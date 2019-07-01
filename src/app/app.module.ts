@@ -17,6 +17,7 @@ import { SidebarComponent } from './_pages/page/sidebar/sidebar.component';
 import { NavbarComponent } from './_pages/page/navbar/navbar.component';
 import { FooterComponent } from './_pages/page/footer/footer.component';
 import { SpinnerComponent } from './_shared/components/spinner/spinner.component';
+import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemsidebar.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { SpinnerComponent } from './_shared/components/spinner/spinner.component
     SidebarComponent,
     NavbarComponent,
     FooterComponent,
-    SpinnerComponent
+    SpinnerComponent,
+    ItemSidebarComponent
   ],
   imports: [
     BrowserModule,

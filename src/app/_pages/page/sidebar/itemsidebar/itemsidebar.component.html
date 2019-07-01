@@ -1,0 +1,15 @@
+<ul class="menu-items" [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)"
+[ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}">
+    <li>
+        <a href="#" routerLink="/home" routerLinkActive="active">
+            <i class="fa fa-tv"></i>
+            <span>{{item.displayName}}</span>
+        </a>
+    </li>
+</ul>
+
+<div *ngIf="expanded">
+    <app-item-sidebar *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
+    </app-item-sidebar>
+</div>
+      

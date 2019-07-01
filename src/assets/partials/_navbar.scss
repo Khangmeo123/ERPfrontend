@@ -181,12 +181,19 @@
 
         ul {
 
-          margin-left: auto;
+          margin-left: 35%;
           flex-wrap: nowrap;
 
           li {
             padding: 0;
-
+            .user-profile {
+              margin-top: 7px;
+              display: flex; 
+              color: #ffffff;
+              i {
+                margin-top: 4px;
+              }
+            }
             .nav-link {
 
               .link-text {

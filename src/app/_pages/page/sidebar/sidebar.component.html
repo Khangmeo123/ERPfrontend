@@ -1,17 +1,26 @@
 <aside class="sidebar shadow-sm">
-  <div class="sidebar-search pt-2 pb-1 pl-3 pr-3">
+  <!-- <div class="sidebar-search pt-2 pb-1 pl-3 pr-3">
     <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
-  </div>
+  </div> -->
   <nav class="sidebar-menu pt-2 pb-3">
-    <div class="menu-header mt-3 mb-2">
-      Components
-    </div>
-    <ul class="menu-items">
+    <!-- <div class="menu-header mt-3 mb-2">
+        
+    </div> -->
+    <ul  class="menu-items">
+      <li>
+          <a href="#" routerLink="" routerLinkActive="active">
+            <i style="color: #FCE205" class="fas fa-star"></i>
+            <span>Bookmarks</span>
+          </a>
+          
+      </li>
+    </ul>
+    <app-item-sidebar *ngFor="let item of navItems" [item] = "item"></app-item-sidebar>
+    <!-- <ul class="menu-items">
       <li >
         <a href="#" routerLink="/home" routerLinkActive="active">
           <i class="fa fa-tv"></i>
           <span>Home</span>
-          <!-- <span class="badge badge-warning rounded-0 text-dark p-1">NEW</span> -->
         </a>
       </li>
       <li>
@@ -20,30 +29,7 @@
           <span>Admin</span>
         </a>
       </li>
-      <!-- <li>
-        <a href="#" routerLink="/tables" routerLinkActive="active">
-          <i class="fa fa-table"></i>
-          <span>Tables</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" routerLink="/typography" routerLinkActive="active">
-          <i class="fa fa-align-center"></i>
-          <span>Typography</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" routerLink="/maps" routerLinkActive="active">
-          <i class="fa fa-globe"></i>
-          <span>Maps</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" routerLink="/notifications" routerLinkActive="active">
-          <i class="fas fa-bell"></i>
-          <span>Notifications</span>
-        </a>
-      </li> -->
-    </ul>
+
+    </ul> -->
   </nav>
 </aside>
