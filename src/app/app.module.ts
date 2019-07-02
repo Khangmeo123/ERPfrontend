@@ -18,6 +18,7 @@ import { NavbarComponent } from './_pages/page/navbar/navbar.component';
 import { FooterComponent } from './_pages/page/footer/footer.component';
 import { SpinnerComponent } from './_shared/components/spinner/spinner.component';
 import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemsidebar.component';
+import { MatIconModule } from '@angular/material';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemside
     CollapseModule.forRoot(),
     ToastrModule.forRoot(),
     HttpClientModule,
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+    MatIconModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

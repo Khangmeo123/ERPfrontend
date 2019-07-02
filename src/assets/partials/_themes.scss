@@ -126,13 +126,25 @@ body {
         }
 
         .menu-items {
-          a {
+          li {
             color: rgba($sidebar-color, 0.7);
-
+            span {
+              i {
+                margin-right: 10px;
+                color: #3D464D;
+              }
+              
+              &:hover,
+              &.active {
+                i {
+                  color: #3D464D;
+                }
+              }
+            }
             i {
               color: $sidebar-icon-color;
-              color: #abb7da;
-              color: rgba(140, 165, 239, 0.6);
+              color: #1C4E80;
+              // color: rgba(140, 165, 239, 0.6);
               border: none;
               width: auto;
               font-size: 1rem;
@@ -140,12 +152,14 @@ body {
 
             &:hover,
             &.active {
-              background: #f5f5f9;
+              background: #dcdcdc;
               color: rgba($sidebar-color, 0.9);
-
-              i {
-                color: #95b0ff;
+              a {
+                i {
+                  color: #1C4E80;
+                }
               }
+              
             }
           }
         }

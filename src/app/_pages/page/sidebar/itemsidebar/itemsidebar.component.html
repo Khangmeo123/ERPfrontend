@@ -1,10 +1,12 @@
-<ul class="menu-items" [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)"
-[ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}">
-    <li>
+<ul class="menu-items" [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)">
+<!-- [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}"> -->
+    <li style="display: flex">
         <a href="#" routerLink="/home" routerLinkActive="active">
             <i class="fa fa-tv"></i>
-            <span>{{item.displayName}}</span>
+            <span >{{item.displayName}}</span>
         </a>
+
+        <span [ngStyle]="{'display': (item.children && item.children.length > 0) ? 'block': 'none' }"><i class="fas" [ngClass]="!expanded ? 'fa-caret-down' : 'fa-caret-up'"></i></span>
     </li>
 </ul>
 

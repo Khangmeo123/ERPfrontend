@@ -1,3 +1,4 @@
+$sidebar-color: #3D464D;
 .wrapper {
   main {
     position: relative;
@@ -62,7 +63,11 @@
           list-style-type: none;
           margin: 0;
           padding: 0;
-
+          &:hover,
+          &.active
+          {
+            background: #dcdcdc
+          }
           li {
             display: block;
 
@@ -74,9 +79,9 @@
               height: 30px;
               line-height: 45px;
               padding: 0 1.5rem;
-              font-size: 0.8rem;
+              font-size: 14px;
               letter-spacing: 0px;
-              font-weight: 600;
+              font-weight: 500;
 
               i {
                 @extend .icon-style;
@@ -84,7 +89,7 @@
               }
 
               span {
-                color: inherit;
+                color: $sidebar-color;
                 margin-left: 1rem;
               }
             }
@@ -140,7 +145,17 @@
             span {
               display: none;
             }
+
+
           }
+
+          ul span {
+            i {
+              display: none
+            }
+          }
+
+          
         }
       }
 

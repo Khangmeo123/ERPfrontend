@@ -122,7 +122,9 @@
 
     .nav-link {
       padding: 0;
-
+      mat-icon {
+        padding-top: 7px;
+      }
       i {
         font-size: 1.1rem;
         width: 40px;
@@ -186,8 +188,9 @@
 
           li {
             padding: 0;
+
             .user-profile {
-              margin-top: 7px;
+              margin-top: 10px;
               display: flex; 
               color: #ffffff;
               i {

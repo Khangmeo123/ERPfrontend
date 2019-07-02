@@ -12,10 +12,12 @@ export class AppService {
 
   toggleSidebar() {
     this.isSidebarToggeled = ! this.isSidebarToggeled;
+    console.log('toggleSidebar', this.isSidebarToggeled);
   }
 
   toggleSidebarPin() {
     this.isSidebarPinned = ! this.isSidebarPinned;
+    console.log('toggleSidebarPin', this.isSidebarPinned)
   }
 
   getSidebarStat() {

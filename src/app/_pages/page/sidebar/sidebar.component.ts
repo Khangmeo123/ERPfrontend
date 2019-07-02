@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
 
 @Component({
@@ -7,7 +7,7 @@ import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-
+  @Input() isShow: boolean = false;
   constructor() { }
 
   navItems: ItemSidebar[] = [
@@ -24,26 +24,12 @@ export class SidebarComponent implements OnInit {
             {
               displayName: 'Michael Prentice',
               iconName: 'person',
-              route: 'devfestfl/speakers/michael-prentice',
-              children: [
-                {
-                  displayName: 'Create Enterprise UIs',
-                  iconName: 'star_rate',
-                  route: 'devfestfl/speakers/michael-prentice/material-design'
-                }
-              ]
+              route: 'devfestfl/speakers/michael-prentice'
             },
             {
               displayName: 'Stephen Fluin',
               iconName: 'person',
-              route: 'devfestfl/speakers/stephen-fluin',
-              children: [
-                {
-                  displayName: 'What\'s up with the Web?',
-                  iconName: 'star_rate',
-                  route: 'devfestfl/speakers/stephen-fluin/what-up-web'
-                }
-              ]
+              route: 'devfestfl/speakers/stephen-fluin'
             },
             {
               displayName: 'Mike Brocchi',
@@ -110,13 +96,6 @@ export class SidebarComponent implements OnInit {
               displayName: 'Michael Prentice',
               iconName: 'person',
               route: 'michael-prentice',
-              children: [
-                {
-                  displayName: 'Create Enterprise UIs',
-                  iconName: 'star_rate',
-                  route: 'material-design'
-                }
-              ]
             },
             {
               displayName: 'Stephen Fluin',
@@ -124,7 +103,7 @@ export class SidebarComponent implements OnInit {
               route: 'stephen-fluin',
               children: [
                 {
-                  displayName: 'What\'s up with the Web?',
+                  displayName: 'the Web?',
                   iconName: 'star_rate',
                   route: 'what-up-web'
                 }
@@ -134,18 +113,6 @@ export class SidebarComponent implements OnInit {
               displayName: 'Mike Brocchi',
               iconName: 'person',
               route: 'mike-brocchi',
-              children: [
-                {
-                  displayName: 'My ally, the CLI',
-                  iconName: 'star_rate',
-                  route: 'my-ally-cli'
-                },
-                {
-                  displayName: 'Become an Angular Tailor',
-                  iconName: 'star_rate',
-                  route: 'become-angular-tailer'
-                }
-              ]
             }
           ]
         },
@@ -154,22 +121,22 @@ export class SidebarComponent implements OnInit {
           iconName: 'speaker_notes',
           children: [
             {
-              displayName: 'Create Enterprise UIs',
+              displayName: 'Enterprise UIs',
               iconName: 'star_rate',
               route: 'material-design'
             },
             {
-              displayName: 'What\'s up with the Web?',
+              displayName: 'What\'s up?',
               iconName: 'star_rate',
               route: 'what-up-web'
             },
             {
-              displayName: 'My ally, the CLI',
+              displayName: 'the CLI',
               iconName: 'star_rate',
               route: 'my-ally-cli'
             },
             {
-              displayName: 'Become an Angular Tailor',
+              displayName: 'Angular Tailor',
               iconName: 'star_rate',
               route: 'become-angular-tailer'
             }
@@ -194,13 +161,6 @@ export class SidebarComponent implements OnInit {
               displayName: 'Michael Prentice',
               iconName: 'person',
               route: 'michael-prentice',
-              children: [
-                {
-                  displayName: 'Create Enterprise UIs',
-                  iconName: 'star_rate',
-                  route: 'material-design'
-                }
-              ]
             },
             {
               displayName: 'Stephen Fluin',
@@ -208,7 +168,7 @@ export class SidebarComponent implements OnInit {
               route: 'stephen-fluin',
               children: [
                 {
-                  displayName: 'What\'s up with the Web?',
+                  displayName: 'What\'s up ',
                   iconName: 'star_rate',
                   route: 'what-up-web'
                 }
@@ -225,7 +185,7 @@ export class SidebarComponent implements OnInit {
                   route: 'my-ally-cli'
                 },
                 {
-                  displayName: 'Become an Angular Tailor',
+                  displayName: 'Angular Tailor',
                   iconName: 'star_rate',
                   route: 'become-angular-tailer'
                 }
@@ -238,12 +198,12 @@ export class SidebarComponent implements OnInit {
           iconName: 'speaker_notes',
           children: [
             {
-              displayName: 'Create Enterprise UIs',
+              displayName: 'Enterprise UIs',
               iconName: 'star_rate',
               route: 'material-design'
             },
             {
-              displayName: 'What\'s up with the Web?',
+              displayName: 'the Web?',
               iconName: 'star_rate',
               route: 'what-up-web'
             },
@@ -253,7 +213,7 @@ export class SidebarComponent implements OnInit {
               route: 'my-ally-cli'
             },
             {
-              displayName: 'Become an Angular Tailor',
+              displayName: 'Angular Tailor',
               iconName: 'star_rate',
               route: 'become-angular-tailer'
             }
@@ -281,7 +241,7 @@ export class SidebarComponent implements OnInit {
               route: 'michael-prentice',
               children: [
                 {
-                  displayName: 'Create Enterprise UIs',
+                  displayName: 'Enterprise UIs',
                   iconName: 'star_rate',
                   route: 'material-design'
                 }
@@ -293,7 +253,7 @@ export class SidebarComponent implements OnInit {
               route: 'stephen-fluin',
               children: [
                 {
-                  displayName: 'What\'s up with the Web?',
+                  displayName: 'the Web?',
                   iconName: 'star_rate',
                   route: 'what-up-web'
                 }
@@ -305,12 +265,12 @@ export class SidebarComponent implements OnInit {
               route: 'mike-brocchi',
               children: [
                 {
-                  displayName: 'My ally, the CLI',
+                  displayName: 'the CLI',
                   iconName: 'star_rate',
                   route: 'my-ally-cli'
                 },
                 {
-                  displayName: 'Become an Angular Tailor',
+                  displayName: 'Angular Tailor',
                   iconName: 'star_rate',
                   route: 'become-angular-tailer'
                 }
@@ -323,22 +283,22 @@ export class SidebarComponent implements OnInit {
           iconName: 'speaker_notes',
           children: [
             {
-              displayName: 'Create Enterprise UIs',
+              displayName: 'Enterprise UIs',
               iconName: 'star_rate',
               route: 'material-design'
             },
             {
-              displayName: 'What\'s up with the Web?',
+              displayName: 'the Web?',
               iconName: 'star_rate',
               route: 'what-up-web'
             },
             {
-              displayName: 'My ally, the CLI',
+              displayName: 'the CLI',
               iconName: 'star_rate',
               route: 'my-ally-cli'
             },
             {
-              displayName: 'Become an Angular Tailor',
+              displayName: 'Angular Tailor',
               iconName: 'star_rate',
               route: 'become-angular-tailer'
             }

@@ -8,10 +8,11 @@ import { AppService } from '../../_services/app.service';
   styleUrls: ['./page.component.scss']
 })
 export class PageComponent implements OnInit {
-
+  private isShow: boolean = false;
   constructor(private appService: AppService) { }
 
   ngOnInit() {
+    this.isShow = this.appService.getSidebarStat().isSidebarPinned;
   }
 
   getClasses() {

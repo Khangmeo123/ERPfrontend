@@ -22,11 +22,14 @@ export class ItemSidebarComponent implements OnInit {
     @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
     @Input() item: ItemSidebar;
     @Input() depth = 0;
+    @Input() isShow;
     constructor(public router: Router) { }
 
     ngOnInit() {
-        console.log('item: : : ', this.item)
+        console.log('isShow: : : ', this.isShow)
     }
+
+    ngOnChang 
     onItemSelected(item: ItemSidebar) {
         if (!item.children || !item.children.length) {
             this.router.navigate([item.route]);
