@@ -2,7 +2,6 @@ import {moduleMetadata, storiesOf} from '@storybook/angular';
 import {TreeSelectComponent} from './tree-select.component';
 import {TreeModule} from 'primeng/tree';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {ClickOutsideModule} from 'ng-click-outside';
 import {sampleTree} from '../sample-data/tree.sample';
 
 storiesOf('Tree Select', module)
@@ -11,7 +10,6 @@ storiesOf('Tree Select', module)
       imports: [
         TreeModule,
         BrowserAnimationsModule,
-        ClickOutsideModule,
       ]
     })
   )
