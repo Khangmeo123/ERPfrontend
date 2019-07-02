@@ -3,14 +3,9 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './_pages/login/login.component';
 import {PageComponent} from './_pages/page/page.component';
 import {AuthGuard} from './_helpers';
-import {TreeSelectComponent} from './_shared/components/tree-select/tree-select.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
-  {
-    path: 'tree',
-    component: TreeSelectComponent,
-  },
   {
     path: '', component: PageComponent, children: [
       {path: 'home', loadChildren: () => import('./_modules/home/home.module').then(m => m.HomeModule)},
