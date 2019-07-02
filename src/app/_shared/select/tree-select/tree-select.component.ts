@@ -1,6 +1,7 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {TreeNode} from 'primeng/api';
 import {toggleMenu} from './tree-select.component.animations';
+import {Tree} from 'primeng/tree';
 
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 
@@ -28,6 +29,8 @@ export class TreeSelectComponent implements OnInit {
 
   @Output() selector = new EventEmitter<TreeNode | TreeNode[]>();
 
+  @ViewChild('tree', {static: false}) tree: Tree;
+
   private isOpened = false;
 
   private nodes: TreeNode[] = [];
@@ -38,8 +41,16 @@ export class TreeSelectComponent implements OnInit {
     }
   }
 
+  get displayClearButton() {
+    return this.nodes.length > 0;
+  }
+
   get animationState() {
     return this.isOpened ? 'open' : 'closed';
+  }
+
+  get toggleState() {
+    return `${this.isOpened ? 'pi pi-caret-up' : 'pi pi-caret-down'} mx-1`;
   }
 
   clearSelection() {
@@ -50,6 +61,18 @@ export class TreeSelectComponent implements OnInit {
 
   get isSingle() {
     return this.mode === 'single';
+  }
+
+  onKeyDown(event) {
+    console.log(event.key);
+    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+      const parentNode = event.target.parentNode.parentNode;
+      const firstElement = parentNode.querySelector('.select-list ul li');
+      console.log(firstElement);
+      if (firstElement) {
+        firstElement.firstChild.focus();
+      }
+    }
   }
 
   get selectedNodes() {
@@ -101,6 +124,12 @@ export class TreeSelectComponent implements OnInit {
     return `${this.nodes.length} ${this.selectedLabel}`;
   }
 
+  onSelect() {
+    if (this.isSingle) {
+      this.closeList();
+    }
+  }
+
   openList() {
     if (!this.isOpened) {
       this.isOpened = true;
@@ -111,6 +140,10 @@ export class TreeSelectComponent implements OnInit {
     if (this.isOpened) {
       this.isOpened = false;
     }
+  }
+
+  toggleList() {
+    this.isOpened = !this.isOpened;
   }
 
   onChange(data) {

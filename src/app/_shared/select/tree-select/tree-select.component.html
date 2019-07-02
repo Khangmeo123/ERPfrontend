@@ -1,11 +1,8 @@
 <div class="select-component {{mode}}" (clickOutside)="closeList()">
   <div class="select-head d-flex align-items-center align-content-center">
-    <input type="text" class="form-control select-search flex-grow-1" (focus)="openList()" [value]="selectedText">
-    <a role="button" (click)="clearSelection()" class="clear-button">
-      <span class="pi pi-times-circle"></span>
-    </a>
-  </div>
-  <div class="selected-list">
+    <input type="text" class="form-control select-search flex-grow-1" (focus)="openList()" [value]="selectedText" (keydown)="onKeyDown($event)">
+    <span class="pi pi-times-circle" (click)="clearSelection()" *ngIf="displayClearButton"></span>
+    <span [class]="toggleState" (click)="toggleList()"></span>
   </div>
   <div class="select-list" [@toggleMenu]="animationState" *ngIf="isOpened">
     <div *ngIf="isLoading; else notLoading" class="d-flex justify-content-center py-4">
@@ -13,9 +10,11 @@
     </div>
     <ng-template #notLoading>
       <p-tree [value]="options"
+              #tree
               [selectionMode]="mode"
               [(selection)]="selectedNodes"
               (selectionChange)="onChange($event)"
+              (onNodeSelect)="onSelect($event)"
       ></p-tree>
     </ng-template>
   </div>

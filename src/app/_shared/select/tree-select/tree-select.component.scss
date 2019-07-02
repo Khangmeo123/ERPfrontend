@@ -9,6 +9,11 @@
   width: 18em;
   position: relative;
 
+  .pi {
+    color: #495057;
+    font-size: medium;
+  }
+
   .ui-treenode-content.ui-treenode-selectable.ui-treenode-content-selected:after {
     display: block;
     content: '√';
@@ -29,18 +34,18 @@
     position: relative;
 
     .select-search {
+      width: 100%;
       border: 0;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
     }
 
-    .select-search:hover {
-
+    .select-search:focus {
+      border: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
     }
 
     .clear-button {
-      padding-right: $input-padding-x / 2;
-      padding-left: $input-padding-x / 2;
       vertical-align: middle;
       cursor: pointer;
 
@@ -54,9 +59,9 @@
 
   .select-list {
     position: absolute;
-    top: $input-height;
     left: 0;
     right: 0;
+    z-index: 99;
     border: 1px solid $border-color;
     border-top-width: 0;
     border-bottom-left-radius: $border-radius;
