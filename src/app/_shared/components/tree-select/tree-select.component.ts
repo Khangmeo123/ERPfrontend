@@ -68,7 +68,9 @@ export class TreeSelectComponent implements OnInit {
   }
 
   clearSelection() {
-
+    if (this.nodes.length > 0) {
+      this.nodes = [];
+    }
   }
 
   get isSingle() {
