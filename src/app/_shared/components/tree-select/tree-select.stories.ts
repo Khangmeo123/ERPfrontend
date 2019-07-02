@@ -26,4 +26,11 @@ storiesOf('Tree Select', module)
       mode: 'multiple',
       options: sampleTree,
     },
+  }))
+  .add('checkbox', () => ({
+    component: TreeSelectComponent,
+    props: {
+      mode: 'checkbox',
+      options: sampleTree,
+    },
   }));

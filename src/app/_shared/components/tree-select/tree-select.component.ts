@@ -3,7 +3,7 @@ import {animate, group, state, style, transition, trigger} from '@angular/animat
 import {TreeNode} from 'primeng/api';
 import {sampleTree} from '../sample-data/tree.sample';
 
-type SelectMode = 'single' | 'multiple';
+type SelectMode = 'single' | 'multiple' | 'checkbox';
 
 @Component({
   selector: 'app-tree',
@@ -54,35 +54,74 @@ export class TreeSelectComponent implements OnInit {
 
   @Input() selectedLabel = 'mục đã chọn';
 
-  @Input() formControlName: string = null;
-
   @Output() selector = new EventEmitter<TreeNode | TreeNode[]>();
 
   private isOpened = false;
 
-  private selected: TreeNode[] = [];
+  private nodes: TreeNode[] = [];
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+  }
 
   get animationState() {
     return this.isOpened ? 'open' : 'closed';
   }
 
   clearSelection() {
-    this.selected = [];
+
   }
 
   get isSingle() {
     return this.mode === 'single';
   }
 
+  get selectedNodes() {
+    if (this.isSingle) {
+      if (this.nodes.length > 0) {
+        return this.nodes[0];
+      }
+      return null;
+    }
+    return this.nodes;
+  }
+
+  set selectedNodes(data: TreeNode[] | TreeNode) {
+    if (this.mode === 'checkbox') {
+      this.nodes = Object.values(data).map(node => node);
+      return;
+    }
+    const node = data[0] || data;
+    if (this.isSingle) {
+      if (this.nodes.length === 1) {
+        if (this.nodes[0] === node) {
+          this.nodes = [];
+          return;
+        }
+      }
+      this.nodes[0] = node;
+      return;
+    }
+    const index = this.nodes.indexOf(node);
+    if (index >= 0) {
+      this.nodes = [
+        ...this.nodes.slice(0, index),
+        ...this.nodes.slice(index + 1),
+      ];
+      return;
+    }
+    this.nodes = [
+      ...this.nodes,
+      node,
+    ];
+  }
+
   get selectedText() {
     if (this.isSingle) {
-      if (this.selected.length === 1) {
-        return this.selected[0].label;
+      if (this.nodes.length === 1) {
+        return this.nodes[0].label;
       }
     }
-    return `${this.selected.length} ${this.selectedLabel}`;
+    return `${this.nodes.length} ${this.selectedLabel}`;
   }
 
   openList() {
@@ -97,41 +136,7 @@ export class TreeSelectComponent implements OnInit {
     }
   }
 
-  get selectedNodes() {
-    if (this.isSingle) {
-      if (this.selected.length > 0) {
-        return this.selected[0];
-      }
-      return null;
-    }
-    return this.selected;
-  }
-
-  set selectedNodes(data: TreeNode[] | TreeNode) {
-    const node: TreeNode = data[0] || data;
-    if (this.isSingle) {
-      if (this.selected.length > 0) {
-        if (this.selected[0] === node) {
-          this.selected = [];
-        } else {
-          this.selected[0] = node;
-        }
-      } else {
-        this.selected[0] = node;
-      }
-    } else if (this.mode === 'multiple')  {
-      const index = this.selected.indexOf(node);
-      if (index >= 0) {
-        this.selected = [
-          ...this.selected.slice(0, index),
-          ...this.selected.slice(index + 1),
-        ];
-      } else {
-        this.selected = [
-          ...this.selected,
-          node,
-        ];
-      }
-    }
+  onChange(data) {
+    this.selector.emit(data);
   }
 }

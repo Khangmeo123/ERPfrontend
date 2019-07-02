@@ -13,7 +13,7 @@
               *ngIf="options !== null"
               [selectionMode]="mode"
               [(selection)]="selectedNodes"
-              (selectionChange)="selector.emit(selectedNodes)"
+              (selectionChange)="onChange($event)"
       ></p-tree>
     </div>
   </div>
