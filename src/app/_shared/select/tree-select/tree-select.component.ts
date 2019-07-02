@@ -1,7 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {animate, group, state, style, transition, trigger} from '@angular/animations';
 import {TreeNode} from 'primeng/api';
-import {sampleTree} from '../sample-data/tree.sample';
+import {toggleMenu} from './tree-select.component.animations';
 
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 
@@ -9,50 +8,23 @@ type SelectMode = 'single' | 'multiple' | 'checkbox';
   selector: 'app-tree',
   templateUrl: './tree-select.component.html',
   styleUrls: [
-    './tree-select.component.scss'
+    './tree-select.component.scss',
   ],
   encapsulation: ViewEncapsulation.None,
   animations: [
-    trigger('toggleMenu', [
-      state('open', style({
-        opacity: '1', visibility: 'visible'
-      })),
-      state('closed', style({
-        opacity: '0', visibility: 'hidden'
-      })),
-      transition('open => closed', [group([
-          animate('400ms ease-in-out', style({
-            opacity: '0'
-          })),
-          animate('600ms ease-in-out', style({
-            'max-height': '0px'
-          })),
-          animate('700ms ease-in-out', style({
-            visibility: 'hidden'
-          }))
-        ]
-      )]),
-      transition('closed => open', [group([
-          animate('1ms ease-in-out', style({
-            visibility: 'visible'
-          })),
-          animate('600ms ease-in-out', style({
-            'max-height': '500px'
-          })),
-          animate('800ms ease-in-out', style({
-            opacity: '1'
-          }))
-        ]
-      )])
-    ]),
-  ]
+    toggleMenu,
+  ],
 })
 export class TreeSelectComponent implements OnInit {
-  @Input() options: TreeNode[] = sampleTree;
+  options: TreeNode[] = [];
 
   @Input() mode: SelectMode = 'single';
 
   @Input() selectedLabel = 'mục đã chọn';
+
+  @Input() initialValue: TreeNode[] | TreeNode = null;
+
+  @Input() isLoading = false;
 
   @Output() selector = new EventEmitter<TreeNode | TreeNode[]>();
 
@@ -61,6 +33,9 @@ export class TreeSelectComponent implements OnInit {
   private nodes: TreeNode[] = [];
 
   ngOnInit(): void {
+    if (this.initialValue) {
+      this.selectedNodes = this.initialValue;
+    }
   }
 
   get animationState() {
@@ -89,7 +64,7 @@ export class TreeSelectComponent implements OnInit {
 
   set selectedNodes(data: TreeNode[] | TreeNode) {
     if (this.mode === 'checkbox') {
-      this.nodes = Object.values(data).map(node => node);
+      this.nodes = Object.values(data);
       return;
     }
     const node = data[0] || data;

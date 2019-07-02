@@ -8,8 +8,6 @@ import {CommonModule} from '@angular/common';
 import {AppRoutingModule} from './app-routing.module';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
-import {TreeModule} from 'primeng/tree';
-
 import {AppComponent} from './app.component';
 import {PageComponent} from './_pages/page/page.component';
 import {LoginComponent} from './_pages/login/login.component';
@@ -19,8 +17,7 @@ import {SidebarComponent} from './_pages/page/sidebar/sidebar.component';
 import {NavbarComponent} from './_pages/page/navbar/navbar.component';
 import {FooterComponent} from './_pages/page/footer/footer.component';
 import {SpinnerComponent} from './_shared/components/spinner/spinner.component';
-import {TreeSelectComponent} from './_shared/components/tree-select/tree-select.component';
-import {ClickOutsideModule} from 'ng-click-outside';
+import {TreeSelectComponent} from './_shared/select/tree-select/tree-select.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +28,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
-    TreeSelectComponent
+    TreeSelectComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,15 +40,12 @@ import {ClickOutsideModule} from 'ng-click-outside';
     ToastrModule.forRoot(),
     HttpClientModule,
     MatProgressSpinnerModule,
-    TreeModule,
-    BrowserAnimationsModule,
-    ClickOutsideModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
     {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
 }

@@ -1,5 +1,5 @@
-@import "~bootstrap/scss/functions";
-@import "~bootstrap/scss/variables";
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
 
 .ui-tree {
   border-width: 0 !important;
@@ -7,6 +7,7 @@
 
 .select-component {
   width: 18em;
+  position: relative;
 
   .ui-treenode-content.ui-treenode-selectable.ui-treenode-content-selected:after {
     display: block;
@@ -52,6 +53,10 @@
   }
 
   .select-list {
+    position: absolute;
+    top: $input-height;
+    left: 0;
+    right: 0;
     border: 1px solid $border-color;
     border-top-width: 0;
     border-bottom-left-radius: $border-radius;
