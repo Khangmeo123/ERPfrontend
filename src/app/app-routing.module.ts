@@ -3,13 +3,13 @@ import {RouterModule, Routes} from '@angular/router';
 import {LoginComponent} from './_pages/login/login.component';
 import {PageComponent} from './_pages/page/page.component';
 import {AuthGuard} from './_helpers';
-import {TreeComponent} from './_shared/components/tree/tree.component';
+import {TreeSelectComponent} from './_shared/components/tree-select/tree-select.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {
     path: 'tree',
-    component: TreeComponent,
+    component: TreeSelectComponent,
   },
   {
     path: '', component: PageComponent, children: [
@@ -24,5 +24,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

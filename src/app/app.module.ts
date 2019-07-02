@@ -19,7 +19,7 @@ import {SidebarComponent} from './_pages/page/sidebar/sidebar.component';
 import {NavbarComponent} from './_pages/page/navbar/navbar.component';
 import {FooterComponent} from './_pages/page/footer/footer.component';
 import {SpinnerComponent} from './_shared/components/spinner/spinner.component';
-import {TreeComponent} from './_shared/components/tree/tree.component';
+import {TreeSelectComponent} from './_shared/components/tree-select/tree-select.component';
 import {ClickOutsideModule} from 'ng-click-outside';
 
 @NgModule({
@@ -31,7 +31,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
-    TreeComponent
+    TreeSelectComponent
   ],
   imports: [
     BrowserModule,

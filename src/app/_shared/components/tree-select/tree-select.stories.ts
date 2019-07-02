@@ -1,0 +1,29 @@
+import {moduleMetadata, storiesOf} from '@storybook/angular';
+import {TreeSelectComponent} from './tree-select.component';
+import {TreeModule} from 'primeng/tree';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {sampleTree} from '../sample-data/tree.sample';
+
+storiesOf('Tree Select', module)
+  .addDecorator(
+    moduleMetadata({
+      imports: [
+        TreeModule,
+        BrowserAnimationsModule,
+      ]
+    })
+  )
+  .add('single', () => ({
+    component: TreeSelectComponent,
+    props: {
+      mode: 'single',
+      options: sampleTree,
+    },
+  }))
+  .add('multiple', () => ({
+    component: TreeSelectComponent,
+    props: {
+      mode: 'multiple',
+      options: sampleTree,
+    },
+  }));

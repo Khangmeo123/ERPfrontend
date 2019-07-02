@@ -1,20 +1,19 @@
 <div class="col-md-8 offset-2">
   <div class="select-component" (clickOutside)="closeList()">
     <div class="select-head d-flex align-items-center align-content-center">
-      <input type="text" class="form-control select-search flex-grow-1" (focus)="openList()" [value]="selectInfo">
+      <input type="text" class="form-control select-search flex-grow-1" (focus)="openList()" [value]="selectedText">
       <a role="button" (click)="clearSelection()" class="clear-button">
         <span class="pi pi-times-circle"></span>
       </a>
     </div>
     <div class="selected-list">
     </div>
-    <div class="select-list" [@toggleMenu]="menuState">
+    <div class="select-list" [@toggleMenu]="animationState" *ngIf="isOpened">
       <p-tree [value]="options"
               *ngIf="options !== null"
               [selectionMode]="mode"
-              [(selection)]="nodes"
-              (onNodeSelect)="select($event)"
-              (onNodeUnselect)="unselect($event)"
+              [(selection)]="selectedNodes"
+              (selectionChange)="selector.emit(selectedNodes)"
       ></p-tree>
     </div>
   </div>
