@@ -58,3 +58,13 @@
     border-bottom-right-radius: $border-radius;
   }
 }
+
+.select-component.checkbox {
+  .ui-treenode-content.ui-treenode-selectable.ui-treenode-content-selected:after {
+    display: block;
+    content: none;
+    float: right;
+    font-weight: 700;
+    color: green;
+  }
+}

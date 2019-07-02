@@ -1,4 +1,4 @@
-<div class="select-component" (clickOutside)="closeList()">
+<div class="select-component {{mode}}" (clickOutside)="closeList()">
   <div class="select-head d-flex align-items-center align-content-center">
     <input type="text" class="form-control select-search flex-grow-1" (focus)="openList()" [value]="selectedText">
     <a role="button" (click)="clearSelection()" class="clear-button">
