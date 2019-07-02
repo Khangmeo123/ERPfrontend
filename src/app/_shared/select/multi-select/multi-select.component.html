@@ -1,0 +1,10 @@
+<div class="head">
+  <input type="text" class="form-control">
+</div>
+<div class="list">
+  <ul class="dropdown-menu" *dropdownMenu>
+    <li role="menuitem" *ngFor="let item of options">
+      {{item.label}}
+    </li>
+  </ul>
+</div>

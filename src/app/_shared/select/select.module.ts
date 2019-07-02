@@ -5,10 +5,13 @@ import {TreeModule} from 'primeng/tree';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {TreeSelectComponent} from './tree-select/tree-select.component';
+import {MultiSelectComponent} from './multi-select/multi-select.component';
+import {BsDropdownModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
     TreeSelectComponent,
+    MultiSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -17,9 +20,11 @@ import {TreeSelectComponent} from './tree-select/tree-select.component';
     BrowserAnimationsModule,
     ClickOutsideModule,
     MatProgressSpinnerModule,
+    BsDropdownModule,
   ],
   exports: [
     TreeSelectComponent,
+    MultiSelectComponent,
   ],
 })
 export class SelectModule { }
