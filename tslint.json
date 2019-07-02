@@ -72,7 +72,6 @@
       true,
       "single"
     ],
-    "trailing-comma": false,
     "no-conflicting-lifecycle": true,
     "no-host-metadata-property": true,
     "no-input-rename": true,
@@ -85,7 +84,14 @@
     "template-no-negated-async": true,
     "use-lifecycle-interface": true,
     "use-pipe-transform-interface": true,
-    "eofline": true
+    "eofline": true,
+    "trailing-comma": [
+      true,
+      {
+        "multiline": "always",
+        "singleline": "never"
+      }
+    ]
   },
   "rulesDirectory": [
     "codelyzer"
