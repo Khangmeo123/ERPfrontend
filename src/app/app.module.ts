@@ -17,7 +17,6 @@ import {SidebarComponent} from './_pages/page/sidebar/sidebar.component';
 import {NavbarComponent} from './_pages/page/navbar/navbar.component';
 import {FooterComponent} from './_pages/page/footer/footer.component';
 import {SpinnerComponent} from './_shared/components/spinner/spinner.component';
-import {TreeSelectComponent} from './_shared/select/tree-select/tree-select.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +27,6 @@ import {TreeSelectComponent} from './_shared/select/tree-select/tree-select.comp
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
-    TreeSelectComponent,
   ],
   imports: [
     BrowserModule,

@@ -8,7 +8,7 @@ describe('TreeSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TreeSelectComponent ]
+      declarations: [ TreeSelectComponent ],
     })
     .compileComponents();
   }));

@@ -1,6 +1,6 @@
-import {TreeNode} from 'primeng/api';
+import {ITreeNode} from './tree-select.interfaces';
 
-export const sampleTree: TreeNode[] = [
+export const sampleTree: ITreeNode[] = [
   {
     label: 'Documents',
     data: 'Documents Folder',
@@ -14,20 +14,20 @@ export const sampleTree: TreeNode[] = [
       children: [{
         label: 'Expenses.doc',
         icon: 'fa fa-file-word-o',
-        data: 'Expenses Document'
+        data: 'Expenses Document',
       },
         {
-          label: 'Resume.doc', icon: 'fa fa-file-word-o', data: 'Resume Document'
-        }
-      ]
+          label: 'Resume.doc', icon: 'fa fa-file-word-o', data: 'Resume Document',
+        },
+      ],
     },
       {
         label: 'Home',
         data: 'Home Folder',
         expandedIcon: 'fa fa-folder-open',
         collapsedIcon: 'fa fa-folder',
-        children: [{label: 'Invoices.txt', icon: 'fa fa-file-word-o', data: 'Invoices for this month'}]
-      }]
+        children: [{label: 'Invoices.txt', icon: 'fa fa-file-word-o', data: 'Invoices for this month'}],
+      }],
   },
   {
     label: 'Pictures',
@@ -37,7 +37,7 @@ export const sampleTree: TreeNode[] = [
     children: [
       {label: 'barcelona.jpg', icon: 'fa fa-file-image-o', data: 'Barcelona Photo'},
       {label: 'logo.jpg', icon: 'fa fa-file-image-o', data: 'PrimeFaces Logo'},
-      {label: 'primeui.png', icon: 'fa fa-file-image-o', data: 'PrimeUI Logo'}]
+      {label: 'primeui.png', icon: 'fa fa-file-image-o', data: 'PrimeUI Logo'}],
   },
   {
     label: 'Movies',
@@ -50,13 +50,13 @@ export const sampleTree: TreeNode[] = [
       children: [{
         label: 'Scarface',
         icon: 'fa fa-file-video-o',
-        data: 'Scarface Movie'
+        data: 'Scarface Movie',
       }, {
         label: 'Serpico',
         icon: 'fa fa-file-video-o',
-        data: 'Serpico Movie'
-      }
-      ]
+        data: 'Serpico Movie',
+      },
+      ],
     },
       {
         label: 'Robert De Niro',
@@ -65,13 +65,13 @@ export const sampleTree: TreeNode[] = [
           {
             label: 'Goodfellas',
             icon: 'fa fa-file-video-o',
-            data: 'Goodfellas Movie'
+            data: 'Goodfellas Movie',
           }, {
             label: 'Untouchables',
             icon: 'fa fa-file-video-o',
-            data: 'Untouchables Movie'
-          }
-        ]
-      }]
-  }
+            data: 'Untouchables Movie',
+          },
+        ],
+      }],
+  },
 ];

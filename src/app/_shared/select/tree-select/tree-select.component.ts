@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {TreeNode} from 'primeng/api';
-import {toggleMenu} from './tree-select.component.animations';
+import {Component, EventEmitter, Input, OnInit, Output, OnChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {toggleMenu} from './tree-select.animations';
+import {ITreeNode} from './tree-select.interfaces';
 import {Tree} from 'primeng/tree';
 
 type SelectMode = 'single' | 'multiple' | 'checkbox';
@@ -16,28 +16,51 @@ type SelectMode = 'single' | 'multiple' | 'checkbox';
     toggleMenu,
   ],
 })
-export class TreeSelectComponent implements OnInit {
-  options: TreeNode[] = [];
+export class TreeSelectComponent implements OnInit, OnChanges {
+  options: ITreeNode[] = [];
 
   @Input() mode: SelectMode = 'single';
 
   @Input() selectedLabel = 'mục đã chọn';
 
-  @Input() initialValue: TreeNode[] | TreeNode = null;
+  @Input() initialValue: ITreeNode[] | ITreeNode = null;
 
   @Input() isLoading = false;
 
-  @Output() selector = new EventEmitter<TreeNode | TreeNode[]>();
+  @Output() selector = new EventEmitter<ITreeNode | ITreeNode[]>();
 
   @ViewChild('tree', {static: false}) tree: Tree;
 
   private isOpened = false;
 
-  private nodes: TreeNode[] = [];
+  private nodes: ITreeNode[] = [];
 
   ngOnInit(): void {
     if (this.initialValue) {
       this.selectedNodes = this.initialValue;
+    }
+  }
+
+  ngOnChanges(changes) {
+    if (changes.options.currentValue) {
+      this.nodes = [];
+      this.options.forEach((node: ITreeNode) => {
+        this.retrieveAllSelected(node);
+      });
+    }
+  }
+
+  retrieveAllSelected(node: ITreeNode) {
+    if (node.selected) {
+      this.nodes = [
+        ...this.nodes,
+        node,
+      ];
+    }
+    if (node.children) {
+      node.children.forEach((subNode) => {
+        this.retrieveAllSelected(subNode);
+      });
     }
   }
 
@@ -85,7 +108,7 @@ export class TreeSelectComponent implements OnInit {
     return this.nodes;
   }
 
-  set selectedNodes(data: TreeNode[] | TreeNode) {
+  set selectedNodes(data: ITreeNode[] | ITreeNode) {
     if (this.mode === 'checkbox') {
       this.nodes = Object.values(data);
       return;
@@ -113,6 +136,10 @@ export class TreeSelectComponent implements OnInit {
       ...this.nodes,
       node,
     ];
+  }
+
+  get rootClass() {
+    return `select-component ${this.mode} ${this.isOpened ? 'show' : 'hide'}`;
   }
 
   get selectedText() {

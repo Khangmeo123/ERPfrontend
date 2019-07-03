@@ -78,3 +78,10 @@
     color: green;
   }
 }
+
+.select-component.show {
+  .select-head {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
