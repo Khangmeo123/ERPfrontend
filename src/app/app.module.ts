@@ -20,7 +20,6 @@ import { SpinnerComponent } from './_shared/components/spinner/spinner.component
 import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemsidebar.component';
 import { MatIconModule } from '@angular/material';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -45,9 +44,10 @@ import { MatIconModule } from '@angular/material';
     MatIconModule
   ],
   providers: [
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
+    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {
+}
