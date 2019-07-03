@@ -1,0 +1,87 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+
+.ui-tree {
+  border-width: 0 !important;
+}
+
+.select-component {
+  width: 18em;
+  position: relative;
+
+  .pi {
+    color: #495057;
+    font-size: medium;
+  }
+
+  .ui-treenode-content.ui-treenode-selectable.ui-treenode-content-selected:after {
+    display: block;
+    content: '√';
+    float: right;
+    font-weight: 700;
+    color: green;
+  }
+
+  .ui-treenode-label.ui-state-highlight {
+    background: transparent!important;
+    color: inherit!important;
+  }
+
+  .select-head {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: 0 0;
+    position: relative;
+
+    .select-search {
+      width: 100%;
+      border: 0;
+    }
+
+    .select-search:focus {
+      border: 0;
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+
+    .clear-button {
+      vertical-align: middle;
+      cursor: pointer;
+
+      span {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+      }
+    }
+  }
+
+  .select-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    border: 1px solid $border-color;
+    border-top-width: 0;
+    border-bottom-left-radius: $border-radius;
+    border-bottom-right-radius: $border-radius;
+  }
+}
+
+.select-component.checkbox {
+  .ui-treenode-content.ui-treenode-selectable.ui-treenode-content-selected:after {
+    display: block;
+    content: none;
+    float: right;
+    font-weight: 700;
+    color: green;
+  }
+}
+
+.select-component.show {
+  .select-head {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+}
