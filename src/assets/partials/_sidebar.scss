@@ -1,4 +1,4 @@
-$sidebar-color: #3D464D;
+$sidebar-color: #3d464d;
 .wrapper {
   main {
     position: relative;
@@ -7,14 +7,13 @@ $sidebar-color: #3D464D;
       height: 100%;
       width: $sidebar-width;
       position: absolute;
-      transition: left .3s ease;
+      transition: left 0.3s ease;
       left: -$sidebar-width;
       top: 0;
       z-index: 111;
       overflow: auto;
 
       .sidebar-profile {
-
         .user-picture {
           width: 60px;
           height: 60px;
@@ -31,12 +30,12 @@ $sidebar-color: #3D464D;
 
         .profile-details {
           .name {
-            font-size: .9rem;
+            font-size: 0.9rem;
             font-weight: 800;
           }
 
           .role {
-            font-size: .7rem;
+            font-size: 0.7rem;
             letter-spacing: 1px;
             font-weight: 700;
           }
@@ -48,13 +47,13 @@ $sidebar-color: #3D464D;
       }
 
       .sidebar-menu {
-        >div {
+        > div {
           padding: 0 1.5rem;
         }
 
         .menu-header {
           padding: 0 1.5rem;
-          font-size: .75rem;
+          font-size: 0.75rem;
           text-transform: uppercase;
           font-weight: 700;
         }
@@ -64,13 +63,14 @@ $sidebar-color: #3D464D;
           margin: 0;
           padding: 0;
           &:hover,
-          &.active
-          {
-            background: #dcdcdc
+          &.active {
+            background: #dcdcdc;
           }
           li {
             display: block;
-
+            span {
+              cursor: pointer; 
+            }
             a {
               text-decoration: none;
               display: flex;
@@ -87,6 +87,8 @@ $sidebar-color: #3D464D;
                 @extend .icon-style;
                 font-size: 1rem;
               }
+              
+              
 
               span {
                 color: $sidebar-color;
@@ -95,7 +97,6 @@ $sidebar-color: #3D464D;
             }
           }
         }
-       
       }
     }
 
@@ -109,26 +110,24 @@ $sidebar-color: #3D464D;
 
   &.pinned-sidebar {
     @media (min-width: 768px) {
-      .navbar-header{
-        width: $sidebar-pinned-wdth!important;
-        span{
-          display: none!important;
+      .navbar-header {
+        width: $sidebar-pinned-wdth !important;
+        span {
+          display: none !important;
         }
       }
 
       .sidebar {
         width: $sidebar-pinned-wdth;
-        
-        .sidebar-search{
+
+        .sidebar-search {
           display: none;
         }
         .sidebar-profile {
-
           .user-picture {
             width: 40px;
             height: 40px;
           }
-
         }
 
         .profile-details,
@@ -139,26 +138,22 @@ $sidebar-color: #3D464D;
 
         .sidebar-menu {
           ul a {
-            padding: .5rem;
+            padding: 0.5rem;
             justify-content: center;
 
             span {
               display: none;
             }
-
-
           }
 
           ul span {
-            i {
-              display: none
+            i, mat-icon {
+              display: none;
             }
+            
           }
-
-          
         }
       }
-
     }
   }
 

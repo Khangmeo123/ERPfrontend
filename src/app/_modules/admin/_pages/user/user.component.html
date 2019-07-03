@@ -1,8 +1,16 @@
-<div style="height: 100%; width: 100%">
-  <h1>
-    user works!
-  </h1>
-  <div class="row">
+<div class="data-table-edit" style="height: 100%; width: 100%">
+  <div class="title-page">
+    <div>
+      {{title}}
+    </div>
+    <span (click)="onClickSaveBookMark($event)">
+      <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+        star
+      </mat-icon>
+    </span>
+
+  </div>
+  <!-- <div class="row">
     <div class="col-md-12">
       <input class="form-control" type="text"/>
     </div>
@@ -22,5 +30,5 @@
         </form>
       </div>
     </div>
-  </div>
+  </div> -->
 </div>

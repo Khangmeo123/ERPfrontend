@@ -1,7 +1,7 @@
 export interface ItemSidebar {
     displayName: string;
     disabled?: boolean;
-    iconName: string;
+    iconName: number;
     route?: string;
     children?: ItemSidebar[];
 }

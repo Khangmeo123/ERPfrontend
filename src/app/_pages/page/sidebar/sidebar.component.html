@@ -1,22 +1,37 @@
-<aside class="sidebar shadow-sm">
-  <!-- <div class="sidebar-search pt-2 pb-1 pl-3 pr-3">
+<aside class="sidebar shadow-sm" (mouseenter)="onEnterMouse($event)" (mouseleave)="onLeaveMouse($event)">
+    <!-- <div class="sidebar-search pt-2 pb-1 pl-3 pr-3">
     <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
   </div> -->
-  <nav class="sidebar-menu pt-2 pb-3">
-    <!-- <div class="menu-header mt-3 mb-2">
+    <nav class="sidebar-menu pt-2 pb-3">
+        <!-- <div class="menu-header mt-3 mb-2">
         
     </div> -->
-    <ul  class="menu-items">
-      <li>
-          <a href="#" routerLink="" routerLinkActive="active">
-            <i style="color: #FCE205" class="fas fa-star"></i>
-            <span>Bookmarks</span>
-          </a>
-          
-      </li>
-    </ul>
-    <app-item-sidebar *ngFor="let item of navItems" [item] = "item" [isShow] = "isShow"></app-item-sidebar>
-    <!-- <ul class="menu-items">
+        <ul class="menu-items" (click)="onClickBookmark()">
+            <li>
+                <a href="#" routerLink="/home" routerLinkActive="active">
+                    <mat-icon style="color: #FCE205">
+                        star
+                    </mat-icon>
+                    <span>Bookmarks</span>
+                </a>
+
+            </li>
+
+        </ul>
+        <ul [ngStyle]="{'display' : !isShowBookMark ? 'none' : 'block'}" *ngFor="let item of listBookMark">
+            <li style="display: flex">
+                <a href="#" routerLink="{{item.route}}" routerLinkActive="active">
+                    <span style="padding-left: 20px">{{item.title}}</span>
+                </a>
+                <span style="margin-top: 8px" (click)="deleteBookMark(item)">
+                    <mat-icon style="font-size: 14px" >clear</mat-icon>
+                </span>
+
+            </li>
+        </ul>
+        <app-item-sidebar [ngStyle]="{'display' : isShowBookMark ? 'none' : 'block'}" *ngFor="let item of navItems"
+            [item]="item" [isShowChild]="isShowChil"></app-item-sidebar>
+        <!-- <ul class="menu-items">
       <li >
         <a href="#" routerLink="/home" routerLinkActive="active">
           <i class="fa fa-tv"></i>
@@ -31,5 +46,5 @@
       </li>
 
     </ul> -->
-  </nav>
+    </nav>
 </aside>

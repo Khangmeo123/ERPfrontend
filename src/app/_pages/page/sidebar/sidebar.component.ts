@@ -1,5 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
 import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
+import { AppService } from 'src/app/_services';
 
 @Component({
   selector: 'app-sidebar',
@@ -7,186 +8,127 @@ import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
   styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
-  @Input() isShow: boolean = false;
-  constructor() { }
+  public isShowChil: boolean = true;
+  public isShowBookMark: boolean = false;
+  public listBookMark: Array<any> = [];
+  constructor(
+    private appService: AppService) {
+    this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
+  }
 
   navItems: ItemSidebar[] = [
     {
-      displayName: 'DevFestFL',
-      iconName: 'recent_actors',
-      route: 'devfestfl',
+      displayName: 'Data Table',
+      iconName: 1,
+      route: 'admin',
       children: [
         {
-          displayName: 'Speakers',
-          iconName: 'group',
-          route: 'devfestfl/speakers',
-          children: [
-            {
-              displayName: 'Michael Prentice',
-              iconName: 'person',
-              route: 'devfestfl/speakers/michael-prentice'
-            },
-            {
-              displayName: 'Stephen Fluin',
-              iconName: 'person',
-              route: 'devfestfl/speakers/stephen-fluin'
-            },
-            {
-              displayName: 'Mike Brocchi',
-              iconName: 'person',
-              route: 'devfestfl/speakers/mike-brocchi',
-              children: [
-                {
-                  displayName: 'My ally, the CLI',
-                  iconName: 'star_rate',
-                  route: 'devfestfl/speakers/mike-brocchi/my-ally-cli'
-                },
-                {
-                  displayName: 'Become an Angular Tailor',
-                  iconName: 'star_rate',
-                  route: 'devfestfl/speakers/mike-brocchi/become-angular-tailer'
-                }
-              ]
-            }
-          ]
+          displayName: 'Editable Table',
+          iconName: 0,
+          route: '/admin',
         },
         {
-          displayName: 'Sessions',
-          iconName: 'speaker_notes',
-          route: 'devfestfl/sessions',
-          children: [
-            {
-              displayName: 'Create Enterprise UIs',
-              iconName: 'star_rate',
-              route: 'devfestfl/sessions/material-design'
-            },
-            {
-              displayName: 'What\'s up with the Web?',
-              iconName: 'star_rate',
-              route: 'devfestfl/sessions/what-up-web'
-            },
-            {
-              displayName: 'My ally, the CLI',
-              iconName: 'star_rate',
-              route: 'devfestfl/sessions/my-ally-cli'
-            },
-            {
-              displayName: 'Become an Angular Tailor',
-              iconName: 'star_rate',
-              route: 'devfestfl/sessions/become-angular-tailer'
-            }
-          ]
+          displayName: 'Table',
+          iconName: 0,
+          route: 'admin',
         },
         {
           displayName: 'Feedback',
-          iconName: 'feedback',
-          route: 'devfestfl/feedback'
+          iconName: 0,
+          route: '/admin'
         }
       ]
     },
     {
       displayName: 'Disney',
-      iconName: 'videocam',
-      children: [
-        {
-          displayName: 'Speakers',
-          iconName: 'group',
-          children: [
-            {
-              displayName: 'Michael Prentice',
-              iconName: 'person',
-              route: 'michael-prentice',
-            },
-            {
-              displayName: 'Stephen Fluin',
-              iconName: 'person',
-              route: 'stephen-fluin',
-              children: [
-                {
-                  displayName: 'the Web?',
-                  iconName: 'star_rate',
-                  route: 'what-up-web'
-                }
-              ]
-            },
-            {
-              displayName: 'Mike Brocchi',
-              iconName: 'person',
-              route: 'mike-brocchi',
-            }
-          ]
-        },
-        {
-          displayName: 'Sessions',
-          iconName: 'speaker_notes',
-          children: [
-            {
-              displayName: 'Enterprise UIs',
-              iconName: 'star_rate',
-              route: 'material-design'
-            },
-            {
-              displayName: 'What\'s up?',
-              iconName: 'star_rate',
-              route: 'what-up-web'
-            },
-            {
-              displayName: 'the CLI',
-              iconName: 'star_rate',
-              route: 'my-ally-cli'
-            },
-            {
-              displayName: 'Angular Tailor',
-              iconName: 'star_rate',
-              route: 'become-angular-tailer'
-            }
-          ]
-        },
-        {
-          displayName: 'Feedback',
-          iconName: 'feedback',
-          route: 'feedback'
-        }
-      ]
+      iconName: 1,
+      // children: [
+      //   {
+      //     displayName: 'Speakers',
+      //     iconName: 0,
+      //     children: [
+      //       {
+      //         displayName: 'Michael Prentice',
+      //         iconName: 0,
+      //         route: 'michael-prentice',
+      //       },
+      //       {
+      //         displayName: 'Stephen Fluin',
+      //         iconName: 0,
+      //         route: 'stephen-fluin',
+      //       ]
+      //   },
+      //   {
+      //     displayName: 'Sessions',
+      //     iconName: 0,
+      //     children: [
+      //       {
+      //         displayName: 'Enterprise UIs',
+      //         iconName: 0,
+      //         route: 'material-design'
+      //       },
+      //       {
+      //         displayName: 'What\'s up?',
+      //         iconName: 0,
+      //         route: 'what-up-web'
+      //       },
+      //       {
+      //         displayName: 'the CLI',
+      //         iconName: 0,
+      //         route: 'my-ally-cli'
+      //       },
+      //       {
+      //         displayName: 'Angular Tailor',
+      //         iconName: 0,
+      //         route: 'become-angular-tailer'
+      //       }
+      //     ]
+      //   },
+      //   {
+      //     displayName: 'Feedback',
+      //     iconName: 0,
+      //     route: 'feedback'
+      //   }
+      // ]
     },
     {
       displayName: 'Orlando',
-      iconName: 'movie_filter',
+      iconName: 1,
       children: [
         {
           displayName: 'Speakers',
-          iconName: 'group',
+          iconName: 0,
           children: [
             {
               displayName: 'Michael Prentice',
-              iconName: 'person',
+              iconName: 0,
               route: 'michael-prentice',
             },
             {
               displayName: 'Stephen Fluin',
-              iconName: 'person',
+              iconName: 0,
               route: 'stephen-fluin',
               children: [
                 {
                   displayName: 'What\'s up ',
-                  iconName: 'star_rate',
+                  iconName: 0,
                   route: 'what-up-web'
                 }
               ]
             },
             {
               displayName: 'Mike Brocchi',
-              iconName: 'person',
+              iconName: 0,
               route: 'mike-brocchi',
               children: [
                 {
                   displayName: 'My ally, the CLI',
-                  iconName: 'star_rate',
+                  iconName: 0,
                   route: 'my-ally-cli'
                 },
                 {
                   displayName: 'Angular Tailor',
-                  iconName: 'star_rate',
+                  iconName: 0,
                   route: 'become-angular-tailer'
                 }
               ]
@@ -195,33 +137,33 @@ export class SidebarComponent implements OnInit {
         },
         {
           displayName: 'Sessions',
-          iconName: 'speaker_notes',
+          iconName: 0,
           children: [
             {
               displayName: 'Enterprise UIs',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'material-design'
             },
             {
               displayName: 'the Web?',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'what-up-web'
             },
             {
               displayName: 'My ally, the CLI',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'my-ally-cli'
             },
             {
               displayName: 'Angular Tailor',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'become-angular-tailer'
             }
           ]
         },
         {
           displayName: 'Feedback',
-          iconName: 'feedback',
+          iconName: 0,
           route: 'feedback'
         }
       ]
@@ -229,49 +171,49 @@ export class SidebarComponent implements OnInit {
     {
       displayName: 'Maleficent',
       disabled: true,
-      iconName: 'report_problem',
+      iconName: 1,
       children: [
         {
           displayName: 'Speakers',
-          iconName: 'group',
+          iconName: 0,
           children: [
             {
               displayName: 'Michael Prentice',
-              iconName: 'person',
+              iconName: 0,
               route: 'michael-prentice',
               children: [
                 {
                   displayName: 'Enterprise UIs',
-                  iconName: 'star_rate',
+                  iconName: 0,
                   route: 'material-design'
                 }
               ]
             },
             {
               displayName: 'Stephen Fluin',
-              iconName: 'person',
+              iconName: 0,
               route: 'stephen-fluin',
               children: [
                 {
                   displayName: 'the Web?',
-                  iconName: 'star_rate',
+                  iconName: 0,
                   route: 'what-up-web'
                 }
               ]
             },
             {
               displayName: 'Mike Brocchi',
-              iconName: 'person',
+              iconName: 0,
               route: 'mike-brocchi',
               children: [
                 {
                   displayName: 'the CLI',
-                  iconName: 'star_rate',
+                  iconName: 0,
                   route: 'my-ally-cli'
                 },
                 {
                   displayName: 'Angular Tailor',
-                  iconName: 'star_rate',
+                  iconName: 0,
                   route: 'become-angular-tailer'
                 }
               ]
@@ -280,33 +222,33 @@ export class SidebarComponent implements OnInit {
         },
         {
           displayName: 'Sessions',
-          iconName: 'speaker_notes',
+          iconName: 0,
           children: [
             {
               displayName: 'Enterprise UIs',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'material-design'
             },
             {
               displayName: 'the Web?',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'what-up-web'
             },
             {
               displayName: 'the CLI',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'my-ally-cli'
             },
             {
               displayName: 'Angular Tailor',
-              iconName: 'star_rate',
+              iconName: 0,
               route: 'become-angular-tailer'
             }
           ]
         },
         {
           displayName: 'Feedback',
-          iconName: 'feedback',
+          iconName: 0,
           route: 'feedback'
         }
       ]
@@ -314,6 +256,39 @@ export class SidebarComponent implements OnInit {
   ];
 
   ngOnInit() {
+    console.log('ngOnInit', this.listBookMark)
   }
+
+  ngOnChanges(channges) {
+    console.log('ngOnChanges', channges)
+
+  }
+
+  onEnterMouse() {
+    this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
+    this.isShowChil = false;
+    this.appService.toggleSidebarPin();
+  }
+
+  onLeaveMouse() {
+    this.isShowChil = true;
+    this.appService.toggleSidebarPin();
+  }
+
+  onClickBookmark() {
+    this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
+    this.isShowBookMark = !this.isShowBookMark;
+  }
+
+  deleteBookMark(item) {
+    const index = this.listBookMark.indexOf(item);
+    if(index > -1){
+      this.listBookMark.splice(index, 1);
+      localStorage.setItem('key_luu_book_mark', JSON.stringify(this.listBookMark));
+    }
+    
+    console.log('deleteBookMark', index)
+  }
+
 
 }

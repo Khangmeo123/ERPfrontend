@@ -1,7 +1,8 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Poppins&display=swap");
 
-$bg-color: #f2f3f8;
+// $bg-color: #f2f3f8;
+$bg-color: #ffffff;
 $navbar-bg-color: #1c4e80;
 $navbar-color: #ffffff;
 $sidebar-bg-color: #fff;
@@ -129,6 +130,9 @@ body {
           li {
             color: rgba($sidebar-color, 0.7);
             span {
+              mat-icon {
+                margin-top: 10px;
+              }
               i {
                 margin-right: 10px;
                 color: #3D464D;
@@ -141,6 +145,7 @@ body {
                 }
               }
             }
+            
             i {
               color: $sidebar-icon-color;
               color: #1C4E80;

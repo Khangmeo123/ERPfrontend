@@ -22,20 +22,27 @@ export class ItemSidebarComponent implements OnInit {
     @HostBinding('attr.aria-expanded') ariaExpanded = this.expanded;
     @Input() item: ItemSidebar;
     @Input() depth = 0;
-    @Input() isShow;
+    @Input() isShowChild;
+
+
+    private isShowOut: boolean;
+
     constructor(public router: Router) { }
 
     ngOnInit() {
-        console.log('isShow: : : ', this.isShow)
     }
 
-    ngOnChang 
+    ngOnChanges() {
+        this.isShowOut = this.isShowChild;
+    }
+
     onItemSelected(item: ItemSidebar) {
-        if (!item.children || !item.children.length) {
-            this.router.navigate([item.route]);
-        }
+        // if (!item.children || !item.children.length) {
+        //     this.router.navigate([item.route]);
+        // }
         if (item.children && item.children.length) {
             this.expanded = !this.expanded;
         }
+        console.log('onItemSelected', this.expanded);
     }
 }

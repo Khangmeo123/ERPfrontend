@@ -1,17 +1,33 @@
-<ul class="menu-items" [ngStyle]="{'padding-left': (depth * 12) + 'px'}" (click)="onItemSelected(item)">
-<!-- [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}"> -->
+<ul class="menu-items" [ngStyle]="{'padding-left': (depth * 12) + 'px','display': isShowOut == false ? 'block': 'none'}"
+    (click)="onItemSelected(item)">
+    <!-- [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}"> -->
     <li style="display: flex">
-        <a href="#" routerLink="/home" routerLinkActive="active">
-            <i class="fa fa-tv"></i>
-            <span >{{item.displayName}}</span>
+        <a *ngIf="(item.children && item.children.length > 0)" href="#" routerLink="/" routerLinkActive="active">
+            <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
+            <span>{{item.displayName}}</span>
         </a>
 
-        <span [ngStyle]="{'display': (item.children && item.children.length > 0) ? 'block': 'none' }"><i class="fas" [ngClass]="!expanded ? 'fa-caret-down' : 'fa-caret-up'"></i></span>
+        <a  *ngIf="(!item.children || item.children.length == 0)" href="#" routerLink="{{item.route}}" routerLinkActive="active">
+            <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
+            <span>{{item.displayName}}</span>
+        </a>
+
+        <span [ngStyle]="{'display': (item.children && item.children.length > 0) ? 'block': 'none' }"><i class="fas"
+                [ngClass]="!expanded ? 'fa-caret-down' : 'fa-caret-up'"></i></span>
     </li>
 </ul>
 
-<div *ngIf="expanded">
-    <app-item-sidebar *ngFor="let child of item.children" [item]="child" [depth]="depth + 1">
+
+<ul class="menu-items menu-block">
+    <li [ngStyle]="{'display': isShowOut == true ? 'block': 'none' }">
+        <a href="#" routerLink="/home" routerLinkActive="active">
+            <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
+        </a>
+    </li>
+</ul>
+
+<div *ngIf="expanded && isShowOut == false">
+    <app-item-sidebar *ngFor="let child of item.children" [isShowChild]="isShowChild" [item]="child"
+        [depth]="depth + 1">
     </app-item-sidebar>
 </div>
-      
