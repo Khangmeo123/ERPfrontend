@@ -1,4 +1,4 @@
-<div class="select-component {{mode}}" (clickOutside)="closeList()">
+<div [class]="rootClass" (clickOutside)="closeList()">
   <div class="select-head d-flex align-items-center align-content-center">
     <input type="text" class="form-control select-search flex-grow-1" (focus)="openList()" [value]="selectedText" (keydown)="onKeyDown($event)">
     <span class="pi pi-times-circle" (click)="clearSelection()" *ngIf="displayClearButton"></span>
@@ -14,7 +14,7 @@
               [selectionMode]="mode"
               [(selection)]="selectedNodes"
               (selectionChange)="onChange($event)"
-              (onNodeSelect)="onSelect($event)"
+              (onNodeSelect)="onSelect()"
       ></p-tree>
     </ng-template>
   </div>

@@ -1,7 +1,7 @@
 import {moduleMetadata, storiesOf} from '@storybook/angular';
 import {TreeSelectComponent} from './tree-select.component';
 import {TreeModule} from 'primeng/tree';
-import {sampleTree} from './tree-select.component.sample';
+import {sampleTree} from './tree-select.sample';
 import {SelectModule} from '../select.module';
 
 storiesOf('Tree Select', module)
