@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, OnChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {toggleMenu} from './tree-select.animations';
 import {ITreeNode} from './tree-select.interfaces';
 import {Tree} from 'primeng/tree';
@@ -42,11 +42,13 @@ export class TreeSelectComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    if (changes.options.currentValue) {
-      this.nodes = [];
-      this.options.forEach((node: ITreeNode) => {
-        this.retrieveAllSelected(node);
-      });
+    if (changes.options) {
+      if (changes.options.currentValue) {
+        this.nodes = [];
+        this.options.forEach((node: ITreeNode) => {
+          this.retrieveAllSelected(node);
+        });
+      }
     }
   }
 

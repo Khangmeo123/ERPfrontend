@@ -1,4 +1,4 @@
 export interface IOption {
   label: string;
-  value: any;
+  data: any;
 }

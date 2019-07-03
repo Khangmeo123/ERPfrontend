@@ -3,10 +3,10 @@ import { CommonModule } from '@angular/common';
 import {MatProgressSpinnerModule} from '@angular/material';
 import {TreeModule} from 'primeng/tree';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
 import {ClickOutsideModule} from 'ng-click-outside';
 import {TreeSelectComponent} from './tree-select/tree-select.component';
 import {MultiSelectComponent} from './multi-select/multi-select.component';
-import {BsDropdownModule} from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -20,7 +20,7 @@ import {BsDropdownModule} from 'ngx-bootstrap';
     BrowserAnimationsModule,
     ClickOutsideModule,
     MatProgressSpinnerModule,
-    BsDropdownModule,
+    BsDropdownModule.forRoot(),
   ],
   exports: [
     TreeSelectComponent,

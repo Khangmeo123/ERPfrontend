@@ -1,24 +1,24 @@
-import {IOption} from './multi-select.interfaces';
+import {ITreeNode} from '../tree-select/tree-select.interfaces';
 
-export const sampleMenuData: IOption[] = [
+export const sampleMenuData: ITreeNode[] = [
   {
     label: 'Documents',
-    value: 'documents',
+    data: 'documents',
   },
   {
     label: 'Downloads',
-    value: 'downloads',
+    data: 'downloads',
   },
   {
     label: 'Pictures',
-    value: 'pictures',
+    data: 'pictures',
   },
   {
     label: 'Music',
-    value: 'music',
+    data: 'music',
   },
   {
     label: 'Videos',
-    value: 'videos',
+    data: 'videos',
   },
 ];

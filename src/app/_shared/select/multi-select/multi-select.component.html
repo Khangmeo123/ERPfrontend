@@ -1,10 +1,10 @@
-<div class="head">
-  <input type="text" class="form-control">
-</div>
-<div class="list">
-  <ul class="dropdown-menu" *dropdownMenu>
-    <li role="menuitem" *ngFor="let item of options">
-      {{item.label}}
-    </li>
-  </ul>
+<div class="multi-select">
+  <div class="head d-flex align-items-center">
+    <input type="text" class="form-control flex-grow-1 text" (keydown)="onKeyDown($event)">
+    <span role="button" class="pi pi-caret-{{togglerClass}} toggler"></span>
+  </div>
+  <div class="list">
+    <p-tree [value]="options"
+    ></p-tree>
+  </div>
 </div>

@@ -1,0 +1,35 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.multi-select {
+  width: 18em;
+
+  border-radius: $border-radius;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  position: relative;
+
+  .head {
+    border: 1px solid $border-color;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    input.text {
+      border: none;
+    }
+
+    input.text:focus {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+
+  .list {
+    position: absolute;
+    top: $input-height + $input-padding-y;
+    left: 0;
+  }
+}
