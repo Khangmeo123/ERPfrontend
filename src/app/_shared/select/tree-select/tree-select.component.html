@@ -16,9 +16,10 @@
             <li *ngFor="let item of nodes; index as i" class="ui-listbox-item ui-corner-all d-flex align-items-center">
               <input type="checkbox" #selectedCheckbox name="selected" [value]="i" checked
                      (click)="onUnselect($event)">
-              <span class="ml-2" role="button" (click)="selectedCheckbox.click()">
+              <span #selectedLabel class="ml-2 flex-grow-1" role="button" (click)="selectedCheckbox.click()">
                 {{item.label}}
               </span>
+              <span class="pi pi-copy mx-1" role="button" (click)="copyToClipboard(selectedLabel.innerText)"></span>
             </li>
           </ul>
         </div>
