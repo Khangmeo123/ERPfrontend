@@ -1,21 +1,26 @@
 import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
 import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
 import { AppService } from 'src/app/_services';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { toggleMenu } from 'src/app/_shared/select/tree-select/tree-select.animations';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.scss']
+  styleUrls: ['./sidebar.component.scss'],
+  animations: [toggleMenu]
 })
 export class SidebarComponent implements OnInit {
   public isShowChil: boolean = true;
   public isShowBookMark: boolean = false;
   public listBookMark: Array<any> = [];
+  private length = 0;
   constructor(
     private appService: AppService) {
     this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
+    this.length = this.listBookMark.length;
   }
-
+  private isOpened = false;
   navItems: ItemSidebar[] = [
     {
       displayName: 'Data Table',
@@ -264,30 +269,44 @@ export class SidebarComponent implements OnInit {
 
   }
 
+  get animationState() {
+    return this.isOpened ? 'open' : 'closed';
+  }
+
   onEnterMouse() {
+    console.log('onEnterMouse')
     this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
     this.isShowChil = false;
     this.appService.toggleSidebarPin();
   }
 
   onLeaveMouse() {
+    console.log('onLeaveMouse')
     this.isShowChil = true;
     this.appService.toggleSidebarPin();
   }
 
   onClickBookmark() {
+    let element = document.querySelector('.menu-bookmark-line');
+    console.log('element', element)
     this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
+    this.length = this.listBookMark.length;
     this.isShowBookMark = !this.isShowBookMark;
+    if (this.isShowBookMark) {
+      element.classList.add('show');
+    } else {
+      element.classList.remove('show');
+    }
   }
 
   deleteBookMark(item) {
     const index = this.listBookMark.indexOf(item);
-    if(index > -1){
+    if (index > -1) {
       this.listBookMark.splice(index, 1);
       localStorage.setItem('key_luu_book_mark', JSON.stringify(this.listBookMark));
     }
-    
-    console.log('deleteBookMark', index)
+
+    // console.log('deleteBookMark', index)
   }
 
 

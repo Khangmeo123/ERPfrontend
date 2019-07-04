@@ -1,0 +1,32 @@
+
+.menu-bookmark-line::before{
+    content: '';
+    height: 100%;
+    opacity: 1;
+    width: 3px;
+    background: #1c4e80;
+    position: absolute;
+    left: 35px;
+    top: 40;
+    border-radius: 15px;
+}
+
+.menu-bookmark-line {
+    // margin-left: 15px !important;
+    position: relative;
+    transition: all .26s ease;
+    -webkit-transform: scaleY(0);
+    transform: scaleY(0);
+    transform-origin: top;
+    -webkit-transform-origin: top;
+    height: auto;
+    max-height: 0;
+    // display: block !important;
+}
+
+
+.show {
+    -webkit-transform: scaleY(1);
+    transform: scaleY(1);
+    max-height: 600px;
+}

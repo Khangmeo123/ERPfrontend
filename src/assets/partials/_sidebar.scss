@@ -137,6 +137,9 @@ $sidebar-color: #3d464d;
         }
 
         .sidebar-menu {
+          .menu-bookmark-line {
+            display: none;
+          }
           ul a {
             padding: 0.5rem;
             justify-content: center;
