@@ -6,9 +6,10 @@ import {Tree} from 'primeng/tree';
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 
 @Component({
-  selector: 'app-tree',
+  selector: 'app-tree-select',
   templateUrl: './tree-select.component.html',
   styleUrls: [
+    '../select.scss',
     './tree-select.component.scss',
   ],
   encapsulation: ViewEncapsulation.None,
@@ -17,7 +18,7 @@ type SelectMode = 'single' | 'multiple' | 'checkbox';
   ],
 })
 export class TreeSelectComponent implements OnInit, OnChanges {
-  options: ITreeNode[] = [];
+  @Input() options: ITreeNode[] = [];
 
   @Input() mode: SelectMode = 'single';
 
