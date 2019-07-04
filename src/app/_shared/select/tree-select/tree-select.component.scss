@@ -1,9 +1,5 @@
-@import "../../../../../node_modules/bootstrap/scss/functions";
-@import "../../../../../node_modules/bootstrap/scss/variables";
-
-.ui-tree {
-  border-width: 0 !important;
-}
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
 
 .select-component {
   width: 18em;
@@ -12,14 +8,6 @@
   .pi {
     color: #495057;
     font-size: medium;
-  }
-
-  .ui-treenode-content.ui-treenode-selectable.ui-treenode-content-selected:after {
-    display: block;
-    content: '√';
-    float: right;
-    font-weight: 700;
-    color: green;
   }
 
   .ui-treenode-label.ui-state-highlight {
@@ -32,13 +20,16 @@
     border-radius: $border-radius;
     padding: 0 0;
     position: relative;
+    cursor: pointer;
 
-    .select-search {
+    .select-text {
       width: 100%;
       border: 0;
+      background-color: transparent;
+      cursor: pointer;
     }
 
-    .select-search:focus {
+    .select-text:focus {
       border: 0;
       -webkit-box-shadow: none;
       -moz-box-shadow: none;
@@ -57,26 +48,46 @@
     }
   }
 
-  .select-list {
+  .lists {
     position: absolute;
     left: 0;
     right: 0;
+    margin-right: 0;
     z-index: 9999;
     border: 1px solid $border-color;
     border-top-width: 0;
     border-bottom-left-radius: $border-radius;
     border-bottom-right-radius: $border-radius;
+    max-height: 100vh;
+    overflow-y: auto;
   }
-}
 
-.select-component.checkbox {
-  .ui-treenode-content.ui-treenode-selectable.ui-treenode-content-selected:after {
-    display: block;
-    content: none;
-    float: right;
-    font-weight: 700;
-    color: green;
+  .selected-results {
+    max-height: 132px;
+    width: 100%;
+    overflow-y: auto;
+    border-bottom: 1px solid $border-color;
+    .ui-listbox {
+      width: 100%;
+      border: none;
+      margin-top: 8px;
+      margin-bottom: 8px;
+      .ui-listbox-item {
+        margin-left: 14px;
+      }
+    }
   }
+
+  .ui-tree {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    border: 0;
+    max-height: 226px;
+    overflow-y: auto;
+  }
+
 }
 
 .select-component.show {

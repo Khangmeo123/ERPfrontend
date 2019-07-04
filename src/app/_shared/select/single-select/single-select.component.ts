@@ -2,14 +2,16 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
 import {IListItem} from '../select.interfaces';
 
 @Component({
-  selector: 'app-multi-select',
-  templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.scss'],
+  selector: 'app-single-select',
+  templateUrl: './single-select.component.html',
+  styleUrls: [
+    './single-select.component.scss',
+  ],
   encapsulation: ViewEncapsulation.None,
 })
-export class MultiSelectComponent implements OnInit {
+export class SingleSelectComponent implements OnInit {
   @Input() options: IListItem[] = [];
-  @Input() values: any[] = [];
+  @Input() selectedItem: IListItem = null;
 
   @Input() selectedLabel = 'Selected';
   @Input() availableLabel = 'Available';
@@ -42,7 +44,10 @@ export class MultiSelectComponent implements OnInit {
   }
 
   get selectedText() {
-    return `${this.values.length} ${this.selectedTextLabel}`;
+    if (this.selectedItem && this.selectedItem.label) {
+      return this.selectedItem.label;
+    }
+    return `0 ${this.selectedLabel}`;
   }
 
   copyToClipboard(event) {
@@ -60,31 +65,32 @@ export class MultiSelectComponent implements OnInit {
     this.search.emit(value);
   }
 
-  onSelect({value}) {
+  onSelect(event) {
+    const {value} = event;
     const selectedItem = this.options.find((option) => option.value === value);
     const index = this.options.indexOf(selectedItem);
-    this.values = [
-      ...this.values,
-      selectedItem,
-    ];
-    this.options = [
-      ...this.options.slice(0, index),
-      ...this.options.slice(index + 1),
-    ];
+    const currentItem = this.selectedItem;
+    this.selectedItem = selectedItem;
+    if (currentItem) {
+      this.options = [
+        ...this.options.slice(0, index),
+        ...this.options.slice(index + 1),
+        currentItem,
+      ];
+    } else {
+      this.options = [
+        ...this.options.slice(0, index),
+        ...this.options.slice(index + 1),
+      ];
+    }
   }
 
-  onUnselect(event) {
-    const {target: {value}} = event;
-    const unselectedItem = this.values.find((option) => option.value === value);
-    const index = this.values.indexOf(unselectedItem);
-    this.values = [
-      ...this.values.slice(0, index),
-      ...this.values.slice(index + 1),
-    ];
+  onUnselect() {
     this.options = [
       ...this.options,
-      unselectedItem,
+      this.selectedItem,
     ];
+    this.selectedItem = null;
   }
 
   closeList() {

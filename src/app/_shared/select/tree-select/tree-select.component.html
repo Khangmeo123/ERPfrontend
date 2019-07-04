@@ -1,10 +1,29 @@
-<div [class]="rootClass" (clickOutside)="closeList()">
+<div [class]="rootClass" (clickOutside)="closeList()" (click)="$event.stopPropagation()">
   <div class="select-head d-flex align-items-center align-content-center">
-    <input type="text" class="form-control select-search flex-grow-1" (focus)="openList()" [value]="selectedText" (keydown)="onKeyDown($event)">
+    <input type="text" class="form-control select-text flex-grow-1"
+           readonly
+           (focus)="openList()"
+           [value]="selectedText"
+           (keydown)="onKeyDown($event)">
     <span class="pi pi-times-circle" (click)="clearSelection()" *ngIf="displayClearButton"></span>
     <span [class]="toggleState" (click)="toggleList()"></span>
   </div>
-  <div class="select-list" [@toggleMenu]="animationState" *ngIf="isOpened">
+  <div class="lists" [@toggleMenu]="animationState" *ngIf="isOpened">
+    <div *ngIf="nodes.length > 0" class="selected-results">
+      <div class="ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all">
+        <div class="ui-listbox-list-wrapper">
+          <ul class="ui-listbox-list">
+            <li *ngFor="let item of nodes; index as i" class="ui-listbox-item ui-corner-all d-flex align-items-center">
+              <input type="checkbox" #selectedCheckbox name="selected" [value]="i" checked
+                     (click)="onUnselect($event)">
+              <span class="ml-2" role="button" (click)="selectedCheckbox.click()">
+                {{item.label}}
+              </span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
     <div *ngIf="isLoading; else notLoading" class="d-flex justify-content-center py-4">
       <mat-spinner></mat-spinner>
     </div>

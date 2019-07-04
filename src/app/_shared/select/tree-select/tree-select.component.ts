@@ -21,7 +21,9 @@ export class TreeSelectComponent implements OnInit, OnChanges {
 
   @Input() mode: SelectMode = 'single';
 
-  @Input() selectedLabel = 'mục đã chọn';
+  @Input() selectedLabel = 'selected';
+
+  @Input() selectedListLabel = 'Selected';
 
   @Input() initialValue: ITreeNode[] | ITreeNode = null;
 
@@ -154,9 +156,7 @@ export class TreeSelectComponent implements OnInit, OnChanges {
   }
 
   onSelect() {
-    if (this.isSingle) {
-      this.closeList();
-    }
+
   }
 
   openList() {
@@ -177,5 +177,22 @@ export class TreeSelectComponent implements OnInit, OnChanges {
 
   onChange(data) {
     this.selector.emit(data);
+  }
+
+  onUnselect(event) {
+    const {
+      target: {
+        value: index,
+      },
+    } = event;
+    const node = this.nodes[index];
+    this.options = [
+      ...this.options,
+      node,
+    ];
+    this.nodes = [
+      ...this.nodes.slice(0, index),
+      ...this.nodes.slice(index + 1),
+    ];
   }
 }

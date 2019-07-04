@@ -1,9 +1,9 @@
 import {storiesOf} from '@storybook/angular/dist/client/preview';
 import {moduleMetadata} from '@storybook/angular';
 import {SelectModule} from '../select.module';
-import {sampleMenuData} from './multi-select.sample';
+import {sampleMenuData} from './single-select.sample';
 
-storiesOf('Multi-Select', module)
+storiesOf('Single-Select', module)
   .addDecorator(
     moduleMetadata({
       imports: [
@@ -16,12 +16,12 @@ storiesOf('Multi-Select', module)
       `<div class="container">
         <div class="row">
           <div class="col-md-3">
-            <app-multi-select [options]="options" [values]="values"></app-multi-select>
+            <app-single-select [options]="options" [selectedItem]="value"></app-single-select>
           </div>
         </div>
       </div>`,
     props: {
       options: sampleMenuData,
-      values: [],
+      selectedItem: null,
     },
   }));

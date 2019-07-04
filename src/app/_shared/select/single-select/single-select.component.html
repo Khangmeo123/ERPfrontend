@@ -1,4 +1,4 @@
-<div class="multi-select {{isOpened ? 'show' : 'hide'}} flex-grow-1" (clickOutside)="closeList()"
+<div class="single-select {{isOpened ? 'show' : 'hide'}} flex-grow-1" (clickOutside)="closeList()"
      (click)="$event.stopPropagation()">
   <div class="head d-flex align-items-center">
     <input type="text"
@@ -21,24 +21,23 @@
         <span role="button" class="ml-1 pi pi-times-circle" (click)="searchField.value = null"></span>
       </div>
     </div>
-    <div class="list selected-list" *ngIf="values.length > 0">
+    <div class="list selected-list" *ngIf="selectedItem">
       <span class="label">
         {{selectedLabel}}:
       </span>
       <div class="ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all">
         <div class="ui-listbox-list-wrapper">
           <ul class="ui-listbox-list">
-            <li *ngFor="let item of values"
-                class="ui-listbox-item ui-corner-all d-flex align-items-center">
+            <li class="ui-listbox-item ui-corner-all d-flex align-items-center">
               <input type="checkbox"
                      name="item"
                      #selectedCheckbox
-                     [value]="item.value"
+                     [value]="selectedItem.value"
                      class="form-check mr-1"
                      checked="checked"
-                     (change)="onUnselect($event)">
+                     (change)="onUnselect()">
               <span class="flex-grow-1" (click)="selectedCheckbox.click()">
-                {{ item.label }}
+                {{ selectedItem.label }}
               </span>
               <span role="button" class="ms-btn mr-1 pi pi-copy" (click)="copyToClipboard($event)"></span>
             </li>
