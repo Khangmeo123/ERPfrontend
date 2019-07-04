@@ -15,7 +15,7 @@ storiesOf('Multi-Select', module)
     template:
       `<div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col">
             <app-multi-select [options]="options" [values]="values"></app-multi-select>
           </div>
         </div>

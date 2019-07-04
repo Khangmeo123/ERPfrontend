@@ -5,6 +5,7 @@ import {IListItem} from '../select.interfaces';
   selector: 'app-single-select',
   templateUrl: './single-select.component.html',
   styleUrls: [
+    '../select.scss',
     './single-select.component.scss',
   ],
   encapsulation: ViewEncapsulation.None,

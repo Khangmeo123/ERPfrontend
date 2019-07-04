@@ -15,7 +15,7 @@ storiesOf('Single-Select', module)
     template:
       `<div class="container">
         <div class="row">
-          <div class="col-md-3">
+          <div class="col">
             <app-single-select [options]="options" [selectedItem]="value"></app-single-select>
           </div>
         </div>

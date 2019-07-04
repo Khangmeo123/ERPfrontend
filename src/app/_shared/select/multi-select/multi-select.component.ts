@@ -4,7 +4,10 @@ import {IListItem} from '../select.interfaces';
 @Component({
   selector: 'app-multi-select',
   templateUrl: './multi-select.component.html',
-  styleUrls: ['./multi-select.component.scss'],
+  styleUrls: [
+    '../select.scss',
+    './multi-select.component.scss',
+  ],
   encapsulation: ViewEncapsulation.None,
 })
 export class MultiSelectComponent implements OnInit {
