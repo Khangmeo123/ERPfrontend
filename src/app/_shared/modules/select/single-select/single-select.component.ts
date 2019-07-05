@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
 import {IListItem} from '../select.interfaces';
+import {SelectComponent} from '../select.component';
 
 @Component({
   selector: 'app-single-select',
@@ -10,7 +11,7 @@ import {IListItem} from '../select.interfaces';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class SingleSelectComponent implements OnInit {
+export class SingleSelectComponent extends SelectComponent implements OnInit {
   @Input() options: IListItem[] = [];
   @Input() selectedItem: IListItem = null;
 
@@ -21,11 +22,6 @@ export class SingleSelectComponent implements OnInit {
   @Output() selectionChange = new EventEmitter<any>();
 
   @Output() search = new EventEmitter<string>();
-
-  private isOpened = false;
-
-  constructor() {
-  }
 
   ngOnInit(): void {
   }
@@ -38,10 +34,6 @@ export class SingleSelectComponent implements OnInit {
     if (event.key.startsWith('Arrow')) {
       this.toggleList();
     }
-  }
-
-  toggleList() {
-    this.isOpened = !this.isOpened;
   }
 
   get selectedText() {
@@ -92,17 +84,5 @@ export class SingleSelectComponent implements OnInit {
       this.selectedItem,
     ];
     this.selectedItem = null;
-  }
-
-  closeList() {
-    if (this.isOpened) {
-      this.isOpened = false;
-    }
-  }
-
-  openList() {
-    if (!this.isOpened) {
-      this.isOpened = true;
-    }
   }
 }

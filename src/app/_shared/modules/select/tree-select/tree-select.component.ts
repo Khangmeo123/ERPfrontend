@@ -1,7 +1,8 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Tree} from 'primeng/tree';
 import {toggleMenu} from './tree-select.animations';
 import {ITreeNode} from './tree-select.interfaces';
-import {Tree} from 'primeng/tree';
+import {SelectComponent} from '../select.component';
 
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 
@@ -17,7 +18,7 @@ type SelectMode = 'single' | 'multiple' | 'checkbox';
     toggleMenu,
   ],
 })
-export class TreeSelectComponent implements OnInit, OnChanges {
+export class TreeSelectComponent extends SelectComponent implements OnInit, OnChanges {
   @Input() options: ITreeNode[] = [];
 
   @Input() mode: SelectMode = 'single';
@@ -33,8 +34,6 @@ export class TreeSelectComponent implements OnInit, OnChanges {
   @Output() selector = new EventEmitter<ITreeNode | ITreeNode[]>();
 
   @ViewChild('tree', {static: false}) tree: Tree;
-
-  private isOpened = false;
 
   private nodes: ITreeNode[] = [];
 
@@ -144,7 +143,7 @@ export class TreeSelectComponent implements OnInit, OnChanges {
   }
 
   get rootClass() {
-    return `select-component ${this.mode} ${this.isOpened ? 'show' : 'hide'}`;
+    return `select select-component ${this.mode} ${this.isOpened ? 'show' : 'hide'}`;
   }
 
   get selectedText() {
@@ -158,18 +157,6 @@ export class TreeSelectComponent implements OnInit, OnChanges {
 
   onSelect() {
 
-  }
-
-  openList() {
-    if (!this.isOpened) {
-      this.isOpened = true;
-    }
-  }
-
-  closeList() {
-    if (this.isOpened) {
-      this.isOpened = false;
-    }
   }
 
   copyToClipboard(text: string) {

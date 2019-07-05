@@ -82,4 +82,18 @@ storiesOf('Tree Select', module)
       mode: 'checkbox',
       options: sampleTree,
     },
+  }))
+  .add('fixed-bottom', () => ({
+    template:
+      `<div class="container">
+        <div class="row">
+          <div class="col fixed-bottom mb-4">
+            <app-tree-select [mode]="mode" [options]="options"></app-tree-select>
+          </div>
+        </div>
+      </div>`,
+    props: {
+      mode: 'checkbox',
+      options: sampleTree,
+    },
   }));

@@ -1,5 +1,5 @@
 <div [class]="rootClass" (clickOutside)="closeList()" (click)="$event.stopPropagation()">
-  <div class="select-head d-flex align-items-center align-content-center">
+  <div class="select-head d-flex align-items-center align-content-center" #head>
     <input type="text" class="form-control select-text flex-grow-1"
            readonly
            (focus)="openList()"
@@ -8,7 +8,7 @@
     <span class="pi pi-times-circle" (click)="clearSelection()" *ngIf="displayClearButton"></span>
     <span [class]="toggleState" (click)="toggleList()"></span>
   </div>
-  <div class="lists" [@toggleMenu]="animationState" *ngIf="isOpened">
+  <div class="lists {{listDirection}}" [@toggleMenu]="animationState" *ngIf="isOpened">
     <div *ngIf="nodes.length > 0" class="selected-results">
       <div class="ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all">
         <div class="ui-listbox-list-wrapper">

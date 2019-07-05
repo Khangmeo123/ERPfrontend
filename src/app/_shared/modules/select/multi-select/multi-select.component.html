@@ -1,6 +1,6 @@
 <div class="select multi-select {{isOpened ? 'show' : 'hide'}} flex-grow-1" (clickOutside)="closeList()"
      (click)="$event.stopPropagation()">
-  <div class="head d-flex align-items-center">
+  <div class="head d-flex align-items-center" #head>
     <input type="text"
            class="form-control flex-grow-1 result"
            readonly
@@ -9,7 +9,7 @@
            (keydown)="onKeyDown($event)">
     <span role="button" class="toggler pi pi-caret-{{toggleClass}}" (click)="toggleList()"></span>
   </div>
-  <div class="lists" *ngIf="isOpened">
+  <div class="lists {{listDirection}}" *ngIf="isOpened">
     <div class="list">
       <div class="label d-flex align-items-center">
         <div class="input-group align-items-center input-group-sm">
