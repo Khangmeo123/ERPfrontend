@@ -5,7 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
 
-  isSidebarPinned = true; // default true
+  isSidebarPinned = false; // default true
   isSidebarToggeled = false;
 
   constructor() { }

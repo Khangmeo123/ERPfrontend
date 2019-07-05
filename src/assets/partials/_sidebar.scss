@@ -7,7 +7,7 @@ $sidebar-color: #3d464d;
       height: 100%;
       width: $sidebar-width;
       position: absolute;
-      transition: left 0.3s ease;
+      transition: left 1s ease;
       left: -$sidebar-width;
       top: 0;
       z-index: 111;
@@ -47,9 +47,9 @@ $sidebar-color: #3d464d;
       }
 
       .sidebar-menu {
-        > div {
-          padding: 0 1.5rem;
-        }
+        // > div {
+        //   padding: 0 1.5rem;
+        // }
 
         .menu-header {
           padding: 0 1.5rem;
@@ -148,6 +148,10 @@ $sidebar-color: #3d464d;
               display: none;
             }
           }
+
+          // ul li {
+          //   display: 
+          // }
 
           ul span {
             i, mat-icon {

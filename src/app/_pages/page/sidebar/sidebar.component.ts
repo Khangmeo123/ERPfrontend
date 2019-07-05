@@ -1,20 +1,21 @@
-import { Component, OnInit, Input, HostListener, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, HostListener, ElementRef, OnChanges } from '@angular/core';
 import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
 import { AppService } from 'src/app/_services';
-import { trigger, state, style, transition, animate } from '@angular/animations';
-import { toggleMenu } from 'src/app/_shared/select/tree-select/tree-select.animations';
+import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarRight, toggleMenuNavbarLeft } from './sidebar.animation';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  animations: [toggleMenu]
+  animations: [toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarRight, toggleMenuNavbarLeft]
 })
-export class SidebarComponent implements OnInit {
-  public isShowChil: boolean = true;
-  public isShowBookMark: boolean = false;
+export class SidebarComponent implements OnInit, OnChanges {
+  public isShowChil = true;
+  public isShowBookMark = false;
   public listBookMark: Array<any> = [];
   private length = 0;
+
+  @Input() toggleMenu = false;
   constructor(
     private appService: AppService) {
     this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
@@ -261,29 +262,26 @@ export class SidebarComponent implements OnInit {
   ];
 
   ngOnInit() {
+    this.navItems.forEach(item => {
+      item.disabled = true;
+    })
     console.log('ngOnInit', this.listBookMark)
   }
 
-  ngOnChanges(channges) {
+  ngOnChanges(channges: any) {
+    if (channges.toggleMenu && channges.toggleMenu !== undefined) {
+      this.isShowChil = this.toggleMenu;
+    }
     console.log('ngOnChanges', channges)
 
   }
 
   get animationState() {
-    return this.isOpened ? 'open' : 'closed';
+    return !this.isShowChil ? 'open' : 'closed';
   }
 
-  onEnterMouse() {
-    console.log('onEnterMouse')
-    this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
-    this.isShowChil = false;
-    this.appService.toggleSidebarPin();
-  }
-
-  onLeaveMouse() {
-    console.log('onLeaveMouse')
-    this.isShowChil = true;
-    this.appService.toggleSidebarPin();
+  get animationStateLeft() {
+    return this.isShowChil ? 'open' : 'closed';
   }
 
   onClickBookmark() {
@@ -297,6 +295,9 @@ export class SidebarComponent implements OnInit {
     } else {
       element.classList.remove('show');
     }
+    this.navItems.forEach(item => {
+      item.disabled = true;
+    })
   }
 
   deleteBookMark(item) {
@@ -307,6 +308,12 @@ export class SidebarComponent implements OnInit {
     }
 
     // console.log('deleteBookMark', index)
+  }
+
+
+  changeMenu(event){
+    this.navItems = event;
+    console.log('changeMenu', event);
   }
 
 

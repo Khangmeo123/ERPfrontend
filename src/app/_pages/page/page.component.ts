@@ -1,13 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../_services/app.service';
+import { toggleMenuNavbarRight } from './sidebar/sidebar.animation';
 
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
-  styleUrls: ['./page.component.scss']
+  styleUrls: ['./page.component.scss'],
+  animations: [toggleMenuNavbarRight]
 })
 export class PageComponent implements OnInit {
+  public isToggle = false;
   constructor(private appService: AppService) { }
 
   ngOnInit() {
@@ -22,5 +25,10 @@ export class PageComponent implements OnInit {
   }
   toggleSidebar() {
     this.appService.toggleSidebar();
+  }
+
+  onChangeToggle(event) {
+    console.log('onChangeToggle',event)
+    this.isToggle = event;
   }
 }
