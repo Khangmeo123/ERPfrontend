@@ -1,4 +1,4 @@
-<aside class="sidebar shadow-sm" [@toggleMenuNavbarLeft] = "animationStateLeft">
+<aside class="sidebar shadow-sm" [@toggleMenuNavbarLeft]="animationStateLeft">
   <!-- <div class="sidebar-search pt-2 pb-1 pl-3 pr-3">
     <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
   </div> -->
@@ -21,27 +21,29 @@
 
     </ul>
     <div class="menu-bookmark-line">
-        <!-- <div  [style.height.px] = "30*length"></div> -->
-        <ul style="margin-left: 15px" [ngStyle]="{'display' : !isShowBookMark ? 'none' : 'block'}" *ngFor="let item of listBookMark">
-          <li style="display: flex">
-            <a href="#" routerLink="{{item.route}}" routerLinkActive="active">
-              <span>{{item.title}}</span>
-            </a>
-            <span style="margin-top: 8px" (click)="deleteBookMark(item)">
-              <mat-icon style="font-size: 14px">clear</mat-icon>
-            </span>
-    
-          </li>
-          
-        </ul>
-        
+      <!-- <div  [style.height.px] = "30*length"></div> -->
+      <ul style="margin-left: 15px" [ngStyle]="{'display' : !isShowBookMark ? 'none' : 'block'}"
+        *ngFor="let item of listBookMark">
+        <li style="display: flex">
+          <a href="#" routerLink="{{item.Route}}" routerLinkActive="active">
+            <span>{{item.Name}}</span>
+          </a>
+          <span style="margin-top: 8px" (click)="bookmarkService.deleteBookMarks(item)">
+            <mat-icon style="font-size: 14px">clear</mat-icon>
+          </span>
+
+        </li>
+
+      </ul>
+
     </div>
-    
+
     <div class="menu-under" *ngIf="!isShowBookMark" [@toggleMenuSideBar] style="z-index: 1">
-      <app-item-sidebar  [ngStyle]="{'display' : isShowBookMark ? 'none' : 'block'}" *ngFor="let item of navItems"
-      [item]="item" [listMenu] = "navItems" (dataOut) = "changeMenu($event)" [isShowChild]="isShowChil"></app-item-sidebar>
+      <app-item-sidebar [ngStyle]="{'display' : isShowBookMark ? 'none' : 'block'}" *ngFor="let item of navItems"
+        [item]="item" [listMenu]="navItems" (dataOut)="changeMenu($event)" [isShowChild]="isShowChil">
+      </app-item-sidebar>
     </div>
-    
+
     <!-- <ul class="menu-items">
       <li >
         <a href="#" routerLink="/home" routerLinkActive="active">

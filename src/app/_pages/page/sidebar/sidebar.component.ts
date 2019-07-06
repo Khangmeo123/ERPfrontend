@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, HostListener, ElementRef, OnChanges } from '@angular/core';
 import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
-import { AppService } from 'src/app/_services';
+import { AppService, BookmarkService } from 'src/app/_services';
 import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarLeft } from './sidebar.animation';
 
 @Component({
@@ -16,7 +16,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   private length = 0;
 
   @Input() toggleMenu = false;
-  constructor(private appService: AppService) {
+  constructor(private appService: AppService, private bookmarkService: BookmarkService) {
   }
   private isOpened = false;
   navItems: ItemSidebar[] = [
@@ -33,7 +33,7 @@ export class SidebarComponent implements OnInit, OnChanges {
         {
           displayName: 'Table',
           iconName: 0,
-          route: 'admin',
+          route: '/admin',
         },
         {
           displayName: 'Feedback',
@@ -47,7 +47,8 @@ export class SidebarComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.navItems.forEach(item => {
       item.disabled = true;
-    })
+    });
+    this.listBookMark = this.bookmarkService.listBookMarks;
   }
 
   ngOnChanges(channges: any) {
@@ -64,9 +65,9 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
 
-  waitWidth(){
+  waitWidth() {
     const element = document.querySelector('.sidebar') as HTMLInputElement;
-    if(element && element.style.width === '260px'){
+    if (element && element.style.width === '260px') {
       element.classList.add('set-opacity');
     } else {
       element.classList.remove('set-opacity');
@@ -88,10 +89,8 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
 
-  changeMenu(event){
+  changeMenu(event) {
     this.navItems = event;
-    console.log('changeMenu', event);
   }
-
 
 }
