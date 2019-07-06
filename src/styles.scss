@@ -34,6 +34,21 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.div-form {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  .input-form {
+    width: 90%;
+  }
+  .error-form{
+    width: 10%;
+  }
+}
+.full-width{
+  width: 100%;
+}
+
 *[role="button"] {
   cursor: pointer;
 }

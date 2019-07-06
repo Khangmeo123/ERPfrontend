@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from './user.service';
 import { Subscription } from 'rxjs';
@@ -7,13 +7,13 @@ import { Subscription } from 'rxjs';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  providers:[UserService]
+  providers: [UserService]
 })
-export class UserComponent implements OnInit {
+export class UserComponent implements OnInit, OnDestroy {
   playerForm: FormGroup;
   userForm: FormGroup;
   userFormSub: Subscription;
-  constructor(private fb: FormBuilder, private UserService: UserService) { 
+  constructor(private fb: FormBuilder, private UserService: UserService) {
     this.playerForm = this.fb.group({
       firstName: this.fb.control('FirstName'),
       lastName: this.fb.control('LastName')
@@ -26,9 +26,10 @@ export class UserComponent implements OnInit {
     })
     this.UserService.getUser();
   }
+
   ngOnDestroy(): void {
-    //Called once, before the instance is destroyed.
-    //Add 'implements OnDestroy' to the class.
+    // Called once, before the instance is destroyed.
+    // Add 'implements OnDestroy' to the class.
     this.userFormSub.unsubscribe();
   }
 }
