@@ -1,0 +1,67 @@
+.pagination {
+
+  color: #3D464D;
+  display: flex;
+  .form-control {
+    text-align: center;
+    padding: 2px 2px;
+    font-size: 14px !important;
+    width: 32px;
+    height: 21px;
+    border: none;
+    border-bottom: 1px solid #707070;
+    color: #3D464D;
+    border-radius: 0;
+
+  }
+  .show-entries {
+    display: flex;
+
+    span {
+      margin-left: 3px;
+      margin-right: 3px;
+    }
+    .form-control {
+      width: 50px;
+
+    }
+
+    .form-control:focus {
+      outline: none;
+      outline: 0;
+      border-color: 707070;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+  }
+  .input-text {
+    margin-right: 5px;
+    margin-left: 5px;
+    .form-group {
+      input::before, ::after, :focus {
+        outline: none;
+        outline: 0;
+        border-color: #707070;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+
+
+  }
+
+  .previous {
+    cursor: pointer;
+    margin-bottom: 3px;
+    margin-right: 3px;
+  }
+  .next {
+    cursor: pointer;
+    margin-bottom: 3px;
+    margin-left: 3px;
+  }
+  span {
+    font-size: 14px;
+    //font-weight: bold;
+  }
+}
