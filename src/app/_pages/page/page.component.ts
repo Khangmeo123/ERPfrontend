@@ -26,7 +26,7 @@ export class PageComponent implements OnInit {
   }
 
   onChangeToggle(event) {
-    console.log('onChangeToggle',event)
+    console.log('onChangeToggle', event)
     this.isToggle = event;
   }
 }

@@ -28,18 +28,10 @@ export class UserComponent implements OnInit {
       firstName: this.fb.control('FirstName'),
       lastName: this.fb.control('LastName')
     });
-
-    this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
   }
 
   ngOnInit() {
-    this.listBookMark.forEach(item => {
-      if (item.route === this.router.url) {
-        this.isSaveBookMark = true;
-      } else {
-        this.isSaveBookMark = false;
-      }
-    })
+   
     this.userFormSub = this.UserService.userForm$.subscribe(user => {
       this.userForm = user;
     })
