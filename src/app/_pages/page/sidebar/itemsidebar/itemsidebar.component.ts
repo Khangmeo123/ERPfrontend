@@ -2,7 +2,6 @@ import { Component, OnInit, Input, HostBinding, Output, EventEmitter } from '@an
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ItemSidebar } from './itemsidebar.entity';
 import { Router } from '@angular/router';
-import { toggleMenu } from 'src/app/_shared/select/tree-select/tree-select.animations';
 import { AppService } from 'src/app/_services';
 import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarRight, visibleSpan } from '../sidebar.animation';
 
@@ -10,7 +9,7 @@ import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarRight, visibleSpan
     selector: 'app-item-sidebar',
     templateUrl: './itemsidebar.component.html',
     styleUrls: ['./itemsidebar.component.scss'],
-    animations: [toggleMenuNavbar, toggleMenuNavbarRight, toggleMenuSideBar, visibleSpan, ]
+    animations: [toggleMenuNavbar, toggleMenuNavbarRight, toggleMenuSideBar, visibleSpan]
 })
 export class ItemSidebarComponent implements OnInit {
     expanded: boolean;
