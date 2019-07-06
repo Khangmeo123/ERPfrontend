@@ -3,12 +3,12 @@ import {moduleMetadata} from '@storybook/angular';
 import {FiltersModule} from '../filters.module';
 import {TableModule} from 'primeng/table';
 import {sampleTable} from './advanced-filters.sample';
-import {TextFilter} from '../../../filters/TextFilter';
+import {TextFilter} from '../../../models/filters/TextFilter';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {FormsModule} from '@angular/forms';
 import {AdvancedFiltersComponent} from './advanced-filters.component';
-import {DateFilter} from '../../../filters/DateFilter';
-import {NumberFilter} from '../../../filters/NumberFilter';
+import {DateFilter} from '../../../models/filters/DateFilter';
+import {NumberFilter} from '../../../models/filters/NumberFilter';
 
 storiesOf('Advanced Filters', module)
   .addDecorator(

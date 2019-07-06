@@ -1,8 +1,8 @@
 import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FilterType} from '../../../filters/FilterType';
-import {DateFilter} from '../../../filters/DateFilter';
-import {TextFilter} from '../../../filters/TextFilter';
-import {NumberFilter} from '../../../filters/NumberFilter';
+import {FilterType} from '../../../models/filters/FilterType';
+import {DateFilter} from '../../../models/filters/DateFilter';
+import {TextFilter} from '../../../models/filters/TextFilter';
+import {NumberFilter} from '../../../models/filters/NumberFilter';
 import {toggleMenu} from '../../../animations/toggle-menu';
 
 @Component({
