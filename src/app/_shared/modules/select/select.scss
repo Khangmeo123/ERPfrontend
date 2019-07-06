@@ -1,0 +1,88 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.select {
+  position: relative;
+
+  .head {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+
+    input.result {
+      background-color: #ffffff;
+      border: none;
+    }
+
+    input.result:focus {
+      -webkit-box-shadow: none;
+      -moz-box-shadow: none;
+      box-shadow: none;
+    }
+
+    .toggler {
+      margin-left: $input-padding-y / 2;
+      margin-right: $input-padding-y / 2;
+      cursor: pointer;
+    }
+  }
+
+  .lists {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+
+  .list {
+    position: relative;
+    width: 100%;
+
+    .label {
+      display: block;
+      width: 100%;
+      padding: $input-padding-y $input-padding-y;
+      border-left: 1px solid $border-color;
+      border-right: 1px solid $border-color;
+      border-bottom: 1px solid $border-color;
+    }
+
+    .ui-listbox {
+      width: 100%;
+      min-width: unset;
+      border: 1px solid $border-color;
+      border-top-width: 0;
+
+      .ui-listbox-item.ui-state-highlight {
+        color: #333333;
+        background-color: transparent;
+      }
+    }
+  }
+
+  .list.selected-list {
+    .ui-listbox-item {
+      padding-right: 0;
+
+      .ms-btn {
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.select.show {
+  .head {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  .ui-listbox {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+}
+
+.pi {
+  color: #495057;
+  font-size: medium;
+}

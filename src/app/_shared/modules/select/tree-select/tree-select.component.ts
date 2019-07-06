@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, OnChanges, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {toggleMenu} from './tree-select.animations';
 import {ITreeNode} from './tree-select.interfaces';
 import {Tree} from 'primeng/tree';
@@ -6,9 +6,10 @@ import {Tree} from 'primeng/tree';
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 
 @Component({
-  selector: 'app-tree',
+  selector: 'app-tree-select',
   templateUrl: './tree-select.component.html',
   styleUrls: [
+    '../select.scss',
     './tree-select.component.scss',
   ],
   encapsulation: ViewEncapsulation.None,
@@ -17,11 +18,13 @@ type SelectMode = 'single' | 'multiple' | 'checkbox';
   ],
 })
 export class TreeSelectComponent implements OnInit, OnChanges {
-  options: ITreeNode[] = [];
+  @Input() options: ITreeNode[] = [];
 
   @Input() mode: SelectMode = 'single';
 
-  @Input() selectedLabel = 'mục đã chọn';
+  @Input() selectedLabel = 'selected';
+
+  @Input() selectedListLabel = 'Selected';
 
   @Input() initialValue: ITreeNode[] | ITreeNode = null;
 
@@ -42,11 +45,13 @@ export class TreeSelectComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    if (changes.options.currentValue) {
-      this.nodes = [];
-      this.options.forEach((node: ITreeNode) => {
-        this.retrieveAllSelected(node);
-      });
+    if (changes.options) {
+      if (changes.options.currentValue) {
+        this.nodes = [];
+        this.options.forEach((node: ITreeNode) => {
+          this.retrieveAllSelected(node);
+        });
+      }
     }
   }
 
@@ -152,9 +157,7 @@ export class TreeSelectComponent implements OnInit, OnChanges {
   }
 
   onSelect() {
-    if (this.isSingle) {
-      this.closeList();
-    }
+
   }
 
   openList() {
@@ -169,11 +172,37 @@ export class TreeSelectComponent implements OnInit, OnChanges {
     }
   }
 
+  copyToClipboard(text: string) {
+    const input = document.createElement('input');
+    input.value = text;
+    document.body.appendChild(input);
+    input.select();
+    document.execCommand('copy');
+    document.body.removeChild(input);
+  }
+
   toggleList() {
     this.isOpened = !this.isOpened;
   }
 
   onChange(data) {
     this.selector.emit(data);
+  }
+
+  onUnselect(event) {
+    const {
+      target: {
+        value: index,
+      },
+    } = event;
+    const node = this.nodes[index];
+    this.options = [
+      ...this.options,
+      node,
+    ];
+    this.nodes = [
+      ...this.nodes.slice(0, index),
+      ...this.nodes.slice(index + 1),
+    ];
   }
 }

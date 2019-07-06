@@ -1,0 +1,55 @@
+<div class="select single-select {{isOpened ? 'show' : 'hide'}} flex-grow-1" (clickOutside)="closeList()"
+     (click)="$event.stopPropagation()">
+  <div class="head d-flex align-items-center">
+    <input type="text"
+           class="form-control flex-grow-1 result"
+           readonly
+           [value]="selectedText"
+           (focus)="openList()"
+           (keydown)="onKeyDown($event)">
+    <span role="button" class="toggler pi pi-caret-{{toggleClass}}" (click)="toggleList()"></span>
+  </div>
+  <div class="lists" *ngIf="isOpened">
+    <div class="list">
+      <div class="label d-flex align-items-center">
+        <div class="input-group align-items-center input-group-sm">
+          <input type="text" #searchField class="form-control form-control-sm flex-grow-1" (input)="onChange($event)">
+          <div class="input-group-append">
+            <span class="input-group-text pi pi-search"></span>
+          </div>
+        </div>
+        <span role="button" class="ml-1 pi pi-times-circle" (click)="searchField.value = null"></span>
+      </div>
+    </div>
+    <div class="list selected-list" *ngIf="selectedItem">
+      <span class="label">
+        {{selectedLabel}}:
+      </span>
+      <div class="ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all">
+        <div class="ui-listbox-list-wrapper">
+          <ul class="ui-listbox-list">
+            <li class="ui-listbox-item ui-corner-all d-flex align-items-center">
+              <input type="checkbox"
+                     name="item"
+                     #selectedCheckbox
+                     [value]="selectedItem.value"
+                     class="form-check mr-1"
+                     checked="checked"
+                     (change)="onUnselect()">
+              <span class="flex-grow-1" (click)="selectedCheckbox.click()">
+                {{ selectedItem.label }}
+              </span>
+              <span role="button" class="ms-btn mr-1 pi pi-copy" (click)="copyToClipboard($event)"></span>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="list" *ngIf="options.length > 0">
+      <span class="label">
+        {{availableLabel}}:
+      </span>
+      <p-listbox [options]="options" (onClick)="onSelect($event)"></p-listbox>
+    </div>
+  </div>
+</div>

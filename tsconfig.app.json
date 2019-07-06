@@ -2,7 +2,12 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    "types": []
+    "types": [
+      "node"
+    ],
+    "typeRoots": [
+      "../node_modules/@types"
+    ]
   },
   "include": [
     "src/**/*.ts"
@@ -10,6 +15,8 @@
   "exclude": [
     "src/test.ts",
     "src/**/*.spec.ts",
-    "src/**/*.stories.ts"
+    "src/**/*.sample.ts",
+    "src/**/*.stories.ts",
+    "src/**/*.worker.ts"
   ]
 }

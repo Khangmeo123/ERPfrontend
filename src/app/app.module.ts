@@ -1,12 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CollapseModule } from 'ngx-bootstrap/collapse';
-import { ToastrModule } from 'ngx-toastr';
-import { CommonModule } from '@angular/common';
-import { AppRoutingModule } from './app-routing.module';
-import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {BrowserModule} from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {ReactiveFormsModule} from '@angular/forms';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CollapseModule} from 'ngx-bootstrap/collapse';
+import {ToastrModule} from 'ngx-toastr';
+import {CommonModule} from '@angular/common';
+import {AppRoutingModule} from './app-routing.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './_pages/page/page.component';

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserService } from './user.service';
 import { Subscription } from 'rxjs';
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   selector: 'app-user',
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.scss'],
-  providers: [UserService]
+  providers:[UserService]
 })
 export class UserComponent implements OnInit {
   playerForm: FormGroup;
@@ -46,6 +46,8 @@ export class UserComponent implements OnInit {
     this.UserService.getUser();
   }
   ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
     this.userFormSub.unsubscribe();
   }
 

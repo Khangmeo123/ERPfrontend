@@ -1,4 +1,4 @@
-<div class="data-table-edit" style="height: 100%; width: 100%">
+<div style="height: 100%; width: 100%">
   <div class="title-page">
     <div>
       {{title}}
@@ -10,25 +10,26 @@
     </span>
 
   </div>
-  <!-- <div class="row">
+  <div class="row">
     <div class="col-md-12">
-      <input class="form-control" type="text"/>
-    </div>
-    <div class="col-md-12">
-      <div class="row">
-        <form [formGroup]="userForm">
-            <div class="col-md-3">
-                <mat-form-field>
-                  <input matInput formControlName="Display" placeholder="Display" autocomplete="off">
-                </mat-form-field>
-              </div>
-              <div class="col-md-3">
-                <mat-form-field>
-                  <input matInput formControlName="Name" placeholder="Name" autocomplete="off">
-                </mat-form-field>
-              </div>
-        </form>
+      <div class="row" [formGroup]="userForm">
+        <div class="col-md-3 div-form">
+          <input type="text" class="form-control input-form" id="exampleInputEmail1" formControlName="Display"
+            placeholder="Enter email">
+          <app-error
+            *ngIf="userForm.controls.Display?.errors?.invalidusername || !!userForm.controls.Error.get('Display')?.value"
+            [formGroup]="userForm" [property]="'Name'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+        <div class="col-md-3 div-form">
+          <input type="text" class="form-control" id="exampleInputEmail1" formControlName="Name"
+            placeholder="Enter email">
+          <app-error
+            *ngIf="userForm.controls.Name?.errors?.invalidusername || !!userForm.controls.Error.get('Name')?.value"
+            [formGroup]="userForm" [property]="'Name'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
     </div>
-  </div> -->
+  </div>
 </div>
