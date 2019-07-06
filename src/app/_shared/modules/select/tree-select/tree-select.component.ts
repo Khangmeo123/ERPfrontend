@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
 import {Tree} from 'primeng/tree';
-import {toggleMenu} from './tree-select.animations';
+import {toggleMenu} from '../../../animations/toggle-menu';
 import {ITreeNode} from './tree-select.interfaces';
 import {SelectComponent} from '../select.component';
 

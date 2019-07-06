@@ -1,0 +1,14 @@
+<div class="advanced-filter">
+  <span #toggler role="button" class="pi pi-filter" (click)="toggleList()"></span>
+  <div #pane class="filter-pane {{ dropdownDirection }} ui-widget ui-corner-all" [@toggleMenu]="listState">
+    <div class="ui-inputgroup mb-1 d-flex p-1">
+            <span class="ui-inputgroup-addon">
+              {{filterTypeSign}}
+            </span>
+      <input type="text" class="flex-grow-1" pInputText (input)="onApplyFilter($event)" *ngIf="isTextFilter">
+      <input type="number" class="flex-grow-1" pInputText (input)="onApplyFilter($event)" *ngIf="isNumberFilter">
+      <p-calendar (onInput)="onApplyFilter($event)" (onSelect)="onApplyFilter($event)" *ngIf="isDateFilter"></p-calendar>
+    </div>
+    <p-listbox [options]="filterTypes" [(ngModel)]="selectedType"></p-listbox>
+  </div>
+</div>
