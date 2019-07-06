@@ -1,13 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../_services/app.service';
-import { toggleMenuNavbarRight } from './sidebar/sidebar.animation';
 
 
 @Component({
   selector: 'app-page',
   templateUrl: './page.component.html',
   styleUrls: ['./page.component.scss'],
-  animations: [toggleMenuNavbarRight]
 })
 export class PageComponent implements OnInit {
   public isToggle = false;

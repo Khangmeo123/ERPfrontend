@@ -1,13 +1,13 @@
 import { Component, OnInit, Input, HostListener, ElementRef, OnChanges } from '@angular/core';
 import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
 import { AppService } from 'src/app/_services';
-import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarRight, toggleMenuNavbarLeft } from './sidebar.animation';
+import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarLeft } from './sidebar.animation';
 
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss'],
-  animations: [toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarRight, toggleMenuNavbarLeft]
+  animations: [toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarLeft]
 })
 export class SidebarComponent implements OnInit, OnChanges {
   public isShowChil = true;
@@ -16,10 +16,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   private length = 0;
 
   @Input() toggleMenu = false;
-  constructor(
-    private appService: AppService) {
-    this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
-    this.length = this.listBookMark.length;
+  constructor(private appService: AppService) {
   }
   private isOpened = false;
   navItems: ItemSidebar[] = [
@@ -44,220 +41,6 @@ export class SidebarComponent implements OnInit, OnChanges {
           route: '/admin'
         }
       ]
-    },
-    {
-      displayName: 'Disney',
-      iconName: 1,
-      // children: [
-      //   {
-      //     displayName: 'Speakers',
-      //     iconName: 0,
-      //     children: [
-      //       {
-      //         displayName: 'Michael Prentice',
-      //         iconName: 0,
-      //         route: 'michael-prentice',
-      //       },
-      //       {
-      //         displayName: 'Stephen Fluin',
-      //         iconName: 0,
-      //         route: 'stephen-fluin',
-      //       ]
-      //   },
-      //   {
-      //     displayName: 'Sessions',
-      //     iconName: 0,
-      //     children: [
-      //       {
-      //         displayName: 'Enterprise UIs',
-      //         iconName: 0,
-      //         route: 'material-design'
-      //       },
-      //       {
-      //         displayName: 'What\'s up?',
-      //         iconName: 0,
-      //         route: 'what-up-web'
-      //       },
-      //       {
-      //         displayName: 'the CLI',
-      //         iconName: 0,
-      //         route: 'my-ally-cli'
-      //       },
-      //       {
-      //         displayName: 'Angular Tailor',
-      //         iconName: 0,
-      //         route: 'become-angular-tailer'
-      //       }
-      //     ]
-      //   },
-      //   {
-      //     displayName: 'Feedback',
-      //     iconName: 0,
-      //     route: 'feedback'
-      //   }
-      // ]
-    },
-    {
-      displayName: 'Orlando',
-      iconName: 1,
-      children: [
-        {
-          displayName: 'Speakers',
-          iconName: 0,
-          children: [
-            {
-              displayName: 'Michael Prentice',
-              iconName: 0,
-              route: 'michael-prentice',
-            },
-            {
-              displayName: 'Stephen Fluin',
-              iconName: 0,
-              route: 'stephen-fluin',
-              children: [
-                {
-                  displayName: 'What\'s up ',
-                  iconName: 0,
-                  route: 'what-up-web'
-                }
-              ]
-            },
-            {
-              displayName: 'Mike Brocchi',
-              iconName: 0,
-              route: 'mike-brocchi',
-              children: [
-                {
-                  displayName: 'My ally, the CLI',
-                  iconName: 0,
-                  route: 'my-ally-cli'
-                },
-                {
-                  displayName: 'Angular Tailor',
-                  iconName: 0,
-                  route: 'become-angular-tailer'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          displayName: 'Sessions',
-          iconName: 0,
-          children: [
-            {
-              displayName: 'Enterprise UIs',
-              iconName: 0,
-              route: 'material-design'
-            },
-            {
-              displayName: 'the Web?',
-              iconName: 0,
-              route: 'what-up-web'
-            },
-            {
-              displayName: 'My ally, the CLI',
-              iconName: 0,
-              route: 'my-ally-cli'
-            },
-            {
-              displayName: 'Angular Tailor',
-              iconName: 0,
-              route: 'become-angular-tailer'
-            }
-          ]
-        },
-        {
-          displayName: 'Feedback',
-          iconName: 0,
-          route: 'feedback'
-        }
-      ]
-    },
-    {
-      displayName: 'Maleficent',
-      disabled: true,
-      iconName: 1,
-      children: [
-        {
-          displayName: 'Speakers',
-          iconName: 0,
-          children: [
-            {
-              displayName: 'Michael Prentice',
-              iconName: 0,
-              route: 'michael-prentice',
-              children: [
-                {
-                  displayName: 'Enterprise UIs',
-                  iconName: 0,
-                  route: 'material-design'
-                }
-              ]
-            },
-            {
-              displayName: 'Stephen Fluin',
-              iconName: 0,
-              route: 'stephen-fluin',
-              children: [
-                {
-                  displayName: 'the Web?',
-                  iconName: 0,
-                  route: 'what-up-web'
-                }
-              ]
-            },
-            {
-              displayName: 'Mike Brocchi',
-              iconName: 0,
-              route: 'mike-brocchi',
-              children: [
-                {
-                  displayName: 'the CLI',
-                  iconName: 0,
-                  route: 'my-ally-cli'
-                },
-                {
-                  displayName: 'Angular Tailor',
-                  iconName: 0,
-                  route: 'become-angular-tailer'
-                }
-              ]
-            }
-          ]
-        },
-        {
-          displayName: 'Sessions',
-          iconName: 0,
-          children: [
-            {
-              displayName: 'Enterprise UIs',
-              iconName: 0,
-              route: 'material-design'
-            },
-            {
-              displayName: 'the Web?',
-              iconName: 0,
-              route: 'what-up-web'
-            },
-            {
-              displayName: 'the CLI',
-              iconName: 0,
-              route: 'my-ally-cli'
-            },
-            {
-              displayName: 'Angular Tailor',
-              iconName: 0,
-              route: 'become-angular-tailer'
-            }
-          ]
-        },
-        {
-          displayName: 'Feedback',
-          iconName: 0,
-          route: 'feedback'
-        }
-      ]
     }
   ];
 
@@ -265,7 +48,6 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.navItems.forEach(item => {
       item.disabled = true;
     })
-    console.log('ngOnInit', this.listBookMark)
   }
 
   ngOnChanges(channges: any) {
@@ -277,10 +59,6 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   }
 
-  get animationState() {
-    return !this.isShowChil ? 'open' : 'closed';
-  }
-
   get animationStateLeft() {
     return this.isShowChil ? 'open' : 'closed';
   }
@@ -288,19 +66,15 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   waitWidth(){
     const element = document.querySelector('.sidebar') as HTMLInputElement;
-    console.log('element.style.width', element.style.width)
     if(element && element.style.width === '260px'){
       element.classList.add('set-opacity');
     } else {
       element.classList.remove('set-opacity');
     }
-    console.log('element', element);
   }
 
   onClickBookmark() {
     let element = document.querySelector('.menu-bookmark-line');
-    console.log('element', element)
-    this.listBookMark = JSON.parse(localStorage.getItem('key_luu_book_mark'));
     this.length = this.listBookMark.length;
     this.isShowBookMark = !this.isShowBookMark;
     if (this.isShowBookMark) {
@@ -311,16 +85,6 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.navItems.forEach(item => {
       item.disabled = true;
     })
-  }
-
-  deleteBookMark(item) {
-    const index = this.listBookMark.indexOf(item);
-    if (index > -1) {
-      this.listBookMark.splice(index, 1);
-      localStorage.setItem('key_luu_book_mark', JSON.stringify(this.listBookMark));
-    }
-
-    // console.log('deleteBookMark', index)
   }
 
 

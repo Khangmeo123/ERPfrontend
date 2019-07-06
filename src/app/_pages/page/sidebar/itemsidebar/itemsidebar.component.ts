@@ -3,13 +3,13 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ItemSidebar } from './itemsidebar.entity';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/_services';
-import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarRight, visibleSpan } from '../sidebar.animation';
+import { toggleMenuSideBar, toggleMenuNavbar } from '../sidebar.animation';
 
 @Component({
     selector: 'app-item-sidebar',
     templateUrl: './itemsidebar.component.html',
     styleUrls: ['./itemsidebar.component.scss'],
-    animations: [toggleMenuNavbar, toggleMenuNavbarRight, toggleMenuSideBar, visibleSpan]
+    animations: [toggleMenuNavbar, toggleMenuSideBar]
 })
 export class ItemSidebarComponent implements OnInit {
     expanded: boolean;
@@ -39,16 +39,11 @@ export class ItemSidebarComponent implements OnInit {
         if (change.listMenu && this.listMenu && this.listMenu.length > 0) {
             this.listRootMenu = this.listMenu;
         }
-        console.log('ngOnChanges listRootMenu', this.listRootMenu)
     }
 
-    get animationState() {
-        return this.expanded ? 'open' : 'closed';
-    }
 
     onItemSelected(item: ItemSidebar, index) {
         let ele = document.querySelector('.menu-items');
-        console.log('onItemSelected ele', ele);
         if (item.children && item.children.length) {
             this.expanded = !this.expanded;
             if (item.iconName === 1) {
@@ -67,13 +62,7 @@ export class ItemSidebarComponent implements OnInit {
                 this.dataOut.emit(this.listRootMenu);
 
             }
-            // this.disabled(item.children, item.disabled)
         }
-        // console.log('onItemSelected', item);
     }
-
-
-
-
 
 }

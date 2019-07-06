@@ -30,7 +30,7 @@ import { MatIconModule } from '@angular/material';
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
-    ItemSidebarComponent
+    ItemSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +42,7 @@ import { MatIconModule } from '@angular/material';
     ToastrModule.forRoot(),
     HttpClientModule,
     MatProgressSpinnerModule,
-    MatIconModule
+    MatIconModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

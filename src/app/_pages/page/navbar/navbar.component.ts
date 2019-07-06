@@ -20,9 +20,8 @@ export class NavbarComponent implements OnInit {
 
   toggleSidebarPin() {
     this.isToggleMenu = !this.isToggleMenu;
-    console.log('toggleSidebarPin', this.isToggleMenu);
     this.appService.toggleSidebarPin();
-    this.changeToggle.emit(this.isToggleMenu)
+    this.changeToggle.emit(this.isToggleMenu);
   }
   toggleSidebar() {
     this.appService.toggleSidebar();

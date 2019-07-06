@@ -5,13 +5,13 @@
     <li style="display: flex">
         <a *ngIf="(item.children && item.children.length > 0)" href="#" routerLink="/" routerLinkActive="active">
             <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
-            <span  [@visibleSpan] >{{item.displayName}}</span>
+            <span >{{item.displayName}}</span>
         </a>
 
         <a *ngIf="(!item.children || item.children.length == 0)" href="#" routerLink="{{item.route}}"
             routerLinkActive="active">
             <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
-            <span  [@visibleSpan] >{{item.displayName}}</span>
+            <span >{{item.displayName}}</span>
         </a>
 
         <span [ngStyle]="{'display': (item.children && item.children.length > 0) ? 'block': 'none' }"><i class="fas"
@@ -27,13 +27,13 @@
     <li style="display: flex">
         <a *ngIf="(item.children && item.children.length > 0)" href="#" routerLink="/" routerLinkActive="active">
             <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
-            <span  [@visibleSpan] >{{item.displayName}}</span>
+            <span >{{item.displayName}}</span>
         </a>
 
         <a *ngIf="(!item.children || item.children.length == 0)" href="#" routerLink="{{item.route}}"
             routerLinkActive="active">
             <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
-            <span  [@visibleSpan] >{{item.displayName}}</span>
+            <span >{{item.displayName}}</span>
         </a>
 
         <span [ngStyle]="{'display': (item.children && item.children.length > 0) ? 'block': 'none' }"><i class="fas"

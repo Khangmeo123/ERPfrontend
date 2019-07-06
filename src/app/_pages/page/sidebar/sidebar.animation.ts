@@ -8,7 +8,7 @@ export const toggleMenuSideBar = trigger('toggleMenuSideBar', [
   transition(':leave', [
     style({ transform: 'translateY(0)', opacity: 1, position: 'relative' }),
     animate('200ms', style({ transform: 'translateY(100%)', opacity: 0, position: 'absolute' }))
-  ])
+  ]),
 ]);
 
 
@@ -23,50 +23,14 @@ export const toggleMenuNavbar = trigger('toggleMenuNavbar', [
   ])
 ]);
 
-export const visibleSpan = trigger('visibleSpan', [
-  transition(':enter', [
-    style({ opacity: 0}),
-    animate('800ms', style({ opacity: 1})),
-  ]),
-  transition(':leave', [
-    style({ opacity: 1}),
-    animate('500ms', style({opacity: 0})),
-  ])
-]);
 
 
-export const toggleMenuNavbarRight = trigger('toggleMenuNavbarRight', [
-  state('open', style({
-    width: '260px', visibility: 'visible',
-  })),
-  state('closed', style({
-    width: '70px', visibility: 'hidden',
-  })),
-  transition('open => closed', [group([
-    animate('600ms ease-in-out', style({
-      width: '70px',
-    })),
-    animate('700ms ease-in-out', style({
-      visibility: 'visible',
-    })),
-  ],
-  )]),
-  transition('closed => open', [group([
-    animate('600ms ease-in-out', style({
-      width: '260px',
-    })),
-    animate('800ms ease-in-out', style({
-      visibility: 'visible',
-    })),
-  ],
-  )]),
-]);
 export const toggleMenuNavbarLeft = trigger('toggleMenuNavbarLeft', [
   state('open', style({
     width: '70px', visibility: 'visible', opacity: 0,
   })),
   state('closed', style({
-    width: '260px', visibility: 'visible',  opacity: 1,
+    width: '260px', visibility: 'visible', opacity: 1,
   })),
   transition('open => closed', [group([
     animate('200ms ease-in-out', style({

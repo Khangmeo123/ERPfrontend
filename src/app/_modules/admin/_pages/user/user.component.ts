@@ -53,25 +53,6 @@ export class UserComponent implements OnInit {
 
 
   onClickSaveBookMark(event) {
-
     this.isSaveBookMark = !this.isSaveBookMark;
-    const listRoute = []
-    for (const item of this.listBookMark) {
-      listRoute.push(item.route);
-    }
-    const index = listRoute.indexOf(this.router.url);
-    if (this.isSaveBookMark) {
-      if (index < 0) {
-        this.listBookMark.push({ title: this.title, route: this.router.url });
-      }
-    } else {
-      if (index > -1) {
-        this.listBookMark.splice(index, 1);
-      }
-    }
-
-
-    localStorage.setItem('key_luu_book_mark', JSON.stringify(this.listBookMark));
-
   }
 }
