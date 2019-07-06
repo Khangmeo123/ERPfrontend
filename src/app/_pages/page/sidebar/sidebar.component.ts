@@ -272,6 +272,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     if (channges.toggleMenu && channges.toggleMenu !== undefined) {
       this.isShowChil = this.toggleMenu;
     }
+    this.waitWidth();
     console.log('ngOnChanges', channges)
 
   }
@@ -282,6 +283,18 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   get animationStateLeft() {
     return this.isShowChil ? 'open' : 'closed';
+  }
+
+
+  waitWidth(){
+    const element = document.querySelector('.sidebar') as HTMLInputElement;
+    console.log('element.style.width', element.style.width)
+    if(element && element.style.width === '260px'){
+      element.classList.add('set-opacity');
+    } else {
+      element.classList.remove('set-opacity');
+    }
+    console.log('element', element);
   }
 
   onClickBookmark() {

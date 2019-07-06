@@ -72,10 +72,10 @@ export const toggleMenuNavbarLeft = trigger('toggleMenuNavbarLeft', [
     animate('200ms ease-in-out', style({
       width: '260px',
     })),
-    animate('700ms ease-in-out', style({
+    animate('300ms ease-in-out', style({
       visibility: 'visible',
     })),
-    animate('800ms ease-in-out', style({
+    animate('400ms ease-in-out', style({
       opacity: '1',
     })),
   ],
@@ -84,10 +84,10 @@ export const toggleMenuNavbarLeft = trigger('toggleMenuNavbarLeft', [
     animate('200ms ease-in-out', style({
       width: '70px',
     })),
-    animate('800ms ease-in-out', style({
+    animate('300ms ease-in-out', style({
       visibility: 'visible',
     })),
-    animate('800ms ease-in-out', style({
+    animate('400ms ease-in-out', style({
       opacity: '1',
     })),
   ],
