@@ -1,6 +1,6 @@
-import {ITreeNode} from './tree-select.interfaces';
+import {TreeNode} from 'primeng/api';
 
-export const sampleTree: ITreeNode[] = [
+export const sampleTree: TreeNode[] = [
   {
     label: 'Documents',
     data: 'Documents Folder',

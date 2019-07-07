@@ -1,0 +1,33 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.select-head {
+  border: 1px solid $border-color;
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+  cursor: pointer;
+
+  * {
+    cursor: pointer;
+  }
+
+  input.form-control {
+    border: none;
+  }
+
+  input.form-control:focus {
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  input[readonly] {
+    background: #ffffff;
+  }
+
+  span.pi {
+    margin-right: 0.25rem;
+  }
+}

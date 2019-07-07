@@ -1,41 +1,9 @@
-<div [class]="rootClass" (clickOutside)="closeList()" (click)="$event.stopPropagation()">
-  <div class="select-head d-flex align-items-center align-content-center">
-    <input type="text" class="form-control select-text flex-grow-1"
-           readonly
-           (focus)="openList()"
-           [value]="selectedText"
-           (keydown)="onKeyDown($event)">
-    <span class="pi pi-times-circle" (click)="clearSelection()" *ngIf="displayClearButton"></span>
-    <span [class]="toggleState" (click)="toggleList()"></span>
-  </div>
-  <div class="lists" [@toggleMenu]="animationState" *ngIf="isOpened">
-    <div *ngIf="nodes.length > 0" class="selected-results">
-      <div class="ui-listbox ui-inputtext ui-widget ui-widget-content ui-corner-all">
-        <div class="ui-listbox-list-wrapper">
-          <ul class="ui-listbox-list">
-            <li *ngFor="let item of nodes; index as i" class="ui-listbox-item ui-corner-all d-flex align-items-center">
-              <input type="checkbox" #selectedCheckbox name="selected" [value]="i" checked
-                     (click)="onUnselect($event)">
-              <span #selectedLabel class="ml-2 flex-grow-1" role="button" (click)="selectedCheckbox.click()">
-                {{item.label}}
-              </span>
-              <span class="pi pi-copy mx-1" role="button" (click)="copyToClipboard(selectedLabel.innerText)"></span>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </div>
-    <div *ngIf="isLoading; else notLoading" class="d-flex justify-content-center py-4">
-      <mat-spinner></mat-spinner>
-    </div>
-    <ng-template #notLoading>
-      <p-tree [value]="options"
-              #tree
-              [selectionMode]="mode"
-              [(selection)]="selectedNodes"
-              (selectionChange)="onChange($event)"
-              (onNodeSelect)="onSelect()"
-      ></p-tree>
-    </ng-template>
-  </div>
-</div>
+<app-select>
+  <app-select-head (headClick)="toggleList()">
+
+  </app-select-head>
+  <app-select-body [@toggleMenu]="listState">
+    <app-select-list [dataSource]="selected" selected="true"></app-select-list>
+    <p-tree [value]="dataSource"></p-tree>
+  </app-select-body>
+</app-select>

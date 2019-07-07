@@ -1,0 +1,28 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.select-body {
+  border: 1px solid $border-color;
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+  background: #ffffff;
+
+  .ui-tree {
+    width: 100%;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    border-radius: 0;
+    border-bottom: 1px solid $border-color;
+    max-height: 326px;
+    overflow-y: auto;
+  }
+
+  :last-child {
+    border-bottom: 0;
+  }
+}

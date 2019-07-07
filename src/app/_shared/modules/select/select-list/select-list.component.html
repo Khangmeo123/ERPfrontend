@@ -1,0 +1,12 @@
+<div class="select-list">
+  <ul class="dropdown-menu">
+    <li *ngFor="let item of dataSource; index as i" class="dropdown-item d-flex align-items-center">
+      <input type="checkbox" checked (change)="onChange(item)" *ngIf="selected">
+      <span class="label flex-grow-1" (click)="onChange(item)" role="button">
+        {{item[key]}}
+      </span>
+      <span class="pi pi-copy" [tooltip]="copyTooltip" triggers="click:mouseleave" (click)="copy($event)"
+            *ngIf="selected"></span>
+    </li>
+  </ul>
+</div>

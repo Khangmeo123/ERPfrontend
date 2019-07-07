@@ -1,0 +1,30 @@
+.select-list {
+  ul.dropdown-menu {
+    display: block !important;
+    position: relative;
+    width: 100%;
+    -webkit-border-radius: 0;
+    -moz-border-radius: 0;
+    border-radius: 0;
+    border: 0;
+
+    li.dropdown-item {
+      cursor: pointer;
+
+      input[type="checkbox"] {
+        margin-right: 0.5rem;
+      }
+    }
+
+    li.dropdown-item:active {
+      background: inherit;
+      color: inherit;
+    }
+  }
+
+  .tooltip {
+    .tooltip-inner {
+      color: white;
+    }
+  }
+}

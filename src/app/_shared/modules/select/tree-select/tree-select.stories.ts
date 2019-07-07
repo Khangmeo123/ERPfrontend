@@ -1,85 +1,33 @@
-import {moduleMetadata, storiesOf} from '@storybook/angular';
-import {TreeModule} from 'primeng/tree';
-import {sampleTree} from './tree-select.sample';
+import {storiesOf} from '@storybook/angular/dist/client/preview';
+import {moduleMetadata} from '@storybook/angular';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+
+import {CommonModule} from '@angular/common';
 import {SelectModule} from '../select.module';
+import {sampleTree} from '../sample/tree.sample';
+import {sampleList} from '../sample/list.sample';
 
 storiesOf('Tree Select', module)
   .addDecorator(
     moduleMetadata({
       imports: [
-        TreeModule,
+        CommonModule,
         SelectModule,
+        BrowserAnimationsModule,
       ],
     }),
   )
-  .add('single', () => ({
-    template:
-      `<div class="container">
-        <div class="row">
-          <div class="col">
-            <app-tree-select [mode]="mode" [options]="options"></app-tree-select>
-          </div>
-        </div>
-      </div>`,
+  .add('default', () => ({
+    template: `<div class="container">
+  <div class="row">
+    <div class="col">
+      <app-tree-select [dataSource]="dataSource" [selected]="selected"></app-tree-select>
+    </div>
+  </div>
+</div>
+`,
     props: {
-      mode: 'single',
-      options: sampleTree,
-    },
-  }))
-  .add('loading', () => ({
-    template:
-      `<div class="container">
-        <div class="row">
-          <div class="col">
-            <app-tree-select [mode]="mode" [isLoading]="isLoading"></app-tree-select>
-          </div>
-        </div>
-      </div>`,
-    props: {
-      mode: 'single',
-      isLoading: true,
-    },
-  }))
-  .add('initialValue', () => ({
-    template:
-      `<div class="container">
-        <div class="row">
-          <div class="col">
-            <app-tree-select [mode]="mode" [options]="options" [initialValue]="initialValue"></app-tree-select>
-          </div>
-        </div>
-      </div>`,
-    props: {
-      mode: 'single',
-      options: sampleTree,
-      initialValue: sampleTree[0],
-    },
-  }))
-  .add('multiple', () => ({
-    template:
-      `<div class="container">
-        <div class="row">
-          <div class="col">
-            <app-tree-select [mode]="mode" [options]="options"></app-tree-select>
-          </div>
-        </div>
-      </div>`,
-    props: {
-      mode: 'multiple',
-      options: sampleTree,
-    },
-  }))
-  .add('checkbox', () => ({
-    template:
-      `<div class="container">
-        <div class="row">
-          <div class="col">
-            <app-tree-select [mode]="mode" [options]="options"></app-tree-select>
-          </div>
-        </div>
-      </div>`,
-    props: {
-      mode: 'checkbox',
-      options: sampleTree,
+      dataSource: sampleTree,
+      selected: sampleList,
     },
   }));

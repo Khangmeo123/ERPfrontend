@@ -1,208 +1,96 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {toggleMenu} from './tree-select.animations';
-import {ITreeNode} from './tree-select.interfaces';
-import {Tree} from 'primeng/tree';
-
-type SelectMode = 'single' | 'multiple' | 'checkbox';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {ISelect} from '../select.interface';
+import {IFlatItem} from '../../../interfaces/IFlatItem';
+import {toggleMenu} from '../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-tree-select',
   templateUrl: './tree-select.component.html',
-  styleUrls: [
-    '../select.scss',
-    './tree-select.component.scss',
-  ],
+  styleUrls: ['./tree-select.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
     toggleMenu,
   ],
 })
-export class TreeSelectComponent implements OnInit, OnChanges {
-  @Input() options: ITreeNode[] = [];
+export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
 
-  @Input() mode: SelectMode = 'single';
+  private opened = false;
 
-  @Input() selectedLabel = 'selected';
+  @Input() dataSource: any[] = [];
+  protected treeData: any[] = [];
+  @Input() selected: any[] = [];
 
-  @Input() selectedListLabel = 'Selected';
-
-  @Input() initialValue: ITreeNode[] | ITreeNode = null;
-
-  @Input() isLoading = false;
-
-  @Output() selector = new EventEmitter<ITreeNode | ITreeNode[]>();
-
-  @ViewChild('tree', {static: false}) tree: Tree;
-
-  private isOpened = false;
-
-  private nodes: ITreeNode[] = [];
-
-  ngOnInit(): void {
-    if (this.initialValue) {
-      this.selectedNodes = this.initialValue;
-    }
+  ngOnInit() {
   }
 
-  ngOnChanges(changes) {
-    if (changes.options) {
-      if (changes.options.currentValue) {
-        this.nodes = [];
-        this.options.forEach((node: ITreeNode) => {
-          this.retrieveAllSelected(node);
-        });
+  get isOpened() {
+    return this.opened;
+  }
+
+  set isOpened(data: boolean) {
+    if (data !== this.opened) {
+      if (data) {
+        this.beforeOpenList();
+      } else {
+        this.beforeCloseList();
       }
+      this.opened = data;
     }
   }
 
-  retrieveAllSelected(node: ITreeNode) {
-    if (node.selected) {
-      this.nodes = [
-        ...this.nodes,
-        node,
-      ];
-    }
-    if (node.children) {
-      node.children.forEach((subNode) => {
-        this.retrieveAllSelected(subNode);
-      });
-    }
-  }
-
-  get displayClearButton() {
-    return this.nodes.length > 0;
-  }
-
-  get animationState() {
-    return this.isOpened ? 'open' : 'closed';
-  }
-
-  get toggleState() {
-    return `${this.isOpened ? 'pi pi-caret-up' : 'pi pi-caret-down'} mx-1`;
-  }
-
-  clearSelection() {
-    if (this.nodes.length > 0) {
-      this.nodes = [];
-    }
-  }
-
-  get isSingle() {
-    return this.mode === 'single';
-  }
-
-  onKeyDown(event) {
-    console.log(event.key);
-    if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
-      const parentNode = event.target.parentNode.parentNode;
-      const firstElement = parentNode.querySelector('.select-list ul li');
-      console.log(firstElement);
-      if (firstElement) {
-        firstElement.firstChild.focus();
+  buildTree(flatList: IFlatItem[]) {
+    const map = {};
+    flatList.forEach((flatItem: IFlatItem) => {
+      if (!flatItem.parentId) {
+        map[flatItem.id] = flatItem;
       }
-    }
-  }
-
-  get selectedNodes() {
-    if (this.isSingle) {
-      if (this.nodes.length > 0) {
-        return this.nodes[0];
+      if (!flatItem.children) {
+        flatItem.children = [];
       }
-      return null;
-    }
-    return this.nodes;
-  }
-
-  set selectedNodes(data: ITreeNode[] | ITreeNode) {
-    if (this.mode === 'checkbox') {
-      this.nodes = Object.values(data);
-      return;
-    }
-    const node = data[0] || data;
-    if (this.isSingle) {
-      if (this.nodes.length === 1) {
-        if (this.nodes[0] === node) {
-          this.nodes = [];
-          return;
-        }
+    });
+    flatList.forEach((flatItem: IFlatItem) => {
+      if (flatItem.parentId) {
+        map[flatItem.parentId].children = [
+          ...map[flatItem.parentId].children,
+          flatItem,
+        ];
       }
-      this.nodes[0] = node;
-      return;
-    }
-    const index = this.nodes.indexOf(node);
-    if (index >= 0) {
-      this.nodes = [
-        ...this.nodes.slice(0, index),
-        ...this.nodes.slice(index + 1),
-      ];
-      return;
-    }
-    this.nodes = [
-      ...this.nodes,
-      node,
-    ];
+    });
+    return Object.values(map);
   }
 
-  get rootClass() {
-    return `select-component ${this.mode} ${this.isOpened ? 'show' : 'hide'}`;
+  beforeCloseList() {
   }
 
-  get selectedText() {
-    if (this.isSingle) {
-      if (this.nodes.length === 1) {
-        return this.nodes[0].label;
-      }
-    }
-    return `${this.nodes.length} ${this.selectedLabel}`;
-  }
-
-  onSelect() {
-
-  }
-
-  openList() {
-    if (!this.isOpened) {
-      this.isOpened = true;
-    }
+  beforeOpenList() {
   }
 
   closeList() {
-    if (this.isOpened) {
-      this.isOpened = false;
-    }
+    this.isOpened = false;
   }
 
-  copyToClipboard(text: string) {
-    const input = document.createElement('input');
-    input.value = text;
-    document.body.appendChild(input);
-    input.select();
-    document.execCommand('copy');
-    document.body.removeChild(input);
+  onChange(event) {
+  }
+
+  onSelect(event) {
+  }
+
+  onUnselect(event) {
+  }
+
+  openList() {
+    this.isOpened = true;
   }
 
   toggleList() {
     this.isOpened = !this.isOpened;
   }
 
-  onChange(data) {
-    this.selector.emit(data);
+  ngOnChanges(changes: SimpleChanges): void {
+    this.treeData = this.buildTree(this.dataSource);
   }
 
-  onUnselect(event) {
-    const {
-      target: {
-        value: index,
-      },
-    } = event;
-    const node = this.nodes[index];
-    this.options = [
-      ...this.options,
-      node,
-    ];
-    this.nodes = [
-      ...this.nodes.slice(0, index),
-      ...this.nodes.slice(index + 1),
-    ];
+  get listState() {
+    return this.isOpened ? 'opened' : 'closed';
   }
 }
