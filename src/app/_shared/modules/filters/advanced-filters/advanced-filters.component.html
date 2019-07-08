@@ -1,6 +1,6 @@
 <div class="advanced-filter" (clickOutside)="closeDropdown()" (click)="$event.stopPropagation()">
-  <div #pane class="{{ dropdownDirection }} ">
-    <div class="ui-inputgroup mb-1 d-flex p-1">
+  <div #pane class="filter-pane {{ dropdownDirection }}">
+    <div class="ui-inputgroup d-flex p-1">
       <span class="ui-inputgroup-addon">
         {{filterTypeSign}}
       </span>
