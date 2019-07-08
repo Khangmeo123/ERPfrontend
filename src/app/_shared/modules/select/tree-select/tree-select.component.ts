@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {toggleMenu} from './tree-select.animations';
-import {ITreeNode} from './tree-select.interfaces';
-import {Tree} from 'primeng/tree';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { toggleMenu } from './tree-select.animations';
+import { ITreeNode } from './tree-select.interfaces';
+import { Tree } from 'primeng/tree';
 
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 
@@ -32,11 +32,11 @@ export class TreeSelectComponent implements OnInit, OnChanges {
 
   @Output() selector = new EventEmitter<ITreeNode | ITreeNode[]>();
 
-  @ViewChild('tree', {static: false}) tree: Tree;
+  @ViewChild('tree', { static: false }) tree: Tree;
 
-  private isOpened = false;
+  public isOpened = false;
 
-  private nodes: ITreeNode[] = [];
+  public nodes: ITreeNode[] = [];
 
   ngOnInit(): void {
     if (this.initialValue) {

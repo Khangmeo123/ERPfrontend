@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {IListItem} from '../select.interfaces';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { IListItem } from '../select.interfaces';
 
 @Component({
   selector: 'app-single-select',
@@ -22,7 +22,7 @@ export class SingleSelectComponent implements OnInit {
 
   @Output() search = new EventEmitter<string>();
 
-  private isOpened = false;
+  public isOpened = false;
 
   constructor() {
   }
@@ -62,12 +62,12 @@ export class SingleSelectComponent implements OnInit {
   }
 
   onChange(event) {
-    const {target: {value}} = event;
+    const { target: { value } } = event;
     this.search.emit(value);
   }
 
   onSelect(event) {
-    const {value} = event;
+    const { value } = event;
     const selectedItem = this.options.find((option) => option.value === value);
     const index = this.options.indexOf(selectedItem);
     const currentItem = this.selectedItem;

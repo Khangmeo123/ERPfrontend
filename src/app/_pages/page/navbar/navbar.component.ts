@@ -9,7 +9,7 @@ import { AppService } from '../../../_services';
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent implements OnInit {
-  private isToggleMenu = false;
+  isToggleMenu = false;
   @Output() changeToggle = new EventEmitter()
 
   constructor(private appService: AppService) { }

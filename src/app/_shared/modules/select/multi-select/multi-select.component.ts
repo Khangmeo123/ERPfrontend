@@ -1,5 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {IListItem} from '../select.interfaces';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { IListItem } from '../select.interfaces';
 
 @Component({
   selector: 'app-multi-select',
@@ -22,7 +22,7 @@ export class MultiSelectComponent implements OnInit {
 
   @Output() search = new EventEmitter<string>();
 
-  private isOpened = false;
+  public isOpened = false;
 
   constructor() {
   }
@@ -59,11 +59,11 @@ export class MultiSelectComponent implements OnInit {
   }
 
   onChange(event) {
-    const {target: {value}} = event;
+    const { target: { value } } = event;
     this.search.emit(value);
   }
 
-  onSelect({value}) {
+  onSelect({ value }) {
     const selectedItem = this.options.find((option) => option.value === value);
     const index = this.options.indexOf(selectedItem);
     this.values = [
@@ -77,7 +77,7 @@ export class MultiSelectComponent implements OnInit {
   }
 
   onUnselect(event) {
-    const {target: {value}} = event;
+    const { target: { value } } = event;
     const unselectedItem = this.values.find((option) => option.value === value);
     const index = this.values.indexOf(unselectedItem);
     this.values = [
