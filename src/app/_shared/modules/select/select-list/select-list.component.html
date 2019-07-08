@@ -1,8 +1,12 @@
 <div class="select-list">
-  <ul class="dropdown-menu">
-    <li *ngFor="let item of dataSource; index as i" class="dropdown-item d-flex align-items-center">
-      <input type="checkbox" checked (change)="onChange(item)" *ngIf="selected">
-      <span class="label flex-grow-1" (click)="onChange(item)" role="button">
+  <ul class="dropdown-menu" tabindex="1" (focus)="ulFocus($event)" role="menu">
+    <li *ngFor="let item of dataSource; index as i" class="dropdown-item d-flex align-items-center"
+        role="menuitem"
+        [tabindex]="-1"
+        (keypress)="liPress($event, item, i)"
+        (keydown)="keyDown($event)">
+      <input type="checkbox" checked (change)="onChange(item, i)" *ngIf="selected">
+      <span class="label flex-grow-1" (click)="onChange(item, i)" role="button">
         {{item[key]}}
       </span>
       <span class="pi pi-copy" [tooltip]="copyTooltip" triggers="click:mouseleave" (click)="copy($event)"

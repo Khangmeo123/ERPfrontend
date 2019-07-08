@@ -1,4 +1,8 @@
 .select-list {
+  position: relative;
+  height: auto;
+  border: 0;
+
   ul.dropdown-menu {
     display: block !important;
     position: relative;

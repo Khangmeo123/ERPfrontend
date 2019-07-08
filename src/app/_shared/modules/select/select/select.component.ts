@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -8,7 +8,10 @@ import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class SelectComponent implements OnInit {
 
-  constructor() { }
+  @Input() listDirection = 'down';
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

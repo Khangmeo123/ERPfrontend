@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-select-head',
@@ -12,9 +12,15 @@ export class SelectHeadComponent implements OnInit {
 
   @Output() headClick = new EventEmitter();
 
+  @ViewChild('head', {static: false}) head;
+
   constructor() {
   }
 
   ngOnInit() {
+  }
+
+  onHeadClick(event) {
+    this.headClick.emit(event);
   }
 }

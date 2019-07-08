@@ -1,20 +1,20 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import {TreeSelectComponent} from './tree-select.component';
+import {SingleSelectComponent} from './single-select.component';
 
-describe('TreeSelectComponent', () => {
-  let component: TreeSelectComponent;
-  let fixture: ComponentFixture<TreeSelectComponent>;
+describe('SingleSelectComponent', () => {
+  let component: SingleSelectComponent;
+  let fixture: ComponentFixture<SingleSelectComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [TreeSelectComponent],
+      declarations: [SingleSelectComponent],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TreeSelectComponent);
+    fixture = TestBed.createComponent(SingleSelectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

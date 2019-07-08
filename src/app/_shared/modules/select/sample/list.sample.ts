@@ -1,41 +1,26 @@
 export const sampleList: any[] = [
   {
+    id: 1,
     label: 'Documents',
     value: 'documents',
   },
   {
+    id: 2,
     label: 'Downloads',
     value: 'downloads',
   },
   {
+    id: 3,
     label: 'Pictures',
     value: 'pictures',
   },
   {
+    id: 4,
     label: 'Music',
     value: 'music',
   },
   {
-    label: 'Videos',
-    value: 'videos',
-  },
-  {
-    label: 'Documents',
-    value: 'documents',
-  },
-  {
-    label: 'Downloads',
-    value: 'downloads',
-  },
-  {
-    label: 'Pictures',
-    value: 'pictures',
-  },
-  {
-    label: 'Music',
-    value: 'music',
-  },
-  {
+    id: 5,
     label: 'Videos',
     value: 'videos',
   },

@@ -11,6 +11,19 @@
   margin-bottom: 0.25rem;
   background: #ffffff;
 
+  .select-list {
+    position: relative;
+    height: auto;
+  }
+
+  .select-list:not(:only-child):first-of-type {
+    border-bottom: 1px solid $border-color;
+  }
+
+  .select-list:only-child {
+
+  }
+
   .ui-tree {
     width: 100%;
     border-top: 0;
@@ -20,9 +33,5 @@
     border-bottom: 1px solid $border-color;
     max-height: 326px;
     overflow-y: auto;
-  }
-
-  :last-child {
-    border-bottom: 0;
   }
 }

@@ -1,17 +1,15 @@
 export interface ISelect {
-  closeList();
+  closeList(event);
 
-  openList();
+  openList(event);
 
-  toggleList();
-
-  beforeOpenList();
-
-  beforeCloseList();
+  toggleList(event);
 
   onSelect(event);
 
   onUnselect(event);
 
-  onChange(event);
+  onChange();
 }
+
+export type SelectMode = 'single' | 'multiple' | 'checkbox';

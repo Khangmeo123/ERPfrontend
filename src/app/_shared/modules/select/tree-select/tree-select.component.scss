@@ -1,4 +1,17 @@
 .select-list {
-  max-height: 148px;
+  max-height: 147px;
   overflow-y: auto;
+}
+
+.ui-tree {
+  .ui-tree-container {
+    .ui-treenode {
+      .ui-treenode-content {
+        .ui-treenode-label.ui-state-highlight {
+          background: inherit!important;
+          color: inherit!important;
+        }
+      }
+    }
+  }
 }
