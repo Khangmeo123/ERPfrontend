@@ -1,0 +1,138 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.advanced-filter {
+  margin-left: 20px;
+  position: relative;
+  display: inline-table;
+  button:focus {
+    outline: none;
+    outline: 0;
+    border-color: #cecece;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+  }
+
+  .ui-inputgroup-addon {
+    border-color: #ced4da !important;
+    border-right: none;
+    color: #3D464D !important;
+  }
+
+  .form-control {
+    border-radius: 0;
+  }
+
+  .btn {
+    border: 1px solid #cecece;
+    border-left: none;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+
+  input {
+    border-right: none;
+  }
+
+  * {
+    font-size: small;
+  }
+
+  .ui-listbox {
+    min-width: unset;
+    max-width: unset;
+    width: 100%;
+    border-width: 0;
+    border-top: 1px solid $border-color;
+  }
+
+  .ui-calendar {
+    .ui-inputtext {
+      border-left: 0;
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+  }
+
+  .ui-inputgroup {
+    width: 100% !important;
+
+    input {
+      min-width: unset !important;
+      width: 100%;
+    }
+  }
+
+  .filter-pane {
+    width: 16em;
+    border: 1px solid #a6a6a6;
+    //border-radius: $border-radius;
+    position: absolute;
+    left: 0;
+    right: auto;
+  }
+
+  .filter-pane.right {
+    right: 0;
+    left: auto;
+  }
+
+
+  .select-list {
+    .dropdown-menu {
+      margin-top: -6px;
+      margin-left: 4px;
+      display: block !important;
+      position: absolute;
+      width: 97%;
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
+      border: 1px solid #ced4da;
+
+      li.dropdown-item {
+        cursor: pointer;
+
+        input[type="checkbox"] {
+          margin-right: 0.5rem;
+        }
+      }
+      ul {
+        margin-bottom: 0;
+        margin-left: -40px;
+      }
+
+      li.dropdown-item:hover {
+        background-color: #eaeaea;
+        color: inherit;
+      }
+    }
+
+    .tooltip {
+      .tooltip-inner {
+        color: white;
+      }
+    }
+
+  }
+
+  .ui-calendar {
+    .ui-inputtext {
+      border: 1px solid #cecece;
+      border-right: 0;
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+    input.ui-inputtext:hover {
+      border: 1px solid #cecece;
+      border-right: 0;
+    }
+    input.ui-inputtext:focus{
+      border-color: #cecece;
+      border-right: 0;
+    }
+
+  }
+
+}
