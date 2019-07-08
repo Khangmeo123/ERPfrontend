@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
@@ -12,11 +12,14 @@ import { AppComponent } from './app.component';
 import { PageComponent } from './_pages/page/page.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { ErrorInterceptor, JwtInterceptor } from './_helpers';
+
+import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { SidebarComponent } from './_pages/page/sidebar/sidebar.component';
 import { NavbarComponent } from './_pages/page/navbar/navbar.component';
 import { FooterComponent } from './_pages/page/footer/footer.component';
 import { SpinnerComponent } from './_shared/components/spinner/spinner.component';
+import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemsidebar.component';
+import { MatIconModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -27,6 +30,7 @@ import { SpinnerComponent } from './_shared/components/spinner/spinner.component
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
+    ItemSidebarComponent,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +43,7 @@ import { SpinnerComponent } from './_shared/components/spinner/spinner.component
     HttpClientModule,
     MatProgressSpinnerModule,
     FormsModule,
+    MatIconModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
