@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild, ViewEncapsulation} from '@angular/core';
+import {Component, Input, OnInit, Output, ViewChild, ViewEncapsulation, EventEmitter} from '@angular/core';
 import {FilterType} from '../../../models/filters/FilterType';
 import {DateFilter} from '../../../models/filters/DateFilter';
 import {TextFilter} from '../../../models/filters/TextFilter';
@@ -22,9 +22,13 @@ export class AdvancedFiltersComponent implements OnInit {
   @ViewChild('pane', {static: false}) pane;
   @ViewChild('toggler', {static: false}) toggler;
 
+  @Output() changeFilter = new EventEmitter();
+
   protected types: FilterType[] = [];
 
   protected isOpened = false;
+  private listValueFilter: Array<any> = [];
+  private typeInput: string = '';
 
   type = null;
 
@@ -32,6 +36,25 @@ export class AdvancedFiltersComponent implements OnInit {
 
   constructor() {
   }
+
+  ngOnInit() {
+    if (this.isDateFilter) {
+      this.typeInput = 'text';
+      this.types = DateFilter.types;
+    } else if (this.isTextFilter) {
+      this.typeInput = 'text';
+      this.types = TextFilter.types;
+    } else if (this.isNumberFilter) {
+      this.typeInput = 'number';
+      this.types = NumberFilter.types;
+    }
+    if (this.type === null) {
+      this.type = this.types[0];
+      this.type = this.types[0];
+    }
+
+  }
+
 
   get isDateFilter() {
     return this.filter instanceof DateFilter;
@@ -73,20 +96,6 @@ export class AdvancedFiltersComponent implements OnInit {
     return this.isOpened ? 'opened' : 'closed';
   }
 
-  ngOnInit() {
-    if (this.isDateFilter) {
-      this.types = DateFilter.types;
-    } else if (this.isTextFilter) {
-      this.types = TextFilter.types;
-    } else if (this.isNumberFilter) {
-      this.types = NumberFilter.types;
-    }
-    if (this.type === null) {
-      this.type = this.types[0];
-    }
-
-  }
-
   get filterTypes() {
     return this.types.map((type) => {
       return {
@@ -112,12 +121,23 @@ export class AdvancedFiltersComponent implements OnInit {
   }
 
   onApplyFilter(event) {
+    console.log(event);
     this.types.forEach(({code}) => {
       if (this.type.code === code) {
-        this.filter[code] = event.target.value;
+        if (event && event.target) {
+          this.filter[code] = event.target.value;
+        } else if (event) {
+          this.filter[code] = event;
+        }
       } else {
         this.filter[code] = null;
       }
     });
+    this.changeFilter.emit();
+  }
+
+  onSelectType(item) {
+    this.type = this.types.find((type) => type.code === item.value);
+    console.log('onSelectType item', item);
   }
 }

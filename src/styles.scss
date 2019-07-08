@@ -52,3 +52,11 @@ body {
 *[role="button"] {
   cursor: pointer;
 }
+
+.form-control:focus {
+  outline: none;
+  outline: 0;
+  border-color: #cecece;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+}
