@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-pagination',
@@ -10,7 +10,7 @@ export class PaginationComponent implements OnInit, OnChanges {
     pageNumber: 4,
     pageSize: 50,
     totalItems: 400,
-    skip: 0
+    skip: 0,
   };
   @Output() paginationOut = new EventEmitter();
   private indexItem: number = 1;
@@ -22,7 +22,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   ngOnInit() {
     this.indexItem = this.pagination.pageNumber;
     if (this.pagination.totalItems && this.pagination.pageSize) {
-      this.totalPage = Math.round(this.pagination.totalItems / this.pagination.pageSize);
+      this.totalPage = Math.ceil(this.pagination.totalItems / this.pagination.pageSize);
     }
     this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
   }
@@ -31,11 +31,10 @@ export class PaginationComponent implements OnInit, OnChanges {
     if (change.pagination && this.pagination && this.pagination.pageNumber) {
       this.indexItem = this.pagination.pageNumber;
       if (this.pagination.totalItems && this.pagination.pageSize) {
-        this.totalPage = Math.round(this.pagination.totalItems / this.pagination.pageSize);
+        this.totalPage = Math.ceil(this.pagination.totalItems / this.pagination.pageSize);
       }
       this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
     }
-    console.log('ngOnChanges change', this.pagination);
   }
 
 
@@ -43,9 +42,9 @@ export class PaginationComponent implements OnInit, OnChanges {
     if (this.indexItem > 1) {
       this.indexItem--;
       this.pagination.pageNumber = this.indexItem;
+      this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
+      this.paginationOut.emit(this.pagination);
     }
-    this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
-    this.paginationOut.emit(this.pagination);
   }
 
 
@@ -53,27 +52,29 @@ export class PaginationComponent implements OnInit, OnChanges {
     if (this.indexItem < this.totalPage) {
       this.indexItem++;
       this.pagination.pageNumber = this.indexItem;
+      this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
+      this.paginationOut.emit(this.pagination);
     }
-    this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
-    this.paginationOut.emit(this.pagination);
   }
 
 
   public onClickFirst() {
-    this.indexItem = 1;
-    this.pagination.pageNumber = this.indexItem;
-    this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
-    this.paginationOut.emit(this.pagination);
-    console.log('onClickFirst', this.pagination);
+    if (this.indexItem !== 1) {
+      this.indexItem = 1;
+      this.pagination.pageNumber = this.indexItem;
+      this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
+      this.paginationOut.emit(this.pagination);
+    }
   }
 
 
   public onClickLast() {
-    this.indexItem = this.totalPage;
-    this.pagination.pageNumber = this.indexItem;
-    this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
-    this.paginationOut.emit(this.pagination);
-    console.log('onClickLast', this.pagination);
+    if (this.indexItem !== this.totalPage) {
+      this.indexItem = this.totalPage;
+      this.pagination.pageNumber = this.indexItem;
+      this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
+      this.paginationOut.emit(this.pagination);
+    }
   }
 
 

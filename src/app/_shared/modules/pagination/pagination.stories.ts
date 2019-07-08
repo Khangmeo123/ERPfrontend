@@ -1,7 +1,7 @@
-import {moduleMetadata, storiesOf} from '@storybook/angular';
-import {PaginationModule} from './pagination.module';
-import {FormsModule} from '@angular/forms';
-import {MatIconModule} from '@angular/material';
+import { moduleMetadata, storiesOf } from '@storybook/angular';
+import { PaginationModule } from './pagination.module';
+import { FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material';
 
 
 storiesOf('Pagination', module)
@@ -21,11 +21,16 @@ storiesOf('Pagination', module)
       `<div class="container">
         <div class="row">
           <div class="col">
-            <app-pagination></app-pagination>
+            <app-pagination [pagination]="pagination" (paginationOut)="event($event)"></app-pagination>
           </div>
         </div>
       </div>`,
     props: {
-      // pagination: sampleTree,
+      pagination: {
+        pageNumber: 1,
+        pageSize: 50,
+        totalItems: 20,
+        skip: 0,
+      },
     },
   }));
