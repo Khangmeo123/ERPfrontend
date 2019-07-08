@@ -1,14 +1,14 @@
-import {storiesOf} from '@storybook/angular/dist/client/preview';
-import {moduleMetadata} from '@storybook/angular';
-import {FiltersModule} from '../filters.module';
-import {TableModule} from 'primeng/table';
-import {sampleTable} from './advanced-filters.sample';
-import {TextFilter} from '../../../models/filters/TextFilter';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
-import {AdvancedFiltersComponent} from './advanced-filters.component';
-import {DateFilter} from '../../../models/filters/DateFilter';
-import {NumberFilter} from '../../../models/filters/NumberFilter';
+import { storiesOf } from '@storybook/angular/dist/client/preview';
+import { moduleMetadata } from '@storybook/angular';
+import { FiltersModule } from '../filters.module';
+import { TableModule } from 'primeng/table';
+import { sampleTable } from './advanced-filters.sample';
+import { TextFilter } from '../../../models/filters/TextFilter';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule } from '@angular/forms';
+import { AdvancedFiltersComponent } from './advanced-filters.component';
+import { DateFilter } from '../../../models/filters/DateFilter';
+import { NumberFilter } from '../../../models/filters/NumberFilter';
 
 storiesOf('Advanced Filters', module)
   .addDecorator(
@@ -51,28 +51,52 @@ storiesOf('Advanced Filters', module)
   .add('table', () => ({
     template: `
     <div class="container">
+    <button (click)="Seach(filter)">Search</button>
     <p-table [value]="users">
-    <ng-template pTemplate="header">
-        <tr>
-            <th pResizableColumn>
-            ID
-             </th>
-            <th pResizableColumn> Name </th>
-            <th pResizableColumn> Email </th>
-            <th pResizableColumn> Birthday </th>
-        </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-user>
-        <tr>
-            <td> {{user.id}} </td>
-            <td> {{user.name}} </td>
-            <td> {{user.email}} </td>
-            <td> {{user.birthday}} </td>
-        </tr>
-    </ng-template>
-</p-table>
+      <ng-template pTemplate="header">
+          <tr>
+              <th pResizableColumn>
+              ID
+              </th>
+              <th pResizableColumn> Name </th>
+              <th pResizableColumn> Email </th>
+              <th pResizableColumn> Birthday </th>
+          </tr>
+          <tr>
+            <th>
+              <app-advanced-filters [filter]="filter.id"></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters [filter]="filter.name"></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters [filter]="filter.email"></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters [filter]="filter.birthday"></app-advanced-filters>
+            </th>
+          </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-user>
+          <tr>
+              <td> {{user.id}} </td>
+              <td> {{user.name}} </td>
+              <td> {{user.email}} </td>
+              <td> {{user.birthday}} </td>
+          </tr>
+      </ng-template>
+    </p-table>
 </div>`,
     props: {
       users: sampleTable,
+      filter: {
+        id: new TextFilter(),
+        name: new TextFilter(),
+        email: new NumberFilter(),
+        birthday: new DateFilter(),
+      },
+      Seach: (event) => {
+        console.log(event)
+      }
     },
   }));

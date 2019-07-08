@@ -1,9 +1,9 @@
-import {Component, Input, OnInit, Output, ViewChild, ViewEncapsulation, EventEmitter} from '@angular/core';
-import {FilterType} from '../../../models/filters/FilterType';
-import {DateFilter} from '../../../models/filters/DateFilter';
-import {TextFilter} from '../../../models/filters/TextFilter';
-import {NumberFilter} from '../../../models/filters/NumberFilter';
-import {toggleMenu} from '../../../animations/toggle-menu';
+import { Component, Input, OnInit, Output, ViewChild, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { FilterType } from '../../../models/filters/FilterType';
+import { DateFilter } from '../../../models/filters/DateFilter';
+import { TextFilter } from '../../../models/filters/TextFilter';
+import { NumberFilter } from '../../../models/filters/NumberFilter';
+import { toggleMenu } from '../../../animations/toggle-menu';
 
 @Component({
   selector: 'app-advanced-filters',
@@ -19,17 +19,17 @@ export class AdvancedFiltersComponent implements OnInit {
   @Input() filter;
   @Input() searchEntity;
 
-  @ViewChild('pane', {static: false}) pane;
-  @ViewChild('toggler', {static: false}) toggler;
+  @ViewChild('pane', { static: false }) pane;
+  @ViewChild('toggler', { static: false }) toggler;
 
   @Output() changeFilter = new EventEmitter();
 
   protected types: FilterType[] = [];
 
   protected isOpened = false;
-  private listValueFilter: Array<any> = [];
-  private typeInput: string = '';
-
+  public listValueFilter: Array<any> = [];
+  public typeInput: string = '';
+  public valueInput: any;
   type = null;
 
   dropdownDirection = 'left';
@@ -71,7 +71,7 @@ export class AdvancedFiltersComponent implements OnInit {
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const {left} = this.toggler.nativeElement.getBoundingClientRect();
+    const { left } = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -121,8 +121,7 @@ export class AdvancedFiltersComponent implements OnInit {
   }
 
   onApplyFilter(event) {
-    console.log(event);
-    this.types.forEach(({code}) => {
+    this.types.forEach(({ code }) => {
       if (this.type.code === code) {
         if (event && event.target) {
           this.filter[code] = event.target.value;
@@ -133,11 +132,25 @@ export class AdvancedFiltersComponent implements OnInit {
         this.filter[code] = null;
       }
     });
+    this.valueInput = event.target.value;
     this.changeFilter.emit();
   }
 
   onSelectType(item) {
     this.type = this.types.find((type) => type.code === item.value);
-    console.log('onSelectType item', item);
+    const keys = Object.keys(this.filter);
+    for (const property in this.filter) {
+      if (this.filter.hasOwnProperty(property)) {
+        this.filter[property] = null;
+      }
+    }
+    this.filter[this.type.code] = this.valueInput;
+    this.toggleList();
+  }
+
+  closeDropdown() {
+    if (this.isOpened) {
+      this.isOpened = !this.isOpened;
+    }
   }
 }

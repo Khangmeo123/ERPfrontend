@@ -1,12 +1,13 @@
-<div class="advanced-filter">
+<div class="advanced-filter" (clickOutside)="closeDropdown()" (click)="$event.stopPropagation()">
   <div #pane class="{{ dropdownDirection }} ">
     <div class="ui-inputgroup mb-1 d-flex p-1">
       <span class="ui-inputgroup-addon">
         {{filterTypeSign}}
       </span>
-      <input *ngIf="!isDateFilter" type={{typeInput}} class="form-control" (input)="onApplyFilter($event)" placeholder="Search...">
-      <p-calendar (onInput)="onApplyFilter($event)" (onSelect)="onApplyFilter($event)"
-                  *ngIf="isDateFilter"></p-calendar>
+      <input *ngIf="!isDateFilter" type={{typeInput}} class="form-control" (input)="onApplyFilter($event)"
+        placeholder="Search...">
+      <p-calendar (onInput)="onApplyFilter($event)" (onSelect)="onApplyFilter($event)" *ngIf="isDateFilter">
+      </p-calendar>
       <div class="input-group-append">
         <button #toggler class="btn" type="button" (click)="toggleList()">
           <i class="fas fa-filter"></i>
@@ -18,7 +19,7 @@
       <div class="select-list">
         <ul class="dropdown-menu">
           <li *ngFor="let item of filterTypes; index as i" class="dropdown-item d-flex align-items-center"
-              (click)="onSelectType(item)">
+            (click)="onSelectType(item)">
             <span>{{item.label}}</span>
           </li>
         </ul>
@@ -26,5 +27,3 @@
     </div>
   </div>
 </div>
-
-
