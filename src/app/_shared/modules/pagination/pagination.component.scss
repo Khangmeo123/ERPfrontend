@@ -17,6 +17,7 @@
   .show-entries {
     display: flex;
 
+
     span {
       margin-left: 3px;
       margin-right: 3px;
@@ -29,7 +30,7 @@
     .form-control:focus {
       outline: none;
       outline: 0;
-      border-color: 707070;
+      border-color: #707070;
       -webkit-box-shadow: none;
       box-shadow: none;
     }

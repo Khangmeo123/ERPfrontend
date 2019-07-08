@@ -2,7 +2,8 @@
   <div class="show-entries">
     <span>Show</span>
     <span class="select-page">
-      <select class="form-control" #pageSize (change)="onSelectPageSize(pageSize.value)">
+      <select class="form-control" [(ngModel)]="pagination.pageSize" #pageSize
+              (change)="onSelectPageSize(pageSize.value)">
       <option selected value="10">10</option>
       <option value="20">20</option>
       <option value="50">50</option>
@@ -19,11 +20,8 @@
   </div>
   <div class="input-text">
     <span>
-      {{indexItem}} / {{totalPage}}
+      {{indexItem}} / {{ (pagination.totalItems / pagination.pageSize) | ceilMath}}
     </span>
-    <!--    <div class="form-group">-->
-    <!--      <input [(ngModel)]="indexItem" (keyup.enter)="goToPage($event)" type="text" class="form-control" id="index">-->
-    <!--    </div>-->
   </div>
   <div class="next">
     <span (click)="onClickNext()"><mat-icon>chevron_right</mat-icon></span>

@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
+import { PaginationModel } from './pagination.model';
 
 @Component({
   selector: 'app-pagination',
@@ -6,28 +7,20 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angu
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input() pagination: any = {
-    pageNumber: 4,
-    pageSize: 50,
-    totalItems: 400,
-    skip: 0,
-  };
+  @Input() pagination: PaginationModel;
   @Output() paginationOut = new EventEmitter();
-  private indexItem: number = 1;
-  private totalPage: number = 0;
+  public indexItem: number = 1;
+  public totalPage: number = 0;
 
   constructor() {
   }
 
   ngOnInit() {
-    this.indexItem = this.pagination.pageNumber;
-    if (this.pagination.totalItems && this.pagination.pageSize) {
-      this.totalPage = Math.ceil(this.pagination.totalItems / this.pagination.pageSize);
-    }
-    this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.pageSize;
+    console.log('ngOnInit', this.pagination);
   }
 
   ngOnChanges(change) {
+    console.log('ngOnChanges', change);
     if (change.pagination && this.pagination && this.pagination.pageNumber) {
       this.indexItem = this.pagination.pageNumber;
       if (this.pagination.totalItems && this.pagination.pageSize) {

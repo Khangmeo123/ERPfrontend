@@ -1,0 +1,20 @@
+export class PaginationModel {
+  pageNumber: number;
+  pageSize: number;
+  totalItems: number;
+  skip: number;
+
+  constructor(event) {
+    if (event !== null && event !== undefined) {
+      this.pageNumber = event.pageNumber !== null ? event.pageNumber : 1;
+      this.pageSize = event.pageSize !== null ? event.pageSize : 10;
+      this.totalItems = event.totalItems !== null ? event.totalItems : 0;
+      this.skip = event.skip !== null ? event.skip : 0;
+    } else {
+      this.pageNumber = 1;
+      this.pageSize = 10;
+      this.totalItems = 0;
+      this.skip = 0;
+    }
+  }
+}
