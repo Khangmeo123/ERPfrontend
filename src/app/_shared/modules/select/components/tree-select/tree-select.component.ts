@@ -100,7 +100,7 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
 
   isOpened = false;
 
-  @Input() valueSelector = (node) => node;
+  @Input() valueSelector = (node) => node.id;
 
   ngOnInit() {}
 

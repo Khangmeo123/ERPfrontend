@@ -5,12 +5,14 @@
                    (toggleList)="toggleList($event)"
                    (headClick)="toggleList($event)"></app-select-head>
   <app-select-body [@toggleMenu]="listState">
+    <app-select-search (search)="search.emit($event)"></app-select-search>
+    <app-select-list [dataSource]="selectedItems"
+                     [key]="key"
+                     selected="true"
+                     *ngIf="selectedItems.length"
+                     (selectionChange)="unselect($event)"></app-select-list>
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
-      <app-select-list [dataSource]="selectedItems"
-                       [key]="key"
-                       selected="true"
-                       (selectionChange)="unselect($event)"></app-select-list>
       <app-select-list [dataSource]="list"
                        [key]="key"
                        (selectionChange)="select($event)"></app-select-list>
