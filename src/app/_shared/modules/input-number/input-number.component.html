@@ -1,0 +1,6 @@
+<input type="number"
+       class="form-control"
+       (keyup)="onKeyUp($event)"
+       (keydown)="onKeyDown($event)"
+       [value]="control.value"
+       (change)="onChange($event)">

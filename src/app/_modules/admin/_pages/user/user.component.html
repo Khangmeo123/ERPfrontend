@@ -17,7 +17,7 @@
           <input type="text" class="form-control input-form" id="exampleInputEmail1" formControlName="Display"
             placeholder="Enter email">
           <app-error
-            *ngIf="userForm.controls.Display?.errors?.invalidusername || !!userForm.controls.Error.get('Display')?.value"
+            *ngIf="userForm.controls.Display?.errors?.invalidUsername || !!userForm.controls.Error.get('Display')?.value"
             [formGroup]="userForm" [property]="'Name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
@@ -25,7 +25,7 @@
           <input type="text" class="form-control" id="exampleInputEmail1" formControlName="Name"
             placeholder="Enter email">
           <app-error
-            *ngIf="userForm.controls.Name?.errors?.invalidusername || !!userForm.controls.Error.get('Name')?.value"
+            *ngIf="userForm.controls.Name?.errors?.invalidUsername || !!userForm.controls.Error.get('Name')?.value"
             [formGroup]="userForm" [property]="'Name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
