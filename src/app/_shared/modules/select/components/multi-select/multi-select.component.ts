@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../select.interface';
-import {getListDirection, initiateSelectedNodes} from '../helpers';
-import {toggleMenu} from '../../../animations/toggleMenu';
+import {ISelect} from '../../select.interface';
+import {getListDirection, initiateSelectedNodes} from '../../helpers';
+import {toggleMenu} from '../../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-multi-select',
@@ -16,7 +16,7 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
 
   @Input() list = [];
 
-  @Input() initialIds = [];
+  @Input() selectedIds = [];
 
   @Output() selectionChange = new EventEmitter();
 
@@ -38,7 +38,7 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.list || changes.initialIds) {
+    if (changes.list || changes.selectedIds) {
       this.isLoading = false;
     }
   }
@@ -54,7 +54,7 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   @Input() valueSelector = (node) => node.id;
 
   ngOnInit() {
-    this.selectedList = initiateSelectedNodes(this.list, this.initialIds);
+    this.selectedList = initiateSelectedNodes(this.list, this.selectedIds);
   }
 
   closeList(event) {
@@ -77,6 +77,10 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   openList(event) {
+    if (!this.isOpened) {
+      this.beforeOpenList(event);
+      this.isOpened = true;
+    }
   }
 
   toggleList(event) {

@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {copy} from '../../../../_helpers/miscellaneous';
+import {copy} from '../../../../../_helpers/miscellaneous';
 
 const COPIED_TOOLTIP = 'Copied';
 

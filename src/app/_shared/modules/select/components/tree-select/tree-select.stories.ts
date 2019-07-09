@@ -4,24 +4,18 @@ import {moduleMetadata} from '@storybook/angular';
 
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CommonModule} from '@angular/common';
-import {SelectModule} from '../select.module';
-import {SelectMode} from '../select.interface';
 
-const getSampleFlatList = () => [
-  {
-    id: 1,
-    label: 'Item 1',
-  },
-  {
-    id: 2,
-    parentId: 1,
-    label: 'Item 1.1',
-  },
-];
+import {SelectModule} from '../../select.module';
+import {SelectMode} from '../../select.interface';
+import {getSampleFlatList} from '../../sample/list.sample';
 
 @Component({
   template: `
-    <app-tree-select [dataSource]="data" [mode]="mode" (firstLoadData)="firstLoadData()" [firstLoad]="true"></app-tree-select>`,
+    <app-tree-select [dataSource]="data"
+                     [mode]="mode"
+                     (firstLoadData)="firstLoadData()"
+                     [firstLoad]="true"></app-tree-select>
+  `,
 })
 export class TreeSelectParentSampleComponent {
   @Input() mode: SelectMode = 'single';
@@ -34,7 +28,6 @@ export class TreeSelectParentSampleComponent {
     }, 2000);
   }
 }
-
 
 storiesOf('Tree Select', module)
   .addDecorator(
@@ -105,7 +98,21 @@ storiesOf('Tree Select', module)
       dataSource: getSampleFlatList(),
     },
   }))
-  .add('inside parent', () => ({
+  .add('scaleX x2', () => ({
+    template: `<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <app-tree-select (firstLoadData)="null" scaleX="x2" [mode]="mode" [dataSource]="dataSource"></app-tree-select>
+    </div>
+  </div>
+</div>
+`,
+    props: {
+      mode: 'checkbox',
+      dataSource: getSampleFlatList(),
+    },
+  }))
+  .add('first loading', () => ({
     component: TreeSelectParentSampleComponent,
     props: {
       mode: 'checkbox',

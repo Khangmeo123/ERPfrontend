@@ -31,10 +31,10 @@ export const buildTree = (flatList: IFlatItem[]) => {
   return Object.values(map);
 };
 
-export const initiateSelectedNodes = (dataSource: IFlatItem[], initialIds: any[]) => {
+export const initiateSelectedNodes = (dataSource: IFlatItem[], selectedIds: any[]) => {
   const map = [];
   dataSource.forEach((item) => {
     map[item.id] = item;
   });
-  return initialIds.map((id) => map[id]);
+  return selectedIds.map((id) => map[id]);
 };

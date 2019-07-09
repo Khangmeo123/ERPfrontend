@@ -1,3 +1,5 @@
+export type SelectMode = 'single' | 'multiple' | 'checkbox';
+
 export interface ISelect {
   closeList(event);
 
@@ -11,5 +13,3 @@ export interface ISelect {
 
   onChange();
 }
-
-export type SelectMode = 'single' | 'multiple' | 'checkbox';

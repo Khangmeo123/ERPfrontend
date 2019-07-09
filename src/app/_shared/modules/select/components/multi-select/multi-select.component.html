@@ -1,5 +1,9 @@
 <app-select [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
-  <app-select-head [label]="selectedText" (headClick)="toggleList($event)"></app-select-head>
+  <app-select-head [label]="selectedText"
+                   (openList)="openList($event)"
+                   (closeList)="closeList($event)"
+                   (toggleList)="toggleList($event)"
+                   (headClick)="toggleList($event)"></app-select-head>
   <app-select-body [@toggleMenu]="listState">
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>

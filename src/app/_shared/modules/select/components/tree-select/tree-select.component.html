@@ -1,8 +1,10 @@
 <app-select [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
   <app-select-head (headClick)="toggleList($event)"
-                   [label]="selectedText"
-                   #head></app-select-head>
-  <app-select-body [@toggleMenu]="listState">
+                   (openList)="openList($event)"
+                   (closeList)="closeList($event)"
+                   (toggleList)="toggleList($event)"
+                   [label]="selectedText"></app-select-head>
+  <app-select-body [@toggleMenu]="listState" [scaleX]="scaleX">
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
       <app-select-list [dataSource]="selectedNodes"
@@ -12,8 +14,7 @@
                        *ngIf="selectedNodes.length"></app-select-list>
       <p-tree [selectionMode]="mode"
               [value]="treeData"
-              [selection]="selection"
-              (selectionChange)="onSelect($event)"></p-tree>
+              [(selection)]="selection"></p-tree>
     </ng-template>
   </app-select-body>
 </app-select>

@@ -12,6 +12,12 @@ export class SelectHeadComponent implements OnInit {
 
   @Output() headClick = new EventEmitter();
 
+  @Output() openList = new EventEmitter();
+
+  @Output() closeList = new EventEmitter();
+
+  @Output() toggleList = new EventEmitter();
+
   @ViewChild('head', {static: false}) head;
 
   constructor() {
@@ -22,5 +28,23 @@ export class SelectHeadComponent implements OnInit {
 
   onHeadClick(event) {
     this.headClick.emit(event);
+  }
+
+  onKeyDown(event) {
+    switch (event.key) {
+      case 'ArrowDown':
+      case 'ArrowRight':
+        this.openList.emit(event);
+        break;
+      case 'ArrowUp':
+      case 'ArrowLeft':
+        this.closeList.emit(event);
+        break;
+      case 'Enter':
+        this.toggleList.emit(event);
+        break;
+      default:
+        break;
+    }
   }
 }

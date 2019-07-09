@@ -1,4 +1,4 @@
-export const sampleList: any[] = [
+export const getSampleFlatList = () => [
   {
     id: 1,
     label: 'Documents',
@@ -25,3 +25,5 @@ export const sampleList: any[] = [
     value: 'videos',
   },
 ];
+
+export const sampleList: any[] = getSampleFlatList();
