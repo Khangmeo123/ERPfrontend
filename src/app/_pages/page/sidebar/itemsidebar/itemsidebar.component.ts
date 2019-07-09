@@ -21,7 +21,7 @@ export class ItemSidebarComponent implements OnInit {
     @Output() dataOut = new EventEmitter();
 
 
-    private isShowOut: boolean;
+    public isShowOut: boolean;
     public isTogge: boolean = false;
     public listRootMenu = []
 

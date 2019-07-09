@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {IListItem} from '../select.interfaces';
-import {SelectComponent} from '../select.component';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { IListItem } from '../select.interfaces';
 
 @Component({
   selector: 'app-single-select',
@@ -11,7 +10,7 @@ import {SelectComponent} from '../select.component';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class SingleSelectComponent extends SelectComponent implements OnInit {
+export class SingleSelectComponent implements OnInit {
   @Input() options: IListItem[] = [];
   @Input() selectedItem: IListItem = null;
 
@@ -22,6 +21,11 @@ export class SingleSelectComponent extends SelectComponent implements OnInit {
   @Output() selectionChange = new EventEmitter<any>();
 
   @Output() search = new EventEmitter<string>();
+
+  public isOpened = false;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
@@ -34,6 +38,10 @@ export class SingleSelectComponent extends SelectComponent implements OnInit {
     if (event.key.startsWith('Arrow')) {
       this.toggleList();
     }
+  }
+
+  toggleList() {
+    this.isOpened = !this.isOpened;
   }
 
   get selectedText() {
@@ -54,12 +62,12 @@ export class SingleSelectComponent extends SelectComponent implements OnInit {
   }
 
   onChange(event) {
-    const {target: {value}} = event;
+    const { target: { value } } = event;
     this.search.emit(value);
   }
 
   onSelect(event) {
-    const {value} = event;
+    const { value } = event;
     const selectedItem = this.options.find((option) => option.value === value);
     const index = this.options.indexOf(selectedItem);
     const currentItem = this.selectedItem;
@@ -84,5 +92,17 @@ export class SingleSelectComponent extends SelectComponent implements OnInit {
       this.selectedItem,
     ];
     this.selectedItem = null;
+  }
+
+  closeList() {
+    if (this.isOpened) {
+      this.isOpened = false;
+    }
+  }
+
+  openList() {
+    if (!this.isOpened) {
+      this.isOpened = true;
+    }
   }
 }

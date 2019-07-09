@@ -1,8 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {Tree} from 'primeng/tree';
-import {toggleMenu} from '../../../animations/toggle-menu';
-import {ITreeNode} from './tree-select.interfaces';
-import {SelectComponent} from '../select.component';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { toggleMenu } from './tree-select.animations';
+import { ITreeNode } from './tree-select.interfaces';
+import { Tree } from 'primeng/tree';
 
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 
@@ -18,7 +17,7 @@ type SelectMode = 'single' | 'multiple' | 'checkbox';
     toggleMenu,
   ],
 })
-export class TreeSelectComponent extends SelectComponent implements OnInit, OnChanges {
+export class TreeSelectComponent implements OnInit, OnChanges {
   @Input() options: ITreeNode[] = [];
 
   @Input() mode: SelectMode = 'single';
@@ -33,9 +32,11 @@ export class TreeSelectComponent extends SelectComponent implements OnInit, OnCh
 
   @Output() selector = new EventEmitter<ITreeNode | ITreeNode[]>();
 
-  @ViewChild('tree', {static: false}) tree: Tree;
+  @ViewChild('tree', { static: false }) tree: Tree;
 
-  private nodes: ITreeNode[] = [];
+  public isOpened = false;
+
+  public nodes: ITreeNode[] = [];
 
   ngOnInit(): void {
     if (this.initialValue) {
@@ -143,7 +144,7 @@ export class TreeSelectComponent extends SelectComponent implements OnInit, OnCh
   }
 
   get rootClass() {
-    return `select select-component ${this.mode} ${this.isOpened ? 'show' : 'hide'}`;
+    return `select-component ${this.mode} ${this.isOpened ? 'show' : 'hide'}`;
   }
 
   get selectedText() {
@@ -157,6 +158,18 @@ export class TreeSelectComponent extends SelectComponent implements OnInit, OnCh
 
   onSelect() {
 
+  }
+
+  openList() {
+    if (!this.isOpened) {
+      this.isOpened = true;
+    }
+  }
+
+  closeList() {
+    if (this.isOpened) {
+      this.isOpened = false;
+    }
   }
 
   copyToClipboard(text: string) {
