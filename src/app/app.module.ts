@@ -7,11 +7,13 @@ import { ToastrModule } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { AppRoutingModule } from './app-routing.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppComponent } from './app.component';
 import { PageComponent } from './_pages/page/page.component';
 import { LoginComponent } from './_pages/login/login.component';
-import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { SidebarComponent } from './_pages/page/sidebar/sidebar.component';
@@ -38,12 +40,19 @@ import { MatIconModule } from '@angular/material';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
-    CollapseModule.forRoot(),
-    ToastrModule.forRoot(),
     HttpClientModule,
     MatProgressSpinnerModule,
     FormsModule,
     MatIconModule,
+    CollapseModule.forRoot(),
+    ToastrModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      }
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -52,4 +61,7 @@ import { MatIconModule } from '@angular/material';
   bootstrap: [AppComponent],
 })
 export class AppModule {
+}
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
