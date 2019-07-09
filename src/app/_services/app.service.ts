@@ -5,17 +5,17 @@ import { Injectable } from '@angular/core';
 })
 export class AppService {
 
-  isSidebarPinned = false;
+  isSidebarPinned = false; // default true
   isSidebarToggeled = false;
 
   constructor() { }
 
   toggleSidebar() {
-    this.isSidebarToggeled = ! this.isSidebarToggeled;
+    this.isSidebarToggeled = !this.isSidebarToggeled;
   }
 
   toggleSidebarPin() {
-    this.isSidebarPinned = ! this.isSidebarPinned;
+    this.isSidebarPinned = !this.isSidebarPinned;
   }
 
   getSidebarStat() {
