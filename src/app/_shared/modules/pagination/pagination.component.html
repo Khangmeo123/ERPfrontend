@@ -2,29 +2,36 @@
   <div class="show-entries">
     <span>Show</span>
     <span class="select-page">
-      <select class="form-control" [(ngModel)]="pagination.pageSize" #pageSize
-              (change)="onSelectPageSize(pageSize.value)">
-      <option selected value="10">10</option>
-      <option value="20">20</option>
-      <option value="50">50</option>
-      <option value="100">100</option>
-    </select>
+      <select class="form-control" [(ngModel)]="pagination.take" #pageSize (change)="onSelectPageSize(pageSize.value)">
+        <option selected value="10">10</option>
+        <option value="20">20</option>
+        <option value="50">50</option>
+        <option value="100">100</option>
+      </select>
     </span>
     <span style="margin-right: 15px">
       entries
     </span>
   </div>
   <div class="previous">
-    <span (click)="onClickFirst()"><mat-icon>first_page</mat-icon></span>
-    <span (click)="onClickPrevious()"><mat-icon>chevron_left</mat-icon></span>
+    <span (click)="onClickFirst()">
+      <mat-icon>first_page</mat-icon>
+    </span>
+    <span (click)="onClickPrevious()">
+      <mat-icon>chevron_left</mat-icon>
+    </span>
   </div>
   <div class="input-text">
     <span>
-      {{indexItem}} / {{ (pagination.totalItems / pagination.pageSize) | ceilMath}}
+      {{indexItem}} / {{ (pagination.totalItems / pagination.take) | ceilMath}}
     </span>
   </div>
   <div class="next">
-    <span (click)="onClickNext()"><mat-icon>chevron_right</mat-icon></span>
-    <span (click)="onClickLast()"><mat-icon>last_page</mat-icon></span>
+    <span (click)="onClickNext()">
+      <mat-icon>chevron_right</mat-icon>
+    </span>
+    <span (click)="onClickLast()">
+      <mat-icon>last_page</mat-icon>
+    </span>
   </div>
 </div>

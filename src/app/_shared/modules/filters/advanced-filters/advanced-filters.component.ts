@@ -18,7 +18,6 @@ export class AdvancedFiltersComponent implements OnInit {
 
   @Input() filter;
   @Input() searchEntity;
-
   @ViewChild('pane', { static: false }) pane;
   @ViewChild('toggler', { static: false }) toggler;
 
@@ -52,7 +51,6 @@ export class AdvancedFiltersComponent implements OnInit {
       this.type = this.types[0];
       this.type = this.types[0];
     }
-
   }
 
 
@@ -125,14 +123,15 @@ export class AdvancedFiltersComponent implements OnInit {
       if (this.type.code === code) {
         if (event && event.target) {
           this.filter[code] = event.target.value;
+          this.valueInput = event.target.value;
         } else if (event) {
           this.filter[code] = event;
+          this.valueInput = event;
         }
       } else {
         this.filter[code] = null;
       }
     });
-    this.valueInput = event.target.value;
     this.changeFilter.emit();
   }
 

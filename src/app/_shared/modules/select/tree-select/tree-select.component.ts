@@ -1,7 +1,8 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { toggleMenu } from './tree-select.animations';
+
 import { ITreeNode } from './tree-select.interfaces';
 import { Tree } from 'primeng/tree';
+import { toggleMenu } from 'src/app/_shared/animations/toggle-menu';
 
 type SelectMode = 'single' | 'multiple' | 'checkbox';
 

@@ -3,7 +3,6 @@
 @import "~bootstrap/scss/variables";
 
 .advanced-filter {
-  margin-left: 20px;
   position: relative;
   display: inline-table;
   button:focus {
@@ -65,10 +64,6 @@
   }
 
   .filter-pane {
-    width: 16em;
-    border: 1px solid #a6a6a6;
-    //border-radius: $border-radius;
-    position: absolute;
     left: 0;
     right: auto;
   }
@@ -131,6 +126,14 @@
     input.ui-inputtext:focus{
       border-color: #cecece;
       border-right: 0;
+    }
+
+    .ui-datepicker {
+      min-width: 20em !important;
+
+      table td > span, a {
+        padding: 0.1em !important;
+      }
     }
 
   }

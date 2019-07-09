@@ -28,9 +28,12 @@ storiesOf('Pagination', module)
     props: {
       pagination: {
         pageNumber: 1,
-        pageSize: 50,
+        take: 50,
         totalItems: 20,
         skip: 0,
       },
+      event: (event) => {
+        console.log(event)
+      }
     },
   }));
