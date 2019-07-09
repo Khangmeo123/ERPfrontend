@@ -92,7 +92,7 @@
       height: calc(100vh - #{$navbar-height} + 1px) !important;
 
       ul {
-        display: flex;
+        //display: flex;
         flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
