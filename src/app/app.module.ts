@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
@@ -42,6 +42,7 @@ import { MatIconModule } from '@angular/material';
     ToastrModule.forRoot(),
     HttpClientModule,
     MatProgressSpinnerModule,
+    FormsModule,
     MatIconModule,
   ],
   providers: [
