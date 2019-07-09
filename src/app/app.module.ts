@@ -21,6 +21,7 @@ import { SpinnerComponent } from './_shared/components/spinner/spinner.component
 import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemsidebar.component';
 import { MatIconModule } from '@angular/material';
 import {DropdownModule} from 'primeng/dropdown';
+import {PipeModule} from './_shared/pipe/pipe.module';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import {DropdownModule} from 'primeng/dropdown';
     FooterComponent,
     SpinnerComponent,
     ItemSidebarComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -46,6 +48,7 @@ import {DropdownModule} from 'primeng/dropdown';
     MatIconModule,
     DropdownModule,
     FormsModule,
+    PipeModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
