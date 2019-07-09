@@ -1,0 +1,57 @@
+<ul *ngIf="item.iconName == 1 " class="menu-items"
+    [ngStyle]="{'padding-left': (depth * 12) + 'px','display': (!isShowOut && (item.disabled && item.disabled == true)) ? 'block': 'none'}"
+    (click)="onItemSelected(item, $index)" style="background-color: #ffffff">
+    <!-- [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}"> -->
+    <li style="display: flex">
+        <a *ngIf="(item.children && item.children.length > 0)" href="#" routerLink="/" routerLinkActive="active">
+            <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
+            <span >{{item.displayName}}</span>
+        </a>
+
+        <a *ngIf="(!item.children || item.children.length == 0)" href="#" routerLink="{{item.route}}"
+            routerLinkActive="active">
+            <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
+            <span >{{item.displayName}}</span>
+        </a>
+
+        <span [ngStyle]="{'display': (item.children && item.children.length > 0) ? 'block': 'none' }"><i class="fas"
+                [ngClass]="!expanded ? 'fa-caret-down' : 'fa-caret-up'"></i></span>
+    </li>
+
+</ul>
+
+<ul *ngIf="item.iconName !== 1" class="menu-items"
+    [ngStyle]="{'padding-left': (depth * 12) + 'px','display': (!isShowOut) ? 'block': 'none'}"
+    (click)="onItemSelected(item, $index)" style="background-color: #ffffff">
+    <!-- [ngClass]="{'active': item.route ? router.isActive(item.route, true): false, 'expanded': expanded}"> -->
+    <li style="display: flex">
+        <a *ngIf="(item.children && item.children.length > 0)" href="#" routerLink="/" routerLinkActive="active">
+            <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
+            <span >{{item.displayName}}</span>
+        </a>
+
+        <a *ngIf="(!item.children || item.children.length == 0)" href="#" routerLink="{{item.route}}"
+            routerLinkActive="active">
+            <i [ngStyle]="{'display': (item.iconName  == 1) ? 'block': 'none' }" class="fa fa-tv"></i>
+            <span >{{item.displayName}}</span>
+        </a>
+
+        <span [ngStyle]="{'display': (item.children && item.children.length > 0) ? 'block': 'none' }"><i class="fas"
+                [ngClass]="!expanded ? 'fa-caret-down' : 'fa-caret-up'"></i></span>
+    </li>
+
+</ul>
+
+
+<ul class="menu-items menu-block" *ngIf="isShowOut">
+    <li>
+        <a href="#" routerLink="/home" routerLinkActive="active">
+            <i class="fa fa-tv"></i>
+        </a>
+    </li>
+</ul>
+
+<div *ngIf="expanded && !isShowOut" [@toggleMenuSideBar]>
+    <app-item-sidebar *ngFor="let child of item.children" [isShowChild]="isShowOut" [item]="child" [depth]="depth + 1">
+    </app-item-sidebar>
+</div>

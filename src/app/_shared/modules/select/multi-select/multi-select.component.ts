@@ -1,6 +1,5 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from '@angular/core';
-import {IListItem} from '../select.interfaces';
-import {SelectComponent} from '../select.component';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
+import { IListItem } from '../select.interfaces';
 
 @Component({
   selector: 'app-multi-select',
@@ -11,7 +10,7 @@ import {SelectComponent} from '../select.component';
   ],
   encapsulation: ViewEncapsulation.None,
 })
-export class MultiSelectComponent extends SelectComponent implements OnInit {
+export class MultiSelectComponent implements OnInit {
   @Input() options: IListItem[] = [];
   @Input() values: any[] = [];
 
@@ -22,6 +21,11 @@ export class MultiSelectComponent extends SelectComponent implements OnInit {
   @Output() selectionChange = new EventEmitter<any>();
 
   @Output() search = new EventEmitter<string>();
+
+  public isOpened = false;
+
+  constructor() {
+  }
 
   ngOnInit(): void {
   }
@@ -34,6 +38,10 @@ export class MultiSelectComponent extends SelectComponent implements OnInit {
     if (event.key.startsWith('Arrow')) {
       this.toggleList();
     }
+  }
+
+  toggleList() {
+    this.isOpened = !this.isOpened;
   }
 
   get selectedText() {
@@ -51,11 +59,11 @@ export class MultiSelectComponent extends SelectComponent implements OnInit {
   }
 
   onChange(event) {
-    const {target: {value}} = event;
+    const { target: { value } } = event;
     this.search.emit(value);
   }
 
-  onSelect({value}) {
+  onSelect({ value }) {
     const selectedItem = this.options.find((option) => option.value === value);
     const index = this.options.indexOf(selectedItem);
     this.values = [
@@ -69,7 +77,7 @@ export class MultiSelectComponent extends SelectComponent implements OnInit {
   }
 
   onUnselect(event) {
-    const {target: {value}} = event;
+    const { target: { value } } = event;
     const unselectedItem = this.values.find((option) => option.value === value);
     const index = this.values.indexOf(unselectedItem);
     this.values = [
@@ -80,5 +88,17 @@ export class MultiSelectComponent extends SelectComponent implements OnInit {
       ...this.options,
       unselectedItem,
     ];
+  }
+
+  closeList() {
+    if (this.isOpened) {
+      this.isOpened = false;
+    }
+  }
+
+  openList() {
+    if (!this.isOpened) {
+      this.isOpened = true;
+    }
   }
 }

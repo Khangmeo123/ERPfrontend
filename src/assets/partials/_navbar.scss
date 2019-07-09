@@ -122,7 +122,9 @@
 
     .nav-link {
       padding: 0;
-
+      mat-icon {
+        padding-top: 7px;
+      }
       i {
         font-size: 1.1rem;
         width: 40px;
@@ -181,12 +183,20 @@
 
         ul {
 
-          margin-left: auto;
+          margin-left: 30%;
           flex-wrap: nowrap;
 
           li {
             padding: 0;
 
+            .user-profile {
+              margin-top: 10px;
+              display: flex; 
+              color: #ffffff;
+              i {
+                margin-top: 4px;
+              }
+            }
             .nav-link {
 
               .link-text {
