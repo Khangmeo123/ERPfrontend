@@ -66,6 +66,11 @@ export class SidebarComponent implements OnInit, OnChanges {
           route: '/business-group/storybook',
         },
         {
+          displayName: 'Tài khoản ngân hàng',
+          iconName: 0,
+          route: '/business-group/bank-account',
+        },
+        {
           displayName: 'Biểu thuế - HTTK',
           iconName: 0,
           route: '/business-group/tariff-coa',

@@ -32,10 +32,11 @@ import { ListEmployeeComponent } from './_pages/employee/list-employee/list-empl
 import { DetailEmployeeComponent } from './_pages/employee/detail-employee/detail-employee.component';
 import { ListCustomerComponent } from './_pages/customer/list-customer/list-customer.component';
 import { DetailCustomerComponent } from './_pages/customer/detail-customer/detail-customer.component';
+import { BankAccountComponent } from './_pages/bank-account/bank-account.component';
 
 
 @NgModule({
-  declarations: [BusinessGroupComponent, UnitComponent, ProductComponent, ListProductComponent, BankComponent, AssetComponent, EmployeeComponent, CustomerComponent, SupplierComponent, CurrencyComponent, StorybookComponent, CostCenterComponent, FiscalYearComponent, AccountantPeriodComponent, VoucherComponent, PaymentMethodComponent, PaymentTermComponent, DivisionComponent, DeparmentComponent, DetailProductComponent, ListSupplierComponent, DetailSupplierComponent, ListEmployeeComponent, DetailEmployeeComponent, ListCustomerComponent, DetailCustomerComponent],
+  declarations: [BusinessGroupComponent, UnitComponent, ProductComponent, ListProductComponent, BankComponent, AssetComponent, EmployeeComponent, CustomerComponent, SupplierComponent, CurrencyComponent, StorybookComponent, CostCenterComponent, FiscalYearComponent, AccountantPeriodComponent, VoucherComponent, PaymentMethodComponent, PaymentTermComponent, DivisionComponent, DeparmentComponent, DetailProductComponent, ListSupplierComponent, DetailSupplierComponent, ListEmployeeComponent, DetailEmployeeComponent, ListCustomerComponent, DetailCustomerComponent, BankAccountComponent],
   imports: [
     BusinessGroupRoutingModule,
     CommonModule,
