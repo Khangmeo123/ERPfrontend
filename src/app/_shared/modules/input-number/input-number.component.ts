@@ -1,6 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {generateRandomString} from '../../../_helpers/string';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { generateRandomString } from '../../../_helpers/string';
 
 @Component({
   selector: 'app-input-number',
@@ -23,6 +23,8 @@ export class InputNumberComponent implements OnInit {
   @Input() allowNegative = true;
 
   @Input() inputId = generateRandomString(10);
+
+  @Input() placeHolder: string = "ngày/tháng/năm";
 
   @Output() numberChange = new EventEmitter();
 

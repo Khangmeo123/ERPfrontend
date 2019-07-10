@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
-import {MomentDateAdapter} from '@angular/material-moment-adapter';
-import {DEFAULT_DATE_FORMAT} from './date-picker.formats';
-import {FormControl} from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
+import { MomentDateAdapter } from '@angular/material-moment-adapter';
+import { DEFAULT_DATE_FORMAT } from './date-picker.formats';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-date-picker',
@@ -32,9 +32,11 @@ export class DatePickerComponent implements OnInit {
 
   @Input() inputReadOnly = false;
 
+  @Input() placeHolder: string;
+
   @Output() valueChange = new EventEmitter();
 
-  @ViewChild('matDatepickerToggle', {static: false}) matDatepickerToggle;
+  @ViewChild('matDatepickerToggle', { static: false }) matDatepickerToggle;
 
   constructor() {
   }
@@ -67,7 +69,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   onKeyDown(event) {
-    const {target} = event;
+    const { target } = event;
     if (event.key === 'Control') {
       this.checkCtrl = true;
     }
