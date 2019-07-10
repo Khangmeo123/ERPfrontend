@@ -48,13 +48,13 @@ export class BankComponent implements OnInit {
       id: 1,
       name: 'Thanh Tùng',
       des: 'tungpt@duyhung.vn',
-    },{
+    }, {
       id: 1,
       name: 'Thanh Tùng',
       des: 'tungpt@duyhung.vn',
     }
   ]
-  
+
   constructor() {
   }
 
@@ -66,8 +66,8 @@ export class BankComponent implements OnInit {
     this.isSaveBookMark = !this.isSaveBookMark;
   }
 
-  paginationOut() {
-    
+  paginationOut(event) {
+
   }
 
 }
