@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IdbService } from './_services/idb.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -8,7 +9,8 @@ import { IdbService } from './_services/idb.service';
 })
 export class AppComponent {
   title = 'CodeBase';
-  constructor(private idbService: IdbService) {
+  constructor(private idbService: IdbService, private translate: TranslateService) {
+    translate.setDefaultLang('vi');
     // this.idbService.connectToIDB().then(res => {
     //   this.idbService.getAllKey('objectStoreValue').then(result => {
     //     if (typeof Worker !== 'undefined') {
