@@ -48,7 +48,7 @@ export class SidebarComponent implements OnInit, OnChanges {
         {
           displayName: 'Quản lý khách hàng',
           iconName: 0,
-          route: '/business-group/cutomer',
+          route: '/business-group/customer',
         },
         {
           displayName: 'Quản lý nhà cung cấp',
