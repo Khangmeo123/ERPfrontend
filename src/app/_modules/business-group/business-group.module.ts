@@ -1,3 +1,4 @@
+import { BusinessGroupRoutingModule } from './business-group-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -36,6 +37,7 @@ import { DetailCustomerComponent } from './_pages/customer/detail-customer/detai
 @NgModule({
   declarations: [BusinessGroupComponent, UnitComponent, ProductComponent, ListProductComponent, BankComponent, AssetComponent, EmployeeComponent, CustomerComponent, SupplierComponent, CurrencyComponent, StorybookComponent, CostCenterComponent, FiscalYearComponent, AccountantPeriodComponent, VoucherComponent, PaymentMethodComponent, PaymentTermComponent, DivisionComponent, DeparmentComponent, DetailProductComponent, ListSupplierComponent, DetailSupplierComponent, ListEmployeeComponent, DetailEmployeeComponent, ListCustomerComponent, DetailCustomerComponent],
   imports: [
+    BusinessGroupRoutingModule,
     CommonModule,
     HttpClientModule,
     MatTableModule,

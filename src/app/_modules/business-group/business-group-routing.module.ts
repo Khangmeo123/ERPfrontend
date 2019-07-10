@@ -35,6 +35,7 @@ const routes: Routes = [
           { path: 'list-product', component: ListProductComponent },
           { path: 'detail-product', component: DetailProductComponent },
           { path: 'unit', component: UnitComponent },
+          { path: '', redirectTo: 'list-product', pathMatch: 'full' }
         ],
       },
       { path: 'asset', component: AssetComponent },
@@ -42,18 +43,21 @@ const routes: Routes = [
         path: 'employee', component: EmployeeComponent, children: [
           { path: 'list-employee', component: ListEmployeeComponent },
           { path: 'detail-employee', component: DetailEmployeeComponent },
+          { path: '', redirectTo: 'list-employee', pathMatch: 'full' },
         ]
       },
       {
         path: 'customer', component: CustomerComponent, children: [
           { path: 'list-customer', component: ListCustomerComponent },
           { path: 'detail-customer', component: DetailCustomerComponent },
+          { path: '', redirectTo: 'list-customer', pathMatch: 'full' },
         ]
       },
       {
         path: 'supplier', component: SupplierComponent, children: [
           { path: 'list-supplier', component: ListSupplierComponent },
           { path: 'detail-supplier', component: DetailSupplierComponent },
+          { path: '', redirectTo: 'list-supplier', pathMatch: 'full' },
         ],
       },
       { path: 'currency', component: CurrencyComponent },

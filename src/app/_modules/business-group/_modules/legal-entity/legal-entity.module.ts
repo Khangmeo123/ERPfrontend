@@ -1,3 +1,4 @@
+import { LegalEntityRoutingModule } from './legal-entity-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerGroupComponent } from './_page/customer-group/customer-group.component';
@@ -23,7 +24,8 @@ import { DetailCompanyPositionComponent } from './_page/company-position/detail-
 @NgModule({
   declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent, SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent, DetailCustomerGroupComponent, ConfigureSupplierGroupComponent, ListSupplierGroupComponent, DetailSupplierGroupComponent, ConfigureProductGroupComponent, ListProductGroupComponent, DetailProductGroupComponent, ConfigureCompanyPositionComponent, ListCompanyPositionComponent, DetailCompanyPositionComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    LegalEntityRoutingModule
   ]
 })
 export class LegalEntityModule { }

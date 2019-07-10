@@ -10,7 +10,7 @@ const routes: Routes = [
     path: '', children: [
       { path: 'coa', component: CoaComponent },
       { path: 'excise-tariff', component: ExciseTariffComponent },
-      { path: 'resoure_tariff', component: ResourceTariffComponent },
+      { path: 'resoure-tariff', component: ResourceTariffComponent },
     ]
   }
 ];
