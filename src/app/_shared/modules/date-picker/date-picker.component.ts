@@ -56,7 +56,6 @@ export class DatePickerComponent implements OnInit {
   }
 
   onDateChange(event) {
-    console.log(event);
     this.value = event.targetElement.value;
     this.valueChange.emit(this.value);
   }
