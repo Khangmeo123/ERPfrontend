@@ -6,7 +6,7 @@
                    (headClick)="toggleList($event)"></app-select-head>
   <app-select-body [@toggleMenu]="listState">
     <app-select-search (search)="search.emit($event)"></app-select-search>
-    <ng-template [ngIf]="">
+    <ng-template [ngIf]="selectedList.length">
       <div class="py-2 pl-4 d-flex align-items-center border-bottom">
         <span class="h4 font-weight-bold">
           Selected

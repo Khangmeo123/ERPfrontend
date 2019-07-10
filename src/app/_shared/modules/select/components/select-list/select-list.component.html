@@ -3,10 +3,11 @@
     <li *ngFor="let item of dataSource; index as i" class="dropdown-item d-flex align-items-center"
         role="menuitem"
         [tabindex]="-1"
+        (click)="onChange(item, i)"
         (keypress)="liPress($event, item, i)"
         (keydown)="keyDown($event)">
-      <input type="checkbox" checked (change)="onChange(item, i)" *ngIf="selected">
-      <span class="label flex-grow-1" (click)="onChange(item, i)" role="button">
+      <input type="checkbox" checked *ngIf="selected">
+      <span class="label flex-grow-1" role="button">
         {{item[key]}}
       </span>
       <span class="pi pi-copy" [tooltip]="copyTooltip" triggers="click:mouseleave" (click)="copy($event)"

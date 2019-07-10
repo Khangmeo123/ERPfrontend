@@ -3,7 +3,7 @@ import { FilterType } from '../../../models/filters/FilterType';
 import { DateFilter } from '../../../models/filters/DateFilter';
 import { TextFilter } from '../../../models/filters/TextFilter';
 import { NumberFilter } from '../../../models/filters/NumberFilter';
-import { toggleMenu } from '../../../animations/toggle-menu';
+import { toggleMenu } from '../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-advanced-filters',
@@ -26,7 +26,6 @@ export class AdvancedFiltersComponent implements OnInit {
   protected types: FilterType[] = [];
 
   protected isOpened = false;
-  public listValueFilter: Array<any> = [];
   public typeInput: string = '';
   public valueInput: any;
   type = null;
@@ -103,14 +102,6 @@ export class AdvancedFiltersComponent implements OnInit {
     });
   }
 
-  get selectedType() {
-    return this.type.code;
-  }
-
-  set selectedType(code) {
-    this.type = this.types.find((type) => type.code === code);
-  }
-
   get filterTypeSign() {
     if (this.type) {
       return this.type.sign;
@@ -137,7 +128,6 @@ export class AdvancedFiltersComponent implements OnInit {
 
   onSelectType(item) {
     this.type = this.types.find((type) => type.code === item.value);
-    const keys = Object.keys(this.filter);
     for (const property in this.filter) {
       if (this.filter.hasOwnProperty(property)) {
         this.filter[property] = null;
