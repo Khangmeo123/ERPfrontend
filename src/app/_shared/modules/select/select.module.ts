@@ -1,35 +1,46 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {MatProgressSpinnerModule} from '@angular/material';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {TreeSelectComponent} from './components/tree-select/tree-select.component';
+import {SelectHeadComponent} from './components/select-head/select-head.component';
+import {BsDropdownModule, TooltipModule} from 'ngx-bootstrap';
+import {SelectBodyComponent} from './components/select-body/select-body.component';
+import {SelectComponent} from './components/select/select.component';
 import {TreeModule} from 'primeng/tree';
-import {ListboxModule} from 'primeng/listbox';
-import {BsDropdownModule} from 'ngx-bootstrap/dropdown';
+import {SelectListComponent} from './components/select-list/select-list.component';
+import { SingleSelectComponent } from './components/single-select/single-select.component';
+import { MultiSelectComponent } from './components/multi-select/multi-select.component';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SelectSpinnerComponent } from './components/select-spinner/select-spinner.component';
+import { SelectSearchComponent } from './components/select-search/select-search.component';
+import {MatIconModule} from '@angular/material/icon';
 import {ClickOutsideModule} from 'ng-click-outside';
-import {MultiSelectComponent} from './multi-select/multi-select.component';
-import {TreeSelectComponent} from './tree-select/tree-select.component';
-import {SingleSelectComponent} from './single-select/single-select.component';
 
 @NgModule({
   declarations: [
     TreeSelectComponent,
-    MultiSelectComponent,
+    SelectHeadComponent,
+    SelectBodyComponent,
+    SelectComponent,
+    SelectListComponent,
     SingleSelectComponent,
+    MultiSelectComponent,
+    SelectSpinnerComponent,
+    SelectSearchComponent,
   ],
   imports: [
     CommonModule,
-    MatProgressSpinnerModule,
-    TreeModule,
-    ListboxModule,
-    BrowserAnimationsModule,
-    ClickOutsideModule,
-    MatProgressSpinnerModule,
     BsDropdownModule.forRoot(),
+    TreeModule,
+    TooltipModule.forRoot(),
+    MatProgressSpinnerModule,
+    MatIconModule,
+    ClickOutsideModule,
   ],
   exports: [
     TreeSelectComponent,
-    MultiSelectComponent,
     SingleSelectComponent,
+    MultiSelectComponent,
   ],
 })
-export class SelectModule {}
+export class SelectModule {
+}
