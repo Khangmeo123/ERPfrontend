@@ -32,7 +32,7 @@ export class DatePickerComponent implements OnInit {
 
   @Input() inputReadOnly = false;
 
-  @Input() placeHolder: string;
+  @Input() placeHolder: string = 'ngày/tháng/năm';
 
   @Output() valueChange = new EventEmitter();
 

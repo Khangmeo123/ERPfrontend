@@ -24,7 +24,7 @@ export class InputNumberComponent implements OnInit {
 
   @Input() inputId = generateRandomString(10);
 
-  @Input() placeHolder: string = "ngày/tháng/năm";
+  @Input() placeHolder: string = '';
 
   @Output() numberChange = new EventEmitter();
 
