@@ -3,7 +3,7 @@ import { animate, style, transition, trigger, state, group } from '@angular/anim
 export const toggleMenuSideBar = trigger('toggleMenuSideBar', [
   transition(':enter', [
     style({ transform: 'translateY(100%)', opacity: 0, position: 'absolute' }),
-    animate('500ms', style({ transform: 'translateY(0)', opacity: 1, position: 'relative' }))
+    animate('300ms', style({ transform: 'translateY(0)', opacity: 1, position: 'relative' }))
   ]),
   transition(':leave', [
     style({ transform: 'translateY(0)', opacity: 1, position: 'relative' }),
