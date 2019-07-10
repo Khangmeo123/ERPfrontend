@@ -1,6 +1,9 @@
-<input type="number"
+<input type="text"
        class="form-control"
+       autocomplete="off"
+       [id]="inputId"
        (keyup)="onKeyUp($event)"
        (keydown)="onKeyDown($event)"
-       [value]="control.value"
-       (change)="onChange($event)">
+       (input)="onInput($event)"
+       [value]="value"
+       (change)="onChange()">

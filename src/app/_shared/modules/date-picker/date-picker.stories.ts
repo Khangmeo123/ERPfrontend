@@ -15,11 +15,17 @@ import {dateField} from '../../../_helpers';
         <div class="col-12">
           <form [formGroup]="form">
             <app-date-picker [control]="date"></app-date-picker>
-            Value: {{date.value}}
           </form>
         </div>
-        <div class="col-12 alert alert-danger" *ngIf="date.errors?.invalidDate">
-          {{date.errors?.invalidDate}}
+        <div class="col-12 mt-2">
+          <span>
+            Value: {{date.value}}
+          </span>
+        </div>
+        <div class="col-12 mt-2" *ngIf="date.errors?.invalidDate">
+          <div class="alert alert-danger">
+            {{date.errors?.invalidDate}}
+          </div>
         </div>
       </div>
     </div>`,

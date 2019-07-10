@@ -1,5 +1,6 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl} from '@angular/forms';
+import {generateRandomString} from '../../../_helpers/string';
 
 @Component({
   selector: 'app-input-number',
@@ -21,17 +22,39 @@ export class InputNumberComponent implements OnInit {
 
   @Input() allowNegative = true;
 
+  @Input() inputId = generateRandomString(10);
+
   @Output() numberChange = new EventEmitter();
 
   checkControl = false;
 
   get value() {
-    console.log(this.control.value);
-    return this.control.value;
+    const value: number = this.control.value;
+    if (typeof value === 'number') {
+      return value.toLocaleString('vi', {
+        maximumFractionDigits: this.precision,
+      });
+    }
+    return null;
   }
 
   set value(value) {
-    this.control.setValue(value);
+    if (value === '' || value === null) {
+      this.control.setValue(null);
+      return;
+    }
+    let str = value.split(this.thousandSeparator).join('');
+    str = str.split(this.decimalSeparator).join('.');
+    const isNegative = str[0] === '-';
+    if (str === '-') {
+      this.control.setValue('-');
+      return;
+    }
+    if (isNegative) {
+      str = str.substr(1);
+    }
+    const result = this.allowNegative ? parseFloat(str) : parseInt(str, 10);
+    this.control.setValue(isNegative ? -result : result);
   }
 
   ngOnInit(): void {
@@ -47,17 +70,40 @@ export class InputNumberComponent implements OnInit {
     if (event.key === 'Control') {
       this.checkControl = true;
     }
-    if (!this.checkControl) {
-
+    if (this.checkControl) {
+      return;
+    }
+    if (event.key.length === 1) {
+      if (event.key === this.decimalSeparator) {
+        if (this.onlyInteger || event.target.value.indexOf(this.decimalSeparator) >= 0) {
+          // Not allow enter decimal separator twice or in integer mode
+          return event.preventDefault();
+        }
+        return;
+      }
+      if (!event.key.match(/[0-9]/)) {
+        if (event.key === '-') {
+          if (!this.allowNegative || event.target.value.indexOf('-') >= 0) {
+            // Not allow negative number
+            return event.preventDefault();
+          }
+          return;
+        }
+        return event.preventDefault();
+      }
+    }
+    if (event.key === 'ArrowUp') {
+      this.control.setValue(this.control.value + 1);
+    } else if (event.key === 'ArrowDown') {
+      this.control.setValue(this.control.value - 1);
     }
   }
 
-  onChange(event) {
-    console.log('change');
-    console.log(event);
+  onChange() {
+    this.numberChange.emit(this.control.value);
   }
 
   onInput(event) {
-
+    this.value = event.target.value;
   }
 }
