@@ -12,9 +12,9 @@ import {generateRandomString} from '../../../_helpers/string';
 export class InputNumberComponent implements OnInit {
   @Input() control: FormControl = new FormControl();
 
-  @Input() thousandSeparator = '.';
+  @Input() thousandSeparator = ',';
 
-  @Input() decimalSeparator = ',';
+  @Input() decimalSeparator = '.';
 
   @Input() precision = 4;
 
@@ -31,9 +31,12 @@ export class InputNumberComponent implements OnInit {
   get value() {
     const value: number = this.control.value;
     if (typeof value === 'number') {
-      return value.toLocaleString('vi', {
-        maximumFractionDigits: this.precision,
-      });
+      const [integerPart, decimalPart = null] = value.toString().split('.');
+      let result = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, this.thousandSeparator);
+      if (decimalPart) {
+        result += `${this.decimalSeparator}${decimalPart}`;
+      }
+      return result;
     }
     return null;
   }
@@ -89,6 +92,9 @@ export class InputNumberComponent implements OnInit {
           }
           return;
         }
+        return event.preventDefault();
+      }
+      if (event.target.value.lastIndexOf(this.decimalSeparator) + 1 + this.precision === event.target.value.length) {
         return event.preventDefault();
       }
     }
