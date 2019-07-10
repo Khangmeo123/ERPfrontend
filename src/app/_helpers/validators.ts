@@ -1,10 +1,9 @@
-import {AbstractControl} from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 
 export function requiredField(c: AbstractControl) {
   return (c.value == null || c.value.length === 0) ? {
-    invalidUsername: 'Name must be requried!',
-    message: 'Name must be requried!',
+    invalidUsername: 'Name must be required!',
   } : null;
 }
 
