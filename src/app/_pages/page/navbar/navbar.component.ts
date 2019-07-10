@@ -1,16 +1,18 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {AppService} from '../../../_services';
 import {SelectItem} from 'primeng/api';
+import { toggleMenu } from 'src/app/_shared/animations/toggle-menu';
 
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  styleUrls: ['./navbar.component.scss'],
+  animations: [toggleMenu]
 })
 export class NavbarComponent implements OnInit {
   language: Array<any> = [];
-  private languageSelected: string = 'flag-vn';
+  languageSelected: string = 'flag-vn';
   isToggleMenu = false;
   @Output() changeToggle = new EventEmitter();
 
@@ -25,6 +27,7 @@ export class NavbarComponent implements OnInit {
   isToggle = false;
   isLogout = false;
   isToggleFlags = false;
+  isOpened = false;
 
   ngOnInit() {
 
@@ -32,11 +35,10 @@ export class NavbarComponent implements OnInit {
 
   onToggle() {
     this.isToggle = !this.isToggle;
-    console.log('onToggle', this.isToggle);
   }
 
   onToggleFlag() {
-    this.isToggleFlags = !this.isToggleFlags;
+    this.isToggleFlags = !this.isToggleFlags;    
   }
 
   onClickChangeLanguage(item) {
@@ -47,6 +49,28 @@ export class NavbarComponent implements OnInit {
 
   onClickLogOut(event) {
     this.isLogout = !this.isLogout;
+  }
+
+  closeDropdown() {
+    if (this.isToggleFlags) {
+      this.isToggleFlags = false;
+    }
+
+  }
+
+  closeDropMenu() {
+    if (this.isToggle) {
+      this.isToggle = false;
+    }
+
+  }
+
+  get listState() {
+    return this.isToggleFlags ? 'opened' : 'closed';
+  }
+
+  get listStateMenu() {
+    return this.isToggle ? 'opened' : 'closed';
   }
 
   toggleSidebarPin() {

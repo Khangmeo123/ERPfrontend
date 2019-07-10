@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, HostListener, ElementRef, OnChanges } from '@angular/core';
 import { ItemSidebar } from './itemsidebar/itemsidebar.entity';
 import { AppService, BookmarkService } from 'src/app/_services';
-import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarLeft } from './sidebar.animation';
+import { toggleMenuSideBar, toggleMenuNavbar, toggleMenuNavbarLeft } from '../../../_shared/animations/sidebar.animation';
 
 @Component({
   selector: 'app-sidebar',
@@ -180,7 +180,6 @@ export class SidebarComponent implements OnInit, OnChanges {
       this.isShowChil = this.toggleMenu;
     }
     this.waitWidth();
-    console.log('ngOnChanges', channges)
 
   }
 
@@ -199,7 +198,7 @@ export class SidebarComponent implements OnInit, OnChanges {
   }
 
   onClickBookmark() {
-    let element = document.querySelector('.menu-bookmark-line');
+    const element = document.querySelector('.menu-bookmark-line');
     this.length = this.listBookMark.length;
     this.isShowBookMark = !this.isShowBookMark;
     if (this.isShowBookMark) {
