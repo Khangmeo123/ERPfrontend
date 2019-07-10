@@ -1,0 +1,17 @@
+{
+	"bank": {
+		"content": {
+			"add_item": "",
+			"table": {
+				"bank_description": "",
+				"bank_id": "",
+				"bank_name": ""
+			},
+			"upload_excel": "",
+			"xuat_excel": ""
+		},
+		"header": {
+			"title": ""
+		}
+	}
+}

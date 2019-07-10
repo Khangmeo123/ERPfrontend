@@ -92,7 +92,8 @@ body {
     }
 
     input {
-      min-width: 388px !important;
+      min-width: 200px !important;
+      max-width: 450px;
     }
   }
   main {

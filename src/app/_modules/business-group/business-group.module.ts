@@ -2,7 +2,7 @@ import { BusinessGroupRoutingModule } from './business-group-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatTableModule } from '@angular/material';
+import { MatTableModule, MatIconModule } from '@angular/material';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 // Import component:
@@ -32,6 +32,10 @@ import { ListEmployeeComponent } from './_pages/employee/list-employee/list-empl
 import { DetailEmployeeComponent } from './_pages/employee/detail-employee/detail-employee.component';
 import { ListCustomerComponent } from './_pages/customer/list-customer/list-customer.component';
 import { DetailCustomerComponent } from './_pages/customer/detail-customer/detail-customer.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableModule } from 'primeng/table';
+import {FiltersModule} from '../../_shared/modules/filters/filters.module';
+import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { BankAccountComponent } from './_pages/bank-account/bank-account.component';
 
 
@@ -44,6 +48,11 @@ import { BankAccountComponent } from './_pages/bank-account/bank-account.compone
     MatTableModule,
     ReactiveFormsModule,
     FormsModule,
+    TranslateModule.forChild(),
+    MatIconModule,
+    TableModule,
+    FiltersModule,
+    PaginationModule,
   ]
 })
 export class BusinessgroupModule { }

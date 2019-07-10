@@ -1,7 +1,7 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AppService } from '../../../_services';
-import { toggleMenu } from 'src/app/_shared/animations/toggle-menu';
+import { toggleMenu } from 'src/app/_shared/animations/toggleMenu';
 
 interface LanguageEntity {
   label: string;

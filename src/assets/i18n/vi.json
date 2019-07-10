@@ -1,0 +1,17 @@
+{
+	"bank": {
+		"content": {
+			"add_item": "Thêm mới",
+			"table": {
+				"bank_description": "Mô tả",
+				"bank_id": "Mã ngân hàng",
+				"bank_name": "Tên ngân hàng"
+			},
+			"upload_excel": "Nhập hàng loạt",
+			"xuat_excel": "Xuất Excel"
+		},
+		"header": {
+			"title": "Danh sách ngân hàng"
+		}
+	}
+}

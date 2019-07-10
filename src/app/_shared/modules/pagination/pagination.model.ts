@@ -4,7 +4,7 @@ export class PaginationModel {
   take: number;
   skip: number;
 
-  constructor(event) {
+  constructor(event?) {
     if (event !== null && event !== undefined) {
       this.pageNumber = event.pageNumber !== null ? event.pageNumber : 1;
       this.take = event.pageSize !== null ? event.pageSize : 10;
