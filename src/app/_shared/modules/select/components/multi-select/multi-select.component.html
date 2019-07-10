@@ -1,0 +1,33 @@
+<app-select [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
+  <app-select-head [label]="selectedText"
+                   (openList)="openList($event)"
+                   (closeList)="closeList($event)"
+                   (toggleList)="toggleList($event)"
+                   (headClick)="toggleList($event)"></app-select-head>
+  <app-select-body [@toggleMenu]="listState">
+    <app-select-search (search)="search.emit($event)"></app-select-search>
+    <ng-template [ngIf]="selectedList.length">
+      <div class="py-2 pl-4 d-flex align-items-center border-bottom">
+        <span class="h4 font-weight-bold">
+          Selected
+        </span>
+      </div>
+      <app-select-list [dataSource]="selectedList"
+                       (selectionChange)="unselect($event)"
+                       selected="true"
+                       [key]="key"
+      ></app-select-list>
+    </ng-template>
+    <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
+    <ng-template #notLoading>
+      <ng-template [ngIf]="list.length">
+        <div class="py-2 pl-4 d-flex align-items-center border-bottom">
+        <span class="h4 font-weight-bold">
+          Available
+        </span>
+        </div>
+        <app-select-list [dataSource]="list" (selectionChange)="select($event)"></app-select-list>
+      </ng-template>
+    </ng-template>
+  </app-select-body>
+</app-select>

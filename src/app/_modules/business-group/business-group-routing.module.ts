@@ -25,6 +25,7 @@ import { DetailSupplierComponent } from './_pages/supplier/detail-supplier/detai
 import { ListEmployeeComponent } from './_pages/employee/list-employee/list-employee.component';
 import { DetailEmployeeComponent } from './_pages/employee/detail-employee/detail-employee.component';
 import { DetailCustomerComponent } from './_pages/customer/detail-customer/detail-customer.component';
+import { BankAccountComponent } from './_pages/bank-account/bank-account.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,7 @@ const routes: Routes = [
       },
       { path: 'currency', component: CurrencyComponent },
       { path: 'storybook', component: StorybookComponent },
+      { path: 'bank-acount', component: BankAccountComponent },
       { path: 'tariff-coa', loadChildren: () => import('./_modules/tariff-coa/tariff-coa.module').then(m => m.TariffCoaModule) },
       { path: 'cost-center', component: CostCenterComponent },
       { path: 'fiscal-year', component: FiscalYearComponent },

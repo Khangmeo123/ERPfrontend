@@ -1,0 +1,9 @@
+<div class="select-search d-flex align-items-center p-2">
+  <div class="input-group input-group-sm">
+    <input type="text" #search class="form-control form-control-sm flex-grow-1" (change)="onChange($event)">
+    <div class="input-group-append">
+      <span class="pi pi-search input-group-text"></span>
+    </div>
+  </div>
+  <span class="pi pi-times ml-1" role="button" (click)="search.value = null"></span>
+</div>
