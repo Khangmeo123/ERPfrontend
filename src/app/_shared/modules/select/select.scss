@@ -28,9 +28,20 @@
 
   .lists {
     position: absolute;
+    top: 42px;
     left: 0;
     right: 0;
     width: 100%;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+  }
+
+  .lists.up {
+    position: absolute;
+    top: auto;
+    left: 0;
+    right: 0;
+    bottom: 42px;
   }
 
   .list {

@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
@@ -33,7 +33,6 @@ import {PipeModule} from './_shared/pipe/pipe.module';
     FooterComponent,
     SpinnerComponent,
     ItemSidebarComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -41,14 +40,21 @@ import {PipeModule} from './_shared/pipe/pipe.module';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
-    CollapseModule.forRoot(),
-    ToastrModule.forRoot(),
     HttpClientModule,
     MatProgressSpinnerModule,
     MatIconModule,
     DropdownModule,
     FormsModule,
     PipeModule,
+    CollapseModule.forRoot(),
+    ToastrModule.forRoot(),
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient],
+      }
+    })
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -57,4 +63,7 @@ import {PipeModule} from './_shared/pipe/pipe.module';
   bootstrap: [AppComponent],
 })
 export class AppModule {
+}
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
 }
