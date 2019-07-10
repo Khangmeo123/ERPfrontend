@@ -16,7 +16,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   @Input() list = [];
 
-  @Input() selectedIds = [];
+  @Input() selectedList = [];
 
   @Input() key = 'label';
 
@@ -25,8 +25,6 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   @Output() listOpen = new EventEmitter();
 
   @Output() selectionChange = new EventEmitter();
-
-  selectedItems = [];
 
   listDirection = 'down';
 
@@ -42,8 +40,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   get selectedText() {
-    if (this.selectedItems.length) {
-      return this.selectedItems[0][this.key];
+    if (this.selectedList.length) {
+      return this.selectedList[0][this.key];
     }
     return '0 selected';
   }
@@ -51,7 +49,6 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   @Input() valueSelector = (node) => node.id;
 
   ngOnInit() {
-    this.selectedItems = initiateSelectedNodes(this.list, this.selectedIds);
   }
 
   closeList(event) {
@@ -65,7 +62,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   unselect({data}) {
-    this.selectedItems = [];
+    this.selectedList = [];
     this.list = [
       ...this.list,
       data,
@@ -74,7 +71,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (changes.list || changes.selectedIds) {
+    if (changes.list || changes.selectedList) {
       if (this.isLoading) {
         this.isLoading = false;
       }
@@ -83,23 +80,23 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   onChange() {
     this.selectionChange.emit(
-      this.selectedItems.map(this.valueSelector),
+      this.selectedList.map(this.valueSelector),
     );
   }
 
   select(event) {
     const {data, index} = event;
-    if (this.selectedItems.length) {
-      if (this.selectedItems[0].id === data.id) {
+    if (this.selectedList.length) {
+      if (this.selectedList[0].id === data.id) {
         return this.unselect(event);
       }
     }
     this.list = [
       ...this.list.slice(0, index),
       ...this.list.slice(index + 1),
-      ...this.selectedItems,
+      ...this.selectedList,
     ];
-    this.selectedItems[0] = data;
+    this.selectedList[0] = data;
     return this.onChange();
   }
 

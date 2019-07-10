@@ -3,7 +3,7 @@
 @import "../../../../../../../node_modules/bootstrap/scss/variables";
 
 .select-body {
-  width: 100%!important;
+  width: 100% !important;
   border: 1px solid $border-color;
   -webkit-border-radius: $border-radius;
   -moz-border-radius: $border-radius;
@@ -16,14 +16,13 @@
   .select-list {
     position: relative;
     height: auto;
-  }
-
-  .select-list:not(:only-child):first-of-type {
     border-bottom: 1px solid $border-color;
   }
 
-  .select-list:only-child {
-
+  .select-list:not(:only-child):last-of-type,
+  .select-list:only-child,
+  :last-child {
+    border-bottom: 0;
   }
 
   .ui-tree {

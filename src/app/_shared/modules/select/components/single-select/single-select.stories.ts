@@ -6,7 +6,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SelectModule} from '../../select.module';
 import {sampleList} from '../../sample/list.sample';
 
-const dataSource = sampleList;
 @Component({
   template: `
     <app-single-select key="label" [list]="list" (selectionChange)="onChange($event)" (listOpen)="open($event)"></app-single-select>`,
