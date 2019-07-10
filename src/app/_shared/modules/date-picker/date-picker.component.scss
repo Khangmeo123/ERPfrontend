@@ -1,0 +1,23 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.date-picker {
+  max-width: 296px;
+
+  .ui-calendar {
+    input.ui-inputtext {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
+  .input-group-text {
+    cursor: pointer;
+    height: $input-height;
+  }
+
+  button.mat-icon-button {
+    outline: none;
+  }
+}

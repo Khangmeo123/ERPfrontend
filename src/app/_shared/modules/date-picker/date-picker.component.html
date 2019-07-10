@@ -1,0 +1,13 @@
+<div class="date-picker">
+  <div class="input-group">
+    <input type="text" class="form-control" [readOnly]="inputReadOnly" (dateChange)="onDateChange($event)"
+      (keydown)="onKeyDown($event)" (keyup)="onKeyUp($event)" (focus)="onFocus()" maxlength="10" name="date"
+      [matDatepicker]="matDatepicker" [placeholder]="placeHolder">
+    <mat-datepicker #matDatepicker></mat-datepicker>
+    <div class="input-group-append">
+      <div class="input-group-text">
+        <mat-datepicker-toggle matSuffix #matDatepickerToggle [for]="matDatepicker"></mat-datepicker-toggle>
+      </div>
+    </div>
+  </div>
+</div>
