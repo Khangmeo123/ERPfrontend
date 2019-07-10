@@ -3,7 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ItemSidebar } from './itemsidebar.entity';
 import { Router } from '@angular/router';
 import { AppService } from 'src/app/_services';
-import { toggleMenuSideBar, toggleMenuNavbar } from '../sidebar.animation';
+import { toggleMenuSideBar, toggleMenuNavbar } from '../../../../_shared/animations/sidebar.animation';
 
 @Component({
     selector: 'app-item-sidebar',

@@ -31,7 +31,7 @@
   </ul>
   <!-- right menu -->
   <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed">
-    <ul class="navbar-nav" [ngStyle]="{'margin-left': isToggleMenu ? '38%' : '32%'}">
+    <ul class="navbar-nav" [ngStyle]="{'margin-left': isToggleMenu ? '43%' : '38%'}">
       <div class="search-input mt-1 align-items-center" [ngStyle]="{'display': !isCollapsed ? 'none': 'block' }">
         <div class="has-search">
           <span class="fa fa-search form-control-feedback"></span>
@@ -52,23 +52,13 @@
             help_outline
           </mat-icon>
           <span class="link-text">Help</span>
-          <!-- <span class="badge badge-pill ba dge-danger">3</span> -->
-          <!-- <span class="nav-alert help"></span> -->
         </a>
       </li>
-<!--      <li class="nav-item">-->
-<!--        <a class="btn nav-link">-->
-<!--          <mat-icon>-->
-<!--            account_circle-->
-<!--          </mat-icon>-->
-<!--          <span class="link-text">Profile</span>-->
-<!--        </a>-->
-<!--      </li>-->
-      <li class="nav-item" style="cursor: pointer; margin-top: 7px">
+      <li (clickOutside)="closeDropdown()" class="nav-item" style="cursor: pointer; margin-top: 7px">
         <div class="nav-link" (click)="onToggleFlag()">
           <img src="./assets/img/{{languageSelected}}.png" style="width:24px;vertical-align:middle" />
         </div>
-        <div class="sub-nav" style="width: 150px; right: 100px; height: 90px" *ngIf="isToggleFlags">
+        <div class="sub-nav" style="width: 150px; right: 100px; height: 90px" [@toggleMenu]="listState">
           <ul class="flags">
             <li class="content-drop list" *ngFor="let item of language">
               <div class="ui-helper-clearfix" (click)="onClickChangeLanguage(item)">
@@ -79,13 +69,13 @@
           </ul>
         </div>
       </li>
-      <li class="nav-item" style="cursor: pointer">
+      <li (clickOutside)="closeDropMenu()" class="nav-item" style="cursor: pointer">
         <div class="user-profile" (click)="onToggle()">
           <span class="nav-link">huongnt
           </span>
           <i class="fas fa-caret-down"></i>
         </div>
-        <div class="sub-nav"  *ngIf="isToggle">
+        <div class="sub-nav" [@toggleMenu]="listStateMenu">
           <ul class="dropdown">
             <li class="">
               <div class="row">
