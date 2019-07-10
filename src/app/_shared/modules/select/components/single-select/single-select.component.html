@@ -6,13 +6,25 @@
                    (headClick)="toggleList($event)"></app-select-head>
   <app-select-body [@toggleMenu]="listState">
     <app-select-search (search)="search.emit($event)"></app-select-search>
-    <app-select-list [dataSource]="selectedList"
-                     [key]="key"
-                     selected="true"
-                     *ngIf="selectedList.length"
-                     (selectionChange)="unselect($event)"></app-select-list>
+    <ng-template [ngIf]="">
+      <div class="py-2 pl-4 d-flex align-items-center border-bottom">
+        <span class="h4 font-weight-bold">
+          Selected
+        </span>
+      </div>
+      <app-select-list [dataSource]="selectedList"
+                       [key]="key"
+                       selected="true"
+                       *ngIf="selectedList.length"
+                       (selectionChange)="unselect($event)"></app-select-list>
+    </ng-template>
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
+      <div class="py-2 pl-4 d-flex align-items-center border-bottom">
+        <span class="h4 font-weight-bold">
+          Available
+        </span>
+      </div>
       <app-select-list [dataSource]="list"
                        [key]="key"
                        (selectionChange)="select($event)"></app-select-list>

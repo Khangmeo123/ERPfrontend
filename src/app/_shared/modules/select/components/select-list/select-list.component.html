@@ -1,5 +1,5 @@
 <div class="select-list">
-  <ul class="dropdown-menu" tabindex="1" (focus)="ulFocus($event)" role="menu">
+  <ul class="dropdown-menu" tabindex="-1" (focus)="ulFocus($event)" role="menu">
     <li *ngFor="let item of dataSource; index as i" class="dropdown-item d-flex align-items-center"
         role="menuitem"
         [tabindex]="-1"
