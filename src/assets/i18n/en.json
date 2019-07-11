@@ -1,23 +1,4 @@
 {
-	"asset": {
-		"content": {
-			"modal": {
-				"title": ""
-			},
-			"table": {
-				"asset_id": "",
-				"asset_name": "",
-				"status_1": "",
-				"status_2": "",
-				"type": "",
-				"type_1": "",
-				"type_2": ""
-			}
-		},
-		"header": {
-			"title": ""
-		}
-	},
 	"bank": {
 		"content": {
 			"add_item": "",
@@ -42,28 +23,6 @@
 			"title": ""
 		}
 	},
-	"employee": {
-		"content": {
-			"table": {
-				"account_number": "",
-				"birthday": "",
-				"employee_id": "",
-				"employee_name": "",
-				"gender": {
-					"men": "",
-					"women": ""
-				},
-				"id_emp": "",
-				"sex": ""
-			}
-		},
-		"detail": {
-			"title": ""
-		},
-		"header": {
-			"title": ""
-		}
-	},
 	"product": {
 		"content": {
 			"add_item": "",
@@ -72,6 +31,8 @@
 				"product_id_tt": "",
 				"product_length": "",
 				"product_properti": "",
+				"product_status": "",
+				"product_unit": "",
 				"product_weight": "",
 				"product_width": ""
 			},
@@ -87,16 +48,8 @@
 				"product_height": "",
 				"product_id": "",
 				"product_name": "",
-				"product_properti_1": "",
-				"product_properti_2": "",
-				"product_properti_3": "",
-				"product_properti_4": "",
 				"product_status": "",
-				"product_unit": "",
-				"product_unit_1": "",
-				"product_unit_2": "",
-				"status_1": "",
-				"status_2": ""
+				"product_unit": ""
 			},
 			"upload_excel": "",
 			"xuat_excel": ""

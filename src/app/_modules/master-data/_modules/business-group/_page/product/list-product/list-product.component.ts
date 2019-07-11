@@ -32,6 +32,6 @@ export class ListProductComponent implements OnInit {
   ngOnInit() {
   }
   showdetail() {
-    this.router.navigate(['/master-data/business-group/product/detail-product']);
+    this.router.navigate(['/business-group/product/detail-product']);
   }
 }
