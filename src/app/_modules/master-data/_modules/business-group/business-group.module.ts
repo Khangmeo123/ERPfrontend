@@ -27,8 +27,10 @@ import { DetailProductComponent } from './_page/product/detail-product/detail-pr
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-
-
+import { AccordionModule } from 'ngx-bootstrap';
+import {RadioButtonModule} from 'primeng/radiobutton';
+import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [BusinessGroupComponent,
@@ -48,6 +50,10 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
+    AccordionModule.forRoot(),
+    RadioButtonModule,
+    DatePickerModule,
+    KeyFilterModule,
   ]
 })
 export class BusinessGroupModule { }

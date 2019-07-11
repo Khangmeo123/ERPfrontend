@@ -1,0 +1,37 @@
+$color-button: #1C4E80;
+// .row {
+//     flex-direction: row-reverse
+// }
+.asset-list {
+    .content-asset {
+        
+
+        .fix-pagination {
+            margin-top: 20px; 
+            float: right;
+        }
+        
+    }
+    
+    
+}
+
+.list-button {
+    float: right;
+    button {
+        background-color: $color-button;
+        color: #ffffff;
+    }
+
+    .btn-add {
+        margin: 10px;
+    }
+
+    // .btn-huy {
+    //     background-color: #cecece;
+    // }
+
+    // .btn-xoa {
+    //     background-color: red;
+    // }
+}
