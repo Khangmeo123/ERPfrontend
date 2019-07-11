@@ -5,6 +5,7 @@
 
 <ng-template [ngIf]="selectedFile">
   <p-dialog header="Crop image" [(visible)]="display" [draggable]="false" [style]="{width: 450, height: 450}"
+            [closable]="false"
             positionTop="100">
     <div class="image flex-grow-1">
       <img #image [src]="imageDataURL" [alt]="filename">
