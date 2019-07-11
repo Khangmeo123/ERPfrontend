@@ -1,0 +1,22 @@
+@import "~cropperjs/dist/cropper.min.css";
+
+.cropper {
+  input[type="file"] {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+p-dialog {
+  div.ui-dialog-content {
+    width: 400px;
+    img {
+      width: 100%;
+      max-height: 400px;
+    }
+  }
+
+  > .action {
+
+  }
+}

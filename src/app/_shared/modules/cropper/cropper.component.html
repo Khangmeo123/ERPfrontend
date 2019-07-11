@@ -1,0 +1,27 @@
+<span class="cropper" role="button" (click)="file.click()">
+  <ng-content></ng-content>
+  <input type="file" #file (change)="onSelectFile($event)" accept="image/*">
+</span>
+
+<ng-template [ngIf]="selectedFile">
+  <p-dialog header="Crop image" [(visible)]="display" [draggable]="false" [style]="{width: 450, height: 450}"
+            [closable]="false"
+            positionTop="100">
+    <div class="image flex-grow-1">
+      <img #image [src]="imageDataURL" [alt]="filename">
+    </div>
+    <div class="d-flex justify-content-between mt-2">
+      <button class="btn btn-primary mr-2" (click)="onOk()" *ngIf="cropped; else notCropped">
+        OK
+      </button>
+      <ng-template #notCropped>
+        <button class="btn btn-primary mr-2" (click)="onCrop(image)">
+          {{this.cropper ? 'Done' : 'Crop'}}
+        </button>
+      </ng-template>
+      <button class="btn btn-secondary" (click)="onCancel($event)">
+        Cancel
+      </button>
+    </div>
+  </p-dialog>
+</ng-template>
