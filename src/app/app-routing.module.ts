@@ -10,8 +10,8 @@ const routes: Routes = [
     path: '', component: PageComponent, children: [
       { path: 'home', loadChildren: () => import('./_modules/home/home.module').then(m => m.HomeModule) },
       { path: 'admin', loadChildren: () => import('./_modules/admin/admin.module').then(m => m.AdminModule) },
-      { path: 'business-group', loadChildren: () => import('./_modules/business-group/business-group.module').then(m => m.BusinessgroupModule) },
-    ], canActivate: [AuthGuard]
+      { path: 'master-data', loadChildren: () => import('./_modules/master-data/master-data.module').then(m => m.MasterDataModule) },
+    ], canActivate: [AuthGuard],
   },
   { path: '**', redirectTo: 'login', pathMatch: 'full' },
 ];

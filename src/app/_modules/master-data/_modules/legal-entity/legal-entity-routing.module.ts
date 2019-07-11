@@ -16,10 +16,12 @@ import { SpecialPriceCustomerComponent } from './_page/special-price-customer/sp
 import { DetailCustomerGroupComponent } from './_page/customer-group/detail-customer-group/detail-customer-group.component';
 import { DetailProductGroupComponent } from './_page/product-group/detail-product-group/detail-product-group.component';
 import { DetailCompanyPositionComponent } from './_page/company-position/detail-company-position/detail-company-position.component';
+import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
 
 const routes: Routes = [
   {
     path: '', children: [
+      { path: '', component: LegalEntityComponent },
       {
         path: 'customer-group', component: CustomerGroupComponent, children: [
           { path: 'configure-customer-group', component: ConfigureCustomerGroupComponent },

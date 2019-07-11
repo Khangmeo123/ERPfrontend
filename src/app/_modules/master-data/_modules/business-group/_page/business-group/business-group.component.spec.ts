@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+
 import { BusinessGroupComponent } from './business-group.component';
 
 describe('BusinessGroupComponent', () => {
@@ -7,9 +8,9 @@ describe('BusinessGroupComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [BusinessGroupComponent]
+      declarations: [ BusinessGroupComponent ]
     })
-      .compileComponents();
+    .compileComponents();
   }));
 
   beforeEach(() => {

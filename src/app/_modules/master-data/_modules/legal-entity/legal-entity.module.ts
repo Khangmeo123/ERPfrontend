@@ -7,7 +7,6 @@ import { CompanyPositionComponent } from './_page/company-position/company-posit
 import { ProductGroupComponent } from './_page/product-group/product-group.component';
 import { SpecialPriceSupplierComponent } from './_page/special-price-supplier/special-price-supplier.component';
 import { SpecialPriceCustomerComponent } from './_page/special-price-customer/special-price-customer.component';
-import { LegalEntityComponent } from './legal-entity.component';
 import { ConfigureCustomerGroupComponent } from './_page/customer-group/configure-customer-group/configure-customer-group.component';
 import { ListCustomerGroupComponent } from './_page/customer-group/list-customer-group/list-customer-group.component';
 import { DetailCustomerGroupComponent } from './_page/customer-group/detail-customer-group/detail-customer-group.component';
@@ -20,12 +19,17 @@ import { DetailProductGroupComponent } from './_page/product-group/detail-produc
 import { ConfigureCompanyPositionComponent } from './_page/company-position/configure-company-position/configure-company-position.component';
 import { ListCompanyPositionComponent } from './_page/company-position/list-company-position/list-company-position.component';
 import { DetailCompanyPositionComponent } from './_page/company-position/detail-company-position/detail-company-position.component';
+import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
 
 @NgModule({
-  declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent, SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent, DetailCustomerGroupComponent, ConfigureSupplierGroupComponent, ListSupplierGroupComponent, DetailSupplierGroupComponent, ConfigureProductGroupComponent, ListProductGroupComponent, DetailProductGroupComponent, ConfigureCompanyPositionComponent, ListCompanyPositionComponent, DetailCompanyPositionComponent],
+  declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent,
+    SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent,
+    DetailCustomerGroupComponent, ConfigureSupplierGroupComponent, ListSupplierGroupComponent, DetailSupplierGroupComponent,
+    ConfigureProductGroupComponent, ListProductGroupComponent, DetailProductGroupComponent, ConfigureCompanyPositionComponent,
+    ListCompanyPositionComponent, DetailCompanyPositionComponent],
   imports: [
     CommonModule,
-    LegalEntityRoutingModule
+    LegalEntityRoutingModule,
   ]
 })
 export class LegalEntityModule { }

@@ -23,151 +23,172 @@ export class SidebarComponent implements OnInit, OnChanges {
     {
       displayName: 'Dữ liệu đầu vào',
       iconName: 1,
-      route: '/business-group',
+      route: '/master-data',
       children: [
+        {
+          displayName: 'Quản lý nhóm kinh doanh',
+          iconName: 0,
+          route: '/master-data/business-group',
+        },
         {
           displayName: 'Quản lý ngân hàng',
           iconName: 0,
-          route: '/business-group/bank',
+          route: '/master-data/business-group/bank',
         },
         {
           displayName: 'Quản lý sản phẩm',
           iconName: 0,
-          route: '/business-group/product',
+          route: '/master-data/business-group/product',
         },
         {
           displayName: 'Quản lý tài sản',
           iconName: 0,
-          route: '/business-group/asset',
+          route: '/master-data/business-group/asset',
         },
         {
           displayName: 'Quản lý nhân viên',
           iconName: 0,
-          route: '/business-group/employee',
+          route: '/master-data/business-group/employee',
         },
         {
           displayName: 'Quản lý khách hàng',
           iconName: 0,
-          route: '/business-group/customer',
+          route: '/master-data/business-group/customer',
         },
         {
           displayName: 'Quản lý nhà cung cấp',
           iconName: 0,
-          route: '/business-group/supplier',
+          route: '/master-data/business-group/supplier',
         },
         {
           displayName: 'Tiền tệ',
           iconName: 0,
-          route: '/business-group/currency',
+          route: '/master-data/business-group/currency',
+        },
+        {
+          displayName: '------------------------------',
+          iconName: 0,
+          route: null,
         },
         {
           displayName: 'Bộ sổ',
           iconName: 0,
-          route: '/business-group/storybook',
+          route: '/master-data/storybook',
         },
         {
           displayName: 'Tài khoản ngân hàng',
           iconName: 0,
-          route: '/business-group/bank-account',
+          route: '/master-data/storybook/bank-account',
         },
         {
           displayName: 'Biểu thuế - HTTK',
           iconName: 0,
-          route: '/business-group/tariff-coa',
-          children: [
-            {
-              displayName: 'Hệ thống tài khoản',
-              iconName: 0,
-              route: '/business-group/tariff-coa/coa',
-            },
-            {
-              displayName: 'Biểu thuế tiêu thụ đặc biệt',
-              iconName: 0,
-              route: '/business-group/tariff-coa/excise-tariff',
-            },
-            {
-              displayName: 'Biểu thuế tài nguyên',
-              iconName: 0,
-              route: '/business-group/tariff-coa/resoure-tariff',
-            }
-          ]
+          route: '/master-data/storybook/tariff-coa',
+        },
+        {
+          displayName: 'Hệ thống tài khoản',
+          iconName: 0,
+          route: '/master-data/storybook/coa',
+        },
+        {
+          displayName: 'Biểu thuế tiêu thụ đặc biệt',
+          iconName: 0,
+          route: '/master-data/storybook/excise-tariff',
+        },
+        {
+          displayName: 'Biểu thuế tài nguyên',
+          iconName: 0,
+          route: '/master-data/storybook/resoure-tariff',
         },
         {
           displayName: 'Trung tâm chi phí',
           iconName: 0,
-          route: '/business-group/cost-center',
+          route: '/master-data/storybook/cost-center',
         },
         {
           displayName: 'Năm tài chính',
           iconName: 0,
-          route: '/business-group/fiscal-year',
+          route: '/master-data/storybook/fiscal-year',
         },
         {
           displayName: 'Kỳ kế toán',
           iconName: 0,
-          route: '/business-group/accountant-period',
+          route: '/master-data/storybook/accountant-period',
         },
         {
           displayName: 'Quản lý chứng từ',
           iconName: 0,
-          route: '/business-group/voucher',
+          route: '/master-data/storybook/voucher',
         },
         {
           displayName: 'Phương thức thanh toán',
           iconName: 0,
-          route: '/business-group/payment-method',
+          route: '/master-data/storybook/payment-method',
         },
         {
           displayName: 'Điều khoản thanh toán',
           iconName: 0,
-          route: '/business-group/payment-term',
+          route: '/master-data/storybook/payment-term',
+        },
+        {
+          displayName: '------------------------------',
+          iconName: 0,
+          route: null,
         },
         {
           displayName: 'Quản lý chi nhánh',
           iconName: 0,
-          route: '/business-group/legal-entity',
-          children: [
-            {
-              displayName: 'Quản lý nhóm KH',
-              iconName: 0,
-              route: '/business-group/legal-entity/customer-group',
-            },
-            {
-              displayName: 'Quản lý nhóm NCC',
-              iconName: 0,
-              route: '/business-group/legal-entity/supplier-group',
-            },
-            {
-              displayName: 'Quản lý nhóm chức vụ',
-              iconName: 0,
-              route: '/business-group/legal-entity/company-position',
-            },
-            {
-              displayName: 'Quản lý nhóm sản phẩm',
-              iconName: 0,
-              route: '/business-group/legal-entity/product-group',
-            },
-            {
-              displayName: 'Giá đặc biệt NCC',
-              iconName: 0,
-              route: '/business-group/legal-entity/special-price-supplier',
-            },
-            {
-              displayName: 'Giá đặc biệt KH',
-              iconName: 0,
-              route: '/business-group/legal-entity/special-price-customer',
-            }
-          ]
+          route: '/master-data/legal-entity',
+        },
+        {
+          displayName: 'Quản lý nhóm KH',
+          iconName: 0,
+          route: '/master-data/legal-entity/customer-group',
+        },
+        {
+          displayName: 'Quản lý nhóm NCC',
+          iconName: 0,
+          route: '/master-data/legal-entity/supplier-group',
+        },
+        {
+          displayName: 'Quản lý nhóm chức vụ',
+          iconName: 0,
+          route: '/master-data/legal-entity/company-position',
+        },
+        {
+          displayName: 'Quản lý nhóm sản phẩm',
+          iconName: 0,
+          route: '/master-data/legal-entity/product-group',
+        },
+        {
+          displayName: 'Giá đặc biệt NCC',
+          iconName: 0,
+          route: '/master-data/legal-entity/special-price-supplier',
+        },
+        {
+          displayName: 'Giá đặc biệt KH',
+          iconName: 0,
+          route: '/master-data/legal-entity/special-price-customer',
+        },
+        {
+          displayName: '------------------------------',
+          iconName: 0,
+          route: null,
         },
         {
           displayName: 'Quản lý văn phòng',
           iconName: 0,
-          route: '/business-group/division',
+          route: '/master-data/division',
+        },
+        {
+          displayName: '------------------------------',
+          iconName: 0,
+          route: null,
         },
         {
           displayName: 'Quản lý phòng ban',
           iconName: 0,
-          route: '/business-group/department',
+          route: '/master-data/department',
         },
       ],
     },

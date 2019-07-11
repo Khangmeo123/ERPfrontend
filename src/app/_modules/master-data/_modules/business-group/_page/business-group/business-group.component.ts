@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-businessgroup',
+  selector: 'app-business-group',
   templateUrl: './business-group.component.html',
   styleUrls: ['./business-group.component.scss']
 })
