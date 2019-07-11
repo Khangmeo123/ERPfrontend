@@ -20,8 +20,12 @@ export class BankComponent implements OnInit {
     des: new TextFilter(),
   }
 
+  display: boolean = false;
   pagination = new PaginationModel();
-
+  public popoverTitle: string = 'Popover title';
+  public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+  public confirmClicked: boolean = false;
+  public cancelClicked: boolean = false;
 
   tmptable = [
     {
@@ -67,6 +71,22 @@ export class BankComponent implements OnInit {
   }
 
   paginationOut(event) {
+
+  }
+
+  showDialog() {
+    this.display = true;
+  }
+
+  onClickCancel() {
+    this.display = false;
+  }
+
+  onClickSave() {
+
+  }
+
+  onClickDelete() {
 
   }
 

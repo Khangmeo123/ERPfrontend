@@ -1,1 +1,131 @@
-<p>detail-product works!</p>
+<div class="product-detail">
+    <div style="height: 100%; width: 100%; margin-top: 10px">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="title-page">
+                    <div>
+                        {{'product.content.modal.title' | translate}}
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="list-button right">
+                    <button class="btn btn-huy"
+                        (click)="onClickCancel()">{{ 'product.content.modal.cancel' | translate}}</button>
+                    <button class="btn btn-add" (click)="onClickSave()">
+                        {{ 'product.content.modal.save' | translate}}</button>
+                    <button class="btn btn-xoa" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                        [popoverMessage]="popoverMessage" placement="left" (confirm)="confirmClicked = true"
+                        (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                        {{ 'product.content.modal.delete' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.table.product_id' | translate}}<span
+                        style="color: red">*</span></label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.detail.product_id_ncc' | translate}}</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.detail.product_id_tt' | translate}}</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.table.product_name' | translate}}<span
+                        style="color: red">*</span></label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.detail.product_properti' | translate}}<span
+                        style="color: red">*</span></label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.table.product_unit' | translate}}<span
+                        style="color: red">*</span></label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.table.product_cost' | translate}}<span
+                        style="color: red">*</span></label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.detail.product_weight' | translate}} (kg)</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.table.product_status' | translate}}<span
+                        style="color: red">*</span></label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.table.product_height' | translate}} (cm)<span
+                        style="color: red">*</span></label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.detail.product_length' | translate}} (cm)</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="bankid">{{ 'product.content.detail.product_width' | translate}} (cm)</label>
+                <input type="text" class="form-control" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+
+        </div>
+        <div class="col-sm-8">
+            <div class="form-group">
+                <label for="bankid">{{ 'bank.content.modal.add_des_bank' | translate}}</label>
+                <textarea class="form-control" rows="8">
+                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+                </textarea>
+            </div>
+        </div>
+    </div>
+</div>

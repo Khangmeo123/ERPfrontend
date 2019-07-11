@@ -2,10 +2,54 @@
 	"bank": {
 		"content": {
 			"add_item": "",
+			"modal": {
+				"add_des_bank": "",
+				"add_id_bank": "",
+				"add_name_bank": "",
+				"cancel": "",
+				"delete": "",
+				"save": "",
+				"title": ""
+			},
 			"table": {
 				"bank_description": "",
 				"bank_id": "",
 				"bank_name": ""
+			},
+			"upload_excel": "",
+			"xuat_excel": ""
+		},
+		"header": {
+			"title": ""
+		}
+	},
+	"product": {
+		"content": {
+			"add_item": "",
+			"detail": {
+				"product_id_ncc": "",
+				"product_id_tt": "",
+				"product_length": "",
+				"product_properti": "",
+				"product_status": "",
+				"product_unit": "",
+				"product_weight": "",
+				"product_width": ""
+			},
+			"modal": {
+				"cancel": "",
+				"delete": "",
+				"save": "",
+				"title": ""
+			},
+			"table": {
+				"product_cost": "",
+				"product_description": "",
+				"product_height": "",
+				"product_id": "",
+				"product_name": "",
+				"product_status": "",
+				"product_unit": ""
 			},
 			"upload_excel": "",
 			"xuat_excel": ""

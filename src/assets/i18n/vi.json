@@ -2,6 +2,15 @@
 	"bank": {
 		"content": {
 			"add_item": "Thêm mới",
+			"modal": {
+				"add_des_bank": "Mô tả",
+				"add_id_bank": "Mã ngân hàng",
+				"add_name_bank": "Tên ngân hàng",
+				"cancel": "Hủy",
+				"delete": "Xóa",
+				"save": "Lưu",
+				"title": "Thêm mới ngân hàng"
+			},
 			"table": {
 				"bank_description": "Mô tả",
 				"bank_id": "Mã ngân hàng",
@@ -12,6 +21,41 @@
 		},
 		"header": {
 			"title": "Danh sách ngân hàng"
+		}
+	},
+	"product": {
+		"content": {
+			"add_item": "Thêm mới",
+			"detail": {
+				"product_id_ncc": "Mã SP từ NCC",
+				"product_id_tt": "Mã SP trên thịt trường",
+				"product_length": "Chiều dài",
+				"product_properti": "Tính chất hàng",
+				"product_status": "Trạng thái",
+				"product_unit": "",
+				"product_weight": "Cân nặng",
+				"product_width": "Chiều rộng"
+			},
+			"modal": {
+				"cancel": "Hủy",
+				"delete": "Xóa",
+				"save": "Lưu",
+				"title": "Thêm mới sản phẩm"
+			},
+			"table": {
+				"product_cost": "Đơn giá cơ bản",
+				"product_description": "Mô tả",
+				"product_height": "Chiều cao",
+				"product_id": "Mã sản phẩm",
+				"product_name": "Tên sản phẩm",
+				"product_status": "Trạng thái",
+				"product_unit": "Đơn vị cơ bản"
+			},
+			"upload_excel": "Nhập hàng loạt",
+			"xuat_excel": "Xuất Excel"
+		},
+		"header": {
+			"title": "Danh sách sản phẩm"
 		}
 	}
 }

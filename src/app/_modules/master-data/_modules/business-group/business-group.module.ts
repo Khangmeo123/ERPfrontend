@@ -25,6 +25,8 @@ import { DetailEmployeeComponent } from './_page/employee/detail-employee/detail
 import { ListProductComponent } from './_page/product/list-product/list-product.component';
 import { DetailProductComponent } from './_page/product/detail-product/detail-product.component';
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 
 
 
@@ -42,6 +44,10 @@ import { ListSupplierComponent } from './_page/supplier/list-supplier/list-suppl
     TableModule,
     PaginationModule,
     FiltersModule,
+    DialogModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger',
+    }),
   ]
 })
 export class BusinessGroupModule { }

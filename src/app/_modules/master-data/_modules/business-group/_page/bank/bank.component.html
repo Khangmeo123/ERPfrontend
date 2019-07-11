@@ -17,12 +17,15 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="list-button right">
-                    <button class="btn btn-add"> + {{ 'bank.content.add_item' | translate}}</button>
+                    <button class="btn btn-add" (click)="showDialog()"> +
+                        {{ 'bank.content.add_item' | translate}}</button>
                     <button class="btn btn-add"> {{ 'bank.content.upload_excel' | translate}}</button>
                     <button class="btn btn-add"> {{ 'bank.content.xuat_excel' | translate}}</button>
                 </div>
             </div>
         </div>
+
+
         <div class="row" style="margin-top: 15px">
             <div class="col-sm-12">
                 <div class="table-list-bank">
@@ -68,3 +71,55 @@
 
     </div>
 </div>
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
+    [style]="{width: '900px'}">
+    <p-header>
+        {{ 'bank.content.modal.title' | translate}}
+    </p-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="bankid">{{ 'bank.content.modal.add_id_bank' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="bankname">{{ 'bank.content.modal.add_name_bank' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="bankid">{{ 'bank.content.modal.add_des_bank' | translate}}</label>
+                    <textarea  class="form-control" rows="6">
+                            At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
+                     </textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+                <div class="col-sm-12">
+                    <div class="list-button right">
+                        <button class="btn btn-huy" (click)="onClickCancel()">{{ 'bank.content.modal.cancel' | translate}}</button>
+                        <button class="btn btn-add" (click)="onClickSave()"> {{ 'bank.content.modal.save' | translate}}</button>
+                        <button class="btn btn-xoa" mwlConfirmationPopover
+                        [popoverTitle]="popoverTitle"
+                        [popoverMessage]="popoverMessage"
+                        placement="bottom"
+                        (confirm)="confirmClicked = true"
+                        (cancel)="cancelClicked = true"
+                        (click)="onClickDelete()"> {{ 'bank.content.modal.delete' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+    </p-footer>
+</p-dialog>
