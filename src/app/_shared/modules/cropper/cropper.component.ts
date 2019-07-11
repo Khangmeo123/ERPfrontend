@@ -53,7 +53,7 @@ export class CropperComponent implements OnInit {
   onCrop(image) {
     if (!this.cropped) {
       if (this.cropper) {
-        this.imageDataURL = this.cropper.getCroppedCanvas().toDataURL();
+        this.imageDataURL = this.cropper.getCroppedCanvas().toDataURL('image/jpeg');
         this.cropper.destroy();
         this.cropped = true;
       } else {
