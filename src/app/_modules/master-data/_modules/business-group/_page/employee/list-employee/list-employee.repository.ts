@@ -5,7 +5,7 @@ import { Repository } from 'src/app/_helpers/repository';
 @Injectable({
     providedIn: 'root',
 })
-export class BankRepository extends Repository {
+export class EmployeeRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
     }

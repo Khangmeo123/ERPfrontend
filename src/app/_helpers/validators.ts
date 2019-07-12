@@ -1,10 +1,10 @@
-import {AbstractControl} from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 
 export const requiredField = (c: AbstractControl) =>
   (c.value == null || c.value.length === 0)
     ? {
-      invalidUsername: 'Name must be required!',
+      invalidRequired: 'Field must be required!',
     }
     : null;
 
@@ -16,3 +16,10 @@ export function dateField(control: AbstractControl) {
     };
 }
 
+export function checkLength(from = 1, to = 100) {
+  return (c: AbstractControl) => {
+    return (c.value.length > 100 || c.value.length < from) ? {
+      invalidLength: 'Field length must in range ' + '[' + from + ' ,' + to + ']',
+    } : null;
+  };
+}

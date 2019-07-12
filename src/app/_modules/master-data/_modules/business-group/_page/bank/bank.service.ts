@@ -1,25 +1,18 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { UserForm } from './model/user.model';
-import { UserRepository } from '../../_backend/user/user.repository';
+import { BankRepository } from './bank.repository';
+import { BankForm } from 'src/app/_modules/master-data/_backend/bank/bank.form';
 
 @Injectable()
-export class UserService {
-  private userForm: BehaviorSubject<FormGroup | undefined> = new BehaviorSubject(this.fb.group(
-    new UserForm()
+export class BankService {
+  private bankForm: BehaviorSubject<FormGroup | undefined> = new BehaviorSubject(this.fb.group(
+    new BankForm(),
   ));
-  userForm$: Observable<FormGroup> = this.userForm.asObservable();
 
-  constructor(private fb: FormBuilder, private userRepository: UserRepository) { }
-
-  getUser() {
-    this.userRepository.getUser().subscribe(res => {
-      if (res) {
-        this.userForm.next(this.fb.group(
-          new UserForm(res)
-        ));
-      }
-    });
+  constructor(private fb: FormBuilder, private bankRepository: BankRepository) {
+    this.bankForm.next(this.fb.group(
+      new BankForm(),
+    ));
   }
 }
