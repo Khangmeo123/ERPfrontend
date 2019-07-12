@@ -2,7 +2,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BusinessGroupRoutingModule } from './buniness-group-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
 import { TableModule } from 'primeng/table';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
@@ -27,14 +27,36 @@ import { DetailProductComponent } from './_page/product/detail-product/detail-pr
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-
-
+import { AccordionModule } from 'ngx-bootstrap';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { InputTextModule } from 'primeng/inputtext';
+import { ErrorModule } from '../../../../_shared/components/error/error.module';
+import { SelectModule } from '../../../../_shared/modules/select/select.module';
 
 @NgModule({
-  declarations: [BusinessGroupComponent,
-    AssetComponent, BankComponent, BusinessGroupComponent, CurrencyComponent, CustomerComponent, EmployeeComponent,
-    ProductComponent, SupplierComponent, UnitComponent, DetailCustomerComponent, ListCustomerComponent, ListEmployeeComponent,
-    DetailEmployeeComponent, ListProductComponent, DetailProductComponent, ListSupplierComponent, DetailSupplierComponent],
+  declarations: [
+    BusinessGroupComponent,
+    AssetComponent,
+    BankComponent,
+    BusinessGroupComponent,
+    CurrencyComponent,
+    CustomerComponent,
+    EmployeeComponent,
+    ProductComponent,
+    SupplierComponent,
+    UnitComponent,
+    DetailCustomerComponent,
+    ListCustomerComponent,
+    ListEmployeeComponent,
+    DetailEmployeeComponent,
+    ListProductComponent,
+    DetailProductComponent,
+    ListSupplierComponent,
+    DetailSupplierComponent,
+    CurrencyComponent,
+  ],
   imports: [
     CommonModule,
     BusinessGroupRoutingModule,
@@ -48,6 +70,14 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
-  ]
+    AccordionModule.forRoot(),
+    RadioButtonModule,
+    DatePickerModule,
+    KeyFilterModule,
+    FormsModule,
+    InputTextModule,
+    ErrorModule,
+    SelectModule,
+  ],
 })
 export class BusinessGroupModule { }

@@ -14,6 +14,10 @@ import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
 import { ResourceTariffComponent } from './_page/resource-tariff/resource-tariff.component';
 import { VoucherComponent } from './_page/voucher/voucher.component';
 import { TariffCoaComponent } from './_page/tariff-coa/tariff-coa.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { TableModule } from 'primeng/table';
+import { FormsModule } from '@angular/forms';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [StorybookComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
@@ -22,6 +26,10 @@ import { TariffCoaComponent } from './_page/tariff-coa/tariff-coa.component';
   imports: [
     CommonModule,
     StorybookRoutingModule,
+    TranslateModule,
+    TableModule,
+    FormsModule,
+    DialogModule,
   ]
 })
 export class StorybookModule { }

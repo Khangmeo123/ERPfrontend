@@ -1,26 +1,7 @@
 <div class="full-width">
-    <i class="fa fa-15 fa-exclamation-circle text-danger pull-right" [ngClass]="placement">
-        <span class="tooltiptext">
-            {{formGroup.controls[property].errors?.message}}
-            {{formGroup.controls.Error.get(property).value}}
-        </span>
-    </i>
-    <!-- <i class="fa fa-15 fa-exclamation-circle text-danger pull-right tooltip-left">
-        <span class="tooltiptext">
-            {{formGroup.controls[property].errors?.message}}
-            {{formGroup.controls.Error.get(property).value}}
-        </span>
-    </i>
-    <i class="fa fa-15 fa-exclamation-circle text-danger pull-right tooltip-top">
-        <span class="tooltiptext">
-            {{formGroup.controls[property].errors?.message}}
-            {{formGroup.controls.Error.get(property).value}}
-        </span>
-    </i>
-    <i class="fa fa-15 fa-exclamation-circle text-danger pull-right tooltip-bottom">
-        <span class="tooltiptext">
-            {{formGroup.controls[property].errors?.message}}
-            {{formGroup.controls.Error.get(property).value}}
-        </span>
-    </i> -->
+  <i class="fa fa-15 fa-exclamation-circle text-danger pull-right" [ngClass]="placement">
+            <span *ngFor="let error of errors" class="tooltiptext">
+              {{ error[0] | translate }}
+            </span>
+  </i>
 </div>
