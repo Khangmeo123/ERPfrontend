@@ -16,11 +16,9 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   ngOnInit() {
-    console.log('ngOnInit', this.pagination);
   }
 
   ngOnChanges(change) {
-    console.log('ngOnChanges', change);
     if (change.pagination && this.pagination && this.pagination.pageNumber) {
       this.indexItem = this.pagination.pageNumber;
       if (this.pagination.totalItems && this.pagination.take) {
