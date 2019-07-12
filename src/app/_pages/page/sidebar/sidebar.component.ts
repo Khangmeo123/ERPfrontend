@@ -41,6 +41,11 @@ export class SidebarComponent implements OnInit, OnChanges {
           route: '/master-data/business-group/product',
         },
         {
+          displayName: 'Đơn vị tính sản phẩm',
+          iconName: 0,
+          route: '/master-data/business-group/unit',
+        },
+        {
           displayName: 'Quản lý tài sản',
           iconName: 0,
           route: '/master-data/business-group/asset',

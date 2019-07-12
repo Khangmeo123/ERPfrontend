@@ -1,89 +1,76 @@
-<div class="bank-list">
-    <div style="height: 100%; width: 100%">
-        <div class="title-page">
-            <div>
-                {{'bank.header.title' | translate}}
-            </div>
+<div class="page bank-list">
+    <div class="page-header">
+        <span class="page-title">
+            {{'bank.header.title' | translate}}
             <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
-
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
+            <button class="btn btn-import">{{'general.button.import' | translate}}</button>
+            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
         </div>
     </div>
     <hr>
-    <div class="content-bank">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="list-button right">
-                    <button class="btn btn-add" (click)="showDialog()"> +
-                        {{ 'bank.content.add_item' | translate}}</button>
-                    <button class="btn btn-add"> {{ 'bank.content.upload_excel' | translate}}</button>
-                    <button class="btn btn-add"> {{ 'bank.content.xuat_excel' | translate}}</button>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row" style="margin-top: 15px">
-            <div class="col-sm-12">
-                <div class="table-list-bank">
-                    <p-table [value]="tmptable">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th pResizableColumn>
-                                    {{ 'bank.content.table.bank_id' | translate}}
-                                </th>
-                                <th pResizableColumn> {{ 'bank.content.table.bank_name' | translate}} </th>
-                                <th pResizableColumn> {{ 'bank.content.table.bank_description' | translate}} </th>
-                            </tr>
-                            <tr>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <ng-template pTemplate="body" let-bank>
-                            <tr>
-                                <td> {{bank.id}} </td>
-                                <td> {{bank.name}} </td>
-                                <td> {{bank.des}} </td>
-                            </tr>
-                        </ng-template>
-                    </p-table>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row" style="flex-direction: row-reverse">
-            <div class="fix-pagination">
+    <div class="page-body">
+        <div class="page-selection list">
+            <p-table [value]="tmptable">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn>
+                            {{ 'bank.content.table.bank_id' | translate}}
+                        </th>
+                        <th pResizableColumn> {{ 'bank.content.table.bank_name' | translate}} </th>
+                        <th pResizableColumn> {{ 'bank.content.table.bank_description' | translate}} </th>
+                    </tr>
+                    <tr>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-bank>
+                    <tr>
+                        <td> {{bank.id}} </td>
+                        <td> {{bank.name}} </td>
+                        <td> {{bank.des}} </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+            <div class="pagination">
                 <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
             </div>
         </div>
-
     </div>
 </div>
-
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
         {{ 'bank.content.modal.title' | translate}}
     </p-header>
     <div class="container">
-        <div class="row">
+        <div class="row" [formGroup]="userForm">
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="bankid">{{ 'bank.content.modal.add_id_bank' | translate}}<span
                             style="color: red">*</span></label>
-                    <input type="text" class="form-control" />
+                    <div class="div-form">
+                        <input type="text" class="form-control" />
+                        <app-error
+                            *ngIf="userForm.controls.Name?.errors?.invalidUsername || !!userForm.controls.Error.get('Name')?.value"
+                            [formGroup]="userForm" [property]="'Name'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
+
                 </div>
             </div>
             <div class="col-sm-6">
@@ -98,7 +85,7 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="bankid">{{ 'bank.content.modal.add_des_bank' | translate}}</label>
-                    <textarea  class="form-control" rows="6">
+                    <textarea class="form-control" rows="6">
                             At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
                      </textarea>
                 </div>
@@ -107,19 +94,18 @@
     </div>
     <p-footer>
         <div class="row">
-                <div class="col-sm-12">
-                    <div class="list-button right">
-                        <button class="btn btn-huy" (click)="onClickCancel()">{{ 'bank.content.modal.cancel' | translate}}</button>
-                        <button class="btn btn-add" (click)="onClickSave()"> {{ 'bank.content.modal.save' | translate}}</button>
-                        <button class="btn btn-xoa" mwlConfirmationPopover
-                        [popoverTitle]="popoverTitle"
-                        [popoverMessage]="popoverMessage"
-                        placement="bottom"
-                        (confirm)="confirmClicked = true"
-                        (cancel)="cancelClicked = true"
-                        (click)="onClickDelete()"> {{ 'bank.content.modal.delete' | translate}}</button>
-                    </div>
+            <div class="col-sm-12">
+                <div class="page-actions">
+                    <button class="btn btn-cancel"
+                        (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                    <button class="btn btn-save" (click)="onClickSave()">
+                        {{ 'general.button.save' | translate}}</button>
+                    <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                        (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                        {{ 'general.button.delete' | translate}}</button>
                 </div>
             </div>
+        </div>
     </p-footer>
 </p-dialog>

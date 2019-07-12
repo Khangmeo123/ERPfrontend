@@ -31,6 +31,8 @@ import { AccordionModule } from 'ngx-bootstrap';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { ErrorModule } from 'src/app/_shared/components/error/error.module';
+import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 
 @NgModule({
   declarations: [
@@ -70,6 +72,8 @@ import { KeyFilterModule } from 'primeng/keyfilter';
     RadioButtonModule,
     DatePickerModule,
     KeyFilterModule,
+    ErrorModule,
+    CropperModule
   ],
 })
 export class BusinessGroupModule {

@@ -3,11 +3,15 @@ import { Router } from '@angular/router';
 import { BookmarkService } from 'src/app/_services';
 import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
+import { UserService } from 'src/app/_modules/admin/_pages/user/user.service';
+import { FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
-  styleUrls: ['./bank.component.scss']
+  styleUrls: ['./bank.component.scss'],
+  providers: [UserService],
 })
 export class BankComponent implements OnInit {
 
@@ -58,11 +62,15 @@ export class BankComponent implements OnInit {
       des: 'tungpt@duyhung.vn',
     }
   ]
-
-  constructor() {
+  userForm: FormGroup;
+  userFormSub: Subscription;
+  constructor(public userService: UserService) {
   }
 
   ngOnInit() {
+    this.userFormSub = this.userService.userForm$.subscribe(user => {
+      this.userForm = user;
+    });
   }
 
 

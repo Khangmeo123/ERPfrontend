@@ -7,7 +7,7 @@ import { PaginationModel } from './pagination.model';
   styleUrls: ['./pagination.component.scss']
 })
 export class PaginationComponent implements OnInit, OnChanges {
-  @Input() pagination: PaginationModel;
+  @Input() pagination: PaginationModel = new PaginationModel();
   @Output() paginationOut = new EventEmitter();
   public indexItem: number = 1;
   public totalPage: number = 0;

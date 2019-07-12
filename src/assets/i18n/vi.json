@@ -7,6 +7,7 @@
 			"table": {
 				"asset_id": "Mã tài sản",
 				"asset_name": "Tên tài sản",
+				"status": "Trạng thái",
 				"status_1": "Đang sử dụng",
 				"status_2": "Chưa sử dụng",
 				"type": "Loại tài sản",
@@ -20,23 +21,17 @@
 	},
 	"bank": {
 		"content": {
-			"add_item": "Thêm mới",
 			"modal": {
 				"add_des_bank": "Mô tả",
 				"add_id_bank": "Mã ngân hàng",
 				"add_name_bank": "Tên ngân hàng",
-				"cancel": "Hủy",
-				"delete": "Xóa",
-				"save": "Lưu",
 				"title": "Thêm mới ngân hàng"
 			},
 			"table": {
 				"bank_description": "Mô tả",
 				"bank_id": "Mã ngân hàng",
 				"bank_name": "Tên ngân hàng"
-			},
-			"upload_excel": "Nhập hàng loạt",
-			"xuat_excel": "Xuất Excel"
+			}
 		},
 		"header": {
 			"title": "Danh sách ngân hàng"
@@ -46,7 +41,10 @@
 		"content": {
 			"table": {
 				"account_number": "Số tài khoản",
+				"bassic_salary": "Lương đóng bảo hiểm",
 				"birthday": "Ngày sinh",
+				"coefficients_salary": "Hệ số lương",
+				"date_range": "Ngày cấp",
 				"employee_id": "Mã nhân viên",
 				"employee_name": "Tên nhân viên",
 				"gender": {
@@ -54,19 +52,59 @@
 					"women": "Nữ"
 				},
 				"id_emp": "CMND",
-				"sex": "Giới tính"
+				"salary_agreement": "Lương thỏa thuận",
+				"sex": "Giới tính",
+				"status": "Trạng thái",
+				"status_3": "Tạm nghỉ",
+				"tax_code": "Mã số thuế"
 			}
 		},
 		"detail": {
-			"title": ""
+			"account_name": "Tên chủ tài khoản",
+			"branch": "Chi nhánh",
+			"branch_address": "Địa chỉ chi nhánh",
+			"city": "Tỉnh/Thành phố",
+			"modal": {
+				"title": "Thêm thông tin liên hệ"
+			},
+			"name_bank": "Tên ngân hàng",
+			"note": "Chú thích",
+			"number_dependents": "Số người phụ thuộc",
+			"status": "Trạng thái",
+			"status_1": "Đang hoạt động",
+			"status_2": "Dừng hoạt động",
+			"tab": {
+				"add_item": "Thêm thông tin liên hệ",
+				"title_1": "Thông tin chung",
+				"title_2": "Tài khoản ngân hàng",
+				"title_3": "Thông tin nhận hàng"
+			},
+			"table": {
+				"address": "Địa chỉ ",
+				"contact": "Tên người liên hệ",
+				"email": "Email",
+				"index": "STT",
+				"phone": "Số điện thoại",
+				"relationship": "Quan hệ với nhân viên"
+			},
+			"title": "Thêm mới nhân viên"
 		},
 		"header": {
 			"title": "Danh sách nhân viên"
 		}
 	},
+	"general": {
+		"button": {
+			"add": "Thêm mới",
+			"cancel": "Hủy",
+			"delete": "Xóa",
+			"export": "Xuất Excel",
+			"import": "Nhập hàng loạt",
+			"save": "Lưu"
+		}
+	},
 	"product": {
 		"content": {
-			"add_item": "Thêm mới",
 			"detail": {
 				"product_id_ncc": "Mã SP từ NCC",
 				"product_id_tt": "Mã SP trên thịt trường",
@@ -76,9 +114,7 @@
 				"product_width": "Chiều rộng"
 			},
 			"modal": {
-				"cancel": "Hủy",
-				"delete": "Xóa",
-				"save": "Lưu",
+				"add_des": "Mô tả",
 				"title": "Thêm mới sản phẩm"
 			},
 			"table": {
@@ -97,12 +133,89 @@
 				"product_unit_2": "2",
 				"status_1": "Đang hoạt động",
 				"status_2": "Dừng hoạt động"
-			},
-			"upload_excel": "Nhập hàng loạt",
-			"xuat_excel": "Xuất Excel"
+			}
 		},
 		"header": {
 			"title": "Danh sách sản phẩm"
+		}
+	},
+	"supplier": {
+		"content": {
+			"table": {
+				"gender": {
+					"men": "Nam",
+					"women": "Nữ"
+				},
+				"sex": "Giới tính",
+				"status_3": "",
+				"supplier_address": "Địa chỉ",
+				"supplier_id": "Mã nhà cung cấp",
+				"supplier_id_number": "Số CMND",
+				"supplier_name": "Tên nhà cung cấp",
+				"supplier_phone": "Điện thoại",
+				"supplier_status": "Trạng thái",
+				"supplier_tax_code": "Mã số thuế"
+			}
+		},
+		"detail": {
+			"birthday": "Ngày sinh",
+			"date_range": "Ngày cấp",
+			"issue_by": "Nơi cấp",
+			"modal": {
+				"title": "Thêm mới tài khoản ngân hàng"
+			},
+			"modal1": {
+				"title": "Thêm thông tin liên hệ"
+			},
+			"note": "Chú thích",
+			"status": "Trạng thái",
+			"status_1": "Đang hoạt động",
+			"status_2": "Dừng hoạt động",
+			"tab": {
+				"title_1": "Thông tin chung",
+				"title_2": "Tài khoản ngân hàng",
+				"title_3": "Thông tin giao hàng nhận"
+			},
+			"table": {
+				"add_item": "Thêm thông tin liên hệ",
+				"address": "Địa chỉ",
+				"contact": "Tên người nhận",
+				"email": "Email",
+				"index": "STT",
+				"phone": "Số điện thoại"
+			},
+			"table1": {
+				"account_name": "Tên chủ tài khoản",
+				"account_number": "Số tài khoản",
+				"add_item": "Thêm mới tài khoản",
+				"address_bank": "Địa chỉ chi nhánh",
+				"bank_name": "Tên ngân hàng",
+				"branch": "Chi nhánh ngân hàng",
+				"city": "Tỉnh/Thành phố",
+				"index": "STT"
+			},
+			"title": "Thêm mới nhà cung cấp"
+		},
+		"header": {
+			"title": "Danh sách nhà cung cấp"
+		}
+	},
+	"unit": {
+		"content": {
+			"modal": {
+				"add_des_unit": "Mô tả",
+				"add_id_unit": "Mã đơn vị",
+				"add_name_unit": "Tên đơn vị",
+				"title": "Thêm đơn vị tính"
+			},
+			"table": {
+				"unit_description": "Mô tả",
+				"unit_id": "Mã đơn vị",
+				"unit_name": "Tên đơn vị"
+			}
+		},
+		"header": {
+			"title": "Đơn vị tính sản phẩm"
 		}
 	}
 }

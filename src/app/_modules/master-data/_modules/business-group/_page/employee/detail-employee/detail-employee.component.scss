@@ -1,5 +1,9 @@
 $color-button: #1C4E80;
 
+
+.row-button-add {
+    flex-direction: row-reverse
+}
 .list-button {
     float: right;
     button {
