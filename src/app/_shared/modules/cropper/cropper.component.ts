@@ -13,6 +13,8 @@ export class CropperComponent implements OnInit {
 
   display = false;
 
+  result = '';
+
   @Input() selectedFile: File;
 
   cropper: Cropper;
@@ -69,14 +71,15 @@ export class CropperComponent implements OnInit {
   onOk() {
     this.destroy();
     this.output.emit(this.imageDataURL);
+    this.result = this.imageDataURL;
   }
 
   onSelectFile(event) {
     this.cropper = null;
+    this.selectedFile = null;
     const {files} = event.target;
     if (files.length) {
       this.selectedFile = files[0];
-      this.display = true;
       const reader = new FileReader();
       reader.onload = () => {
       };
@@ -84,8 +87,9 @@ export class CropperComponent implements OnInit {
         this.imageDataURL = reader.result.toString();
       };
       reader.readAsDataURL(this.selectedFile);
-    } else {
-      this.selectedFile = null;
+    }
+    if (this.selectedFile) {
+      this.display = true;
     }
   }
 
@@ -96,6 +100,7 @@ export class CropperComponent implements OnInit {
     }
     this.display = false;
     this.cropped = false;
+    this.file.nativeElement.value = null;
   }
 
   onCancel(event) {
