@@ -1,1 +1,129 @@
-<p>currency works!</p>
+<div class="page currency">
+  <div class="page-header">
+    <div class="page-title">
+      {{'currency.title' | translate}}
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="showDialog()">
+        {{'general.button.add' | translate}}
+      </button>
+      <button class="btn btn-add">
+        {{'general.button.import' | translate}}
+      </button>
+      <button class="btn btn-add">
+        {{'general.button.export' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="page-body mt-4">
+    <div class="page-section list">
+      <p-table [value]="tmptable">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn>
+              {{ 'currency.content.table.currency_id' | translate}}
+            </th>
+            <th pResizableColumn> {{ 'currency.content.table.currency_name' | translate}} </th>
+            <th pResizableColumn> {{ 'currency.content.table.currency_description' | translate}} </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-currency>
+          <tr>
+            <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="currency.id">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{currency.id}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="currency.name">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{currency.name}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+            <td pEditableColumn>
+              <p-cellEditor>
+                <ng-template pTemplate="input">
+                  <input pInputText type="text" [(ngModel)]="currency.des">
+                </ng-template>
+                <ng-template pTemplate="output">
+                  {{currency.des}}
+                </ng-template>
+              </p-cellEditor>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="pagination">
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+      </div>
+    </div>
+  </div>
+  <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display"
+            [style]="{width: '900px'}">
+    <p-header>
+      {{ 'currency.content.modal.title' | translate}}
+    </p-header>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="currency_id">{{ 'currency.content.modal.add_id' | translate}} <span>*</span></label>
+            <input type="text" class="form-control" id="currency_id"/>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="currency_name">{{ 'currency.content.modal.add_name' | translate}}<span>*</span></label>
+            <input type="text" class="form-control" id="currency_name"/>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-group">
+            <label for="currency_description">{{ 'currency.content.modal.add_des_currency' | translate}}</label>
+            <textarea class="form-control" rows="6" id="currency_description">At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.</textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p-footer>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="list-button right">
+            <button class="btn btn-cancel"
+                    (click)="onClickCancel()">{{ 'currency.content.modal.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="onClickSave()"> {{ 'currency.content.modal.save' | translate}}</button>
+            <button class="btn btn-delete" mwlConfirmationPopover
+                    [popoverTitle]="popoverTitle"
+                    [popoverMessage]="popoverMessage"
+                    placement="bottom"
+                    (confirm)="confirmClicked = true"
+                    (cancel)="cancelClicked = true"
+                    (click)="onClickDelete()"> {{ 'currency.content.modal.delete' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </p-footer>
+  </p-dialog>
+</div>
