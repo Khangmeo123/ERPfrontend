@@ -19,6 +19,8 @@ import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 
+import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
+
 @NgModule({
   declarations: [StorybookComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
     ExciseTariffComponent, FiscalYearComponent, PaymentMethodComponent, PaymentTermComponent, ResourceTariffComponent, VoucherComponent,
@@ -30,6 +32,7 @@ import { DialogModule } from 'primeng/dialog';
     TableModule,
     FormsModule,
     DialogModule,
+    FiltersModule
   ]
 })
 export class StorybookModule { }
