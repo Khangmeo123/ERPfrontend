@@ -102,28 +102,29 @@ body {
   padding: 2px 3px !important;
 }
 
+.btn.btn-add,
+.btn.btn-import,
+.btn.btn-export,
+.btn.btn-save {
+  background: $color-button;
+  color: $white;
+}
+
+.btn.btn-update {
+  background: $color-button;
+  color: $white;
+}
+
+.btn.btn-delete {
+  background: $danger;
+  color: $white;
+}
+
+.btn.cancel {
+  border: 1px solid $secondary;
+}
+
 .page {
-  button.btn-add,
-  button.btn-import,
-  button.btn-export {
-    background: $color-button;
-    color: $white;
-  }
-
-  button.btn-update {
-    background: $color-button;
-    color: $white;
-  }
-
-  button.btn-delete {
-    background: $danger;
-    color: $white;
-  }
-
-  button.cancel {
-    border: 1px solid $secondary;
-  }
-
   .page-header {
     display: flex;
     flex-direction: row;
