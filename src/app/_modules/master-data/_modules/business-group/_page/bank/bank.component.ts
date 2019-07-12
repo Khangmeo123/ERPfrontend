@@ -1,3 +1,4 @@
+import { BankEntity } from './../../../../_backend/bank/bank.entity';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookmarkService } from 'src/app/_services';
@@ -60,6 +61,12 @@ export class BankComponent implements OnInit {
   ]
 
   constructor() {
+    const bank = new BankEntity({
+      id: '1', code: 'bankcode', name: 'bankname', description: 'bankdescription', bankEntity: {
+        id: '2', code: 'bankcode2', name: 'bankname2', description: 'bankdescription2',
+      }
+    });
+    console.log(bank);
   }
 
   ngOnInit() {
