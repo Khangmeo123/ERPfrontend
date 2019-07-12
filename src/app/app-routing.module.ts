@@ -11,9 +11,9 @@ const routes: Routes = [
       { path: 'home', loadChildren: () => import('./_modules/home/home.module').then(m => m.HomeModule) },
       { path: 'admin', loadChildren: () => import('./_modules/admin/admin.module').then(m => m.AdminModule) },
       { path: 'master-data', loadChildren: () => import('./_modules/master-data/master-data.module').then(m => m.MasterDataModule) },
-    ], canActivate: [AuthGuard],
+    ], /*canActivate: [AuthGuard]*/
   },
-  { path: '**', redirectTo: 'login', pathMatch: 'full' },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({

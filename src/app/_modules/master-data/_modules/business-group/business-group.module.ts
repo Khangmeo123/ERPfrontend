@@ -2,7 +2,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BusinessGroupRoutingModule } from './buniness-group-routing.module';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material';
 import { TableModule } from 'primeng/table';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
@@ -31,7 +31,9 @@ import { AccordionModule } from 'ngx-bootstrap';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
+import { InputTextModule } from 'primeng/inputtext';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
+import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 
 @NgModule({
@@ -54,6 +56,7 @@ import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
     DetailProductComponent,
     ListSupplierComponent,
     DetailSupplierComponent,
+    CurrencyComponent,
   ],
   imports: [
     CommonModule,
@@ -72,8 +75,10 @@ import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
     RadioButtonModule,
     DatePickerModule,
     KeyFilterModule,
+    FormsModule,
+    InputTextModule,
     ErrorModule,
-    CropperModule
+    SelectModule,
   ],
 })
 export class BusinessGroupModule {

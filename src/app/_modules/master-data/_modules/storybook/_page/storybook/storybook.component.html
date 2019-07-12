@@ -1,1 +1,111 @@
-<p>storybook works!</p>
+<div class="page storybook">
+  <div class="page-header">
+    <div class="page-title">
+      {{'storybook.title' | translate}}
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="toggleModal()">
+        {{'general.button.add' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="page-body mt-2">
+    <div class="page-section">
+      <p-table [value]="[]">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              {{'storybook.code' | translate}}
+            </th>
+            <th>
+              {{'storybook.name' | translate}}
+            </th>
+            <th>
+              {{'storybook.currency' | translate}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row>
+          <tr>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="text" class="form-control" [(ngModel)]="row.code" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{row.code}}
+              </ng-template>
+            </p-cellEditor>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="text" class="form-control" [(ngModel)]="row.name" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{row.name}}
+              </ng-template>
+            </p-cellEditor>
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input type="text" class="form-control" [(ngModel)]="row.currency" required>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{row.currency}}
+              </ng-template>
+            </p-cellEditor>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+
+<p-dialog [(visible)]="visible">
+  <p-header>
+    {{'storybook.add' | translate}}
+  </p-header>
+  <form class="container">
+    <div class="row">
+      <div class="form-group col-12">
+        <label>
+          {{'storybook.code' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-12">
+        <label>
+          {{'storybook.name' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-12">
+        <label>
+          {{'storybook.currency' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+  </form>
+  <p-footer *ngIf="isAdd; else notAdd">
+    <button class="btn btn-add mr-2">
+      {{'general.button.add' | translate}}
+    </button>
+    <button class="btn btn-cancel">
+      {{'general.button.cancel' | translate}}
+    </button>
+  </p-footer>
+  <ng-template #notAdd>
+    <p-footer>
+      <button class="btn btn-add mr-2">
+        {{'general.button.add' | translate}}
+      </button>
+      <button class="btn btn-cancel mr-2">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-delete">
+        {{'general.button.delete' | translate}}
+      </button>
+    </p-footer>
+  </ng-template>
+</p-dialog>
