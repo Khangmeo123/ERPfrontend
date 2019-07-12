@@ -1,7 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 // $fa-font-path:"~font-awesome/fonts";
-
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$color-button: #1C4E80;
 
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
@@ -45,14 +49,17 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+
   .input-form {
     width: 90%;
   }
-  .error-form{
+
+  .error-form {
     width: 10%;
   }
 }
-.full-width{
+
+.full-width {
   width: 100%;
 }
 
@@ -69,22 +76,112 @@ body {
 }
 
 
-.title-page{
+.title-page {
   display: flex;
+
   div {
-      font-size: 21px;
-      color: $color-title;
-      text-transform: uppercase;
-      font-weight: bold;
+    font-size: 21px;
+    color: $color-title;
+    text-transform: uppercase;
+    font-weight: bold;
   }
+
   mat-icon {
-      font-size: 23px;
-      padding: 5px;
-      padding-top: 2px;
-      cursor: pointer;
+    font-size: 23px;
+    padding: 5px;
+    padding-top: 2px;
+    cursor: pointer;
   }
 }
 
 .th-filter {
   background-color: #ffffff !important;
+}
+
+.card-header {
+  padding: 2px 3px !important;
+}
+
+.btn.btn-add,
+.btn.btn-import,
+.btn.btn-export,
+.btn.btn-save {
+  background: $color-button;
+  color: $white;
+}
+
+.btn.btn-update {
+  background: $color-button;
+  color: $white;
+}
+
+.btn.btn-delete {
+  background: $danger;
+  color: $white;
+}
+
+.btn.cancel {
+  border: 1px solid $secondary;
+}
+
+.page {
+  .page-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    .page-title {
+      font-size: 21px;
+      color: $color-title;
+      text-transform: uppercase;
+      font-weight: bold;
+      flex-grow: 1;
+      flex-basis: auto;
+    }
+
+    .page-actions {
+      .btn {
+        margin-right: 0.5rem;
+      }
+
+      .btn:only-child,
+      .btn:last-child {
+        margin-right: auto;
+      }
+    }
+
+    .page-body {
+      .page-section {
+
+      }
+
+      .page-section.form {
+
+      }
+
+      .page-section.list {
+
+      }
+    }
+
+    .pagination {
+
+    }
+  }
+
+  .page-footer {
+
+  }
+
+  mat-icon {
+    font-size: 23px;
+    padding: 2px auto 5px;
+    cursor: pointer;
+  }
+
+  .pagination {
+    margin-top: 0.5rem;
+    display: flex;
+    justify-content: flex-end;
+  }
 }

@@ -9,17 +9,11 @@ import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-b
 @Component({
   template: `<div class="container">
   <div class="row">
-  <app-cropper>
-    <button class="btn btn-primary">
-      Upload
-    </button>
-  </app-cropper>
+  <app-cropper></app-cropper>
   </div>
 </div>`,
 })
-class CropperStories {
-
-}
+class CropperStories {}
 
 storiesOf('Cropper', module)
   .addDecorator(
