@@ -140,12 +140,12 @@ body {
     }
 
     .page-actions {
-      button {
+      .btn {
         margin-right: 0.5rem;
       }
 
-      button:only-child,
-      button:last-child {
+      .btn:only-child,
+      .btn:last-child {
         margin-right: auto;
       }
     }
