@@ -28,15 +28,31 @@ import { ListSupplierComponent } from './_page/supplier/list-supplier/list-suppl
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AccordionModule } from 'ngx-bootstrap';
-import {RadioButtonModule} from 'primeng/radiobutton';
+import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
-import {KeyFilterModule} from 'primeng/keyfilter';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
-  declarations: [BusinessGroupComponent,
-    AssetComponent, BankComponent, BusinessGroupComponent, CurrencyComponent, CustomerComponent, EmployeeComponent,
-    ProductComponent, SupplierComponent, UnitComponent, DetailCustomerComponent, ListCustomerComponent, ListEmployeeComponent,
-    DetailEmployeeComponent, ListProductComponent, DetailProductComponent, ListSupplierComponent, DetailSupplierComponent],
+  declarations: [
+    BusinessGroupComponent,
+    AssetComponent,
+    BankComponent,
+    BusinessGroupComponent,
+    CurrencyComponent,
+    CustomerComponent,
+    EmployeeComponent,
+    ProductComponent,
+    SupplierComponent,
+    UnitComponent,
+    DetailCustomerComponent,
+    ListCustomerComponent,
+    ListEmployeeComponent,
+    DetailEmployeeComponent,
+    ListProductComponent,
+    DetailProductComponent,
+    ListSupplierComponent,
+    DetailSupplierComponent,
+  ],
   imports: [
     CommonModule,
     BusinessGroupRoutingModule,
@@ -54,6 +70,7 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     RadioButtonModule,
     DatePickerModule,
     KeyFilterModule,
-  ]
+  ],
 })
-export class BusinessGroupModule { }
+export class BusinessGroupModule {
+}
