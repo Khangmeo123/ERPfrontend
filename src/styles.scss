@@ -120,6 +120,10 @@ body {
     color: $white;
   }
 
+  button.cancel {
+    border: 1px solid $secondary;
+  }
+
   .page-header {
     display: flex;
     flex-direction: row;
