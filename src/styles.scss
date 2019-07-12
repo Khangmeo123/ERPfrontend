@@ -103,13 +103,33 @@ body {
 }
 
 .page {
+  button.btn-add,
+  button.btn-import,
+  button.btn-export {
+    background: $color-button;
+    color: $white;
+  }
+
+  button.btn-update {
+    background: $color-button;
+    color: $white;
+  }
+
+  button.btn-delete {
+    background: $danger;
+    color: $white;
+  }
+
   .page-header {
-    font-size: 21px;
-    color: $color-title;
-    text-transform: uppercase;
-    font-weight: bold;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
     .page-title {
+      font-size: 21px;
+      color: $color-title;
+      text-transform: uppercase;
+      font-weight: bold;
       flex-grow: 1;
       flex-basis: auto;
     }
@@ -122,21 +142,6 @@ body {
       button:only-child,
       button:last-child {
         margin-right: auto;
-      }
-
-      button.btn-add {
-        background: $color-button;
-        color: $white;
-      }
-
-      button.btn-update {
-        background: $color-button;
-        color: $white;
-      }
-
-      button.btn-delete {
-        background: $danger;
-        color: $white;
       }
     }
 
@@ -160,17 +165,13 @@ body {
   }
 
   .page-footer {
-    
+
   }
 
   mat-icon {
     font-size: 23px;
     padding: 2px auto 5px;
     cursor: pointer;
-  }
-
-  .page-list {
-    margin-top: 0.5rem;
   }
 
   .pagination {
