@@ -1,14 +1,28 @@
-<span class="cropper" role="button" (click)="file.click()">
-  <ng-content></ng-content>
+<div class="cropper" role="button" (click)="file.click()">
+  <div class="d-flex">
+    <div class="result flex-grow-1">
+      <img [src]="result" alt="result" *ngIf="result; else notResult">
+      <ng-template #notResult>
+        <img src="../../../../assets/img/image-placeholder.png" alt="">
+      </ng-template>
+    </div>
+    <div class="ml-2">
+      <button class="btn btn-primary">
+        Browse Image
+      </button>
+    </div>
+  </div>
   <input type="file" #file (change)="onSelectFile($event)" accept="image/*">
-</span>
+</div>
 
 <ng-template [ngIf]="selectedFile">
   <p-dialog header="Crop image" [(visible)]="display" [draggable]="false" [style]="{width: 450, height: 450}"
             [closable]="false"
             positionTop="100">
-    <div class="image flex-grow-1">
-      <img #image [src]="imageDataURL" [alt]="filename">
+    <div class="image-container">
+      <div class="image">
+        <img #image [src]="imageDataURL" [alt]="filename">
+      </div>
     </div>
     <div class="d-flex justify-content-between mt-2">
       <button class="btn btn-primary mr-2" (click)="onOk()" *ngIf="cropped; else notCropped">
