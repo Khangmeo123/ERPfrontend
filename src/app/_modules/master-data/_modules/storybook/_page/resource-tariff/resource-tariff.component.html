@@ -1,1 +1,228 @@
-<p>resource-tariff works!</p>
+<div class="page resource-tariff">
+    <div class="page-header">
+        <span class="page-tittle">
+            <strong>
+                {{'resource.header.title'| translate }}
+            </strong>
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>
+            <button class="btn btn-import">{{'general.button.import' | translate}}</button>
+            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+        </div>
+    </div>
+
+    <div class="page-body mt-4 ">
+        <div class="page-section form mb-4 d-flex">
+            <span>{{'resource.status.label' | translate}}</span>
+            <select class="form-control flex-grow-1" style="max-width: 10%" aria-placeholder="DH-HN">
+                <option value="1">1</option>
+            </select>
+        </div>
+
+
+        <div class="page-section list">
+            <p-table>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            {{'resource.code' | translate}}
+                        </th>
+                        <th>
+                            {{'resource.type' | translate}}
+                        </th>
+                        <th>
+                            {{'resource.unit' | translate}}
+                        </th>
+                        <th>
+                            {{'resource.percent' | translate}}
+                        </th>
+                        <th>
+                            {{'resource.description' | translate}}
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+
+                    </tr>
+                </ng-template>
+                <!-- <ng-template pTemplate="body"
+                             let-resource>
+                    <tr>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="resource.code"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{resource.code}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="resource.type"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ resource.type } }
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <input type="text" class="form-control" [(ngModel)]="tarresourceiff.unit" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{resource.unit}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.percent"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{tariff.percent}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.description"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ tariff.description }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                    </tr>
+                </ng-template> -->
+            </p-table>
+        </div>
+
+        <div class="pagination">
+            <!-- Pagination go here -->
+        </div>
+    </div>
+
+</div>
+
+
+<p-dialog [(visible)]="visible">
+    <p-header>
+        {{'resource.modal.title' | translate}}
+    </p-header>
+    <form class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="mt-4 mb-4">
+                    <label>
+                        {{'resource.code' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control" type="text" placeholder="10100">
+                </div>
+
+                <div class="mb-4">
+                    <label>
+                        {{'resource.unit' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+
+                    </label>
+                    <select class="form-control">
+                        <option value="1">tan(1000kg)</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label>
+                        {{'resource.percent' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+
+                    </label>
+                    <input class="form-control" type="text" placeholder="70">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="mt-4 mb-4">
+                    <label>
+                        {{'resource.name' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga">
+                </div>
+
+                <div class=" mb-4">
+                    <label>
+                        {{'resource.account.total' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+
+                    <select class="form-control">
+                        <option value="1">0101</option>
+                    </select>
+                </div>
+
+                <div class=" mb-4">
+                    <label>
+                        {{'resource.description' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control" type="text-area" placeholder="any description">
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-footer *ngIf="isAdd; else notAdd">
+        <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+        <button class="btn btn-save" (click)="onClickSave()">
+            {{ 'general.button.save' | translate}}</button>
+    </p-footer>
+    <ng-template #notAdd>
+        <p-footer>
+            <div class="page-actions">
+                <button class="btn btn-cancel"
+                    (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                <button class="btn btn-save" (click)="onClickSave()">
+                    {{ 'general.button.save' | translate}}</button>
+                <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                    [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                    (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                    {{ 'general.button.delete' | translate}}</button>
+            </div>
+        </p-footer>
+    </ng-template>
+</p-dialog>

@@ -16,14 +16,15 @@ import { VoucherComponent } from './_page/voucher/voucher.component';
 import { TariffCoaComponent } from './_page/tariff-coa/tariff-coa.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
-import { SelectModule } from '../../../../_shared/modules/select/select.module';
-import { AccordionModule } from 'ngx-bootstrap';
-import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
-import { PaginationModule } from '../../../../_shared/modules/pagination/pagination.module';
-import { CheckboxModule } from 'primeng/checkbox';
-import { RadioButtonModule } from 'primeng/radiobutton';
+import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { MatIconModule } from '@angular/material';
+
+import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 
 @NgModule({
   declarations: [StorybookComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
@@ -36,12 +37,18 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     TableModule,
     FormsModule,
     DialogModule,
-    SelectModule,
-    AccordionModule,
-    FiltersModule,
+    TranslateModule.forChild(),
+    DatePickerModule,
+    KeyFilterModule,
+    ReactiveFormsModule,
     PaginationModule,
-    CheckboxModule,
-    RadioButtonModule,
+    FiltersModule,
+    DialogModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger',
+    }),
+    // tslint:disable-next-line: trailing-comma
+    MatIconModule
   ]
 })
 export class StorybookModule { }

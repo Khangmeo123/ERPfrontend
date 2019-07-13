@@ -329,16 +329,16 @@
     <p-footer>
         <div class="row">
             <div class="col-sm-12">
-                    <div class="page-actions">
-                            <button class="btn btn-cancel"
-                                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-                            <button class="btn btn-save" (click)="onClickSave()">
-                                {{ 'general.button.save' | translate}}</button>
-                            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                                (cancel)="cancelClicked = true" (click)="onClickDelete()">
-                                {{ 'general.button.delete' | translate}}</button>
-                        </div>
+                <div class="page-actions">
+                    <button class="btn btn-cancel"
+                        (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                    <button class="btn btn-save" (click)="onClickSave()">
+                        {{ 'general.button.save' | translate}}</button>
+                    <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                        (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                        {{ 'general.button.delete' | translate}}</button>
+                </div>
             </div>
         </div>
     </p-footer>

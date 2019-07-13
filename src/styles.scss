@@ -1,5 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
 // $fa-font-path:"~font-awesome/fonts";
+
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/functions";
@@ -49,17 +50,14 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-
   .input-form {
     width: 90%;
   }
-
-  .error-form {
+  .error-form{
     width: 10%;
   }
 }
-
-.full-width {
+.full-width{
   width: 100%;
 }
 
@@ -76,21 +74,21 @@ body {
 }
 
 
-.title-page {
+.title-page{
   display: flex;
 
   div {
-    font-size: 21px;
-    color: $color-title;
-    text-transform: uppercase;
-    font-weight: bold;
+      font-size: 21px;
+      color: $color-title;
+      text-transform: uppercase;
+      font-weight: bold;
   }
 
   mat-icon {
-    font-size: 23px;
-    padding: 5px;
-    padding-top: 2px;
-    cursor: pointer;
+      font-size: 23px;
+      padding: 5px;
+      padding-top: 2px;
+      cursor: pointer;
   }
 }
 

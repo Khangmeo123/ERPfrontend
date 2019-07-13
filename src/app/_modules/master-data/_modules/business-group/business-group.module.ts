@@ -81,5 +81,4 @@ import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
     SelectModule,
   ],
 })
-export class BusinessGroupModule {
-}
+export class BusinessGroupModule { }

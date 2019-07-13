@@ -1,24 +1,4 @@
 {
-	"asset": {
-		"content": {
-			"modal": {
-				"title": ""
-			},
-			"table": {
-				"asset_id": "",
-				"asset_name": "",
-				"status": "",
-				"status_1": "",
-				"status_2": "",
-				"type": "",
-				"type_1": "",
-				"type_2": ""
-			}
-		},
-		"header": {
-			"title": ""
-		}
-	},
 	"bank": {
 		"content": {
 			"modal": {
@@ -37,72 +17,6 @@
 			"title": ""
 		}
 	},
-	"employee": {
-		"content": {
-			"table": {
-				"account_number": "",
-				"bassic_salary": "",
-				"birthday": "",
-				"coefficients_salary": "",
-				"date_range": "",
-				"employee_id": "",
-				"employee_name": "",
-				"gender": {
-					"men": "",
-					"women": ""
-				},
-				"id_emp": "",
-				"salary_agreement": "",
-				"sex": "",
-				"status": "",
-				"status_3": "",
-				"tax_code": ""
-			}
-		},
-		"detail": {
-			"account_name": "",
-			"branch": "",
-			"branch_address": "",
-			"city": "",
-			"modal": {
-				"title": ""
-			},
-			"name_bank": "",
-			"note": "",
-			"number_dependents": "",
-			"status": "",
-			"status_1": "",
-			"status_2": "",
-			"tab": {
-				"add_item": "",
-				"title_1": "",
-				"title_2": "",
-				"title_3": ""
-			},
-			"table": {
-				"address": "",
-				"contact": "",
-				"email": "",
-				"index": "",
-				"phone": "",
-				"relationship": ""
-			},
-			"title": ""
-		},
-		"header": {
-			"title": ""
-		}
-	},
-	"general": {
-		"button": {
-			"add": "",
-			"cancel": "",
-			"delete": "",
-			"export": "",
-			"import": "",
-			"save": ""
-		}
-	},
 	"product": {
 		"content": {
 			"detail": {
@@ -110,6 +24,8 @@
 				"product_id_tt": "",
 				"product_length": "",
 				"product_properti": "",
+				"product_status": "",
+				"product_unit": "",
 				"product_weight": "",
 				"product_width": ""
 			},
@@ -123,49 +39,8 @@
 				"product_height": "",
 				"product_id": "",
 				"product_name": "",
-				"product_properti_1": "",
-				"product_properti_2": "",
-				"product_properti_3": "",
-				"product_properti_4": "",
 				"product_status": "",
-				"product_unit": "",
-				"product_unit_1": "",
-				"product_unit_2": "",
-				"status_1": "",
-				"status_2": ""
-			}
-		},
-		"header": {
-			"title": ""
-		}
-	},
-	"supplier": {
-		"content": {
-			"table": {
-				"gender": {
-					"men": "",
-					"women": ""
-				},
-				"sex": "",
-				"status_3": "",
-				"supplier_address": "",
-				"supplier_id": "",
-				"supplier_id_number": "",
-				"supplier_name": "",
-				"supplier_phone": "",
-				"supplier_status": "",
-				"supplier_tax_code": ""
-			}
-		},
-		"detail": {
-			"birthday": "",
-			"date_range": "",
-			"issue_by": "",
-			"modal": {
-				"title": ""
-			},
-			"modal1": {
-				"title": ""
+				"product_unit": ""
 			},
 			"note": "",
 			"status": "",

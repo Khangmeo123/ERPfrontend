@@ -1,24 +1,4 @@
 {
-	"asset": {
-		"content": {
-			"modal": {
-				"title": "Thêm tài sản"
-			},
-			"table": {
-				"asset_id": "Mã tài sản",
-				"asset_name": "Tên tài sản",
-				"status": "Trạng thái",
-				"status_1": "Đang sử dụng",
-				"status_2": "Chưa sử dụng",
-				"type": "Loại tài sản",
-				"type_1": "Công cụ dụng cụ",
-				"type_2": "Tài sản cố định"
-			}
-		},
-		"header": {
-			"title": "Danh sách tài sản"
-		}
-	},
 	"bank": {
 		"content": {
 			"modal": {
@@ -37,72 +17,6 @@
 			"title": "Danh sách ngân hàng"
 		}
 	},
-	"employee": {
-		"content": {
-			"table": {
-				"account_number": "Số tài khoản",
-				"bassic_salary": "Lương đóng bảo hiểm",
-				"birthday": "Ngày sinh",
-				"coefficients_salary": "Hệ số lương",
-				"date_range": "Ngày cấp",
-				"employee_id": "Mã nhân viên",
-				"employee_name": "Tên nhân viên",
-				"gender": {
-					"men": "Nam",
-					"women": "Nữ"
-				},
-				"id_emp": "CMND",
-				"salary_agreement": "Lương thỏa thuận",
-				"sex": "Giới tính",
-				"status": "Trạng thái",
-				"status_3": "Tạm nghỉ",
-				"tax_code": "Mã số thuế"
-			}
-		},
-		"detail": {
-			"account_name": "Tên chủ tài khoản",
-			"branch": "Chi nhánh",
-			"branch_address": "Địa chỉ chi nhánh",
-			"city": "Tỉnh/Thành phố",
-			"modal": {
-				"title": "Thêm thông tin liên hệ"
-			},
-			"name_bank": "Tên ngân hàng",
-			"note": "Chú thích",
-			"number_dependents": "Số người phụ thuộc",
-			"status": "Trạng thái",
-			"status_1": "Đang hoạt động",
-			"status_2": "Dừng hoạt động",
-			"tab": {
-				"add_item": "Thêm thông tin liên hệ",
-				"title_1": "Thông tin chung",
-				"title_2": "Tài khoản ngân hàng",
-				"title_3": "Thông tin nhận hàng"
-			},
-			"table": {
-				"address": "Địa chỉ ",
-				"contact": "Tên người liên hệ",
-				"email": "Email",
-				"index": "STT",
-				"phone": "Số điện thoại",
-				"relationship": "Quan hệ với nhân viên"
-			},
-			"title": "Thêm mới nhân viên"
-		},
-		"header": {
-			"title": "Danh sách nhân viên"
-		}
-	},
-	"general": {
-		"button": {
-			"add": "Thêm mới",
-			"cancel": "Hủy",
-			"delete": "Xóa",
-			"export": "Xuất Excel",
-			"import": "Nhập hàng loạt",
-			"save": "Lưu"
-		}
-	},
 	"product": {
 		"content": {
 			"detail": {
@@ -110,6 +24,8 @@
 				"product_id_tt": "Mã SP trên thịt trường",
 				"product_length": "Chiều dài",
 				"product_properti": "Tính chất hàng",
+				"product_status": "Trạng thái",
+				"product_unit": "",
 				"product_weight": "Cân nặng",
 				"product_width": "Chiều rộng"
 			},
@@ -123,17 +39,11 @@
 				"product_height": "Chiều cao",
 				"product_id": "Mã sản phẩm",
 				"product_name": "Tên sản phẩm",
-				"product_properti_1": "Vật tư hàng hóa",
-				"product_properti_2": "Thành phẩm",
-				"product_properti_3": "Dịch vụ",
-				"product_properti_4": "Diễn giải",
 				"product_status": "Trạng thái",
-				"product_unit": "Đơn vị cơ bản",
-				"product_unit_1": "1",
-				"product_unit_2": "2",
-				"status_1": "Đang hoạt động",
-				"status_2": "Dừng hoạt động"
-			}
+				"product_unit": "Đơn vị cơ bản"
+			},
+			"upload_excel": "Nhập hàng loạt",
+			"xuat_excel": "Xuất Excel"
 		},
 		"header": {
 			"title": "Danh sách sản phẩm"
