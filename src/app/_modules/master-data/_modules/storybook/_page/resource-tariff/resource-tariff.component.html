@@ -1,25 +1,22 @@
-<div class="page">
+<div class="page resource-tariff">
     <div class="page-header">
         <span class="page-tittle">
             <strong>
-                {{'Bieu Thue Tai Nguyen '| translate }}
+                {{'resource.header.title'| translate }}
             </strong>
         </span>
         <div class="page-actions">
-            <button class="btn btn-primary btn-add"
-                    (click)="toggleModal()">add tariff</button>
-            <button class="btn btn-primary btn-import">import</button>
-            <button class="btn btn-primary btn-export">export Excel</button>
+            <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>
+            <button class="btn btn-import">{{'general.button.import' | translate}}</button>
+            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
         </div>
     </div>
 
     <div class="page-body mt-4 ">
         <div class="page-section form mb-4 d-flex">
-            <span>{{ 'ten bo so:'| translate }}</span>
-            <select class="form-control flex-grow-1"
-                    style="width: 20%"
-                    aria-placeholder="DH-HN">
-                <option value="1">DH-HN</option>
+            <span>{{'resource.status.label' | translate}}</span>
+            <select class="form-control flex-grow-1" style="max-width: 10%" aria-placeholder="DH-HN">
+                <option value="1">1</option>
             </select>
         </div>
 
@@ -29,19 +26,19 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>
-                            {{'tariff.code' | translate}}
+                            {{'resource.code' | translate}}
                         </th>
                         <th>
-                            {{'tariff.type' | translate}}
+                            {{'resource.type' | translate}}
                         </th>
                         <th>
-                            {{'tariff.unit' | translate}}
+                            {{'resource.unit' | translate}}
                         </th>
                         <th>
-                            {{'tariff.percent' | translate}}
+                            {{'resource.percent' | translate}}
                         </th>
                         <th>
-                            {{'tariff.description' | translate}}
+                            {{'resource.description' | translate}}
                         </th>
 
                     </tr>
@@ -64,19 +61,19 @@
 
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body"
-                             let-tariff>
+                <!-- <ng-template pTemplate="body"
+                             let-resource>
                     <tr>
                         <td pEditableColumn>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <input type="text"
                                            class="form-control"
-                                           [(ngModel)]="tariff.code"
+                                           [(ngModel)]="resource.code"
                                            required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{tariff.code}}
+                                    {{resource.code}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
@@ -85,21 +82,21 @@
                                 <ng-template pTemplate="input">
                                     <input type="text"
                                            class="form-control"
-                                           [(ngModel)]="tariff.type"
+                                           [(ngModel)]="resource.type"
                                            required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{ tariff.type } }
+                                    {{ resource.type } }
                             </ng-template>
                           </p-cellEditor>
                         </td>
                         <td pEditableColumn>
                           <p-cellEditor>
                             <ng-template pTemplate="input">
-                              <input type="text" class="form-control" [(ngModel)]="tariff.unit" required>
+                              <input type="text" class="form-control" [(ngModel)]="tarresourceiff.unit" required>
                             </ng-template>
                             <ng-template pTemplate="output">
-                              {{tariff.unit}}
+                              {{resource.unit}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
@@ -131,7 +128,7 @@
                         </td>
 
                     </tr>
-                </ng-template>
+                </ng-template> -->
             </p-table>
         </div>
 
@@ -145,24 +142,22 @@
 
 <p-dialog [(visible)]="visible">
     <p-header>
-        {{'Resource.Tariff.Add or Resource.Tariff.Edit' | translate}}
+        {{'resource.modal.title' | translate}}
     </p-header>
     <form class="container">
         <div class="row">
             <div class="col-6">
                 <div class="mt-4 mb-4">
                     <label>
-                        {{'tariff.code' | translate}}
+                        {{'resource.code' | translate}}
                         <span class="text-danger mr-2">(*)</span>
                     </label>
-                    <input class="form-control"
-                           type="text"
-                           placeholder="10100">
+                    <input class="form-control" type="text" placeholder="10100">
                 </div>
 
                 <div class="mb-4">
                     <label>
-                        {{'tariff.unit' | translate}}
+                        {{'resource.unit' | translate}}
                         <span class="text-danger mr-2">(*)</span>
 
                     </label>
@@ -173,30 +168,26 @@
 
                 <div class="mb-4">
                     <label>
-                        {{'tariff.percent' | translate}}
+                        {{'resource.percent' | translate}}
                         <span class="text-danger mr-2">(*)</span>
 
                     </label>
-                    <input class="form-control"
-                           type="text"
-                           placeholder="70">
+                    <input class="form-control" type="text" placeholder="70">
                 </div>
             </div>
 
             <div class="col-6">
                 <div class="mt-4 mb-4">
                     <label>
-                        {{'tariff.name' | translate}}
+                        {{'resource.name' | translate}}
                         <span class="text-danger mr-2">(*)</span>
                     </label>
-                    <input class="form-control"
-                           type="text"
-                           placeholder="Thuoc la dieu, xi ga">
+                    <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga">
                 </div>
 
                 <div class=" mb-4">
                     <label>
-                        {{'tariff.account.total' | translate}}
+                        {{'resource.account.total' | translate}}
                         <span class="text-danger mr-2">(*)</span>
                     </label>
 
@@ -207,35 +198,31 @@
 
                 <div class=" mb-4">
                     <label>
-                        {{'tariff.description' | translate}}
+                        {{'resource.description' | translate}}
                         <span class="text-danger mr-2">(*)</span>
                     </label>
-                    <input class="form-control"
-                           type="text-area"
-                           placeholder="any description">
+                    <input class="form-control" type="text-area" placeholder="any description">
                 </div>
             </div>
         </div>
     </form>
     <p-footer *ngIf="isAdd; else notAdd">
-        <button class="btn btn-add mr-3">
-            {{'Them loai thue' | translate}}
-        </button>
-        <button class="btn btn-cancel">
-            {{'Huy them' | translate}}
-        </button>
+        <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+        <button class="btn btn-save" (click)="onClickSave()">
+            {{ 'general.button.save' | translate}}</button>
     </p-footer>
     <ng-template #notAdd>
         <p-footer>
-            <button class="btn btn-add mr-2">
-                {{'Luu chinh sua' | translate}}
-            </button>
-            <button class="btn btn-cancel mr-2">
-                {{'huy luu' | translate}}
-            </button>
-            <button class="btn btn-delete">
-                {{'xoa chinh sua' | translate}}
-            </button>
+            <div class="page-actions">
+                <button class="btn btn-cancel"
+                    (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                <button class="btn btn-save" (click)="onClickSave()">
+                    {{ 'general.button.save' | translate}}</button>
+                <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                    [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                    (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                    {{ 'general.button.delete' | translate}}</button>
+            </div>
         </p-footer>
     </ng-template>
 </p-dialog>

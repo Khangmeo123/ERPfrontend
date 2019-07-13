@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AdvancedFiltersComponent } from '../../../../../../_shared/modules/filters/advanced-filters/advanced-filters.component'
+import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 
 @Component({
   selector: 'app-excise-tariff',
@@ -10,7 +11,7 @@ import { AdvancedFiltersComponent } from '../../../../../../_shared/modules/filt
 export class ExciseTariffComponent implements OnInit {
   visible = false;
   constructor() { }
-
+  pagination = new PaginationModel();
   ngOnInit() {
   }
   toggleModal() {
