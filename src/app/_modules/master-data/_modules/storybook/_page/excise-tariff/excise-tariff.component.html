@@ -134,33 +134,146 @@
             
             <div class="row">
                 <div class="col-6">
-                    <div >
+                    <div class="mt-4 mb-4">
                         <label>
                             {{'excise.code' | translate}}
                             <span class="text-danger mr-2">(*)</span>
                         </label>
-                        <input type="text"aria-placeholder="" >
+                        <input class="form-control" type="text"placeholder="10100" >
                     </div>
 
-                    <div >
+                    <div class="mb-4">
                         <label>
                             {{'excise.unit' | translate}}
                             <span class="text-danger mr-2">(*)</span>
+                            
                         </label>
+                        <select class="form-control">
+                          <option  value="1">Boo</option>
+                        </select>
                     </div>
-                    <div >
-                        <label>
+
+                    <div  class="mb-4">
+                        <label >
                             {{'excise.percent' | translate}}
                             <span class="text-danger mr-2">(*)</span>
+                            
                         </label>
+                        <input class="form-control" type="text" placeholder="70" >
                     </div>
                 </div>
 
                 <div class="col-6">
+                    <div class="mt-4 mb-4">
+                      <label>
+                          {{'excise.name' | translate}}
+                          <span class="text-danger mr-2">(*)</span>
+                      </label>
+                      <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga" >
+                    </div>
 
+                    <div class=" mb-4">
+                      <label>
+                          {{'excise.account.total' | translate}}
+                          <span class="text-danger mr-2">(*)</span>
+                      </label>
+                      
+                      <select class="form-control">
+                        <option  value="1">101</option>
+                      </select>
+                    </div>
+
+                  <div class=" mb-4">
+                    <label>
+                        {{'excise.description' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control" type="text-area" placeholder="any description" >
+                  </div>
+
+                  <div class=" mb-4 page-actions">
+                    <button class="btn  btn-add mr-3">{{ 'Them loai thue' | translate }}</button>
+                    <button class="btn  btn-cancel">{{ 'Huy them' | translate }}</button>
+                  </div>
                 </div>
             </div>
 
+        </div>
+
+        <div class="page-section">
+          <div class="page-header mt-4 mb-4">
+            <span class="page-title">
+                <strong>
+                    {{ 'chinh sua thue tieu thu dac biet' | translate }}
+                </strong>
+            </span>
+          </div>
+
+          <div class="row">
+            <div class="col-6">
+                <div class="mt-4 mb-4">
+                    <label>
+                        {{'excise.code' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control" type="text"placeholder="10100" >
+                </div>
+
+                <div class="mb-4">
+                    <label>
+                        {{'excise.unit' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                        
+                    </label>
+                    <select class="form-control">
+                      <option  value="1">Boo</option>
+                    </select>
+                </div>
+
+                <div  class="mb-4">
+                    <label >
+                        {{'excise.percent' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                        
+                    </label>
+                    <input class="form-control" type="text" placeholder="70" >
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="mt-4 mb-4">
+                  <label>
+                      {{'excise.name' | translate}}
+                      <span class="text-danger mr-2">(*)</span>
+                  </label>
+                  <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga" >
+                </div>
+
+                <div class=" mb-4">
+                  <label>
+                      {{'excise.account.total' | translate}}
+                      <span class="text-danger mr-2">(*)</span>
+                  </label>
+                  <select class="form-control">
+                    <option  value="1">101</option>
+                  </select>
+                </div>
+
+              <div class=" mb-4">
+                <label>
+                    {{'excise.description' | translate}}
+                    <span class="text-danger mr-2">(*)</span>
+                </label>
+                <input class="form-control" type="text-area" placeholder="any description" >
+              </div>
+
+              <div class=" mb-4 page-actions">
+                <button class="btn btn-save mr-2">{{ 'Luu chinh sua' | translate }}</button>
+                <button class="btn btn-cancel mr-2">{{ 'Huy chinh sua' | translate }}</button>
+                <button class="btn btn-delete ">{{ 'Xoa loai thue' | translate }}</button>
+              </div>
+            </div>
+          </div>
         </div>
 
 
