@@ -21,9 +21,10 @@ import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
-import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { MatIconModule } from '@angular/material';
+
+import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 
 @NgModule({
   declarations: [StorybookComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
@@ -32,6 +33,7 @@ import { MatIconModule } from '@angular/material';
   imports: [
     CommonModule,
     StorybookRoutingModule,
+    TranslateModule,
     TableModule,
     FormsModule,
     DialogModule,

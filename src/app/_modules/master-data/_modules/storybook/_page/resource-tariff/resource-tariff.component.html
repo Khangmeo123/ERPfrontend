@@ -1,1 +1,241 @@
-<p>resource-tariff works!</p>
+<div class="page">
+    <div class="page-header">
+        <span class="page-tittle">
+            <strong>
+                {{'Bieu Thue Tai Nguyen '| translate }}
+            </strong>
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-primary btn-add"
+                    (click)="toggleModal()">add tariff</button>
+            <button class="btn btn-primary btn-import">import</button>
+            <button class="btn btn-primary btn-export">export Excel</button>
+        </div>
+    </div>
+
+    <div class="page-body mt-4 ">
+        <div class="page-section form mb-4 d-flex">
+            <span>{{ 'ten bo so:'| translate }}</span>
+            <select class="form-control flex-grow-1"
+                    style="width: 20%"
+                    aria-placeholder="DH-HN">
+                <option value="1">DH-HN</option>
+            </select>
+        </div>
+
+
+        <div class="page-section list">
+            <p-table>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>
+                            {{'tariff.code' | translate}}
+                        </th>
+                        <th>
+                            {{'tariff.type' | translate}}
+                        </th>
+                        <th>
+                            {{'tariff.unit' | translate}}
+                        </th>
+                        <th>
+                            {{'tariff.percent' | translate}}
+                        </th>
+                        <th>
+                            {{'tariff.description' | translate}}
+                        </th>
+
+                    </tr>
+                    <tr>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th>
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body"
+                             let-tariff>
+                    <tr>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.code"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{tariff.code}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.type"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ tariff.type } }
+                            </ng-template>
+                          </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                          <p-cellEditor>
+                            <ng-template pTemplate="input">
+                              <input type="text" class="form-control" [(ngModel)]="tariff.unit" required>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                              {{tariff.unit}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.percent"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{tariff.percent}}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+                        <td pEditableColumn>
+                            <p-cellEditor>
+                                <ng-template pTemplate="input">
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.description"
+                                           required>
+                                </ng-template>
+                                <ng-template pTemplate="output">
+                                    {{ tariff.description }}
+                                </ng-template>
+                            </p-cellEditor>
+                        </td>
+
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+
+        <div class="pagination">
+            <!-- Pagination go here -->
+        </div>
+    </div>
+
+</div>
+
+
+<p-dialog [(visible)]="visible">
+    <p-header>
+        {{'Resource.Tariff.Add or Resource.Tariff.Edit' | translate}}
+    </p-header>
+    <form class="container">
+        <div class="row">
+            <div class="col-6">
+                <div class="mt-4 mb-4">
+                    <label>
+                        {{'tariff.code' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control"
+                           type="text"
+                           placeholder="10100">
+                </div>
+
+                <div class="mb-4">
+                    <label>
+                        {{'tariff.unit' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+
+                    </label>
+                    <select class="form-control">
+                        <option value="1">tan(1000kg)</option>
+                    </select>
+                </div>
+
+                <div class="mb-4">
+                    <label>
+                        {{'tariff.percent' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+
+                    </label>
+                    <input class="form-control"
+                           type="text"
+                           placeholder="70">
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="mt-4 mb-4">
+                    <label>
+                        {{'tariff.name' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control"
+                           type="text"
+                           placeholder="Thuoc la dieu, xi ga">
+                </div>
+
+                <div class=" mb-4">
+                    <label>
+                        {{'tariff.account.total' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+
+                    <select class="form-control">
+                        <option value="1">0101</option>
+                    </select>
+                </div>
+
+                <div class=" mb-4">
+                    <label>
+                        {{'tariff.description' | translate}}
+                        <span class="text-danger mr-2">(*)</span>
+                    </label>
+                    <input class="form-control"
+                           type="text-area"
+                           placeholder="any description">
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-footer *ngIf="isAdd; else notAdd">
+        <button class="btn btn-add mr-3">
+            {{'Them loai thue' | translate}}
+        </button>
+        <button class="btn btn-cancel">
+            {{'Huy them' | translate}}
+        </button>
+    </p-footer>
+    <ng-template #notAdd>
+        <p-footer>
+            <button class="btn btn-add mr-2">
+                {{'Luu chinh sua' | translate}}
+            </button>
+            <button class="btn btn-cancel mr-2">
+                {{'huy luu' | translate}}
+            </button>
+            <button class="btn btn-delete">
+                {{'xoa chinh sua' | translate}}
+            </button>
+        </p-footer>
+    </ng-template>
+</p-dialog>
