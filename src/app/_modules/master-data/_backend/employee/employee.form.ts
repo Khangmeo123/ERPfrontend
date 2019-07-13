@@ -25,11 +25,6 @@ export class EmployeeForm {
 
     constructor(employeeEntity?: EmployeeEntity) {
         if (employeeEntity !== null && employeeEntity !== undefined) {
-            if (Object.entries(employeeEntity.error).length === 0 && employeeEntity.error.constructor === Object) {
-                Object.keys(employeeEntity.error).forEach((item) => {
-                    this.error.addControl(item, new FormControl(employeeEntity.error[item]));
-                });
-            }
         }
     }
 }
