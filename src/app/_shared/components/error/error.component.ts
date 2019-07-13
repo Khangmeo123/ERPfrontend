@@ -64,6 +64,5 @@ export class ErrorComponent implements OnInit {
     console.log(this.formGroup);
     debugger
   }
-
 }
 

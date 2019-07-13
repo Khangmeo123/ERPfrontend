@@ -5,15 +5,17 @@
         {{filterTypeSign}}
       </span>
       <input *ngIf="!isDateFilter" type={{typeInput}} class="form-control" (input)="onApplyFilter($event)"
-        placeholder="Search...">
-      <p-calendar (onInput)="onApplyFilter($event)" (onSelect)="onApplyFilter($event)" *ngIf="isDateFilter">
-      </p-calendar>
+             placeholder="Search...">
+      <!--        <p-calendar (onInput)="onApplyFilter($event)" (onSelect)="onApplyFilter($event)" *ngIf="isDateFilter">-->
+      <!--        </p-calendar>-->
+      <div class="flex-grow-1">
+        <app-date-picker (valueChange)="onApplyFilter($event)"></app-date-picker>
+      </div>
       <div class="input-group-append">
         <button #toggler class="btn" type="button" (click)="toggleList()">
           <i class="fas fa-filter"></i>
         </button>
       </div>
-
     </div>
     <div [@toggleMenu]="listState">
       <div class="select-list">
