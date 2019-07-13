@@ -71,6 +71,7 @@ export class BankComponent implements OnInit {
   ngOnInit() {
     this.userFormSub = this.userService.userForm$.subscribe(user => {
       this.userForm = user;
+      debugger
     });
   }
 
