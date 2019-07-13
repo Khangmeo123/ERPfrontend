@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./resource-tariff.component.scss']
 })
 export class ResourceTariffComponent implements OnInit {
-
+  visible = false;
   constructor() { }
 
   ngOnInit() {
   }
 
+  toggleModal() {
+    this.visible = !this.visible;
+  }
 }

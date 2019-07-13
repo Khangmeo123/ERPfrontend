@@ -8,10 +8,12 @@ import { AdvancedFiltersComponent } from '../../../../../../_shared/modules/filt
   styleUrls: ['./excise-tariff.component.scss']
 })
 export class ExciseTariffComponent implements OnInit {
-
+  visible = false;
   constructor() { }
 
   ngOnInit() {
   }
-
+  toggleModal() {
+    this.visible = !this.visible;
+  }
 }
