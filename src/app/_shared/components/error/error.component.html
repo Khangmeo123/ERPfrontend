@@ -1,7 +1,10 @@
 <div class="full-width">
   <i class="fa fa-15 fa-exclamation-circle text-danger pull-right" [ngClass]="placement">
-            <span *ngFor="let error of errors" class="tooltiptext">
-              {{ error[0] | translate }}
-            </span>
+    <span class="tooltiptext">
+      <ng-container *ngFor="let error of errors">
+        {{ error[0] | translate }}
+      </ng-container>
+      {{formGroup.controls.error?.get(property).value}}
+    </span>
   </i>
 </div>
