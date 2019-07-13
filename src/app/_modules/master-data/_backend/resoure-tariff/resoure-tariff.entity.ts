@@ -1,8 +1,8 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class ResoureTariffEntity extends Entity {
-    // storyBookEntity:
-    storyBookId: string;
+    // sobEntity:
+    sobId: string;
 
     taxCode: string;
 

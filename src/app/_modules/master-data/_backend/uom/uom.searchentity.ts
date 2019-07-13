@@ -1,11 +1,11 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
-export class UnitSearchEntity extends SearchEntity {
+export class UomSearchEntity extends SearchEntity {
     code: string;
     name: string;
     description: string;
 
-    constructor(unitSearchEntity: any) {
-        super(unitSearchEntity);
+    constructor(uomSearchEntity: any) {
+        super(uomSearchEntity);
     }
 }

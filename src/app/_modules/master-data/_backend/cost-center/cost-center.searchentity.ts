@@ -1,7 +1,7 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class CostCenterSearchEntity extends SearchEntity {
-    storyBookId: string;
+    sobId: string;
     code: string;
     name: string;
     fromValid: string;

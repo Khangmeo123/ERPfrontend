@@ -1,10 +1,10 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class TariffCoaEntity extends Entity {
-    // storyBookEntity:
-    storyBookId: string;
-    storyBookCode: string;
-    storyBookName: string;
+    // sobEntity:
+    sobId: string;
+    sobCode: string;
+    sobName: string;
 
     // tariffEntity:
     tariffId: string;

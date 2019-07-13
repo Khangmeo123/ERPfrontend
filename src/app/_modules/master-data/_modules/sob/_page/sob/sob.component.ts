@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-storybook',
-  templateUrl: './storybook.component.html',
-  styleUrls: ['./storybook.component.scss'],
+  selector: 'app-sob',
+  templateUrl: './sob.component.html',
+  styleUrls: ['./sob.component.scss'],
 })
-export class StorybookComponent implements OnInit {
+export class SobComponent implements OnInit {
 
   visible = false;
 

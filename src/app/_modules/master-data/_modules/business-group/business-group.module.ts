@@ -16,7 +16,7 @@ import { CustomerComponent } from './_page/customer/customer.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
 import { ProductComponent } from './_page/product/product.component';
 import { SupplierComponent } from './_page/supplier/supplier.component';
-import { UnitComponent } from './_page/unit/unit.component';
+import { UomComponent } from './_page/uom/uom.component';
 import { DetailCustomerComponent } from './_page/customer/detail-customer/detail-customer.component';
 import { ListCustomerComponent } from './_page/customer/list-customer/list-customer.component';
 import { DetailSupplierComponent } from './_page/supplier/detail-supplier/detail-supplier.component';
@@ -47,7 +47,7 @@ import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
     EmployeeComponent,
     ProductComponent,
     SupplierComponent,
-    UnitComponent,
+    UomComponent,
     DetailCustomerComponent,
     ListCustomerComponent,
     ListEmployeeComponent,

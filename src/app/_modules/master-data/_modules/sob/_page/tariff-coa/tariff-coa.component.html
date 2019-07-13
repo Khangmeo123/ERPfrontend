@@ -10,7 +10,7 @@
   <div class="page-body">
     <div class="page-section d-flex align-items-center">
       <div class="flex-shrink-1 mr-2">
-        {{'storybook.name' | translate}}
+        {{'sob.name' | translate}}
       </div>
       <div>
         <app-single-select></app-single-select>
@@ -23,10 +23,12 @@
             {{'tariff_coa.tariff.title' | translate}}
           </span>
           <div class="mt-2">
-            <p-checkbox name="tariff" value="excise_tax" label="{{'tariff_coa.tariff.excise' | translate}}"></p-checkbox>
+            <p-checkbox name="tariff" value="excise_tax" label="{{'tariff_coa.tariff.excise' | translate}}">
+            </p-checkbox>
           </div>
           <div class="mt-2">
-            <p-checkbox name="tariff" value="excise_tax" label="{{'tariff_coa.tariff.resources' | translate}}"></p-checkbox>
+            <p-checkbox name="tariff" value="excise_tax" label="{{'tariff_coa.tariff.resources' | translate}}">
+            </p-checkbox>
           </div>
         </div>
         <div class="col">
@@ -34,10 +36,12 @@
             {{'tariff_coa.coa.title' | translate}}
           </span>
           <div class="mt-2">
-            <p-radioButton name="coa" value="circular_133" label="{{ 'tariff_coa.coa.circular_133' | translate}}"></p-radioButton>
+            <p-radioButton name="coa" value="circular_133" label="{{ 'tariff_coa.coa.circular_133' | translate}}">
+            </p-radioButton>
           </div>
           <div class="mt-2">
-            <p-radioButton name="coa" value="circular_200" label="{{ 'tariff_coa.coa.circular_200' | translate}}"></p-radioButton>
+            <p-radioButton name="coa" value="circular_200" label="{{ 'tariff_coa.coa.circular_200' | translate}}">
+            </p-radioButton>
           </div>
         </div>
       </div>

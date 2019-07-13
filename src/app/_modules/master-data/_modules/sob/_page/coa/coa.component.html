@@ -1,24 +1,24 @@
-<div class="page bank_account-details">
+<div class="page coa">
   <div class="page-header">
-    <span class="page-title">
-      {{'bank_account.details.title' | translate}}
-    </span>
+    <div class="page-title">
+      {{'coa.list.title' | translate}}
+    </div>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleBankAccountsModal()">
-        {{'general.button.add' | translate}}
+      <button class="btn btn-add" (click)="toggleModal()">
+        {{'customer.buttons.add' | translate}}
       </button>
       <button class="btn btn-import">
-        {{'general.button.import' | translate}}
+        {{'customer.buttons.import' | translate}}
       </button>
       <button class="btn btn-export">
-        {{'general.button.export' | translate}}
+        {{'customer.buttons.export' | translate}}
       </button>
     </div>
   </div>
   <div class="page-body mt-4">
     <div class="page-section d-flex align-items-center">
       <div class="flex-shrink-1 mr-2">
-        {{'bank_account.storybook.name' | translate}}
+        {{'sob.name' | translate}}
       </div>
       <div>
         <app-single-select></app-single-select>
@@ -29,22 +29,16 @@
         <ng-template pTemplate="header">
           <tr>
             <th>
-              {{'bank_account.accountant_code' | translate}}
+              {{'sob.coa.account_number' | translate}}
             </th>
             <th>
-              {{'bank_account.bank_code' | translate}}
+              {{'sob.coa.account_name' | translate}}
             </th>
             <th>
-              {{'bank_account.bank_name' | translate}}
+              {{'sob.coa.account_status' | translate}}
             </th>
             <th>
-              {{'bank_account.account_number' | translate}}
-            </th>
-            <th>
-              {{'bank_account.account_owner' | translate}}
-            </th>
-            <th>
-              {{'bank_account.description' | translate}}
+              {{'sob.coa.account_description' | translate}}
             </th>
           </tr>
           <tr>
@@ -60,45 +54,13 @@
             <th>
               <app-advanced-filters></app-advanced-filters>
             </th>
-            <th>
-              <app-advanced-filters></app-advanced-filters>
-            </th>
-            <th>
-              <app-advanced-filters></app-advanced-filters>
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-row>
-          <tr>
-            <td>
-              {{row.accountant_code}}
-            </td>
-            <td>
-              {{row.bank_code}}
-            </td>
-            <td>
-              {{row.bank_name}}
-            </td>
-            <td>
-              {{row.account_number}}
-            </td>
-            <td>
-              {{row.account_owner}}
-            </td>
-            <td>
-              {{row.description}}
-            </td>
           </tr>
         </ng-template>
       </p-table>
-      <div class="pagination mt-2">
-        <app-pagination [pagination]="pagination" (paginationOut)="paginationOutput($event)"></app-pagination>
-      </div>
     </div>
   </div>
 </div>
-
-<p-dialog modal="true" [(visible)]="bankAccountsModal">
+<p-dialog modal="true" [(visible)]="modalState">
   <p-header>
     {{'bank_account.bank_accounts.add' | translate}}
   </p-header>
@@ -106,34 +68,34 @@
     <div class="row">
       <div class="form-group col-6">
         <label>
-          {{'bank_account.bank_accounts.accountant_code' | translate}}
+          {{'sob.coa.account_number' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <app-single-select></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
-          {{'bank_account.bank_accounts.bank_code' | translate}}
+          {{'sob.coa.account_name' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'bank_account.bank_accounts.account_number' | translate}}
+          {{'sob.coa.account_status' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'bank_account.bank_accounts.account_owner' | translate}}
+          {{'sob.coa.super_account' | translate}}
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-12">
         <label>
-          {{'bank_account.bank_accounts.description' | translate}}
+          {{'sob.coa.description' | translate}}
         </label>
         <textarea class="form-control" rows="3"></textarea>
       </div>

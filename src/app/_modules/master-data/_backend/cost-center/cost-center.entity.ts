@@ -1,8 +1,8 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class CostCenterEntity extends Entity {
-    // storyBookEntity:
-    storyBookId: string;
+    // sobEntity:
+    sobId: string;
 
     code: string;
     name: string;

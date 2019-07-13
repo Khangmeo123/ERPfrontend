@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { StorybookRoutingModule } from './storybook-routing.module';
 
-import { StorybookComponent } from './_page/storybook/storybook.component';
 import { PaymentMethodComponent } from './_page/payment-method/payment-method.component';
 import { PaymentTermComponent } from './_page/payment-term/payment-term.component';
 import { BankAccountComponent } from './_page/bank-account/bank-account.component';
@@ -25,14 +23,19 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { MatIconModule } from '@angular/material';
 
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
+import { SobRoutingModule } from './sob-routing.module';
+import { SobComponent } from './_page/sob/sob.component';
+import { SelectModule } from 'src/app/_shared/modules/select/select.module';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
-  declarations: [StorybookComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
+  declarations: [SobComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
     ExciseTariffComponent, FiscalYearComponent, PaymentMethodComponent, PaymentTermComponent, ResourceTariffComponent, VoucherComponent,
     TariffCoaComponent],
   imports: [
     CommonModule,
-    StorybookRoutingModule,
+    SobRoutingModule,
     TranslateModule,
     TableModule,
     FormsModule,
@@ -48,7 +51,10 @@ import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
       confirmButtonType: 'danger',
     }),
     // tslint:disable-next-line: trailing-comma
-    MatIconModule
+    MatIconModule,
+    CheckboxModule,
+    SelectModule,
+    RadioButtonModule,
   ]
 })
-export class StorybookModule { }
+export class SobModule { }

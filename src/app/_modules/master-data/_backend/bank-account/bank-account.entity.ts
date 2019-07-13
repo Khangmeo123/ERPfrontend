@@ -1,7 +1,7 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class BankAccountEntity extends Entity {
-    storyBookId: string;
+    sobId: string;
 
     // coaEntity:
     coaId: string;

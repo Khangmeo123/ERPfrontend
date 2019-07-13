@@ -3,11 +3,11 @@ import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.m
 import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
 @Component({
-  selector: 'app-unit',
-  templateUrl: './unit.component.html',
-  styleUrls: ['./unit.component.scss']
+  selector: 'app-uom',
+  templateUrl: './uom.component.html',
+  styleUrls: ['./uom.component.scss']
 })
-export class UnitComponent implements OnInit {
+export class UomComponent implements OnInit {
   isSaveBookMark: boolean = false;
   bookMarkId: string;
   title = 'bank.header.title';

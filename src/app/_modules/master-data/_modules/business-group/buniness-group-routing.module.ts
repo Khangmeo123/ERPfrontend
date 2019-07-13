@@ -6,7 +6,7 @@ import { BankComponent } from './_page/bank/bank.component';
 import { ProductComponent } from './_page/product/product.component';
 import { ListProductComponent } from './_page/product/list-product/list-product.component';
 import { DetailProductComponent } from './_page/product/detail-product/detail-product.component';
-import { UnitComponent } from './_page/unit/unit.component';
+import { UomComponent } from './_page/uom/uom.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
 import { ListEmployeeComponent } from './_page/employee/list-employee/list-employee.component';
@@ -31,7 +31,7 @@ const routes: Routes = [
           { path: '', redirectTo: 'list-product', pathMatch: 'full' }
         ],
       },
-      { path: 'unit', component: UnitComponent },
+      { path: 'unit', component: UomComponent },
       { path: 'asset', component: AssetComponent },
       {
         path: 'employee', component: EmployeeComponent, children: [

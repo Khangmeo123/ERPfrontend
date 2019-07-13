@@ -1,7 +1,7 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class ExciseTariffSearchEntity extends SearchEntity {
-    storyBookId: string;
+    sobId: string;
     taxCode: string;
     taxTypeId: string;
     unitId: string;

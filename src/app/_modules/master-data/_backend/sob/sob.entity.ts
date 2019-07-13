@@ -1,6 +1,6 @@
 import { Entity } from 'src/app/_helpers/entity';
 
-export class StoryBookEntity extends Entity {
+export class SobEntity extends Entity {
     code: string;
     name: string;
 
@@ -9,7 +9,7 @@ export class StoryBookEntity extends Entity {
     currencyCode: string;
     currencyName: string;
 
-    constructor(storyBookEntity: any) {
-        super(storyBookEntity);
+    constructor(sobEntity: any) {
+        super(sobEntity);
     }
 }
