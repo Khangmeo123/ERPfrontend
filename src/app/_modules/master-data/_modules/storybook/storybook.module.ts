@@ -18,6 +18,12 @@ import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
+import { SelectModule } from '../../../../_shared/modules/select/select.module';
+import { AccordionModule } from 'ngx-bootstrap';
+import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
+import { PaginationModule } from '../../../../_shared/modules/pagination/pagination.module';
+import { CheckboxModule } from 'primeng/checkbox';
+import { RadioButtonModule } from 'primeng/radiobutton';
 
 @NgModule({
   declarations: [StorybookComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
@@ -30,6 +36,12 @@ import { DialogModule } from 'primeng/dialog';
     TableModule,
     FormsModule,
     DialogModule,
+    SelectModule,
+    AccordionModule,
+    FiltersModule,
+    PaginationModule,
+    CheckboxModule,
+    RadioButtonModule,
   ]
 })
 export class StorybookModule { }

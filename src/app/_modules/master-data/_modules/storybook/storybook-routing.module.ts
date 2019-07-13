@@ -18,11 +18,11 @@ const routes: Routes = [
   {
     path: '', children: [
       { path: '', component: StorybookComponent },
-      { path: 'bank-acount', component: BankAccountComponent },
+      { path: 'bank-account', component: BankAccountComponent },
       { path: 'tariff-coa', component: TariffCoaComponent },
       { path: 'coa', component: CoaComponent },
       { path: 'excise-tariff', component: ExciseTariffComponent },
-      { path: 'resoure-tariff', component: ResourceTariffComponent },
+      { path: 'resource-tariff', component: ResourceTariffComponent },
       { path: 'cost-center', component: CostCenterComponent },
       { path: 'fiscal-year', component: FiscalYearComponent },
       { path: 'accountant-period', component: AccountantPeriodComponent },
