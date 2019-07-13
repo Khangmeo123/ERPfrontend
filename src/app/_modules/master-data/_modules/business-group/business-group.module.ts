@@ -32,8 +32,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
-import { ErrorModule } from '../../../../_shared/components/error/error.module';
+import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
+import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 
 @NgModule({
   declarations: [

@@ -7,6 +7,7 @@
 			"table": {
 				"asset_id": "",
 				"asset_name": "",
+				"status": "",
 				"status_1": "",
 				"status_2": "",
 				"type": "",
@@ -20,23 +21,17 @@
 	},
 	"bank": {
 		"content": {
-			"add_item": "",
 			"modal": {
 				"add_des_bank": "",
 				"add_id_bank": "",
 				"add_name_bank": "",
-				"cancel": "",
-				"delete": "",
-				"save": "",
 				"title": ""
 			},
 			"table": {
 				"bank_description": "",
 				"bank_id": "",
 				"bank_name": ""
-			},
-			"upload_excel": "",
-			"xuat_excel": ""
+			}
 		},
 		"header": {
 			"title": ""
@@ -46,7 +41,10 @@
 		"content": {
 			"table": {
 				"account_number": "",
+				"bassic_salary": "",
 				"birthday": "",
+				"coefficients_salary": "",
+				"date_range": "",
 				"employee_id": "",
 				"employee_name": "",
 				"gender": {
@@ -54,19 +52,59 @@
 					"women": ""
 				},
 				"id_emp": "",
-				"sex": ""
+				"salary_agreement": "",
+				"sex": "",
+				"status": "",
+				"status_3": "",
+				"tax_code": ""
 			}
 		},
 		"detail": {
+			"account_name": "",
+			"branch": "",
+			"branch_address": "",
+			"city": "",
+			"modal": {
+				"title": ""
+			},
+			"name_bank": "",
+			"note": "",
+			"number_dependents": "",
+			"status": "",
+			"status_1": "",
+			"status_2": "",
+			"tab": {
+				"add_item": "",
+				"title_1": "",
+				"title_2": "",
+				"title_3": ""
+			},
+			"table": {
+				"address": "",
+				"contact": "",
+				"email": "",
+				"index": "",
+				"phone": "",
+				"relationship": ""
+			},
 			"title": ""
 		},
 		"header": {
 			"title": ""
 		}
 	},
+	"general": {
+		"button": {
+			"add": "",
+			"cancel": "",
+			"delete": "",
+			"export": "",
+			"import": "",
+			"save": ""
+		}
+	},
 	"product": {
 		"content": {
-			"add_item": "",
 			"detail": {
 				"product_id_ncc": "",
 				"product_id_tt": "",
@@ -76,9 +114,7 @@
 				"product_width": ""
 			},
 			"modal": {
-				"cancel": "",
-				"delete": "",
-				"save": "",
+				"add_des": "",
 				"title": ""
 			},
 			"table": {
@@ -97,9 +133,86 @@
 				"product_unit_2": "",
 				"status_1": "",
 				"status_2": ""
+			}
+		},
+		"header": {
+			"title": ""
+		}
+	},
+	"supplier": {
+		"content": {
+			"table": {
+				"gender": {
+					"men": "",
+					"women": ""
+				},
+				"sex": "",
+				"status_3": "",
+				"supplier_address": "",
+				"supplier_id": "",
+				"supplier_id_number": "",
+				"supplier_name": "",
+				"supplier_phone": "",
+				"supplier_status": "",
+				"supplier_tax_code": ""
+			}
+		},
+		"detail": {
+			"birthday": "",
+			"date_range": "",
+			"issue_by": "",
+			"modal": {
+				"title": ""
 			},
-			"upload_excel": "",
-			"xuat_excel": ""
+			"modal1": {
+				"title": ""
+			},
+			"note": "",
+			"status": "",
+			"status_1": "",
+			"status_2": "",
+			"tab": {
+				"title_1": "",
+				"title_2": "",
+				"title_3": ""
+			},
+			"table": {
+				"add_item": "",
+				"address": "",
+				"contact": "",
+				"email": "",
+				"index": "",
+				"phone": ""
+			},
+			"table1": {
+				"account_name": "",
+				"account_number": "",
+				"add_item": "",
+				"address_bank": "",
+				"bank_name": "",
+				"branch": "",
+				"city": "",
+				"index": ""
+			},
+			"title": ""
+		},
+		"header": {
+			"title": ""
+		}
+	},
+	"unit": {
+		"content": {
+			"modal": {
+				"add_des_unit": "",
+				"add_id_unit": "",
+				"add_name_unit": "",
+				"title": ""
+			},
+			"table": {
+				"unit_description": "",
+				"unit_id": "",
+				"unit_name": ""
+			}
 		},
 		"header": {
 			"title": ""

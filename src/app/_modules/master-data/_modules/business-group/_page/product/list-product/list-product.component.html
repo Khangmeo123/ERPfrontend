@@ -1,88 +1,73 @@
-<div class="product-list">
-        <div style="height: 100%; width: 100%">
-            <div class="title-page">
-                <div>
-                    {{'product.header.title' | translate}}
-                </div>
-                <span (click)="onClickSaveBookMark($event)">
-                    <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
-                        star
-                    </mat-icon>
-                </span>
-    
-            </div>
-        </div>
-        <hr>
-        <div class="content-product">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="list-button right">
-                        <button class="btn btn-add" (click)="showdetail()"> +
-                            {{ 'product.content.add_item' | translate}}</button>
-                        <button class="btn btn-add"> {{ 'product.content.upload_excel' | translate}}</button>
-                        <button class="btn btn-add"> {{ 'product.content.xuat_excel' | translate}}</button>
-                    </div>
-                </div>
-            </div>
-    
-    
-            <div class="row" style="margin-top: 15px">
-                <div class="col-sm-12">
-                    <div class="table-list-product">
-                        <p-table [value]="tmptable">
-                            <ng-template pTemplate="header">
-                                <tr>
-                                    <th pResizableColumn>
-                                        {{ 'product.content.table.product_id' | translate}}
-                                    </th>
-                                    <th pResizableColumn> {{ 'product.content.table.product_name' | translate}} </th>
-                                    <th pResizableColumn> {{ 'product.content.table.product_description' | translate}} </th>
-                                    <th pResizableColumn> {{ 'product.content.table.product_unit' | translate}} </th>
-                                    <th pResizableColumn> {{ 'product.content.table.product_cost' | translate}} </th>
-                                    <th pResizableColumn> {{ 'product.content.table.product_status' | translate}} </th>
-                                </tr>
-                                <tr>
-                                    <th class="th-filter">
-                                        <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
-                                    </th>
-                                    <th class="th-filter">
-                                        <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
-                                    </th>
-                                    <th class="th-filter">
-                                        <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
-                                    </th>
-                                    <th class="th-filter">
-                                        <app-advanced-filters [filter]="filters.unit"></app-advanced-filters>
-                                    </th>
-                                    <th class="th-filter">
-                                        <app-advanced-filters [filter]="filters.cost"></app-advanced-filters>
-                                    </th>
-                                    <th class="th-filter">
-                                        <app-advanced-filters [filter]="filters.status"></app-advanced-filters>
-                                    </th>
-                                </tr>
-                            </ng-template>
-                            <ng-template pTemplate="body" let-product>
-                                <tr>
-                                    <td> {{product.id}} </td>
-                                    <td> {{product.name}} </td>
-                                    <td> {{product.des}} </td>
-                                    <td> {{product.unit}} </td>
-                                    <td> {{product.cost}} </td>
-                                    <td> {{product.status}} </td>
-                                </tr>
-                            </ng-template>
-                        </p-table>
-                    </div>
-                </div>
-            </div>
-    
-            <div class="row">
-                <div class="fix-pagination">
-                    <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
-                </div>
-            </div>
-    
+<div class="page product-list">
+    <div class="page-header">
+        <span class="page-title">
+            {{'product.header.title' | translate}}
+            <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="showdetail()"> + {{'general.button.add' | translate}}</button>
+            <button class="btn btn-import">{{'general.button.import' | translate}}</button>
+            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
         </div>
     </div>
-    
+    <hr>
+
+    <div class="page-body">
+        <div class="page-selection list">
+            <p-table [value]="tmptable">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn>
+                            {{ 'product.content.table.product_id' | translate}}
+                        </th>
+                        <th pResizableColumn> {{ 'product.content.table.product_name' | translate}} </th>
+                        <th pResizableColumn> {{ 'product.content.table.product_description' | translate}} </th>
+                        <th pResizableColumn> {{ 'product.content.table.product_unit' | translate}} </th>
+                        <th pResizableColumn> {{ 'product.content.table.product_cost' | translate}} </th>
+                        <th pResizableColumn> {{ 'product.content.table.product_status' | translate}} </th>
+                    </tr>
+                    <tr>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.unit"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.cost"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.status"></app-advanced-filters>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr>
+                        <td> {{product.id}} </td>
+                        <td> {{product.name}} </td>
+                        <td> {{product.des}} </td>
+                        <td> {{product.unit}} </td>
+                        <td> {{product.cost}} </td>
+                        <td> {{product.status}} </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+    </div>
+
+</div>

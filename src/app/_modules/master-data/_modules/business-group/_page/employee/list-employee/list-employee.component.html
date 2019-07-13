@@ -1,72 +1,61 @@
-<div class="employee-list">
-    <div style="height: 100%; width: 100%">
-        <div class="title-page">
-            <div>
-                {{'employee.header.title' | translate}}
-            </div>
+<div class="page employee-list">
+    <div class="page-header">
+        <span class="page-title">
+            {{'employee.header.title' | translate}}
             <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
 
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="showdetail()"> + {{'general.button.add' | translate}}</button>
+            <button class="btn btn-import">{{'general.button.import' | translate}}</button>
+            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
         </div>
     </div>
     <hr>
-    <div class="content-employee">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="list-button right">
-                    <button class="btn btn-add" (click)="showdetail()"> +
-                        {{ 'bank.content.add_item' | translate}}</button>
-                    <button class="btn btn-add"> {{ 'bank.content.upload_excel' | translate}}</button>
-                    <button class="btn btn-add"> {{ 'bank.content.xuat_excel' | translate}}</button>
-                </div>
-            </div>
-        </div>
-
-
-        <div class="row" style="margin-top: 15px">
-            <div class="col-sm-12">
-                <div class="table-list-employee">
-                    <p-table [value]="tmptable">
-                        <ng-template pTemplate="header">
-                            <tr>
-                                <th pResizableColumn>
-                                    {{ 'employee.content.table.employee_id' | translate}}
-                                </th>
-                                <th pResizableColumn> {{ 'employee.content.table.employee_name' | translate}} </th>
-                                <th pResizableColumn> {{ 'employee.content.table.sex' | translate}} </th>
-                                <th pResizableColumn> {{ 'employee.content.table.birthday' | translate}} </th>
-                                <th pResizableColumn> {{ 'employee.content.table.id_emp' | translate}} </th>
-                                <th pResizableColumn> {{ 'employee.content.table.account_number' | translate}} </th>
-                                <th pResizableColumn> {{ 'product.content.table.product_status' | translate}} </th>
-                            </tr>
-                            <tr>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.sex"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.birthday"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.id_emp"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.account_number"></app-advanced-filters>
-                                </th>
-                                <th class="th-filter">
-                                    <app-advanced-filters [filter]="filters.status"></app-advanced-filters>
-                                </th>
-                            </tr>
-                        </ng-template>
-                        <!-- <ng-template pTemplate="body" let-employee>
+    <div class="page-body">
+        <div class="page-selection list" style="margin-top: 15px">
+            <p-table [value]="tmptable">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn>
+                            {{ 'employee.content.table.employee_id' | translate}}
+                        </th>
+                        <th pResizableColumn> {{ 'employee.content.table.employee_name' | translate}} </th>
+                        <th pResizableColumn> {{ 'employee.content.table.sex' | translate}} </th>
+                        <th pResizableColumn> {{ 'employee.content.table.birthday' | translate}} </th>
+                        <th pResizableColumn> {{ 'employee.content.table.id_emp' | translate}} </th>
+                        <th pResizableColumn> {{ 'employee.content.table.account_number' | translate}} </th>
+                        <th pResizableColumn> {{ 'employee.content.table.status' | translate}} </th>
+                    </tr>
+                    <tr>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.sex"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.birthday"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.id_emp"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.account_number"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.status"></app-advanced-filters>
+                        </th>
+                    </tr>
+                </ng-template>
+                <!-- <ng-template pTemplate="body" let-employee>
                             <tr>
                                 <td> {{employee.id}} </td>
                                 <td> {{employee.name}} </td>
@@ -76,15 +65,11 @@
                                 <td> {{employee.status}} </td>
                             </tr>
                         </ng-template> -->
-                    </p-table>
-                </div>
-            </div>
+            </p-table>
         </div>
 
-        <div class="row">
-            <div class="fix-pagination">
-                <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
-            </div>
+        <div class="pagination">
+            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
         </div>
 
     </div>
