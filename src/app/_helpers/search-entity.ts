@@ -1,5 +1,7 @@
 export class SearchEntity {
     id: string;
+    skip: number;
+    take: number;
 
     constructor(searchEntity: any) {
         if (searchEntity !== null && searchEntity !== undefined) {
