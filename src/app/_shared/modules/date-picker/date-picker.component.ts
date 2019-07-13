@@ -30,6 +30,8 @@ export class DatePickerComponent implements OnInit {
 
   @Input() control = new FormControl();
 
+  @Input() displayToggler = false;
+
   @Input() inputReadOnly = false;
 
   @Input() placeHolder: string = 'ngày/tháng/năm';
@@ -54,7 +56,8 @@ export class DatePickerComponent implements OnInit {
   ngOnInit() {
   }
 
-  onFocus() {
+  onMouseDown(toggler) {
+    console.log(toggler._button._elementRef.nativeElement.click());
   }
 
   onDateChange(event) {

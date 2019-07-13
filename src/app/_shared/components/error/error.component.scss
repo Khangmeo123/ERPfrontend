@@ -3,7 +3,7 @@
     padding: 5px;
 }
 //tool-tip-custom:
-@mixin tooltiptext {
+@mixin tooltipText {
     font-size: 0.8rem;
     visibility: hidden;
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -24,8 +24,8 @@
 }
 .tooltip-right {
     position: relative;
-    .tooltiptext {
-        @include tooltiptext;
+    .tooltipText {
+        @include tooltipText;
         top: -50%;
         left: 120%; 
     }::before {
@@ -39,15 +39,15 @@
         border-color: transparent #f8d7da transparent transparent;
       };
 }
-.tooltip-right:hover .tooltiptext {
+.tooltip-right:hover .tooltipText {
     visibility: visible;
     opacity: 1;
 }
 
 .tooltip-left {
     position: relative;
-    .tooltiptext {
-        @include tooltiptext;
+    .tooltipText {
+        @include tooltipText;
         top: -5px;
         right: 120%; 
     }::after {
@@ -61,7 +61,7 @@
         border-color: transparent transparent transparent #f8d7da;
       }
 }
-.tooltip-left:hover .tooltiptext {
+.tooltip-left:hover .tooltipText {
     visibility: visible;
     opacity: 1;
 }
@@ -69,8 +69,8 @@
 
 .tooltip-bottom {
     position: relative;
-    .tooltiptext {
-        @include tooltiptext;
+    .tooltipText {
+        @include tooltipText;
         width: 150px;
         top: 120%;
         left: 50%; 
@@ -86,15 +86,15 @@
         border-color: transparent transparent #f8d7da transparent;
       }
 }
-.tooltip-bottom:hover .tooltiptext {
+.tooltip-bottom:hover .tooltipText {
     visibility: visible;
     opacity: 1;
 }
 
 .tooltip-top {
     position: relative;
-    .tooltiptext {
-        @include tooltiptext;
+    .tooltipText {
+        @include tooltipText;
         width: 150px;
         bottom: 120%;
         left: 50%; 
@@ -111,7 +111,7 @@
       }
 }
 
-.tooltip-top:hover .tooltiptext {
+.tooltip-top:hover .tooltipText {
     visibility: visible;
     opacity: 1;
 }

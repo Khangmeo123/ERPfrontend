@@ -1,3 +1,11 @@
-<input type="text" class="form-control" [placeholder]="placeHolder" autocomplete="off" [id]="inputId"
-    (keyup)="onKeyUp($event)" (keydown)="onKeyDown($event)" (input)="onInput($event)" [value]="value"
-    (change)="onChange()">
+<input type="text"
+       class="form-control"
+       [placeholder]="placeHolder"
+       autocomplete="off"
+       [id]="inputId"
+       (keyup)="onKeyUp($event)"
+       (keydown)="onKeyDown($event)"
+       (input)="onInput($event)"
+       [value]="value"
+       maxlength="19"
+       (change)="onChange()">

@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { FormsModule } from '@angular/forms';
 import { CalendarModule } from 'primeng/calendar';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { DatePickerModule } from '../date-picker/date-picker.module';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
     FormsModule,
     CalendarModule,
     ClickOutsideModule,
+    DatePickerModule,
   ],
   exports: [
     AdvancedFiltersComponent,

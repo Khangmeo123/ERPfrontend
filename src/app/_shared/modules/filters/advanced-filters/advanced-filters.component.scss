@@ -38,6 +38,14 @@
     font-size: small;
   }
 
+  p-calendar {
+    span {
+      input {
+        width: 100%;
+      }
+    }
+  }
+
   .ui-listbox {
     min-width: unset;
     max-width: unset;
@@ -135,7 +143,5 @@
         padding: 0.1em !important;
       }
     }
-
   }
-
 }
