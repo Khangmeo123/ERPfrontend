@@ -1,6 +1,6 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
-export class EmployeeSearchEntity extends SearchEntity {
+export class CustomerSearchEntity extends SearchEntity {
     code: string;
     name: string;
     address: string;
@@ -8,7 +8,7 @@ export class EmployeeSearchEntity extends SearchEntity {
     phone: number;
     statusId: string;
 
-    constructor(employeeSearchEntity: any) {
-        super(employeeSearchEntity);
+    constructor(customerSearchEntity?: any) {
+        super(customerSearchEntity);
     }
 }

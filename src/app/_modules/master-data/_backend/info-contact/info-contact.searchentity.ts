@@ -6,7 +6,7 @@ export class InfoContactSearchEntity extends SearchEntity {
     email: string;
     address: string;
 
-    constructor(infoContactSearchEntity: any) {
+    constructor(infoContactSearchEntity?: any) {
         super(infoContactSearchEntity);
     }
 }

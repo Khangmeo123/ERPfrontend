@@ -4,7 +4,7 @@ export class BankSearchEntity extends SearchEntity {
     name: string;
     code: string;
     description: string;
-    constructor(bankSearchEntity: any) {
+    constructor(bankSearchEntity?: any) {
         super(bankSearchEntity);
     }
 }

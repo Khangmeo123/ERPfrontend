@@ -5,7 +5,7 @@ export class CurrencyEntity extends Entity {
     name: string;
     description: string;
 
-    constructor(currencyEntity: any) {
+    constructor(currencyEntity?: any) {
         super(currencyEntity);
     }
 }

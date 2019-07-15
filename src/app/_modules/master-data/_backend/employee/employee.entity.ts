@@ -15,15 +15,36 @@ export class EmployeeEntity extends Entity {
     taxNumber: string;
     dependents: number;
     gender: boolean;
-    // statusEntity
+
+    // statusEntity:
     statusId: string;
     statusName: string;
     statusCode: string;
 
-    bankAccountEntity: BankAccountEntity;
+    // jobTitleEntity:
+    jobTitleId: string;
+    jobTitleName: string;
+    jobTitleCode: string;
+
+    // jobLevelEntity:
+    jobLevelId: string;
+    jobLevelName: string;
+    jobLevelCode: string;
+
+    // bankEntity:
+    bankId: string;
+    bankName: string;
+    bankCode: string;
+
+    bankAccountName: string;
+    bankAccountNumber: string;
+    bankCity: string;
+    bankBranch: string;
+    bankAddress: string;
+
     infoContacts: InfoContactEntity[];
 
-    constructor(employeeEntity: any) {
+    constructor(employeeEntity?: any) {
         super(employeeEntity);
     }
 }
