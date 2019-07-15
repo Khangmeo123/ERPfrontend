@@ -3,21 +3,14 @@
 @import "~bootstrap/scss/variables";
 
 .date-picker {
-  .ui-calendar {
-    input.ui-inputtext {
-      display: none;
-      visibility: hidden;
-    }
-  }
-
   .form-control {
-    height: 38px !important;
+    //height: 38px !important;
   }
 
   .input-group-text {
     cursor: pointer;
     height: $input-height;
-    padding: 0.25rem 0.25rem;
+    padding: 0 0;
   }
 
   button.mat-icon-button {

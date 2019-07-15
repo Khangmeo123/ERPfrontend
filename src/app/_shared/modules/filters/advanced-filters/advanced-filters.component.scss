@@ -23,6 +23,13 @@
     border-radius: 0;
   }
 
+  .date-picker {
+    .input-group-append {
+      display: none;
+      visibility: hidden;
+    }
+  }
+
   .btn {
     border: 1px solid #cecece;
     border-left: none;
@@ -101,6 +108,7 @@
           margin-right: 0.5rem;
         }
       }
+
       ul {
         margin-bottom: 0;
         margin-left: -40px;
@@ -127,11 +135,13 @@
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }
+
     input.ui-inputtext:hover {
       border: 1px solid #cecece;
       border-right: 0;
     }
-    input.ui-inputtext:focus{
+
+    input.ui-inputtext:focus {
       border-color: #cecece;
       border-right: 0;
     }
