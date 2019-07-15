@@ -8,7 +8,7 @@ export class EmployeeSearchEntity extends SearchEntity {
     phone: string;
     statusId: string;
 
-    constructor(employeeSearchEntity: any) {
+    constructor(employeeSearchEntity?: any) {
         super(employeeSearchEntity);
     }
 }

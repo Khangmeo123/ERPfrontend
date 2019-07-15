@@ -35,6 +35,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
+    ToastrModule,
     AccordionModule.forRoot(),
     RadioButtonModule,
     DatePickerModule,

@@ -5,7 +5,7 @@ export class UomEntity extends Entity {
     name: string;
     description: string;
 
-    constructor(uomEntity: any) {
+    constructor(uomEntity?: any) {
         super(uomEntity);
     }
 }

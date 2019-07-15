@@ -5,7 +5,7 @@ export class CurrencySearchEntity extends SearchEntity {
     name: string;
     description: string;
 
-    constructor(unitSearchEntity: any) {
-        super(unitSearchEntity);
+    constructor(currencySearchEntity?: any) {
+        super(currencySearchEntity);
     }
 }

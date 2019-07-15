@@ -5,8 +5,9 @@ export class InfoContactEntity extends Entity {
     phone: string;
     email: string;
     address: string;
+    relationship: string;
 
-    constructor(infoContactEntity: any) {
+    constructor(infoContactEntity?: any) {
         super(infoContactEntity);
     }
 }

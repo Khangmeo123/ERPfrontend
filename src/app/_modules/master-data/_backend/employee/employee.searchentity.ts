@@ -9,7 +9,7 @@ export class EmployeeSearchEntity extends SearchEntity {
     bankAccountId: string;
     statusId: string;
 
-    constructor(employeeSearchEntity: any) {
+    constructor(employeeSearchEntity?: any) {
         super(employeeSearchEntity);
     }
 }

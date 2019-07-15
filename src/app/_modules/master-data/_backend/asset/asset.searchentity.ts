@@ -6,7 +6,7 @@ export class AssetSearchEntity extends SearchEntity {
     typeId: string;
     statusId: string;
 
-    constructor(assetSearchEntity: any) {
+    constructor(assetSearchEntity?: any) {
         super(assetSearchEntity);
     }
 }
