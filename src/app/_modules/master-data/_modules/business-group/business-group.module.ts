@@ -35,8 +35,10 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
+
 import { JobLevelComponent } from './_page/job-level/job-level.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -75,6 +77,7 @@ import { JobTitleComponent } from './_page/job-title/job-title.component';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
+    ToastrModule,
     AccordionModule.forRoot(),
     RadioButtonModule,
     DatePickerModule,

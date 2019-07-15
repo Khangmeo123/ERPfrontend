@@ -5,7 +5,7 @@ export class ProductSearchEntity extends SearchEntity {
     name: string;
     description: string;
     unitPrice: number;
-    unitId: string;
+    uomId: string;
     statusId: string;
 
     constructor(productSearchEntity: any) {

@@ -5,7 +5,7 @@ export class UomSearchEntity extends SearchEntity {
     name: string;
     description: string;
 
-    constructor(uomSearchEntity: any) {
+    constructor(uomSearchEntity?: any) {
         super(uomSearchEntity);
     }
 }

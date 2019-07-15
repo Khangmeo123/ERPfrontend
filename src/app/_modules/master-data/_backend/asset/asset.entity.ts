@@ -14,7 +14,7 @@ export class AssetEntity extends Entity {
     statusCode: string;
     statusId: string;
 
-    constructor(assetEntity: any) {
+    constructor(assetEntity?: any) {
         super(assetEntity);
     }
 }
