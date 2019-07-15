@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnChanges } from '@angular/core';
 import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
 @Component({
@@ -6,8 +6,7 @@ import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
   templateUrl: './detail-employee.component.html',
   styleUrls: ['./detail-employee.component.scss']
 })
-export class DetailEmployeeComponent implements OnInit {
-
+export class DetailEmployeeComponent implements OnInit, OnChanges {
 
   isOpenTab1: boolean = true;
   isOpenTab2: boolean = false;
@@ -26,7 +25,10 @@ export class DetailEmployeeComponent implements OnInit {
   ngOnInit() {
   }
 
-  onClickOpen() {
+  ngOnChanges (){
+  }
+
+  onClickOpen(event) {
     this.isOpenTab1 = !this.isOpenTab1;
   }
 

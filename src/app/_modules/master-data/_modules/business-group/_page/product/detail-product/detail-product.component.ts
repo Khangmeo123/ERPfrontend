@@ -13,7 +13,7 @@ export class DetailProductComponent implements OnInit {
   constructor() { }
 
 
-  isOpenTab1: boolean = true;
+  isOpenTab1: boolean = false;
   isOpenTab2: boolean = false;
   ngOnInit() {
   }

@@ -17,7 +17,13 @@
     <div class="page-section form">
       <form class="mt-2">
         <accordion>
-          <accordion-group heading="{{'customers.details.general' | translate}}">
+          <accordion-group [isOpen]="true">
+            <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+              <div class="pull-left float-left">{{'customers.details.general' | translate }}</div>
+              <span class="float-right pull-right" accordion-heading>
+                <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+              </span>
+            </button>
             <div class="row">
               <div class="form-group col">
                 <label for="customer_code">
@@ -63,7 +69,13 @@
               </div>
             </div>
           </accordion-group>
-          <accordion-group heading="{{'customer.bank_accounts.title' | translate}}">
+          <accordion-group>
+            <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+              <div class="pull-left float-left">{{'customer.bank_accounts.title' | translate }}</div>
+              <span class="float-right pull-right" accordion-heading>
+                <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+              </span>
+            </button>
             <div class="d-flex justify-content-end">
               <button class="btn btn-add" (click)="toggleContactsModal()">
                 {{'customer.contacts.add' | translate}}
@@ -88,8 +100,8 @@
                       {{'customer.contacts.email' | translate}}
                     </th>
                     <th>
-                        {{'customer.contacts.city' | translate}}
-                      </th>
+                      {{'customer.contacts.city' | translate}}
+                    </th>
                     <th>
                       {{'customer.contacts.address' | translate}}
                     </th>
@@ -99,7 +111,13 @@
             </div>
 
           </accordion-group>
-          <accordion-group [isOpen]="!contactsModal" heading="{{'customer.contacts.title' | translate}}">
+          <accordion-group>
+            <button (click)="onClickOpenTab3($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+              <div class="pull-left float-left">{{'customer.contacts.title' | translate }}</div>
+              <span class="float-right pull-right" accordion-heading>
+                <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+              </span>
+            </button>
             <div class="d-flex justify-content-end">
               <button class="btn btn-add" (click)="toggleBankAccountsModal()">
                 {{'customer.bank_accounts.add' | translate}}

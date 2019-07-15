@@ -15,11 +15,11 @@
     </div>
     <div class="page-body">
         <accordion>
-            <accordion-group [isOpen]="isOpenTab1">
+            <accordion-group [isOpen]="true">
                 <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'employee.detail.tab.title_1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
-                        <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
                 <div class="row">
@@ -142,7 +142,7 @@
                 <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'employee.detail.tab.title_2' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
-                        <i class="fas " [ngClass]="isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
                 <div class="row">
@@ -195,7 +195,7 @@
                 <button (click)="onClickOpenTab3($event)" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'employee.detail.tab.title_3' | translate }}</div> <span
                         class="float-right pull-right" accordion-heading>
-                        <i class="fas " [ngClass]="isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
                 <div class="row row-button-add">
