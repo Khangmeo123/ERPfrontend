@@ -7,7 +7,7 @@ export class CoaSearchEntity extends SearchEntity {
     propertyId: string;
     description: string;
 
-    constructor(coaSearchEntity: any) {
+    constructor(coaSearchEntity?: any) {
         super(coaSearchEntity);
     }
 }

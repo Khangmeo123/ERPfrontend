@@ -4,6 +4,7 @@ export class CostCenterSearchEntity extends SearchEntity {
     sobId: string;
     code: string;
     name: string;
+    coaId: string;
     fromValid: string;
     toValid: string;
     description: string;

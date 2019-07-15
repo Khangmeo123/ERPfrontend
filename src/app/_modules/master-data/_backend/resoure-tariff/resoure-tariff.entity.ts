@@ -7,9 +7,7 @@ export class ResoureTariffEntity extends Entity {
     taxCode: string;
 
     // taxtypeEntity:
-    taxTypeId: string;
-    taxTypeCode: string;
-    taxTypeName: string;
+    taxType : string;
 
     // unitEntity:
     unitId: string;
@@ -24,7 +22,7 @@ export class ResoureTariffEntity extends Entity {
     taxRate: number;
     description: string;
 
-    constructor(resoureTariffEntity: any) {
+    constructor(resoureTariffEntity?: any) {
         super(resoureTariffEntity);
     }
 }

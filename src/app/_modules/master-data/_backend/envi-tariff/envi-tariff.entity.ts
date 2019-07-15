@@ -1,22 +1,20 @@
 import { Entity } from 'src/app/_helpers/entity';
 
-export class ExciseTariffEntity extends Entity {
+export class EnviTariffEntity extends Entity {
     // sobEntity:
     sobId: string;
 
     taxCode: string;
 
     // taxtypeEntity:
-    taxType: string;
+    taxType : string;
 
     // unitEntity:
-    //don vi tinh
     unitId: string;
     unitName: string;
     unitCode: string;
 
     // coaEntity:
-    //tai khoan tong hop
     coaId: string;
     coaName: string;
     coaCode: string;
@@ -24,7 +22,7 @@ export class ExciseTariffEntity extends Entity {
     taxRate: number;
     description: string;
 
-    constructor(exciseTariffEntity?: any) {
-        super(exciseTariffEntity);
+    constructor(enviTariffEntity?: any) {
+        super(enviTariffEntity);
     }
 }

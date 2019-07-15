@@ -8,7 +8,7 @@ export class ExciseTariffSearchEntity extends SearchEntity {
     taxRate: number;
     description: number;
 
-    constructor(exciseTariffSearchEntity: any) {
+    constructor(exciseTariffSearchEntity?: any) {
         super(exciseTariffSearchEntity);
     }
 }

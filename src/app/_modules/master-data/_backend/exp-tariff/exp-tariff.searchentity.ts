@@ -1,6 +1,6 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
-export class ResoureTariffSearchEntity extends SearchEntity {
+export class ExpTariffSearchEntity extends SearchEntity {
     sobId: string;
     taxCode: string;
     taxType: string;
@@ -8,7 +8,7 @@ export class ResoureTariffSearchEntity extends SearchEntity {
     taxRate: number;
     description: string;
 
-    constructor(resoureTariffSearchEntity?: any) {
-        super(resoureTariffSearchEntity);
+    constructor(expTariffSearchEntity?: any) {
+        super(expTariffSearchEntity);
     }
 }
