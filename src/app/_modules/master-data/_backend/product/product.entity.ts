@@ -23,6 +23,7 @@ export class ProductEntity extends Entity {
     statusName: string;
     statusCode: string;
     statusId: string;
+
     height: number;
     length: number;
     width: number;
