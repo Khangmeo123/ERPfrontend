@@ -18,6 +18,8 @@ import { SupplierComponent } from './_page/supplier/supplier.component';
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DetailSupplierComponent } from './_page/supplier/detail-supplier/detail-supplier.component';
 import { CurrencyComponent } from './_page/currency/currency.component';
+import { JobLevelComponent } from './_page/job-level/job-level.component';
+import { JobTitleComponent } from './_page/job-title/job-title.component';
 
 const routes: Routes = [
   {
@@ -54,6 +56,8 @@ const routes: Routes = [
           { path: '', redirectTo: 'list-supplier', pathMatch: 'full' },
         ],
       },
+      { path: 'job-level', component: JobLevelComponent },
+      { path: 'job-title', component: JobTitleComponent },
       { path: 'currency', component: CurrencyComponent },
     ],
   }

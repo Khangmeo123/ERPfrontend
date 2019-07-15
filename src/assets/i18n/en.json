@@ -1,4 +1,20 @@
 {
+	"asset": {
+		"content": {
+			"modal": {
+				"title": ""
+			},
+			"table": {
+				"asset_id": "",
+				"asset_name": "",
+				"status": "",
+				"type": ""
+			}
+		},
+		"header": {
+			"title": ""
+		}
+	},
 	"bank": {
 		"content": {
 			"modal": {
@@ -17,6 +33,230 @@
 			"title": ""
 		}
 	},
+	"bank_account": {
+		"account_number": "",
+		"account_owner": "",
+		"accountant_code": "",
+		"bank_accounts": {
+			"account_number": "",
+			"account_owner": "",
+			"accountant_code": "",
+			"add": "",
+			"bank_code": "",
+			"description": ""
+		},
+		"bank_code": "",
+		"bank_name": "",
+		"description": "",
+		"details": {
+			"title": ""
+		},
+		"sob": {
+			"name": ""
+		}
+	},
+	"business_group": {
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"id": "",
+		"modal": {
+			"title": ""
+		},
+		"name": ""
+	},
+	"coa": {
+		"account_description": "",
+		"account_name": "",
+		"account_number": "",
+		"account_status": "",
+		"description": "",
+		"list": {
+			"title": ""
+		},
+		"name": "",
+		"super_account": ""
+	},
+	"cost-center": {
+		"content": {
+			"account": "",
+			"description": "",
+			"from_date": "",
+			"id": "",
+			"modal": {
+				"title": ""
+			},
+			"name": "",
+			"to_date": ""
+		},
+		"header": {
+			"title": ""
+		},
+		"status": {
+			"active": "",
+			"inactive": "",
+			"label": ""
+		}
+	},
+	"currency": {
+		"currency_description": "",
+		"currency_id": "",
+		"currency_name": "",
+		"title": ""
+	},
+	"customer": {
+		"address": "",
+		"bank_account": {
+			"account_number": "",
+			"account_owner": "",
+			"bank_address": "",
+			"bank_branch": "",
+			"bank_name": "",
+			"id": "",
+			"province": ""
+		},
+		"bank_accounts": {
+			"add": "",
+			"title": ""
+		},
+		"code": "",
+		"contacts": {
+			"add": "",
+			"address": "",
+			"city": "",
+			"email": "",
+			"id": "",
+			"phone_number": "",
+			"recipient": "",
+			"title": ""
+		},
+		"details": {
+			"title": ""
+		},
+		"list": {
+			"title": ""
+		},
+		"more_details": "",
+		"name": "",
+		"phoneNumber": "",
+		"status": "",
+		"taxCode": "",
+		"tax_code": ""
+	},
+	"customers": {
+		"details": {
+			"general": ""
+		}
+	},
+	"employee": {
+		"content": {
+			"table": {
+				"account_number": "",
+				"bassic_salary": "",
+				"birthday": "",
+				"coefficients_salary": "",
+				"date_range": "",
+				"employee_id": "",
+				"employee_name": "",
+				"gender": {
+					"men": "",
+					"women": ""
+				},
+				"id_emp": "",
+				"issue_by": "",
+				"salary_agreement": "",
+				"sex": "",
+				"status": "",
+				"tax_code": ""
+			}
+		},
+		"detail": {
+			"account_name": "",
+			"branch": "",
+			"branch_address": "",
+			"city": "",
+			"level": "",
+			"modal": {
+				"title": ""
+			},
+			"name_bank": "",
+			"number_dependents": "",
+			"position": "",
+			"status": "",
+			"tab": {
+				"add_item": "",
+				"title_1": "",
+				"title_2": "",
+				"title_3": ""
+			},
+			"table": {
+				"address": "",
+				"contact": "",
+				"email": "",
+				"index": "",
+				"phone": "",
+				"relationship": ""
+			},
+			"title": ""
+		},
+		"header": {
+			"title": ""
+		}
+	},
+	"fiscal_year": {
+		"content": {
+			"from_date": "",
+			"modal": {
+				"title": ""
+			},
+			"name": "",
+			"status": "",
+			"to_date": "",
+			"valuation_method": ""
+		},
+		"header": {
+			"title": ""
+		},
+		"status": {
+			"label": ""
+		}
+	},
+	"general": {
+		"button": {
+			"add": "",
+			"cancel": "",
+			"delete": "",
+			"download_example": "",
+			"export": "",
+			"import": "",
+			"import_file": "",
+			"save": ""
+		}
+	},
+	"job_level": {
+		"header": {
+			"title": ""
+		},
+		"job_level_description": "",
+		"job_level_id": "",
+		"job_level_level": "",
+		"job_level_name": "",
+		"modal": {
+			"title": ""
+		}
+	},
+	"job_title": {
+		"header": {
+			"title": ""
+		},
+		"job_title_description": "",
+		"job_title_id": "",
+		"job_title_name": "",
+		"modal": {
+			"title": ""
+		}
+	},
 	"product": {
 		"content": {
 			"detail": {
@@ -24,14 +264,26 @@
 				"product_id_tt": "",
 				"product_length": "",
 				"product_properti": "",
-				"product_status": "",
-				"product_unit": "",
 				"product_weight": "",
 				"product_width": ""
 			},
 			"modal": {
 				"add_des": "",
 				"title": ""
+			},
+			"tab": {
+				"enviroment_tax": "",
+				"enviroment_tax_id": "",
+				"export_tax": "",
+				"export_tax_id": "",
+				"import_tax": "",
+				"import_tax_id": "",
+				"resource_tax": "",
+				"resource_tax_id": "",
+				"special_consumption_tax": "",
+				"special_consumption_tax_id": "",
+				"value_add_tax": "",
+				"value_add_tax_id": ""
 			},
 			"table": {
 				"product_cost": "",
@@ -41,11 +293,66 @@
 				"product_name": "",
 				"product_status": "",
 				"product_unit": ""
+			}
+		},
+		"detail": {
+			"tab": {
+				"title_1": "",
+				"title_2": ""
+			}
+		},
+		"header": {
+			"title": ""
+		}
+	},
+	"resource": {
+		"account": {
+			"total": ""
+		},
+		"code": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"percent": "",
+		"status": {
+			"label": ""
+		},
+		"type": "",
+		"unit": ""
+	},
+	"sob": {
+		"add": "",
+		"code": "",
+		"currency": "",
+		"name": "",
+		"title": ""
+	},
+	"supplier": {
+		"content": {
+			"table": {
+				"supplier_address": "",
+				"supplier_id": "",
+				"supplier_name": "",
+				"supplier_phone": "",
+				"supplier_status": "",
+				"supplier_tax_code": ""
+			}
+		},
+		"detail": {
+			"modal": {
+				"title": ""
+			},
+			"modal1": {
+				"title": ""
 			},
 			"note": "",
 			"status": "",
-			"status_1": "",
-			"status_2": "",
+			"supplier_tax_code": "",
 			"tab": {
 				"title_1": "",
 				"title_2": "",
@@ -54,6 +361,7 @@
 			"table": {
 				"add_item": "",
 				"address": "",
+				"city": "",
 				"contact": "",
 				"email": "",
 				"index": "",
@@ -75,18 +383,49 @@
 			"title": ""
 		}
 	},
-	"unit": {
+	"tariff": {
+		"account": {
+			"total": ""
+		},
+		"code": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"percent": "",
+		"status": {
+			"label": ""
+		},
+		"type": "",
+		"unit": ""
+	},
+	"tariff_coa": {
+		"coa": {
+			"circular_133": "",
+			"circular_200": "",
+			"title": ""
+		},
+		"save": "",
+		"tariff": {
+			"excise": "",
+			"resources": "",
+			"title": ""
+		},
+		"title": ""
+	},
+	"uom": {
 		"content": {
 			"modal": {
-				"add_des_unit": "",
-				"add_id_unit": "",
-				"add_name_unit": "",
 				"title": ""
 			},
 			"table": {
-				"unit_description": "",
-				"unit_id": "",
-				"unit_name": ""
+				"uom_description": "",
+				"uom_id": "",
+				"uom_name": ""
 			}
 		},
 		"header": {

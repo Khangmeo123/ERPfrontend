@@ -4,30 +4,26 @@
       {{'customer.details.title' | translate}}
     </span>
     <div class="page-actions">
-      <button class="btn btn-add">
-        {{'general.button.add' | translate}}
-      </button>
-      <button class="btn btn-import">
-        {{'general.button.import' | translate}}
-      </button>
-      <button class="btn btn-export">
-        {{'general.button.export' | translate}}
-      </button>
+      <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+      <button class="btn btn-save" (click)="onClickSave()">
+        {{ 'general.button.save' | translate}}</button>
+      <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+        (cancel)="cancelClicked = true" (click)="onClickDelete()">
+        {{ 'general.button.delete' | translate}}</button>
     </div>
   </div>
   <div class="page-body mt-4">
     <div class="page-section form">
-      <div class="d-flex justify-content-end">
-        <button class="btn btn-add mr-2">
-          {{'general.button.add' | translate}}
-        </button>
-        <button class="btn btn-add">
-          {{'general.button.cancel' | translate}}
-        </button>
-      </div>
       <form class="mt-2">
         <accordion>
-          <accordion-group heading="{{'customers.details.general' | translate}}">
+          <accordion-group [isOpen]="true">
+            <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+              <div class="pull-left float-left">{{'customers.details.general' | translate }}</div>
+              <span class="float-right pull-right" accordion-heading>
+                <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+              </span>
+            </button>
             <div class="row">
               <div class="form-group col">
                 <label for="customer_code">
@@ -35,25 +31,10 @@
                   <span class="text-danger ml-1"> (*) </span>
                 </label>
                 <input type="text" class="form-control" id="customer_code">
-                <app-error
-                  *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
+                <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
                   [formGroup]="form" [property]="'name'" [placement]="'top'" class="error-form">
                 </app-error>
               </div>
-              <div class="form-group col">
-                <label>
-                  {{'customer.birthday' | translate}}
-                </label>
-                <app-date-picker></app-date-picker>
-              </div>
-              <div class="form-group col">
-                <label for="customer_id_card">
-                  {{'customer.id_card' | translate}}
-                </label>
-                <input type="number" class="form-control" id="customer_id_card">
-              </div>
-            </div>
-            <div class="row">
               <div class="form-group col">
                 <label for="customer_name">
                   {{'customer.name' | translate}}
@@ -61,66 +42,82 @@
                 </label>
                 <input type="text" class="form-control" id="customer_name">
               </div>
+
               <div class="form-group col">
                 <label for="tax_code">
                   {{'customer.tax_code' | translate}}
                 </label>
                 <input type="text" class="form-control" id="tax_code">
               </div>
-              <div class="form-group col">
-                <label for="tax_code">
-                  {{'customer.issued_date' | translate}}
-                </label>
-                <input type="text" class="form-control" id="issued_date">
-              </div>
             </div>
+
+
             <div class="row">
-              <div class="form-group col">
-                <label>
-                  {{'customer.gender' | translate}}
-                </label>
-                <div class="input-group">
-                  <span class="text-danger mr-2">
-                    <p-radioButton name="gender" label="{{'general.genders.male' | translate}}"
-                                   value="male"></p-radioButton>
-                  </span>
-                  <span>
-                    <p-radioButton name="gender" label="{{'general.genders.female' | translate}}"
-                                   value="female"></p-radioButton>
-                  </span>
-                </div>
-              </div>
-              <div class="form-group col">
+              <div class="form-group col-4">
                 <label for="customer_status">
-                  {{'customer.status.label' | translate}}
+                  {{'customer.status' | translate}}
                 </label>
-                <select class="form-control" name="customer_status" id="customer_status">
-                  <option value="active">
-                    {{'customer.status.active'|translate}}
-                  </option>
-                  <option value="inactive">
-                    {{'customer.status.inactive'|translate}}
-                  </option>
-                </select>
+                <app-single-select></app-single-select>
               </div>
-              <div class="form-group col">
-                <label for="customer_id_card_issued_at">
-                  {{'customer.id_card_issued_at' | translate}}
-                </label>
-                <input type="text" class="form-control" id="customer_id_card_issued_at">
-              </div>
-            </div>
-            <div class="row">
+              <!-- <div class="form-group col"></div> -->
               <div class="form-group col">
                 <label for="customer_more_details">
                   {{'customer.more_details' | translate}}
                 </label>
-                <textarea name="customer_more_details" id="customer_more_details" rows="5"
-                          class="form-control"></textarea>
+                <textarea name="customer_more_details" id="customer_more_details" rows="1"
+                  class="form-control"></textarea>
               </div>
             </div>
           </accordion-group>
-          <accordion-group heading="{{'customer.bank_accounts.title' | translate}}">
+          <accordion-group>
+            <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+              <div class="pull-left float-left">{{'customer.bank_accounts.title' | translate }}</div>
+              <span class="float-right pull-right" accordion-heading>
+                <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+              </span>
+            </button>
+            <div class="d-flex justify-content-end">
+              <button class="btn btn-add" (click)="toggleContactsModal()">
+                {{'customer.contacts.add' | translate}}
+
+              </button>
+            </div>
+
+            <div class="mt-2">
+              <p-table [value]="[]">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>
+                      {{'customer.contacts.id' | translate}}
+                    </th>
+                    <th>
+                      {{'customer.contacts.recipient' | translate}}
+                    </th>
+                    <th>
+                      {{'customer.contacts.phone_number' | translate}}
+                    </th>
+                    <th>
+                      {{'customer.contacts.email' | translate}}
+                    </th>
+                    <th>
+                      {{'customer.contacts.city' | translate}}
+                    </th>
+                    <th>
+                      {{'customer.contacts.address' | translate}}
+                    </th>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+
+          </accordion-group>
+          <accordion-group>
+            <button (click)="onClickOpenTab3($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+              <div class="pull-left float-left">{{'customer.contacts.title' | translate }}</div>
+              <span class="float-right pull-right" accordion-heading>
+                <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+              </span>
+            </button>
             <div class="d-flex justify-content-end">
               <button class="btn btn-add" (click)="toggleBankAccountsModal()">
                 {{'customer.bank_accounts.add' | translate}}
@@ -156,36 +153,6 @@
               </p-table>
             </div>
           </accordion-group>
-          <accordion-group heading="{{'customer.contacts.title' | translate}}">
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-add" (click)="toggleContactsModal()">
-                {{'customer.contacts.add' | translate}}
-              </button>
-            </div>
-            <div class="mt-2">
-              <p-table [value]="[]">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>
-                      {{'customer.contacts.id' | translate}}
-                    </th>
-                    <th>
-                      {{'customer.contacts.recipient' | translate}}
-                    </th>
-                    <th>
-                      {{'customer.contacts.phone_number' | translate}}
-                    </th>
-                    <th>
-                      {{'customer.contacts.email' | translate}}
-                    </th>
-                    <th>
-                      {{'customer.contacts.address' | translate}}
-                    </th>
-                  </tr>
-                </ng-template>
-              </p-table>
-            </div>
-          </accordion-group>
         </accordion>
       </form>
     </div>
@@ -203,40 +170,40 @@
     <div class="row">
       <div class="form-group col-6">
         <label>
-          {{'customer.bank_accounts.bank_name' | translate}}
+          {{'customer.bank_account.bank_name' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <app-single-select></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
-          {{'customer.bank_accounts.account_owner' | translate}}
+          {{'customer.bank_account.account_owner' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'customer.bank_accounts.account_number' | translate}}
+          {{'customer.bank_account.account_number' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'customer.bank_accounts.bank_branch' | translate}}
+          {{'customer.bank_account.bank_branch' | translate}}
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'customer.bank_accounts.province' | translate}}
+          {{'customer.bank_account.province' | translate}}
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'customer.bank_accounts.address' | translate}}
+          {{'customer.bank_account.bank_address' | translate}}
         </label>
         <input type="text" class="form-control">
       </div>
@@ -273,7 +240,7 @@
     <div class="row">
       <div class="form-group col-6">
         <label>
-          {{'customer.contacts.name' | translate}}
+          {{'customer.contacts.recipient' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <input type="text" class="form-control">

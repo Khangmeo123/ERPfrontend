@@ -9,7 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
   imports: [
     CommonModule,
     TooltipModule.forRoot(),
-    TranslateModule.forRoot(),
+    TranslateModule.forChild({}),
   ],
   exports: [
     ErrorComponent,

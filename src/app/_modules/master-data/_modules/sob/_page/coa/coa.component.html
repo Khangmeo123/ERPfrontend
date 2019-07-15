@@ -1,24 +1,34 @@
 <div class="page coa">
   <div class="page-header">
-    <div class="page-title">
+    <span class="page-title">
       {{'coa.list.title' | translate}}
-    </div>
+      <span (click)="onClickSaveBookMark($event)">
+        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()">
-        {{'customer.buttons.add' | translate}}
-      </button>
-      <button class="btn btn-import">
-        {{'customer.buttons.import' | translate}}
-      </button>
-      <button class="btn btn-export">
-        {{'customer.buttons.export' | translate}}
-      </button>
+      <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>
+      <div class="btn-group" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+          aria-controls="dropdown-basic">
+          {{'general.button.import' | translate}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.download_example' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-export">{{'general.button.export' | translate}}</button>
     </div>
   </div>
   <div class="page-body mt-4">
     <div class="page-section d-flex align-items-center">
       <div class="flex-shrink-1 mr-2">
-        {{'sob.name' | translate}}
+        {{'coa.name' | translate}}
       </div>
       <div>
         <app-single-select></app-single-select>
@@ -29,16 +39,16 @@
         <ng-template pTemplate="header">
           <tr>
             <th>
-              {{'sob.coa.account_number' | translate}}
+              {{'coa.account_number' | translate}}
             </th>
             <th>
-              {{'sob.coa.account_name' | translate}}
+              {{'coa.account_name' | translate}}
             </th>
             <th>
-              {{'sob.coa.account_status' | translate}}
+              {{'coa.account_status' | translate}}
             </th>
             <th>
-              {{'sob.coa.account_description' | translate}}
+              {{'coa.account_description' | translate}}
             </th>
           </tr>
           <tr>
@@ -68,34 +78,34 @@
     <div class="row">
       <div class="form-group col-6">
         <label>
-          {{'sob.coa.account_number' | translate}}
+          {{'coa.account_number' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <app-single-select></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
-          {{'sob.coa.account_name' | translate}}
+          {{'coa.account_name' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'sob.coa.account_status' | translate}}
+          {{'coa.account_status' | translate}}
           <span class="text-danger mr-2">(*)</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
-          {{'sob.coa.super_account' | translate}}
+          {{'coa.super_account' | translate}}
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-12">
         <label>
-          {{'sob.coa.description' | translate}}
+          {{'coa.description' | translate}}
         </label>
         <textarea class="form-control" rows="3"></textarea>
       </div>
