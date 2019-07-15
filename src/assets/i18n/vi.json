@@ -1,4 +1,20 @@
 {
+	"asset": {
+		"content": {
+			"modal": {
+				"title": "Thêm tài sản"
+			},
+			"table": {
+				"asset_id": "Mã tài sản",
+				"asset_name": "Tên tài sản",
+				"status": "Trạng thái",
+				"type": "Loại tài sản"
+			}
+		},
+		"header": {
+			"title": "Danh sách tài sản"
+		}
+	},
 	"bank": {
 		"content": {
 			"modal": {
@@ -17,6 +33,230 @@
 			"title": "Danh sách ngân hàng"
 		}
 	},
+	"bank_account": {
+		"account_number": "Số tài khoản",
+		"account_owner": "Chủ tài khoản",
+		"accountant_code": "Mã tài khoản kế toán",
+		"bank_accounts": {
+			"account_number": "Số tài khoản",
+			"account_owner": "Chủ tài khoản",
+			"accountant_code": "Mã tài khoản kế toán",
+			"add": "Thêm tài khoản ngân hàng",
+			"bank_code": "Mã ngân hàng",
+			"description": "Mô tả"
+		},
+		"bank_code": "Mã ngân hàng",
+		"bank_name": "Tên ngân hàng",
+		"description": "Mô tả",
+		"details": {
+			"title": "Tài khoản ngân hàng"
+		},
+		"sob": {
+			"name": "Bộ sổ"
+		}
+	},
+	"business_group": {
+		"description": "Mô tả",
+		"header": {
+			"title": "Danh sách nhóm kinh doanh"
+		},
+		"id": "Mã nhóm kinh doanh",
+		"modal": {
+			"title": "Thêm nhóm kinh doanh"
+		},
+		"name": "Tên nhóm kinh doanh"
+	},
+	"coa": {
+		"account_description": "Mô tả",
+		"account_name": "Tên tài khoản",
+		"account_number": "Số tài khoản",
+		"account_status": "Tính chất",
+		"description": "Mô tả",
+		"list": {
+			"title": "Hệ thống tài khoản"
+		},
+		"name": "Bộ sổ",
+		"super_account": "Tài khoản tổng hợp"
+	},
+	"cost-center": {
+		"content": {
+			"account": "Tài khoản ngầm định",
+			"description": "Mô tả",
+			"from_date": "Hiệu lực từ ngày",
+			"id": "Mã trung tâm",
+			"modal": {
+				"title": "Thêm trung tâm chi phí"
+			},
+			"name": "Tên trung tâm",
+			"to_date": "Đến ngày"
+		},
+		"header": {
+			"title": "Trung tâm chi phí"
+		},
+		"status": {
+			"active": "",
+			"inactive": "",
+			"label": "Bộ sổ"
+		}
+	},
+	"currency": {
+		"currency_description": "Mô tả",
+		"currency_id": "Mã tiền tệ",
+		"currency_name": "Tên loại tiền tệ",
+		"title": "Đơn vị tiền tệ"
+	},
+	"customer": {
+		"address": "Địa chỉ",
+		"bank_account": {
+			"account_number": "Số tài khoản",
+			"account_owner": "Tên chủ tài khoản",
+			"bank_address": "Địa chỉ",
+			"bank_branch": "Chi nhánh ngân hàng",
+			"bank_name": "Tên ngân hàng",
+			"id": "STT",
+			"province": "Tỉnh/Thành phố"
+		},
+		"bank_accounts": {
+			"add": "Thêm tài khoản ngân hàng",
+			"title": "Thông tin liên hệ"
+		},
+		"code": "Mã khách hàng",
+		"contacts": {
+			"add": "Thêm liên hệ",
+			"address": "Địa chỉ",
+			"city": "Tỉnh/Thành phố",
+			"email": "Email",
+			"id": "STT",
+			"phone_number": "Số điện thoại",
+			"recipient": "Tên người liên hệ",
+			"title": ""
+		},
+		"details": {
+			"title": ""
+		},
+		"list": {
+			"title": "Danh sách khách hàng"
+		},
+		"more_details": "Lưu ý khác",
+		"name": "Tên khách hàng",
+		"phoneNumber": "Điện thoại",
+		"status": "Trạng thái",
+		"taxCode": "Mã số thuế",
+		"tax_code": "Mã số thuế"
+	},
+	"customers": {
+		"details": {
+			"general": "Thông tin chung"
+		}
+	},
+	"employee": {
+		"content": {
+			"table": {
+				"account_number": "Số tài khoản",
+				"bassic_salary": "Lương đóng bảo hiểm",
+				"birthday": "Ngày sinh",
+				"coefficients_salary": "Hệ số lương",
+				"date_range": "Ngày cấp",
+				"employee_id": "Mã nhân viên",
+				"employee_name": "Tên nhân viên",
+				"gender": {
+					"men": "Nam",
+					"women": "Nữ"
+				},
+				"id_emp": "Số CMND",
+				"issue_by": "Nơi cấp",
+				"salary_agreement": "Lương thỏa thuận",
+				"sex": "Giới tính",
+				"status": "Trạng thái",
+				"tax_code": "Mã số thuế"
+			}
+		},
+		"detail": {
+			"account_name": "tên chủ tài khoản",
+			"branch": "Chi nhánh",
+			"branch_address": "Địa chỉ chi nhánh",
+			"city": "Tỉnh/Thành phố",
+			"level": "Cấp bậc chức vụ",
+			"modal": {
+				"title": "Thêm thông tin liên hệ"
+			},
+			"name_bank": "Tên ngân hàng",
+			"number_dependents": "Số người phụ thuộc",
+			"position": "Chức vụ",
+			"status": "Trạng thái",
+			"tab": {
+				"add_item": "Thêm",
+				"title_1": "Thông tin chung",
+				"title_2": "Tài khoản ngân hàng",
+				"title_3": "Thông tin liên hệ"
+			},
+			"table": {
+				"address": "Địa chỉ",
+				"contact": "Tên người liên hệ",
+				"email": "Email",
+				"index": "STT",
+				"phone": "Số điện thoại",
+				"relationship": "Quan hệ với nhân viên"
+			},
+			"title": ""
+		},
+		"header": {
+			"title": "Danh sách nhân viên"
+		}
+	},
+	"fiscal_year": {
+		"content": {
+			"from_date": "Từ ngày",
+			"modal": {
+				"title": "Thêm năm tài chính"
+			},
+			"name": "Tên",
+			"status": "Trạng thái",
+			"to_date": "Đến ngày",
+			"valuation_method": "Phương pháp định giá ngầm định"
+		},
+		"header": {
+			"title": "Năm tài chính"
+		},
+		"status": {
+			"label": "Bộ sổ"
+		}
+	},
+	"general": {
+		"button": {
+			"add": "Thêm",
+			"cancel": "Hủy",
+			"delete": "Xóa",
+			"download_example": "Tải file mẫu",
+			"export": "Xuất Excel",
+			"import": "Nhập hàng loạt",
+			"import_file": "Nhập hàng loạt",
+			"save": "Lưu"
+		}
+	},
+	"job_level": {
+		"header": {
+			"title": "Cấp bậc chức vụ"
+		},
+		"job_level_description": "Mô tả",
+		"job_level_id": "Mã cấp bậc",
+		"job_level_level": "Mã chức vụ",
+		"job_level_name": "Tên cấp bậc",
+		"modal": {
+			"title": "Thêm cấp bậc"
+		}
+	},
+	"job_title": {
+		"header": {
+			"title": "Chức vụ công việc"
+		},
+		"job_title_description": "Mô tả",
+		"job_title_id": "Mã chức vụ",
+		"job_title_name": "Tên chức vụ",
+		"modal": {
+			"title": "Thêm chức vụ"
+		}
+	},
 	"product": {
 		"content": {
 			"detail": {
@@ -24,14 +264,26 @@
 				"product_id_tt": "Mã SP trên thịt trường",
 				"product_length": "Chiều dài",
 				"product_properti": "Tính chất hàng",
-				"product_status": "Trạng thái",
-				"product_unit": "",
 				"product_weight": "Cân nặng",
 				"product_width": "Chiều rộng"
 			},
 			"modal": {
 				"add_des": "Mô tả",
 				"title": "Thêm mới sản phẩm"
+			},
+			"tab": {
+				"enviroment_tax": "Thuế môi trường (%)",
+				"enviroment_tax_id": "Mã thuế môi trường",
+				"export_tax": "Thuế xuất khẩu (%)",
+				"export_tax_id": "Mã thuế suất khẩu",
+				"import_tax": "Thuế nhập khẩu (%)",
+				"import_tax_id": "Mã thuế nhập khẩu",
+				"resource_tax": "Thuế tài nguyên (%)",
+				"resource_tax_id": "Mã thuế tài nguyên",
+				"special_consumption_tax": "Thuế TTĐB (% )",
+				"special_consumption_tax_id": "Mã thuế TTĐB",
+				"value_add_tax": "Thuế GTGT (%)",
+				"value_add_tax_id": "Mã thuế GTGT"
 			},
 			"table": {
 				"product_cost": "Đơn giá cơ bản",
@@ -41,26 +293,50 @@
 				"product_name": "Tên sản phẩm",
 				"product_status": "Trạng thái",
 				"product_unit": "Đơn vị cơ bản"
-			},
-			"upload_excel": "Nhập hàng loạt",
-			"xuat_excel": "Xuất Excel"
+			}
+		},
+		"detail": {
+			"tab": {
+				"title_1": "Thông tin chung",
+				"title_2": "Thông tin thuế suất"
+			}
 		},
 		"header": {
 			"title": "Danh sách sản phẩm"
 		}
 	},
+	"resource": {
+		"account": {
+			"total": "Tài khoản tổng hợp"
+		},
+		"code": "Mã thuế",
+		"description": "Mô tả",
+		"header": {
+			"title": "Biểu thuế tài nguyên"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế tài nguyên"
+		},
+		"name": "Tên loại thuế",
+		"percent": "Thuế suất (%)",
+		"status": {
+			"label": "Bộ sổ"
+		},
+		"type": "",
+		"unit": "Đơn vị tính"
+	},
+	"sob": {
+		"add": "",
+		"code": "",
+		"currency": "",
+		"name": "",
+		"title": ""
+	},
 	"supplier": {
 		"content": {
 			"table": {
-				"gender": {
-					"men": "Nam",
-					"women": "Nữ"
-				},
-				"sex": "Giới tính",
-				"status_3": "",
 				"supplier_address": "Địa chỉ",
 				"supplier_id": "Mã nhà cung cấp",
-				"supplier_id_number": "Số CMND",
 				"supplier_name": "Tên nhà cung cấp",
 				"supplier_phone": "Điện thoại",
 				"supplier_status": "Trạng thái",
@@ -68,9 +344,6 @@
 			}
 		},
 		"detail": {
-			"birthday": "Ngày sinh",
-			"date_range": "Ngày cấp",
-			"issue_by": "Nơi cấp",
 			"modal": {
 				"title": "Thêm mới tài khoản ngân hàng"
 			},
@@ -79,16 +352,16 @@
 			},
 			"note": "Chú thích",
 			"status": "Trạng thái",
-			"status_1": "Đang hoạt động",
-			"status_2": "Dừng hoạt động",
+			"supplier_tax_code": "",
 			"tab": {
 				"title_1": "Thông tin chung",
-				"title_2": "Tài khoản ngân hàng",
-				"title_3": "Thông tin giao hàng nhận"
+				"title_2": "Thông tin liên hệ",
+				"title_3": "Tài khoản ngân hàng"
 			},
 			"table": {
 				"add_item": "Thêm thông tin liên hệ",
 				"address": "Địa chỉ",
+				"city": "Tỉnh/Thành phố",
 				"contact": "Tên người nhận",
 				"email": "Email",
 				"index": "STT",
@@ -110,18 +383,49 @@
 			"title": "Danh sách nhà cung cấp"
 		}
 	},
-	"unit": {
+	"tariff": {
+		"account": {
+			"total": ""
+		},
+		"code": "Mã thuế",
+		"description": "Mô tả",
+		"header": {
+			"title": "Biểu thuế tiêu thụ đặc biệt"
+		},
+		"modal": {
+			"title": "Thêm thuế tiêu thụ đặc biệt"
+		},
+		"name": "Tên loại thuế",
+		"percent": "Thuế suất (%)",
+		"status": {
+			"label": "Bộ sổ"
+		},
+		"type": "",
+		"unit": "Đơn vị tính"
+	},
+	"tariff_coa": {
+		"coa": {
+			"circular_133": "",
+			"circular_200": "",
+			"title": ""
+		},
+		"save": "",
+		"tariff": {
+			"excise": "",
+			"resources": "",
+			"title": ""
+		},
+		"title": ""
+	},
+	"uom": {
 		"content": {
 			"modal": {
-				"add_des_unit": "Mô tả",
-				"add_id_unit": "Mã đơn vị",
-				"add_name_unit": "Tên đơn vị",
-				"title": "Thêm đơn vị tính"
+				"title": "Thêm đơn vị tính sản phẩm"
 			},
 			"table": {
-				"unit_description": "Mô tả",
-				"unit_id": "Mã đơn vị",
-				"unit_name": "Tên đơn vị"
+				"uom_description": "Mô tả",
+				"uom_id": "Mã đơn vị",
+				"uom_name": "Tên đơn vị"
 			}
 		},
 		"header": {

@@ -12,7 +12,19 @@ export class DetailProductComponent implements OnInit {
   public cancelClicked: boolean = false;
   constructor() { }
 
+
+  isOpenTab1: boolean = true;
+  isOpenTab2: boolean = false;
   ngOnInit() {
   }
+
+  onClickOpen() {
+    this.isOpenTab1 = !this.isOpenTab1;
+  }
+
+  onClickOpenTab2() {
+    this.isOpenTab2 = !this.isOpenTab2;
+  }
+
 
 }

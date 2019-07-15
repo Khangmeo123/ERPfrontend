@@ -43,10 +43,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="bankid"> {{ 'supplier.detail.birthday' | translate}}</label>
-                                    <div class="" style="width: 300px">
-                                        <app-date-picker></app-date-picker>
-                                    </div>
+                                    <label for="bankid"> {{ 'supplier.detail.supplier_tax_code' | translate}}</label>
+                                    <input type="text" class="form-control" />
 
                                 </div>
 
@@ -55,60 +53,17 @@
 
                         <div class="row">
                             <div class="col-sm-4">
-
                                 <div class="form-group">
-                                    <label for="bankid">
-                                        {{ 'supplier.content.table.supplier_id_number' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" />
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'supplier.content.table.sex' | translate}}</label>
-                                    <div class="ratio-button" style="display: flex">
-                                        <p-radioButton name="groupname" value="val1"
-                                            [label]="'supplier.content.table.gender.men' | translate"></p-radioButton>
-                                        <p-radioButton name="groupname" value="val2"
-                                            [label]="'supplier.content.table.gender.women' | translate"></p-radioButton>
-                                    </div>
+                                    <label for="bankid">{{ 'supplier.detail.status' | translate}}</label>
+                                    <app-single-select></app-single-select>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="bankid"> {{ 'supplier.detail.date_range' | translate}}</label>
-                                    <app-date-picker></app-date-picker>
-                                </div>
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'supplier.detail.issue_by' | translate}}</label>
-                                    <input type="text" class="form-control" pKeyFilter="int" />
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
+                            <div class="col-sm-8">
                                 <div class="form-group">
                                     <label for="bankid">{{ 'supplier.detail.note' | translate}}</label>
-                                    <textarea class="form-control" rows="5">
+                                    <textarea class="form-control" rows="1">
                                                             At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
                                                         </textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'supplier.content.table.supplier_tax_code' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" pKeyFilter="int" />
-                                </div>
-                            </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'supplier.detail.status' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <select class="form-control" id="exampleFormControlSelect2">
-                                        <option value="1">{{ 'supplier.detail.status_1' | translate}}</option>
-                                        <option value="2">{{ 'supplier.detail.status_2' | translate}}</option>
-                                        <option value="2">{{ 'supplier.content.table.status_3' | translate}}</option>
-                                    </select>
                                 </div>
                             </div>
                         </div>
@@ -118,72 +73,7 @@
 
                 <div class="row"></div>
             </accordion-group>
-            <accordion-group>
-                <button (click)="onClickOpenTab3($event)" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'supplier.detail.tab.title_3' | translate }}</div> <span
-                        class="float-right pull-right" accordion-heading>
-                        <i class="fas " [ngClass]="isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
-                    </span>
-                </button>
-                <div class="row row-button-add">
-                    <div class="list-button pull-right">
-                        <button class="btn btn-add" (click)="onClickAddBank()">
-                            {{ 'supplier.detail.table1.add_item' | translate}}</button>
-                    </div>
-                </div>
-                <div class="row" style="margin-top: 15px">
-                    <div class="col-sm-12">
-                        <div class="table-list-supplier">
-                            <p-table>
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th pResizableColumn>
-                                            {{ 'supplier.detail.table1.index' | translate}}
-                                        </th>
-                                        <th pResizableColumn> {{ 'supplier.detail.table1.bank_name' | translate}} </th>
-                                        <th pResizableColumn> {{ 'supplier.detail.table1.account_name' | translate}}
-                                        </th>
-                                        <th pResizableColumn> {{ 'supplier.detail.table1.account_number' | translate}}
-                                        </th>
-                                        <th pResizableColumn> {{ 'supplier.detail.table1.city' | translate}} </th>
-                                        <th pResizableColumn> {{ 'supplier.detail.table1.branch' | translate}} </th>
-                                        <th pResizableColumn> {{ 'supplier.detail.table1.address_bank' | translate}}
-                                        </th>
 
-                                    </tr>
-                                    <tr>
-                                        <th class="th-filter">
-                                            <app-advanced-filters></app-advanced-filters>
-                                        </th>
-                                        <th class="th-filter">
-                                            <app-advanced-filters>
-                                            </app-advanced-filters>
-                                        </th>
-                                        <th class="th-filter">
-                                            <app-advanced-filters>
-                                            </app-advanced-filters>
-                                        </th>
-                                        <th class="th-filter">
-                                            <app-advanced-filters>
-                                            </app-advanced-filters>
-                                        </th>
-                                        <th class="th-filter">
-                                            <app-advanced-filters></app-advanced-filters>
-                                        </th>
-                                        <th class="th-filter">
-                                            <app-advanced-filters></app-advanced-filters>
-                                        </th>
-                                        <th class="th-filter">
-                                            <app-advanced-filters></app-advanced-filters>
-                                        </th>
-                                    </tr>
-                                </ng-template>
-
-                            </p-table>
-                        </div>
-                    </div>
-                </div>
-            </accordion-group>
             <accordion-group>
                 <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'supplier.detail.tab.title_2' | translate }}</div>
@@ -192,11 +82,11 @@
                     </span>
                 </button>
                 <div class="row row-button-add">
-                        <div class="list-button pull-right">
-                            <button class="btn btn-add" (click)="onClickAddAccount()">
-                                {{ 'supplier.detail.table.add_item' | translate}}</button>
-                        </div>
+                    <div class="list-button pull-right">
+                        <button class="btn btn-add" (click)="onClickAddAccount()">
+                            {{ 'supplier.detail.table.add_item' | translate}}</button>
                     </div>
+                </div>
                 <div class="row" style="margin-top: 10px">
                     <p-table>
                         <ng-template pTemplate="header">
@@ -207,6 +97,7 @@
                                 <th pResizableColumn> {{ 'supplier.detail.table.contact' | translate}} </th>
                                 <th pResizableColumn> {{ 'supplier.detail.table.phone' | translate}} </th>
                                 <th pResizableColumn> {{ 'supplier.detail.table.email' | translate}} </th>
+                                <th pResizableColumn> {{ 'supplier.detail.table.city' | translate}} </th>
                                 <th pResizableColumn> {{ 'supplier.detail.table.address' | translate}} </th>
 
                             </tr>
@@ -218,6 +109,10 @@
                                     <app-advanced-filters>
                                     </app-advanced-filters>
                                 </th>
+                                <th class="th-filter">
+                                        <app-advanced-filters>
+                                        </app-advanced-filters>
+                                    </th>
                                 <th class="th-filter">
                                     <app-advanced-filters></app-advanced-filters>
                                 </th>
@@ -234,6 +129,72 @@
 
                 </div>
             </accordion-group>
+            <accordion-group>
+                    <button (click)="onClickOpenTab3($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'supplier.detail.tab.title_3' | translate }}</div> <span
+                            class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="row row-button-add">
+                        <div class="list-button pull-right">
+                            <button class="btn btn-add" (click)="onClickAddBank()">
+                                {{ 'supplier.detail.table1.add_item' | translate}}</button>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-top: 15px">
+                        <div class="col-sm-12">
+                            <div class="table-list-supplier">
+                                <p-table>
+                                    <ng-template pTemplate="header">
+                                        <tr>
+                                            <th pResizableColumn>
+                                                {{ 'supplier.detail.table1.index' | translate}}
+                                            </th>
+                                            <th pResizableColumn> {{ 'supplier.detail.table1.bank_name' | translate}} </th>
+                                            <th pResizableColumn> {{ 'supplier.detail.table1.account_name' | translate}}
+                                            </th>
+                                            <th pResizableColumn> {{ 'supplier.detail.table1.account_number' | translate}}
+                                            </th>
+                                            <th pResizableColumn> {{ 'supplier.detail.table1.city' | translate}} </th>
+                                            <th pResizableColumn> {{ 'supplier.detail.table1.branch' | translate}} </th>
+                                            <th pResizableColumn> {{ 'supplier.detail.table1.address_bank' | translate}}
+                                            </th>
+    
+                                        </tr>
+                                        <tr>
+                                            <th class="th-filter">
+                                                <app-advanced-filters></app-advanced-filters>
+                                            </th>
+                                            <th class="th-filter">
+                                                <app-advanced-filters>
+                                                </app-advanced-filters>
+                                            </th>
+                                            <th class="th-filter">
+                                                <app-advanced-filters>
+                                                </app-advanced-filters>
+                                            </th>
+                                            <th class="th-filter">
+                                                <app-advanced-filters>
+                                                </app-advanced-filters>
+                                            </th>
+                                            <th class="th-filter">
+                                                <app-advanced-filters></app-advanced-filters>
+                                            </th>
+                                            <th class="th-filter">
+                                                <app-advanced-filters></app-advanced-filters>
+                                            </th>
+                                            <th class="th-filter">
+                                                <app-advanced-filters></app-advanced-filters>
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+    
+                                </p-table>
+                            </div>
+                        </div>
+                    </div>
+                </accordion-group>
         </accordion>
     </div>
 

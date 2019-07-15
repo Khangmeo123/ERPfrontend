@@ -71,6 +71,16 @@ export class SidebarComponent implements OnInit, OnChanges {
           route: '/master-data/business-group/currency',
         },
         {
+          displayName: 'Chức vụ công việc',
+          iconName: 0,
+          route: '/master-data/business-group/job-title',
+        },
+        {
+          displayName: 'Cấp bậc chức vụ',
+          iconName: 0,
+          route: '/master-data/business-group/job-level',
+        },
+        {
           displayName: '------------------------------',
           iconName: 0,
           route: null,
@@ -103,7 +113,7 @@ export class SidebarComponent implements OnInit, OnChanges {
         {
           displayName: 'Biểu thuế tài nguyên',
           iconName: 0,
-          route: '/master-data/sob/resoure-tariff',
+          route: '/master-data/sob/resource-tariff',
         },
         {
           displayName: 'Trung tâm chi phí',

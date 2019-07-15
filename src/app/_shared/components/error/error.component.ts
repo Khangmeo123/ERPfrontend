@@ -62,7 +62,6 @@ export class ErrorComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.formGroup);
-    debugger
   }
 }
 

@@ -1,18 +1,15 @@
 <div class="page currency">
   <div class="page-header">
-    <div class="page-title">
+    <span class="page-title">
       {{'currency.title' | translate}}
-    </div>
+      <span (click)="onClickSaveBookMark($event)">
+        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="showDialog()">
-        {{'general.button.add' | translate}}
-      </button>
-      <button class="btn btn-add">
-        {{'general.button.import' | translate}}
-      </button>
-      <button class="btn btn-add">
-        {{'general.button.export' | translate}}
-      </button>
+      <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
     </div>
   </div>
   <div class="page-body mt-4">
@@ -21,10 +18,10 @@
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn>
-              {{ 'currency.content.table.currency_id' | translate}}
+              {{ 'currency.currency_id' | translate}}
             </th>
-            <th pResizableColumn> {{ 'currency.content.table.currency_name' | translate}} </th>
-            <th pResizableColumn> {{ 'currency.content.table.currency_description' | translate}} </th>
+            <th pResizableColumn> {{ 'currency.currency_name' | translate}} </th>
+            <th pResizableColumn> {{ 'currency.currency_description' | translate}} </th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -78,31 +75,31 @@
       </div>
     </div>
   </div>
-  <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display"
-            [style]="{width: '900px'}">
+  <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" [style]="{width: '900px'}">
     <p-header>
-      {{ 'currency.content.modal.title' | translate}}
+      {{ 'currency.title' | translate}}
     </p-header>
     <div class="container">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currency_id">{{ 'currency.content.modal.add_id' | translate}} <span>*</span></label>
-            <input type="text" class="form-control" id="currency_id"/>
+            <label for="currency_id">{{ 'currency.currency_id' | translate}} <span>*</span></label>
+            <input type="text" class="form-control" id="currency_id" />
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currency_name">{{ 'currency.content.modal.add_name' | translate}}<span>*</span></label>
-            <input type="text" class="form-control" id="currency_name"/>
+            <label for="currency_name">{{ 'currency.currency_name' | translate}}<span>*</span></label>
+            <input type="text" class="form-control" id="currency_name" />
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <label for="currency_description">{{ 'currency.content.modal.add_des_currency' | translate}}</label>
-            <textarea class="form-control" rows="6" id="currency_description">At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.</textarea>
+            <label for="currency_description">{{ 'currency.currency_description' | translate}}</label>
+            <textarea class="form-control" rows="6"
+              id="currency_description">At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.</textarea>
           </div>
         </div>
       </div>
@@ -110,17 +107,14 @@
     <p-footer>
       <div class="row">
         <div class="col-sm-12">
-          <div class="list-button right">
-            <button class="btn btn-cancel"
-                    (click)="onClickCancel()">{{ 'currency.content.modal.cancel' | translate}}</button>
-            <button class="btn btn-save" (click)="onClickSave()"> {{ 'currency.content.modal.save' | translate}}</button>
-            <button class="btn btn-delete" mwlConfirmationPopover
-                    [popoverTitle]="popoverTitle"
-                    [popoverMessage]="popoverMessage"
-                    placement="bottom"
-                    (confirm)="confirmClicked = true"
-                    (cancel)="cancelClicked = true"
-                    (click)="onClickDelete()"> {{ 'currency.content.modal.delete' | translate}}</button>
+          <div class="page-actions">
+            <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="onClickSave()">
+              {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+              (cancel)="cancelClicked = true" (click)="onClickDelete()">
+              {{ 'general.button.delete' | translate}}</button>
           </div>
         </div>
       </div>

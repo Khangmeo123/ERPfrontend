@@ -22,123 +22,121 @@
                         <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
-
                 <div class="row">
-                    <div class="col-sm-2">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.employee_id' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.birthday' | translate}}</label>
+                            <app-date-picker></app-date-picker>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.salary_agreement' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid"> {{ 'employee.content.table.employee_name' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.id_emp' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.coefficients_salary' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.sex' | translate}}</label>
+                            <div class="ratio-button" style="display: flex">
+                                <p-radioButton name="groupname" value="val1"
+                                    [label]="'employee.content.table.gender.men' | translate"></p-radioButton>
+                                <p-radioButton name="groupname" value="val2"
+                                    [label]="'employee.content.table.gender.women' | translate"></p-radioButton>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.issue_by' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.bassic_salary' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" />
+                        </div>
 
                     </div>
-                    <div class="col-sm-10">
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.content.table.employee_id' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid"> {{ 'employee.content.table.employee_name' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.content.table.sex' | translate}}</label>
-                                    <div class="ratio-button" style="display: flex">
-                                        <p-radioButton name="groupname" value="val1"
-                                            [label]="'employee.content.table.gender.men' | translate"></p-radioButton>
-                                        <p-radioButton name="groupname" value="val2"
-                                            [label]="'employee.content.table.gender.women' | translate"></p-radioButton>
-                                    </div>
-                                </div>
-                            </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.detail.position' | translate}}</label>
+                            <app-single-select></app-single-select>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.content.table.birthday' | translate}}</label>
-                                    <app-date-picker></app-date-picker>
-                                </div>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.content.table.id_emp' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" />
-                                </div>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.content.table.date_range' | translate}}</label>
-                                    <app-date-picker></app-date-picker>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.date_range' | translate}}</label>
+                            <app-date-picker></app-date-picker>
                         </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label
-                                        for="bankid">{{ 'employee.content.table.salary_agreement' | translate}}</label>
-                                    <input type="text" class="form-control" pKeyFilter="int">
-                                </div>
-                                <div class="form-group">
-                                    <label
-                                        for="bankid">{{ 'employee.content.table.coefficients_salary' | translate}}</label>
-                                    <input type="text" class="form-control" pKeyFilter="int" />
-                                </div>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.content.table.bassic_salary' | translate}}</label>
-                                    <input type="text" class="form-control" pKeyFilter="int" />
-                                </div>
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.detail.number_dependents' | translate}}</label>
-                                    <input type="text" class="form-control" pKeyFilter="int" />
-                                </div>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.detail.note' | translate}}</label>
-                                    <textarea class="form-control" rows="5">
-                                                        At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-                                                    </textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.content.table.tax_code' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <input type="text" class="form-control" pKeyFilter="int" />
-                                </div>
-                            </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
-                                <div class="form-group">
-                                    <label for="bankid">{{ 'employee.detail.status' | translate}}<span
-                                            style="color: red">*</span></label>
-                                    <select class="form-control" id="exampleFormControlSelect2">
-                                        <option value="1">{{ 'employee.detail.status_1' | translate}}</option>
-                                        <option value="2">{{ 'employee.detail.status_2' | translate}}</option>
-                                        <option value="2">{{ 'employee.content.table.status_3' | translate}}</option>
-                                    </select>
-                                </div>
-                            </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.detail.number_dependents' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" />
                         </div>
                     </div>
                 </div>
-
-                <div class="row"></div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.detail.level' | translate}}</label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.content.table.tax_code' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.detail.status' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+                </div>
             </accordion-group>
             <accordion-group>
                 <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
@@ -148,30 +146,21 @@
                     </span>
                 </button>
                 <div class="row">
-                    <div class="col-sm-2">
-
-                    </div>
-                    <div class="col-sm-10">
+                    <div class="col-sm-12">
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="bankid">{{ 'employee.detail.name_bank' | translate}}</label>
-                                    <select class="form-control" id="exampleFormControlSelect2">
-                                        <option value="1">{{ 'employee.detail.status_1' | translate}}</option>
-                                        <option value="2">{{ 'employee.detail.status_2' | translate}}</option>
-                                        <option value="2">{{ 'employee.content.table.status_3' | translate}}</option>
-                                    </select>
+                                    <app-single-select></app-single-select>
                                 </div>
                             </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="bankid">{{ 'employee.detail.account_name' | translate}}</label>
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="bankid">{{ 'employee.content.table.account_number' | translate}}</label>
                                     <input type="text" class="form-control" />
@@ -180,21 +169,19 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="bankid">{{ 'employee.detail.city' | translate}}</label>
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="bankid">{{ 'employee.detail.branch' | translate}}</label>
                                     <input type="text" class="form-control" />
                                 </div>
                             </div>
-                            <div class="col-sm-1"></div>
-                            <div class="col-sm-3">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="bankid">{{ 'employee.detail.branch_address' | translate}}</label>
                                     <input type="text" class="form-control" />
@@ -218,8 +205,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-9">
+                    <div class="col-sm-12">
                         <div class="table-list-employee">
                             <p-table>
                                 <ng-template pTemplate="header">

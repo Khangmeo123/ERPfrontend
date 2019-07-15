@@ -27,7 +27,7 @@ import { DetailProductComponent } from './_page/product/detail-product/detail-pr
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { AccordionModule } from 'ngx-bootstrap';
+import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
@@ -35,6 +35,8 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
+import { JobLevelComponent } from './_page/job-level/job-level.component';
+import { JobTitleComponent } from './_page/job-title/job-title.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +59,8 @@ import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
     ListSupplierComponent,
     DetailSupplierComponent,
     CurrencyComponent,
+    JobLevelComponent,
+    JobTitleComponent,
   ],
   imports: [
     CommonModule,
@@ -79,6 +83,7 @@ import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
     InputTextModule,
     ErrorModule,
     SelectModule,
+    BsDropdownModule.forRoot()
   ],
 })
 export class BusinessGroupModule { }

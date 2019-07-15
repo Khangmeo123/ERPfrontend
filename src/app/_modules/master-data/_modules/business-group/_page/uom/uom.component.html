@@ -1,17 +1,31 @@
 
-<div class="page unit-list">
+<div class="page uom-list">
         <div class="page-header">
             <span class="page-title">
-                {{'unit.header.title' | translate}}
+                {{'uom.header.title' | translate}}
                 <span (click)="onClickSaveBookMark($event)">
                     <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                         star
                     </mat-icon>
                 </span>
             </span>
+
             <div class="page-actions">
                 <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
-                <button class="btn btn-import">{{'general.button.import' | translate}}</button>
+                <div class="btn-group" dropdown>
+                    <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                        aria-controls="dropdown-basic">
+                        {{'general.button.import' | translate}}<span class="caret"></span>
+                    </button>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                        <li role="menuitem"><a class="dropdown-item"
+                                href="#">{{'general.button.import_file' | translate}}</a></li>
+                        <li class="divider dropdown-divider"></li>
+                        <li role="menuitem"><a class="dropdown-item"
+                                href="#">{{'general.button.download_example' | translate}}</a>
+                        </li>
+                    </ul>
+                </div>
                 <button class="btn btn-export">{{'general.button.export' | translate}}</button>
             </div>
         </div>
@@ -22,10 +36,10 @@
                     <ng-template pTemplate="header">
                         <tr>
                             <th pResizableColumn>
-                                {{ 'unit.content.table.unit_id' | translate}}
+                                {{ 'uom.content.table.uom_id' | translate}}
                             </th>
-                            <th pResizableColumn> {{ 'unit.content.table.unit_name' | translate}} </th>
-                            <th pResizableColumn> {{ 'unit.content.table.unit_description' | translate}} </th>
+                            <th pResizableColumn> {{ 'uom.content.table.uom_name' | translate}} </th>
+                            <th pResizableColumn> {{ 'uom.content.table.uom_description' | translate}} </th>
                         </tr>
                         <tr>
                             <th class="th-filter">
@@ -39,11 +53,11 @@
                             </th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-unit>
+                    <ng-template pTemplate="body" let-uom>
                         <tr>
-                            <td> {{unit.id}} </td>
-                            <td> {{unit.name}} </td>
-                            <td> {{unit.des}} </td>
+                            <td> {{uom.id}} </td>
+                            <td> {{uom.name}} </td>
+                            <td> {{uom.des}} </td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -56,13 +70,13 @@
     <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
         [style]="{width: '900px'}">
         <p-header>
-            {{ 'unit.content.modal.title' | translate}}
+            {{ 'uom.content.modal.title' | translate}}
         </p-header>
         <div class="container">
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="unitid">{{ 'unit.content.modal.add_id_unit' | translate}}<span
+                        <label for="uomid">{{ 'uom.content.table.uom_id' | translate}}<span
                                 style="color: red">*</span></label>
                                 <input type="text" class="form-control" />
                         <!-- <div class="div-form">
@@ -77,7 +91,7 @@
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group">
-                        <label for="unitname">{{ 'unit.content.modal.add_name_unit' | translate}}<span
+                        <label for="uomname">{{ 'uom.content.table.uom_name' | translate}}<span
                                 style="color: red">*</span></label>
                         <input type="text" class="form-control" />
                     </div>
@@ -86,7 +100,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="form-group">
-                        <label for="unitid">{{ 'unit.content.modal.add_des_unit' | translate}}</label>
+                        <label for="uomid">{{ 'uom.content.table.uom_description' | translate}}</label>
                         <textarea class="form-control" rows="6">
                                 At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
                          </textarea>
