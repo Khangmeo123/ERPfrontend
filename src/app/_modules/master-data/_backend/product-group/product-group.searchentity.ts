@@ -2,7 +2,7 @@ import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class ProductGroupSearchEntity extends SearchEntity {
     sobId: string;
-   legalId:string;
+    legalId:string;
 
 
     code:string;

@@ -4,7 +4,7 @@ import { ProductGroupEntity } from './product-group.entity';
 import { FormModel } from 'src/app/_helpers/form-model';
 
 
-export class LegalForm extends FormModel{
+export class ProductGroupForm extends FormModel{
 
     name = new FormControl('',[requiredField]);
     code = new FormControl('',[requiredField]);

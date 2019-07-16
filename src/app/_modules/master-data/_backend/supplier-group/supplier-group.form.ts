@@ -4,7 +4,7 @@ import { SupplierGroupEntity } from './supplier-group.entity';
 import { FormModel } from 'src/app/_helpers/form-model';
 
 
-export class LegalForm extends FormModel{
+export class SupplierGroupForm extends FormModel{
 
     name = new FormControl('',[requiredField]);
     code = new FormControl('',[requiredField]);
