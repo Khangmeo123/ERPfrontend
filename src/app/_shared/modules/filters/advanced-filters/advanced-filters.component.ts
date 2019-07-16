@@ -17,9 +17,8 @@ import { toggleMenu } from '../../../animations/toggleMenu';
 export class AdvancedFiltersComponent implements OnInit {
 
   @Input() filter;
-  @Input() searchEntity;
-  @ViewChild('pane', {static: false}) pane;
-  @ViewChild('toggler', {static: false}) toggler;
+  @ViewChild('pane', { static: false }) pane;
+  @ViewChild('toggler', { static: false }) toggler;
 
   @Output() changeFilter = new EventEmitter();
   public typeInput: string = '';
@@ -84,7 +83,7 @@ export class AdvancedFiltersComponent implements OnInit {
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const {left} = this.toggler.nativeElement.getBoundingClientRect();
+    const { left } = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -106,8 +105,7 @@ export class AdvancedFiltersComponent implements OnInit {
   }
 
   onApplyFilter(event) {
-    console.log(event);
-    this.types.forEach(({code}) => {
+    this.types.forEach(({ code }) => {
       if (this.type.code === code) {
         if (event && event.target) {
           this.filter[code] = event.target.value;
@@ -131,6 +129,7 @@ export class AdvancedFiltersComponent implements OnInit {
       }
     }
     this.filter[this.type.code] = this.valueInput;
+    this.changeFilter.emit();
     this.toggleList();
   }
 
