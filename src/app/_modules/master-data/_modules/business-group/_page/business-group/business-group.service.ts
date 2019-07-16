@@ -6,13 +6,20 @@ import { BehaviorSubject } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
 export class BusinessGroupService {
-  public listBusinessGroups: BehaviorSubject<BusinessGroupEntity[]> = new BehaviorSubject([]);
-  constructor(private fb: FormBuilder, private businessGroupRepository: BusinessGroupRepository) { }
+  public businessGroupList: BehaviorSubject<BusinessGroupEntity[]>;
+  public businessGroupForm: BehaviorSubject<FormGroup>;
+
+  constructor(private fb: FormBuilder, private businessGroupRepository: BusinessGroupRepository) {
+    this.businessGroupList = new BehaviorSubject([]);
+    this.businessGroupForm = new BehaviorSubject(this.fb.group(
+      new BusinessGroupForm(),
+    ));
+  }
 
   getList(businessGroupSearchEntity: BusinessGroupSearchEntity) {
     this.businessGroupRepository.getList(businessGroupSearchEntity).subscribe(res => {
       if (res) {
-        this.listBusinessGroups.next(res);
+        this.businessGroupList.next(res);
       }
     }, err => {
       if (err) {
@@ -22,11 +29,29 @@ export class BusinessGroupService {
   }
 
   getId(businessGroupId: string) {
+    this.businessGroupRepository.getId(businessGroupId).subscribe(res => {
+      if (res) {
+        this.businessGroupForm.next(this.fb.group(
+          new BusinessGroupForm(res),
+        ));
+      }
+    }, err => {
+      if (err) {
 
+      }
+    });
   }
 
   add(businessGroupEntity: any) {
+    this.businessGroupRepository.add(businessGroupEntity).subscribe(res => {
+      if (res) {
 
+      }
+    }, err => {
+      if (err) {
+
+      }
+    });
   }
 
   edit(businessGroupEntity: any) {

@@ -16,6 +16,7 @@ export class JwtInterceptor implements HttpInterceptor {
                 setHeaders: {
                     Authorization: `Bearer ${currentUser.token}`,
                     Language: this.translateService.currentLang,
+                    'X-BusinessGroup': 'AE0E3884-FB32-4DA1-9A51-BE6E80402A67',
                 }
             });
         }
