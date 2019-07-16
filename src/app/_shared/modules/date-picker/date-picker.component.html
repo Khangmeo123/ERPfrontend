@@ -2,10 +2,11 @@
   <div class="input-group">
     <input type="text" class="form-control"
            [readOnly]="inputReadOnly"
-           (dateChange)="onDateChange($event)"
+           [(ngModel)]="date"
+           (dateChange)="onDateChange($event); matDatepicker.close();"
            (keydown)="onKeyDown($event)"
            (keyup)="onKeyUp($event)"
-           (mousedown)="onMouseDown(matDatepickerToggle)"
+           (mousedown)="onMouseDown(matDatepicker)"
            (input)="onInput($event)"
            maxlength="10"
            name="date"
@@ -14,8 +15,8 @@
            [placeholder]="placeHolder">
     <mat-datepicker #matDatepicker></mat-datepicker>
     <div class="input-group-append">
-      <div class="input-group-text">
-        <mat-datepicker-toggle matSuffix #matDatepickerToggle [for]="matDatepicker"></mat-datepicker-toggle>
+      <div class="input-group-text" role="button" (click)="matDatepicker.open()">
+        <mat-icon>calendar_today</mat-icon>
       </div>
     </div>
   </div>
