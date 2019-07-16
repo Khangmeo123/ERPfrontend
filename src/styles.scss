@@ -2,16 +2,14 @@
 // $fa-font-path:"~font-awesome/fonts";
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
 $color-button: #1C4E80;
-
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
-
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
-@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 $hamburger-padding-x: 0px !default;
 $hamburger-padding-y: 0px !default;
@@ -36,6 +34,39 @@ $color-title: #1C4E80;
 @import './assets/lightning-admin';
 
 @import "./scss/scrollbars";
+
+/* REQUIRED */
+@import '~pretty-checkbox/src/scss/variables';
+@import '~pretty-checkbox/src/scss/core';
+
+/* OPTIONALS */
+@import '~pretty-checkbox/src/scss/elements/default/fill';
+@import '~pretty-checkbox/src/scss/elements/default/outline';
+@import '~pretty-checkbox/src/scss/elements/default/thick';
+
+@import '~pretty-checkbox/src/scss/elements/font-icon/general';
+
+@import '~pretty-checkbox/src/scss/elements/svg/general';
+
+@import '~pretty-checkbox/src/scss/elements/image/general';
+
+@import '~pretty-checkbox/src/scss/elements/switch/general';
+@import '~pretty-checkbox/src/scss/elements/switch/fill';
+@import '~pretty-checkbox/src/scss/elements/switch/slim';
+
+@import '~pretty-checkbox/src/scss/extras/toggle';
+@import '~pretty-checkbox/src/scss/extras/plain';
+@import '~pretty-checkbox/src/scss/extras/round';
+@import '~pretty-checkbox/src/scss/extras/curve';
+@import '~pretty-checkbox/src/scss/extras/animation';
+@import '~pretty-checkbox/src/scss/extras/disabled';
+@import '~pretty-checkbox/src/scss/extras/locked';
+@import '~pretty-checkbox/src/scss/extras/colors';
+@import '~pretty-checkbox/src/scss/extras/print';
+
+@import '~pretty-checkbox/src/scss/states/hover';
+@import '~pretty-checkbox/src/scss/states/focus';
+@import '~pretty-checkbox/src/scss/states/indeterminate';
 
 html, body {
   height: 100%;

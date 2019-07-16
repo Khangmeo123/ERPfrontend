@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { TextFilter } from '../../../../../../_shared/models/filters/TextFilter';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { TextFilter } from '../../../../../../../_shared/models/filters/TextFilter';
+import { PaginationModel } from '../../../../../../../_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-special-price-supplier',
-  templateUrl: './special-price-supplier.component.html',
-  styleUrls: ['./special-price-supplier.component.scss']
+  selector: 'app-customers-in-group',
+  templateUrl: './customers-in-group.component.html',
+  styleUrls: ['./customers-in-group.component.scss']
 })
-export class SpecialPriceSupplierComponent implements OnInit {
+export class CustomersInGroupComponent implements OnInit {
 
   isSavedBookMark = false;
 

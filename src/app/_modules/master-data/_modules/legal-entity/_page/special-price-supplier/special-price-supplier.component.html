@@ -1,1 +1,35 @@
-<p>special-price-supplier works!</p>
+<div class="page">
+  <div class="page-header">
+    <span class="page-title">
+      {{'special-price-supplier.title' | translate}}
+      <span (click)="onClickSaveBookMark($event)">
+        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="router.navigate(['/master-data/legal-entity/customer-group/configure-customer-group'])"> + {{'general.button.add' | translate}}</button>
+      <div class="btn-group" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                aria-controls="dropdown-basic">
+          {{'general.button.import' | translate}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item"
+                                 href="#">{{'general.button.import_file' | translate}}</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item"
+                                 href="#">{{'general.button.download_example' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="page-section mt-4 row">
+
+    </div>
+  </div>
+</div>

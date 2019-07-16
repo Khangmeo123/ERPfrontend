@@ -36,7 +36,6 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
-import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 
 import { ToastrModule } from 'ngx-toastr';
 
@@ -86,7 +85,7 @@ import { ToastrModule } from 'ngx-toastr';
     InputTextModule,
     ErrorModule,
     SelectModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
   ],
 })
 export class BusinessGroupModule { }

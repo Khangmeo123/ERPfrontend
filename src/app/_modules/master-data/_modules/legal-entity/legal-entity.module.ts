@@ -20,16 +20,37 @@ import { ConfigureCompanyPositionComponent } from './_page/company-position/conf
 import { ListCompanyPositionComponent } from './_page/company-position/list-company-position/list-company-position.component';
 import { DetailCompanyPositionComponent } from './_page/company-position/detail-company-position/detail-company-position.component';
 import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
+import { TranslateModule } from '@ngx-translate/core';
+import { MatIconModule } from '@angular/material';
+import { SelectModule } from '../../../../_shared/modules/select/select.module';
+import { TableModule } from 'primeng/table';
+import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
+import { ErrorModule } from '../../../../_shared/components/error/error.module';
+import { DialogModule } from 'primeng/dialog';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
+import { CustomersInGroupComponent } from './_page/customer-group/customers-in-group/customers-in-group.component';
 
 @NgModule({
   declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent,
     SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent,
     DetailCustomerGroupComponent, ConfigureSupplierGroupComponent, ListSupplierGroupComponent, DetailSupplierGroupComponent,
     ConfigureProductGroupComponent, ListProductGroupComponent, DetailProductGroupComponent, ConfigureCompanyPositionComponent,
-    ListCompanyPositionComponent, DetailCompanyPositionComponent],
+    ListCompanyPositionComponent, DetailCompanyPositionComponent, CustomersInGroupComponent],
   imports: [
     CommonModule,
     LegalEntityRoutingModule,
-  ]
+    TranslateModule.forChild(),
+    MatIconModule,
+    SelectModule,
+    TableModule,
+    FiltersModule,
+    ErrorModule,
+    DialogModule,
+    ConfirmationPopoverModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    AccordionModule.forRoot(),
+  ],
 })
-export class LegalEntityModule { }
+export class LegalEntityModule {
+}
