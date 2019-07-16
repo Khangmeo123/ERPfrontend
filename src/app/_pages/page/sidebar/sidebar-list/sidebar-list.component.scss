@@ -7,16 +7,19 @@ li.menu-item {
   display: flex;
   align-items: center;
   align-content: center;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .icon-placeholder {
+    width: 20px;
+    display: inline-flex;
+  }
 
   a {
     .label {
       line-height: normal;
     }
-  }
-
-  i.pi,
-  span.pi {
-    margin-right: 0.25rem;
   }
 }
 
@@ -36,4 +39,16 @@ li.divider {
 li:active,
 li:focus {
   outline: none;
+}
+
+.pinned-sidebar {
+  .menu-item.menu-item-0 {
+    display: block;
+    visibility: visible;
+
+    .menu-item {
+      display: none;
+      visibility: hidden;
+    }
+  }
 }

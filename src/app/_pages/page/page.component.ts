@@ -9,7 +9,7 @@ import { AppService } from '../../_services';
   encapsulation: ViewEncapsulation.None,
 })
 export class PageComponent implements OnInit {
-  public isToggle = false;
+  public isPinned = false;
 
   constructor(private appService: AppService) {
   }
@@ -30,7 +30,6 @@ export class PageComponent implements OnInit {
   }
 
   onChangeToggle(event) {
-    console.log('onChangeToggle', event);
-    this.isToggle = event;
+    this.isPinned = event;
   }
 }

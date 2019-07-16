@@ -1,4 +1,6 @@
 .pinned-sidebar {
+  height: auto;
+
   ul.menu-items {
     margin-left: 0 !important;
 
@@ -7,10 +9,14 @@
       visibility: hidden;
     }
 
-    li.menu-item.menu-item-0,
-    li.menu-item.menu-item-1 {
+    li.menu-item.menu-item-0 {
       display: flex;
       visibility: visible;
+
+      li.menu-item {
+        display: none;
+        visibility: hidden;
+      }
     }
   }
 }

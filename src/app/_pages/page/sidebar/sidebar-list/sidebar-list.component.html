@@ -4,20 +4,25 @@
   </li>
   <ng-template #notDivider>
     <li *ngIf="item.route; else notRoute"
-      class="menu-item menu-item-{{level}} d-flex" [routerLink]="item.route || null" routerLinkActive="active"
+        class="menu-item menu-item-{{level}} d-flex"
+        (click)="toggleChildren(item)"
+        [routerLink]="item.route || null" routerLinkActive="active"
         [routerLinkActiveOptions]="{exact: item.exact}">
       <a class="flex-grow-1">
-        <i [class]="item.icon" *ngIf="!!item.icon"></i>
+        <i [class]="item.icon" *ngIf="!!item.icon; else notHaveIcon"></i>
+        <ng-template #notHaveIcon>
+          <div class="icon-placeholder"></div>
+        </ng-template>
         <span class="label">
             {{item.label}}
         </span>
       </a>
-      <span *ngIf="item.children?.length && pinned" class="pi pi-caret-down"></span>
+      <span *ngIf="item.children?.length && pinned" [class]="caretClass"></span>
     </li>
     <ng-template #notRoute>
     </ng-template>
-    <ng-container *ngIf="item.children?.length" [@toggleMenuSideBar]>
-      <app-sidebar-list [level]="level+1" [menu]="item.children" [pinned]="pinned"></app-sidebar-list>
+    <ng-container *ngIf="item.children?.length && isOpened" [@toggleMenuSideBar]>
+      <app-sidebar-list [root]="item" [level]="level+1" [menu]="item.children" [pinned]="pinned"></app-sidebar-list>
     </ng-container>
   </ng-template>
 </ng-container>
