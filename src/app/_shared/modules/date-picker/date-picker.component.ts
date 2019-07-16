@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DEFAULT_DATE_FORMAT } from './date-picker.formats';
@@ -38,7 +38,7 @@ export class DatePickerComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter();
 
-  @ViewChild('matDatepickerToggle', { static: false }) matDatepickerToggle;
+  date;
 
   constructor() {
   }
@@ -56,13 +56,14 @@ export class DatePickerComponent implements OnInit {
   ngOnInit() {
   }
 
-  onMouseDown(toggler) {
-    console.log(toggler._button._elementRef.nativeElement.click());
+  onMouseDown(datePicker) {
+    datePicker.open();
   }
 
   onDateChange(event) {
     this.value = event.targetElement.value;
     this.valueChange.emit(this.value);
+    console.log(event);
   }
 
   onKeyUp(event) {
@@ -72,7 +73,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   onKeyDown(event) {
-    const { target } = event;
+    const {target} = event;
     if (event.key === 'Control') {
       this.checkCtrl = true;
     }
@@ -93,6 +94,12 @@ export class DatePickerComponent implements OnInit {
         }
         return;
       }
+    }
+  }
+
+  onInput(event) {
+    if (event.target.value === '') {
+      this.valueChange.emit('');
     }
   }
 }
