@@ -9,10 +9,10 @@ export class ExportTariffEntity extends Entity {
     // taxtypeEntity:
     taxType : string;
 
-    // unitEntity:
-    unitId: string;
-    unitName: string;
-    unitCode: string;
+    // uomEntity:
+    uomId: string;
+    uomName: string;
+    uomCode: string;
 
     // coaEntity:
     coaId: string;

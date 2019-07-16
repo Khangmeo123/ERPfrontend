@@ -2,9 +2,10 @@ import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class EnvironmentTariffSearchEntity extends SearchEntity {
     sobId: string;
+    
     taxCode: string;
     taxType: string;
-    unitId: string;
+    uomId: string;
     taxRate: number;
     description: string;
 

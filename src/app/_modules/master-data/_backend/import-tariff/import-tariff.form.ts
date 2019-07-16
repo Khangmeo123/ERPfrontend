@@ -9,8 +9,8 @@ export class ExportTariffForm extends FormModel{
     taxType = new FormControl('',[requiredField]);
 
     //don vi tien te
-    unitId = new FormControl('');
-    unitName = new FormControl('');
+    uomId = new FormControl('');
+    uomName = new FormControl('');
 
     //tai khoan tong hop
     coaId = new FormControl('');

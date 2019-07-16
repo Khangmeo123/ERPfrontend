@@ -8,9 +8,9 @@ export class ResoureTariffForm extends FormModel{
     taxCode = new FormControl('',[requiredField]);
     taxType = new FormControl('',[requiredField]);
 
-    //don vi tien te
-    unitId = new FormControl('');
-    unitName = new FormControl('');
+    //don vi tinh
+    uomId = new FormControl('');
+    uomName = new FormControl('');
 
     //tai khoan tong hop
     coaId = new FormControl('');

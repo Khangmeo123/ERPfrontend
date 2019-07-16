@@ -9,8 +9,8 @@ export class ExciseTariffForm extends FormModel{
     taxType = new FormControl('',[requiredField]);
 
     //don vi tien te
-    currencyId = new FormControl('');
-    currencyName = new FormControl('');
+    uomId = new FormControl('');
+    uomName = new FormControl('');
 
     //tai khoan tong hop
     coaId = new FormControl('');

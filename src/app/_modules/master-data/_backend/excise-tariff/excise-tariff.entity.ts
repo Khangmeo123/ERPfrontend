@@ -9,11 +9,11 @@ export class ExciseTariffEntity extends Entity {
     // taxtypeEntity:
     taxType: string;
 
-    // unitEntity:
+    // uomEntity:
     //don vi tinh
-    unitId: string;
-    unitName: string;
-    unitCode: string;
+    uomId: string;
+    uomName: string;
+    uomCode: string;
 
     // coaEntity:
     //tai khoan tong hop

@@ -4,7 +4,7 @@ export class ExportTariffSearchEntity extends SearchEntity {
     sobId: string;
     taxCode: string;
     taxType: string;
-    unitId: string;
+    uomId: string;
     taxRate: number;
     description: string;
 
