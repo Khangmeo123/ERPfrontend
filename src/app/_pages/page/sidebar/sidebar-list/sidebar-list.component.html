@@ -3,18 +3,15 @@
     <div class="divider-content"></div>
   </li>
   <ng-template #notDivider>
-    <li *ngIf="item.route; else notRoute"
-        class="menu-item menu-item-{{level}} d-flex"
-        (click)="toggleChildren(item)"
-        [routerLink]="item.route || null" routerLinkActive="active"
-        [routerLinkActiveOptions]="{exact: item.exact}">
+    <li *ngIf="item.route; else notRoute" class="menu-item menu-item-{{level}} d-flex" (click)="toggleChildren(item)"
+      [routerLink]="item.route || null" routerLinkActive="active" [routerLinkActiveOptions]="{exact: item.exact}">
       <a class="flex-grow-1">
         <i [class]="item.icon" *ngIf="!!item.icon; else notHaveIcon"></i>
         <ng-template #notHaveIcon>
           <div class="icon-placeholder"></div>
         </ng-template>
         <span class="label">
-            {{item.label}}
+          {{item.label}}
         </span>
       </a>
       <span *ngIf="item.children?.length && pinned" [class]="caretClass"></span>

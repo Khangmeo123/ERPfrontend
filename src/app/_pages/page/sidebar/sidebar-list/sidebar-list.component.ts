@@ -14,7 +14,7 @@ import { toggleMenuSideBar } from '../sidebar.animation';
 export class SidebarListComponent implements OnInit {
   @Input() level = 0;
 
-  @Input() root = null;
+  @Input() root = { route: '' };
 
   @Input() menu: SidebarItem[] = [];
 
@@ -30,7 +30,8 @@ export class SidebarListComponent implements OnInit {
   }
 
   get routeUrl() {
-    return this.activatedRoute.snapshot._routerState.url;
+    console.log(this.router.url);
+    return this.router.url;
   }
 
   ngOnInit() {
