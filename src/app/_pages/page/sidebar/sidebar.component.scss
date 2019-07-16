@@ -7,8 +7,6 @@ aside.sidebar {
   }
 
   nav {
-    height: 100%;
-
     .bookmark-icon {
       color: #FCE205;
     }
@@ -35,33 +33,22 @@ aside.sidebar {
     .sidebar-bookmarks {
       ul.show {
         display: block;
+        visibility: visible;
+
+        ::before {
+          background: #1c4e80;
+          width: 3px;
+          position: absolute;
+          left: 35px;
+          height: 100%;
+          opacity: 1;
+        }
       }
 
       ul.hide {
         display: none;
+        visibility: hidden;
       }
-    }
-
-    .sidebar-bookmarks::before {
-      content: "";
-      height: 100%;
-      opacity: 1;
-      width: 3px;
-      background: #1c4e80;
-      position: absolute;
-      left: 35px;
-      top: 40px;
-      border-radius: 15px;
-    }
-
-    .sidebar-bookmarks {
-      position: relative;
-      transition: all 0.26s ease;
-      -webkit-transform: scaleY(0);
-      transform: scaleY(0);
-      transform-origin: top;
-      -webkit-transform-origin: top;
-      height: auto;
     }
   }
 

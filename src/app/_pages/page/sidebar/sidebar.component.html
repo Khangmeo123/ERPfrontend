@@ -10,9 +10,9 @@
       </li>
     </ul>
     <div class="sidebar-menu sidebar-bookmarks">
-      <ul *ngFor="let item of bookmarks" [class]="bookmarkMenuState" [@toggleMenuSideBar]>
-        <li>
-          <a href="#" routerLink="{{item.route}}" routerLinkActive="active">
+      <ul [@toggleMenuSideBar] [class]="bookmarkMenuState" *ngIf="showBookmarks">
+        <li *ngFor="let item of bookmarks" class="d-flex">
+          <a href="#" routerLink="{{item.route}}" routerLinkActive="active" class="flex-grow-1">
             <span>{{item.label}}</span>
           </a>
           <span class="d-flex align-items-center align-content-center" (click)="bookmarkService.deleteBookMarks(item)">

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular/core';
 import { toggleMenuNavbar, toggleMenuNavbarLeft, toggleMenuSideBar } from '../../../_shared/animations/sidebar.animation';
 import { SidebarItem } from './interfaces/SidebarItem';
 import { sampleSidebarMenu } from './sidebar.sample';
@@ -16,11 +16,12 @@ import { AppService, BookmarkService } from '../../../_services';
     toggleMenuNavbarLeft,
   ],
   providers: [],
+  encapsulation: ViewEncapsulation.None,
 })
 export class SidebarComponent implements OnInit, OnChanges {
   @Input() menu: SidebarItem[] = sampleSidebarMenu;
 
-  @Input() bookmarks: SidebarItem[] = sampleSidebarMenu;
+  @Input() bookmarks = sampleSidebarMenu;
 
   @Input() showBookmarks = false;
 
