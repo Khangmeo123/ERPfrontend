@@ -1,9 +1,9 @@
-import { FormModel } from './../../../../_helpers/form-model';
+import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { EnviTariffEntity } from 'src/app/_modules/master-data/_backend/envi-tariff/envi-tariff.entity';
+import { EnvironmentTariffEntity } from 'src/app/_modules/master-data/_backend/environment-tariff/environment-tariff.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class EnviTariffForm extends FormModel{
+export class EnvironmentTariffForm extends FormModel{
 
     taxCode = new FormControl('',[requiredField]);
     taxType = new FormControl('',[requiredField]);
@@ -21,7 +21,7 @@ export class EnviTariffForm extends FormModel{
     taxRate = new FormControl('');
     description = new FormControl('');
 
-    constructor(enviTariffEntity?: EnviTariffEntity) {
-        super(enviTariffEntity);
+    constructor(environmentTariffEntity?: EnvironmentTariffEntity) {
+        super(environmentTariffEntity);
     }
 }

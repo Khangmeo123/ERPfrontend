@@ -1,9 +1,9 @@
-import { FormModel } from './../../../../_helpers/form-model';
+import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { ExpTariffEntity } from 'src/app/_modules/master-data/_backend/exp-tariff/exp-tariff.entity';
+import { ExportTariffEntity } from 'src/app/_modules/master-data/_backend/export-tariff/export-tariff.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class ExpTariffForm extends FormModel{
+export class ExportTariffForm extends FormModel{
 
     taxCode = new FormControl('',[requiredField]);
     taxType = new FormControl('',[requiredField]);
@@ -21,7 +21,7 @@ export class ExpTariffForm extends FormModel{
     taxRate = new FormControl('');
     description = new FormControl('');
 
-    constructor(expTariffEntity?: ExpTariffEntity) {
-        super(expTariffEntity);
+    constructor(exportTariffEntity?: ExportTariffEntity) {
+        super(exportTariffEntity);
     }
 }

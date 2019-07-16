@@ -1,9 +1,9 @@
-import { FormModel } from './../../../../_helpers/form-model';
+import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { VatEntityEntity } from 'src/app/_modules/master-data/_backend/vat-entity/vat-entity.entity';
+import { ImportTariffEntity } from 'src/app/_modules/master-data/_backend/import-tariff/import-tariff.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class VatEntityForm extends FormModel{
+export class ExportTariffForm extends FormModel{
 
     taxCode = new FormControl('',[requiredField]);
     taxType = new FormControl('',[requiredField]);
@@ -21,7 +21,7 @@ export class VatEntityForm extends FormModel{
     taxRate = new FormControl('');
     description = new FormControl('');
 
-    constructor(vatEntityEntity?: VatEntityEntity) {
-        super(vatEntityEntity);
+    constructor(importTariffEntity?: ImportTariffEntity) {
+        super(importTariffEntity);
     }
 }
