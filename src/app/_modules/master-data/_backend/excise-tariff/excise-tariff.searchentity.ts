@@ -2,13 +2,14 @@ import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class ExciseTariffSearchEntity extends SearchEntity {
     sobId: string;
+
     taxCode: string;
     taxTypeId: string;
-    unitId: string;
+    uomId: string;
     taxRate: number;
-    description: number;
+    description: string;
 
-    constructor(exciseTariffSearchEntity: any) {
+    constructor(exciseTariffSearchEntity?: any) {
         super(exciseTariffSearchEntity);
     }
 }

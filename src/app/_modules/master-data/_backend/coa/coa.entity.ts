@@ -4,7 +4,7 @@ export class CoaEntity extends Entity {
     // sobEntity:
     sobId: string;
 
-    accountNumber: number;
+    accountNumber: string;
     accountName: string;
 
     // propertyEntity:
@@ -18,7 +18,7 @@ export class CoaEntity extends Entity {
 
     description: string;
 
-    constructor(coaEntity: any) {
+    constructor(coaEntity?: any) {
         super(coaEntity);
     }
 }
