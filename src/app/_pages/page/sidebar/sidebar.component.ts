@@ -20,7 +20,7 @@ import { AppService, BookmarkService } from '../../../_services';
 export class SidebarComponent implements OnInit, OnChanges {
   @Input() menu: SidebarItem[] = sampleSidebarMenu;
 
-  @Input() bookmarks: SidebarItem[] = [];
+  @Input() bookmarks: SidebarItem[] = sampleSidebarMenu;
 
   @Input() showBookmarks = false;
 
@@ -48,5 +48,9 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   get bookmarkCaret() {
     return `pi pi-caret-${this.showBookmarks ? 'up' : 'down'} mr-1`;
+  }
+
+  get animationStateLeft() {
+    return this.showBookmarks ? 'open' : 'closed';
   }
 }

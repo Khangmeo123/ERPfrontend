@@ -1,7 +1,7 @@
-<aside class="sidebar shadow-sm" [@toggleMenuNavbarLeft]="animationStateLeft">
+<aside class="sidebar shadow-sm">
   <nav class="sidebar-menu pt-2 pb-3">
     <ul class="bookmark-header" [@toggleMenuSideBar]>
-      <li class="bookmark-title" (click)="toggleBookmarks()">
+      <li class="bookmark-title d-flex align-items-center" (click)="toggleBookmarks()">
         <a class="flex-grow-1">
           <mat-icon class="bookmark-icon">star</mat-icon>
           <span>{{'bookmarks.title' | translate}}</span>
@@ -10,18 +10,18 @@
       </li>
     </ul>
     <div class="sidebar-menu sidebar-bookmarks">
-      <ul *ngFor="let item of bookmarks" [class]="bookmarkMenuState">
+      <ul *ngFor="let item of bookmarks" [class]="bookmarkMenuState" [@toggleMenuSideBar]>
         <li>
           <a href="#" routerLink="{{item.route}}" routerLinkActive="active">
             <span>{{item.label}}</span>
           </a>
-          <span style="margin-top: 8px" (click)="bookmarkService.deleteBookMarks(item)">
-            <mat-icon style="font-size: 14px">clear</mat-icon>
+          <span class="d-flex align-items-center align-content-center" (click)="bookmarkService.deleteBookMarks(item)">
+            <mat-icon>clear</mat-icon>
           </span>
         </li>
       </ul>
     </div>
-    <div class="sidebar-menu mt-2">
+    <div class="sidebar-menu mt-2" *ngIf="!showBookmarks">
       <ul class="menu-items">
         <app-sidebar-list [menu]="menu" [pinned]="!isOpened" [root]=""></app-sidebar-list>
       </ul>

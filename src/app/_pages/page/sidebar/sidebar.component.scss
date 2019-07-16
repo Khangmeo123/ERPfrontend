@@ -1,8 +1,16 @@
 aside.sidebar {
+  mat-icon {
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   nav {
+    height: 100%;
+
     .bookmark-icon {
       color: #FCE205;
-      height: 100%;
     }
 
     ul.bookmark-header {
@@ -32,6 +40,28 @@ aside.sidebar {
       ul.hide {
         display: none;
       }
+    }
+
+    .sidebar-bookmarks::before {
+      content: "";
+      height: 100%;
+      opacity: 1;
+      width: 3px;
+      background: #1c4e80;
+      position: absolute;
+      left: 35px;
+      top: 40px;
+      border-radius: 15px;
+    }
+
+    .sidebar-bookmarks {
+      position: relative;
+      transition: all 0.26s ease;
+      -webkit-transform: scaleY(0);
+      transform: scaleY(0);
+      transform-origin: top;
+      -webkit-transform-origin: top;
+      height: auto;
     }
   }
 

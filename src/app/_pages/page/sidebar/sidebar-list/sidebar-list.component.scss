@@ -11,6 +11,10 @@ li.menu-item {
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  .pi {
+    color: #3d464d;
+  }
+
   .icon-placeholder {
     width: 20px;
     display: inline-flex;

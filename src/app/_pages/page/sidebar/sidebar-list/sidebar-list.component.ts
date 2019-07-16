@@ -30,7 +30,6 @@ export class SidebarListComponent implements OnInit {
   }
 
   get routeUrl() {
-    console.log(this.router.url);
     return this.router.url;
   }
 

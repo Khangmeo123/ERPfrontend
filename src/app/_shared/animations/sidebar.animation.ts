@@ -27,7 +27,7 @@ export const toggleMenuNavbar = trigger('toggleMenuNavbar', [
 
 export const toggleMenuNavbarLeft = trigger('toggleMenuNavbarLeft', [
   state('open', style({
-    width: '70px', visibility: 'visible', opacity: 0,
+    width: '70px', visibility: 'visible', opacity: 1,
   })),
   state('closed', style({
     width: '260px', visibility: 'visible', opacity: 1,
