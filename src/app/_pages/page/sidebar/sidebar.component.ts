@@ -96,11 +96,6 @@ export class SidebarComponent implements OnInit, OnChanges {
           route: '/master-data/sob/bank-account',
         },
         {
-          displayName: 'Biểu thuế - HTTK',
-          iconName: 0,
-          route: '/master-data/sob/tariff-coa',
-        },
-        {
           displayName: 'Hệ thống tài khoản',
           iconName: 0,
           route: '/master-data/sob/coa',
@@ -114,6 +109,27 @@ export class SidebarComponent implements OnInit, OnChanges {
           displayName: 'Biểu thuế tài nguyên',
           iconName: 0,
           route: '/master-data/sob/resource-tariff',
+        },
+        {
+          displayName: 'Biểu thuế giá trị gia tăng',
+          iconName: 0,
+          route: '/master-data/sob/value-added-tax',
+        },
+        {
+          displayName: 'Biểu thuế xuất khẩu',
+          iconName: 0,
+          route: '/master-data/sob/export-tax',
+        },
+
+        {
+          displayName: 'Biểu thuế nhập khẩu',
+          iconName: 0,
+          route: '/master-data/sob/import-tax',
+        },
+        {
+          displayName: 'Biểu thuế môi trường',
+          iconName: 0,
+          route: '/master-data/sob/environment-tax',
         },
         {
           displayName: 'Trung tâm chi phí',

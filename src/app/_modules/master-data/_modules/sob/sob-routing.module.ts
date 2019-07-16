@@ -11,15 +11,17 @@ import { VoucherComponent } from './_page/voucher/voucher.component';
 import { PaymentMethodComponent } from './_page/payment-method/payment-method.component';
 import { ExciseTariffComponent } from './_page/excise-tariff/excise-tariff.component';
 import { PaymentTermComponent } from './_page/payment-term/payment-term.component';
-import { TariffCoaComponent } from './_page/tariff-coa/tariff-coa.component';
 import { SobComponent } from './_page/sob/sob.component';
+import {ValueAddedTaxComponent} from './_page/value-added-tax/value-added-tax.component';
+import {EnvironmentTaxComponent} from './_page/environment-tax/environment-tax.component';
+import {ImportTaxComponent} from './_page/import-tax/import-tax.component';
+import {ExportTaxComponent} from './_page/export-tax/export-tax.component';
 
 const routes: Routes = [
   {
     path: '', children: [
       { path: '', component: SobComponent },
       { path: 'bank-account', component: BankAccountComponent },
-      { path: 'tariff-coa', component: TariffCoaComponent },
       { path: 'coa', component: CoaComponent },
       { path: 'excise-tariff', component: ExciseTariffComponent },
       { path: 'resource-tariff', component: ResourceTariffComponent },
@@ -28,6 +30,10 @@ const routes: Routes = [
       { path: 'accountant-period', component: AccountantPeriodComponent },
       { path: 'voucher', component: VoucherComponent },
       { path: 'payment-method', component: PaymentMethodComponent },
+      { path: 'value-added-tax', component: ValueAddedTaxComponent },
+      { path: 'environment-tax', component: EnvironmentTaxComponent },
+      { path: 'import-tax', component: ImportTaxComponent },
+      { path: 'export-tax', component: ExportTaxComponent },
       { path: 'payment-term', component: PaymentTermComponent },
     ],
   },

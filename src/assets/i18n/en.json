@@ -1,4 +1,19 @@
 {
+	"accounting_period": {
+		"description": "",
+		"from_date": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"lable": "",
+			"title": ""
+		},
+		"status": {
+			"fiscal_year": ""
+		},
+		"to_date": ""
+	},
 	"asset": {
 		"content": {
 			"modal": {
@@ -50,9 +65,6 @@
 		"description": "",
 		"details": {
 			"title": ""
-		},
-		"sob": {
-			"name": ""
 		}
 	},
 	"business_group": {
@@ -75,7 +87,6 @@
 		"list": {
 			"title": ""
 		},
-		"name": "",
 		"super_account": ""
 	},
 	"cost-center": {
@@ -92,11 +103,6 @@
 		},
 		"header": {
 			"title": ""
-		},
-		"status": {
-			"active": "",
-			"inactive": "",
-			"label": ""
 		}
 	},
 	"currency": {
@@ -204,6 +210,34 @@
 			"title": ""
 		}
 	},
+	"environment_tax": {
+		"code": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"parent_account": "",
+		"tax_rate": "",
+		"unit": ""
+	},
+	"export_tax": {
+		"code": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"parent_account": "",
+		"tax_rate": "",
+		"unit": ""
+	},
 	"fiscal_year": {
 		"content": {
 			"from_date": "",
@@ -217,9 +251,6 @@
 		},
 		"header": {
 			"title": ""
-		},
-		"status": {
-			"label": ""
 		}
 	},
 	"general": {
@@ -232,7 +263,22 @@
 			"import": "",
 			"import_file": "",
 			"save": ""
-		}
+		},
+		"sob": ""
+	},
+	"import_tax": {
+		"code": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"parent_account": "",
+		"tax_rate": "",
+		"unit": ""
 	},
 	"job_level": {
 		"header": {
@@ -256,6 +302,29 @@
 		"modal": {
 			"title": ""
 		}
+	},
+	"payment_method": {
+		"code": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"payment_method_name": ""
+	},
+	"payment_term": {
+		"code": "",
+		"discount_period": "",
+		"discount_rate": "",
+		"due_in_date": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": ""
 	},
 	"product": {
 		"content": {
@@ -319,18 +388,21 @@
 		},
 		"name": "",
 		"percent": "",
-		"status": {
-			"label": ""
-		},
-		"type": "",
 		"unit": ""
 	},
 	"sob": {
 		"add": "",
+		"chart_account": "",
 		"code": "",
 		"currency": "",
+		"enviroment_tax": "",
+		"export_tax": "",
+		"import_tax": "",
 		"name": "",
-		"title": ""
+		"resource_tax": "",
+		"special_consumption_tax": "",
+		"title": "",
+		"value_added_tax": ""
 	},
 	"supplier": {
 		"content": {
@@ -397,25 +469,7 @@
 		},
 		"name": "",
 		"percent": "",
-		"status": {
-			"label": ""
-		},
-		"type": "",
 		"unit": ""
-	},
-	"tariff_coa": {
-		"coa": {
-			"circular_133": "",
-			"circular_200": "",
-			"title": ""
-		},
-		"save": "",
-		"tariff": {
-			"excise": "",
-			"resources": "",
-			"title": ""
-		},
-		"title": ""
 	},
 	"uom": {
 		"content": {
@@ -431,5 +485,33 @@
 		"header": {
 			"title": ""
 		}
+	},
+	"value_added_tax": {
+		"code": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"parent_account": "",
+		"tax_rate": "",
+		"unit": ""
+	},
+	"voucher": {
+		"code": "",
+		"credit": "",
+		"debit": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"type": ""
 	}
 }
