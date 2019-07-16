@@ -1,6 +1,7 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class BankAccountEntity extends Entity {
+
     sobId: string;
 
     // coaEntity:
@@ -17,7 +18,7 @@ export class BankAccountEntity extends Entity {
     accountName: string;
     description: string;
 
-    constructor(bankAccountEntity: any) {
+    constructor(bankAccountEntity?: any) {
         super(bankAccountEntity);
     }
 }

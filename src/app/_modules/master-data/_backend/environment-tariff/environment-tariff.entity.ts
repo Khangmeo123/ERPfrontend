@@ -1,6 +1,6 @@
 import { Entity } from 'src/app/_helpers/entity';
 
-export class ResoureTariffEntity extends Entity {
+export class EnvironmentTariffEntity extends Entity {
     // sobEntity:
     sobId: string;
 
@@ -22,7 +22,7 @@ export class ResoureTariffEntity extends Entity {
     taxRate: number;
     description: string;
 
-    constructor(resoureTariffEntity?: any) {
-        super(resoureTariffEntity);
+    constructor(environmentTariffEntity?: any) {
+        super(environmentTariffEntity);
     }
 }

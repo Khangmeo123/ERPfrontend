@@ -7,16 +7,16 @@ export class ExciseTariffEntity extends Entity {
     taxCode: string;
 
     // taxtypeEntity:
-    taxTypeId: string;
-    taxTypeCode: string;
-    taxTypeName: string;
+    taxType: string;
 
-    // unitEntity:
-    unitId: string;
-    unitName: string;
-    unitCode: string;
+    // uomEntity:
+    //don vi tinh
+    uomId: string;
+    uomName: string;
+    uomCode: string;
 
     // coaEntity:
+    //tai khoan tong hop
     coaId: string;
     coaName: string;
     coaCode: string;
@@ -24,7 +24,7 @@ export class ExciseTariffEntity extends Entity {
     taxRate: number;
     description: string;
 
-    constructor(exciseTariffEntity: any) {
+    constructor(exciseTariffEntity?: any) {
         super(exciseTariffEntity);
     }
 }

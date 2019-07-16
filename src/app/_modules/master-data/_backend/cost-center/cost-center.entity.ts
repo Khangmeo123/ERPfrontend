@@ -11,11 +11,11 @@ export class CostCenterEntity extends Entity {
 
     // coaEntity:
     coaId: string;
-    coaAccountNumber: number;
+    coaAccountNumber: string;
 
     description: string;
 
-    constructor(costCenterEntity: any) {
+    constructor(costCenterEntity?: any) {
         super(costCenterEntity);
     }
 }
