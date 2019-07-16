@@ -96,7 +96,7 @@ storiesOf('Advanced Filters', module)
         birthday: new DateFilter(),
       },
       Seach: (event) => {
-        console.log(event)
-      }
+        console.log(event);
+      },
     },
   }));

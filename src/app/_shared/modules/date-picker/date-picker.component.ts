@@ -38,7 +38,7 @@ export class DatePickerComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter();
 
-  @ViewChild('matDatepickerToggle', { static: false }) matDatepickerToggle;
+  @ViewChild('matDatepickerToggle', {static: false}) matDatepickerToggle;
 
   constructor() {
   }
@@ -72,7 +72,7 @@ export class DatePickerComponent implements OnInit {
   }
 
   onKeyDown(event) {
-    const { target } = event;
+    const {target} = event;
     if (event.key === 'Control') {
       this.checkCtrl = true;
     }
@@ -93,6 +93,12 @@ export class DatePickerComponent implements OnInit {
         }
         return;
       }
+    }
+  }
+
+  onInput(event) {
+    if (event.target.value === '') {
+      this.valueChange.emit('');
     }
   }
 }
