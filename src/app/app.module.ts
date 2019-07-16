@@ -18,13 +18,13 @@ import { SidebarComponent } from './_pages/page/sidebar/sidebar.component';
 import { NavbarComponent } from './_pages/page/navbar/navbar.component';
 import { FooterComponent } from './_pages/page/footer/footer.component';
 import { SpinnerComponent } from './_shared/components/spinner/spinner.component';
-import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemsidebar.component';
 import { MatIconModule } from '@angular/material';
 import {DropdownModule} from 'primeng/dropdown';
 import {PipeModule} from './_shared/pipe/pipe.module';
 import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 import { ClickOutsideModule } from 'ng-click-outside';
+import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar-list.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { ClickOutsideModule } from 'ng-click-outside';
     NavbarComponent,
     FooterComponent,
     SpinnerComponent,
-    ItemSidebarComponent,
+    SidebarListComponent,
   ],
   imports: [
     BrowserModule,

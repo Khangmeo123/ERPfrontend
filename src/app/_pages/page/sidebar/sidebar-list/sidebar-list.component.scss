@@ -1,0 +1,39 @@
+//@import "~bootstrap/scss/mixins";
+//@import "~bootstrap/scss/functions";
+//@import "~bootstrap/scss/variables";
+
+li.menu-item {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  align-content: center;
+
+  a {
+    .label {
+      line-height: normal;
+    }
+  }
+
+  i.pi,
+  span.pi {
+    margin-right: 0.25rem;
+  }
+}
+
+li.divider {
+  display: flex;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+
+  .divider-content {
+    border: 1px dashed #3d464d;
+    flex-grow: 1;
+  }
+}
+
+li:active,
+li:focus {
+  outline: none;
+}

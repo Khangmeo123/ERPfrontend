@@ -1,0 +1,16 @@
+.pinned-sidebar {
+  ul.menu-items {
+    margin-left: 0 !important;
+
+    li {
+      display: none;
+      visibility: hidden;
+    }
+
+    li.menu-item.menu-item-0,
+    li.menu-item.menu-item-1 {
+      display: flex;
+      visibility: visible;
+    }
+  }
+}
