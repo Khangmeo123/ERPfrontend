@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, Output, ViewChild, ViewEncapsulation, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FilterType } from '../../../models/filters/FilterType';
 import { DateFilter } from '../../../models/filters/DateFilter';
 import { TextFilter } from '../../../models/filters/TextFilter';
@@ -17,22 +17,50 @@ import { toggleMenu } from '../../../animations/toggleMenu';
 export class AdvancedFiltersComponent implements OnInit {
 
   @Input() filter;
-  @Input() searchEntity;
   @ViewChild('pane', { static: false }) pane;
   @ViewChild('toggler', { static: false }) toggler;
 
   @Output() changeFilter = new EventEmitter();
-
-  protected types: FilterType[] = [];
-
-  protected isOpened = false;
   public typeInput: string = '';
   public valueInput: any;
   type = null;
-
   dropdownDirection = 'left';
+  protected types: FilterType[] = [];
+  protected isOpened = false;
 
   constructor() {
+  }
+
+  get isDateFilter() {
+    return this.filter instanceof DateFilter;
+  }
+
+  get isNumberFilter() {
+    return this.filter instanceof NumberFilter;
+  }
+
+  get isTextFilter() {
+    return this.filter instanceof TextFilter;
+  }
+
+  get listState() {
+    return this.isOpened ? 'opened' : 'closed';
+  }
+
+  get filterTypes() {
+    return this.types.map((type) => {
+      return {
+        label: type.languages.en,
+        value: type.code,
+      };
+    });
+  }
+
+  get filterTypeSign() {
+    if (this.type) {
+      return this.type.sign;
+    }
+    return null;
   }
 
   ngOnInit() {
@@ -50,19 +78,6 @@ export class AdvancedFiltersComponent implements OnInit {
       this.type = this.types[0];
       this.type = this.types[0];
     }
-  }
-
-
-  get isDateFilter() {
-    return this.filter instanceof DateFilter;
-  }
-
-  get isNumberFilter() {
-    return this.filter instanceof NumberFilter;
-  }
-
-  get isTextFilter() {
-    return this.filter instanceof TextFilter;
   }
 
   beforeOpenList() {
@@ -87,26 +102,6 @@ export class AdvancedFiltersComponent implements OnInit {
       this.beforeCloseList();
     }
     this.isOpened = !this.isOpened;
-  }
-
-  get listState() {
-    return this.isOpened ? 'opened' : 'closed';
-  }
-
-  get filterTypes() {
-    return this.types.map((type) => {
-      return {
-        label: type.languages.en,
-        value: type.code,
-      };
-    });
-  }
-
-  get filterTypeSign() {
-    if (this.type) {
-      return this.type.sign;
-    }
-    return null;
   }
 
   onApplyFilter(event) {
@@ -134,12 +129,19 @@ export class AdvancedFiltersComponent implements OnInit {
       }
     }
     this.filter[this.type.code] = this.valueInput;
+    this.changeFilter.emit();
     this.toggleList();
   }
 
   closeDropdown() {
     if (this.isOpened) {
       this.isOpened = !this.isOpened;
+    }
+  }
+
+  onInput(event) {
+    if (event.target.value === '') {
+      this.onApplyFilter('');
     }
   }
 }
