@@ -1,1 +1,139 @@
-<p>list-product-of-legal-entity works!</p>
+<div class="page list-product-of-legal-entity">
+    <div class="page-header">
+        <span class="page-title">
+            {{'list_product_of_legal_entity.title' | translate}}
+            <span (click)="onClickSaveBookMark($event)" data-qe-id="button-save-bookmark">
+                <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="showDialog()" data-qe-id="button-add"> +
+                {{'general.button.add' | translate}}</button>
+            <div class="btn-group" dropdown data-qe-id="button-import">
+                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                    aria-controls="dropdown-basic">
+                    {{'general.button.import' | translate}}<span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.import_file' | translate}}</a></li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.download_example' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="mt-2 row">
+            <div class="col-sm-2 d-flex align-items-center">
+                <span class="sob-label flex-shrink-1">
+                    {{'general.sob' | translate}}
+                </span>
+                <app-single-select></app-single-select>
+            </div>
+            <div class="col-sm-2 d-flex align-items-center">
+                <span class="sob-label flex-shrink-1">
+                    {{'general.legal_entity.name' | translate}}
+                </span>
+                <app-single-select></app-single-select>
+            </div>
+        </div>
+        <div class="page-section mt-4 row">
+            <div class="page-selection list">
+                <p-table [value]="tmptable">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pResizableColumn data-qe-id="table-thead-code">
+                                {{ 'list_product_of_legal_entity.code' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-name">
+                                {{ 'list_product_of_legal_entity.name' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-product-group">
+                                {{ 'list_product_of_legal_entity.product_group' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-description">
+                                {{ 'list_product_of_legal_entity.description' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-unit">
+                                {{ 'list_product_of_legal_entity.unit' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-primary-price">
+                                {{ 'list_product_of_legal_entity.primary_price' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead"></th>
+                        </tr>
+                        <tr>
+                            <th class="th-filter" data-qe-id="table-thead-filter-code">
+                                <app-advanced-filters></app-advanced-filters>
+                            </th>
+                            <th class="th-filter" data-qe-id="table-thead-filter-name">
+                                <app-advanced-filters></app-advanced-filters>
+                            </th>
+                            <th class="th-filter" data-qe-id="table-thead-filter-product_group">
+                                <app-advanced-filters></app-advanced-filters>
+                            </th>
+                            <th class="th-filter" data-qe-id="table-thead-filter-description">
+                                <app-advanced-filters></app-advanced-filters>
+                            </th>
+                            <th class="th-filter" data-qe-id="table-thead-filter-unit">
+                                <app-advanced-filters></app-advanced-filters>
+                            </th>
+                            <th class="th-filter" data-qe-id="table-thead-filter-primary-price">
+                                <app-advanced-filters></app-advanced-filters>
+                            </th>
+                            <th class="th-filter"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-item>
+                                  <tr>
+                                      <td> {{item.code}} </td>
+                                      <td> {{item.name}} </td>
+                                      <td> {{item.productGroup}} </td>
+                                      <td> {{item.des}} </td>
+                                      <td> {{item.unit}} </td>
+                                      <td> {{item.primaryPrice}} </td>
+                                      <td><a href="javascript:void(0)" (click) = "onClickViewDetail()">{{'general.view_detail' | translate}}</a></td>
+                                  </tr>
+                              </ng-template>
+                </p-table>
+                <div class="pagination">
+                    <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
+    [style]="{width: '900px'}">
+    <p-header>
+        {{ 'list_product_of_legal_entity.modal.title' | translate}}
+    </p-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="special_price_customerid">{{ 'general.legal_entity.name' | translate}}</label>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                    <button class="btn btn-cancel" (click)="onClickCancel()"
+                        data-qe-id="dialog-button-save">{{ 'general.button.cancel' | translate}}</button>
+                    <button class="btn btn-save" (click)="onClickSave()" data-qe-id="dialog-button-cancel">
+                        {{ 'general.button.save' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

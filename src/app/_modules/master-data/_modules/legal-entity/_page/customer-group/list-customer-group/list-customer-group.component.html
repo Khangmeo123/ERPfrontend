@@ -28,26 +28,26 @@
     </div>
   </div>
   <div class="page-body">
-    <div class="page-section mt-2 row">
-      <div class="col d-flex align-items-center">
-        <span class="sob-label flex-shrink-1">
-        {{'sob.name' | translate}}
-        </span>
-        <app-single-select></app-single-select>
-      </div>
-      <div class="col d-flex align-items-center">
-        <span class="sob-label flex-shrink-1">
-        {{'legal_entity.name' | translate}}
-        </span>
-        <app-single-select></app-single-select>
-      </div>
-      <div class="col d-flex align-items-center">
-        <span class="sob-label flex-shrink-1">
-        {{'customer_group.name' | translate}}
-        </span>
-        <app-single-select></app-single-select>
-      </div>
-    </div>
+      <div class="mt-2 row">
+          <div class="col-sm-2 d-flex align-items-center">
+            <span class="sob-label flex-shrink-1">
+              {{'general.sob' | translate}}
+            </span>
+            <app-single-select></app-single-select>
+          </div>
+          <div class="col-sm-2 d-flex align-items-center">
+            <span class="sob-label flex-shrink-1">
+              {{'general.legal_entity.name' | translate}}
+            </span>
+            <app-single-select></app-single-select>
+          </div>
+          <div class="col-sm-2 d-flex align-items-center">
+            <span class="sob-label flex-shrink-1">
+              {{'general.customer_group.name' | translate}}
+            </span>
+            <app-single-select></app-single-select>
+          </div>
+        </div>
     <div class="page-section mt-2">
       <p-table [value]="[]">
         <ng-template pTemplate="header">

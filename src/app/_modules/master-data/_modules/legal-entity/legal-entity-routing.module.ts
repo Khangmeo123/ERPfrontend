@@ -60,10 +60,11 @@ const routes: Routes = [
           {path: 'configure-product-group', component: ConfigureProductGroupComponent},
           {path: 'list-product-group', component: ListProductGroupComponent},
           {path: 'detail-product-group', component: DetailProductGroupComponent},
+          {path: '', redirectTo: 'list-product-group', pathMatch: 'full'}
         ],
       },
-      {path: 'special-price-supplier', component: SpecialPriceCustomerComponent},
-      {path: 'special-price-customer', component: SpecialPriceSupplierComponent},
+      {path: 'special-price-supplier', component: SpecialPriceSupplierComponent},
+      {path: 'special-price-customer', component: SpecialPriceCustomerComponent},
       {path: 'customer-list-of-legal-entity', component: CustomerListOfLegalEntityComponent, children: [
           {path: 'list-customer-legal-entity', component: CustomerListComponent},
           {path: 'detail-customer-legal-entity', component: DetailCustomerOfLegalEntityComponent},
@@ -72,7 +73,7 @@ const routes: Routes = [
       {path: 'supplier-of-legal-entity', component: SupplierOfLegalEntityComponent, children: [
           {path: 'list-supplier-legal-entity', component: ListSupplierOfLegalEntityComponent},
           {path: 'detail-supplier-legal-entity', component: DetailSupplierOfLegalEntityComponent},
-          {path: '', redirectTo: 'supplier-of-legal-entity', pathMatch: 'full'}
+          {path: '', redirectTo: 'list-supplier-legal-entity', pathMatch: 'full'}
         ]},
       {path: 'employee-of-legal-entity', component: EmployeeOfLegalEntityComponent, children: [
           {path: 'list-employee-legal-entity', component: ListEmployeeOfLegalEntityComponent},
@@ -82,7 +83,7 @@ const routes: Routes = [
       {path: 'product-of-legal-entity', component: EmployeeOfLegalEntityComponent, children: [
           {path: 'list-product-legal-entity', component: ListProductOfLegalEntityComponent},
           {path: 'detail-product-legal-entity', component: DetailProductOfLegalEntityComponent},
-          {path: '', redirectTo: 'product-of-legal-entity', pathMatch: 'full'}
+          {path: '', redirectTo: 'list-product-legal-entity', pathMatch: 'full'}
         ]},
     ],
   },
