@@ -1,16 +1,17 @@
 <div class="date-picker">
   <div class="input-group">
-    <input type="text" class="form-control"
+    <input type="text"
+           class="form-control"
            [readOnly]="inputReadOnly"
-           [(ngModel)]="date"
-           (dateChange)="onDateChange($event); matDatepicker.close();"
            (keydown)="onKeyDown($event)"
            (keyup)="onKeyUp($event)"
            (mousedown)="onMouseDown(matDatepicker)"
            (input)="onInput($event)"
+           (dateChange)="onDateChange($event); matDatepicker.close();"
+           (dateInput)="onDateInput($event)"
            maxlength="10"
-           name="date"
            autocomplete="off"
+           [(ngModel)]="dateValue"
            [matDatepicker]="matDatepicker"
            [placeholder]="placeHolder">
     <mat-datepicker #matDatepicker></mat-datepicker>

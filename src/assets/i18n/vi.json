@@ -1,4 +1,19 @@
 {
+	"accounting_period": {
+		"description": "Mô tả",
+		"from_date": "Từ ngày",
+		"header": {
+			"title": "Kỳ kế toán"
+		},
+		"modal": {
+			"lable": "Thêm kỳ kế toán theo",
+			"title": "Thêm kỳ kế toán"
+		},
+		"status": {
+			"fiscal_year": "Năm"
+		},
+		"to_date": "Đến ngày"
+	},
 	"asset": {
 		"content": {
 			"modal": {
@@ -50,9 +65,6 @@
 		"description": "Mô tả",
 		"details": {
 			"title": "Tài khoản ngân hàng"
-		},
-		"sob": {
-			"name": "Bộ sổ"
 		}
 	},
 	"business_group": {
@@ -75,7 +87,6 @@
 		"list": {
 			"title": "Hệ thống tài khoản"
 		},
-		"name": "Bộ sổ",
 		"super_account": "Tài khoản tổng hợp"
 	},
 	"cost-center": {
@@ -92,11 +103,6 @@
 		},
 		"header": {
 			"title": "Trung tâm chi phí"
-		},
-		"status": {
-			"active": "",
-			"inactive": "",
-			"label": "Bộ sổ"
 		}
 	},
 	"currency": {
@@ -198,11 +204,39 @@
 				"phone": "Số điện thoại",
 				"relationship": "Quan hệ với nhân viên"
 			},
-			"title": ""
+			"title": "Thêm mới nhân viên"
 		},
 		"header": {
 			"title": "Danh sách nhân viên"
 		}
+	},
+	"environment_tax": {
+		"code": "Mã thuế",
+		"description": "Mô tả",
+		"header": {
+			"title": "Biểu thuế môi trường"
+		},
+		"modal": {
+			"title": "Thêm thuế môi trường"
+		},
+		"name": "Tên loại thuế",
+		"parent_account": "Tài khoản tổng hợp",
+		"tax_rate": "Thuế suất",
+		"unit": "Đơn vị tính"
+	},
+	"export_tax": {
+		"code": "Mã thuế",
+		"description": "Mô tả",
+		"header": {
+			"title": "Biểu thuế xuất khẩu"
+		},
+		"modal": {
+			"title": "Thêm thuế xuất khẩu"
+		},
+		"name": "Tên loại thuế",
+		"parent_account": "Tài khoản tổng hợp",
+		"tax_rate": "Thuế suất",
+		"unit": "Đơn vị tính"
 	},
 	"fiscal_year": {
 		"content": {
@@ -217,9 +251,6 @@
 		},
 		"header": {
 			"title": "Năm tài chính"
-		},
-		"status": {
-			"label": "Bộ sổ"
 		}
 	},
 	"general": {
@@ -232,7 +263,22 @@
 			"import": "Nhập hàng loạt",
 			"import_file": "Nhập hàng loạt",
 			"save": "Lưu"
-		}
+		},
+		"sob": "Số bộ sổ"
+	},
+	"import_tax": {
+		"code": "Mã thuế",
+		"description": "Mô tả",
+		"header": {
+			"title": "Biểu thuế nhập khẩu"
+		},
+		"modal": {
+			"title": "Thêm thuế nhập khẩu"
+		},
+		"name": "Tên loại thuế",
+		"parent_account": "Tài khoản tổng hợp",
+		"tax_rate": "Thuế suất",
+		"unit": "Đơn vị tính"
 	},
 	"job_level": {
 		"header": {
@@ -256,6 +302,29 @@
 		"modal": {
 			"title": "Thêm chức vụ"
 		}
+	},
+	"payment_method": {
+		"code": "Mã phương thức",
+		"header": {
+			"title": "Phương thức thanh toán"
+		},
+		"modal": {
+			"title": "Thêm phương thức"
+		},
+		"payment_method_name": "Tên loại phương thức thanh toán"
+	},
+	"payment_term": {
+		"code": "Mã điều khoản",
+		"discount_period": "Tên điều khoản",
+		"discount_rate": "Ngày được nợ",
+		"due_in_date": "Thời gian hưởng chiết khấu",
+		"header": {
+			"title": "Điều khoản thanh toán"
+		},
+		"modal": {
+			"title": "Thêm điều khoản thanh toán"
+		},
+		"name": "Tên điều khoản"
 	},
 	"product": {
 		"content": {
@@ -319,18 +388,21 @@
 		},
 		"name": "Tên loại thuế",
 		"percent": "Thuế suất (%)",
-		"status": {
-			"label": "Bộ sổ"
-		},
-		"type": "",
 		"unit": "Đơn vị tính"
 	},
 	"sob": {
-		"add": "",
-		"code": "",
-		"currency": "",
-		"name": "",
-		"title": ""
+		"add": "Thêm bộ sổ",
+		"chart_account": "Hệ thống tài khoản kế toán",
+		"code": "Mã bộ sổ",
+		"currency": "Đơn vị tiền tệ",
+		"enviroment_tax": "Biểu thuế môi trường",
+		"export_tax": "Biểu thuế xuất khẩu",
+		"import_tax": "Biểu thuế nhập khẩu",
+		"name": "Tên bộ sổ",
+		"resource_tax": "Biểu thuế tài nguyên",
+		"special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
+		"title": "Danh sách bộ sổ",
+		"value_added_tax": "Biểu thuế GTGT"
 	},
 	"supplier": {
 		"content": {
@@ -352,7 +424,7 @@
 			},
 			"note": "Chú thích",
 			"status": "Trạng thái",
-			"supplier_tax_code": "",
+			"supplier_tax_code": "Mã số thuế",
 			"tab": {
 				"title_1": "Thông tin chung",
 				"title_2": "Thông tin liên hệ",
@@ -397,25 +469,7 @@
 		},
 		"name": "Tên loại thuế",
 		"percent": "Thuế suất (%)",
-		"status": {
-			"label": "Bộ sổ"
-		},
-		"type": "",
 		"unit": "Đơn vị tính"
-	},
-	"tariff_coa": {
-		"coa": {
-			"circular_133": "",
-			"circular_200": "",
-			"title": ""
-		},
-		"save": "",
-		"tariff": {
-			"excise": "",
-			"resources": "",
-			"title": ""
-		},
-		"title": ""
 	},
 	"uom": {
 		"content": {
@@ -431,5 +485,33 @@
 		"header": {
 			"title": "Đơn vị tính sản phẩm"
 		}
+	},
+	"value_added_tax": {
+		"code": "Mã thuế",
+		"description": "Mô tả",
+		"header": {
+			"title": "Biểu thuế GTGT"
+		},
+		"modal": {
+			"title": "Thêm thuế GTGT"
+		},
+		"name": "Tên loại thuế",
+		"parent_account": "Tài khoản tổng hợp",
+		"tax_rate": "Thuế suất",
+		"unit": "Đơn vị tính"
+	},
+	"voucher": {
+		"code": "Mã chứng từ",
+		"credit": "Tài khoản có",
+		"debit": "Tài khoản nợ",
+		"description": "Mô tả",
+		"header": {
+			"title": "Thông tin chứng từ"
+		},
+		"modal": {
+			"title": "Thêm chứng từ"
+		},
+		"name": "Tên chứng từ",
+		"type": "Loại chứng từ"
 	}
 }
