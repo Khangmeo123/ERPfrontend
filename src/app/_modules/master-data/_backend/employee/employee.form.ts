@@ -44,6 +44,6 @@ export class EmployeeForm extends FormModel {
     infoContacts = new FormArray([]);
 
     constructor(employeeEntity?: EmployeeEntity) {
-        super(employeeEntity);
+        super();
     }
 }

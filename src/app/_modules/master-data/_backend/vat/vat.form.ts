@@ -3,10 +3,10 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { VatEntity } from 'src/app/_modules/master-data/_backend/vat/vat.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class VatForm extends FormModel{
+export class VatForm extends FormModel {
 
-    taxCode = new FormControl('',[requiredField]);
-    taxType = new FormControl('',[requiredField]);
+    taxCode = new FormControl('', [requiredField]);
+    taxType = new FormControl('', [requiredField]);
 
     //don vi tinh
     uomId = new FormControl('');
@@ -16,12 +16,12 @@ export class VatForm extends FormModel{
     coaId = new FormControl('');
     coaName = new FormControl('');
 
-    
+
 
     taxRate = new FormControl('');
     description = new FormControl('');
 
     constructor(vatEntity?: VatEntity) {
-        super(vatEntity);
+        super();
     }
 }

@@ -10,6 +10,6 @@ export class CurrencyForm extends FormModel {
     description = new FormControl();
 
     constructor(currencyEntity?: CurrencyEntity) {
-        super(currencyEntity);
+        super();
     }
 }

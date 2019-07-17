@@ -68,6 +68,6 @@ export class ProductForm extends FormModel {
     sctValue = new FormControl('');
 
     constructor(productEntity?: ProductEntity) {
-        super(productEntity);
+        super();
     }
 }

@@ -10,6 +10,6 @@ export class JobTitleForm extends FormModel {
     description = new FormControl();
 
     constructor(jobTitleEntity?: JobTitleEntity) {
-        super(jobTitleEntity);
+        super();
     }
 }
