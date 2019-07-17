@@ -1,4 +1,15 @@
 {
+	" companyPosition": {
+		"add ": ""
+	},
+	" employee": {
+		"contact": {
+			"add ": ""
+		}
+	},
+	" supplier": {
+		"add ": ""
+	},
 	"asset": {
 		"content": {
 			"modal": {
@@ -55,6 +66,9 @@
 			"name": "Bộ sổ"
 		}
 	},
+	"bookmarks": {
+		"title": ""
+	},
 	"business_group": {
 		"description": "Mô tả",
 		"header": {
@@ -77,6 +91,17 @@
 		},
 		"name": "Bộ sổ",
 		"super_account": "Tài khoản tổng hợp"
+	},
+	"companyPosition": {
+		"content": {
+			"table": {
+				"group_code": "",
+				"group_name": ""
+			}
+		},
+		"header": {
+			"title": ""
+		}
 	},
 	"cost-center": {
 		"content": {
@@ -144,20 +169,147 @@
 		"taxCode": "Mã số thuế",
 		"tax_code": "Mã số thuế"
 	},
+	"customer_group": "",
+	"customer_of_legal_entity": {
+		"address": "Địa chỉ",
+		"code": "Mã khách hàng",
+		"customer_group": "Nhóm khách hàng",
+		"detail": "",
+		"header": {
+			"title": "Danh sách khách hàng của pháp nhân"
+		},
+		"name": "Tên khách hàng",
+		"phone": "Số điện thoại",
+		"tax_code": "Mã số thuế"
+	},
 	"customers": {
 		"details": {
 			"general": "Thông tin chung"
 		}
 	},
-	"employee": {
+	"debt_load": "",
+	"detail": "",
+	"detail_customer_of_legal_entity": {
+		"another_note": "",
+		"bank_accounts": {
+			"account_name": "",
+			"account_number": "",
+			"add": "",
+			"address": "",
+			"branch": "",
+			"city": "",
+			"index": "",
+			"name": ""
+		},
+		"bank_add_account ": "",
+		"code": "",
+		"contact": {
+			"add": "",
+			"address": "",
+			"city": "",
+			"email": "",
+			"index": "",
+			"name": "",
+			"phone": ""
+		},
+		"contact_add ": "",
 		"content": {
+			"detail": {
+				"customer_group": ""
+			}
+		},
+		"debt_load": "Số ngày được nợ",
+		"due_in_date": "Số nợ tối đa",
+		"header": {
+			"title": "Sửa thông tin khách hàng"
+		},
+		"name": "Tên khách hàng",
+		"payment_term": "Điều khoản thanh toán",
+		"pic_name": "",
+		"status": "Trạng thái",
+		"tab": {
+			"title_1": "Thông tin chung",
+			"title_2": "Thông tin liên hệ",
+			"title_3": "Tài khoản ngân hàng"
+		},
+		"tax_code": "Mã số thuế"
+	},
+	"detail_employee_of_legal_entity": {
+		"bank_account": {
+			"account_name": "",
+			"account_number": "",
+			"bank_branch": "",
+			"bank_city": "",
+			"bank_name": "",
+			"branch_address": ""
+		},
+		"contact": {
+			"address": "",
+			"email": "",
+			"name": "",
+			"phone": "",
+			"relation": "",
+			"stt": ""
+		},
+		"group_employee": ""
+	},
+	"detail_product_of_legal_entity": {
+		"amount_from": "",
+		"amount_to": "",
+		"bill_of_materias": {
+			"amount": "",
+			"code_of_materias": "",
+			"description": "",
+			"modal_title": "",
+			"name_of_materias": "",
+			"price_of_primary_unit": "",
+			"primary_price": "",
+			"title": "",
+			"transformation_rate_to_main_unit": "",
+			"unit": "",
+			"unit_price": ""
+		},
+		"detail": {
+			"tab": {
+				"title_3": ""
+			}
+		},
+		"discount": "",
+		"inventory_account": "",
+		"return_account": "",
+		"transformation_unit": {
+			"amount": "",
+			"code_of_materias": "",
+			"name_of_materias": "",
+			"title": "",
+			"unit": ""
+		}
+	},
+	"due_in_days": "",
+	"employee": {
+		"contact": {
+			"add": ""
+		},
+		"content": {
+			"modal": {
+				"title": ""
+			},
 			"table": {
 				"account_number": "Số tài khoản",
+				"address": "",
 				"bassic_salary": "Lương đóng bảo hiểm",
 				"birthday": "Ngày sinh",
 				"coefficients_salary": "Hệ số lương",
+				"contact_name": "",
 				"date_range": "Ngày cấp",
+				"email": "",
+				"employee_account_number": "",
+				"employee_birthday": "",
+				"employee_code": "",
+				"employee_gender": "",
+				"employee_group": "",
 				"employee_id": "Mã nhân viên",
+				"employee_identify": "",
 				"employee_name": "Tên nhân viên",
 				"gender": {
 					"men": "Nam",
@@ -165,6 +317,8 @@
 				},
 				"id_emp": "Số CMND",
 				"issue_by": "Nơi cấp",
+				"phone": "",
+				"relation": "",
 				"salary_agreement": "Lương thỏa thuận",
 				"sex": "Giới tính",
 				"status": "Trạng thái",
@@ -226,13 +380,23 @@
 		"button": {
 			"add": "Thêm",
 			"cancel": "Hủy",
+			"clear": "",
 			"delete": "Xóa",
 			"download_example": "Tải file mẫu",
 			"export": "Xuất Excel",
 			"import": "Nhập hàng loạt",
 			"import_file": "Nhập hàng loạt",
 			"save": "Lưu"
-		}
+		},
+		"customer_group": {
+			"name": ""
+		},
+		"legal": "",
+		"legal_entity": {
+			"name": ""
+		},
+		"sob": "",
+		"view_detail": ""
 	},
 	"job_level": {
 		"header": {
@@ -257,6 +421,26 @@
 			"title": "Thêm chức vụ"
 		}
 	},
+	"legal_entity": {
+		"add": "Thêm pháp nhân",
+		"code": "Mã pháp nhân",
+		"name": "Tên pháp nhân",
+		"title": "Danh sách pháp nhân"
+	},
+	"list_product_of_legal_entity": {
+		"code": "",
+		"description": "",
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"primary_price": "",
+		"product_group": "",
+		"title": "",
+		"unit": ""
+	},
+	"payment_terms": "",
+	"pic": "",
 	"product": {
 		"content": {
 			"detail": {
@@ -272,14 +456,18 @@
 				"title": "Thêm mới sản phẩm"
 			},
 			"tab": {
+				"discount_account": "",
 				"enviroment_tax": "Thuế môi trường (%)",
 				"enviroment_tax_id": "Mã thuế môi trường",
+				"expense_account": "",
 				"export_tax": "Thuế xuất khẩu (%)",
 				"export_tax_id": "Mã thuế suất khẩu",
 				"import_tax": "Thuế nhập khẩu (%)",
 				"import_tax_id": "Mã thuế nhập khẩu",
 				"resource_tax": "Thuế tài nguyên (%)",
 				"resource_tax_id": "Mã thuế tài nguyên",
+				"revenue_account": "",
+				"sales_allowances_account": "",
 				"special_consumption_tax": "Thuế TTĐB (% )",
 				"special_consumption_tax_id": "Mã thuế TTĐB",
 				"value_add_tax": "Thuế GTGT (%)",
@@ -303,7 +491,16 @@
 		},
 		"header": {
 			"title": "Danh sách sản phẩm"
-		}
+		},
+		"product_group": ""
+	},
+	"product_group": {
+		"code": "",
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"title": ""
 	},
 	"resource": {
 		"account": {
@@ -332,9 +529,35 @@
 		"name": "",
 		"title": ""
 	},
+	"special_price_customer": {
+		"code": "",
+		"description": "",
+		"discount": "",
+		"from_date": "",
+		"modal": {
+			"title": ""
+		},
+		"product_group": "",
+		"title": "",
+		"to_date": ""
+	},
+	"special_price_supplier": {
+		"code": "",
+		"description": "",
+		"discount": "",
+		"from_date": "",
+		"modal": {
+			"title": ""
+		},
+		"product_group": "",
+		"title": "",
+		"to_date": ""
+	},
 	"supplier": {
 		"content": {
 			"table": {
+				"group_code": "",
+				"group_name": "",
 				"supplier_address": "Địa chỉ",
 				"supplier_id": "Mã nhà cung cấp",
 				"supplier_name": "Tên nhà cung cấp",

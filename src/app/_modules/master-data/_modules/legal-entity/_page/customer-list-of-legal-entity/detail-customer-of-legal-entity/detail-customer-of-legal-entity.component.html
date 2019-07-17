@@ -1,7 +1,7 @@
-<div class="page customer-detail">
+<div class="page detail_customer_of_legal_entity-detail">
     <div class="page-header">
         <span class="page-title">
-            {{'customer.content.modal.title' | translate}}
+            {{'detail_customer_of_legal_entity.header.title' | translate}}
         </span>
         <div class="page-actions">
             <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
@@ -21,7 +21,7 @@
         <accordion>
             <accordion-group [isOpen]="true">
                 <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'customer.detail.tab.title_1' | translate }}</div>
+                    <div class="pull-left float-left">{{'detail_customer_of_legal_entity.tab.title_1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
@@ -30,21 +30,21 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.table.customer_code' | translate}}<span
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.code' | translate}}<span
                                     style="color: red">*</span></label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.detail.customer_name' | translate}}<span
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.name' | translate}}<span
                                     style="color: red">*</span></label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.tax_code' | translate}}</label>
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.tax_code' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.table.customer_status' | translate}}<span
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.status' | translate}}<span
                                     style="color: red">*</span></label>
 
 
@@ -63,7 +63,7 @@
 
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.detail.another_note' | translate}}</label>
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.another_note' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
@@ -72,19 +72,19 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.table.payment_term' | translate}}</label>
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.payment_term' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.detail.dueInDate' | translate}}</label>
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.due_in_date' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.table.debtLoad' | translate}}</label>
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.debt_load' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
@@ -94,13 +94,13 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.table.pic_name' | translate}}</label>
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.pic_name' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'customer.content.detail.customer_group' | translate}}</label>
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.content.detail.customer_group' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
@@ -111,14 +111,14 @@
 
             <accordion-group>
                 <button (click)="onClickOpenTab1()" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'customer.detail.tab.title_2' | translate }}</div>
+                    <div class="pull-left float-left">{{'detail_customer_of_legal_entity.tab.title_2' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-add" (click)="showAddcontact()">
-                        {{'customer.contact.add' | translate}}
+                        {{'detail_customer_of_legal_entity.contact.add' | translate}}
                     </button>
                 </div>
                 <div class="mt-2">
@@ -126,22 +126,22 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>
-                                    {{'customer.contact.stt' | translate}}
+                                    {{'detail_customer_of_legal_entity.contact.index' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.contact.name' | translate}}
+                                    {{'detail_customer_of_legal_entity.contact.name' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.contact.phone' | translate}}
+                                    {{'detail_customer_of_legal_entity.contact.phone' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.contact.email' | translate}}
+                                    {{'detail_customer_of_legal_entity.contact.email' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.contact.city' | translate}}
+                                    {{'detail_customer_of_legal_entity.contact.city' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.contact.address' | translate}}
+                                    {{'detail_customer_of_legal_entity.contact.address' | translate}}
                                 </th>
 
                             </tr>
@@ -153,14 +153,14 @@
 
             <accordion-group>
                 <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'customer.detail.tab.title_3' | translate }}</div>
+                    <div class="pull-left float-left">{{'detail_customer_of_legal_entity.tab.title_3' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-add" (click)="showAddbank()">
-                        {{'customer.bank_accounts.add' | translate}}
+                        {{'detail_customer_of_legal_entity.bank_accounts.add' | translate}}
                     </button>
                 </div>
                 <div class="mt-2">
@@ -168,25 +168,25 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>
-                                    {{'customer.bank.stt' | translate}}
+                                    {{'detail_customer_of_legal_entity.bank_accounts.index' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.bank.name' | translate}}
+                                    {{'detail_customer_of_legal_entity.bank_accounts.name' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.bank.account_name' | translate}}
+                                    {{'detail_customer_of_legal_entity.bank_accounts.account_name' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.bank.account_number' | translate}}
+                                    {{'detail_customer_of_legal_entity.bank_accounts.account_number' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.bank.city' | translate}}
+                                    {{'detail_customer_of_legal_entity.bank_accounts.city' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.bank.branch' | translate}}
+                                    {{'detail_customer_of_legal_entity.bank_accounts.branch' | translate}}
                                 </th>
                                 <th>
-                                    {{'customer.bank.address' | translate}}
+                                    {{'detail_customer_of_legal_entity.bank_accounts.address' | translate}}
                                 </th>
 
                             </tr>
@@ -203,20 +203,20 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayContact" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
-        {{ ' customer.contact_add ' | translate}}
+        {{ 'detail_customer_of_legal_entity.contact_add ' | translate}}
     </p-header>
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customercode">{{ 'customer.content.table.bank_name' | translate}}<span
+                    <label for="detail_customer_of_legal_entitycode">{{'detail_customer_of_legal_entity.bank_accounts.name' | translate}}<span
                             style="color: red">*</span></label>
                     <app-single-select></app-single-select>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customername">{{ 'customer.content.table.bank_account_name' | translate}}<span
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.bank_accounts.account_name' | translate}}<span
                             style="color: red">*</span></label>
                     <input type="text" class="form-control" />
                 </div>
@@ -225,14 +225,14 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customerid">{{ 'customer.content.table.bank_account_number' | translate}}<span
+                    <label for="detail_customer_of_legal_entityid">{{'detail_customer_of_legal_entity.bank_accounts.account_number' | translate}}<span
                             style="color: red">*</span></label>
                     <input type="text" class="form-control" />
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customername">{{ 'customer.content.table.bank_branch' | translate}}</label>
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.bank_accounts.branch' | translate}}</label>
                     <input type="text" class="form-control" />
                 </div>
             </div>
@@ -240,13 +240,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customerid">{{ 'customer.content.table.bank_city' | translate}}</label>
+                    <label for="detail_customer_of_legal_entityid">{{'detail_customer_of_legal_entity.bank_accounts.city' | translate}}</label>
                     <input type="text" class="form-control" />
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customername">{{ 'customer.content.table.bank_address' | translate}</label>
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.bank_accounts.address' | translate}}</label>
                                 <input type="text" class="form-control" />
                     </div>
                 </div>
@@ -268,24 +268,23 @@
         </div>
         </p-footer>
 </p-dialog>
-
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayBank" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
-        {{ ' customer.bank_add_account ' | translate}}
+        {{ 'detail_customer_of_legal_entity.bank_add_account ' | translate}}
     </p-header>
     <div class="container">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customercode">{{ 'customer.content.table.pic_name' | translate}}<span
+                    <label for="detail_customer_of_legal_entitycode">{{'detail_customer_of_legal_entity.contact.name' | translate}}<span
                             style="color: red">*</span></label>
                     <app-single-select></app-single-select>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customername">{{ 'customer.content.table.pic_phone' | translate}}<span
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.contact.phone' | translate}}<span
                             style="color: red">*</span></label>
                     <input type="text" class="form-control" />
                 </div>
@@ -295,13 +294,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customerid">{{ 'customer.content.table.pic_email' | translate}}</label>
+                    <label for="detail_customer_of_legal_entityid">{{'detail_customer_of_legal_entity.contact.email' | translate}}</label>
                     <input type="text" class="form-control" />
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="customername">{{ 'customer.content.table.pic_address' | translate}</label>
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.contact.address' | translate}}</label>
                                 <input type="text" class="form-control" />
                     </div>
                 </div>

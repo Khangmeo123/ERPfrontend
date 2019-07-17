@@ -33,13 +33,13 @@ import { ListSupplierGroupComponent } from './_page/supplier-group/list-supplier
 const routes: Routes = [
   {
     path: '', children: [
-      {path: '', component: LegalEntityComponent},
+      { path: '', component: LegalEntityComponent },
       {
         path: 'customer-group', component: CustomerGroupComponent, children: [
-          {path: 'configure-customer-group', component: ConfigureCustomerGroupComponent},
-          {path: 'list-customer-group', component: ListCustomerGroupComponent},
-          {path: 'detail-customer-group', component: DetailCustomerGroupComponent},
-          {path: '**', redirectTo: 'list-customer-group'},
+          { path: 'configure-customer-group', component: ConfigureCustomerGroupComponent },
+          { path: 'list-customer-group', component: ListCustomerGroupComponent },
+          { path: 'detail-customer-group', component: DetailCustomerGroupComponent },
+          { path: '**', redirectTo: 'list-customer-group' },
         ],
       },
       {
@@ -60,34 +60,42 @@ const routes: Routes = [
       },
       {
         path: 'product-group', component: ProductGroupComponent, children: [
-          {path: 'configure-product-group', component: ConfigureProductGroupComponent},
-          {path: 'list-product-group', component: ListProductGroupComponent},
-          {path: 'detail-product-group', component: DetailProductGroupComponent},
-          {path: '', redirectTo: 'list-product-group', pathMatch: 'full'}
+          { path: 'configure-product-group', component: ConfigureProductGroupComponent },
+          { path: 'list-product-group', component: ListProductGroupComponent },
+          { path: 'detail-product-group', component: DetailProductGroupComponent },
+          { path: '', redirectTo: 'list-product-group', pathMatch: 'full' }
         ],
       },
-      {path: 'special-price-supplier', component: SpecialPriceSupplierComponent},
-      {path: 'special-price-customer', component: SpecialPriceCustomerComponent},
-      {path: 'customer-list-of-legal-entity', component: CustomerListOfLegalEntityComponent, children: [
-          {path: 'list-customer-legal-entity', component: CustomerListComponent},
-          {path: 'detail-customer-legal-entity', component: DetailCustomerOfLegalEntityComponent},
-          {path: '', redirectTo: 'list-customer-legal-entity', pathMatch: 'full'}
-        ]},
-      {path: 'supplier-of-legal-entity', component: SupplierOfLegalEntityComponent, children: [
-          {path: 'list-supplier-legal-entity', component: ListSupplierOfLegalEntityComponent},
-          {path: 'detail-supplier-legal-entity', component: DetailSupplierOfLegalEntityComponent},
-          {path: '', redirectTo: 'list-supplier-legal-entity', pathMatch: 'full'}
-        ]},
-      {path: 'employee-of-legal-entity', component: EmployeeOfLegalEntityComponent, children: [
-          {path: 'list-employee-legal-entity', component: ListEmployeeOfLegalEntityComponent},
-          {path: 'detail-employee-legal-entity', component: DetailEmployeeOfLegalEntityComponent},
-          {path: '', redirectTo: 'employee-of-legal-entity', pathMatch: 'full'}
-        ]},
-      {path: 'product-of-legal-entity', component: EmployeeOfLegalEntityComponent, children: [
-          {path: 'list-product-legal-entity', component: ListProductOfLegalEntityComponent},
-          {path: 'detail-product-legal-entity', component: DetailProductOfLegalEntityComponent},
-          {path: '', redirectTo: 'list-product-legal-entity', pathMatch: 'full'}
-        ]},
+      { path: 'special-price-supplier', component: SpecialPriceSupplierComponent },
+      { path: 'special-price-customer', component: SpecialPriceCustomerComponent },
+      {
+        path: 'customer-list-of-legal-entity', component: CustomerListOfLegalEntityComponent, children: [
+          { path: 'list-customer-legal-entity', component: CustomerListComponent },
+          { path: 'detail-customer-legal-entity', component: DetailCustomerOfLegalEntityComponent },
+          { path: '', redirectTo: 'list-customer-legal-entity', pathMatch: 'full' }
+        ]
+      },
+      {
+        path: 'supplier-of-legal-entity', component: SupplierOfLegalEntityComponent, children: [
+          { path: 'list-supplier-legal-entity', component: ListSupplierOfLegalEntityComponent },
+          { path: 'detail-supplier-legal-entity', component: DetailSupplierOfLegalEntityComponent },
+          { path: '', redirectTo: 'list-supplier-legal-entity', pathMatch: 'full' }
+        ]
+      },
+      {
+        path: 'employee-of-legal-entity', component: EmployeeOfLegalEntityComponent, children: [
+          { path: 'list-employee-legal-entity', component: ListEmployeeOfLegalEntityComponent },
+          { path: 'detail-employee-legal-entity', component: DetailEmployeeOfLegalEntityComponent },
+          { path: '', redirectTo: 'list-employee-legal-entity', pathMatch: 'full' }
+        ]
+      },
+      {
+        path: 'product-of-legal-entity', component: EmployeeOfLegalEntityComponent, children: [
+          { path: 'list-product-legal-entity', component: ListProductOfLegalEntityComponent },
+          { path: 'detail-product-legal-entity', component: DetailProductOfLegalEntityComponent },
+          { path: '', redirectTo: 'list-product-legal-entity', pathMatch: 'full' }
+        ]
+      },
     ],
   },
 ];

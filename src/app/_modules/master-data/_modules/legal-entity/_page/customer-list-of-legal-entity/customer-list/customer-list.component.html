@@ -1,7 +1,7 @@
-<div class="page customer-list">
+<div class="page customer_of_legal_entity-list">
     <div class="page-header">
         <span class="page-title">
-            {{'customer.header.title' | translate}}
+            {{'customer_of_legal_entity.header.title' | translate}}
             <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -48,13 +48,13 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn>
-                            {{ 'customer.content.table.customer_code' | translate}}</th>
-                        <th pResizableColumn> {{ 'customer.content.table.customer_name' | translate}} </th>
-                        <th pResizableColumn> {{ 'customer.content.table.customer_group' | translate}} </th>
-                        <th pResizableColumn> {{ 'customer.content.table.tax_code' | translate}} </th>
-                        <th pResizableColumn> {{ 'customer.content.table.customer_address' | translate}} </th>
-                        <th pResizableColumn> {{ 'customer.content.table.customer_phone' | translate}} </th>
-                        <th pResizableColumn> {{ 'detail' | translate}} </th>
+                            {{ 'customer_of_legal_entity.code' | translate}}</th>
+                        <th pResizableColumn> {{ 'customer_of_legal_entity.name' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer_of_legal_entity.customer_group' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer_of_legal_entity.tax_code' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer_of_legal_entity.address' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer_of_legal_entity.phone' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer_of_legal_entity.detail' | translate}} </th>
                     </tr>
                     <tr>
                         <th class="th-filter">
@@ -75,17 +75,19 @@
                         <th class="th-filter">
                             <app-advanced-filters ></app-advanced-filters>
                         </th>
+                        <th class="th-filter">
+                            </th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-customer>
+                <ng-template pTemplate="body" let-customer_of_legal_entity>
                     <tr>
-                        <td> {{customer.code}} </td>
-                        <td> {{customer.name}} </td>
-                        <td> {{customer.group}} </td>
-                        <td> {{customer.tax_code}} </td>
-                        <td> {{customer.address}} </td>
-                        <td> {{customer.phone}} </td>
-                        <td> {{customer.detail}} </td>
+                        <td> {{customer_of_legal_entity.code}} </td>
+                        <td> {{customer_of_legal_entity.name}} </td>
+                        <td> {{customer_of_legal_entity.group}} </td>
+                        <td> {{customer_of_legal_entity.tax_code}} </td>
+                        <td> {{customer_of_legal_entity.address}} </td>
+                        <td> {{customer_of_legal_entity.phone}} </td>
+                        <td> {{customer_of_legal_entity.detail}} </td>
                     </tr>
                 </ng-template>
             </p-table>
