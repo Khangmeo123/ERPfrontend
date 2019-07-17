@@ -30,13 +30,25 @@ import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { CustomersInGroupComponent } from './_page/customer-group/customers-in-group/customers-in-group.component';
+import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/customer-list-of-legal-entity.component';
+import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/supplier-of-legal-entity.component';
+import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
+import { ProductOfLegalEntityComponent } from './_page/product-of-legal-entity/product-of-legal-entity.component';
+import { DetailCustomerOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/detail-customer-of-legal-entity/detail-customer-of-legal-entity.component';
+import { CustomerListComponent } from './_page/customer-list-of-legal-entity/customer-list/customer-list.component';
+import { ListSupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/list-supplier-of-legal-entity/list-supplier-of-legal-entity.component';
+import { DetailSupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/detail-supplier-of-legal-entity/detail-supplier-of-legal-entity.component';
+import { ListEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/list-employee-of-legal-entity/list-employee-of-legal-entity.component';
+import { DetailEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/detail-employee-of-legal-entity/detail-employee-of-legal-entity.component';
+import { ListProductOfLegalEntityComponent } from './_page/product-of-legal-entity/list-product-of-legal-entity/list-product-of-legal-entity.component';
+import { DetailProductOfLegalEntityComponent } from './_page/product-of-legal-entity/detail-product-of-legal-entity/detail-product-of-legal-entity.component';
 
 @NgModule({
   declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent,
     SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent,
     DetailCustomerGroupComponent, ConfigureSupplierGroupComponent, ListSupplierGroupComponent, DetailSupplierGroupComponent,
     ConfigureProductGroupComponent, ListProductGroupComponent, DetailProductGroupComponent, ConfigureCompanyPositionComponent,
-    ListCompanyPositionComponent, DetailCompanyPositionComponent, CustomersInGroupComponent],
+    ListCompanyPositionComponent, DetailCompanyPositionComponent, CustomersInGroupComponent, CustomerListOfLegalEntityComponent, SupplierOfLegalEntityComponent, EmployeeOfLegalEntityComponent, ProductOfLegalEntityComponent, DetailCustomerOfLegalEntityComponent, CustomerListComponent, ListSupplierOfLegalEntityComponent, DetailSupplierOfLegalEntityComponent, ListEmployeeOfLegalEntityComponent, DetailEmployeeOfLegalEntityComponent, ListProductOfLegalEntityComponent, DetailProductOfLegalEntityComponent],
   imports: [
     CommonModule,
     LegalEntityRoutingModule,

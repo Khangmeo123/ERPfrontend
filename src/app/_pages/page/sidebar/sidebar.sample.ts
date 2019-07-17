@@ -98,21 +98,37 @@ export const sampleSidebarMenu = [
         divider: true,
       },
       {
-        label: 'Quản lý chi nhánh',
+        label: 'Quản lý pháp nhân',
         route: '/master-data/legal-entity',
         exact: true,
+      },
+      {
+        label: 'Khách hàng của pháp nhân',
+        route: '/master-data/legal-entity/customer-list-of-legal-entity',
       },
       {
         label: 'Quản lý nhóm KH',
         route: '/master-data/legal-entity/customer-group',
       },
       {
+        label: 'NCC của pháp nhân',
+        route: '/master-data/legal-entity/supplier-of-legal-entity',
+      },
+      {
         label: 'Quản lý nhóm NCC',
         route: '/master-data/legal-entity/supplier-group',
       },
       {
-        label: 'Quản lý nhóm chức vụ',
+        label: 'Nhân viên của pháp nhân',
+        route: '/master-data/legal-entity/employee-of-legal-entity',
+      },
+      {
+        label: 'Quản lý nhóm nhân viên',
         route: '/master-data/legal-entity/company-position',
+      },
+      {
+        label: 'Sản phẩm của pháp nhân',
+        route: '/master-data/legal-entity/product-of-legal-entity',
       },
       {
         label: 'Quản lý nhóm sản phẩm',
@@ -130,7 +146,7 @@ export const sampleSidebarMenu = [
         divider: true,
       },
       {
-        label: 'Quản lý văn phòng',
+        label: 'Quản lý chi nhánh',
         route: '/master-data/division',
         exact: true,
       },
