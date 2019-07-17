@@ -3,9 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { AdvancedFiltersComponent } from './advanced-filters/advanced-filters.component';
 import { ListboxModule } from 'primeng/listbox';
-import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
-import { CalendarModule } from 'primeng/calendar';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { DatePickerModule } from '../date-picker/date-picker.module';
 
@@ -17,11 +15,10 @@ import { DatePickerModule } from '../date-picker/date-picker.module';
     CommonModule,
     BsDropdownModule.forRoot(),
     ListboxModule,
-    InputTextModule,
-    FormsModule,
-    CalendarModule,
     ClickOutsideModule,
     DatePickerModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [
     AdvancedFiltersComponent,
