@@ -31,10 +31,8 @@
 
     <div class="page-body mt-4 ">
         <div class="page-section form mb-4 d-flex">
-            <span>{{'resource.status.label' | translate}}</span>
-            <select class="form-control flex-grow-1" style="max-width: 10%" aria-placeholder="DH-HN">
-                <option value="1">1</option>
-            </select>
+            <span class="sob">{{'general.sob' | translate}}</span>
+            <app-single-select></app-single-select>
         </div>
 
 
@@ -46,7 +44,7 @@
                             {{'resource.code' | translate}}
                         </th>
                         <th>
-                            {{'resource.type' | translate}}
+                            {{'resource.name' | translate}}
                         </th>
                         <th>
                             {{'resource.unit' | translate}}
@@ -60,19 +58,19 @@
 
                     </tr>
                     <tr>
-                        <th>
+                        <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
-                        <th>
+                        <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
-                        <th>
+                        <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
-                        <th>
+                        <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
-                        <th>
+                        <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
 
@@ -157,7 +155,8 @@
 </div>
 
 
-<p-dialog [(visible)]="visible">
+<p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="visible" appendTo="body" [style]="{width: '900px'}"
+    modal="true">
     <p-header>
         {{'resource.modal.title' | translate}}
     </p-header>
@@ -175,19 +174,14 @@
                 <div class="mb-4">
                     <label>
                         {{'resource.unit' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
 
                     </label>
-                    <select class="form-control">
-                        <option value="1">tan(1000kg)</option>
-                    </select>
+                    <app-single-select></app-single-select>
                 </div>
 
                 <div class="mb-4">
                     <label>
                         {{'resource.percent' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
-
                     </label>
                     <input class="form-control" type="text" placeholder="70">
                 </div>
@@ -197,7 +191,6 @@
                 <div class="mt-4 mb-4">
                     <label>
                         {{'resource.name' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
                     </label>
                     <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga">
                 </div>
@@ -205,18 +198,14 @@
                 <div class=" mb-4">
                     <label>
                         {{'resource.account.total' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
                     </label>
 
-                    <select class="form-control">
-                        <option value="1">0101</option>
-                    </select>
+                    <app-single-select></app-single-select>
                 </div>
 
                 <div class=" mb-4">
                     <label>
                         {{'resource.description' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
                     </label>
                     <input class="form-control" type="text-area" placeholder="any description">
                 </div>

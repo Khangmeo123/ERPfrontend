@@ -1,8 +1,8 @@
-<div class="page voucher">
+<div class="page export-tax">
         <div class="page-header">
             <span class="page-title">
-                {{'voucher.header.title' | translate}}
-                <span (click)="onClickSaveBookMark()">
+                {{'export_tax.header.title' | translate}}
+                <span (click)="onClickSaveBookMark($event)">
                     <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                         star
                     </mat-icon>
@@ -27,32 +27,32 @@
                 <button class="btn btn-export">{{'general.button.export' | translate}}</button>
             </div>
         </div>
+    
         <div class="page-body mt-4 ">
             <div class="page-section form mb-4 d-flex">
                 <span class="sob">{{'general.sob' | translate}}</span>
                 <app-single-select></app-single-select>
             </div>
+    
+    
             <div class="page-section list">
                 <p-table>
                     <ng-template pTemplate="header">
                         <tr>
                             <th>
-                                {{'voucher.code' | translate}}
+                                {{'export_tax.code' | translate}}
                             </th>
                             <th>
-                                {{'voucher.name' | translate}}
+                                {{'export_tax.name' | translate}}
                             </th>
                             <th>
-                                {{'voucher.debit' | translate}}
+                                {{'export_tax.unit' | translate}}
                             </th>
                             <th>
-                                {{'voucher.credit' | translate}}
+                                {{'export_tax.tax_rate' | translate}} (%)
                             </th>
                             <th>
-                                {{'voucher.type' | translate}}
-                            </th>
-                            <th>
-                                {{'voucher.description' | translate}}
+                                {{'export_tax.description' | translate}}
                             </th>
     
                         </tr>
@@ -72,61 +72,58 @@
                             <th class="th-filter">
                                 <app-advanced-filters></app-advanced-filters>
                             </th>
-                            <th class="th-filter">
-                                    <app-advanced-filters></app-advanced-filters>
-                                </th>
     
                         </tr>
                     </ng-template>
-                    <!-- <ng-template pTemplate="body" let-voucher>
+                    <!-- <ng-template pTemplate="body" let-export_tax>
                             <tr>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="voucher.code" required>
+                                            <input type="text" class="form-control" [(ngModel)]="export_tax.code" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{voucher.code}}
+                                            {{export_tax.code}}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="voucher.type" required>
+                                            <input type="text" class="form-control" [(ngModel)]="export_tax.type" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{ voucher.type } }
+                                            {{ export_tax.type } }
                                     </ng-template>
                                   </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                   <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                      <input type="text" class="form-control" [(ngModel)]="voucher.unit" required>
+                                      <input type="text" class="form-control" [(ngModel)]="export_tax.unit" required>
                                     </ng-template>
                                     <ng-template pTemplate="output">
-                                      {{voucher.unit}}
+                                      {{export_tax.unit}}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="voucher.percent" required>
+                                            <input type="text" class="form-control" [(ngModel)]="export_tax.percent" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{voucher.percent}}
+                                            {{export_tax.percent}}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="voucher.description" required>
+                                            <input type="text" class="form-control" [(ngModel)]="export_tax.description" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{ voucher.description }}
+                                            {{ export_tax.description }}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
@@ -147,14 +144,14 @@
     <p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="visible" appendTo="body" [style]="{width: '900px'}"
         modal="true">
         <p-header>
-            {{'voucher.modal.title' | translate}}
+            {{'export_tax.modal.title' | translate}}
         </p-header>
         <form class="container">
             <div class="row">
                 <div class="col-6">
                     <div class="mt-4 mb-4">
                         <label>
-                            {{'voucher.code' | translate}}
+                            {{'export_tax.code' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <input class="form-control" type="text" placeholder="">
@@ -162,14 +159,14 @@
     
                     <div class="mb-4">
                         <label>
-                            {{'voucher.debit' | translate}}
+                            {{'export_tax.unit' | translate}}
                         </label>
-                        <input class="form-control" type="text" placeholder="">
+                        <app-single-select></app-single-select>
                     </div>
     
                     <div class="mb-4">
                         <label>
-                            {{'voucher.type' | translate}}
+                            {{'export_tax.tax_rate' | translate}} (%)
                         </label>
                         <input class="form-control" type="text" placeholder="">
                     </div>
@@ -178,15 +175,15 @@
                 <div class="col-6">
                     <div class="mt-4 mb-4">
                         <label>
-                            {{'voucher.name' | translate}}
+                            {{'export_tax.name' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <input class="form-control" type="text" placeholder="">
+                        <input class="form-control" type="text" placeholder="a">
                     </div>
     
                     <div class=" mb-4">
                         <label>
-                            {{'voucher.credit' | translate}}
+                            {{'export_tax.parent_account' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
     
@@ -195,7 +192,7 @@
     
                     <div class=" mb-4">
                         <label>
-                            {{'voucher.description' | translate}}
+                            {{'export_tax.description' | translate}}
                         </label>
                         <input class="form-control" type="text-area" placeholder="">
                     </div>

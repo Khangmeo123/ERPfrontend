@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class SobComponent implements OnInit {
 
   visible = false;
+  isSaveBookMark: boolean = false;
 
   constructor() {
   }
@@ -19,5 +20,9 @@ export class SobComponent implements OnInit {
 
   toggleModal() {
     this.visible = !this.visible;
+  }
+
+  onClickSaveBookMark() {
+    this.isSaveBookMark = !this.onClickSaveBookMark;
   }
 }

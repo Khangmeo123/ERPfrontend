@@ -11,7 +11,6 @@ import { ExciseTariffComponent } from './_page/excise-tariff/excise-tariff.compo
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
 import { ResourceTariffComponent } from './_page/resource-tariff/resource-tariff.component';
 import { VoucherComponent } from './_page/voucher/voucher.component';
-import { TariffCoaComponent } from './_page/tariff-coa/tariff-coa.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -28,11 +27,32 @@ import { SobComponent } from './_page/sob/sob.component';
 import { SelectModule } from 'src/app/_shared/modules/select/select.module';
 import { CheckboxModule } from 'primeng/checkbox';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ValueAddedTaxComponent } from './_page/value-added-tax/value-added-tax.component';
+import { EnvironmentTaxComponent } from './_page/environment-tax/environment-tax.component';
+import { ImportTaxComponent } from './_page/import-tax/import-tax.component';
+import { ExportTaxComponent } from './_page/export-tax/export-tax.component';
+import { SpecialConsumptionTaxComponent } from './_page/special-consumption-tax/special-consumption-tax.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
-  declarations: [SobComponent, BankAccountComponent, CoaComponent, AccountantPeriodComponent, CostCenterComponent,
-    ExciseTariffComponent, FiscalYearComponent, PaymentMethodComponent, PaymentTermComponent, ResourceTariffComponent, VoucherComponent,
-    TariffCoaComponent],
+  declarations: [
+    SobComponent,
+    BankAccountComponent,
+    CoaComponent,
+    AccountantPeriodComponent,
+    CostCenterComponent,
+    ExciseTariffComponent,
+    FiscalYearComponent,
+    PaymentMethodComponent,
+    PaymentTermComponent,
+    ResourceTariffComponent,
+    VoucherComponent,
+    ValueAddedTaxComponent,
+    EnvironmentTaxComponent,
+    ImportTaxComponent,
+    ExportTaxComponent,
+    SpecialConsumptionTaxComponent,
+  ],
   imports: [
     CommonModule,
     SobRoutingModule,
@@ -55,6 +75,7 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     CheckboxModule,
     SelectModule,
     RadioButtonModule,
+    BsDropdownModule.forRoot()
   ]
 })
 export class SobModule { }

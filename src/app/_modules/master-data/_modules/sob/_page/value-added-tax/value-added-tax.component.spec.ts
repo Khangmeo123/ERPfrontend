@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TariffCoaComponent } from './tariff-coa.component';
+import { ValueAddedTaxComponent } from './value-added-tax.component';
 
-describe('TariffCoaComponent', () => {
-  let component: TariffCoaComponent;
-  let fixture: ComponentFixture<TariffCoaComponent>;
+describe('ValueAddedTaxComponent', () => {
+  let component: ValueAddedTaxComponent;
+  let fixture: ComponentFixture<ValueAddedTaxComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TariffCoaComponent ]
+      declarations: [ ValueAddedTaxComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(TariffCoaComponent);
+    fixture = TestBed.createComponent(ValueAddedTaxComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
