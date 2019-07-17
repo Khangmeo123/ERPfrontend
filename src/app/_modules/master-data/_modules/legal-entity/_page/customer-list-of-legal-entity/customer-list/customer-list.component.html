@@ -1,1 +1,99 @@
-<p>customer-list works!</p>
+<div class="page customer-list">
+    <div class="page-header">
+        <span class="page-title">
+            {{'customer.header.title' | translate}}
+            <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="showdetail()"> + {{'general.button.add' | translate}}</button>
+            <div class="btn-group" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                    aria-controls="dropdown-basic">
+                    {{'general.button.import' | translate}}<span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.import_file' | translate}}</a></li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.download_example' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+        </div>
+
+    </div>
+    <hr>
+
+
+    <div class="page-body">
+        <div class="page-section mt-2 d-flex">
+            <span class="sob-label flex-shrink-1">
+                {{'general.sob' | translate}}
+            </span>
+            <app-single-select></app-single-select>
+            <span class="sob-label flex-shrink-1">
+                {{'general.legal' | translate}}
+            </span>
+            <app-single-select></app-single-select>
+        </div>
+        <div class="page-selection list mt-2">
+            <p-table [value]="tmptable">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn>
+                            {{ 'customer.content.table.customer_code' | translate}}</th>
+                        <th pResizableColumn> {{ 'customer.content.table.customer_name' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer.content.table.customer_group' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer.content.table.tax_code' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer.content.table.customer_address' | translate}} </th>
+                        <th pResizableColumn> {{ 'customer.content.table.customer_phone' | translate}} </th>
+                        <th pResizableColumn> {{ 'detail' | translate}} </th>
+                    </tr>
+                    <tr>
+                        <th class="th-filter">
+                            <app-advanced-filters ></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters ></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters ></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters ></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters ></app-advanced-filters>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-customer>
+                    <tr>
+                        <td> {{customer.code}} </td>
+                        <td> {{customer.name}} </td>
+                        <td> {{customer.group}} </td>
+                        <td> {{customer.tax_code}} </td>
+                        <td> {{customer.address}} </td>
+                        <td> {{customer.phone}} </td>
+                        <td> {{customer.detail}} </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+    </div>
+
+</div>

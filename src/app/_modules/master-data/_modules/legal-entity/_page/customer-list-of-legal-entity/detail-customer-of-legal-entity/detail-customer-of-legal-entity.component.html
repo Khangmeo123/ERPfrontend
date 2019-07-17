@@ -1,1 +1,325 @@
-<p>detail-customer-of-legal-entity works!</p>
+<div class="page customer-detail">
+    <div class="page-header">
+        <span class="page-title">
+            {{'customer.content.modal.title' | translate}}
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="onClickSave()">
+                {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                {{ 'general.button.delete' | translate}}</button>
+        </div>
+    </div>
+
+    <hr>
+
+
+    <div class="page-body">
+        <accordion>
+            <accordion-group [isOpen]="true">
+                <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'customer.detail.tab.title_1' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.table.customer_code' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.detail.customer_name' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.tax_code' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.table.customer_status' | translate}}<span
+                                    style="color: red">*</span></label>
+
+
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.detail.another_note' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.table.payment_term' | translate}}</label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.detail.dueInDate' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.table.debtLoad' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.table.pic_name' | translate}}</label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'customer.content.detail.customer_group' | translate}}</label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+
+                </div>
+
+            </accordion-group>
+
+            <accordion-group>
+                <button (click)="onClickOpenTab1()" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'customer.detail.tab.title_2' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-add" (click)="showAddcontact()">
+                        {{'customer.contact.add' | translate}}
+                    </button>
+                </div>
+                <div class="mt-2">
+                    <p-table [value]="[]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'customer.contact.stt' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.contact.name' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.contact.phone' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.contact.email' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.contact.city' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.contact.address' | translate}}
+                                </th>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+            </accordion-group>
+
+            <accordion-group>
+                <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'customer.detail.tab.title_3' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-add" (click)="showAddbank()">
+                        {{'customer.bank_accounts.add' | translate}}
+                    </button>
+                </div>
+                <div class="mt-2">
+                    <p-table [value]="[]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'customer.bank.stt' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.bank.name' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.bank.account_name' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.bank.account_number' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.bank.city' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.bank.branch' | translate}}
+                                </th>
+                                <th>
+                                    {{'customer.bank.address' | translate}}
+                                </th>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+            </accordion-group>
+
+        </accordion>
+    </div>
+</div>
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayContact" appendTo="body"
+    [style]="{width: '900px'}">
+    <p-header>
+        {{ ' customer.contact_add ' | translate}}
+    </p-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customercode">{{ 'customer.content.table.bank_name' | translate}}<span
+                            style="color: red">*</span></label>
+                    <app-single-select></app-single-select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customername">{{ 'customer.content.table.bank_account_name' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customerid">{{ 'customer.content.table.bank_account_number' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customername">{{ 'customer.content.table.bank_branch' | translate}}</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customerid">{{ 'customer.content.table.bank_city' | translate}}</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customername">{{ 'customer.content.table.bank_address' | translate}</label>
+                                <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                   
+                    <button class="btn btn-save" (click)="onClickSave()">
+                        {{ 'general.button.save' | translate}}</button>
+
+                        <button class="btn btn-cancel"
+                            (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+
+                </div>
+            </div>
+        </div>
+        </p-footer>
+</p-dialog>
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayBank" appendTo="body"
+    [style]="{width: '900px'}">
+    <p-header>
+        {{ ' customer.bank_add_account ' | translate}}
+    </p-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customercode">{{ 'customer.content.table.pic_name' | translate}}<span
+                            style="color: red">*</span></label>
+                    <app-single-select></app-single-select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customername">{{ 'customer.content.table.pic_phone' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customerid">{{ 'customer.content.table.pic_email' | translate}}</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="customername">{{ 'customer.content.table.pic_address' | translate}</label>
+                                <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                   
+                    <button class="btn btn-save"
+                    (click)="onClickSave()"> {{ 'general.button.save' | translate}}</button>
+
+                        <button class="btn btn-cancel"
+                            (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+
+                </div>
+            </div>
+        </div>
+        </p-footer>
+</p-dialog>

@@ -1,1 +1,322 @@
-<p>detail-employee-of-legal-entity works!</p>
+<div class="page employee-detail">
+        <div class="page-header">
+            <span class="page-title">
+                {{'employee.content.modal.title' | translate}}
+            </span>
+            <div class="page-actions">
+                <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                <button class="btn btn-save" (click)="onClickSave()">
+                    {{ 'general.button.save' | translate}}</button>
+                <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                    [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                    (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                    {{ 'general.button.delete' | translate}}</button>
+            </div>
+        </div>
+    
+        <hr>
+    
+    
+        <div class="page-body">
+            <accordion>
+                <accordion-group [isOpen]="true">
+                    <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'employee.detail.tab.title_1' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+    
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.table.employee_code' | translate}}<span
+                                        style="color: red">*</span></label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.employee_birthday' | translate}}</label>
+                                <app-date-picker></app-date-picker>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.agreement_salary' | translate}}</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.table.employee_name' | translate}}<span
+                                        style="color: red">*</span></label>
+    
+    
+                                <app-single-select></app-single-select>
+                            </div>
+                        </div>
+    
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.employee_identify' | translate}}</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="employeeCode">{{ 'employee.content.detail.salary_ratio' | translate}}</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+    
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.gender' | translate}}</label>
+                                <div>
+                                        <span>
+                                                <input type="radio" >
+                                                {{ 'employee-gender-male' | translate }}
+                                            </span>
+                                            <span>
+                                                <input type="radio" >
+                                                {{ 'employee-gender-female' | translate }}
+                                            </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.date_of_issue' | translate}}</label>
+                                <app-date-picker></app-date-picker>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.table.insurance_salary' | translate}}</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                    </div>
+    
+    
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.table.job_tittle' | translate}}</label>
+                                <app-single-select></app-single-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.issueed_by' | translate}}</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.number_of_independent' | translate}}</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+    
+                    </div>
+
+                    <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="employeeCode">{{ 'employee.content.table.job_level' | translate}}</label>
+                                    <app-single-select></app-single-select>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="employeeCode">{{ 'employee.content.detail.tax_code' | translate}}</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="employeeCode">{{ 'employee.content.detail.status' | translate}}<span
+                                        style="color: red">*</span></label>
+                                    <app-single-select></app-single-select>
+                                </div>
+                            </div>
+        
+                        </div>
+                        <div class="row">
+                                <div class="col-sm-4">
+                                    <div class="form-group">
+                                        <label for="employeeCode">{{ 'employee.content.table.group_employee' | translate}}</label>
+                                        <app-single-select></app-single-select>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
+                </accordion-group>
+    
+                <accordion-group>
+                    <button (click)="onClickOpenTab1()" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'employee.detail.tab.title_2' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.table.bank_name' | translate}}</label>
+                                <app-single-select></app-single-select>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.account_name' | translate}}</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="employeeCode">{{ 'employee.content.detail.account_number' | translate}}</label>
+                                <input type="text" class="form-control" />
+                            </div>
+                        </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="employeeCode">{{ 'employee.content.table.bank_city' | translate}}</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="employeeCode">{{ 'employee.content.detail.bank_branch' | translate}}</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="employeeCode">{{ 'employee.content.detail.branch_address' | translate}}</label>
+                                    <input type="text" class="form-control" />
+                                </div>
+                            </div>
+        
+                        </div>
+    
+                </accordion-group>
+    
+                <accordion-group>
+                    <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'employee.detail.tab.title_3' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="showAddcontact()">
+                            {{'employee.contact.add' | translate}}
+                        </button>
+                    </div>
+                    <div class="mt-2">
+                        <p-table [value]="[]">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        {{'employee.contact.stt' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'employee.contact.name' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'employee.contact.relation' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'employee.contact.phone' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'employee.contact.email' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'employee.contact.address' | translate}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+    
+                </accordion-group>
+    
+            </accordion>
+        </div>
+    </div>
+    
+    <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayContact" appendTo="body"
+        [style]="{width: '900px'}">
+        <p-header>
+            {{ ' employee.contact.add ' | translate}}
+        </p-header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="employeecode">{{ 'employee.content.table.contact_name' | translate}}<span
+                                style="color: red">*</span></label>
+                                <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="employeename">{{ 'employee.content.table.relation' | translate}}</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="employeeid">{{ 'employee.content.table.phone' | translate}}<span
+                                style="color: red">*</span></label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="employeename">{{ 'employee.content.table.email' | translate}}</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="employeeid">{{ 'employee.content.table.address' | translate}}</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <p-footer>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-actions">
+                       
+                        <button class="btn btn-save" (click)="onClickSave()">
+                            {{ 'general.button.save' | translate}}</button>
+    
+                            <button class="btn btn-cancel"
+                                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+    
+                    </div>
+                </div>
+            </div>
+            </p-footer>
+    </p-dialog>
+    
+    

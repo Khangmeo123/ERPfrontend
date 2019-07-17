@@ -1,1 +1,104 @@
-<p>list-employee-of-legal-entity works!</p>
+<div class="page employee-list">
+        <div class="page-header">
+            <span class="page-title">
+                {{'employee.header.title' | translate}}
+                <span (click)="onClickSaveBookMark($event)">
+                    <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+                        star
+                    </mat-icon>
+                </span>
+    
+            </span>
+            <div class="page-actions">
+                <button class="btn btn-add" (click)="showdetail()"> + {{'general.button.add' | translate}}</button>
+                <div class="btn-group" dropdown>
+                    <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                        aria-controls="dropdown-basic">
+                        {{'general.button.import' | translate}}<span class="caret"></span>
+                    </button>
+                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                        <li role="menuitem"><a class="dropdown-item"
+                                href="#">{{'general.button.import_file' | translate}}</a></li>
+                        <li class="divider dropdown-divider"></li>
+                        <li role="menuitem"><a class="dropdown-item"
+                                href="#">{{'general.button.download_example' | translate}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+            </div>
+    
+        </div>
+        <hr>
+    
+    
+        <div class="page-body">
+            <div class="page-section mt-2 d-flex">
+                <span class="sob-label flex-shrink-1">
+                    {{'general.sob' | translate}}
+                </span>
+                <app-single-select></app-single-select>
+                <span class="sob-label flex-shrink-1">
+                    {{'general.legal' | translate}}
+                </span>
+                <app-single-select></app-single-select>
+            </div>
+            <div class="page-selection list mt-2">
+                <p-table [value]="tmptable">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pResizableColumn>
+                                {{ 'employee.content.table.employee_code' | translate}}</th>
+                            <th pResizableColumn> {{ 'employee.content.table.employee_name' | translate}} </th>
+                            <th pResizableColumn> {{ 'employee.content.table.employee_group' | translate}} </th>
+                            <th pResizableColumn> {{ 'employee.content.table.employee_gender' | translate}} </th>
+                            <th pResizableColumn> {{ 'employee.content.table.employee_birthday' | translate}} </th>
+                            <th pResizableColumn> {{ 'employee.content.table.employee_identify' | translate}} </th>
+                            <th pResizableColumn> {{ 'employee.content.table.employee_account_number' | translate}} </th>
+                            <th pResizableColumn> {{ 'detail' | translate}} </th>
+                        </tr>
+                        <tr>
+                            <th class="th-filter">
+                                <app-advanced-filters ></app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-advanced-filters ></app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-advanced-filters ></app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-advanced-filters ></app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-advanced-filters></app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-advanced-filters ></app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-advanced-filters ></app-advanced-filters>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-employee>
+                        <tr>
+                            <td> {{employee.code}} </td>
+                            <td> {{employee.name}} </td>
+                            <td> {{employee.group}} </td>
+                            <td> {{employee.gender}} </td>
+                            <td> {{employee.birthday}} </td>
+                            <td> {{employee.identify}} </td>
+                            <td> {{employee.account_number}} </td>
+                            <td> {{employee.detail}} </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    
+        <div class="pagination">
+            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+        </div>
+    
+    </div>
