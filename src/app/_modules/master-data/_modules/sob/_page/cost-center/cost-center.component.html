@@ -8,7 +8,7 @@
                 </mat-icon>
             </span>
         </span>
-        
+
         <div class="page-actions">
             <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
             <div class="btn-group" dropdown>
@@ -31,18 +31,9 @@
     <hr>
     <div class="page-body">
         <div class="page-selection list">
-            <div class="select-form col-sm-1">
-                <label>
-                    {{'cost-center.status.label' | translate}}
-                </label>
-                <select class="form-control">
-                    <option value="active">
-                        {{'cost-center.status.active'|translate}}
-                    </option>
-                    <option value="inactive">
-                        {{'cost-center.status.inactive'|translate}}
-                    </option>
-                </select>
+            <div class="page-section form mb-4 d-flex">
+                <span class="sob">{{'general.sob' | translate}}</span>
+                <app-single-select></app-single-select>
             </div>
             <p-table [value]="tmptable">
                 <ng-template pTemplate="header">
@@ -142,6 +133,8 @@
                                 </textarea>
                 </div>
             </div>
+        </div>
+        <div class="row">
         </div>
     </div>
     <p-footer>

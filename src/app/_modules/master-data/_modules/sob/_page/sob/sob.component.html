@@ -2,6 +2,11 @@
   <div class="page-header">
     <div class="page-title">
       {{'sob.title' | translate}}
+      <span (click)="onClickSaveBookMark()">
+        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+            star
+        </mat-icon>
+    </span>
     </div>
     <div class="page-actions">
       <button class="btn btn-add" (click)="toggleModal()">
@@ -23,9 +28,12 @@
             <th>
               {{'sob.currency' | translate}}
             </th>
+            <th>
+              {{'sob.chart_account' | translate}}
+            </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-row>
+        <!-- <ng-template pTemplate="body" let-row>
           <tr>
             <p-cellEditor>
               <ng-template pTemplate="input">
@@ -52,38 +60,88 @@
               </ng-template>
             </p-cellEditor>
           </tr>
-        </ng-template>
+        </ng-template> -->
       </p-table>
     </div>
   </div>
 </div>
 
-<p-dialog modal = "true" [(visible)]="visible">
+<p-dialog modal = "true" [(visible)]="visible" [style]="{width: '900px'}">
   <p-header>
     {{'sob.add' | translate}}
   </p-header>
   <form class="container">
     <div class="row">
-      <div class="form-group col-12">
+      <div class="form-group col-6">
         <label>
           {{'sob.code' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
-      <div class="form-group col-12">
+      <div class="form-group col-6">
         <label>
           {{'sob.name' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
-      <div class="form-group col-12">
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'sob.chart_account' | translate}}
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="form-group col-6">
         <label>
           {{'sob.currency' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <app-single-select></app-single-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'sob.special_consumption_tax' | translate}}
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'sob.value_added_tax' | translate}}
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'sob.resource_tax' | translate}}
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'sob.enviroment_tax' | translate}}
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'sob.export_tax' | translate}}
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'sob.import_tax' | translate}}
+        </label>
+        <app-single-select></app-single-select>
       </div>
     </div>
   </form>

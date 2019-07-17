@@ -9,8 +9,6 @@ import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 export class DetailEmployeeComponent implements OnInit, OnChanges {
 
   isOpenTab1: boolean = true;
-  isOpenTab2: boolean = false;
-  isOpenTab3: boolean = false;
   display: boolean = false;
   filters = {
     id: new TextFilter(),
@@ -32,13 +30,6 @@ export class DetailEmployeeComponent implements OnInit, OnChanges {
     this.isOpenTab1 = !this.isOpenTab1;
   }
 
-  onClickOpenTab2() {
-    this.isOpenTab2 = !this.isOpenTab2;
-  }
-
-  onClickOpenTab3() {
-    this.isOpenTab3 = !this.isOpenTab3;
-  }
 
   onClickAddInfo() {
     this.display = true;
