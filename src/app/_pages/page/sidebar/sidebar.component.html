@@ -1,63 +1,30 @@
-<aside class="sidebar shadow-sm" [@toggleMenuNavbarLeft]="animationStateLeft">
-  <!-- <div class="sidebar-search pt-2 pb-1 pl-3 pr-3">
-    <input type="search" class="form-control rounded-pill" name="search" placeholder="Search ...">
-  </div> -->
+<aside class="sidebar shadow-sm">
   <nav class="sidebar-menu pt-2 pb-3">
-    <!-- <div class="menu-header mt-3 mb-2">
-        
-    </div> -->
-
-    <ul style="z-index: 100" class="menu-items" (click)="onClickBookmark()" [@toggleMenuSideBar]>
-      <li style="display: flex">
-        <a href="#" routerLink="/home" routerLinkActive="active">
-          <mat-icon style="color: #FCE205">
-            star
-          </mat-icon>
-          <span>Bookmarks</span>
+    <ul class="bookmark-header" [@toggleMenuSideBar]>
+      <li class="bookmark-title d-flex align-items-center" (click)="toggleBookmarks()">
+        <a class="flex-grow-1">
+          <mat-icon class="bookmark-icon">star</mat-icon>
+          <span>{{'bookmarks.title' | translate}}</span>
         </a>
-        <span [ngStyle]="{'display': (listBookMark && listBookMark.length > 0) ? 'block': 'none' }"><i class="fas"
-            [ngClass]="!isShowBookMark ? 'fa-caret-down' : 'fa-caret-up'"></i></span>
+        <i *ngIf="!isOpened" [class]="bookmarkCaret"></i>
       </li>
-
     </ul>
-    <div class="menu-bookmark-line">
-      <!-- <div  [style.height.px] = "30*length"></div> -->
-      <ul style="margin-left: 15px" [ngStyle]="{'display' : !isShowBookMark ? 'none' : 'block'}"
-        *ngFor="let item of listBookMark">
-        <li style="display: flex">
-          <a href="#" routerLink="{{item.Route}}" routerLinkActive="active">
-            <span>{{item.Name}}</span>
+    <div class="sidebar-menu sidebar-bookmarks">
+      <ul [@toggleMenuSideBar] [class]="bookmarkMenuState" *ngIf="showBookmarks">
+        <li *ngFor="let item of bookmarks" class="d-flex">
+          <a href="#" routerLink="{{item.route}}" routerLinkActive="active" class="flex-grow-1">
+            <span>{{item.label}}</span>
           </a>
-          <span style="margin-top: 8px" (click)="bookmarkService.deleteBookMarks(item)">
-            <mat-icon style="font-size: 14px">clear</mat-icon>
+          <span class="d-flex align-items-center align-content-center" (click)="bookmarkService.deleteBookMarks(item)">
+            <mat-icon>clear</mat-icon>
           </span>
-
         </li>
-
       </ul>
-
     </div>
-
-    <div class="menu-under" *ngIf="!isShowBookMark" [@toggleMenuSideBar] style="z-index: 1">
-      <app-item-sidebar [ngStyle]="{'display' : isShowBookMark ? 'none' : 'block'}" *ngFor="let item of navItems"
-        [item]="item" [listMenu]="navItems" (dataOut)="changeMenu($event)" [isShowChild]="isShowChil">
-      </app-item-sidebar>
+    <div class="sidebar-menu mt-2" *ngIf="!showBookmarks">
+      <ul class="menu-items">
+        <app-sidebar-list [menu]="menu" [pinned]="!isOpened" [root]=""></app-sidebar-list>
+      </ul>
     </div>
-
-    <!-- <ul class="menu-items">
-      <li >
-        <a href="#" routerLink="/home" routerLinkActive="active">
-          <i class="fa fa-tv"></i>
-          <span>Home</span>
-        </a>
-      </li>
-      <li>
-        <a href="#" routerLink="/admin" routerLinkActive="active">
-          <i class="fas fa-gem"></i>
-          <span>Admin</span>
-        </a>
-      </li>
-
-    </ul> -->
   </nav>
 </aside>
