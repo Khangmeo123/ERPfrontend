@@ -5,11 +5,18 @@ import { requiredField, checkLength } from 'src/app/_helpers';
 
 
 export class BankForm extends FormModel {
-    name = new FormControl('', [requiredField, checkLength(3, 10)]);
-    code = new FormControl('', [requiredField, checkLength(1, 500)]);
+    name = new FormControl('', [requiredField, checkLength(1, 500)]);
+    code = new FormControl('', [requiredField, checkLength(3, 10)]);
     description = new FormControl('', [checkLength(1, 1000)]);
 
     constructor(bankEntity?: BankEntity) {
         super();
+        if (bankEntity !== null && bankEntity !== undefined) {
+            Object.keys(bankEntity).forEach((item) => {
+                if (bankEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(bankEntity[item]);
+                }
+            });
+        }
     }
 }

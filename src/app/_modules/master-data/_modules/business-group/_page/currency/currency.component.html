@@ -1,105 +1,108 @@
 <div class="page currency">
   <div class="page-header">
     <span class="page-title">
-      {{'currency.title' | translate}}
-      <span (click)="onClickSaveBookMark($event)">
-        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+      {{ pageTitle | translate}}
+      <span (click)="bookMark($event)">
+        <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
       </span>
     </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
+        {{'general.button.add' | translate}}</button>
+      <button class="btn btn-clear" (click)="clearSearch(table)"
+        data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
   </div>
   <div class="page-body mt-4">
     <div class="page-section list">
-      <p-table [value]="tmptable">
+      <p-table [value]="currencyList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
+        scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn>
-              {{ 'currency.currency_id' | translate}}
+            <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
+              {{'currency.currency_code' | translate}}
+
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn> {{ 'currency.currency_name' | translate}} </th>
-            <th pResizableColumn> {{ 'currency.currency_description' | translate}} </th>
+            <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
+              {{'currency.currency_name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
+              {{'currency.currency_description' | translate}}
+              <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
+            </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+              <app-advanced-filters [filter]="currencySearchEntity.code" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+              <app-advanced-filters [filter]="currencySearchEntity.name" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
+              <app-advanced-filters [filter]="currencySearchEntity.description" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-description"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-currency>
-          <tr>
-            <td pEditableColumn>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="currency.id">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{currency.id}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td pEditableColumn>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="currency.name">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{currency.name}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
-            <td pEditableColumn>
-              <p-cellEditor>
-                <ng-template pTemplate="input">
-                  <input pInputText type="text" [(ngModel)]="currency.des">
-                </ng-template>
-                <ng-template pTemplate="output">
-                  {{currency.des}}
-                </ng-template>
-              </p-cellEditor>
-            </td>
+        <ng-template pTemplate="body" let-currency let-index="rowIndex">
+          <tr (dblclick)="edit(currency.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{currency.code}} </td>
+            <td> {{currency.name}} </td>
+            <td> {{currency.description}} </td>
           </tr>
         </ng-template>
       </p-table>
       <div class="pagination">
-        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+        </app-pagination>
       </div>
     </div>
   </div>
-  <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" [style]="{width: '900px'}">
+  <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" [style]="{width: '900px'}">
     <p-header>
       {{ 'currency.title' | translate}}
     </p-header>
-    <div class="container">
+    <div class="container" [formGroup]="currencyForm">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currency_id">{{ 'currency.currency_id' | translate}} <span>*</span></label>
-            <input type="text" class="form-control" id="currency_id" />
+            <label for="currencyCode">{{ 'currency.currency_code' | translate}} <span>*</span></label>
+            <div class="div-form">
+              <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+                id="currencyCode" />
+              <app-error
+                *ngIf="(currencyForm.controls.code?.errors && currencyForm.controls.code?.touched) || !!currencyForm.controls.error.get('code')?.value"
+                [formGroup]="currencyForm" [property]="'code'" [placement]="'top'" class="error-form">
+              </app-error>
+            </div>
           </div>
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currency_name">{{ 'currency.currency_name' | translate}}<span>*</span></label>
-            <input type="text" class="form-control" id="currency_name" />
+            <label for="currencyName">{{ 'currency.currency_name' | translate}}<span>*</span></label>
+            <div class="div-form">
+              <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+                id="currencyName" />
+              <app-error
+                *ngIf="(currencyForm.controls.name?.errors && currencyForm.controls.name?.touched) || !!currencyForm.controls.error.get('name')?.value"
+                [formGroup]="currencyForm" [property]="'name'" [placement]="'top'" class="error-form">
+              </app-error>
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <label for="currency_description">{{ 'currency.currency_description' | translate}}</label>
-            <textarea class="form-control" rows="4"
-              id="currency_description">At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.</textarea>
+            <label for="currencyDescription">{{ 'currency.currency_description' | translate}}</label>
+            <textarea class="form-control" rows="4" id="currencyDescription" formControlName="description"
+              data-qe-id="dialog-form-description"></textarea>
           </div>
         </div>
       </div>
@@ -108,12 +111,13 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="page-actions">
-            <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-            <button class="btn btn-save" (click)="onClickSave()">
+            <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
               {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+              (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-              [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-              (cancel)="cancelClicked = true" (click)="onClickDelete()">
+              data-qe-id="dialog-button-delete" *ngIf="currencyForm.value?.isDeleted" [popoverMessage]="popoverMessage"
+              placement="bottom" (confirm)="delete()">
               {{ 'general.button.delete' | translate}}</button>
           </div>
         </div>

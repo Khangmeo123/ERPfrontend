@@ -58,8 +58,8 @@ export class BusinessGroupRepository extends Repository {
             );
     }
 
-    delete(businessGroupId: string): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify({ Id: businessGroupId }),
+    delete(businessGroupEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(businessGroupEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

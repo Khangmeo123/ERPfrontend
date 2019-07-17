@@ -37,7 +37,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
-
+import { DropdownModule } from 'primeng/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
@@ -93,6 +93,7 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
     ErrorModule,
     SelectModule,
     BsDropdownModule.forRoot(),
+    DropdownModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,12 +1,13 @@
+import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { BusinessGroupSearchEntity } from 'src/app/_modules/master-data/_backend/business-group/business-group.searchentity';
 import { BusinessGroupService } from './business-group.service';
 import { Subscription } from 'rxjs';
 import { BusinessGroupEntity } from 'src/app/_modules/master-data/_backend/business-group/business-group.entity';
-import { SortEvent } from 'primeng/api';
+import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { BookmarkService } from 'src/app/_services';
 
 @Component({
   selector: 'app-business-group',
@@ -15,6 +16,7 @@ import { SortEvent } from 'primeng/api';
   providers: [BusinessGroupService]
 })
 export class BusinessGroupComponent implements OnInit, OnDestroy {
+  pageTitle: string = 'business_group.header.title';
   isSaveBookMark: boolean = false;
   isShowDialog: boolean = false;
   pagination: PaginationModel = new PaginationModel();
@@ -25,7 +27,8 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
 
-  constructor(private businessGroupService: BusinessGroupService) {
+  constructor(private businessGroupService: BusinessGroupService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
+    private router: Router) {
     const businessGroupListSub = this.businessGroupService.businessGroupList.subscribe(res => {
       if (res) {
         this.businessGroupList = res;
@@ -41,13 +44,16 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
         this.pagination.totalItems = res;
       }
     });
-    this.businessGroupSubs.add(businessGroupListSub).add(businessGroupFormSub).add(businessGroupCountSub);
+    const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
+      this.isSaveBookMark = res;
+    });
+    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.businessGroupSubs.add(businessGroupListSub).add(businessGroupFormSub).add(businessGroupCountSub).add(bookMarkNotify);
   }
 
   ngOnInit() {
     this.businessGroupSearchEntity.skip = this.pagination.skip;
     this.businessGroupSearchEntity.take = this.pagination.take;
-    this.getList();
   }
 
   ngOnDestroy() {
@@ -69,12 +75,16 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    this.businessGroupService.delete(this.businessGroupForm.get('id').value, this.businessGroupSearchEntity);
+    this.businessGroupService.delete(this.businessGroupForm.value, this.businessGroupSearchEntity).then(res => {
+      this.isShowDialog = res;
+    }).catch(err => {
+      this.isShowDialog = err;
+    });
   }
 
   save() {
     if (!this.businessGroupForm.valid) {
-      this.businessGroupService.validateAllFormFields(this.businessGroupForm);
+      this.genaralService.validateAllFormFields(this.businessGroupForm);
     } else {
       this.businessGroupService.save(this.businessGroupForm.value, this.businessGroupSearchEntity).then(res => {
         this.isShowDialog = res;
@@ -84,10 +94,12 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
     }
   }
 
-  sort(event: SortEvent) {
-    // this.businessGroupSearchEntity.orderBy = event.field;
-    // this.businessGroupSearchEntity.orderType = event.order > 0 ? 'asc' : 'dsc';
-    this.businessGroupService.getList(this.businessGroupSearchEntity);
+  sort(event: any) {
+    if (event.sortField && event.sortOrder) {
+      this.businessGroupSearchEntity.orderBy = event.sortField;
+      this.businessGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+    }
+    this.getList();
   }
 
   paginationOut(pagination: PaginationModel) {
@@ -96,10 +108,17 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
     this.getList();
   }
 
-  clearSearch() {
-    this.businessGroupSearchEntity.name.eq = null;
-    this.businessGroupSearchEntity.code.eq = null;
-    this.businessGroupSearchEntity.description.eq = null;
-    debugger
+  clearSearch(table: any) {
+    this.businessGroupSearchEntity = new BusinessGroupSearchEntity();
+    table.reset();
+  }
+
+  bookMark() {
+    this.isSaveBookMark = !this.isSaveBookMark;
+    if (this.isSaveBookMark) {
+      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+    } else {
+      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+    }
   }
 }

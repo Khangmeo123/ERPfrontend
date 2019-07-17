@@ -25,13 +25,12 @@
       <ul style="margin-left: 15px" [ngStyle]="{'display' : !isShowBookMark ? 'none' : 'block'}"
         *ngFor="let item of listBookMark">
         <li style="display: flex">
-          <a href="#" routerLink="{{item.Route}}" routerLinkActive="active">
-            <span>{{item.Name}}</span>
+          <a href="#" routerLink="{{item.route}}" routerLinkActive="active">
+            <span>{{item.name | translate}}</span>
           </a>
           <span style="margin-top: 8px" (click)="bookmarkService.deleteBookMarks(item)">
             <mat-icon style="font-size: 14px">clear</mat-icon>
           </span>
-
         </li>
 
       </ul>
