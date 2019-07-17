@@ -3,8 +3,7 @@
     <div class="divider-content"></div>
   </li>
   <ng-template #notDivider>
-    <li *ngIf="item.children; else notGroup" class="menu-item menu-item-{{level}} d-flex" (click)="toggleChildren(item)"
-      [routerLink]="null">
+    <li *ngIf="item.children; else notGroup" class="menu-item menu-item-{{level}} d-flex" (click)="toggleChildren(item)">
       <a class="flex-grow-1">
         <i [class]="item.icon" *ngIf="!!item.icon; else notHaveIcon"></i>
         <ng-template #notHaveIcon>
