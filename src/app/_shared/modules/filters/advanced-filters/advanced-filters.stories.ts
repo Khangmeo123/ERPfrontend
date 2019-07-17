@@ -6,7 +6,6 @@ import { storiesOf } from '@storybook/angular/dist/client/preview';
 import { moduleMetadata } from '@storybook/angular';
 import { TableModule } from 'primeng/table';
 import { sampleTable } from './advanced-filters.sample';
-import { AdvancedFiltersComponent } from './advanced-filters.component';
 import { FiltersModule } from '../filters.module';
 import { TextFilter } from '../../../models/filters/TextFilter';
 import { DateFilter } from '../../../models/filters/DateFilter';
@@ -20,7 +19,7 @@ import { NumberFilter } from '../../../models/filters/NumberFilter';
         <button class="btn btn-primary btn-sm" (click)="clearFilter()"> Clear</button>
       </div>
       <div class="row mt-4">
-        <p-table [value]="users">
+        <p-table [value]="users" [scrollable]="true" scrollHeight="200px">
           <ng-template pTemplate="header">
             <tr>
               <th pResizableColumn> ID</th>
