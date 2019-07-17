@@ -42,7 +42,8 @@ import { ListEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-en
 import { DetailEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/detail-employee-of-legal-entity/detail-employee-of-legal-entity.component';
 import { ListProductOfLegalEntityComponent } from './_page/product-of-legal-entity/list-product-of-legal-entity/list-product-of-legal-entity.component';
 import { DetailProductOfLegalEntityComponent } from './_page/product-of-legal-entity/detail-product-of-legal-entity/detail-product-of-legal-entity.component';
-
+import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
+import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 @NgModule({
   declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent,
     SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent,
@@ -62,6 +63,8 @@ import { DetailProductOfLegalEntityComponent } from './_page/product-of-legal-en
     ConfirmationPopoverModule.forRoot(),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
+    PaginationModule,
+    DatePickerModule
   ],
 })
 export class LegalEntityModule {
