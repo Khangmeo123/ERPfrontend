@@ -78,7 +78,7 @@ const routes: Routes = [
         path: 'supplier-of-legal-entity', component: SupplierOfLegalEntityComponent, children: [
           { path: 'list-supplier-legal-entity', component: ListSupplierOfLegalEntityComponent },
           { path: 'detail-supplier-legal-entity', component: DetailSupplierOfLegalEntityComponent },
-          { path: '', redirectTo: 'supplier-of-legal-entity', pathMatch: 'full' }
+          { path: '', redirectTo: 'list-supplier-legal-entity', pathMatch: 'full' }
         ]
       },
       {
