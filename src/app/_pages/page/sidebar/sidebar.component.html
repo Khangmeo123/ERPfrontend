@@ -11,13 +11,12 @@
     </ul>
     <div class="sidebar-menu sidebar-bookmarks">
       <ul [@toggleMenuSideBar] [class]="bookmarkMenuState" *ngIf="showBookmarks">
-        <li *ngFor="let item of bookmarks" class="d-flex">
-          <a href="#" routerLink="{{item.route}}" routerLinkActive="active" class="flex-grow-1">
+        <li *ngFor="let item of bookmarks">
+          <a href="#" routerLink="{{item.route}}" routerLinkActive="active">
+            <mat-icon class="bookmark-icon"></mat-icon>
             <span>{{item.name | translate}}</span>
           </a>
-          <span class="d-flex align-items-center align-content-center" (click)="bookmarkService.deleteBookMarks(item)">
-            <mat-icon>clear</mat-icon>
-          </span>
+          <span class="pi pi-times" (click)="removeBookmark(item)" role="button"></span>
         </li>
       </ul>
     </div>
