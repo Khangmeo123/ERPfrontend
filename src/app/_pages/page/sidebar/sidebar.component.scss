@@ -14,7 +14,7 @@ aside.sidebar {
     }
 
     ul:hover {
-      background: inherit!important;
+      background: inherit !important;
       color: inherit;
     }
 
@@ -38,17 +38,35 @@ aside.sidebar {
     }
 
     .sidebar-bookmarks {
+      position: relative;
+
+      ul::before {
+        content: "";
+        background: #1c4e80;
+        width: 3px;
+        position: absolute;
+        left: 35px;
+        height: 100%;
+        opacity: 1;
+      }
+
       ul.show {
-        display: block;
+        display: flex;
         visibility: visible;
 
-        ::before {
-          background: #1c4e80;
-          width: 3px;
-          position: absolute;
-          left: 35px;
-          height: 100%;
-          opacity: 1;
+        li {
+          flex-grow: 1;
+          padding-right: 0.25rem;
+          display: flex;
+          align-items: center;
+
+          a {
+            flex-grow: 1;
+          }
+
+          span.pi {
+            flex-shrink: 1;
+          }
         }
       }
 
