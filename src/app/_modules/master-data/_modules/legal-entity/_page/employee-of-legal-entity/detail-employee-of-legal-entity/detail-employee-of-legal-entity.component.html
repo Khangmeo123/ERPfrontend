@@ -1,7 +1,7 @@
 <div class="page employee-detail">
     <div class="page-header">
         <span class="page-title">
-            {{'employee.content.modal.title' | translate}}
+            {{'detail_employee_of_legal_entity.header.title' | translate}}
         </span>
         <div class="page-actions">
             <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
@@ -142,11 +142,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group">
-                        <label for="bankid">{{ 'detail_employee_of_legal_entity.group_employee' | translate}}<span
-                                style="color: red">*</span></label>
-                        <app-single-select></app-single-select>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_employee_of_legal_entity.group_employee' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <app-single-select></app-single-select>
+                        </div>
                     </div>
+
                 </div>
             </accordion-group>
 
@@ -160,19 +163,22 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.bank_name' | translate}}</label>
+                            <label
+                                for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.bank_name' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.account_name' | translate}}</label>
+                            <label
+                                for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.account_name' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.account_number' | translate}}</label>
+                            <label
+                                for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.account_number' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
@@ -180,19 +186,22 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.bank_city' | translate}}</label>
+                            <label
+                                for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.bank_city' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.bank_branch' | translate}}</label>
+                            <label
+                                for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.bank_division' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.branch_address' | translate}}</label>
+                            <label
+                                for="employeeCode">{{ 'detail_employee_of_legal_entity.bank_account.division_address' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
@@ -210,7 +219,7 @@
                 </button>
                 <div class="d-flex justify-content-end">
                     <button class="btn btn-add" (click)="showAddcontact()">
-                        {{'employee.contact.add' | translate}}
+                        {{'detail_employee_of_legal_entity.contact.add' | translate}}
                     </button>
                 </div>
                 <div class="mt-2">
@@ -218,19 +227,19 @@
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>
-                                    {{'detail_employee_of_legal_entity.contact.stt' | translate}}
+                                    {{'detail_employee_of_legal_entity.contact.index' | translate}}
                                 </th>
                                 <th>
                                     {{'detail_employee_of_legal_entity.contact.name' | translate}}
-                                </th>
-                                <th>
-                                    {{'detail_employee_of_legal_entity.contact.relation' | translate}}
                                 </th>
                                 <th>
                                     {{'detail_employee_of_legal_entity.contact.phone' | translate}}
                                 </th>
                                 <th>
                                     {{'detail_employee_of_legal_entity.contact.email' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_employee_of_legal_entity.contact.city' | translate}}
                                 </th>
                                 <th>
                                     {{'detail_employee_of_legal_entity.contact.address' | translate}}

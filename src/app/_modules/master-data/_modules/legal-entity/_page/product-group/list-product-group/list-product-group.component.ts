@@ -22,6 +22,29 @@ export class ListProductGroupComponent implements OnInit {
   public confirmClicked: boolean = false;
   public cancelClicked: boolean = false;
 
+  tmpProduct = [
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+  ]
+
   constructor(private router: Router) {
   }
 
@@ -45,5 +68,9 @@ export class ListProductGroupComponent implements OnInit {
   }
 
   onClickDelete() {
+  }
+
+  onClickShowDetail() {
+    this.router.navigate(['/master-data/legal-entity/product-group/detail-product-group']);
   }
 }

@@ -27,15 +27,44 @@ export class ListCustomerGroupComponent implements OnInit {
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   public confirmClicked: boolean = false;
   public cancelClicked: boolean = false;
+  isAddGroup: boolean = false
+
+  tmpCustomer = [
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+  ]
 
   constructor(private router: Router) {
   }
 
   ngOnInit() {
+    console.log('tmpCustomer',this.tmpCustomer)
   }
 
   onClickSaveBookMark(event) {
 
+  }
+
+  onClickAddGroup () {
+    this.isAddGroup = !this.isAddGroup;
   }
 
   showDialog() {
@@ -52,4 +81,14 @@ export class ListCustomerGroupComponent implements OnInit {
 
   onClickDelete() {
   }
+
+  onClickShowDetail(){
+    this.router.navigate(['/master-data/legal-entity/customer-group/detail-customer-group']);
+  }
+
+  onClickAddCustomer() {
+    
+  }
+
+ 
 }

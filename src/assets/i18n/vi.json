@@ -1,14 +1,8 @@
 {
-	" companyPosition": {
-		"add ": ""
-	},
 	" employee": {
 		"contact": {
 			"add ": ""
 		}
-	},
-	" supplier": {
-		"add ": ""
 	},
 	"asset": {
 		"content": {
@@ -67,7 +61,7 @@
 		}
 	},
 	"bookmarks": {
-		"title": ""
+		"title": "Dấu trang"
 	},
 	"business_group": {
 		"description": "Mô tả",
@@ -91,17 +85,6 @@
 		},
 		"name": "Bộ sổ",
 		"super_account": "Tài khoản tổng hợp"
-	},
-	"companyPosition": {
-		"content": {
-			"table": {
-				"group_code": "",
-				"group_name": ""
-			}
-		},
-		"header": {
-			"title": ""
-		}
 	},
 	"cost-center": {
 		"content": {
@@ -169,53 +152,195 @@
 		"taxCode": "Mã số thuế",
 		"tax_code": "Mã số thuế"
 	},
-	"customer_group": "",
-	"customer_of_legal_entity": {
-		"address": "Địa chỉ",
-		"code": "Mã khách hàng",
-		"customer_group": "Nhóm khách hàng",
-		"detail": "",
+	"customerGroup": {
+		"add": "Thêm nhóm khách hàng",
+		"code": "Mã nhóm",
+		"customer": {
+			"code": "Mã khách hàng",
+			"name": "Tên khách hàng"
+		},
+		"header": {
+			"title": "Nhóm khách hàng"
+		},
+		"name": "Tên nhóm"
+	},
+	"customerOfLegalEntity": {
+		"code": "Mã pháp nhân",
+		"customer": {
+			"code": "Mã khách hàng",
+			"name": "Tên khách hàng"
+		},
 		"header": {
 			"title": "Danh sách khách hàng của pháp nhân"
 		},
-		"name": "Tên khách hàng",
-		"phone": "Số điện thoại",
-		"tax_code": "Mã số thuế"
+		"name": "Tên pháp nhân",
+		"sob": "Mã bộ sổ"
 	},
+	"customer_group": "",
 	"customers": {
 		"details": {
 			"general": "Thông tin chung"
 		}
 	},
 	"debt_load": "",
-	"detail": "",
-	"detail_customer_of_legal_entity": {
-		"another_note": "",
+	"detailEmployeeGroup": {
+		"bank_account": {
+			"account_number": "Số tài khoản",
+			"account_owner": "Tên chủ tài khoản",
+			"add": "Thêm tài khoản ngân hàng",
+			"bank_address": "Địa chỉ ngân hàng",
+			"bank_division": "Chi nhánh ngân hàng",
+			"bank_name": "Tên ngân hàng",
+			"code": "STT",
+			"province": "Tỉnh/Thành phố",
+			"title": "Tài khoản ngân hàng"
+		},
 		"bank_accounts": {
-			"account_name": "",
-			"account_number": "",
-			"add": "",
-			"address": "",
-			"branch": "",
-			"city": "",
-			"index": "",
-			"name": ""
+			"add": "Thêm tài khoản ngân hàng"
 		},
-		"bank_add_account ": "",
-		"code": "",
+		"bassic_salary": "Lương bảo hiểm",
+		"birthday": "Ngày sinh",
+		"code": "Mã nhân viên",
+		"contacts": {
+			"add": "Thêm thông tin liên hệ",
+			"address": "Địa chỉ",
+			"city": "Tỉnh thành",
+			"code": "STT",
+			"email": "Email",
+			"phone_number": "Số điện thoại",
+			"recipient": "Tên người liên hệ",
+			"title": "Thông tin liên hệ"
+		},
+		"date_range": "Ngày cấp",
+		"detail": {
+			"status": "Trạng thái"
+		},
+		"employee_group": "Nhóm nhân viên",
+		"gender": {
+			"men": "Nam",
+			"title": "Giới tính",
+			"women": "Nữ"
+		},
+		"general": {
+			"title": "Thông tin chung"
+		},
+		"header": {
+			"title": "Chỉnh sửa thông tin nhân viên"
+		},
+		"id_emp": "Số CMND",
+		"issue_by": "Nơi cấp",
+		"jobLevel": "Cấp bậc chức vụ",
+		"jobTitle": "Chức vụ",
+		"name": "Tên nhân viên",
+		"numberOfDependent": "Số người phụ thuộc",
+		"salary_agreement": "Lương thỏa thuận",
+		"salary_ratio": "Hệ số lương",
+		"tax_code": "Mã số thuế"
+	},
+	"detailSupplierGroup": {
+		"bank_account": {
+			"account_number": "Số tài khoản",
+			"account_owner": "Tên chủ tài khoản",
+			"add": "Thêm tài khoản ngân hàng",
+			"bank_address": "Địa chỉ ngân hàng",
+			"bank_division": "Chi nhánh ngân hàng",
+			"bank_name": "Tên ngân hàng",
+			"code": "STT",
+			"province": "Tỉnh/Thành phố",
+			"title": "Tài khoản ngân hàng"
+		},
+		"bank_accounts": {
+			"add": "Thông tin liên hệ"
+		},
+		"code": "Mã nhà cung cấp",
+		"contacts": {
+			"add": "Thêm thông tin liên hệ",
+			"address": "Địa chỉ",
+			"city": "Tỉnh thành",
+			"code": "STT",
+			"email": "Email",
+			"phone_number": "Số điện thoại",
+			"recipient": "Tên người liên hệ",
+			"title": "Thông tin liên hệ"
+		},
+		"debt_load": "Số ngày được nợ",
+		"detail": {
+			"title": "Sửa thông tin nhà cung cấp"
+		},
+		"due_in_days": "Số nợ tối đa",
+		"more_details": "Lưu ý khác",
+		"name": "Tên nhà cung cấp",
+		"payment_terms": "Điều khoản thanh toán",
+		"pic": "Nhân viên phụ trách",
+		"status": "Trạng thái",
+		"supplier_group": "Nhóm nhà cung cấp",
+		"tab_1": {
+			"general": "Thông tin chung"
+		},
+		"tax_code": "Mã số thuế"
+	},
+	"detail_customer_group": {
+		"bank_account": {
+			"account_number": "Số tài khoản",
+			"account_owner": "Tên chủ tài khoản",
+			"bank_address": "Địa chỉ ngân hàng",
+			"bank_division": "Chi nhánh ngân hàng",
+			"bank_name": "Tên ngân hàng",
+			"code": "STT",
+			"province": "Tỉnh/Thành phố"
+		},
+		"bank_accounts": {
+			"add": "",
+			"title": "Tài khoản ngân hàng"
+		},
+		"contacts": {
+			"add": "Thêm thông tin liên hệ",
+			"address": "Địa chỉ",
+			"city": "Tỉnh thành",
+			"code": "STT",
+			"email": "Email",
+			"phone_number": "Số điện thoại",
+			"recipient": "Tên người liên hệ"
+		},
+		"customer_group": "Nhóm khách hàng",
+		"debt_load": "Số ngày được nợ",
+		"detail": {
+			"title": "Sửa thông tin khách hàng"
+		},
+		"due_in_days": "Số nợ tối đa",
+		"payment_terms": "Điều khoản thanh toán",
+		"pic": "Nhân viên phụ trách",
+		"tab_1": {
+			"general": "Thông tin chung"
+		}
+	},
+	"detail_customer_of_legal_entity": {
+		"another_note": "Lưu ý",
+		"bank_accounts": {
+			"account_name": "Tên chủ tài khoản",
+			"account_number": "Số tài khoản",
+			"add": "Thêm tài khoản ngân hàng",
+			"address": "Địa chỉ",
+			"branch": "Chi nhánh",
+			"city": "Tỉnh/Thành phố",
+			"index": "STT",
+			"name": "Tên chủ tài khoản"
+		},
+		"bank_add_account ": "Thêm tài khoản ngân hàng",
+		"code": "Mã khách hàng",
 		"contact": {
-			"add": "",
-			"address": "",
-			"city": "",
-			"email": "",
-			"index": "",
-			"name": "",
-			"phone": ""
+			"add": "Thêm thông tin liên hệ",
+			"address": "Địa chỉ",
+			"city": "Tỉnh thành",
+			"email": "Email",
+			"index": "STT",
+			"name": "Tên người liên hệ",
+			"phone": "Số điện thoại"
 		},
-		"contact_add ": "",
+		"contact_add ": "Thêm thông tin liên hệ",
 		"content": {
 			"detail": {
-				"customer_group": ""
+				"customer_group": "Nhóm nhà cung cấp"
 			}
 		},
 		"debt_load": "Số ngày được nợ",
@@ -225,7 +350,7 @@
 		},
 		"name": "Tên khách hàng",
 		"payment_term": "Điều khoản thanh toán",
-		"pic_name": "",
+		"pic_name": "Nhân viên phụ trách",
 		"status": "Trạng thái",
 		"tab": {
 			"title_1": "Thông tin chung",
@@ -236,22 +361,25 @@
 	},
 	"detail_employee_of_legal_entity": {
 		"bank_account": {
-			"account_name": "",
-			"account_number": "",
-			"bank_branch": "",
-			"bank_city": "",
-			"bank_name": "",
-			"branch_address": ""
+			"account_name": "Tên chủ tài khoản",
+			"account_number": "Số tài khoản",
+			"bank_city": "Tỉnh/Thành phố",
+			"bank_division": "Chi nhánh",
+			"bank_name": "Tên ngân hàng",
+			"division_address": "Địa chỉ chi nhánh"
 		},
 		"contact": {
-			"address": "",
-			"email": "",
-			"name": "",
-			"phone": "",
-			"relation": "",
-			"stt": ""
+			"address": "Địa chỉ",
+			"city": "Tỉnh/Thành phô",
+			"email": "Email",
+			"index": "STT",
+			"name": "Tên liên hệ",
+			"phone": "Số điện thoại"
 		},
-		"group_employee": ""
+		"group_employee": "Nhóm nhân viên",
+		"header": {
+			"title": "Sửa thông tin nhân viên"
+		}
 	},
 	"detail_product_of_legal_entity": {
 		"amount_from": "",
@@ -285,15 +413,71 @@
 			"unit": ""
 		}
 	},
+	"detail_supplier_of_entity": {
+		"code": "Mã nhà cung cấp",
+		"debt_load": "Số nợ tối đa",
+		"due_in_date": "Số ngày được nợ",
+		"modal": {
+			"title": "Thêm thông tin liên hệ"
+		},
+		"modal1": {
+			"title": "Thêm tài khoản ngân hàng"
+		},
+		"name": "Tên nhà cung cấp",
+		"note": "Lưu ý khác",
+		"payment_term": "Điều khoản thanh toán",
+		"pic": "Nhân viên phụ trách",
+		"status": "Trạng thái",
+		"supplier_group": "Nhóm nhà cung cấp",
+		"tab": {
+			"title_1": "Thông tin chung",
+			"title_2": "Thông tin liên hệ",
+			"title_3": "Tài khoản ngân hàng"
+		},
+		"table": {
+			"add_item": "Thêm thông tin liên hệ",
+			"address": "Địa chỉ",
+			"city": "Tỉnh thành",
+			"contact": "Tên người liên hệ",
+			"email": "Email",
+			"index": "STT",
+			"phone": "Số điện thoại"
+		},
+		"table1": {
+			"account_name": "Tên chủ tài khoản",
+			"account_number": "Số tài khoản",
+			"add_item": "Thêm tài khoản ngân hàng",
+			"address_bank": "Địa chỉ ngân hàng",
+			"bank_name": "Tên ngân hàng",
+			"city": "Tỉnh/Thành phố",
+			"division": "Chi nhánh ngân hàng",
+			"index": "STT"
+		},
+		"tax_code": "Mã số thuế",
+		"title": "Sửa thông tin nhà cung cấp"
+	},
+	"division": {
+		"address": "",
+		"code": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"tab": {
+			"address": "",
+			"code": "",
+			"name": ""
+		}
+	},
 	"due_in_days": "",
 	"employee": {
 		"contact": {
 			"add": ""
 		},
 		"content": {
-			"modal": {
-				"title": ""
-			},
 			"table": {
 				"account_number": "Số tài khoản",
 				"address": "",
@@ -303,13 +487,7 @@
 				"contact_name": "",
 				"date_range": "Ngày cấp",
 				"email": "",
-				"employee_account_number": "",
-				"employee_birthday": "",
-				"employee_code": "",
-				"employee_gender": "",
-				"employee_group": "",
 				"employee_id": "Mã nhân viên",
-				"employee_identify": "",
 				"employee_name": "Tên nhân viên",
 				"gender": {
 					"men": "Nam",
@@ -358,6 +536,30 @@
 			"title": "Danh sách nhân viên"
 		}
 	},
+	"employeeGroup": {
+		"add": "",
+		"code": "Mã nhóm",
+		"employee": {
+			"code": "Mã nhân viên",
+			"name": "Tên nhân viên"
+		},
+		"header": {
+			"title": "Nhóm nhân viên"
+		},
+		"name": "Tên nhóm"
+	},
+	"employeeOfLegalEntity": {
+		"code": "Mã pháp nhân",
+		"employee": {
+			"code": "Mã nhân viên",
+			"name": "Tên nhân viên"
+		},
+		"header": {
+			"title": "Danh sách nhân viên của pháp nhân"
+		},
+		"name": "Tên pháp nhân",
+		"sob": "Mã bộ sổ"
+	},
 	"fiscal_year": {
 		"content": {
 			"from_date": "Từ ngày",
@@ -393,10 +595,10 @@
 		},
 		"legal": "",
 		"legal_entity": {
-			"name": ""
+			"name": "Tên pháp nhân"
 		},
 		"sob": "",
-		"view_detail": ""
+		"view_detail": "Xem chi tiết"
 	},
 	"job_level": {
 		"header": {
@@ -494,13 +696,16 @@
 		},
 		"product_group": ""
 	},
-	"product_group": {
-		"code": "",
-		"modal": {
-			"title": ""
+	"productGroup": {
+		"code": "Mã nhóm",
+		"header": {
+			"title": "Nhóm sản phẩm"
 		},
-		"name": "",
-		"title": ""
+		"name": "Tên nhóm",
+		"product": {
+			"code": "Mã sản phâm",
+			"name": "Tên sản phẩm"
+		}
 	},
 	"resource": {
 		"account": {
@@ -554,10 +759,11 @@
 		"to_date": ""
 	},
 	"supplier": {
+		"bank_account": {
+			"bank_address": ""
+		},
 		"content": {
 			"table": {
-				"group_code": "",
-				"group_name": "",
 				"supplier_address": "Địa chỉ",
 				"supplier_id": "Mã nhà cung cấp",
 				"supplier_name": "Tên nhà cung cấp",
@@ -604,6 +810,30 @@
 		},
 		"header": {
 			"title": "Danh sách nhà cung cấp"
+		}
+	},
+	"supplierGroup": {
+		"add": "Thêm nhóm nhà cung cấp",
+		"code": "Mã nhóm",
+		"header": {
+			"title": "Nhóm nhà cung cấp"
+		},
+		"name": "Tên nhóm",
+		"supplier": {
+			"code": "Mã nhà cung cấp",
+			"name": "Tên nhà cung cấp"
+		}
+	},
+	"supplierOfLegalEntity": {
+		"code": "Mã pháp nhân",
+		"header": {
+			"title": "Danh sách nhà cung cấp của pháp nhân"
+		},
+		"name": "Tên pháp nhân",
+		"sob": "Mã bộ sổ",
+		"supplier": {
+			"code": "Mã nhà cung cấp",
+			"name": "Tên nhà cung cấp"
 		}
 	},
 	"tariff": {

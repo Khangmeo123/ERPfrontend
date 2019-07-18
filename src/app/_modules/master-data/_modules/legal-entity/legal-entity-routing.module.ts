@@ -29,6 +29,7 @@ import { DetailEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-
 import { ListProductOfLegalEntityComponent } from './_page/product-of-legal-entity/list-product-of-legal-entity/list-product-of-legal-entity.component';
 import { DetailProductOfLegalEntityComponent } from './_page/product-of-legal-entity/detail-product-of-legal-entity/detail-product-of-legal-entity.component';
 import { ListSupplierGroupComponent } from './_page/supplier-group/list-supplier-group/list-supplier-group.component';
+import { DetailSupplierGroupComponent } from './_page/supplier-group/detail-supplier-group/detail-supplier-group.component';
 
 const routes: Routes = [
   {
@@ -46,7 +47,7 @@ const routes: Routes = [
         path: 'supplier-group', component: SupplierGroupComponent, children: [
           { path: 'configure-supplier-group', component: ConfigureSupplierGroupComponent },
           { path: 'list-supplier-group', component: ListSupplierGroupComponent },
-          { path: 'detail-supplier-group', component: ConfigureSupplierGroupComponent },
+          { path: 'detail-supplier-group', component: DetailSupplierGroupComponent },
           { path: '', redirectTo: 'list-supplier-group', pathMatch: 'full' }
         ],
       },

@@ -11,13 +11,48 @@ export class ListEmployeeOfLegalEntityComponent implements OnInit {
   pagination = new PaginationModel()
   constructor(protected router: Router) { }
   
-  
+  tmptable = [
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+      customerGroup: 'huongnguyenhd96@gmail.com',
+      taxCode: 'hihi',
+      address: 1,
+      phone: '1000000',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+      customerGroup: 'huongnguyenhd96@gmail.com',
+      taxCode: 'hihi',
+      address: 1,
+      phone: '1000000',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+      customerGroup: 'huongnguyenhd96@gmail.com',
+      taxCode: 'hihi',
+      address: 1,
+      phone: '1000000',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+      customerGroup: 'huongnguyenhd96@gmail.com',
+      taxCode: 'hihi',
+      address: 1,
+      phone: '1000000',
+    },
+
+  ]
+
   ngOnInit() {
   }
 
   
 
-  showdetail() {
+  onClickShowDetail() {
     this.router.navigate(['/master-data/legal-entity/employee-of-legal-entity/detail-employee-legal-entity']);
   }
 }

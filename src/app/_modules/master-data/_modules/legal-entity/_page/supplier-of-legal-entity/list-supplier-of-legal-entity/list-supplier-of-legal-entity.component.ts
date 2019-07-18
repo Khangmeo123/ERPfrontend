@@ -60,7 +60,7 @@ export class ListSupplierOfLegalEntityComponent implements OnInit {
 
 
   onClickShowDetail() {
-    this.router.navigate(['/master-data/legal-entity/customer-list-of-legal-entity/detail-customer-legal-entity']);
+    this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity/detail-supplier-legal-entity']);
   }
 
   showDialog() {

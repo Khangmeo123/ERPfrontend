@@ -1,7 +1,7 @@
 <div class="page">
   <div class="page-header">
     <span class="page-title">
-      {{'customer_group.configure.title' | translate}}
+      {{'detail_customer_group.detail.title' | translate}}
       <span (click)="onClickSaveBookMark($event)">
         <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
           star
@@ -25,7 +25,7 @@
         <accordion>
           <accordion-group [isOpen]="true">
             <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
-              <div class="pull-left float-left">{{'customers.details.general' | translate }}</div>
+              <div class="pull-left float-left">{{'detail_customer_group.tab_1.general' | translate }}</div>
               <span class="float-right pull-right" accordion-heading>
                 <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
               </span>
@@ -74,31 +74,31 @@
               </div>
               <div class="form-group col-4">
                 <label>
-                  {{'payment_terms' | translate}}
+                  {{'detail_customer_group.payment_terms' | translate}}
                 </label>
                 <app-single-select></app-single-select>
               </div>
               <div class="form-group col-4">
                 <label>
-                  {{'due_in_days' | translate}}
+                  {{'detail_customer_group.due_in_days' | translate}}
                 </label>
                 <input type="text" class="form-control">
               </div>
               <div class="form-group col-4">
                 <label>
-                  {{'debt_load' | translate}}
+                  {{'detail_customer_group.debt_load' | translate}}
                 </label>
                 <input type="text" class="form-control">
               </div>
               <div class="form-group col-4">
                 <label>
-                  {{'pic' | translate}}
+                  {{'detail_customer_group.pic' | translate}}
                 </label>
                 <app-single-select></app-single-select>
               </div>
               <div class="form-group col-4">
                 <label>
-                  {{'customer_group' | translate}}
+                  {{'detail_customer_group.customer_group' | translate}}
                 </label>
                 <app-single-select></app-single-select>
               </div>
@@ -106,14 +106,14 @@
           </accordion-group>
           <accordion-group>
             <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
-              <div class="pull-left float-left">{{'customer.bank_accounts.title' | translate }}</div>
+              <div class="pull-left float-left">{{'detail_customer_group.bank_accounts.title' | translate }}</div>
               <span class="float-right pull-right" accordion-heading>
                 <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
               </span>
             </button>
             <div class="d-flex justify-content-end">
               <button class="btn btn-add" (click)="toggleContactsModal()">
-                {{'customer.contacts.add' | translate}}
+                {{'detail_customer_group.contacts.add' | translate}}
 
               </button>
             </div>
@@ -123,22 +123,22 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th>
-                      {{'customer.contacts.id' | translate}}
+                      {{'detail_customer_group.contacts.code' | translate}}
                     </th>
                     <th>
-                      {{'customer.contacts.recipient' | translate}}
+                      {{'detail_customer_group.contacts.recipient' | translate}}
                     </th>
                     <th>
-                      {{'customer.contacts.phone_number' | translate}}
+                      {{'detail_customer_group.contacts.phone_number' | translate}}
                     </th>
                     <th>
-                      {{'customer.contacts.email' | translate}}
+                      {{'detail_customer_group.contacts.email' | translate}}
                     </th>
                     <th>
-                      {{'customer.contacts.city' | translate}}
+                      {{'detail_customer_group.contacts.city' | translate}}
                     </th>
                     <th>
-                      {{'customer.contacts.address' | translate}}
+                      {{'detail_customer_group.contacts.address' | translate}}
                     </th>
                   </tr>
                 </ng-template>
@@ -163,25 +163,25 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th>
-                      {{'customer.bank_account.id' | translate}}
+                      {{'detail_customer_group.bank_account.code' | translate}}
                     </th>
                     <th>
-                      {{'customer.bank_account.bank_name' | translate}}
+                      {{'detail_customer_group.bank_account.bank_name' | translate}}
                     </th>
                     <th>
-                      {{'customer.bank_account.account_owner' | translate}}
+                      {{'detail_customer_group.bank_account.account_owner' | translate}}
                     </th>
                     <th>
-                      {{'customer.bank_account.account_number' | translate}}
+                      {{'detail_customer_group.bank_account.account_number' | translate}}
                     </th>
                     <th>
-                      {{'customer.bank_account.province' | translate}}
+                      {{'detail_customer_group.bank_account.province' | translate}}
                     </th>
                     <th>
-                      {{'customer.bank_account.bank_branch' | translate}}
+                      {{'detail_customer_group.bank_account.bank_division' | translate}}
                     </th>
                     <th>
-                      {{'customer.bank_account.bank_address' | translate}}
+                      {{'detail_customer_group.bank_account.bank_address' | translate}}
                     </th>
                   </tr>
                 </ng-template>
@@ -192,3 +192,131 @@
     </div>
   </div>
 </div>
+
+
+<p-dialog modal="true" [(visible)]="bankAccountsModal">
+    <p-header>
+      {{'detail_customer_group.bank_accounts.add' | translate}}
+    </p-header>
+    <form class="container">
+      <div class="row">
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.bank_account.bank_name' | translate}}
+            <span class="text-danger mr-2">(*)</span>
+          </label>
+          <app-single-select></app-single-select>
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.bank_account.account_owner' | translate}}
+            <span class="text-danger mr-2">(*)</span>
+          </label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.bank_account.account_number' | translate}}
+            <span class="text-danger mr-2">(*)</span>
+          </label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.bank_account.bank_division' | translate}}
+          </label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.bank_account.province' | translate}}
+          </label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'customer.bank_account.bank_address' | translate}}
+          </label>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </form>
+    <p-footer>
+      <ng-template *ngIf="isAdd; else notAdd">
+        <button class="btn btn-add mr-2">
+          {{'general.button.add' | translate}}
+        </button>
+        <button class="btn btn-cancel">
+          {{'general.button.cancel' | translate}}
+        </button>
+      </ng-template>
+      <ng-template #notAdd>
+        <button class="btn btn-add mr-2">
+          {{'general.button.save' | translate}}
+        </button>
+        <button class="btn btn-cancel mr-2">
+          {{'general.button.cancel' | translate}}
+        </button>
+        <button class="btn btn-delete">
+          {{'general.button.delete' | translate}}
+        </button>
+      </ng-template>
+    </p-footer>
+  </p-dialog>
+  
+  <p-dialog modal="true" [(visible)]="contactsModal">
+    <p-header>
+      {{'detail_customer_group.contacts.add' | translate}}
+    </p-header>
+    <form class="container">
+      <div class="row">
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.contacts.recipient' | translate}}
+            <span class="text-danger mr-2">(*)</span>
+          </label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.contacts.phone_number' | translate}}
+            <span class="text-danger mr-2">(*)</span>
+          </label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.contacts.email' | translate}}
+          </label>
+          <input type="text" class="form-control">
+        </div>
+        <div class="form-group col-6">
+          <label>
+            {{'detail_customer_group.contacts.address' | translate}}
+          </label>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </form>
+    <p-footer>
+      <ng-template *ngIf="isAdd; else notAdd">
+        <button class="btn btn-add mr-2">
+          {{'general.button.add' | translate}}
+        </button>
+        <button class="btn btn-cancel">
+          {{'general.button.cancel' | translate}}
+        </button>
+      </ng-template>
+      <ng-template #notAdd>
+        <button class="btn btn-add mr-2">
+          {{'general.button.save' | translate}}
+        </button>
+        <button class="btn btn-cancel mr-2">
+          {{'general.button.cancel' | translate}}
+        </button>
+        <button class="btn btn-delete">
+          {{'general.button.delete' | translate}}
+        </button>
+      </ng-template>
+    </p-footer>
+  </p-dialog>

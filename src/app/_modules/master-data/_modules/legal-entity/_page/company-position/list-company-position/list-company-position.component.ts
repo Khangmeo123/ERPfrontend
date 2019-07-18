@@ -14,7 +14,28 @@ export class ListCompanyPositionComponent implements OnInit {
 
   constructor(protected router: Router) { }
   
-  
+  tmpEmployee = [
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+    {
+      code: 1,
+      name: 'Nguyễn Thị Hương',
+    },
+  ]
   ngOnInit() {
   }
 
@@ -22,5 +43,9 @@ export class ListCompanyPositionComponent implements OnInit {
 
   showAddGroupEmployees() {
     this.display = !this.display;
+  }
+
+  onClickShowDetail () {
+    this.router.navigate(['/master-data/legal-entity/company-position/detail-company-position']);
   }
 }

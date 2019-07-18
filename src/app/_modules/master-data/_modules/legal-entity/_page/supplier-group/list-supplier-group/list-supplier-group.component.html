@@ -1,121 +1,155 @@
-<div class="page supplier-list">
-        <div class="page-header">
-            <span class="page-title">
-                {{'supplier.header.title' | translate}}
-                <span (click)="onClickSaveBookMark($event)">
-                    <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
-                        star
-                    </mat-icon>
-                </span>
-    
+<div class="page list-supplier-group">
+    <div class="page-header">
+        <span class="page-title">
+            {{'supplierGroup.header.title' | translate}}
+            <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
             </span>
-            <div class="page-actions">
-                <button class="btn btn-add" (click)="showAddSupplier()"> + {{'general.button.add' | translate}}</button>
-                <div class="btn-group" dropdown>
-                    <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                        aria-controls="dropdown-basic">
-                        {{'general.button.import' | translate}}<span class="caret"></span>
-                    </button>
-                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                        <li role="menuitem"><a class="dropdown-item"
-                                href="#">{{'general.button.import_file' | translate}}</a></li>
-                        <li class="divider dropdown-divider"></li>
-                        <li role="menuitem"><a class="dropdown-item"
-                                href="#">{{'general.button.download_example' | translate}}</a>
-                        </li>
-                    </ul>
-                </div>
-                <button class="btn btn-export">{{'general.button.export' | translate}}</button>
-            </div>
-    
-        </div>
-        <hr>
-    
-    
-        <div class="page-body">
-            <div class="page-section mt-2 d-flex">
-                <span class="sob-label flex-shrink-1">
-                    {{'general.sob' | translate}}
-                </span>
-                <app-single-select></app-single-select>
-                <span class="sob-label flex-shrink-1">
-                    {{'general.legal' | translate}}
-                </span>
-                <app-single-select></app-single-select>
-            </div>
-            <div class="page-selection list mt-2">
-                <p-table [value]="tmptable">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th pResizableColumn> {{ 'supplier.content.table.group_code' | translate}}</th>
-                            <th pResizableColumn> {{ 'supplier.content.table.group_name' | translate}} </th>
-                            
-                        </tr>
-                        <tr>
-                            <th class="th-filter">
-                                <app-advanced-filters ></app-advanced-filters>
-                            </th>
-                            <th class="th-filter">
-                                <app-advanced-filters ></app-advanced-filters>
-                            </th>
-                          
-                        </tr>
-                    </ng-template>
-                    <ng-template pTemplate="body" let-supplier>
-                        <tr>
-                            <td> {{supplier.group_code}} </td>
-                            <td> {{supplier.group_name}} </td>
-                          
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
-    
-        <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
-        </div>
-    
+        </span>
+
     </div>
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-6 page-1">
+                <div class="mt-2 row">
+                    <div class="col-sm-7 d-flex align-items-center">
+                        <span class="sob-label flex-shrink-1">
+                            {{'general.legal_entity.name' | translate}}
+                        </span>
+                        <app-single-select></app-single-select>
+                    </div>
+                    <div class="col-sm-5 d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="onClickAddGroup()"> +
+                            {{'general.button.add' | translate}}</button>
+                    </div>
+                </div>
+                <div class="page-section mt-2">
+                    <p-table [value]="[]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'supplierGroup.code' | translate}}
+                                </th>
+                                <th>
+                                    {{'supplierGroup.name' | translate}}
+                                </th>
+                            </tr>
+                            <tr>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="row d-flex ">
+                    <div class="col-sm-4 align-items-center">
+                        <app-multi-select></app-multi-select>
+                    </div>
 
 
+                    <div class="col-sm-8 page-actions  d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="onClickAddSupplier()"> +
+                            {{'general.button.add' | translate}}</button>
+                        <div class="btn-group" dropdown>
+                            <button id="button-basic" dropdownToggle type="button"
+                                class="btn btn-import dropdown-toggle" aria-controls="dropdown-basic">
+                                {{'general.button.import' | translate}}<span class="caret"></span>
+                            </button>
+                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                                aria-labelledby="button-basic">
+                                <li role="menuitem"><a class="dropdown-item"
+                                        href="#">{{'general.button.import_file' | translate}}</a>
+                                </li>
+                                <li class="divider dropdown-divider"></li>
+                                <li role="menuitem"><a class="dropdown-item"
+                                        href="#">{{'general.button.download_example' | translate}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+                    </div>
+                </div>
 
-    <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
-    [style]="{width: '900px'}">
+                <div class="page-section mt-2">
+                    <p-table [value]="tmpSupplier">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'supplierGroup.supplier.code' | translate}}
+                                </th>
+                                <th>
+                                    {{'supplierGroup.supplier.name' | translate}}
+                                </th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr (dblclick)="onClickShowDetail()">
+                                <td> {{item.code}} </td>
+                                <td> {{item.name}} </td>
+                                <td> <a href="javascript:void(0)">{{'general.button.delete' | translate}}</a></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<p-dialog modal="true" [(visible)]="display">
     <p-header>
-        {{ ' supplier.add ' | translate}}
+        {{'supplierGroup.add' | translate}}
     </p-header>
-    <div class="container">
+    <form class="container">
         <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="suppliercode">{{ 'supplier.content.table.group_code' | translate}}<span
-                            style="color: red">*</span></label>
-                            <input type="text" class="form-control" />
-                </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'supplierGroup.code' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-single-select></app-single-select>
             </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="suppliername">{{ 'supplier.content.table.group_name' | translate}}<span
-                            style="color: red">*</span></label>
-                    <input type="text" class="form-control" />
-                </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'supplierGroup.name' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input type="text" class="form-control">
             </div>
         </div>
-    </div>
+    </form>
     <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions">
-                   
-                    <button class="btn btn-save" (click)="onClickSave()">
-                        {{ 'general.button.save' | translate}}</button>
-
-                        <button class="btn btn-cancel"
-                            (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-                </div>
-            </div>
-        </div>
-        </p-footer>
+        <ng-template>
+            <button class="btn btn-add mr-2">
+                {{'general.button.save' | translate}}
+            </button>
+            <button class="btn btn-cancel mr-2">
+                {{'general.button.cancel' | translate}}
+            </button>
+            <button class="btn btn-delete">
+                {{'general.button.delete' | translate}}
+            </button>
+        </ng-template>
+    </p-footer>
 </p-dialog>
-
