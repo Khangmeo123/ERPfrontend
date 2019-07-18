@@ -29,7 +29,7 @@ export class NavbarComponent implements OnInit {
   }
 
   isCollapsed = true;
-  isToggle = false;
+  isPinned = false;
   isLogout = false;
   isToggleFlags = false;
   isOpened = false;
@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
   }
 
   onToggle() {
-    this.isToggle = !this.isToggle;
+    this.isPinned = !this.isPinned;
   }
 
   onToggleFlag() {
@@ -64,8 +64,8 @@ export class NavbarComponent implements OnInit {
   }
 
   closeDropMenu() {
-    if (this.isToggle) {
-      this.isToggle = false;
+    if (this.isPinned) {
+      this.isPinned = false;
     }
 
   }
@@ -75,7 +75,7 @@ export class NavbarComponent implements OnInit {
   }
 
   get listStateMenu() {
-    return this.isToggle ? 'opened' : 'closed';
+    return this.isPinned ? 'opened' : 'closed';
   }
 
   toggleSidebarPin() {
