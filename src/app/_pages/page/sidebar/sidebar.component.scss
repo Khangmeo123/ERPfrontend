@@ -78,7 +78,7 @@ aside.sidebar {
       ul.show {
         display: flex;
         visibility: visible;
-
+        flex-direction: column;
         li {
           flex-grow: 1;
           padding-right: 0.25rem;
