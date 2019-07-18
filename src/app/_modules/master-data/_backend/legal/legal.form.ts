@@ -13,5 +13,12 @@ export class LegalForm extends FormModel {
 
     constructor(legalEntity?: LegalEntity) {
         super();
+        if (legalEntity !== null && legalEntity !== undefined) {
+            Object.keys(legalEntity).forEach((item) => {
+                if (legalEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(legalEntity[item]);
+                }
+            });
+        }
     }
 }

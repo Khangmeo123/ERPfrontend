@@ -13,5 +13,12 @@ export class ProductGroupForm extends FormModel {
 
     constructor(productGroupEntity?: ProductGroupEntity) {
         super();
+        if (productGroupEntity !== null && productGroupEntity !== undefined) {
+            Object.keys(productGroupEntity).forEach((item) => {
+                if (productGroupEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(productGroupEntity[item]);
+                }
+            });
+        }
     }
 }

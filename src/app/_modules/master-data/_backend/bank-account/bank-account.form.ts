@@ -20,5 +20,12 @@ export class SobForm extends FormModel {
 
     constructor(bankAccountEntity?: BankAccountEntity) {
         super();
+        if (bankAccountEntity !== null && bankAccountEntity !== undefined) {
+            Object.keys(bankAccountEntity).forEach((item) => {
+                if (bankAccountEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(bankAccountEntity[item]);
+                }
+            });
+        }
     }
 }

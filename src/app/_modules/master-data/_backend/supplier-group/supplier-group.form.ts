@@ -13,5 +13,12 @@ export class SupplierGroupForm extends FormModel {
 
     constructor(supplierGroupEntity?: SupplierGroupEntity) {
         super();
+        if (supplierGroupEntity !== null && supplierGroupEntity !== undefined) {
+            Object.keys(supplierGroupEntity).forEach((item) => {
+                if (supplierGroupEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(supplierGroupEntity[item]);
+                }
+            });
+        }
     }
 }

@@ -23,5 +23,12 @@ export class ResoureTariffForm extends FormModel {
 
     constructor(resoureTariffEntity?: ResoureTariffEntity) {
         super();
+        if (resoureTariffEntity !== null && resoureTariffEntity !== undefined) {
+            Object.keys(resoureTariffEntity).forEach((item) => {
+                if (resoureTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(resoureTariffEntity[item]);
+                }
+            });
+        }
     }
 }

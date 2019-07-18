@@ -23,5 +23,12 @@ export class EnvironmentTariffForm extends FormModel {
 
     constructor(environmentTariffEntity?: EnvironmentTariffEntity) {
         super();
+        if (environmentTariffEntity !== null && environmentTariffEntity !== undefined) {
+            Object.keys(environmentTariffEntity).forEach((item) => {
+                if (environmentTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(environmentTariffEntity[item]);
+                }
+            });
+        }
     }
 }

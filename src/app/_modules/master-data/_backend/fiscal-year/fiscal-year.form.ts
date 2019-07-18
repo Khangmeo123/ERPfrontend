@@ -19,5 +19,12 @@ export class FiscalYearForm extends FormModel {
 
     constructor(fiscalYearEntity?: FiscalYearEntity) {
         super();
+        if (fiscalYearEntity !== null && fiscalYearEntity !== undefined) {
+            Object.keys(fiscalYearEntity).forEach((item) => {
+                if (fiscalYearEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(fiscalYearEntity[item]);
+                }
+            });
+        }
     }
 }

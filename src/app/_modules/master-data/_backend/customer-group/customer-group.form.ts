@@ -13,5 +13,12 @@ export class CustomerGroupForm extends FormModel {
 
     constructor(customerGroupEntity?: CustomerGroupEntity) {
         super();
+        if (customerGroupEntity !== null && customerGroupEntity !== undefined) {
+            Object.keys(customerGroupEntity).forEach((item) => {
+                if (customerGroupEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(customerGroupEntity[item]);
+                }
+            });
+        }
     }
 }
