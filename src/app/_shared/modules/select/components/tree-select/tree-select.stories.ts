@@ -1,18 +1,20 @@
-import {Component, Input} from '@angular/core';
-import {storiesOf} from '@storybook/angular/dist/client/preview';
-import {moduleMetadata} from '@storybook/angular';
+import { Component, Input } from '@angular/core';
+import { storiesOf } from '@storybook/angular/dist/client/preview';
+import { moduleMetadata } from '@storybook/angular';
 
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {CommonModule} from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CommonModule } from '@angular/common';
 
-import {SelectModule} from '../../select.module';
-import {SelectMode} from '../../select.interface';
-import {getSampleFlatList} from '../../sample/list.sample';
+import { SelectModule } from '../../select.module';
+import { SelectMode } from '../../select.interface';
+import { getSampleFlatList } from '../../sample/list.sample';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
     <app-tree-select [dataSource]="data"
                      [mode]="mode"
+                     selectedSuffix="{{'select.selectedItems' | translate}}"
                      (firstLoadData)="firstLoadData()"
                      [firstLoad]="true"></app-tree-select>
   `,
@@ -39,6 +41,7 @@ storiesOf('Tree Select', module)
         CommonModule,
         SelectModule,
         BrowserAnimationsModule,
+        TranslateModule.forRoot(),
       ],
     }),
   )
@@ -46,7 +49,7 @@ storiesOf('Tree Select', module)
     template: `<div class="container">
   <div class="row">
     <div class="col">
-      <app-tree-select (firstLoadData)="null" [mode]="mode" [dataSource]="dataSource"></app-tree-select>
+      <app-tree-select selectedSuffix="{{'select.selectedItems' | translate}}" (firstLoadData)="null" [mode]="mode" [dataSource]="dataSource"></app-tree-select>
     </div>
   </div>
 </div>
@@ -60,7 +63,7 @@ storiesOf('Tree Select', module)
     template: `<div class="container">
   <div class="row">
     <div class="col">
-      <app-tree-select (firstLoadData)="null" [mode]="mode" [dataSource]="dataSource"></app-tree-select>
+      <app-tree-select selectedSuffix="{{'select.selectedItems' | translate}}" (firstLoadData)="null" [mode]="mode" [dataSource]="dataSource"></app-tree-select>
     </div>
   </div>
 </div>
@@ -74,7 +77,7 @@ storiesOf('Tree Select', module)
     template: `<div class="container">
   <div class="row">
     <div class="col">
-      <app-tree-select (firstLoadData)="null" [mode]="mode" [dataSource]="dataSource"></app-tree-select>
+      <app-tree-select selectedSuffix="{{'select.selectedItems' | translate}}" (firstLoadData)="null" [mode]="mode" [dataSource]="dataSource"></app-tree-select>
     </div>
   </div>
 </div>

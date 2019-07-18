@@ -12,7 +12,7 @@
            name="date"
            autocomplete="off"
            [matDatepicker]="matDatepicker"
-           [placeholder]="placeHolder">
+           placeholder="{{'datePicker.placeHolder' | translate}}">
     <mat-datepicker #matDatepicker></mat-datepicker>
     <div class="input-group-append">
       <div class="input-group-text" role="button" (click)="matDatepicker.open()">

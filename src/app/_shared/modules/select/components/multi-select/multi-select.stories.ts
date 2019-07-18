@@ -5,6 +5,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SelectModule} from '../../select.module';
 import {sampleList} from '../../sample/list.sample';
 import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
@@ -40,6 +41,7 @@ storiesOf('Multi Select', module)
         CommonModule,
         BrowserAnimationsModule,
         SelectModule,
+        TranslateModule.forRoot(),
       ],
     }),
   )

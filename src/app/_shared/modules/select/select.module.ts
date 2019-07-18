@@ -14,6 +14,7 @@ import { SelectSpinnerComponent } from './components/select-spinner/select-spinn
 import { SelectSearchComponent } from './components/select-search/select-search.component';
 import {MatIconModule} from '@angular/material/icon';
 import {ClickOutsideModule} from 'ng-click-outside';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {ClickOutsideModule} from 'ng-click-outside';
     MatProgressSpinnerModule,
     MatIconModule,
     ClickOutsideModule,
+    TranslateModule,
   ],
   exports: [
     TreeSelectComponent,

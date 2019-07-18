@@ -17,15 +17,23 @@ import { toggleMenu } from '../../../animations/toggleMenu';
 export class AdvancedFiltersComponent implements OnInit {
 
   @Input() filter;
-  @ViewChild('pane', { static: false }) pane;
-  @ViewChild('toggler', { static: false }) toggler;
+
+  @ViewChild('pane', {static: false}) pane;
+
+  @ViewChild('toggler', {static: false}) toggler;
 
   @Output() changeFilter = new EventEmitter();
+
   public typeInput: string = '';
+
   public valueInput: any;
+
   type = null;
+
   dropdownDirection = 'left';
+
   protected types: FilterType[] = [];
+
   protected isOpened = false;
 
   constructor() {
@@ -50,7 +58,7 @@ export class AdvancedFiltersComponent implements OnInit {
   get filterTypes() {
     return this.types.map((type) => {
       return {
-        label: type.languages.en,
+        label: type.code,
         value: type.code,
       };
     });
@@ -83,7 +91,7 @@ export class AdvancedFiltersComponent implements OnInit {
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const { left } = this.toggler.nativeElement.getBoundingClientRect();
+    const {left} = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -105,7 +113,7 @@ export class AdvancedFiltersComponent implements OnInit {
   }
 
   onApplyFilter(event) {
-    this.types.forEach(({ code }) => {
+    this.types.forEach(({code}) => {
       if (this.type.code === code) {
         if (event && event.target) {
           this.filter[code] = event.target.value;

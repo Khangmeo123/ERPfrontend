@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { AdvancedFiltersComponent } from './advanced-filters.component';
 import { DateFilter } from '../../../models/filters/DateFilter';
 import { NumberFilter } from '../../../models/filters/NumberFilter';
+import { TranslateModule } from '@ngx-translate/core';
 
 storiesOf('Advanced Filters', module)
   .addDecorator(
@@ -19,6 +20,7 @@ storiesOf('Advanced Filters', module)
         BrowserAnimationsModule,
         FormsModule,
         FiltersModule,
+        TranslateModule.forRoot(),
       ],
     }),
   )

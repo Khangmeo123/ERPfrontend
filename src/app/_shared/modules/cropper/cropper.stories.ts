@@ -5,6 +5,7 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {Component} from '@angular/core';
 import {CropperModule} from './cropper.module';
 import {BrowserAnimationsModule, NoopAnimationsModule} from '@angular/platform-browser/animations';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `<div class="container">
@@ -18,13 +19,16 @@ class CropperStories {}
 storiesOf('Cropper', module)
   .addDecorator(
     moduleMetadata({
-      declarations: [],
+      declarations: [
+        CropperStories,
+      ],
       imports: [
         CommonModule,
         ReactiveFormsModule,
         CropperModule,
         BrowserAnimationsModule,
         NoopAnimationsModule,
+        TranslateModule.forRoot(),
       ],
       entryComponents: [
         CropperStories,

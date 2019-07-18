@@ -1,5 +1,5 @@
 <app-select [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
-  <app-select-head [label]="selectedText"
+  <app-select-head label="{{this.selectedList.length.toString() +  ' ' + 'select.selectedItems' | translate}}"
                    (openList)="openList($event)"
                    (closeList)="closeList($event)"
                    (toggleList)="toggleList($event)"
@@ -9,7 +9,7 @@
     <ng-template [ngIf]="selectedList.length">
       <div class="py-2 pl-4 d-flex align-items-center border-bottom">
         <span class="h4 font-weight-bold">
-          Selected
+          {{'select.selectedList' | translate}}
         </span>
       </div>
       <app-select-list [dataSource]="selectedList"
@@ -23,7 +23,7 @@
       <ng-template [ngIf]="list.length">
         <div class="py-2 pl-4 d-flex align-items-center border-bottom">
         <span class="h4 font-weight-bold">
-          Available
+          {{'select.availableList' | translate}}
         </span>
         </div>
         <app-select-list [dataSource]="list" (selectionChange)="select($event)"></app-select-list>

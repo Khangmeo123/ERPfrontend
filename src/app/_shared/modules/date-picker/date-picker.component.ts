@@ -3,6 +3,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DEFAULT_DATE_FORMAT } from './date-picker.formats';
 import { FormControl } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-date-picker',
@@ -12,6 +13,7 @@ import { FormControl } from '@angular/forms';
   ],
   encapsulation: ViewEncapsulation.None,
   providers: [
+    TranslateService,
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -33,8 +35,6 @@ export class DatePickerComponent implements OnInit {
   @Input() displayToggler = false;
 
   @Input() inputReadOnly = false;
-
-  @Input() placeHolder: string = 'ngày/tháng/năm';
 
   @Output() valueChange = new EventEmitter();
 
