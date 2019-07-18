@@ -4,18 +4,18 @@ import {Filter} from './Filter';
 export class TextFilter extends Filter {
   constructor(textFilter?) {
     super();
-    this.eq = textFilter !== undefined && textFilter.eq !== undefined ? textFilter.eq : null;
-    this.ne = textFilter !== undefined && textFilter.ne !== undefined ? textFilter.ne : null;
+    this.equal = textFilter !== undefined && textFilter.equal !== undefined ? textFilter.equal : null;
+    this.notEqual = textFilter !== undefined && textFilter.notEqual !== undefined ? textFilter.notEqual : null;
     this.sw = textFilter !== undefined && textFilter.sw !== undefined ? textFilter.sw : null;
     this.ew = textFilter !== undefined && textFilter.ew !== undefined ? textFilter.ew : null;
-    this.ct = textFilter !== undefined && textFilter.ct !== undefined ? textFilter.ct : null;
-    this.nc = textFilter !== undefined && textFilter.nc !== undefined ? textFilter.nc : null;
+    this.contains = textFilter !== undefined && textFilter.contains !== undefined ? textFilter.contains : null;
+    this.notContains = textFilter !== undefined && textFilter.notContains !== undefined ? textFilter.notContains : null;
   }
 
   static types: FilterType[] = [
     {
       sign: '=',
-      code: 'eq',
+      code: 'equal',
       languages: {
         en: 'Equals',
         vi: 'Bằng',
@@ -23,7 +23,7 @@ export class TextFilter extends Filter {
     },
     {
       sign: '!=',
-      code: 'ne',
+      code: 'notEqual',
       languages: {
         en: 'Not equals',
         vi: 'Không bằng',
@@ -47,7 +47,7 @@ export class TextFilter extends Filter {
     },
     {
       sign: 'CT',
-      code: 'ct',
+      code: 'contains',
       languages: {
         en: 'Contains',
         vi: 'Chứa',
@@ -55,17 +55,17 @@ export class TextFilter extends Filter {
     },
     {
       sign: 'NC',
-      code: 'nc',
+      code: 'notContains',
       languages: {
         en: 'Not contains',
         vi: 'Không chứa',
       },
     },
   ];
-  eq: string = null;
-  ne: string = null;
+  equal: string = null;
+  notEqual: string = null;
   sw: string = null;
   ew: string = null;
-  ct: string = null;
-  nc: string = null;
+  contains: string = null;
+  notContains: string = null;
 }
