@@ -1,1 +1,132 @@
-<p>division works!</p>
+<div class="page division">
+    <div class="page-header">
+        <span class="page-title">
+            {{'division.header.title' | translate}}
+            <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="showChange()"> + {{'general.button.add' | translate}}</button>
+            <div class="btn-group" dropdown>
+                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                    aria-controls="dropdown-basic">
+                    {{'general.button.import' | translate}}<span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.import_file' | translate}}</a></li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.download_example' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+        </div>
+    </div>
+    <hr>
+
+    <div class="page-body">
+            <div class="page-section mt-2 d-flex">
+                <span class="sob-label flex-shrink-1">
+                    {{'general.legal' | translate}}
+                </span>
+                <app-single-select></app-single-select>
+            </div>
+        <div class="page-selection list">
+            <p-table>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn> {{ 'division.code' | translate}}</th>
+                        <th pResizableColumn> {{ 'division.name' | translate}} </th>
+                        <th pResizableColumn> {{ 'division.address' | translate}} </th>
+                       
+                    </tr>
+                    <tr>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.code"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="filters.address"></app-advanced-filters>
+                        </th>
+                      
+                    </tr>
+                </ng-template>
+                <!-- <ng-template pTemplate="body" let-list_supplier_of_legal_entity>
+                    <tr>
+                        <td> {{list_supplier_of_legal_entity.code}} </td>
+                        <td> {{list_supplier_of_legal_entity.name}} </td>
+                        <td> {{list_supplier_of_legal_entity.group}} </td>
+                        <td> {{list_supplier_of_legal_entity.tax_code}} </td>
+                        <td> {{list_supplier_of_legal_entity.address}} </td>
+                        <td> {{list_supplier_of_legal_entity.phone}} </td>
+                    </tr>
+                </ng-template> -->
+            </p-table>
+            <div class="pagination">
+                    <app-pagination></app-pagination>
+                </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
+        [style]="{width: '500px'}">
+        <p-header>
+            {{ 'division.modal.title' | translate}}
+        </p-header>
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="bankid">{{ 'division.tab.code' | translate}}<span
+                                style="color: red">*</span></label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label for="bankid">{{ 'division.tab.name' | translate}}<span
+                                style="color: red">*</span></label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+    
+                <div class="col-sm-12">
+                    <div class="form-group">
+                        <label for="bankname">{{ 'division.tab.address' | translate}}</label>
+                        <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+    
+        </div>
+        <p-footer>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="page-actions">
+                        <button class="btn btn-cancel"
+                            (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                        <button class="btn btn-save" (click)="onClickSave()">
+                            {{ 'general.button.save' | translate}}</button>
+                        <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                            (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                            {{ 'general.button.delete' | translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </p-footer>
+    </p-dialog>
