@@ -8,8 +8,6 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   {
     path: '', component: PageComponent, children: [
-      { path: 'home', loadChildren: () => import('./_modules/home/home.module').then(m => m.HomeModule) },
-      { path: 'admin', loadChildren: () => import('./_modules/admin/admin.module').then(m => m.AdminModule) },
       { path: 'master-data', loadChildren: () => import('./_modules/master-data/master-data.module').then(m => m.MasterDataModule) },
     ], /*canActivate: [AuthGuard]*/
   },
