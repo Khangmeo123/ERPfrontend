@@ -1,4 +1,7 @@
 {
+	"advancedFilter": {
+		"placeholder": ""
+	},
 	"asset": {
 		"content": {
 			"modal": {
@@ -18,19 +21,16 @@
 	"bank": {
 		"content": {
 			"modal": {
-				"add_des_bank": "",
-				"add_id_bank": "",
-				"add_name_bank": "",
+				"bank_code": "",
+				"bank_description": "",
+				"bank_name": "",
 				"title": ""
 			},
 			"table": {
+				"bank_code": "",
 				"bank_description": "",
-				"bank_id": "",
 				"bank_name": ""
 			}
-		},
-		"header": {
-			"title": ""
 		}
 	},
 	"bank_account": {
@@ -59,11 +59,8 @@
 		"title": ""
 	},
 	"business_group": {
+		"code": "",
 		"description": "",
-		"header": {
-			"title": ""
-		},
-		"id": "",
 		"modal": {
 			"title": ""
 		},
@@ -102,9 +99,13 @@
 			"label": ""
 		}
 	},
+	"cropper": {
+		"browseImage": "",
+		"crop": ""
+	},
 	"currency": {
+		"currency_code": "",
 		"currency_description": "",
-		"currency_id": "",
 		"currency_name": "",
 		"title": ""
 	},
@@ -176,6 +177,9 @@
 		"details": {
 			"general": ""
 		}
+	},
+	"datePicker": {
+		"placeHolder": ""
 	},
 	"debt_load": "",
 	"detailEmployeeGroup": {
@@ -583,6 +587,7 @@
 			"export": "",
 			"import": "",
 			"import_file": "",
+			"ok": "",
 			"save": ""
 		},
 		"customer_group": {
@@ -595,11 +600,9 @@
 		"sob": ""
 	},
 	"job_level": {
-		"header": {
-			"title": ""
-		},
+		"job_level_code": "",
 		"job_level_description": "",
-		"job_level_id": "",
+		"job_level_jobTitle": "",
 		"job_level_level": "",
 		"job_level_name": "",
 		"modal": {
@@ -607,11 +610,8 @@
 		}
 	},
 	"job_title": {
-		"header": {
-			"title": ""
-		},
+		"job_title_code": "",
 		"job_title_description": "",
-		"job_title_id": "",
 		"job_title_name": "",
 		"modal": {
 			"title": ""
@@ -622,6 +622,10 @@
 		"code": "",
 		"name": "",
 		"title": ""
+	},
+	"pagination": {
+		"entries": "",
+		"show": ""
 	},
 	"payment_terms": "",
 	"pic": "",
@@ -715,6 +719,11 @@
 		},
 		"type": "",
 		"unit": ""
+	},
+	"select": {
+		"availableList": "",
+		"selectedItems": "",
+		"selectedList": ""
 	},
 	"sob": {
 		"add": "",
@@ -862,16 +871,16 @@
 	"uom": {
 		"content": {
 			"modal": {
-				"title": ""
+				"title": "",
+				"uom_code": "",
+				"uom_description": "",
+				"uom_name": ""
 			},
 			"table": {
+				"uom_code": "",
 				"uom_description": "",
-				"uom_id": "",
 				"uom_name": ""
 			}
-		},
-		"header": {
-			"title": ""
 		}
 	}
 }

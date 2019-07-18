@@ -1,4 +1,7 @@
 {
+	"advancedFilter": {
+		"placeholder": ""
+	},
 	"asset": {
 		"content": {
 			"modal": {
@@ -18,19 +21,16 @@
 	"bank": {
 		"content": {
 			"modal": {
-				"add_des_bank": "Mô tả",
-				"add_id_bank": "Mã ngân hàng",
-				"add_name_bank": "Tên ngân hàng",
+				"bank_code": "Mã ngân hàng",
+				"bank_description": "",
+				"bank_name": "",
 				"title": "Thêm mới ngân hàng"
 			},
 			"table": {
+				"bank_code": "Mã ngân hàng",
 				"bank_description": "Mô tả",
-				"bank_id": "Mã ngân hàng",
 				"bank_name": "Tên ngân hàng"
 			}
-		},
-		"header": {
-			"title": "Danh sách ngân hàng"
 		}
 	},
 	"bank_account": {
@@ -59,11 +59,8 @@
 		"title": "Dấu trang"
 	},
 	"business_group": {
+		"code": "Mã nhóm kinh doanh",
 		"description": "Mô tả",
-		"header": {
-			"title": "Danh sách nhóm kinh doanh"
-		},
-		"id": "Mã nhóm kinh doanh",
 		"modal": {
 			"title": "Thêm nhóm kinh doanh"
 		},
@@ -102,9 +99,13 @@
 			"label": "Bộ sổ"
 		}
 	},
+	"cropper": {
+		"browseImage": "",
+		"crop": ""
+	},
 	"currency": {
+		"currency_code": "Mã tiền tệ",
 		"currency_description": "Mô tả",
-		"currency_id": "Mã tiền tệ",
 		"currency_name": "Tên loại tiền tệ",
 		"title": "Đơn vị tiền tệ"
 	},
@@ -176,6 +177,9 @@
 		"details": {
 			"general": "Thông tin chung"
 		}
+	},
+	"datePicker": {
+		"placeHolder": ""
 	},
 	"debt_load": "",
 	"detailEmployeeGroup": {
@@ -577,12 +581,13 @@
 		"button": {
 			"add": "Thêm",
 			"cancel": "Hủy",
-			"clear": "",
+			"clear": "Bỏ lọc",
 			"delete": "Xóa",
 			"download_example": "Tải file mẫu",
 			"export": "Xuất Excel",
 			"import": "Nhập hàng loạt",
 			"import_file": "Nhập hàng loạt",
+			"ok": "",
 			"save": "Lưu"
 		},
 		"customer_group": {
@@ -595,23 +600,18 @@
 		"sob": ""
 	},
 	"job_level": {
-		"header": {
-			"title": "Cấp bậc chức vụ"
-		},
+		"job_level_code": "Mã cấp bậc",
 		"job_level_description": "Mô tả",
-		"job_level_id": "Mã cấp bậc",
-		"job_level_level": "Mã chức vụ",
+		"job_level_jobTitle": "",
+		"job_level_level": "Mã cấp bậc",
 		"job_level_name": "Tên cấp bậc",
 		"modal": {
 			"title": "Thêm cấp bậc"
 		}
 	},
 	"job_title": {
-		"header": {
-			"title": "Chức vụ công việc"
-		},
+		"job_title_code": "Mã chức vụ",
 		"job_title_description": "Mô tả",
-		"job_title_id": "Mã chức vụ",
 		"job_title_name": "Tên chức vụ",
 		"modal": {
 			"title": "Thêm chức vụ"
@@ -622,6 +622,10 @@
 		"code": "Mã pháp nhân",
 		"name": "Tên pháp nhân",
 		"title": "Danh sách pháp nhân"
+	},
+	"pagination": {
+		"entries": "bản ghi",
+		"show": "Hiện thị"
 	},
 	"payment_terms": "",
 	"pic": "",
@@ -716,12 +720,17 @@
 		"type": "",
 		"unit": "Đơn vị tính"
 	},
+	"select": {
+		"availableList": "",
+		"selectedItems": "",
+		"selectedList": ""
+	},
 	"sob": {
-		"add": "",
-		"code": "",
-		"currency": "",
-		"name": "",
-		"title": ""
+		"add": "Thêm bộ sổ",
+		"code": "Mã bộ sổ",
+		"currency": "Đơn vị tiền tệ",
+		"name": "Tên bộ sổ",
+		"title": "Danh sách bộ sổ"
 	},
 	"special_price_customer": {
 		"code": "",
@@ -862,16 +871,16 @@
 	"uom": {
 		"content": {
 			"modal": {
-				"title": "Thêm đơn vị tính sản phẩm"
+				"title": "Thêm đơn vị tính sản phẩm",
+				"uom_code": "Mã đơn vị",
+				"uom_description": "",
+				"uom_name": ""
 			},
 			"table": {
+				"uom_code": "Mã đơn vị",
 				"uom_description": "Mô tả",
-				"uom_id": "Mã đơn vị",
 				"uom_name": "Tên đơn vị"
 			}
-		},
-		"header": {
-			"title": "Đơn vị tính sản phẩm"
 		}
 	}
 }
