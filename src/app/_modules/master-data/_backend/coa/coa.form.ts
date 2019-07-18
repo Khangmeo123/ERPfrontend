@@ -3,12 +3,12 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { CoaEntity } from 'src/app/_modules/master-data/_backend/coa/coa.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class CoaForm extends FormModel{
-    
-    accountNumber = new FormControl('',[requiredField]);
-    accountName = new FormControl('',[requiredField]);
+export class CoaForm extends FormModel {
 
-    
+    accountNumber = new FormControl('', [requiredField]);
+    accountName = new FormControl('', [requiredField]);
+
+
     propertyId = new FormControl('');
     propertyName = new FormControl('');
 
@@ -19,6 +19,13 @@ export class CoaForm extends FormModel{
     description = new FormControl('');
 
     constructor(coaEntity?: CoaEntity) {
-        super(coaEntity);
+        super();
+        if (coaEntity !== null && coaEntity !== undefined) {
+            Object.keys(coaEntity).forEach((item) => {
+                if (coaEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(coaEntity[item]);
+                }
+            });
+        }
     }
 }

@@ -6,13 +6,13 @@ import { Subject } from 'rxjs';
 })
 export class SpinnerService {
   isLoading = new Subject<boolean>();
-  constructor() { 
+  constructor() {
     this.isLoading.next(false);
   }
   show() {
     this.isLoading.next(true);
   }
   hide() {
-      this.isLoading.next(false);
+    this.isLoading.next(false);
   }
 }

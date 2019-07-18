@@ -1,15 +1,9 @@
 <div class="cropper" role="button" (click)="file.click()">
   <div class="d-flex">
     <div class="result flex-grow-1">
-      <img [src]="result" alt="result" *ngIf="result; else notResult">
-      <ng-template #notResult>
-        <img src="../../../../assets/img/image-placeholder.png" alt="">
-      </ng-template>
-    </div>
-    <div class="ml-2">
-      <button class="btn btn-primary">
-        Browse Image
-      </button>
+      <img [src]="result" alt="result" *ngIf="result">
+      <div class="overlay" pTooltip="{{'cropper.browseImage' | translate}}">
+      </div>
     </div>
   </div>
   <input type="file" #file (change)="onSelectFile($event)" accept="image/*">
@@ -26,15 +20,15 @@
     </div>
     <div class="d-flex justify-content-between mt-2">
       <button class="btn btn-primary mr-2" (click)="onOk()" *ngIf="cropped; else notCropped">
-        OK
+        {{'general.button.ok' | translate}}
       </button>
       <ng-template #notCropped>
         <button class="btn btn-primary mr-2" (click)="onCrop(image)">
-          {{this.cropper ? 'Done' : 'Crop'}}
+          {{this.cropper ? 'cropper.done' : 'cropper.crop' | translate}}
         </button>
       </ng-template>
       <button class="btn btn-secondary" (click)="onCancel($event)">
-        Cancel
+        {{'general.button.cancel' | translate}}
       </button>
     </div>
   </p-dialog>

@@ -11,6 +11,13 @@ export class InfoContactForm extends FormModel {
     address: string;
     relationship: string;
     constructor(infoContactEntity?: InfoContactEntity) {
-        super(infoContactEntity);
+        super();
+        if (infoContactEntity !== null && infoContactEntity !== undefined) {
+            Object.keys(infoContactEntity).forEach((item) => {
+                if (infoContactEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(infoContactEntity[item]);
+                }
+            });
+        }
     }
 }

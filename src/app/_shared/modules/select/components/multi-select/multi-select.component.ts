@@ -39,10 +39,6 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
     return this.isOpened ? 'opened' : 'closed';
   }
 
-  get selectedText() {
-    return `${this.selectedList.length} selected`;
-  }
-
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
       this.isLoading = false;

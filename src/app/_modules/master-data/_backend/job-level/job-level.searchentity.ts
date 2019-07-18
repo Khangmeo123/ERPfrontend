@@ -1,9 +1,10 @@
+import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class JobLevelSearchEntity extends SearchEntity {
-    name: string;
-    code: string;
-    description: string;
+    name: TextFilter = new TextFilter();
+    code: TextFilter = new TextFilter();
+    description: TextFilter = new TextFilter();
     jobTitleId: string;
 
     constructor(jobLevelSearchEntity?: any) {

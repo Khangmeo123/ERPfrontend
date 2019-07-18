@@ -3,20 +3,27 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { CostCenterEntity } from 'src/app/_modules/master-data/_backend/cost-center/cost-center.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class CostCenterForm extends FormModel{
+export class CostCenterForm extends FormModel {
 
-    name = new FormControl('',[requiredField]);
-    code = new FormControl('',[requiredField]);
+    name = new FormControl('', [requiredField]);
+    code = new FormControl('', [requiredField]);
 
     formValid = new FormControl('');
     toValid = new FormControl('');
 
-    coaId =  new FormControl('');
+    coaId = new FormControl('');
     coaAccountNumber = new FormControl('');
 
     description = new FormControl('');
 
     constructor(costCenterEntity?: CostCenterEntity) {
-        super(costCenterEntity);
+        super();
+        if (costCenterEntity !== null && costCenterEntity !== undefined) {
+            Object.keys(costCenterEntity).forEach((item) => {
+                if (costCenterEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(costCenterEntity[item]);
+                }
+            });
+        }
     }
 }

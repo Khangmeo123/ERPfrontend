@@ -1,3 +1,4 @@
+import { SupplierEntity } from './supplier.entity';
 import { FormControl, Validators, FormGroup, AbstractControl, FormArray } from '@angular/forms';
 import { requiredField, checkLength } from 'src/app/_helpers';
 import { FormModel } from 'src/app/_helpers/form-model';
@@ -15,7 +16,14 @@ export class SupplierForm extends FormModel {
 
     infoContacts = new FormArray([]);
     bankAccounts = new FormArray([]);
-    constructor(supplierForm?: SupplierForm) {
-        super(supplierForm);
+    constructor(supplierEntity?: SupplierEntity) {
+        super();
+        if (supplierEntity !== null && supplierEntity !== undefined) {
+            Object.keys(supplierEntity).forEach((item) => {
+                if (supplierEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(supplierEntity[item]);
+                }
+            });
+        }
     }
 }

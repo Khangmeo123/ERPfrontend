@@ -132,6 +132,7 @@ body {
 }
 
 .btn.btn-add,
+.btn.btn-clear,
 .btn.btn-import,
 .btn.btn-export,
 .btn.btn-save {
@@ -216,5 +217,19 @@ body {
     margin-top: 0.5rem;
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+.ui-table-scrollable-header, .ui-table-scrollable-footer {
+  overflow: unset!important;
+}
+
+.ui-table-resizable {
+  .ui-table-thead{
+     tr{
+       th {
+        overflow: visible;
+      }
+    }
   }
 }

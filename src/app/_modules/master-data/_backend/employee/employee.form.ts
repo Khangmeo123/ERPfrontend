@@ -44,6 +44,13 @@ export class EmployeeForm extends FormModel {
     infoContacts = new FormArray([]);
 
     constructor(employeeEntity?: EmployeeEntity) {
-        super(employeeEntity);
+        super();
+        if (employeeEntity !== null && employeeEntity !== undefined) {
+            Object.keys(employeeEntity).forEach((item) => {
+                if (employeeEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(employeeEntity[item]);
+                }
+            });
+        }
     }
 }

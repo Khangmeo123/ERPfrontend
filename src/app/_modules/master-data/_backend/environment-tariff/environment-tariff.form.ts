@@ -3,10 +3,10 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { EnvironmentTariffEntity } from 'src/app/_modules/master-data/_backend/environment-tariff/environment-tariff.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class EnvironmentTariffForm extends FormModel{
+export class EnvironmentTariffForm extends FormModel {
 
-    taxCode = new FormControl('',[requiredField]);
-    taxType = new FormControl('',[requiredField]);
+    taxCode = new FormControl('', [requiredField]);
+    taxType = new FormControl('', [requiredField]);
 
     //don vi tinh
     uomId = new FormControl('');
@@ -16,12 +16,19 @@ export class EnvironmentTariffForm extends FormModel{
     coaId = new FormControl('');
     coaName = new FormControl('');
 
-    
+
 
     taxRate = new FormControl('');
     description = new FormControl('');
 
     constructor(environmentTariffEntity?: EnvironmentTariffEntity) {
-        super(environmentTariffEntity);
+        super();
+        if (environmentTariffEntity !== null && environmentTariffEntity !== undefined) {
+            Object.keys(environmentTariffEntity).forEach((item) => {
+                if (environmentTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(environmentTariffEntity[item]);
+                }
+            });
+        }
     }
 }

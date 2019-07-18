@@ -3,16 +3,16 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { requiredField, checkLength } from 'src/app/_helpers';
 import { VoucherListEntity } from './voucher-list.entity';
 
-export class VoucherListForm extends FormModel{
+export class VoucherListForm extends FormModel {
 
-    name = new FormControl('',[requiredField]);
-    code = new FormControl('',[requiredField]);
-    
-    debtId =  new FormControl('');
-    debtName =  new FormControl('');
+    name = new FormControl('', [requiredField]);
+    code = new FormControl('', [requiredField]);
 
-    creditId =  new FormControl('');
-    creditName =  new FormControl('');
+    debtId = new FormControl('');
+    debtName = new FormControl('');
+
+    creditId = new FormControl('');
+    creditName = new FormControl('');
 
     typeId = new FormControl('');
     typeName = new FormControl('');
@@ -20,6 +20,13 @@ export class VoucherListForm extends FormModel{
     description = new FormControl('');
 
     constructor(voucherListEntity?: VoucherListEntity) {
-        super(voucherListEntity);
+        super();
+        if (voucherListEntity !== null && voucherListEntity !== undefined) {
+            Object.keys(voucherListEntity).forEach((item) => {
+                if (voucherListEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(voucherListEntity[item]);
+                }
+            });
+        }
     }
 }

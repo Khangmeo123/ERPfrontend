@@ -36,8 +36,11 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { InputTextModule } from 'primeng/inputtext';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
-
+import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
+import { DropdownModule } from 'primeng/dropdown';
 import { ToastrModule } from 'ngx-toastr';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 
 @NgModule({
   declarations: [
@@ -76,7 +79,11 @@ import { ToastrModule } from 'ngx-toastr';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
-    ToastrModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     AccordionModule.forRoot(),
     RadioButtonModule,
     DatePickerModule,
@@ -86,6 +93,11 @@ import { ToastrModule } from 'ngx-toastr';
     ErrorModule,
     SelectModule,
     BsDropdownModule.forRoot(),
+    DropdownModule,
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
   ],
 })
 export class BusinessGroupModule { }

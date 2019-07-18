@@ -15,6 +15,13 @@ export class AssetForm extends FormModel {
     statusName = new FormControl('', [requiredField]);
 
     constructor(assetEntity?: AssetEntity) {
-        super(assetEntity);
+        super();
+        if (assetEntity !== null && assetEntity !== undefined) {
+            Object.keys(assetEntity).forEach((item) => {
+                if (assetEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(assetEntity[item]);
+                }
+            });
+        }
     }
 }

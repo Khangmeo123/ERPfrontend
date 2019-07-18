@@ -4,14 +4,21 @@ import { LegalEntity } from './legal.entity';
 import { FormModel } from 'src/app/_helpers/form-model';
 
 
-export class LegalForm extends FormModel{
+export class LegalForm extends FormModel {
 
-    name = new FormControl('',[requiredField]);
-    code = new FormControl('',[requiredField]);
-    
+    name = new FormControl('', [requiredField]);
+    code = new FormControl('', [requiredField]);
+
 
 
     constructor(legalEntity?: LegalEntity) {
-       super(legalEntity);
+        super();
+        if (legalEntity !== null && legalEntity !== undefined) {
+            Object.keys(legalEntity).forEach((item) => {
+                if (legalEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(legalEntity[item]);
+                }
+            });
+        }
     }
 }

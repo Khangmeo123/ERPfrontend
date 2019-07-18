@@ -3,17 +3,17 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class SobForm extends FormModel{
-    code =  new FormControl('',[requiredField]);
-    name = new FormControl('',[requiredField]);
+export class SobForm extends FormModel {
+    code = new FormControl('', [requiredField]);
+    name = new FormControl('', [requiredField]);
 
     //he thong tai khoan ke toan
     coaId = new FormControl('');
-    coaName =  new FormControl('');
+    coaName = new FormControl('');
 
     //don vi tien te
-    currencyId =  new FormControl('',[requiredField]);
-    currencyName =  new FormControl('',[requiredField]);
+    currencyId = new FormControl('', [requiredField]);
+    currencyName = new FormControl('', [requiredField]);
 
     //bieu thue tieu thu dac biet
     sctId = new FormControl('');
@@ -37,12 +37,19 @@ export class SobForm extends FormModel{
     extId = new FormControl('');
     extName = new FormControl('');
 
-     //bieu thue nhap khau
-     imtId = new FormControl('');
-     imtName = new FormControl('');
-    
+    //bieu thue nhap khau
+    imtId = new FormControl('');
+    imtName = new FormControl('');
+
 
     constructor(sobEntity?: SobEntity) {
-        super(sobEntity);
+        super();
+        if (sobEntity !== null && sobEntity !== undefined) {
+            Object.keys(sobEntity).forEach((item) => {
+                if (sobEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(sobEntity[item]);
+                }
+            });
+        }
     }
 }

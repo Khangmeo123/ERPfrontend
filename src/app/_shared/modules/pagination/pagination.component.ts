@@ -19,6 +19,7 @@ export class PaginationComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(change) {
+
     if (change.pagination && this.pagination && this.pagination.pageNumber) {
       this.indexItem = this.pagination.pageNumber;
       if (this.pagination.totalItems && this.pagination.take) {
@@ -40,7 +41,7 @@ export class PaginationComponent implements OnInit, OnChanges {
 
 
   public onClickNext() {
-    if (this.indexItem < this.totalPage) {
+    if (this.indexItem < Math.ceil(this.pagination.totalItems / this.pagination.take)) {
       this.indexItem++;
       this.pagination.pageNumber = this.indexItem;
       this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.take;
@@ -60,9 +61,10 @@ export class PaginationComponent implements OnInit, OnChanges {
 
 
   public onClickLast() {
-    if (this.indexItem !== this.totalPage) {
-      this.indexItem = this.totalPage;
-      this.pagination.pageNumber = this.indexItem;
+    const pageIndex = Math.ceil(this.pagination.totalItems / this.pagination.take);
+    if (this.indexItem < pageIndex) {
+      this.indexItem = pageIndex;
+      this.pagination.pageNumber = pageIndex;
       this.pagination.skip = (this.pagination.pageNumber - 1) * this.pagination.take;
       this.paginationOut.emit(this.pagination);
     }
@@ -71,12 +73,9 @@ export class PaginationComponent implements OnInit, OnChanges {
 
   public onSelectPageSize(value) {
     const pagesize = Number(value);
-    if (pagesize !== this.pagination.take) {
-      this.pagination.take = pagesize;
-      this.totalPage = Math.ceil(this.pagination.totalItems / this.pagination.take);
-      this.onClickFirst();
-    }
-
+    this.pagination.take = pagesize;
+    this.pagination.skip = 0;
+    this.paginationOut.emit(this.pagination);
   }
 
 }

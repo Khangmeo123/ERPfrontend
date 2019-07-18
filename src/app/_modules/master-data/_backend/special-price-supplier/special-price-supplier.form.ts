@@ -4,9 +4,9 @@ import { SpecialPriceSupplierEntity } from './special-price-supplier.entity';
 import { FormModel } from 'src/app/_helpers/form-model';
 
 
-export class SpecialPriceSupplierForm extends FormModel{
-    productGroupId = new FormControl('',[requiredField]);
-    productGroupName = new FormControl('',[requiredField]);
+export class SpecialPriceSupplierForm extends FormModel {
+    productGroupId = new FormControl('', [requiredField]);
+    productGroupName = new FormControl('', [requiredField]);
 
     productId = new FormControl('');
     productName = new FormControl('');
@@ -18,6 +18,13 @@ export class SpecialPriceSupplierForm extends FormModel{
     description = new FormControl('');
 
     constructor(specialPriceSupplierEntity?: SpecialPriceSupplierEntity) {
-       super(specialPriceSupplierEntity);
+        super();
+        if (specialPriceSupplierEntity !== null && specialPriceSupplierEntity !== undefined) {
+            Object.keys(specialPriceSupplierEntity).forEach((item) => {
+                if (specialPriceSupplierEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(specialPriceSupplierEntity[item]);
+                }
+            });
+        }
     }
 }
