@@ -2,7 +2,7 @@ aside.sidebar {
   mat-icon {
     width: 20px;
     font-size: 20px;
-    display: flex;
+    display: block;
     justify-content: center;
     align-items: center;
     padding: 0 0;
@@ -11,6 +11,31 @@ aside.sidebar {
   nav {
     .bookmark-icon {
       color: #FCE205;
+    }
+
+    ul {
+      display: block;
+      li {
+        width: 100%;
+
+        a {
+          flex-grow: 1;
+          overflow: hidden;
+          display: inline-block;
+
+          mat-icon {
+            width: 20px!important;
+          }
+
+          span {
+            flex-grow: 1;
+            overflow: hidden;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
     }
 
     ul:hover {
@@ -59,14 +84,6 @@ aside.sidebar {
           padding-right: 0.25rem;
           display: flex;
           align-items: center;
-
-          a {
-            flex-grow: 1;
-          }
-
-          span.pi {
-            flex-shrink: 1;
-          }
         }
       }
 

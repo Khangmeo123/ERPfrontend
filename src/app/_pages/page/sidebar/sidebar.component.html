@@ -12,7 +12,7 @@
     <div class="sidebar-menu sidebar-bookmarks">
       <ul [@toggleMenuSideBar] [class]="bookmarkMenuState" *ngIf="showBookmarks">
         <li *ngFor="let item of bookmarks">
-          <a href="#" routerLink="{{item.route}}" routerLinkActive="active" class="flex-grow-1">
+          <a href="#" routerLink="{{item.route}}" routerLinkActive="active">
             <mat-icon class="bookmark-icon"></mat-icon>
             <span>{{item.name | translate}}</span>
           </a>
