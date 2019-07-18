@@ -7,10 +7,9 @@
       <input *ngIf="!isDateFilter; else dateFilter"
              type="{{inputType}}"
              class="form-control"
-             (change)="onApplyFilter($event)"
-             (keyup)="onInput($event)"
+             (keyup)="onKeyUp($event)"
              [(ngModel)]="filterValue"
-             placeholder="Search...">
+             placeholder="{{'advancedFilter.placeholder' | translate}}">
       <ng-template #dateFilter>
         <div class="flex-grow-1">
           <app-date-picker (valueChange)="onApplyFilter($event)" [(value)]="filterValue"></app-date-picker>
