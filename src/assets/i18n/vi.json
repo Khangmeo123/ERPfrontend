@@ -1,9 +1,4 @@
 {
-	" employee": {
-		"contact": {
-			"add ": ""
-		}
-	},
 	"asset": {
 		"content": {
 			"modal": {
@@ -369,6 +364,7 @@
 			"division_address": "Địa chỉ chi nhánh"
 		},
 		"contact": {
+			"add": "Thêm thông tin liên hệ",
 			"address": "Địa chỉ",
 			"city": "Tỉnh/Thành phô",
 			"email": "Email",
@@ -382,35 +378,42 @@
 		}
 	},
 	"detail_product_of_legal_entity": {
-		"amount_from": "",
-		"amount_to": "",
 		"bill_of_materias": {
-			"amount": "",
-			"code_of_materias": "",
-			"description": "",
-			"modal_title": "",
-			"name_of_materias": "",
-			"price_of_primary_unit": "",
-			"primary_price": "",
-			"title": "",
-			"transformation_rate_to_main_unit": "",
-			"unit": "",
-			"unit_price": ""
+			"amount": "Số lượng",
+			"code_of_materias": "Mã nguyên vật liệu",
+			"modal_title": "Thêm nguyên vật liệu",
+			"name_of_materias": "Tên nguyên vật liệu",
+			"title": "Định mức nguyên vật liệu",
+			"unit": "Đơn vị tính"
 		},
-		"detail": {
-			"tab": {
-				"title_3": ""
-			}
+		"default_value": {
+			"discount_account": "TK chiết khấu",
+			"expense_account": "TK chi phí",
+			"inventory_account": "TK kho",
+			"return_account": "TK trả lại",
+			"revenue_account": "TK doanh thu",
+			"sales_allowances_account": "TK giảm giá",
+			"title": "Giá trị ngầm định"
 		},
-		"discount": "",
-		"inventory_account": "",
-		"return_account": "",
+		"discount": "Chiết khấu",
+		"discounts": {
+			"amount_from": "Số lượng từ",
+			"amount_to": "Số lượng đến",
+			"discount_type": "Loại chiết khấu",
+			"modal_title": "Thêm chiết khấu",
+			"title": "Chiết khấu"
+		},
+		"product_group": "Nhóm sản phẩm",
 		"transformation_unit": {
-			"amount": "",
-			"code_of_materias": "",
-			"name_of_materias": "",
-			"title": "",
-			"unit": ""
+			"amount": "Số lương",
+			"description": "Mô tả",
+			"modal_title": "Thêm đơn vị chuyển đổi",
+			"price_of_primary_unit": "Đơn giá của đơn vị cơ bản",
+			"primary_unit": "Đơn vị cơ bản",
+			"sale_price": "Đơn giá bán",
+			"title": "Đơn vị chuyển đổi",
+			"transformation_rate_to_main_unit": "Tỉ lệ chuyển đổi về đơn vị cơ bản",
+			"unit": "Đơn vị tính"
 		}
 	},
 	"detail_supplier_of_entity": {
@@ -474,19 +477,13 @@
 	},
 	"due_in_days": "",
 	"employee": {
-		"contact": {
-			"add": ""
-		},
 		"content": {
 			"table": {
 				"account_number": "Số tài khoản",
-				"address": "",
 				"bassic_salary": "Lương đóng bảo hiểm",
 				"birthday": "Ngày sinh",
 				"coefficients_salary": "Hệ số lương",
-				"contact_name": "",
 				"date_range": "Ngày cấp",
-				"email": "",
 				"employee_id": "Mã nhân viên",
 				"employee_name": "Tên nhân viên",
 				"gender": {
@@ -495,8 +492,6 @@
 				},
 				"id_emp": "Số CMND",
 				"issue_by": "Nơi cấp",
-				"phone": "",
-				"relation": "",
 				"salary_agreement": "Lương thỏa thuận",
 				"sex": "Giới tính",
 				"status": "Trạng thái",
@@ -597,8 +592,7 @@
 		"legal_entity": {
 			"name": "Tên pháp nhân"
 		},
-		"sob": "",
-		"view_detail": "Xem chi tiết"
+		"sob": ""
 	},
 	"job_level": {
 		"header": {
@@ -629,18 +623,6 @@
 		"name": "Tên pháp nhân",
 		"title": "Danh sách pháp nhân"
 	},
-	"list_product_of_legal_entity": {
-		"code": "",
-		"description": "",
-		"modal": {
-			"title": ""
-		},
-		"name": "",
-		"primary_price": "",
-		"product_group": "",
-		"title": "",
-		"unit": ""
-	},
 	"payment_terms": "",
 	"pic": "",
 	"product": {
@@ -658,18 +640,14 @@
 				"title": "Thêm mới sản phẩm"
 			},
 			"tab": {
-				"discount_account": "",
 				"enviroment_tax": "Thuế môi trường (%)",
 				"enviroment_tax_id": "Mã thuế môi trường",
-				"expense_account": "",
 				"export_tax": "Thuế xuất khẩu (%)",
 				"export_tax_id": "Mã thuế suất khẩu",
 				"import_tax": "Thuế nhập khẩu (%)",
 				"import_tax_id": "Mã thuế nhập khẩu",
 				"resource_tax": "Thuế tài nguyên (%)",
 				"resource_tax_id": "Mã thuế tài nguyên",
-				"revenue_account": "",
-				"sales_allowances_account": "",
 				"special_consumption_tax": "Thuế TTĐB (% )",
 				"special_consumption_tax_id": "Mã thuế TTĐB",
 				"value_add_tax": "Thuế GTGT (%)",
@@ -693,8 +671,7 @@
 		},
 		"header": {
 			"title": "Danh sách sản phẩm"
-		},
-		"product_group": ""
+		}
 	},
 	"productGroup": {
 		"code": "Mã nhóm",
@@ -706,6 +683,18 @@
 			"code": "Mã sản phâm",
 			"name": "Tên sản phẩm"
 		}
+	},
+	"productOfLegalEntity": {
+		"code": "Mã pháp nhân",
+		"header": {
+			"title": "Danh sách sản phẩm của pháp nhân"
+		},
+		"name": "Tên pháp nhân",
+		"product": {
+			"code": "Mã sản phẩm",
+			"name": "Tên sản phẩm"
+		},
+		"sob": "Mã bộ sổ"
 	},
 	"resource": {
 		"account": {
