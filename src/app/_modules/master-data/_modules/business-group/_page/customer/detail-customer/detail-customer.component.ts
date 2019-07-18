@@ -16,7 +16,8 @@ export class DetailCustomerComponent implements OnInit, OnDestroy {
   contactsModal = false;
 
   isOpenTab1: boolean = false;
-
+  isOpenTab2: boolean = false;
+  isOpenTab3: boolean = false;
 
   ngOnDestroy(): void {
   }
@@ -36,4 +37,11 @@ export class DetailCustomerComponent implements OnInit, OnDestroy {
     this.isOpenTab1 = !this.isOpenTab1;
   }
 
+  onClickOpenTab2() {
+    this.isOpenTab2 = !this.isOpenTab2;
+  }
+
+  onClickOpenTab3() {
+    this.isOpenTab3 = !this.isOpenTab3;
+  }
 }
