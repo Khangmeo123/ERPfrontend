@@ -4,18 +4,18 @@ import {Filter} from './Filter';
 export class DateFilter extends Filter {
   constructor(dateFilter?) {
     super();
-    this.eq = dateFilter !== undefined && dateFilter.eq !== undefined ? dateFilter.eq : null;
-    this.ne = dateFilter !== undefined && dateFilter.ne !== undefined ? dateFilter.ne : null;
-    this.lt = dateFilter !== undefined && dateFilter.lt !== undefined ? dateFilter.lt : null;
-    this.le = dateFilter !== undefined && dateFilter.le !== undefined ? dateFilter.le : null;
-    this.gt = dateFilter !== undefined && dateFilter.gt !== undefined ? dateFilter.gt : null;
-    this.ge = dateFilter !== undefined && dateFilter.ge !== undefined ? dateFilter.ge : null;
+    this.equal = dateFilter !== undefined && dateFilter.equal !== undefined ? dateFilter.equal : null;
+    this.notEqual = dateFilter !== undefined && dateFilter.notEqual !== undefined ? dateFilter.notEqual : null;
+    this.less = dateFilter !== undefined && dateFilter.less !== undefined ? dateFilter.less : null;
+    this.lessEqual = dateFilter !== undefined && dateFilter.lessEqual !== undefined ? dateFilter.lessEqual : null;
+    this.greater = dateFilter !== undefined && dateFilter.greater !== undefined ? dateFilter.greater : null;
+    this.greaterEqual = dateFilter !== undefined && dateFilter.greaterEqual !== undefined ? dateFilter.greaterEqual : null;
   }
 
   static types: FilterType[] = [
     {
       sign: '=',
-      code: 'eq',
+      code: 'equal',
       languages: {
         en: 'Equals',
         vi: 'Bằng',
@@ -31,7 +31,7 @@ export class DateFilter extends Filter {
     },
     {
       sign: '<',
-      code: 'lt',
+      code: 'less',
       languages: {
         en: 'Less than',
         vi: 'Nhỏ hơn',
@@ -39,7 +39,7 @@ export class DateFilter extends Filter {
     },
     {
       sign: '<=',
-      code: 'le',
+      code: 'lessEqual',
       languages: {
         en: 'Less or equals than',
         vi: 'Nhỏ hơn hoặc bằng',
@@ -47,7 +47,7 @@ export class DateFilter extends Filter {
     },
     {
       sign: '>',
-      code: 'gt',
+      code: 'greater',
       languages: {
         en: 'Greater than',
         vi: 'Lớn hơn',
@@ -55,17 +55,17 @@ export class DateFilter extends Filter {
     },
     {
       sign: '>=',
-      code: 'ge',
+      code: 'greaterEqual',
       languages: {
         en: 'Greater or equals than',
         vi: 'Lớn hơn hoặc bằng',
       },
     },
   ];
-  eq: string = null;
-  ne: string = null;
-  lt: string = null;
-  le: string = null;
-  gt: string = null;
-  ge: string = null;
+  equal: string = null;
+  notEqual: string = null;
+  less: string = null;
+  lessEqual: string = null;
+  greater: string = null;
+  greaterEqual: string = null;
 }
