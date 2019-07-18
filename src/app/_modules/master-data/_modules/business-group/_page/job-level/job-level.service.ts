@@ -116,26 +116,26 @@ export class JobLevelService {
     return defered;
   }
 
-  getListJobTitle(jobTitleSearchEntity: JobTitleSearchEntity) {
-    this.jobLevelRepository.getListJobTitle(jobTitleSearchEntity).subscribe(res => {
-      if (res) {
-        this.jobTitleList.next(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
-  getListJobTitleByTyping(jobTitleSearchEntity: Observable<JobTitleSearchEntity>) {
-    jobTitleSearchEntity.pipe(debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(searchEntity => {
-        return this.jobLevelRepository.getListJobTitle(searchEntity)
-      })).subscribe(res => {
-        if (res) {
-          this.jobTitleList.next(res);
-        }
-      });
-  }
+  // getListJobTitle(jobTitleSearchEntity: JobTitleSearchEntity) {
+  //   this.jobLevelRepository.getListJobTitle(jobTitleSearchEntity).subscribe(res => {
+  //     if (res) {
+  //       this.jobTitleList.next(res);
+  //     }
+  //   }, err => {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //   });
+  // }
+  // getListJobTitleByTyping(jobTitleSearchEntity: Observable<JobTitleSearchEntity>) {
+  //   jobTitleSearchEntity.pipe(debounceTime(400),
+  //     distinctUntilChanged(),
+  //     switchMap(searchEntity => {
+  //       return this.jobLevelRepository.getListJobTitle(searchEntity)
+  //     })).subscribe(res => {
+  //       if (res) {
+  //         this.jobTitleList.next(res);
+  //       }
+  //     });
+  // }
 }

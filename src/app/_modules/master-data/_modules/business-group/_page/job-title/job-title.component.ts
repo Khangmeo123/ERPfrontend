@@ -63,6 +63,9 @@ export class JobTitleComponent implements OnInit, OnDestroy {
   }
 
   getList() {
+    this.pagination.pageNumber = 1;
+    this.jobTitleSearchEntity.skip = 0;
+    this.jobTitleSearchEntity.take = this.pagination.take;
     this.jobTitleService.getList(this.jobTitleSearchEntity);
   }
 
@@ -107,7 +110,7 @@ export class JobTitleComponent implements OnInit, OnDestroy {
   paginationOut(pagination: PaginationModel) {
     this.jobTitleSearchEntity.skip = pagination.skip;
     this.jobTitleSearchEntity.take = pagination.take;
-    this.getList();
+    this.jobTitleService.getList(this.jobTitleSearchEntity);
   }
 
   clearSearch(table: any) {

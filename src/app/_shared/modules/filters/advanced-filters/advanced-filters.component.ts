@@ -152,10 +152,14 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     }
   }
 
-  onInput(event) {
+  onKeyUp(event) {
     const { value } = event.target;
     if (value === '') {
       this.onApplyFilter(value);
+    } else {
+      if (event.key === 'Enter') {
+        this.onApplyFilter(event);
+      }
     }
   }
 }

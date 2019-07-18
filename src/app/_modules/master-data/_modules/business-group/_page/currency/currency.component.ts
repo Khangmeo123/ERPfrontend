@@ -63,6 +63,9 @@ export class CurrencyComponent implements OnInit, OnDestroy {
   }
 
   getList() {
+    this.pagination.pageNumber = 1;
+    this.currencySearchEntity.skip = 0;
+    this.currencySearchEntity.take = this.pagination.take;
     this.currencyService.getList(this.currencySearchEntity);
   }
 
@@ -107,7 +110,7 @@ export class CurrencyComponent implements OnInit, OnDestroy {
   paginationOut(pagination: PaginationModel) {
     this.currencySearchEntity.skip = pagination.skip;
     this.currencySearchEntity.take = pagination.take;
-    this.getList();
+    this.currencyService.getList(this.currencySearchEntity);
   }
 
   clearSearch(table: any) {

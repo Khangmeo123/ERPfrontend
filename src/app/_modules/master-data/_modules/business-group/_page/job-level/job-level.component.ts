@@ -23,14 +23,14 @@ export class JobLevelComponent implements OnInit, OnDestroy {
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
   pagination: PaginationModel = new PaginationModel();
-  jobTitleTyping: Subject<JobTitleSearchEntity> = new Subject();
-  jobTitleSearchEntity: JobTitleSearchEntity = new JobTitleSearchEntity();
+  // jobTitleIds: JobTitleEntity[];
+  // jobTitleExceptIds: JobTitleEntity[];
+  // jobTitleTyping: Subject<JobTitleSearchEntity> = new Subject();
+  // jobTitleSearchEntity: JobTitleSearchEntity = new JobTitleSearchEntity();
   jobLevelSearchEntity: JobLevelSearchEntity = new JobLevelSearchEntity();
   jobLevelList: JobLevelEntity[];
   jobLevelForm: FormGroup;
   jobLevelSubs: Subscription = new Subscription();
-  jobTitleIds: JobTitleEntity[];
-  jobTitleExceptIds: JobTitleEntity[];
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   brands: any[];
@@ -55,16 +55,15 @@ export class JobLevelComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isBookMark = res;
     });
-    const jobTitleSub = this.jobLevelService.jobTitleList.subscribe(res => {
-      if (res) {
-        debugger
-        this.jobTitleExceptIds = res.exceptIds;
-        this.jobTitleIds = res.ids;
-      }
-    })
-    this.jobLevelService.getListJobTitleByTyping(this.jobTitleTyping);
+    // const jobTitleSub = this.jobLevelService.jobTitleList.subscribe(res => {
+    //   if (res) {
+    //     this.jobTitleExceptIds = res.exceptIds;
+    //     this.jobTitleIds = res.ids;
+    //   }
+    // })
+    // this.jobLevelService.getListJobTitleByTyping(this.jobTitleTyping);
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
-    this.jobLevelSubs.add(jobLevelListSub).add(jobLevelFormSub).add(jobLevelCountSub).add(jobTitleSub).add(bookMarkNotify);
+    this.jobLevelSubs.add(jobLevelListSub).add(jobLevelFormSub).add(jobLevelCountSub).add(bookMarkNotify);
   }
 
   ngOnInit() {
@@ -77,6 +76,9 @@ export class JobLevelComponent implements OnInit, OnDestroy {
   }
 
   getList() {
+    this.pagination.pageNumber = 1;
+    this.jobLevelSearchEntity.skip = 0;
+    this.jobLevelSearchEntity.take = this.pagination.take;
     this.jobLevelService.getList(this.jobLevelSearchEntity);
   }
 
@@ -121,7 +123,7 @@ export class JobLevelComponent implements OnInit, OnDestroy {
   paginationOut(pagination: PaginationModel) {
     this.jobLevelSearchEntity.skip = pagination.skip;
     this.jobLevelSearchEntity.take = pagination.take;
-    this.getList();
+    this.jobLevelService.getList(this.jobLevelSearchEntity);
   }
 
   clearSearch(table: any) {
@@ -138,15 +140,15 @@ export class JobLevelComponent implements OnInit, OnDestroy {
     }
   }
 
-  openjobTitle(id: string) {
-    this.jobTitleSearchEntity = new JobTitleSearchEntity();
-    this.jobTitleSearchEntity.ids.push(id);
-    this.jobLevelService.getListJobTitle(this.jobTitleSearchEntity);
-  }
+  // openjobTitle(id: string) {
+  //   this.jobTitleSearchEntity = new JobTitleSearchEntity();
+  //   this.jobTitleSearchEntity.ids.push(id);
+  //   this.jobLevelService.getListJobTitle(this.jobTitleSearchEntity);
+  // }
 
-  jobTitleSearch(event) {
-    this.jobTitleSearchEntity.code = event;
-    this.jobTitleSearchEntity.name = event;
-    this.jobTitleTyping.next(this.jobTitleSearchEntity);
-  }
+  // jobTitleSearch(event) {
+  //   this.jobTitleSearchEntity.code = event;
+  //   this.jobTitleSearchEntity.name = event;
+  //   this.jobTitleTyping.next(this.jobTitleSearchEntity);
+  // }
 }

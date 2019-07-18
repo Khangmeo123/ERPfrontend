@@ -103,7 +103,7 @@
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="bankCode" />
-                        <app-error
+                        <app-error data-qe-id="dialog-error-code"
                             *ngIf="(bankForm.controls.code?.errors && bankForm.controls.code?.touched) || !!bankForm.controls.error.get('code')?.value"
                             [formGroup]="bankForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
@@ -117,7 +117,7 @@
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="bankName" />
-                        <app-error
+                        <app-error data-qe-id="dialog-error-name"
                             *ngIf="(bankForm.controls.name?.errors && bankForm.controls.name?.touched) || !!bankForm.controls.error.get('name')?.value"
                             [formGroup]="bankForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>

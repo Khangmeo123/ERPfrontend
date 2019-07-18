@@ -25,7 +25,7 @@
   </div>
   <div class="input-text">
     <span>
-      {{indexItem}} / {{ (pagination.totalItems / pagination.take) | ceilMath}}
+      {{pagination.pageNumber}} / {{ (pagination.totalItems / pagination.take) | ceilMath}}
     </span>
   </div>
   <div class="next">

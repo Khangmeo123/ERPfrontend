@@ -18,6 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
     ListboxModule,
     ClickOutsideModule,
     DatePickerModule,
+    FormsModule,
+    ReactiveFormsModule,
     TranslateModule,
   ],
   exports: [

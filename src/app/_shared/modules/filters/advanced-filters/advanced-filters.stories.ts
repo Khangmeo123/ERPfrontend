@@ -70,7 +70,7 @@ class AdvancedFiltersStories {
   }
 
   search() {
-    console.log('Search');
+    console.log(this.filter);
   }
 
   clearFilter() {
