@@ -1,10 +1,10 @@
-import {FilterType} from './FilterType';
-import {Filter} from './Filter';
+import { FilterType } from './FilterType';
+import { Filter } from './Filter';
 
 export class TextFilter extends Filter {
   constructor(textFilter?) {
     super();
-    this.eq = textFilter !== undefined && textFilter.eq !== undefined ? textFilter.eq : null;
+    this.equal = textFilter !== undefined && textFilter.equal !== undefined ? textFilter.equal : null;
     this.ne = textFilter !== undefined && textFilter.ne !== undefined ? textFilter.ne : null;
     this.sw = textFilter !== undefined && textFilter.sw !== undefined ? textFilter.sw : null;
     this.ew = textFilter !== undefined && textFilter.ew !== undefined ? textFilter.ew : null;
@@ -15,7 +15,7 @@ export class TextFilter extends Filter {
   static types: FilterType[] = [
     {
       sign: '=',
-      code: 'eq',
+      code: 'equal',
       languages: {
         en: 'Equals',
         vi: 'Bằng',
@@ -62,7 +62,7 @@ export class TextFilter extends Filter {
       },
     },
   ];
-  eq: string = null;
+  equal: string = null;
   ne: string = null;
   sw: string = null;
   ew: string = null;

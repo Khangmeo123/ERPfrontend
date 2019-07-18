@@ -87,28 +87,23 @@ export class BusinessGroupService {
     return defered;
   }
 
-  delete(businessGroupId: string, businessGroupSearchEntity: BusinessGroupSearchEntity) {
-    this.businessGroupRepository.delete(businessGroupId).subscribe(res => {
-      if (res) {
-        this.getList(businessGroupSearchEntity);
-        this.toastrService.success('Cập nhật thành công !');
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
+  delete(businessGroupEntity: any, businessGroupSearchEntity: BusinessGroupSearchEntity): Promise<boolean> {
+    const defered = new Promise<boolean>((resolve, reject) => {
+      this.businessGroupRepository.delete(businessGroupEntity).subscribe(res => {
+        if (res) {
+          this.getList(businessGroupSearchEntity);
+          this.toastrService.success('Cập nhật thành công !');
+          resolve(false);
+        }
+      }, err => {
+        if (err) {
+          this.businessGroupForm.next(this.fb.group(
+            new BusinessGroupForm(err),
+          ));
+          reject(true);
+        }
+      });
     });
+    return defered;
   }
-
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
-  }
-
 }

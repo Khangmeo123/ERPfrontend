@@ -1,68 +1,77 @@
 <div class="page business-group">
   <div class="page-header">
     <span class="page-title">
-      {{'business_group.header.title' | translate}}
-      <span (click)="onClickSaveBookMark($event)">
+      {{ pageTitle | translate}}
+      <span (click)="bookMark($event)">
         <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
       </span>
     </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button class="btn btn-export" (click)="clearSearch(businessGroupSearchEntity)">Clear Search</button>
+      <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
+        {{'general.button.add' | translate}}</button>
+      <button class="btn btn-clear" (click)="clearSearch(table)"
+        data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
   </div>
   <hr>
   <div class="page-body">
     <div class="page-section list">
-      <p-table [value]="businessGroupList">
+      <p-table [value]="businessGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+        [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn>
+            <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
               {{ 'business_group.code' | translate}}
-              <span>
-                <i class="fa fa-angle-down"></i>
-                <i class="fa fa-angle-up"></i>
-              </span>
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn>
+            <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
               {{ 'business_group.name' | translate}}
-              <i class="fa fa-angle-down"></i>
-              <i class="fa fa-angle-up"></i>
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn>
+            <th pResizableColumn [pSortableColumn]="'description'" data-qe-id="table-thead-description">
               {{ 'business_group.description' | translate}}
-              <i class="fa fa-angle-down"></i>
-              <i class="fa fa-angle-up"></i>
+              <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="businessGroupSearchEntity.code" (changeFilter)="getList()">
+              <app-advanced-filters [filter]="businessGroupSearchEntity.code" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-code">
               </app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="businessGroupSearchEntity.name" (changeFilter)="getList()">
+              <app-advanced-filters [filter]="businessGroupSearchEntity.name" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-name">
               </app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="businessGroupSearchEntity.description" (changeFilter)="getList()">
+              <app-advanced-filters [filter]="businessGroupSearchEntity.description" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-description">
               </app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-business_group>
-          <tr (dblclick)="edit(business_group.id)">
-            <td> {{business_group.code}} </td>
-            <td> {{business_group.name}} </td>
-            <td> {{business_group.description}} </td>
+        <ng-template pTemplate="body" let-businessGroup let-index="rowIndex">
+          <tr (dblclick)="edit(businessGroup.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td class="ui-resizable-column"> {{businessGroup.code}} </td>
+            <td class="ui-resizable-column"> {{businessGroup.name}} </td>
+            <td class="ui-resizable-column"> {{businessGroup.description}} </td>
           </tr>
         </ng-template>
       </p-table>
     </div>
     <div class="pagination">
-      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+      </app-pagination>
     </div>
   </div>
 </div>
@@ -76,9 +85,10 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="business_groupid">{{ 'business_group.code' | translate}}<span style="color: red">*</span></label>
+          <label for="businessGroupCode">{{ 'business_group.code' | translate}}<span style="color: red">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" formControlName="code" />
+            <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+              id="businessGroupCode" />
             <app-error
               *ngIf="(businessGroupForm.controls.code?.errors && businessGroupForm.controls.code?.touched) || !!businessGroupForm.controls.error.get('code')?.value"
               [formGroup]="businessGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -88,10 +98,10 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="business_groupname">{{ 'business_group.name' | translate}}<span
-              style="color: red">*</span></label>
+          <label for="businessGroupName">{{ 'business_group.name' | translate}}<span style="color: red">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" formControlName="name" />
+            <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+              id="businessGroupName" />
             <app-error
               *ngIf="(businessGroupForm.controls.name?.errors && businessGroupForm.controls.name?.touched) || !!businessGroupForm.controls.error.get('name')?.value"
               [formGroup]="businessGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
@@ -103,8 +113,9 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label for="business_groupid">{{ 'business_group.description' | translate}}</label>
-          <textarea class="form-control" rows="4" formControlName="description">
+          <label for="businessGroupDescription">{{ 'business_group.description' | translate}}</label>
+          <textarea class="form-control" rows="4" formControlName="description" data-qe-id="dialog-form-description"
+            id="businessGroupDescription">
           </textarea>
         </div>
       </div>
@@ -114,13 +125,13 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="page-actions">
-          <button class="btn btn-cancel"
-            (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
-          <button class="btn btn-save" (click)="save()">
+          <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
             {{ 'general.button.save' | translate}}</button>
+          <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+            (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
           <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-            *ngIf="businessGroupForm.value?.isDeleted" [popoverMessage]="popoverMessage" placement="bottom"
-            (confirm)="delete()">
+            data-qe-id="dialog-button-cancel" *ngIf="businessGroupForm.value?.isDeleted"
+            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
             {{ 'general.button.delete' | translate}}</button>
         </div>
       </div>

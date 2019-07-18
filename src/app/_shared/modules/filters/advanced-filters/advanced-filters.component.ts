@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import { FilterType } from '../../../models/filters/FilterType';
 import { DateFilter } from '../../../models/filters/DateFilter';
 import { TextFilter } from '../../../models/filters/TextFilter';
@@ -14,18 +14,28 @@ import { toggleMenu } from '../../../animations/toggleMenu';
     toggleMenu,
   ],
 })
-export class AdvancedFiltersComponent implements OnInit {
+export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
   @Input() filter;
-  @ViewChild('pane', { static: false }) pane;
-  @ViewChild('toggler', { static: false }) toggler;
+
+  @ViewChild('pane', {static: false}) pane;
+
+  @ViewChild('toggler', {static: false}) toggler;
 
   @Output() changeFilter = new EventEmitter();
-  public typeInput: string = '';
-  public valueInput: any;
+
+  public inputType: string = '';
+
+  public inputValue: any;
+
+  filterValue;
+
   type = null;
+
   dropdownDirection = 'left';
+
   protected types: FilterType[] = [];
+
   protected isOpened = false;
 
   constructor() {
@@ -63,19 +73,24 @@ export class AdvancedFiltersComponent implements OnInit {
     return null;
   }
 
+  ngOnChanges(changes): void {
+    if (changes.filter) {
+      this.filterValue = null;
+    }
+  }
+
   ngOnInit() {
     if (this.isDateFilter) {
-      this.typeInput = 'text';
+      this.inputType = 'text';
       this.types = DateFilter.types;
     } else if (this.isTextFilter) {
-      this.typeInput = 'text';
+      this.inputType = 'text';
       this.types = TextFilter.types;
     } else if (this.isNumberFilter) {
-      this.typeInput = 'number';
+      this.inputType = 'number';
       this.types = NumberFilter.types;
     }
     if (this.type === null) {
-      this.type = this.types[0];
       this.type = this.types[0];
     }
   }
@@ -83,7 +98,7 @@ export class AdvancedFiltersComponent implements OnInit {
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const { left } = this.toggler.nativeElement.getBoundingClientRect();
+    const {left} = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -91,9 +106,7 @@ export class AdvancedFiltersComponent implements OnInit {
     }
   }
 
-  beforeCloseList() {
-
-  }
+  beforeCloseList() {}
 
   toggleList() {
     if (!this.isOpened) {
@@ -105,14 +118,14 @@ export class AdvancedFiltersComponent implements OnInit {
   }
 
   onApplyFilter(event) {
-    this.types.forEach(({ code }) => {
+    this.types.forEach(({code}) => {
       if (this.type.code === code) {
         if (event && event.target) {
           this.filter[code] = event.target.value;
-          this.valueInput = event.target.value;
+          this.inputValue = event.target.value;
         } else if (event) {
           this.filter[code] = event;
-          this.valueInput = event;
+          this.inputValue = event;
         }
       } else {
         this.filter[code] = null;
@@ -121,14 +134,14 @@ export class AdvancedFiltersComponent implements OnInit {
     this.changeFilter.emit();
   }
 
-  onSelectType(item) {
-    this.type = this.types.find((type) => type.code === item.value);
+  onSelectType(value) {
+    this.type = this.types.find((type) => type.code === value);
     for (const property in this.filter) {
       if (this.filter.hasOwnProperty(property)) {
         this.filter[property] = null;
       }
     }
-    this.filter[this.type.code] = this.valueInput;
+    this.filter[this.type.code] = this.inputValue;
     this.changeFilter.emit();
     this.toggleList();
   }
@@ -140,8 +153,9 @@ export class AdvancedFiltersComponent implements OnInit {
   }
 
   onInput(event) {
-    if (event.target.value === '') {
-      this.onApplyFilter('');
+    const {value} = event.target;
+    if (value === '') {
+      this.onApplyFilter(value);
     }
   }
 }

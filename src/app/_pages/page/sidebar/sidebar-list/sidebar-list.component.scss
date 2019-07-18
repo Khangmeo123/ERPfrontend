@@ -1,0 +1,58 @@
+//@import "~bootstrap/scss/mixins";
+//@import "~bootstrap/scss/functions";
+//@import "~bootstrap/scss/variables";
+
+li.menu-item {
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+  align-content: center;
+  -ms-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+
+  .pi {
+    color: #3d464d;
+  }
+
+  .icon-placeholder {
+    width: 20px;
+    display: inline-flex;
+  }
+
+  a {
+    .label {
+      line-height: normal;
+    }
+  }
+}
+
+li.divider {
+  display: flex;
+  padding-left: 40px;
+  padding-right: 40px;
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+
+  .divider-content {
+    border: 1px dashed #3d464d;
+    flex-grow: 1;
+  }
+}
+
+li:active,
+li:focus {
+  outline: none;
+}
+
+.pinned-sidebar {
+  .menu-item.menu-item-0 {
+    display: block;
+    visibility: visible;
+
+    .menu-item {
+      display: none;
+      visibility: hidden;
+    }
+  }
+}

@@ -1,102 +1,127 @@
-import { BankEntity } from './../../../../_backend/bank/bank.entity';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router, Routes } from '@angular/router';
 import { BookmarkService } from 'src/app/_services';
-import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
-import { UserService } from 'src/app/_modules/admin/_pages/user/user.service';
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
+import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
+import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { BankService } from './bank.service';
+import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
   styleUrls: ['./bank.component.scss'],
-  providers: [UserService],
+  providers: [BankService],
 })
-export class BankComponent implements OnInit {
-
-  isSaveBookMark: boolean = false;
+export class BankComponent implements OnInit, OnDestroy {
+  pageTitle: string = 'bank.header.title';
   bookMarkId: string;
-  title = 'bank.header.title';
-  filters = {
-    id: new TextFilter(),
-    name: new TextFilter(),
-    des: new TextFilter(),
-  }
+  isBookMark: boolean = false;
+  isShowDialog: boolean = false;
+  pagination: PaginationModel = new PaginationModel();
+  bankSearchEntity: BankSearchEntity = new BankSearchEntity();
+  bankList: BankEntity[];
+  bankForm: FormGroup;
+  bankSubs: Subscription = new Subscription();
+  popoverTitle: string = '';
+  popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+  brands: any[];
 
-  display: boolean = false;
-  pagination = new PaginationModel();
-  public popoverTitle: string = 'Popover title';
-  public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  public confirmClicked: boolean = false;
-  public cancelClicked: boolean = false;
-
-  tmptable = [
-    {
-      id: 1,
-      name: 'Thanh Tùng',
-      des: 'tungpt@duyhung.vn',
-    },
-    {
-      id: 1,
-      name: 'Thanh Tùng',
-      des: 'tungpt@duyhung.vn',
-    },
-    {
-      id: 1,
-      name: 'Thanh Tùng',
-      des: 'tungpt@duyhung.vn',
-    },
-    {
-      id: 1,
-      name: 'Thanh Tùng',
-      des: 'tungpt@duyhung.vn',
-    },
-    {
-      id: 1,
-      name: 'Thanh Tùng',
-      des: 'tungpt@duyhung.vn',
-    }, {
-      id: 1,
-      name: 'Thanh Tùng',
-      des: 'tungpt@duyhung.vn',
-    }
-  ]
-  userForm: FormGroup;
-  userFormSub: Subscription;
-  constructor(public userService: UserService) {
+  constructor(private bankService: BankService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
+    private router: Router) {
+    const bankListSub = this.bankService.bankList.subscribe(res => {
+      if (res) {
+        this.bankList = res;
+      }
+    });
+    const bankFormSub = this.bankService.bankForm.subscribe(res => {
+      if (res) {
+        this.bankForm = res;
+      }
+    });
+    const bankCountSub = this.bankService.bankCount.subscribe(res => {
+      if (res) {
+        this.pagination.totalItems = res;
+      }
+    });
+    const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
+      this.isBookMark = res;
+    });
+    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bankSubs.add(bankListSub).add(bankFormSub).add(bankCountSub).add(bookMarkNotify);
   }
 
   ngOnInit() {
-    this.userFormSub = this.userService.userForm$.subscribe(user => {
-      this.userForm = user;
+    this.bankSearchEntity.skip = this.pagination.skip;
+    this.bankSearchEntity.take = this.pagination.take;
+  }
+
+  ngOnDestroy() {
+    this.bankSubs.unsubscribe();
+  }
+
+  getList() {
+    this.bankService.getList(this.bankSearchEntity);
+  }
+
+  add() {
+    this.bankService.add();
+    this.isShowDialog = true;
+  }
+
+  edit(bankId: string) {
+    this.bankService.edit(bankId);
+    this.isShowDialog = true;
+  }
+
+  delete() {
+    this.bankService.delete(this.bankForm.value, this.bankSearchEntity).then(res => {
+      this.isShowDialog = res;
+    }).catch(err => {
+      this.isShowDialog = err;
     });
   }
 
-
-  onClickSaveBookMark(event) {
-    this.isSaveBookMark = !this.isSaveBookMark;
+  save() {
+    if (!this.bankForm.valid) {
+      this.genaralService.validateAllFormFields(this.bankForm);
+    } else {
+      this.bankService.save(this.bankForm.value, this.bankSearchEntity).then(res => {
+        this.isShowDialog = res;
+      }).catch(err => {
+        this.isShowDialog = err;
+      });
+    }
   }
 
-  paginationOut(event) {
-
+  sort(event: any) {
+    if (event.sortField && event.sortOrder) {
+      this.bankSearchEntity.orderBy = event.sortField;
+      this.bankSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+    }
+    this.getList();
   }
 
-  showDialog() {
-    this.display = true;
+  paginationOut(pagination: PaginationModel) {
+    this.bankSearchEntity.skip = pagination.skip;
+    this.bankSearchEntity.take = pagination.take;
+    this.getList();
   }
 
-  onClickCancel() {
-    this.display = false;
+  clearSearch(table: any) {
+    this.bankSearchEntity = new BankSearchEntity();
+    table.reset();
   }
 
-  onClickSave() {
-
+  bookMark() {
+    this.isBookMark = !this.isBookMark;
+    if (this.isBookMark) {
+      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+    } else {
+      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+    }
   }
-
-  onClickDelete() {
-
-  }
-
 }
