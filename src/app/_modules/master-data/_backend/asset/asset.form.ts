@@ -15,6 +15,6 @@ export class AssetForm extends FormModel {
     statusName = new FormControl('', [requiredField]);
 
     constructor(assetEntity?: AssetEntity) {
-        super(assetEntity);
+        super();
     }
 }

@@ -12,6 +12,6 @@ export class JobLevelForm extends FormModel {
     description = new FormControl();
 
     constructor(jobLevelEntity?: JobLevelEntity) {
-        super(jobLevelEntity);
+        super();
     }
 }

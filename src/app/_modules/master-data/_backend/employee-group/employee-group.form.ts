@@ -4,14 +4,14 @@ import { EmployeeGroupEntity } from './employee-group.entity';
 import { FormModel } from 'src/app/_helpers/form-model';
 
 
-export class EmployeeGroupForm extends FormModel{
+export class EmployeeGroupForm extends FormModel {
 
-    name = new FormControl('',[requiredField]);
-    code = new FormControl('',[requiredField]);
-    
-    description =new FormControl('');
+    name = new FormControl('', [requiredField]);
+    code = new FormControl('', [requiredField]);
+
+    description = new FormControl('');
 
     constructor(employeeGroupEntity?: EmployeeGroupEntity) {
-       super(employeeGroupEntity);
+        super();
     }
 }
