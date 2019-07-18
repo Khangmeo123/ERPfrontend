@@ -21,8 +21,6 @@ export class JobLevelService {
   constructor(private fb: FormBuilder, private jobLevelRepository: JobLevelRepository, private toastrService: ToastrService) {
     this.jobLevelCount = new BehaviorSubject(0);
     this.jobLevelList = new BehaviorSubject([]);
-    const test = new Entities();
-    debugger
     this.jobTitleList = new BehaviorSubject(new Entities());
     this.jobLevelForm = new BehaviorSubject(this.fb.group(
       new JobLevelForm(),
