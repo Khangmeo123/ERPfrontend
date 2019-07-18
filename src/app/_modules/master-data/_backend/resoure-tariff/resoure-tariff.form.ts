@@ -3,10 +3,10 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { ResoureTariffEntity } from 'src/app/_modules/master-data/_backend/resoure-tariff/resoure-tariff.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class ResoureTariffForm extends FormModel{
+export class ResoureTariffForm extends FormModel {
 
-    taxCode = new FormControl('',[requiredField]);
-    taxType = new FormControl('',[requiredField]);
+    taxCode = new FormControl('', [requiredField]);
+    taxType = new FormControl('', [requiredField]);
 
     //don vi tinh
     uomId = new FormControl('');
@@ -16,12 +16,12 @@ export class ResoureTariffForm extends FormModel{
     coaId = new FormControl('');
     coaName = new FormControl('');
 
-    
+
 
     taxRate = new FormControl('');
     description = new FormControl('');
 
     constructor(resoureTariffEntity?: ResoureTariffEntity) {
-        super(resoureTariffEntity);
+        super();
     }
 }

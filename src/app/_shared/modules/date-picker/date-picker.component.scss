@@ -10,7 +10,8 @@
   .input-group-text {
     cursor: pointer;
     height: $input-height;
-    padding: 0 0;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
   }
 
   button.mat-icon-button {

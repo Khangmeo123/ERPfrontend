@@ -3,18 +3,18 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { requiredField, checkLength } from 'src/app/_helpers';
 import { PaymentTermEntity } from './payment-term.entity';
 
-export class PaymentTermForm extends FormModel{
+export class PaymentTermForm extends FormModel {
 
-    name = new FormControl('',[requiredField]);
-    code = new FormControl('',[requiredField]);
+    name = new FormControl('', [requiredField]);
+    code = new FormControl('', [requiredField]);
 
     dueInDate = new FormControl('');
 
-    discountPeriod =  new FormControl('');
+    discountPeriod = new FormControl('');
     discountRate = new FormControl('');
-    
+
 
     constructor(paymentTermEntity?: PaymentTermEntity) {
-        super(paymentTermEntity);
+        super();
     }
 }

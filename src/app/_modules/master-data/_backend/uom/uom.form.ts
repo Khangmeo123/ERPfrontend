@@ -8,6 +8,6 @@ export class UomForm extends FormModel {
     description = new FormControl('');
 
     constructor(uomForm?: UomForm) {
-        super(uomForm);
+        super();
     }
 }

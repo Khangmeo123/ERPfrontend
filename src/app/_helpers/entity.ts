@@ -1,7 +1,7 @@
 export class Entity {
     id: string;
-    isDelete: boolean = true;
-    isEdit: boolean = true;
+    isDeleted: boolean = true;
+    isEdited: boolean = true;
     error: any;
     constructor(entity: any) {
         if (entity !== null && entity !== undefined) {

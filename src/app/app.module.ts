@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { ToastrModule } from 'ngx-toastr';
@@ -11,7 +11,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AppComponent } from './app.component';
 import { PageComponent } from './_pages/page/page.component';
 import { LoginComponent } from './_pages/login/login.component';
-import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { SidebarComponent } from './_pages/page/sidebar/sidebar.component';
@@ -20,10 +20,10 @@ import { FooterComponent } from './_pages/page/footer/footer.component';
 import { SpinnerComponent } from './_shared/components/spinner/spinner.component';
 import { ItemSidebarComponent } from './_pages/page/sidebar/itemsidebar/itemsidebar.component';
 import { MatIconModule } from '@angular/material';
-import {DropdownModule} from 'primeng/dropdown';
-import {PipeModule} from './_shared/pipe/pipe.module';
-import {TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import { DropdownModule } from 'primeng/dropdown';
+import { PipeModule } from './_shared/pipe/pipe.module';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ClickOutsideModule } from 'ng-click-outside';
 
 @NgModule({

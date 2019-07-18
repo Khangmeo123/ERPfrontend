@@ -9,53 +9,56 @@
       </span>
     </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
-      <!-- <div class="btn-group" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-          aria-controls="dropdown-basic">
-          {{'general.button.import' | translate}}<span class="caret"></span>
-        </button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a></li>
-          <li class="divider dropdown-divider"></li>
-          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.download_example' | translate}}</a>
-          </li>
-        </ul>
-      </div>
-      <button class="btn btn-export">{{'general.button.export' | translate}}</button> -->
+      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-export" (click)="clearSearch(businessGroupSearchEntity)">Clear Search</button>
     </div>
   </div>
   <hr>
   <div class="page-body">
     <div class="page-section list">
-      <p-table [value]="tmptable">
+      <p-table [value]="businessGroupList">
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn>
-              {{ 'business_group.id' | translate}}
+              {{ 'business_group.code' | translate}}
+              <span>
+                <i class="fa fa-angle-down"></i>
+                <i class="fa fa-angle-up"></i>
+              </span>
             </th>
-            <th pResizableColumn> {{ 'business_group.name' | translate}} </th>
-            <th pResizableColumn> {{ 'business_group.description' | translate}} </th>
+            <th pResizableColumn>
+              {{ 'business_group.name' | translate}}
+              <i class="fa fa-angle-down"></i>
+              <i class="fa fa-angle-up"></i>
+            </th>
+            <th pResizableColumn>
+              {{ 'business_group.description' | translate}}
+              <i class="fa fa-angle-down"></i>
+              <i class="fa fa-angle-up"></i>
+            </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+              <app-advanced-filters [filter]="businessGroupSearchEntity.code" (changeFilter)="getList()">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+              <app-advanced-filters [filter]="businessGroupSearchEntity.name" (changeFilter)="getList()">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
+              <app-advanced-filters [filter]="businessGroupSearchEntity.description" (changeFilter)="getList()">
+              </app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <!-- <ng-template pTemplate="body" let-business_group>
-          <tr>
-            <td> {{business_group.id}} </td>
+        <ng-template pTemplate="body" let-business_group>
+          <tr (dblclick)="edit(business_group.id)">
+            <td> {{business_group.code}} </td>
             <td> {{business_group.name}} </td>
-            <td> {{business_group.des}} </td>
+            <td> {{business_group.description}} </td>
           </tr>
-        </ng-template> -->
+        </ng-template>
       </p-table>
     </div>
     <div class="pagination">
@@ -64,25 +67,36 @@
   </div>
 </div>
 
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
   [style]="{width: '900px'}">
   <p-header>
     {{ 'business_group.modal.title' | translate}}
   </p-header>
-  <div class="container">
+  <div class="container" [formGroup]="businessGroupForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="business_groupid">{{ 'business_group.id' | translate}}<span style="color: red">*</span></label>
-          <input type="text" class="form-control" />
-
+          <label for="business_groupid">{{ 'business_group.code' | translate}}<span style="color: red">*</span></label>
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="code" />
+            <app-error
+              *ngIf="(businessGroupForm.controls.code?.errors && businessGroupForm.controls.code?.touched) || !!businessGroupForm.controls.error.get('code')?.value"
+              [formGroup]="businessGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="business_groupname">{{ 'business_group.name' | translate}}<span
               style="color: red">*</span></label>
-          <input type="text" class="form-control" />
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="name" />
+            <app-error
+              *ngIf="(businessGroupForm.controls.name?.errors && businessGroupForm.controls.name?.touched) || !!businessGroupForm.controls.error.get('name')?.value"
+              [formGroup]="businessGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
       </div>
     </div>
@@ -90,9 +104,8 @@
       <div class="col-sm-12">
         <div class="form-group">
           <label for="business_groupid">{{ 'business_group.description' | translate}}</label>
-          <textarea class="form-control" rows="4">
-                            At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-                     </textarea>
+          <textarea class="form-control" rows="4" formControlName="description">
+          </textarea>
         </div>
       </div>
     </div>
@@ -101,12 +114,13 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="page-actions">
-          <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-          <button class="btn btn-save" (click)="onClickSave()">
+          <button class="btn btn-cancel"
+            (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
+          <button class="btn btn-save" (click)="save()">
             {{ 'general.button.save' | translate}}</button>
           <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-            (cancel)="cancelClicked = true" (click)="onClickDelete()">
+            *ngIf="businessGroupForm.value?.isDeleted" [popoverMessage]="popoverMessage" placement="bottom"
+            (confirm)="delete()">
             {{ 'general.button.delete' | translate}}</button>
         </div>
       </div>

@@ -10,6 +10,6 @@ export class BankForm extends FormModel {
     description = new FormControl('', [checkLength(1, 1000)]);
 
     constructor(bankEntity?: BankEntity) {
-        super(bankEntity);
+        super();
     }
 }

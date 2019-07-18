@@ -64,16 +64,16 @@ storiesOf('Advanced Filters', module)
           </tr>
           <tr>
             <th>
-              <app-advanced-filters [filter]="filter.id"></app-advanced-filters>
+              <app-advanced-filters [filter]="filter.id" (changeFilter)="Seach($event)"></app-advanced-filters>
             </th>
             <th>
-              <app-advanced-filters [filter]="filter.name"></app-advanced-filters>
+              <app-advanced-filters [filter]="filter.name" (changeFilter)="Seach($event)"></app-advanced-filters>
             </th>
             <th>
-              <app-advanced-filters [filter]="filter.email"></app-advanced-filters>
+              <app-advanced-filters [filter]="filter.email" (changeFilter)="Seach($event)"></app-advanced-filters>
             </th>
             <th>
-              <app-advanced-filters [filter]="filter.birthday"></app-advanced-filters>
+              <app-advanced-filters [filter]="filter.birthday" (changeFilter)="Seach($event)"></app-advanced-filters>
             </th>
           </tr>
       </ng-template>
@@ -96,7 +96,7 @@ storiesOf('Advanced Filters', module)
         birthday: new DateFilter(),
       },
       Seach: (event) => {
-        console.log(event)
-      }
+        console.log(event);
+      },
     },
   }));
