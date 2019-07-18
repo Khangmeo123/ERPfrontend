@@ -3,22 +3,22 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { BankAccountEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class SobForm extends FormModel{
-    coaId = new FormControl('',[requiredField]);
-    coaCode = new FormControl('',[requiredField]);
-    coaName = new FormControl('',[requiredField]);
+export class SobForm extends FormModel {
+    coaId = new FormControl('', [requiredField]);
+    coaCode = new FormControl('', [requiredField]);
+    coaName = new FormControl('', [requiredField]);
 
-    bankId = new FormControl('',[requiredField]);
-    bankCode = new FormControl('',[requiredField]);
-    bankName = new FormControl('',[requiredField]);
+    bankId = new FormControl('', [requiredField]);
+    bankCode = new FormControl('', [requiredField]);
+    bankName = new FormControl('', [requiredField]);
 
-    accountNumber = new FormControl('',[requiredField]);
+    accountNumber = new FormControl('', [requiredField]);
 
-    accountName = new FormControl('',[requiredField]);
+    accountName = new FormControl('', [requiredField]);
 
     description = new FormControl('');
 
     constructor(bankAccountEntity?: BankAccountEntity) {
-        super(bankAccountEntity);
+        super();
     }
 }

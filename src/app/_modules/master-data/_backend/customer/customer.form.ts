@@ -16,6 +16,6 @@ export class CustomerForm extends FormModel {
     infoContacts = new FormArray([]);
     bankAccounts = new FormArray([]);
     constructor(customerForm?: CustomerForm) {
-        super(customerForm);
+        super();
     }
 }

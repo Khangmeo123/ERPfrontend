@@ -1,12 +1,12 @@
-import {storiesOf} from '@storybook/angular/dist/client/preview';
-import {moduleMetadata} from '@storybook/angular';
-import {CommonModule} from '@angular/common';
-import {DatePickerModule} from './date-picker.module';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MomentDateModule} from '@angular/material-moment-adapter';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {Component} from '@angular/core';
-import {dateField} from '../../../_helpers';
+import { storiesOf } from '@storybook/angular/dist/client/preview';
+import { moduleMetadata } from '@storybook/angular';
+import { CommonModule } from '@angular/common';
+import { DatePickerModule } from './date-picker.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MomentDateModule } from '@angular/material-moment-adapter';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { dateField } from '../../../_helpers';
 
 @Component({
   template: `
@@ -32,9 +32,7 @@ import {dateField} from '../../../_helpers';
 })
 export class TestComponent {
   form = new FormGroup({
-    date: new FormControl(null, [
-      dateField,
-    ]),
+    date: new FormControl(null, dateField),
   });
 
   get date(): FormControl {

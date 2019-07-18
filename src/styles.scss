@@ -102,6 +102,7 @@ body {
 }
 
 .btn.btn-add,
+.btn.btn-clear,
 .btn.btn-import,
 .btn.btn-export,
 .btn.btn-save {
@@ -190,4 +191,18 @@ body {
 .cdk-overlay-container {
   position: fixed !important;
   z-index: 1010 !important; /* set value you need */
+}
+
+.ui-table-scrollable-header, .ui-table-scrollable-footer {
+  overflow: unset!important;
+}
+
+.ui-table-resizable {
+  .ui-table-thead{
+     tr{
+       th {
+        overflow: visible;
+      }
+    }
+  }
 }

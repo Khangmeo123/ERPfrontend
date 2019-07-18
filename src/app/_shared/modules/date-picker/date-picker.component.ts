@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DEFAULT_DATE_FORMAT } from './date-picker.formats';
 import { FormControl } from '@angular/forms';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-date-picker',
@@ -25,7 +26,7 @@ import { FormControl } from '@angular/forms';
     },
   ],
 })
-export class DatePickerComponent implements OnInit {
+export class DatePickerComponent implements OnInit, OnChanges {
   checkCtrl = false;
 
   @Input() control = new FormControl();
@@ -38,31 +39,52 @@ export class DatePickerComponent implements OnInit {
 
   @Output() valueChange = new EventEmitter();
 
-  @ViewChild('matDatepickerToggle', { static: false }) matDatepickerToggle;
+  dateValue = null;
 
   constructor() {
   }
 
+  @Input()
   get value() {
-    return this.control.value;
+    return this.dateValue;
   }
 
-  set value(value) {
-    this.control.setValue(value);
+  set value(data) {
+    if (data) {
+      if (data.value) {
+        this.dateValue = data.value;
+        return;
+      }
+    }
+    this.dateValue = data;
   }
 
-  @Input() validator = () => null;
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes.value) {
+      const {currentValue} = changes.value;
+      if (currentValue === null) {
+        console.log(this.dateValue);
+      }
+    }
+  }
 
   ngOnInit() {
   }
 
-  onMouseDown(toggler) {
-    console.log(toggler._button._elementRef.nativeElement.click());
+  onMouseDown(datePicker) {
+    datePicker.open();
   }
 
   onDateChange(event) {
-    this.value = event.targetElement.value;
-    this.valueChange.emit(this.value);
+    this.onValueChange(event);
+  }
+
+  onDateInput(event) {
+    this.value = event.value;
+  }
+
+  onValueChange(event) {
+    this.valueChange.emit(event);
   }
 
   onKeyUp(event) {
@@ -72,27 +94,35 @@ export class DatePickerComponent implements OnInit {
   }
 
   onKeyDown(event) {
-    const { target } = event;
-    if (event.key === 'Control') {
+    const {target, key} = event;
+    const {value} = target;
+    if (key === 'Control') {
       this.checkCtrl = true;
     }
     if (!this.checkCtrl) {
-      if (event.key.length === 1) {
-        if (target.value.length > 10 || !event.key.match(/[0-9\-\/]/)) {
+      if (key.length === 1) {
+        if (value.length > 10 || !key.match(/[0-9\-\/]/)) {
           event.preventDefault();
           return;
         }
-        if (target.value.length === 2 || target.value.length === 5) {
+        if (value.length === 2 || value.length === 5) {
           event.preventDefault();
           target.value += '/';
           return;
         }
-        if (event.key < '0' || event.key > '9') {
+        if (key < '0' || key > '9') {
           event.preventDefault();
           return;
         }
         return;
       }
+    }
+  }
+
+  onInput(event) {
+    const {value} = event.target;
+    if (value === '') {
+      this.valueChange.emit(value);
     }
   }
 }

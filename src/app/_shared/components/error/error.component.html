@@ -4,7 +4,7 @@
       <ng-container *ngFor="let error of errors">
         {{ error[0] | translate }}
       </ng-container>
-      {{formGroup.controls.error?.get(property).value}}
+      {{formGroup.controls.error?.get(property)?.value}}
     </span>
   </i>
 </div>
