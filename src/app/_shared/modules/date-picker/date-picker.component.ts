@@ -3,7 +3,7 @@ import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/materia
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DEFAULT_DATE_FORMAT } from './date-picker.formats';
 import { FormControl } from '@angular/forms';
-import * as moment from 'moment';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-date-picker',
@@ -13,6 +13,7 @@ import * as moment from 'moment';
   ],
   encapsulation: ViewEncapsulation.None,
   providers: [
+    TranslateService,
     {
       provide: DateAdapter,
       useClass: MomentDateAdapter,
@@ -34,8 +35,6 @@ export class DatePickerComponent implements OnInit, OnChanges {
   @Input() displayToggler = false;
 
   @Input() inputReadOnly = false;
-
-  @Input() placeHolder: string = 'ngày/tháng/năm';
 
   @Output() valueChange = new EventEmitter();
 
@@ -61,7 +60,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
-      const {currentValue} = changes.value;
+      const { currentValue } = changes.value;
       if (currentValue === null) {
         console.log(this.dateValue);
       }
@@ -94,8 +93,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
   }
 
   onKeyDown(event) {
-    const {target, key} = event;
-    const {value} = target;
+    const { target, key } = event;
+    const { value } = target;
     if (key === 'Control') {
       this.checkCtrl = true;
     }
@@ -120,7 +119,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
   }
 
   onInput(event) {
-    const {value} = event.target;
+    const { value } = event.target;
     if (value === '') {
       this.valueChange.emit(value);
     }

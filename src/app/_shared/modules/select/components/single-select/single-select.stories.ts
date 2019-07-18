@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SelectModule} from '../../select.module';
 import {sampleList} from '../../sample/list.sample';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
@@ -37,6 +38,7 @@ storiesOf('Single Select', module)
         CommonModule,
         BrowserAnimationsModule,
         SelectModule,
+        TranslateModule.forRoot(),
       ],
     }),
   )

@@ -18,17 +18,15 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
   @Input() filter;
 
-  @ViewChild('pane', {static: false}) pane;
+  @ViewChild('pane', { static: false }) pane;
 
-  @ViewChild('toggler', {static: false}) toggler;
+  @ViewChild('toggler', { static: false }) toggler;
 
   @Output() changeFilter = new EventEmitter();
 
   public inputType: string = '';
 
   public inputValue: any;
-
-  filterValue;
 
   type = null;
 
@@ -37,6 +35,8 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   protected types: FilterType[] = [];
 
   protected isOpened = false;
+
+  filterValue;
 
   constructor() {
   }
@@ -60,7 +60,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   get filterTypes() {
     return this.types.map((type) => {
       return {
-        label: type.languages.en,
+        label: type.code,
         value: type.code,
       };
     });
@@ -98,7 +98,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const {left} = this.toggler.nativeElement.getBoundingClientRect();
+    const { left } = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -106,7 +106,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     }
   }
 
-  beforeCloseList() {}
+  beforeCloseList() { }
 
   toggleList() {
     if (!this.isOpened) {
@@ -118,7 +118,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   }
 
   onApplyFilter(event) {
-    this.types.forEach(({code}) => {
+    this.types.forEach(({ code }) => {
       if (this.type.code === code) {
         if (event && event.target) {
           this.filter[code] = event.target.value;
@@ -134,8 +134,8 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     this.changeFilter.emit();
   }
 
-  onSelectType(value) {
-    this.type = this.types.find((type) => type.code === value);
+  onSelectType(t: FilterType) {
+    this.type = this.types.find((type) => type.code === t.code);
     for (const property in this.filter) {
       if (this.filter.hasOwnProperty(property)) {
         this.filter[property] = null;
@@ -153,7 +153,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   }
 
   onInput(event) {
-    const {value} = event.target;
+    const { value } = event.target;
     if (value === '') {
       this.onApplyFilter(value);
     }

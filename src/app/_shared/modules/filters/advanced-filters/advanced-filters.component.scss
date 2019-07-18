@@ -81,6 +81,7 @@
   .filter-pane {
     left: 0;
     right: auto;
+    position: relative;
   }
 
   .filter-pane.right {
@@ -90,12 +91,20 @@
 
 
   .select-list {
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    display: flex;
+
     .dropdown-menu {
-      margin-top: -6px;
-      margin-left: 4px;
+      margin-top: 0;
+      left: 0.25rem;
+      right: 0.25rem;
       display: block !important;
-      position: absolute;
-      width: 97%;
+      flex-grow: 1;
       -webkit-border-radius: 0;
       -moz-border-radius: 0;
       border-radius: 0;

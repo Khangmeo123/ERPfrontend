@@ -1,6 +1,8 @@
 <div class="pagination container">
   <div class="show-entries">
-    <span>Show</span>
+    <span>
+      {{'pagination.show' | translate}}
+    </span>
     <span class="select-page">
       <select class="form-control" [(ngModel)]="pagination.take" #pageSize (change)="onSelectPageSize(pageSize.value)">
         <option selected value="10">10</option>
@@ -10,7 +12,7 @@
       </select>
     </span>
     <span style="margin-right: 15px">
-      entries
+      {{'pagination.entries' | translate}}
     </span>
   </div>
   <div class="previous">

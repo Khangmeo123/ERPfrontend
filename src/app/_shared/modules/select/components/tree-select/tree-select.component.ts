@@ -15,6 +15,8 @@ import {addItemToArray, removeItemByIndex} from '../../../../../_helpers/array.h
 })
 export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
 
+  @Input() selectedSuffix = 'selected';
+
   get selection() {
     if (this.isSingle) {
       if (this.selectedNodes.length) {
@@ -59,7 +61,7 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
         return selectedNodes[0][key];
       }
     }
-    return `${selectedNodes.length} selected`;
+    return `${selectedNodes.length} ${this.selectedSuffix}`;
   }
 
   get listState() {

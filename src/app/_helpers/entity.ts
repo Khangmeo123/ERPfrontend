@@ -21,3 +21,11 @@ export class Entity {
     }
 
 }
+
+export class Entities {
+    ids: any[] = [];
+    exceptIds: any[] = [];
+    constructor() {
+
+    }
+}

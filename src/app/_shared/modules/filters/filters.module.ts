@@ -6,6 +6,7 @@ import { ListboxModule } from 'primeng/listbox';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { DatePickerModule } from '../date-picker/date-picker.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [
@@ -17,8 +18,7 @@ import { DatePickerModule } from '../date-picker/date-picker.module';
     ListboxModule,
     ClickOutsideModule,
     DatePickerModule,
-    FormsModule,
-    ReactiveFormsModule,
+    TranslateModule,
   ],
   exports: [
     AdvancedFiltersComponent,

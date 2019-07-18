@@ -10,6 +10,7 @@ import { FiltersModule } from '../filters.module';
 import { TextFilter } from '../../../models/filters/TextFilter';
 import { DateFilter } from '../../../models/filters/DateFilter';
 import { NumberFilter } from '../../../models/filters/NumberFilter';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
@@ -90,6 +91,7 @@ storiesOf('Advanced Filters', module)
         FormsModule,
         ReactiveFormsModule,
         FiltersModule,
+        TranslateModule.forRoot(),
       ],
     }),
   )

@@ -1,5 +1,6 @@
 export class SearchEntity {
     id: string;
+    ids: string[] = [];
     skip: number;
     take: number;
     orderBy: string;

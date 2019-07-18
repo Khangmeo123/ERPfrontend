@@ -43,6 +43,14 @@ export const sampleSidebarMenu = [
         route: '/master-data/business-group/currency',
       },
       {
+        label: 'Chức vụ công việc',
+        route: '/master-data/business-group/job-title',
+      },
+      {
+        label: 'Cấp bậc công việc',
+        route: '/master-data/business-group/job-level',
+      },
+      {
         divider: true,
       },
       {
