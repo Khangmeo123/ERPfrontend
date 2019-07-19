@@ -4,7 +4,7 @@
                    (closeList)="closeList($event)"
                    (toggleList)="toggleList($event)"
                    (headClick)="toggleList($event)"></app-select-head>
-  <app-select-body [@toggleMenu]="listState">
+  <app-select-body [@toggleMenu]="listState" *ngIf="isOpened">
     <app-select-search (search)="search.emit($event)"></app-select-search>
     <ng-template [ngIf]="selectedList.length">
       <div class="py-2 pl-4 d-flex align-items-center border-bottom">
