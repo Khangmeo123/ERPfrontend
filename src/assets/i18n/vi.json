@@ -840,17 +840,17 @@
 	},
 	"sob": {
 		"add": "Thêm bộ sổ",
-		"chart_account": "",
+		"chart_account": "Hệ thống TKKT",
 		"code": "Mã bộ sổ",
 		"currency": "Đơn vị tiền tệ",
-		"enviroment_tax": "",
-		"export_tax": "",
-		"import_tax": "",
+		"enviroment_tax": "Biểu thuế môi trường",
+		"export_tax": "Biểu thuế xuất khẩu",
+		"import_tax": "Biểu thuế nhập khẩu",
 		"name": "Tên bộ sổ",
-		"resource_tax": "",
-		"special_consumption_tax": "",
+		"resource_tax": "Biểu thuế tài nguyên",
+		"special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
 		"title": "Danh sách bộ sổ",
-		"value_added_tax": ""
+		"value_added_tax": "Biểu thuế GTGT"
 	},
 	"special_consumption_tax": {
 		"header": {
