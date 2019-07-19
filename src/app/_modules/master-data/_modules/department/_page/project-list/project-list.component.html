@@ -1,7 +1,7 @@
 <div class="page">
   <div class="page-header">
     <div class="page-title">
-      {{'project.title' | translate}}
+      {{'department.project.title' | translate}}
     </div>
     <div class="page-actions">
       <button class="btn btn-add" (click)="toggleModal()">
@@ -14,11 +14,11 @@
       <p-table resizableColumns [value]="[]">
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn> {{'project.code' | translate}} </th>
-            <th pResizableColumn> {{'project.name' | translate}} </th>
-            <th pResizableColumn> {{'project.manager' | translate}} </th>
-            <th pResizableColumn> {{'project.startDate' | translate}} </th>
-            <th pResizableColumn> {{'project.endDate' | translate}} </th>
+            <th pResizableColumn> {{'department.project.code' | translate}} </th>
+            <th pResizableColumn> {{'department.project.name' | translate}} </th>
+            <th pResizableColumn> {{'department.project.manager' | translate}} </th>
+            <th pResizableColumn> {{'department.project.startDate' | translate}} </th>
+            <th pResizableColumn> {{'department.project.endDate' | translate}} </th>
           </tr>
           <tr>
             <th>
@@ -53,21 +53,21 @@
 </div>
 <p-dialog [modal]="true" appendTo="body" [(visible)]="modal">
   <p-header>
-    {{'project.add' | translate}}
+    {{'department.project.add' | translate}}
   </p-header>
   <div class="container">
     <div class="row">
       <div class="form-group col">
         <label>
-          {{'project.code' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.project.code' | translate}}
+          <span class="text-danger ml-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col">
         <label>
-          {{'project.name' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.project.name' | translate}}
+          <span class="text-danger ml-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
@@ -75,14 +75,14 @@
     <div class="row">
       <div class="form-group col">
         <label>
-          {{'project.manager' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.project.manager' | translate}}
+          <span class="text-danger ml-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col">
         <label>
-          {{'project.description' | translate}}
+          {{'department.project.description' | translate}}
         </label>
         <textarea class="form-control" rows="1"></textarea>
       </div>
@@ -90,13 +90,13 @@
     <div class="row">
       <div class="form-group col">
         <label>
-          {{'project.startDate' | translate}}
+          {{'department.project.startDate' | translate}}
         </label>
         <app-date-picker></app-date-picker>
       </div>
       <div class="form-group col">
         <label>
-          {{'project.endDate' | translate}}
+          {{'department.project.endDate' | translate}}
         </label>
         <app-date-picker></app-date-picker>
       </div>

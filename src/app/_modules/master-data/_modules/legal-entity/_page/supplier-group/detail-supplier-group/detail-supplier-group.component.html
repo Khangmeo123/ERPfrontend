@@ -34,7 +34,7 @@
             <div class="form-group col">
               <label for="supplier_code">
                 {{'detailSupplierGroup.code' | translate}}
-                <span class="text-danger ml-1"> (*) </span>
+                <span class="text-danger ml-1"> * </span>
               </label>
               <input type="text" class="form-control" id="supplier_code">
               <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
@@ -44,7 +44,7 @@
             <div class="form-group col">
               <label for="supplier_name">
                 {{'detailSupplierGroup.name' | translate}}
-                <span class="text-danger ml-1"> (*) </span>
+                <span class="text-danger ml-1"> * </span>
               </label>
               <input type="text" class="form-control" id="supplier_name">
             </div>
@@ -203,21 +203,21 @@
       <div class="form-group col-6">
         <label>
           {{'detailSupplierGroup.bank_account.bank_name' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <app-single-select></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'detailSupplierGroup.bank_account.account_owner' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
           {{'detailSupplierGroup.bank_account.account_number' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
@@ -273,14 +273,14 @@
       <div class="form-group col-6">
         <label>
           {{'detailSupplierGroup.contacts.recipient' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
           {{'detailSupplierGroup.contacts.phone_number' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>

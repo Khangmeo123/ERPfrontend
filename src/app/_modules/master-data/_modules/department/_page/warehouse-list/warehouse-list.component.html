@@ -1,7 +1,7 @@
 <div class="page">
   <div class="page-header">
     <div class="page-title">
-      {{'warehouse.title' | translate}}
+      {{'department.warehouse.title' | translate}}
     </div>
     <div class="page-actions">
       <button class="btn btn-add" (click)="toggleModal()">
@@ -14,8 +14,9 @@
       <p-table resizableColumns [value]="[]">
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn> {{'warehouse.code' | translate}} </th>
-            <th pResizableColumn> {{'warehouse.name' | translate}} </th>
+            <th pResizableColumn> {{'department.warehouse.code' | translate}} </th>
+            <th pResizableColumn> {{'department.warehouse.name' | translate}} </th>
+            <th pResizableColumn> {{'department.warehouse.address' | translate}} </th>
           </tr>
           <tr>
             <th>
@@ -24,6 +25,10 @@
             <th>
               <app-advanced-filters></app-advanced-filters>
             </th>
+            <th>
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-warehouse>
@@ -38,21 +43,29 @@
 </div>
 <p-dialog [modal]="true" appendTo="body" [(visible)]="modal">
   <p-header>
-    {{'warehouse.add' | translate}}
+    {{'department.warehouse.add' | translate}}
   </p-header>
   <div class="container">
     <div class="row">
       <div class="form-group col">
         <label>
-          {{'warehouse.code' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.warehouse.code' | translate}}
+          <span class="text-danger ml-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col">
         <label>
-          {{'warehouse.name' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.warehouse.name' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label>
+          {{'department.warehouse.address' | translate}}
         </label>
         <input type="text" class="form-control">
       </div>

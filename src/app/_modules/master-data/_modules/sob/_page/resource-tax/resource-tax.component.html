@@ -1,7 +1,7 @@
-<div class="page resource-tariff">
+<div class="page resource-tax">
     <div class="page-header">
         <span class="page-title">
-            {{'resource.header.title' | translate}}
+            {{'resource_tax.header.title' | translate}}
             <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -41,19 +41,22 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>
-                            {{'resource.code' | translate}}
+                            {{'tax.code' | translate}}
                         </th>
                         <th>
-                            {{'resource.name' | translate}}
+                            {{'tax.name' | translate}}
                         </th>
                         <th>
-                            {{'resource.unit' | translate}}
+                            {{'tax.unit' | translate}}
                         </th>
                         <th>
-                            {{'resource.percent' | translate}}
+                            {{'tax.discount' | translate}}
                         </th>
                         <th>
-                            {{'resource.description' | translate}}
+                            {{'tax.description' | translate}}
+                        </th>
+                        <th>
+                            {{'tax.disable' | translate}}
                         </th>
 
                     </tr>
@@ -73,22 +76,24 @@
                         <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
+                        <th class="th-filter">
+                        </th>
 
                     </tr>
                 </ng-template>
                 <!-- <ng-template pTemplate="body"
-                             let-resource>
+                             let-tax>
                     <tr>
                         <td pEditableColumn>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
                                     <input type="text"
                                            class="form-control"
-                                           [(ngModel)]="resource.code"
+                                           [(ngModel)]="tax.code"
                                            required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{resource.code}}
+                                    {{tax.code}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
@@ -97,21 +102,21 @@
                                 <ng-template pTemplate="input">
                                     <input type="text"
                                            class="form-control"
-                                           [(ngModel)]="resource.type"
+                                           [(ngModel)]="tax.type"
                                            required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{ resource.type } }
+                                    {{ tax.type } }
                             </ng-template>
                           </p-cellEditor>
                         </td>
                         <td pEditableColumn>
                           <p-cellEditor>
                             <ng-template pTemplate="input">
-                              <input type="text" class="form-control" [(ngModel)]="tarresourceiff.unit" required>
+                              <input type="text" class="form-control" [(ngModel)]="tartaxiff.unit" required>
                             </ng-template>
                             <ng-template pTemplate="output">
-                              {{resource.unit}}
+                              {{tax.unit}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
@@ -120,11 +125,11 @@
                                 <ng-template pTemplate="input">
                                     <input type="text"
                                            class="form-control"
-                                           [(ngModel)]="tariff.percent"
+                                           [(ngModel)]="tariff.discount"
                                            required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{tariff.percent}}
+                                    {{tariff.discount}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
@@ -158,22 +163,22 @@
 <p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="visible" appendTo="body" [style]="{width: '900px'}"
     modal="true">
     <p-header>
-        {{'resource.modal.title' | translate}}
+        {{'resource_tax.modal.title' | translate}}
     </p-header>
     <form class="container">
         <div class="row">
             <div class="col-6">
                 <div class="mt-4 mb-4">
                     <label>
-                        {{'resource.code' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
+                        {{'tax.code' | translate}}
+                        <span class="text-danger mr-2">*</span>
                     </label>
                     <input class="form-control" type="text" placeholder="10100">
                 </div>
 
                 <div class="mb-4">
                     <label>
-                        {{'resource.unit' | translate}}
+                        {{'tax.unit' | translate}}
 
                     </label>
                     <app-single-select></app-single-select>
@@ -181,7 +186,7 @@
 
                 <div class="mb-4">
                     <label>
-                        {{'resource.percent' | translate}}
+                        {{'tax.discount' | translate}}
                     </label>
                     <input class="form-control" type="text" placeholder="70">
                 </div>
@@ -190,14 +195,14 @@
             <div class="col-6">
                 <div class="mt-4 mb-4">
                     <label>
-                        {{'resource.name' | translate}}
+                        {{'tax.name' | translate}}
                     </label>
                     <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga">
                 </div>
 
                 <div class=" mb-4">
                     <label>
-                        {{'resource.account.total' | translate}}
+                        {{'tax.parent_account' | translate}}
                     </label>
 
                     <app-single-select></app-single-select>
@@ -205,7 +210,7 @@
 
                 <div class=" mb-4">
                     <label>
-                        {{'resource.description' | translate}}
+                        {{'tax.description' | translate}}
                     </label>
                     <input class="form-control" type="text-area" placeholder="any description">
                 </div>

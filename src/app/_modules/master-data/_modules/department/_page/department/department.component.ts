@@ -15,19 +15,19 @@ export class DepartmentComponent implements OnInit {
 
   routes = [
     {
-      key: 'department.employee.title',
+      key: 'Nhân sự',
       route: '/master-data/department/employee',
     },
     {
-      key: 'department.asset.title',
+      key: 'Tài sản',
       route: '/master-data/department/asset',
     },
     {
-      key: 'department.warehouse.title',
-      route: '/master-data/department/warehouse',
+      key: 'Kho bãi',
+      route: '/master-data/department/warehouse-group',
     },
     {
-      key: 'department.project.title',
+      key: 'Dự án',
       route: '/master-data/department/project',
     },
   ];

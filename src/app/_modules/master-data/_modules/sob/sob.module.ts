@@ -7,9 +7,8 @@ import { BankAccountComponent } from './_page/bank-account/bank-account.componen
 import { CoaComponent } from './_page/coa/coa.component';
 import { AccountantPeriodComponent } from './_page/accountant-period/accountant-period.component';
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
-import { ExciseTariffComponent } from './_page/excise-tariff/excise-tariff.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
-import { ResourceTariffComponent } from './_page/resource-tariff/resource-tariff.component';
+import { ResourceTaxComponent } from './_page/resource-tax/resource-tax.component';
 import { VoucherComponent } from './_page/voucher/voucher.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
@@ -41,11 +40,10 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     CoaComponent,
     AccountantPeriodComponent,
     CostCenterComponent,
-    ExciseTariffComponent,
     FiscalYearComponent,
     PaymentMethodComponent,
     PaymentTermComponent,
-    ResourceTariffComponent,
+    ResourceTaxComponent,
     VoucherComponent,
     ValueAddedTaxComponent,
     EnvironmentTaxComponent,

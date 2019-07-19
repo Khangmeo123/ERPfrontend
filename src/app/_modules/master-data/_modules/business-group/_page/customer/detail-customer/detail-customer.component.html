@@ -28,7 +28,7 @@
               <div class="form-group col">
                 <label for="customer_code">
                   {{'customer.code' | translate}}
-                  <span class="text-danger ml-1"> (*) </span>
+                  <span class="text-danger ml-1"> * </span>
                 </label>
                 <input type="text" class="form-control" id="customer_code">
                 <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
@@ -38,7 +38,7 @@
               <div class="form-group col">
                 <label for="customer_name">
                   {{'customer.name' | translate}}
-                  <span class="text-danger ml-1"> (*) </span>
+                  <span class="text-danger ml-1"> * </span>
                 </label>
                 <input type="text" class="form-control" id="customer_name">
               </div>
@@ -171,21 +171,21 @@
       <div class="form-group col-6">
         <label>
           {{'customer.bank_account.bank_name' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <app-single-select></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'customer.bank_account.account_owner' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
           {{'customer.bank_account.account_number' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
@@ -241,14 +241,14 @@
       <div class="form-group col-6">
         <label>
           {{'customer.contacts.recipient' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
           {{'customer.contacts.phone_number' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>

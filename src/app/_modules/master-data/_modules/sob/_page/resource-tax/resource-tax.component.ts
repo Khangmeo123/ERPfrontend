@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-resource-tariff',
-  templateUrl: './resource-tariff.component.html',
-  styleUrls: ['./resource-tariff.component.scss']
+  selector: 'app-resource-tax',
+  templateUrl: './resource-tax.component.html',
+  styleUrls: ['./resource-tax.component.scss']
 })
-export class ResourceTariffComponent implements OnInit {
+export class ResourceTaxComponent implements OnInit {
   visible = false;
   constructor() { }
 

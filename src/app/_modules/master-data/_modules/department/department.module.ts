@@ -19,6 +19,13 @@ import { EmployeeListComponent } from './_page/employee-list/employee-list.compo
 import { AssetListComponent } from './_page/asset-list/asset-list.component';
 import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
 import { ProjectListComponent } from './_page/project-list/project-list.component';
+import { DetailEmployeeComponent } from './_page/employee-list/detail-employee/detail-employee.component';
+import { DepartmentRootComponent } from './_page/department-root/department-root.component';
+import { RadioButtonModule } from 'primeng/radiobutton';
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { BsDropdownModule, AccordionModule } from 'ngx-bootstrap';
+import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
+import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 
 
 @NgModule({
@@ -33,6 +40,9 @@ import { ProjectListComponent } from './_page/project-list/project-list.componen
     AssetListComponent,
     WarehouseListComponent,
     ProjectListComponent,
+    DetailEmployeeComponent,
+    DepartmentRootComponent,
+    WarehouseGroupComponent,
   ],
   imports: [
     CommonModule,
@@ -44,6 +54,11 @@ import { ProjectListComponent } from './_page/project-list/project-list.componen
     FiltersModule,
     DialogModule,
     DatePickerModule,
+    RadioButtonModule,
+    ConfirmationPopoverModule.forRoot(),
+    BsDropdownModule.forRoot(),
+    AccordionModule.forRoot(),
+    PaginationModule,
   ],
 })
 export class DepartmentModule {

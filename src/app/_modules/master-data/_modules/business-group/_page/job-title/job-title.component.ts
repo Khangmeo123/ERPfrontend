@@ -8,6 +8,7 @@ import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
 import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
+import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 
 @Component({
   selector: 'app-job-title',
@@ -16,7 +17,7 @@ import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/
   providers: [JobTitleService],
 })
 export class JobTitleComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'jobTitle.header.title';
+  pageTitle = _('jobTitle.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;

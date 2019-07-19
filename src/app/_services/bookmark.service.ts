@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 export class BookMark {
   id?: string;
   route: string;
-  name: string;
+  name: any;
 
   constructor(bookmark: any) {
     if (bookmark !== null && bookmark !== undefined) {

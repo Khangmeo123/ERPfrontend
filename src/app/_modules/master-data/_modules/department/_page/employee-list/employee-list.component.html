@@ -17,7 +17,7 @@
   </div>
   <div class="page-body mt-4">
     <div class="page-section">
-      <p-table resizableColumns [value]="[]">
+      <p-table resizableColumns [value]="tmptable">
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn> {{'department.employee.code' | translate}} </th>
@@ -35,11 +35,11 @@
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-employee>
-          <tr>
+          <tr (dblclick) = "onClickViewDetail()">
             <td>{{employee.code}}</td>
             <td>{{employee.name}}</td>
             <td>
-              <a role="button">{{'general.button.delete' | translate}}</a>
+              <a href="javascript:void(0)">{{'general.button.delete' | translate}}</a>
             </td>
           </tr>
         </ng-template>

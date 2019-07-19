@@ -67,23 +67,23 @@
     </div>
   </div>
 </div>
-<p-dialog [modal]="true" appendTo="body" [(visible)]="modal">
+<p-dialog [modal]="true" [contentStyle]="{'overflow':'visible'}" appendTo="body" [(visible)]="modal" [style]="{width: '700px'}">
   <p-header>
-    {{'asset.add' | translate}}
+    {{'department.asset.add' | translate}}
   </p-header>
   <div class="container">
     <div class="row">
       <div class="form-group col">
         <label>
-          {{'asset.code' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.asset.code' | translate}} 
+          <span class="text-danger ml-2">*</span>
         </label>
         <input type="text" class="form-control" disabled readonly>
       </div>
       <div class="form-group col">
         <label>
-          {{'asset.name' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.asset.name' | translate}}
+          <span class="text-danger ml-2">*</span>
         </label>
         <input type="text" class="form-control" disabled readonly>
       </div>
@@ -91,14 +91,14 @@
     <div class="row">
       <div class="form-group col">
         <label>
-          {{'asset.type' | translate}}
-          <span class="text-danger ml-2">(*)</span>
+          {{'department.asset.type' | translate}}
+          <span class="text-danger ml-2">*</span>
         </label>
         <input type="text" class="form-control" disabled readonly>
       </div>
       <div class="form-group col">
         <label>
-          {{'asset.manager' | translate}}
+          {{'department.asset.manager' | translate}}
         </label>
         <app-single-select></app-single-select>
       </div>
@@ -106,13 +106,13 @@
     <div class="row">
       <div class="form-group col">
         <label>
-          {{'asset.code' | translate}}
+          {{'department.asset.fromDate' | translate}}
         </label>
         <app-date-picker></app-date-picker>
       </div>
       <div class="form-group col">
         <label>
-          {{'asset.name' | translate}}
+          {{'department.asset.toDate' | translate}}
         </label>
         <app-date-picker></app-date-picker>
       </div>

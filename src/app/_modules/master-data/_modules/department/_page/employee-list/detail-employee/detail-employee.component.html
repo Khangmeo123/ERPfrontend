@@ -13,6 +13,7 @@
                 {{ 'general.button.delete' | translate}}</button>
         </div>
     </div>
+    <hr>
     <div class="page-body">
         <accordion>
             <accordion-group [isOpen]="true">
@@ -247,6 +248,41 @@
 
             </accordion-group>
 
+            <accordion-group>
+                    <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'detailEmployeeGroup.own_asset.title' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+    
+                    <div class="mt-2">
+    
+                        <p-table [value]="[]">
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th>
+                                        {{'detailEmployeeGroup.own_asset.code' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'detailEmployeeGroup.own_asset.name' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'detailEmployeeGroup.own_asset.type' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'detailEmployeeGroup.own_asset.from_date' | translate}}
+                                    </th>
+                                    <th>
+                                        {{'detailEmployeeGroup.own_asset.to_date' | translate}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+    
+                </accordion-group>
+
         </accordion>
     </div>
 
@@ -312,3 +348,4 @@
         </ng-template>
     </p-footer>
 </p-dialog>
+

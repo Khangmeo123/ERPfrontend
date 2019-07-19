@@ -31,12 +31,15 @@
     <hr>
 
     <div class="page-body">
+        <div class="row">
             <div class="page-section mt-2 d-flex">
                 <span class="sob-label flex-shrink-1">
-                    {{'general.legal' | translate}}
+                    {{'general.legal_entity.name' | translate}}
                 </span>
                 <app-single-select></app-single-select>
             </div>
+        </div>
+
         <div class="page-selection list">
             <p-table>
                 <ng-template pTemplate="header">
@@ -44,7 +47,7 @@
                         <th pResizableColumn> {{ 'division.code' | translate}}</th>
                         <th pResizableColumn> {{ 'division.name' | translate}} </th>
                         <th pResizableColumn> {{ 'division.address' | translate}} </th>
-                       
+
                     </tr>
                     <tr>
                         <th class="th-filter">
@@ -56,7 +59,7 @@
                         <th class="th-filter">
                             <app-advanced-filters [filter]="filters.address"></app-advanced-filters>
                         </th>
-                      
+
                     </tr>
                 </ng-template>
                 <!-- <ng-template pTemplate="body" let-list_supplier_of_legal_entity>
@@ -71,8 +74,8 @@
                 </ng-template> -->
             </p-table>
             <div class="pagination">
-                    <app-pagination></app-pagination>
-                </div>
+                <app-pagination></app-pagination>
+            </div>
         </div>
     </div>
 </div>
@@ -81,52 +84,50 @@
 
 
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
-        [style]="{width: '500px'}">
-        <p-header>
-            {{ 'division.modal.title' | translate}}
-        </p-header>
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="bankid">{{ 'division.tab.code' | translate}}<span
-                                style="color: red">*</span></label>
-                        <input type="text" class="form-control" />
-                    </div>
-                </div>
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <label for="bankid">{{ 'division.tab.name' | translate}}<span
-                                style="color: red">*</span></label>
-                        <input type="text" class="form-control" />
-                    </div>
+    [style]="{width: '500px'}">
+    <p-header>
+        {{ 'division.modal.title' | translate}}
+    </p-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="bankid">{{ 'division.tab.code' | translate}}<span class="text-danger ml-2">*</span></label>
+                    <input type="text" class="form-control" />
                 </div>
             </div>
-            <div class="row">
-    
-                <div class="col-sm-12">
-                    <div class="form-group">
-                        <label for="bankname">{{ 'division.tab.address' | translate}}</label>
-                        <input type="text" class="form-control" />
-                    </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="bankid">{{ 'division.tab.name' | translate}}<span class="text-danger ml-2">*</span></label>
+                    <input type="text" class="form-control" />
                 </div>
             </div>
-    
         </div>
-        <p-footer>
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="page-actions">
-                        <button class="btn btn-cancel"
-                            (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-                        <button class="btn btn-save" (click)="onClickSave()">
-                            {{ 'general.button.save' | translate}}</button>
-                        <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                            (cancel)="cancelClicked = true" (click)="onClickDelete()">
-                            {{ 'general.button.delete' | translate}}</button>
-                    </div>
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label for="bankname">{{ 'division.tab.address' | translate}}</label>
+                    <input type="text" class="form-control" />
                 </div>
             </div>
-        </p-footer>
-    </p-dialog>
+        </div>
+
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                    <button class="btn btn-cancel"
+                        (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                    <button class="btn btn-save" (click)="onClickSave()">
+                        {{ 'general.button.save' | translate}}</button>
+                    <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                        (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                        {{ 'general.button.delete' | translate}}</button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

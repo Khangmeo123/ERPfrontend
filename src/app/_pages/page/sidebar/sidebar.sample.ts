@@ -71,12 +71,12 @@ export const sampleSidebarMenu = [
       {
         label: 'Biểu thuế tiêu thụ đặc biệt',
 
-        route: '/master-data/sob/excise-tariff',
+        route: '/master-data/sob/special-consumption-tax',
       },
       {
         label: 'Biểu thuế tài nguyên',
 
-        route: '/master-data/sob/resource-tariff',
+        route: '/master-data/sob/resource-tax',
       },
       {
         label: 'Biểu thuế giá trị gia tăng',
@@ -112,7 +112,7 @@ export const sampleSidebarMenu = [
       {
         label: 'Kỳ kế toán',
 
-        route: '/master-data/sob/accountant-period',
+        route: '/master-data/sob/accounting-period',
       },
       {
         label: 'Quản lý chứng từ',
@@ -191,7 +191,7 @@ export const sampleSidebarMenu = [
       {
         label: 'Quản lý phòng ban',
         route: '/master-data/department',
-        exact: true,
+        exact: false,
       },
     ],
   },
