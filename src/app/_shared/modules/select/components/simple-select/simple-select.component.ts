@@ -76,7 +76,7 @@ export class SimpleSelectComponent implements OnInit, ISelect {
     const {data} = event;
     this.selectedItem = data;
     this.selectionChange.emit(this.valueSelector(data));
-    this.isOpened = true;
+    this.isOpened = false;
   }
 
   onUnselect(event) {
