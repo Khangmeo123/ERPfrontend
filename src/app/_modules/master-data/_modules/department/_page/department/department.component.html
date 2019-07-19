@@ -1,1 +1,52 @@
-<p>department works!</p>
+<div class="page departments">
+  <div class="page-header">
+    <span class="page-title">
+      {{'departments.title' | translate}}
+      <span role="button" (click)="onClickSaveBookMark($event)">
+          <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+              star
+          </mat-icon>
+      </span>
+    </span>
+    <div class="page-actions">
+      <button class="btn btn-add">
+        {{'general.button.add' | translate}}
+      </button>
+      <button class="btn btn-import">
+        {{'general.button.import' | translate}}
+      </button>
+      <button class="btn btn-export">
+        {{'general.button.export' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="page-body mt-2">
+    <div class="page-section row mt-2">
+      <div class="col-6 d-flex align-items-center">
+          <span class="sob-label flex-shrink-1">
+              {{'general.legal_entity.name' | translate}}
+          </span>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="col-6 d-flex align-items-center">
+          <span class="sob-label flex-shrink-1">
+              {{'general.sob.name' | translate}}
+          </span>
+        <app-single-select></app-single-select>
+      </div>
+    </div>
+    <div class="page-section mt-4">
+      <div class="tabs d-flex">
+        <div class="tab-button" *ngFor="let item of routes" role="link" [routerLink]="item.route"
+             routerLinkActive="active">
+          {{item.key | translate}}
+        </div>
+      </div>
+    </div>
+    <div class="page-section mt-4">
+      <div class="tab-pane">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>
+</div>

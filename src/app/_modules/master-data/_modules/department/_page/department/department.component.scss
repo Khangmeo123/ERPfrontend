@@ -1,0 +1,30 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+.tabs {
+  border: 3px solid $border-color;
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+
+  .tab-button {
+    flex-grow: 1;
+    cursor: pointer;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    justify-content: center;
+    text-align: center;
+    border-right: 3px solid $border-color;
+  }
+
+  .tab-button:hover,
+  .tab-button.active {
+    background: rgb(28, 78, 128);
+    color: #ffffff;
+  }
+
+  .tab-button:last-child {
+    border: 0;
+  }
+}

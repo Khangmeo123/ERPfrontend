@@ -1,0 +1,132 @@
+<div class="page">
+  <div class="page-header">
+    <div class="page-title mr-2">
+      <app-multi-select></app-multi-select>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="toggleModal()">
+        {{'general.button.add' | translate}}
+      </button>
+      <button class="btn btn-import">
+        {{'general.button.import' | translate}}
+      </button>
+      <button class="btn btn-export">
+        {{'general.button.export' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="page-body mt-4">
+    <div class="page-section">
+      <p-table resizableColumns [value]="[]">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn> {{'department.asset.code' | translate}} </th>
+            <th pResizableColumn> {{'department.asset.name' | translate}} </th>
+            <th pResizableColumn> {{'department.asset.type' | translate}} </th>
+            <th pResizableColumn> {{'department.asset.manager' | translate}} </th>
+            <th pResizableColumn> {{'department.asset.fromDate' | translate}} </th>
+            <th pResizableColumn> {{'department.asset.toDate' | translate}} </th>
+            <th pResizableColumn> {{'department.asset.actions' | translate}} </th>
+          </tr>
+          <tr>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-asset>
+          <tr>
+            <td>{{asset.code}}</td>
+            <td>{{asset.name}}</td>
+            <td>{{asset.type}}</td>
+            <td>{{asset.manager}}</td>
+            <td>{{asset.fromDate}}</td>
+            <td>{{asset.toDate}}</td>
+            <td>
+              <a role="button">{{'general.button.delete' | translate}}</a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+<p-dialog [modal]="true" appendTo="body" [(visible)]="modal">
+  <p-header>
+    {{'asset.add' | translate}}
+  </p-header>
+  <div class="container">
+    <div class="row">
+      <div class="form-group col">
+        <label>
+          {{'asset.code' | translate}}
+          <span class="text-danger ml-2">(*)</span>
+        </label>
+        <input type="text" class="form-control" disabled readonly>
+      </div>
+      <div class="form-group col">
+        <label>
+          {{'asset.name' | translate}}
+          <span class="text-danger ml-2">(*)</span>
+        </label>
+        <input type="text" class="form-control" disabled readonly>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label>
+          {{'asset.type' | translate}}
+          <span class="text-danger ml-2">(*)</span>
+        </label>
+        <input type="text" class="form-control" disabled readonly>
+      </div>
+      <div class="form-group col">
+        <label>
+          {{'asset.manager' | translate}}
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label>
+          {{'asset.code' | translate}}
+        </label>
+        <app-date-picker></app-date-picker>
+      </div>
+      <div class="form-group col">
+        <label>
+          {{'asset.name' | translate}}
+        </label>
+        <app-date-picker></app-date-picker>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button class="btn btn-add mr-2">
+      {{'general.button.save' | translate}}
+    </button>
+    <button class="btn btn-cancel mr-2">
+      {{'general.button.cancel' | translate}}
+    </button>
+    <button class="btn btn-delete">
+      {{'general.button.delete' | translate}}
+    </button>
+  </p-footer>
+</p-dialog>
