@@ -15,6 +15,7 @@ import { SelectSearchComponent } from './components/select-search/select-search.
 import {MatIconModule} from '@angular/material/icon';
 import {ClickOutsideModule} from 'ng-click-outside';
 import { TranslateModule } from '@ngx-translate/core';
+import { SimpleSelectComponent } from './components/simple-select/simple-select.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TranslateModule } from '@ngx-translate/core';
     MultiSelectComponent,
     SelectSpinnerComponent,
     SelectSearchComponent,
+    SimpleSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { TranslateModule } from '@ngx-translate/core';
     TreeSelectComponent,
     SingleSelectComponent,
     MultiSelectComponent,
+    SimpleSelectComponent,
   ],
 })
 export class SelectModule {
