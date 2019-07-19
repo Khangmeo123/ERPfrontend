@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
 import {ISelect} from '../../select.interface';
 import {toggleMenu} from '../../../../animations/toggleMenu';
-import {getListDirection, initiateSelectedNodes} from '../../helpers';
+import {getListDirection} from '../../helpers';
 
 @Component({
   selector: 'app-single-select',
