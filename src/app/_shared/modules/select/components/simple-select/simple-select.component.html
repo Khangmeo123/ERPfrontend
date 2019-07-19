@@ -5,6 +5,9 @@
                    (toggleList)="toggleList($event)"
                    (headClick)="toggleList($event)"></app-select-head>
   <app-select-body [@toggleMenu]="listState">
-    <app-select-list [dataSource]="list" [key]="key" (selectionChange)="onSelect($event)"></app-select-list>
+    <app-select-spinner *ngIf="list.length === 0; else notLoading"></app-select-spinner>
+    <ng-template #notLoading>
+      <app-select-list [dataSource]="list" [key]="key" (selectionChange)="onSelect($event)"></app-select-list>
+    </ng-template>
   </app-select-body>
 </app-select>
