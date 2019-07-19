@@ -12,5 +12,12 @@ export class PaymentMethodForm extends FormModel {
 
     constructor(paymentMethodEntity?: PaymentMethodEntity) {
         super();
+        if (paymentMethodEntity !== null && paymentMethodEntity !== undefined) {
+            Object.keys(paymentMethodEntity).forEach((item) => {
+                if (paymentMethodEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(paymentMethodEntity[item]);
+                }
+            });
+        }
     }
 }

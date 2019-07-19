@@ -18,5 +18,12 @@ export class CostCenterForm extends FormModel {
 
     constructor(costCenterEntity?: CostCenterEntity) {
         super();
+        if (costCenterEntity !== null && costCenterEntity !== undefined) {
+            Object.keys(costCenterEntity).forEach((item) => {
+                if (costCenterEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(costCenterEntity[item]);
+                }
+            });
+        }
     }
 }

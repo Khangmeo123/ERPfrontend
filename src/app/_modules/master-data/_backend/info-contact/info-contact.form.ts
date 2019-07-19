@@ -12,5 +12,12 @@ export class InfoContactForm extends FormModel {
     relationship: string;
     constructor(infoContactEntity?: InfoContactEntity) {
         super();
+        if (infoContactEntity !== null && infoContactEntity !== undefined) {
+            Object.keys(infoContactEntity).forEach((item) => {
+                if (infoContactEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(infoContactEntity[item]);
+                }
+            });
+        }
     }
 }

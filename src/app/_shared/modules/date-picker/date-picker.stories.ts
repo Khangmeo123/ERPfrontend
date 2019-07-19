@@ -7,6 +7,7 @@ import { MomentDateModule } from '@angular/material-moment-adapter';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
 import { dateField } from '../../../_helpers';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
@@ -30,7 +31,7 @@ import { dateField } from '../../../_helpers';
       </div>
     </div>`,
 })
-export class TestComponent {
+export class DatePickerStories {
   form = new FormGroup({
     date: new FormControl(null, dateField),
   });
@@ -44,7 +45,7 @@ storiesOf('DatePicker', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        TestComponent,
+        DatePickerStories,
       ],
       imports: [
         CommonModule,
@@ -53,10 +54,11 @@ storiesOf('DatePicker', module)
         BrowserAnimationsModule,
         ReactiveFormsModule,
         FormsModule,
+        TranslateModule.forRoot({}),
       ],
     }),
   )
   .add('default', () => ({
-    component: TestComponent,
+    component: DatePickerStories,
     props: {},
   }));

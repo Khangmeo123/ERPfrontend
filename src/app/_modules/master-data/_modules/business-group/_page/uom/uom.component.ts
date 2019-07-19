@@ -63,6 +63,9 @@ export class UomComponent implements OnInit, OnDestroy {
   }
 
   getList() {
+    this.pagination.pageNumber = 1;
+    this.uomSearchEntity.skip = 0;
+    this.uomSearchEntity.take = this.pagination.take;
     this.uomService.getList(this.uomSearchEntity);
   }
 
@@ -107,7 +110,7 @@ export class UomComponent implements OnInit, OnDestroy {
   paginationOut(pagination: PaginationModel) {
     this.uomSearchEntity.skip = pagination.skip;
     this.uomSearchEntity.take = pagination.take;
-    this.getList();
+    this.uomService.getList(this.uomSearchEntity);
   }
 
   clearSearch(table: any) {

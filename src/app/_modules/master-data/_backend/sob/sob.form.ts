@@ -44,5 +44,12 @@ export class SobForm extends FormModel {
 
     constructor(sobEntity?: SobEntity) {
         super();
+        if (sobEntity !== null && sobEntity !== undefined) {
+            Object.keys(sobEntity).forEach((item) => {
+                if (sobEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(sobEntity[item]);
+                }
+            });
+        }
     }
 }

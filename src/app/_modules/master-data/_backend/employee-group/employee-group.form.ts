@@ -13,5 +13,12 @@ export class EmployeeGroupForm extends FormModel {
 
     constructor(employeeGroupEntity?: EmployeeGroupEntity) {
         super();
+        if (employeeGroupEntity !== null && employeeGroupEntity !== undefined) {
+            Object.keys(employeeGroupEntity).forEach((item) => {
+                if (employeeGroupEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(employeeGroupEntity[item]);
+                }
+            });
+        }
     }
 }

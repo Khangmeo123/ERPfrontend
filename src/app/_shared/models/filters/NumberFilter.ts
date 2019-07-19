@@ -4,18 +4,18 @@ import {Filter} from './Filter';
 export class NumberFilter extends Filter {
   constructor(numberFilter?) {
     super();
-    this.eq = numberFilter !== undefined && numberFilter.eq !== undefined ? numberFilter.eq : null;
-    this.ge = numberFilter !== undefined && numberFilter.ge !== undefined ? numberFilter.ge : null;
-    this.gt = numberFilter !== undefined && numberFilter.gt !== undefined ? numberFilter.gt : null;
-    this.le = numberFilter !== undefined && numberFilter.le !== undefined ? numberFilter.le : null;
-    this.lt = numberFilter !== undefined && numberFilter.lt !== undefined ? numberFilter.lt : null;
-    this.ne = numberFilter !== undefined && numberFilter.ne !== undefined ? numberFilter.ne : null;
+    this.equal = numberFilter !== undefined && numberFilter.equal !== undefined ? numberFilter.equal : null;
+    this.greaterEqual = numberFilter !== undefined && numberFilter.greaterEqual !== undefined ? numberFilter.greaterEqual : null;
+    this.greater = numberFilter !== undefined && numberFilter.greater !== undefined ? numberFilter.greater : null;
+    this.lessEqual = numberFilter !== undefined && numberFilter.lessEqual !== undefined ? numberFilter.lessEqual : null;
+    this.less = numberFilter !== undefined && numberFilter.less !== undefined ? numberFilter.less : null;
+    this.notEqual = numberFilter !== undefined && numberFilter.notEqual !== undefined ? numberFilter.notEqual : null;
   }
 
   static types: FilterType[] = [
     {
       sign: '=',
-      code: 'eq',
+      code: 'equal',
       languages: {
         en: 'Equals',
         vi: 'Bằng',
@@ -23,7 +23,7 @@ export class NumberFilter extends Filter {
     },
     {
       sign: '!=',
-      code: 'ne',
+      code: 'notEqual',
       languages: {
         en: 'Not equals',
         vi: 'Không bằng',
@@ -31,7 +31,7 @@ export class NumberFilter extends Filter {
     },
     {
       sign: '<',
-      code: 'lt',
+      code: 'less',
       languages: {
         en: 'Less than',
         vi: 'Bắt đầu với',
@@ -39,7 +39,7 @@ export class NumberFilter extends Filter {
     },
     {
       sign: '<=',
-      code: 'le',
+      code: 'lessEqual',
       languages: {
         en: 'Less than or equals',
         vi: 'Nhỏ hơn hoặc bằng',
@@ -47,7 +47,7 @@ export class NumberFilter extends Filter {
     },
     {
       sign: '>',
-      code: 'gt',
+      code: 'greater',
       languages: {
         en: 'Greater than',
         vi: 'Lớn hơn',
@@ -55,17 +55,17 @@ export class NumberFilter extends Filter {
     },
     {
       sign: '>=',
-      code: 'ge',
+      code: 'greaterEqual',
       languages: {
         en: 'Greater than or equals',
         vi: 'Lớn hơn hoặc bằng',
       },
     },
   ];
-  eq: number = null;
-  ne: number = null;
-  lt: number = null;
-  le: number = null;
-  gt: number = null;
-  ge: number = null;
+  equal: number = null;
+  notEqual: number = null;
+  less: number = null;
+  lessEqual: number = null;
+  greater: number = null;
+  greaterEqual: number = null;
 }

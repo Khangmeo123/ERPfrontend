@@ -1,15 +1,15 @@
-import { FilterType } from './FilterType';
-import { Filter } from './Filter';
+import {FilterType} from './FilterType';
+import {Filter} from './Filter';
 
 export class TextFilter extends Filter {
   constructor(textFilter?) {
     super();
     this.equal = textFilter !== undefined && textFilter.equal !== undefined ? textFilter.equal : null;
-    this.ne = textFilter !== undefined && textFilter.ne !== undefined ? textFilter.ne : null;
-    this.sw = textFilter !== undefined && textFilter.sw !== undefined ? textFilter.sw : null;
-    this.ew = textFilter !== undefined && textFilter.ew !== undefined ? textFilter.ew : null;
-    this.ct = textFilter !== undefined && textFilter.ct !== undefined ? textFilter.ct : null;
-    this.nc = textFilter !== undefined && textFilter.nc !== undefined ? textFilter.nc : null;
+    this.notEqual = textFilter !== undefined && textFilter.notEqual !== undefined ? textFilter.notEqual : null;
+    this.startsWith = textFilter !== undefined && textFilter.startsWith !== undefined ? textFilter.startsWith : null;
+    this.endsWith = textFilter !== undefined && textFilter.endsWith !== undefined ? textFilter.endsWith : null;
+    this.contains = textFilter !== undefined && textFilter.contains !== undefined ? textFilter.contains : null;
+    this.notContains = textFilter !== undefined && textFilter.notContains !== undefined ? textFilter.notContains : null;
   }
 
   static types: FilterType[] = [
@@ -23,7 +23,7 @@ export class TextFilter extends Filter {
     },
     {
       sign: '!=',
-      code: 'ne',
+      code: 'notEqual',
       languages: {
         en: 'Not equals',
         vi: 'Không bằng',
@@ -31,7 +31,7 @@ export class TextFilter extends Filter {
     },
     {
       sign: 'SW',
-      code: 'sw',
+      code: 'startsWith',
       languages: {
         en: 'Starts with',
         vi: 'Bắt đầu với',
@@ -39,7 +39,7 @@ export class TextFilter extends Filter {
     },
     {
       sign: 'EW',
-      code: 'ew',
+      code: 'endsWith',
       languages: {
         en: 'Ends with',
         vi: 'Kết thúc với',
@@ -47,7 +47,7 @@ export class TextFilter extends Filter {
     },
     {
       sign: 'CT',
-      code: 'ct',
+      code: 'contains',
       languages: {
         en: 'Contains',
         vi: 'Chứa',
@@ -55,7 +55,7 @@ export class TextFilter extends Filter {
     },
     {
       sign: 'NC',
-      code: 'nc',
+      code: 'notContains',
       languages: {
         en: 'Not contains',
         vi: 'Không chứa',
@@ -63,9 +63,9 @@ export class TextFilter extends Filter {
     },
   ];
   equal: string = null;
-  ne: string = null;
-  sw: string = null;
-  ew: string = null;
-  ct: string = null;
-  nc: string = null;
+  notEqual: string = null;
+  startsWith: string = null;
+  endsWith: string = null;
+  contains: string = null;
+  notContains: string = null;
 }

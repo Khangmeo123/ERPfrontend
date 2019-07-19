@@ -1,16 +1,17 @@
 <div class="page job-level">
     <div class="page-header">
         <span class="page-title">
-            {{'job_level.header.title' | translate}}
-            <span (click)="onClickSaveBookMark($event)">
-                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+            {{ pageTitle | translate}}
+            <span (click)="bookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
         <div class="page-actions">
-            <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown>
+            <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
+                {{'general.button.add' | translate}}</button>
+            <div class="btn-group" dropdown data-qe-id="button-import">
                 <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
                     aria-controls="dropdown-basic">
                     {{'general.button.import' | translate}}<span class="caret"></span>
@@ -24,87 +25,122 @@
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
         </div>
     </div>
     <hr>
     <div class="page-body">
         <div class="page-section list">
-            <p-table [value]="tmptable">
+            <p-table [value]="jobLevelList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pResizableColumn>
-                            {{ 'job_level.job_level_id' | translate}}
+                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
+                            {{ 'job_level.job_level_code' | translate}}
                         </th>
-                        <th pResizableColumn>
-                            {{ 'job_level.job_level_level' | translate}}
+                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
+                            {{ 'job_level.job_level_name' | translate}}
                         </th>
-                        <th pResizableColumn> {{ 'job_level.job_level_name' | translate}} </th>
-                        <th pResizableColumn> {{ 'job_level.job_level_description' | translate}} </th>
+                        <!-- <th pResizableColumn data-qe-id="table-thead-jobTitle" [pSortableColumn]="'jobTitle'">
+                            {{ 'job_level.job_level_jobTitle' | translate}}
+                        </th> -->
+                        <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
+                            {{ 'job_level.job_level_description' | translate}}
+                        </th>
                     </tr>
                     <tr>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+                            <app-advanced-filters [filter]="jobLevelSearchEntity.code" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-code"></app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+                            <app-advanced-filters [filter]="jobLevelSearchEntity.name" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-name"></app-advanced-filters>
                         </th>
+                        <!-- <th class="th-filter">
+                            <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
+                                (search)="jobTitleSearch($event)"
+                                (selectionChange)="jobTitleSearchEntity.jobTitleId = $event.Id"
+                                (listOpen)="jobTitleSearch(jobTitleSearchEntity.jobTitleId)">
+                            </app-single-select>
+                        </th> -->
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.des"></app-advanced-filters>
+                            <app-advanced-filters [filter]="jobLevelSearchEntity.description" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-description"></app-advanced-filters>
                         </th>
                     </tr>
                 </ng-template>
-                <!-- <ng-template pTemplate="body" let-job_level>
-                        <tr>
-                            <td> {{job_level.id}} </td>
-                            <td> {{job_level.name}} </td>
-                            <td> {{job_level.des}} </td>
-                        </tr>
-                    </ng-template> -->
+                <ng-template pTemplate="body" let-jobLevel let-index="rowIndex">
+                    <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                        <td> {{jobLevel.code}} </td>
+                        <td> {{jobLevel.name}} </td>
+                        <!-- <td> {{jobLevel.jobTitleName}} </td> -->
+                        <td> {{jobLevel.description}} </td>
+                    </tr>
+                </ng-template>
             </p-table>
         </div>
         <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+            </app-pagination>
         </div>
     </div>
 </div>
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
         {{ 'job_level.modal.title' | translate}}
     </p-header>
-    <div class="container">
+    <div class="container" [formGroup]="jobLevelForm">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="job_levelid">{{ 'job_level.job_level_id' | translate}}<span
+                    <label for="joLevelCode">{{ 'job_level.job_level_code' | translate}}<span
                             style="color: red">*</span></label>
-                    <input type="text" class="form-control" />
-
-                </div>
-                <div class="form-group">
-                    <label for="job_levelname">{{ 'job_level.job_level_level' | translate}}<span
-                            style="color: red">*</span></label>
-                    <app-single-select></app-single-select>
-                </div>
-
-                <div class="form-group">
-                    <label for="job_levelname">{{ 'job_level.job_level_name' | translate}}<span
-                            style="color: red">*</span></label>
-                    <input type="text" class="form-control" />
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+                            id="joLevelCode" />
+                        <app-error data-qe-id="dialog-form-code"
+                            *ngIf="(jobLevelForm.controls.code?.errors && jobLevelForm.controls.code?.touched) || !!jobLevelForm.controls.error.get('code')?.value"
+                            [formGroup]="jobLevelForm" [property]="'code'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
                 </div>
             </div>
-
-
             <div class="col-sm-6">
+                <!-- <div class="form-group">
+                    <label for="job_levelname">{{ 'job_level.job_level_level' | translate}}<span
+                            style="color: red">*</span></label>
+                    <div class="div-form">
+                        <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
+                            (search)="jobTitleSearch($event)"
+                            (selectionChange)="jobLevelForm.controls.jobTitleId.setValue($event.Id); jobLevelForm.controls.jobTitleName.setValue($event.Name);"
+                            (listOpen)="jobTitleSearch(jobLevelForm.controls.jobTileId.value)">
+                        </app-single-select>
+                        <app-error
+                            *ngIf="(jobLevelForm.controls.jobTileId?.errors && jobLevelForm.controls.jobTileId?.touched) || !!jobLevelForm.controls.error.get('jobTileId')?.value"
+                            [formGroup]="jobLevelForm" [property]="'jobTileId'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
+                </div> -->
+                <div class="form-group">
+                    <label for="jobLevelName">{{ 'job_level.job_level_name' | translate}}<span
+                            style="color: red">*</span></label>
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+                            id="jobLevelName" />
+                        <app-error data-qe-id="dialog-error-name"
+                            *ngIf="(jobLevelForm.controls.name?.errors && jobLevelForm.controls.name?.touched) || !!jobLevelForm.controls.error.get('name')?.value"
+                            [formGroup]="jobLevelForm" [property]="'name'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12">
                 <div class="form-group">
                     <label for="job_levelid">{{ 'job_level.job_level_description' | translate}}</label>
-                    <textarea class="form-control" rows="7">
-                                        At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-                                 </textarea>
+                    <textarea class="form-control" rows="4" formControlName="description">
+                    </textarea>
                 </div>
             </div>
         </div>
@@ -113,13 +149,13 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-cancel"
-                        (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-                    <button class="btn btn-save" (click)="onClickSave()">
+                    <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
+                    <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+                        (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
                     <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                        (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                        data-qe-id="dialog-button-delete" *ngIf="jobLevelForm.value?.isDeleted"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
                         {{ 'general.button.delete' | translate}}</button>
                 </div>
             </div>

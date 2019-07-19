@@ -61,6 +61,9 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   }
 
   getList() {
+    this.pagination.pageNumber = 1;
+    this.businessGroupSearchEntity.skip = 0;
+    this.businessGroupSearchEntity.take = this.pagination.take;
     this.businessGroupService.getList(this.businessGroupSearchEntity);
   }
 
@@ -105,7 +108,7 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   paginationOut(pagination: PaginationModel) {
     this.businessGroupSearchEntity.skip = pagination.skip;
     this.businessGroupSearchEntity.take = pagination.take;
-    this.getList();
+    this.businessGroupService.getList(this.businessGroupSearchEntity);
   }
 
   clearSearch(table: any) {

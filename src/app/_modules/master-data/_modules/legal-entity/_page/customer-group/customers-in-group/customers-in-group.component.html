@@ -1,0 +1,92 @@
+<div class="page">
+  <div class="page-header">
+    <span class="page-title">
+      {{'customer_group.title' | translate}}
+      <span (click)="onClickSaveBookMark($event)">
+        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="router.navigate(['/master-data/legal-entity/customer-group/configure-customer-group'])"> + {{'general.button.add' | translate}}</button>
+      <div class="btn-group" dropdown>
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                aria-controls="dropdown-basic">
+          {{'general.button.import' | translate}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item"
+                                 href="#">{{'general.button.import_file' | translate}}</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item"
+                                 href="#">{{'general.button.download_example' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+      <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="page-section mt-2 row">
+      <div class="col d-flex align-items-center">
+        <span class="sob-label flex-shrink-1">
+        {{'sob.name' | translate}}
+        </span>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="col d-flex align-items-center">
+        <span class="sob-label flex-shrink-1">
+        {{'legal_entity.name' | translate}}
+        </span>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="col d-flex align-items-center">
+        <span class="sob-label flex-shrink-1">
+        {{'customer_group.name' | translate}}
+        </span>
+        <app-single-select></app-single-select>
+      </div>
+    </div>
+    <div class="page-section mt-2">
+      <p-table [value]="[]">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              {{'customer_group.customer.code' | translate}}
+            </th>
+            <th>
+              {{'customer_group.customer.name' | translate}}
+            </th>
+            <th>
+              {{'customer_group.customer.address' | translate}}
+            </th>
+            <th>
+              {{'customer_group.customer.tax_code' | translate}}
+            </th>
+            <th>
+              {{'customer_group.customer.phone' | translate}}
+            </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>

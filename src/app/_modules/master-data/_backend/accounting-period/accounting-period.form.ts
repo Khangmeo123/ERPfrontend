@@ -15,5 +15,12 @@ export class AccountingPeriodForm extends FormModel {
 
     constructor(accountingPeriodEntity?: AccountingPeriodEntity) {
         super();
+        if (accountingPeriodEntity !== null && accountingPeriodEntity !== undefined) {
+            Object.keys(accountingPeriodEntity).forEach((item) => {
+                if (accountingPeriodEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(accountingPeriodEntity[item]);
+                }
+            });
+        }
     }
 }

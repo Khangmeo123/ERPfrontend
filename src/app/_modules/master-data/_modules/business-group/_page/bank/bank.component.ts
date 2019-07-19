@@ -64,6 +64,9 @@ export class BankComponent implements OnInit, OnDestroy {
   }
 
   getList() {
+    this.pagination.pageNumber = 1;
+    this.bankSearchEntity.skip = 0;
+    this.bankSearchEntity.take = this.pagination.take;
     this.bankService.getList(this.bankSearchEntity);
   }
 
@@ -108,7 +111,7 @@ export class BankComponent implements OnInit, OnDestroy {
   paginationOut(pagination: PaginationModel) {
     this.bankSearchEntity.skip = pagination.skip;
     this.bankSearchEntity.take = pagination.take;
-    this.getList();
+    this.bankService.getList(this.bankSearchEntity);
   }
 
   clearSearch(table: any) {

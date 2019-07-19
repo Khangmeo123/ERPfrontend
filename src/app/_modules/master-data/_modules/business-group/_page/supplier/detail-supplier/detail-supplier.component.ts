@@ -15,7 +15,8 @@ export class DetailSupplierComponent implements OnInit {
 
 
   isOpenTab1: boolean = true;
-
+  isOpenTab2: boolean = false;
+  isOpenTab3: boolean = false;
   display: boolean = false;
   displayAccount: boolean = false;
   filters = {
@@ -37,6 +38,14 @@ export class DetailSupplierComponent implements OnInit {
   
   onClickOpen() {
     this.isOpenTab1 = !this.isOpenTab1;
+  }
+
+  onClickOpenTab2() {
+    this.isOpenTab2 = !this.isOpenTab2;
+  }
+
+  onClickOpenTab3() {
+    this.isOpenTab3 = !this.isOpenTab3;
   }
 
   onClickAddBank() {

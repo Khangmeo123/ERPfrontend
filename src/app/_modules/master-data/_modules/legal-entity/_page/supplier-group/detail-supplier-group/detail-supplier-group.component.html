@@ -1,1 +1,322 @@
-<p>detail-supplier-group works!</p>
+<div class="page detail-supplier-group">
+  <div class="page-header">
+    <span class="page-title">
+      {{'detailSupplierGroup.detail.title' | translate}}
+      <span (click)="onClickSaveBookMark($event)">
+        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
+    <div class="page-actions">
+      <button class="btn btn-save">
+        {{'general.button.save' | translate}}
+      </button>
+      <button class="btn btn-cancel">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-delete">
+        {{'general.button.delete' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="page-section">
+      <accordion>
+        <accordion-group [isOpen]="true">
+          <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+            <div class="pull-left float-left">{{'detailSupplierGroup.tab_1.general' | translate }}</div>
+            <span class="float-right pull-right" accordion-heading>
+              <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+            </span>
+          </button>
+          <div class="row">
+            <div class="form-group col">
+              <label for="supplier_code">
+                {{'detailSupplierGroup.code' | translate}}
+                <span class="text-danger ml-1"> (*) </span>
+              </label>
+              <input type="text" class="form-control" id="supplier_code">
+              <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
+                [formGroup]="form" [property]="'name'" [placement]="'top'" class="error-form">
+              </app-error>
+            </div>
+            <div class="form-group col">
+              <label for="supplier_name">
+                {{'detailSupplierGroup.name' | translate}}
+                <span class="text-danger ml-1"> (*) </span>
+              </label>
+              <input type="text" class="form-control" id="supplier_name">
+            </div>
+
+            <div class="form-group col">
+              <label for="tax_code">
+                {{'detailSupplierGroup.tax_code' | translate}}
+              </label>
+              <input type="text" class="form-control" id="tax_code">
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-4">
+              <label for="supplier_status">
+                {{'detailSupplierGroup.status' | translate}}
+              </label>
+              <app-single-select></app-single-select>
+            </div>
+            <!-- <div class="form-group col"></div> -->
+            <div class="form-group col-8">
+              <label for="supplier_more_details">
+                {{'detailSupplierGroup.more_details' | translate}}
+              </label>
+              <textarea name="supplier_more_details" id="supplier_more_details" rows="1"
+                class="form-control"></textarea>
+            </div>
+            <div class="form-group col-4">
+              <label>
+                {{'detailSupplierGroup.payment_terms' | translate}}
+              </label>
+              <app-single-select></app-single-select>
+            </div>
+            <div class="form-group col-4">
+              <label>
+                {{'detailSupplierGroup.due_in_days' | translate}}
+              </label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+              <label>
+                {{'detailSupplierGroup.debt_load' | translate}}
+              </label>
+              <input type="text" class="form-control">
+            </div>
+            <div class="form-group col-4">
+              <label>
+                {{'detailSupplierGroup.pic' | translate}}
+              </label>
+              <app-single-select></app-single-select>
+            </div>
+            <div class="form-group col-4">
+              <label>
+                {{'detailSupplierGroup.supplier_group' | translate}}
+              </label>
+              <app-single-select></app-single-select>
+            </div>
+          </div>
+        </accordion-group>
+        <accordion-group>
+          <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <div class="pull-left float-left">{{'detailSupplierGroup.contacts.title' | translate }}</div>
+            <span class="float-right pull-right" accordion-heading>
+              <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+            </span>
+          </button>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-add" (click)="toggleContactsModal()">
+              {{'detailSupplierGroup.contacts.add' | translate}}
+
+            </button>
+          </div>
+
+          <div class="mt-2">
+            <p-table [value]="[]">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>
+                    {{'detailSupplierGroup.contacts.code' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.contacts.recipient' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.contacts.phone_number' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.contacts.email' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.contacts.city' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.contacts.address' | translate}}
+                  </th>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+
+        </accordion-group>
+        <accordion-group>
+          <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <div class="pull-left float-left">{{'detailSupplierGroup.bank_account.title' | translate }}</div>
+            <span class="float-right pull-right" accordion-heading>
+              <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+            </span>
+          </button>
+          <div class="d-flex justify-content-end">
+            <button class="btn btn-add" (click)="toggleBankAccountsModal()">
+              {{'detailSupplierGroup.bank_account.add' | translate}}
+            </button>
+          </div>
+          <div class="mt-2">
+            <p-table [value]="[]">
+              <ng-template pTemplate="header">
+                <tr>
+                  <th>
+                    {{'detailSupplierGroup.bank_account.code' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.bank_account.bank_name' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.bank_account.account_owner' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.bank_account.account_number' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.bank_account.province' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.bank_account.bank_division' | translate}}
+                  </th>
+                  <th>
+                    {{'detailSupplierGroup.bank_account.bank_address' | translate}}
+                  </th>
+                </tr>
+              </ng-template>
+            </p-table>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog modal="true" [(visible)]="bankAccountsModal">
+  <p-header>
+    {{'detailSupplierGroup.bank_accounts.add' | translate}}
+  </p-header>
+  <form class="container">
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.bank_account.bank_name' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.bank_account.account_owner' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.bank_account.account_number' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.bank_account.bank_division' | translate}}
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.bank_account.province' | translate}}
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'supplier.bank_account.bank_address' | translate}}
+        </label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <ng-template *ngIf="isAdd; else notAdd">
+      <button class="btn btn-add mr-2">
+        {{'general.button.add' | translate}}
+      </button>
+      <button class="btn btn-cancel">
+        {{'general.button.cancel' | translate}}
+      </button>
+    </ng-template>
+    <ng-template #notAdd>
+      <button class="btn btn-add mr-2">
+        {{'general.button.save' | translate}}
+      </button>
+      <button class="btn btn-cancel mr-2">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-delete">
+        {{'general.button.delete' | translate}}
+      </button>
+    </ng-template>
+  </p-footer>
+</p-dialog>
+
+<p-dialog modal="true" [(visible)]="contactsModal">
+  <p-header>
+    {{'detailSupplierGroup.contacts.add' | translate}}
+  </p-header>
+  <form class="container">
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.contacts.recipient' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.contacts.phone_number' | translate}}
+          <span class="text-danger mr-2">(*)</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.contacts.email' | translate}}
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailSupplierGroup.contacts.address' | translate}}
+        </label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <ng-template *ngIf="isAdd; else notAdd">
+      <button class="btn btn-add mr-2">
+        {{'general.button.add' | translate}}
+      </button>
+      <button class="btn btn-cancel">
+        {{'general.button.cancel' | translate}}
+      </button>
+    </ng-template>
+    <ng-template #notAdd>
+      <button class="btn btn-add mr-2">
+        {{'general.button.save' | translate}}
+      </button>
+      <button class="btn btn-cancel mr-2">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-delete">
+        {{'general.button.delete' | translate}}
+      </button>
+    </ng-template>
+  </p-footer>
+</p-dialog>

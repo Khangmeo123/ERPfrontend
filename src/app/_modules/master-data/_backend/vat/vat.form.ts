@@ -23,5 +23,12 @@ export class VatForm extends FormModel {
 
     constructor(vatEntity?: VatEntity) {
         super();
+        if (vatEntity !== null && vatEntity !== undefined) {
+            Object.keys(vatEntity).forEach((item) => {
+                if (vatEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(vatEntity[item]);
+                }
+            });
+        }
     }
 }

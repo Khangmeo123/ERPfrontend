@@ -69,5 +69,12 @@ export class ProductForm extends FormModel {
 
     constructor(productEntity?: ProductEntity) {
         super();
+        if (productEntity !== null && productEntity !== undefined) {
+            Object.keys(productEntity).forEach((item) => {
+                if (productEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(productEntity[item]);
+                }
+            });
+        }
     }
 }

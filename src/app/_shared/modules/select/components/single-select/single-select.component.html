@@ -9,7 +9,7 @@
     <ng-template [ngIf]="selectedList.length">
       <div class="py-2 pl-4 d-flex align-items-center border-bottom">
         <span class="h4 font-weight-bold">
-          Selected
+          {{'select.selectedList' | translate}}
         </span>
       </div>
       <app-select-list [dataSource]="selectedList"
@@ -22,7 +22,7 @@
     <ng-template #notLoading>
       <div class="py-2 pl-4 d-flex align-items-center border-bottom">
         <span class="h4 font-weight-bold">
-          Available
+          {{'select.availableList' | translate}}
         </span>
       </div>
       <app-select-list [dataSource]="list"

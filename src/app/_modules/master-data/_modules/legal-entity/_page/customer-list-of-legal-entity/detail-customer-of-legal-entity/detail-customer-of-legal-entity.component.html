@@ -1,0 +1,324 @@
+<div class="page detail_customer_of_legal_entity-detail">
+    <div class="page-header">
+        <span class="page-title">
+            {{'detail_customer_of_legal_entity.header.title' | translate}}
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="onClickSave()">
+                {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
+                (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                {{ 'general.button.delete' | translate}}</button>
+        </div>
+    </div>
+
+    <hr>
+
+
+    <div class="page-body">
+        <accordion>
+            <accordion-group [isOpen]="true">
+                <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'detail_customer_of_legal_entity.tab.title_1' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.code' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.name' | translate}}<span
+                                    style="color: red">*</span></label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.tax_code' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.status' | translate}}<span
+                                    style="color: red">*</span></label>
+
+
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-8">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.another_note' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.payment_term' | translate}}</label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.due_in_date' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.debt_load' | translate}}</label>
+                            <input type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.pic_name' | translate}}</label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'detail_customer_of_legal_entity.content.detail.customer_group' | translate}}</label>
+                            <app-single-select></app-single-select>
+                        </div>
+                    </div>
+
+                </div>
+
+            </accordion-group>
+
+            <accordion-group>
+                <button (click)="onClickOpenTab1()" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'detail_customer_of_legal_entity.tab.title_2' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-add" (click)="showAddcontact()">
+                        {{'detail_customer_of_legal_entity.contact.add' | translate}}
+                    </button>
+                </div>
+                <div class="mt-2">
+                    <p-table [value]="[]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.contact.index' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.contact.name' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.contact.phone' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.contact.email' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.contact.city' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.contact.address' | translate}}
+                                </th>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+            </accordion-group>
+
+            <accordion-group>
+                <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'detail_customer_of_legal_entity.tab.title_3' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-add" (click)="showAddbank()">
+                        {{'detail_customer_of_legal_entity.bank_accounts.add' | translate}}
+                    </button>
+                </div>
+                <div class="mt-2">
+                    <p-table [value]="[]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.bank_accounts.index' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.bank_accounts.name' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.bank_accounts.account_name' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.bank_accounts.account_number' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.bank_accounts.city' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.bank_accounts.branch' | translate}}
+                                </th>
+                                <th>
+                                    {{'detail_customer_of_legal_entity.bank_accounts.address' | translate}}
+                                </th>
+
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+            </accordion-group>
+
+        </accordion>
+    </div>
+</div>
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayContact" appendTo="body"
+    [style]="{width: '900px'}">
+    <p-header>
+        {{ 'detail_customer_of_legal_entity.contact_add ' | translate}}
+    </p-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entitycode">{{'detail_customer_of_legal_entity.bank_accounts.name' | translate}}<span
+                            style="color: red">*</span></label>
+                    <app-single-select></app-single-select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.bank_accounts.account_name' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityid">{{'detail_customer_of_legal_entity.bank_accounts.account_number' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.bank_accounts.branch' | translate}}</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityid">{{'detail_customer_of_legal_entity.bank_accounts.city' | translate}}</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.bank_accounts.address' | translate}}</label>
+                                <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                   
+                    <button class="btn btn-save" (click)="onClickSave()">
+                        {{ 'general.button.save' | translate}}</button>
+
+                        <button class="btn btn-cancel"
+                            (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+
+                </div>
+            </div>
+        </div>
+        </p-footer>
+</p-dialog>
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayBank" appendTo="body"
+    [style]="{width: '900px'}">
+    <p-header>
+        {{ 'detail_customer_of_legal_entity.bank_add_account ' | translate}}
+    </p-header>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entitycode">{{'detail_customer_of_legal_entity.contact.name' | translate}}<span
+                            style="color: red">*</span></label>
+                    <app-single-select></app-single-select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.contact.phone' | translate}}<span
+                            style="color: red">*</span></label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityid">{{'detail_customer_of_legal_entity.contact.email' | translate}}</label>
+                    <input type="text" class="form-control" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="detail_customer_of_legal_entityname">{{'detail_customer_of_legal_entity.contact.address' | translate}}</label>
+                                <input type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                   
+                    <button class="btn btn-save"
+                    (click)="onClickSave()"> {{ 'general.button.save' | translate}}</button>
+
+                        <button class="btn btn-cancel"
+                            (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+
+                </div>
+            </div>
+        </div>
+        </p-footer>
+</p-dialog>

@@ -23,5 +23,12 @@ export class ExportTariffForm extends FormModel {
 
     constructor(exportTariffEntity?: ExportTariffEntity) {
         super();
+        if (exportTariffEntity !== null && exportTariffEntity !== undefined) {
+            Object.keys(exportTariffEntity).forEach((item) => {
+                if (exportTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(exportTariffEntity[item]);
+                }
+            });
+        }
     }
 }

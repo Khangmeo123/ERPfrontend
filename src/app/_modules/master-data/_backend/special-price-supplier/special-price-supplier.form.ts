@@ -19,5 +19,12 @@ export class SpecialPriceSupplierForm extends FormModel {
 
     constructor(specialPriceSupplierEntity?: SpecialPriceSupplierEntity) {
         super();
+        if (specialPriceSupplierEntity !== null && specialPriceSupplierEntity !== undefined) {
+            Object.keys(specialPriceSupplierEntity).forEach((item) => {
+                if (specialPriceSupplierEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(specialPriceSupplierEntity[item]);
+                }
+            });
+        }
     }
 }

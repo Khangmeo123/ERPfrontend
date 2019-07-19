@@ -4,13 +4,8 @@
       <span class="ui-inputgroup-addon">
         {{filterTypeSign}}
       </span>
-      <input *ngIf="!isDateFilter; else dateFilter"
-             type="{{inputType}}"
-             class="form-control"
-             (change)="onApplyFilter($event)"
-             (keyup)="onInput($event)"
-             [(ngModel)]="filterValue"
-             placeholder="Search...">
+      <input *ngIf="!isDateFilter; else dateFilter" type="{{inputType}}" class="form-control" (keyup)="onKeyUp($event)"
+        [(ngModel)]="filterValue" placeholder="{{'advancedFilter.placeholder' | translate}}">
       <ng-template #dateFilter>
         <div class="flex-grow-1">
           <app-date-picker (valueChange)="onApplyFilter($event)" [(value)]="filterValue"></app-date-picker>
@@ -25,10 +20,8 @@
     <div [@toggleMenu]="listState">
       <div class="select-list">
         <ul class="dropdown-menu">
-          <li *ngFor="let item of filterTypes"
-              class="dropdown-item d-flex align-items-center"
-              (click)="onSelectType(item.value)">
-            <span>{{item.label}}</span>
+          <li *ngFor="let type of types" class="dropdown-item d-flex align-items-center" (click)="onSelectType(type)">
+            <span>{{'advancedFilter.' + type.code | translate}}</span>
           </li>
         </ul>
       </div>

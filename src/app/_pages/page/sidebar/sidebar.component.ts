@@ -2,7 +2,7 @@ import { Component, Input, OnChanges, OnInit, ViewEncapsulation } from '@angular
 import { toggleMenuNavbar, toggleMenuNavbarLeft, toggleMenuSideBar } from '../../../_shared/animations/sidebar.animation';
 import { SidebarItem } from './interfaces/SidebarItem';
 import { sampleSidebarMenu } from './sidebar.sample';
-import { AppService, BookmarkService, BookMark } from '../../../_services';
+import { AppService, BookMark, BookmarkService } from '../../../_services';
 
 @Component({
   selector: 'app-sidebar',
@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit, OnChanges {
 
   @Input() isOpened = true;
 
-  bookmarks: BookMark[];
+  bookmarks: BookMark[] = [];
 
   constructor(
     private appService: AppService,
@@ -38,6 +38,10 @@ export class SidebarComponent implements OnInit, OnChanges {
     return this.showBookmarks ? 'show' : 'hide';
   }
 
+  get bookmarkCaret() {
+    return `pi pi-caret-${this.showBookmarks ? 'up' : 'down'} mr-1`;
+  }
+
   ngOnInit(): void {
   }
 
@@ -48,11 +52,7 @@ export class SidebarComponent implements OnInit, OnChanges {
     this.showBookmarks = !this.showBookmarks;
   }
 
-  get bookmarkCaret() {
-    return `pi pi-caret-${this.showBookmarks ? 'up' : 'down'} mr-1`;
-  }
-
-  get animationStateLeft() {
-    return this.showBookmarks ? 'open' : 'closed';
+  removeBookmark(bookmark: BookMark) {
+    this.bookmarkService.deleteBookMarks(bookmark);
   }
 }

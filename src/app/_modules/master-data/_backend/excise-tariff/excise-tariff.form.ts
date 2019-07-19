@@ -23,5 +23,12 @@ export class ExciseTariffForm extends FormModel {
 
     constructor(exciseTariffEntity?: ExciseTariffEntity) {
         super();
+        if (exciseTariffEntity !== null && exciseTariffEntity !== undefined) {
+            Object.keys(exciseTariffEntity).forEach((item) => {
+                if (exciseTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(exciseTariffEntity[item]);
+                }
+            });
+        }
     }
 }

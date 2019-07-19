@@ -3,15 +3,12 @@
 
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
-@import "~pretty-checkbox/dist/pretty-checkbox.min.css";
-@import "~pretty-checkbox/src/scss/variables";
-@import "~pretty-checkbox/src/scss/core";
 
-$color-button: #1c4e80;
-
+$color-button: #1C4E80;
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 $hamburger-padding-x: 0px !default;
@@ -22,24 +19,56 @@ $hamburger-layer-spacing: 5px !default;
 $hamburger-layer-color: #9b9ea2 !default;
 $hamburger-layer-border-radius: 4px !default;
 $hamburger-hover-opacity: 0.7 !default;
-$color-title: #1c4e80;
+$color-title: #1C4E80;
 
-@import "~bootstrap/scss/bootstrap";
+@import '~bootstrap/scss/bootstrap';
 // @import '~font-awesome/scss/font-awesome';
 // @import '~hamburgers/_sass/hamburgers/hamburgers';
-@import "~ngx-toastr/toastr-bs4-alert";
+@import '~ngx-toastr/toastr-bs4-alert';
 
-@import "~@fortawesome/fontawesome-free/scss/fontawesome";
-@import "~@fortawesome/fontawesome-free/scss/solid";
-@import "~@fortawesome/fontawesome-free/scss/regular";
-@import "~@fortawesome/fontawesome-free/scss/brands";
+@import '~@fortawesome/fontawesome-free/scss/fontawesome';
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/regular';
+@import '~@fortawesome/fontawesome-free/scss/brands';
 
-@import "./assets/lightning-admin";
+@import './assets/lightning-admin';
 
 @import "./scss/scrollbars";
 
-html,
-body {
+/* REQUIRED */
+@import '~pretty-checkbox/src/scss/variables';
+@import '~pretty-checkbox/src/scss/core';
+
+/* OPTIONALS */
+@import '~pretty-checkbox/src/scss/elements/default/fill';
+@import '~pretty-checkbox/src/scss/elements/default/outline';
+@import '~pretty-checkbox/src/scss/elements/default/thick';
+
+@import '~pretty-checkbox/src/scss/elements/font-icon/general';
+
+@import '~pretty-checkbox/src/scss/elements/svg/general';
+
+@import '~pretty-checkbox/src/scss/elements/image/general';
+
+@import '~pretty-checkbox/src/scss/elements/switch/general';
+@import '~pretty-checkbox/src/scss/elements/switch/fill';
+@import '~pretty-checkbox/src/scss/elements/switch/slim';
+
+@import '~pretty-checkbox/src/scss/extras/toggle';
+@import '~pretty-checkbox/src/scss/extras/plain';
+@import '~pretty-checkbox/src/scss/extras/round';
+@import '~pretty-checkbox/src/scss/extras/curve';
+@import '~pretty-checkbox/src/scss/extras/animation';
+@import '~pretty-checkbox/src/scss/extras/disabled';
+@import '~pretty-checkbox/src/scss/extras/locked';
+@import '~pretty-checkbox/src/scss/extras/colors';
+@import '~pretty-checkbox/src/scss/extras/print';
+
+@import '~pretty-checkbox/src/scss/states/hover';
+@import '~pretty-checkbox/src/scss/states/focus';
+@import '~pretty-checkbox/src/scss/states/indeterminate';
+
+html, body {
   height: 100%;
 }
 
@@ -55,11 +84,11 @@ body {
   .input-form {
     width: 90%;
   }
-  .error-form {
+  .error-form{
     width: 10%;
   }
 }
-.full-width {
+.full-width{
   width: 100%;
 }
 
@@ -75,21 +104,22 @@ body {
   box-shadow: none;
 }
 
-.title-page {
+
+.title-page{
   display: flex;
 
   div {
-    font-size: 21px;
-    color: $color-title;
-    text-transform: uppercase;
-    font-weight: bold;
+      font-size: 21px;
+      color: $color-title;
+      text-transform: uppercase;
+      font-weight: bold;
   }
 
   mat-icon {
-    font-size: 23px;
-    padding: 5px;
-    padding-top: 2px;
-    cursor: pointer;
+      font-size: 23px;
+      padding: 5px;
+      padding-top: 2px;
+      cursor: pointer;
   }
 }
 
@@ -150,25 +180,31 @@ body {
       }
 
       .btn-import {
-        margin-right: 0.5rem !important;
+        margin-right: 0.5rem !important
       }
+    }
+
+    .page-body {
+      .page-section {
+
+      }
+
+      .page-section.form {
+
+      }
+
+      .page-section.list {
+
+      }
+    }
+
+    .pagination {
+
     }
   }
 
   .page-footer {
-  }
-  .page-body {
-    margin-top: 20px;
-    .page-section {
-    }
 
-    .page-section.form {
-    }
-
-    .page-section.list {
-    }
-    .pagination {
-    }
   }
 
   mat-icon {
@@ -182,15 +218,6 @@ body {
     display: flex;
     justify-content: flex-end;
   }
-
-  .sob {
-    padding: 5px;
-  }
-}
-
-.cdk-overlay-container {
-  position: fixed !important;
-  z-index: 1010 !important; /* set value you need */
 }
 
 .ui-table-scrollable-header, .ui-table-scrollable-footer {

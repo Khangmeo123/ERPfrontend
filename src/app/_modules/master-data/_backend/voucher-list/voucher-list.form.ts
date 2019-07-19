@@ -21,5 +21,12 @@ export class VoucherListForm extends FormModel {
 
     constructor(voucherListEntity?: VoucherListEntity) {
         super();
+        if (voucherListEntity !== null && voucherListEntity !== undefined) {
+            Object.keys(voucherListEntity).forEach((item) => {
+                if (voucherListEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(voucherListEntity[item]);
+                }
+            });
+        }
     }
 }
