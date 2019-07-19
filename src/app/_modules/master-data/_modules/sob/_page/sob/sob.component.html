@@ -2,7 +2,7 @@
   <div class="page-header">
     <div class="page-title">
       {{'sob.title' | translate}}
-      <span (click)="onClickSaveBookMark()">
+      <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
             star
         </mat-icon>
@@ -16,7 +16,7 @@
   </div>
   <div class="page-body mt-2">
     <div class="page-section">
-      <p-table [value]="[]">
+      <p-table [value]="sobList">
         <ng-template pTemplate="header">
           <tr>
             <th>
@@ -33,40 +33,12 @@
             </th>
           </tr>
         </ng-template>
-        <!-- <ng-template pTemplate="body" let-row>
-          <tr>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input type="text" class="form-control" [(ngModel)]="row.code" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{row.code}}
-              </ng-template>
-            </p-cellEditor>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input type="text" class="form-control" [(ngModel)]="row.name" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{row.name}}
-              </ng-template>
-            </p-cellEditor>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input type="text" class="form-control" [(ngModel)]="row.currency" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{row.currency}}
-              </ng-template>
-            </p-cellEditor>
-          </tr>
-        </ng-template> -->
       </p-table>
     </div>
   </div>
 </div>
 
-<p-dialog modal = "true" [(visible)]="visible" [style]="{width: '900px'}">
+<p-dialog modal="true" [(visible)]="visible" [style]="{width: '900px'}" appendTo="body">
   <p-header>
     {{'sob.add' | translate}}
   </p-header>
@@ -99,7 +71,7 @@
           {{'sob.currency' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="currencyList" (listOpen)="currencySearch($event)"></app-simple-select>
       </div>
     </div>
     <div class="row">

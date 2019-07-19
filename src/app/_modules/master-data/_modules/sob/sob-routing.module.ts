@@ -6,7 +6,7 @@ import { CoaComponent } from './_page/coa/coa.component';
 import { ResourceTariffComponent } from './_page/resource-tariff/resource-tariff.component';
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
-import { AccountantPeriodComponent } from './_page/accountant-period/accountant-period.component';
+import { AccountingPeriod } from './_page/accounting-period/accounting-period';
 import { VoucherComponent } from './_page/voucher/voucher.component';
 import { PaymentMethodComponent } from './_page/payment-method/payment-method.component';
 import { ExciseTariffComponent } from './_page/excise-tariff/excise-tariff.component';
@@ -27,7 +27,7 @@ const routes: Routes = [
       { path: 'resource-tariff', component: ResourceTariffComponent },
       { path: 'cost-center', component: CostCenterComponent },
       { path: 'fiscal-year', component: FiscalYearComponent },
-      { path: 'accountant-period', component: AccountantPeriodComponent },
+      { path: 'accounting-period', component: AccountingPeriod },
       { path: 'voucher', component: VoucherComponent },
       { path: 'payment-method', component: PaymentMethodComponent },
       { path: 'value-added-tax', component: ValueAddedTaxComponent },

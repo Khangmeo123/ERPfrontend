@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AccountantPeriodComponent } from './accountant-period.component';
+import { AccountingPeriod } from './accounting-period';
 
-describe('AccountantPeriodComponent', () => {
-  let component: AccountantPeriodComponent;
-  let fixture: ComponentFixture<AccountantPeriodComponent>;
+describe('AccountingPeriod', () => {
+  let component: AccountingPeriod;
+  let fixture: ComponentFixture<AccountingPeriod>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountantPeriodComponent ]
+      declarations: [ AccountingPeriod ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(AccountantPeriodComponent);
+    fixture = TestBed.createComponent(AccountingPeriod);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

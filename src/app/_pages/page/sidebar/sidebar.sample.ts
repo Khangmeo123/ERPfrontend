@@ -112,7 +112,7 @@ export const sampleSidebarMenu = [
       {
         label: 'Kỳ kế toán',
 
-        route: '/master-data/sob/accountant-period',
+        route: '/master-data/sob/accounting-period',
       },
       {
         label: 'Quản lý chứng từ',

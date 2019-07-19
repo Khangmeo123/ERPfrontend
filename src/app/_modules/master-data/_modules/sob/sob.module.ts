@@ -5,7 +5,7 @@ import { PaymentMethodComponent } from './_page/payment-method/payment-method.co
 import { PaymentTermComponent } from './_page/payment-term/payment-term.component';
 import { BankAccountComponent } from './_page/bank-account/bank-account.component';
 import { CoaComponent } from './_page/coa/coa.component';
-import { AccountantPeriodComponent } from './_page/accountant-period/accountant-period.component';
+import { AccountingPeriod } from './_page/accounting-period/accounting-period';
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
 import { ExciseTariffComponent } from './_page/excise-tariff/excise-tariff.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
@@ -39,7 +39,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     SobComponent,
     BankAccountComponent,
     CoaComponent,
-    AccountantPeriodComponent,
+    AccountingPeriod,
     CostCenterComponent,
     ExciseTariffComponent,
     FiscalYearComponent,

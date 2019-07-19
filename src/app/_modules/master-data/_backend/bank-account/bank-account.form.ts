@@ -3,7 +3,7 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { BankAccountEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class SobForm extends FormModel {
+export class BankAccountForm extends FormModel {
     coaId = new FormControl('', [requiredField]);
     coaCode = new FormControl('', [requiredField]);
     coaName = new FormControl('', [requiredField]);

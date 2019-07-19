@@ -1,6 +1,6 @@
 import { Router } from '@angular/router';
 import { FormGroup } from '@angular/forms';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { BusinessGroupSearchEntity } from 'src/app/_modules/master-data/_backend/business-group/business-group.searchentity';
 import { BusinessGroupService } from './business-group.service';
@@ -13,7 +13,7 @@ import { BookmarkService } from 'src/app/_services';
   selector: 'app-business-group',
   templateUrl: './business-group.component.html',
   styleUrls: ['./business-group.component.scss'],
-  providers: [BusinessGroupService]
+  providers: [BusinessGroupService],
 })
 export class BusinessGroupComponent implements OnInit, OnDestroy {
   pageTitle: string = 'business_group.header.title';
@@ -28,7 +28,7 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
 
   constructor(private businessGroupService: BusinessGroupService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
-    private router: Router) {
+              private router: Router) {
     const businessGroupListSub = this.businessGroupService.businessGroupList.subscribe(res => {
       if (res) {
         this.businessGroupList = res;
@@ -47,7 +47,7 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isSaveBookMark = res;
     });
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
     this.businessGroupSubs.add(businessGroupListSub).add(businessGroupFormSub).add(businessGroupCountSub).add(bookMarkNotify);
   }
 
@@ -119,9 +119,9 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 }
