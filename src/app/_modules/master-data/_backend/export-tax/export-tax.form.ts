@@ -3,7 +3,7 @@ import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator,
 import { ExportTaxEntity } from 'src/app/_modules/master-data/_backend/export-tax/export-tax.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class ExportTariffForm extends FormModel {
+export class ExportTaxForm extends FormModel {
 
     taxCode = new FormControl('', [requiredField]);
     taxType = new FormControl('', [requiredField]);

@@ -6,24 +6,24 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { CurrencyEntity } from '../../../../_backend/currency/currency.entity';
 import { CurrencySearchEntity } from '../../../../_backend/currency/currency.searchentity';
-import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-account.searchentity';
-import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BankAccountRepository extends Repository {
+export class CoaRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
     this.apiUrl = environment.apiUrlApps + 'master-data/setOfBook';
   }
 
-  getList(bankAccountSearchEntity: BankAccountSearchEntity): Observable<BankAccountEntity[]> {
-    return this.http.post<BankAccountEntity[]>(this.apiUrl + '/list', JSON.stringify(bankAccountSearchEntity),
+  getList(coaSearchEntity: CoaSearchEntity): Observable<CoaEntity[]> {
+    return this.http.post<CoaEntity[]>(this.apiUrl + '/list', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         return r.body.map((item) => {
-          return new BankAccountEntity(item);
+          return new CoaEntity(item);
         });
       }),
     );
@@ -47,39 +47,39 @@ export class BankAccountRepository extends Repository {
     );
   }
 
-  count(bankAccountSearchEntity: BankAccountSearchEntity): Observable<number> {
-    return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(bankAccountSearchEntity),
+  count(coaSearchEntity: CoaSearchEntity): Observable<number> {
+    return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
   }
 
-  getId(bankAccountId: string): Observable<BankAccountEntity> {
-    return this.http.post<BankAccountEntity>(this.apiUrl + '/get', JSON.stringify({Id: bankAccountId}),
+  getId(coaId: string): Observable<CoaEntity> {
+    return this.http.post<CoaEntity>(this.apiUrl + '/get', JSON.stringify({Id: coaId}),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
-        return new BankAccountEntity(r.body);
+        return new CoaEntity(r.body);
       }),
     );
   }
 
 
-  add(bankAccountEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(bankAccountEntity),
+  add(coaEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(coaEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
   }
 
-  update(bankAccountEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/update', JSON.stringify(bankAccountEntity),
+  update(coaEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/update', JSON.stringify(coaEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
   }
 
-  delete(bankAccountEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(bankAccountEntity),
+  delete(coaEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(coaEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

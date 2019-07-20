@@ -30,7 +30,7 @@ export class SobRepository extends Repository {
   }
 
   getCurrencyList(currencySearchEntity: CurrencySearchEntity): Observable<CurrencyEntity[]> {
-    return this.http.post<CurrencyEntity[]>(this.apiUrl + '/currency/list', JSON.stringify(currencySearchEntity),
+    return this.http.post<CurrencyEntity[]>(this.apiUrl + '/ListCurrency', JSON.stringify(currencySearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         return r.body.map((item) => {

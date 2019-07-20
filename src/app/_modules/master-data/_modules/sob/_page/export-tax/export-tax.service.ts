@@ -1,47 +1,47 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
-import { EnvironmentTaxForm } from '../../../../_backend/environment-tax/environment-tax.form';
-import { EnvironmentTaxEntity } from '../../../../_backend/environment-tax/environment-tax.entity';
-import { EnvironmentTaxRepository } from './environment-tax.repository';
+import { ExportTaxRepository } from './export-tax.repository';
+import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
+import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
+import { ExportTaxForm } from '../../../../_backend/export-tax/export-tax.form';
 
-export class EnvironmentTaxService {
-  public environmentTaxList: BehaviorSubject<EnvironmentTaxEntity[]>;
-  public environmentTaxCount: BehaviorSubject<number>;
-  public environmentTaxForm: BehaviorSubject<FormGroup>;
+export class ExportTaxService {
+  public exportTaxList: BehaviorSubject<ExportTaxEntity[]>;
+  public exportTaxCount: BehaviorSubject<number>;
+  public exportTaxForm: BehaviorSubject<FormGroup>;
 
-  constructor(private fb: FormBuilder, private environmentTaxRepository: EnvironmentTaxRepository, private toastrService: ToastrService) {
-    this.environmentTaxCount = new BehaviorSubject(0);
-    this.environmentTaxList = new BehaviorSubject([]);
-    this.environmentTaxForm = new BehaviorSubject(this.fb.group(
-      new EnvironmentTaxForm(),
+  constructor(private fb: FormBuilder, private exportTaxRepository: ExportTaxRepository, private toastrService: ToastrService) {
+    this.exportTaxCount = new BehaviorSubject(0);
+    this.exportTaxList = new BehaviorSubject([]);
+    this.exportTaxForm = new BehaviorSubject(this.fb.group(
+      new ExportTaxForm(),
     ));
   }
 
-  getList(environmentTaxSearchEntity: EnvironmentTaxSearchEntity) {
-    forkJoin(this.environmentTaxRepository.getList(environmentTaxSearchEntity),
-      this.environmentTaxRepository.count(environmentTaxSearchEntity)).subscribe(([list, count]) => {
+  getList(exportTaxSearchEntity: ExportTaxSearchEntity) {
+    forkJoin(this.exportTaxRepository.getList(exportTaxSearchEntity),
+      this.exportTaxRepository.count(exportTaxSearchEntity)).subscribe(([list, count]) => {
       if (list) {
-        this.environmentTaxList.next(list);
+        this.exportTaxList.next(list);
       }
       if (count) {
-        this.environmentTaxCount.next(count);
+        this.exportTaxCount.next(count);
       }
     });
   }
 
   add() {
-    this.environmentTaxForm.next(this.fb.group(
-      new EnvironmentTaxForm(),
+    this.exportTaxForm.next(this.fb.group(
+      new ExportTaxForm(),
     ));
   }
 
-  edit(environmentTaxId: string) {
-    this.environmentTaxRepository.getId(environmentTaxId).subscribe(res => {
+  edit(exportTaxId: string) {
+    this.exportTaxRepository.getId(exportTaxId).subscribe(res => {
       if (res) {
-        this.environmentTaxForm.next(this.fb.group(
-          new EnvironmentTaxForm(res),
+        this.exportTaxForm.next(this.fb.group(
+          new ExportTaxForm(res),
         ));
       }
     }, err => {
@@ -51,34 +51,34 @@ export class EnvironmentTaxService {
     });
   }
 
-  save(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
+  save(exportTaxEntity: any, exportTaxSearchEntity: ExportTaxSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (environmentTaxEntity.id === null || environmentTaxEntity.id === undefined) {
-        this.environmentTaxRepository.add(environmentTaxEntity).subscribe(res => {
+      if (exportTaxEntity.id === null || exportTaxEntity.id === undefined) {
+        this.exportTaxRepository.add(exportTaxEntity).subscribe(res => {
           if (res) {
-            this.getList(environmentTaxSearchEntity);
+            this.getList(exportTaxSearchEntity);
             this.toastrService.success('Cập nhật thành công !');
             resolve(false);
           }
         }, err => {
           if (err) {
-            this.environmentTaxForm.next(this.fb.group(
-              new EnvironmentTaxForm(err),
+            this.exportTaxForm.next(this.fb.group(
+              new ExportTaxForm(err),
             ));
             reject(true);
           }
         });
       } else {
-        this.environmentTaxRepository.update(environmentTaxEntity).subscribe(res => {
+        this.exportTaxRepository.update(exportTaxEntity).subscribe(res => {
           if (res) {
-            this.getList(environmentTaxSearchEntity);
+            this.getList(exportTaxSearchEntity);
             this.toastrService.success('Cập nhật thành công !');
             resolve(false);
           }
         }, err => {
           if (err) {
-            this.environmentTaxForm.next(this.fb.group(
-              new EnvironmentTaxForm(err),
+            this.exportTaxForm.next(this.fb.group(
+              new ExportTaxForm(err),
             ));
             reject(true);
           }
@@ -88,18 +88,18 @@ export class EnvironmentTaxService {
     return defered;
   }
 
-  delete(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
+  delete(exportTaxEntity: any, exportTaxSearchEntity: ExportTaxSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.environmentTaxRepository.delete(environmentTaxEntity).subscribe(res => {
+      this.exportTaxRepository.delete(exportTaxEntity).subscribe(res => {
         if (res) {
-          this.getList(environmentTaxSearchEntity);
+          this.getList(exportTaxSearchEntity);
           this.toastrService.success('Cập nhật thành công !');
           resolve(false);
         }
       }, err => {
         if (err) {
-          this.environmentTaxForm.next(this.fb.group(
-            new EnvironmentTaxForm(err),
+          this.exportTaxForm.next(this.fb.group(
+            new ExportTaxForm(err),
           ));
           reject(true);
         }

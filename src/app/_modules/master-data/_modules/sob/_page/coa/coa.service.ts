@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaForm } from '../../../../_backend/coa/coa.form';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { CoaRepository } from './coa.repository';
 
 export class CoaService {
   public coaList: BehaviorSubject<CoaEntity[]>;

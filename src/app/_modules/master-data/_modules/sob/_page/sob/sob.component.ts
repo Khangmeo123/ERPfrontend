@@ -21,16 +21,27 @@ import { CurrencySearchEntity } from '../../../../_backend/currency/currency.sea
 })
 export class SobComponent implements OnInit, OnDestroy {
   pageTitle: string = 'sob.header.title';
+
   isSaveBookMark: boolean = false;
+
   isShowDialog: boolean = false;
+
   pagination: PaginationModel = new PaginationModel();
+
   sobSearchEntity: SobSearchEntity = new SobSearchEntity();
+
   sobList: SobEntity[];
+
   currencySearchEntity: CurrencySearchEntity = new CurrencySearchEntity();
+
   sobForm: FormGroup;
+
   sobSubs: Subscription = new Subscription();
+
   popoverTitle: string = '';
+
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+
   visible = false;
 
   currencyList: CurrencyEntity[] = [];
