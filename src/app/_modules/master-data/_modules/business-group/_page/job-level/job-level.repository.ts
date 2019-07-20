@@ -16,7 +16,7 @@ import { Entities } from 'src/app/_helpers/entity';
 export class JobLevelRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/job-level';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/job-level';
     }
 
     getList(jobLevelSearchEntity: JobLevelSearchEntity): Observable<JobLevelEntity[]> {

@@ -14,7 +14,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 export class AssetRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/asset';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/asset';
     }
 
     getList(assetSearchEntity: AssetSearchEntity): Observable<AssetEntity[]> {

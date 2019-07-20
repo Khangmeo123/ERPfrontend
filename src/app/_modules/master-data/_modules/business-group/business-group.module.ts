@@ -16,7 +16,6 @@ import { BankComponent } from './_page/bank/bank.component';
 import { CurrencyComponent } from './_page/currency/currency.component';
 import { CustomerComponent } from './_page/customer/customer.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
-import { ProductComponent } from './_page/product/product.component';
 import { SupplierComponent } from './_page/supplier/supplier.component';
 import { UomComponent } from './_page/uom/uom.component';
 import { DetailCustomerComponent } from './_page/customer/detail-customer/detail-customer.component';
@@ -24,8 +23,6 @@ import { ListCustomerComponent } from './_page/customer/list-customer/list-custo
 import { DetailSupplierComponent } from './_page/supplier/detail-supplier/detail-supplier.component';
 import { ListEmployeeComponent } from './_page/employee/list-employee/list-employee.component';
 import { DetailEmployeeComponent } from './_page/employee/detail-employee/detail-employee.component';
-import { ListProductComponent } from './_page/product/list-product/list-product.component';
-import { DetailProductComponent } from './_page/product/detail-product/detail-product.component';
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
@@ -41,6 +38,9 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
+import { ItemComponent } from './_page/item/item.component';
+import { ListItemComponent } from './_page/item/list-item/list-item.component';
+import { DetailItemComponent } from './_page/item/detail-item/detail-item.component';
 
 @NgModule({
   declarations: [
@@ -51,15 +51,15 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
     CurrencyComponent,
     CustomerComponent,
     EmployeeComponent,
-    ProductComponent,
+    ItemComponent,
     SupplierComponent,
     UomComponent,
     DetailCustomerComponent,
     ListCustomerComponent,
     ListEmployeeComponent,
     DetailEmployeeComponent,
-    ListProductComponent,
-    DetailProductComponent,
+    ListItemComponent,
+    DetailItemComponent,
     ListSupplierComponent,
     DetailSupplierComponent,
     CurrencyComponent,

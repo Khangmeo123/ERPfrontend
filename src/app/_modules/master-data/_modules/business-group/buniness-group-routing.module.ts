@@ -3,9 +3,9 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { BusinessGroupComponent } from './_page/business-group/business-group.component';
 import { BankComponent } from './_page/bank/bank.component';
-import { ProductComponent } from './_page/product/product.component';
-import { ListProductComponent } from './_page/product/list-product/list-product.component';
-import { DetailProductComponent } from './_page/product/detail-product/detail-product.component';
+import { ItemComponent } from './_page/item/item.component';
+import { ListItemComponent } from './_page/item/list-item/list-item.component';
+import { DetailItemComponent } from './_page/item/detail-item/detail-item.component';
 import { UomComponent } from './_page/uom/uom.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
@@ -27,10 +27,10 @@ const routes: Routes = [
       { path: '', component: BusinessGroupComponent },
       { path: 'bank', component: BankComponent },
       {
-        path: 'product', component: ProductComponent, children: [
-          { path: 'list-product', component: ListProductComponent },
-          { path: 'detail-product', component: DetailProductComponent },
-          { path: '', redirectTo: 'list-product', pathMatch: 'full' }
+        path: 'item', component: ItemComponent, children: [
+          { path: 'list-item', component: ListItemComponent },
+          { path: 'detail-item', component: DetailItemComponent },
+          { path: '', redirectTo: 'list-item', pathMatch: 'full' }
         ],
       },
       { path: 'unit', component: UomComponent },

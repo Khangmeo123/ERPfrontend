@@ -1,0 +1,121 @@
+<div class="page list-item-of-legal-entity">
+    <div class="page-header">
+        <span class="page-title">
+            {{'itemOfLegalEntity.header.title' | translate}}
+            <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+        </span>
+
+    </div>
+    <div class="page-body">
+        <div class="row">
+            <div class="col-sm-6 page-1">
+                <div class="mt-2 row">
+                    <!-- <div class="col-sm-7 d-flex align-items-center">
+                            <span class="sob-label flex-shrink-1">
+                                {{'general.legal_entity.name' | translate}}
+                            </span>
+                            <app-single-select></app-single-select>
+                        </div> -->
+                </div>
+                <div class="page-section table1 mt-2">
+                    <p-table [value]="[]">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'itemOfLegalEntity.sob' | translate}}
+                                </th>
+                                <th>
+                                    {{'itemOfLegalEntity.code' | translate}}
+                                </th>
+                                <th>
+                                    {{'itemOfLegalEntity.name' | translate}}
+                                </th>
+
+                            </tr>
+                            <tr>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </div>
+
+            <div class="col-sm-6">
+                <div class="row d-flex ">
+                    <div class="col-sm-4 align-items-center">
+                        <app-multi-select></app-multi-select>
+                    </div>
+
+
+                    <div class="col-sm-8 page-actions  d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="onClickAddsupplier()"> +
+                            {{'general.button.add' | translate}}</button>
+                        <div class="btn-group" dropdown>
+                            <button id="button-basic" dropdownToggle type="button"
+                                class="btn btn-import dropdown-toggle" aria-controls="dropdown-basic">
+                                {{'general.button.import' | translate}}<span class="caret"></span>
+                            </button>
+                            <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                                aria-labelledby="button-basic">
+                                <li role="menuitem"><a class="dropdown-item"
+                                        href="#">{{'general.button.import_file' | translate}}</a>
+                                </li>
+                                <li class="divider dropdown-divider"></li>
+                                <li role="menuitem"><a class="dropdown-item"
+                                        href="#">{{'general.button.download_example' | translate}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+                    </div>
+                </div>
+
+                <div class="page-section mt-2">
+                    <p-table [value]="tmptable">
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th>
+                                    {{'itemOfLegalEntity.item.code' | translate}}
+                                </th>
+                                <th>
+                                    {{'itemOfLegalEntity.item.name' | translate}}
+                                </th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                                <th class="th-filter">
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
+                                <th></th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                            <tr (dblclick)="onClickViewDetail()">
+                                <td> {{item.code}} </td>
+                                <td> {{item.name}} </td>
+                                <td> <a href="javascript:void(0)">{{'general.button.delete' | translate}}</a></td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
