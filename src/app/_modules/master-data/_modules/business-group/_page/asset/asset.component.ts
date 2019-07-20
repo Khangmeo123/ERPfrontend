@@ -30,7 +30,6 @@ export class AssetComponent implements OnInit, OnDestroy {
   assetSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
 
   constructor(private assetService: AssetService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {

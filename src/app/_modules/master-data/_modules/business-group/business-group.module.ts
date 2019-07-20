@@ -1,3 +1,4 @@
+import { ItemDetailComponent } from './_page/item/item-detail/item-detail.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
 import { JobLevelComponent } from './_page/job-level/job-level.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -39,8 +40,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 import { ItemComponent } from './_page/item/item.component';
-import { ListItemComponent } from './_page/item/list-item/list-item.component';
-import { DetailItemComponent } from './_page/item/detail-item/detail-item.component';
+import { ItemListComponent } from './_page/item/item-list/item-list.component';
 
 @NgModule({
   declarations: [
@@ -58,8 +58,8 @@ import { DetailItemComponent } from './_page/item/detail-item/detail-item.compon
     ListCustomerComponent,
     ListEmployeeComponent,
     DetailEmployeeComponent,
-    ListItemComponent,
-    DetailItemComponent,
+    ItemListComponent,
+    ItemDetailComponent,
     ListSupplierComponent,
     DetailSupplierComponent,
     CurrencyComponent,

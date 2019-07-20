@@ -67,12 +67,21 @@ export class ItemForm extends FormModel {
     sctName = new FormControl('');
     sctValue = new FormControl('');
 
+    errors = new FormGroup({
+        code: new FormControl(''),
+        name: new FormControl(''),
+        unitPrice: new FormControl(''),
+        propertyId: new FormControl(''),
+        uomId: new FormControl(''),
+        statusId: new FormControl(''),
+    });
+
     constructor(itemEntity?: ItemEntity) {
         super();
         if (itemEntity !== null && itemEntity !== undefined) {
             Object.keys(itemEntity).forEach((item) => {
                 if (itemEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(itemEntity[item]);
+                    this[item].patchValue(itemEntity[item]);
                 }
             });
         }

@@ -4,12 +4,13 @@
             {{'item.content.modal.title' | translate}}
         </span>
         <div class="page-actions">
-            <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-            <button class="btn btn-save" (click)="onClickSave()">
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
                 {{ 'general.button.save' | translate}}</button>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                 [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                (cancel)="cancelClicked = true" (click)="delete()" data-qe-id="button-delete">
                 {{ 'general.button.delete' | translate}}</button>
         </div>
     </div>
@@ -17,8 +18,8 @@
     <hr>
     <div class="page-body">
         <accordion>
-            <accordion-group [isOpen]="true">
-                <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+            <accordion-group [isOpen]="true" [formGroup]="itemForm">
+                <button (click)="isOpenTab1 = !isOpenTab1;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'item.detail.tab.title_1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -28,9 +29,16 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_id' | translate}}<span
+                            <label for="bankid">{{ 'item.content.table.item_code' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="code"
+                                    data-qe-id="dialog-form-code" id="assetCode" />
+                                <app-error data-qe-id="dialog-error-code"
+                                    *ngIf="(itemForm.controls.code?.errors && itemForm.controls.code?.touched) || !!itemForm.controls.errors.get('code')?.value"
+                                    [formGroup]="itemForm" [property]="'code'" [placement]="'top'" class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -131,7 +139,7 @@
                 </div>
             </accordion-group>
             <accordion-group>
-                <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab2 = !isOpenTab2;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'item.detail.tab.title_2' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>

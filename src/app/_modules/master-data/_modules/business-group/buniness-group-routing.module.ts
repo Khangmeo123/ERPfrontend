@@ -4,8 +4,6 @@ import { Routes, RouterModule } from '@angular/router';
 import { BusinessGroupComponent } from './_page/business-group/business-group.component';
 import { BankComponent } from './_page/bank/bank.component';
 import { ItemComponent } from './_page/item/item.component';
-import { ListItemComponent } from './_page/item/list-item/list-item.component';
-import { DetailItemComponent } from './_page/item/detail-item/detail-item.component';
 import { UomComponent } from './_page/uom/uom.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
@@ -20,6 +18,8 @@ import { DetailSupplierComponent } from './_page/supplier/detail-supplier/detail
 import { CurrencyComponent } from './_page/currency/currency.component';
 import { JobLevelComponent } from './_page/job-level/job-level.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
+import { ItemListComponent } from './_page/item/item-list/item-list.component';
+import { ItemDetailComponent } from './_page/item/item-detail/item-detail.component';
 
 const routes: Routes = [
   {
@@ -28,9 +28,9 @@ const routes: Routes = [
       { path: 'bank', component: BankComponent },
       {
         path: 'item', component: ItemComponent, children: [
-          { path: 'list-item', component: ListItemComponent },
-          { path: 'detail-item', component: DetailItemComponent },
-          { path: '', redirectTo: 'list-item', pathMatch: 'full' }
+          { path: 'item-list', component: ItemListComponent },
+          { path: 'item-detail', component: ItemDetailComponent },
+          { path: '', redirectTo: 'item-list', pathMatch: 'full' }
         ],
       },
       { path: 'unit', component: UomComponent },

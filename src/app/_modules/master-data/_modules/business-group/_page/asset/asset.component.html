@@ -33,7 +33,7 @@
     <hr>
     <div class="page-body">
         <div class="page-selection list">
-            <p-table [value]="assetList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+            <p-table [value]="itemList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                 [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
                 <ng-template pTemplate="colgroup">
                     <colgroup>
@@ -52,11 +52,11 @@
                             {{ 'asset.content.table.asset_name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
+                        <th pResizableColumn data-qe-id="table-thead-type" [pSortableColumn]="'type'">
                             {{ 'asset.content.table.asset_type' | translate}}
                             <p-sortIcon [field]="'type'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
+                        <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
                             {{ 'asset.content.table.asset_status' | translate}}
                             <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
                         </th>
