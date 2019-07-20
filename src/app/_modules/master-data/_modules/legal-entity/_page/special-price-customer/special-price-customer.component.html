@@ -33,13 +33,13 @@
     <div class="page-body">
 
         <div class="mt-2 row">
-            <div class="col-sm-2 d-flex align-items-center">
+            <div class="col-sm-3 d-flex align-items-center">
                 <span class="sob-label flex-shrink-1">
                     {{'general.legal_entity.name' | translate}}
                 </span>
                 <app-single-select></app-single-select>
             </div>
-            <div class="col-sm-2 d-flex align-items-center">
+            <div class="col-sm-3 d-flex align-items-center">
                 <span class="sob-label flex-shrink-1">
                     {{'general.customer_group.name' | translate}}
                 </span>
@@ -113,14 +113,14 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="special_price_customerid">{{ 'special_price_customer.product_group' | translate}}<span
-                            style="color: red">*</span></label>
+                            class="text-danger ml-2">*</span></label>
                     <app-single-select data-qe-id="dialog-form-product-group"></app-single-select>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="special_price_customername">{{ 'special_price_customer.code' | translate}}<span
-                            style="color: red">*</span></label>
+                            class="text-danger ml-2">*</span></label>
                     <app-single-select ata-qe-id="dialog-form-code"></app-single-select>
                 </div>
             </div>
@@ -129,14 +129,14 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="special_price_customerid">{{ 'special_price_customer.from_date' | translate}}<span
-                            style="color: red">*</span></label>
+                            class="text-danger ml-2">*</span></label>
                     <app-date-picker data-qe-id="dialog-form-from-date"></app-date-picker>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="special_price_customername">{{ 'special_price_customer.to_date' | translate}}<span
-                            style="color: red">*</span></label>
+                            class="text-danger ml-2">*</span></label>
                     <app-date-picker data-qe-id="dialog-form-to-date"></app-date-picker>
                 </div>
             </div>

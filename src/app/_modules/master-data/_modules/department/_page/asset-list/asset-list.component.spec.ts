@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ExciseTariffComponent } from './excise-tariff.component';
+import { AssetListComponent } from './asset-list.component';
 
-describe('ExciseTariffComponent', () => {
-  let component: ExciseTariffComponent;
-  let fixture: ComponentFixture<ExciseTariffComponent>;
+describe('AssetListComponent', () => {
+  let component: AssetListComponent;
+  let fixture: ComponentFixture<AssetListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExciseTariffComponent ]
+      declarations: [ AssetListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ExciseTariffComponent);
+    fixture = TestBed.createComponent(AssetListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

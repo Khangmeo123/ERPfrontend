@@ -42,18 +42,6 @@
                             <th>
                                 {{'voucher.name' | translate}}
                             </th>
-                            <th>
-                                {{'voucher.debit' | translate}}
-                            </th>
-                            <th>
-                                {{'voucher.credit' | translate}}
-                            </th>
-                            <th>
-                                {{'voucher.type' | translate}}
-                            </th>
-                            <th>
-                                {{'voucher.description' | translate}}
-                            </th>
     
                         </tr>
                         <tr>
@@ -63,18 +51,6 @@
                             <th class="th-filter">
                                 <app-advanced-filters></app-advanced-filters>
                             </th>
-                            <th class="th-filter">
-                                <app-advanced-filters></app-advanced-filters>
-                            </th>
-                            <th class="th-filter">
-                                <app-advanced-filters></app-advanced-filters>
-                            </th>
-                            <th class="th-filter">
-                                <app-advanced-filters></app-advanced-filters>
-                            </th>
-                            <th class="th-filter">
-                                    <app-advanced-filters></app-advanced-filters>
-                                </th>
     
                         </tr>
                     </ng-template>
@@ -160,19 +136,6 @@
                         <input class="form-control" type="text" placeholder="">
                     </div>
     
-                    <div class="mb-4">
-                        <label>
-                            {{'voucher.debit' | translate}}
-                        </label>
-                        <input class="form-control" type="text" placeholder="">
-                    </div>
-    
-                    <div class="mb-4">
-                        <label>
-                            {{'voucher.type' | translate}}
-                        </label>
-                        <input class="form-control" type="text" placeholder="">
-                    </div>
                 </div>
     
                 <div class="col-6">
@@ -184,21 +147,7 @@
                         <input class="form-control" type="text" placeholder="">
                     </div>
     
-                    <div class=" mb-4">
-                        <label>
-                            {{'voucher.credit' | translate}}
-                            <span class="text-danger mr-2">*</span>
-                        </label>
-    
-                        <app-single-select></app-single-select>
-                    </div>
-    
-                    <div class=" mb-4">
-                        <label>
-                            {{'voucher.description' | translate}}
-                        </label>
-                        <input class="form-control" type="text-area" placeholder="">
-                    </div>
+                    
                 </div>
             </div>
         </form>
