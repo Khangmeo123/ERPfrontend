@@ -40,19 +40,22 @@
                     <ng-template pTemplate="header">
                         <tr>
                             <th>
-                                {{'import_tax.code' | translate}}
+                                {{'tax.code' | translate}}
                             </th>
                             <th>
-                                {{'import_tax.name' | translate}}
+                                {{'tax.name' | translate}}
                             </th>
                             <th>
-                                {{'import_tax.unit' | translate}}
+                                {{'tax.unit' | translate}}
                             </th>
                             <th>
-                                {{'import_tax.tax_rate' | translate}} (%)
+                                {{'tax.discount' | translate}} (%)
                             </th>
                             <th>
-                                {{'import_tax.description' | translate}}
+                                {{'tax.description' | translate}}
+                            </th>
+                            <th>
+                                {{'tax.disable' | translate}}
                             </th>
     
                         </tr>
@@ -72,58 +75,60 @@
                             <th class="th-filter">
                                 <app-advanced-filters></app-advanced-filters>
                             </th>
+                            <th class="th-filter">
+                            </th>
     
                         </tr>
                     </ng-template>
-                    <!-- <ng-template pTemplate="body" let-import_tax>
+                    <!-- <ng-template pTemplate="body" let-tax>
                             <tr>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="import_tax.code" required>
+                                            <input type="text" class="form-control" [(ngModel)]="tax.code" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{import_tax.code}}
+                                            {{tax.code}}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="import_tax.type" required>
+                                            <input type="text" class="form-control" [(ngModel)]="tax.type" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{ import_tax.type } }
+                                            {{ tax.type } }
                                     </ng-template>
                                   </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                   <p-cellEditor>
                                     <ng-template pTemplate="input">
-                                      <input type="text" class="form-control" [(ngModel)]="import_tax.unit" required>
+                                      <input type="text" class="form-control" [(ngModel)]="tax.unit" required>
                                     </ng-template>
                                     <ng-template pTemplate="output">
-                                      {{import_tax.unit}}
+                                      {{tax.unit}}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="import_tax.percent" required>
+                                            <input type="text" class="form-control" [(ngModel)]="tax.discount" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{import_tax.percent}}
+                                            {{tax.discount}}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
                                 <td pEditableColumn>
                                     <p-cellEditor>
                                         <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="import_tax.description" required>
+                                            <input type="text" class="form-control" [(ngModel)]="tax.description" required>
                                         </ng-template>
                                         <ng-template pTemplate="output">
-                                            {{ import_tax.description }}
+                                            {{ tax.description }}
                                         </ng-template>
                                     </p-cellEditor>
                                 </td>
@@ -151,7 +156,7 @@
                 <div class="col-6">
                     <div class="mt-4 mb-4">
                         <label>
-                            {{'import_tax.code' | translate}}
+                            {{'tax.code' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <input class="form-control" type="text" placeholder="">
@@ -159,14 +164,14 @@
     
                     <div class="mb-4">
                         <label>
-                            {{'import_tax.unit' | translate}}
+                            {{'tax.unit' | translate}}
                         </label>
                         <app-single-select></app-single-select>
                     </div>
     
                     <div class="mb-4">
                         <label>
-                            {{'import_tax.tax_rate' | translate}} (%)
+                            {{'tax.discount' | translate}} (%)
                         </label>
                         <input class="form-control" type="text" placeholder="">
                     </div>
@@ -175,7 +180,7 @@
                 <div class="col-6">
                     <div class="mt-4 mb-4">
                         <label>
-                            {{'import_tax.name' | translate}}
+                            {{'tax.name' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <input class="form-control" type="text" placeholder="a">
@@ -183,7 +188,7 @@
     
                     <div class=" mb-4">
                         <label>
-                            {{'import_tax.parent_account' | translate}}
+                            {{'tax.parent_account' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
     
@@ -192,7 +197,7 @@
     
                     <div class=" mb-4">
                         <label>
-                            {{'import_tax.description' | translate}}
+                            {{'tax.description' | translate}}
                         </label>
                         <input class="form-control" type="text-area" placeholder="">
                     </div>

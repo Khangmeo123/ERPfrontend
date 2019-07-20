@@ -1,0 +1,116 @@
+<div class="page">
+  <div class="page-header">
+    <div class="page-title">
+      {{'department.project.title' | translate}}
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="toggleModal()">
+        {{'general.button.add' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="page-body mt-4">
+    <div class="page-section">
+      <p-table resizableColumns [value]="[]">
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn> {{'department.project.code' | translate}} </th>
+            <th pResizableColumn> {{'department.project.name' | translate}} </th>
+            <th pResizableColumn> {{'department.project.manager' | translate}} </th>
+            <th pResizableColumn> {{'department.project.startDate' | translate}} </th>
+            <th pResizableColumn> {{'department.project.endDate' | translate}} </th>
+          </tr>
+          <tr>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-project>
+          <tr>
+            <td>{{project.code}}</td>
+            <td>{{project.name}}</td>
+            <td>{{project.manager}}</td>
+            <td>{{project.startDate}}</td>
+            <td>{{project.endDate}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
+<p-dialog [modal]="true" appendTo="body" [(visible)]="modal">
+  <p-header>
+    {{'department.project.add' | translate}}
+  </p-header>
+  <div class="container">
+    <div class="row">
+      <div class="form-group col">
+        <label>
+          {{'department.project.code' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col">
+        <label>
+          {{'department.project.name' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label>
+          {{'department.project.manager' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+      <div class="form-group col">
+        <label>
+          {{'department.project.description' | translate}}
+        </label>
+        <textarea class="form-control" rows="1"></textarea>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label>
+          {{'department.project.startDate' | translate}}
+        </label>
+        <app-date-picker></app-date-picker>
+      </div>
+      <div class="form-group col">
+        <label>
+          {{'department.project.endDate' | translate}}
+        </label>
+        <app-date-picker></app-date-picker>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <button class="btn btn-add mr-2">
+      {{'general.button.save' | translate}}
+    </button>
+    <button class="btn btn-cancel mr-2">
+      {{'general.button.cancel' | translate}}
+    </button>
+    <button class="btn btn-delete">
+      {{'general.button.delete' | translate}}
+    </button>
+  </p-footer>
+</p-dialog>

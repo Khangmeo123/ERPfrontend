@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { BusinessGroupEntity } from 'src/app/_modules/master-data/_backend/business-group/business-group.entity';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
+import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 
 @Component({
   selector: 'app-business-group',
@@ -16,7 +17,7 @@ import { BookmarkService } from 'src/app/_services';
   providers: [BusinessGroupService],
 })
 export class BusinessGroupComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'business_group.header.title';
+  pageTitle = _('business_group.header.title');
   isSaveBookMark: boolean = false;
   isShowDialog: boolean = false;
   pagination: PaginationModel = new PaginationModel();

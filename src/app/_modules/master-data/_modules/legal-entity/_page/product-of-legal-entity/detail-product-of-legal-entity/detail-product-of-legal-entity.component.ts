@@ -11,8 +11,7 @@ export class DetailProductOfLegalEntityComponent implements OnInit {
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   public confirmClicked: boolean = false;
   public cancelClicked: boolean = false;
-  constructor() { }
-
+  isChecked: boolean = false;
 
   isOpenTab1: boolean = false;
   isOpenTab2: boolean = false;
@@ -22,6 +21,8 @@ export class DetailProductOfLegalEntityComponent implements OnInit {
   isOpenModalDiscount: boolean = false;
   isOpenModalTransformationUnit: boolean = false;
   isOpenModalBillOfMaterias: boolean = false;
+
+  constructor() { }
   ngOnInit() {
   }
 
@@ -51,5 +52,9 @@ export class DetailProductOfLegalEntityComponent implements OnInit {
 
   onClickAddBillOfMaterias() {
     this.isOpenModalBillOfMaterias = !this.isOpenModalBillOfMaterias;
+  }
+
+  onClickChange () {
+    this.isChecked = !this.isChecked;
   }
 }

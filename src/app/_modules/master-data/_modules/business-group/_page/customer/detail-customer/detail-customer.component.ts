@@ -11,13 +11,9 @@ export class DetailCustomerComponent implements OnInit, OnDestroy {
     name: new FormControl(),
   });
 
-  bankAccountsModal = false;
-
-  contactsModal = false;
 
   isOpenTab1: boolean = false;
-  isOpenTab2: boolean = false;
-  isOpenTab3: boolean = false;
+
 
   ngOnDestroy(): void {
   }
@@ -25,23 +21,9 @@ export class DetailCustomerComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
   }
 
-  toggleBankAccountsModal() {
-    this.bankAccountsModal = !this.bankAccountsModal;
-  }
-
-  toggleContactsModal() {
-    this.contactsModal = !this.contactsModal;
-  }
-
   onClickOpen(event) {
     this.isOpenTab1 = !this.isOpenTab1;
   }
 
-  onClickOpenTab2() {
-    this.isOpenTab2 = !this.isOpenTab2;
-  }
 
-  onClickOpenTab3() {
-    this.isOpenTab3 = !this.isOpenTab3;
-  }
 }
