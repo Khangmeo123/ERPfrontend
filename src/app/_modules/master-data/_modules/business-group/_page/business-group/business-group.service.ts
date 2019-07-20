@@ -61,10 +61,6 @@ export class BusinessGroupService {
           }
         }, err => {
           if (err) {
-            const testItem = this.fb.group(
-              new BusinessGroupForm(err),
-            );
-            debugger
             this.businessGroupForm.next(this.fb.group(
               new BusinessGroupForm(err),
             ));

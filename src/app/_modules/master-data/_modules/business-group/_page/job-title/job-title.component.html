@@ -95,7 +95,7 @@
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="jobTitleCode" />
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(jobTitleForm.controls.code?.errors && jobTitleForm.controls.code?.touched) || !!jobTitleForm.controls.error.get('code')?.value"
+                            *ngIf="(jobTitleForm.controls.code?.errors && jobTitleForm.controls.code?.touched) || !!jobTitleForm.controls.errors.get('code')?.value"
                             [formGroup]="jobTitleForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -109,7 +109,7 @@
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="jobTitleName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(jobTitleForm.controls.name?.errors && jobTitleForm.controls.name?.touched) || !!jobTitleForm.controls.error.get('name')?.value"
+                            *ngIf="(jobTitleForm.controls.name?.errors && jobTitleForm.controls.name?.touched) || !!jobTitleForm.controls.errors.get('name')?.value"
                             [formGroup]="jobTitleForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>

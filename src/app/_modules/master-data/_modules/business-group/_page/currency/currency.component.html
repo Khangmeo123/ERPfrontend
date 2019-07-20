@@ -78,7 +78,7 @@
               <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                 id="currencyCode" />
               <app-error data-qe-id="dialog-error-code"
-                *ngIf="(currencyForm.controls.code?.errors && currencyForm.controls.code?.touched) || !!currencyForm.controls.error.get('code')?.value"
+                *ngIf="(currencyForm.controls.code?.errors && currencyForm.controls.code?.touched) || !!currencyForm.controls.errors.get('code')?.value"
                 [formGroup]="currencyForm" [property]="'code'" [placement]="'top'" class="error-form">
               </app-error>
             </div>
@@ -92,7 +92,7 @@
               <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                 id="currencyName" />
               <app-error data-qe-id="dialog-error-name"
-                *ngIf="(currencyForm.controls.name?.errors && currencyForm.controls.name?.touched) || !!currencyForm.controls.error.get('name')?.value"
+                *ngIf="(currencyForm.controls.name?.errors && currencyForm.controls.name?.touched) || !!currencyForm.controls.errors.get('name')?.value"
                 [formGroup]="currencyForm" [property]="'name'" [placement]="'top'" class="error-form">
               </app-error>
             </div>

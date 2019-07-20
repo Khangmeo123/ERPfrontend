@@ -10,8 +10,20 @@ export class JobLevelForm extends FormModel {
     jobTitleId = new FormControl('', [requiredField]);
     jobTitleName = new FormControl('', [requiredField]);
     description = new FormControl();
-
+    errors = new FormGroup({
+        name: new FormControl(''),
+        code: new FormControl(''),
+        jobTitleId: new FormControl(''),
+        description: new FormControl('')
+    });
     constructor(jobLevelEntity?: JobLevelEntity) {
         super();
+        if (jobLevelEntity !== null && jobLevelEntity !== undefined) {
+            Object.keys(jobLevelEntity).forEach((item) => {
+                if (jobLevelEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].patchValue(jobLevelEntity[item]);
+                }
+            });
+        }
     }
 }

@@ -8,13 +8,16 @@ export class BankForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(1, 500)]);
     code = new FormControl('', [requiredField, checkLength(3, 10)]);
     description = new FormControl('', [checkLength(0, 1000)]);
-
+    errors = new FormGroup({
+        name: new FormControl(),
+        code: new FormControl()
+    });
     constructor(bankEntity?: BankEntity) {
         super();
         if (bankEntity !== null && bankEntity !== undefined) {
             Object.keys(bankEntity).forEach((item) => {
                 if (bankEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(bankEntity[item]);
+                    this[item].patchValue(bankEntity[item]);
                 }
             });
         }

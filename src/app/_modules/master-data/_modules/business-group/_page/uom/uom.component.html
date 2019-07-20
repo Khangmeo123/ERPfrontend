@@ -97,7 +97,7 @@
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="uomCode" />
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(uomForm.controls.code?.errors && uomForm.controls.code?.touched) || !!uomForm.controls.error.get('code')?.value"
+                            *ngIf="(uomForm.controls.code?.errors && uomForm.controls.code?.touched) || !!uomForm.controls.errors.get('code')?.value"
                             [formGroup]="uomForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -111,7 +111,7 @@
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="uomName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(uomForm.controls.name?.errors && uomForm.controls.name?.touched) || !!uomForm.controls.error.get('name')?.value"
+                            *ngIf="(uomForm.controls.name?.errors && uomForm.controls.name?.touched) || !!uomForm.controls.errors.get('name')?.value"
                             [formGroup]="uomForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>

@@ -8,13 +8,17 @@ export class JobTitleForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(3, 50)]);
     code = new FormControl('', [requiredField, checkLength(3, 10)]);
     description = new FormControl('', [checkLength(0, 500)]);
-
+    errors = new FormGroup({
+        name: new FormControl(''),
+        code: new FormControl(''),
+        description: new FormControl('')
+    });
     constructor(jobTitleEntity?: JobTitleEntity) {
         super();
         if (jobTitleEntity !== null && jobTitleEntity !== undefined) {
             Object.keys(jobTitleEntity).forEach((item) => {
                 if (jobTitleEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(jobTitleEntity[item]);
+                    this[item].patchValue(jobTitleEntity[item]);
                 }
             });
         }

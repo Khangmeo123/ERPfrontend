@@ -117,7 +117,7 @@
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="assetCode" />
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(assetForm.controls.code?.errors && assetForm.controls.code?.touched) || !!assetForm.controls.error.get('code')?.value"
+                            *ngIf="(assetForm.controls.code?.errors && assetForm.controls.code?.touched) || !!assetForm.controls.errors.get('code')?.value"
                             [formGroup]="assetForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -131,7 +131,7 @@
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="assetName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(assetForm.controls.name?.errors && assetForm.controls.name?.touched) || !!assetForm.controls.error.get('name')?.value"
+                            *ngIf="(assetForm.controls.name?.errors && assetForm.controls.name?.touched) || !!assetForm.controls.errors.get('name')?.value"
                             [formGroup]="assetForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -149,7 +149,7 @@
                             (listOpen)="openAssetTypes($event)" data-qe-id="dialog-form-typeId">
                         </app-simple-select>
                         <app-error data-qe-id="dialog-error-typeId"
-                            *ngIf="(assetForm.controls.typeId?.errors && assetForm.controls.typeId?.touched) || !!assetForm.controls.error.get('typeId')?.value"
+                            *ngIf="(assetForm.controls.typeId?.errors && assetForm.controls.typeId?.touched) || !!assetForm.controls.errors.get('typeId')?.value"
                             [formGroup]="assetForm" [property]="'typeId'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -165,7 +165,7 @@
                             (listOpen)="openAssetStatuses($event)">
                         </app-simple-select>
                         <app-error data-qe-id="dialog-error-statusId"
-                            *ngIf="(assetForm.controls.statusId?.errors && assetForm.controls.statusId?.touched) || !!assetForm.controls.error.get('statusId')?.value"
+                            *ngIf="(assetForm.controls.statusId?.errors && assetForm.controls.statusId?.touched) || !!assetForm.controls.errors.get('statusId')?.value"
                             [formGroup]="assetForm" [property]="'statusId'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
