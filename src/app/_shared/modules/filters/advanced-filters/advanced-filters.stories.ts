@@ -29,16 +29,16 @@ import { TranslateModule } from '@ngx-translate/core';
               <th pResizableColumn> Birthday</th>
             </tr>
             <tr>
-              <th>
+              <th class="th-filter">
                 <app-advanced-filters [filter]="filter.id" (changeFilter)="search()"></app-advanced-filters>
               </th>
-              <th>
+              <th class="th-filter">
                 <app-advanced-filters [filter]="filter.name" (changeFilter)="search()"></app-advanced-filters>
               </th>
-              <th>
+              <th class="th-filter">
                 <app-advanced-filters [filter]="filter.email" (changeFilter)="search()"></app-advanced-filters>
               </th>
-              <th>
+              <th class="th-filter">
                 <app-advanced-filters [filter]="filter.birthday" (changeFilter)="search()"></app-advanced-filters>
               </th>
             </tr>

@@ -1,7 +1,7 @@
-<div class="date-picker">
-  <div class="input-group">
+<div class="date-picker d-flex">
+  <div class="input-group {{small ? 'input-group-sm' : ''}}">
     <input type="text"
-           class="form-control"
+           class="form-control {{small ? 'form-control-sm' : ''}}"
            [readOnly]="inputReadOnly"
            (keydown)="onKeyDown($event)"
            (keyup)="onKeyUp($event)"

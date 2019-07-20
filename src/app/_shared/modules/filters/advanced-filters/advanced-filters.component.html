@@ -1,19 +1,19 @@
 <div class="advanced-filter" (clickOutside)="closeDropdown()" (click)="$event.stopPropagation()">
   <div #pane class="filter-pane {{ dropdownDirection }}">
-    <div class="ui-inputgroup d-flex p-1">
-      <span class="ui-inputgroup-addon">
-        {{filterTypeSign}}
-      </span>
+    <div class="input-group d-flex input-group-sm">
+      <div class="input-group-prepend">
+        <span class="input-group-text">
+          {{filterTypeSign}}
+        </span>
+      </div>
       <input *ngIf="!isDateFilter; else dateFilter"
              type="{{inputType}}"
-             class="form-control"
+             class="form-control form-control-sm"
              (keyup)="onKeyUp($event)"
              [(ngModel)]="filterValue"
              placeholder="{{'advancedFilter.placeholder' | translate}}">
       <ng-template #dateFilter>
-        <div class="flex-grow-1">
-          <app-date-picker (valueChange)="onApplyFilter($event)" [(value)]="filterValue"></app-date-picker>
-        </div>
+        <app-date-picker [small]="true" (valueChange)="onApplyFilter($event)" [(value)]="filterValue"></app-date-picker>
       </ng-template>
       <div class="input-group-append">
         <button #toggler class="btn" type="button" (click)="toggleList()">
