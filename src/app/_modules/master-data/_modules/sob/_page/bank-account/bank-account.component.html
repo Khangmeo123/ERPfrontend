@@ -98,7 +98,7 @@
   </div>
 </div>
 
-<p-dialog modal="true" [(visible)]="bankAccountsModal">
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="bankAccountsModal">
   <p-header>
     {{'bank_account.bank_accounts.add' | translate}}
   </p-header>
@@ -107,21 +107,21 @@
       <div class="form-group col-6">
         <label>
           {{'bank_account.bank_accounts.accountant_code' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <app-single-select></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'bank_account.bank_accounts.bank_code' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>
       <div class="form-group col-6">
         <label>
           {{'bank_account.bank_accounts.account_number' | translate}}
-          <span class="text-danger mr-2">(*)</span>
+          <span class="text-danger mr-2">*</span>
         </label>
         <input type="text" class="form-control">
       </div>

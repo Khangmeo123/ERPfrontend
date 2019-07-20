@@ -233,3 +233,8 @@ body {
     }
   }
 }
+
+.cdk-overlay-container {
+  position: fixed !important;
+  z-index: 1010 !important; /* set value you need */
+}

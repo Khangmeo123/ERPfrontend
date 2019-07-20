@@ -31,7 +31,7 @@
               <div class="form-group col">
                 <label for="customer_code">
                   {{'customer.code' | translate}}
-                  <span class="text-danger ml-1"> (*) </span>
+                  <span class="text-danger ml-1"> * </span>
                 </label>
                 <input type="text" class="form-control" id="customer_code">
                 <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
@@ -41,7 +41,7 @@
               <div class="form-group col">
                 <label for="customer_name">
                   {{'customer.name' | translate}}
-                  <span class="text-danger ml-1"> (*) </span>
+                  <span class="text-danger ml-1"> * </span>
                 </label>
                 <input type="text" class="form-control" id="customer_name">
               </div>

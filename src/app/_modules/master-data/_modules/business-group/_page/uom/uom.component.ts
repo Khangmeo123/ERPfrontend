@@ -8,6 +8,7 @@ import { UomService } from './uom.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
+import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 
 @Component({
   selector: 'app-uom',
@@ -16,7 +17,7 @@ import { Router } from '@angular/router';
   providers: [UomService]
 })
 export class UomComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'uom.header.title';
+  pageTitle = _('uom.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;

@@ -57,15 +57,6 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     return this.isOpened ? 'opened' : 'closed';
   }
 
-  get filterTypes() {
-    return this.types.map((type) => {
-      return {
-        label: type.code,
-        value: type.code,
-      };
-    });
-  }
-
   get filterTypeSign() {
     if (this.type) {
       return this.type.sign;
@@ -135,13 +126,14 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   }
 
   onSelectType(t: FilterType) {
+    console.log(this.filterValue);
     this.type = this.types.find((type) => type.code === t.code);
     for (const property in this.filter) {
       if (this.filter.hasOwnProperty(property)) {
         this.filter[property] = null;
       }
     }
-    this.filter[this.type.code] = this.inputValue;
+    this.filter[this.type.code] = this.filterValue;
     this.changeFilter.emit();
     this.toggleList();
   }

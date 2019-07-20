@@ -18,6 +18,7 @@ export class DetailProductGroupComponent implements OnInit {
   isOpenTab2: boolean = false;
   isOpenTab3: boolean = false;
   isOpenTab4: boolean = false;
+  isChecked: boolean = false;
 
   isOpenModalDiscount: boolean = false;
   isOpenModalTransformationUnit: boolean = false;
@@ -51,6 +52,10 @@ export class DetailProductGroupComponent implements OnInit {
 
   onClickAddBillOfMaterias() {
     this.isOpenModalBillOfMaterias = !this.isOpenModalBillOfMaterias;
+  }
+
+  onClickChange () {
+    this.isChecked = !this.isChecked;
   }
 
 }

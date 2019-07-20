@@ -1,4 +1,19 @@
 {
+	"accounting_period": {
+		"description": "",
+		"from_date": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"lable": "",
+			"title": ""
+		},
+		"status": {
+			"fiscal_year": ""
+		},
+		"to_date": ""
+	},
 	"advancedFilter": {
 		"placeholder": ""
 	},
@@ -31,6 +46,9 @@
 				"bank_description": "",
 				"bank_name": ""
 			}
+		},
+		"header": {
+			"title": ""
 		}
 	},
 	"bank_account": {
@@ -50,9 +68,6 @@
 		"description": "",
 		"details": {
 			"title": ""
-		},
-		"sob": {
-			"name": ""
 		}
 	},
 	"bookmarks": {
@@ -61,6 +76,9 @@
 	"business_group": {
 		"code": "",
 		"description": "",
+		"header": {
+			"title": ""
+		},
 		"modal": {
 			"title": ""
 		},
@@ -75,7 +93,6 @@
 		"list": {
 			"title": ""
 		},
-		"name": "",
 		"super_account": ""
 	},
 	"cost-center": {
@@ -92,11 +109,6 @@
 		},
 		"header": {
 			"title": ""
-		},
-		"status": {
-			"active": "",
-			"inactive": "",
-			"label": ""
 		}
 	},
 	"cropper": {
@@ -107,6 +119,9 @@
 		"currency_code": "",
 		"currency_description": "",
 		"currency_name": "",
+		"header": {
+			"title": ""
+		},
 		"title": ""
 	},
 	"customer": {
@@ -182,20 +197,66 @@
 		"placeHolder": ""
 	},
 	"debt_load": "",
+	"department": {
+		"add": "",
+		"asset": {
+			"actions": "",
+			"add": "",
+			"code": "",
+			"fromDate": "",
+			"manager": "",
+			"name": "",
+			"toDate": "",
+			"type": ""
+		},
+		"code": "",
+		"employee": {
+			"actions": "",
+			"code": "",
+			"name": ""
+		},
+		"name": "",
+		"project": {
+			"add": "",
+			"code": "",
+			"description": "",
+			"endDate": "",
+			"manager": "",
+			"name": "",
+			"startDate": "",
+			"title": ""
+		},
+		"title": "",
+		"warehouse": {
+			"add": "",
+			"address": "",
+			"code": "",
+			"name": "",
+			"title": ""
+		},
+		"warehouse_group": {
+			"code": "",
+			"details": {
+				"title": ""
+			},
+			"modal": {
+				"title": ""
+			},
+			"name": ""
+		}
+	},
+	"departments": {
+		"title": ""
+	},
 	"detailEmployeeGroup": {
 		"bank_account": {
 			"account_number": "",
 			"account_owner": "",
-			"add": "",
 			"bank_address": "",
 			"bank_division": "",
 			"bank_name": "",
-			"code": "",
 			"province": "",
 			"title": ""
-		},
-		"bank_accounts": {
-			"add": ""
 		},
 		"bassic_salary": "",
 		"birthday": "",
@@ -232,6 +293,14 @@
 		"jobTitle": "",
 		"name": "",
 		"numberOfDependent": "",
+		"own_asset": {
+			"code": "",
+			"from_date": "",
+			"name": "",
+			"title": "",
+			"to_date": "",
+			"type": ""
+		},
 		"salary_agreement": "",
 		"salary_ratio": "",
 		"tax_code": ""
@@ -559,6 +628,23 @@
 		"name": "",
 		"sob": ""
 	},
+	"environment_tax": {
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
+	"export_tax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
 	"fiscal_year": {
 		"content": {
 			"from_date": "",
@@ -572,9 +658,6 @@
 		},
 		"header": {
 			"title": ""
-		},
-		"status": {
-			"label": ""
 		}
 	},
 	"general": {
@@ -593,11 +676,30 @@
 		"customer_group": {
 			"name": ""
 		},
-		"legal": "",
+		"detail": "",
+		"division": "",
 		"legal_entity": {
 			"name": ""
 		},
 		"sob": ""
+	},
+	"import_tax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
+	"jobLevel": {
+		"header": {
+			"title": ""
+		}
+	},
+	"jobTitle": {
+		"header": {
+			"title": ""
+		}
 	},
 	"job_level": {
 		"job_level_code": "",
@@ -626,6 +728,29 @@
 	"pagination": {
 		"entries": "",
 		"show": ""
+	},
+	"payment_method": {
+		"code": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"payment_method_name": ""
+	},
+	"payment_term": {
+		"code": "",
+		"discount_period": "",
+		"discount_rate": "",
+		"due_in_date": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": ""
 	},
 	"payment_terms": "",
 	"pic": "",
@@ -700,25 +825,13 @@
 		},
 		"sob": ""
 	},
-	"resource": {
-		"account": {
-			"total": ""
-		},
-		"code": "",
-		"description": "",
+	"resource_tax": {
 		"header": {
 			"title": ""
 		},
 		"modal": {
 			"title": ""
-		},
-		"name": "",
-		"percent": "",
-		"status": {
-			"label": ""
-		},
-		"type": "",
-		"unit": ""
+		}
 	},
 	"select": {
 		"availableList": "",
@@ -727,10 +840,25 @@
 	},
 	"sob": {
 		"add": "",
+		"chart_account": "",
 		"code": "",
 		"currency": "",
+		"enviroment_tax": "",
+		"export_tax": "",
+		"import_tax": "",
 		"name": "",
-		"title": ""
+		"resource_tax": "",
+		"special_consumption_tax": "",
+		"title": "",
+		"value_added_tax": ""
+	},
+	"special_consumption_tax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
 	},
 	"special_price_customer": {
 		"code": "",
@@ -834,39 +962,14 @@
 			"name": ""
 		}
 	},
-	"tariff": {
-		"account": {
-			"total": ""
-		},
+	"tax": {
 		"code": "",
 		"description": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
+		"disable": "",
+		"discount": "",
 		"name": "",
-		"percent": "",
-		"status": {
-			"label": ""
-		},
-		"type": "",
+		"parent_account": "",
 		"unit": ""
-	},
-	"tariff_coa": {
-		"coa": {
-			"circular_133": "",
-			"circular_200": "",
-			"title": ""
-		},
-		"save": "",
-		"tariff": {
-			"excise": "",
-			"resources": "",
-			"title": ""
-		},
-		"title": ""
 	},
 	"uom": {
 		"content": {
@@ -881,6 +984,31 @@
 				"uom_description": "",
 				"uom_name": ""
 			}
+		},
+		"header": {
+			"title": ""
 		}
+	},
+	"value_added_tax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
+	"voucher": {
+		"code": "",
+		"credit": "",
+		"debit": "",
+		"description": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"type": ""
 	}
 }

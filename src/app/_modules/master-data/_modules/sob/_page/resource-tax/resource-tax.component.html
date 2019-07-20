@@ -1,13 +1,14 @@
-<div class="page excise-tariff">
+<div class="page resource-tax">
     <div class="page-header">
         <span class="page-title">
-            {{'tariff.header.title' | translate}}
+            {{'resource_tax.header.title' | translate}}
             <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
+
         <div class="page-actions">
             <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>
             <div class="btn-group" dropdown>
@@ -40,30 +41,30 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th>
-                            {{'tariff.code' | translate}}
+                            {{'tax.code' | translate}}
                         </th>
                         <th>
-                            {{'tariff.name' | translate}}
+                            {{'tax.name' | translate}}
                         </th>
                         <th>
-                            {{'tariff.unit' | translate}}
+                            {{'tax.unit' | translate}}
                         </th>
                         <th>
-                            {{'tariff.percent' | translate}}
+                            {{'tax.discount' | translate}}
                         </th>
                         <th>
-                            {{'tariff.description' | translate}}
+                            {{'tax.description' | translate}}
+                        </th>
+                        <th>
+                            {{'tax.disable' | translate}}
                         </th>
 
                     </tr>
                     <tr>
-                        <th  class="th-filter">
+                        <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
-                        <th  class="th-filter">
-                            <app-advanced-filters></app-advanced-filters>
-                        </th>
-                        <th  class="th-filter">
+                        <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
                         </th>
                         <th class="th-filter">
@@ -71,56 +72,74 @@
                         </th>
                         <th class="th-filter">
                             <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters></app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
                         </th>
 
                     </tr>
                 </ng-template>
-                <!-- <ng-template pTemplate="body" let-tariff>
+                <!-- <ng-template pTemplate="body"
+                             let-tax>
                     <tr>
                         <td pEditableColumn>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
-                                    <input type="text" class="form-control" [(ngModel)]="tariff.code" required>
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tax.code"
+                                           required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{tariff.code}}
+                                    {{tax.code}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
                         <td pEditableColumn>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
-                                    <input type="text" class="form-control" [(ngModel)]="tariff.type" required>
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tax.type"
+                                           required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{ tariff.type } }
+                                    {{ tax.type } }
                             </ng-template>
                           </p-cellEditor>
                         </td>
                         <td pEditableColumn>
                           <p-cellEditor>
                             <ng-template pTemplate="input">
-                              <input type="text" class="form-control" [(ngModel)]="tariff.unit" required>
+                              <input type="text" class="form-control" [(ngModel)]="tartaxiff.unit" required>
                             </ng-template>
                             <ng-template pTemplate="output">
-                              {{tariff.unit}}
+                              {{tax.unit}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
                         <td pEditableColumn>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
-                                    <input type="text" class="form-control" [(ngModel)]="tariff.percent" required>
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.discount"
+                                           required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
-                                    {{tariff.percent}}
+                                    {{tariff.discount}}
                                 </ng-template>
                             </p-cellEditor>
                         </td>
                         <td pEditableColumn>
                             <p-cellEditor>
                                 <ng-template pTemplate="input">
-                                    <input type="text" class="form-control" [(ngModel)]="tariff.description" required>
+                                    <input type="text"
+                                           class="form-control"
+                                           [(ngModel)]="tariff.description"
+                                           required>
                                 </ng-template>
                                 <ng-template pTemplate="output">
                                     {{ tariff.description }}
@@ -134,39 +153,40 @@
         </div>
 
         <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+            <!-- Pagination go here -->
         </div>
     </div>
 
 </div>
 
 
-<p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="visible" appendTo="body"
-    [style]="{width: '900px'}" modal="true">
+<p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="visible" appendTo="body" [style]="{width: '900px'}"
+    modal="true">
     <p-header>
-        {{'tariff.modal.title' | translate}}
+        {{'resource_tax.modal.title' | translate}}
     </p-header>
     <form class="container">
         <div class="row">
             <div class="col-6">
                 <div class="mt-4 mb-4">
                     <label>
-                        {{'tariff.code' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
+                        {{'tax.code' | translate}}
+                        <span class="text-danger mr-2">*</span>
                     </label>
                     <input class="form-control" type="text" placeholder="10100">
                 </div>
 
                 <div class="mb-4">
                     <label>
-                        {{'tariff.unit' | translate}}
+                        {{'tax.unit' | translate}}
+
                     </label>
                     <app-single-select></app-single-select>
                 </div>
 
                 <div class="mb-4">
                     <label>
-                        {{'tariff.percent' | translate}}
+                        {{'tax.discount' | translate}}
                     </label>
                     <input class="form-control" type="text" placeholder="70">
                 </div>
@@ -175,16 +195,14 @@
             <div class="col-6">
                 <div class="mt-4 mb-4">
                     <label>
-                        {{'tariff.name' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
+                        {{'tax.name' | translate}}
                     </label>
                     <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga">
                 </div>
 
                 <div class=" mb-4">
                     <label>
-                        {{'tariff.account.total' | translate}}
-                        <span class="text-danger mr-2">(*)</span>
+                        {{'tax.parent_account' | translate}}
                     </label>
 
                     <app-single-select></app-single-select>
@@ -192,7 +210,7 @@
 
                 <div class=" mb-4">
                     <label>
-                        {{'tariff.description' | translate}}
+                        {{'tax.description' | translate}}
                     </label>
                     <input class="form-control" type="text-area" placeholder="any description">
                 </div>

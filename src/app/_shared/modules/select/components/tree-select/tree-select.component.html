@@ -4,7 +4,7 @@
                    (closeList)="closeList($event)"
                    (toggleList)="toggleList($event)"
                    [label]="selectedText"></app-select-head>
-  <app-select-body [@toggleMenu]="listState" [scaleX]="scaleX">
+  <app-select-body [@toggleMenu]="listState" [scaleX]="scaleX" *ngIf="isOpened">
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
       <app-select-list [dataSource]="selectedNodes"

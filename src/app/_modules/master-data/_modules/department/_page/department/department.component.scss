@@ -1,0 +1,55 @@
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+
+$background: #1C4E80;
+
+.tabs {
+  border: 3px solid $border-color;
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+
+  .tab-button {
+    flex-grow: 1;
+    cursor: pointer;
+    padding-top: 0.25rem;
+    padding-bottom: 0.25rem;
+    justify-content: center;
+    text-align: center;
+    border-right: 3px solid $border-color;
+  }
+
+  .tab-button:hover,
+  .tab-button.active {
+    background: rgb(28, 78, 128);
+    color: #ffffff;
+  }
+
+  .tab-button:last-child {
+    border: 0;
+  }
+
+  
+}
+
+ul.fems-tab {
+  padding: 0;
+  margin: 0 0 10px;
+  border-bottom: solid 1px $background;
+}
+
+  ul.fems-tab li.active {
+    background-color: $background;
+    color: #fff;
+  }
+
+  ul.fems-tab li {
+    display: table-cell;
+    vertical-align: middle;
+    width: 1000em;
+    padding: 5px 10px;
+    text-align: center;
+    // font-weight: bold;
+    font-size: 14px;
+  }
