@@ -16,11 +16,13 @@ import { toggleMenu } from '../../../animations/toggleMenu';
 })
 export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
+  @Input() small = true;
+
   @Input() filter;
 
-  @ViewChild('pane', { static: false }) pane;
+  @ViewChild('pane', {static: false}) pane;
 
-  @ViewChild('toggler', { static: false }) toggler;
+  @ViewChild('toggler', {static: false}) toggler;
 
   @Output() changeFilter = new EventEmitter();
 
@@ -31,12 +33,9 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   type = null;
 
   dropdownDirection = 'left';
-
-  protected types: FilterType[] = [];
-
-  protected isOpened = false;
-
   filterValue;
+  protected types: FilterType[] = [];
+  protected isOpened = false;
 
   constructor() {
   }
@@ -89,7 +88,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const { left } = this.toggler.nativeElement.getBoundingClientRect();
+    const {left} = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -97,7 +96,8 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     }
   }
 
-  beforeCloseList() { }
+  beforeCloseList() {
+  }
 
   toggleList() {
     if (!this.isOpened) {
@@ -109,7 +109,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   }
 
   onApplyFilter(event) {
-    this.types.forEach(({ code }) => {
+    this.types.forEach(({code}) => {
       if (this.type.code === code) {
         if (event && event.target) {
           this.filter[code] = event.target.value;
@@ -145,8 +145,9 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   }
 
   onKeyUp(event) {
-    const { value } = event.target;
+    const {value} = event.target;
     if (value === '') {
+      this.filter[this.type.code] = null;
       this.onApplyFilter(value);
     } else {
       if (event.key === 'Enter') {
