@@ -29,7 +29,7 @@
         <ng-template pTemplate="header">
           <tr>
             <th>
-              {{'bank_account.accountant_code' | translate}}
+              {{'bank_account.accounting_code' | translate}}
             </th>
             <th>
               {{'bank_account.bank_code' | translate}}
@@ -71,7 +71,7 @@
         <ng-template pTemplate="body" let-row>
           <tr>
             <td>
-              {{row.accountant_code}}
+              {{row.accounting_code}}
             </td>
             <td>
               {{row.bank_code}}
@@ -106,7 +106,7 @@
     <div class="row">
       <div class="form-group col-6">
         <label>
-          {{'bank_account.bank_accounts.accountant_code' | translate}}
+          {{'bank_account.bank_accounts.accounting_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <app-single-select></app-single-select>

@@ -1,14 +1,14 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { ImportTariffEntity } from 'src/app/_modules/master-data/_backend/import-tariff/import-tariff.entity';
+import { EnvironmentTaxEntity } from 'src/app/_modules/master-data/_backend/environment-tax/environment-tax.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class ExportTariffForm extends FormModel {
+export class EnvironmentTaxForm extends FormModel {
 
     taxCode = new FormControl('', [requiredField]);
     taxType = new FormControl('', [requiredField]);
 
-    //don vi tien te
+    //don vi tinh
     uomId = new FormControl('');
     uomName = new FormControl('');
 
@@ -21,12 +21,12 @@ export class ExportTariffForm extends FormModel {
     taxRate = new FormControl('');
     description = new FormControl('');
 
-    constructor(importTariffEntity?: ImportTariffEntity) {
+    constructor(environmentTariffEntity?: EnvironmentTaxEntity) {
         super();
-        if (importTariffEntity !== null && importTariffEntity !== undefined) {
-            Object.keys(importTariffEntity).forEach((item) => {
-                if (importTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(importTariffEntity[item]);
+        if (environmentTariffEntity !== null && environmentTariffEntity !== undefined) {
+            Object.keys(environmentTariffEntity).forEach((item) => {
+                if (environmentTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(environmentTariffEntity[item]);
                 }
             });
         }

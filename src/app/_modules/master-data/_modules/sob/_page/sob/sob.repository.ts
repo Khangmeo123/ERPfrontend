@@ -15,7 +15,7 @@ import { CurrencySearchEntity } from '../../../../_backend/currency/currency.sea
 export class SobRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/setOfBook';
+    this.apiUrl = environment.apiUrlApps + 'master-data/sob';
   }
 
   getList(sobSearchEntity: SobSearchEntity): Observable<SobEntity[]> {

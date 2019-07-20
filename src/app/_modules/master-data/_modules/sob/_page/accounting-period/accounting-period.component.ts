@@ -6,7 +6,7 @@ import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.m
   templateUrl: './accounting-period.component.html',
   styleUrls: ['./accounting-period.component.scss']
 })
-export class AccountingPeriod implements OnInit {
+export class AccountingPeriodComponent implements OnInit {
   isChecked = false;
 
   visible = false;

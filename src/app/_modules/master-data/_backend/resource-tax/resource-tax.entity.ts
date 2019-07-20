@@ -1,6 +1,6 @@
 import { Entity } from 'src/app/_helpers/entity';
 
-export class ResoureTariffEntity extends Entity {
+export class ResourceTaxEntity extends Entity {
     // sobEntity:
     sobId: string;
 

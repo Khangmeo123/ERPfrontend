@@ -1,14 +1,14 @@
 import { FormModel } from './../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { ExciseTariffEntity } from 'src/app/_modules/master-data/_backend/excise-tariff/excise-tariff.entity';
+import { ResourceTaxEntity } from 'src/app/_modules/master-data/_backend/resource-tax/resource-tax.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class ExciseTariffForm extends FormModel {
+export class ResourceTaxForm extends FormModel {
 
     taxCode = new FormControl('', [requiredField]);
     taxType = new FormControl('', [requiredField]);
 
-    //don vi tien te
+    //don vi tinh
     uomId = new FormControl('');
     uomName = new FormControl('');
 
@@ -21,12 +21,12 @@ export class ExciseTariffForm extends FormModel {
     taxRate = new FormControl('');
     description = new FormControl('');
 
-    constructor(exciseTariffEntity?: ExciseTariffEntity) {
+    constructor(resoureTariffEntity?: ResourceTaxEntity) {
         super();
-        if (exciseTariffEntity !== null && exciseTariffEntity !== undefined) {
-            Object.keys(exciseTariffEntity).forEach((item) => {
-                if (exciseTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(exciseTariffEntity[item]);
+        if (resoureTariffEntity !== null && resoureTariffEntity !== undefined) {
+            Object.keys(resoureTariffEntity).forEach((item) => {
+                if (resoureTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].setValue(resoureTariffEntity[item]);
                 }
             });
         }
