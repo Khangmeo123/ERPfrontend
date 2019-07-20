@@ -6,7 +6,7 @@ import { BusinessGroupEntity } from './business-group.entity';
 
 export class BusinessGroupForm extends FormModel {
     name = new FormControl('', [requiredField]);
-    code = new FormControl('', [requiredField, checkLength(1, 2)]);
+    code = new FormControl('', [requiredField, checkLength(2, 2)]);
     description = new FormControl('');
 
     constructor(businessGroupEntity?: BusinessGroupEntity) {
@@ -14,7 +14,13 @@ export class BusinessGroupForm extends FormModel {
         if (businessGroupEntity !== null && businessGroupEntity !== undefined) {
             Object.keys(businessGroupEntity).forEach((item) => {
                 if (businessGroupEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(businessGroupEntity[item]);
+                    if (item === 'errors') {
+                        Object.keys(businessGroupEntity[item]).forEach(result => {
+                            this[item].addControl(result, new FormControl(businessGroupEntity[item][result]));
+                        });
+                    } else {
+                        this[item].setValue(businessGroupEntity[item]);
+                    }
                 }
             });
         }

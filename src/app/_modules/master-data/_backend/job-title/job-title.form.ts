@@ -7,7 +7,7 @@ import { JobTitleEntity } from './job-title.entity';
 export class JobTitleForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(3, 50)]);
     code = new FormControl('', [requiredField, checkLength(3, 10)]);
-    description = new FormControl('', [checkLength(-1, 500)]);
+    description = new FormControl('', [checkLength(0, 500)]);
 
     constructor(jobTitleEntity?: JobTitleEntity) {
         super();

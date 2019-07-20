@@ -5,7 +5,7 @@ export class FormModel {
     id = new FormControl();
     isDeleted = new FormControl(false);
     isEdited = new FormControl();
-    error = new FormGroup({});
+    errors = new FormGroup({});
     constructor() {
     }
 }

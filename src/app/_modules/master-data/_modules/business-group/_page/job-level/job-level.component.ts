@@ -139,16 +139,4 @@ export class JobLevelComponent implements OnInit, OnDestroy {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
   }
-
-  // openjobTitle(id: string) {
-  //   this.jobTitleSearchEntity = new JobTitleSearchEntity();
-  //   this.jobTitleSearchEntity.ids.push(id);
-  //   this.jobLevelService.getListJobTitle(this.jobTitleSearchEntity);
-  // }
-
-  // jobTitleSearch(event) {
-  //   this.jobTitleSearchEntity.code = event;
-  //   this.jobTitleSearchEntity.name = event;
-  //   this.jobTitleTyping.next(this.jobTitleSearchEntity);
-  // }
 }

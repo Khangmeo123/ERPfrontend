@@ -26,6 +26,8 @@
                 </ul>
             </div>
             <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
     </div>
     <hr>
@@ -67,7 +69,7 @@
                     <tr (dblclick)="edit(jobTitle.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
                         <td> {{jobTitle.code}} </td>
                         <td> {{jobTitle.name}} </td>
-                        <td> {{jobTitle.des}} </td>
+                        <td> {{jobTitle.description}} </td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -88,7 +90,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="jobTitleCode">{{ 'job_title.job_title_code' | translate}}<span
-                            style="color: red">*</span></label>
+                            class="text-danger">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="jobTitleCode" />
@@ -102,7 +104,7 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="jobTitleName">{{ 'job_title.job_title_name' | translate}}<span
-                            style="color: red">*</span></label>
+                            class="text-danger">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="jobTitleName" />

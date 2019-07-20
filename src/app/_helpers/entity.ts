@@ -29,3 +29,12 @@ export class Entities {
 
     }
 }
+
+export class EnumEntity {
+    id: string;
+    name: string;
+
+    constructor() {
+
+    }
+}
