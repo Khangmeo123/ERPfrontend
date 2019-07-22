@@ -109,8 +109,6 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    console.log('save:', this.legalForm.valid)
-    console.log('save form:', this.legalForm)
     if (!this.legalForm.valid) {
       this.genaralService.validateAllFormFields(this.legalForm);
     } else {
@@ -164,7 +162,6 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
 
 
   bookMark() {
-    console.log('bookMark', this.isSaveBookMark)
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
       this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });

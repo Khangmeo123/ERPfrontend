@@ -9,7 +9,8 @@
       </span>
     </span>
     <div class="page-actions">
-      <button [disabled]="legalSearchEntity.setOfBookId == undefined" class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
+      <button [disabled]="legalSearchEntity.setOfBookId == undefined" class="btn btn-add" (click)="add()"
+        data-qe-id="button-add"> +
         {{'general.button.add' | translate}}</button>
       <button class="btn btn-clear" (click)="clearSearch(table)"
         data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
@@ -22,9 +23,8 @@
         {{'general.sob' | translate}}
       </span>
       <app-single-select data-qe-id="form-select-sob" [list]="sobExceptIds" [selectedList]="sobIds" [key]="'name'"
-      (search)="sobSearch($event)"
-      (selectionChange)="selectSob($event)"
-       (listOpen)="sobSearch(legalSearchEntity.setOfBookId)"></app-single-select>
+        (search)="sobSearch($event)" (selectionChange)="selectSob($event)"
+        (listOpen)="sobSearch(legalSearchEntity.setOfBookId)"></app-single-select>
     </div>
     <div class="page-section mt-2">
       <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
