@@ -1,13 +1,13 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ResourceTaxEntity } from '../../../../_backend/resource-tax/resource-tax.entity';
+import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
 import { ResourceTaxRepository } from './resource-tax.repository';
-import { ResourceTaxForm } from '../../../../_backend/resource-tax/resource-tax.form';
-import { ResourceTaxSearchentity } from '../../../../_backend/resource-tax/resource-tax.searchentity';
+import { NaturalResourceTaxForm } from '../../../../_backend/natural-resource-tax/natural-resource-tax.form';
+import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
 
 export class ResourceTaxService {
-  public resourceTaxList: BehaviorSubject<ResourceTaxEntity[]>;
+  public resourceTaxList: BehaviorSubject<NaturalResourceTaxEntity[]>;
   public resourceTaxCount: BehaviorSubject<number>;
   public resourceTaxForm: BehaviorSubject<FormGroup>;
 
@@ -15,11 +15,11 @@ export class ResourceTaxService {
     this.resourceTaxCount = new BehaviorSubject(0);
     this.resourceTaxList = new BehaviorSubject([]);
     this.resourceTaxForm = new BehaviorSubject(this.fb.group(
-      new ResourceTaxForm(),
+      new NaturalResourceTaxForm(),
     ));
   }
 
-  getList(resourceTaxSearchEntity: ResourceTaxSearchentity) {
+  getList(resourceTaxSearchEntity: NaturalResourceTaxSearchentity) {
     forkJoin(this.resourceTaxRepository.getList(resourceTaxSearchEntity),
       this.resourceTaxRepository.count(resourceTaxSearchEntity)).subscribe(([list, count]) => {
       if (list) {
@@ -33,7 +33,7 @@ export class ResourceTaxService {
 
   add() {
     this.resourceTaxForm.next(this.fb.group(
-      new ResourceTaxForm(),
+      new NaturalResourceTaxForm(),
     ));
   }
 
@@ -41,7 +41,7 @@ export class ResourceTaxService {
     this.resourceTaxRepository.getId(resourceTaxId).subscribe(res => {
       if (res) {
         this.resourceTaxForm.next(this.fb.group(
-          new ResourceTaxForm(res),
+          new NaturalResourceTaxForm(res),
         ));
       }
     }, err => {
@@ -51,7 +51,7 @@ export class ResourceTaxService {
     });
   }
 
-  save(resourceTaxEntity: any, resourceTaxSearchEntity: ResourceTaxSearchentity): Promise<boolean> {
+  save(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
       if (resourceTaxEntity.id === null || resourceTaxEntity.id === undefined) {
         this.resourceTaxRepository.add(resourceTaxEntity).subscribe(res => {
@@ -63,7 +63,7 @@ export class ResourceTaxService {
         }, err => {
           if (err) {
             this.resourceTaxForm.next(this.fb.group(
-              new ResourceTaxForm(err),
+              new NaturalResourceTaxForm(err),
             ));
             reject(true);
           }
@@ -78,7 +78,7 @@ export class ResourceTaxService {
         }, err => {
           if (err) {
             this.resourceTaxForm.next(this.fb.group(
-              new ResourceTaxForm(err),
+              new NaturalResourceTaxForm(err),
             ));
             reject(true);
           }
@@ -88,7 +88,7 @@ export class ResourceTaxService {
     return defered;
   }
 
-  delete(resourceTaxEntity: any, resourceTaxSearchEntity: ResourceTaxSearchentity): Promise<boolean> {
+  delete(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
       this.resourceTaxRepository.delete(resourceTaxEntity).subscribe(res => {
         if (res) {
@@ -99,7 +99,7 @@ export class ResourceTaxService {
       }, err => {
         if (err) {
           this.resourceTaxForm.next(this.fb.group(
-            new ResourceTaxForm(err),
+            new NaturalResourceTaxForm(err),
           ));
           reject(true);
         }

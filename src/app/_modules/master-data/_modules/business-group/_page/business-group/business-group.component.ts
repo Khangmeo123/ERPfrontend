@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { BusinessGroupEntity } from 'src/app/_modules/master-data/_backend/business-group/business-group.entity';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 
 @Component({
   selector: 'app-business-group',

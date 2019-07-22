@@ -4,8 +4,8 @@
 // import { Observable } from 'rxjs';
 // import { map } from 'rxjs/operators';
 // import { environment } from 'src/environments/environment';
-// import { ResourceTaxSearchentity } from '../../../../_backend/resource-tax/resource-tax.searchentity';
-// import { ResourceTaxEntity } from '../../../../_backend/resource-tax/resource-tax.entity';
+// import { NaturalResourceTaxSearchentity } from '../../../../_backend/resource-tax/resource-tax.searchentity';
+// import { NaturalResourceTaxEntity } from '../../../../_backend/resource-tax/resource-tax.entity';
 //
 // @Injectable({
 //   providedIn: 'root',
@@ -16,8 +16,8 @@
 //     this.apiUrl = environment.apiUrlApps + 'master-data/setOfBook';
 //   }
 //
-//   getList(specialConsumptionTaxSearchEntity: ResourceTaxSearchentity): Observable<ResourceTaxEntity[]> {
-//     return this.http.post<ResourceTaxEntity[]>(this.apiUrl + '/list', JSON.stringify(specialConsumptionTaxSearchEntity),
+//   getList(specialConsumptionTaxSearchEntity: NaturalResourceTaxSearchentity): Observable<NaturalResourceTaxEntity[]> {
+//     return this.http.post<NaturalResourceTaxEntity[]>(this.apiUrl + '/list', JSON.stringify(specialConsumptionTaxSearchEntity),
 //       {observe: 'response', headers: this.getHeader()}).pipe(
 //       map(r => {
 //         return r.body.map((item) => {

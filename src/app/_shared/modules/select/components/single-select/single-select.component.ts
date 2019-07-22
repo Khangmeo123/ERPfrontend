@@ -73,6 +73,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
       if (this.isLoading) {
+        debugger
         this.isLoading = false;
       }
     }

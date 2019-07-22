@@ -1,6 +1,6 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
-export class ResourceTaxSearchentity extends SearchEntity {
+export class NaturalResourceTaxSearchentity extends SearchEntity {
     sobId: string;
     taxCode: string;
     taxType: string;

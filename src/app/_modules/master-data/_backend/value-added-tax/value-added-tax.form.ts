@@ -1,9 +1,9 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { VatEntity } from 'src/app/_modules/master-data/_backend/vat/vat.entity';
+import { ValueAddedTaxEntity } from 'src/app/_modules/master-data/_backend/value-added-tax/value-added-tax.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
 
-export class VatForm extends FormModel {
+export class ValueAddedTaxForm extends FormModel {
 
     taxCode = new FormControl('', [requiredField]);
     taxType = new FormControl('', [requiredField]);
@@ -21,7 +21,7 @@ export class VatForm extends FormModel {
     taxRate = new FormControl('');
     description = new FormControl('');
 
-    constructor(vatEntity?: VatEntity) {
+    constructor(vatEntity?: ValueAddedTaxEntity) {
         super();
         if (vatEntity !== null && vatEntity !== undefined) {
             Object.keys(vatEntity).forEach((item) => {

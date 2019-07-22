@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {getListDirection} from '../../helpers';
-import {toggleMenu} from '../../../../animations/toggleMenu';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { getListDirection } from '../../helpers';
+import { toggleMenu } from '../../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-multi-select',
@@ -32,8 +32,7 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
 
   isLoading = false;
 
-  constructor() {
-  }
+  constructor() {}
 
   get listState() {
     return this.isOpened ? 'opened' : 'closed';

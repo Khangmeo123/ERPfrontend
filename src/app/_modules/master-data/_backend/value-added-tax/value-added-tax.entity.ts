@@ -1,6 +1,6 @@
 import { Entity } from 'src/app/_helpers/entity';
 
-export class VatEntity extends Entity {
+export class ValueAddedTaxEntity extends Entity {
     // sobEntity:
     sobId: string;
 

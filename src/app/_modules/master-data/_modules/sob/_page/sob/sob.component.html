@@ -42,7 +42,7 @@
   <p-header>
     {{'sob.add' | translate}}
   </p-header>
-  <form class="container">
+  <form class="container" [formGroup]="sobForm">
     <div class="row">
       <div class="form-group col-6">
         <label>
@@ -64,14 +64,14 @@
         <label>
           {{'sob.chart_account' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="coaList" (listOpen)="getCoaList()"></app-simple-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.currency' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-simple-select [list]="currencyList" (listOpen)="currencySearch($event)"></app-simple-select>
+        <app-simple-select [list]="currencyList" (listOpen)="getCurrencyList()"></app-simple-select>
       </div>
     </div>
     <div class="row">
@@ -79,13 +79,14 @@
         <label>
           {{'sob.special_consumption_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="specialConsumptionTaxTemplates"
+                           (listOpen)="getSpecialConsumptionTaxTemplates()"></app-simple-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.value_added_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="valueAddedTaxTemplates" (listOpen)="getValueAddedTaxTemplates()"></app-simple-select>
       </div>
     </div>
     <div class="row">
@@ -93,13 +94,14 @@
         <label>
           {{'sob.resource_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="naturalResourceTaxTemplates"
+                           (listOpen)="getNaturalResourceTaxTemplates()"></app-simple-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.enviroment_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="environmentTaxTemplates" (listOpen)="getEnvironmentTemplates()"></app-simple-select>
       </div>
     </div>
     <div class="row">
@@ -107,13 +109,13 @@
         <label>
           {{'sob.export_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="exportTaxTemplates" (listOpen)="getExportTaxTemplates()"></app-simple-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.import_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-simple-select [list]="importTaxTemplates" (listOpen)="getImportTaxTemplates()"></app-simple-select>
       </div>
     </div>
   </form>
@@ -126,15 +128,17 @@
     </button>
   </p-footer>
   <ng-template #notAdd>
-    <p-footer>
+    <p-footer class="d-flex">
+      <div class="flex-grow-1 justify-content-start">
+        <button class="btn btn-link text-danger">
+          {{'general.button.delete' | translate}}
+        </button>
+      </div>
       <button class="btn btn-add mr-2">
         {{'general.button.add' | translate}}
       </button>
       <button class="btn btn-cancel mr-2">
         {{'general.button.cancel' | translate}}
-      </button>
-      <button class="btn btn-delete">
-        {{'general.button.delete' | translate}}
       </button>
     </p-footer>
   </ng-template>
