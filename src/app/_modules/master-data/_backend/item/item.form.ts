@@ -10,15 +10,15 @@ export class ItemForm extends FormModel {
     codeFromMarket = new FormControl('');
     name = new FormControl('', [requiredField]);
 
-    // propertyEntity:
-    propertyName = new FormControl('', [requiredField]);
-    propertyId = new FormControl('', [requiredField]);
+    // characteristicEntity:
+    characteristicName = new FormControl('', [requiredField]);
+    characteristicId = new FormControl('', [requiredField]);
 
     // unitEntity:
     uomName = new FormControl('', [requiredField]);
     uomId = new FormControl('', [requiredField]);
 
-    unitPrice = new FormControl('', [requiredField]);
+    primaryPrice = new FormControl('', [requiredField]);
     weight = new FormControl('');
 
     // statusEntity:
@@ -70,7 +70,7 @@ export class ItemForm extends FormModel {
     errors = new FormGroup({
         code: new FormControl(''),
         name: new FormControl(''),
-        unitPrice: new FormControl(''),
+        primaryPrice: new FormControl(''),
         propertyId: new FormControl(''),
         uomId: new FormControl(''),
         statusId: new FormControl(''),

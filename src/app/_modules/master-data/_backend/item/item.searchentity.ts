@@ -6,7 +6,7 @@ export class ItemSearchEntity extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
     description: TextFilter = new TextFilter();
-    unitPrice: NumberFilter = new NumberFilter();
+    primaryPrice: NumberFilter = new NumberFilter();
     uomId: string;
     statusId: string;
 

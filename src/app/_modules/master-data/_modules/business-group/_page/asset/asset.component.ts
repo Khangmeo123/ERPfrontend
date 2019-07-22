@@ -10,6 +10,8 @@ import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { EnumEntity } from 'src/app/_helpers/entity';
+import { translate } from 'src/app/_helpers/string';
+
 @Component({
   selector: 'app-asset',
   templateUrl: './asset.component.html',
@@ -17,7 +19,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
   providers: [AssetService]
 })
 export class AssetComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'asset.header.title';
+  pageTitle: string = translate('asset.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;

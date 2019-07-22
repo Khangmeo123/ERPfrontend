@@ -1,11 +1,8 @@
 import { ItemForm } from './../../../../../_backend/item/item.form';
 import { UomSearchEntity } from './../../../../../_backend/uom/uom.searchentity';
 import { EnumEntity, Entities } from './../../../../../../../_helpers/entity';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { UomEntity } from 'src/app/_modules/master-data/_backend/uom/uom.entity';
-import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.entity';
-import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/item.searchentity';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
@@ -19,6 +16,7 @@ export class ItemDetailService {
   public itemListCount: BehaviorSubject<number>;
   public uomList: BehaviorSubject<Entities>;
   public statusList: BehaviorSubject<EnumEntity[]>;
+  public characteristicList: BehaviorSubject<EnumEntity[]>;
   constructor(private fb: FormBuilder, private itemDetailRepository: ItemDetailRepository, private toastrService: ToastrService) {
     this.itemForm = new BehaviorSubject(this.fb.group(
       new ItemForm(),
@@ -26,6 +24,7 @@ export class ItemDetailService {
     this.uomList = new BehaviorSubject(new Entities());
     this.itemListCount = new BehaviorSubject(0);
     this.statusList = new BehaviorSubject([]);
+    this.characteristicList = new BehaviorSubject([]);
   }
 
   getId(itemId?) {
@@ -48,23 +47,45 @@ export class ItemDetailService {
     }
   }
 
-  save(itemEntity: any) {
-    if (itemEntity.id === null || itemEntity.id === undefined) {
-      this.itemDetailRepository.add(itemEntity).subscribe(res => {
+  save(itemEntity: any): Promise<boolean> {
+    const defered = new Promise<boolean>((resolve, reject) => {
+      if (itemEntity.id === null || itemEntity.id === undefined) {
+        this.itemDetailRepository.add(itemEntity).subscribe(res => {
+          if (res) {
+            this.toastrService.success('Cập nhật thành công !');
+            resolve();
+          }
+        }, err => {
+          if (err) {
+            this.itemForm.next(this.fb.group(
+              new ItemForm(err),
+            ));
+          }
+        });
+      } else {
+        this.itemDetailRepository.update(itemEntity).subscribe(res => {
+          if (res) {
+            this.toastrService.success('Cập nhật thành công !');
+            resolve();
+          }
+        }, err => {
+          if (err) {
+            this.itemForm.next(this.fb.group(
+              new ItemForm(err),
+            ));
+          }
+        });
+      }
+    });
+    return defered;
+  }
+
+  delete(itemEntity: any): Promise<boolean> {
+    const defered = new Promise<boolean>((resolve, reject) => {
+      this.itemDetailRepository.delete(itemEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
-        }
-      }, err => {
-        if (err) {
-          this.itemForm.next(this.fb.group(
-            new ItemForm(err),
-          ))
-        }
-      });
-    } else {
-      this.itemDetailRepository.update(itemEntity).subscribe(res => {
-        if (res) {
-          this.toastrService.success('Cập nhật thành công !');
+          resolve();
         }
       }, err => {
         if (err) {
@@ -73,21 +94,8 @@ export class ItemDetailService {
           ));
         }
       });
-    }
-  }
-
-  delete(itemEntity: any) {
-    this.itemDetailRepository.delete(itemEntity).subscribe(res => {
-      if (res) {
-        this.toastrService.success('Cập nhật thành công !');
-      }
-    }, err => {
-      if (err) {
-        this.itemForm.next(this.fb.group(
-          new ItemForm(err),
-        ));
-      }
     });
+    return defered;
   }
 
   getUomList(uomSearchEntity: UomSearchEntity) {
@@ -99,7 +107,7 @@ export class ItemDetailService {
       if (err) {
         console.log(err);
       }
-    })
+    });
   }
 
   getUomListByTyping(uomSearchEntity: Observable<UomSearchEntity>) {
@@ -123,6 +131,18 @@ export class ItemDetailService {
       if (err) {
         console.log(err);
       }
-    })
+    });
+  }
+
+  getCharacteristicList() {
+    this.itemDetailRepository.getCharacteristicList().subscribe(res => {
+      if (res) {
+        this.characteristicList.next(res);
+      }
+    }, err => {
+      if (err) {
+        console.log(err);
+      }
+    });
   }
 }

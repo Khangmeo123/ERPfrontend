@@ -71,4 +71,11 @@ export class ItemDetailRepository extends Repository {
                 map(r => r.body),
             );
     }
+
+    getCharacteristicList(): Observable<EnumEntity[]> {
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/characteristic/list', JSON.stringify({}),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
 }

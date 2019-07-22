@@ -8,13 +8,11 @@ export class ItemEntity extends Entity {
     name: string;
 
     // propertyEntity:
-    propertyName: string;
-    propertyCode: string;
-    propertyId: string;
+    characteristicName: string;
+    characteristicId: string;
 
     // unitEntity:
     uomName: string;
-    uomCode: string;
     uomId: string;
 
     unitPrice: number;
@@ -22,7 +20,6 @@ export class ItemEntity extends Entity {
 
     // statusEntity:
     statusName: string;
-    statusCode: string;
     statusId: string;
 
     height: number;

@@ -70,6 +70,6 @@ export class ItemListService {
       if (err) {
         console.log(err);
       }
-    })
+    });
   }
 }

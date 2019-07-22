@@ -1,3 +1,4 @@
+import { DirectiveModule } from './../../../../_shared/directive/directive.module';
 import { ItemDetailComponent } from './_page/item/item-detail/item-detail.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
 import { JobLevelComponent } from './_page/job-level/job-level.component';
@@ -79,11 +80,7 @@ import { ItemListComponent } from './_page/item/item-list/item-list.component';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
-    ToastrModule.forRoot({
-      timeOut: 1000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }),
+    ToastrModule,
     AccordionModule.forRoot(),
     RadioButtonModule,
     DatePickerModule,
@@ -94,6 +91,7 @@ import { ItemListComponent } from './_page/item/item-list/item-list.component';
     SelectModule,
     BsDropdownModule.forRoot(),
     DropdownModule,
+    DirectiveModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

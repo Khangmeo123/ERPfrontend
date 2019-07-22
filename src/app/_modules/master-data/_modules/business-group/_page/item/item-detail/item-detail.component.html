@@ -29,12 +29,12 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_code' | translate}}<span
+                            <label for="itemCode">{{ 'item.content.table.item_code' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
-                                <input type="text" class="form-control" formControlName="code"
-                                    data-qe-id="dialog-form-code" id="assetCode" />
-                                <app-error data-qe-id="dialog-error-code"
+                                <input type="text" class="form-control" formControlName="code" data-qe-id="form-code"
+                                    id="itemCode" />
+                                <app-error data-qe-id="form-error-code"
                                     *ngIf="(itemForm.controls.code?.errors && itemForm.controls.code?.touched) || !!itemForm.controls.errors.get('code')?.value"
                                     [formGroup]="itemForm" [property]="'code'" [placement]="'top'" class="error-form">
                                 </app-error>
@@ -43,14 +43,32 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_id_ncc' | translate}}</label>
-                            <input type="text" class="form-control" />
+                            <label
+                                for="itemCodeFromSupplier">{{ 'item.content.detail.item_codeFromSupplier' | translate}}</label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="codeFromSupplier"
+                                    data-qe-id="form-codeFromSupplier" id="itemCodeFromSupplier" />
+                                <app-error data-qe-id="form-error-codeFromSupplier"
+                                    *ngIf="(itemForm.controls.codeFromSupplier?.errors && itemForm.controls.codeFromSupplier?.touched) || !!itemForm.controls.errors.get('codeFromSupplier')?.value"
+                                    [formGroup]="itemForm" [property]="'codeFromSupplier'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_id_tt' | translate}}</label>
-                            <input type="text" class="form-control" />
+                            <label
+                                for="itemCodeFromMarket">{{ 'item.content.detail.item_codeFromMarket' | translate}}</label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="codeFromMarket"
+                                    data-qe-id="form-codeFromMarket" id="itemCodeFromMarket" />
+                                <app-error data-qe-id="form-error-codeFromMarket"
+                                    *ngIf="(itemForm.controls.codeFromMarket?.errors && itemForm.controls.codeFromMarket?.touched) || !!itemForm.controls.errors.get('codeFromMarket')?.value"
+                                    [formGroup]="itemForm" [property]="'codeFromMarket'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -58,46 +76,100 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_name' | translate}}<span
+                            <label for="itemName">{{ 'item.content.table.item_name' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="name" data-qe-id="form-name"
+                                    id="itemName" />
+                                <app-error data-qe-id="form-error-name"
+                                    *ngIf="(itemForm.controls.name?.errors && itemForm.controls.name?.touched) || !!itemForm.controls.errors.get('name')?.value"
+                                    [formGroup]="itemForm" [property]="'name'" [placement]="'top'" class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_properti' | translate}}<span
+                            <label for="bankid">{{ 'item.content.detail.item_characteristic' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                            <div class="div-form">
+                                <app-simple-select [key]="'name'" [list]="characteristicList"
+                                    (selectionChange)="itemForm.controls.characteristic.setValue($event)"
+                                    (listOpen)="openCharacteristicList()" data-qe-id="form-characteristic"
+                                    class="w-100">
+                                </app-simple-select>
+                                <app-error data-qe-id="form-error-characteristic"
+                                    *ngIf="(itemForm.controls.characteristicId?.errors && itemForm.controls.characteristicId?.touched) || !!itemForm.controls.errors.get('characteristicId')?.value"
+                                    [formGroup]="itemForm" [property]="'characteristicId'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_unit' | translate}}<span
+                            <label for="bankid">{{ 'item.content.table.item_uom' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                            <div class="div-form">
+                                <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
+                                    (search)="searchUom($event)"
+                                    (selectionChange)="itemForm.controls.uomId.setValue($event.Id)"
+                                    (listOpen)="openUomList(itemForm.controls.uomId.value)"
+                                    data-qe-id="table-thead-filter-uom" class="w-100">
+                                </app-single-select>
+                                <app-error data-qe-id="form-error-uom"
+                                    *ngIf="(itemForm.controls.uomId?.errors && itemForm.controls.uomId?.touched) || !!itemForm.controls.errors.get('uomId')?.value"
+                                    [formGroup]="itemForm" [property]="'uomId'" [placement]="'top'" class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_cost' | translate}}<span
+                            <label for="itemPrimaryPrice">{{ 'item.content.table.item_primaryPrice' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="primaryPrice"
+                                    data-qe-id="form-primaryPrice" id="itemPrimaryPrice" />
+                                <app-error data-qe-id="form-error-primaryPrice"
+                                    *ngIf="(itemForm.controls.primaryPrice?.errors && itemForm.controls.primaryPrice?.touched) || !!itemForm.controls.errors.get('primaryPrice')?.value"
+                                    [formGroup]="itemForm" [property]="'primaryPrice'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_weight' | translate}} (kg)</label>
-                            <input type="text" class="form-control" />
+                            <label for="itemWeight">{{ 'item.content.detail.item_weight' | translate}} (kg)</label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="weight"
+                                    data-qe-id="form-weight" id="itemWeight" />
+                                <app-error data-qe-id="form-error-weight"
+                                    *ngIf="(itemForm.controls.weight?.errors && itemForm.controls.weight?.touched) || !!itemForm.controls.errors.get('weight')?.value"
+                                    [formGroup]="itemForm" [property]="'weight'" [placement]="'top'" class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_status' | translate}}<span
+                            <label for="itemStatus">{{ 'item.content.table.item_status' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                            <div class="div-form">
+                                <app-simple-select [key]="'name'" [list]="statusList"
+                                    (selectionChange)="itemForm.controls.status.setValue($event)"
+                                    (listOpen)="openStatusList()" data-qe-id="form-characteristic" class="w-100">
+                                </app-simple-select>
+                                <app-error data-qe-id="form-error-status"
+                                    *ngIf="(itemForm.controls.statusId?.errors && itemForm.controls.statusId?.touched) || !!itemForm.controls.errors.get('statusId')?.value"
+                                    [formGroup]="itemForm" [property]="'statusId'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -108,19 +180,40 @@
                         <div class="form-group">
                             <label for="bankid">{{ 'item.content.table.item_height' | translate}} (cm)<span
                                     class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="height"
+                                    data-qe-id="form-height" id="itemHeight" />
+                                <app-error data-qe-id="form-error-height"
+                                    *ngIf="(itemForm.controls.height?.errors && itemForm.controls.height?.touched) || !!itemForm.controls.errors.get('height')?.value"
+                                    [formGroup]="itemForm" [property]="'height'" [placement]="'top'" class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_length' | translate}} (cm)</label>
-                            <input type="text" class="form-control" />
+                            <label for="itemlength">{{ 'item.content.detail.item_length' | translate}} (cm)</label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="length"
+                                    data-qe-id="form-length" id="itemlength" />
+                                <app-error data-qe-id="form-error-length"
+                                    *ngIf="(itemForm.controls.length?.errors && itemForm.controls.length?.touched) || !!itemForm.controls.errors.get('length')?.value"
+                                    [formGroup]="itemForm" [property]="'length'" [placement]="'top'" class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_width' | translate}} (cm)</label>
-                            <input type="text" class="form-control" />
+                            <label for="itemWidth">{{ 'item.content.detail.item_width' | translate}} (cm)</label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="width" data-qe-id="form-width"
+                                    id="itemWidth" />
+                                <app-error data-qe-id="form-error-width"
+                                    *ngIf="(itemForm.controls.width?.errors && itemForm.controls.width?.touched) || !!itemForm.controls.errors.get('width')?.value"
+                                    [formGroup]="itemForm" [property]="'width'" [placement]="'top'" class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,10 +223,9 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.modal.add_des' | translate}}</label>
-                            <textarea class="form-control" rows="8">
-                                                    At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-                                                </textarea>
+                            <label for="itemDescription">{{ 'item.content.detail.item_description' | translate}}</label>
+                            <textarea class="form-control" rows="8" formControlName="description" id="itemDescription">
+                            </textarea>
                         </div>
                     </div>
                 </div>

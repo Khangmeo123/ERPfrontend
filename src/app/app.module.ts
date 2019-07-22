@@ -50,13 +50,17 @@ import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar
     FormsModule,
     PipeModule,
     CollapseModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 2500,
+      positionClass: 'toast-bottom-right',
+      preventDuplicates: true,
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
         deps: [HttpClient],
-      }
+      },
     }),
     ClickOutsideModule,
   ],

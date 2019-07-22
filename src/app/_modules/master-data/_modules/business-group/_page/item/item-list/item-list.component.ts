@@ -12,6 +12,7 @@ import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { UomSearchEntity } from 'src/app/_modules/master-data/_backend/uom/uom.searchentity';
 import { UomEntity } from './../../../../../_backend/uom/uom.entity';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-item-list',
@@ -19,7 +20,7 @@ import { UomEntity } from './../../../../../_backend/uom/uom.entity';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit, OnDestroy {
-  pageTitle: string = 'itemList.header.title';
+  pageTitle: string = translate('itemList.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
@@ -65,7 +66,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
       }
     });
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
-
+    this.itemListService.getUomListByTyping(this.uomTyping);
     this.itemListSubs.add(itemListSub).add(itemListCountSub).add(uomListSub).add(statusListSub).add(bookMarkNotify);
   }
 
@@ -117,21 +118,21 @@ export class ItemListComponent implements OnInit, OnDestroy {
     }
   }
 
-  openItemListStatuses() {
+  openStatusList() {
     if (this.statusList.length === 0) {
       this.itemListService.getStatusList();
     }
   }
 
-  openUom(id: string) {
+  openUomList(id: string) {
     this.uomSearchEntity = new UomSearchEntity();
     this.uomSearchEntity.ids.push(id);
     this.itemListService.getUomList(this.uomSearchEntity);
   }
 
   searchUom(event) {
-    this.uomSearchEntity.code = event;
-    this.uomSearchEntity.name = event;
+    this.uomSearchEntity.code.startsWith = event;
+    this.uomSearchEntity.name.startsWith = event;
     this.uomTyping.next(this.uomSearchEntity);
   }
 

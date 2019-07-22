@@ -55,9 +55,9 @@
                             {{ 'item.content.table.item_uom' | translate}}
                             <p-sortIcon [field]="'uom'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-unitPrice" [pSortableColumn]="'unitPrice'">
-                            {{ 'item.content.table.item_unitPrice' | translate}}
-                            <p-sortIcon [field]="'unitPrice'" class="float-right"></p-sortIcon>
+                        <th pResizableColumn data-qe-id="table-thead-primaryPrice" [pSortableColumn]="'primaryPrice'">
+                            {{ 'item.content.table.item_primaryPrice' | translate}}
+                            <p-sortIcon [field]="'primaryPrice'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
                             {{ 'item.content.table.item_status' | translate}}
@@ -83,18 +83,18 @@
                         <th class="th-filter">
                             <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
                                 (search)="searchUom($event)" (selectionChange)="itemSearchEntity.uomId = $event.Id"
-                                (listOpen)="openUom(itemSearchEntity.uomId)" data-qe-id="table-thead-filter-uom">
+                                (listOpen)="openUomList(itemSearchEntity.uomId)" data-qe-id="table-thead-filter-uom">
                             </app-single-select>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="itemSearchEntity.unitPrice" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-unitPrice">
+                            <app-advanced-filters [filter]="itemSearchEntity.primaryPrice" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-primaryPrice">
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
                             <app-simple-select [key]="'name'" [list]="statusList"
-                                (selectionChange)="itemSearchEntity.statusId = $event"
-                                (listOpen)="openItemListStatuses()" data-qe-id="table-thead-filter-status">
+                                (selectionChange)="itemSearchEntity.statusId = $event" (listOpen)="openStatusList()"
+                                data-qe-id="table-thead-filter-status">
                             </app-simple-select>
                         </th>
                     </tr>
