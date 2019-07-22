@@ -1,4 +1,4 @@
-<div class="page item-list">
+<div class="page employee-list">
     <div class="page-header">
         <span class="page-title">
             {{'asset.header.title' | translate}}
@@ -29,93 +29,89 @@
             <button class="btn btn-clear" (click)="clearSearch(table)"
                 data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
-
     </div>
     <hr>
-
     <div class="page-body">
-        <div class="page-selection list">
-            <p-table [value]="itemList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+        <div class="page-selection list" style="margin-top: 15px">
+            <p-table [value]="employeeList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                 [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'item.content.table.item_code' | translate}}
+                            {{ 'employee.content.table.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'item.content.table.item_name' | translate}}
+                            {{ 'employee.content.table.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'item.content.table.item_description' | translate}}
-                            <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
+                        <th pResizableColumn data-qe-id="table-thead-gender" [pSortableColumn]="'gender'">
+                            {{ 'employee.content.table.gender' | translate}}
+                            <p-sortIcon [field]="'gender'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-uom" [pSortableColumn]="'uom'">
-                            {{ 'item.content.table.item_uom' | translate}}
-                            <p-sortIcon [field]="'uom'" class="float-right"></p-sortIcon>
+                        <th pResizableColumn data-qe-id="table-thead-birthday" [pSortableColumn]="'birthday'">
+                            {{ 'employee.content.table.birthday' | translate}}
+                            <p-sortIcon [field]="'birthday'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-primaryPrice" [pSortableColumn]="'primaryPrice'">
-                            {{ 'item.content.table.item_primaryPrice' | translate}}
-                            <p-sortIcon [field]="'primaryPrice'" class="float-right"></p-sortIcon>
+                        <th pResizableColumn data-qe-id="table-thead-identityNumber"
+                            [pSortableColumn]="'identityNumber'">
+                            {{ 'employee.content.table.identityNumber' | translate}}
+                            <p-sortIcon [field]="'identityNumber'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
-                            {{ 'item.content.table.item_status' | translate}}
+                            {{ 'employee.content.table.status' | translate}}
                             <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
                     <tr>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="itemSearchEntity.code" (changeFilter)="getList()"
+                            <app-advanced-filters [filter]="employeeSearchEntity.code" (changeFilter)="getList()"
                                 data-qe-id="table-thead-filter-code">
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="itemSearchEntity.name" (changeFilter)="getList()"
+                            <app-advanced-filters [filter]="employeeSearchEntity.name" (changeFilter)="getList()"
                                 data-qe-id="table-thead-filter-name">
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="itemSearchEntity.description" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-description">
+                            <app-advanced-filters [filter]="employeeSearchEntity.gender" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-gender">
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
-                                (search)="searchUom($event)" (selectionChange)="itemSearchEntity.uomId = $event.Id"
-                                (listOpen)="openUomList(itemSearchEntity.uomId)" data-qe-id="table-thead-filter-uom">
-                            </app-single-select>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="itemSearchEntity.primaryPrice" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-primaryPrice">
+                            <app-advanced-filters [filter]="employeeSearchEntity.birthday" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-birthday">
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-simple-select [key]="'name'" [list]="statusList"
-                                (selectionChange)="itemSearchEntity.statusId = $event" (listOpen)="openStatusList()"
+                            <app-advanced-filters [filter]="employeeSearchEntity.identityNumber"
+                                (changeFilter)="getList()" data-qe-id="table-thead-filter-identityNumber">
+                            </app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="employeeSearchEntity.status" (changeFilter)="getList()"
                                 data-qe-id="table-thead-filter-status">
-                            </app-simple-select>
+                            </app-advanced-filters>
                         </th>
                     </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-item let-index="rowIndex">
-                    <tr (dblclick)="toDetail(item.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td> {{item.code}} </td>
-                        <td> {{item.name}} </td>
-                        <td> {{item.description}} </td>
-                        <td> {{item.uomName}} </td>
-                        <td> {{item.unitPrice}} </td>
-                        <td> {{item.statusName}} </td>
+                <ng-template pTemplate="body" let-employee let-index="rowIndex">
+                    <tr (dblclick)="toDetail(employee.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                        <td> {{employee.code}} </td>
+                        <td> {{employee.name}} </td>
+                        <td> {{employee.gender}} </td>
+                        <td> {{employee.birthday}} </td>
+                        <td> {{employee.identityNumber}} </td>
+                        <td> {{employee.status}} </td>
                     </tr>
                 </ng-template>
             </p-table>
         </div>
-    </div>
 
-    <div class="pagination">
-        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
-        </app-pagination>
+        <div class="pagination">
+            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+            </app-pagination>
+        </div>
     </div>
-
 </div>

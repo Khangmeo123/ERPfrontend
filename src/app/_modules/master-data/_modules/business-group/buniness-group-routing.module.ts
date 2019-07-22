@@ -7,8 +7,6 @@ import { ItemComponent } from './_page/item/item.component';
 import { UomComponent } from './_page/uom/uom.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
-import { ListEmployeeComponent } from './_page/employee/list-employee/list-employee.component';
-import { DetailEmployeeComponent } from './_page/employee/detail-employee/detail-employee.component';
 import { CustomerComponent } from './_page/customer/customer.component';
 import { ListCustomerComponent } from './_page/customer/list-customer/list-customer.component';
 import { DetailCustomerComponent } from './_page/customer/detail-customer/detail-customer.component';
@@ -20,6 +18,8 @@ import { JobLevelComponent } from './_page/job-level/job-level.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
 import { ItemListComponent } from './_page/item/item-list/item-list.component';
 import { ItemDetailComponent } from './_page/item/item-detail/item-detail.component';
+import { EmployeeListComponent } from './_page/employee/employee-list/employee-list.component';
+import { EmployeeDetailComponent } from './_page/employee/employee-detail/employee-detail.component';
 
 const routes: Routes = [
   {
@@ -37,9 +37,9 @@ const routes: Routes = [
       { path: 'asset', component: AssetComponent },
       {
         path: 'employee', component: EmployeeComponent, children: [
-          { path: 'list-employee', component: ListEmployeeComponent },
-          { path: 'detail-employee', component: DetailEmployeeComponent },
-          { path: '', redirectTo: 'list-employee', pathMatch: 'full' },
+          { path: 'employee-list', component: EmployeeListComponent },
+          { path: 'employee-detail', component: EmployeeDetailComponent },
+          { path: '', redirectTo: 'employee-list', pathMatch: 'full' },
         ]
       },
       {

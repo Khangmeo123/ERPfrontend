@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
 import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.entity';
-import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/item.searchentity';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { EnumEntity, Entities } from 'src/app/_helpers/entity';

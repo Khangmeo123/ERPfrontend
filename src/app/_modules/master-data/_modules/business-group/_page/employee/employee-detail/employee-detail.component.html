@@ -1,22 +1,23 @@
 <div class="page employee-detail">
     <div class="page-header">
         <span class="page-title">
-            {{'employee.detail.title' | translate}}
+            {{pageTitle}}
         </span>
         <div class="page-actions">
-            <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-            <button class="btn btn-save" (click)="onClickSave()">
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
                 {{ 'general.button.save' | translate}}</button>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                 [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                (cancel)="cancelClicked = true" (click)="delete()" data-qe-id="button-delete">
                 {{ 'general.button.delete' | translate}}</button>
         </div>
     </div>
     <div class="page-body">
         <accordion>
-            <accordion-group [isOpen]="true">
-                <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+            <accordion-group [isOpen]="true" [formGroup]="employeeForm">
+                <button (click)="isOpenTab1 = !isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'employee.detail.tab.title_1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -25,15 +26,30 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.employee_id' | translate}}<span
+                            <label for="employeeCode">{{ 'employee.content.table.employee_code' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="code" data-qe-id="form-code"
+                                    id="employeeCode" />
+                                <app-error data-qe-id="form-error-code"
+                                    *ngIf="(employeeForm.controls.code?.errors && employeeForm.controls.code?.touched) || !!employeeForm.controls.errors.get('code')?.value"
+                                    [formGroup]="employeeForm" [property]="'code'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'employee.content.table.birthday' | translate}}</label>
-                            <app-date-picker></app-date-picker>
+                            <div class="div-form">
+                                <app-date-picker [control]="employeeForm.get('birthday')"></app-date-picker>
+                                <app-error data-qe-id="form-error-code"
+                                    *ngIf="(employeeForm.controls.birthday?.errors && employeeForm.controls.birthday?.touched) || !!employeeForm.controls.errors.get('birthday')?.value"
+                                    [formGroup]="employeeForm" [property]="'code'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -138,7 +154,7 @@
                     </div>
                 </div>
             </accordion-group>
-       
+
         </accordion>
     </div>
 

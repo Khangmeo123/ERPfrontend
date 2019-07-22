@@ -16,7 +16,7 @@ import { translate } from 'src/app/_helpers/string';
   styleUrls: ['./item-detail.component.scss']
 })
 export class ItemDetailComponent implements OnInit, OnDestroy {
-  pageTitle: string = translate('asset.header.title');
+  pageTitle: string = translate('item.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;

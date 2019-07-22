@@ -1,3 +1,4 @@
+import { EmployeeDetailComponent } from './_page/employee/employee-detail/employee-detail.component';
 import { DirectiveModule } from './../../../../_shared/directive/directive.module';
 import { ItemDetailComponent } from './_page/item/item-detail/item-detail.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
@@ -23,8 +24,6 @@ import { UomComponent } from './_page/uom/uom.component';
 import { DetailCustomerComponent } from './_page/customer/detail-customer/detail-customer.component';
 import { ListCustomerComponent } from './_page/customer/list-customer/list-customer.component';
 import { DetailSupplierComponent } from './_page/supplier/detail-supplier/detail-supplier.component';
-import { ListEmployeeComponent } from './_page/employee/list-employee/list-employee.component';
-import { DetailEmployeeComponent } from './_page/employee/detail-employee/detail-employee.component';
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
@@ -38,10 +37,11 @@ import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 import { ItemComponent } from './_page/item/item.component';
 import { ItemListComponent } from './_page/item/item-list/item-list.component';
+import { EmployeeListComponent } from './_page/employee/employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
@@ -57,8 +57,8 @@ import { ItemListComponent } from './_page/item/item-list/item-list.component';
     UomComponent,
     DetailCustomerComponent,
     ListCustomerComponent,
-    ListEmployeeComponent,
-    DetailEmployeeComponent,
+    EmployeeListComponent,
+    EmployeeDetailComponent,
     ItemListComponent,
     ItemDetailComponent,
     ListSupplierComponent,
