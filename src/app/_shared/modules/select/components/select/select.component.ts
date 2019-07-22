@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
+import { Component, Input, OnInit, ViewEncapsulation } from '@angular/core';
 
 @Component({
   selector: 'app-select',
@@ -8,12 +8,17 @@ import {Component, Input, OnInit, ViewEncapsulation} from '@angular/core';
 })
 export class SelectComponent implements OnInit {
 
+  @Input() disabled = true;
+
   @Input() listDirection = 'down';
 
   constructor() {
   }
 
-  ngOnInit() {
+  get disabledClass() {
+    return this.disabled ? 'disabled' : '';
   }
 
+  ngOnInit() {
+  }
 }

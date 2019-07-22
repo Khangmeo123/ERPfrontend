@@ -17,6 +17,8 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
 
   @Input() selectedSuffix = 'selected';
 
+  @Input() disabled = false;
+
   get selection() {
     if (this.isSingle) {
       if (this.selectedNodes.length) {
@@ -172,7 +174,6 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
   }
 
   onChange() {
-    console.log(this.selectedNodes);
     this.selectionChange.emit(
       this.selectedNodes.map(this.valueSelector),
     );

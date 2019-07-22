@@ -1,4 +1,4 @@
-<app-select [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
+<app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
   <app-select-head (headClick)="toggleList($event)"
                    (openList)="openList($event)"
                    (closeList)="closeList($event)"

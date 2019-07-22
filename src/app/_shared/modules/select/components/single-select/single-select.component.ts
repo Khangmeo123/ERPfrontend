@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {getListDirection} from '../../helpers';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { getListDirection } from '../../helpers';
 
 @Component({
   selector: 'app-single-select',
@@ -19,6 +19,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   @Input() selectedList = [];
 
   @Input() key = 'label';
+
+  @Input() disabled = false;
 
   @Output() search = new EventEmitter();
 
@@ -79,6 +81,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   onChange() {
+    this.isOpened = false;
     this.selectionChange.emit(
       this.selectedList.map(this.valueSelector),
     );
