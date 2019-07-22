@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
+import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { BookmarkService } from 'src/app/_services';
 
 @Component({
   selector: 'app-customer-list',
@@ -9,12 +12,13 @@ import { Router } from '@angular/router';
 })
 export class CustomerListComponent implements OnInit {
 
-
+  pageTitle = _('customerOfLegalEntity.header.title');
   pagination = new PaginationModel();
   display: boolean = false;
   isAddGroup = false;
 
   isAddCustomer = false;
+  isSaveBookMark: boolean = false;
 
   tmptable = [
     {
@@ -52,7 +56,10 @@ export class CustomerListComponent implements OnInit {
 
   ]
 
-  constructor(protected router: Router) { }
+  constructor(
+    private genaralService: GeneralService, 
+    private bookmarkService: BookmarkService,
+    private router: Router) { }
 
 
   ngOnInit() {
@@ -65,5 +72,18 @@ export class CustomerListComponent implements OnInit {
 
   showDialog() {
     this.display = true;
+  }
+
+  sort (event) {
+    
+  }
+
+  bookMark() {
+    this.isSaveBookMark = !this.isSaveBookMark;
+    if (this.isSaveBookMark) {
+      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+    } else {
+      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+    }
   }
 }

@@ -1,12 +1,12 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
 export class LegalSearchEntity extends SearchEntity {
-    sobId: string;
-   
-    code:string;
-    name:string;
+    setOfBookId: string;
+    code: TextFilter = new TextFilter();
+    name: TextFilter = new TextFilter();
 
-    constructor(legalSearchEntity: any) {
+    constructor(legalSearchEntity?: any) {
         super(legalSearchEntity);
     }
 }

@@ -45,6 +45,7 @@ import { DetailProductOfLegalEntityComponent } from './_page/product-of-legal-en
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent,
@@ -68,6 +69,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     PaginationModule,
     DatePickerModule,
     RadioButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
 })
 export class LegalEntityModule {

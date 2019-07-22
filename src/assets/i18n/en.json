@@ -572,31 +572,14 @@
 			}
 		},
 		"detail": {
-			"account_name": "",
-			"branch": "",
-			"branch_address": "",
-			"city": "",
 			"level": "",
-			"modal": {
-				"title": ""
-			},
-			"name_bank": "",
 			"number_dependents": "",
 			"position": "",
 			"status": "",
 			"tab": {
-				"add_item": "",
 				"title_1": "",
 				"title_2": "",
 				"title_3": ""
-			},
-			"table": {
-				"address": "",
-				"contact": "",
-				"email": "",
-				"index": "",
-				"phone": "",
-				"relationship": ""
 			},
 			"title": ""
 		},
@@ -722,8 +705,10 @@
 	"legal_entity": {
 		"add": "",
 		"code": "",
-		"name": "",
-		"title": ""
+		"header": {
+			"title": ""
+		},
+		"name": ""
 	},
 	"pagination": {
 		"entries": "",
@@ -899,38 +884,11 @@
 			}
 		},
 		"detail": {
-			"modal": {
-				"title": ""
-			},
-			"modal1": {
-				"title": ""
-			},
 			"note": "",
 			"status": "",
 			"supplier_tax_code": "",
 			"tab": {
-				"title_1": "",
-				"title_2": "",
-				"title_3": ""
-			},
-			"table": {
-				"add_item": "",
-				"address": "",
-				"city": "",
-				"contact": "",
-				"email": "",
-				"index": "",
-				"phone": ""
-			},
-			"table1": {
-				"account_name": "",
-				"account_number": "",
-				"add_item": "",
-				"address_bank": "",
-				"bank_name": "",
-				"branch": "",
-				"city": "",
-				"index": ""
+				"title_1": ""
 			},
 			"title": ""
 		},
@@ -999,16 +957,12 @@
 	},
 	"voucher": {
 		"code": "",
-		"credit": "",
-		"debit": "",
-		"description": "",
 		"header": {
 			"title": ""
 		},
 		"modal": {
 			"title": ""
 		},
-		"name": "",
-		"type": ""
+		"name": ""
 	}
 }

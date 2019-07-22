@@ -572,31 +572,14 @@
 			}
 		},
 		"detail": {
-			"account_name": "tên chủ tài khoản",
-			"branch": "Chi nhánh",
-			"branch_address": "Địa chỉ chi nhánh",
-			"city": "Tỉnh/Thành phố",
 			"level": "Cấp bậc chức vụ",
-			"modal": {
-				"title": "Thêm thông tin liên hệ"
-			},
-			"name_bank": "Tên ngân hàng",
 			"number_dependents": "Số người phụ thuộc",
 			"position": "Chức vụ",
 			"status": "Trạng thái",
 			"tab": {
-				"add_item": "Thêm",
 				"title_1": "Thông tin chung",
 				"title_2": "Tài khoản ngân hàng",
 				"title_3": "Thông tin liên hệ"
-			},
-			"table": {
-				"address": "Địa chỉ",
-				"contact": "Tên người liên hệ",
-				"email": "Email",
-				"index": "STT",
-				"phone": "Số điện thoại",
-				"relationship": "Quan hệ với nhân viên"
 			},
 			"title": "Sửa thông tin nhân viên"
 		},
@@ -722,8 +705,10 @@
 	"legal_entity": {
 		"add": "Thêm pháp nhân",
 		"code": "Mã pháp nhân",
-		"name": "Tên pháp nhân",
-		"title": "Danh sách pháp nhân"
+		"header": {
+			"title": "Danh sách pháp nhân"
+		},
+		"name": "Tên pháp nhân"
 	},
 	"pagination": {
 		"entries": "bản ghi",
@@ -899,38 +884,11 @@
 			}
 		},
 		"detail": {
-			"modal": {
-				"title": "Thêm mới tài khoản ngân hàng"
-			},
-			"modal1": {
-				"title": "Thêm thông tin liên hệ"
-			},
 			"note": "Chú thích",
 			"status": "Trạng thái",
 			"supplier_tax_code": "",
 			"tab": {
-				"title_1": "Thông tin chung",
-				"title_2": "Thông tin liên hệ",
-				"title_3": "Tài khoản ngân hàng"
-			},
-			"table": {
-				"add_item": "Thêm thông tin liên hệ",
-				"address": "Địa chỉ",
-				"city": "Tỉnh/Thành phố",
-				"contact": "Tên người nhận",
-				"email": "Email",
-				"index": "STT",
-				"phone": "Số điện thoại"
-			},
-			"table1": {
-				"account_name": "Tên chủ tài khoản",
-				"account_number": "Số tài khoản",
-				"add_item": "Thêm mới tài khoản",
-				"address_bank": "Địa chỉ chi nhánh",
-				"bank_name": "Tên ngân hàng",
-				"branch": "Chi nhánh ngân hàng",
-				"city": "Tỉnh/Thành phố",
-				"index": "STT"
+				"title_1": "Thông tin chung"
 			},
 			"title": "Thêm mới nhà cung cấp"
 		},
@@ -999,16 +957,12 @@
 	},
 	"voucher": {
 		"code": "Mã chứng từ",
-		"credit": "Tài khoản có",
-		"debit": "Tài khoản nợ",
-		"description": "Mô tả",
 		"header": {
 			"title": "Thông tin chứng từ"
 		},
 		"modal": {
 			"title": "Thêm chứng từ"
 		},
-		"name": "Tên loại chứng từ",
-		"type": "Loại chứng từ"
+		"name": "Tên loại chứng từ"
 	}
 }

@@ -1,9 +1,9 @@
 <div class="page list-customer-of-legal-entity">
     <div class="page-header">
         <span class="page-title">
-            {{'customerOfLegalEntity.header.title' | translate}}
-            <span (click)="onClickSaveBookMark($event)">
-                <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+            {{pageTitle | translate}}
+            <span (click)="bookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
@@ -14,16 +14,17 @@
         <div class="row">
             <div class="col-sm-6 page-1">
                 <div class="mt-2 row">
-                    <!-- <div class="col-sm-7 d-flex align-items-center">
-                        <span class="sob-label flex-shrink-1">
-                            {{'general.legal_entity.name' | translate}}
-                        </span>
-                        <app-single-select></app-single-select>
-                    </div> -->
                 </div>
                 <div class="page-section table1 mt-2">
                     <p-table [value]="[]">
-                        <ng-template pTemplate="header">
+                        <ng-template pTemplate="colgroup">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header" >
                             <tr>
                                 <th>
                                     {{'customerOfLegalEntity.sob' | translate}}
@@ -44,8 +45,8 @@
                                     <app-advanced-filters></app-advanced-filters>
                                 </th>
                                 <th class="th-filter">
-                                        <app-advanced-filters></app-advanced-filters>
-                                    </th>
+                                    <app-advanced-filters></app-advanced-filters>
+                                </th>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -57,8 +58,6 @@
                     <div class="col-sm-4 align-items-center">
                         <app-multi-select></app-multi-select>
                     </div>
-
-
                     <div class="col-sm-8 page-actions  d-flex justify-content-end">
                         <button class="btn btn-add" (click)="onClickAddCustomer()"> +
                             {{'general.button.add' | translate}}</button>
@@ -83,6 +82,12 @@
                 </div>
 
                 <div class="page-section mt-2">
+                    <ng-template pTemplate="colgroup">
+                        <colgroup>
+                            <col>
+                            <col>
+                        </colgroup>
+                    </ng-template>
                     <p-table [value]="tmptable">
                         <ng-template pTemplate="header">
                             <tr>

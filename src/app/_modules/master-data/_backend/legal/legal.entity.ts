@@ -2,13 +2,11 @@ import { Entity } from 'src/app/_helpers/entity';
 
 export class LegalEntity extends Entity {
     // sobEntity:
-    sobId: string;
-
+    setOfBookId: string;
     code: string;
-    name:string;
-    
+    name: string;
 
-    constructor(legalEntity: any) {
+    constructor(legalEntity?: any) {
         super(legalEntity);
     }
 }
