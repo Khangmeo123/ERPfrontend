@@ -28,7 +28,7 @@
   <div class="page-body mt-4">
     <div class="page-section d-flex align-items-center">
       <div class="flex-shrink-1 mr-2">
-        {{'general.sob' | translate}}
+        {{'general.sob' | translate}}:
       </div>
       <div>
         <app-single-select></app-single-select>
@@ -53,16 +53,16 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters [filter]="coaSE.accountNumber"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters [filter]="coaSE.accountName"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters [filter]="coaSE.propertyId"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters [filter]="coaSE.description"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>

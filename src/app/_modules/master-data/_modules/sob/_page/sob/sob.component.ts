@@ -115,8 +115,6 @@ export class SobComponent implements OnInit, OnDestroy, OnChanges {
 
     const currencyListSub = this.sobService.currencyList.subscribe((res) => {
       if (res) {
-        console.log('change console');
-        console.log(res);
         this.currencyList = res;
       }
     });
