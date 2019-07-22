@@ -8,20 +8,21 @@ import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { CurrencySearchEntity } from '../../../../_backend/currency/currency.searchentity';
 import { CurrencyEntity } from '../../../../_backend/currency/currency.entity';
-import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.searchEntity';
+import { Entities } from '../../../../../../_helpers/entity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { ImportTaxEntity } from '../../../../_backend/import-tax/import-tax.entity';
-import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
+import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.searchEntity';
 import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
+import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
+import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-added-tax.entity';
+import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
 import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
 import { EnvironmentTaxEntity } from '../../../../_backend/environment-tax/environment-tax.entity';
+import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
+import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
 import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
-import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
-import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-added-tax.entity';
-import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
-import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
-import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -43,83 +44,62 @@ export class SobRepository extends Repository {
     );
   }
 
-  getCurrencyList(currencySearchEntity: CurrencySearchEntity): Observable<CurrencyEntity[]> {
-    return this.http.post<CurrencyEntity[]>(this.apiUrl + '/listCurrency', JSON.stringify(currencySearchEntity),
+  getCurrencyList(currencySearchEntity: CurrencySearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-currency', JSON.stringify(currencySearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new CurrencyEntity(item);
-        });
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new CurrencyEntity(item)),
+          exceptIds: exceptIds.map((item) => new CurrencyEntity(item)),
+        };
       }),
     );
   }
 
-  getImportTaxTemplates(importTaxSearchEntity: ImportTaxSearchEntity): Observable<ImportTaxEntity[]> {
-    return this.http.post<ImportTaxEntity[]>(this.apiUrl + '/listImportTaxTemplate', JSON.stringify(importTaxSearchEntity),
+  getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-coa', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new ImportTaxEntity(item);
-        });
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new CoaEntity(item)),
+          exceptIds: exceptIds.map((item) => new CoaEntity(item)),
+        };
       }),
     );
   }
 
-  getExportTaxTemplates(exportTaxSearchEntity: ExportTaxSearchEntity): Observable<ExportTaxEntity[]> {
-    return this.http.post<ExportTaxEntity[]>(this.apiUrl + '/listExportTaxTemplate', JSON.stringify(exportTaxSearchEntity),
+  getImportTaxTemplates(importTaxSearchEntity: ImportTaxSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-import-tax-template', JSON.stringify(importTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new ExportTaxEntity(item);
-        });
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new ImportTaxEntity(item)),
+          exceptIds: exceptIds.map((item) => new ImportTaxEntity(item)),
+        };
       }),
     );
   }
 
-  getEnvironmentTaxTemplates(environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Observable<EnvironmentTaxEntity[]> {
-    return this.http.post<EnvironmentTaxEntity[]>(this.apiUrl + '/listEnvironmentTaxTemplate', JSON.stringify(environmentTaxSearchEntity),
+  getExportTaxTemplates(exportTaxSearchEntity: ExportTaxSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-export-tax-template', JSON.stringify(exportTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new EnvironmentTaxEntity(item);
-        });
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new ExportTaxEntity(item)),
+          exceptIds: exceptIds.map((item) => new ExportTaxEntity(item)),
+        };
       }),
     );
   }
 
-  getSpecialConsumptionTaxTemplates(
-    specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity,
-  ): Observable<SpecialConsumptionTaxEntity[]> {
-    return this.http.post<SpecialConsumptionTaxEntity[]>(
-      this.apiUrl + '/listSpecialConsumptionTaxTemplate',
-      JSON.stringify(specialConsumptionTaxSearchEntity),
+  getValueAddedTaxTemplates(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-value-added-tax-template', JSON.stringify(valueAddedTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new SpecialConsumptionTaxEntity(item);
-        });
-      }),
-    );
-  }
-
-  getValueAddedTaxTemplates(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity): Observable<ValueAddedTaxEntity[]> {
-    return this.http.post<ValueAddedTaxEntity[]>(this.apiUrl + '/listValueAddedTaxTemplate', JSON.stringify(valueAddedTaxSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new ValueAddedTaxEntity(item);
-        });
-      }),
-    );
-  }
-
-  getNaturalResourceTaxTemplates(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchentity): Observable<NaturalResourceTaxEntity[]> {
-    return this.http.post<NaturalResourceTaxEntity[]>(this.apiUrl + '/listNaturalResourceTaxTemplate', JSON.stringify(naturalResourceTaxSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new NaturalResourceTaxEntity(item);
-        });
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new ValueAddedTaxEntity(item)),
+          exceptIds: exceptIds.map((item) => new ValueAddedTaxEntity(item)),
+        };
       }),
     );
   }
@@ -128,17 +108,6 @@ export class SobRepository extends Repository {
     return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
-    );
-  }
-
-  getCoaList(coaSearchEntity: CoaSearchEntity): Observable<CoaEntity[]> {
-    return this.http.post<CoaEntity[]>(this.apiUrl + '/listCOA', JSON.stringify(coaSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body.map((item) => {
-          return new CoaEntity(item);
-        });
-      }),
     );
   }
 
@@ -151,6 +120,43 @@ export class SobRepository extends Repository {
     );
   }
 
+  getEnvironmentTaxTemplates(environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-environment-tax-template', JSON.stringify(environmentTaxSearchEntity),
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new EnvironmentTaxEntity(item)),
+          exceptIds: exceptIds.map((item) => new EnvironmentTaxEntity(item)),
+        };
+      }),
+    );
+  }
+
+  getNaturalResourceTaxTemplates(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchentity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-natural-resource-tax-template', JSON.stringify(naturalResourceTaxSearchEntity),
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new NaturalResourceTaxEntity(item)),
+          exceptIds: exceptIds.map((item) => new NaturalResourceTaxEntity(item)),
+        };
+      }),
+    );
+  }
+
+  getSpecialConsumptionTaxTemplates(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Observable<Entities> {
+    return this.http.post<Entities>(
+      this.apiUrl + '/list-special-consumption-tax-template',
+      JSON.stringify(specialConsumptionTaxSearchEntity),
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(({body: {ids, exceptIds}}) => {
+        return {
+          ids: ids.map((item) => new SpecialConsumptionTaxEntity(item)),
+          exceptIds: exceptIds.map((item) => new SpecialConsumptionTaxEntity(item)),
+        };
+      }),
+    );
+  }
 
   add(sobEntity: any): Observable<boolean> {
     return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(sobEntity),

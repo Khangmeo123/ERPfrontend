@@ -6,20 +6,13 @@ import { SobRepository } from './sob.repository';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { SobForm } from '../../../../_backend/sob/sob.form';
 import { CurrencySearchEntity } from '../../../../_backend/currency/currency.searchentity';
-import { CurrencyEntity } from '../../../../_backend/currency/currency.entity';
-import { ImportTaxEntity } from '../../../../_backend/import-tax/import-tax.entity';
-import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
-import { EnvironmentTaxEntity } from '../../../../_backend/environment-tax/environment-tax.entity';
-import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
-import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-added-tax.entity';
-import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
-import { CoaEntity } from '../../../../_backend/coa/coa.entity';
+import { Entities } from '../../../../../../_helpers/entity';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.searchEntity';
 import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
+import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
 import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
 import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
-import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
-import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 export class SobService {
@@ -27,14 +20,14 @@ export class SobService {
   public sobList: BehaviorSubject<SobEntity[]> = new BehaviorSubject([]);
   public sobCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
-  public currencyList: BehaviorSubject<CurrencyEntity[]> = new BehaviorSubject([]);
-  public importTaxTemplates: BehaviorSubject<ImportTaxEntity[]> = new BehaviorSubject([]);
-  public coaList: BehaviorSubject<CoaEntity[]> = new BehaviorSubject([]);
-  public exportTaxTemplates: BehaviorSubject<ExportTaxEntity[]> = new BehaviorSubject([]);
-  public environmentTaxTemplates: BehaviorSubject<EnvironmentTaxEntity[]> = new BehaviorSubject([]);
-  public specialConsumptionTaxTemplates: BehaviorSubject<SpecialConsumptionTaxEntity[]> = new BehaviorSubject([]);
-  public valueAddedTaxTemplates: BehaviorSubject<ValueAddedTaxEntity[]> = new BehaviorSubject([]);
-  public naturalResourceTaxTemplates: BehaviorSubject<NaturalResourceTaxEntity[]> = new BehaviorSubject([]);
+  public currencyList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public importTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public exportTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public environmentTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public specialConsumptionTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public valueAddedTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public naturalResourceTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   public sobForm: BehaviorSubject<FormGroup>;
 

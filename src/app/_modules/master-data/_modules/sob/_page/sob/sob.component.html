@@ -12,6 +12,9 @@
       <button class="btn btn-add" (click)="toggleModal()">
         {{'general.button.add' | translate}}
       </button>
+      <button class="btn btn-add" (click)="clearFilters()">
+        {{'general.button.clear' | translate}}
+      </button>
     </div>
   </div>
   <div class="page-body mt-2">
@@ -78,14 +81,14 @@
         <label>
           {{'sob.chart_account' | translate}}
         </label>
-        <app-simple-select [list]="coaList" (listOpen)="getCoaList()"></app-simple-select>
+        <app-single-select [list]="coaList" (listOpen)="getCoaList()"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.currency' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-simple-select [list]="currencyList" (listOpen)="getCurrencyList()"></app-simple-select>
+        <app-single-select [list]="currencyList" key="name" (listOpen)="getCurrencyList()"></app-single-select>
       </div>
     </div>
     <div class="row">
@@ -93,14 +96,14 @@
         <label>
           {{'sob.special_consumption_tax' | translate}}
         </label>
-        <app-simple-select [list]="specialConsumptionTaxTemplates"
-                           (listOpen)="getSpecialConsumptionTaxTemplates()"></app-simple-select>
+        <app-single-select [list]="specialConsumptionTaxTemplates"
+                           (listOpen)="getSpecialConsumptionTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.value_added_tax' | translate}}
         </label>
-        <app-simple-select [list]="valueAddedTaxTemplates" (listOpen)="getValueAddedTaxTemplates()"></app-simple-select>
+        <app-single-select [list]="valueAddedTaxTemplates" (listOpen)="getValueAddedTaxTemplates()"></app-single-select>
       </div>
     </div>
     <div class="row">
@@ -108,14 +111,14 @@
         <label>
           {{'sob.resource_tax' | translate}}
         </label>
-        <app-simple-select [list]="naturalResourceTaxTemplates"
-                           (listOpen)="getNaturalResourceTaxTemplates()"></app-simple-select>
+        <app-single-select [list]="naturalResourceTaxTemplates"
+                           (listOpen)="getNaturalResourceTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.enviroment_tax' | translate}}
         </label>
-        <app-simple-select [list]="environmentTaxTemplates" (listOpen)="getEnvironmentTemplates()"></app-simple-select>
+        <app-single-select [list]="environmentTaxTemplates" (listOpen)="getEnvironmentTemplates()"></app-single-select>
       </div>
     </div>
     <div class="row">
@@ -123,13 +126,13 @@
         <label>
           {{'sob.export_tax' | translate}}
         </label>
-        <app-simple-select [list]="exportTaxTemplates" (listOpen)="getExportTaxTemplates()"></app-simple-select>
+        <app-single-select [list]="exportTaxTemplates" (listOpen)="getExportTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
           {{'sob.import_tax' | translate}}
         </label>
-        <app-simple-select [list]="importTaxTemplates" (listOpen)="getImportTaxTemplates()"></app-simple-select>
+        <app-single-select [list]="importTaxTemplates" (listOpen)="getImportTaxTemplates()"></app-single-select>
       </div>
     </div>
   </form>

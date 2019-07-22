@@ -1,4 +1,4 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SobService } from './sob.service';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { FormGroup } from '@angular/forms';
@@ -10,20 +10,20 @@ import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { CurrencyEntity } from '../../../../_backend/currency/currency.entity';
 import { CurrencySearchEntity } from '../../../../_backend/currency/currency.searchentity';
-import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { ImportTaxEntity } from '../../../../_backend/import-tax/import-tax.entity';
 import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.searchEntity';
-import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
 import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
-import { EnvironmentTaxEntity } from '../../../../_backend/environment-tax/environment-tax.entity';
 import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
-import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-added-tax.entity';
 import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
-import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
 import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
-import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
 import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { ImportTaxEntity } from '../../../../_backend/import-tax/import-tax.entity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
+import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
+import { EnvironmentTaxEntity } from '../../../../_backend/environment-tax/environment-tax.entity';
+import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-added-tax.entity';
+import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
+import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
 
 @Component({
   selector: 'app-sob',
@@ -33,7 +33,7 @@ import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-
     SobService,
   ],
 })
-export class SobComponent implements OnInit, OnDestroy, OnChanges {
+export class SobComponent implements OnInit, OnDestroy {
   pageTitle: string = 'sob.header.title';
 
   isSaveBookMark: boolean = false;
@@ -49,6 +49,8 @@ export class SobComponent implements OnInit, OnDestroy, OnChanges {
   currencySearchEntity: CurrencySearchEntity = new CurrencySearchEntity();
 
   currencyList: CurrencyEntity[] = [];
+
+  selectedCurrencyList = [];
 
   coaList: CoaEntity[] = [];
 
@@ -99,65 +101,68 @@ export class SobComponent implements OnInit, OnDestroy, OnChanges {
         this.sobList = res;
       }
     });
+
     const sobFormSub = this.sobService.sobForm.subscribe(res => {
       if (res) {
         this.sobForm = res;
       }
     });
+
     const sobCountSub = this.sobService.sobCount.subscribe(res => {
       if (res) {
         this.pagination.totalItems = res;
       }
     });
+
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isSaveBookMark = res;
     });
 
     const currencyListSub = this.sobService.currencyList.subscribe((res) => {
       if (res) {
-        this.currencyList = res;
+        this.currencyList = res.exceptIds;
       }
     });
 
     const coaListSub = this.sobService.coaList.subscribe((res) => {
       if (res) {
-        this.coaList = res;
+        this.coaList = res.exceptIds;
       }
     });
 
     const importTaxSub = this.sobService.importTaxTemplates.subscribe((res) => {
       if (res) {
-        this.importTaxTemplates = res;
+        this.importTaxTemplates = res.exceptIds;
       }
     });
 
     const exportTaxSub = this.sobService.exportTaxTemplates.subscribe((res) => {
       if (res) {
-        this.exportTaxTemplates = res;
+        this.exportTaxTemplates = res.exceptIds;
       }
     });
 
     const environmentTaxSub = this.sobService.exportTaxTemplates.subscribe((res) => {
       if (res) {
-        this.environmentTaxTemplates = res;
+        this.environmentTaxTemplates = res.exceptIds;
       }
     });
 
     const naturalResourceTaxSub = this.sobService.naturalResourceTaxTemplates.subscribe((res) => {
       if (res) {
-        this.naturalResourceTaxTemplates = res;
+        this.naturalResourceTaxTemplates = res.exceptIds;
       }
     });
 
     const valueAddedTaxSub = this.sobService.valueAddedTaxTemplates.subscribe((res) => {
       if (res) {
-        this.valueAddedTaxTemplates = res;
+        this.valueAddedTaxTemplates = res.exceptIds;
       }
     });
 
     const specialConsumptionTaxSub = this.sobService.specialConsumptionTaxTemplates.subscribe((res) => {
       if (res) {
-        this.specialConsumptionTaxTemplates = res;
+        this.specialConsumptionTaxTemplates = res.exceptIds;
       }
     });
 
@@ -208,10 +213,6 @@ export class SobComponent implements OnInit, OnDestroy, OnChanges {
     this.sobSearchEntity.skip = this.pagination.skip;
     this.sobSearchEntity.take = this.pagination.take;
     this.getList();
-  }
-
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
   }
 
   getCurrencyList() {
@@ -289,5 +290,9 @@ export class SobComponent implements OnInit, OnDestroy, OnChanges {
     } else {
       this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
+  }
+
+  clearFilters() {
+    this.sobSearchEntity = new SobSearchEntity();
   }
 }

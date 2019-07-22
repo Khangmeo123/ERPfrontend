@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {getListDirection} from '../../helpers';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { getListDirection } from '../../helpers';
 
 @Component({
   selector: 'app-single-select',
@@ -73,7 +73,6 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
       if (this.isLoading) {
-        debugger
         this.isLoading = false;
       }
     }
