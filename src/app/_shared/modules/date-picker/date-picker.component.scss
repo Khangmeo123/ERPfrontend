@@ -2,23 +2,18 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
-app-date-picker {
-  flex-grow: 1;
+.date-picker {
+  .form-control {
+  }
 
-  .date-picker {
-    .form-control {
-      min-width: unset!important;
-    }
+  .input-group-text {
+    cursor: pointer;
+    height: $input-height;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
 
-    .input-group-text {
-      cursor: pointer;
-      height: $input-height;
-      padding-left: 0.25rem;
-      padding-right: 0.25rem;
-    }
-
-    button.mat-icon-button {
-      outline: none;
-    }
+  button.mat-icon-button {
+    outline: none;
   }
 }

@@ -3,10 +3,6 @@
 @import "~bootstrap/scss/variables";
 
 .advanced-filter {
-  * {
-    font-size: small!important;
-  }
-
   position: relative;
   // display: inline-table;
   button:focus {
@@ -28,12 +24,9 @@
   }
 
   .date-picker {
-    .input-group {
-      flex-wrap: unset;
-      .input-group-append {
-        display: none;
-        visibility: hidden;
-      }
+    .input-group-append {
+      display: none;
+      visibility: hidden;
     }
   }
 

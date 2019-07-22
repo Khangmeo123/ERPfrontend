@@ -30,8 +30,6 @@ import { TranslateService } from '@ngx-translate/core';
 export class DatePickerComponent implements OnInit, OnChanges {
   checkCtrl = false;
 
-  @Input() small = false;
-
   @Input() control = new FormControl();
 
   @Input() displayToggler = false;
@@ -62,7 +60,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
-      const {currentValue} = changes.value;
+      const { currentValue } = changes.value;
       if (currentValue === null) {
         console.log(this.dateValue);
       }
@@ -95,8 +93,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
   }
 
   onKeyDown(event) {
-    const {target, key} = event;
-    const {value} = target;
+    const { target, key } = event;
+    const { value } = target;
     if (key === 'Control') {
       this.checkCtrl = true;
     }
@@ -121,7 +119,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
   }
 
   onInput(event) {
-    const {value} = event.target;
+    const { value } = event.target;
     if (value === '') {
       this.valueChange.emit(value);
     }
