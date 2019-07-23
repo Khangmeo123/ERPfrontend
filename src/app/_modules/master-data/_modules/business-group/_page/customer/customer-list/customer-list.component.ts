@@ -91,7 +91,7 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.customerSearchEntity.orderBy = event.sortField;
-      this.customerSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.customerSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

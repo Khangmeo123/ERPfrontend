@@ -117,7 +117,7 @@ export class AssetComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.assetSearchEntity.orderBy = event.sortField;
-      this.assetSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.assetSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

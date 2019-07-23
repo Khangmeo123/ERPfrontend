@@ -103,7 +103,7 @@ export class UomComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.uomSearchEntity.orderBy = event.sortField;
-      this.uomSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.uomSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

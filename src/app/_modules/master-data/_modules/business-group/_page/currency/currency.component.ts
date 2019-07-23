@@ -104,7 +104,7 @@ export class CurrencyComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.currencySearchEntity.orderBy = event.sortField;
-      this.currencySearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.currencySearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

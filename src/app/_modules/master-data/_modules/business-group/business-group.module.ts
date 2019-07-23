@@ -42,6 +42,7 @@ import { EmployeeListComponent } from './_page/employee/employee-list/employee-l
 import { SupplierListComponent } from './_page/supplier/supplier-list/supplier-list.component';
 import { SupplierDetailComponent } from './_page/supplier/supplier-detail/supplier-detail.component';
 import { CustomerListComponent } from './_page/customer/customer-list/customer-list.component';
+import { InputNumberModule } from 'src/app/_shared/modules/input-number/input-number.module';
 
 @NgModule({
   declarations: [
@@ -92,6 +93,7 @@ import { CustomerListComponent } from './_page/customer/customer-list/customer-l
     BsDropdownModule.forRoot(),
     DropdownModule,
     DirectiveModule,
+    InputNumberModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

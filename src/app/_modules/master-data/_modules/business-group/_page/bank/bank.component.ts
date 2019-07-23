@@ -104,7 +104,7 @@ export class BankComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.bankSearchEntity.orderBy = event.sortField;
-      this.bankSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.bankSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

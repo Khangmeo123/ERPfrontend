@@ -89,7 +89,7 @@ export class SupplierListComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.supplierSearchEntity.orderBy = event.sortField;
-      this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

@@ -103,7 +103,7 @@ export class JobTitleComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.jobTitleSearchEntity.orderBy = event.sortField;
-      this.jobTitleSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.jobTitleSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

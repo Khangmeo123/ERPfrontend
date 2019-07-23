@@ -130,9 +130,8 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.employeeDetailService.getJobLevelList(this.jobLevelSearchEntity);
   }
 
-  searchJobLevel(event: string) {
-    this.jobLevelSearchEntity.code.startsWith = event;
-    this.jobLevelSearchEntity.name.startsWith = event;
+  searchJobLevel(event: number) {
+    this.jobLevelSearchEntity.level.equal = event;
     this.jobLevelTyping.next(this.jobLevelSearchEntity);
   }
 }

@@ -101,7 +101,7 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.businessGroupSearchEntity.orderBy = event.sortField;
-      this.businessGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.businessGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

@@ -22,10 +22,6 @@ export class JobLevelComponent implements OnInit, OnDestroy {
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
   pagination: PaginationModel = new PaginationModel();
-  // jobTitleIds: JobTitleEntity[];
-  // jobTitleExceptIds: JobTitleEntity[];
-  // jobTitleTyping: Subject<JobTitleSearchEntity> = new Subject();
-  // jobTitleSearchEntity: JobTitleSearchEntity = new JobTitleSearchEntity();
   jobLevelSearchEntity: JobLevelSearchEntity = new JobLevelSearchEntity();
   jobLevelList: JobLevelEntity[];
   jobLevelForm: FormGroup;
@@ -54,13 +50,6 @@ export class JobLevelComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isBookMark = res;
     });
-    // const jobTitleSub = this.jobLevelService.jobTitleList.subscribe(res => {
-    //   if (res) {
-    //     this.jobTitleExceptIds = res.exceptIds;
-    //     this.jobTitleIds = res.ids;
-    //   }
-    // })
-    // this.jobLevelService.getListJobTitleByTyping(this.jobTitleTyping);
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
     this.jobLevelSubs.add(jobLevelListSub).add(jobLevelFormSub).add(jobLevelCountSub).add(bookMarkNotify);
   }
@@ -114,7 +103,7 @@ export class JobLevelComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.jobLevelSearchEntity.orderBy = event.sortField;
-      this.jobLevelSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.jobLevelSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

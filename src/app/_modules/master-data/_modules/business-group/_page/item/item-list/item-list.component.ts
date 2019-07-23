@@ -105,7 +105,7 @@ export class ItemListComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.itemSearchEntity.orderBy = event.sortField;
-      this.itemSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.itemSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

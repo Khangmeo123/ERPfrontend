@@ -143,7 +143,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'employee.detail.content.jobLevel' | translate}}</label>
-                            <app-single-select [list]="jobLevelExceptIds" [selectedList]="jobLevelIds" [key]="'name'"
+                            <app-single-select [list]="jobLevelExceptIds" [selectedList]="jobLevelIds" [key]="'level'"
                                 (search)="searchJobLevel($event)"
                                 (selectionChange)="employeeForm.controls.jobLevelId.setValue($event.Id)"
                                 (listOpen)="openJobLevelList(jobTitleSearchEntity.jobLevelId)"></app-single-select>

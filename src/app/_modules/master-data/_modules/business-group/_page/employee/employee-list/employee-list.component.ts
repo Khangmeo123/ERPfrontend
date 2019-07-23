@@ -79,7 +79,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.employeeSearchEntity.orderBy = event.sortField;
-      this.employeeSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.employeeSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

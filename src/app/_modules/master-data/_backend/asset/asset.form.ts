@@ -9,10 +9,10 @@ export class AssetForm extends FormModel {
     code = new FormControl('', [requiredField]);
     // typeEntity:
     typeId = new FormControl('', [requiredField]);
-    typeName = new FormControl('', [requiredField]);
+    typeName = new FormControl('');
     // statusEntity:
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('', [requiredField]);
+    statusName = new FormControl('');
     errors = new FormGroup({
         name: new FormControl(''),
         code: new FormControl(''),

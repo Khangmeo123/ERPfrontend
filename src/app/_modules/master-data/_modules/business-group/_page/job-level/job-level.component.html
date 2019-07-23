@@ -26,6 +26,8 @@
                 </ul>
             </div>
             <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
     </div>
     <hr>
@@ -37,29 +39,23 @@
                     <colgroup>
                         <col>
                         <col>
-                        <col>
                     </colgroup>
                 </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'job_level.job_level_code' | translate}}
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'job_level.job_level_name' | translate}}
+                        <th pResizableColumn data-qe-id="table-thead-level" [pSortableColumn]="'level'">
+                            {{ 'jobLevel.table.level' | translate}}
+                            <p-sortIcon [field]="'level'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'job_level.job_level_description' | translate}}
+                            {{ 'jobLevel.table.description' | translate}}
+                            <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
                     <tr>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="jobLevelSearchEntity.code" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-code"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="jobLevelSearchEntity.name" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-name"></app-advanced-filters>
+                            <app-advanced-filters [filter]="jobLevelSearchEntity.level" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-level"></app-advanced-filters>
                         </th>
                         <th class="th-filter">
                             <app-advanced-filters [filter]="jobLevelSearchEntity.description" (changeFilter)="getList()"
@@ -69,8 +65,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-jobLevel let-index="rowIndex">
                     <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td> {{jobLevel.code}} </td>
-                        <td> {{jobLevel.name}} </td>
+                        <td> {{jobLevel.level}} </td>
                         <td> {{jobLevel.description}} </td>
                     </tr>
                 </ng-template>
@@ -80,48 +75,33 @@
             <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
             </app-pagination>
         </div>
-        <button class="btn btn-clear" (click)="clearSearch(table)"
-            data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
 </div>
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
-        {{ 'job_level.modal.title' | translate}}
+        {{ 'jobLevel.dialog.title' | translate}}
     </p-header>
     <div class="container" [formGroup]="jobLevelForm">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="joLevelCode">{{ 'job_level.job_level_code' | translate}}<span
+                    <label for="jobLevel">{{ 'jobLevel.dialog.level' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
-                        <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-                            id="joLevelCode" />
+                        <app-input-number [control]="jobLevelForm.get('level')" inputId="jobLevel"
+                            data-qe-id="dialog-form-level" class="w-100">
+                        </app-input-number>
                         <app-error data-qe-id="dialog-form-code"
-                            *ngIf="(jobLevelForm.controls.code?.errors && jobLevelForm.controls.code?.touched) || !!jobLevelForm.controls.errors.get('code')?.value"
-                            [formGroup]="jobLevelForm" [property]="'code'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="jobLevelName">{{ 'job_level.job_level_name' | translate}}<span
-                            class="text-danger">*</span></label>
-                    <div class="div-form">
-                        <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-                            id="jobLevelName" />
-                        <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(jobLevelForm.controls.name?.errors && jobLevelForm.controls.name?.touched) || !!jobLevelForm.controls.errors.get('name')?.value"
-                            [formGroup]="jobLevelForm" [property]="'name'" [placement]="'top'" class="error-form">
+                            *ngIf="(jobLevelForm.controls.level?.errors && jobLevelForm.controls.level?.touched) || !!jobLevelForm.controls.errors.get('level')?.value"
+                            [formGroup]="jobLevelForm" [property]="'level'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="job_levelid">{{ 'job_level.job_level_description' | translate}}</label>
+                    <label for="job_levelid">{{ 'jobLevel.dialog.description' | translate}}</label>
                     <textarea class="form-control" rows="4" formControlName="description">
                     </textarea>
                 </div>

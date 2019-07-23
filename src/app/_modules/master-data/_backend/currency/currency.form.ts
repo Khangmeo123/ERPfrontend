@@ -6,7 +6,7 @@ import { requiredField, checkLength } from 'src/app/_helpers';
 
 export class CurrencyForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(3, 50)]);
-    code = new FormControl('', [requiredField, checkLength(3, 10)]);
+    code = new FormControl('', [requiredField, checkLength(3, 3)]);
     description = new FormControl('', [checkLength(0, 500)]);
     errors = new FormGroup({
         name: new FormControl(''),
