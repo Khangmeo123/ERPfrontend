@@ -1,36 +1,29 @@
 <div class="page item-detail">
     <div class="page-header">
         <span class="page-title">
-            {{'item.content.modal.title' | translate}}
+            {{pageTitle}}
         </span>
         <div class="page-actions">
             <button class="btn btn-cancel" (click)="cancel()"
                 data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
             <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
                 {{ 'general.button.save' | translate}}</button>
-            <button class="btn btn-delete" *ngIf="itemForm.value?.isDeleted" mwlConfirmationPopover
-                [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
-                (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="delete()"
-                data-qe-id="button-delete">
-                {{ 'general.button.delete' | translate}}</button>
         </div>
     </div>
-
     <hr>
     <div class="page-body">
         <accordion>
             <accordion-group [isOpen]="true" [formGroup]="itemForm">
                 <button (click)="isOpenTab1 = !isOpenTab1;" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'item.detail.tab.title_1' | translate }}</div>
+                    <div class="pull-left float-left">{{'item.detail.tab.title1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
-
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="itemCode">{{ 'item.content.table.item_code' | translate}}<span
+                            <label for="itemCode">{{ 'item.detail.content.code' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="code" data-qe-id="form-code"
@@ -45,7 +38,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label
-                                for="itemCodeFromSupplier">{{ 'item.content.detail.item_codeFromSupplier' | translate}}</label>
+                                for="itemCodeFromSupplier">{{ 'item.detail.content.codeFromSupplier' | translate}}</label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="codeFromSupplier"
                                     data-qe-id="form-codeFromSupplier" id="itemCodeFromSupplier" />
@@ -60,7 +53,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label
-                                for="itemCodeFromMarket">{{ 'item.content.detail.item_codeFromMarket' | translate}}</label>
+                                for="itemCodeFromMarket">{{ 'item.content.detail.codeFromMarket' | translate}}</label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="codeFromMarket"
                                     data-qe-id="form-codeFromMarket" id="itemCodeFromMarket" />
@@ -77,7 +70,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="itemName">{{ 'item.content.table.item_name' | translate}}<span
+                            <label for="itemName">{{ 'item.detail.content.name' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="name" data-qe-id="form-name"
@@ -92,7 +85,7 @@
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_characteristic' | translate}}<span
+                            <label for="bankid">{{ 'item.detail.content.characteristic' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <app-simple-select [key]="'name'" [list]="characteristicList"
@@ -110,7 +103,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_uom' | translate}}<span
+                            <label for="bankid">{{ 'item.detail.content.uom' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
@@ -130,7 +123,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="itemPrimaryPrice">{{ 'item.content.table.item_primaryPrice' | translate}}<span
+                            <label for="itemPrimaryPrice">{{ 'item.detail.content.primaryPrice' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="primaryPrice"
@@ -145,7 +138,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="itemWeight">{{ 'item.content.detail.item_weight' | translate}} (kg)</label>
+                            <label for="itemWeight">{{ 'item.detail.content.weight' | translate}} (kg)</label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="weight"
                                     data-qe-id="form-weight" id="itemWeight" />
@@ -158,7 +151,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="itemStatus">{{ 'item.content.table.item_status' | translate}}<span
+                            <label for="itemStatus">{{ 'item.detail.content.status' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <app-simple-select [key]="'name'" [list]="statusList"
@@ -179,7 +172,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_height' | translate}} (cm)<span
+                            <label for="bankid">{{ 'item.detail.content.height' | translate}} (cm)<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="height"
@@ -193,7 +186,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="itemlength">{{ 'item.content.detail.item_length' | translate}} (cm)</label>
+                            <label for="itemlength">{{ 'item.detail.content.length' | translate}} (cm)</label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="length"
                                     data-qe-id="form-length" id="itemlength" />
@@ -206,7 +199,7 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="itemWidth">{{ 'item.content.detail.item_width' | translate}} (cm)</label>
+                            <label for="itemWidth">{{ 'item.detail.content.width' | translate}} (cm)</label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="width" data-qe-id="form-width"
                                     id="itemWidth" />
@@ -224,7 +217,7 @@
                     </div>
                     <div class="col-sm-8">
                         <div class="form-group">
-                            <label for="itemDescription">{{ 'item.content.detail.item_description' | translate}}</label>
+                            <label for="itemDescription">{{ 'item.detail.content.description' | translate}}</label>
                             <textarea class="form-control" rows="8" formControlName="description" id="itemDescription">
                             </textarea>
                         </div>
@@ -233,7 +226,7 @@
             </accordion-group>
             <accordion-group>
                 <button (click)="isOpenTab2 = !isOpenTab2;" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'item.detail.tab.title_2' | translate }}</div>
+                    <div class="pull-left float-left">{{'item.detail.tab.title2' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
@@ -241,19 +234,19 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.value_add_tax_id' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content.vat' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.import_tax_id' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content.imt' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.export_tax_id' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content.ext' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
@@ -261,19 +254,19 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.value_add_tax' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content.vat' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.import_tax' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content..impt' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.export_tax' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content.ext' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
@@ -281,19 +274,19 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.special_consumption_tax_id' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content.sct' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.resource_tax_id' | translate}} </label>
+                            <label for="bankid">{{ 'item.detail.content.nrt' | translate}} </label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'item.content.tab.enviroment_tax_id' | translate}}</label>
+                            <label for="bankid">{{ 'item.detail.content.tab.emt' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
@@ -323,5 +316,19 @@
         </accordion>
 
     </div>
-
+    <div class="page-footer">
+        <div>
+            <button class="btn btn-delete" *ngIf="itemForm.value?.isDeleted" mwlConfirmationPopover
+                [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
+                (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="delete()"
+                data-qe-id="button-delete">
+                {{ 'general.button.delete' | translate}}</button>
+        </div>
+        <div class="page-actions">
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
+                {{ 'general.button.save' | translate}}</button>
+        </div>
+    </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="page item-list">
     <div class="page-header">
         <span class="page-title">
-            {{'asset.header.title' | translate}}
+            {{pageTitle}}
             <span (click)="bookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -32,35 +32,41 @@
 
     </div>
     <hr>
-
     <div class="page-body">
         <div class="page-selection list">
             <p-table [value]="itemList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                 [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'item.content.table.item_code' | translate}}
+                            {{ 'item.list.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'item.content.table.item_name' | translate}}
+                            {{ 'item.list.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'item.content.table.item_description' | translate}}
+                            {{ 'item.list.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-uom" [pSortableColumn]="'uom'">
-                            {{ 'item.content.table.item_uom' | translate}}
+                            {{ 'item.list.content.uom' | translate}}
                             <p-sortIcon [field]="'uom'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-primaryPrice" [pSortableColumn]="'primaryPrice'">
-                            {{ 'item.content.table.item_primaryPrice' | translate}}
+                            {{ 'item.list.content.primaryPrice' | translate}}
                             <p-sortIcon [field]="'primaryPrice'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
-                            {{ 'item.content.table.item_status' | translate}}
+                            {{ 'item.list.content.status' | translate}}
                             <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ItemDetailRepository } from './item-detail.repository';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -49,7 +50,7 @@ export class ItemDetailService {
 
   save(itemEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (itemEntity.id === null || itemEntity.id === undefined) {
+      if (itemEntity.id === null || itemEntity.id === undefined || itemEntity.id === environment.emtyGuid) {
         this.itemDetailRepository.add(itemEntity).subscribe(res => {
           if (res) {
             this.toastrService.success('Cập nhật thành công !');

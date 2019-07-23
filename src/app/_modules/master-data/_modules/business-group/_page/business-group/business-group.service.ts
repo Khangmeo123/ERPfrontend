@@ -5,6 +5,7 @@ import { BusinessGroupForm } from './../../../../_backend/business-group/busines
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { environment } from 'src/environments/environment';
 
 export class BusinessGroupService {
   public businessGroupList: BehaviorSubject<BusinessGroupEntity[]>;
@@ -52,7 +53,7 @@ export class BusinessGroupService {
 
   save(businessGroupEntity: any, businessGroupSearchEntity: BusinessGroupSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (businessGroupEntity.id === null || businessGroupEntity.id === undefined) {
+      if (businessGroupEntity.id === null || businessGroupEntity.id === undefined || businessGroupEntity.id === environment.emtyGuid) {
         this.businessGroupRepository.add(businessGroupEntity).subscribe(res => {
           if (res) {
             this.getList(businessGroupSearchEntity);

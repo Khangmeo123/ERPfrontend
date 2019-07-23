@@ -184,27 +184,22 @@ body {
         margin-right: 0.5rem !important
       }
     }
-
-    .page-body {
-      .page-section {
-
-      }
-
-      .page-section.form {
-
-      }
-
-      .page-section.list {
-
-      }
-    }
-
-    .pagination {
-
-    }
-
   }
 
+  .page-body {
+    margin: 15px 0px 15px 0px;
+    .page-section {
+
+    }
+
+    .page-section.form {
+
+    }
+
+    .page-section.list {
+
+    }
+  }
 
   mat-icon {
     font-size: 23px;

@@ -1,5 +1,5 @@
 <div class="page employee-detail">
-    <div class="page-header mb-1">
+    <div class="page-header">
         <span class="page-title">
             {{pageTitle}}
         </span>
@@ -10,6 +10,7 @@
                 data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
         </div>
     </div>
+    <hr>
     <div class="page-body">
         <accordion>
             <accordion-group [isOpen]="true" [formGroup]="employeeForm">
@@ -176,7 +177,7 @@
 
         </accordion>
     </div>
-    <div class="page-footer mt-1">
+    <div class="page-footer">
         <div>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                 [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"

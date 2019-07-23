@@ -8,11 +8,7 @@ import { UomComponent } from './_page/uom/uom.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
 import { CustomerComponent } from './_page/customer/customer.component';
-import { ListCustomerComponent } from './_page/customer/list-customer/list-customer.component';
-import { DetailCustomerComponent } from './_page/customer/detail-customer/detail-customer.component';
 import { SupplierComponent } from './_page/supplier/supplier.component';
-import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
-import { DetailSupplierComponent } from './_page/supplier/detail-supplier/detail-supplier.component';
 import { CurrencyComponent } from './_page/currency/currency.component';
 import { JobLevelComponent } from './_page/job-level/job-level.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
@@ -20,6 +16,10 @@ import { ItemListComponent } from './_page/item/item-list/item-list.component';
 import { ItemDetailComponent } from './_page/item/item-detail/item-detail.component';
 import { EmployeeListComponent } from './_page/employee/employee-list/employee-list.component';
 import { EmployeeDetailComponent } from './_page/employee/employee-detail/employee-detail.component';
+import { SupplierListComponent } from './_page/supplier/supplier-list/supplier-list.component';
+import { SupplierDetailComponent } from './_page/supplier/supplier-detail/supplier-detail.component';
+import { CustomerDetailComponent } from './_page/customer/customer-detail/customer-detail.component';
+import { CustomerListComponent } from './_page/customer/customer-list/customer-list.component';
 
 const routes: Routes = [
   {
@@ -44,16 +44,16 @@ const routes: Routes = [
       },
       {
         path: 'customer', component: CustomerComponent, children: [
-          { path: 'list-customer', component: ListCustomerComponent },
-          { path: 'detail-customer', component: DetailCustomerComponent },
-          { path: '', redirectTo: 'list-customer', pathMatch: 'full' },
+          { path: 'customer-list', component: CustomerListComponent },
+          { path: 'customer-detail', component: CustomerDetailComponent },
+          { path: '', redirectTo: 'customer-list', pathMatch: 'full' },
         ]
       },
       {
         path: 'supplier', component: SupplierComponent, children: [
-          { path: 'list-supplier', component: ListSupplierComponent },
-          { path: 'detail-supplier', component: DetailSupplierComponent },
-          { path: '', redirectTo: 'list-supplier', pathMatch: 'full' },
+          { path: 'supplier-list', component: SupplierListComponent },
+          { path: 'supplier-detail', component: SupplierDetailComponent },
+          { path: '', redirectTo: 'supplier-list', pathMatch: 'full' },
         ],
       },
       { path: 'job-level', component: JobLevelComponent },

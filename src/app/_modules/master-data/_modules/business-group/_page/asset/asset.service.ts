@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AssetEntity } from 'src/app/_modules/master-data/_backend/asset/asset.entity';
 import { AssetSearchEntity } from 'src/app/_modules/master-data/_backend/asset/asset.searchentity';
 import { EnumEntity } from 'src/app/_helpers/entity';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class AssetService {
@@ -59,7 +60,7 @@ export class AssetService {
 
   save(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (assetEntity.id === null || assetEntity.id === undefined) {
+      if (assetEntity.id === null || assetEntity.id === undefined || assetEntity.id === environment.emtyGuid) {
         this.assetRepository.add(assetEntity).subscribe(res => {
           if (res) {
             this.getList(assetSearchEntity);

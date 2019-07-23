@@ -8,6 +8,7 @@ import { Entities, EnumEntity } from 'src/app/_helpers/entity';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { JobLevelSearchEntity } from 'src/app/_modules/master-data/_backend/job-level/job-level.searchentity';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class EmployeeDetailService {
@@ -47,7 +48,7 @@ export class EmployeeDetailService {
 
   save(employeeEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (employeeEntity.id === null || employeeEntity.id === undefined) {
+      if (employeeEntity.id === null || employeeEntity.id === undefined || employeeEntity.id === environment.emtyGuid) {
         this.employeeDetailRepository.add(employeeEntity).subscribe(res => {
           if (res) {
             this.toastrService.success('Cập nhật thành công !');

@@ -6,6 +6,7 @@ import { BankForm } from 'src/app/_modules/master-data/_backend/bank/bank.form';
 import { ToastrService } from 'ngx-toastr';
 import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class BankService {
@@ -54,7 +55,7 @@ export class BankService {
 
   save(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (bankEntity.id === null || bankEntity.id === undefined) {
+      if (bankEntity.id === null || bankEntity.id === undefined || bankEntity.id === environment.emtyGuid) {
         this.bankRepository.add(bankEntity).subscribe(res => {
           if (res) {
             this.getList(bankSearchEntity);

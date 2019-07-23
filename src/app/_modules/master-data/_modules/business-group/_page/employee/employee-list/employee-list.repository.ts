@@ -13,7 +13,7 @@ import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/e
 export class EmployeeListRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/item/item-list';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/employee/employee-list';
     }
 
     getList(employeeSearchEntity: EmployeeSearchEntity): Observable<EmployeeEntity[]> {

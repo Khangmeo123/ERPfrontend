@@ -20,20 +20,21 @@ import { translate } from 'src/app/_helpers/string';
   styleUrls: ['./item-list.component.scss']
 })
 export class ItemListComponent implements OnInit, OnDestroy {
-  pageTitle: string = translate('itemList.header.title');
+  pageTitle: string = translate('item.list.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
   pagination: PaginationModel = new PaginationModel();
-  uomSearchEntity: UomSearchEntity = new UomSearchEntity();
-  uomTyping: Subject<UomSearchEntity> = new Subject();
+  // item
   itemSearchEntity: ItemSearchEntity = new ItemSearchEntity();
   itemList: ItemEntity[];
-  statusList: EnumEntity[];
-  uomList: UomEntity[];
+  // uom
   uomExceptIds: UomEntity[];
   uomIds: UomEntity[];
-  itemListForm: FormGroup;
+  uomSearchEntity: UomSearchEntity = new UomSearchEntity();
+  uomTyping: Subject<UomSearchEntity> = new Subject();
+  // status
+  statusList: EnumEntity[];
   itemListSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
