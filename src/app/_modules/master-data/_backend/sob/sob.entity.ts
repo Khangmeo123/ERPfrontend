@@ -1,42 +1,42 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class SobEntity extends Entity {
-    code: string;
-    name: string;
+  code: string;
+  name: string;
 
-    coaId: string;
-    coaName: string;
-    coaCode: string;
+  chartOfAccountTemplateId: string;
+  chartOfAccountTemplateName: string;
+  chartOfAccountTemplateCode: string;
 
-    currencyId: string;
-    currencyCode: string;
-    currencyName: string;
+  currencyId: string;
+  currencyCode: string;
+  currencyName: string;
 
-    sctId: string;
-    sctCode: string;
-    sctName: string;
+  specialConsumptionTaxTemplateId: string;
+  specialConsumptionTaxTemplateCode: string;
+  specialConsumptionTaxTemplateName: string;
 
-    vatId: string;
-    vatCode: string;
-    vatName: string;
+  valueAddedTaxTemplateId: string;
+  valueAddedTaxTemplateCode: string;
+  valueAddedTaxTemplateName: string;
 
-    nrtId: string;
-    nrtCode: string;
-    nrtName: string;
+  naturalResourceTaxTemplateId: string;
+  naturalResourceTaxTemplateCode: string;
+  naturalResourceTaxTemplateName: string;
 
-    entId: string;
-    entCode: string;
-    entName: string;
+  environmentTaxTemplateId: string;
+  environmentTaxTemplateCode: string;
+  environmentTaxTemplateName: string;
 
-    extId: string;
-    extCode: string;
-    extName: string;
+  exportTaxTemplateId: string;
+  exportTaxTemplateCode: string;
+  exportTaxTemplateName: string;
 
-    imtId: string;
-    imtCode: string;
-    imtName: string;
+  importTaxTemplateId: string;
+  importTaxTemplateCode: string;
+  importTaxTemplateName: string;
 
-    constructor(sobEntity?: any) {
-        super(sobEntity);
-    }
+  constructor(sobEntity?: any) {
+    super(sobEntity);
+  }
 }

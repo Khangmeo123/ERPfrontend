@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SobService } from './sob.service';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { BookmarkService } from '../../../../../../_services';
@@ -50,33 +50,47 @@ export class SobComponent implements OnInit, OnDestroy {
 
   currencyList: CurrencyEntity[] = [];
 
-  selectedCurrencyList = [];
+  selectedCurrencyList: CurrencyEntity[] = [];
 
   coaList: CoaEntity[] = [];
 
   coaSearchEntity = new CoaSearchEntity();
 
+  selectedCoaList: CoaEntity[] = [];
+
   importTaxTemplates: ImportTaxEntity[] = [];
 
   importTaxSearchEntity: ImportTaxSearchEntity = new ImportTaxSearchEntity();
 
+  selectedImportTaxTemplates: ImportTaxEntity[] = [];
+
   exportTaxTemplates: ExportTaxEntity[] = [];
+
+  selectedExportTaxTemplates: ExportTaxEntity[] = [];
 
   exportTaxSearchEntity: ExportTaxSearchEntity = new ExportTaxSearchEntity();
 
   environmentTaxTemplates: EnvironmentTaxEntity[] = [];
 
+  selectedEnvironmentTaxTemplates: EnvironmentTaxEntity[] = [];
+
   environmentTaxSearchEntity: EnvironmentTaxSearchEntity = new EnvironmentTaxSearchEntity();
 
   valueAddedTaxTemplates: ValueAddedTaxEntity[] = [];
+
+  selectedValueAddedTaxTemplates: ValueAddedTaxEntity[] = [];
 
   valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity = new ValueAddedTaxSearchEntity();
 
   naturalResourceTaxTemplates: NaturalResourceTaxEntity[] = [];
 
+  selectedNaturalResourceTaxTemplates: NaturalResourceTaxEntity[] = [];
+
   naturalResourceTaxSearchEntity: NaturalResourceTaxSearchentity = new NaturalResourceTaxSearchentity();
 
   specialConsumptionTaxTemplates: SpecialConsumptionTaxEntity[] = [];
+
+  selectedSpecialConsumptionTaxTemplates: SpecialConsumptionTaxEntity[] = [];
 
   specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity = new SpecialConsumptionTaxSearchentity();
 
@@ -121,48 +135,56 @@ export class SobComponent implements OnInit, OnDestroy {
     const currencyListSub = this.sobService.currencyList.subscribe((res) => {
       if (res) {
         this.currencyList = res.exceptIds;
+        this.selectedCurrencyList = res.ids;
       }
     });
 
     const coaListSub = this.sobService.coaList.subscribe((res) => {
       if (res) {
         this.coaList = res.exceptIds;
+        this.selectedCoaList = res.ids;
       }
     });
 
     const importTaxSub = this.sobService.importTaxTemplates.subscribe((res) => {
       if (res) {
         this.importTaxTemplates = res.exceptIds;
+        this.selectedImportTaxTemplates = res.ids;
       }
     });
 
     const exportTaxSub = this.sobService.exportTaxTemplates.subscribe((res) => {
       if (res) {
         this.exportTaxTemplates = res.exceptIds;
+        this.selectedExportTaxTemplates = res.ids;
       }
     });
 
     const environmentTaxSub = this.sobService.environmentTaxTemplates.subscribe((res) => {
       if (res) {
         this.environmentTaxTemplates = res.exceptIds;
+        this.selectedEnvironmentTaxTemplates = res.ids;
       }
     });
 
     const naturalResourceTaxSub = this.sobService.naturalResourceTaxTemplates.subscribe((res) => {
       if (res) {
         this.naturalResourceTaxTemplates = res.exceptIds;
+        this.selectedNaturalResourceTaxTemplates = res.ids;
       }
     });
 
     const valueAddedTaxSub = this.sobService.valueAddedTaxTemplates.subscribe((res) => {
       if (res) {
         this.valueAddedTaxTemplates = res.exceptIds;
+        this.selectedValueAddedTaxTemplates = res.ids;
       }
     });
 
     const specialConsumptionTaxSub = this.sobService.specialConsumptionTaxTemplates.subscribe((res) => {
       if (res) {
         this.specialConsumptionTaxTemplates = res.exceptIds;
+        this.selectedSpecialConsumptionTaxTemplates = res.ids;
       }
     });
 
@@ -181,8 +203,11 @@ export class SobComponent implements OnInit, OnDestroy {
       .add(valueAddedTaxSub);
   }
 
-  onSelect(data, field: string) {
-    console.log(data);
+  onSelectId(data: string[], field: string) {
+    const control: FormControl = this.sobForm.get(field) as FormControl;
+    if (data.length && control !== null) {
+      control.setValue(data[0]);
+    }
   }
 
   getImportTaxTemplates() {
@@ -239,9 +264,15 @@ export class SobComponent implements OnInit, OnDestroy {
   }
 
   add() {
-    this.isShowDialog = true;
-    console.log(this.sobForm.value);
-    this.sobService.add();
+    if (this.sobForm.invalid && this.sobForm.untouched) {
+      this.generalService.validateAllFormFields(this.sobForm);
+    }
+    if (this.sobForm.valid) {
+      this.isShowDialog = true;
+      this.sobService.add();
+    } else {
+      console.log('Invalid');
+    }
   }
 
   edit(sobId: string) {

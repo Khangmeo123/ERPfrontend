@@ -1,5 +1,5 @@
 import { FormModel } from '../../../../_helpers/form-model';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
 import { requiredField } from 'src/app/_helpers';
 
@@ -13,23 +13,25 @@ export class SobForm extends FormModel {
   currencyId = new FormControl('', [requiredField]);
   currencyName = new FormControl('', [requiredField]);
 
-  specialConsumptionTemplateId = new FormControl('');
-  specialConsumptionTemplateName = new FormControl('');
+  specialConsumptionTaxTemplateId = new FormControl('');
+  specialConsumptionTaxTemplateName = new FormControl('');
 
-  valueAddedTemplateId = new FormControl('');
-  valueAddedTemplateName = new FormControl('');
+  valueAddedTaxTemplateId = new FormControl('');
+  valueAddedTaxTemplateName = new FormControl('');
 
-  naturalResourceTemplateId = new FormControl('');
-  naturalResourceTemplateName = new FormControl('');
+  naturalResourceTaxTemplateId = new FormControl('');
+  naturalResourceTaxTemplateName = new FormControl('');
 
-  environmentTemplateId = new FormControl('');
-  environmentTemplateName = new FormControl('');
+  environmentTaxTemplateId = new FormControl('');
+  environmentTaxTemplateName = new FormControl('');
 
-  exportTemplateId = new FormControl('');
-  exportTemplateName = new FormControl('');
+  exportTaxTemplateId = new FormControl('');
+  exportTaxTemplateName = new FormControl('');
 
-  importTemplateId = new FormControl('');
-  importTemplateName = new FormControl('');
+  importTaxTemplateId = new FormControl('');
+  importTaxTemplateName = new FormControl('');
+
+  errors = new FormGroup({});
 
   constructor(sobEntity?: SobEntity) {
     super();
