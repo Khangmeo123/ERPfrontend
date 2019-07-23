@@ -22,17 +22,22 @@
       <p-table [value]="sobList">
         <ng-template pTemplate="header">
           <tr>
-            <th>
-              {{'sob.code' | translate}}
+            <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
+              {{ 'sob.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
-            <th>
-              {{'sob.name' | translate}}
+            <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
+              {{ 'sob.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
-            <th>
-              {{'sob.currency' | translate}}
+            <th pResizableColumn [pSortableColumn]="'currencyName'" data-qe-id="table-thead-currency-name">
+              {{ 'sob.currency' | translate}}
+              <p-sortIcon [field]="'currencyName'" class="float-right"></p-sortIcon>
             </th>
-            <th>
-              {{'sob.chart_account' | translate}}
+            <th pResizableColumn [pSortableColumn]="'chartOfAccountTemplateName'"
+                data-qe-id="table-thead-chart-of-account-template-name">
+              {{ 'sob.currency' | translate}}
+              <p-sortIcon [field]="'chartOfAccountTemplateName'" class="float-right"></p-sortIcon>
             </th>
           </tr>
           <tr>
@@ -121,11 +126,17 @@
           {{'sob.currency' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-single-select [list]="currencyList"
-                           id="currency"
-                           key="name"
-                           (selectionChange)="onSelectId($event, 'currencyId')"
-                           (listOpen)="getCurrencyList()"></app-single-select>
+        <div class="div-form">
+          <app-single-select [list]="currencyList"
+                             id="currency"
+                             key="name"
+                             (selectionChange)="onSelectId($event, 'currencyId')"
+                             (listOpen)="getCurrencyList()"></app-single-select>
+          <app-error data-qe-id="dialog-error-currency-id"
+                     *ngIf="(sobForm.controls.currencyId?.errors && sobForm.controls.currencyId?.touched) || !!sobForm.controls.error.get('currencyId')?.value"
+                     [formGroup]="sobForm" [property]="'currencyId'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
     </div>
     <div class="row">
