@@ -15,7 +15,7 @@ import { EmployeeListService } from './employee-list.service';
   providers: [EmployeeListService],
 })
 export class EmployeeListComponent implements OnInit, OnDestroy {
-  pageTitle: string = translate('employeeList.header.title');
+  pageTitle: string = translate('employeeList.list.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;

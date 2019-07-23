@@ -156,7 +156,7 @@ body {
 }
 
 .page {
-  .page-header {
+  .page-header,.page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -202,11 +202,9 @@ body {
     .pagination {
 
     }
-  }
-
-  .page-footer {
 
   }
+
 
   mat-icon {
     font-size: 23px;

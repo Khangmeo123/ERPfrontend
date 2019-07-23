@@ -20,7 +20,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 })
 export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
-  pageTitle: string = translate('employee.header.title');
+  pageTitle: string = translate('employee.detail.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
@@ -83,12 +83,12 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.employeeDetailSubs.unsubscribe();
   }
   cancel() {
-    this.router.navigate(['/master-data/employee/employee-list']);
+    this.router.navigate(['/master-data/business-group/employee/employee-list']);
   }
 
   delete() {
     this.employeeDetailService.delete(this.employeeForm.value).then(res => {
-      this.router.navigate(['/master-data/employee/employee-list']);
+      this.router.navigate(['/master-data/business-group/employee/employee-list']);
     });
   }
 
@@ -97,7 +97,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
       this.generalService.validateAllFormFields(this.employeeForm);
     } else {
       this.employeeDetailService.save(this.employeeForm).then(res => {
-        this.router.navigate(['/master-data/employee/employee-list']);
+        this.router.navigate(['/master-data/business-group/employee/employee-list']);
       });
     }
   }
@@ -110,7 +110,9 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
   openJobTitleList(jobTitleId: string) {
     this.jobTitleSearchEntity = new JobTitleSearchEntity();
-    this.jobTitleSearchEntity.ids.push(jobTitleId);
+    if (jobTitleId !== null && jobTitleId !== undefined) {
+      this.jobTitleSearchEntity.ids.push(jobTitleId);
+    }
     this.employeeDetailService.getJobTitleList(this.jobTitleSearchEntity);
   }
 
@@ -120,10 +122,12 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.jobTitleTyping.next(this.jobTitleSearchEntity);
   }
 
-  openJobLevelList(jobTitleId: string) {
+  openJobLevelList(jobLevelId: string) {
     this.jobLevelSearchEntity = new JobLevelSearchEntity();
-    this.jobLevelSearchEntity.ids.push(jobTitleId);
-    this.employeeDetailService.getJobTitleList(this.jobTitleSearchEntity);
+    if (jobLevelId !== null && jobLevelId !== undefined) {
+      this.jobLevelSearchEntity.ids.push(jobLevelId);
+    }
+    this.employeeDetailService.getJobLevelList(this.jobLevelSearchEntity);
   }
 
   searchJobLevel(event: string) {

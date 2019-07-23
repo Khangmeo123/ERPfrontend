@@ -1,7 +1,7 @@
 <div class="page employee-list">
     <div class="page-header">
         <span class="page-title">
-            {{'asset.header.title' | translate}}
+            {{pageTitle}}
             <span (click)="bookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -38,28 +38,28 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'employee.content.table.code' | translate}}
+                            {{ 'employee.list.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'employee.content.table.name' | translate}}
+                            {{ 'employee.list.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-gender" [pSortableColumn]="'gender'">
-                            {{ 'employee.content.table.gender' | translate}}
+                            {{ 'employee.list.content.gender' | translate}}
                             <p-sortIcon [field]="'gender'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-birthday" [pSortableColumn]="'birthday'">
-                            {{ 'employee.content.table.birthday' | translate}}
+                            {{ 'employee.list.content.birthday' | translate}}
                             <p-sortIcon [field]="'birthday'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-identityNumber"
                             [pSortableColumn]="'identityNumber'">
-                            {{ 'employee.content.table.identityNumber' | translate}}
+                            {{ 'employee.list.content.identityNumber' | translate}}
                             <p-sortIcon [field]="'identityNumber'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
-                            {{ 'employee.content.table.status' | translate}}
+                            {{ 'employee.list.content.status' | translate}}
                             <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -108,7 +108,6 @@
                 </ng-template>
             </p-table>
         </div>
-
         <div class="pagination">
             <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
             </app-pagination>

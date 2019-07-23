@@ -1,24 +1,20 @@
 <div class="page employee-detail">
-    <div class="page-header">
+    <div class="page-header mb-1">
         <span class="page-title">
             {{pageTitle}}
         </span>
         <div class="page-actions">
-            <button class="btn btn-cancel" (click)="cancel()"
-                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
             <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
                 {{ 'general.button.save' | translate}}</button>
-            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                (cancel)="cancelClicked = true" (click)="delete()" data-qe-id="button-delete">
-                {{ 'general.button.delete' | translate}}</button>
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
         </div>
     </div>
     <div class="page-body">
         <accordion>
             <accordion-group [isOpen]="true" [formGroup]="employeeForm">
                 <button (click)="isOpenTab1 = !isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'employee.detail.tab.title_1' | translate }}</div>
+                    <div class="pull-left float-left">{{'employee.detail.tab.title1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
@@ -26,13 +22,13 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="employeeCode">{{ 'employee.content.table.employee_code' | translate}}<span
+                            <label for="employeeCode">{{ 'employee.detail.content.code' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <input type="text" class="form-control" formControlName="code" data-qe-id="form-code"
                                     id="employeeCode" />
                                 <app-error data-qe-id="form-error-code"
-                                    *ngIf="(employeeForm.controls.code?.errors && employeeForm.controls.code?.touched) || !!employeeForm.controls.errors.get('code')?.value"
+                                    *ngIf="(employeeForm.controls.code?.errors && employeeForm.controls.code?.touched) || !!employeeForm.controls.errors?.get('code')?.value"
                                     [formGroup]="employeeForm" [property]="'code'" [placement]="'top'"
                                     class="error-form">
                                 </app-error>
@@ -41,21 +37,16 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.birthday' | translate}}</label>
-                            <div class="div-form">
-                                <app-date-picker [control]="employeeForm.get('birthday')"></app-date-picker>
-                                <app-error data-qe-id="form-error-code"
-                                    *ngIf="(employeeForm.controls.birthday?.errors && employeeForm.controls.birthday?.touched) || !!employeeForm.controls.errors.get('birthday')?.value"
-                                    [formGroup]="employeeForm" [property]="'code'" [placement]="'top'"
-                                    class="error-form">
-                                </app-error>
-                            </div>
+                            <label for="employeeBirthday">{{ 'employee.detail.content.birthday' | translate}}</label>
+                            <app-date-picker [control]="employeeForm.get('birthday')">
+                            </app-date-picker>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.salary_agreement' | translate}}</label>
-                            <input type="text" class="form-control" pKeyFilter="int">
+                            <label for="employeeSalary">{{ 'employee.detail.content.salary' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" formControlName="salary"
+                                id="employeeSalary">
                         </div>
                     </div>
 
@@ -63,23 +54,32 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid"> {{ 'employee.content.table.employee_name' | translate}}<span
+                            <label for="bankid"> {{ 'employee.detail.content.name' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
+                            <div class="div-form">
+                                <input type="text" class="form-control" formControlName="name" id="employeeName">
+                                <app-error data-qe-id="form-error-name"
+                                    *ngIf="(employeeForm.controls.name?.errors && employeeForm.controls.name?.touched) || !!employeeForm.controls.errors.get('name')?.value"
+                                    [formGroup]="employeeForm" [property]="'name'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.id_emp' | translate}}</label>
-                            <input type="text" class="form-control" />
+                            <label
+                                for="employeeIdentityNumber">{{ 'employee.detail.content.identityNumber' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="identityNumber"
+                                id="employeeIdentityNumber">
                         </div>
                     </div>
                     <div class="col-sm-4">
-
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.coefficients_salary' | translate}}</label>
-                            <input type="text" class="form-control" pKeyFilter="int" />
+                            <label for="bankid">{{ 'employee.detail.content.salaryCoefficient' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" formControlName="salaryCoefficient"
+                                id="employeeSalaryCoefficient">
                         </div>
                     </div>
 
@@ -87,11 +87,11 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.sex' | translate}}</label>
+                            <label for="bankid">{{ 'employee.detail.content.gender' | translate}}</label>
                             <div class="ratio-button" style="display: flex">
-                                <p-radioButton name="groupname" value="val1"
+                                <p-radioButton name="groupname" value="val1" formControlName="gender"
                                     [label]="'employee.content.table.gender.men' | translate"></p-radioButton>
-                                <p-radioButton name="groupname" value="val2"
+                                <p-radioButton name="groupname" value="val2" formControlName="gender" class="ml-1"
                                     [label]="'employee.content.table.gender.women' | translate"></p-radioButton>
                             </div>
                         </div>
@@ -99,57 +99,76 @@
 
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.issue_by' | translate}}</label>
-                            <input type="text" class="form-control" />
+                            <label
+                                for="employeeIdentityPlace">{{ 'employee.detail.content.identityPlace' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="identityPlace"
+                                id="employeeIdentityPlace">
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.bassic_salary' | translate}}</label>
-                            <input type="text" class="form-control" pKeyFilter="int" />
-                        </div>
-
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'employee.detail.position' | translate}}</label>
-                            <app-single-select></app-single-select>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.date_range' | translate}}</label>
-                            <app-date-picker></app-date-picker>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'employee.detail.number_dependents' | translate}}</label>
-                            <input type="text" class="form-control" pKeyFilter="int" />
+                            <label for="employeeSalaryInsurance">
+                                {{ 'employee.content.table.salaryInsurance' | translate}}
+                            </label>
+                            <input type="text" class="form-control" formControlName="salaryInsurance"
+                                id="employeeSalaryInsurance">
                         </div>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.detail.level' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <label for="bankid">{{ 'employee.detail.content.jobTitle' | translate}}</label>
+                            <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
+                                (search)="searchJobTitle($event)"
+                                (selectionChange)="employeeForm.controls.jobTitleId.setValue($event.Id)"
+                                (listOpen)="openJobTitleList(jobTitleSearchEntity.jobTitleId)"></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.content.table.tax_code' | translate}}</label>
+                            <label for="bankid">{{ 'employee.detail.content.identityDate' | translate}}</label>
+                            <app-date-picker [control]="employeeForm.get('identityDate')"></app-date-picker>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.detail.content.dependents' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.detail.content.jobLevel' | translate}}</label>
+                            <app-single-select [list]="jobLevelExceptIds" [selectedList]="jobLevelIds" [key]="'name'"
+                                (search)="searchJobLevel($event)"
+                                (selectionChange)="employeeForm.controls.jobLevelId.setValue($event.Id)"
+                                (listOpen)="openJobLevelList(jobTitleSearchEntity.jobLevelId)"></app-single-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employee.detail.content.taxNumber' | translate}}</label>
                             <input type="text" class="form-control" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label for="bankid">{{ 'employee.detail.status' | translate}}<span
+                            <label for="employeeStatus">{{ 'employee.detail.content.status' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                            <div class="div-form">
+                                <app-simple-select [key]="'name'" [list]="statusList"
+                                    (selectionChange)="employeeForm.controls.status.setValue($event)"
+                                    (listOpen)="openStatusList()" data-qe-id="form-characteristic" class="w-100">
+                                </app-simple-select>
+                                <app-error data-qe-id="form-error-status"
+                                    *ngIf="(employeeForm.controls.status?.errors && employeeForm.controls.status?.touched) || !!employeeForm.controls.errors?.get('status')?.value"
+                                    [formGroup]="employeeForm" [property]="'status'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -157,8 +176,20 @@
 
         </accordion>
     </div>
-
-
+    <div class="page-footer mt-1">
+        <div>
+            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                (cancel)="cancelClicked = true" data-qe-id="button-delete">
+                {{ 'general.button.delete' | translate}}</button>
+        </div>
+        <div class="page-actions">
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
+                {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
+        </div>
+    </div>
 
 
 </div>
