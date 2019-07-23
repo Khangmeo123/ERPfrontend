@@ -13,7 +13,6 @@ import { toggleMenu } from '../../../../animations/toggleMenu';
   ],
 })
 export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
-
   @Input() list = [];
 
   @Input() selectedList = [];

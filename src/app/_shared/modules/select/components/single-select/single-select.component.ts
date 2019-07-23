@@ -13,6 +13,7 @@ import { getListDirection } from '../../helpers';
   ],
 })
 export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
+  @Input() initialValue = '';
 
   @Input() list = [];
 
@@ -42,10 +43,12 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   get selectedText() {
-    if (this.selectedList.length) {
-      return this.selectedList[0][this.key];
+    if (this.selectedList) {
+      if (this.selectedList.length) {
+        return this.selectedList[0][this.key];
+      }
     }
-    return '0 selected';
+    return this.initialValue;
   }
 
   @Input() valueSelector = (node) => node.id;
@@ -74,9 +77,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
-      if (this.isLoading) {
-        this.isLoading = false;
-      }
+      this.isLoading = false;
     }
   }
 
