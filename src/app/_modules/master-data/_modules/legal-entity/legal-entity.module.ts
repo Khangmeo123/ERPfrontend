@@ -63,7 +63,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FiltersModule,
     ErrorModule,
     DialogModule,
-    ConfirmationPopoverModule.forRoot(),
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger',
+    }),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     PaginationModule,

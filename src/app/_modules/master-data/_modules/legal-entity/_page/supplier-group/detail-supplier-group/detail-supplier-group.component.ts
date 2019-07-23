@@ -48,4 +48,16 @@ export class DetailSupplierGroupComponent implements OnInit {
   onClickOpenTab3() {
     this.isOpenTab3 = !this.isOpenTab3;
   }
+
+  sort(event) {
+
+  }
+
+  sortBankAccount(event){
+
+  }
+
+  onClickDelete() {
+    
+  }
 }

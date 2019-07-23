@@ -36,19 +36,23 @@ export class ListSupplierGroupComponent implements OnInit {
 
   constructor(protected router: Router) { }
   
-  
   ngOnInit() {
   }
   onClickAddGroup () {
     this.display = !this.display;
   }
- 
-
   onClickShowDetail() {
     this.router.navigate(['/master-data/legal-entity/supplier-group/detail-supplier-group']);
   }
 
   onClickAddSupplier() {
-    
+  }
+
+  sortSupplierGroup(event) {
+
+  }
+
+  sortSupplier(event) {
+
   }
 }

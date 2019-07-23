@@ -155,10 +155,11 @@ body {
 }
 
 .page {
-  .page-header {
+  .page-header, .page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 20px;
 
     .page-title {
       font-size: 21px;
@@ -201,10 +202,17 @@ body {
     .pagination {
 
     }
+
   }
 
   .page-footer {
-
+    margin-top: 20px;
+    .page-actions {
+      .btn {
+        margin-right: 0.5rem;
+      }
+      float: right;
+    }
   }
 
   mat-icon {
@@ -218,6 +226,8 @@ body {
     display: flex;
     justify-content: flex-end;
   }
+
+  
 }
 
 .ui-table-scrollable-header, .ui-table-scrollable-footer {
@@ -237,4 +247,8 @@ body {
 .cdk-overlay-container {
   position: fixed !important;
   z-index: 1010 !important; /* set value you need */
+}
+
+.page-actions-delete {
+  float: left;
 }

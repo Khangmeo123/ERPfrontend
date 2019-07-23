@@ -2,22 +2,14 @@
   <div class="page-header">
     <span class="page-title">
       {{'detailSupplierGroup.detail.title' | translate}}
-      <span (click)="onClickSaveBookMark($event)">
-        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
-          star
-        </mat-icon>
-      </span>
     </span>
     <div class="page-actions">
-      <button class="btn btn-save">
-        {{'general.button.save' | translate}}
-      </button>
-      <button class="btn btn-cancel">
+      <button class="btn btn-cancel" data-qe-id="button-cancel">
         {{'general.button.cancel' | translate}}
       </button>
-      <button class="btn btn-delete">
-        {{'general.button.delete' | translate}}
-      </button>
+      <button class="btn btn-save" data-qe-id="button-save">
+          {{'general.button.save' | translate}}
+        </button>
     </div>
   </div>
   <div class="page-body">
@@ -36,7 +28,7 @@
                 {{'detailSupplierGroup.code' | translate}}
                 <span class="text-danger ml-1"> * </span>
               </label>
-              <input type="text" class="form-control" id="supplier_code">
+              <input type="text" class="form-control" id="supplier_code" data-qe-id="detail-form-general-code">
               <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
                 [formGroup]="form" [property]="'name'" [placement]="'top'" class="error-form">
               </app-error>
@@ -46,14 +38,14 @@
                 {{'detailSupplierGroup.name' | translate}}
                 <span class="text-danger ml-1"> * </span>
               </label>
-              <input type="text" class="form-control" id="supplier_name">
+              <input type="text" class="form-control" id="supplier_name" data-qe-id="detail-form-general-name">
             </div>
 
             <div class="form-group col">
               <label for="tax_code">
                 {{'detailSupplierGroup.tax_code' | translate}}
               </label>
-              <input type="text" class="form-control" id="tax_code">
+              <input type="text" class="form-control" id="tax_code" data-qe-id="detail-form-general-tax-code">
             </div>
           </div>
 
@@ -62,45 +54,45 @@
               <label for="supplier_status">
                 {{'detailSupplierGroup.status' | translate}}
               </label>
-              <app-single-select></app-single-select>
+              <app-single-select data-qe-id="detail-form-general-status"></app-single-select>
             </div>
             <!-- <div class="form-group col"></div> -->
             <div class="form-group col-8">
               <label for="supplier_more_details">
                 {{'detailSupplierGroup.more_details' | translate}}
               </label>
-              <textarea name="supplier_more_details" id="supplier_more_details" rows="1"
-                class="form-control"></textarea>
+              <textarea name="supplier_more_details" id="supplier_more_details" rows="1" class="form-control"
+                data-qe-id="detail-form-general-more-detail"></textarea>
             </div>
             <div class="form-group col-4">
               <label>
                 {{'detailSupplierGroup.payment_terms' | translate}}
               </label>
-              <app-single-select></app-single-select>
+              <app-single-select data-qe-id="detail-form-general-payment-term"></app-single-select>
             </div>
             <div class="form-group col-4">
               <label>
                 {{'detailSupplierGroup.due_in_days' | translate}}
               </label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" data-qe-id="detail-form-general-due-in-days">
             </div>
             <div class="form-group col-4">
               <label>
                 {{'detailSupplierGroup.debt_load' | translate}}
               </label>
-              <input type="text" class="form-control">
+              <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load">
             </div>
             <div class="form-group col-4">
               <label>
                 {{'detailSupplierGroup.pic' | translate}}
               </label>
-              <app-single-select></app-single-select>
+              <app-single-select data-qe-id="detail-form-general-pic"></app-single-select>
             </div>
             <div class="form-group col-4">
               <label>
                 {{'detailSupplierGroup.supplier_group' | translate}}
               </label>
-              <app-single-select></app-single-select>
+              <app-single-select data-qe-id="detail-form-general-supplier-group"></app-single-select>
             </div>
           </div>
         </accordion-group>
@@ -112,33 +104,51 @@
             </span>
           </button>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-add" (click)="toggleContactsModal()">
+            <button class="btn btn-add" (click)="toggleContactsModal()" data-qe-id="button-add-contact">
               {{'detailSupplierGroup.contacts.add' | translate}}
 
             </button>
           </div>
 
           <div class="mt-2">
-            <p-table [value]="[]">
+            <p-table [value]="[]" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
+              scrollHeight="500px" [resizableColumns]="true" #table>
+              <ng-template pTemplate="colgroup">
+                <colgroup>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                </colgroup>
+              </ng-template>
               <ng-template pTemplate="header">
                 <tr>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-contacts-code">
                     {{'detailSupplierGroup.contacts.code' | translate}}
+                    <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'recipient'" data-qe-id="table-thead-contacts-recipient">
                     {{'detailSupplierGroup.contacts.recipient' | translate}}
+                    <p-sortIcon [field]="'recipient'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'phone-number'"
+                    data-qe-id="table-thead-contacts-phone-number">
                     {{'detailSupplierGroup.contacts.phone_number' | translate}}
+                    <p-sortIcon [field]="'phone-number'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'email'" data-qe-id="table-thead-contacts-email">
                     {{'detailSupplierGroup.contacts.email' | translate}}
+                    <p-sortIcon [field]="'email'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'city'" data-qe-id="table-thead-contacts-city">
                     {{'detailSupplierGroup.contacts.city' | translate}}
+                    <p-sortIcon [field]="'city'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'address'" data-qe-id="table-thead-contacts-address">
                     {{'detailSupplierGroup.contacts.address' | translate}}
+                    <p-sortIcon [field]="'address'" class="float-right"></p-sortIcon>
                   </th>
                 </tr>
               </ng-template>
@@ -154,34 +164,55 @@
             </span>
           </button>
           <div class="d-flex justify-content-end">
-            <button class="btn btn-add" (click)="toggleBankAccountsModal()">
+            <button class="btn btn-add" (click)="toggleBankAccountsModal()" data-qe-id="button-add-bank-account">
               {{'detailSupplierGroup.bank_account.add' | translate}}
             </button>
           </div>
           <div class="mt-2">
-            <p-table [value]="[]">
+            <p-table [value]="[]" [customSort]="true" [lazy]="true" (onLazyLoad)="sortBankAccount($event)"
+              [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableBankAccount>
+              <ng-template pTemplate="colgroup">
+                <colgroup>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                  <col>
+                </colgroup>
+              </ng-template>
               <ng-template pTemplate="header">
                 <tr>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'bank-code'" data-qe-id="table-thead-bank-code">
                     {{'detailSupplierGroup.bank_account.code' | translate}}
+                    <p-sortIcon [field]="'bank-code'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'bank-name'" data-qe-id="table-thead-bank-name">
                     {{'detailSupplierGroup.bank_account.bank_name' | translate}}
+                    <p-sortIcon [field]="'bank-name'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'bank-account-owner'"
+                    data-qe-id="table-thead-bank-account-owner">
                     {{'detailSupplierGroup.bank_account.account_owner' | translate}}
+                    <p-sortIcon [field]="'account-owner'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'bank-account-number'"
+                    data-qe-id="table-thead-bank-account-number">
                     {{'detailSupplierGroup.bank_account.account_number' | translate}}
+                    <p-sortIcon [field]="'bank-account-number'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'bank-province'" data-qe-id="table-thead-bank-province">
                     {{'detailSupplierGroup.bank_account.province' | translate}}
+                    <p-sortIcon [field]="'bank-province'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'bank-division'" data-qe-id="table-thead-bank-division">
                     {{'detailSupplierGroup.bank_account.bank_division' | translate}}
+                    <p-sortIcon [field]="'bank-division'" class="float-right"></p-sortIcon>
                   </th>
-                  <th>
+                  <th pResizableColumn [pSortableColumn]="'bank-address'" data-qe-id="table-thead-bank-address">
                     {{'detailSupplierGroup.bank_account.bank_address' | translate}}
+                    <p-sortIcon [field]="'bank-address'" class="float-right"></p-sortIcon>
                   </th>
                 </tr>
               </ng-template>
@@ -189,6 +220,21 @@
           </div>
         </accordion-group>
       </accordion>
+    </div>
+  </div>
+  <div class="page-footer d-flex">
+    <div class="page-actions-delete">
+      <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
+        (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="onClickDelete()">
+        {{ 'general.button.delete' | translate}}</a>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-add mr-2" data-qe-id="button-save">
+        {{'general.button.save' | translate}}
+      </button>
     </div>
   </div>
 </div>
@@ -205,7 +251,7 @@
           {{'detailSupplierGroup.bank_account.bank_name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select data-qe-id="dialog-bank-account"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label>
@@ -242,25 +288,25 @@
     </div>
   </form>
   <p-footer>
-    <ng-template *ngIf="isAdd; else notAdd">
-      <button class="btn btn-add mr-2">
-        {{'general.button.add' | translate}}
-      </button>
-      <button class="btn btn-cancel">
-        {{'general.button.cancel' | translate}}
-      </button>
-    </ng-template>
-    <ng-template #notAdd>
-      <button class="btn btn-add mr-2">
-        {{'general.button.save' | translate}}
-      </button>
-      <button class="btn btn-cancel mr-2">
-        {{'general.button.cancel' | translate}}
-      </button>
-      <button class="btn btn-delete">
-        {{'general.button.delete' | translate}}
-      </button>
-    </ng-template>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-actions-delete">
+          <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
+            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" data-qe-id="button-delete">
+            {{ 'general.button.delete' | translate}}</a>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="page-actions">
+          <button class="btn btn-cancel mr-2" (click)="cancel()" data-qe-id="dialog-button-cancel">
+            {{'general.button.cancel' | translate}}
+          </button>
+          <button class="btn btn-add mr-2" data-qe-id="button-save">
+            {{'general.button.save' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
   </p-footer>
 </p-dialog>
 
@@ -299,24 +345,24 @@
     </div>
   </form>
   <p-footer>
-    <ng-template *ngIf="isAdd; else notAdd">
-      <button class="btn btn-add mr-2">
-        {{'general.button.add' | translate}}
-      </button>
-      <button class="btn btn-cancel">
-        {{'general.button.cancel' | translate}}
-      </button>
-    </ng-template>
-    <ng-template #notAdd>
-      <button class="btn btn-add mr-2">
-        {{'general.button.save' | translate}}
-      </button>
-      <button class="btn btn-cancel mr-2">
-        {{'general.button.cancel' | translate}}
-      </button>
-      <button class="btn btn-delete">
-        {{'general.button.delete' | translate}}
-      </button>
-    </ng-template>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-actions-delete">
+          <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
+            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" data-qe-id="button-delete">
+            {{ 'general.button.delete' | translate}}</a>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="page-actions">
+          <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+            {{'general.button.cancel' | translate}}
+          </button>
+          <button class="btn btn-add mr-2" data-qe-id="button-save">
+            {{'general.button.save' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
   </p-footer>
 </p-dialog>
