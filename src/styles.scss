@@ -125,6 +125,7 @@ body {
 
 .th-filter {
   background-color: #ffffff !important;
+  padding: 0.25rem 0.5rem!important;
 }
 
 .card-header {
@@ -155,7 +156,7 @@ body {
 }
 
 .page {
-  .page-header, .page-footer {
+  .page-header,.page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -184,34 +185,20 @@ body {
         margin-right: 0.5rem !important
       }
     }
-
-    .page-body {
-      .page-section {
-
-      }
-
-      .page-section.form {
-
-      }
-
-      .page-section.list {
-
-      }
-    }
-
-    .pagination {
-
-    }
-
   }
 
-  .page-footer {
-    margin-top: 20px;
-    .page-actions {
-      .btn {
-        margin-right: 0.5rem;
-      }
-      float: right;
+  .page-body {
+    margin: 15px 0px 15px 0px;
+    .page-section {
+
+    }
+
+    .page-section.form {
+
+    }
+
+    .page-section.list {
+
     }
   }
 

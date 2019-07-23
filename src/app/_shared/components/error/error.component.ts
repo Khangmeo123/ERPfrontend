@@ -42,7 +42,7 @@ export class ErrorComponent implements OnInit {
     return this.placementValue;
   }
 
-  @Input() 
+  @Input()
   set placement(placement: string) {
     switch (placement.toLocaleLowerCase()) {
       case 'top':

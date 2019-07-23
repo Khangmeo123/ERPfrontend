@@ -1,0 +1,127 @@
+<div class="page item-list">
+    <div class="page-header">
+        <span class="page-title">
+            {{pageTitle}}
+            <span (click)="bookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-add" (click)="toDetail()" data-qe-id="button-add"> +
+                {{'general.button.add' | translate}}</button>
+            <div class="btn-group" dropdown data-qe-id="button-import">
+                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                    aria-controls="dropdown-basic">
+                    {{'general.button.import' | translate}}<span class="caret"></span>
+                </button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.import_file' | translate}}</a></li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem"><a class="dropdown-item"
+                            href="#">{{'general.button.download_example' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+        </div>
+
+    </div>
+    <hr>
+    <div class="page-body">
+        <div class="page-selection list">
+            <p-table [value]="itemList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
+                            {{ 'item.list.content.code' | translate}}
+                            <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
+                            {{ 'item.list.content.name' | translate}}
+                            <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
+                            {{ 'item.list.content.description' | translate}}
+                            <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn data-qe-id="table-thead-uom" [pSortableColumn]="'uom'">
+                            {{ 'item.list.content.uom' | translate}}
+                            <p-sortIcon [field]="'uom'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn data-qe-id="table-thead-primaryPrice" [pSortableColumn]="'primaryPrice'">
+                            {{ 'item.list.content.primaryPrice' | translate}}
+                            <p-sortIcon [field]="'primaryPrice'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
+                            {{ 'item.list.content.status' | translate}}
+                            <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="itemSearchEntity.code" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-code">
+                            </app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="itemSearchEntity.name" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-name">
+                            </app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="itemSearchEntity.description" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-description">
+                            </app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
+                                (search)="searchUom($event)" (selectionChange)="itemSearchEntity.uomId = $event.Id"
+                                (listOpen)="openUomList(itemSearchEntity.uomId)" data-qe-id="table-thead-filter-uom">
+                            </app-single-select>
+                        </th>
+                        <th class="th-filter">
+                            <app-advanced-filters [filter]="itemSearchEntity.primaryPrice" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-primaryPrice">
+                            </app-advanced-filters>
+                        </th>
+                        <th class="th-filter">
+                            <app-simple-select [key]="'name'" [list]="statusList"
+                                (selectionChange)="itemSearchEntity.statusId = $event" (listOpen)="openStatusList()"
+                                data-qe-id="table-thead-filter-status">
+                            </app-simple-select>
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-item let-index="rowIndex">
+                    <tr (dblclick)="toDetail(item.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                        <td> {{item.code}} </td>
+                        <td> {{item.name}} </td>
+                        <td> {{item.description}} </td>
+                        <td> {{item.uomName}} </td>
+                        <td> {{item.unitPrice}} </td>
+                        <td> {{item.statusName}} </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+
+    <div class="pagination">
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+        </app-pagination>
+    </div>
+
+</div>

@@ -16,7 +16,7 @@ import { Entities } from 'src/app/_helpers/entity';
 export class JobLevelRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/job-level';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/job-level';
     }
 
     getList(jobLevelSearchEntity: JobLevelSearchEntity): Observable<JobLevelEntity[]> {
@@ -67,19 +67,4 @@ export class JobLevelRepository extends Repository {
                 map(r => r.body),
             );
     }
-
-    // getListJobTitle(jobTitleSearchEntity: JobTitleSearchEntity) {
-    //     return this.http.post<Entities>(this.apiUrl + '/job-title/list', JSON.stringify(jobTitleSearchEntity),
-    //         { observe: 'response', headers: this.getHeader() }).pipe(
-    //             map(r => {
-    //                 r.body.ids = r.body.ids.map(item => {
-    //                     return new JobTitleEntity(item);
-    //                 });
-    //                 r.body.exceptIds = r.body.exceptIds.map(item => {
-    //                     return new JobTitleEntity(item);
-    //                 });
-    //                 return r.body;
-    //             }),
-    //         );
-    // }
 }

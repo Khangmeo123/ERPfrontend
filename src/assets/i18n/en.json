@@ -450,7 +450,7 @@
 			"title": ""
 		}
 	},
-	"detail_product_of_legal_entity": {
+	"detail_item_of_legal_entity": {
 		"bill_of_materias": {
 			"amount": "",
 			"code_of_materias": "",
@@ -476,7 +476,7 @@
 			"modal_title": "",
 			"title": ""
 		},
-		"product_group": "",
+		"item_group": "",
 		"transformation_unit": {
 			"amount": "",
 			"description": "",
@@ -739,15 +739,15 @@
 	},
 	"payment_terms": "",
 	"pic": "",
-	"product": {
+	"item": {
 		"content": {
 			"detail": {
-				"product_id_ncc": "",
-				"product_id_tt": "",
-				"product_length": "",
-				"product_properti": "",
-				"product_weight": "",
-				"product_width": ""
+				"item_id_ncc": "",
+				"item_id_tt": "",
+				"item_length": "",
+				"item_properti": "",
+				"item_weight": "",
+				"item_width": ""
 			},
 			"modal": {
 				"add_des": "",
@@ -768,13 +768,13 @@
 				"value_add_tax_id": ""
 			},
 			"table": {
-				"product_cost": "",
-				"product_description": "",
-				"product_height": "",
-				"product_id": "",
-				"product_name": "",
-				"product_status": "",
-				"product_unit": ""
+				"item_cost": "",
+				"item_description": "",
+				"item_height": "",
+				"item_id": "",
+				"item_name": "",
+				"item_status": "",
+				"item_unit": ""
 			}
 		},
 		"detail": {
@@ -787,24 +787,24 @@
 			"title": ""
 		}
 	},
-	"productGroup": {
+	"itemGroup": {
 		"code": "",
 		"header": {
 			"title": ""
 		},
 		"name": "",
-		"product": {
+		"item": {
 			"code": "",
 			"name": ""
 		}
 	},
-	"productOfLegalEntity": {
+	"itemOfLegalEntity": {
 		"code": "",
 		"header": {
 			"title": ""
 		},
 		"name": "",
-		"product": {
+		"item": {
 			"code": "",
 			"name": ""
 		},
@@ -853,7 +853,7 @@
 		"modal": {
 			"title": ""
 		},
-		"product_group": "",
+		"item_group": "",
 		"title": "",
 		"to_date": ""
 	},
@@ -865,7 +865,7 @@
 		"modal": {
 			"title": ""
 		},
-		"product_group": "",
+		"item_group": "",
 		"title": "",
 		"to_date": ""
 	},

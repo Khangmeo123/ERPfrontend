@@ -13,13 +13,18 @@ export class AssetForm extends FormModel {
     // statusEntity:
     statusId = new FormControl('', [requiredField]);
     statusName = new FormControl('', [requiredField]);
-
+    errors = new FormGroup({
+        name: new FormControl(''),
+        code: new FormControl(''),
+        typeId: new FormControl(''),
+        statusId: new FormControl('')
+    });
     constructor(assetEntity?: AssetEntity) {
         super();
         if (assetEntity !== null && assetEntity !== undefined) {
             Object.keys(assetEntity).forEach((item) => {
                 if (assetEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(assetEntity[item]);
+                    this[item].patchValue(assetEntity[item]);
                 }
             });
         }

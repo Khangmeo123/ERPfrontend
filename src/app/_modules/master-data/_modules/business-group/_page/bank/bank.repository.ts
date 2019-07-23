@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class BankRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/bank';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/bank';
     }
 
     getList(bankSearchEntity: BankSearchEntity): Observable<BankEntity[]> {

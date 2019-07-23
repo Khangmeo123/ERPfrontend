@@ -50,8 +50,8 @@
         <p-table [value]="tmptable">
           <ng-template pTemplate="header">
             <tr>
-              <th pResizableColumn data-qe-id="table-thead-product-group">
-                {{ 'special_price_supplier.product_group' | translate}} </th>
+              <th pResizableColumn data-qe-id="table-thead-item-group">
+                {{ 'special_price_supplier.item_group' | translate}} </th>
               <th pResizableColumn data-qe-id="table-thead-code"> {{ 'special_price_supplier.code' | translate}} </th>
               <th pResizableColumn data-qe-id="table-thead-discount"> {{ 'special_price_supplier.discount' | translate}}
               </th>
@@ -64,7 +64,7 @@
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters data-qe-id="table-thead-filter-product-group"></app-advanced-filters>
+                <app-advanced-filters data-qe-id="table-thead-filter-item-group"></app-advanced-filters>
               </th>
               <th class="th-filter">
                 <app-advanced-filters data-qe-id="table-thead-filter-code"></app-advanced-filters>
@@ -110,9 +110,9 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="special_price_supplierid">{{ 'special_price_supplier.product_group' | translate}}<span
+          <label for="special_price_supplierid">{{ 'special_price_supplier.item_group' | translate}}<span
               class="text-danger ml-2">*</span></label>
-          <app-single-select data-qe-id="dialog-form-product-group"></app-single-select>
+          <app-single-select data-qe-id="dialog-form-item-group"></app-single-select>
         </div>
       </div>
       <div class="col-sm-6">

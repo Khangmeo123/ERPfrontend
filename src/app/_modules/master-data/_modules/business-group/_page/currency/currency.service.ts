@@ -6,6 +6,7 @@ import { CurrencyForm } from 'src/app/_modules/master-data/_backend/currency/cur
 import { ToastrService } from 'ngx-toastr';
 import { CurrencyEntity } from 'src/app/_modules/master-data/_backend/currency/currency.entity';
 import { CurrencySearchEntity } from 'src/app/_modules/master-data/_backend/currency/currency.searchentity';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class CurrencyService {
@@ -54,7 +55,7 @@ export class CurrencyService {
 
   save(currencyEntity: any, currencySearchEntity: CurrencySearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (currencyEntity.id === null || currencyEntity.id === undefined) {
+      if (currencyEntity.id === null || currencyEntity.id === undefined || currencyEntity.id === environment.emtyGuid) {
         this.currencyRepository.add(currencyEntity).subscribe(res => {
           if (res) {
             this.getList(currencySearchEntity);

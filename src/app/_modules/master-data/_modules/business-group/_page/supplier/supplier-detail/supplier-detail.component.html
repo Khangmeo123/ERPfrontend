@@ -1,0 +1,112 @@
+<div class="page supplier-detail">
+    <div class="page-header">
+        <span class="page-title">
+            {{pageTitle}}
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-save">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-cancel">
+                {{ 'general.button.save' | translate}}</button>
+        </div>
+    </div>
+    <hr>
+    <div class="page-body">
+        <accordion>
+            <accordion-group [isOpen]="true" [formGroup]="supplierForm">
+                <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'supplier.detail.tab.title1' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="supplierCode">{{ 'supplier.detail.content.code' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="code"
+                                            data-qe-id="form-code" id="supplierCode" />
+                                        <app-error data-qe-id="form-error-code"
+                                            *ngIf="(supplierForm.controls.code?.errors && supplierForm.controls.code?.touched) || !!supplierForm.controls.errors?.get('code')?.value"
+                                            [formGroup]="supplierForm" [property]="'code'" [placement]="'top'"
+                                            class="error-form">
+                                        </app-error>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="supplierName">
+                                        {{ 'supplier.detail.content.name' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="name"
+                                            data-qe-id="form-name" id="supplierName" />
+                                        <app-error data-qe-id="form-error-name"
+                                            *ngIf="(supplierForm.controls.name?.errors && supplierForm.controls.name?.touched) || !!supplierForm.controls.errors?.get('name')?.value"
+                                            [formGroup]="supplierForm" [property]="'name'" [placement]="'top'"
+                                            class="error-form">
+                                        </app-error>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="supplierTaxNumber">
+                                        {{ 'supplier.detail.content.taxNumber' | translate}}</label>
+                                    <input type="text" class="form-control" formControlName="taxNumber"
+                                        data-qe-id="form-taxNumber" id="supplierTaxNumber" />
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="bankid">{{ 'supplier.detail.content.status' | translate}}</label>
+                                    <div class="div-form">
+                                        <app-simple-select [key]="'name'" [list]="statusList"
+                                            (selectionChange)="supplierForm.controls.status.setValue($event)"
+                                            (listOpen)="openStatusList()" data-qe-id="form-characteristic"
+                                            class="w-100">
+                                        </app-simple-select>
+                                        <app-error data-qe-id="form-error-status"
+                                            *ngIf="(supplierForm.controls.status?.errors && supplierForm.controls.status?.touched) || !!supplierForm.controls.errors?.get('status')?.value"
+                                            [formGroup]="supplierForm" [property]="'status'" [placement]="'top'"
+                                            class="error-form">
+                                        </app-error>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-8">
+                                <div class="form-group">
+                                    <label for="bankid">{{ 'supplier.detail.content.note' | translate}}</label>
+                                    <textarea class="form-control" rows="1" formControlName="note">
+                                    </textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
+    <div class="page-footer">
+        <div>
+            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                (cancel)="cancelClicked = true" data-qe-id="button-delete">
+                {{ 'general.button.delete' | translate}}</button>
+        </div>
+        <div class="page-actions">
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-save">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-cancel">
+                {{ 'general.button.save' | translate}}</button>
+        </div>
+    </div>
+</div>

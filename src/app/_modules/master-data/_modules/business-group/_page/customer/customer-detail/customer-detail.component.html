@@ -1,0 +1,111 @@
+<div class="page customer-details">
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle}}
+    </span>
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()"
+        data-qe-id="button-save">{{ 'general.button.cancel' | translate}}</button>
+      <button class="btn btn-save" (click)="save()" data-qe-id="button-cancel">
+        {{ 'general.button.save' | translate}}</button>
+    </div>
+  </div>
+  <hr>
+  <div class="page-body">
+    <div class="page-section form">
+      <form class="mt-2">
+        <accordion>
+          <accordion-group [isOpen]="true" [formGroup]="customerForm">
+            <button class="btn btn-link btn-block clearfix" accordion-heading>
+              <div class="pull-left float-left">{{'customer.detail.tab.title1' | translate }}</div>
+              <span class="float-right pull-right" accordion-heading>
+                <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+              </span>
+            </button>
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="customerCode">{{ 'customer.detail.content.code' | translate}}<span
+                          class="text-danger ml-2">*</span></label>
+                      <div class="div-form">
+                        <input type="text" class="form-control" formControlName="code" data-qe-id="form-code"
+                          id="customerCode" />
+                        <app-error data-qe-id="form-error-code"
+                          *ngIf="(customerForm.controls.code?.errors && customerForm.controls.code?.touched) || !!customerForm.controls.errors?.get('code')?.value"
+                          [formGroup]="customerForm" [property]="'code'" [placement]="'top'" class="error-form">
+                        </app-error>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="customerName">
+                        {{ 'customer.detail.content.name' | translate}}<span class="text-danger ml-2">*</span></label>
+                      <div class="div-form">
+                        <input type="text" class="form-control" formControlName="name" data-qe-id="form-name"
+                          id="customerName" />
+                        <app-error data-qe-id="form-error-name"
+                          *ngIf="(customerForm.controls.name?.errors && customerForm.controls.name?.touched) || !!customerForm.controls.errors?.get('name')?.value"
+                          [formGroup]="customerForm" [property]="'name'" [placement]="'top'" class="error-form">
+                        </app-error>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="customerTaxNumber">
+                        {{ 'customer.detail.content.taxNumber' | translate}}</label>
+                      <input type="text" class="form-control" formControlName="taxNumber" data-qe-id="form-taxNumber"
+                        id="customerTaxNumber" />
+                    </div>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-4">
+                    <div class="form-group">
+                      <label for="bankid">{{ 'customer.detail.content.status' | translate}}</label>
+                      <div class="div-form">
+                        <app-simple-select [key]="'name'" [list]="statusList"
+                          (selectionChange)="customerForm.controls.status.setValue($event)"
+                          (listOpen)="openStatusList()" data-qe-id="form-characteristic" class="w-100">
+                        </app-simple-select>
+                        <app-error data-qe-id="form-error-status"
+                          *ngIf="(customerForm.controls.status?.errors && customerForm.controls.status?.touched) || !!customerForm.controls.errors?.get('status')?.value"
+                          [formGroup]="customerForm" [property]="'status'" [placement]="'top'" class="error-form">
+                        </app-error>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-8">
+                    <div class="form-group">
+                      <label for="bankid">{{ 'customer.detail.content.note' | translate}}</label>
+                      <textarea class="form-control" rows="1" formControlName="note">
+                      </textarea>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </accordion-group>
+        </accordion>
+      </form>
+    </div>
+  </div>
+  <div class="page-footer">
+    <div>
+      <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" (cancel)="cancelClicked = true"
+        data-qe-id="button-delete">
+        {{ 'general.button.delete' | translate}}</button>
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()"
+        data-qe-id="button-save">{{ 'general.button.cancel' | translate}}</button>
+      <button class="btn btn-save" (click)="save()" data-qe-id="button-cancel">
+        {{ 'general.button.save' | translate}}</button>
+    </div>
+  </div>
+</div>

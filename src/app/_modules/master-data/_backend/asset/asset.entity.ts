@@ -6,12 +6,10 @@ export class AssetEntity extends Entity {
 
     // typeEntity:
     typeName: string;
-    typeCode: string;
     typeId: string;
 
     // statusEntity:
     statusName: string;
-    statusCode: string;
     statusId: string;
 
     constructor(assetEntity?: any) {

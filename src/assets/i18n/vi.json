@@ -450,7 +450,7 @@
 			"title": "Sửa thông tin nhân viên"
 		}
 	},
-	"detail_product_of_legal_entity": {
+	"detail_item_of_legal_entity": {
 		"bill_of_materias": {
 			"amount": "Số lượng",
 			"code_of_materias": "Mã nguyên vật liệu",
@@ -476,7 +476,7 @@
 			"modal_title": "Thêm chiết khấu",
 			"title": "Chiết khấu"
 		},
-		"product_group": "Nhóm sản phẩm",
+		"item_group": "Nhóm sản phẩm",
 		"transformation_unit": {
 			"amount": "Số lương",
 			"description": "Mô tả",
@@ -739,15 +739,15 @@
 	},
 	"payment_terms": "",
 	"pic": "",
-	"product": {
+	"item": {
 		"content": {
 			"detail": {
-				"product_id_ncc": "Mã SP từ NCC",
-				"product_id_tt": "Mã SP trên thịt trường",
-				"product_length": "Chiều dài",
-				"product_properti": "Tính chất hàng",
-				"product_weight": "Cân nặng",
-				"product_width": "Chiều rộng"
+				"item_id_ncc": "Mã SP từ NCC",
+				"item_id_tt": "Mã SP trên thị trường",
+				"item_length": "Chiều dài",
+				"item_properti": "Tính chất hàng",
+				"item_weight": "Cân nặng",
+				"item_width": "Chiều rộng"
 			},
 			"modal": {
 				"add_des": "Mô tả",
@@ -768,13 +768,13 @@
 				"value_add_tax_id": "Mã thuế GTGT"
 			},
 			"table": {
-				"product_cost": "Đơn giá cơ bản",
-				"product_description": "Mô tả",
-				"product_height": "Chiều cao",
-				"product_id": "Mã sản phẩm",
-				"product_name": "Tên sản phẩm",
-				"product_status": "Trạng thái",
-				"product_unit": "Đơn vị cơ bản"
+				"item_cost": "Đơn giá cơ bản",
+				"item_description": "Mô tả",
+				"item_height": "Chiều cao",
+				"item_id": "Mã sản phẩm",
+				"item_name": "Tên sản phẩm",
+				"item_status": "Trạng thái",
+				"item_unit": "Đơn vị cơ bản"
 			}
 		},
 		"detail": {
@@ -787,24 +787,24 @@
 			"title": "Danh sách sản phẩm"
 		}
 	},
-	"productGroup": {
+	"itemGroup": {
 		"code": "Mã nhóm",
 		"header": {
 			"title": "Nhóm sản phẩm"
 		},
 		"name": "Tên nhóm",
-		"product": {
+		"item": {
 			"code": "Mã sản phâm",
 			"name": "Tên sản phẩm"
 		}
 	},
-	"productOfLegalEntity": {
+	"itemOfLegalEntity": {
 		"code": "Mã pháp nhân",
 		"header": {
 			"title": "Danh sách sản phẩm của pháp nhân"
 		},
 		"name": "Tên pháp nhân",
-		"product": {
+		"item": {
 			"code": "Mã sản phẩm",
 			"name": "Tên sản phẩm"
 		},
@@ -853,7 +853,7 @@
 		"modal": {
 			"title": "Thêm giá đặc biệt"
 		},
-		"product_group": "Nhóm sản phẩm",
+		"item_group": "Nhóm sản phẩm",
 		"title": "Giá đặc biệt cho khách hàng",
 		"to_date": "Đến ngày"
 	},
@@ -865,7 +865,7 @@
 		"modal": {
 			"title": "Thêm giá đặc biệt"
 		},
-		"product_group": "Nhóm sản phẩm",
+		"item_group": "Nhóm sản phẩm",
 		"title": "Giá đặc biệt cho nhà cung cấp",
 		"to_date": "Đến ngày"
 	},

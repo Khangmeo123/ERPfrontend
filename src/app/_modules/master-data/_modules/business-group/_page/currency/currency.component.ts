@@ -8,7 +8,8 @@ import { CurrencyService } from './currency.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { translate } from 'src/app/_helpers/string';
+
 
 @Component({
   selector: 'app-currency',
@@ -17,7 +18,7 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [CurrencyService],
 })
 export class CurrencyComponent implements OnInit, OnDestroy {
-  pageTitle = _('currency.header.title');
+  pageTitle = translate('currency.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;

@@ -7,13 +7,10 @@ export class SupplierEntity extends Entity {
     name: string;
     taxNumber: string;
     note: string;
-    // statusEntity
+
+    // status
     statusId: string;
     statusName: string;
-    statusCode: string;
-
-    infoContacts: InfoContactEntity[];
-    bankAccounts: BankAccountEntity[];
 
     constructor(supplierEntity?: any) {
         super(supplierEntity);

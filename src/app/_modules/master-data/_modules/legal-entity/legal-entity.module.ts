@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { CustomerGroupComponent } from './_page/customer-group/customer-group.component';
 import { SupplierGroupComponent } from './_page/supplier-group/supplier-group.component';
 import { CompanyPositionComponent } from './_page/company-position/company-position.component';
-import { ProductGroupComponent } from './_page/product-group/product-group.component';
+import { ItemGroupComponent } from './_page/item-group/item-group.component';
 import { SpecialPriceSupplierComponent } from './_page/special-price-supplier/special-price-supplier.component';
 import { SpecialPriceCustomerComponent } from './_page/special-price-customer/special-price-customer.component';
 import { ConfigureCustomerGroupComponent } from './_page/customer-group/configure-customer-group/configure-customer-group.component';
@@ -13,9 +13,9 @@ import { DetailCustomerGroupComponent } from './_page/customer-group/detail-cust
 import { ConfigureSupplierGroupComponent } from './_page/supplier-group/configure-supplier-group/configure-supplier-group.component';
 import { ListSupplierGroupComponent } from './_page/supplier-group/list-supplier-group/list-supplier-group.component';
 import { DetailSupplierGroupComponent } from './_page/supplier-group/detail-supplier-group/detail-supplier-group.component';
-import { ConfigureProductGroupComponent } from './_page/product-group/configure-product-group/configure-product-group.component';
-import { ListProductGroupComponent } from './_page/product-group/list-product-group/list-product-group.component';
-import { DetailProductGroupComponent } from './_page/product-group/detail-product-group/detail-product-group.component';
+import { ConfigureItemGroupComponent } from './_page/item-group/configure-item-group/configure-item-group.component';
+import { ListItemGroupComponent } from './_page/item-group/list-item-group/list-item-group.component';
+import { DetailItemGroupComponent } from './_page/item-group/detail-item-group/detail-item-group.component';
 import { ConfigureCompanyPositionComponent } from './_page/company-position/configure-company-position/configure-company-position.component';
 import { ListCompanyPositionComponent } from './_page/company-position/list-company-position/list-company-position.component';
 import { DetailCompanyPositionComponent } from './_page/company-position/detail-company-position/detail-company-position.component';
@@ -33,26 +33,26 @@ import { CustomersInGroupComponent } from './_page/customer-group/customers-in-g
 import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/customer-list-of-legal-entity.component';
 import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/supplier-of-legal-entity.component';
 import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
-import { ProductOfLegalEntityComponent } from './_page/product-of-legal-entity/product-of-legal-entity.component';
+import { ItemOfLegalEntityComponent } from './_page/item-of-legal-entity/item-of-legal-entity.component';
 import { DetailCustomerOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/detail-customer-of-legal-entity/detail-customer-of-legal-entity.component';
 import { CustomerListComponent } from './_page/customer-list-of-legal-entity/customer-list/customer-list.component';
 import { ListSupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/list-supplier-of-legal-entity/list-supplier-of-legal-entity.component';
 import { DetailSupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/detail-supplier-of-legal-entity/detail-supplier-of-legal-entity.component';
 import { ListEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/list-employee-of-legal-entity/list-employee-of-legal-entity.component';
 import { DetailEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/detail-employee-of-legal-entity/detail-employee-of-legal-entity.component';
-import { ListProductOfLegalEntityComponent } from './_page/product-of-legal-entity/list-product-of-legal-entity/list-product-of-legal-entity.component';
-import { DetailProductOfLegalEntityComponent } from './_page/product-of-legal-entity/detail-product-of-legal-entity/detail-product-of-legal-entity.component';
+import { ListItemOfLegalEntityComponent } from './_page/item-of-legal-entity/list-item-of-legal-entity/list-item-of-legal-entity.component';
+import { DetailItemOfLegalEntityComponent } from './_page/item-of-legal-entity/detail-item-of-legal-entity/detail-item-of-legal-entity.component';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ProductGroupComponent,
+  declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ItemGroupComponent,
     SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent,
     DetailCustomerGroupComponent, ConfigureSupplierGroupComponent, ListSupplierGroupComponent, DetailSupplierGroupComponent,
-    ConfigureProductGroupComponent, ListProductGroupComponent, DetailProductGroupComponent, ConfigureCompanyPositionComponent,
-    ListCompanyPositionComponent, DetailCompanyPositionComponent, CustomersInGroupComponent, CustomerListOfLegalEntityComponent, SupplierOfLegalEntityComponent, EmployeeOfLegalEntityComponent, ProductOfLegalEntityComponent, DetailCustomerOfLegalEntityComponent, CustomerListComponent, ListSupplierOfLegalEntityComponent, DetailSupplierOfLegalEntityComponent, ListEmployeeOfLegalEntityComponent, DetailEmployeeOfLegalEntityComponent, ListProductOfLegalEntityComponent, DetailProductOfLegalEntityComponent],
+    ConfigureItemGroupComponent, ListItemGroupComponent, DetailItemGroupComponent, ConfigureCompanyPositionComponent,
+    ListCompanyPositionComponent, DetailCompanyPositionComponent, CustomersInGroupComponent, CustomerListOfLegalEntityComponent, SupplierOfLegalEntityComponent, EmployeeOfLegalEntityComponent, ItemOfLegalEntityComponent, DetailCustomerOfLegalEntityComponent, CustomerListComponent, ListSupplierOfLegalEntityComponent, DetailSupplierOfLegalEntityComponent, ListEmployeeOfLegalEntityComponent, DetailEmployeeOfLegalEntityComponent, ListItemOfLegalEntityComponent, DetailItemOfLegalEntityComponent],
   imports: [
     CommonModule,
     LegalEntityRoutingModule,
