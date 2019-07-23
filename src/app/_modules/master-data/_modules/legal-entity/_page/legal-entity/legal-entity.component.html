@@ -87,7 +87,7 @@
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
             id="legalEntityCode">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.error.get('code')?.value"
+            *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.error?.get('code')?.value"
             [formGroup]="legalForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
@@ -102,7 +102,7 @@
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
             id="legalEntityName">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.error.get('name')?.value"
+            *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.error?.get('name')?.value"
             [formGroup]="legalForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>

@@ -6,6 +6,9 @@ export class SupplierSearchEntity extends SearchEntity {
     name: TextFilter = new TextFilter();
     taxNumber: TextFilter = new TextFilter();
     statusId: string;
+    legalEntityId: string;
+    supplierGroupingId: string;
+
 
     constructor(employeeSearchEntity?: any) {
         super(employeeSearchEntity);

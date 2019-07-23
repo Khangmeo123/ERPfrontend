@@ -1,9 +1,9 @@
 <div class="page list-supplier-group">
     <div class="page-header">
         <span class="page-title">
-            {{'supplierGroup.header.title' | translate}}
-            <span (click)="onClickSaveBookMark($event)">
-                <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+            {{pageTitle | translate}}
+            <span (click)="bookMark()">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
@@ -18,18 +18,22 @@
                         <span class="sob-label flex-shrink-1">
                             {{'general.legal_entity.name' | translate}}
                         </span>
-                        <app-single-select data-qe-id="form-select-sob"></app-single-select>
+                        <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
+                            [selectedList]="legalEntityIds" [key]="'name'" (search)="sobSearch($event)"
+                            (selectionChange)="selectSob($event)"
+                            (listOpen)="sobSearch(supplierGroupSearchEntity.legalEntityId)"></app-single-select>
                     </div>
                     <div class="col-sm-5 d-flex page-actions justify-content-end">
-                        <button class="btn btn-add" (click)="onClickAddGroup()" data-qe-id="button-add-supplier-group">
+                        <button class="btn btn-add" [disabled]="supplierGroupSearchEntity.legalEntityId == undefined"
+                            (click)="onClickAddGroup()" data-qe-id="button-add-supplier-group">
                             +
                             {{'general.button.add' | translate}}</button>
-                        <button class="btn btn-clear" (click)="clearSearch(table)"
+                        <button class="btn btn-clear" (click)="clearSearchGroup(tableSupplierGroup)"
                             data-qe-id="button-clear-supplier-group">{{'general.button.clear' | translate}}</button>
                     </div>
                 </div>
                 <div class="page-section mt-2">
-                    <p-table [value]="legalList" [customSort]="true" [lazy]="true"
+                    <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true"
                         (onLazyLoad)="sortSupplierGroup($event)" [scrollable]="true" scrollHeight="500px"
                         [resizableColumns]="true" #tableSupplierGroup>
                         <ng-template pTemplate="colgroup">
@@ -53,18 +57,27 @@
                             </tr>
                             <tr>
                                 <th class="th-filter">
-                                    <app-advanced-filters data-qe-id="table-thead-filter-code-supplier-group">
+                                    <app-advanced-filters [filter]="supplierGroupSearchEntity.code"
+                                        (changeFilter)="getList()" data-qe-id="table-thead-filter-code-supplier-group">
                                     </app-advanced-filters>
                                 </th>
                                 <th class="th-filter">
-                                    <app-advanced-filters data-qe-id="table-thead-filter-name-supplier-group">
+                                    <app-advanced-filters [filter]="supplierGroupSearchEntity.name"
+                                        (changeFilter)="getList()" data-qe-id="table-thead-filter-name-supplier-group">
                                     </app-advanced-filters>
                                 </th>
                             </tr>
                         </ng-template>
+
+                        <ng-template pTemplate="body" let-supplierGroup let-index="rowIndex">
+                            <tr (click)="onClickDetail(supplierGroup.id)" (dblclick)="edit(supplierGroup.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <td class="ui-resizable-column"> {{supplierGroup.code}} </td>
+                                <td class="ui-resizable-column"> {{supplierGroup.name}} </td>
+                            </tr>
+                        </ng-template>
                     </p-table>
                     <div class="pagination">
-                        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"
+                        <app-pagination [pagination]="pagination" (paginationOut)="paginationGroupOut($event)"
                             data-qe-id="pagination">
                         </app-pagination>
                     </div>
@@ -73,7 +86,9 @@
             <div class="col-sm-6">
                 <div class="row d-flex ">
                     <div class="col-sm-4 align-items-center">
-                        <app-multi-select data-qe-id="form-multi-select-supplier"></app-multi-select>
+                        <app-multi-select data-qe-id="form-multi-select-supplier" [list]="supplierExceptIds"
+                            [selectedList]="supplierIds" [key]="'name'" (search)="suppplierSearchApp($event)"
+                            (selectionChange)="selectSupplierApp($event)" (listOpen)="openSupplierList(supplierGroupSearchEntity.ids)"></app-multi-select>
                     </div>
                     <div class="col-sm-8 page-actions  d-flex justify-content-end">
                         <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier"> +
@@ -101,7 +116,7 @@
                     </div>
                 </div>
                 <div class="page-section mt-2">
-                    <p-table [value]="tmpSupplier" [customSort]="true" [lazy]="true" (onLazyLoad)="sortSupplier($event)"
+                    <p-table [value]="supplierDetailList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortSupplier($event)"
                         [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableSupplier>
                         <ng-template pTemplate="colgroup">
                             <colgroup>
@@ -130,7 +145,7 @@
                                     <app-advanced-filters data-qe-id="table-thead-filter-name-supplier">
                                     </app-advanced-filters>
                                 </th>
-                                <th></th>
+                                <th class="th-filter"></th>
                             </tr>
                         </ng-template>
                         <ng-template pTemplate="body" let-item>
@@ -142,7 +157,7 @@
                         </ng-template>
                     </p-table>
                     <div class="pagination">
-                        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"
+                        <app-pagination [pagination]="paginationdetail" (paginationOut)="paginationDetailOut($event)"
                             data-qe-id="pagination">
                         </app-pagination>
                     </div>
@@ -158,21 +173,35 @@
     <p-header>
         {{'supplierGroup.add' | translate}}
     </p-header>
-    <form class="container">
+    <form class="container" [formGroup]="supplierGroupForm">
         <div class="row">
             <div class="form-group col-6">
                 <label>
                     {{'supplierGroup.code' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <input type="text" class="form-control" data-qe-id="dialog-form-code">
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+                        id="supplierGroupCode">
+                    <app-error data-qe-id="dialog-error-code"
+                        *ngIf="(supplierGroupForm.controls.code?.errors && supplierGroupForm.controls.code?.touched) || !!supplierGroupForm.controls.error?.get('code')?.value"
+                        [formGroup]="supplierGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>
                     {{'supplierGroup.name' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <input type="text" class="form-control" data-qe-id="dialog-form-name">
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+                        id="supplierGroupName">
+                    <app-error data-qe-id="dialog-error-code"
+                        *ngIf="(supplierGroupForm.controls.name?.errors && supplierGroupForm.controls.name?.touched) || !!supplierGroupForm.controls.error?.get('name')?.value"
+                        [formGroup]="supplierGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
             </div>
         </div>
     </form>
@@ -180,9 +209,9 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="page-actions-delete">
-                    <a class="btn" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                        data-qe-id="dialog-button-delete" [popoverMessage]="popoverMessage" placement="bottom"
-                        (confirm)="delete()">
+                    <a *ngIf="supplierGroupForm.value?.isDeleted" class="btn" mwlConfirmationPopover
+                        [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
                         {{ 'general.button.delete' | translate}}</a>
                 </div>
             </div>
@@ -191,7 +220,7 @@
                     <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
                         {{'general.button.cancel' | translate}}
                     </button>
-                    <button class="btn btn-add mr-2">
+                    <button class="btn btn-add mr-2" (click)="save()" data-qe-id="dialog-button-save">
                         {{'general.button.save' | translate}}
                     </button>
                 </div>

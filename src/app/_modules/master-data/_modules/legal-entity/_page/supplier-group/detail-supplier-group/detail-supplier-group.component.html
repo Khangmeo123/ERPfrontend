@@ -8,8 +8,8 @@
         {{'general.button.cancel' | translate}}
       </button>
       <button class="btn btn-save" data-qe-id="button-save">
-          {{'general.button.save' | translate}}
-        </button>
+        {{'general.button.save' | translate}}
+      </button>
     </div>
   </div>
   <div class="page-body">
@@ -53,6 +53,7 @@
             <div class="form-group col-4">
               <label for="supplier_status">
                 {{'detailSupplierGroup.status' | translate}}
+                <span class="text-danger ml-1"> * </span>
               </label>
               <app-single-select data-qe-id="detail-form-general-status"></app-single-select>
             </div>
@@ -111,8 +112,7 @@
           </div>
 
           <div class="mt-2">
-            <p-table [value]="[]" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
-              scrollHeight="500px" [resizableColumns]="true" #table>
+            <p-table [value]="[]" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
               <ng-template pTemplate="colgroup">
                 <colgroup>
                   <col>
@@ -125,30 +125,23 @@
               </ng-template>
               <ng-template pTemplate="header">
                 <tr>
-                  <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-contacts-code">
+                  <th pResizableColumn data-qe-id="table-thead-contacts-code">
                     {{'detailSupplierGroup.contacts.code' | translate}}
-                    <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'recipient'" data-qe-id="table-thead-contacts-recipient">
+                  <th pResizableColumn data-qe-id="table-thead-contacts-recipient">
                     {{'detailSupplierGroup.contacts.recipient' | translate}}
-                    <p-sortIcon [field]="'recipient'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'phone-number'"
-                    data-qe-id="table-thead-contacts-phone-number">
+                  <th pResizableColumn data-qe-id="table-thead-contacts-phone-number">
                     {{'detailSupplierGroup.contacts.phone_number' | translate}}
-                    <p-sortIcon [field]="'phone-number'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'email'" data-qe-id="table-thead-contacts-email">
+                  <th pResizableColumn data-qe-id="table-thead-contacts-email">
                     {{'detailSupplierGroup.contacts.email' | translate}}
-                    <p-sortIcon [field]="'email'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'city'" data-qe-id="table-thead-contacts-city">
+                  <th pResizableColumn data-qe-id="table-thead-contacts-city">
                     {{'detailSupplierGroup.contacts.city' | translate}}
-                    <p-sortIcon [field]="'city'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'address'" data-qe-id="table-thead-contacts-address">
+                  <th pResizableColumn data-qe-id="table-thead-contacts-address">
                     {{'detailSupplierGroup.contacts.address' | translate}}
-                    <p-sortIcon [field]="'address'" class="float-right"></p-sortIcon>
                   </th>
                 </tr>
               </ng-template>
@@ -169,8 +162,7 @@
             </button>
           </div>
           <div class="mt-2">
-            <p-table [value]="[]" [customSort]="true" [lazy]="true" (onLazyLoad)="sortBankAccount($event)"
-              [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableBankAccount>
+            <p-table [value]="[]" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableBankAccount>
               <ng-template pTemplate="colgroup">
                 <colgroup>
                   <col>
@@ -184,35 +176,26 @@
               </ng-template>
               <ng-template pTemplate="header">
                 <tr>
-                  <th pResizableColumn [pSortableColumn]="'bank-code'" data-qe-id="table-thead-bank-code">
+                  <th pResizableColumn data-qe-id="table-thead-bank-code">
                     {{'detailSupplierGroup.bank_account.code' | translate}}
-                    <p-sortIcon [field]="'bank-code'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'bank-name'" data-qe-id="table-thead-bank-name">
+                  <th pResizableColumn data-qe-id="table-thead-bank-name">
                     {{'detailSupplierGroup.bank_account.bank_name' | translate}}
-                    <p-sortIcon [field]="'bank-name'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'bank-account-owner'"
-                    data-qe-id="table-thead-bank-account-owner">
+                  <th pResizableColumn data-qe-id="table-thead-bank-account-owner">
                     {{'detailSupplierGroup.bank_account.account_owner' | translate}}
-                    <p-sortIcon [field]="'account-owner'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'bank-account-number'"
-                    data-qe-id="table-thead-bank-account-number">
+                  <th pResizableColumn data-qe-id="table-thead-bank-account-number">
                     {{'detailSupplierGroup.bank_account.account_number' | translate}}
-                    <p-sortIcon [field]="'bank-account-number'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'bank-province'" data-qe-id="table-thead-bank-province">
+                  <th pResizableColumn data-qe-id="table-thead-bank-province">
                     {{'detailSupplierGroup.bank_account.province' | translate}}
-                    <p-sortIcon [field]="'bank-province'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'bank-division'" data-qe-id="table-thead-bank-division">
+                  <th pResizableColumn data-qe-id="table-thead-bank-division">
                     {{'detailSupplierGroup.bank_account.bank_division' | translate}}
-                    <p-sortIcon [field]="'bank-division'" class="float-right"></p-sortIcon>
                   </th>
-                  <th pResizableColumn [pSortableColumn]="'bank-address'" data-qe-id="table-thead-bank-address">
+                  <th pResizableColumn data-qe-id="table-thead-bank-address">
                     {{'detailSupplierGroup.bank_account.bank_address' | translate}}
-                    <p-sortIcon [field]="'bank-address'" class="float-right"></p-sortIcon>
                   </th>
                 </tr>
               </ng-template>

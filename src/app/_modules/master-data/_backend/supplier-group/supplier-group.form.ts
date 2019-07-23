@@ -8,8 +8,13 @@ export class SupplierGroupForm extends FormModel {
 
     name = new FormControl('', [requiredField]);
     code = new FormControl('', [requiredField]);
+    legalEntityId = new FormControl('', [requiredField]);
+    errors = new FormGroup({
+        name: new FormControl(''),
+        code: new FormControl(''),
+        legalEntityId: new FormControl('')
+    });
 
-    description = new FormControl('');
 
     constructor(supplierGroupEntity?: SupplierGroupEntity) {
         super();

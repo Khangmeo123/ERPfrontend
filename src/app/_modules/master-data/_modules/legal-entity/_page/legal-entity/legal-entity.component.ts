@@ -106,6 +106,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   }
 
   add() {
+    console.log('add',this.legalSearchEntity.setOfBookId)
     this.display = true;
     this.legalService.add(this.legalSearchEntity.setOfBookId);
   }
