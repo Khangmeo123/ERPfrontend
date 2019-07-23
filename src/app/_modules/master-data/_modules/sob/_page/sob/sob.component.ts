@@ -268,15 +268,8 @@ export class SobComponent implements OnInit, OnDestroy {
   }
 
   add() {
-    if (this.sobForm.invalid && this.sobForm.untouched) {
-      this.generalService.validateAllFormFields(this.sobForm);
-    }
-    if (this.sobForm.valid) {
-      this.isShowDialog = true;
-      this.sobService.add();
-    } else {
-      console.log('Invalid');
-    }
+    this.isShowDialog = true;
+    this.sobService.add();
   }
 
   edit(sobId: string) {

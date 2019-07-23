@@ -115,10 +115,9 @@ export class SobService {
   }
 
   add() {
-    const data = this.sobForm.value.getRawValue();
-    const entity: SobEntity = new SobEntity(data);
-    console.log(entity);
-    this.sobRepository.add(entity);
+    this.sobForm.next(this.fb.group(
+      new SobForm(),
+    ));
   }
 
   edit(sobId: string) {

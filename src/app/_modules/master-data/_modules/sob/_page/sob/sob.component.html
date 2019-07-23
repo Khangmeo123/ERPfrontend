@@ -50,6 +50,22 @@
             </th>
           </tr>
         </ng-template>
+        <ng-template pTemplate="body" let-sob>
+          <tr>
+            <td>
+              {{sob.code}}
+            </td>
+            <td>
+              {{sob.name}}
+            </td>
+            <td>
+              {{sob.currencyName}}
+            </td>
+            <td>
+              {{sob.chartOfAccountTemplateName}}
+            </td>
+          </tr>
+        </ng-template>
       </p-table>
     </div>
   </div>
@@ -167,7 +183,7 @@
     </div>
   </form>
   <p-footer>
-    <button class="btn btn-add mr-2" (click)="add()">
+    <button class="btn btn-add mr-2" (click)="save()">
       {{'general.button.add' | translate}}
     </button>
     <button class="btn btn-cancel" (click)="cancelModal()">
