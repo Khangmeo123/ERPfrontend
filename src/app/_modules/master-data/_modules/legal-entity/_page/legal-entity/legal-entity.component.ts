@@ -41,6 +41,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   sobIds: LegalEntity[];
   sobExceptIds: LegalEntity[];
   sobTyping: Subject<LegalSearchEntity> = new Subject();
+  setOfBookId: string = '';
 
   constructor(
     private bookmarkService: BookmarkService,
@@ -100,6 +101,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   }
   selectSob(event) {
     this.legalSearchEntity.setOfBookId = event[0];
+    this.setOfBookId = event[0];
     this.getList();
   }
 
@@ -149,6 +151,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
 
   clearSearch(table: any) {
     this.legalSearchEntity = new LegalSearchEntity();
+    this.legalSearchEntity.setOfBookId = this.setOfBookId;
     table.reset();
   }
 

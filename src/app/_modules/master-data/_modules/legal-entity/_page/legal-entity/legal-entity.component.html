@@ -39,9 +39,11 @@
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
               {{'legal_entity.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
               {{'legal_entity.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
           </tr>
           <tr>
