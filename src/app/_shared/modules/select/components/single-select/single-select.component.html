@@ -28,7 +28,11 @@
       </div>
       <app-select-list [dataSource]="list"
                        [key]="key"
+                       *ngIf="list.length; else empty"
                        (selectionChange)="select($event)"></app-select-list>
+      <ng-template #empty>
+        <app-no-data></app-no-data>
+      </ng-template>
     </ng-template>
   </app-select-body>
 </app-select>

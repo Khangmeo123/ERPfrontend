@@ -27,7 +27,6 @@ class SingleSelectStories {
 
   open(event) {
     setTimeout(() => {
-      // console.log(event);
       this.list = [
         ...sampleList,
       ];

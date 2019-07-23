@@ -1,4 +1,5 @@
-<app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
+<app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)"
+            (click)="$event.stopPropagation()">
   <app-select-head [label]="selectedText"
                    (openList)="openList($event)"
                    (closeList)="closeList($event)"
@@ -26,7 +27,11 @@
           {{'select.availableList' | translate}}
         </span>
         </div>
-        <app-select-list [dataSource]="list" (selectionChange)="select($event)"></app-select-list>
+        <app-select-list [dataSource]="list" *ngIf="list.length; else empty"
+                         (selectionChange)="select($event)"></app-select-list>
+        <ng-template #empty>
+          <app-no-data></app-no-data>
+        </ng-template>
       </ng-template>
     </ng-template>
   </app-select-body>

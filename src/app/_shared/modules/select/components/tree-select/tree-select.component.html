@@ -1,4 +1,5 @@
-<app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
+<app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)"
+            (click)="$event.stopPropagation()">
   <app-select-head (headClick)="toggleList($event)"
                    (openList)="openList($event)"
                    (closeList)="closeList($event)"
@@ -14,7 +15,11 @@
                        *ngIf="selectedNodes.length"></app-select-list>
       <p-tree [selectionMode]="mode"
               [value]="treeData"
+              *ngIf="treeData.length; else empty"
               [(selection)]="selection"></p-tree>
+      <ng-template #empty>
+        <app-no-data></app-no-data>
+      </ng-template>
     </ng-template>
   </app-select-body>
 </app-select>
