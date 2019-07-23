@@ -50,8 +50,8 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-sob>
-          <tr>
+        <ng-template pTemplate="body" let-sob let-index="index">
+          <tr (dblclick)="edit(sob.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td>
               {{sob.code}}
             </td>
