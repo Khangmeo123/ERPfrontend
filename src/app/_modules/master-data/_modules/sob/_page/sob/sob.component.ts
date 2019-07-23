@@ -102,8 +102,6 @@ export class SobComponent implements OnInit, OnDestroy {
 
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa?';
 
-  visible = false;
-
   constructor(
     private sobService: SobService,
     private generalService: GeneralService,
@@ -235,7 +233,7 @@ export class SobComponent implements OnInit, OnDestroy {
   }
 
   toggleModal() {
-    this.visible = !this.visible;
+    this.isShowDialog = !this.isShowDialog;
   }
 
   ngOnInit() {

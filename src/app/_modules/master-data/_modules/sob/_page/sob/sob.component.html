@@ -71,25 +71,38 @@
   </div>
 </div>
 
-<p-dialog modal="true" [(visible)]="visible" [style]="{width: '900px'}" appendTo="body">
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" [style]="{width: '900px'}"
+          appendTo="body">
   <p-header>
     {{'sob.add' | translate}}
   </p-header>
-  <form class="container" [formGroup]="sobForm">
+  <div class="container" [formGroup]="sobForm">
     <div class="row">
       <div class="form-group col-6">
         <label for="code">
           {{'sob.code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" id="code" class="form-control" formControlName="code">
+        <div class="div-form">
+          <input type="text" id="code" class="form-control" formControlName="code">
+          <app-error data-qe-id="dialog-error-code"
+                     *ngIf="(sobForm.controls.code?.errors && sobForm.controls.code?.touched) || !!sobForm.controls.error.get('code')?.value"
+                     [formGroup]="sobForm" [property]="'code'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
         <label for="name">
           {{'sob.name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control" id="name" formControlName="name">
+        <div class="div-form">
+          <input type="text" class="form-control" id="name" formControlName="name">
+          <app-error data-qe-id="dialog-error-name"
+                     *ngIf="(sobForm.controls.name?.errors && sobForm.controls.name?.touched) || !!sobForm.controls.error.get('name')?.value"
+                     [formGroup]="sobForm" [property]="'name'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
     </div>
     <div class="row">
@@ -181,28 +194,20 @@
                            (listOpen)="getImportTaxTemplates()"></app-single-select>
       </div>
     </div>
-  </form>
+  </div>
   <p-footer>
-    <button class="btn btn-add mr-2" (click)="save()">
-      {{'general.button.add' | translate}}
-    </button>
-    <button class="btn btn-cancel" (click)="cancelModal()">
-      {{'general.button.cancel' | translate}}
-    </button>
-  </p-footer>
-  <ng-template #notAdd>
-    <p-footer class="d-flex">
-      <div class="flex-grow-1 justify-content-start">
-        <button class="btn btn-link text-danger">
-          {{'general.button.delete' | translate}}
+    <div class="d-flex">
+      <button class="btn btn-delete" *ngIf="sobForm.value?.isDeleted">
+        {{'general.button.delete' | translate}}
+      </button>
+      <div class="flex-grow-1 d-flex justify-content-end">
+        <button class="btn btn-add mr-2" (click)="save()">
+          {{'general.button.add' | translate}}
+        </button>
+        <button class="btn btn-cancel" (click)="cancelModal()">
+          {{'general.button.cancel' | translate}}
         </button>
       </div>
-      <button class="btn btn-add mr-2">
-        {{'general.button.add' | translate}}
-      </button>
-      <button class="btn btn-cancel mr-2">
-        {{'general.button.cancel' | translate}}
-      </button>
-    </p-footer>
-  </ng-template>
+    </div>
+  </p-footer>
 </p-dialog>

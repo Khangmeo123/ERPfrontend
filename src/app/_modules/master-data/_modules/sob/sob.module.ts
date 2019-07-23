@@ -32,6 +32,7 @@ import { ImportTaxComponent } from './_page/import-tax/import-tax.component';
 import { ExportTaxComponent } from './_page/export-tax/export-tax.component';
 import { SpecialConsumptionTaxComponent } from './_page/special-consumption-tax/special-consumption-tax.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { ErrorModule } from '../../../../_shared/components/error/error.module';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     CheckboxModule,
     SelectModule,
     RadioButtonModule,
-    BsDropdownModule.forRoot()
+    BsDropdownModule.forRoot(),
+    ErrorModule
   ]
 })
 export class SobModule { }

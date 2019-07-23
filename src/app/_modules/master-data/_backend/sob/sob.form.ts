@@ -1,10 +1,10 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
-import { requiredField } from 'src/app/_helpers';
+import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class SobForm extends FormModel {
-  code = new FormControl('', [requiredField]);
+  code = new FormControl('', [requiredField, checkLength(1, 2)]);
   name = new FormControl('', [requiredField]);
 
   chartOfAccountTemplateId = new FormControl('');
