@@ -142,7 +142,7 @@ export class SobComponent implements OnInit, OnDestroy {
       }
     });
 
-    const environmentTaxSub = this.sobService.exportTaxTemplates.subscribe((res) => {
+    const environmentTaxSub = this.sobService.environmentTaxTemplates.subscribe((res) => {
       if (res) {
         this.environmentTaxTemplates = res.exceptIds;
       }
@@ -179,6 +179,10 @@ export class SobComponent implements OnInit, OnDestroy {
       .add(naturalResourceTaxSub)
       .add(specialConsumptionTaxSub)
       .add(valueAddedTaxSub);
+  }
+
+  onSelect(data, field: string) {
+    console.log(data);
   }
 
   getImportTaxTemplates() {
@@ -236,6 +240,7 @@ export class SobComponent implements OnInit, OnDestroy {
 
   add() {
     this.isShowDialog = true;
+    console.log(this.sobForm.value);
     this.sobService.add();
   }
 

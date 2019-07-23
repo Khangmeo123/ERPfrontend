@@ -30,7 +30,7 @@ import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consum
 export class SobRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/sob';
+    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book';
   }
 
   getList(sobSearchEntity: SobSearchEntity): Observable<SobEntity[]> {
@@ -57,7 +57,7 @@ export class SobRepository extends Repository {
   }
 
   getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-coa', JSON.stringify(coaSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/list-coa-template', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {

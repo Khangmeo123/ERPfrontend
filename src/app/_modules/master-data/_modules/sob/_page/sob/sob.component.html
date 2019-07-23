@@ -62,82 +62,101 @@
   <form class="container" [formGroup]="sobForm">
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="code">
           {{'sob.code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input type="text" id="code" class="form-control" formControlName="code">
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="name">
           {{'sob.name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input type="text" class="form-control" id="name">
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="chart-of-account-template">
           {{'sob.chart_account' | translate}}
         </label>
-        <app-single-select [list]="coaList" (listOpen)="getCoaList()"></app-single-select>
+        <app-single-select id="chart-of-account-template" [list]="coaList" key="name"
+                           (listOpen)="getCoaList()"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="currency">
           {{'sob.currency' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-single-select [list]="currencyList" key="name" (listOpen)="getCurrencyList()"></app-single-select>
+        <app-single-select [list]="currencyList" id="currency" key="name"
+                           (listOpen)="getCurrencyList()"></app-single-select>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="special-consumption-tax-template">
           {{'sob.special_consumption_tax' | translate}}
         </label>
         <app-single-select [list]="specialConsumptionTaxTemplates"
+                           key="name"
+                           id="special-consumption-tax-template"
                            (listOpen)="getSpecialConsumptionTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="value-added-tax-template">
           {{'sob.value_added_tax' | translate}}
         </label>
-        <app-single-select [list]="valueAddedTaxTemplates" (listOpen)="getValueAddedTaxTemplates()"></app-single-select>
+        <app-single-select [list]="valueAddedTaxTemplates"
+                           key="name"
+                           id="value-added-tax-template"
+                           (listOpen)="getValueAddedTaxTemplates()"></app-single-select>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="natural-resource-tax-template">
           {{'sob.resource_tax' | translate}}
         </label>
         <app-single-select [list]="naturalResourceTaxTemplates"
+                           key="name"
+                           id="natural-resource-tax-template"
                            (listOpen)="getNaturalResourceTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="environment-tax-template">
           {{'sob.enviroment_tax' | translate}}
         </label>
-        <app-single-select [list]="environmentTaxTemplates" (listOpen)="getEnvironmentTemplates()"></app-single-select>
+        <app-single-select [list]="environmentTaxTemplates"
+                           key="name"
+                           id="environment-tax-template"
+                           (listOpen)="getEnvironmentTemplates()"></app-single-select>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="export-tax-template">
           {{'sob.export_tax' | translate}}
         </label>
-        <app-single-select [list]="exportTaxTemplates" (listOpen)="getExportTaxTemplates()"></app-single-select>
+        <app-single-select [list]="exportTaxTemplates"
+                           key="name"
+                           id="export-tax-template"
+                           (listOpen)="getExportTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="import-tax-template">
           {{'sob.import_tax' | translate}}
         </label>
-        <app-single-select [list]="importTaxTemplates" (listOpen)="getImportTaxTemplates()"></app-single-select>
+        <app-single-select [list]="importTaxTemplates"
+                           key="name"
+                           (selectionChange)="onSelect($event, 'importTaxTemplateId')"
+                           id="import-tax-template"
+                           (listOpen)="getImportTaxTemplates()"></app-single-select>
       </div>
     </div>
   </form>
-  <p-footer *ngIf="isAdd; else notAdd">
-    <button class="btn btn-add mr-2">
+  <p-footer>
+    <button class="btn btn-add mr-2" (click)="add()">
       {{'general.button.add' | translate}}
     </button>
     <button class="btn btn-cancel">

@@ -7,29 +7,29 @@ export class SobForm extends FormModel {
   code = new FormControl('', [requiredField]);
   name = new FormControl('', [requiredField]);
 
-  coaId = new FormControl('');
-  coaName = new FormControl('');
+  chartOfAccountTemplateId = new FormControl('');
+  chartOfAccountTemplateName = new FormControl('');
 
   currencyId = new FormControl('', [requiredField]);
   currencyName = new FormControl('', [requiredField]);
 
-  sctId = new FormControl('');
-  sctName = new FormControl('');
+  specialConsumptionTemplateId = new FormControl('');
+  specialConsumptionTemplateName = new FormControl('');
 
-  vatId = new FormControl('');
-  vatName = new FormControl('');
+  valueAddedTemplateId = new FormControl('');
+  valueAddedTemplateName = new FormControl('');
 
-  nrtId = new FormControl('');
-  nrtName = new FormControl('');
+  naturalResourceTemplateId = new FormControl('');
+  naturalResourceTemplateName = new FormControl('');
 
-  entId = new FormControl('');
-  entName = new FormControl('');
+  environmentTemplateId = new FormControl('');
+  environmentTemplateName = new FormControl('');
 
-  extId = new FormControl('');
-  extName = new FormControl('');
+  exportTemplateId = new FormControl('');
+  exportTemplateName = new FormControl('');
 
-  imtId = new FormControl('');
-  imtName = new FormControl('');
+  importTemplateId = new FormControl('');
+  importTemplateName = new FormControl('');
 
   constructor(sobEntity?: SobEntity) {
     super();
