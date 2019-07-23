@@ -263,6 +263,10 @@ export class SobComponent implements OnInit, OnDestroy {
     this.sobService.getList(this.sobSearchEntity);
   }
 
+  cancelModal() {
+    this.toggleModal();
+  }
+
   add() {
     if (this.sobForm.invalid && this.sobForm.untouched) {
       this.generalService.validateAllFormFields(this.sobForm);
