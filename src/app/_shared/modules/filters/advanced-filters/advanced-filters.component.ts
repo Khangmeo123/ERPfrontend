@@ -122,6 +122,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
         this.filter[code] = null;
       }
     });
+    this.filterValue = this.filter[this.type.code];
     this.changeFilter.emit();
   }
 

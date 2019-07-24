@@ -38,31 +38,24 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   @Output() valueChange = new EventEmitter();
 
-  dateValue = null;
+  @Input() value = '';
+
+  date = null;
 
   constructor() {
   }
 
-  @Input()
-  get value() {
-    return this.dateValue;
-  }
-
-  set value(data) {
-    if (data) {
-      if (data.value) {
-        this.dateValue = data.value;
-        return;
-      }
-    }
-    this.dateValue = data;
+  onDateChange(event) {
+    const {value} = event.targetElement;
+    this.control.setValue(value);
+    this.valueChange.emit(value);
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
-      const { currentValue } = changes.value;
-      if (currentValue === null) {
-        console.log(this.dateValue);
+      if (!changes.value.currentValue) {
+        this.date = null;
+        this.control.setValue(null);
       }
     }
   }
@@ -74,27 +67,21 @@ export class DatePickerComponent implements OnInit, OnChanges {
     datePicker.open();
   }
 
-  onDateChange(event) {
-    this.onValueChange(event);
-  }
-
-  onDateInput(event) {
-    this.value = event.value;
-  }
-
-  onValueChange(event) {
-    this.valueChange.emit(event);
-  }
-
   onKeyUp(event) {
     if (event.key === 'Control') {
       this.checkCtrl = false;
+      return;
+    }
+    const {value} = event.target;
+    if (value === '' || value === null) {
+      this.date = null;
+      this.control.setValue(null);
     }
   }
 
   onKeyDown(event) {
-    const { target, key } = event;
-    const { value } = target;
+    const {target, key} = event;
+    const {value} = target;
     if (key === 'Control') {
       this.checkCtrl = true;
     }
@@ -115,13 +102,6 @@ export class DatePickerComponent implements OnInit, OnChanges {
         }
         return;
       }
-    }
-  }
-
-  onInput(event) {
-    const { value } = event.target;
-    if (value === '') {
-      this.valueChange.emit(value);
     }
   }
 }
