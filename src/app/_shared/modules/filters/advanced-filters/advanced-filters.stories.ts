@@ -16,7 +16,7 @@ import { TranslateModule } from '@ngx-translate/core';
   template: `
     <div class="container">
       <div class="row d-flex justify-content-end">
-        <button class="btn btn-primary btn-sm mr-2" (click)="search(filter)">Search</button>
+        <button class="btn btn-primary btn-sm mr-2" (click)="search()">Search</button>
         <button class="btn btn-primary btn-sm" (click)="clearFilter()"> Clear</button>
       </div>
       <div class="row mt-4">
