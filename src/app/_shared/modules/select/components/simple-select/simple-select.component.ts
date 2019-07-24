@@ -14,7 +14,9 @@ import { getListDirection } from '../../helpers';
 export class SimpleSelectComponent implements OnInit, ISelect {
   @Input() list = [];
 
-  selectedItem = null;
+  @Input() initValue = null;
+
+  @Input() selectedItem = null;
 
   @Input() disabled = false;
 
@@ -41,7 +43,7 @@ export class SimpleSelectComponent implements OnInit, ISelect {
     if (this.selectedItem) {
       return this.selectedItem[this.key];
     }
-    return '';
+    return this.initValue;
   }
 
   @Input() valueSelector = (node) => node.id;
@@ -75,7 +77,7 @@ export class SimpleSelectComponent implements OnInit, ISelect {
   }
 
   onSelect(event) {
-    const {data} = event;
+    const { data } = event;
     this.selectedItem = data;
     this.selectionChange.emit(this.valueSelector(data));
     this.isOpened = false;

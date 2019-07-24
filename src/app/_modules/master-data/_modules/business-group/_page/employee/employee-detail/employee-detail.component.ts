@@ -117,6 +117,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   searchJobTitle(event: string) {
+    this.jobTitleSearchEntity = new JobTitleSearchEntity();
     this.jobTitleSearchEntity.name.startsWith = event;
     this.jobTitleTyping.next(this.jobTitleSearchEntity);
   }
@@ -130,6 +131,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   searchJobLevel(event: number) {
+    this.jobLevelSearchEntity = new JobLevelSearchEntity();
     this.jobLevelSearchEntity.level.equal = event;
     this.jobLevelTyping.next(this.jobLevelSearchEntity);
   }

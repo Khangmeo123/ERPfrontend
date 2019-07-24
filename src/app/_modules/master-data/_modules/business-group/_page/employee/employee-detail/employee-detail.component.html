@@ -46,8 +46,8 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="employeeSalary">{{ 'employee.detail.content.salary' | translate}}</label>
-                            <input type="text" class="form-control" pKeyFilter="int" formControlName="salary"
-                                id="employeeSalary">
+                            <app-input-number [control]="employeeForm.get('salary')" inputId="employeeSalary">
+                            </app-input-number>
                         </div>
                     </div>
 
@@ -80,8 +80,8 @@
                         <div class="form-group">
                             <label
                                 for="employeeSalaryRatio">{{ 'employee.detail.content.salaryRatio' | translate}}</label>
-                            <input type="text" class="form-control" pKeyFilter="int" formControlName="salaryRatio"
-                                id="employeeSalaryRatio">
+                            <app-input-number [control]="employeeForm.get('salaryRatio')"
+                                inputId="employeeInsuranceSalary"></app-input-number>
                         </div>
                     </div>
 
@@ -112,8 +112,8 @@
                             <label for="employeeInsuranceSalary">
                                 {{ 'employee.content.table.insuranceSalary' | translate}}
                             </label>
-                            <input type="text" class="form-control" formControlName="insuranceSalary"
-                                id="employeeInsuranceSalary">
+                            <app-input-number [control]="employeeForm.get('insuranceSalary')"
+                                inputId="employeeInsuranceSalary"></app-input-number>
                         </div>
                     </div>
                 </div>
@@ -121,7 +121,8 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'employee.detail.content.jobTitle' | translate}}</label>
-                            <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
+                            <app-single-select [initialValue]="employeeForm.controls.jobTitleName.value"
+                                [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
                                 (search)="searchJobTitle($event)"
                                 (selectionChange)="employeeForm.controls.jobTitleId.setValue($event[0])"
                                 (listOpen)="openJobTitleList(employeeForm.controls.jobTitleId.value)">
@@ -147,7 +148,8 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'employee.detail.content.jobLevel' | translate}}</label>
-                            <app-single-select [list]="jobLevelExceptIds" [selectedList]="jobLevelIds" [key]="'level'"
+                            <app-single-select [initialValue]="employeeForm.controls.jobLevel.value"
+                                [list]="jobLevelExceptIds" [selectedList]="jobLevelIds" [key]="'level'"
                                 (search)="searchJobLevel($event)"
                                 (selectionChange)="employeeForm.controls.jobLevelId.setValue($event[0])"
                                 (listOpen)="openJobLevelList(employeeForm.controls.jobLevelId.value)">
@@ -166,6 +168,7 @@
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
                                 <app-simple-select [key]="'name'" [list]="statusList"
+                                    [initValue]="employeeForm.controls.statusName.value"
                                     (selectionChange)="employeeForm.controls.statusId.setValue($event)"
                                     (listOpen)="openStatusList()" data-qe-id="form-characteristic" class="w-100">
                                 </app-simple-select>

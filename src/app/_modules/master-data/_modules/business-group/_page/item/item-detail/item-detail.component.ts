@@ -115,7 +115,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
   }
 
   searchUom(event: string) {
-    this.uomSearchEntity.code.startsWith = event;
+    this.uomSearchEntity = new UomSearchEntity();
     this.uomSearchEntity.name.startsWith = event;
     this.uomTyping.next(this.uomSearchEntity);
   }

@@ -29,7 +29,7 @@ export class EmployeeForm extends FormModel {
 
     // jobLevelEntity:
     jobLevelId = new FormControl();
-    jobLevelName = new FormControl();
+    jobLevel = new FormControl();
 
     errors = new FormGroup({
         name: new FormControl(''),
