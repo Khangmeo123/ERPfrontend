@@ -3,14 +3,14 @@ import { SupplierGroupEntity } from 'src/app/_modules/master-data/_backend/suppl
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Entities } from 'src/app/_helpers/entity';
 import { ToastrService } from 'ngx-toastr';
-import { ListSupplierRepository } from './list-supplier-group.repository';
+import { ListSupplierRepository } from './supplier-group.repository';
 import { SupplierGroupForm } from '../../../../_backend/supplier-group/supplier-group.form';
 import { SupplierGroupSearchEntity } from 'src/app/_modules/master-data/_backend/supplier-group/supplier-group.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { SupplierSearchEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.searchentity';
 import { SupplierEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.entity';
 
-export class ListSupplierGroupService {
+export class SupplierGroupService {
     public supplierGroupList: BehaviorSubject<SupplierGroupEntity[]>;
     public supplierGroupForm: BehaviorSubject<FormGroup>;
     public supplierGroupCount: BehaviorSubject<number>;

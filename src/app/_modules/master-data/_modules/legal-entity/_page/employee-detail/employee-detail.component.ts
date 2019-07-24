@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-detail-employee-of-legal-entity',
-  templateUrl: './detail-employee-of-legal-entity.component.html',
-  styleUrls: ['./detail-employee-of-legal-entity.component.scss']
+  templateUrl: './employee-detail.component.html',
+  styleUrls: ['./employee-detail.component.scss']
 })
-export class DetailEmployeeOfLegalEntityComponent implements OnInit {
+export class EmployeeDetailComponent implements OnInit {
 
   
   displayContact : boolean = false;

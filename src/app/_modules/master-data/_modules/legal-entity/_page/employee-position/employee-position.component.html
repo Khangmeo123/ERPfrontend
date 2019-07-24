@@ -1,7 +1,7 @@
-<div class="page list-item-group">
+<div class="page list-employee-group">
   <div class="page-header">
         <span class="page-title">
-            {{'itemGroup.header.title' | translate}}
+            {{'employeeGroup.header.title' | translate}}
           <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -30,10 +30,10 @@
             <ng-template pTemplate="header">
               <tr>
                 <th>
-                  {{'itemGroup.code' | translate}}
+                  {{'employeeGroup.code' | translate}}
                 </th>
                 <th>
-                  {{'itemGroup.name' | translate}}
+                  {{'employeeGroup.name' | translate}}
                 </th>
               </tr>
               <tr>
@@ -52,12 +52,7 @@
       <div class="col-sm-6">
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
-            <div class="search-input ">
-              <div class="has-search">
-                <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control">
-              </div>
-            </div>
+            <app-multi-select></app-multi-select>
           </div>
 
 
@@ -85,14 +80,14 @@
         </div>
 
         <div class="page-section mt-2">
-          <p-table [value]="tmpitem">
+          <p-table [value]="tmpEmployee">
             <ng-template pTemplate="header">
               <tr>
                 <th>
-                  {{'itemGroup.item.code' | translate}}
+                  {{'employeeGroup.employee.code' | translate}}
                 </th>
                 <th>
-                  {{'itemGroup.item.name' | translate}}
+                  {{'employeeGroup.employee.name' | translate}}
                 </th>
                 <th></th>
               </tr>
@@ -121,3 +116,41 @@
     </div>
   </div>
 </div>
+
+
+<p-dialog modal="true" [(visible)]="isAddGroup">
+  <p-header>
+    {{'employeeGroup.add' | translate}}
+  </p-header>
+  <form class="container">
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'employeeGroup.code' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <app-single-select></app-single-select>
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'employeeGroup.name' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <input type="text" class="form-control">
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <ng-template>
+      <button class="btn btn-add mr-2">
+        {{'general.button.save' | translate}}
+      </button>
+      <button class="btn btn-cancel mr-2">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-delete">
+        {{'general.button.delete' | translate}}
+      </button>
+    </ng-template>
+  </p-footer>
+</p-dialog>

@@ -159,7 +159,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Quản lý nhóm nhân viên',
-        route: '/master-data/legal-entity/company-position',
+        route: '/master-data/legal-entity/employee-position',
       },
       {
         label: 'Sản phẩm của pháp nhân',

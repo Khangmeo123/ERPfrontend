@@ -7,6 +7,8 @@ export class SupplierEntity extends Entity {
     name: string;
     taxNumber: string;
     note: string;
+    legalEntityId: string;
+    supplierIds: []
 
     // status
     statusId: string;

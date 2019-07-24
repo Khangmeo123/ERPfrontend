@@ -3,10 +3,10 @@ import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-detail-customer-group',
-  templateUrl: './detail-customer-group.component.html',
-  styleUrls: ['./detail-customer-group.component.scss'],
+  templateUrl: './customer-detail.component.html',
+  styleUrls: ['./customer-detail.component.scss'],
 })
-export class DetailCustomerGroupComponent implements OnInit {
+export class CustomerDetailComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl(),

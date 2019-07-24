@@ -14,7 +14,7 @@ import { Entities } from 'src/app/_helpers/entity';
 export class SupplierDetailRepository extends Repository{
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/supplier-group/detail-supplier-group';
+        this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/supplier-detail';
     }
 
     getId(supplierId: string): Observable<LegalSupplierDetailEntity> {

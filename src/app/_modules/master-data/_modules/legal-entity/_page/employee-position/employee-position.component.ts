@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
-import { Router } from '@angular/router';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Router} from '@angular/router';
+
 @Component({
-  selector: 'app-list-company-position',
-  templateUrl: './list-company-position.component.html',
-  styleUrls: ['./list-company-position.component.scss']
+  selector: 'app-company-position',
+  templateUrl: './employee-position.component.html',
+  styleUrls: ['./employee-position.component.scss']
 })
-export class ListCompanyPositionComponent implements OnInit {
+export class EmployeePositionComponent implements OnInit {
 
   display : boolean = false;
-  
   pagination = new PaginationModel()
-
   constructor(protected router: Router) { }
-  
+
   tmpEmployee = [
     {
       code: 1,
@@ -39,13 +38,13 @@ export class ListCompanyPositionComponent implements OnInit {
   ngOnInit() {
   }
 
-  
+
 
   showAddGroupEmployees() {
     this.display = !this.display;
   }
 
   onClickShowDetail () {
-    this.router.navigate(['/master-data/legal-entity/company-position/detail-company-position']);
+    this.router.navigate(['/master-data/legal-entity/employee-position/employee-detail']);
   }
 }

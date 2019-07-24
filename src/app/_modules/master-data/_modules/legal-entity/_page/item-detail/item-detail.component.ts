@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-detail-item-of-legal-entity',
-  templateUrl: './detail-item-of-legal-entity.component.html',
-  styleUrls: ['./detail-item-of-legal-entity.component.scss']
+  templateUrl: './item-detail.component.html',
+  styleUrls: ['./item-detail.component.scss']
 })
-export class DetailItemOfLegalEntityComponent implements OnInit {
+export class ItemDetailComponent implements OnInit {
 
   public popoverTitle: string = 'Popover title';
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
