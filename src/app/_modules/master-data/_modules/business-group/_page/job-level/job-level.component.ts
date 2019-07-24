@@ -1,5 +1,4 @@
-import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
-import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
+import { translate } from 'src/app/_helpers/string';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { JobLevelSearchEntity } from 'src/app/_modules/master-data/_backend/job-level/job-level.searchentity';
@@ -10,7 +9,6 @@ import { JobLevelService } from './job-level.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 
 @Component({
   selector: 'app-job-level',
@@ -19,7 +17,7 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [JobLevelService]
 })
 export class JobLevelComponent implements OnInit, OnDestroy {
-  pageTitle = _('jobLevel.header.title');
+  pageTitle = translate('jobLevel.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
@@ -140,16 +138,4 @@ export class JobLevelComponent implements OnInit, OnDestroy {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
   }
-
-  // openjobTitle(id: string) {
-  //   this.jobTitleSearchEntity = new JobTitleSearchEntity();
-  //   this.jobTitleSearchEntity.ids.push(id);
-  //   this.jobLevelService.getListJobTitle(this.jobTitleSearchEntity);
-  // }
-
-  // jobTitleSearch(event) {
-  //   this.jobTitleSearchEntity.code = event;
-  //   this.jobTitleSearchEntity.name = event;
-  //   this.jobTitleTyping.next(this.jobTitleSearchEntity);
-  // }
 }

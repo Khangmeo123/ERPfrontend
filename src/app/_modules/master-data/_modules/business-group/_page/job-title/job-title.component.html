@@ -26,6 +26,8 @@
                 </ul>
             </div>
             <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
     </div>
     <hr>
@@ -33,6 +35,13 @@
         <div class="page-section list">
             <p-table [value]="jobTitleList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                 [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
@@ -67,7 +76,7 @@
                     <tr (dblclick)="edit(jobTitle.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
                         <td> {{jobTitle.code}} </td>
                         <td> {{jobTitle.name}} </td>
-                        <td> {{jobTitle.des}} </td>
+                        <td> {{jobTitle.description}} </td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -93,7 +102,7 @@
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="jobTitleCode" />
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(jobTitleForm.controls.code?.errors && jobTitleForm.controls.code?.touched) || !!jobTitleForm.controls.error.get('code')?.value"
+                            *ngIf="(jobTitleForm.controls.code?.errors && jobTitleForm.controls.code?.touched) || !!jobTitleForm.controls.errors.get('code')?.value"
                             [formGroup]="jobTitleForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -107,7 +116,7 @@
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="jobTitleName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(jobTitleForm.controls.name?.errors && jobTitleForm.controls.name?.touched) || !!jobTitleForm.controls.error.get('name')?.value"
+                            *ngIf="(jobTitleForm.controls.name?.errors && jobTitleForm.controls.name?.touched) || !!jobTitleForm.controls.errors.get('name')?.value"
                             [formGroup]="jobTitleForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -129,7 +138,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+                    <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
                     <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                         (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>

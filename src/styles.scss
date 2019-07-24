@@ -125,6 +125,7 @@ body {
 
 .th-filter {
   background-color: #ffffff !important;
+  padding: 0.25rem 0.5rem!important;
 }
 
 .card-header {
@@ -155,10 +156,11 @@ body {
 }
 
 .page {
-  .page-header {
+  .page-header,.page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 20px;
 
     .page-title {
       font-size: 21px;
@@ -183,28 +185,21 @@ body {
         margin-right: 0.5rem !important
       }
     }
-
-    .page-body {
-      .page-section {
-
-      }
-
-      .page-section.form {
-
-      }
-
-      .page-section.list {
-
-      }
-    }
-
-    .pagination {
-
-    }
   }
 
-  .page-footer {
+  .page-body {
+    margin: 15px 0px 15px 0px;
+    .page-section {
 
+    }
+
+    .page-section.form {
+
+    }
+
+    .page-section.list {
+
+    }
   }
 
   mat-icon {
@@ -218,6 +213,8 @@ body {
     display: flex;
     justify-content: flex-end;
   }
+
+  
 }
 
 .ui-table-scrollable-header, .ui-table-scrollable-footer {
@@ -237,4 +234,8 @@ body {
 .cdk-overlay-container {
   position: fixed !important;
   z-index: 1010 !important; /* set value you need */
+}
+
+.page-actions-delete {
+  float: left;
 }

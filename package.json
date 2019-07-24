@@ -9,7 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "storybook": "start-storybook -p 6006",
-    "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/en.json ./src/assets/i18n/vi.json --clean --sort --format namespaced-json --marker _"
+    "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/en.json ./src/assets/i18n/vi.json --clean --sort --format namespaced-json --marker translate"
   },
   "private": true,
   "dependencies": {
@@ -32,6 +32,7 @@
     "bootstrap": "^4.3.1",
     "chart.js": "^2.8.0",
     "cropperjs": "^1.5.2",
+    "guid-typescript": "^1.0.9",
     "hamburgers": "^1.1.3",
     "hammerjs": "^2.0.8",
     "idb": "^4.0.3",

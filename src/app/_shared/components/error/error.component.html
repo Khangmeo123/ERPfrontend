@@ -2,9 +2,9 @@
   <i class="fa fa-15 fa-exclamation-circle text-danger pull-right" [ngClass]="placement">
     <span class="tooltipText">
       <ng-container *ngFor="let error of errors">
-        {{ error[0] | translate }}
+        <span>{{ error[1] | translate }}</span><br>
       </ng-container>
-      {{formGroup.controls.error?.get(property)?.value}}
+      {{formGroup.controls.errors?.get(property)?.value}}
     </span>
   </i>
 </div>

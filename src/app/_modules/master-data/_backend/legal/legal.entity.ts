@@ -1,7 +1,7 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class LegalEntity extends Entity {
-    // sobEntity:
+    setOfBookCode: string;
     setOfBookId: string;
     code: string;
     name: string;

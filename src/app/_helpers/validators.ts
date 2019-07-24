@@ -4,7 +4,7 @@ import { AbstractControl } from '@angular/forms';
 export const requiredField = (c: AbstractControl) =>
   (c.value == null || c.value.length === 0)
     ? {
-      invalidRequired: 'Field must be required!',
+      invalidRequired: 'Trường này bắt buộc phải nhập liệu!',
     }
     : null;
 
@@ -19,7 +19,7 @@ export function dateField(control: AbstractControl) {
 export function checkLength(from = 1, to = 100) {
   return (c: AbstractControl) => {
     return (c.value.length > to || c.value.length < from) ? {
-      invalidLength: 'Field length must in range ' + '[' + from + ' ,' + to + ']',
+      invalidLength: 'Số kí tự phải trong khoảng' + '[' + from + ' ,' + to + ']',
     } : null;
   };
 }

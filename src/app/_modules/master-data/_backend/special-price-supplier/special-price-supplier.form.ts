@@ -5,11 +5,11 @@ import { FormModel } from 'src/app/_helpers/form-model';
 
 
 export class SpecialPriceSupplierForm extends FormModel {
-    productGroupId = new FormControl('', [requiredField]);
-    productGroupName = new FormControl('', [requiredField]);
+    itemGroupId = new FormControl('', [requiredField]);
+    itemGroupName = new FormControl('', [requiredField]);
 
-    productId = new FormControl('');
-    productName = new FormControl('');
+    itemId = new FormControl('');
+    itemName = new FormControl('');
 
     fromValid = new FormControl('');
     toValid = new FormControl('');

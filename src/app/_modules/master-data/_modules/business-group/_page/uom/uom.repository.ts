@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class UomRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/uom';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/uom';
     }
 
     getList(uomSearchEntity: UomSearchEntity): Observable<UomEntity[]> {

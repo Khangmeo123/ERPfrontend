@@ -6,6 +6,7 @@ import { JobTitleForm } from 'src/app/_modules/master-data/_backend/job-title/jo
 import { ToastrService } from 'ngx-toastr';
 import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class JobTitleService {
@@ -54,7 +55,7 @@ export class JobTitleService {
 
   save(jobTitleEntity: any, jobTitleSearchEntity: JobTitleSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (jobTitleEntity.id === null || jobTitleEntity.id === undefined) {
+      if (jobTitleEntity.id === null || jobTitleEntity.id === undefined || jobTitleEntity.id === environment.emtyGuid) {
         this.jobTitleRepository.add(jobTitleEntity).subscribe(res => {
           if (res) {
             this.getList(jobTitleSearchEntity);

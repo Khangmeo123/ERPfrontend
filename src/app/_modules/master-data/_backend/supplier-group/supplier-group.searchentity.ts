@@ -1,16 +1,13 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
 export class SupplierGroupSearchEntity extends SearchEntity {
-    sobId: string;
-    legalId:string;
-
-
-    code:string;
-    name:string;
-    description:string;
+    legalEntityId: string;
+    code: TextFilter = new TextFilter();
+    name: TextFilter = new TextFilter();
 
     
-    constructor(supplierGroupSearchEntity: any) {
+    constructor(supplierGroupSearchEntity?: any) {
         super(supplierGroupSearchEntity);
     }
 }

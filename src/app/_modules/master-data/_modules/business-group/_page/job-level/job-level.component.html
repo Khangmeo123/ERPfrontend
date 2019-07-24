@@ -33,6 +33,13 @@
         <div class="page-section list">
             <p-table [value]="jobLevelList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                 [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
@@ -41,9 +48,6 @@
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
                             {{ 'job_level.job_level_name' | translate}}
                         </th>
-                        <!-- <th pResizableColumn data-qe-id="table-thead-jobTitle" [pSortableColumn]="'jobTitle'">
-                            {{ 'job_level.job_level_jobTitle' | translate}}
-                        </th> -->
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
                             {{ 'job_level.job_level_description' | translate}}
                         </th>
@@ -57,13 +61,6 @@
                             <app-advanced-filters [filter]="jobLevelSearchEntity.name" (changeFilter)="getList()"
                                 data-qe-id="table-thead-filter-name"></app-advanced-filters>
                         </th>
-                        <!-- <th class="th-filter">
-                            <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
-                                (search)="jobTitleSearch($event)"
-                                (selectionChange)="jobTitleSearchEntity.jobTitleId = $event.Id"
-                                (listOpen)="jobTitleSearch(jobTitleSearchEntity.jobTitleId)">
-                            </app-single-select>
-                        </th> -->
                         <th class="th-filter">
                             <app-advanced-filters [filter]="jobLevelSearchEntity.description" (changeFilter)="getList()"
                                 data-qe-id="table-thead-filter-description"></app-advanced-filters>
@@ -74,7 +71,6 @@
                     <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
                         <td> {{jobLevel.code}} </td>
                         <td> {{jobLevel.name}} </td>
-                        <!-- <td> {{jobLevel.jobTitleName}} </td> -->
                         <td> {{jobLevel.description}} </td>
                     </tr>
                 </ng-template>
@@ -84,6 +80,8 @@
             <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
             </app-pagination>
         </div>
+        <button class="btn btn-clear" (click)="clearSearch(table)"
+            data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
 </div>
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
@@ -101,36 +99,21 @@
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="joLevelCode" />
                         <app-error data-qe-id="dialog-form-code"
-                            *ngIf="(jobLevelForm.controls.code?.errors && jobLevelForm.controls.code?.touched) || !!jobLevelForm.controls.error.get('code')?.value"
+                            *ngIf="(jobLevelForm.controls.code?.errors && jobLevelForm.controls.code?.touched) || !!jobLevelForm.controls.errors.get('code')?.value"
                             [formGroup]="jobLevelForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <!-- <div class="form-group">
-                    <label for="job_levelname">{{ 'job_level.job_level_level' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
-                            (search)="jobTitleSearch($event)"
-                            (selectionChange)="jobLevelForm.controls.jobTitleId.setValue($event.Id); jobLevelForm.controls.jobTitleName.setValue($event.Name);"
-                            (listOpen)="jobTitleSearch(jobLevelForm.controls.jobTileId.value)">
-                        </app-single-select>
-                        <app-error
-                            *ngIf="(jobLevelForm.controls.jobTileId?.errors && jobLevelForm.controls.jobTileId?.touched) || !!jobLevelForm.controls.error.get('jobTileId')?.value"
-                            [formGroup]="jobLevelForm" [property]="'jobTileId'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div> -->
                 <div class="form-group">
                     <label for="jobLevelName">{{ 'job_level.job_level_name' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
+                            class="text-danger">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="jobLevelName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(jobLevelForm.controls.name?.errors && jobLevelForm.controls.name?.touched) || !!jobLevelForm.controls.error.get('name')?.value"
+                            *ngIf="(jobLevelForm.controls.name?.errors && jobLevelForm.controls.name?.touched) || !!jobLevelForm.controls.errors.get('name')?.value"
                             [formGroup]="jobLevelForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -149,7 +132,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+                    <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
                     <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                         (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>

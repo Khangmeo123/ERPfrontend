@@ -2,6 +2,7 @@ import { SearchEntity } from 'src/app/_helpers/search-entity';
 import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
 export class LegalSearchEntity extends SearchEntity {
+    setOfBookCode: TextFilter = new TextFilter();
     setOfBookId: string;
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();

@@ -1,16 +1,17 @@
-<div class="page bank-list">
+<div class="page asset-list">
     <div class="page-header">
         <span class="page-title">
             {{'asset.header.title' | translate}}
-            <span (click)="onClickSaveBookMark($event)">
-                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+            <span (click)="bookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
         <div class="page-actions">
-            <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown>
+            <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
+                {{'general.button.add' | translate}}</button>
+            <div class="btn-group" dropdown data-qe-id="button-import">
                 <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
                     aria-controls="dropdown-basic">
                     {{'general.button.import' | translate}}<span class="caret"></span>
@@ -24,72 +25,116 @@
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
     </div>
     <hr>
     <div class="page-body">
         <div class="page-selection list">
-            <p-table [value]="tmptable">
+            <p-table [value]="itemList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pResizableColumn>
-                            {{ 'asset.content.table.asset_id' | translate}}
+                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
+                            {{ 'asset.content.table.asset_code' | translate}}
+                            <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn> {{ 'asset.content.table.asset_name' | translate}} </th>
-                        <th pResizableColumn> {{ 'asset.content.table.type' | translate}} </th>
-                        <th pResizableColumn> {{ 'asset.content.table.status' | translate}} </th>
+                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
+                            {{ 'asset.content.table.asset_name' | translate}}
+                            <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn data-qe-id="table-thead-type" [pSortableColumn]="'type'">
+                            {{ 'asset.content.table.asset_type' | translate}}
+                            <p-sortIcon [field]="'type'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
+                            {{ 'asset.content.table.asset_status' | translate}}
+                            <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
+                        </th>
                     </tr>
                     <tr>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.id"></app-advanced-filters>
+                            <app-advanced-filters [filter]="assetSearchEntity.code" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-code">
+                            </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+                            <app-advanced-filters [filter]="assetSearchEntity.name" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-name">
+                            </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.type"></app-advanced-filters>
+                            <app-simple-select [key]="'name'" [list]="assetTypes"
+                                (selectionChange)="assetSearchEntity.typeId = $event"
+                                (listOpen)="openAssetTypes($event)">
+                            </app-simple-select>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.status"></app-advanced-filters>
+                            <app-simple-select [key]="'name'" [list]="assetStatuses"
+                                (selectionChange)="assetSearchEntity.statusId = $event"
+                                (listOpen)="openAssetStatuses($event)">
+                            </app-simple-select>
                         </th>
                     </tr>
                 </ng-template>
-                <!-- <ng-template pTemplate="body" let-asset>
-                                <tr>
-                                    <td> {{asset.id}} </td>
-                                    <td> {{asset.name}} </td>
-                                    <td> {{asset.type}} </td>
-                                    <td> {{asset.status}} </td>
-                                </tr>
-                            </ng-template> -->
+                <ng-template pTemplate="body" let-asset let-index="rowIndex">
+                    <tr (dblclick)="edit(asset.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                        <td> {{asset.code}} </td>
+                        <td> {{asset.name}} </td>
+                        <td> {{asset.description}} </td>
+                    </tr>
+                </ng-template>
             </p-table>
             <div class="pagination">
-                <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+                <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"
+                    data-qe-id="pagination"></app-pagination>
             </div>
         </div>
     </div>
 </div>
 
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
         {{ 'asset.content.modal.title' | translate}}
     </p-header>
-    <div class="container">
+    <div class="container" [formGroup]="assetForm">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="assetid">{{ 'asset.content.table.asset_id' | translate}}<span
-                        class="text-danger ml-2">*</span></label>
-                    <input type="text" class="form-control" />
+                    <label for="assetCode">{{ 'asset.content.table.asset_code' | translate}}<span
+                            class="text-danger">*</span></label>
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+                            id="assetCode" />
+                        <app-error data-qe-id="dialog-error-code"
+                            *ngIf="(assetForm.controls.code?.errors && assetForm.controls.code?.touched) || !!assetForm.controls.errors.get('code')?.value"
+                            [formGroup]="assetForm" [property]="'code'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="assetname">{{ 'asset.content.table.asset_name' | translate}}<span
-                        class="text-danger ml-2">*</span></label>
-                    <input type="text" class="form-control" />
+                    <label for="assetName">{{ 'asset.content.table.asset_name' | translate}}<span
+                            class="text-danger">*</span></label>
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+                            id="assetName" />
+                        <app-error data-qe-id="dialog-error-name"
+                            *ngIf="(assetForm.controls.name?.errors && assetForm.controls.name?.touched) || !!assetForm.controls.errors.get('name')?.value"
+                            [formGroup]="assetForm" [property]="'name'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
                 </div>
             </div>
         </div>
@@ -97,15 +142,33 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="assetid">{{ 'asset.content.table.type' | translate}}<span
-                        class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                            class="text-danger">*</span></label>
+                    <div class="div-form">
+                        <app-simple-select [key]="'name'" [list]="assetTypes" class="w-100"
+                            (selectionChange)="assetForm.controls.typeId.setValue($event)"
+                            (listOpen)="openAssetTypes($event)" data-qe-id="dialog-form-typeId">
+                        </app-simple-select>
+                        <app-error data-qe-id="dialog-error-typeId"
+                            *ngIf="(assetForm.controls.typeId?.errors && assetForm.controls.typeId?.touched) || !!assetForm.controls.errors.get('typeId')?.value"
+                            [formGroup]="assetForm" [property]="'typeId'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="assetname">{{ 'asset.content.table.status' | translate}}<span
-                        class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                            class="text-danger">*</span></label>
+                    <div class="div-form">
+                        <app-simple-select [key]="'name'" [list]="assetStatuses" class="w-100"
+                            (selectionChange)="assetForm.controls.statusId.setValue($event)"
+                            (listOpen)="openAssetStatuses($event)">
+                        </app-simple-select>
+                        <app-error data-qe-id="dialog-error-statusId"
+                            *ngIf="(assetForm.controls.statusId?.errors && assetForm.controls.statusId?.touched) || !!assetForm.controls.errors.get('statusId')?.value"
+                            [formGroup]="assetForm" [property]="'statusId'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
                 </div>
             </div>
         </div>
@@ -114,13 +177,13 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-cancel"
-                        (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-                    <button class="btn btn-save" (click)="onClickSave()">
+                    <button class="btn btn-save" appNoDblClick (click)="save()" data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
+                    <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+                        (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
                     <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                        (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                        data-qe-id="dialog-button-delete" *ngIf="assetForm.value?.isDeleted"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
                         {{ 'general.button.delete' | translate}}</button>
                 </div>
             </div>

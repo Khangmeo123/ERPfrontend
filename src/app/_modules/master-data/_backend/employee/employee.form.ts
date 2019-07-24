@@ -6,8 +6,8 @@ import { FormModel } from 'src/app/_helpers/form-model';
 
 
 export class EmployeeForm extends FormModel {
-    name = new FormControl('', [requiredField]);
-    code = new FormControl('', [requiredField]);
+    name = new FormControl('', [requiredField, checkLength(3, 100)]);
+    code = new FormControl({ value: '', disabled: true });
     identityNumber = new FormControl();
     identityDate = new FormControl();
     identityPlace = new FormControl();
@@ -40,15 +40,19 @@ export class EmployeeForm extends FormModel {
     bankCity = new FormControl();
     bankBranch = new FormControl();
     bankAddress = new FormControl();
-
     infoContacts = new FormArray([]);
+
+    errors = new FormGroup({
+        name: new FormControl(''),
+        statusId: new FormControl(''),
+    });
 
     constructor(employeeEntity?: EmployeeEntity) {
         super();
         if (employeeEntity !== null && employeeEntity !== undefined) {
             Object.keys(employeeEntity).forEach((item) => {
                 if (employeeEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(employeeEntity[item]);
+                    this[item].patchValue(employeeEntity[item]);
                 }
             });
         }

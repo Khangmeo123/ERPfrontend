@@ -35,6 +35,13 @@
         <div class="page-selection list">
             <p-table [value]="uomList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
                 scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
@@ -97,7 +104,7 @@
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="uomCode" />
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(uomForm.controls.code?.errors && uomForm.controls.code?.touched) || !!uomForm.controls.error.get('code')?.value"
+                            *ngIf="(uomForm.controls.code?.errors && uomForm.controls.code?.touched) || !!uomForm.controls.errors.get('code')?.value"
                             [formGroup]="uomForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -111,7 +118,7 @@
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="uomName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(uomForm.controls.name?.errors && uomForm.controls.name?.touched) || !!uomForm.controls.error.get('name')?.value"
+                            *ngIf="(uomForm.controls.name?.errors && uomForm.controls.name?.touched) || !!uomForm.controls.errors.get('name')?.value"
                             [formGroup]="uomForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -132,7 +139,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+                    <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
                     <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                         (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>

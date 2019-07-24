@@ -9,7 +9,7 @@ import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/ban
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BankService } from './bank.service';
 import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-bank',
@@ -18,7 +18,7 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [BankService],
 })
 export class BankComponent implements OnInit, OnDestroy {
-  pageTitle = _('bank.header.title');
+  pageTitle = translate('bank.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
