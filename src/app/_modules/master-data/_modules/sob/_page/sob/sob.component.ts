@@ -203,8 +203,12 @@ export class SobComponent implements OnInit, OnDestroy {
 
   onSelectId(data: string[], field: string) {
     const control: FormControl = this.sobForm.get(field) as FormControl;
-    if (data.length && control !== null) {
-      control.setValue(data[0]);
+    if (control !== null) {
+      if (data.length) {
+        control.setValue(data[0]);
+      } else {
+        control.setValue(null);
+      }
     }
   }
 
@@ -286,6 +290,7 @@ export class SobComponent implements OnInit, OnDestroy {
   save() {
     if (!this.sobForm.valid) {
       this.generalService.validateAllFormFields(this.sobForm);
+      console.log(this.sobForm.getRawValue());
     } else {
       this.sobService.save(this.sobForm.value, this.sobSearchEntity).then(res => {
         this.isShowDialog = res;

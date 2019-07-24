@@ -108,7 +108,7 @@
                      [formGroup]="sobForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
-      </div>
+	      </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
@@ -118,6 +118,7 @@
         <app-single-select id="chart-of-account-template"
                            [list]="coaList"
                            key="name"
+                           [initialValue]="sobForm.controls.chartOfAccountTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'chartOfAccountTemplateId')"
                            (listOpen)="getCoaList()"></app-single-select>
       </div>
@@ -130,6 +131,7 @@
           <app-single-select [list]="currencyList"
                              id="currency"
                              key="name"
+                             [initialValue]="sobForm.controls.currencyName?.value"
                              (selectionChange)="onSelectId($event, 'currencyId')"
                              (listOpen)="getCurrencyList()"></app-single-select>
           <app-error data-qe-id="dialog-error-currency-id"
@@ -146,6 +148,7 @@
         </label>
         <app-single-select [list]="specialConsumptionTaxTemplates"
                            key="name"
+                           [initialValue]="sobForm.controls.specialConsumptionTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'specialConsumptionTaxTemplateId')"
                            id="special-consumption-tax-template"
                            (listOpen)="getSpecialConsumptionTaxTemplates()"></app-single-select>
@@ -156,6 +159,7 @@
         </label>
         <app-single-select [list]="valueAddedTaxTemplates"
                            key="name"
+                           [initialValue]="sobForm.controls.valueAddedTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'valueAddedTaxTemplateId')"
                            id="value-added-tax-template"
                            (listOpen)="getValueAddedTaxTemplates()"></app-single-select>
@@ -168,6 +172,7 @@
         </label>
         <app-single-select [list]="naturalResourceTaxTemplates"
                            key="name"
+                           [initialValue]="sobForm.controls.naturalResourceTaxTemplate?.value"
                            (selectionChange)="onSelectId($event, 'naturalResourceTaxTemplateId')"
                            id="natural-resource-tax-template"
                            (listOpen)="getNaturalResourceTaxTemplates()"></app-single-select>
@@ -178,6 +183,7 @@
         </label>
         <app-single-select [list]="environmentTaxTemplates"
                            key="name"
+                           [initialValue]="sobForm.controls.environmentTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'environmentTaxTemplateId')"
                            id="environment-tax-template"
                            (listOpen)="getEnvironmentTemplates()"></app-single-select>
@@ -192,6 +198,7 @@
                            key="name"
                            (selectionChange)="onSelectId($event, 'exportTaxTemplateId')"
                            id="export-tax-template"
+                           [initialValue]="sobForm.controls.exportTaxTemplateName?.value"
                            (listOpen)="getExportTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
@@ -200,6 +207,7 @@
         </label>
         <app-single-select [list]="importTaxTemplates"
                            key="name"
+                           [initialValue]="sobForm.controls.importTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'importTaxTemplateId')"
                            id="import-tax-template"
                            (listOpen)="getImportTaxTemplates()"></app-single-select>
