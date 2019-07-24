@@ -5,15 +5,17 @@ import { PaymentMethodEntity } from '../../../../_backend/payment-method/payment
 import { PaymentMethodRepository } from './payment-method.repository';
 import { PaymentMethodForm } from '../../../../_backend/payment-method/payment-method.form';
 import { PaymentMethodSearchEntity } from '../../../../_backend/payment-method/payment-method.searchentity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { Entities } from '../../../../../../_helpers/entity';
 
 export class PaymentMethodService {
-  public paymentMethodList: BehaviorSubject<PaymentMethodEntity[]>;
-  public paymentMethodCount: BehaviorSubject<number>;
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public paymentMethodList: BehaviorSubject<PaymentMethodEntity[]> = new BehaviorSubject([]);
   public paymentMethodForm: BehaviorSubject<FormGroup>;
+  public paymentMethodCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
   constructor(private fb: FormBuilder, private paymentMethodRepository: PaymentMethodRepository, private toastrService: ToastrService) {
     this.paymentMethodCount = new BehaviorSubject(0);
-    this.paymentMethodList = new BehaviorSubject([]);
     this.paymentMethodForm = new BehaviorSubject(this.fb.group(
       new PaymentMethodForm(),
     ));
@@ -29,6 +31,15 @@ export class PaymentMethodService {
         this.paymentMethodCount.next(count);
       }
     });
+  }
+
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.paymentMethodRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        if (list) {
+          this.sobList.next(list);
+        }
+      });
   }
 
   add() {
