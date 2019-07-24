@@ -39,7 +39,7 @@ storiesOf('Simple Select', module)
         CommonModule,
         BrowserAnimationsModule,
         SelectModule,
-        TranslateModule.forRoot(),
+        TranslateModule.forRoot({}),
       ],
     }),
   )

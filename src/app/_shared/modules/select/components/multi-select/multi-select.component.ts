@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {getListDirection} from '../../helpers';
-import {toggleMenu} from '../../../../animations/toggleMenu';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { getListDirection } from '../../helpers';
+import { toggleMenu } from '../../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-multi-select',
@@ -13,6 +13,7 @@ import {toggleMenu} from '../../../../animations/toggleMenu';
   ],
 })
 export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
+  @Input() initialValue = 0;
 
   @Input() list = [];
 
@@ -28,6 +29,8 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
 
   isOpened = false;
 
+  @Input() disabled = false;
+
   listDirection = 'down';
 
   isLoading = false;
@@ -37,6 +40,24 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
 
   get listState() {
     return this.isOpened ? 'opened' : 'closed';
+  }
+
+  get selectedText() {
+    if (this.selectedList) {
+      if (this.selectedList.length === 1) {
+        return this.selectedList[0][this.key];
+      }
+      return `${this.selectedList.length} selected`;
+    }
+    return `${this.initialValue} selected`;
+  }
+
+  get hasSelected() {
+    return this.selectedList && this.selectedList.length;
+  }
+
+  get hasData() {
+    return this.list && this.list.length;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

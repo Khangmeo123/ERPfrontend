@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-select-head',
@@ -8,7 +8,7 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angula
 export class SelectHeadComponent implements OnInit {
   @Input() caretDirection = 'down';
 
-  @Input() label = 'Select Label';
+  @Input() label = '';
 
   @Output() headClick = new EventEmitter();
 

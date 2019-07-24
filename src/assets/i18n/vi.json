@@ -112,8 +112,8 @@
 		}
 	},
 	"cropper": {
-		"browseImage": "",
-		"crop": ""
+		"browseImage": "Chọn ảnh",
+		"crop": "Cắt ảnh"
 	},
 	"currency": {
 		"currency_code": "Mã tiền tệ",
@@ -194,7 +194,7 @@
 		}
 	},
 	"datePicker": {
-		"placeHolder": ""
+		"placeHolder": "ngày/tháng/năm"
 	},
 	"debt_load": "",
 	"department": {
@@ -246,7 +246,7 @@
 		}
 	},
 	"departments": {
-		"title": ""
+		"title": "Quản lý phòng ban"
 	},
 	"detailEmployeeGroup": {
 		"bank_account": {
@@ -838,9 +838,9 @@
 		}
 	},
 	"select": {
-		"availableList": "",
-		"selectedItems": "",
-		"selectedList": ""
+		"availableList": "Có thể chọn",
+		"selectedItems": "Đã chọn",
+		"selectedList": "Danh sách đã chọn"
 	},
 	"sob": {
 		"add": "Thêm bộ sổ",
