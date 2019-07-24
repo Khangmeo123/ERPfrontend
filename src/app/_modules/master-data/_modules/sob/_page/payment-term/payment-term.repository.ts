@@ -6,6 +6,9 @@ import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { PaymentTermSearchEntity } from '../../../../_backend/payment-term/payment-term.searchentity';
 import { PaymentTermEntity } from '../../../../_backend/payment-term/payment-term.entity';
+import { SobEntity } from '../../../../_backend/sob/sob.entity';
+import { Entities } from '../../../../../../_helpers/entity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +16,23 @@ import { PaymentTermEntity } from '../../../../_backend/payment-term/payment-ter
 export class PaymentTermRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/setOfBook';
+    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/payment-term';
+  }
+
+  getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => {
+        const {
+          ids,
+          exceptIds,
+        } = r.body;
+        return {
+          ids: ids.map((item) => new SobEntity(item)),
+          exceptIds: exceptIds.map((item) => new SobEntity(item)),
+        }
+      }),
+    );
   }
 
   getList(paymentTermSearchEntity: PaymentTermSearchEntity): Observable<PaymentTermEntity[]> {

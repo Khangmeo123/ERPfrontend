@@ -20,7 +20,6 @@ import { FormGroup } from '@angular/forms';
   ],
 })
 export class PaymentMethodComponent implements OnInit {
-
   isSaveBookMark: boolean = false;
   bookMarkId: string;
 

@@ -1,15 +1,19 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { PaymentTermEntity } from '../../../../_backend/payment-term/payment-term.entity';
+import { PaymentTermEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.entity';
 import { PaymentTermRepository } from './payment-term.repository';
-import { PaymentTermSearchEntity } from '../../../../_backend/payment-term/payment-term.searchentity';
-import { PaymentTermForm } from '../../../../_backend/payment-term/payment-term.form';
+import { PaymentTermSearchEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.searchentity';
+import { PaymentTermForm } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.form';
+import { Entities } from 'src/app/_helpers/entity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 
 export class PaymentTermService {
   public paymentTermList: BehaviorSubject<PaymentTermEntity[]>;
   public paymentTermCount: BehaviorSubject<number>;
   public paymentTermForm: BehaviorSubject<FormGroup>;
+
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   constructor(private fb: FormBuilder, private paymentTermRepository: PaymentTermRepository, private toastrService: ToastrService) {
     this.paymentTermCount = new BehaviorSubject(0);
@@ -29,6 +33,13 @@ export class PaymentTermService {
         this.paymentTermCount.next(count);
       }
     });
+  }
+
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.paymentTermRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        this.sobList.next(list);
+      });
   }
 
   add() {

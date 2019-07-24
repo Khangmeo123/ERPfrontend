@@ -41,7 +41,7 @@ export class PaymentMethodRepository extends Repository {
         return {
           ids: ids.map((item) => new SobEntity(item)),
           exceptIds: exceptIds.map((item) => new SobEntity(item)),
-        }
+        };
       }),
     );
   }
