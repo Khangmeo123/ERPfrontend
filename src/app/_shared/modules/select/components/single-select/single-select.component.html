@@ -9,7 +9,7 @@
     <app-select-search (search)="search.emit($event)"></app-select-search>
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
-      <ng-template [ngIf]="selectedList.length">
+      <ng-template [ngIf]="hasSelected">
         <div class="py-2 pl-4 d-flex align-items-center border-bottom">
         <span class="h4 font-weight-bold">
           {{'select.selectedList' | translate}}
@@ -18,7 +18,6 @@
         <app-select-list [dataSource]="selectedList"
                          [key]="key"
                          selected="true"
-                         *ngIf="selectedList.length"
                          (selectionChange)="unselect($event)"></app-select-list>
       </ng-template>
       <div class="py-2 pl-4 d-flex align-items-center border-bottom">
@@ -28,7 +27,7 @@
       </div>
       <app-select-list [dataSource]="list"
                        [key]="key"
-                       *ngIf="list.length; else empty"
+                       *ngIf="hasData; else empty"
                        (selectionChange)="select($event)"></app-select-list>
       <ng-template #empty>
         <app-no-data></app-no-data>

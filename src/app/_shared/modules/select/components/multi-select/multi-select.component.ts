@@ -13,6 +13,8 @@ import { toggleMenu } from '../../../../animations/toggleMenu';
   ],
 })
 export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
+  @Input() initialValue = 0;
+
   @Input() list = [];
 
   @Input() selectedList = [];
@@ -41,10 +43,21 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   get selectedText() {
-    if (this.selectedList.length === 1) {
-      return this.selectedList[0][this.key];
+    if (this.selectedList) {
+      if (this.selectedList.length === 1) {
+        return this.selectedList[0][this.key];
+      }
+      return `${this.selectedList.length} selected`;
     }
-    return `${this.selectedList.length} selected`;
+    return `${this.initialValue} selected`;
+  }
+
+  get hasSelected() {
+    return this.selectedList && this.selectedList.length;
+  }
+
+  get hasData() {
+    return this.list && this.list.length;
   }
 
   ngOnChanges(changes: SimpleChanges): void {

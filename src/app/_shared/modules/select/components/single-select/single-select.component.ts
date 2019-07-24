@@ -42,9 +42,17 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
     return this.isOpened ? 'opened' : 'closed';
   }
 
+  get hasSelected() {
+    return this.selectedList && this.selectedList.length;
+  }
+
+  get hasData() {
+    return this.list && this.list.length;
+  }
+
   get selectedText() {
     if (this.selectedList) {
-      if (this.selectedList.length) {
+      if (this.hasSelected) {
         return this.selectedList[0][this.key];
       }
     }
