@@ -3,10 +3,10 @@ import { FormGroup, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-detail-supplier-group',
-  templateUrl: './detail-supplier-group.component.html',
-  styleUrls: ['./detail-supplier-group.component.scss']
+  templateUrl: './detail-supplier.component.html',
+  styleUrls: ['./detail-supplier.component.scss']
 })
-export class DetailSupplierGroupComponent implements OnInit {
+export class DetailSupplierComponent implements OnInit {
 
   form = new FormGroup({
     name: new FormControl(),

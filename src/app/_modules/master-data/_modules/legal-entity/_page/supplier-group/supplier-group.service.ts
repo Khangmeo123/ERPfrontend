@@ -4,7 +4,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { Entities } from 'src/app/_helpers/entity';
 import { ToastrService } from 'ngx-toastr';
 import { ListSupplierRepository } from './list-supplier-group.repository';
-import { SupplierGroupForm } from '../../../../../_backend/supplier-group/supplier-group.form';
+import { SupplierGroupForm } from '../../../../_backend/supplier-group/supplier-group.form';
 import { SupplierGroupSearchEntity } from 'src/app/_modules/master-data/_backend/supplier-group/supplier-group.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { SupplierSearchEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.searchentity';

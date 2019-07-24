@@ -28,7 +28,7 @@
                 {{'detailSupplierGroup.code' | translate}}
                 <span class="text-danger ml-1"> * </span>
               </label>
-              <input type="text" class="form-control" id="supplier_code" data-qe-id="detail-form-general-code">
+              <input type="text" class="form-control" id="supplier_code" data-qe-id="detail-form-general-code" disabled>
               <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
                 [formGroup]="form" [property]="'name'" [placement]="'top'" class="error-form">
               </app-error>
@@ -38,14 +38,14 @@
                 {{'detailSupplierGroup.name' | translate}}
                 <span class="text-danger ml-1"> * </span>
               </label>
-              <input type="text" class="form-control" id="supplier_name" data-qe-id="detail-form-general-name">
+              <input type="text" class="form-control" id="supplier_name" data-qe-id="detail-form-general-name" disabled>
             </div>
 
             <div class="form-group col">
               <label for="tax_code">
                 {{'detailSupplierGroup.tax_code' | translate}}
               </label>
-              <input type="text" class="form-control" id="tax_code" data-qe-id="detail-form-general-tax-code">
+              <input type="text" class="form-control" id="tax_code" data-qe-id="detail-form-general-tax-code" disabled>
             </div>
           </div>
 
@@ -55,14 +55,14 @@
                 {{'detailSupplierGroup.status' | translate}}
                 <span class="text-danger ml-1"> * </span>
               </label>
-              <app-single-select data-qe-id="detail-form-general-status"></app-single-select>
+              <input type="text" class="form-control" id="tax_code" data-qe-id="detail-form-general-status" disabled>
             </div>
             <!-- <div class="form-group col"></div> -->
             <div class="form-group col-8">
               <label for="supplier_more_details">
                 {{'detailSupplierGroup.more_details' | translate}}
               </label>
-              <textarea name="supplier_more_details" id="supplier_more_details" rows="1" class="form-control"
+              <textarea disabled name="supplier_more_details" id="supplier_more_details" rows="1" class="form-control"
                 data-qe-id="detail-form-general-more-detail"></textarea>
             </div>
             <div class="form-group col-4">

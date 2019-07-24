@@ -118,7 +118,7 @@ export class ListSupplierRepository extends Repository {
             );
     }
 
-    addSupplier(supplierSearchEntity: any): Observable<boolean>{
+    addSupplier(supplierSearchEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/bulk-create-supplier-detail', JSON.stringify(supplierSearchEntity),
         { observe: 'response', headers: this.getHeader() }).pipe(
             map(r => r.body),
