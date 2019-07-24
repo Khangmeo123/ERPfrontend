@@ -44,8 +44,8 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-paymentMethod>
-          <tr>
+        <ng-template pTemplate="body" let-paymentMethod let-index="index">
+          <tr (dblclick)="edit(paymentMethod.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{paymentMethod.code}} </td>
             <td> {{paymentMethod.name}} </td>
           </tr>
@@ -58,42 +58,58 @@
   </div>
 </div>
 
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
           [style]="{width: '700px'}">
   <p-header>
     {{ 'payment_method.modal.title' | translate}}
   </p-header>
-  <div class="container">
+  <div class="container" [formGroup]="paymentMethodForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="payment_method_id">{{ 'payment_method.code' | translate}}<span
+          <label for="payment-method-code">{{ 'payment_method.code' | translate}}<span
             class="text-danger ml-2">*</span></label>
-          <input type="text" class="form-control"/>
+          <div class="div-form">
+            <input type="text" class="form-control" id="payment-method-code" formControlName="code"/>
+            <app-error data-qe-id="dialog-error-code"
+                       *ngIf="(paymentMethodForm.controls.code?.errors && paymentMethodForm.controls.code?.touched) || !!paymentMethodForm.controls.errors.get('code')?.value"
+                       [formGroup]="paymentMethodForm" [property]="'code'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="payment_method_name">{{ 'payment_method.payment_method_name' | translate}}<span
+          <label for="payment-method-name">{{ 'payment_method.payment_method_name' | translate}}<span
             class="text-danger ml-2">*</span></label>
-          <input type="text" class="form-control"/>
+          <div class="div-form">
+            <input type="text" class="form-control" id="payment-method-name" formControlName="name"/>
+            <app-error data-qe-id="dialog-error-name"
+                       *ngIf="(paymentMethodForm.controls.code?.errors && paymentMethodForm.controls.name?.touched) || !!paymentMethodForm.controls.errors.get('name')?.value"
+                       [formGroup]="paymentMethodForm" [property]="'code'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
       </div>
     </div>
   </div>
   <p-footer>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="page-actions">
-          <button class="btn btn-cancel"
-                  (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-          <button class="btn btn-save" (click)="onClickSave()">
-            {{ 'general.button.save' | translate}}</button>
-          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                  [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                  (cancel)="cancelClicked = true" (click)="onClickDelete()">
-            {{ 'general.button.delete' | translate}}</button>
-        </div>
+    <div class="d-flex">
+      <button class="btn btn-delete"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              placement="bottom"
+              (confirm)="confirmClicked = true"
+              (cancel)="cancelClicked = true"
+              *ngIf="paymentMethodForm.value?.isDeleted"
+              (click)="onClickDelete()">
+        {{ 'general.button.delete' | translate}}</button>
+      <div class="flex-grow-1 justify-content-end d-flex">
+        <button class="btn btn-cancel"
+                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+        <button class="btn btn-save" (click)="onClickSave()">
+          {{ 'general.button.save' | translate}}</button>
       </div>
     </div>
   </p-footer>

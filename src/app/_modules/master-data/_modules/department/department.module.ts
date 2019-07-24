@@ -22,7 +22,7 @@ import { ProjectListComponent } from './_page/project-list/project-list.componen
 import { DetailEmployeeComponent } from './_page/employee-list/detail-employee/detail-employee.component';
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { BsDropdownModule, AccordionModule } from 'ngx-bootstrap';
 import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';

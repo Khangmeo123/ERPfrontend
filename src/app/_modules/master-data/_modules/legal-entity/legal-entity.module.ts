@@ -27,7 +27,7 @@ import { TableModule } from 'primeng/table';
 import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { CustomersInGroupComponent } from './_page/customer-group/customers-in-group/customers-in-group.component';
 import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/customer-list-of-legal-entity.component';

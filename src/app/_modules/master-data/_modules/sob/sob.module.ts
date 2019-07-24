@@ -17,7 +17,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { MatIconModule } from '@angular/material';
 
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';

@@ -28,7 +28,7 @@ import { ListProductComponent } from './_page/product/list-product/list-product.
 import { DetailProductComponent } from './_page/product/detail-product/detail-product.component';
 import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';

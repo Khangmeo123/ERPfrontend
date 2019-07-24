@@ -9,7 +9,7 @@ import { FiltersModule } from '../../../../_shared/modules/filters/filters.modul
 import { TableModule } from 'primeng/table';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 @NgModule({
   declarations: [DivisionComponent],
   imports: [

@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { Entities } from '../../../../../../_helpers/entity';
 import { PaymentMethodEntity } from '../../../../_backend/payment-method/payment-method.entity';
 import { PaymentMethodSearchEntity } from '../../../../_backend/payment-method/payment-method.searchentity';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-method',
@@ -23,8 +24,8 @@ export class PaymentMethodComponent implements OnInit {
   isSaveBookMark: boolean = false;
   bookMarkId: string;
 
+  isShowDialog = false;
 
-  display: boolean = false;
   pagination = new PaginationModel();
   public popoverTitle: string = 'Popover title';
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
@@ -40,6 +41,8 @@ export class PaymentMethodComponent implements OnInit {
   public paymentMethodList: PaymentMethodEntity[] = [];
   public paymentMethodCount: number = 0;
   public paymentMethodSearchEntity: PaymentMethodSearchEntity = new PaymentMethodSearchEntity();
+
+  public paymentMethodForm: FormGroup;
 
   constructor(
     private paymentMethodService: PaymentMethodService,
@@ -58,8 +61,13 @@ export class PaymentMethodComponent implements OnInit {
       this.paymentMethodCount = count;
     });
 
+    const paymentMethodFormSub = this.paymentMethodService.paymentMethodForm.subscribe((form: FormGroup) => {
+      this.paymentMethodForm = form;
+    });
+
     this.subs.add(sobListSub)
       .add(paymentMethodSub)
+      .add(paymentMethodFormSub)
       .add(paymentMethodCountSub);
   }
 
@@ -78,6 +86,7 @@ export class PaymentMethodComponent implements OnInit {
 
   changeSob([setOfBookId]) {
     this.paymentMethodSearchEntity.setOfBookId = setOfBookId;
+    this.paymentMethodForm.controls.setOfBookId.setValue(setOfBookId);
     this.getList();
   }
 
@@ -93,19 +102,37 @@ export class PaymentMethodComponent implements OnInit {
     this.isSaveBookMark = !this.isSaveBookMark;
   }
 
+  edit(id: string) {
+    this.paymentMethodService.edit(id);
+    this.isShowDialog = true;
+  }
+
   paginationOut(event) {
   }
 
   showDialog() {
-    this.display = true;
+    this.isShowDialog = true;
   }
 
   onClickCancel() {
-    this.display = false;
+    this.isShowDialog = false;
   }
 
   onClickSave() {
-
+    if (this.paymentMethodForm.invalid) {
+      this.generalService.validateAllFormFields(this.paymentMethodForm);
+    }
+    if (this.paymentMethodForm.valid) {
+      const data = this.paymentMethodForm.getRawValue();
+      const entity = new PaymentMethodEntity(data);
+      this.paymentMethodService.save(entity, this.paymentMethodSearchEntity)
+        .then((res) => {
+          this.isShowDialog = res;
+        })
+        .catch((err) => {
+          this.isShowDialog = err;
+        });
+    }
   }
 
   onClickDelete() {
