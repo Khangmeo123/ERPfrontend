@@ -6,7 +6,7 @@ export class EmployeeSearchEntity extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
     gender: TextFilter = new TextFilter();
-    birthday: DateFilter = new DateFilter();
+    dob: DateFilter = new DateFilter();
     identityNumber: TextFilter = new TextFilter();
     statusId: string;
 

@@ -56,9 +56,9 @@
                             {{ 'employee.list.content.gender' | translate}}
                             <p-sortIcon [field]="'gender'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-birthday" [pSortableColumn]="'birthday'">
-                            {{ 'employee.list.content.birthday' | translate}}
-                            <p-sortIcon [field]="'birthday'" class="float-right"></p-sortIcon>
+                        <th pResizableColumn data-qe-id="table-thead-dob" [pSortableColumn]="'dob'">
+                            {{ 'employee.list.content.dob' | translate}}
+                            <p-sortIcon [field]="'dob'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-identityNumber"
                             [pSortableColumn]="'identityNumber'">
@@ -87,8 +87,8 @@
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="employeeSearchEntity.birthday" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-birthday">
+                            <app-advanced-filters [filter]="employeeSearchEntity.dob" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-dob">
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
@@ -97,9 +97,10 @@
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="employeeSearchEntity.status" (changeFilter)="getList()"
+                            <app-simple-select [key]="'name'" [list]="statusList"
+                                (selectionChange)="employeeSearchEntity.statusId = $event" (listOpen)="openStatusList()"
                                 data-qe-id="table-thead-filter-status">
-                            </app-advanced-filters>
+                            </app-simple-select>
                         </th>
                     </tr>
                 </ng-template>
@@ -107,10 +108,10 @@
                     <tr (dblclick)="toDetail(employee.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
                         <td> {{employee.code}} </td>
                         <td> {{employee.name}} </td>
-                        <td> {{employee.gender}} </td>
-                        <td> {{employee.birthday}} </td>
+                        <td> {{(employee.gender | gender) | translate}} </td>
+                        <td> {{employee.dob | date: 'dd/MM/yyyy'}} </td>
                         <td> {{employee.identityNumber}} </td>
-                        <td> {{employee.status}} </td>
+                        <td> {{employee.statusName}} </td>
                     </tr>
                 </ng-template>
             </p-table>

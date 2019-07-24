@@ -128,4 +128,16 @@ export class BankComponent implements OnInit, OnDestroy {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
   }
+
+  downloadTemplate() {
+    this.bankService.downloadTemplate();
+  }
+
+  exportTemplate() {
+    this.bankService.exportFile();
+  }
+
+  importTemplate(file: File) {
+    this.bankService.importFile(file);
+  }
 }

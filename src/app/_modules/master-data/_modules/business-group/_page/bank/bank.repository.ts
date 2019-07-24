@@ -64,4 +64,33 @@ export class BankRepository extends Repository {
                 map(r => r.body),
             );
     }
+
+    importFile(file: File) {
+        const formData = new FormData();
+        formData.append('file', File[0]);
+        return this.http.post<boolean>(this.apiUrl + '/import', formData,
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    exportFile(): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/export', JSON.stringify({}),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    this.downLoadFile(r.body, 'application/ms-excel');
+                    return true;
+                }),
+            );
+    }
+
+    downloadTemplate() {
+        return this.http.post<boolean>(this.apiUrl + '/download-template', JSON.stringify({}),
+            { observe: 'response', responseType: 'blob' as 'json' }).pipe(
+                map(r => {
+                    this.downLoadFile(r.body, 'application/ms-excel');
+                    return true;
+                }),
+            );
+    }
 }

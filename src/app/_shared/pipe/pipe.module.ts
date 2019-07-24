@@ -1,15 +1,16 @@
-import {NgModule} from '@angular/core';
+import { Gender } from './gender.pipe';
+import { NgModule } from '@angular/core';
 import { SafeHtml } from './salehtml.pipe';
 
 
 @NgModule({
   declarations: [
-    SafeHtml,
+    SafeHtml, Gender,
   ],
   imports: [
   ],
   exports: [
-    SafeHtml,
+    SafeHtml, Gender,
   ],
 })
-export class PipeModule {}
+export class PipeModule { }

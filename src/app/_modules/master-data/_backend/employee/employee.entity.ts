@@ -6,43 +6,27 @@ export class EmployeeEntity extends Entity {
     code: string;
     name: string;
     identityNumber: string;
-    identityDate: string;
-    identityPlace: string;
+    issueDate: string;
+    issuePlace: string;
     salary: number;
-    salaryCoefficient: number;
-    salaryInsurance: number;
-    birthDay: string;
-    taxNumber: string;
-    dependents: number;
+    salaryRatio: number;
+    insuranceSalary: number;
+    dob: string;
+    taxCode: string;
+    numberDependentPerson: number;
     gender: boolean;
 
     // statusEntity:
     statusId: string;
     statusName: string;
-    statusCode: string;
 
     // jobTitleEntity:
     jobTitleId: string;
     jobTitleName: string;
-    jobTitleCode: string;
 
     // jobLevelEntity:
     jobLevelId: string;
     jobLevelName: string;
-    jobLevelCode: string;
-
-    // bankEntity:
-    bankId: string;
-    bankName: string;
-    bankCode: string;
-
-    bankAccountName: string;
-    bankAccountNumber: string;
-    bankCity: string;
-    bankBranch: string;
-    bankAddress: string;
-
-    infoContacts: InfoContactEntity[];
 
     constructor(employeeEntity?: any) {
         super(employeeEntity);

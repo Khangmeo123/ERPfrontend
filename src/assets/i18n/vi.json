@@ -681,7 +681,11 @@
 		"legal_entity": {
 			"name": "Tên pháp nhân"
 		},
-		"sob": "Số bộ sổ"
+		"sob": "Số bộ sổ",
+		"gender": {
+			"male": "Nam",
+			"female": "Nữ"
+		}
 	},
 	"import_tax": {
 		"header": {

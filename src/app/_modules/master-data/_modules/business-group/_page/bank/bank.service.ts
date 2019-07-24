@@ -110,4 +110,39 @@ export class BankService {
     return defered;
   }
 
+  importFile(file: File) {
+    this.bankRepository.importFile(file).subscribe(res => {
+      if (res) {
+        console.log(res);
+      }
+    }, err => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+
+  exportFile() {
+    this.bankRepository.exportFile().subscribe(res => {
+      if (res) {
+        this.toastrService.success('Cập nhật thành công !');
+      }
+    }, err => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
+
+  downloadTemplate() {
+    this.bankRepository.downloadTemplate().subscribe(res => {
+      if (res) {
+        this.toastrService.success('Cập nhật thành công !');
+      }
+    }, err => {
+      if (err) {
+        console.log(err);
+      }
+    });
+  }
 }

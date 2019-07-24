@@ -36,7 +36,6 @@ export class CustomerListComponent implements OnInit, OnDestroy {
     private router: Router) {
     const customerListSub = this.customerListService.customerList.subscribe(res => {
       if (res) {
-        debugger
         this.customerList = res;
       }
     });

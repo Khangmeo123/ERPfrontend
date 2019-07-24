@@ -96,7 +96,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     if (!this.employeeForm.valid) {
       this.generalService.validateAllFormFields(this.employeeForm);
     } else {
-      this.employeeDetailService.save(this.employeeForm).then(res => {
+      this.employeeDetailService.save(this.employeeForm.value).then(res => {
         this.router.navigate(['/master-data/business-group/employee/employee-list']);
       });
     }
@@ -117,7 +117,6 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   searchJobTitle(event: string) {
-    this.jobTitleSearchEntity.code.startsWith = event;
     this.jobTitleSearchEntity.name.startsWith = event;
     this.jobTitleTyping.next(this.jobTitleSearchEntity);
   }

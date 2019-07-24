@@ -17,15 +17,18 @@
                     {{'general.button.import' | translate}}<span class="caret"></span>
                 </button>
                 <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.import_file' | translate}}</a></li>
+                    <li role="menuitem"><button class="dropdown-item"
+                            (click)="file.click()">{{'general.button.import_file' | translate}}</button></li>
                     <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.download_example' | translate}}</a>
+                    <li role="menuitem"><button class="dropdown-item"
+                            (click)="downloadTemplate()">{{'general.button.download_example' | translate}}</button>
                     </li>
                 </ul>
+                <input type="file" accept=".xlsx" (click)="file.value = null" (change)="importTemplate(file.files)"
+                    #file hidden>
             </div>
-            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-export" data-qe-id="button-export"
+                (click)="exportFile()">{{'general.button.export' | translate}}</button>
             <button class="btn btn-clear" (click)="clearSearch(table)"
                 data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>

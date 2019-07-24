@@ -6,6 +6,7 @@ import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/empl
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/employee.entity';
+import { EnumEntity } from 'src/app/_helpers/entity';
 
 @Injectable({
     providedIn: 'root',
@@ -29,6 +30,13 @@ export class EmployeeListRepository extends Repository {
 
     count(employeeSearchEntity: EmployeeSearchEntity): Observable<number> {
         return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(employeeSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    getStatusList(): Observable<EnumEntity[]> {
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-status', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

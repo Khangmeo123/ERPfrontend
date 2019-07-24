@@ -9,19 +9,19 @@ export class EmployeeForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(3, 100)]);
     code = new FormControl({ value: '', disabled: true });
     identityNumber = new FormControl();
-    identityDate = new FormControl();
-    identityPlace = new FormControl();
+    issueDate = new FormControl();
+    issuePlace = new FormControl();
     salary = new FormControl();
-    salaryCoefficient = new FormControl();
-    salaryInsurance = new FormControl();
-    birthDay = new FormControl();
-    taxNumber = new FormControl();
-    dependents = new FormControl();
+    salaryRatio = new FormControl();
+    insuranceSalary = new FormControl();
+    dob = new FormControl();
+    taxCode = new FormControl();
+    numberDependentPerson = new FormControl();
     gender = new FormControl();
 
     // statusEntity:
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('', [requiredField]);
+    statusName = new FormControl('');
 
     // jobTitleEntity:
     jobTitleId = new FormControl();
@@ -30,17 +30,6 @@ export class EmployeeForm extends FormModel {
     // jobLevelEntity:
     jobLevelId = new FormControl();
     jobLevelName = new FormControl();
-
-    // bankEntity:
-    bankId = new FormControl();
-    bankName = new FormControl();
-
-    bankAccountName = new FormControl();
-    bankAccountNumber = new FormControl();
-    bankCity = new FormControl();
-    bankBranch = new FormControl();
-    bankAddress = new FormControl();
-    infoContacts = new FormArray([]);
 
     errors = new FormGroup({
         name: new FormControl(''),

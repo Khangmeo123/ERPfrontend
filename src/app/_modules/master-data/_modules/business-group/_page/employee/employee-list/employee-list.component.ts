@@ -1,3 +1,4 @@
+import { EnumEntity } from './../../../../../../../_helpers/entity';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
@@ -23,6 +24,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
   employeeList: EmployeeEntity[];
   employeeListSubs: Subscription = new Subscription();
+  statusList: EnumEntity[];
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   brands: any[];
@@ -38,11 +40,16 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
         this.pagination.totalItems = res;
       }
     });
+    const statusListSub = this.employeeListService.statusList.subscribe(res => {
+      if (res) {
+        this.statusList = res;
+      }
+    });
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isBookMark = res;
     });
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
-    this.employeeListSubs.add(employeeListSub).add(employeeCountSub).add(bookMarkNotify);
+    this.employeeListSubs.add(employeeListSub).add(employeeCountSub).add(statusListSub).add(bookMarkNotify);
   }
 
   ngOnInit() {
@@ -90,6 +97,12 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
       this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
     } else {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+    }
+  }
+
+  openStatusList() {
+    if (this.statusList.length === 0) {
+      this.employeeListService.getStatusList();
     }
   }
 

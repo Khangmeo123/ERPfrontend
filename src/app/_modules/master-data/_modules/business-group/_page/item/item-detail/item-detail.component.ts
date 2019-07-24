@@ -77,12 +77,12 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    this.router.navigate(['/master-data/item/item-list']);
+    this.router.navigate(['/master-data/business-group/item/item-list']);
   }
 
   delete() {
     this.itemDetailService.delete(this.itemForm.value).then(res => {
-      this.router.navigate(['/master-data/item/item-list']);
+      this.router.navigate(['/master-data/business-group/item/item-list']);
     });
   }
 
@@ -91,7 +91,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
       this.generalService.validateAllFormFields(this.itemForm);
     } else {
       this.itemDetailService.save(this.itemForm).then(res => {
-        this.router.navigate(['/master-data/item/item-list']);
+        this.router.navigate(['/master-data/business-group/item/item-list']);
       });
     }
   }
