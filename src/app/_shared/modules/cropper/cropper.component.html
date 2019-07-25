@@ -2,7 +2,7 @@
   <div class="d-flex">
     <div class="result flex-grow-1">
       <img [src]="result" alt="result" *ngIf="result">
-      <div class="overlay" pTooltip="{{'cropper.browseImage' | translate}}">
+      <div class="cropper-overlay" pTooltip="{{'cropper.browseImage' | translate}}">
       </div>
     </div>
   </div>
@@ -11,8 +11,7 @@
 
 <ng-template [ngIf]="selectedFile">
   <p-dialog header="Crop image" [(visible)]="display" [draggable]="false" [style]="{width: 450, height: 450}"
-            [closable]="false"
-            positionTop="100">
+    [closable]="false" positionTop="100">
     <div class="image-container">
       <div class="image">
         <img #image [src]="imageDataURL" [alt]="filename">

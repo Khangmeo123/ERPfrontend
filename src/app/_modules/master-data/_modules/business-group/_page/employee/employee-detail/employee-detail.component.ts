@@ -52,6 +52,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     const employeeFormSub = this.employeeDetailService.employeeForm.subscribe(res => {
       if (res) {
         this.employeeForm = res;
+        debugger
       }
     });
     const statusListSub = this.employeeDetailService.statusList.subscribe(res => {
