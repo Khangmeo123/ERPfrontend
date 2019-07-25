@@ -328,8 +328,4 @@ export class SobComponent implements OnInit, OnDestroy {
       this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
-
-  clearFilters() {
-    this.sobSearchEntity = new SobSearchEntity();
-  }
 }

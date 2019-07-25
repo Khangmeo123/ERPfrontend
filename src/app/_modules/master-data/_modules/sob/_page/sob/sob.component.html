@@ -12,14 +12,15 @@
       <button class="btn btn-add" (click)="add()">
         {{'general.button.add' | translate}}
       </button>
-      <button class="btn btn-add" (click)="clearFilters()">
+      <button class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
     </div>
   </div>
   <div class="page-body mt-2">
     <div class="page-section">
-      <p-table [value]="sobList">
+      <p-table [value]="sobList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
