@@ -21,27 +21,38 @@ import { Entities } from '../../../../../../_helpers/entity';
 })
 export class PaymentTermComponent implements OnInit {
   isSaveBookMark: boolean = false;
+
   bookMarkId: string;
 
   isShowDialog = false;
 
   pagination = new PaginationModel();
+
   public popoverTitle: string = 'Popover title';
+
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+
   public confirmClicked: boolean = false;
+
   public cancelClicked: boolean = false;
 
   public subs: Subscription = new Subscription();
 
   public sobList: SobEntity[] = [];
+
   public selectedSobList: SobEntity[] = [];
+
   public sobSearchEntity: SobSearchEntity = new SobSearchEntity();
 
   public paymentTermList: PaymentTermEntity[] = [];
+
   public paymentTermCount: number = 0;
+
   public paymentTermSearchEntity: PaymentTermSearchEntity = new PaymentTermSearchEntity();
 
   public paymentTermForm: FormGroup;
+
+  public setOfBookId: string = '';
 
   constructor(
     private paymentTermService: PaymentTermService,
@@ -62,6 +73,9 @@ export class PaymentTermComponent implements OnInit {
 
     const paymentTermFormSub = this.paymentTermService.paymentTermForm.subscribe((form: FormGroup) => {
       this.paymentTermForm = form;
+      if (this.setOfBookId) {
+        this.paymentTermForm.controls.setOfBookId.setValue(this.setOfBookId);
+      }
     });
 
     this.subs.add(sobListSub)
@@ -77,6 +91,19 @@ export class PaymentTermComponent implements OnInit {
     return null;
   }
 
+  add() {
+    this.paymentTermService.add();
+    this.showDialog();
+  }
+
+  sort(event: any) {
+    if (event.sortField && event.sortOrder) {
+      this.paymentTermSearchEntity.orderBy = event.sortField;
+      this.paymentTermSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+    }
+    this.getList();
+  }
+
   ngOnInit() {
     if (this.currentSob) {
       this.getList();
@@ -86,6 +113,7 @@ export class PaymentTermComponent implements OnInit {
   changeSob([setOfBookId]) {
     this.paymentTermSearchEntity.setOfBookId = setOfBookId;
     this.paymentTermForm.controls.setOfBookId.setValue(setOfBookId);
+    this.setOfBookId = setOfBookId;
     this.getList();
   }
 
@@ -114,6 +142,7 @@ export class PaymentTermComponent implements OnInit {
   }
 
   onClickCancel() {
+    this.paymentTermService.cancel();
     this.isShowDialog = false;
   }
 
@@ -134,6 +163,18 @@ export class PaymentTermComponent implements OnInit {
     }
   }
 
+  clearSearch(table: any) {
+    this.paymentTermSearchEntity = new PaymentTermSearchEntity();
+    table.reset();
+  }
+
   onClickDelete() {
+    this.paymentTermService.delete(this.paymentTermForm.value, this.paymentTermSearchEntity)
+      .then(res => {
+        this.isShowDialog = res;
+      })
+      .catch(err => {
+        this.isShowDialog = err;
+      });
   }
 }

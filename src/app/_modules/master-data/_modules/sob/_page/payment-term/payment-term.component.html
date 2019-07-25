@@ -9,7 +9,10 @@
             </span>
         </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="showDialog()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-add" (click)="clearSearch(table)">
+        {{'general.button.clear' | translate}}
+      </button>
     </div>
   </div>
   <hr>
@@ -23,7 +26,8 @@
                          (listOpen)="getSobList()"></app-single-select>
     </div>
     <div class="page-section list">
-      <p-table [value]="paymentTermList">
+      <p-table [value]="paymentTermList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'"
@@ -39,19 +43,24 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="paymentTermSearchEntity.code"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="paymentTermSearchEntity.code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="paymentTermSearchEntity.name"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="paymentTermSearchEntity.name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="paymentTermSearchEntity.dueInDate"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="paymentTermSearchEntity.dueInDate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="paymentTermSearchEntity.discountPeriod"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="paymentTermSearchEntity.discountPeriod"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="paymentTermSearchEntity.discountRate"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="paymentTermSearchEntity.discountRate"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
@@ -118,24 +127,21 @@
     </div>
   </div>
   <p-footer>
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="page-actions">
-          <button class="btn btn-cancel"
-                  (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}
-          </button>
-          <button class="btn btn-save" (click)="onClickSave()">
-            {{ 'general.button.save' | translate}}</button>
-          <button class="btn btn-delete"
-                  mwlConfirmationPopover
-                  [popoverTitle]="popoverTitle"
-                  [popoverMessage]="popoverMessage"
-                  placement="bottom"
-                  (confirm)="confirmClicked = true"
-                  (cancel)="cancelClicked = true"
-                  (click)="onClickDelete()">
-            {{ 'general.button.delete' | translate}}</button>
-        </div>
+    <div class="d-flex">
+      <button class="btn btn-delete"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              placement="bottom"
+              (confirm)="onClickDelete()"
+              (cancel)="onClickCancel()"
+              *ngIf="paymentTermForm.value?.isDeleted">
+        {{ 'general.button.delete' | translate}}</button>
+      <div class="flex-grow-1 justify-content-end d-flex">
+        <button class="btn btn-cancel"
+                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+        <button class="btn btn-save" (click)="onClickSave()">
+          {{ 'general.button.save' | translate}}</button>
       </div>
     </div>
   </p-footer>
