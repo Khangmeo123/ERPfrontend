@@ -77,6 +77,11 @@ export class PaymentMethodComponent implements OnInit {
     return null;
   }
 
+  add() {
+    this.paymentMethodService.add();
+    this.showDialog();
+  }
+
   ngOnInit() {
     if (this.currentSob) {
       this.getList();
@@ -114,6 +119,7 @@ export class PaymentMethodComponent implements OnInit {
   }
 
   onClickCancel() {
+    this.paymentMethodService.cancel();
     this.isShowDialog = false;
   }
 
