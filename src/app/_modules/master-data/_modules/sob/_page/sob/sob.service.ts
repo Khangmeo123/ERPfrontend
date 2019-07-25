@@ -120,6 +120,12 @@ export class SobService {
     ));
   }
 
+  cancel() {
+    this.sobForm.next(this.fb.group(
+      new SobForm(),
+    ));
+  }
+
   edit(sobId: string) {
     this.sobRepository.getId(sobId).subscribe(res => {
       if (res) {

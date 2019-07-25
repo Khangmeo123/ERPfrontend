@@ -218,7 +218,13 @@
   </div>
   <p-footer>
     <div class="d-flex">
-      <button class="btn btn-delete" *ngIf="sobForm.value?.isDeleted">
+      <button class="btn btn-delete" *ngIf="sobForm.value?.isDeleted"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              placement="bottom"
+              (confirm)="delete()"
+              (cancel)="cancelModal()">
         {{'general.button.delete' | translate}}
       </button>
       <div class="flex-grow-1 d-flex justify-content-end">

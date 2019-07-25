@@ -266,7 +266,7 @@ export class SobComponent implements OnInit, OnDestroy {
   }
 
   cancelModal() {
-    this.sobService.add();
+    this.sobService.cancel();
     this.toggleModal();
   }
 
