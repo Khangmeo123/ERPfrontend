@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { Subscription } from 'rxjs';
+import { SobEntity } from '../../../../_backend/sob/sob.entity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { FormGroup } from '@angular/forms';
+import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { Entities } from '../../../../../../_helpers/entity';
+import { CoaService } from './coa.service';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { CoaService } from './coa.service';
 
 @Component({
   selector: 'app-coa',
@@ -9,23 +16,191 @@ import { CoaService } from './coa.service';
   styleUrls: ['./coa.component.scss'],
   providers: [
     CoaService,
+    GeneralService,
   ],
 })
 export class CoaComponent implements OnInit {
+  isSaveBookMark: boolean = false;
 
-  modalState = false;
+  bookMarkId: string;
 
-  coaList: CoaEntity[] = [];
+  isShowDialog = false;
 
-  coaSE: CoaSearchEntity = new CoaSearchEntity();
+  pagination = new PaginationModel();
 
-  constructor(private coaService: CoaService) {
+  public popoverTitle: string = 'Popover title';
+
+  public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+
+  public confirmClicked: boolean = false;
+
+  public cancelClicked: boolean = false;
+
+  public subs: Subscription = new Subscription();
+
+  public sobList: SobEntity[] = [];
+
+  public selectedSobList: SobEntity[] = [];
+
+  public sobSearchEntity: SobSearchEntity = new SobSearchEntity();
+
+  public coaList: CoaEntity[] = [];
+
+  public parentAccountList: CoaEntity[] = [];
+
+  public parentAccountSearchEntity: CoaSearchEntity = new CoaSearchEntity();
+
+  public selectedParentAccountList: CoaEntity[] = [];
+
+  public coaCount: number = 0;
+
+  public coaSearchEntity: CoaSearchEntity = new CoaSearchEntity();
+
+  public coaForm: FormGroup;
+
+  public setOfBookId: string = '';
+
+  public characteristicList: any[] = [];
+
+  constructor(
+    private coaService: CoaService,
+    private generalService: GeneralService
+  ) {
+    const sobListSub = this.coaService.sobList.subscribe((list: Entities) => {
+      this.sobList = list.exceptIds;
+      this.selectedSobList = list.ids;
+    });
+
+    const coaSub = this.coaService.coaList.subscribe((list) => {
+      this.coaList = list;
+    });
+
+    const parentAccountSub = this.coaService.parentAccountList.subscribe((list) => {
+      this.parentAccountList = list;
+    });
+
+    const coaCountSub = this.coaService.coaCount.subscribe((count) => {
+      this.coaCount = count;
+    });
+
+    const coaFormSub = this.coaService.coaForm.subscribe((form: FormGroup) => {
+      this.coaForm = form;
+      if (this.setOfBookId) {
+        this.coaForm.controls.setOfBookId.setValue(this.setOfBookId);
+      }
+    });
+
+    const characteristicListSub = this.coaService.characteristicList.subscribe((list) => {
+      this.characteristicList = list;
+    });
+
+    this.subs.add(sobListSub)
+      .add(coaSub)
+      .add(coaFormSub)
+      .add(characteristicListSub)
+      .add(parentAccountSub)
+      .add(coaCountSub);
+  }
+
+  get currentSob() {
+    if (this.selectedSobList.length) {
+      return this.selectedSobList[0];
+    }
+    return null;
+  }
+
+  getParentAccountList() {
+    this.coaService.getParentAccountList(this.parentAccountSearchEntity);
+  }
+
+  getCharacteristicList() {
+    this.coaService.getCharacteristicList();
+  }
+
+  add() {
+    this.coaService.add();
+    this.showDialog();
   }
 
   ngOnInit() {
+    if (this.currentSob) {
+      this.getList();
+    }
   }
 
-  toggleModal() {
-    this.modalState = !this.modalState;
+  changeSob([setOfBookId]) {
+    this.coaSearchEntity.setOfBookId = setOfBookId;
+    this.coaForm.controls.setOfBookId.setValue(setOfBookId);
+    this.setOfBookId = setOfBookId;
+    this.getList();
+  }
+
+  getList() {
+    this.coaService.getList(this.coaSearchEntity);
+  }
+
+  getSobList() {
+    this.coaService.getSobList(this.sobSearchEntity);
+  }
+
+  onClickSaveBookMark(event) {
+    this.isSaveBookMark = !this.isSaveBookMark;
+  }
+
+  edit(id: string) {
+    this.coaService.edit(id);
+    this.isShowDialog = true;
+  }
+
+  paginationOut(event) {
+  }
+
+  showDialog() {
+    this.isShowDialog = true;
+  }
+
+  onClickCancel() {
+    this.coaService.cancel();
+    this.isShowDialog = false;
+  }
+
+  onClickSave() {
+    if (this.coaForm.invalid) {
+      this.generalService.validateAllFormFields(this.coaForm);
+    }
+    if (this.coaForm.valid) {
+      const data = this.coaForm.getRawValue();
+      const entity = new CoaEntity(data);
+      this.coaService.save(entity, this.coaSearchEntity)
+        .then((res) => {
+          this.isShowDialog = res;
+        })
+        .catch((err) => {
+          this.isShowDialog = err;
+        });
+    }
+  }
+
+  sort(event: any) {
+    if (event.sortField && event.sortOrder) {
+      this.coaSearchEntity.orderBy = event.sortField;
+      this.coaSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+    }
+    this.getList();
+  }
+
+  clearSearch(table: any) {
+    this.coaSearchEntity = new CoaSearchEntity();
+    table.reset();
+  }
+
+  onClickDelete() {
+    this.coaService.delete(this.coaForm.value, this.coaSearchEntity)
+      .then(res => {
+        this.isShowDialog = res;
+      })
+      .catch(err => {
+        this.isShowDialog = err;
+      });
   }
 }

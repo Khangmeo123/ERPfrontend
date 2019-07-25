@@ -4,6 +4,9 @@ import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { SobEntity } from '../../../../_backend/sob/sob.entity';
+import { Entities } from '../../../../../../_helpers/entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 
@@ -13,7 +16,7 @@ import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 export class CoaRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/setOfBook';
+    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/chart-of-account';
   }
 
   getList(coaSearchEntity: CoaSearchEntity): Observable<CoaEntity[]> {
@@ -23,6 +26,31 @@ export class CoaRepository extends Repository {
         return r.body.map((item) => {
           return new CoaEntity(item);
         });
+      }),
+    );
+  }
+
+  getCharacteristicList(): Observable<any[]> {
+    return this.http.post<any[]>(this.apiUrl + '/list', '{}',
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => {
+        return r.body;
+      }),
+    );
+  }
+
+  getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => {
+        const {
+          ids,
+          exceptIds,
+        } = r.body;
+        return {
+          ids: ids.map((item) => new SobEntity(item)),
+          exceptIds: exceptIds.map((item) => new SobEntity(item)),
+        };
       }),
     );
   }
