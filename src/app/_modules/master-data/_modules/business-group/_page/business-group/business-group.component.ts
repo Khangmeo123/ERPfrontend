@@ -20,6 +20,7 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   pageTitle = translate('business_group.header.title');
   isSaveBookMark: boolean = false;
   isShowDialog: boolean = false;
+  isShowDialogError: boolean = false;
   pagination: PaginationModel = new PaginationModel();
   businessGroupSearchEntity: BusinessGroupSearchEntity = new BusinessGroupSearchEntity();
   businessGroupList: BusinessGroupEntity[];

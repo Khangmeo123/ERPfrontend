@@ -13,12 +13,6 @@ export class JobLevelForm extends FormModel {
     });
     constructor(jobLevelEntity?: JobLevelEntity) {
         super();
-        if (jobLevelEntity !== null && jobLevelEntity !== undefined) {
-            Object.keys(jobLevelEntity).forEach((item) => {
-                if (jobLevelEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(jobLevelEntity[item]);
-                }
-            });
-        }
+        this.mapData(jobLevelEntity);
     }
 }

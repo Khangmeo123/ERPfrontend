@@ -99,6 +99,7 @@
                         </th>
                         <th class="th-filter">
                             <app-simple-select [key]="'name'" [list]="statusList"
+                                [initValue]="itemSearchEntity.statusId"
                                 (selectionChange)="itemSearchEntity.statusId = $event" (listOpen)="openStatusList()"
                                 data-qe-id="table-thead-filter-status">
                             </app-simple-select>

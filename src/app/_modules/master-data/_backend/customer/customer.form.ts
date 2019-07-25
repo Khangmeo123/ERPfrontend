@@ -7,23 +7,17 @@ import { FormModel } from 'src/app/_helpers/form-model';
 export class CustomerForm extends FormModel {
     code = new FormControl('', [requiredField]);
     name = new FormControl('', [requiredField]);
-    taxNumber = new FormControl();
+    taxCode = new FormControl();
     note = new FormControl();
 
     // statusEntity
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('', [requiredField]);
+    statusName = new FormControl('');
 
     infoContacts = new FormArray([]);
     bankAccounts = new FormArray([]);
     constructor(customerEntity?: CustomerEntity) {
         super();
-        if (customerEntity !== null && customerEntity !== undefined) {
-            Object.keys(customerEntity).forEach((item) => {
-                if (customerEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(customerEntity[item]);
-                }
-            });
-        }
+        this.mapData(customerEntity);
     }
 }

@@ -70,7 +70,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     if (!this.supplierForm.valid) {
       this.generalService.validateAllFormFields(this.supplierForm);
     } else {
-      this.supplierDetailService.save(this.supplierForm).then(res => {
+      this.supplierDetailService.save(this.supplierForm.value).then(res => {
         this.router.navigate(['/master-data/business-group/supplier/supplier-list']);
       });
     }

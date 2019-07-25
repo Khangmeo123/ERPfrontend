@@ -27,14 +27,9 @@ export class EmployeeDetailService {
   }
 
   getId(employeeId?) {
-    if (employeeId === null || employeeId === undefined) {
-      this.employeeForm.next(this.fb.group(
-        new EmployeeForm(),
-      ));
-    } else {
+    if (employeeId !== null && employeeId !== undefined) {
       this.employeeDetailRepository.getId(employeeId).subscribe(res => {
         if (res) {
-          debugger
           this.employeeForm.next(this.fb.group(
             new EmployeeForm(res),
           ));

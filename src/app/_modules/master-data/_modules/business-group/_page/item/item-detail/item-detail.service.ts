@@ -29,11 +29,7 @@ export class ItemDetailService {
   }
 
   getId(itemId?) {
-    if (itemId === null || itemId === undefined) {
-      this.itemForm.next(this.fb.group(
-        new ItemForm(),
-      ));
-    } else {
+    if (itemId !== null && itemId !== undefined) {
       this.itemDetailRepository.getId(itemId).subscribe(res => {
         if (res) {
           this.itemForm.next(this.fb.group(

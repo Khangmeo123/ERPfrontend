@@ -14,12 +14,6 @@ export class UomForm extends FormModel {
     })
     constructor(uomEntity?: UomEntity) {
         super();
-        if (uomEntity !== null && uomEntity !== undefined) {
-            Object.keys(uomEntity).forEach((item) => {
-                if (uomEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(uomEntity[item]);
-                }
-            });
-        }
+        this.mapData(uomEntity);
     }
 }

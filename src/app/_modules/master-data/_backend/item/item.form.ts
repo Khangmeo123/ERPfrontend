@@ -78,12 +78,6 @@ export class ItemForm extends FormModel {
 
     constructor(itemEntity?: ItemEntity) {
         super();
-        if (itemEntity !== null && itemEntity !== undefined) {
-            Object.keys(itemEntity).forEach((item) => {
-                if (itemEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(itemEntity[item]);
-                }
-            });
-        }
+        this.mapData(itemEntity);
     }
 }

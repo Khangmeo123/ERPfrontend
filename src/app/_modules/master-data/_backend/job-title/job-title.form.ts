@@ -15,12 +15,6 @@ export class JobTitleForm extends FormModel {
     });
     constructor(jobTitleEntity?: JobTitleEntity) {
         super();
-        if (jobTitleEntity !== null && jobTitleEntity !== undefined) {
-            Object.keys(jobTitleEntity).forEach((item) => {
-                if (jobTitleEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(jobTitleEntity[item]);
-                }
-            });
-        }
+        this.mapData(jobTitleEntity);
     }
 }

@@ -69,7 +69,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     if (!this.customerForm.valid) {
       this.generalService.validateAllFormFields(this.customerForm);
     } else {
-      this.customerDetailService.save(this.customerForm).then(res => {
+      this.customerDetailService.save(this.customerForm.value).then(res => {
         this.router.navigate(['/master-data/business-group/customer/customer-list']);
       });
     }

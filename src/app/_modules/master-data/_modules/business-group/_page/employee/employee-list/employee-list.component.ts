@@ -21,13 +21,17 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
   pagination: PaginationModel = new PaginationModel();
+  // employee:
   employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
   employeeList: EmployeeEntity[];
   employeeListSubs: Subscription = new Subscription();
+  // status:
   statusList: EnumEntity[];
+  // gender:
+  genderList: any[] = [{ label: 'Nam', id: true }, { label: 'Nữ', id: false }];
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
+  testValue = 'test';
 
   constructor(private employeeListService: EmployeeListService, private bookmarkService: BookmarkService, private router: Router) {
     const employeeListSub = this.employeeListService.employeeList.subscribe(res => {
@@ -81,6 +85,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   clearSearch(table: any) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
     table.reset();
+    this.testValue = '';
   }
 
   sort(event: any) {

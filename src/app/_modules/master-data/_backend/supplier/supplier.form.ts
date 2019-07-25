@@ -7,12 +7,12 @@ import { FormModel } from 'src/app/_helpers/form-model';
 export class SupplierForm extends FormModel {
     code = new FormControl('', [requiredField]);
     name = new FormControl('', [requiredField, checkLength(3, 100)]);
-    taxNumber = new FormControl();
+    taxCode = new FormControl();
     note = new FormControl();
 
     // status
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('', [requiredField]);
+    statusName = new FormControl('');
 
     errors = new FormGroup({
         code: new FormControl(''),
@@ -22,12 +22,6 @@ export class SupplierForm extends FormModel {
 
     constructor(supplierEntity?: SupplierEntity) {
         super();
-        if (supplierEntity !== null && supplierEntity !== undefined) {
-            Object.keys(supplierEntity).forEach((item) => {
-                if (supplierEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(supplierEntity[item]);
-                }
-            });
-        }
+        this.mapData(supplierEntity);
     }
 }

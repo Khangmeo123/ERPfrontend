@@ -20,11 +20,7 @@ export class SupplierDetailService {
   }
 
   getId(supplierId?) {
-    if (supplierId === null || supplierId === undefined) {
-      this.supplierForm.next(this.fb.group(
-        new SupplierForm(),
-      ));
-    } else {
+    if (supplierId !== null && supplierId !== undefined) {
       this.supplierDetailRepository.getId(supplierId).subscribe(res => {
         if (res) {
           this.supplierForm.next(this.fb.group(

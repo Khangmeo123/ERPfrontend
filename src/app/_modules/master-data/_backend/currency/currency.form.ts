@@ -11,16 +11,10 @@ export class CurrencyForm extends FormModel {
     errors = new FormGroup({
         name: new FormControl(''),
         code: new FormControl(''),
-        description: new FormControl('')
+        description: new FormControl(''),
     })
     constructor(currencyEntity?: CurrencyEntity) {
         super();
-        if (currencyEntity !== null && currencyEntity !== undefined) {
-            Object.keys(currencyEntity).forEach((item) => {
-                if (currencyEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(currencyEntity[item]);
-                }
-            });
-        }
+        this.mapData(currencyEntity);
     }
 }

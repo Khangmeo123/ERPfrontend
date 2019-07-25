@@ -18,6 +18,16 @@
   <hr>
   <div class="page-body">
     <div class="page-section list">
+      <div class="error-div w-100">
+        <div class="alert alert-danger" role="alert" *ngIf="false">
+          <i class="fa fa-times-circle"></i>
+          <span>
+            {{'general.error.fileImport' | translate}}
+            <a href="javascript:;"
+              (click)="isShowDialogError = !isShowDialogError">{{'general.error.direction' | translate}}</a>
+          </span>
+        </div>
+      </div>
       <p-table [value]="businessGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
         [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
@@ -135,6 +145,28 @@
             data-qe-id="dialog-button-delete" *ngIf="businessGroupForm.value?.isDeleted"
             [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
             {{ 'general.button.delete' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>
+<p-dialog modal="true" [(visible)]="isShowDialogError" appendTo="body" [style]="{width: '600px'}">
+  <p-header>
+    {{ 'business_group.dialog.error.title' | translate}}
+  </p-header>
+  <div class="container" [formGroup]="businessGroupForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div [innerHTML]="" class="text-danger"></div>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions">
+          <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+            (click)="isShowDialogError = false">{{ 'general.button.cancel' | translate}}</button>
         </div>
       </div>
     </div>

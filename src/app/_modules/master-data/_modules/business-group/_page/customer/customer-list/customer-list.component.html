@@ -24,6 +24,8 @@
         </ul>
       </div>
       <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+      <button class="btn btn-clear" (click)="clearSearch(table)"
+        data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
   </div>
   <hr>
@@ -48,9 +50,9 @@
               {{ 'customer.list.content.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-taxNumber" [pSortableColumn]="'taxNumber'">
-              {{ 'customer.list.content.taxNumber' | translate}}
-              <p-sortIcon [field]="'taxNumber'" class="float-right"></p-sortIcon>
+            <th pResizableColumn data-qe-id="table-thead-taxCode" [pSortableColumn]="'taxCode'">
+              {{ 'customer.list.content.taxCode' | translate}}
+              <p-sortIcon [field]="'taxCode'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
               {{ 'customer.list.content.status' | translate}}
@@ -67,12 +69,12 @@
                 data-qe-id="table-thead-filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="customerSearchEntity.taxNumber" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-taxNumber"></app-advanced-filters>
+              <app-advanced-filters [filter]="customerSearchEntity.taxCode" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-taxCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-simple-select [key]="'name'" [list]="statusList"
-                (selectionChange)="customerSearchEntity.statusId = $event" (listOpen)="openStatusList()"
+              <app-simple-select [key]="'name'" [list]="statusList" [initValue]="customerSearchEntity.statusId"
+                (selectionChange)="customerSearchEntity.statusId = $event; getList()" (listOpen)="openStatusList()"
                 data-qe-id="table-thead-filter-status">
               </app-simple-select>
             </th>
@@ -82,8 +84,8 @@
           <tr (dblclick)="toDetail(customer.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{customer.code}} </td>
             <td> {{customer.name}} </td>
-            <td> {{customer.taxNumber}} </td>
-            <td> {{customer.status}} </td>
+            <td> {{customer.taxCode}} </td>
+            <td> {{customer.statusName}} </td>
           </tr>
         </ng-template>
       </p-table>

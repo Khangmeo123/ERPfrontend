@@ -38,12 +38,6 @@ export class EmployeeForm extends FormModel {
 
     constructor(employeeEntity?: EmployeeEntity) {
         super();
-        if (employeeEntity !== null && employeeEntity !== undefined) {
-            Object.keys(employeeEntity).forEach((item) => {
-                if (employeeEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(employeeEntity[item]);
-                }
-            });
-        }
+        this.mapData(employeeEntity);
     }
 }

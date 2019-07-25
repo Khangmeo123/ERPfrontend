@@ -56,8 +56,8 @@
                   <div class="col-sm-4">
                     <div class="form-group">
                       <label for="customerTaxNumber">
-                        {{ 'customer.detail.content.taxNumber' | translate}}</label>
-                      <input type="text" class="form-control" formControlName="taxNumber" data-qe-id="form-taxNumber"
+                        {{ 'customer.detail.content.taxCode' | translate}}</label>
+                      <input type="text" class="form-control" formControlName="taxCode" data-qe-id="form-taxCode"
                         id="customerTaxNumber" />
                     </div>
 
@@ -69,12 +69,13 @@
                       <label for="bankid">{{ 'customer.detail.content.status' | translate}}</label>
                       <div class="div-form">
                         <app-simple-select [key]="'name'" [list]="statusList"
-                          (selectionChange)="customerForm.controls.status.setValue($event)"
+                          [initValue]="customerForm.controls.statusName.value"
+                          (selectionChange)="customerForm.controls.statusId.setValue($event)"
                           (listOpen)="openStatusList()" data-qe-id="form-characteristic" class="w-100">
                         </app-simple-select>
                         <app-error data-qe-id="form-error-status"
-                          *ngIf="(customerForm.controls.status?.errors && customerForm.controls.status?.touched) || !!customerForm.controls.errors?.get('status')?.value"
-                          [formGroup]="customerForm" [property]="'status'" [placement]="'top'" class="error-form">
+                          *ngIf="(customerForm.controls.statusId?.errors && customerForm.controls.statusId?.dirty) || !!customerForm.controls.errors?.get('statusId')?.value"
+                          [formGroup]="customerForm" [property]="'statusId'" [placement]="'top'" class="error-form">
                         </app-error>
                       </div>
                     </div>

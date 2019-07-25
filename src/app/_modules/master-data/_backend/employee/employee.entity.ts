@@ -28,6 +28,7 @@ export class EmployeeEntity extends Entity {
     jobLevelId: string;
     jobLevelName: string;
 
+    infoContacts: any[] = [];
     constructor(employeeEntity?: any) {
         super(employeeEntity);
     }

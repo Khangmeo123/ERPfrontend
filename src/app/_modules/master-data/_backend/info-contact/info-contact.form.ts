@@ -8,8 +8,8 @@ export class InfoContactForm extends FormModel {
     name = new FormControl('', [requiredField]);
     phone = new FormControl('', [requiredField]);
     email = new FormControl('', [requiredField]);
-    address: string;
-    relationship: string;
+    address = new FormControl('');
+    relationship = new FormControl('');
     constructor(infoContactEntity?: InfoContactEntity) {
         super();
         if (infoContactEntity !== null && infoContactEntity !== undefined) {

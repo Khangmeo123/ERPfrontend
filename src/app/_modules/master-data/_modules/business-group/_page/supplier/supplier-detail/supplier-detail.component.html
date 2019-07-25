@@ -57,9 +57,9 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="supplierTaxNumber">
-                                        {{ 'supplier.detail.content.taxNumber' | translate}}</label>
-                                    <input type="text" class="form-control" formControlName="taxNumber"
-                                        data-qe-id="form-taxNumber" id="supplierTaxNumber" />
+                                        {{ 'supplier.detail.content.taxCode' | translate}}</label>
+                                    <input type="text" class="form-control" formControlName="taxCode"
+                                        data-qe-id="form-taxCode" id="supplierTaxNumber" />
                                 </div>
 
                             </div>
@@ -67,16 +67,18 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="bankid">{{ 'supplier.detail.content.status' | translate}}</label>
+                                    <label for="bankid">{{ 'supplier.detail.content.status' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <app-simple-select [key]="'name'" [list]="statusList"
-                                            (selectionChange)="supplierForm.controls.status.setValue($event)"
+                                            [initValue]="supplierForm.controls.statusName.value"
+                                            (selectionChange)="supplierForm.controls.statusId.setValue($event)"
                                             (listOpen)="openStatusList()" data-qe-id="form-characteristic"
                                             class="w-100">
                                         </app-simple-select>
                                         <app-error data-qe-id="form-error-status"
-                                            *ngIf="(supplierForm.controls.status?.errors && supplierForm.controls.status?.touched) || !!supplierForm.controls.errors?.get('status')?.value"
-                                            [formGroup]="supplierForm" [property]="'status'" [placement]="'top'"
+                                            *ngIf="(supplierForm.controls.statusId?.errors && supplierForm.controls.statusId?.dirty) || !!supplierForm.controls.errors?.get('statusId')?.value"
+                                            [formGroup]="supplierForm" [property]="'statusId'" [placement]="'top'"
                                             class="error-form">
                                         </app-error>
                                     </div>
@@ -98,6 +100,7 @@
     <div class="page-footer">
         <div>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                *ngIf="supplierForm.controls.id.value !== null && supplierForm.controls.id.value !== undefined"
                 [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
                 (cancel)="cancelClicked = true" data-qe-id="button-delete">
                 {{ 'general.button.delete' | translate}}</button>

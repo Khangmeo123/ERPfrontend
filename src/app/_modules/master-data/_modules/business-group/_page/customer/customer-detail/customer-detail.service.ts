@@ -20,11 +20,7 @@ export class CustomerDetailService {
   }
 
   getId(customerId?) {
-    if (customerId === null || customerId === undefined) {
-      this.customerForm.next(this.fb.group(
-        new CustomerForm(),
-      ));
-    } else {
+    if (customerId !== null && customerId !== undefined) {
       this.customerDetailRepository.getId(customerId).subscribe(res => {
         if (res) {
           this.customerForm.next(this.fb.group(

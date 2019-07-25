@@ -21,12 +21,6 @@ export class AssetForm extends FormModel {
     });
     constructor(assetEntity?: AssetEntity) {
         super();
-        if (assetEntity !== null && assetEntity !== undefined) {
-            Object.keys(assetEntity).forEach((item) => {
-                if (assetEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].patchValue(assetEntity[item]);
-                }
-            });
-        }
+        this.mapData(assetEntity);
     }
 }
