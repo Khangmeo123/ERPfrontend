@@ -33,8 +33,12 @@ import { TranslateModule } from '@ngx-translate/core';
 })
 export class DatePickerStories {
   form = new FormGroup({
-    date: new FormControl(null, dateField),
+    date: new FormControl(null),
   });
+
+  constructor() {
+    this.date.setValue('2019/11/19');
+  }
 
   get date(): FormControl {
     return this.form.get('date') as FormControl;
