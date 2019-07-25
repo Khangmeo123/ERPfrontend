@@ -6,6 +6,7 @@ import {CommonModule} from '@angular/common';
 import {ErrorModule} from './error.module';
 import {requiredField} from '../../../_helpers';
 import {TooltipModule} from 'ngx-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
@@ -42,6 +43,7 @@ storiesOf('Error', module)
         ReactiveFormsModule,
         ErrorModule,
         TooltipModule.forRoot(),
+        TranslateModule.forRoot(),
       ],
     }),
   )

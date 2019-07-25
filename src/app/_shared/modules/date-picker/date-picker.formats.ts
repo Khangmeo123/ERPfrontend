@@ -1,4 +1,4 @@
-import {MatDateFormats} from '@angular/material';
+import { MatDateFormats } from '@angular/material';
 
 export const DEFAULT_DATE_FORMAT: MatDateFormats = {
   parse: {
@@ -11,3 +11,5 @@ export const DEFAULT_DATE_FORMAT: MatDateFormats = {
     monthYearA11yLabel: 'MMMM/YYYY',
   },
 };
+
+export const OUTPUT_DATE_FORMAT: string = 'yyyy/MM/dd';

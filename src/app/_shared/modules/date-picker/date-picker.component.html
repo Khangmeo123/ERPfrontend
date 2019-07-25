@@ -6,12 +6,10 @@
            (keydown)="onKeyDown($event)"
            (keyup)="onKeyUp($event)"
            (mousedown)="onMouseDown(matDatepicker)"
-           (input)="onInput($event)"
-           (dateChange)="onDateChange($event); matDatepicker.close();"
-           (dateInput)="onDateInput($event)"
+           (dateChange)="onDateChange(matDatepicker)"
            maxlength="10"
            autocomplete="off"
-           [(ngModel)]="dateValue"
+           [(ngModel)]="date"
            [matDatepicker]="matDatepicker"
            placeholder="{{'datePicker.placeHolder' | translate}}">
     <mat-datepicker #matDatepicker></mat-datepicker>

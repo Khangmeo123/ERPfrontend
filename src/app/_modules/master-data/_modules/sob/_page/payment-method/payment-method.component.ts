@@ -21,27 +21,38 @@ import { FormGroup } from '@angular/forms';
 })
 export class PaymentMethodComponent implements OnInit {
   isSaveBookMark: boolean = false;
+
   bookMarkId: string;
 
   isShowDialog = false;
 
   pagination = new PaginationModel();
+
   public popoverTitle: string = 'Popover title';
+
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+
   public confirmClicked: boolean = false;
+
   public cancelClicked: boolean = false;
 
   public subs: Subscription = new Subscription();
 
   public sobList: SobEntity[] = [];
+
   public selectedSobList: SobEntity[] = [];
+
   public sobSearchEntity: SobSearchEntity = new SobSearchEntity();
 
   public paymentMethodList: PaymentMethodEntity[] = [];
+
   public paymentMethodCount: number = 0;
+
   public paymentMethodSearchEntity: PaymentMethodSearchEntity = new PaymentMethodSearchEntity();
 
   public paymentMethodForm: FormGroup;
+
+  public setOfBookId: string = '';
 
   constructor(
     private paymentMethodService: PaymentMethodService,
@@ -62,6 +73,10 @@ export class PaymentMethodComponent implements OnInit {
 
     const paymentMethodFormSub = this.paymentMethodService.paymentMethodForm.subscribe((form: FormGroup) => {
       this.paymentMethodForm = form;
+      console.log(this.setOfBookId);
+      if (this.setOfBookId) {
+        this.paymentMethodForm.controls.setOfBookId.setValue(this.setOfBookId);
+      }
     });
 
     this.subs.add(sobListSub)
@@ -91,6 +106,7 @@ export class PaymentMethodComponent implements OnInit {
   changeSob([setOfBookId]) {
     this.paymentMethodSearchEntity.setOfBookId = setOfBookId;
     this.paymentMethodForm.controls.setOfBookId.setValue(setOfBookId);
+    this.setOfBookId = setOfBookId;
     this.getList();
   }
 
@@ -111,8 +127,7 @@ export class PaymentMethodComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {
-  }
+  paginationOut(event) {}
 
   showDialog() {
     this.isShowDialog = true;
