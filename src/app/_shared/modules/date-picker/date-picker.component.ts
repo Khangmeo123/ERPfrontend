@@ -1,9 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DEFAULT_DATE_FORMAT } from './date-picker.formats';
+import { DEFAULT_DATE_FORMAT, OUTPUT_DATE_FORMAT } from './date-picker.formats';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-date-picker',
@@ -24,7 +25,7 @@ import { TranslateService } from '@ngx-translate/core';
     {
       provide: MAT_DATE_FORMATS,
       useValue: DEFAULT_DATE_FORMAT,
-    },
+    }
   ],
 })
 export class DatePickerComponent implements OnInit, OnChanges {
@@ -38,29 +39,44 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   @Output() valueChange = new EventEmitter();
 
-  @Input() value = '';
+  @Input() value: string = '';
 
-  date = null;
+  dateValue = null;
 
   constructor() {
   }
 
-  onDateChange(event) {
-    const {value} = event.targetElement;
-    this.control.setValue(value);
-    this.valueChange.emit(value);
+  get date() {
+    return this.dateValue;
+  }
+
+  set date(value) {
+    this.dateValue = value;
+    const datePipe = new DatePipe('en-US');
+    this.control.setValue(
+      datePipe.transform(value, OUTPUT_DATE_FORMAT),
+    );
+    this.valueChange.emit(this.control.value);
+  }
+
+  onDateChange(datePicker) {
+    datePicker.close();
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.value) {
       if (!changes.value.currentValue) {
         this.date = null;
-        this.control.setValue(null);
+      } else {
+        this.date = new Date(changes.value.currentValue);
       }
     }
   }
 
   ngOnInit() {
+    if (this.control.value) {
+      this.date = new Date(this.control.value);
+    }
   }
 
   onMouseDown(datePicker) {
@@ -75,7 +91,6 @@ export class DatePickerComponent implements OnInit, OnChanges {
     const {value} = event.target;
     if (value === '' || value === null) {
       this.date = null;
-      this.control.setValue(null);
     }
   }
 
