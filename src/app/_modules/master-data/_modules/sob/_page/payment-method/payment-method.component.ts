@@ -156,6 +156,14 @@ export class PaymentMethodComponent implements OnInit {
     }
   }
 
+  sort(event: any) {
+    if (event.sortField && event.sortOrder) {
+      this.paymentMethodSearchEntity.orderBy = event.sortField;
+      this.paymentMethodSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+    }
+    this.getList();
+  }
+
   clearSearch(table: any) {
     this.paymentMethodSearchEntity = new PaymentMethodSearchEntity();
     table.reset();
