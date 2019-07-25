@@ -96,6 +96,7 @@ import { PipeModule } from 'src/app/_shared/pipe/pipe.module';
     DirectiveModule,
     InputNumberModule,
     PipeModule,
+    CropperModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
