@@ -10,6 +10,9 @@
         </span>
     <div class="page-actions">
       <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-add" (click)="clearSearch(table)">
+        {{'general.button.clear' | translate}}
+      </button>
     </div>
   </div>
   <hr>
@@ -23,7 +26,8 @@
                          (listOpen)="getSobList()"></app-single-select>
     </div>
     <div class="page-selection list mt-4">
-      <p-table [value]="paymentMethodList">
+      <p-table [value]="paymentMethodList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
@@ -100,10 +104,9 @@
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
               placement="bottom"
-              (confirm)="confirmClicked = true"
-              (cancel)="cancelClicked = true"
-              *ngIf="paymentMethodForm.value?.isDeleted"
-              (click)="onClickDelete()">
+              (confirm)="onClickDelete()"
+              (cancel)="onClickCancel()"
+              *ngIf="paymentMethodForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
         <button class="btn btn-cancel"

@@ -127,7 +127,8 @@ export class PaymentMethodComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {}
+  paginationOut(event) {
+  }
 
   showDialog() {
     this.isShowDialog = true;
@@ -155,6 +156,18 @@ export class PaymentMethodComponent implements OnInit {
     }
   }
 
+  clearSearch(table: any) {
+    this.paymentMethodSearchEntity = new PaymentMethodSearchEntity();
+    table.reset();
+  }
+
   onClickDelete() {
+    this.paymentMethodService.delete(this.paymentMethodForm.value, this.paymentMethodSearchEntity)
+      .then(res => {
+        this.isShowDialog = res;
+      })
+      .catch(err => {
+        this.isShowDialog = err;
+      });
   }
 }
