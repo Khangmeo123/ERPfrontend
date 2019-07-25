@@ -266,12 +266,13 @@ export class SobComponent implements OnInit, OnDestroy {
   }
 
   cancelModal() {
+    this.sobService.add();
     this.toggleModal();
   }
 
   add() {
-    this.isShowDialog = true;
     this.sobService.add();
+    this.isShowDialog = true;
   }
 
   edit(sobId: string) {

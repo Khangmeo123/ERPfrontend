@@ -9,7 +9,7 @@
     </span>
     </div>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()">
+      <button class="btn btn-add" (click)="add()">
         {{'general.button.add' | translate}}
       </button>
       <button class="btn btn-add" (click)="clearFilters()">
@@ -30,28 +30,30 @@
               {{ 'sob.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn [pSortableColumn]="'currencyName'" data-qe-id="table-thead-currency-name">
+            <th pResizableColumn [pSortableColumn]="'currencyCode'" data-qe-id="table-thead-currency-name">
               {{ 'sob.currency' | translate}}
-              <p-sortIcon [field]="'currencyName'" class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'currencyCode'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'chartOfAccountTemplateName'"
                 data-qe-id="table-thead-chart-of-account-template-name">
-              {{ 'sob.currency' | translate}}
+              {{ 'sob.chart_account' | translate}}
               <p-sortIcon [field]="'chartOfAccountTemplateName'" class="float-right"></p-sortIcon>
             </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="sobSearchEntity.code"></app-advanced-filters>
+              <app-advanced-filters [filter]="sobSearchEntity.code" (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="sobSearchEntity.name"></app-advanced-filters>
+              <app-advanced-filters [filter]="sobSearchEntity.name" (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="sobSearchEntity.currencyName"></app-advanced-filters>
+              <app-advanced-filters [filter]="sobSearchEntity.currencyCode"
+                                    (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="sobSearchEntity.chartOfAccountName"></app-advanced-filters>
+              <app-advanced-filters [filter]="sobSearchEntity.chartOfAccountName"
+                                    (changeFilter)="getList()"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
@@ -64,7 +66,7 @@
               {{sob.name}}
             </td>
             <td>
-              {{sob.currencyName}}
+              {{sob.currencyCode}}
             </td>
             <td>
               {{sob.chartOfAccountTemplateName}}
@@ -108,7 +110,7 @@
                      [formGroup]="sobForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
-	      </div>
+      </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
@@ -130,8 +132,8 @@
         <div class="div-form">
           <app-single-select [list]="currencyList"
                              id="currency"
-                             key="name"
-                             [initialValue]="sobForm.controls.currencyName?.value"
+                             key="code"
+                             [initialValue]="sobForm.controls.currencyCode?.value"
                              (selectionChange)="onSelectId($event, 'currencyId')"
                              (listOpen)="getCurrencyList()"></app-single-select>
           <app-error data-qe-id="dialog-error-currency-id"

@@ -11,7 +11,7 @@ export class SobForm extends FormModel {
   chartOfAccountTemplateName = new FormControl('');
 
   currencyId = new FormControl('', [requiredField]);
-  currencyName = new FormControl('', []);
+  currencyCode = new FormControl('', []);
 
   specialConsumptionTaxTemplateId = new FormControl('');
   specialConsumptionTaxTemplateName = new FormControl('');
