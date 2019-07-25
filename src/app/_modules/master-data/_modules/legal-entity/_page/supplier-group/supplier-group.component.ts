@@ -11,6 +11,8 @@ import {Router} from '@angular/router';
 import {SupplierGroupService} from './supplier-group.service';
 import {GeneralService} from '../../../../../../_helpers/general-service.service';
 import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
+import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 
 @Component({
   selector: 'app-supplier-group',
@@ -37,10 +39,11 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   supplierGroupSubs: Subscription = new Subscription();
 
 
-  legalEntityIds: SupplierGroupEntity[];
-  legalEntityExceptIds: SupplierGroupEntity[];
-  leGalEntityTyping: Subject<SupplierGroupSearchEntity> = new Subject();
+  legalEntityIds: LegalEntity[];
+  legalEntityExceptIds: LegalEntity[];
+  leGalEntityTyping: Subject<LegalSearchEntity> = new Subject();
   legalEntityId: string = '';
+  legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
 
   supplierIds: SupplierEntity[];
   supplierExceptIds: SupplierEntity[];
@@ -96,7 +99,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       }
     });
 
-    const legalEntityListSub = this.supplierGroupService.sobList.subscribe(res => {
+    const legalEntityListSub = this.supplierGroupService.legalList.subscribe(res => {
       if (res) {
         this.legalEntityIds = res.ids;
         this.legalEntityExceptIds = res.exceptIds;
@@ -141,12 +144,12 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.supplierDetailSubs.unsubscribe();
   }
 
-  sobSearch(event) {
-    this.supplierGroupSearchEntity.code = event;
-    this.supplierGroupSearchEntity.name = event;
-    this.leGalEntityTyping.next(this.supplierGroupSearchEntity);
+  legalSearch(event) {
+    this.legalSearchEntity.code = event;
+    this.legalSearchEntity.name = event;
+    this.leGalEntityTyping.next(this.legalSearchEntity);
   }
-  selectSob(event) {
+  selectLegal(event) {
     this.supplierGroupSearchEntity.legalEntityId = event[0];
     this.legalEntityId = event[0];
     this.getList();
@@ -160,11 +163,13 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   suppplierSearchApp(event) {
-
+    this.supplierSearchEntity.code = event;
+    this.supplierSearchEntity.name = event;
+    this.supplierTyping.next(this.supplierSearchEntity);
   }
 
   selectSupplierApp(event) {
-
+    console.log('selectSupplierApp', event)
   }
 
   getList() {

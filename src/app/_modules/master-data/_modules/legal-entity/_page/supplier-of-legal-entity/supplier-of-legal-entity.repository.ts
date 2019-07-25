@@ -17,7 +17,7 @@ import { Entities } from 'src/app/_helpers/entity';
 export class SupplierOfLegalEntityRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/supplier-of-legal-entity/list-supplier-legal-entity';
+        this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/supplier-of-legal-entity';
     }
 
     getListLegal(legalSearchEntity: LegalSearchEntity): Observable<LegalEntity[]> {

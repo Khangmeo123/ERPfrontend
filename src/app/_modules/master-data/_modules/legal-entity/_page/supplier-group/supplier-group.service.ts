@@ -9,13 +9,14 @@ import { SupplierGroupSearchEntity } from 'src/app/_modules/master-data/_backend
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { SupplierSearchEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.searchentity';
 import { SupplierEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.entity';
+import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 
 export class SupplierGroupService {
     public supplierGroupList: BehaviorSubject<SupplierGroupEntity[]>;
     public supplierGroupForm: BehaviorSubject<FormGroup>;
     public supplierGroupCount: BehaviorSubject<number>;
 
-    public sobList: BehaviorSubject<Entities>;
+    public legalList: BehaviorSubject<Entities>;
     public supplierList: BehaviorSubject<Entities>;
     public supplierDetailList: BehaviorSubject<SupplierEntity[]>;
     public supplierDetailCount: BehaviorSubject<number>;
@@ -29,15 +30,15 @@ export class SupplierGroupService {
         this.supplierGroupForm = new BehaviorSubject(this.fb.group(
             new SupplierGroupForm(),
         ));
-        this.sobList = new BehaviorSubject(new Entities());
+        this.legalList = new BehaviorSubject(new Entities());
         this.supplierList = new BehaviorSubject(new Entities());
         this.supplierDetailList = new BehaviorSubject([]);
         this.supplierDetailCount = new BehaviorSubject(0);
     }
 
     getList(supplierGroupSearchEntity: SupplierGroupSearchEntity) {
-        forkJoin(this.supplierGroupRepository.getList(supplierGroupSearchEntity),
-            this.supplierGroupRepository.count(supplierGroupSearchEntity)).subscribe(([list, count]) => {
+        forkJoin(this.supplierGroupRepository.getListSupplierGroup(supplierGroupSearchEntity),
+            this.supplierGroupRepository.countSupplierGroup(supplierGroupSearchEntity)).subscribe(([list, count]) => {
                 if (list) {
                     this.supplierGroupList.next(list);
                 }
@@ -137,10 +138,10 @@ export class SupplierGroupService {
     }
 
 
-    getListLegalEntity(supplierGroupSearchEntity: SupplierGroupSearchEntity) {
-        this.supplierGroupRepository.getListLegalEntity(supplierGroupSearchEntity).subscribe(res => {
+    getListLegalEntity(legalSearchEntity: LegalSearchEntity) {
+        this.supplierGroupRepository.getListLegalEntity(legalSearchEntity).subscribe(res => {
             if (res) {
-                this.sobList.next(res);
+                this.legalList.next(res);
             }
         }, err => {
             if (err) {
@@ -148,14 +149,14 @@ export class SupplierGroupService {
             }
         });
     }
-    getLisLegalEntityByTyping(supplierGroupSearchEntity: Observable<SupplierGroupSearchEntity>) {
-        supplierGroupSearchEntity.pipe(debounceTime(400),
+    getLisLegalEntityByTyping(legalSearchEntity: Observable<LegalSearchEntity>) {
+        legalSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
                 return this.supplierGroupRepository.getListLegalEntity(searchEntity)
             })).subscribe(res => {
                 if (res) {
-                    this.sobList.next(res);
+                    this.legalList.next(res);
                 }
             });
     }

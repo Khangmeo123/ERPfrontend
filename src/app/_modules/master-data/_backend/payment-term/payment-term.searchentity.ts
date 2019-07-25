@@ -14,7 +14,7 @@ export class PaymentTermSearchEntity extends SearchEntity {
 
 
     
-    constructor(paymentTermSearchEntity: any) {
+    constructor(paymentTermSearchEntity?: any) {
         super(paymentTermSearchEntity);
     }
 }

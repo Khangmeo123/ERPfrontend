@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { Entities } from 'src/app/_helpers/entity';
 import { SupplierSearchEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.searchentity';
 import { SupplierEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.entity';
+import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 
 @Injectable({
     providedIn: 'root',
@@ -18,11 +19,11 @@ import { SupplierEntity } from 'src/app/_modules/master-data/_backend/supplier/s
 export class ListSupplierRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/supplier-group/list-supplier-group';
+        this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/supplier-group';
     }
 
-    getList(supplierGroupSearchEntity: SupplierGroupSearchEntity): Observable<SupplierGroupEntity[]> {
-        return this.http.post<SupplierGroupEntity[]>(this.apiUrl + '/list', JSON.stringify(supplierGroupSearchEntity),
+    getListSupplierGroup(supplierGroupSearchEntity: SupplierGroupSearchEntity): Observable<SupplierGroupEntity[]> {
+        return this.http.post<SupplierGroupEntity[]>(this.apiUrl + '/list-supplier-grouping', JSON.stringify(supplierGroupSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return r.body.map((item) => {
@@ -32,8 +33,8 @@ export class ListSupplierRepository extends Repository {
             );
     }
 
-    count(supplierGroupSearchEntity: SupplierGroupSearchEntity): Observable<number> {
-        return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(supplierGroupSearchEntity),
+    countSupplierGroup(supplierGroupSearchEntity: SupplierGroupSearchEntity): Observable<number> {
+        return this.http.post<number>(this.apiUrl + '/count-supplier-grouping', JSON.stringify(supplierGroupSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
@@ -69,8 +70,8 @@ export class ListSupplierRepository extends Repository {
             );
     }
 
-    getListLegalEntity(supplierGroupSearchEntity: SupplierGroupSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-legal-entity', JSON.stringify(supplierGroupSearchEntity),
+    getListLegalEntity(legalSearchEntity: LegalSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-legal-entity', JSON.stringify(legalSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -119,10 +120,17 @@ export class ListSupplierRepository extends Repository {
     }
 
     addSupplier(supplierSearchEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/bulk-create-supplier-detail', JSON.stringify(supplierSearchEntity),
+        return this.http.post<boolean>(this.apiUrl + '/bulk-add-supplier-detail', JSON.stringify(supplierSearchEntity),
         { observe: 'response', headers: this.getHeader() }).pipe(
             map(r => r.body),
         );
+    }
+
+    deleteSupplier(employeeEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/delete-supplier-detail', JSON.stringify(employeeEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
     }
 
 

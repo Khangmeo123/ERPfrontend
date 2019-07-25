@@ -27,3 +27,4 @@ export class SupplierGroupForm extends FormModel {
         }
     }
 }
+

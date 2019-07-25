@@ -871,7 +871,7 @@
 	},
 	"supplier": {
 		"bank_account": {
-			"bank_address": ""
+			"bank_address": "Địa chỉ chi nhánh"
 		},
 		"content": {
 			"table": {

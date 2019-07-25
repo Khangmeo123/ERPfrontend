@@ -7,9 +7,10 @@ import { InfoContactEntity } from './info-contact.entity';
 export class InfoContactForm extends FormModel {
     name = new FormControl('', [requiredField]);
     phone = new FormControl('', [requiredField]);
-    email = new FormControl('', [requiredField]);
-    address: string;
-    relationship: string;
+    email = new FormControl('');
+    address = new FormControl('');
+    provinceId = new FormControl('');
+    provinceName = new FormControl('');
     constructor(infoContactEntity?: InfoContactEntity) {
         super();
         if (infoContactEntity !== null && infoContactEntity !== undefined) {

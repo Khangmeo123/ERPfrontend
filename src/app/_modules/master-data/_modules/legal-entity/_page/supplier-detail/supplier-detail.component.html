@@ -1,351 +1,443 @@
 <div class="page detail-supplier-group">
-  <div class="page-header">
-    <span class="page-title">
-      {{'detailSupplierGroup.detail.title' | translate}}
-    </span>
-    <div class="page-actions">
-      <button class="btn btn-cancel" data-qe-id="button-cancel">
-        {{'general.button.cancel' | translate}}
-      </button>
-      <button class="btn btn-save" data-qe-id="button-save">
-        {{'general.button.save' | translate}}
-      </button>
-    </div>
-  </div>
-  <div class="page-body">
-    <div class="page-section">
-      <accordion>
-        <accordion-group [isOpen]="true">
-          <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
-            <div class="pull-left float-left">{{'detailSupplierGroup.tab_1.general' | translate }}</div>
-            <span class="float-right pull-right" accordion-heading>
-              <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
-            </span>
-          </button>
-          <div class="row">
-            <div class="form-group col">
-              <label for="supplier_code">
-                {{'detailSupplierGroup.code' | translate}}
-                <span class="text-danger ml-1"> * </span>
-              </label>
-              <input type="text" class="form-control" id="supplier_code" data-qe-id="detail-form-general-code" disabled>
-              <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
-                [formGroup]="form" [property]="'name'" [placement]="'top'" class="error-form">
-              </app-error>
-            </div>
-            <div class="form-group col">
-              <label for="supplier_name">
-                {{'detailSupplierGroup.name' | translate}}
-                <span class="text-danger ml-1"> * </span>
-              </label>
-              <input type="text" class="form-control" id="supplier_name" data-qe-id="detail-form-general-name" disabled>
-            </div>
-
-            <div class="form-group col">
-              <label for="tax_code">
-                {{'detailSupplierGroup.tax_code' | translate}}
-              </label>
-              <input type="text" class="form-control" id="tax_code" data-qe-id="detail-form-general-tax-code" disabled>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="form-group col-4">
-              <label for="supplier_status">
-                {{'detailSupplierGroup.status' | translate}}
-                <span class="text-danger ml-1"> * </span>
-              </label>
-              <input type="text" class="form-control" id="tax_code" data-qe-id="detail-form-general-status" disabled>
-            </div>
-            <!-- <div class="form-group col"></div> -->
-            <div class="form-group col-8">
-              <label for="supplier_more_details">
-                {{'detailSupplierGroup.more_details' | translate}}
-              </label>
-              <textarea disabled name="supplier_more_details" id="supplier_more_details" rows="1" class="form-control"
-                data-qe-id="detail-form-general-more-detail"></textarea>
-            </div>
-            <div class="form-group col-4">
-              <label>
-                {{'detailSupplierGroup.payment_terms' | translate}}
-              </label>
-              <app-single-select data-qe-id="detail-form-general-payment-term"></app-single-select>
-            </div>
-            <div class="form-group col-4">
-              <label>
-                {{'detailSupplierGroup.due_in_days' | translate}}
-              </label>
-              <input type="text" class="form-control" data-qe-id="detail-form-general-due-in-days">
-            </div>
-            <div class="form-group col-4">
-              <label>
-                {{'detailSupplierGroup.debt_load' | translate}}
-              </label>
-              <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load">
-            </div>
-            <div class="form-group col-4">
-              <label>
-                {{'detailSupplierGroup.pic' | translate}}
-              </label>
-              <app-single-select data-qe-id="detail-form-general-pic"></app-single-select>
-            </div>
-            <div class="form-group col-4">
-              <label>
-                {{'detailSupplierGroup.supplier_group' | translate}}
-              </label>
-              <app-single-select data-qe-id="detail-form-general-supplier-group"></app-single-select>
-            </div>
-          </div>
-        </accordion-group>
-        <accordion-group>
-          <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
-            <div class="pull-left float-left">{{'detailSupplierGroup.contacts.title' | translate }}</div>
-            <span class="float-right pull-right" accordion-heading>
-              <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
-            </span>
-          </button>
-          <div class="d-flex justify-content-end">
-            <button class="btn btn-add" (click)="toggleContactsModal()" data-qe-id="button-add-contact">
-              {{'detailSupplierGroup.contacts.add' | translate}}
-
+    <div class="page-header">
+        <span class="page-title">
+            {{'detailSupplierGroup.detail.title' | translate}}
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-cancel" data-qe-id="button-cancel">
+                {{'general.button.cancel' | translate}}
             </button>
-          </div>
-
-          <div class="mt-2">
-            <p-table [value]="[]" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
-              <ng-template pTemplate="colgroup">
-                <colgroup>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                </colgroup>
-              </ng-template>
-              <ng-template pTemplate="header">
-                <tr>
-                  <th pResizableColumn data-qe-id="table-thead-contacts-code">
-                    {{'detailSupplierGroup.contacts.code' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-contacts-recipient">
-                    {{'detailSupplierGroup.contacts.recipient' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-contacts-phone-number">
-                    {{'detailSupplierGroup.contacts.phone_number' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-contacts-email">
-                    {{'detailSupplierGroup.contacts.email' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-contacts-city">
-                    {{'detailSupplierGroup.contacts.city' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-contacts-address">
-                    {{'detailSupplierGroup.contacts.address' | translate}}
-                  </th>
-                </tr>
-              </ng-template>
-            </p-table>
-          </div>
-
-        </accordion-group>
-        <accordion-group>
-          <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
-            <div class="pull-left float-left">{{'detailSupplierGroup.bank_account.title' | translate }}</div>
-            <span class="float-right pull-right" accordion-heading>
-              <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
-            </span>
-          </button>
-          <div class="d-flex justify-content-end">
-            <button class="btn btn-add" (click)="toggleBankAccountsModal()" data-qe-id="button-add-bank-account">
-              {{'detailSupplierGroup.bank_account.add' | translate}}
+            <button class="btn btn-save" data-qe-id="button-save">
+                {{'general.button.save' | translate}}
             </button>
-          </div>
-          <div class="mt-2">
-            <p-table [value]="[]" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableBankAccount>
-              <ng-template pTemplate="colgroup">
-                <colgroup>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                  <col>
-                </colgroup>
-              </ng-template>
-              <ng-template pTemplate="header">
-                <tr>
-                  <th pResizableColumn data-qe-id="table-thead-bank-code">
-                    {{'detailSupplierGroup.bank_account.code' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-bank-name">
-                    {{'detailSupplierGroup.bank_account.bank_name' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-bank-account-owner">
-                    {{'detailSupplierGroup.bank_account.account_owner' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-bank-account-number">
-                    {{'detailSupplierGroup.bank_account.account_number' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-bank-province">
-                    {{'detailSupplierGroup.bank_account.province' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-bank-division">
-                    {{'detailSupplierGroup.bank_account.bank_division' | translate}}
-                  </th>
-                  <th pResizableColumn data-qe-id="table-thead-bank-address">
-                    {{'detailSupplierGroup.bank_account.bank_address' | translate}}
-                  </th>
-                </tr>
-              </ng-template>
-            </p-table>
-          </div>
-        </accordion-group>
-      </accordion>
+        </div>
     </div>
-  </div>
-  <div class="page-footer d-flex">
-    <div class="page-actions-delete">
-      <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
-        (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="onClickDelete()">
-        {{ 'general.button.delete' | translate}}</a>
+    <div class="page-body">
+        <div class="page-section">
+            <accordion>
+                <accordion-group [isOpen]="true" [formGroup]="supplierForm">
+                    <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'detailSupplierGroup.tab_1.general' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="supplier_code">
+                                {{'detailSupplierGroup.code' | translate}}
+                                <span class="text-danger ml-1"> * </span>
+                            </label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="supplier_code"
+                                    data-qe-id="detail-form-general-code" formControlName="code">
+                                <app-error
+                                    *ngIf="(supplierForm?.controls.code?.errors  && supplierForm.controls.code?.touched )|| !!supplierForm.controls.errors?.get('code')?.value"
+                                    [formGroup]="supplierForm" [property]="'code'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
+
+                        </div>
+                        <div class="form-group col">
+                            <label for="supplier_name">
+                                {{'detailSupplierGroup.name' | translate}}
+                                <span class="text-danger ml-1"> * </span>
+                            </label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="supplier_name"
+                                    data-qe-id="detail-form-general-name" formControlName="name">
+                                <app-error
+                                    *ngIf="(supplierForm.controls.name?.errors  && supplierForm.controls.name?.touched )|| !!supplierForm.controls.errors?.get('name')?.value"
+                                    [formGroup]="supplierForm" [property]="'name'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group col">
+                            <label for="tax_code">
+                                {{'detailSupplierGroup.tax_code' | translate}}
+                            </label>
+                            <input type="text" class="form-control" id="tax_code"
+                                data-qe-id="detail-form-general-tax-code" formControlName="taxCode">
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="supplier_status">
+                                {{'detailSupplierGroup.status' | translate}}
+                                <span class="text-danger ml-1"> * </span>
+                            </label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="tax_code"
+                                    data-qe-id="detail-form-general-status" formControlName="status">
+                                <app-error
+                                    *ngIf="(supplierForm.controls.status?.errors  && supplierForm.controls.status?.touched )|| !!supplierForm.controls.errors?.get('status')?.value"
+                                    [formGroup]="supplierForm" [property]="'status'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
+
+                        </div>
+                        <!-- <div class="form-group col"></div> -->
+                        <div class="form-group col-8">
+                            <label for="supplier_more_details">
+                                {{'detailSupplierGroup.more_details' | translate}}
+                            </label>
+                            <textarea name="supplier_more_details" id="supplier_more_details" rows="1"
+                                class="form-control" data-qe-id="detail-form-general-more-detail"
+                                formControlName="note"></textarea>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailSupplierGroup.payment_terms' | translate}}
+                            </label>
+                            <app-single-select data-qe-id="detail-form-general-payment-term"
+                                [list]="paymentTermExceptIds" [selectedList]="paymentTermIds" [key]="'name'"
+                                (search)="paymentTermSearch($event)"
+                                (selectionChange)="supplierForm.controls.paymentTermId.setValue($event[0])"
+                                (listOpen)="openPaymentTermList(supplierDetailEntity.paymentTermId)">
+                            </app-single-select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailSupplierGroup.due_in_days' | translate}}
+                            </label>
+                            <input type="text" class="form-control" data-qe-id="detail-form-general-due-in-days"
+                                formControlName="dueInDays">
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailSupplierGroup.debt_load' | translate}}
+                            </label>
+                            <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load"
+                                formControlName="debtLoad">
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailSupplierGroup.pic' | translate}}
+                            </label>
+                            <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChangeExceptIds"
+                                [selectedList]="staffInChangeIds" [key]="'name'" (search)="staffInChangeSearch($event)"
+                                (selectionChange)="supplierForm.controls.staffInChargeId.setValue($event[0])"
+                                (listOpen)="openStaffInChangeList(supplierDetailEntity.staffInChargeId)">
+                            </app-single-select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailSupplierGroup.supplier_group' | translate}}
+                            </label>
+                            <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load"
+                                formControlName="supplierGroupingName">
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group>
+                    <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'detailSupplierGroup.contacts.title' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="addContact()" data-qe-id="button-add-contact">
+                            {{'detailSupplierGroup.contacts.add' | translate}}
+                        </button>
+                    </div>
+
+                    <div class="mt-2">
+                        <p-table [value]="supplierForm.get('supplierContacts').value" [scrollable]="true"
+                            scrollHeight="500px" [resizableColumns]="true" #table>
+                            <ng-template pTemplate="colgroup">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-code">
+                                        {{'detailSupplierGroup.contacts.code' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-recipient">
+                                        {{'detailSupplierGroup.contacts.recipient' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-phone-number">
+                                        {{'detailSupplierGroup.contacts.phone_number' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-email">
+                                        {{'detailSupplierGroup.contacts.email' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-city">
+                                        {{'detailSupplierGroup.contacts.city' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-address">
+                                        {{'detailSupplierGroup.contacts.address' | translate}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-contact let-index="rowIndex">
+                                <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                    <td> {{index}}</td>
+                                    <td> {{contact.name}} </td>
+                                    <td> {{contact.phone}} </td>
+                                    <td> {{contact.email}} </td>
+                                    <td> </td>
+                                    <td> {{contact.address}} </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+
+                </accordion-group>
+                <accordion-group>
+                    <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'detailSupplierGroup.bank_account.title' | translate }}
+                        </div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="addBankAccount()" data-qe-id="button-add-bank-account">
+                            {{'detailSupplierGroup.bank_account.add' | translate}}
+                        </button>
+                    </div>
+                    <div class="mt-2">
+                        <p-table [value]="supplierForm.get('supplierBankAccounts').value" [scrollable]="true"
+                            scrollHeight="500px" [resizableColumns]="true" #tableBankAccount>
+                            <ng-template pTemplate="colgroup">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-code">
+                                        {{'detailSupplierGroup.bank_account.code' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-name">
+                                        {{'detailSupplierGroup.bank_account.bank_name' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-account-owner">
+                                        {{'detailSupplierGroup.bank_account.account_owner' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-account-number">
+                                        {{'detailSupplierGroup.bank_account.account_number' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-province">
+                                        {{'detailSupplierGroup.bank_account.province' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-division">
+                                        {{'detailSupplierGroup.bank_account.bank_division' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-address">
+                                        {{'detailSupplierGroup.bank_account.bank_address' | translate}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
+                                <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                    <td> {{index}}</td>
+                                    <td> {{bankAccount.name}} </td>
+                                    <td> {{bankAccount.phone}} </td>
+                                    <td> {{bankAccount.email}} </td>
+                                    <td> </td>
+                                    <td> {{bankAccount.address}} </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
     </div>
-    <div class="page-actions">
-      <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
-        {{'general.button.cancel' | translate}}
-      </button>
-      <button class="btn btn-add mr-2" data-qe-id="button-save">
-        {{'general.button.save' | translate}}
-      </button>
+    <div class="page-footer d-flex">
+        <div class="page-actions-delete">
+            <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
+                (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                {{ 'general.button.delete' | translate}}</a>
+        </div>
+        <div class="page-actions">
+            <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+                {{'general.button.cancel' | translate}}
+            </button>
+            <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="save()">
+                {{'general.button.save' | translate}}
+            </button>
+        </div>
     </div>
-  </div>
 </div>
 
 
-<p-dialog modal="true" [(visible)]="bankAccountsModal">
-  <p-header>
-    {{'detailSupplierGroup.bank_accounts.add' | translate}}
-  </p-header>
-  <form class="container">
-    <div class="row">
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.bank_account.bank_name' | translate}}
-          <span class="text-danger mr-2">*</span>
-        </label>
-        <app-single-select data-qe-id="dialog-bank-account"></app-single-select>
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.bank_account.account_owner' | translate}}
-          <span class="text-danger mr-2">*</span>
-        </label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.bank_account.account_number' | translate}}
-          <span class="text-danger mr-2">*</span>
-        </label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.bank_account.bank_division' | translate}}
-        </label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.bank_account.province' | translate}}
-        </label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'supplier.bank_account.bank_address' | translate}}
-        </label>
-        <input type="text" class="form-control">
-      </div>
-    </div>
-  </form>
-  <p-footer>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="page-actions-delete">
-          <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
-            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" data-qe-id="button-delete">
-            {{ 'general.button.delete' | translate}}</a>
+<p-dialog modal="true" [(visible)]="bankAccountsModal" [contentStyle]="{'overflow':'visible'}">
+    <p-header>
+        {{'detailSupplierGroup.bank_accounts.add' | translate}}
+    </p-header>
+    <form class="container" [formGroup]="bankAccountForm">
+        <div class="row">
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.bank_account.bank_name' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-single-select data-qe-id="dialog-bank-account" [list]="bankExceptIds" [selectedList]="bankIds"
+                    [key]="'name'" (search)="bankSearch($event)" (selectionChange)="bankAccountForm.setValue($event[0])"
+                    (listOpen)="openBankList(bankAccountForm.bankId)"></app-single-select>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.bank_account.account_owner' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="accountName" id="accountName">
+                    <app-error data-qe-id="form-error-name"
+                        *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.errors?.get('accountName')?.value"
+                        [formGroup]="bankAccountForm" [property]="'name'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.bank_account.account_number' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="accountNumber" id="accountNumber">
+                    <app-error data-qe-id="form-error-name"
+                        *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.errors?.get('accountNumber')?.value"
+                        [formGroup]="bankAccountForm" [property]="'name'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.bank_account.bank_division' | translate}}
+                </label>
+                <input type="text" class="form-control" fomControlName="branch">
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.bank_account.province' | translate}}
+                </label>
+                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds"
+                    [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
+                    (selectionChange)="supplierForm.get('supplierBankAccounts').setValue($event[0])"
+                    (listOpen)="openProvinceList(supplierForm.get('supplierBankAccounts').provinceId)">
+                </app-single-select>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'supplier.bank_account.bank_address' | translate}}
+                </label>
+                <input type="text" class="form-control"  fomControlName="branch">
+            </div>
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="page-actions">
-          <button class="btn btn-cancel mr-2" (click)="cancel()" data-qe-id="dialog-button-cancel">
-            {{'general.button.cancel' | translate}}
-          </button>
-          <button class="btn btn-add mr-2" data-qe-id="button-save">
-            {{'general.button.save' | translate}}
-          </button>
+    </form>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-actions-delete">
+                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                        data-qe-id="button-delete">
+                        {{ 'general.button.delete' | translate}}</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="page-actions">
+                    <button class="btn btn-cancel mr-2" (click)="cancel()" data-qe-id="dialog-button-cancel">
+                        {{'general.button.cancel' | translate}}
+                    </button>
+                    <button class="btn btn-add mr-2" data-qe-id="button-save">
+                        {{'general.button.save' | translate}}
+                    </button>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </p-footer>
+    </p-footer>
 </p-dialog>
 
-<p-dialog modal="true" [(visible)]="contactsModal">
-  <p-header>
-    {{'detailSupplierGroup.contacts.add' | translate}}
-  </p-header>
-  <form class="container">
-    <div class="row">
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.contacts.recipient' | translate}}
-          <span class="text-danger mr-2">*</span>
-        </label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.contacts.phone_number' | translate}}
-          <span class="text-danger mr-2">*</span>
-        </label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.contacts.email' | translate}}
-        </label>
-        <input type="text" class="form-control">
-      </div>
-      <div class="form-group col-6">
-        <label>
-          {{'detailSupplierGroup.contacts.address' | translate}}
-        </label>
-        <input type="text" class="form-control">
-      </div>
-    </div>
-  </form>
-  <p-footer>
-    <div class="row">
-      <div class="col-sm-6">
-        <div class="page-actions-delete">
-          <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
-            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" data-qe-id="button-delete">
-            {{ 'general.button.delete' | translate}}</a>
+<p-dialog modal="true" [(visible)]="contactsModal" [contentStyle]="{'overflow':'visible'}">
+    <p-header>
+        {{'detailSupplierGroup.contacts.add' | translate}}
+    </p-header>
+    <form class="container" [formGroup]="contactForm">
+        <div class="row">
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.contacts.recipient' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="name">
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.contacts.phone_number' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <input type="text" class="form-control" formControlName="phone">
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.contacts.email' | translate}}
+                </label>
+                <input type="text" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailSupplierGroup.contacts.province' | translate}}
+                </label>
+                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds"
+                    [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
+                    (selectionChange)="contactForm.setValue($event[0])"
+                    (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
+            </div>
+
         </div>
-      </div>
-      <div class="col-sm-6">
-        <div class="page-actions">
-          <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
-            {{'general.button.cancel' | translate}}
-          </button>
-          <button class="btn btn-add mr-2" data-qe-id="button-save">
-            {{'general.button.save' | translate}}
-          </button>
+        <div class="row">
+            <div class="form-group col-12">
+                <label>
+                    {{'detailSupplierGroup.contacts.address' | translate}}
+                </label>
+                <input type="text" class="form-control" formControlName="address">
+            </div>
         </div>
-      </div>
-    </div>
-  </p-footer>
+    </form>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-actions-delete">
+                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                        data-qe-id="button-delete">
+                        {{ 'general.button.delete' | translate}}</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="page-actions">
+                    <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+                        {{'general.button.cancel' | translate}}
+                    </button>
+                    <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="saveContact(contactForm.value)">
+                        {{'general.button.save' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
 </p-dialog>
