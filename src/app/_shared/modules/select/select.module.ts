@@ -16,6 +16,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {ClickOutsideModule} from 'ng-click-outside';
 import { TranslateModule } from '@ngx-translate/core';
 import { SimpleSelectComponent } from './components/simple-select/simple-select.component';
+import { NoDataModule } from '../no-data/no-data.module';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { SimpleSelectComponent } from './components/simple-select/simple-select.
     MatIconModule,
     ClickOutsideModule,
     TranslateModule,
+    NoDataModule,
   ],
   exports: [
     TreeSelectComponent,
