@@ -1,5 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
 import Cropper from 'cropperjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-cropper',
@@ -10,12 +11,13 @@ import Cropper from 'cropperjs';
   encapsulation: ViewEncapsulation.None,
 })
 export class CropperComponent implements OnInit {
+  @Input() control: FormControl = new FormControl();
 
   display = false;
 
   result = '';
 
-  @Input() selectedFile: File;
+  selectedFile: File;
 
   cropper: Cropper;
 
@@ -27,8 +29,8 @@ export class CropperComponent implements OnInit {
 
   cropped = false;
 
-  @ViewChild('image', {static: true}) image;
-  @ViewChild('file', {static: true}) file;
+  @ViewChild('image', { static: true }) image;
+  @ViewChild('file', { static: true }) file;
 
   constructor() {
   }
@@ -39,6 +41,7 @@ export class CropperComponent implements OnInit {
   }
 
   set imageDataURL(data) {
+    this.control.setValue(data);
     this.imageData = data;
   }
 
@@ -50,6 +53,9 @@ export class CropperComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.control.value) {
+      this.result = this.control.value;
+    }
   }
 
   onCrop(image) {
@@ -77,7 +83,7 @@ export class CropperComponent implements OnInit {
   onSelectFile(event) {
     this.cropper = null;
     this.selectedFile = null;
-    const {files} = event.target;
+    const { files } = event.target;
     if (files.length) {
       this.selectedFile = files[0];
       const reader = new FileReader();

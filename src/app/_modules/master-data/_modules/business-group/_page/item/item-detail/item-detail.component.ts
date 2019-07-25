@@ -90,7 +90,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
     if (!this.itemForm.valid) {
       this.generalService.validateAllFormFields(this.itemForm);
     } else {
-      this.itemDetailService.save(this.itemForm).then(res => {
+      this.itemDetailService.save(this.itemForm.value).then(res => {
         this.router.navigate(['/master-data/business-group/item/item-list']);
       });
     }
