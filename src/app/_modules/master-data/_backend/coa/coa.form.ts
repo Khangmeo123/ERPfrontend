@@ -14,7 +14,7 @@ export class CoaForm extends FormModel {
   characteristicName = new FormControl('');
 
 
-  parentAccountId = new FormControl();
+  parentAccountId = new FormControl('');
   parentAccountNumber = new FormControl('');
 
   description = new FormControl('');
