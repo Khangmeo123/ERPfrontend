@@ -9,6 +9,7 @@ export class EmployeeSearchEntity extends SearchEntity {
     birthday: DateFilter = new DateFilter();
     identityNumber: TextFilter = new TextFilter();
     statusId: string;
+    staffInChargeId: string;
 
     constructor(employeeSearchEntity?: any) {
         super(employeeSearchEntity);

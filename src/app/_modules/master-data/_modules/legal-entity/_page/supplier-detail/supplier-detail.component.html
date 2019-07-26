@@ -123,7 +123,7 @@
                             <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChangeExceptIds"
                                 [selectedList]="staffInChangeIds" [key]="'name'" (search)="staffInChangeSearch($event)"
                                 (selectionChange)="supplierForm.controls.staffInChargeId.setValue($event[0])"
-                                (listOpen)="openStaffInChangeList(supplierDetailEntity.staffInChargeId)">
+                                (listOpen)="openStaffInChangeList(staffInChangeSearchEntity.staffInChargeId)">
                             </app-single-select>
                         </div>
                         <div class="form-group col-4">
