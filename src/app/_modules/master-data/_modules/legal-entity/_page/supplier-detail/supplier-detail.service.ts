@@ -172,6 +172,11 @@ export class SupplierDetailService {
         this.supplierDetailForm.next(currentForm);
     }
 
+
+    editContact(contact) {
+        this.contactForm.next(this.fb.group(new InfoContactForm(contact)));
+    }
+
     addCBankAccount() {
         this.bankAccountForm.next(this.fb.group(new BankAccountForm()));
     }

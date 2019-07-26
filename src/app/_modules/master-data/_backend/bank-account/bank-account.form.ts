@@ -11,7 +11,6 @@ export class BankAccountForm extends FormModel {
     bankId = new FormControl('', [requiredField]);
     bankCode = new FormControl('', [requiredField]);
     bankName = new FormControl('', [requiredField]);
-
     accountNumber = new FormControl('', [requiredField]);
 
     accountName = new FormControl('', [requiredField]);
@@ -21,6 +20,12 @@ export class BankAccountForm extends FormModel {
 
     description = new FormControl('');
     address = new FormControl('');
+
+    errors = new FormGroup({
+        bankName: new FormControl(),
+        accountName: new FormControl(),
+        accountNumber: new FormControl()
+    });
 
     constructor(bankAccountEntity?: BankAccountEntity) {
         super();

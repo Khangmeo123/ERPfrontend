@@ -149,8 +149,9 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   paymentTermSearch(event) {
-    this.supplierDetailEntity.code = event;
-    this.supplierDetailEntity.name = event;
+    this.supplierDetailEntity.code.startsWith = event;
+    this.supplierDetailEntity.name.startsWith
+     = event;
     this.paymentTermTyping.next(this.paymentTermSearchEntity);
   }
 
@@ -223,6 +224,11 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     this.contactsModal = !this.contactsModal;
   }
 
+  editContact(contact: any) {
+    console.log('editContact', contact)
+    this.supplierDetailService.editContact(contact);
+  }
+
 
   // Bank account
 
@@ -241,12 +247,18 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
   save() {
     if (!this.supplierForm.valid) {
+      console.log('vao invalid');
       this.generalService.validateAllFormFields(this.supplierForm);
     } else {
+      console.log('thanh cong');
       this.supplierDetailService.save(this.supplierForm).then(res => {
         this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity']);
       });
     }
+  }
+
+  editBankAccount(id: string) {
+
   }
 
   onClickDelete() {

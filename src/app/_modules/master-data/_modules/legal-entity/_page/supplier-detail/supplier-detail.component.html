@@ -184,12 +184,12 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-contact let-index="rowIndex">
-                                <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <tr (dblclick)="editContact(contact)" [attr.data-qe-id]="'table-tbody-row-' + index">
                                     <td> {{index}}</td>
                                     <td> {{contact.name}} </td>
                                     <td> {{contact.phone}} </td>
                                     <td> {{contact.email}} </td>
-                                    <td> </td>
+                                    <td> {{contact.province}}</td>
                                     <td> {{contact.address}} </td>
                                 </tr>
                             </ng-template>
@@ -250,7 +250,7 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
-                                <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <tr (dblclick)="editBankAccount(bankAccount.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
                                     <td> {{index}}</td>
                                     <td> {{bankAccount.name}} </td>
                                     <td> {{bankAccount.phone}} </td>

@@ -47,42 +47,6 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
 
-  tmptable = [
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-
-  ]
-
   constructor(
     protected router: Router,
     private bookmarkService: BookmarkService,
@@ -146,8 +110,8 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   }
 
   supplierSearch(event) {
-    this.supplierSearchEntity.code = event;
-    this.supplierSearchEntity.name = event;
+    this.supplierSearchEntity.code.startsWith = event;
+    this.supplierSearchEntity.name.startsWith = event;
     this.supplierTyping.next(this.supplierSearchEntity);
   }
   selectSupplier(event) {

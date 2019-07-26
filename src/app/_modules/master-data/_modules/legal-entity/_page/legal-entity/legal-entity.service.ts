@@ -54,6 +54,7 @@ export class LegalEntityService {
     edit(legalId: string) {
         this.legalRepository.getId(legalId).subscribe(res => {
             if (res) {
+                console.log('res: ', res)
                 this.legalForm.next(this.fb.group(
                     new LegalForm(res),
                 ));

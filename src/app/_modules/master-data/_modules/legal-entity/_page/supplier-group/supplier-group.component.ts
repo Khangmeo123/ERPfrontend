@@ -144,6 +144,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.supplierDetailSubs.unsubscribe();
   }
 
+  // drop legal entity
   legalSearch(event) {
     this.legalSearchEntity.code = event;
     this.legalSearchEntity.name = event;
@@ -154,9 +155,8 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.legalEntityId = event[0];
     this.getList();
   }
-
+  // drop supplier
   openSupplierList(id: []) {
-    console.log('openSupplierList', id)
     this.supplierSearchEntity = new SupplierSearchEntity();
     this.supplierSearchEntity.ids = id;
     this.supplierGroupService.getListSupplierOfSupplierGroup(this.supplierSearchEntity);
