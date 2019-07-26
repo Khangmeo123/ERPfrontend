@@ -117,10 +117,17 @@
           {{'bank_account.bank_accounts.accounting_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="hidden" id="accounting-code" #accountingCode formControlName="accountingCode">
-        <app-single-select (listOpen)="getCoaList()" [list]="chartOfAccountList"
-                           [selectedList]="selectedChartOfAccountList"
-                           (selectionChange)="accountingCode.value = $event[0]"></app-single-select>
+        <div class="div-form">
+          <input type="hidden" id="accounting-code" #accountingCode formControlName="accountingCode">
+          <app-single-select (listOpen)="getCoaList()"
+                             [list]="coaList"
+                             [selectedList]="selectedCoaList"
+                             (selectionChange)="accountingCode.value = $event[0]"></app-single-select>
+          <app-error data-qe-id="dialog-error-account-name"
+                     *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.error.get('accountName')?.value"
+                     [formGroup]="bankAccountForm" [property]="'accountName'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
         <label for="bank-code">

@@ -11,6 +11,7 @@ import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-
 import { BankAccountService } from './bank_account.service';
 import { ChartOfAccountEntity } from '../../../../_backend/chart-of-account/chart-of-account.entity';
 import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-bank-account',
@@ -19,6 +20,7 @@ import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-accoun
   providers: [
     BankAccountService,
     GeneralService,
+    ToastrService,
   ]
 })
 export class BankAccountComponent implements OnInit {
@@ -64,7 +66,8 @@ export class BankAccountComponent implements OnInit {
 
   constructor(
     private bankAccountService: BankAccountService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private toastrService: ToastrService,
   ) {
     const sobListSub = this.bankAccountService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
@@ -110,8 +113,12 @@ export class BankAccountComponent implements OnInit {
   }
 
   add() {
-    this.bankAccountService.add();
-    this.showDialog();
+    if (this.currentSob) {
+      this.bankAccountService.add();
+      this.showDialog();
+    } else {
+      this.toastrService.error('Phải chọn bộ sổ trước');
+    }
   }
 
   ngOnInit() {

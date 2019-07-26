@@ -4,20 +4,22 @@ import { BankAccountEntity } from 'src/app/_modules/master-data/_backend/bank-ac
 import { requiredField } from 'src/app/_helpers';
 
 export class BankAccountForm extends FormModel {
-  setOfBookId = new FormControl('');
+  setOfBookId = new FormControl(null);
 
-  chartOfAccountId = new FormControl('', [requiredField]);
-  chartOfAccountCode = new FormControl('', [requiredField]);
-  chartOfAccountName = new FormControl('', [requiredField]);
+  chartOfAccountId = new FormControl(null, [requiredField]);
+  chartOfAccountCode = new FormControl(null, [requiredField]);
+  chartOfAccountName = new FormControl(null, [requiredField]);
 
-  bankId = new FormControl('', [requiredField]);
-  bankCode = new FormControl('', [requiredField]);
-  bankName = new FormControl('', [requiredField]);
+  bankId = new FormControl(null, [requiredField]);
+  bankCode = new FormControl(null, [requiredField]);
+  bankName = new FormControl(null, [requiredField]);
 
-  accountNumber = new FormControl('', [requiredField]);
-  accountName = new FormControl('', [requiredField]);
+  accountNumber = new FormControl(null, [requiredField]);
+  accountName = new FormControl(null, [requiredField]);
+  accountOwner = new FormControl(null, [requiredField]);
+  accountingCode = new FormControl(null, [requiredField]);
 
-  description = new FormControl('');
+  description = new FormControl(null);
 
   constructor(bankAccountEntity?: BankAccountEntity) {
     super();

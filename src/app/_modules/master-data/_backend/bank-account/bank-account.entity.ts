@@ -9,6 +9,8 @@ export class BankAccountEntity extends Entity {
   chartOfAccountName: string;
   chartOfAccountCode: string;
 
+  accountingCode: string;
+
   // bankEntity:
   bankId: string;
   bankCode: string;
