@@ -9,6 +9,8 @@ import { Entities } from '../../../../../../_helpers/entity';
 import { CoaService } from './coa.service';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { ToastrService } from 'ngx-toastr';
+import { buildTree } from '../../../../../../_shared/modules/select/helpers';
 
 @Component({
   selector: 'app-coa',
@@ -17,6 +19,7 @@ import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
   providers: [
     CoaService,
     GeneralService,
+    ToastrService,
   ],
 })
 export class CoaComponent implements OnInit {
@@ -64,7 +67,8 @@ export class CoaComponent implements OnInit {
 
   constructor(
     private coaService: CoaService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private toastrService: ToastrService,
   ) {
     const sobListSub = this.coaService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
@@ -72,7 +76,7 @@ export class CoaComponent implements OnInit {
     });
 
     const coaSub = this.coaService.coaList.subscribe((list) => {
-      this.coaList = list;
+      this.coaList = buildTree(list);
     });
 
     const parentAccountSub = this.coaService.parentAccountList.subscribe((list) => {
@@ -118,8 +122,12 @@ export class CoaComponent implements OnInit {
   }
 
   add() {
-    this.coaService.add();
-    this.showDialog();
+    if (this.currentSob) {
+      this.coaService.add();
+      this.showDialog();
+    } else {
+      this.toastrService.error('Phải chọn bộ sổ trước');
+    }
   }
 
   ngOnInit() {
@@ -169,9 +177,7 @@ export class CoaComponent implements OnInit {
       this.generalService.validateAllFormFields(this.coaForm);
     }
     if (this.coaForm.valid) {
-      const data = this.coaForm.getRawValue();
-      const entity = new CoaEntity(data);
-      this.coaService.save(entity, this.coaSearchEntity)
+      this.coaService.save(this.coaForm.value, this.coaSearchEntity)
         .then((res) => {
           this.isShowDialog = res;
         })

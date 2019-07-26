@@ -33,6 +33,7 @@ import { ExportTaxComponent } from './_page/export-tax/export-tax.component';
 import { SpecialConsumptionTaxComponent } from './_page/special-consumption-tax/special-consumption-tax.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
+import { TreeTableModule } from 'primeng/treetable';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,9 @@ import { ErrorModule } from '../../../../_shared/components/error/error.module';
     SelectModule,
     RadioButtonModule,
     BsDropdownModule.forRoot(),
-    ErrorModule
+    ErrorModule,
+    TreeTableModule
   ]
 })
-export class SobModule { }
+export class SobModule {
+}

@@ -4,16 +4,14 @@ import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 export class CoaSearchEntity extends SearchEntity {
   setOfBookId: string;
 
-  accountNumber: TextFilter = new TextFilter();
+  accountCode: TextFilter = new TextFilter();
   accountName: TextFilter = new TextFilter();
 
-  characteristicId: string = null;
-  characteristicName: TextFilter = new TextFilter();
+  characteristicValue: TextFilter = new TextFilter();
 
-  parentAccountId: string = null;
-  parentAccountNumber: TextFilter = new TextFilter();
+  parentAccountCode: TextFilter = new TextFilter();
 
-  description: TextFilter = new TextFilter();
+  accountDescription: TextFilter = new TextFilter();
 
   constructor(coaSearchEntity?: any) {
     super(coaSearchEntity);

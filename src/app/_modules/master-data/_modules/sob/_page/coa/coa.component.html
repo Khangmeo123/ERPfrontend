@@ -41,7 +41,7 @@
                          (listOpen)="getSobList()"></app-single-select>
     </div>
     <div class="page-section mt-2">
-      <p-table [value]="coaList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+      <p-treeTable [value]="coaList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
@@ -61,7 +61,7 @@
           <tr>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="coaSearchEntity.accountNumber"></app-advanced-filters>
+                                    [filter]="coaSearchEntity.accountCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()"
@@ -69,15 +69,15 @@
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="coaSearchEntity.characteristicName"></app-advanced-filters>
+                                    [filter]="coaSearchEntity.characteristicValue"></app-advanced-filters>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="coaSearchEntity.description"></app-advanced-filters>
+                                    [filter]="coaSearchEntity.accountDescription"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-      </p-table>
+      </p-treeTable>
     </div>
   </div>
 </div>
@@ -89,44 +89,57 @@
   <div class="container" [formGroup]="coaForm">
     <div class="row">
       <div class="form-group col-6">
-        <label for="account-number">
+        <label for="account-code">
           {{'coa.account_number' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control" id="account-number" formControlName="accountNumber">
+        <div class="div-form">
+          <input type="text" class="form-control" id="account-code" name="accountCode" formControlName="accountCode">
+          <app-error data-qe-id="dialog-error-account-code"
+                     *ngIf="(coaForm.controls.accountCode?.errors && coaForm.controls.accountCode?.touched) || !!coaForm.controls.error.get('accountCode')?.value"
+                     [formGroup]="coaForm" [property]="'accountCode'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
         <label for="account-name">
           {{'coa.account_name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control" id="account-name" formControlName="accountName">
+        <div class="div-form">
+          <input type="text" class="form-control" id="account-name" name="accountName" formControlName="accountName">
+          <app-error data-qe-id="dialog-error-account-name"
+                     *ngIf="(coaForm.controls.accountName?.errors && coaForm.controls.accountName?.touched) || !!coaForm.controls.error.get('accountName')?.value"
+                     [formGroup]="coaForm" [property]="'accountName'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
         <label for="account-characteristic">
           {{'coa.account_status' | translate}}
-          <span class="text-danger mr-2">*</span>
         </label>
         <input type="hidden" id="account-characteristic" formControlName="characteristicId">
         <app-simple-select (listOpen)="getCharacteristicList()"
                            [list]="characteristicList"
+                           key="name"
         ></app-simple-select>
       </div>
       <div class="form-group col-6">
         <label for="parent-account">
           {{'coa.super_account' | translate}}
         </label>
-        <input type="hidden" formControlName="parentAccountId">
+        <input type="hidden" formControlName="parentId">
         <app-single-select (listOpen)="getParentAccountList()"
                            [list]="parentAccountList"
                            [selectedList]="selectedParentAccountList"
                            id="parent-account"></app-single-select>
       </div>
       <div class="form-group col-12">
-        <label for="description">
+        <label for="account-description">
           {{'coa.description' | translate}}
         </label>
-        <textarea id="description" formControlName="description" class="form-control" rows="3"></textarea>
+        <textarea id="account-description" formControlName="accountDescription" class="form-control"
+                  rows="3"></textarea>
       </div>
     </div>
   </div>
