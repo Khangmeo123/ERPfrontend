@@ -1,22 +1,42 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { Entities } from '../../../../../../_helpers/entity';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
+import { CoaRepository } from './coa.repository';
 import { CoaForm } from '../../../../_backend/coa/coa.form';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { CoaRepository } from './coa.repository';
+import { CharacteristicEntity } from '../../../../_backend/characteristic/characteristic.entity';
 
 export class CoaService {
-  public coaList: BehaviorSubject<CoaEntity[]>;
-  public coaCount: BehaviorSubject<number>;
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public coaList: BehaviorSubject<CoaEntity[]> = new BehaviorSubject([]);
+  public parentAccountList: BehaviorSubject<CoaEntity[]> = new BehaviorSubject([]);
   public coaForm: BehaviorSubject<FormGroup>;
+  public coaCount: BehaviorSubject<number> = new BehaviorSubject(0);
+  public characteristicList: BehaviorSubject<CharacteristicEntity[]> = new BehaviorSubject([]);
 
   constructor(private fb: FormBuilder, private coaRepository: CoaRepository, private toastrService: ToastrService) {
     this.coaCount = new BehaviorSubject(0);
-    this.coaList = new BehaviorSubject([]);
     this.coaForm = new BehaviorSubject(this.fb.group(
       new CoaForm(),
     ));
+  }
+
+  getCharacteristicList() {
+    this.coaRepository.getCharacteristicList()
+      .subscribe((list) => {
+        this.characteristicList.next(list);
+      });
+  }
+
+  getParentAccountList(coaSearchEntity: CoaSearchEntity) {
+    this.coaRepository.getList(coaSearchEntity).subscribe((list) => {
+      if (list) {
+        this.parentAccountList.next(list);
+      }
+    });
   }
 
   getList(coaSearchEntity: CoaSearchEntity) {
@@ -31,7 +51,22 @@ export class CoaService {
     });
   }
 
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.coaRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        if (list) {
+          this.sobList.next(list);
+        }
+      });
+  }
+
   add() {
+    this.coaForm.next(this.fb.group(
+      new CoaForm(),
+    ));
+  }
+
+  cancel() {
     this.coaForm.next(this.fb.group(
       new CoaForm(),
     ));
