@@ -9,7 +9,7 @@ export class PaymentTermSearchEntity extends SearchEntity {
     dueInDate: number;
     discountPeriod: number;
     discountRate: number;
-
+    legalEntityId: string;
 
 
 

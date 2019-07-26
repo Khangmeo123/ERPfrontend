@@ -23,7 +23,7 @@ export class SupplierDetailService {
     public supplierDetailForm: BehaviorSubject<FormGroup>;
 
     public paymenttermList: BehaviorSubject<Entities>;
-    public staffInChangreList: BehaviorSubject<Entities>;
+    public staffInChargeList: BehaviorSubject<Entities>;
     public supplierGroupList: BehaviorSubject<Entities>;
     public proviceList: BehaviorSubject<Entities>;
     public bankList: BehaviorSubject<Entities>;
@@ -37,7 +37,7 @@ export class SupplierDetailService {
           new SupplierDetailForm(),
         ));
         this.paymenttermList = new BehaviorSubject(new Entities());
-        this.staffInChangreList = new BehaviorSubject(new Entities());
+        this.staffInChargeList = new BehaviorSubject(new Entities());
         this.supplierGroupList = new BehaviorSubject(new Entities());
         this.proviceList = new BehaviorSubject(new Entities());
         this.bankList = new BehaviorSubject(new Entities());
@@ -115,7 +115,7 @@ export class SupplierDetailService {
     getListStaffInCharge(employeeSearchEntity: EmployeeSearchEntity) {
         this.supplierDetailRepository.getListStaffInCharge(employeeSearchEntity).subscribe(res => {
             if (res) {
-                this.staffInChangreList.next(res);
+                this.staffInChargeList.next(res);
             }
         }, err => {
             if (err) {
@@ -130,7 +130,7 @@ export class SupplierDetailService {
                 return this.supplierDetailRepository.getListStaffInCharge(searchEntity)
             })).subscribe(res => {
                 if (res) {
-                    this.staffInChangreList.next(res);
+                    this.staffInChargeList.next(res);
                 }
             });
     }

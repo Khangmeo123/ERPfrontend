@@ -47,10 +47,10 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   paymentTermSearchEntity: PaymentTermSearchEntity = new PaymentTermSearchEntity();
 
   //list drop staff in changre
-  staffInChangeIds: EmployeeEntity[];
-  staffInChangeExceptIds: EmployeeEntity[];
-  staffInChangeTyping: Subject<EmployeeSearchEntity> = new Subject();
-  staffInChangeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
+  staffInChargeIds: EmployeeEntity[];
+  staffInChargeExceptIds: EmployeeEntity[];
+  staffInChargeTyping: Subject<EmployeeSearchEntity> = new Subject();
+  staffInChargeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
   //list drop staff in changre
   bankIds: BankAccountEntity[];
@@ -66,6 +66,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   contactForm: FormGroup;
   bankAccountForm: FormGroup;
+  legalEntiyId: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -74,6 +75,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     private generalService: GeneralService) {
 
     this.route.queryParams.subscribe(params => {
+      this.legalEntiyId = params.id;
       this.supplierDetailService.getId(params.id);
     });
     const supplierFormSub = this.supplierDetailService.supplierDetailForm.subscribe(res => {
@@ -89,10 +91,10 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
       }
     });
 
-    const listStaffInChangre = this.supplierDetailService.supplierGroupList.subscribe(res => {
+    const listStaffInChangre = this.supplierDetailService.staffInChargeList.subscribe(res => {
       if (res) {
-        this.staffInChangeIds = res.ids;
-        this.staffInChangeExceptIds = res.exceptIds;
+        this.staffInChargeIds = res.ids;
+        this.staffInChargeExceptIds = res.exceptIds;
       }
     });
 
@@ -143,6 +145,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   openPaymentTermList(paymenttermId: string) {
     this.paymentTermSearchEntity = new PaymentTermSearchEntity();
     if (paymenttermId !== null && paymenttermId !== undefined) {
+      this.paymentTermSearchEntity.legalEntityId = this.legalEntiyId;
       this.paymentTermSearchEntity.ids.push(paymenttermId);
     }
     this.supplierDetailService.getListPaymentTerm(this.paymentTermSearchEntity);
@@ -157,20 +160,20 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   // list drop staff in changre
 
-  openStaffInChangeList(staffInChangeId: string) {
-    this.staffInChangeSearchEntity = new EmployeeSearchEntity();
+  openStaffInChargeList(staffInChangeId: string) {
+    this.staffInChargeSearchEntity = new EmployeeSearchEntity();
     if (staffInChangeId !== null && staffInChangeId !== undefined) {
-      this.staffInChangeSearchEntity.ids.push(staffInChangeId);
+      this.staffInChargeSearchEntity.ids.push(staffInChangeId);
     }
-    this.supplierDetailService.getListStaffInCharge(this.staffInChangeSearchEntity);
+    this.supplierDetailService.getListStaffInCharge(this.staffInChargeSearchEntity);
   }
 
 
-  staffInChangeSearch(event) {
+  staffInChargeSearch(event) {
     console.log('event: ', event)
-    this.staffInChangeSearchEntity.code = event;
-    this.staffInChangeSearchEntity.name = event;
-    this.staffInChangeTyping.next(this.staffInChangeSearchEntity);
+    this.staffInChargeSearchEntity.code = event;
+    this.staffInChargeSearchEntity.name = event;
+    this.staffInChargeTyping.next(this.staffInChargeSearchEntity);
   }
 
 
@@ -208,6 +211,12 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     this.provinceSearchEntity.name = event;
     this.provinceTyping.next(this.provinceSearchEntity);
   }
+  selectedProvince(event) {
+    console.log(event);
+    // supplierForm.controls.staffInChargeId.setValue($event[0]
+  }
+
+  
 
   // Contact info:
   onClickOpenTab2() {

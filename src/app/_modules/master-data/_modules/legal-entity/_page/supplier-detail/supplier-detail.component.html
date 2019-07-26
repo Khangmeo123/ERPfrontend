@@ -120,10 +120,10 @@
                             <label>
                                 {{'detailSupplierGroup.pic' | translate}}
                             </label>
-                            <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChangeExceptIds"
-                                [selectedList]="staffInChangeIds" [key]="'name'" (search)="staffInChangeSearch($event)"
+                            <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChargeExceptIds"
+                                [selectedList]="staffInChargeIds" [key]="'name'" (search)="staffInChargeSearch($event)"
                                 (selectionChange)="supplierForm.controls.staffInChargeId.setValue($event[0])"
-                                (listOpen)="openStaffInChangeList(staffInChangeSearchEntity.staffInChargeId)">
+                                (listOpen)="openStaffInChargeList(staffInChargeSearchEntity.staffInChargeId)">
                             </app-single-select>
                         </div>
                         <div class="form-group col-4">
@@ -383,14 +383,26 @@
                     {{'detailSupplierGroup.contacts.recipient' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <input type="text" class="form-control" formControlName="name">
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="name" id="name">
+                    <app-error data-qe-id="form-error-name"
+                        *ngIf="(contactForm.controls.name?.errors && contactForm.controls.name?.touched) || !!contactForm.controls.errors?.get('name')?.value"
+                        [formGroup]="contactForm" [property]="'name'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>
                     {{'detailSupplierGroup.contacts.phone_number' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <input type="text" class="form-control" formControlName="phone">
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="phone" id="phone">
+                    <app-error data-qe-id="form-error-phone"
+                        *ngIf="(contactForm.controls.phone?.errors && contactForm.controls.phone?.touched) || !!contactForm.controls.errors?.get('phone')?.value"
+                        [formGroup]="contactForm" [property]="'phone'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>
@@ -404,7 +416,7 @@
                 </label>
                 <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds"
                     [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
-                    (selectionChange)="contactForm.setValue($event[0])"
+                    (selectionChange)="selectedProvince($event)"
                     (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
             </div>
 
