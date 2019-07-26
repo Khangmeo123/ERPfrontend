@@ -117,9 +117,10 @@
           {{'bank_account.bank_accounts.accounting_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <div class="div-form">
+        <div class="div-form d-flex">
           <input type="hidden" id="accounting-code" #accountingCode formControlName="accountingCode">
           <app-single-select (listOpen)="getCoaList()"
+                             class="flex-grow-1"
                              [list]="coaList"
                              [selectedList]="selectedCoaList"
                              (selectionChange)="accountingCode.value = $event[0]"></app-single-select>
@@ -134,21 +135,39 @@
           {{'bank_account.bank_accounts.bank_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control" id="bank-code" formControlName="bankCode">
+        <div class="div-form">
+          <input type="text" class="form-control" id="bank-code" formControlName="bankCode">
+          <app-error data-qe-id="dialog-error-bank-code"
+                     *ngIf="(bankAccountForm.controls.bankCode?.errors && bankAccountForm.controls.bankCode?.touched) || !!bankAccountForm.controls.error.get('bankCode')?.value"
+                     [formGroup]="bankAccountForm" [property]="'bankCode'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
         <label for="account-number">
           {{'bank_account.bank_accounts.account_number' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control" id="account-number" formControlName="accountNumber">
+        <div class="div-form">
+          <input type="text" class="form-control" id="account-number" formControlName="accountNumber">
+          <app-error data-qe-id="dialog-error-account-number"
+                     *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountNumber')?.value"
+                     [formGroup]="bankAccountForm" [property]="'accountNumber'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
         <label for="account-owner">
           {{'bank_account.bank_accounts.account_owner' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control" id="account-owner" formControlName="accountOwner">
+        <div class="div-form">
+          <input type="text" class="form-control" id="account-owner" formControlName="accountOwner">
+          <app-error data-qe-id="dialog-error-account-number"
+                     *ngIf="(bankAccountForm.controls.accountOwner?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountOwner')?.value"
+                     [formGroup]="bankAccountForm" [property]="'accountOwner'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-12">
         <label for="description">

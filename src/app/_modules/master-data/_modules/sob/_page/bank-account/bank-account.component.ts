@@ -121,6 +121,10 @@ export class BankAccountComponent implements OnInit {
     }
   }
 
+  paginationOutput(event) {
+
+  }
+
   ngOnInit() {
     if (this.currentSob) {
       this.getList();
