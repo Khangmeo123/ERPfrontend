@@ -1,119 +1,172 @@
 <div class="page list-item-of-legal-entity">
   <div class="page-header">
-        <span class="page-title">
-            {{'itemOfLegalEntity.header.title' | translate}}
-          <span (click)="onClickSaveBookMark($event)">
-                <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
-                    star
-                </mat-icon>
-            </span>
-        </span>
-
+    <span class="page-title">
+      {{pageTitle}}
+      <span (click)="bookMark()">
+        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
   </div>
   <div class="page-body">
     <div class="row">
       <div class="col-sm-6 page-1">
-        <div class="mt-2 row">
-          <!-- <div class="col-sm-7 d-flex align-items-center">
-                  <span class="sob-label flex-shrink-1">
-                      {{'general.legal_entity.name' | translate}}
-                  </span>
-                  <app-single-select></app-single-select>
-              </div> -->
+        <div class="row d-flex ">
+          <div class="col-sm-12 page-actions d-flex justify-content-end">
+            <button class="btn btn-clear" (click)="clearSearchLegalList(tableLegal)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+          </div>
         </div>
-        <div class="page-section table1 mt-2">
-          <p-table [value]="[]">
+        <div class="page-section mt-2">
+          <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortLegalList($event)"
+            [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableLegal>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
             <ng-template pTemplate="header">
               <tr>
-                <th>
-                  {{'itemOfLegalEntity.sob' | translate}}
+                <th pResizableColumn [pSortableColumn]="'sobCode'" data-qe-id="table-thead-legal-sobCode">
+                  {{'itemOfLegalEntity.sobCode' | translate}}
+                  <p-sortIcon [field]="'sobCode'" class="float-right"></p-sortIcon>
                 </th>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-legal-code">
                   {{'itemOfLegalEntity.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                 </th>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-legal-name">
                   {{'itemOfLegalEntity.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-single-select [list]="sobIds" [selectedList]="sobExceptIds" [key]="'name'"
+                    (search)="sobTypingSearch($event)" (selectionChange)="legalSearchEntity.sobId = $event[0].Id"
+                    (listOpen)="sobOpen(legalSearchEntity.sobId)">
+                  </app-single-select>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="legalSearchEntity.code" (changeFilter)="getLegalList()"
+                    data-qe-id="table-thead-filter-code">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="legalSearchEntity.name" (changeFilter)="getLegalList()"
+                    data-qe-id="table-thead-filter-name">
+                  </app-advanced-filters>
                 </th>
               </tr>
             </ng-template>
+            <ng-template pTemplate="body" let-legalEntity let-index="rowIndex">
+              <tr [attr.data-qe-id]="'table-tbody-legal-row-' + index">
+                <td class="ui-resizable-column"> {{legalEntity.sobCode}} </td>
+                <td class="ui-resizable-column"> {{legalEntity.code}} </td>
+                <td class="ui-resizable-column"> {{legalEntity.name}} </td>
+              </tr>
+            </ng-template>
           </p-table>
+        </div>
+        <div class="pagination">
+          <app-pagination [pagination]="paginationLegalList" (paginationOut)="paginationOutLegalList($event)"
+            data-qe-id="pagination-legal">
+          </app-pagination>
         </div>
       </div>
 
       <div class="col-sm-6">
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
-            <app-multi-select></app-multi-select>
+            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemIds" [selectedList]="itemExceptIds"
+              [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemIdList = $event"
+              (listOpen)="itemOpen(supplierSearchEntity.ids)">
+            </app-multi-select>
           </div>
-
-
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
-            <button class="btn btn-add" (click)="onClickAddsupplier()"> +
+            <button class="btn btn-add" (click)="addItemsToLegal()" data-qe-id="button-item-add"> +
               {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown>
-              <button id="button-basic" dropdownToggle type="button"
-                      class="btn btn-import dropdown-toggle" aria-controls="dropdown-basic">
+            <div class="btn-group" dropdown data-qe-id="button-item-import">
+              <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                aria-controls="dropdown-basic">
                 {{'general.button.import' | translate}}<span class="caret"></span>
               </button>
-              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
-                  aria-labelledby="button-basic">
-                <li role="menuitem"><a class="dropdown-item"
-                                       href="#">{{'general.button.import_file' | translate}}</a>
+              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+                <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a>
                 </li>
                 <li class="divider dropdown-divider"></li>
                 <li role="menuitem"><a class="dropdown-item"
-                                       href="#">{{'general.button.download_example' | translate}}</a>
+                    href="#">{{'general.button.download_example' | translate}}</a>
                 </li>
               </ul>
             </div>
-            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-export"
+              data-qe-id="button-item-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearchItemsFromLegalList(tableLegal)"
+              data-qe-id="button-item-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
 
         <div class="page-section mt-2">
-          <p-table [value]="tmptable">
+          <p-table [value]="itemsFromLegalList" [customSort]="true" [lazy]="true"
+            (onLazyLoad)="sortItemsFromLegalList($event)" [scrollable]="true" scrollHeight="500px"
+            [resizableColumns]="true" #tableItem>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
             <ng-template pTemplate="header">
               <tr>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-legal-code">
                   {{'itemOfLegalEntity.item.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-legal-name">
+                  {{'itemOfLegalEntity.item.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
                 <th>
-                  {{'itemOfLegalEntity.item.name' | translate}}
+                  {{'itemOfLegalEntity.item.action' | translate}}
                 </th>
-                <th></th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="itemsFromLegalSearchEntity.code"
+                    (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-code">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="itemsFromLegalSearchEntity.name"
+                    (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-name">
+                  </app-advanced-filters>
                 </th>
                 <th></th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-item>
-              <tr (dblclick)="onClickViewDetail()">
-                <td> {{item.code}} </td>
-                <td> {{item.name}} </td>
-                <td> <a href="javascript:void(0)">{{'general.button.delete' | translate}}</a></td>
+            <ng-template pTemplate="body" let-itemsFromLegal let-index="rowIndex">
+              <tr [attr.data-qe-id]="'table-tbody-filter-item-row-' + index">
+                <td> {{itemsFromLegal.code}} </td>
+                <td> {{itemsFromLegal.name}} </td>
+                <td>
+                  <a href="javascript:void(0)">{{'general.button.edit' | translate}}</a>
+                  <a href="javascript:void(0)">{{'general.button.view' | translate}}</a>
+                </td>
               </tr>
             </ng-template>
           </p-table>
         </div>
 
+        <div class="pagination">
+          <app-pagination [pagination]="paginationItemsFromLegal"
+            (paginationOut)="paginationOutItemsFromLegalList($event)" data-qe-id="pagination-item">
+          </app-pagination>
+        </div>
       </div>
 
     </div>
