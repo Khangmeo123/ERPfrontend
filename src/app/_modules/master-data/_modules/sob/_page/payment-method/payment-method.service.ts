@@ -48,6 +48,12 @@ export class PaymentMethodService {
     ));
   }
 
+  cancel() {
+    this.paymentMethodForm.next(this.fb.group(
+      new PaymentMethodForm(),
+    ));
+  }
+
   edit(paymentMethodId: string) {
     this.paymentMethodRepository.getId(paymentMethodId).subscribe(res => {
       if (res) {

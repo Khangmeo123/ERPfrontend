@@ -21,27 +21,38 @@ import { FormGroup } from '@angular/forms';
 })
 export class PaymentMethodComponent implements OnInit {
   isSaveBookMark: boolean = false;
+
   bookMarkId: string;
 
   isShowDialog = false;
 
   pagination = new PaginationModel();
+
   public popoverTitle: string = 'Popover title';
+
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+
   public confirmClicked: boolean = false;
+
   public cancelClicked: boolean = false;
 
   public subs: Subscription = new Subscription();
 
   public sobList: SobEntity[] = [];
+
   public selectedSobList: SobEntity[] = [];
+
   public sobSearchEntity: SobSearchEntity = new SobSearchEntity();
 
   public paymentMethodList: PaymentMethodEntity[] = [];
+
   public paymentMethodCount: number = 0;
+
   public paymentMethodSearchEntity: PaymentMethodSearchEntity = new PaymentMethodSearchEntity();
 
   public paymentMethodForm: FormGroup;
+
+  public setOfBookId: string = '';
 
   constructor(
     private paymentMethodService: PaymentMethodService,
@@ -62,6 +73,10 @@ export class PaymentMethodComponent implements OnInit {
 
     const paymentMethodFormSub = this.paymentMethodService.paymentMethodForm.subscribe((form: FormGroup) => {
       this.paymentMethodForm = form;
+      console.log(this.setOfBookId);
+      if (this.setOfBookId) {
+        this.paymentMethodForm.controls.setOfBookId.setValue(this.setOfBookId);
+      }
     });
 
     this.subs.add(sobListSub)
@@ -77,6 +92,11 @@ export class PaymentMethodComponent implements OnInit {
     return null;
   }
 
+  add() {
+    this.paymentMethodService.add();
+    this.showDialog();
+  }
+
   ngOnInit() {
     if (this.currentSob) {
       this.getList();
@@ -86,6 +106,7 @@ export class PaymentMethodComponent implements OnInit {
   changeSob([setOfBookId]) {
     this.paymentMethodSearchEntity.setOfBookId = setOfBookId;
     this.paymentMethodForm.controls.setOfBookId.setValue(setOfBookId);
+    this.setOfBookId = setOfBookId;
     this.getList();
   }
 
@@ -114,6 +135,7 @@ export class PaymentMethodComponent implements OnInit {
   }
 
   onClickCancel() {
+    this.paymentMethodService.cancel();
     this.isShowDialog = false;
   }
 
@@ -134,6 +156,26 @@ export class PaymentMethodComponent implements OnInit {
     }
   }
 
+  sort(event: any) {
+    if (event.sortField && event.sortOrder) {
+      this.paymentMethodSearchEntity.orderBy = event.sortField;
+      this.paymentMethodSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+    }
+    this.getList();
+  }
+
+  clearSearch(table: any) {
+    this.paymentMethodSearchEntity = new PaymentMethodSearchEntity();
+    table.reset();
+  }
+
   onClickDelete() {
+    this.paymentMethodService.delete(this.paymentMethodForm.value, this.paymentMethodSearchEntity)
+      .then(res => {
+        this.isShowDialog = res;
+      })
+      .catch(err => {
+        this.isShowDialog = err;
+      });
   }
 }
