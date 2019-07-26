@@ -16,6 +16,8 @@ export class SimpleSelectComponent implements OnInit, ISelect {
 
   selectedItem = null;
 
+  @Input() disabled = false;
+
   isOpened = false;
 
   listDirection = 'down';

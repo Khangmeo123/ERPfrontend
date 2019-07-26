@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {getListDirection} from '../../helpers';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { getListDirection } from '../../helpers';
 
 @Component({
   selector: 'app-single-select',
@@ -13,12 +13,15 @@ import {getListDirection} from '../../helpers';
   ],
 })
 export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
+  @Input() initialValue = '';
 
   @Input() list = [];
 
   @Input() selectedList = [];
 
   @Input() key = 'label';
+
+  @Input() disabled = false;
 
   @Output() search = new EventEmitter();
 
@@ -39,11 +42,21 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
     return this.isOpened ? 'opened' : 'closed';
   }
 
+  get hasSelected() {
+    return this.selectedList && this.selectedList.length;
+  }
+
+  get hasData() {
+    return this.list && this.list.length;
+  }
+
   get selectedText() {
-    if (this.selectedList.length) {
-      return this.selectedList[0][this.key];
+    if (this.selectedList) {
+      if (this.hasSelected) {
+        return this.selectedList[0][this.key];
+      }
     }
-    return '0 selected';
+    return this.initialValue;
   }
 
   @Input() valueSelector = (node) => node.id;
@@ -72,13 +85,12 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
-      if (this.isLoading) {
-        this.isLoading = false;
-      }
+      this.isLoading = false;
     }
   }
 
   onChange() {
+    this.isOpened = false;
     this.selectionChange.emit(
       this.selectedList.map(this.valueSelector),
     );

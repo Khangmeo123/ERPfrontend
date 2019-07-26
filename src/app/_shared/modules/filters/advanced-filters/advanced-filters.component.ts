@@ -18,9 +18,9 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
   @Input() filter;
 
-  @ViewChild('pane', { static: false }) pane;
+  @ViewChild('pane', {static: false}) pane;
 
-  @ViewChild('toggler', { static: false }) toggler;
+  @ViewChild('toggler', {static: false}) toggler;
 
   @Output() changeFilter = new EventEmitter();
 
@@ -31,12 +31,9 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   type = null;
 
   dropdownDirection = 'left';
-
-  protected types: FilterType[] = [];
-
-  protected isOpened = false;
-
   filterValue;
+  protected types: FilterType[] = [];
+  protected isOpened = false;
 
   constructor() {
   }
@@ -89,7 +86,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const { left } = this.toggler.nativeElement.getBoundingClientRect();
+    const {left} = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -97,7 +94,8 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     }
   }
 
-  beforeCloseList() { }
+  beforeCloseList() {
+  }
 
   toggleList() {
     if (!this.isOpened) {
@@ -108,25 +106,12 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     this.isOpened = !this.isOpened;
   }
 
-  onApplyFilter(event) {
-    this.types.forEach(({ code }) => {
-      if (this.type.code === code) {
-        if (event && event.target) {
-          this.filter[code] = event.target.value;
-          this.inputValue = event.target.value;
-        } else if (event) {
-          this.filter[code] = event;
-          this.inputValue = event;
-        }
-      } else {
-        this.filter[code] = null;
-      }
-    });
+  onApplyFilter(value) {
+    this.filter[this.type.code] = value;
     this.changeFilter.emit();
   }
 
   onSelectType(t: FilterType) {
-    console.log(this.filterValue);
     this.type = this.types.find((type) => type.code === t.code);
     for (const property in this.filter) {
       if (this.filter.hasOwnProperty(property)) {
@@ -144,14 +129,15 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     }
   }
 
+  onChange(event) {
+    const {value} = event.target;
+    this.onApplyFilter(value);
+  }
+
   onKeyUp(event) {
-    const { value } = event.target;
-    if (value === '') {
-      this.onApplyFilter(value);
-    } else {
-      if (event.key === 'Enter') {
-        this.onApplyFilter(event);
-      }
+    const {value} = event.target;
+    if (value === '' || value === null) {
+      this.onApplyFilter(null);
     }
   }
 }

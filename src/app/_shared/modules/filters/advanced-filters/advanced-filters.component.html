@@ -8,11 +8,12 @@
              type="{{inputType}}"
              class="form-control"
              (keyup)="onKeyUp($event)"
+             (change)="onChange($event)"
              [(ngModel)]="filterValue"
              placeholder="{{'advancedFilter.placeholder' | translate}}">
       <ng-template #dateFilter>
         <div class="flex-grow-1">
-          <app-date-picker (valueChange)="onApplyFilter($event)" [(value)]="filterValue"></app-date-picker>
+          <app-date-picker (valueChange)="onApplyFilter($event)" [value]="filterValue"></app-date-picker>
         </div>
       </ng-template>
       <div class="input-group-append">

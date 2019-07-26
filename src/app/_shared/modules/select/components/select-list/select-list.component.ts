@@ -60,10 +60,6 @@ export class SelectListComponent implements OnInit {
           target.previousElementSibling.focus();
         }
         break;
-      case 'Enter':
-        const index = event.target.getAttribute('data-index');
-        console.log(index);
-        break;
       default:
         break;
     }
