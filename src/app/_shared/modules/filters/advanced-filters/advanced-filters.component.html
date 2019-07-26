@@ -8,6 +8,7 @@
              type="{{inputType}}"
              class="form-control"
              (keyup)="onKeyUp($event)"
+             (change)="onChange($event)"
              [(ngModel)]="filterValue"
              placeholder="{{'advancedFilter.placeholder' | translate}}">
       <ng-template #dateFilter>

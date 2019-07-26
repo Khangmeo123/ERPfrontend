@@ -56,7 +56,16 @@ export class DatePickerComponent implements OnInit, OnChanges {
     this.control.setValue(
       datePipe.transform(value, OUTPUT_DATE_FORMAT),
     );
-    this.valueChange.emit(this.control.value);
+    if (value && value._i) {
+      if (value._i.length) {
+        if (value._i.length === 10) {
+          this.valueChange.emit(this.control.value);
+          return;
+        }
+        return;
+      }
+      this.valueChange.emit(this.control.value);
+    }
   }
 
   onDateChange(datePicker) {
@@ -67,8 +76,6 @@ export class DatePickerComponent implements OnInit, OnChanges {
     if (changes.value) {
       if (!changes.value.currentValue) {
         this.date = null;
-      } else {
-        this.date = new Date(changes.value.currentValue);
       }
     }
     if (changes.control) {
