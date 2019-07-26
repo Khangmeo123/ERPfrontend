@@ -56,17 +56,17 @@
             </th>
             <th>
               {{'tax.disable' | translate}}
-          </th>
+            </th>
 
           </tr>
           <tr>
-            <th  class="th-filter">
+            <th class="th-filter">
               <app-advanced-filters></app-advanced-filters>
             </th>
-            <th  class="th-filter">
+            <th class="th-filter">
               <app-advanced-filters></app-advanced-filters>
             </th>
-            <th  class="th-filter">
+            <th class="th-filter">
               <app-advanced-filters></app-advanced-filters>
             </th>
             <th class="th-filter">
@@ -80,61 +80,13 @@
 
           </tr>
         </ng-template>
-        <!-- <ng-template pTemplate="body" let-tax>
-            <tr>
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input type="text" class="form-control" [(ngModel)]="tax.code" required>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{tax.code}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input type="text" class="form-control" [(ngModel)]="tax.type" required>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{ tax.type } }
-                    </ng-template>
-                  </p-cellEditor>
-                </td>
-                <td pEditableColumn>
-                  <p-cellEditor>
-                    <ng-template pTemplate="input">
-                      <input type="text" class="form-control" [(ngModel)]="tax.unit" required>
-                    </ng-template>
-                    <ng-template pTemplate="output">
-                      {{tax.unit}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input type="text" class="form-control" [(ngModel)]="tax.discount" required>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{tax.discount}}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
-                <td pEditableColumn>
-                    <p-cellEditor>
-                        <ng-template pTemplate="input">
-                            <input type="text" class="form-control" [(ngModel)]="tax.description" required>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                            {{ tax.description }}
-                        </ng-template>
-                    </p-cellEditor>
-                </td>
+        <ng-template let-tax>
+          <tr>
+            <td>
 
-            </tr>
-        </ng-template> -->
+            </td>
+          </tr>
+        </ng-template>
       </p-table>
     </div>
 
