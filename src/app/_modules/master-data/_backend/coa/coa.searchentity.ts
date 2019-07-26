@@ -6,12 +6,11 @@ export class CoaSearchEntity extends SearchEntity {
 
   accountCode: TextFilter = new TextFilter();
   accountName: TextFilter = new TextFilter();
+  accountDescription: TextFilter = new TextFilter();
 
   characteristicValue: TextFilter = new TextFilter();
 
   parentAccountCode: TextFilter = new TextFilter();
-
-  accountDescription: TextFilter = new TextFilter();
 
   constructor(coaSearchEntity?: any) {
     super(coaSearchEntity);

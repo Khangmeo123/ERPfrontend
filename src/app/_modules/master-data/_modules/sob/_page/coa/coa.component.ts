@@ -11,6 +11,7 @@ import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { ToastrService } from 'ngx-toastr';
 import { buildTree } from '../../../../../../_shared/modules/select/helpers';
+import { CharacteristicEntity } from '../../../../_backend/characteristic/characteristic.entity';
 
 @Component({
   selector: 'app-coa',
@@ -63,7 +64,7 @@ export class CoaComponent implements OnInit {
 
   public setOfBookId: string = '';
 
-  public characteristicList: any[] = [];
+  public characteristicList: CharacteristicEntity[] = [];
 
   constructor(
     private coaService: CoaService,
@@ -97,6 +98,8 @@ export class CoaComponent implements OnInit {
     const characteristicListSub = this.coaService.characteristicList.subscribe((list) => {
       this.characteristicList = list;
     });
+
+    this.coaService.add();
 
     this.subs.add(sobListSub)
       .add(coaSub)

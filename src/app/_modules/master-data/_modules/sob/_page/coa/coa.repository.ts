@@ -9,6 +9,7 @@ import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
+import { CharacteristicEntity } from '../../../../_backend/characteristic/characteristic.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -30,11 +31,11 @@ export class CoaRepository extends Repository {
     );
   }
 
-  getCharacteristicList(): Observable<any[]> {
-    return this.http.post<any[]>(this.apiUrl + '/list', '{}',
+  getCharacteristicList(): Observable<CharacteristicEntity[]> {
+    return this.http.post<CharacteristicEntity[]>(this.apiUrl + '/list-characteristic', '{}',
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
-        return r.body;
+        return r.body.map((item) => new CharacteristicEntity(item));
       }),
     );
   }

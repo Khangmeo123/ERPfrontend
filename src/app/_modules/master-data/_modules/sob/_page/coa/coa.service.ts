@@ -7,6 +7,7 @@ import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaRepository } from './coa.repository';
 import { CoaForm } from '../../../../_backend/coa/coa.form';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { CharacteristicEntity } from '../../../../_backend/characteristic/characteristic.entity';
 
 export class CoaService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
@@ -14,7 +15,7 @@ export class CoaService {
   public parentAccountList: BehaviorSubject<CoaEntity[]> = new BehaviorSubject([]);
   public coaForm: BehaviorSubject<FormGroup>;
   public coaCount: BehaviorSubject<number> = new BehaviorSubject(0);
-  public characteristicList: BehaviorSubject<any[]> = new BehaviorSubject([]);
+  public characteristicList: BehaviorSubject<CharacteristicEntity[]> = new BehaviorSubject([]);
 
   constructor(private fb: FormBuilder, private coaRepository: CoaRepository, private toastrService: ToastrService) {
     this.coaCount = new BehaviorSubject(0);
