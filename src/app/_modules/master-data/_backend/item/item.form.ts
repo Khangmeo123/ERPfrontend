@@ -31,42 +31,6 @@ export class ItemForm extends FormModel {
     img = new FormControl('');
     description = new FormControl('');
 
-    // vatEntity:
-    vatId = new FormControl('');
-    vatCode = new FormControl('');
-    vatName = new FormControl('');
-    vatValue = new FormControl('');
-
-    // nrtEntity:
-    nrtId = new FormControl('');
-    nrtCode = new FormControl('');
-    nrtName = new FormControl('');
-    nrtValue = new FormControl('');
-
-    // entEntity:
-    entId = new FormControl('');
-    entCode = new FormControl('');
-    entName = new FormControl('');
-    entValue = new FormControl('');
-
-    // imtEntity:
-    imtId = new FormControl('');
-    imtCode = new FormControl('');
-    imtName = new FormControl('');
-    imtValue = new FormControl('');
-
-    // extEntity:
-    extId = new FormControl('');
-    extCode = new FormControl('');
-    extName = new FormControl('');
-    extValue = new FormControl('');
-
-    // sctEntity;
-    sctId = new FormControl('');
-    sctCode = new FormControl('');
-    sctName = new FormControl('');
-    sctValue = new FormControl('');
-
     errors = new FormGroup({
         code: new FormControl(''),
         name: new FormControl(''),

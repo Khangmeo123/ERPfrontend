@@ -1,11 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
 import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/item.searchentity';
 import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.entity';
 import { EnumEntity } from 'src/app/_helpers/entity';
-import { FormGroup } from '@angular/forms';
 import { Subscription, Subject } from 'rxjs';
 import { ItemListService } from './item-list.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
@@ -127,12 +125,14 @@ export class ItemListComponent implements OnInit, OnDestroy {
 
   openUomList(id: string) {
     this.uomSearchEntity = new UomSearchEntity();
-    this.uomSearchEntity.ids.push(id);
+    if (id !== null && id !== undefined) {
+      this.uomSearchEntity.ids.push(id);
+    }
     this.itemListService.getUomList(this.uomSearchEntity);
   }
 
   searchUom(event) {
-    this.uomSearchEntity.code.startsWith = event;
+    this.uomSearchEntity = new UomSearchEntity();
     this.uomSearchEntity.name.startsWith = event;
     this.uomTyping.next(this.uomSearchEntity);
   }
