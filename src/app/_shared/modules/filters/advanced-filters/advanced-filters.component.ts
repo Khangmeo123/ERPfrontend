@@ -26,14 +26,13 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
   public inputType: string = '';
 
+  public inputValue: any;
+
   type = null;
 
   dropdownDirection = 'left';
-
   filterValue;
-
   protected types: FilterType[] = [];
-
   protected isOpened = false;
 
   constructor() {
@@ -99,20 +98,17 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   }
 
   toggleList() {
-    if (this.isOpened) {
-      this.beforeCloseList();
-    } else {
+    if (!this.isOpened) {
       this.beforeOpenList();
+    } else {
+      this.beforeCloseList();
     }
     this.isOpened = !this.isOpened;
   }
 
   onApplyFilter(value) {
-    this.changeFilter.emit(value);
-  }
-
-  updateFilter() {
-    this.filter[this.type.code] = this.filterValue;
+    this.filter[this.type.code] = value;
+    this.changeFilter.emit();
   }
 
   onSelectType(t: FilterType) {
@@ -122,8 +118,8 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
         this.filter[property] = null;
       }
     }
-    this.updateFilter();
-    this.onApplyFilter(this.filterValue);
+    this.filter[this.type.code] = this.filterValue;
+    this.changeFilter.emit();
     this.toggleList();
   }
 
@@ -133,15 +129,15 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     }
   }
 
+  onChange(event) {
+    const {value} = event.target;
+    this.onApplyFilter(value);
+  }
+
   onKeyUp(event) {
     const {value} = event.target;
-    this.updateFilter();
-    if (value === '') {
-      this.onApplyFilter(value);
-    } else {
-      if (event.key === 'Enter') {
-        this.onApplyFilter(value);
-      }
+    if (value === '' || value === null) {
+      this.onApplyFilter(null);
     }
   }
 }
