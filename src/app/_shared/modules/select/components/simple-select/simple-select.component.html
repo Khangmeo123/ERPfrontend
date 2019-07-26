@@ -1,4 +1,5 @@
-<app-select [listDirection]="listDirection" (clickOutside)="closeList($event)" (click)="$event.stopPropagation()">
+<app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)"
+            (click)="$event.stopPropagation()">
   <app-select-head [label]="selectedText"
                    (openList)="openList($event)"
                    (closeList)="closeList($event)"
@@ -7,7 +8,11 @@
   <app-select-body [@toggleMenu]="listState" *ngIf="isOpened">
     <app-select-spinner *ngIf="list.length === 0; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
-      <app-select-list [dataSource]="list" [key]="key" (selectionChange)="onSelect($event)"></app-select-list>
+      <app-select-list [dataSource]="list" *ngIf="list.length; else empty" [key]="key"
+                       (selectionChange)="onSelect($event)"></app-select-list>
+      <ng-template #empty>
+        <app-no-data></app-no-data>
+      </ng-template>
     </ng-template>
   </app-select-body>
 </app-select>
