@@ -9,12 +9,12 @@ import { PaymentTermEntity } from 'src/app/_modules/master-data/_backend/payment
 import { PaymentTermSearchEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.searchentity';
 import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/employee.entity';
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
-import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
-import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
-import { BankAccountSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.searchentity';
-import { BankAccountEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.entity';
+import { isFulfilled } from 'q';
+import { InfoContactEntity } from 'src/app/_modules/master-data/_backend/info-contact/info-contact.entity';
+import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
+import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.entity';
 
 @Component({
   selector: 'app-detail-supplier-group',
@@ -37,7 +37,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   // Form general supplier detail
   supplierDetailSubs: Subscription = new Subscription();
-  supplierForm: FormGroup;
+  supplierDetailForm: FormGroup;
   supplierDetailEntity: LegalSupplierDetailEntity = new LegalSupplierDetailEntity();
 
   // list drop payment term
@@ -53,10 +53,10 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   staffInChargeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
   //list drop staff in changre
-  bankIds: BankAccountEntity[];
-  bankExceptIds: BankAccountEntity[];
-  bankTyping: Subject<BankAccountSearchEntity> = new Subject();
-  bankSearchEntity: BankAccountSearchEntity = new BankAccountSearchEntity();
+  bankIds: BankAccountOfLegalEntity[];
+  bankExceptIds: BankAccountOfLegalEntity[];
+  bankTyping: Subject<BankAccountOfLegalSearchEntity> = new Subject();
+  bankSearchEntity: BankAccountOfLegalSearchEntity = new BankAccountOfLegalSearchEntity();
 
   //list drop province
   provinceIds: ProvinceEntity[];
@@ -67,6 +67,11 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   contactForm: FormGroup;
   bankAccountForm: FormGroup;
   legalEntiyId: string = '';
+  index: number = -1;
+
+  editingItem: FormControl = null;
+
+  valueSelector = node => node;
 
   constructor(
     private route: ActivatedRoute,
@@ -79,8 +84,9 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
       this.supplierDetailService.getId(params.id);
     });
     const supplierFormSub = this.supplierDetailService.supplierDetailForm.subscribe(res => {
+      console.log(res)
       if (res) {
-        this.supplierForm = res;
+        this.supplierDetailForm = res;
       }
     });
 
@@ -130,7 +136,6 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    console.log(this.supplierForm.get('supplierBankAccounts').value)
   }
 
   ngOnDestroy() {
@@ -170,7 +175,6 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
 
   staffInChargeSearch(event) {
-    console.log('event: ', event)
     this.staffInChargeSearchEntity.code = event;
     this.staffInChargeSearchEntity.name = event;
     this.staffInChargeTyping.next(this.staffInChargeSearchEntity);
@@ -180,8 +184,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   // list drop bank list
 
   openBankList(bankId: string) {
-    console.log('bankId', bankId)
-    this.bankSearchEntity = new BankAccountSearchEntity();
+    this.bankSearchEntity = new BankAccountOfLegalSearchEntity();
     if (bankId !== null && bankId !== undefined) {
       this.bankSearchEntity.ids.push(bankId);
     }
@@ -212,8 +215,14 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     this.provinceTyping.next(this.provinceSearchEntity);
   }
   selectedProvince(event) {
-    console.log(event);
-    // supplierForm.controls.staffInChargeId.setValue($event[0]
+    const data = event.map(e => ({
+      provinceId: e.id,
+      provinceName: e.name,
+    }));
+    this.contactForm.setValue({
+      ...this.contactForm.value,
+      ...data[0],
+    });
   }
 
   
@@ -229,12 +238,15 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   saveContact(contactValue: any) {
-    this.supplierDetailService.saveContact(contactValue);
+    this.supplierDetailService.saveContact(contactValue, this.index);
     this.contactsModal = !this.contactsModal;
   }
 
-  editContact(contact: any) {
-    console.log('editContact', contact)
+  editContact(contact: any, index: any) {
+    console.log(index);
+    this.index = index;
+    this.contactsModal = true;
+    this.editingItem = contact;
     this.supplierDetailService.editContact(contact);
   }
 
@@ -247,31 +259,63 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   addBankAccount() {
     this.bankAccountsModal = !this.bankAccountsModal;
-    this.supplierDetailService.addCBankAccount();
+    this.supplierDetailService.addBankAccount();
   }
 
-  saveBankAccount(contactValue: any) {
-    this.supplierDetailService.saveBankAccount(contactValue);
-    this.contactsModal = !this.contactsModal;
+  saveBankAccount(bankAccount: any) { 
+    this.supplierDetailService.saveBankAccount(bankAccount, this.index);
+    this.bankAccountsModal = !this.bankAccountsModal;
   }
-  save() {
-    if (!this.supplierForm.valid) {
-      console.log('vao invalid');
-      this.generalService.validateAllFormFields(this.supplierForm);
+  save() {  
+    this.supplierDetailForm.value.code = this.supplierDetailForm.controls.code.value;
+    this.supplierDetailForm.value.name = this.supplierDetailForm.controls.name.value;
+    this.supplierDetailForm.value.taxCode = this.supplierDetailForm.controls.taxCode.value;
+    this.supplierDetailForm.value.status = this.supplierDetailForm.controls.status.value;
+    this.supplierDetailForm.value.note = this.supplierDetailForm.controls.note.value;
+    console.log('this.supplierDetailForm', this.supplierDetailForm)
+    if (!this.supplierDetailForm.valid) {
+      this.generalService.validateAllFormFields(this.supplierDetailForm);
     } else {
-      console.log('thanh cong');
-      this.supplierDetailService.save(this.supplierForm).then(res => {
+      this.supplierDetailService.save(this.supplierDetailForm).then(res => {
         this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity']);
       });
     }
   }
 
-  editBankAccount(id: string) {
+  selectedBank(event){
+    const data = event.map(e => ({
+      bankId: e.id,
+      bankName: e.name,
+    }));
+    this.bankAccountForm.setValue({
+      ...this.bankAccountForm.value,
+      ...data[0],
+    });
+  }
 
+  selectedProvinceBankAccount(event) {
+    const data = event.map(e => ({
+      provinceId: e.id,
+      provinceName: e.name,
+    }));
+    this.bankAccountForm.setValue({
+      ...this.bankAccountForm.value,
+      ...data[0],
+    });
+  }
+
+  editBankAccount(bankAccount, index) {
+    this.index = index;
+    this.bankAccountsModal = true;
+    this.supplierDetailService.editbankAccount(bankAccount);
   }
 
   onClickDelete() {
 
+  }
+
+  cancel() {
+    this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity']);
   }
 
 }

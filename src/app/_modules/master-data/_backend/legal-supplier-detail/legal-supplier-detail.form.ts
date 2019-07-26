@@ -1,9 +1,6 @@
 import { FormControl, FormArray, FormGroup } from '@angular/forms';
 import { FormModel } from 'src/app/_helpers/form-model';
-import { requiredField } from 'src/app/_helpers';
 import { LegalSupplierDetailEntity } from './legal-supplier-detail.entity';
-import { BankForm } from '../bank/bank.form';
-import { BankAccountForm } from '../bank-account/bank-account.form';
 
 export class SupplierDetailForm extends FormModel {
     code = new FormControl({ value: '', disabled: true });
@@ -17,7 +14,6 @@ export class SupplierDetailForm extends FormModel {
     paymentTermName = new FormControl('');
     staffInChargeId = new FormControl();
     staffInChargeName = new FormControl();
-    businessGroupId = new FormControl();
     supplierGroupingName = new FormControl({ value: '', disabled: true });
 
     supplierContacts = new FormArray([]);
@@ -40,7 +36,7 @@ export class SupplierDetailForm extends FormModel {
                         supplierDetailEntity[item].forEach(r => {
                             const formGroup = new FormGroup({});
                             Object.keys(r).forEach((result) => {
-                                formGroup.addControl(result, new FormControl(''));
+                                formGroup.addControl(result, new FormControl(r[result]));
                             });
                             this[item].push(formGroup);
                         })
@@ -52,3 +48,4 @@ export class SupplierDetailForm extends FormModel {
         }
     }
 }
+

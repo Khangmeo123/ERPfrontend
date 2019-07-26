@@ -16,6 +16,8 @@ import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/e
 import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 import { BankAccountSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.searchentity';
 import { BankAccountEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.entity';
+import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
+import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.entity';
 
 @Injectable({
     providedIn: 'root',
@@ -81,23 +83,23 @@ export class SupplierDetailRepository extends Repository{
             );
     }
 
-    getListBankAccount(bankAccountSearchEntity: BankAccountSearchEntity) {
+    getListBankAccount(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-bank', JSON.stringify(bankAccountSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
-                        return new BankAccountEntity(item);
+                        return new BankAccountOfLegalEntity(item);
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new BankAccountEntity(item);
+                        return new BankAccountOfLegalEntity(item);
                     });
                     return r.body;
                 }),
             );
     }
 
-    update(supplierSearchEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/update', JSON.stringify(supplierSearchEntity),
+    update(supplierEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/update', JSON.stringify(supplierEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

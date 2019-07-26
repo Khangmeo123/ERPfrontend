@@ -16,6 +16,8 @@ import { environment } from 'src/environments/environment';
 import { LegalCustomerDetailForm } from 'src/app/_modules/master-data/_backend/legal-customer-detail/legal-customer-detail.form';
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
 import { BankAccountSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.searchentity';
+import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
+import { BankAccountOfLegalForm } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.form';
 
 @Injectable()
 export class SupplierDetailService {
@@ -30,11 +32,11 @@ export class SupplierDetailService {
     public contactForm: BehaviorSubject<FormGroup>;
     public bankAccountForm: BehaviorSubject<FormGroup>;
     constructor(
-        private fb: FormBuilder, 
+        private fb: FormBuilder,
         private supplierDetailRepository: SupplierDetailRepository,
         private toastrService: ToastrService) {
         this.supplierDetailForm = new BehaviorSubject(this.fb.group(
-          new SupplierDetailForm(),
+            new SupplierDetailForm(),
         ));
         this.paymenttermList = new BehaviorSubject(new Entities());
         this.staffInChargeList = new BehaviorSubject(new Entities());
@@ -43,29 +45,29 @@ export class SupplierDetailService {
         this.bankList = new BehaviorSubject(new Entities());
         this.contactForm = new BehaviorSubject(this.fb.group(
             new InfoContactForm(),
-          ));
-        this.bankAccountForm = new BehaviorSubject(this.fb.group(
-            new BankAccountForm(),
         ));
-      }
+        this.bankAccountForm = new BehaviorSubject(this.fb.group(
+            new BankAccountOfLegalForm(),
+        ));
+    }
 
-      getId(supplierId?) {
+    getId(supplierId?) {
         if (supplierId !== null && supplierId !== undefined) {
-          this.supplierDetailRepository.getId(supplierId).subscribe(res => {
-            if (res) {
-              this.supplierDetailForm.next(this.fb.group(
-                new SupplierDetailForm(res),
-              ));
-            }
-          }, err => {
-            if (err) {
-              console.log(err);
-            }
-          });
+            this.supplierDetailRepository.getId(supplierId).subscribe(res => {
+                if (res) {
+                    this.supplierDetailForm.next(this.fb.group(
+                        new SupplierDetailForm(res),
+                    ));
+                }
+            }, err => {
+                if (err) {
+                    console.log(err);
+                }
+            });
         }
-      }
+    }
 
-      getListPaymentTerm(paymentTermSearchEntity: PaymentTermSearchEntity) {
+    getListPaymentTerm(paymentTermSearchEntity: PaymentTermSearchEntity) {
         this.supplierDetailRepository.getListPaymentTerm(paymentTermSearchEntity).subscribe(res => {
             if (res) {
                 this.paymenttermList.next(res);
@@ -136,7 +138,7 @@ export class SupplierDetailService {
     }
 
 
-    getListBank(bankAccountSearchEntity: BankAccountSearchEntity) {
+    getListBank(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
         this.supplierDetailRepository.getListBankAccount(bankAccountSearchEntity).subscribe(res => {
             if (res) {
                 this.bankList.next(res);
@@ -147,7 +149,7 @@ export class SupplierDetailService {
             }
         });
     }
-    getListListBankByTyping(bankAccountSearchEntity: Observable<BankAccountSearchEntity>) {
+    getListListBankByTyping(bankAccountSearchEntity: Observable<BankAccountOfLegalSearchEntity>) {
         bankAccountSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
@@ -163,53 +165,61 @@ export class SupplierDetailService {
         this.contactForm.next(this.fb.group(new InfoContactForm()));
     }
 
-    saveContact(contactValue: any) {
+    saveContact(contactValue: any, index: any) {
+        const indexContact = Number(index);
         const currentForm = this.supplierDetailForm.getValue();
         const arrayContact = currentForm.get('supplierContacts') as FormArray;
-        arrayContact.push(
-            this.fb.group(new InfoContactForm(contactValue))
-        );
+        if (indexContact > -1) {
+            arrayContact.value[index] = Object.assign({}, contactValue);
+        } else {
+            arrayContact.push(
+                this.fb.group(new InfoContactForm(contactValue))
+            );
+        }
         this.supplierDetailForm.next(currentForm);
     }
-
-
     editContact(contact) {
         this.contactForm.next(this.fb.group(new InfoContactForm(contact)));
     }
-
-    addCBankAccount() {
-        this.bankAccountForm.next(this.fb.group(new BankAccountForm()));
+    addBankAccount() {
+        this.bankAccountForm.next(this.fb.group(new BankAccountOfLegalForm()));
     }
 
-    saveBankAccount(bankAccountValue: any) {
+    saveBankAccount(bankAccountValue: any, index: any) {
+        const indexbankAccount = Number(index);
         const currentForm = this.supplierDetailForm.getValue();
         const arrayBankAccount = currentForm.get('supplierBankAccounts') as FormArray;
-        arrayBankAccount.push(
-            this.fb.group(new BankAccountForm(bankAccountValue))
-        );
+        if (indexbankAccount > -1) {
+            arrayBankAccount.value[index] = Object.assign({}, bankAccountValue);
+        } else {
+            arrayBankAccount.push(
+                this.fb.group(new BankAccountOfLegalForm(bankAccountValue))
+            );
+        }
         this.supplierDetailForm.next(currentForm);
     }
-
+    editbankAccount(bankAccountForm) {
+        this.bankAccountForm.next(this.fb.group(new BankAccountOfLegalForm(bankAccountForm)));
+    }
 
     save(supplierDetailEntity: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-          if (supplierDetailEntity.id === null || supplierDetailEntity.id === undefined 
-            || supplierDetailEntity.id === environment.emtyGuid) {
-          } else {
-            this.supplierDetailRepository.update(supplierDetailEntity).subscribe(res => {
-              if (res) {
-                this.toastrService.success('Cập nhật thành công !');
-                resolve();
-              }
-            }, err => {
-              if (err) {
-                this.supplierDetailForm.next(this.fb.group(
-                  new LegalCustomerDetailForm(err),
-                ));
-              }
-            });
-          }
+            if (supplierDetailEntity.value.id !== null && supplierDetailEntity.value.id !== undefined
+                && supplierDetailEntity.value.id !== environment.emtyGuid) {
+                this.supplierDetailRepository.update(supplierDetailEntity.value).subscribe(res => {
+                    if (res) {
+                        this.toastrService.success('Cập nhật thành công !');
+                        resolve();
+                    }
+                }, err => {
+                    if (err) {
+                        this.supplierDetailForm.next(this.fb.group(
+                            new SupplierDetailForm(err),
+                        ));
+                    }
+                });
+            }
         });
         return defered;
-      }
+    }
 }

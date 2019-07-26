@@ -1,6 +1,6 @@
 import { Entity } from 'src/app/_helpers/entity';
 import { InfoContactEntity } from '../info-contact/info-contact.entity';
-import { BankAccountEntity } from '../bank-account/bank-account.entity';
+import { BankAccountOfLegalForm } from '../bank-account-of-legal-entity/bank-account-of-legal-entity.form';
 
 export class LegalSupplierDetailEntity extends Entity {
     id: string;
@@ -18,7 +18,7 @@ export class LegalSupplierDetailEntity extends Entity {
     businessGroupId: string;
 
     supplierContacts: InfoContactEntity[];
-    supplierBankAccounts: BankAccountEntity[];
+    supplierBankAccounts: BankAccountOfLegalForm[];
 
     constructor(supplierEntity?: any) {
         super(supplierEntity);

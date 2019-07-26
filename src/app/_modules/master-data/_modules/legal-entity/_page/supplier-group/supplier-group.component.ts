@@ -75,6 +75,8 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     },
   ]
 
+  listSupplierId = [];
+  legalId: string;
 
 
   constructor(
@@ -264,7 +266,14 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   onClickAddSupplier() {
+    // this.supplierSearchEntity.supplierIds = this.listSupplierId;
+    // this.supplierSearchEntity.legalEntityId = this.legalId;
+    // this.supplierGroupService.save(this.supplierSearchEntity).then(res => {
+    //   this.supplierGroupService.getListSupplier(this.supplierSearchEntity);
+    // }).catch(err => {
+    // });
   }
+
 
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;

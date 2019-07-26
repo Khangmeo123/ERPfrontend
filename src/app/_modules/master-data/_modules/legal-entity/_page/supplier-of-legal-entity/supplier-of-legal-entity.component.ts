@@ -41,7 +41,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   supplierIds: SupplierEntity[];
   supplierExceptIds: SupplierEntity[];
   supplierTyping: Subject<SupplierSearchEntity> = new Subject();
-  legalId: TextFilter = new TextFilter();
+  legalId: string;
   listSupplierId = [];
 
   popoverTitle: string = '';
@@ -115,7 +115,6 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     this.supplierTyping.next(this.supplierSearchEntity);
   }
   selectSupplier(event) {
-    console.log('event: ', event)
     this.listSupplierId = event;
   }
 
@@ -126,9 +125,8 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   }
 
   toDetail(legalId) {
-    console.log('toDetail legalId', legalId);
     this.legalId = legalId;
-    this.supplierSearchEntity.legalEntityId.equal = legalId;
+    this.supplierSearchEntity.legalEntityId = legalId;
     this.getListSupplier(this.supplierSearchEntity);
   }
 
@@ -142,7 +140,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
     this.listLegalOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res =>{
-      this.supplierSearchEntity.legalEntityId.equal = this.legalList[0].id;
+      this.supplierSearchEntity.legalEntityId = this.legalList[0].id;
       this.legalId = this.supplierSearchEntity.legalEntityId;
       this.listLegalOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
     });
@@ -154,8 +152,8 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    if(this.supplierSearchEntity.legalEntityId.equal !== '') {
-      this.getListSupplier(this.supplierSearchEntity.legalEntityId );
+    if(this.supplierSearchEntity.legalEntityId !== '') {
+      this.getListSupplier(this.supplierSearchEntity);
     }
   }
 
@@ -180,7 +178,6 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   }
 
   getListSupplier(supplier) {
-    console.log('supplier', supplier)
     this.paginationdetail.pageNumber = 1;
     this.supplierSearchEntity.skip = 0;
     this.supplierSearchEntity.take = this.paginationdetail.take;
@@ -200,15 +197,15 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     this.supplierSearchEntity.supplierIds = this.listSupplierId;
     this.supplierSearchEntity.legalEntityId = this.legalId;
     this.listLegalOfLegalEntityService.save(this.supplierSearchEntity).then(res => {
-      this.getListSupplier(this.supplierSearchEntity);
+      this.listLegalOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
     }).catch(err => {
     });
   }
 
-  deleteSupplier(supplierId) {
-    this.supplierSearchEntity.id = supplierId.id;
-    this.supplierSearchEntity.name = supplierId.name;
-    this.supplierSearchEntity.code = supplierId.code;
+  deleteSupplier(supplier) {
+    this.supplierSearchEntity.id = supplier.id;
+    this.supplierSearchEntity.name = supplier.name;
+    this.supplierSearchEntity.code = supplier.code;
     this.listLegalOfLegalEntityService.delete(this.supplierSearchEntity).then(res => {
       this.getListSupplier(this.supplierSearchEntity);
     }).catch(err => {

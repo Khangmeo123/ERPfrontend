@@ -4,10 +4,10 @@
             {{'detailSupplierGroup.detail.title' | translate}}
         </span>
         <div class="page-actions">
-            <button class="btn btn-cancel" data-qe-id="button-cancel">
+            <button class="btn btn-cancel" data-qe-id="button-cancel" (click)="cancel()">
                 {{'general.button.cancel' | translate}}
             </button>
-            <button class="btn btn-save" data-qe-id="button-save">
+            <button class="btn btn-save" data-qe-id="button-save" (click)="save()">
                 {{'general.button.save' | translate}}
             </button>
         </div>
@@ -15,7 +15,7 @@
     <div class="page-body">
         <div class="page-section">
             <accordion>
-                <accordion-group [isOpen]="true" [formGroup]="supplierForm">
+                <accordion-group [isOpen]="true" [formGroup]="supplierDetailForm">
                     <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
                         <div class="pull-left float-left">{{'detailSupplierGroup.tab_1.general' | translate }}</div>
                         <span class="float-right pull-right" accordion-heading>
@@ -32,8 +32,8 @@
                                 <input type="text" class="form-control" id="supplier_code"
                                     data-qe-id="detail-form-general-code" formControlName="code">
                                 <app-error
-                                    *ngIf="(supplierForm?.controls.code?.errors  && supplierForm.controls.code?.touched )|| !!supplierForm.controls.errors?.get('code')?.value"
-                                    [formGroup]="supplierForm" [property]="'code'" [placement]="'top'"
+                                    *ngIf="(supplierDetailForm?.controls.code?.errors  && supplierDetailForm.controls.code?.touched )|| !!supplierDetailForm.controls.errors?.get('code')?.value"
+                                    [formGroup]="supplierDetailForm" [property]="'code'" [placement]="'top'"
                                     class="error-form">
                                 </app-error>
                             </div>
@@ -48,8 +48,8 @@
                                 <input type="text" class="form-control" id="supplier_name"
                                     data-qe-id="detail-form-general-name" formControlName="name">
                                 <app-error
-                                    *ngIf="(supplierForm.controls.name?.errors  && supplierForm.controls.name?.touched )|| !!supplierForm.controls.errors?.get('name')?.value"
-                                    [formGroup]="supplierForm" [property]="'name'" [placement]="'top'"
+                                    *ngIf="(supplierDetailForm.controls.name?.errors  && supplierDetailForm.controls.name?.touched )|| !!supplierDetailForm.controls.errors?.get('name')?.value"
+                                    [formGroup]="supplierDetailForm" [property]="'name'" [placement]="'top'"
                                     class="error-form">
                                 </app-error>
                             </div>
@@ -75,8 +75,8 @@
                                 <input type="text" class="form-control" id="tax_code"
                                     data-qe-id="detail-form-general-status" formControlName="status">
                                 <app-error
-                                    *ngIf="(supplierForm.controls.status?.errors  && supplierForm.controls.status?.touched )|| !!supplierForm.controls.errors?.get('status')?.value"
-                                    [formGroup]="supplierForm" [property]="'status'" [placement]="'top'"
+                                    *ngIf="(supplierDetailForm.controls.status?.errors  && supplierDetailForm.controls.status?.touched )|| !!supplierDetailForm.controls.errors?.get('status')?.value"
+                                    [formGroup]="supplierDetailForm" [property]="'status'" [placement]="'top'"
                                     class="error-form">
                                 </app-error>
                             </div>
@@ -97,8 +97,8 @@
                             </label>
                             <app-single-select data-qe-id="detail-form-general-payment-term"
                                 [list]="paymentTermExceptIds" [selectedList]="paymentTermIds" [key]="'name'"
-                                (search)="paymentTermSearch($event)"
-                                (selectionChange)="supplierForm.controls.paymentTermId.setValue($event[0])"
+                                (search)="paymentTermSearch($event)" [initialValue] ="supplierDetailForm.controls.paymentTermName.value"
+                                (selectionChange)="supplierDetailForm.controls.paymentTermId.setValue($event[0])"
                                 (listOpen)="openPaymentTermList(supplierDetailEntity.paymentTermId)">
                             </app-single-select>
                         </div>
@@ -122,8 +122,10 @@
                             </label>
                             <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChargeExceptIds"
                                 [selectedList]="staffInChargeIds" [key]="'name'" (search)="staffInChargeSearch($event)"
-                                (selectionChange)="supplierForm.controls.staffInChargeId.setValue($event[0])"
-                                (listOpen)="openStaffInChargeList(staffInChargeSearchEntity.staffInChargeId)">
+                                (selectionChange)="supplierDetailForm.controls.staffInChargeId.setValue($event[0])"
+                                (listOpen)="openStaffInChargeList(staffInChargeSearchEntity.staffInChargeId)"
+                                [initialValue] ="supplierDetailForm.controls.staffInChargeName.value">
+                                
                             </app-single-select>
                         </div>
                         <div class="form-group col-4">
@@ -149,7 +151,7 @@
                     </div>
 
                     <div class="mt-2">
-                        <p-table [value]="supplierForm.get('supplierContacts').value" [scrollable]="true"
+                        <p-table [value]="supplierDetailForm.get('supplierContacts').value" [scrollable]="true"
                             scrollHeight="500px" [resizableColumns]="true" #table>
                             <ng-template pTemplate="colgroup">
                                 <colgroup>
@@ -184,12 +186,12 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-contact let-index="rowIndex">
-                                <tr (dblclick)="editContact(contact)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <tr (dblclick)="editContact(contact,index)" [attr.data-qe-id]="'table-tbody-row-' + index">
                                     <td> {{index}}</td>
                                     <td> {{contact.name}} </td>
                                     <td> {{contact.phone}} </td>
                                     <td> {{contact.email}} </td>
-                                    <td> {{contact.province}}</td>
+                                    <td> {{contact.provinceName}}</td>
                                     <td> {{contact.address}} </td>
                                 </tr>
                             </ng-template>
@@ -211,7 +213,7 @@
                         </button>
                     </div>
                     <div class="mt-2">
-                        <p-table [value]="supplierForm.get('supplierBankAccounts').value" [scrollable]="true"
+                        <p-table [value]="supplierDetailForm.get('supplierBankAccounts').value" [scrollable]="true"
                             scrollHeight="500px" [resizableColumns]="true" #tableBankAccount>
                             <ng-template pTemplate="colgroup">
                                 <colgroup>
@@ -250,12 +252,13 @@
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
-                                <tr (dblclick)="editBankAccount(bankAccount.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <tr (dblclick)="editBankAccount(bankAccount, index)" [attr.data-qe-id]="'table-tbody-row-' + index">
                                     <td> {{index}}</td>
-                                    <td> {{bankAccount.name}} </td>
-                                    <td> {{bankAccount.phone}} </td>
-                                    <td> {{bankAccount.email}} </td>
-                                    <td> </td>
+                                    <td> {{bankAccount.bankName}} </td>
+                                    <td> {{bankAccount.accountName}} </td>
+                                    <td> {{bankAccount.accountNumber}} </td>
+                                    <td> {{bankAccount.provinceName}} </td>
+                                    <td> {{bankAccount.branch}}</td>
                                     <td> {{bankAccount.address}} </td>
                                 </tr>
                             </ng-template>
@@ -294,9 +297,15 @@
                     {{'detailSupplierGroup.bank_account.bank_name' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <app-single-select data-qe-id="dialog-bank-account" [list]="bankExceptIds" [selectedList]="bankIds"
-                    [key]="'name'" (search)="bankSearch($event)" (selectionChange)="bankAccountForm.setValue($event[0])"
-                    (listOpen)="openBankList(bankAccountForm.bankId)"></app-single-select>
+                <app-single-select data-qe-id="dialog-bank-account"
+                    [valueSelector]="valueSelector"
+                    [list]="bankExceptIds" 
+                    [selectedList]="bankIds"
+                    [key]="'name'" (search)="bankSearch($event)" 
+                    (selectionChange)="selectedBank($event)"
+                    (listOpen)="openBankList(bankAccountForm.bankId)"
+                    [initialValue] ="bankAccountForm.controls.bankName.value"
+                    ></app-single-select>
             </div>
             <div class="form-group col-6">
                 <label>
@@ -304,10 +313,10 @@
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
-                    <input type="text" class="form-control" formControlName="accountName" id="accountName">
+                    <input type="text" class="form-control" formControlName="accountName" id="accountName" data-qe-id="detail-form-bank-account-name">
                     <app-error data-qe-id="form-error-name"
                         *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.errors?.get('accountName')?.value"
-                        [formGroup]="bankAccountForm" [property]="'name'" [placement]="'top'" class="error-form">
+                        [formGroup]="bankAccountForm" [property]="'accountName'" [placement]="'top'" class="error-form">
                     </app-error>
                 </div>
             </div>
@@ -317,10 +326,10 @@
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
-                    <input type="text" class="form-control" formControlName="accountNumber" id="accountNumber">
+                    <input type="text" class="form-control" formControlName="accountNumber" id="accountNumber" data-qe-id="detail-form-bank-account-number" >
                     <app-error data-qe-id="form-error-name"
                         *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.errors?.get('accountNumber')?.value"
-                        [formGroup]="bankAccountForm" [property]="'name'" [placement]="'top'" class="error-form">
+                        [formGroup]="bankAccountForm" [property]="'accountNumber'" [placement]="'top'" class="error-form">
                     </app-error>
                 </div>
             </div>
@@ -334,17 +343,19 @@
                 <label>
                     {{'detailSupplierGroup.bank_account.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds"
+                <app-single-select data-qe-id="detail-form-bank-account-province-name" 
+                    [valueSelector]="valueSelector"
+                    [list]="provinceExceptIds" [initialValue] ="bankAccountForm.controls.provinceName.value"
                     [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
-                    (selectionChange)="supplierForm.get('supplierBankAccounts').setValue($event[0])"
-                    (listOpen)="openProvinceList(supplierForm.get('supplierBankAccounts').provinceId)">
+                    (selectionChange)="selectedProvinceBankAccount($event)"
+                    (listOpen)="openProvinceList(supplierDetailForm.get('supplierBankAccounts').provinceId)">
                 </app-single-select>
             </div>
             <div class="form-group col-6">
                 <label>
                     {{'supplier.bank_account.bank_address' | translate}}
                 </label>
-                <input type="text" class="form-control"  fomControlName="branch">
+                <input type="text" class="form-control"  fomControlName="branch" data-qe-id="detail-form-bank-address" >
             </div>
         </div>
     </form>
@@ -360,10 +371,10 @@
             </div>
             <div class="col-sm-6">
                 <div class="page-actions">
-                    <button class="btn btn-cancel mr-2" (click)="cancel()" data-qe-id="dialog-button-cancel">
+                    <button class="btn btn-cancel mr-2" (click)="bankAccountsModal = false" data-qe-id="dialog-button-cancel" (click)="cancel()">
                         {{'general.button.cancel' | translate}}
                     </button>
-                    <button class="btn btn-add mr-2" data-qe-id="button-save">
+                    <button class="btn btn-add mr-2" data-qe-id="button-save" (click) = "saveBankAccount(bankAccountForm.value)">
                         {{'general.button.save' | translate}}
                     </button>
                 </div>
@@ -414,7 +425,7 @@
                 <label>
                     {{'detailSupplierGroup.contacts.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds"
+                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds" [valueSelector]="valueSelector"
                     [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
                     (selectionChange)="selectedProvince($event)"
                     (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
@@ -442,7 +453,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="page-actions">
-                    <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+                    <button class="btn btn-cancel mr-2" (click)="contactsModal = false" data-qe-id="dialog-button-cancel">
                         {{'general.button.cancel' | translate}}
                     </button>
                     <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="saveContact(contactForm.value)">

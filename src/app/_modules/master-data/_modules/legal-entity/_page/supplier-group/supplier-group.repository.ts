@@ -41,7 +41,7 @@ export class ListSupplierRepository extends Repository {
     }
 
     getId(supplierGroupId: string): Observable<SupplierGroupEntity> {
-        return this.http.post<SupplierGroupEntity>(this.apiUrl + '/get', JSON.stringify({ Id: supplierGroupId }),
+        return this.http.post<SupplierGroupEntity>(this.apiUrl + '/get-supplier-grouping', JSON.stringify({ Id: supplierGroupId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return new SupplierGroupEntity(r.body);
@@ -50,21 +50,21 @@ export class ListSupplierRepository extends Repository {
     }
 
     add(supplierGroupSearchEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(supplierGroupSearchEntity),
+        return this.http.post<boolean>(this.apiUrl + '/create-supplier-grouping', JSON.stringify(supplierGroupSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
     update(supplierGroupSearchEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/update', JSON.stringify(supplierGroupSearchEntity),
+        return this.http.post<boolean>(this.apiUrl + '/update-supplier-grouping', JSON.stringify(supplierGroupSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
     delete(supplierGroupSearchEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(supplierGroupSearchEntity),
+        return this.http.post<boolean>(this.apiUrl + '/delete-supplier-grouping', JSON.stringify(supplierGroupSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
