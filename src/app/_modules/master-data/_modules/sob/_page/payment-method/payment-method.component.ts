@@ -102,7 +102,8 @@ export class PaymentMethodComponent implements OnInit {
     }
   }
 
-  changeSob([setOfBookId]) {
+  changeSob(event) {
+    const [setOfBookId] = event;
     this.paymentMethodSearchEntity.setOfBookId = setOfBookId;
     this.paymentMethodForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;

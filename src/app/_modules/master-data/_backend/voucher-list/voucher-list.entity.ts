@@ -1,29 +1,14 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class VoucherListEntity extends Entity {
-    // sobEntity:
-    
-    sobId: string;
+  // sobEntity:
 
-    name: string;
-    code: string;
+  setOfBookId: string;
 
-    debtId: string;
-    debtCode: string;
-    debtName: string;
+  name: string;
+  code: string;
 
-    creditId: string;
-    creditCode: string;
-    creditName: string;
-
-    typeVoucherId: string;
-    typeVoucherCode: string;
-    typeVoucherName: string;
-
-    description: string;
-   
-
-    constructor(voucherListEntity?: any) {
-        super(voucherListEntity);
-    }
+  constructor(voucherListEntity?: any) {
+    super(voucherListEntity);
+  }
 }
