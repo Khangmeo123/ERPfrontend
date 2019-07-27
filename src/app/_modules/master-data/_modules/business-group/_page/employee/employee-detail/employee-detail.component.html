@@ -173,8 +173,8 @@
                                     (listOpen)="openStatusList()" data-qe-id="form-characteristic" class="w-100">
                                 </app-simple-select>
                                 <app-error data-qe-id="form-error-status"
-                                    *ngIf="(employeeForm.controls.status?.errors && employeeForm.controls.status?.touched) || !!employeeForm.controls.errors?.get('status')?.value"
-                                    [formGroup]="employeeForm" [property]="'status'" [placement]="'top'"
+                                    *ngIf="(employeeForm.controls.statusId?.errors && employeeForm.controls.statusId?.dirty) || !!employeeForm.controls.errors?.get('statusId')?.value"
+                                    [formGroup]="employeeForm" [property]="'statusId'" [placement]="'top'"
                                     class="error-form">
                                 </app-error>
                             </div>
@@ -189,7 +189,8 @@
         <div>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                 [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
-                (cancel)="cancelClicked = true" data-qe-id="button-delete">
+                (cancel)="cancelClicked = true" data-qe-id="button-delete"
+                *ngIf="employeeForm.controls.id.value !== null && employeeForm.controls.id.value !== undefined">
                 {{ 'general.button.delete' | translate}}</button>
         </div>
         <div class="page-actions">

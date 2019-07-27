@@ -5,9 +5,9 @@ import { ItemEntity } from './item.entity';
 
 
 export class ItemForm extends FormModel {
-    code = new FormControl('', [requiredField]);
-    codeFromSupplier = new FormControl('');
-    codeFromMarket = new FormControl('');
+    code = new FormControl('', [requiredField, checkLength(3, 10)]);
+    codeFromSupplier = new FormControl('', [checkLength(0, 500)]);
+    codeFromMarket = new FormControl('', [checkLength(0, 500)]);
     name = new FormControl('', [requiredField]);
 
     // characteristicEntity:
@@ -16,13 +16,13 @@ export class ItemForm extends FormModel {
 
     // unitEntity:
     uomName = new FormControl('', [requiredField]);
-    uomId = new FormControl('', [requiredField]);
+    uomId = new FormControl('');
 
     primaryPrice = new FormControl('', [requiredField]);
     weight = new FormControl('');
 
     // statusEntity:
-    statusName = new FormControl('', [requiredField]);
+    statusName = new FormControl('');
     statusId = new FormControl('', [requiredField]);
 
     height = new FormControl('');

@@ -6,7 +6,7 @@ import { FormModel } from 'src/app/_helpers/form-model';
 
 export class CustomerForm extends FormModel {
     code = new FormControl('', [requiredField]);
-    name = new FormControl('', [requiredField]);
+    name = new FormControl('', [requiredField, checkLength(3, 100)]);
     taxCode = new FormControl();
     note = new FormControl();
 

@@ -66,7 +66,8 @@
                 <div class="row">
                   <div class="col-sm-4">
                     <div class="form-group">
-                      <label for="bankid">{{ 'customer.detail.content.status' | translate}}</label>
+                      <label for="bankid">{{ 'customer.detail.content.status' | translate}}<span
+                          class="text-danger ml-2">*</span></label>
                       <div class="div-form">
                         <app-simple-select [key]="'name'" [list]="statusList"
                           [initValue]="customerForm.controls.statusName.value"
@@ -99,7 +100,8 @@
     <div>
       <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
         [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" (cancel)="cancelClicked = true"
-        data-qe-id="button-delete">
+        data-qe-id="button-delete"
+        *ngIf="customerForm.controls.id.value !== null && customerForm.controls.id.value !== undefined">
         {{ 'general.button.delete' | translate}}</button>
     </div>
     <div class="page-actions">

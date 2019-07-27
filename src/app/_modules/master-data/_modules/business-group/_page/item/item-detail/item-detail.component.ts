@@ -110,7 +110,9 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
 
   openUomList(uomId: string) {
     this.uomSearchEntity = new UomSearchEntity();
-    this.uomSearchEntity.ids.push(uomId);
+    if (uomId !== null && uomId.length > 0) {
+      this.uomSearchEntity.ids.push(uomId);
+    }
     this.itemDetailService.getUomList(this.uomSearchEntity);
   }
 
