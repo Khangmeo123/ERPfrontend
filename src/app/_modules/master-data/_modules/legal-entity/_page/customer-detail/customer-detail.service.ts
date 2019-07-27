@@ -1,45 +1,42 @@
-import { LegalSupplierDetailEntity } from 'src/app/_modules/master-data/_backend/legal-supplier-detail/legal-supplier-detail.entity';
+import { Injectable } from '@angular/core';
+import { CustomerDetailOfLegalEntity } from 'src/app/_modules/master-data/_backend/legal-customer-detail/legal-customer-detail.entity';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { Entities, EnumEntity } from 'src/app/_helpers/entity';
-import { SupplierDetailRepository } from './supplier-detail.repository';
+import { Entities } from 'src/app/_helpers/entity';
 import { ToastrService } from 'ngx-toastr';
-import { SupplierDetailForm } from 'src/app/_modules/master-data/_backend/legal-supplier-detail/legal-supplier-detail.form';
-import { Injectable } from '@angular/core';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { PaymentTermSearchEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.searchentity';
-import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
-import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
+import { CustomerDetailOfLegalForm } from 'src/app/_modules/master-data/_backend/legal-customer-detail/legal-customer-detail.form';
 import { InfoContactForm } from 'src/app/_modules/master-data/_backend/info-contact/info-contact.form';
-import { BankAccountForm } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.form';
-import { environment } from 'src/environments/environment';
-import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
-import { BankAccountSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.searchentity';
-import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { BankAccountOfLegalForm } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.form';
+import { PaymentTermSearchEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.searchentity';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
+import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
+import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
+import { CustomerOfLegalEntityDetailRepository } from './customer-detail.repository';
 
 @Injectable()
-export class SupplierDetailService {
-    public supplierGeneral: BehaviorSubject<LegalSupplierDetailEntity>;
-    public supplierDetailForm: BehaviorSubject<FormGroup>;
+export class CustomerDetailService {
+    public customerGeneral: BehaviorSubject<CustomerDetailOfLegalEntity>;
+    public customerDetailForm: BehaviorSubject<FormGroup>;
 
     public paymenttermList: BehaviorSubject<Entities>;
     public staffInChargeList: BehaviorSubject<Entities>;
-    public supplierGroupList: BehaviorSubject<Entities>;
+    public customerGroupList: BehaviorSubject<Entities>;
     public proviceList: BehaviorSubject<Entities>;
     public bankList: BehaviorSubject<Entities>;
     public contactForm: BehaviorSubject<FormGroup>;
     public bankAccountForm: BehaviorSubject<FormGroup>;
     constructor(
         private fb: FormBuilder,
-        private supplierDetailRepository: SupplierDetailRepository,
+        private customerDetailRepository: CustomerOfLegalEntityDetailRepository,
         private toastrService: ToastrService) {
-        this.supplierDetailForm = new BehaviorSubject(this.fb.group(
-            new SupplierDetailForm(),
+        this.customerDetailForm = new BehaviorSubject(this.fb.group(
+            new CustomerDetailOfLegalForm(),
         ));
         this.paymenttermList = new BehaviorSubject(new Entities());
         this.staffInChargeList = new BehaviorSubject(new Entities());
-        this.supplierGroupList = new BehaviorSubject(new Entities());
+        this.customerGroupList = new BehaviorSubject(new Entities());
         this.proviceList = new BehaviorSubject(new Entities());
         this.bankList = new BehaviorSubject(new Entities());
         this.contactForm = new BehaviorSubject(this.fb.group(
@@ -50,12 +47,12 @@ export class SupplierDetailService {
         ));
     }
 
-    getId(supplierId?) {
-        if (supplierId !== null && supplierId !== undefined) {
-            this.supplierDetailRepository.getId(supplierId).subscribe(res => {
+    getId(customerId?) {
+        if (customerId !== null && customerId !== undefined) {
+            this.customerDetailRepository.getId(customerId).subscribe(res => {
                 if (res) {
-                    this.supplierDetailForm.next(this.fb.group(
-                        new SupplierDetailForm(res),
+                    this.customerDetailForm.next(this.fb.group(
+                        new CustomerDetailOfLegalForm(res),
                     ));
                 }
             }, err => {
@@ -67,7 +64,7 @@ export class SupplierDetailService {
     }
 
     getListPaymentTerm(paymentTermSearchEntity: PaymentTermSearchEntity) {
-        this.supplierDetailRepository.getListPaymentTerm(paymentTermSearchEntity).subscribe(res => {
+        this.customerDetailRepository.getListPaymentTerm(paymentTermSearchEntity).subscribe(res => {
             if (res) {
                 this.paymenttermList.next(res);
             }
@@ -81,7 +78,7 @@ export class SupplierDetailService {
         paymentTermSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.supplierDetailRepository.getListPaymentTerm(searchEntity)
+                return this.customerDetailRepository.getListPaymentTerm(searchEntity)
             })).subscribe(res => {
                 if (res) {
                     this.paymenttermList.next(res);
@@ -91,7 +88,7 @@ export class SupplierDetailService {
 
 
     getListProvice(provinceSearchEntity: ProvinceSearchEntity) {
-        this.supplierDetailRepository.getListProvince(provinceSearchEntity).subscribe(res => {
+        this.customerDetailRepository.getListProvince(provinceSearchEntity).subscribe(res => {
             if (res) {
                 this.proviceList.next(res);
             }
@@ -105,7 +102,7 @@ export class SupplierDetailService {
         provinceSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.supplierDetailRepository.getListProvince(searchEntity)
+                return this.customerDetailRepository.getListProvince(searchEntity)
             })).subscribe(res => {
                 if (res) {
                     this.proviceList.next(res);
@@ -114,7 +111,7 @@ export class SupplierDetailService {
     }
 
     getListStaffInCharge(employeeSearchEntity: EmployeeSearchEntity) {
-        this.supplierDetailRepository.getListStaffInCharge(employeeSearchEntity).subscribe(res => {
+        this.customerDetailRepository.getListStaffInCharge(employeeSearchEntity).subscribe(res => {
             if (res) {
                 this.staffInChargeList.next(res);
             }
@@ -128,7 +125,7 @@ export class SupplierDetailService {
         employeeSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.supplierDetailRepository.getListStaffInCharge(searchEntity)
+                return this.customerDetailRepository.getListStaffInCharge(searchEntity)
             })).subscribe(res => {
                 if (res) {
                     this.staffInChargeList.next(res);
@@ -138,7 +135,7 @@ export class SupplierDetailService {
 
 
     getListBank(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
-        this.supplierDetailRepository.getListBankAccount(bankAccountSearchEntity).subscribe(res => {
+        this.customerDetailRepository.getListBankAccount(bankAccountSearchEntity).subscribe(res => {
             if (res) {
                 this.bankList.next(res);
             }
@@ -152,7 +149,7 @@ export class SupplierDetailService {
         bankAccountSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.supplierDetailRepository.getListBankAccount(searchEntity)
+                return this.customerDetailRepository.getListBankAccount(searchEntity)
             })).subscribe(res => {
                 if (res) {
                     this.bankList.next(res);
@@ -166,8 +163,8 @@ export class SupplierDetailService {
 
     saveContact(contactValue: any, index: any) {
         const indexContact = Number(index);
-        const currentForm = this.supplierDetailForm.getValue();
-        const arrayContact = currentForm.get('supplierContacts') as FormArray;
+        const currentForm = this.customerDetailForm.getValue();
+        const arrayContact = currentForm.get('customerContacts') as FormArray;
         if (indexContact > -1) {
             arrayContact.value[index] = Object.assign({}, contactValue);
         } else {
@@ -175,7 +172,7 @@ export class SupplierDetailService {
                 this.fb.group(new InfoContactForm(contactValue))
             );
         }
-        this.supplierDetailForm.next(currentForm);
+        this.customerDetailForm.next(currentForm);
     }
     editContact(contact) {
         this.contactForm.next(this.fb.group(new InfoContactForm(contact)));
@@ -186,8 +183,8 @@ export class SupplierDetailService {
 
     saveBankAccount(bankAccountValue: any, index: any) {
         const indexbankAccount = Number(index);
-        const currentForm = this.supplierDetailForm.getValue();
-        const arrayBankAccount = currentForm.get('supplierBankAccounts') as FormArray;
+        const currentForm = this.customerDetailForm.getValue();
+        const arrayBankAccount = currentForm.get('customerBankAccounts') as FormArray;
         if (indexbankAccount > -1) {
             arrayBankAccount.value[index] = Object.assign({}, bankAccountValue);
         } else {
@@ -195,25 +192,25 @@ export class SupplierDetailService {
                 this.fb.group(new BankAccountOfLegalForm(bankAccountValue))
             );
         }
-        this.supplierDetailForm.next(currentForm);
+        this.customerDetailForm.next(currentForm);
     }
     editbankAccount(bankAccountForm) {
         this.bankAccountForm.next(this.fb.group(new BankAccountOfLegalForm(bankAccountForm)));
     }
 
-    save(supplierDetailEntity: any): Promise<boolean> {
+    save(customerDetailEntity: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (supplierDetailEntity.value.id !== null && supplierDetailEntity.value.id !== undefined
-                && supplierDetailEntity.value.id !== environment.emtyGuid) {
-                this.supplierDetailRepository.update(supplierDetailEntity.value).subscribe(res => {
+            if (customerDetailEntity.value.id !== null && customerDetailEntity.value.id !== undefined
+                && customerDetailEntity.value.id !== environment.emtyGuid) {
+                this.customerDetailRepository.update(customerDetailEntity.value).subscribe(res => {
                     if (res) {
                         this.toastrService.success('Cập nhật thành công !');
                         resolve();
                     }
                 }, err => {
                     if (err) {
-                        this.supplierDetailForm.next(this.fb.group(
-                            new SupplierDetailForm(err),
+                        this.customerDetailForm.next(this.fb.group(
+                            new CustomerDetailOfLegalForm(err),
                         ));
                     }
                 });

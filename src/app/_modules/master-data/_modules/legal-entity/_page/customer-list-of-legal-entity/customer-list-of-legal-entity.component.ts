@@ -42,41 +42,6 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   customerTyping: Subject<CustomerSearchEntity> = new Subject();
   listCustomerId = [];
 
-  tmptable = [
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-      customerGroup: 'huongnguyenhd96@gmail.com',
-      taxCode: 'hihi',
-      address: 1,
-      phone: '1000000',
-    },
-
-  ]
 
   constructor(
     private customerOfLegalEntityService: CustomerOfLegalEntityService,
@@ -146,8 +111,6 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.listCustomerId = event;
   }
 
- 
-
   // table legal
   getListLegalEntity() {
     this.pagination.pageNumber = 1;
@@ -158,7 +121,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   toDetail(legalId) {
     this.legalId = legalId;
-    this.customerSearchEntity.legalEntityId.equal = legalId;
+    this.customerSearchEntity.legalEntityId = legalId;
     this.getListCustomer(this.customerSearchEntity);
   }
 
@@ -168,8 +131,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
     this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res =>{
-      this.customerSearchEntity.legalEntityId.equal = this.legalList[0].id;
-      this.legalId = this.customerSearchEntity.legalEntityId.equal;
+      this.customerSearchEntity.legalEntityId = this.legalList[0].id;
+      this.legalId = this.customerSearchEntity.legalEntityId;
       this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
     });
   }
@@ -189,7 +152,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   onClickAddCustomer () {
     this.customerSearchEntity.customerIds = this.listCustomerId;
-    this.customerSearchEntity.legalEntityId.equal = this.legalId;
+    this.customerSearchEntity.legalEntityId = this.legalId;
     this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity).then(res => {
       this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
     }).catch(err => {
@@ -204,7 +167,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   }
 
   onClickShowDetail(customerId) {
-    this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'], {queryParams: {id: customerId}});
+    this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'], 
+    {queryParams: {id: customerId, legalEntityId: this.legalId}});
   }
 
   showDialog() {
@@ -217,7 +181,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       this.customerSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    if(this.customerSearchEntity.legalEntityId.equal !== '') {
+    if(this.customerSearchEntity.legalEntityId !== '') {
       this.getListCustomer(this.customerSearchEntity);
     }
   }

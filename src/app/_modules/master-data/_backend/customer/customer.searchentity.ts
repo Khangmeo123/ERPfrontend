@@ -9,7 +9,7 @@ export class CustomerSearchEntity extends SearchEntity {
     phone: number;
     statusId: string;
 
-    legalEntityId: TextFilter = new TextFilter();
+    legalEntityId: string;
     customerIds: Array<any>;
 
     constructor(customerSearchEntity?: any) {

@@ -1,322 +1,459 @@
-<div class="page">
-  <div class="page-header">
-    <span class="page-title">
-      {{'detail_customer_group.detail.title' | translate}}
-      <span (click)="onClickSaveBookMark($event)">
-        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
-          star
-        </mat-icon>
-      </span>
-    </span>
-    <div class="page-actions">
-      <button class="btn btn-save">
-        {{'general.button.save' | translate}}
-      </button>
-      <button class="btn btn-cancel">
-        {{'general.button.cancel' | translate}}
-      </button>
-      <button class="btn btn-delete">
-        {{'general.button.delete' | translate}}
-      </button>
+<div class="page detail-customer-group">
+    <div class="page-header">
+        <span class="page-title">
+            {{'detailCustomerOfLegal.detail.title' | translate}}
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-cancel" data-qe-id="button-cancel" (click)="cancel()">
+                {{'general.button.cancel' | translate}}
+            </button>
+            <button class="btn btn-save" data-qe-id="button-save" (click)="save()">
+                {{'general.button.save' | translate}}
+            </button>
+        </div>
     </div>
-  </div>
-  <div class="page-body">
-    <div class="page-section">
-        <accordion>
-          <accordion-group [isOpen]="true">
-            <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
-              <div class="pull-left float-left">{{'detail_customer_group.tab_1.general' | translate }}</div>
-              <span class="float-right pull-right" accordion-heading>
-                <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
-              </span>
-            </button>
-            <div class="row">
-              <div class="form-group col">
-                <label for="customer_code">
-                  {{'customer.code' | translate}}
-                  <span class="text-danger ml-1"> * </span>
-                </label>
-                <input type="text" class="form-control" id="customer_code">
-                <app-error *ngIf="form.controls.Display?.errors?.invalidUsername || !!form.get('name')?.value"
-                           [formGroup]="form" [property]="'name'" [placement]="'top'" class="error-form">
-                </app-error>
-              </div>
-              <div class="form-group col">
-                <label for="customer_name">
-                  {{'customer.name' | translate}}
-                  <span class="text-danger ml-1"> * </span>
-                </label>
-                <input type="text" class="form-control" id="customer_name">
-              </div>
+    <div class="page-body">
+        <div class="page-section">
+            <accordion>
+                <accordion-group [isOpen]="true" [formGroup]="customerDetailForm">
+                    <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'detailCustomerOfLegal.tab_1.general' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="row">
+                        <div class="form-group col">
+                            <label for="customer_code">
+                                {{'detailCustomerOfLegal.code' | translate}}
+                                <span class="text-danger ml-1"> * </span>
+                            </label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="customer_code"
+                                    data-qe-id="detail-form-general-code" formControlName="code">
+                                <app-error
+                                    *ngIf="(customerDetailForm?.controls.code?.errors  && customerDetailForm.controls.code?.touched )|| !!customerDetailForm.controls.errors?.get('code')?.value"
+                                    [formGroup]="customerDetailForm" [property]="'code'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
 
-              <div class="form-group col">
-                <label for="tax_code">
-                  {{'customer.tax_code' | translate}}
-                </label>
-                <input type="text" class="form-control" id="tax_code">
-              </div>
-            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label for="customer_name">
+                                {{'detailCustomerOfLegal.name' | translate}}
+                                <span class="text-danger ml-1"> * </span>
+                            </label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="customer_name"
+                                    data-qe-id="detail-form-general-name" formControlName="name">
+                                <app-error
+                                    *ngIf="(customerDetailForm.controls.name?.errors  && customerDetailForm.controls.name?.touched )|| !!customerDetailForm.controls.errors?.get('name')?.value"
+                                    [formGroup]="customerDetailForm" [property]="'name'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
 
-            <div class="row">
-              <div class="form-group col-4">
-                <label for="customer_status">
-                  {{'customer.status' | translate}}
-                </label>
-                <app-single-select></app-single-select>
-              </div>
-              <!-- <div class="form-group col"></div> -->
-              <div class="form-group col-8">
-                <label for="customer_more_details">
-                  {{'customer.more_details' | translate}}
-                </label>
-                <textarea name="customer_more_details" id="customer_more_details" rows="1"
-                          class="form-control"></textarea>
-              </div>
-              <div class="form-group col-4">
-                <label>
-                  {{'detail_customer_group.payment_terms' | translate}}
-                </label>
-                <app-single-select></app-single-select>
-              </div>
-              <div class="form-group col-4">
-                <label>
-                  {{'detail_customer_group.due_in_days' | translate}}
-                </label>
-                <input type="text" class="form-control">
-              </div>
-              <div class="form-group col-4">
-                <label>
-                  {{'detail_customer_group.debt_load' | translate}}
-                </label>
-                <input type="text" class="form-control">
-              </div>
-              <div class="form-group col-4">
-                <label>
-                  {{'detail_customer_group.pic' | translate}}
-                </label>
-                <app-single-select></app-single-select>
-              </div>
-              <div class="form-group col-4">
-                <label>
-                  {{'detail_customer_group.customer_group' | translate}}
-                </label>
-                <app-single-select></app-single-select>
-              </div>
-            </div>
-          </accordion-group>
-          <accordion-group>
-            <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
-              <div class="pull-left float-left">{{'detail_customer_group.bank_accounts.title' | translate }}</div>
-              <span class="float-right pull-right" accordion-heading>
-                <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
-              </span>
-            </button>
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-add" (click)="toggleContactsModal()">
-                {{'detail_customer_group.contacts.add' | translate}}
+                        </div>
 
-              </button>
-            </div>
+                        <div class="form-group col">
+                            <label for="tax_code">
+                                {{'detailCustomerOfLegal.tax_code' | translate}}
+                            </label>
+                            <input type="text" class="form-control" id="tax_code"
+                                data-qe-id="detail-form-general-tax-code" formControlName="taxCode">
+                        </div>
+                    </div>
 
-            <div class="mt-2">
-              <p-table [value]="[]">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>
-                      {{'detail_customer_group.contacts.code' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.contacts.recipient' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.contacts.phone_number' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.contacts.email' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.contacts.city' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.contacts.address' | translate}}
-                    </th>
-                  </tr>
-                </ng-template>
-              </p-table>
-            </div>
+                    <div class="row">
+                        <div class="form-group col-4">
+                            <label for="customer_status">
+                                {{'detailCustomerOfLegal.status' | translate}}
+                                <span class="text-danger ml-1"> * </span>
+                            </label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="tax_code"
+                                    data-qe-id="detail-form-general-status" formControlName="status">
+                                <app-error
+                                    *ngIf="(customerDetailForm.controls.status?.errors  && customerDetailForm.controls.status?.touched )|| !!customerDetailForm.controls.errors?.get('status')?.value"
+                                    [formGroup]="customerDetailForm" [property]="'status'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
 
-          </accordion-group>
-          <accordion-group>
-            <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
-              <div class="pull-left float-left">{{'customer.contacts.title' | translate }}</div>
-              <span class="float-right pull-right" accordion-heading>
-                <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
-              </span>
-            </button>
-            <div class="d-flex justify-content-end">
-              <button class="btn btn-add" (click)="toggleBankAccountsModal()">
-                {{'customer.bank_accounts.add' | translate}}
-              </button>
-            </div>
-            <div class="mt-2">
-              <p-table [value]="[]">
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th>
-                      {{'detail_customer_group.bank_account.code' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.bank_account.bank_name' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.bank_account.account_owner' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.bank_account.account_number' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.bank_account.province' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.bank_account.bank_division' | translate}}
-                    </th>
-                    <th>
-                      {{'detail_customer_group.bank_account.bank_address' | translate}}
-                    </th>
-                  </tr>
-                </ng-template>
-              </p-table>
-            </div>
-          </accordion-group>
-        </accordion>
+                        </div>
+                        <!-- <div class="form-group col"></div> -->
+                        <div class="form-group col-8">
+                            <label for="customer_more_details">
+                                {{'detailCustomerOfLegal.more_details' | translate}}
+                            </label>
+                            <textarea name="customer_more_details" id="customer_more_details" rows="1"
+                                class="form-control" data-qe-id="detail-form-general-more-detail"
+                                formControlName="note"></textarea>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailCustomerOfLegal.payment_terms' | translate}}
+                            </label>
+                            <app-single-select data-qe-id="detail-form-general-payment-term"
+                                [list]="paymentTermExceptIds" [selectedList]="paymentTermIds" [key]="'name'"
+                                (search)="paymentTermSearch($event)" [initialValue] ="customerDetailForm.controls.paymentTermName.value"
+                                (selectionChange)="customerDetailForm.controls.paymentTermId.setValue($event[0])"
+                                (listOpen)="openPaymentTermList(paymentTermSearchEntity.paymentTermId)">
+                            </app-single-select>
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailCustomerOfLegal.due_in_days' | translate}}
+                            </label>
+                            <input type="text" class="form-control" data-qe-id="detail-form-general-due-in-days"
+                                formControlName="dueInDays">
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailCustomerOfLegal.debt_load' | translate}}
+                            </label>
+                            <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load"
+                                formControlName="debtLoad">
+                        </div>
+                        <div class="form-group col-4">
+                            <label>
+                                {{'detailCustomerOfLegal.pic' | translate}}
+                            </label>
+                            <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChargeExceptIds"
+                                [selectedList]="staffInChargeIds" [key]="'name'" (search)="staffInChargeSearch($event)"
+                                (selectionChange)="customerDetailForm.controls.staffInChargeId.setValue($event[0])"
+                                (listOpen)="openStaffInChargeList(staffInChargeSearchEntity.staffInChargeId)"
+                                [initialValue] ="customerDetailForm.controls.staffInChargeName.value">
+                                
+                            </app-single-select>
+                        </div>
+                    </div>
+                </accordion-group>
+                <accordion-group>
+                    <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'detailCustomerOfLegal.contacts.title' | translate }}</div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="addContact()" data-qe-id="button-add-contact">
+                            {{'detailCustomerOfLegal.contacts.add' | translate}}
+                        </button>
+                    </div>
+
+                    <div class="mt-2">
+                        <p-table [value]="customerDetailForm.get('customerContacts').value" [scrollable]="true"
+                            scrollHeight="500px" [resizableColumns]="true" #table>
+                            <ng-template pTemplate="colgroup">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-code">
+                                        {{'detailCustomerOfLegal.contacts.code' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-recipient">
+                                        {{'detailCustomerOfLegal.contacts.recipient' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-phone-number">
+                                        {{'detailCustomerOfLegal.contacts.phoneNumber' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-email">
+                                        {{'detailCustomerOfLegal.contacts.email' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-city">
+                                        {{'detailCustomerOfLegal.contacts.city' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-contacts-address">
+                                        {{'detailCustomerOfLegal.contacts.address' | translate}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-contact let-index="rowIndex">
+                                <tr (dblclick)="editContact(contact,index)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                    <td> {{index}}</td>
+                                    <td> {{contact.name}} </td>
+                                    <td> {{contact.phone}} </td>
+                                    <td> {{contact.email}} </td>
+                                    <td> {{contact.provinceName}}</td>
+                                    <td> {{contact.address}} </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+
+                </accordion-group>
+                <accordion-group>
+                    <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
+                        <div class="pull-left float-left">{{'detailCustomerOfLegal.bankAccount.title' | translate }}
+                        </div>
+                        <span class="float-right pull-right" accordion-heading>
+                            <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                        </span>
+                    </button>
+                    <div class="d-flex justify-content-end">
+                        <button class="btn btn-add" (click)="addBankAccount()" data-qe-id="button-add-bank-account">
+                            {{'detailCustomerOfLegal.bankAccount.add' | translate}}
+                        </button>
+                    </div>
+                    <div class="mt-2">
+                        <p-table [value]="customerDetailForm.get('customerBankAccounts').value" [scrollable]="true"
+                            scrollHeight="500px" [resizableColumns]="true" #tableBankAccount>
+                            <ng-template pTemplate="colgroup">
+                                <colgroup>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                    <col>
+                                </colgroup>
+                            </ng-template>
+                            <ng-template pTemplate="header">
+                                <tr>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-code">
+                                        {{'detailCustomerOfLegal.bankAccount.code' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-name">
+                                        {{'detailCustomerOfLegal.bankAccount.bank_name' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-account-owner">
+                                        {{'detailCustomerOfLegal.bankAccount.account_owner' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-account-number">
+                                        {{'detailCustomerOfLegal.bankAccount.account_number' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-province">
+                                        {{'detailCustomerOfLegal.bankAccount.province' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-division">
+                                        {{'detailCustomerOfLegal.bankAccount.bank_division' | translate}}
+                                    </th>
+                                    <th pResizableColumn data-qe-id="table-thead-bank-address">
+                                        {{'detailCustomerOfLegal.bankAccount.bank_address' | translate}}
+                                    </th>
+                                </tr>
+                            </ng-template>
+                            <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
+                                <tr (dblclick)="editBankAccount(bankAccount, index)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                    <td> {{index}}</td>
+                                    <td> {{bankAccount.bankName}} </td>
+                                    <td> {{bankAccount.accountName}} </td>
+                                    <td> {{bankAccount.accountNumber}} </td>
+                                    <td> {{bankAccount.provinceName}} </td>
+                                    <td> {{bankAccount.branch}}</td>
+                                    <td> {{bankAccount.address}} </td>
+                                </tr>
+                            </ng-template>
+                        </p-table>
+                    </div>
+                </accordion-group>
+            </accordion>
+        </div>
     </div>
-  </div>
+    <div class="page-footer d-flex">
+        <div class="page-actions-delete">
+            <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
+                (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                {{ 'general.button.delete' | translate}}</a>
+        </div>
+        <div class="page-actions">
+            <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+                {{'general.button.cancel' | translate}}
+            </button>
+            <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="save()">
+                {{'general.button.save' | translate}}
+            </button>
+        </div>
+    </div>
 </div>
 
 
-<p-dialog modal="true" [(visible)]="bankAccountsModal">
+<p-dialog modal="true" [(visible)]="bankAccountsModal" [contentStyle]="{'overflow':'visible'}">
     <p-header>
-      {{'detail_customer_group.bank_accounts.add' | translate}}
+        {{'detailCustomerOfLegal.bankAccounts.add' | translate}}
     </p-header>
-    <form class="container">
-      <div class="row">
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.bank_account.bank_name' | translate}}
-            <span class="text-danger mr-2">*</span>
-          </label>
-          <app-single-select></app-single-select>
+    <form class="container" [formGroup]="bankAccountForm">
+        <div class="row">
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.bankAccount.bank_name' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <app-single-select data-qe-id="dialog-bank-account"
+                    [valueSelector]="valueSelector"
+                    [list]="bankExceptIds" 
+                    [selectedList]="bankIds"
+                    [key]="'name'" (search)="bankSearch($event)" 
+                    (selectionChange)="selectedBank($event)"
+                    (listOpen)="openBankList(bankAccountForm.bankId)"
+                    [initialValue] ="bankAccountForm.controls.bankName.value"
+                    ></app-single-select>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.bankAccount.account_owner' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="accountName" id="accountName" data-qe-id="detail-form-bank-account-name">
+                    <app-error data-qe-id="form-error-name"
+                        *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.errors?.get('accountName')?.value"
+                        [formGroup]="bankAccountForm" [property]="'accountName'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.bankAccount.account_number' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="accountNumber" id="accountNumber" data-qe-id="detail-form-bank-account-number" >
+                    <app-error data-qe-id="form-error-name"
+                        *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.errors?.get('accountNumber')?.value"
+                        [formGroup]="bankAccountForm" [property]="'accountNumber'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.bankAccount.bank_division' | translate}}
+                </label>
+                <input type="text" class="form-control" fomControlName="branch">
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.bankAccount.province' | translate}}
+                </label>
+                <app-single-select data-qe-id="detail-form-bank-account-province-name" 
+                    [valueSelector]="valueSelector"
+                    [list]="provinceExceptIds" [initialValue] ="bankAccountForm.controls.provinceName.value"
+                    [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
+                    (selectionChange)="selectedProvinceBankAccount($event)"
+                    (listOpen)="openProvinceList(customerDetailForm.get('customerBankAccounts').provinceId)">
+                </app-single-select>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'customer.bankAccount.bank_address' | translate}}
+                </label>
+                <input type="text" class="form-control"  fomControlName="branch" data-qe-id="detail-form-bank-address" >
+            </div>
         </div>
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.bank_account.account_owner' | translate}}
-            <span class="text-danger mr-2">*</span>
-          </label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.bank_account.account_number' | translate}}
-            <span class="text-danger mr-2">*</span>
-          </label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.bank_account.bank_division' | translate}}
-          </label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.bank_account.province' | translate}}
-          </label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group col-6">
-          <label>
-            {{'customer.bank_account.bank_address' | translate}}
-          </label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
     </form>
     <p-footer>
-      <ng-template *ngIf="isAdd; else notAdd">
-        <button class="btn btn-add mr-2">
-          {{'general.button.add' | translate}}
-        </button>
-        <button class="btn btn-cancel">
-          {{'general.button.cancel' | translate}}
-        </button>
-      </ng-template>
-      <ng-template #notAdd>
-        <button class="btn btn-add mr-2">
-          {{'general.button.save' | translate}}
-        </button>
-        <button class="btn btn-cancel mr-2">
-          {{'general.button.cancel' | translate}}
-        </button>
-        <button class="btn btn-delete">
-          {{'general.button.delete' | translate}}
-        </button>
-      </ng-template>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-actions-delete">
+                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                        data-qe-id="button-delete">
+                        {{ 'general.button.delete' | translate}}</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="page-actions">
+                    <button class="btn btn-cancel mr-2" (click)="bankAccountsModal = false" data-qe-id="dialog-button-cancel" (click)="cancel()">
+                        {{'general.button.cancel' | translate}}
+                    </button>
+                    <button class="btn btn-add mr-2" data-qe-id="button-save" (click) = "saveBankAccount(bankAccountForm.value)">
+                        {{'general.button.save' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
     </p-footer>
-  </p-dialog>
-  
-  <p-dialog modal="true" [(visible)]="contactsModal">
+</p-dialog>
+
+<p-dialog modal="true" [(visible)]="contactsModal" [contentStyle]="{'overflow':'visible'}">
     <p-header>
-      {{'detail_customer_group.contacts.add' | translate}}
+        {{'detailCustomerOfLegal.contacts.add' | translate}}
     </p-header>
-    <form class="container">
-      <div class="row">
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.contacts.recipient' | translate}}
-            <span class="text-danger mr-2">*</span>
-          </label>
-          <input type="text" class="form-control">
+    <form class="container" [formGroup]="contactForm">
+        <div class="row">
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.contacts.recipient' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="name" id="name">
+                    <app-error data-qe-id="form-error-name"
+                        *ngIf="(contactForm.controls.name?.errors && contactForm.controls.name?.touched) || !!contactForm.controls.errors?.get('name')?.value"
+                        [formGroup]="contactForm" [property]="'name'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.contacts.phoneNumber' | translate}}
+                    <span class="text-danger mr-2">*</span>
+                </label>
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="phone" id="phone">
+                    <app-error data-qe-id="form-error-phone"
+                        *ngIf="(contactForm.controls.phone?.errors && contactForm.controls.phone?.touched) || !!contactForm.controls.errors?.get('phone')?.value"
+                        [formGroup]="contactForm" [property]="'phone'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.contacts.email' | translate}}
+                </label>
+                <input type="text" class="form-control" formControlName="email">
+            </div>
+            <div class="form-group col-6">
+                <label>
+                    {{'detailCustomerOfLegal.contacts.province' | translate}}
+                </label>
+                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds" [valueSelector]="valueSelector"
+                    [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
+                    (selectionChange)="selectedProvince($event)"
+                    (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
+            </div>
+
         </div>
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.contacts.phone_number' | translate}}
-            <span class="text-danger mr-2">*</span>
-          </label>
-          <input type="text" class="form-control">
+        <div class="row">
+            <div class="form-group col-12">
+                <label>
+                    {{'detailCustomerOfLegal.contacts.address' | translate}}
+                </label>
+                <input type="text" class="form-control" formControlName="address">
+            </div>
         </div>
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.contacts.email' | translate}}
-          </label>
-          <input type="text" class="form-control">
-        </div>
-        <div class="form-group col-6">
-          <label>
-            {{'detail_customer_group.contacts.address' | translate}}
-          </label>
-          <input type="text" class="form-control">
-        </div>
-      </div>
     </form>
     <p-footer>
-      <ng-template *ngIf="isAdd; else notAdd">
-        <button class="btn btn-add mr-2">
-          {{'general.button.add' | translate}}
-        </button>
-        <button class="btn btn-cancel">
-          {{'general.button.cancel' | translate}}
-        </button>
-      </ng-template>
-      <ng-template #notAdd>
-        <button class="btn btn-add mr-2">
-          {{'general.button.save' | translate}}
-        </button>
-        <button class="btn btn-cancel mr-2">
-          {{'general.button.cancel' | translate}}
-        </button>
-        <button class="btn btn-delete">
-          {{'general.button.delete' | translate}}
-        </button>
-      </ng-template>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="page-actions-delete">
+                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
+                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                        data-qe-id="button-delete">
+                        {{ 'general.button.delete' | translate}}</a>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="page-actions">
+                    <button class="btn btn-cancel mr-2" (click)="contactsModal = false" data-qe-id="dialog-button-cancel">
+                        {{'general.button.cancel' | translate}}
+                    </button>
+                    <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="saveContact(contactForm.value)">
+                        {{'general.button.save' | translate}}
+                    </button>
+                </div>
+            </div>
+        </div>
     </p-footer>
-  </p-dialog>
+</p-dialog>
