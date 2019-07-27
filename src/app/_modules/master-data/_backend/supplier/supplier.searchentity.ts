@@ -6,7 +6,7 @@ export class SupplierSearchEntity extends SearchEntity {
     name: TextFilter = new TextFilter();
     taxNumber: TextFilter = new TextFilter();
     statusId: string;
-    legalEntityId: string;
+    legalEntityId: TextFilter = new TextFilter();
     supplierGroupingId: Array<any>;
     supplierIds: Array<any>;
 

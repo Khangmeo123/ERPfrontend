@@ -10,6 +10,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { SupplierSearchEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.searchentity';
 import { SupplierEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.entity';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import { environment } from 'src/environments/environment';
 
 export class SupplierGroupService {
     public supplierGroupList: BehaviorSubject<SupplierGroupEntity[]>;
@@ -36,8 +37,9 @@ export class SupplierGroupService {
         this.supplierDetailCount = new BehaviorSubject(0);
     }
 
-    getList(supplierGroupSearchEntity: SupplierGroupSearchEntity) {
-        forkJoin(this.supplierGroupRepository.getListSupplierGroup(supplierGroupSearchEntity),
+    getList(supplierGroupSearchEntity: SupplierGroupSearchEntity): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            forkJoin(this.supplierGroupRepository.getListSupplierGroup(supplierGroupSearchEntity),
             this.supplierGroupRepository.countSupplierGroup(supplierGroupSearchEntity)).subscribe(([list, count]) => {
                 if (list) {
                     this.supplierGroupList.next(list);
@@ -45,7 +47,12 @@ export class SupplierGroupService {
                 if (count) {
                     this.supplierGroupCount.next(count);
                 }
+                resolve(true);
+            }, err => {
+                    reject(false);
             });
+        });
+        return defered;
     }
 
     add(legalEntityId: any) {
@@ -76,39 +83,56 @@ export class SupplierGroupService {
         });
     }
 
-
-    save(supplierGroupEntity: any, supplierGroupSearchEntity: SupplierGroupSearchEntity): Promise<boolean> {
+    save(supllierGroupEntity: any, supplierGroupSearchEntity: SupplierGroupSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (supplierGroupEntity.id === null || supplierGroupEntity.id === undefined) {
-                this.supplierGroupRepository.add(supplierGroupEntity).subscribe(res => {
+          if (supllierGroupEntity.id === null || supllierGroupEntity.id === undefined || supllierGroupEntity.id === environment.emtyGuid) {
+            this.supplierGroupRepository.add(supllierGroupEntity).subscribe(res => {
+              if (res) {
+                this.getList(supllierGroupEntity);
+                this.toastrService.success('Cập nhật thành công !');
+                resolve(false);
+              }
+            }, err => {
+              if (err) {
+                this.supplierGroupForm.next(this.fb.group(
+                  new SupplierGroupForm(err),
+                ));
+                reject(true);
+              }
+            });
+          } else {
+            this.supplierGroupRepository.update(supllierGroupEntity).subscribe(res => {
+              if (res) {
+                this.getList(supllierGroupEntity);
+                this.toastrService.success('Cập nhật thành công !');
+                resolve(false);
+              }
+            }, err => {
+              if (err) {
+                this.supplierGroupForm.next(this.fb.group(
+                  new SupplierGroupForm(err),
+                ));
+                reject(true);
+              }
+            });
+          }
+        });
+        return defered;
+      }
+
+
+    saveSupplier(supplierGroupSearchEntity: SupplierSearchEntity): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            if (supplierGroupSearchEntity.id === null || supplierGroupSearchEntity.id === undefined 
+                || supplierGroupSearchEntity.id === environment.emtyGuid) {
+                this.supplierGroupRepository.addSupplier(supplierGroupSearchEntity).subscribe(res => {
                     if (res) {
-                        this.getList(supplierGroupSearchEntity);
+                        this.getListSupplierDetail(supplierGroupSearchEntity);
                         this.toastrService.success('Cập nhật thành công !');
                         resolve(false);
                     }
                 }, err => {
                     if (err) {
-                        const testItem = this.fb.group(
-                            new SupplierGroupForm(err),
-                        );
-                        this.supplierGroupForm.next(this.fb.group(
-                            new SupplierGroupForm(err),
-                        ));
-                        reject(true);
-                    }
-                });
-            } else {
-                this.supplierGroupRepository.update(supplierGroupEntity).subscribe(res => {
-                    if (res) {
-                        this.getList(supplierGroupSearchEntity);
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve(false);
-                    }
-                }, err => {
-                    if (err) {
-                        this.supplierGroupForm.next(this.fb.group(
-                            new SupplierGroupForm(err),
-                        ));
                         reject(true);
                     }
                 });

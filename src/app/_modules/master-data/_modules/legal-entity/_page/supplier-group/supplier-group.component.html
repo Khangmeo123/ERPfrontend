@@ -26,14 +26,13 @@
           <div class="col-sm-5 d-flex page-actions justify-content-end">
             <button class="btn btn-add" [disabled]="supplierGroupSearchEntity.legalEntityId == undefined"
               (click)="onClickAddGroup()" data-qe-id="button-add-supplier-group">
-              +
               {{'general.button.add' | translate}}</button>
             <button class="btn btn-clear" (click)="clearSearchGroup(tableSupplierGroup)"
               data-qe-id="button-clear-supplier-group">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
-          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true"
+          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single" [(selection)]="supplierGroupList[0]"
             (onLazyLoad)="sortSupplierGroup($event)" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
             #tableSupplierGroup>
             <ng-template pTemplate="colgroup">
@@ -68,7 +67,7 @@
             </ng-template>
 
             <ng-template pTemplate="body" let-supplierGroup let-index="rowIndex">
-              <tr (click)="onClickDetail(supplierGroup.id)" (dblclick)="edit(supplierGroup.id)"
+              <tr [pSelectableRow]="supplierGroup" (click)="onClickDetail(supplierGroup.id)" (dblclick)="edit(supplierGroup.id)"
                 [attr.data-qe-id]="'table-tbody-row-' + index">
                 <td class="ui-resizable-column"> {{supplierGroup.code}} </td>
                 <td class="ui-resizable-column"> {{supplierGroup.name}} </td>
@@ -91,7 +90,7 @@
               (listOpen)="openSupplierList(supplierGroupSearchEntity.ids)"></app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
-            <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier"> +
+            <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier">
               {{'general.button.add' | translate}}</button>
             <div class="btn-group" dropdown data-qe-id="button-import-supplier">
               <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
@@ -114,7 +113,7 @@
           </div>
         </div>
         <div class="page-section mt-2">
-          <p-table [value]="tmpSupplier" [customSort]="true" [lazy]="true" (onLazyLoad)="sortSupplier($event)"
+          <p-table [value]="supplierDetailList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortSupplier($event)"
             [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableSupplier>
             <ng-template pTemplate="colgroup">
               <colgroup>
