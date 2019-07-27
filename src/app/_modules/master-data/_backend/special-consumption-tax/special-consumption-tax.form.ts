@@ -17,6 +17,8 @@ export class SpecialConsumptionTaxForm extends FormModel {
   chartOfAccountId = new FormControl(null);
   chartOfAccountName = new FormControl(null);
 
+  parentId: FormControl = new FormControl(null);
+
   rate = new FormControl(null);
   description = new FormControl(null);
 

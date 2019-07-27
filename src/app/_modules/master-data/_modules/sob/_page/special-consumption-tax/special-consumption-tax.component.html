@@ -125,7 +125,8 @@
             <span class="text-danger mr-2">*</span>
           </label>
           <div class="div-form">
-            <input class="form-control" type="text" placeholder="10100" id="tax-code">
+            <input class="form-control" type="text" placeholder="10100" id="tax-code" formControlName="code"
+                   name="code">
             <app-error data-qe-id="dialog-error-code"
                        *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"
                        [formGroup]="specialConsumptionTaxForm" [property]="'code'" [placement]="'top'"
@@ -135,11 +136,11 @@
         </div>
 
         <div class="mb-4">
-          <label for="tax-name">
+          <label for="unit-of-measure">
             {{'tax.unit' | translate}}
           </label>
           <div class="div-form d-flex">
-            <input type="hidden" id="tax-name" name="name" formControlName="name"
+            <input type="hidden" id="unit-of-measure" name="unitOfMeasureId" formControlName="unitOfMeasureId"
                    #unitOfMeasureId>
             <app-single-select class="flex-grow-1"
                                [list]="uomList"
@@ -147,7 +148,27 @@
                                [selectedList]="selectedUomList"
                                (listOpen)="getUomList()"
                                (selectionChange)="unitOfMeasureId.value = $event[0]"></app-single-select>
-            <app-error data-qe-id="dialog-error-name"
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="discount">
+            {{'tax.discount' | translate}}
+          </label>
+          <input id="discount" class="form-control" type="text" placeholder="70" formControlName="rate" name="rate">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="mt-4 mb-4">
+          <label for="tax-name">
+            {{'tax.name' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <div class="div-form">
+            <input class="form-control" type="text" id="tax-name" name="name" formControlName="name"
+                   placeholder="Thuốc lá điếu, xì gà">
+            <app-error data-qe-id="dialog-error-code"
                        *ngIf="(specialConsumptionTaxForm.controls.name?.errors && specialConsumptionTaxForm.controls.name?.touched) || !!specialConsumptionTaxForm.controls.errors.get('name')?.value"
                        [formGroup]="specialConsumptionTaxForm" [property]="'name'" [placement]="'top'"
                        class="error-form">
@@ -155,31 +176,19 @@
           </div>
         </div>
 
-        <div class="mb-4">
-          <label>
-            {{'tax.discount' | translate}}
-          </label>
-          <input class="form-control" type="text" placeholder="70">
-        </div>
-      </div>
-
-      <div class="col-6">
-        <div class="mt-4 mb-4">
-          <label>
-            {{'tax.name' | translate}}
-            <span class="text-danger mr-2">*</span>
-          </label>
-          <input class="form-control" type="text" id="unit-of-measure-id" placeholder="Thuốc lá điếu, xì gà">
-        </div>
-
         <div class=" mb-4">
           <label for="parent-id">
             {{'tax.parent_account' | translate}}
-            <span class="text-danger mr-2">*</span>
           </label>
-          <input type="hidden" formControlName="parentId" name="parentId" #parentId>
-          <app-single-select id="parent-id" (selectionChange)="parentId.value = $event[0]" [list]="[]"
-                             [selectedList]="[]"></app-single-select>
+          <div class="div-form d-flex">
+            <input type="hidden" formControlName="parentId" name="parentId" #parentId>
+            <app-single-select class="flex-grow-1"
+                               id="parent-id"
+                               (selectionChange)="parentId.value = $event[0]"
+                               (listOpen)="getList()"
+                               [list]="specialConsumptionTaxList"
+                               [selectedList]="[]"></app-single-select>
+          </div>
         </div>
 
         <div class=" mb-4">
@@ -206,10 +215,12 @@
               *ngIf="specialConsumptionTaxForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel"
-                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+        <button class="btn btn-cancel" (click)="onClickCancel()">
+          {{ 'general.button.cancel' | translate}}
+        </button>
         <button class="btn btn-save" (click)="onClickSave()">
-          {{ 'general.button.save' | translate}}</button>
+          {{ 'general.button.save' | translate}}
+        </button>
       </div>
     </div>
   </p-footer>

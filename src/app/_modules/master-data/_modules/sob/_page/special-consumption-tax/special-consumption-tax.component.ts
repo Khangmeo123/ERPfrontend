@@ -66,7 +66,8 @@ export class SpecialConsumptionTaxComponent implements OnInit {
 
   constructor(
     private specialConsumptionTaxService: SpecialConsumptionTaxService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
+    private toastrService: ToastrService,
   ) {
     const sobListSub = this.specialConsumptionTaxService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
@@ -108,8 +109,12 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   }
 
   add() {
-    this.specialConsumptionTaxService.add();
-    this.showDialog();
+    if (this.setOfBookId) {
+      this.specialConsumptionTaxService.add();
+      this.showDialog();
+    } else {
+      this.toastrService.error('Phải chọn bộ sổ trước');
+    }
   }
 
   ngOnInit() {
