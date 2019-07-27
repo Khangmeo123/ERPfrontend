@@ -140,8 +140,8 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
     this.listLegalOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res =>{
-      this.supplierSearchEntity.legalEntityId = this.legalList[0].id;
-      this.legalId = this.supplierSearchEntity.legalEntityId;
+      this.supplierSearchEntity.legalEntityId.equal = this.legalList[0].id;
+      this.legalId = this.supplierSearchEntity.legalEntityId.equal;
       this.listLegalOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
     });
   }
@@ -152,7 +152,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    if(this.supplierSearchEntity.legalEntityId !== '') {
+    if(this.supplierSearchEntity.legalEntityId.equal !== '') {
       this.getListSupplier(this.supplierSearchEntity);
     }
   }
@@ -195,7 +195,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   onClickAddsupplier () {
     this.supplierSearchEntity.supplierIds = this.listSupplierId;
-    this.supplierSearchEntity.legalEntityId = this.legalId;
+    this.supplierSearchEntity.legalEntityId.equal = this.legalId;
     this.listLegalOfLegalEntityService.save(this.supplierSearchEntity).then(res => {
       this.listLegalOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
     }).catch(err => {
