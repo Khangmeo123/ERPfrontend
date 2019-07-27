@@ -21,7 +21,7 @@ import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.s
 })
 export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
 
-  pageTitle = translate('business_group.header.title');
+  pageTitle = translate('itemOfLegalEntity.header.title');
   isSaveBookMark: boolean = false;
   paginationLegalList = new PaginationModel();
   paginationItemsFromLegal = new PaginationModel();
