@@ -8,7 +8,7 @@ import { GeneralService } from '../../../../../../_helpers/general-service.servi
 import { Entities } from '../../../../../../_helpers/entity';
 import { VoucherListSearchEntity } from '../../../../_backend/voucher-list/voucher-list.searchentity';
 import { VoucherListEntity } from '../../../../_backend/voucher-list/voucher-list.entity';
-import { VoucherListService } from './voucher.service.service';
+import { VoucherListService } from './voucher.service';
 import { ToastrService } from 'ngx-toastr';
 
 @Component({

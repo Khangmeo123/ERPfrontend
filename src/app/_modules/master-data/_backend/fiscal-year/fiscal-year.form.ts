@@ -1,30 +1,34 @@
 import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import { FormControl, FormGroup } from '@angular/forms';
+import { requiredField } from 'src/app/_helpers';
 import { FiscalYearEntity } from './fiscal-year.entity';
 
 export class FiscalYearForm extends FormModel {
 
-    name = new FormControl('', [requiredField]);
-    code = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-    formValid = new FormControl('', [requiredField]);
-    toValid = new FormControl('', [requiredField]);
+  name = new FormControl(null, [requiredField]);
+  code = new FormControl(null, [requiredField]);
 
-    valuationMethodId = new FormControl('', [requiredField]);
-    valuationMethodName = new FormControl('', [requiredField]);
+  formValid = new FormControl(null, [requiredField]);
+  toValid = new FormControl(null, [requiredField]);
 
-    statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('', [requiredField]);
+  valuationMethodId = new FormControl(null, [requiredField]);
+  valuationMethodName = new FormControl(null, [requiredField]);
 
-    constructor(fiscalYearEntity?: FiscalYearEntity) {
-        super();
-        if (fiscalYearEntity !== null && fiscalYearEntity !== undefined) {
-            Object.keys(fiscalYearEntity).forEach((item) => {
-                if (fiscalYearEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(fiscalYearEntity[item]);
-                }
-            });
+  statusId = new FormControl(null, [requiredField]);
+  statusName = new FormControl(null, [requiredField]);
+
+  errors = new FormGroup({});
+
+  constructor(fiscalYearEntity?: FiscalYearEntity) {
+    super();
+    if (fiscalYearEntity !== null && fiscalYearEntity !== undefined) {
+      Object.keys(fiscalYearEntity).forEach((item) => {
+        if (fiscalYearEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(fiscalYearEntity[item]);
         }
+      });
     }
+  }
 }
