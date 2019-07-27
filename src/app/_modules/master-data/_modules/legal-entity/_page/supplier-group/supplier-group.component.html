@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="page-section mt-2">
-          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single" [(selection)]="supplierGroupList[0]"
+          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single" [(selection)]="selectedSupplier"
             (onLazyLoad)="sortSupplierGroup($event)" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
             #tableSupplierGroup>
             <ng-template pTemplate="colgroup">
@@ -159,7 +159,7 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td> 
-                  <div class="edit" (click)="onClickShowDetail()">
+                  <div class="edit" (click)="onClickShowDetail(item.id)">
                       <mat-icon>edit</mat-icon>
                   </div>
                 </td>

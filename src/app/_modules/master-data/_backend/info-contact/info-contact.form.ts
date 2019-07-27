@@ -11,6 +11,11 @@ export class InfoContactForm extends FormModel {
     address = new FormControl('');
     provinceId = new FormControl('');
     provinceName = new FormControl('');
+
+    errors = new FormGroup({
+        name: new FormControl(),
+        phone: new FormControl(),
+    });
     constructor(infoContactEntity?: InfoContactEntity) {
         super();
         if (infoContactEntity !== null && infoContactEntity !== undefined) {
