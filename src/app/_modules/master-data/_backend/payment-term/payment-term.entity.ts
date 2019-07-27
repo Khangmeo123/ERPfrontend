@@ -10,7 +10,7 @@ export class PaymentTermEntity extends Entity {
     dueInDate: number;
     discountPeriod: number;
     discountRate: number;
-   
+    legalEntityId: string;
 
     constructor(paymentTermEntity?: any) {
         super(paymentTermEntity);
