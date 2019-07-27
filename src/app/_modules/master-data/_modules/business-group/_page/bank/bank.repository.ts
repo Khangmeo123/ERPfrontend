@@ -77,20 +77,14 @@ export class BankRepository extends Repository {
     exportFile(): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/export', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    this.downLoadFile(r.body, 'application/ms-excel');
-                    return true;
-                }),
+                map(r => r.body),
             );
     }
 
     downloadTemplate() {
         return this.http.post<boolean>(this.apiUrl + '/download-template', JSON.stringify({}),
-            { observe: 'response', responseType: 'blob' as 'json' }).pipe(
-                map(r => {
-                    this.downLoadFile(r.body, 'application/ms-excel');
-                    return true;
-                }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
             );
     }
 }

@@ -20,8 +20,8 @@
                     <li role="menuitem"><button class="dropdown-item"
                             (click)="file.click()">{{'general.button.import_file' | translate}}</button></li>
                     <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><button class="dropdown-item"
-                            (click)="downloadTemplate()">{{'general.button.download_example' | translate}}</button>
+                    <li role="menuitem"><a class="dropdown-item" href="/api/apps/master-data/business-group/bank/"
+                            (click)="downloadTemplate()">{{'general.button.download_example' | translate}}</a>
                     </li>
                 </ul>
                 <input type="file" accept=".xlsx" (click)="file.value = null" (change)="importTemplate(file.files)"
