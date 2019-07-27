@@ -1,34 +1,28 @@
 <app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)"
-            (click)="$event.stopPropagation()">
-  <app-select-head [label]="selectedText"
-                   (openList)="openList($event)"
-                   (closeList)="closeList($event)"
-                   (toggleList)="toggleList($event)"
-                   (headClick)="toggleList($event)"></app-select-head>
+  (click)="$event.stopPropagation()">
+  <app-select-head [label]="selectedText" (openList)="openList($event)" (closeList)="closeList($event)"
+    (toggleList)="toggleList($event)" (headClick)="toggleList($event)"></app-select-head>
   <app-select-body [@toggleMenu]="listState" *ngIf="isOpened">
     <app-select-search (search)="search.emit($event)"></app-select-search>
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
       <ng-template [ngIf]="hasSelected">
         <div class="py-2 pl-4 d-flex align-items-center border-bottom">
-        <span class="h4 font-weight-bold">
-          {{'select.selectedList' | translate}}
-        </span>
+          <span class="h4 font-weight-bold">
+            {{'select.selectedList' | translate}}
+          </span>
         </div>
-        <app-select-list [dataSource]="selectedList"
-                         (selectionChange)="unselect($event)"
-                         selected="true"
-                         [key]="key"
-        ></app-select-list>
+        <app-select-list [dataSource]="selectedList" (selectionChange)="unselect($event)" selected="true" [key]="key">
+        </app-select-list>
       </ng-template>
       <ng-template [ngIf]="hasData">
         <div class="py-2 pl-4 d-flex align-items-center border-bottom">
-        <span class="h4 font-weight-bold">
-          {{'select.availableList' | translate}}
-        </span>
+          <span class="h4 font-weight-bold">
+            {{'select.availableList' | translate}}
+          </span>
         </div>
         <app-select-list [dataSource]="list" *ngIf="list.length; else empty" [key]="key"
-                         (selectionChange)="select($event)"></app-select-list>
+          (selectionChange)="select($event)"></app-select-list>
         <ng-template #empty>
           <app-no-data></app-no-data>
         </ng-template>
