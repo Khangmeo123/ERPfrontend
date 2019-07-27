@@ -240,14 +240,13 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   onClickDetail(id: string) {
-    // this.supplierSearchEntity.supplierGroupingId = id;
-    // this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+    this.supplierSearchEntity.supplierGroupingId.equal = id;
+    this.supplierSearchEntity.legalEntityId.equal = this.legalEntityId;
     this.getListDetail();
   }
 
 
   onClickShowDetail(id) {
-    //  }
     this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'],{ queryParams: { id: id }});
   }
 
