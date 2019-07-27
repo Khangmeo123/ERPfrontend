@@ -9,9 +9,7 @@ export class AuthenticationService {
     public currentUser: Observable<any>;
 
     constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<any>({
-            token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI1N2JmMDE5OC1mMTA2LTQ1MGQtYmM1ZS1mMWY2NDUyZmRjNDciLCJ1bmlxdWVfbmFtZSI6Imh1eWJxIiwiQnVzaW5lc3NHcm91cElkIjoiMDAwMDAwMDAtMDAwMC0wMDAwLTAwMDAtMDAwMDAwMDAwMDAwIiwiSXNTdXBlckFkbWluIjoiVHJ1ZSIsIm5iZiI6MTU2MzE1OTc0NiwiZXhwIjoxNTczMTU5NzQ1LCJpYXQiOjE1NjMxNTk3NDZ9.9ll68DtTqe0Rs43Pm7jHRJiYNuUCiEGnnC6trMAGt4Q"
-        });
+        this.currentUserSubject = new BehaviorSubject<any>({});
         this.currentUser = this.currentUserSubject.asObservable();
     }
 
