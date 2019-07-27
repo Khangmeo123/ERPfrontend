@@ -8,6 +8,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 import { Subscription } from 'rxjs';
 import { SupplierListService } from './supplier-list.service';
 import { BookmarkService } from 'src/app/_services';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-supplier-list',
@@ -29,7 +30,8 @@ export class SupplierListComponent implements OnInit, OnDestroy {
   supplierListSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/supplier/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/supplier/export';
 
   constructor(private supplierListService: SupplierListService, private bookmarkService: BookmarkService,
     private router: Router) {

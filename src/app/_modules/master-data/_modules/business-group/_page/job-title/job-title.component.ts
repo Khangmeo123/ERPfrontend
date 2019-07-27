@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
 import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
 import { translate } from 'src/app/_helpers/string';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-title',
@@ -28,7 +29,8 @@ export class JobTitleComponent implements OnInit, OnDestroy {
   jobTitleSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/job-level/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/job-level/export';
 
   constructor(private jobTitleService: JobTitleService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {

@@ -11,6 +11,7 @@ import { BookmarkService } from 'src/app/_services';
 import { UomSearchEntity } from 'src/app/_modules/master-data/_backend/uom/uom.searchentity';
 import { UomEntity } from './../../../../../_backend/uom/uom.entity';
 import { translate } from 'src/app/_helpers/string';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-list',
@@ -36,7 +37,8 @@ export class ItemListComponent implements OnInit, OnDestroy {
   itemListSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/item/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/item/export';
 
   constructor(private itemListService: ItemListService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {

@@ -20,15 +20,15 @@
                     <li role="menuitem"><button class="dropdown-item"
                             (click)="file.click()">{{'general.button.import_file' | translate}}</button></li>
                     <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item" href="/api/apps/master-data/business-group/bank/"
-                            (click)="downloadTemplate()">{{'general.button.download_example' | translate}}</a>
+                    <li role="menuitem"><a class="dropdown-item" target="_blank"
+                            [href]="downloadLink">{{'general.button.download_example' | translate}}</a>
                     </li>
                 </ul>
                 <input type="file" accept=".xlsx" (click)="file.value = null" (change)="importTemplate(file.files)"
                     #file hidden>
             </div>
-            <button class="btn btn-export" data-qe-id="button-export"
-                (click)="exportFile()">{{'general.button.export' | translate}}</button>
+            <a class="btn btn-export" data-qe-id="button-export" target="_blank"
+                [href]="exportLink">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearch(table)"
                 data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>

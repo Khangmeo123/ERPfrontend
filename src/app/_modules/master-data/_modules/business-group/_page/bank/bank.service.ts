@@ -121,28 +121,4 @@ export class BankService {
       }
     });
   }
-
-  exportFile() {
-    this.bankRepository.exportFile().subscribe(res => {
-      if (res) {
-        this.toastrService.success('Cập nhật thành công !');
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
-
-  downloadTemplate() {
-    this.bankRepository.downloadTemplate().subscribe(res => {
-      if (res) {
-        this.toastrService.success('Cập nhật thành công !');
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
 }

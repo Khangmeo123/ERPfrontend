@@ -11,6 +11,7 @@ import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { EnumEntity } from 'src/app/_helpers/entity';
 import { translate } from 'src/app/_helpers/string';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-asset',
@@ -32,7 +33,8 @@ export class AssetComponent implements OnInit, OnDestroy {
   assetSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/asset/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/asset/export';
   constructor(private assetService: AssetService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {
     const assetListSub = this.assetService.assetList.subscribe(res => {

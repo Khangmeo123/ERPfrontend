@@ -20,12 +20,13 @@
                     <li role="menuitem"><a class="dropdown-item"
                             href="#">{{'general.button.import_file' | translate}}</a></li>
                     <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.download_example' | translate}}</a>
+                    <li role="menuitem"><a class="dropdown-item" target="_blank"
+                            [href]="downloadLink">{{'general.button.download_example' | translate}}</a>
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <a class="btn btn-export" data-qe-id="button-export" target="_blank"
+                [href]="exportLink">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearch(table)"
                 data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>

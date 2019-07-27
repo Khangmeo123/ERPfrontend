@@ -1,3 +1,4 @@
+import { environment } from './../../../../../../../environments/environment.prod';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, Routes } from '@angular/router';
@@ -30,6 +31,8 @@ export class BankComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   brands: any[];
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/bank/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/bank/export';
 
   constructor(private bankService: BankService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {
@@ -127,14 +130,6 @@ export class BankComponent implements OnInit, OnDestroy {
     } else {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
-  }
-
-  downloadTemplate() {
-    this.bankService.downloadTemplate();
-  }
-
-  exportTemplate() {
-    this.bankService.exportFile();
   }
 
   importTemplate(file: File) {

@@ -8,6 +8,7 @@ import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/e
 import { Subscription } from 'rxjs';
 import { BookmarkService } from 'src/app/_services';
 import { EmployeeListService } from './employee-list.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-employee-list',
@@ -32,6 +33,8 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   testValue = 'test';
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/employee/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/employee/export';
 
   constructor(private employeeListService: EmployeeListService, private bookmarkService: BookmarkService, private router: Router) {
     const employeeListSub = this.employeeListService.employeeList.subscribe(res => {

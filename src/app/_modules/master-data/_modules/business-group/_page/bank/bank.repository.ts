@@ -73,18 +73,4 @@ export class BankRepository extends Repository {
                 map(r => r.body),
             );
     }
-
-    exportFile(): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/export', JSON.stringify({}),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => r.body),
-            );
-    }
-
-    downloadTemplate() {
-        return this.http.post<boolean>(this.apiUrl + '/download-template', JSON.stringify({}),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => r.body),
-            );
-    }
 }

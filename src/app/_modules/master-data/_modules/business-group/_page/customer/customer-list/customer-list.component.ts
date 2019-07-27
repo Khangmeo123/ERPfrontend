@@ -9,6 +9,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 import { Subscription } from 'rxjs';
 import { CustomerListService } from './customer-list.service';
 import { BookmarkService } from 'src/app/_services';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-customer-list',
@@ -30,7 +31,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   customerListSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/customer/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/customer/export';
 
   constructor(private customerListService: CustomerListService, private bookmarkService: BookmarkService,
     private router: Router) {
