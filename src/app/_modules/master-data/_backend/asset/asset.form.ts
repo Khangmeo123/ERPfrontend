@@ -5,8 +5,8 @@ import { AssetEntity } from './asset.entity';
 
 
 export class AssetForm extends FormModel {
-    name = new FormControl('', [requiredField]);
-    code = new FormControl('', [requiredField]);
+    name = new FormControl('', [requiredField, checkLength(1, 500)]);
+    code = new FormControl('', [requiredField, checkLength(3, 10)]);
     // typeEntity:
     typeId = new FormControl('', [requiredField]);
     typeName = new FormControl('');

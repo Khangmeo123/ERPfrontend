@@ -12,7 +12,7 @@ export class CurrencyForm extends FormModel {
         name: new FormControl(''),
         code: new FormControl(''),
         description: new FormControl(''),
-    })
+    });
     constructor(currencyEntity?: CurrencyEntity) {
         super();
         this.mapData(currencyEntity);
