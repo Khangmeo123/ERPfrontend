@@ -197,11 +197,13 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       this.supplierGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res =>{
-      this.supplierSearchEntity.legalEntityId = this.supplierGroupList[0].id;
-      this.legalId = this.supplierSearchEntity.legalEntityId;
-      this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
-    });
+    if(this.legalEntityId !== '' && this.legalEntityId !== undefined) {
+      this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res =>{
+        this.supplierSearchEntity.legalEntityId = this.supplierGroupList[0].id;
+        this.legalId = this.supplierSearchEntity.legalEntityId;
+        this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
+      });
+    }    
   }
 
   sortSupplier(event) {
@@ -246,9 +248,10 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
 
-  onClickShowDetail(id) {
+  onClickShowDetail(supplierId) {
     //  }
-    this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'],{ queryParams: { id: id }});
+    this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'],
+    { queryParams: { id: supplierId, legalEntityId: this.legalId }});
   }
 
   onClickAddSupplier() {

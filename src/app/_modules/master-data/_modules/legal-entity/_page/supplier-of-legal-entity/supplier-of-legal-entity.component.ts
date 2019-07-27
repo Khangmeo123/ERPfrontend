@@ -123,7 +123,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   onClickShowDetail(supplierId) {
     this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity/supplier-detail'],
-      {queryParams: {id: supplierId}});
+      {queryParams: {id: supplierId, legalEntityId: this.legalId}});
   }
 
   toDetail(legalId) {
