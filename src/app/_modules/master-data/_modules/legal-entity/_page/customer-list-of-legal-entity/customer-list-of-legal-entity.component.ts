@@ -7,14 +7,15 @@ import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { CustomerOfLegalEntityService } from './customer-list-of-legal-entity.service';
-import { Subscription } from 'rxjs';
+import { Subscription, Subject } from 'rxjs';
 import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
 import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
 
 @Component({
   selector: 'app-customer-list-of-legal-entity',
   templateUrl: './customer-list-of-legal-entity.component.html',
-  styleUrls: ['./customer-list-of-legal-entity.component.scss']
+  styleUrls: ['./customer-list-of-legal-entity.component.scss'],
+  providers: [CustomerOfLegalEntityService]
 })
 export class CustomerListOfLegalEntityComponent implements OnInit {
 
@@ -22,6 +23,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   pagination = new PaginationModel();
   paginationdetail = new PaginationModel();
   display: boolean = false;
+  selectedList: any;
   isAddGroup = false;
 
   isAddCustomer = false;
@@ -35,6 +37,10 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   legalSubs: Subscription = new Subscription();
   legalId: string;
+  customerIds: CustomerEntity[];
+  customerExceptIds: CustomerEntity[];
+  customerTyping: Subject<CustomerSearchEntity> = new Subject();
+  listCustomerId = [];
 
   tmptable = [
     {
@@ -80,6 +86,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     const legalListSub = this.customerOfLegalEntityService.legalEntityList.subscribe(res => {
       if (res) {
         this.legalList = res;
+        this.selectedList = res[0];
       }
     });
     const legalListCountSub = this.customerOfLegalEntityService.legalEntityCount.subscribe(res => {
@@ -87,12 +94,33 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
         this.pagination.totalItems = res;
       }
     });
+
+    const customerListSub = this.customerOfLegalEntityService.customerList.subscribe(res => {
+      if (res) {
+        this.customerList = res;
+      }
+    });
+    const customerListCountSub = this.customerOfLegalEntityService.customerCount.subscribe(res => {
+      if (res) {
+        this.paginationdetail.totalItems = res;
+      }
+    });
+
+    const customerOfLegalListSub = this.customerOfLegalEntityService.customerListOflegalEntity.subscribe(res => {
+      console.log(res);
+      if (res) {
+        this.customerIds = res.ids;
+        this.customerExceptIds = res.exceptIds;
+      }
+    });
+
+
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isSaveBookMark = res;
     });
 
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
-    this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify);
+    this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify).add(customerListSub).add(customerListCountSub);
 
   }
 
@@ -102,13 +130,35 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.legalSearchEntity.take = this.pagination.take;
   }
 
+  
+  openCustomerList(id: []) {
+    this.customerSearchEntity = new CustomerSearchEntity();
+    this.customerSearchEntity.ids = id;
+    this.customerOfLegalEntityService.getListCustomerOflegalEntity(this.customerSearchEntity);
+  }
+
+  customerSearch(event) {
+    this.customerSearchEntity.code.startsWith = event;
+    this.customerSearchEntity.name.startsWith = event;
+    this.customerTyping.next(this.customerSearchEntity);
+  }
+  selectCustomer(event) {
+    this.listCustomerId = event;
+  }
 
  
 
   // table legal
+  getListLegalEntity() {
+    this.pagination.pageNumber = 1;
+    this.legalSearchEntity.skip = 0;
+    this.legalSearchEntity.take = this.pagination.take;
+    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity);
+  }
+
   toDetail(legalId) {
     this.legalId = legalId;
-    this.customerSearchEntity.legalEntityId = legalId;
+    this.customerSearchEntity.legalEntityId.equal = legalId;
     this.getListCustomer(this.customerSearchEntity);
   }
 
@@ -124,11 +174,27 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     });
   }
 
-  clearSearch() {
+  paginationOut(pagination: PaginationModel) {
+    this.legalSearchEntity.skip = pagination.skip;
+    this.legalSearchEntity.take = pagination.take;
+    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity);
+  }
 
+  clearSearch(table: any) {
+    this.legalSearchEntity = new LegalSearchEntity();
+    table.reset();
   }
 
   // table customer
+
+  onClickAddCustomer () {
+    this.customerSearchEntity.customerIds = this.listCustomerId;
+    this.customerSearchEntity.legalEntityId.equal = this.legalId;
+    this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity).then(res => {
+      this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+    }).catch(err => {
+    });
+  }
 
   getListCustomer(customer) {
     this.paginationdetail.pageNumber = 1;
@@ -138,7 +204,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   }
 
   onClickShowDetail(customerId) {
-    this.router.navigate(['/master-data/legal-entity/customer-detail'], {queryParams: {id: customerId}});
+    this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'], {queryParams: {id: customerId}});
   }
 
   showDialog() {
@@ -146,7 +212,26 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   }
 
   sort(event) {
+    if (event.sortField && event.sortOrder) {
+      this.customerSearchEntity.orderBy = event.sortField;
+      this.customerSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+    }
 
+    if(this.customerSearchEntity.legalEntityId.equal !== '') {
+      this.getListCustomer(this.customerSearchEntity);
+    }
+  }
+
+  paginationDetailOut(pagination: PaginationModel){
+    this.customerSearchEntity.skip = pagination.skip;
+    this.customerSearchEntity.take = pagination.take;
+    this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+  }
+
+  clearSearchCustomer(tableSupplier: any) {
+    this.customerSearchEntity = new CustomerSearchEntity();
+    this.customerSearchEntity.customerIds = this.customerIds;
+    tableSupplier.reset();
   }
 
   bookMark() {

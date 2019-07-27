@@ -10,6 +10,7 @@ export class CustomerSearchEntity extends SearchEntity {
     statusId: string;
 
     legalEntityId: TextFilter = new TextFilter();
+    customerIds: Array<any>;
 
     constructor(customerSearchEntity?: any) {
         super(customerSearchEntity);
