@@ -8,35 +8,45 @@
                 </mat-icon>
             </span>
         </span>
+    <!--    <div class="page-actions">-->
+    <!--      <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>-->
+    <!--      <div class="btn-group" dropdown>-->
+    <!--        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"-->
+    <!--                aria-controls="dropdown-basic">-->
+    <!--          {{'general.button.import' | translate}}<span class="caret"></span>-->
+    <!--        </button>-->
+    <!--        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">-->
+    <!--          <li role="menuitem"><a class="dropdown-item"-->
+    <!--                                 href="#">{{'general.button.import_file' | translate}}</a></li>-->
+    <!--          <li class="divider dropdown-divider"></li>-->
+    <!--          <li role="menuitem"><a class="dropdown-item"-->
+    <!--                                 href="#">{{'general.button.download_example' | translate}}</a>-->
+    <!--          </li>-->
+    <!--        </ul>-->
+    <!--      </div>-->
+    <!--      <button class="btn btn-export">{{'general.button.export' | translate}}</button>-->
+    <!--    </div>-->
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>
-      <div class="btn-group" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                aria-controls="dropdown-basic">
-          {{'general.button.import' | translate}}<span class="caret"></span>
-        </button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item"
-                                 href="#">{{'general.button.import_file' | translate}}</a></li>
-          <li class="divider dropdown-divider"></li>
-          <li role="menuitem"><a class="dropdown-item"
-                                 href="#">{{'general.button.download_example' | translate}}</a>
-          </li>
-        </ul>
-      </div>
-      <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-add" (click)="clearSearch(table)">
+        {{'general.button.clear' | translate}}
+      </button>
     </div>
   </div>
 
   <div class="page-body mt-4 ">
-    <div class="page-section form mb-4 d-flex">
-      <span class="sob">{{'general.sob' | translate}}</span>
-      <app-single-select></app-single-select>
+    <div class="page-section form d-flex align-items-center">
+      <span class="sob mr-2">{{'general.sob' | translate}}: </span>
+      <app-single-select [list]="sobList"
+                         key="name"
+                         (selectionChange)="changeSob($event)"
+                         [selectedList]="selectedSobList"
+                         (listOpen)="getSobList()"></app-single-select>
     </div>
 
-
     <div class="page-section list">
-      <p-table>
+      <p-table [value]="specialConsumptionTaxList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
             <th>
@@ -61,23 +71,26 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="specialConsumptionTaxSearchEntity.code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="specialConsumptionTaxSearchEntity.name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="specialConsumptionTaxSearchEntity.unitOfMeasureName"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="specialConsumptionTaxSearchEntity.rate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="specialConsumptionTaxSearchEntity.description"></app-advanced-filters>
             </th>
-            <th class="th-filter">
-            </th>
-
+            <th class="th-filter"></th>
           </tr>
         </ng-template>
         <ng-template let-tax>
@@ -98,27 +111,37 @@
 </div>
 
 
-<p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="visible" appendTo="body"
-          [style]="{width: '900px'}" modal="true">
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
+          [style]="{width: '700px'}">
   <p-header>
     {{'special_consumption_tax.modal.title' | translate}}
   </p-header>
-  <form class="container">
+  <div class="container" [formGroup]="specialConsumptionTaxForm">
     <div class="row">
       <div class="col-6">
         <div class="mt-4 mb-4">
-          <label>
+          <label for="tax-code">
             {{'tax.code' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-          <input class="form-control" type="text" placeholder="10100">
+          <div class="div-form">
+            <input class="form-control" type="text" placeholder="10100" id="tax-code">
+<!--            <app-error data-qe-id="dialog-error-code"-->
+<!--                       *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"-->
+<!--                       [formGroup]="specialConsumptionTaxForm" [property]="'code'" [placement]="'top'"-->
+<!--                       class="error-form">-->
+<!--            </app-error>-->
+          </div>
         </div>
 
         <div class="mb-4">
-          <label>
+          <label for="unit-of-measure-id">
             {{'tax.unit' | translate}}
           </label>
-          <app-single-select></app-single-select>
+          <input type="hidden" id="unit-of-measure-id" name="unitOfMeasureId" formControlName="unitOfMeasureId"
+                 #unitOfMeasureId>
+          <app-single-select [list]="uomList" [selectedList]="selectedUomList" (listOpen)="getUomList()"
+                             (selectionChange)="unitOfMeasureId.value = $event[0]"></app-single-select>
         </div>
 
         <div class="mb-4">
@@ -135,7 +158,7 @@
             {{'tax.name' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-          <input class="form-control" type="text" placeholder="Thuoc la dieu, xi ga">
+          <input class="form-control" type="text" placeholder="Thuốc lá điếu, xì gà">
         </div>
 
         <div class=" mb-4">
@@ -151,28 +174,28 @@
           <label>
             {{'tax.description' | translate}}
           </label>
-          <input class="form-control" type="text-area" placeholder="any description">
+          <input class="form-control" type="text-area" placeholder="Mô tả cho loại thuế này">
         </div>
       </div>
     </div>
-  </form>
-  <p-footer *ngIf="isAdd; else notAdd">
-    <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-    <button class="btn btn-save" (click)="onClickSave()">
-      {{ 'general.button.save' | translate}}</button>
-  </p-footer>
-  <ng-template #notAdd>
-    <p-footer>
-      <div class="page-actions">
+  </div>
+  <p-footer>
+    <div class="d-flex">
+      <button class="btn btn-delete"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              placement="bottom"
+              (confirm)="onClickDelete()"
+              (cancel)="onClickCancel()"
+              *ngIf="specialConsumptionTaxForm.value?.isDeleted">
+        {{ 'general.button.delete' | translate}}</button>
+      <div class="flex-grow-1 justify-content-end d-flex">
         <button class="btn btn-cancel"
                 (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
         <button class="btn btn-save" (click)="onClickSave()">
           {{ 'general.button.save' | translate}}</button>
-        <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                (cancel)="cancelClicked = true" (click)="onClickDelete()">
-          {{ 'general.button.delete' | translate}}</button>
       </div>
-    </p-footer>
-  </ng-template>
+    </div>
+  </p-footer>
 </p-dialog>

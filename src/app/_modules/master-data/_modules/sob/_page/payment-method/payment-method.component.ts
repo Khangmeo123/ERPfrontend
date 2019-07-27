@@ -73,7 +73,6 @@ export class PaymentMethodComponent implements OnInit {
 
     const paymentMethodFormSub = this.paymentMethodService.paymentMethodForm.subscribe((form: FormGroup) => {
       this.paymentMethodForm = form;
-      console.log(this.setOfBookId);
       if (this.setOfBookId) {
         this.paymentMethodForm.controls.setOfBookId.setValue(this.setOfBookId);
       }
