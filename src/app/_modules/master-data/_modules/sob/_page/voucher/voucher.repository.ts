@@ -16,7 +16,7 @@ import { VoucherListEntity } from '../../../../_backend/voucher-list/voucher-lis
 export class VoucherListRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/payment-method';
+    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/voucher';
   }
 
   getList(voucherSearchEntity: VoucherListSearchEntity): Observable<VoucherListEntity[]> {
