@@ -1,15 +1,15 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
-import {SupplierGroupSearchEntity} from '../../../../_backend/supplier-group/supplier-group.searchentity';
-import {SupplierGroupEntity} from '../../../../_backend/supplier-group/supplier-group.entity';
-import {FormGroup} from '@angular/forms';
-import {Subject, Subscription} from 'rxjs';
-import {SupplierEntity} from '../../../../_backend/supplier/supplier.entity';
-import {SupplierSearchEntity} from '../../../../_backend/supplier/supplier.searchentity';
-import {BookmarkService} from '../../../../../../_services';
-import {Router} from '@angular/router';
-import {SupplierGroupService} from './supplier-group.service';
-import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { SupplierGroupSearchEntity } from '../../../../_backend/supplier-group/supplier-group.searchentity';
+import { SupplierGroupEntity } from '../../../../_backend/supplier-group/supplier-group.entity';
+import { FormGroup } from '@angular/forms';
+import { Subject, Subscription } from 'rxjs';
+import { SupplierEntity } from '../../../../_backend/supplier/supplier.entity';
+import { SupplierSearchEntity } from '../../../../_backend/supplier/supplier.searchentity';
+import { BookmarkService } from '../../../../../../_services';
+import { Router } from '@angular/router';
+import { SupplierGroupService } from './supplier-group.service';
+import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
@@ -68,7 +68,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       }
     });
     const supplierDetailListSub = this.supplierGroupService.supplierDetailList.subscribe(res => {
-      if(res){
+      if (res) {
         this.supplierDetailList = res;
       }
     })
@@ -197,7 +197,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       this.supplierGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res =>{
+    this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res => {
       this.supplierSearchEntity.legalEntityId.equal = this.supplierGroupList[0].id;
       this.legalId = this.supplierSearchEntity.legalEntityId.equal;
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
@@ -209,7 +209,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       this.supplierSearchEntity.orderBy = event.sortField;
       this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
-    if(this.supplierSearchEntity.legalEntityId.equal !== '') {
+    if (this.supplierSearchEntity.legalEntityId.equal !== '') {
       this.getListDetail();
     }
   }
@@ -218,7 +218,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     if (!this.supplierGroupForm.valid) {
       this.genaralService.validateAllFormFields(this.supplierGroupForm);
     } else {
-      this.supplierGroupService.save(this.supplierGroupForm.value,this.supplierGroupSearchEntity).then(res => {
+      this.supplierGroupService.save(this.supplierGroupForm.value, this.supplierGroupSearchEntity).then(res => {
         this.display = res;
       }).catch(err => {
         this.display = err;
@@ -247,7 +247,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
 
   onClickShowDetail(id) {
-    this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'],{ queryParams: { id: id }});
+    this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'], { queryParams: { id: id } });
   }
 
   onClickAddSupplier() {
