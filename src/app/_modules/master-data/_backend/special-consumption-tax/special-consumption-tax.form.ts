@@ -1,24 +1,26 @@
 import { FormModel } from '../../../../_helpers/form-model';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { SpecialConsumptionTaxEntity } from 'src/app/_modules/master-data/_backend/special-consumption-tax/special-consumption-tax.entity';
 import { requiredField } from 'src/app/_helpers';
 
 export class SpecialConsumptionTaxForm extends FormModel {
 
-  setOfBookId = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-  code = new FormControl('', [requiredField]);
+  code = new FormControl(null, [requiredField]);
 
-  name = new FormControl('', [requiredField]);
+  name = new FormControl(null, [requiredField]);
 
-  unitOfMeasureId = new FormControl('');
-  unitOfMeasureName = new FormControl('');
+  unitOfMeasureId = new FormControl(null);
+  unitOfMeasureName = new FormControl(null);
 
-  chartOfAccountId = new FormControl('');
-  chartOfAccountName = new FormControl('');
+  chartOfAccountId = new FormControl(null);
+  chartOfAccountName = new FormControl(null);
 
-  rate = new FormControl('');
-  description = new FormControl('');
+  rate = new FormControl(null);
+  description = new FormControl(null);
+
+  errors: FormGroup = new FormGroup({});
 
   constructor(exciseTariffEntity?: SpecialConsumptionTaxEntity) {
     super();

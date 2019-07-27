@@ -118,7 +118,8 @@ export class SpecialConsumptionTaxComponent implements OnInit {
     }
   }
 
-  changeSob([setOfBookId]) {
+  changeSob(event) {
+    const [setOfBookId] = event;
     this.specialConsumptionTaxSearchEntity.setOfBookId = setOfBookId;
     this.specialConsumptionTaxForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;

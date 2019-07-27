@@ -126,22 +126,33 @@
           </label>
           <div class="div-form">
             <input class="form-control" type="text" placeholder="10100" id="tax-code">
-<!--            <app-error data-qe-id="dialog-error-code"-->
-<!--                       *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"-->
-<!--                       [formGroup]="specialConsumptionTaxForm" [property]="'code'" [placement]="'top'"-->
-<!--                       class="error-form">-->
-<!--            </app-error>-->
+            <app-error data-qe-id="dialog-error-code"
+                       *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"
+                       [formGroup]="specialConsumptionTaxForm" [property]="'code'" [placement]="'top'"
+                       class="error-form">
+            </app-error>
           </div>
         </div>
 
         <div class="mb-4">
-          <label for="unit-of-measure-id">
+          <label for="tax-name">
             {{'tax.unit' | translate}}
           </label>
-          <input type="hidden" id="unit-of-measure-id" name="unitOfMeasureId" formControlName="unitOfMeasureId"
-                 #unitOfMeasureId>
-          <app-single-select [list]="uomList" [selectedList]="selectedUomList" (listOpen)="getUomList()"
-                             (selectionChange)="unitOfMeasureId.value = $event[0]"></app-single-select>
+          <div class="div-form d-flex">
+            <input type="hidden" id="tax-name" name="name" formControlName="name"
+                   #unitOfMeasureId>
+            <app-single-select class="flex-grow-1"
+                               [list]="uomList"
+                               key="name"
+                               [selectedList]="selectedUomList"
+                               (listOpen)="getUomList()"
+                               (selectionChange)="unitOfMeasureId.value = $event[0]"></app-single-select>
+            <app-error data-qe-id="dialog-error-name"
+                       *ngIf="(specialConsumptionTaxForm.controls.name?.errors && specialConsumptionTaxForm.controls.name?.touched) || !!specialConsumptionTaxForm.controls.errors.get('name')?.value"
+                       [formGroup]="specialConsumptionTaxForm" [property]="'name'" [placement]="'top'"
+                       class="error-form">
+            </app-error>
+          </div>
         </div>
 
         <div class="mb-4">
@@ -158,23 +169,27 @@
             {{'tax.name' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-          <input class="form-control" type="text" placeholder="Thuốc lá điếu, xì gà">
+          <input class="form-control" type="text" id="unit-of-measure-id" placeholder="Thuốc lá điếu, xì gà">
         </div>
 
         <div class=" mb-4">
-          <label>
+          <label for="parent-id">
             {{'tax.parent_account' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-
-          <app-single-select></app-single-select>
+          <input type="hidden" formControlName="parentId" name="parentId" #parentId>
+          <app-single-select id="parent-id" (selectionChange)="parentId.value = $event[0]" [list]="[]"
+                             [selectedList]="[]"></app-single-select>
         </div>
 
         <div class=" mb-4">
-          <label>
+          <label for="description">
             {{'tax.description' | translate}}
           </label>
-          <input class="form-control" type="text-area" placeholder="Mô tả cho loại thuế này">
+          <div class="div-form">
+            <input id="description" class="form-control" formControlName="description" type="text-area"
+                   placeholder="Mô tả cho loại thuế này">
+          </div>
         </div>
       </div>
     </div>
