@@ -148,9 +148,10 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   // list drop payment term
   openPaymentTermList(paymenttermId: string) {
+    console.log('paymenttermId', paymenttermId)
     this.paymentTermSearchEntity = new PaymentTermSearchEntity();
+    this.paymentTermSearchEntity.legalEntityId = this.legalEntiyId;
     if (paymenttermId !== null && paymenttermId !== undefined) {
-      this.paymentTermSearchEntity.legalEntityId = this.legalEntiyId;
       this.paymentTermSearchEntity.ids.push(paymenttermId);
     }
     this.supplierDetailService.getListPaymentTerm(this.paymentTermSearchEntity);
@@ -272,7 +273,6 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     this.supplierDetailForm.value.taxCode = this.supplierDetailForm.controls.taxCode.value;
     this.supplierDetailForm.value.status = this.supplierDetailForm.controls.status.value;
     this.supplierDetailForm.value.note = this.supplierDetailForm.controls.note.value;
-    console.log('this.supplierDetailForm', this.supplierDetailForm)
     if (!this.supplierDetailForm.valid) {
       this.generalService.validateAllFormFields(this.supplierDetailForm);
     } else {

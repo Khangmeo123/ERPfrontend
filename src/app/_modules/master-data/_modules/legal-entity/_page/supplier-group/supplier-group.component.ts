@@ -198,8 +198,8 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     }
 
     this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res =>{
-      this.supplierSearchEntity.legalEntityId.equal = this.supplierGroupList[0].id;
-      this.legalId = this.supplierSearchEntity.legalEntityId.equal;
+      this.supplierSearchEntity.legalEntityId = this.supplierGroupList[0].id;
+      this.legalId = this.supplierSearchEntity.legalEntityId;
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
     });
   }
@@ -209,7 +209,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       this.supplierSearchEntity.orderBy = event.sortField;
       this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
-    if(this.supplierSearchEntity.legalEntityId.equal !== '') {
+    if(this.supplierSearchEntity.legalEntityId !== undefined) {
       this.getListDetail();
     }
   }
@@ -253,7 +253,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
   onClickAddSupplier() {
     this.supplierSearchEntity.supplierIds = this.listSupplierId;
-    this.supplierSearchEntity.legalEntityId.equal = this.legalId;
+    this.supplierSearchEntity.legalEntityId = this.legalId;
     this.supplierGroupService.saveSupplier(this.supplierSearchEntity).then(res => {
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
     }).catch(err => {
