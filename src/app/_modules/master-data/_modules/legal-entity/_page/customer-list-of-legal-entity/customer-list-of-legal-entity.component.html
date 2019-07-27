@@ -13,10 +13,13 @@
   <div class="page-body">
     <div class="row">
       <div class="col-sm-6 page-1">
-        <div class="mt-2 row">
-        </div>
+          <div class="page-actions d-flex justify-content-end">
+              <button class="btn btn-clear" (click)="clearSearch(table)"
+                      data-qe-id="button-clear-supplier">{{'general.button.clear' | translate}}</button>
+            </div>
         <div class="page-section table1 mt-2">
-          <p-table [value]="[]">
+          <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortLegalEntiy($event)" selectionMode="single" [(selection)]="legalList[0]"
+          [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -26,16 +29,19 @@
             </ng-template>
             <ng-template pTemplate="header" >
               <tr>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'code'"
+                data-qe-id="table-thead-code-set-of-book">
                   {{'customerOfLegalEntity.sob' | translate}}
                 </th>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'code'" 
+                data-qe-id="table-thead-code">
                   {{'customerOfLegalEntity.code' | translate}}
                 </th>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'name'" 
+                data-qe-id="table-thead-name">
                   {{'customerOfLegalEntity.name' | translate}}
                 </th>
-
+                <th pResizableColumn></th>
               </tr>
               <tr>
                 <th class="th-filter">
@@ -47,8 +53,19 @@
                 <th class="th-filter">
                   <app-advanced-filters></app-advanced-filters>
                 </th>
+                <th class="th-filter"></th>
               </tr>
             </ng-template>
+            <ng-template pTemplate="body" let-legal let-index="rowIndex">
+                <tr [pSelectableRow]="legal" [attr.data-qe-id]="'table-tbody-row-' + index">
+                  <td> {{legal.setOfBookCode}} </td>
+                  <td> {{legal.code}} </td>
+                  <td> {{legal.name}} </td>
+                  <td>  <div class="edit" (click)="toDetail(legal.id)">
+                      <mat-icon>edit</mat-icon>
+                  </div></td>
+                </tr>
+              </ng-template>
           </p-table>
         </div>
       </div>
