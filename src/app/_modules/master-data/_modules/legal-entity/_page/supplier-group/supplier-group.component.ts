@@ -243,7 +243,6 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     // this.supplierSearchEntity.supplierGroupingId = id;
     // this.supplierSearchEntity.legalEntityId = this.legalEntityId;
     this.getListDetail();
-    console.log('onClickDetail id: ', id);
   }
 
 
