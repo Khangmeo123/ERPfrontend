@@ -17,7 +17,8 @@ import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.enti
 @Component({
   selector: 'app-item-group',
   templateUrl: './item-group.component.html',
-  styleUrls: ['./item-group.component.scss']
+  styleUrls: ['./item-group.component.scss'],
+  providers: [ItemGroupService],
 })
 export class ItemGroupComponent implements OnInit, OnDestroy {
 
@@ -30,8 +31,9 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   legalEntityId: string;
   itemGroupId: string;
-  itemsFromItemGroupIds: string[];
+  itemsFromItemGroupIds: string[] = [];
   itemGroupSubs: Subscription = new Subscription();
+  itemGroupSelectedRow: any;
   @ViewChild('tableItemGroup', { static: false }) public tableItemGroup: TemplateRef<any>;
   @ViewChild('tableItems', { static: false }) public tableItems: TemplateRef<any>;
   // legal:
@@ -125,10 +127,10 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   }
 
   // legalEntity:
-  legalEntityOpen(id: string) {
+  legalEntityOpen() {
     this.legalSearchEntity = new LegalSearchEntity();
-    if (id !== null && id !== undefined) {
-      this.legalSearchEntity.ids.push(id);
+    if (this.legalEntityId !== undefined && this.legalEntityId !== null) {
+      this.legalSearchEntity.ids.push(this.legalEntityId);
     }
     this.itemGroupService.dropDownLegalEntity(this.legalSearchEntity);
   }
@@ -140,8 +142,8 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   }
 
   legalEntitySelection(event: any) {
-    this.legalEntityId = event[0].id;
-    this.itemGroupSearchEntity.legalEntityId = event[0].id;
+    this.legalEntityId = event[0];
+    this.legalSearchEntity.ids = [...event];
     this.clearSearchItemGroup(this.tableItemGroup);
   }
 
@@ -150,8 +152,11 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
     this.paginationItemGroup.pageNumber = 1;
     this.itemGroupSearchEntity.skip = 0;
     this.itemGroupSearchEntity.take = this.paginationItemGroup.take;
+    this.itemGroupSearchEntity.legalEntityId = this.legalEntityId;
     this.itemGroupService.getItemGroupListFromLegal(this.itemGroupSearchEntity).then(res => {
       if (res) {
+        this.itemGroupSelectedRow = this.itemGroupList[0];
+        this.itemGroupId = this.itemGroupList[0].id;
         this.clearSearchItemsFromItemGroup(this.tableItems);
       }
     });
@@ -162,7 +167,9 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
       this.itemGroupSearchEntity.orderBy = event.sortField;
       this.itemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
-    this.getItemGroupList();
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.getItemGroupList();
+    }
   }
 
   paginationOutItemGroup(pagination: PaginationModel) {
@@ -178,10 +185,20 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
 
   addItemGroup() {
     this.itemGroupService.addItemGroupFromLegal(this.legalEntityId);
+    this.isShowItemGroupDialog = true;
   }
 
   editItemGroup(itemGroupId: string) {
     this.itemGroupService.editItemGroupFromLegal(itemGroupId);
+    this.isShowItemGroupDialog = true;
+  }
+
+  viewItemGroup(itemGroupId: string) {
+    console.log(itemGroupId);
+  }
+
+  deactiveItemGroup() {
+
   }
 
   saveItemGroup() {
@@ -196,11 +213,21 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
     }
   }
 
+  itemGroupOnRowSelect(event: any) {
+    if (event.data) {
+      this.itemGroupId = event.data.id;
+      this.clearSearchItemsFromItemGroup(this.tableItems);
+    }
+  }
+
   // itemsFromItemGroup:
   getitemsFromItemGroupList() {
     this.paginationItems.pageNumber = 1;
     this.itemsFromItemGroupSearchEntity.skip = 0;
     this.itemsFromItemGroupSearchEntity.take = this.paginationItems.take;
+    if (this.itemGroupId !== null && this.itemGroupId !== undefined) {
+      this.itemsFromItemGroupSearchEntity.itemGroupingId = this.itemGroupId;
+    }
     this.itemGroupService.getItemsFromItemGroup(this.itemsFromItemGroupSearchEntity);
   }
 
@@ -226,9 +253,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   // item:
   itemOpen(id: string) {
     this.itemSearchEntity = new ItemSearchEntity();
-    if (id !== null && id !== undefined) {
-      this.itemSearchEntity.ids.push(id);
-    }
+    this.itemSearchEntity.ids = [...this.itemsFromItemGroupIds];
     this.itemGroupService.dropDownItemList(this.itemSearchEntity);
   }
 
@@ -240,6 +265,24 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
 
   addItemsToItemGroup() {
     this.itemGroupService.addItemsToItemGroup(this.itemsFromItemGroupIds, this.itemGroupId);
+    this.itemsFromItemGroupIds = [];
     this.clearSearchItemsFromItemGroup(this.tableItems);
+  }
+
+  deleteItemFromItemGroup(itemId: string) {
+    this.itemGroupService.deleteItemFromItemGroup(itemId, this.itemGroupId);
+    this.clearSearchItemsFromItemGroup(this.tableItems);
+  }
+
+  editItemFromItemGroup(itemId: string) {
+    if (itemId) {
+      this.router.navigate(['/master-data/legal-entity/item-group/item-detail'], { queryParams: { id: itemId } });
+    }
+  }
+
+  viewItemFromItemGroup(itemId: string) {
+    if (itemId) {
+      this.router.navigate(['/master-data/legal-entity/item-group/item-view'], { queryParams: { id: itemId } });
+    }
   }
 }

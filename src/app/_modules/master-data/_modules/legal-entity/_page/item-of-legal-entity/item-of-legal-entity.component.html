@@ -83,7 +83,7 @@
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemIds" [selectedList]="itemExceptIds"
               [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemIdList = $event"
-              (listOpen)="itemOpen(supplierSearchEntity.ids)">
+              (listOpen)="itemOpen()">
             </app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">

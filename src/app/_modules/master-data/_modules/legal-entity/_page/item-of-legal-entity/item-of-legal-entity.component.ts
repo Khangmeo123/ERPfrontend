@@ -28,7 +28,7 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   legalEntityId: string;
-  itemIdList: string[];
+  itemIdList: string[] = [];
   @ViewChild('tableItem', { static: false }) public tableItem: TemplateRef<any>;
   // legal:
   legalList: LegalEntity[];
@@ -183,11 +183,9 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
     this.itemTyping.next(this.itemSearchEntity);
   }
 
-  itemOpen(id: string) {
+  itemOpen() {
     this.itemSearchEntity = new ItemSearchEntity();
-    if (id !== null && id !== undefined) {
-      this.itemSearchEntity.ids.push(id);
-    }
+    this.itemSearchEntity.ids = [...this.itemIdList];
     this.itemOfLegalEntityService.dropDownItemList(this.itemSearchEntity);
   }
 

@@ -1,16 +1,13 @@
 <div class="page item-detail">
     <div class="page-header">
         <span class="page-title">
-            {{'item.content.modal.title' | translate}}
+            {{pageTitle}}
         </span>
         <div class="page-actions">
-            <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-            <button class="btn btn-save" (click)="onClickSave()">
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
                 {{ 'general.button.save' | translate}}</button>
-            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                (cancel)="cancelClicked = true" (click)="onClickDelete()">
-                {{ 'general.button.delete' | translate}}</button>
         </div>
     </div>
 
@@ -18,7 +15,7 @@
     <div class="page-body">
         <accordion>
             <accordion-group [isOpen]="true">
-                <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab1 = !isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'item.detail.tab.title_1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -137,7 +134,7 @@
                 </div>
             </accordion-group>
             <accordion-group>
-                <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab2 = !isOpenTab2" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'item.detail.tab.title_2' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -227,7 +224,7 @@
             </accordion-group>
 
             <accordion-group>
-                <button (click)="onClickOpenTab2($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab3 = !isOpenTab3" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">
                         {{'detail_item_of_legal_entity.default_value.title' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
@@ -282,7 +279,7 @@
                 </div>
             </accordion-group>
             <accordion-group>
-                <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab3 = !isOpenTab3;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'detail_item_of_legal_entity.discounts.title' | translate }}
                     </div>
                     <span class="float-right pull-right" accordion-heading>
@@ -377,7 +374,7 @@
                 </div>
             </accordion-group>
             <accordion-group>
-                <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab4 = !isOpenTab4;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">
                         {{'detail_item_of_legal_entity.bill_of_materias.title' | translate }}
                     </div>
@@ -420,7 +417,19 @@
         </accordion>
 
     </div>
-
+    <div class="page-footer">
+        <div>
+            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" data-qe-id="button-delete">
+                {{ 'general.button.delete' | translate}}</button>
+        </div>
+        <div class="page-actions">
+            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
+                {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-cancel" (click)="cancel()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
+        </div>
+    </div>
 </div>
 
 

@@ -34,22 +34,22 @@ const routes: Routes = [
       { path: 'employee-of-legal-entity/employee-detail', component: EmployeeDetailComponent },
 
       { path: 'item-group', component: ItemGroupComponent },
+      {
+        path: 'item-of-legal-entity', component: ItemOfLegalEntityComponent,
+      },
       { path: 'item-group/item-detail', component: ItemDetailComponent },
-      { path: 'item-of-legal-entity/employee-detail', component: ItemDetailComponent },
+      { path: 'item-of-legal-entity/item-detail', component: ItemDetailComponent },
 
       { path: 'special-price-supplier', component: SpecialPriceSupplierComponent },
       { path: 'special-price-customer', component: SpecialPriceCustomerComponent },
       {
-        path: 'customer-list-of-legal-entity', component: CustomerListOfLegalEntityComponent
+        path: 'customer-list-of-legal-entity', component: CustomerListOfLegalEntityComponent,
       },
       {
         path: 'supplier-of-legal-entity', component: SupplierOfLegalEntityComponent,
       },
       {
-        path: 'employee-of-legal-entity', component: EmployeeOfLegalEntityComponent
-      },
-      {
-        path: 'item-of-legal-entity', component: ItemOfLegalEntityComponent
+        path: 'employee-of-legal-entity', component: EmployeeOfLegalEntityComponent,
       },
     ],
   },

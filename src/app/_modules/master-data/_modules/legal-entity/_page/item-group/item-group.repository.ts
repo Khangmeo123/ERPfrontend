@@ -121,10 +121,22 @@ export class ItemGroupRepository extends Repository {
     }
 
     addItemsToItemGroup(itemIds: string[], itemGroupId: string): Observable<any> {
-        return this.http.post<any>(this.apiUrl + '/bulk-create-item-detail', JSON.stringify({ itemGroupId: itemGroupId, ids: itemIds }),
+        return this.http.post<any>(this.apiUrl + '/bulk-create-item-detail', JSON.stringify({
+            itemGroupingId: itemGroupId,
+            itemDetailIds: itemIds,
+        }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
+    deleteItemFromItemGroup(itemId: string, itemGroupId: string) {
+        return this.http.post<any>(this.apiUrl + '/delete-item-detail', JSON.stringify({
+            itemGroupingId: itemGroupId,
+            itemDetailId: itemId,
+        }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
 }

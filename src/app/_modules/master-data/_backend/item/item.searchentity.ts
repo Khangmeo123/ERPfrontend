@@ -11,7 +11,7 @@ export class ItemSearchEntity extends SearchEntity {
     uomId: string;
     statusId: string;
     legalEntityId: string;
-
+    itemGroupingId: string;
     constructor(itemSearchEntity?: any) {
         super(itemSearchEntity);
     }

@@ -1,8 +1,8 @@
 <div class="page list-item-group">
   <div class="page-header">
     <span class="page-title">
-      {{'itemGroup.header.title' | translate}}
-      <span (click)="onClickSaveBookMark($event)">
+      {{pageTitle}}
+      <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
@@ -12,58 +12,94 @@
   <div class="page-body">
     <div class="row">
       <div class="col-sm-6 page-1">
-        <div class="mt-2 row">
+        <div class="row mt-2">
           <div class="col-sm-7 d-flex align-items-center">
-            <span class="sob-label flex-shrink-1">
-              {{'general.legal_entity.name' | translate}}
+            <span class="sob-label flex-shrink-1 mr-1">
+              {{'general.legal_entity.name' | translate}}:
             </span>
-            <app-single-select></app-single-select>
+            <app-single-select [list]="legalExceptIds" [selectedList]="legalIds" [key]="'name'"
+              (search)="legalEntityTypingSearch($event)" (selectionChange)="legalEntitySelection($event)"
+              (listOpen)="legalEntityOpen()"></app-single-select>
           </div>
-          <div class="col-sm-5 d-flex justify-content-end">
-            <button class="btn btn-add" (click)="onClickShowDetail()"> +
+          <div class="col-sm-5 d-flex page-actions justify-content-end">
+            <button class="btn btn-add" (click)="addItemGroup()" data-qe-id="button-itemGroup-add"
+              [disabled]="legalEntityId==null||legalEntityId==undefined">
               {{'general.button.add' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearchItemGroup(tableItemGroup)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
-          <p-table [value]="[]">
+          <p-table [value]="itemGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortItemGroupList($event)"
+            (onRowSelect)="itemGroupOnRowSelect($event)" selectionMode="single" [(selection)]="itemGroupSelectedRow"
+            [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableItemGroup>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
             <ng-template pTemplate="header">
               <tr>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-itemGroup-code">
                   {{'itemGroup.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                </th>
+                <th [pSortableColumn]="'name'" data-qe-id="table-thead-itemGroup-name">
+                  {{'itemGroup.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
                 <th>
-                  {{'itemGroup.name' | translate}}
+                  {{'itemGroup.action' | translate}}
                 </th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="itemGroupSearchEntity.code" (changeFilter)="getItemGroupList()"
+                    data-qe-id="table-thead-filter-code">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="itemGroupSearchEntity.name" (changeFilter)="getItemGroupList()"
+                    data-qe-id="table-thead-filter-name">
+                  </app-advanced-filters>
                 </th>
+                <th class="th-filter"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-itemGroup let-index="rowIndex">
+              <tr [attr.data-qe-id]="'table-tbody-itemGroup-row-' + index" [pSelectableRow]="itemGroup">
+                <td class="ui-resizable-column"> {{itemGroup.code}} </td>
+                <td class="ui-resizable-column"> {{itemGroup.name}} </td>
+                <td class="ui-resizable-column">
+                  <a href="javascript:void(0)" (click)="editItemGroup(itemGroup.id)">Sửa</a>
+                  <a href="javascript:void(0)" (click)="viewItemGroup(itemGroup.id)">Xem</a>
+                </td>
               </tr>
             </ng-template>
           </p-table>
         </div>
+        <div class="pagination">
+          <app-pagination [pagination]="paginationItemGroup" (paginationOut)="paginationOutItemGroup($event)"
+            data-qe-id="pagination-itemGroup">
+          </app-pagination>
+        </div>
       </div>
 
       <div class="col-sm-6">
-        <div class="row d-flex ">
+        <div class="row d-flex mt-2">
           <div class="col-sm-4 align-items-center">
-            <div class="search-input ">
-              <div class="has-search">
-                <span class="fa fa-search form-control-feedback"></span>
-                <input type="text" class="form-control">
-              </div>
-            </div>
+            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemIds" [selectedList]="itemExceptIds"
+              [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemsFromItemGroupIds = $event"
+              (listOpen)="itemOpen()">
+            </app-multi-select>
           </div>
 
-
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
-            <button class="btn btn-add" (click)="onClickShowDetail()"> +
+            <button class="btn btn-add" (click)="addItemsToItemGroup()" data-qe-id="button-items-add">
               {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown>
+            <div class="btn-group" dropdown data-qe-id="button-items-import">
               <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
                 aria-controls="dropdown-basic">
                 {{'general.button.import' | translate}}<span class="caret"></span>
@@ -77,44 +113,123 @@
                 </li>
               </ul>
             </div>
-            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-export"
+              data-qe-id="button-items-import">{{'general.button.export' | translate}}</button>
           </div>
         </div>
 
         <div class="page-section mt-2">
-          <p-table [value]="tmpitem">
+          <p-table [value]="itemsFromItemGroupList" [customSort]="true" [lazy]="true"
+            (onLazyLoad)="sortItemsFromItemGroup($event)" [scrollable]="true" scrollHeight="500px"
+            [resizableColumns]="true" #tableItems>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
             <ng-template pTemplate="header">
               <tr>
-                <th>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-items-code">
                   {{'itemGroup.item.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-items-name">
+                  {{'itemGroup.item.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
                 <th>
-                  {{'itemGroup.item.name' | translate}}
+                  {{'itemGroup.item.action' | translate}}
                 </th>
-                <th></th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.code"
+                    (changeFilter)="getitemsFromItemGroupList()" data-qe-id="table-thead-filter-code">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters></app-advanced-filters>
+                  <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.name"
+                    (changeFilter)="getitemsFromItemGroupList()" data-qe-id="table-thead-filter-name">
+                  </app-advanced-filters>
                 </th>
-                <th></th>
+                <th class="th-filter"></th>
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-item>
-              <tr (dblclick)="onClickShowDetail()">
-                <td> {{item.code}} </td>
-                <td> {{item.name}} </td>
-                <td> <a href="javascript:void(0)">{{'general.button.delete' | translate}}</a></td>
+            <ng-template pTemplate="body" let-items let-index="rowIndex">
+              <tr>
+                <td class="ui-resizable-column"> {{items.code}} </td>
+                <td class="ui-resizable-column"> {{items.name}} </td>
+                <td class="ui-resizable-column">
+                  <a href="javascript:void(0)" (click)="deleteItemFromItemGroup()">Xoá</a>
+                  <a href="javascript:void(0)" (click)="editItemFromItemGroup()">Sửa</a>
+                  <a href="javascript:void(0)" (click)="viewItemFromItemGroup()">Xem</a>
+                </td>
               </tr>
             </ng-template>
           </p-table>
         </div>
-
+        <div class="pagination">
+          <app-pagination [pagination]="paginationItems" (paginationOut)="paginationOutItemsFromItemGroup($event)"
+            data-qe-id="pagination-items">
+          </app-pagination>
+        </div>
       </div>
-
     </div>
   </div>
 </div>
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowItemGroupDialog" appendTo="body"
+  [style]="{width: '900px'}">
+  <p-header>
+    {{ 'itemGroup.modal.title' | translate}}
+  </p-header>
+  <div class="container" [formGroup]="itemGroupForm">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="itemGroupCode">{{ 'itemGroup.code' | translate}}<span class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+              id="itemGroupCode" />
+            <app-error data-qe-id="dialog-error-code"
+              *ngIf="(itemGroupForm.controls.code?.errors && itemGroupForm.controls.code?.touched) || !!itemGroupForm.controls.errors?.get('code')?.value"
+              [formGroup]="itemGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="itemGroupFormName">{{ 'itemGroup.name' | translate}}<span
+              class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+              id="itemGroupFormName" />
+            <app-error data-qe-id="dialog-error-name"
+              *ngIf="(itemGroupForm.controls.name?.errors && itemGroupForm.controls.name?.touched) || !!itemGroupForm.controls.errors?.get('name')?.value"
+              [formGroup]="itemGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions">
+          <button class="btn btn-save" appNoDblClick (click)="saveItemGroup()" data-qe-id="dialog-button-save">
+            {{ 'general.button.save' | translate}}</button>
+          <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+            (click)="isShowItemGroupDialog = false">{{ 'general.button.cancel' | translate}}</button>
+          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+            data-qe-id="dialog-button-cancel" *ngIf="itemGroupForm.value?.isDeleted" [popoverMessage]="popoverMessage"
+            placement="bottom" (confirm)="deactiveItemGroup()">
+            {{ 'general.button.delete' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>

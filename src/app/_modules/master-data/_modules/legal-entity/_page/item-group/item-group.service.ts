@@ -181,4 +181,16 @@ export class ItemGroupService {
             }
         });
     }
+
+    deleteItemFromItemGroup(itemId: string, itemGroupId: string) {
+        this.itemGroupRepository.deleteItemFromItemGroup(itemId, itemGroupId).subscribe(res => {
+            if (res) {
+                console.log(res);
+            }
+        }, err => {
+            if (err) {
+
+            }
+        });
+    }
 }
