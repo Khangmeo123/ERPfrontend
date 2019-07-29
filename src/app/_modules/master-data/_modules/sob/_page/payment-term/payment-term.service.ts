@@ -48,6 +48,12 @@ export class PaymentTermService {
     ));
   }
 
+  cancel() {
+    this.paymentTermForm.next(this.fb.group(
+      new PaymentTermForm(),
+    ));
+  }
+
   edit(paymentTermId: string) {
     this.paymentTermRepository.getId(paymentTermId).subscribe(res => {
       if (res) {
