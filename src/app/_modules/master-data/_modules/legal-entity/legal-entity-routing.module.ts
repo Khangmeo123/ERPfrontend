@@ -39,7 +39,7 @@ const routes: Routes = [
       { path: 'special-price-supplier', component: SpecialPriceSupplierComponent },
       { path: 'special-price-customer', component: SpecialPriceCustomerComponent },
       {
-        path: 'customer-list-of-legal-entity', component: CustomerListOfLegalEntityComponent
+        path: 'customer-of-legal-entity', component: CustomerListOfLegalEntityComponent
       },
       {
         path: 'supplier-of-legal-entity', component: SupplierOfLegalEntityComponent,
