@@ -29,6 +29,7 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   legalEntityId: string;
   itemIdList: string[] = [];
+  legalEntitySelectedRow: any;
   @ViewChild('tableItem', { static: false }) public tableItem: TemplateRef<any>;
   // legal:
   legalList: LegalEntity[];
@@ -57,9 +58,19 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
         this.legalList = res;
       }
     });
+    const legalCountSub = this.itemOfLegalEntityService.legalCount.subscribe(res => {
+      if (res) {
+        this.paginationLegalList.totalItems = res;
+      }
+    });
     const itemsFromLegalSub = this.itemOfLegalEntityService.itemsFromLegalList.subscribe(res => {
       if (res) {
         this.itemsFromLegalList = res;
+      }
+    });
+    const itemsFromLegalCountSub = this.itemOfLegalEntityService.itemsFromLegalCount.subscribe(res => {
+      if (res) {
+        this.paginationItemsFromLegal.totalItems = res;
       }
     });
     const itemListSub = this.itemOfLegalEntityService.itemList.subscribe(res => {
@@ -81,7 +92,8 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
     });
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
 
-    this.ItemOfLegalEntitySubs.add(legalListSub).add(itemsFromLegalSub).add(itemListSub).add(sobListSub).add(bookMarkNotify);
+    this.ItemOfLegalEntitySubs.add(legalListSub).add(itemsFromLegalSub).add(itemListSub).add(sobListSub)
+      .add(legalCountSub).add(itemsFromLegalCountSub).add(bookMarkNotify);
   }
 
   // general:
@@ -110,7 +122,11 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
     this.legalSearchEntity.take = this.paginationLegalList.take;
     this.itemOfLegalEntityService.getLegalList(this.legalSearchEntity).then(res => {
       if (res) {
-        this.clearSearchItemsFromLegalList(this.tableItem);
+        if (this.legalList.length > 0) {
+          this.legalEntitySelectedRow = this.legalList[0];
+          this.legalEntityId = this.legalList[0].id;
+          this.clearSearchItemsFromLegalList(this.tableItem);
+        }
       }
     });
   }
@@ -148,6 +164,13 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
     this.sobTyping.next(this.sobSearchEntity);
   }
 
+  legalEntityOnRowSelect(event) {
+    if (event.data) {
+      this.legalEntityId = event.data.id;
+      this.clearSearchItemsFromLegalList(this.tableItem);
+    }
+  }
+
   // itemsFromLegal
 
   getItemsFromLegalList() {
@@ -180,17 +203,50 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
   itemTypingSearch(event: string) {
     this.itemSearchEntity = new ItemSearchEntity();
     this.itemSearchEntity.name.startsWith = event;
+    this.itemSearchEntity.ids = [...this.itemIdList];
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.itemSearchEntity.legalEntityId = this.legalEntityId;
+    }
     this.itemTyping.next(this.itemSearchEntity);
   }
 
   itemOpen() {
     this.itemSearchEntity = new ItemSearchEntity();
     this.itemSearchEntity.ids = [...this.itemIdList];
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.itemSearchEntity.legalEntityId = this.legalEntityId;
+    }
     this.itemOfLegalEntityService.dropDownItemList(this.itemSearchEntity);
   }
 
   addItemsToLegal() {
-    this.itemOfLegalEntityService.addItemsToLegal(this.itemIdList, this.legalEntityId);
-    this.clearSearchItemsFromLegalList(this.tableItem);
+    this.itemOfLegalEntityService.addItemsToLegal(this.itemIdList, this.legalEntityId).then(res => {
+      if (res) {
+        this.itemIdList = [];
+        this.itemIds = [];
+        this.clearSearchItemsFromLegalList(this.tableItem);
+      }
+    });
+
+  }
+
+  deleteItemFromLegal(itemId: string) {
+    this.itemOfLegalEntityService.deleteItemFromLegal(itemId, this.legalEntityId).then(res => {
+      if (res) {
+        this.clearSearchItemsFromLegalList(this.tableItem);
+      }
+    });
+  }
+
+  editItemFromLegal(itemId: string) {
+    if (itemId) {
+      this.router.navigate(['/master-data/legal-entity/item-of-legal-entity/item-detail'], { queryParams: { id: itemId } });
+    }
+  }
+
+  viewItemFromLegal(itemId: string) {
+    if (itemId) {
+      this.router.navigate(['/master-data/legal-entity/item-of-legal-entity/item-detail'], { queryParams: { id: itemId } });
+    }
   }
 }

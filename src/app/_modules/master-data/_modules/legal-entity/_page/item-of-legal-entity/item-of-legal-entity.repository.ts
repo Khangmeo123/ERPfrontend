@@ -10,6 +10,7 @@ import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.e
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.searchentity';
+import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
 
 @Injectable({
     providedIn: 'root',
@@ -58,7 +59,7 @@ export class ItemOfLegalEntityRepository extends Repository {
     }
 
     dropDownItemList(itemSearchEntity: ItemSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail', JSON.stringify(itemSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item', JSON.stringify(itemSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -73,14 +74,17 @@ export class ItemOfLegalEntityRepository extends Repository {
     }
 
     addItemsToLegal(itemIds: string[], legalId: string): Observable<any> {
-        return this.http.post<any>(this.apiUrl + '/create-item-detail', JSON.stringify({ legalEntityId: legalId, ids: itemIds }),
+        return this.http.post<any>(this.apiUrl + '/bulk-create-item-detail', JSON.stringify({ legalEntityId: legalId, itemIds: itemIds }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
-    deactivateItemFromLegal() {
-
+    deleteItemFromLegal(itemId: string, legalId: string) {
+        return this.http.post<any>(this.apiUrl + '/delete-item-detail', JSON.stringify({ legalEntityId: legalId, itemDetailId: itemId }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
     }
 
     importItemsToLegal() {
@@ -92,14 +96,14 @@ export class ItemOfLegalEntityRepository extends Repository {
     }
 
     dropDownSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-sob', JSON.stringify(sobSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
-                        return new ItemEntity(item);
+                        return new SobEntity(item);
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new ItemEntity(item);
+                        return new SobEntity(item);
                     });
                     return r.body;
                 }),

@@ -107,11 +107,35 @@ export class ItemOfLegalEntityService {
         });
     }
 
-    addItemsToLegal(itemIds: string[], legalId: string) {
-        this.itemOflegalEntityRepository.addItemsToLegal(itemIds, legalId).subscribe(res => {
-            if (res) {
-                this.toastrService.success('Hệ thống cập nhật thành công!');
-            }
+    addItemsToLegal(itemIds: string[], legalId: string): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.itemOflegalEntityRepository.addItemsToLegal(itemIds, legalId).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve(true);
+                }
+            }, err => {
+                if (err) {
+                    reject(false);
+                }
+            });
         });
+        return defered;
+    }
+
+    deleteItemFromLegal(itemId: string, legalId: string): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.itemOflegalEntityRepository.deleteItemFromLegal(itemId, legalId).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve(true);
+                }
+            }, err => {
+                if (err) {
+                    reject(false);
+                }
+            });
+        });
+        return defered;
     }
 }

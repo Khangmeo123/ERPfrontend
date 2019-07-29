@@ -4,136 +4,170 @@
             {{pageTitle}}
         </span>
         <div class="page-actions">
-            <button class="btn btn-cancel" (click)="cancel()"
-                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
-            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
+            <button class="btn btn-save" (click)="saveLegalItemDetail()" data-qe-id="button-save">
                 {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-cancel" (click)="cancelLegalItemDetail()"
+                data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
         </div>
     </div>
 
     <hr>
     <div class="page-body">
         <accordion>
-            <accordion-group [isOpen]="true">
+            <accordion-group [isOpen]="true" [formGroup]="itemDetailForm">
                 <button (click)="isOpenTab1 = !isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'item.detail.tab.title_1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
-
                 <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_id' | translate}}<span
-                                    class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
-                        </div>
+                    <div class="col-sm-3 col-md-2">
+                        <app-cropper [control]="itemDetailForm.get('img')"></app-cropper>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_id_ncc' | translate}}</label>
-                            <input type="text" class="form-control" />
+                    <div class="flex-grow-1 pr-2">
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="itemCode">{{ 'item.detail.content.code' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="code"
+                                            data-qe-id="form-code" id="itemCode" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label
+                                        for="itemCodeFromSupplier">{{ 'item.detail.content.codeFromSupplier' | translate}}</label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="codeFromSupplier"
+                                            data-qe-id="form-codeFromSupplier" id="itemCodeFromSupplier" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label
+                                        for="itemCodeFromMarket">{{ 'item.content.detail.codeFromMarket' | translate}}</label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="codeFromMarket"
+                                            data-qe-id="form-codeFromMarket" id="itemCodeFromMarket" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_id_tt' | translate}}</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                </div>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="itemName">{{ 'item.detail.content.name' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="name"
+                                            data-qe-id="form-name" id="itemName" />
+                                    </div>
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_name' | translate}}<span
-                                    class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="bankid">{{ 'item.detail.content.characteristic' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="characteristicName"
+                                            data-qe-id="form-name" id="itemName" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="bankid">{{ 'item.detail.content.uom' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="uomName"
+                                            data-qe-id="form-name" id="itemName" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_properti' | translate}}<span
-                                    class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label
+                                        for="itemPrimaryPrice">{{ 'item.detail.content.primaryPrice' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="primaryPrice"
+                                            data-qe-id="form-primaryPrice" id="itemPrimaryPrice" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="itemWeight">{{ 'item.detail.content.weight' | translate}} (kg)</label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="weight"
+                                            data-qe-id="form-weight" id="itemWeight" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="itemStatus">{{ 'item.detail.content.status' | translate}}<span
+                                            class="text-danger ml-2">*</span></label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="statusName"
+                                            data-qe-id="form-weight" id="itemWeight" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_unit' | translate}}<span
-                                    class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="bankid">{{ 'item.detail.content.height' | translate}} (cm)</label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="height"
+                                            data-qe-id="form-height" id="itemHeight" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="itemlength">{{ 'item.detail.content.length' | translate}} (cm)</label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="length"
+                                            data-qe-id="form-length" id="itemlength" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label for="itemWidth">{{ 'item.detail.content.width' | translate}} (cm)</label>
+                                    <div class="div-form">
+                                        <input type="text" class="form-control" formControlName="width"
+                                            data-qe-id="form-width" id="itemWidth" />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_cost' | translate}}<span
-                                    class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_weight' | translate}} (kg)</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_status' | translate}}<span
-                                    class="text-danger ml-2">*</span></label>
-                            <app-single-select></app-single-select>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.table.item_height' | translate}} (cm)<span
-                                    class="text-danger ml-2">*</span></label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_length' | translate}} (cm)</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.detail.item_width' | translate}} (cm)</label>
-                            <input type="text" class="form-control" />
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4">
-                        <!-- <app-cropper></app-cropper> -->
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'item.content.modal.add_des' | translate}}</label>
-                            <textarea class="form-control" rows="8">
-                                                        At w3schools.com you will learn how to make a website. We offer free tutorials in all web development technologies.
-                                                    </textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="form-group">
-                            <label for="bankid">{{ 'detail_item_of_legal_entity.item_group' | translate}}</label>
-                            <app-single-select></app-single-select>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="form-group">
+                                    <label
+                                        for="itemDescription">{{ 'item.detail.content.description' | translate}}</label>
+                                    <textarea class="form-control" rows="8" formControlName="description"
+                                        id="itemDescription">
+                                    </textarea>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </accordion-group>
-            <accordion-group>
+
+            <accordion-group *ngIf="false">
                 <button (click)="isOpenTab2 = !isOpenTab2" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'item.detail.tab.title_2' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
@@ -226,7 +260,7 @@
             <accordion-group>
                 <button (click)="isOpenTab3 = !isOpenTab3" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">
-                        {{'detail_item_of_legal_entity.default_value.title' | translate }}</div>
+                        {{'legalItemDetail.defaultValue.title' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
@@ -234,22 +268,19 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label
-                                for="bankid">{{ 'detail_item_of_legal_entity.default_value.inventory_account' | translate}}</label>
+                            <label for="bankid">{{ 'legalItemDetail.defaultValue.inventoryAccount' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label
-                                for="bankid">{{ 'detail_item_of_legal_entity.default_value.return_account' | translate}}</label>
+                            <label for="bankid">{{ 'legalItemDetail.defaultValue.returnAccount' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label
-                                for="bankid">{{ 'detail_item_of_legal_entity.default_value.revenue_account' | translate}}</label>
+                            <label for="bankid">{{ 'legalItemDetail.defaultValue.revenueAccount' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
@@ -258,28 +289,27 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label
-                                for="bankid">{{ 'detail_item_of_legal_entity.default_value.sales_allowances_account' | translate}}</label>
+                                for="bankid">{{ 'legalItemDetail.defaultValue.salesAllowancesAccount' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label
-                                for="bankid">{{ 'detail_item_of_legal_entity.default_value.expense_account' | translate}}</label>
+                            <label for="bankid">{{ 'legalItemDetail.defaultValue.expenseAccount' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label
-                                for="bankid">{{ 'detail_item_of_legal_entity.default_value.discount_account' | translate}}</label>
+                            <label for="bankid">{{ 'legalItemDetail.defaultValue.discountAccount' | translate}}</label>
                             <app-single-select></app-single-select>
                         </div>
                     </div>
                 </div>
             </accordion-group>
+
             <accordion-group>
-                <button (click)="isOpenTab3 = !isOpenTab3;" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab4 = !isOpenTab4;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'detail_item_of_legal_entity.discounts.title' | translate }}
                     </div>
                     <span class="float-right pull-right" accordion-heading>
@@ -332,8 +362,9 @@
                     </p-table>
                 </div>
             </accordion-group>
-            <accordion-group>
-                <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
+
+            <accordion-group *ngIf="false">
+                <button (click)="isOpenTab5 = !isOpenTab5;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">
                         {{'detail_item_of_legal_entity.transformation_unit.title' | translate }}
                     </div>
@@ -373,8 +404,9 @@
                     </p-table>
                 </div>
             </accordion-group>
+
             <accordion-group>
-                <button (click)="isOpenTab4 = !isOpenTab4;" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab6 = !isOpenTab6;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">
                         {{'detail_item_of_legal_entity.bill_of_materias.title' | translate }}
                     </div>
@@ -424,9 +456,9 @@
                 {{ 'general.button.delete' | translate}}</button>
         </div>
         <div class="page-actions">
-            <button class="btn btn-save" (click)="save()" data-qe-id="button-save">
+            <button class="btn btn-save" (click)="saveLegalItemDetail()" data-qe-id="button-save">
                 {{ 'general.button.save' | translate}}</button>
-            <button class="btn btn-cancel" (click)="cancel()"
+            <button class="btn btn-cancel" (click)="cancelLegalItemDetail()"
                 data-qe-id="button-cancel">{{ 'general.button.cancel' | translate}}</button>
         </div>
     </div>

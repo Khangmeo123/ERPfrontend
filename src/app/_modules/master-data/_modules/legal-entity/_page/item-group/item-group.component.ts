@@ -137,6 +137,9 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
 
   legalEntityTypingSearch(event: string) {
     this.legalSearchEntity = new LegalSearchEntity();
+    if (this.legalEntityId !== undefined && this.legalEntityId !== null) {
+      this.legalSearchEntity.ids.push(this.legalEntityId);
+    }
     this.legalSearchEntity.name.startsWith = event;
     this.legalTyping.next(this.legalSearchEntity);
   }
@@ -155,8 +158,10 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
     this.itemGroupSearchEntity.legalEntityId = this.legalEntityId;
     this.itemGroupService.getItemGroupListFromLegal(this.itemGroupSearchEntity).then(res => {
       if (res) {
-        this.itemGroupSelectedRow = this.itemGroupList[0];
-        this.itemGroupId = this.itemGroupList[0].id;
+        if (this.itemGroupList.length > 0) {
+          this.itemGroupSelectedRow = this.itemGroupList[0];
+          this.itemGroupId = this.itemGroupList[0].id;
+        }
         this.clearSearchItemsFromItemGroup(this.tableItems);
       }
     });

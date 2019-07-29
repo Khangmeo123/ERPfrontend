@@ -17,7 +17,7 @@ export class LegalItemDetailRepository extends Repository {
         this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/item-detail';
     }
 
-    getItemDetail(itemDetailId: string): Observable<LegalItemDetailEntity> {
+    getLegalItemDetail(itemDetailId: string): Observable<LegalItemDetailEntity> {
         return this.http.post<LegalItemDetailEntity>(this.apiUrl + '/get', JSON.stringify({ id: itemDetailId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

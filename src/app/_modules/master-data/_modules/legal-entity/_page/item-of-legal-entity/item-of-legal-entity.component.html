@@ -20,6 +20,7 @@
         </div>
         <div class="page-section mt-2">
           <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortLegalList($event)"
+            (onRowSelect)="legalEntityOnRowSelect($event)" selectionMode="single" [(selection)]="legalEntitySelectedRow"
             [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableLegal>
             <ng-template pTemplate="colgroup">
               <colgroup>
@@ -45,8 +46,9 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-single-select [list]="sobIds" [selectedList]="sobExceptIds" [key]="'name'"
-                    (search)="sobTypingSearch($event)" (selectionChange)="legalSearchEntity.sobId = $event[0].Id"
+                  <app-single-select [list]="sobExceptIds" [selectedList]="sobIds" [key]="'name'"
+                    (search)="sobTypingSearch($event)"
+                    (selectionChange)="legalSearchEntity.sobId = $event[0]; getLegalList()"
                     (listOpen)="sobOpen(legalSearchEntity.sobId)">
                   </app-single-select>
                 </th>
@@ -63,8 +65,8 @@
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-legalEntity let-index="rowIndex">
-              <tr [attr.data-qe-id]="'table-tbody-legal-row-' + index">
-                <td class="ui-resizable-column"> {{legalEntity.sobCode}} </td>
+              <tr [attr.data-qe-id]="'table-tbody-legal-row-' + index" [pSelectableRow]="legalEntity">
+                <td class="ui-resizable-column"> {{legalEntity.setOfBookCode}} </td>
                 <td class="ui-resizable-column"> {{legalEntity.code}} </td>
                 <td class="ui-resizable-column"> {{legalEntity.name}} </td>
               </tr>
@@ -81,7 +83,7 @@
       <div class="col-sm-6">
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
-            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemIds" [selectedList]="itemExceptIds"
+            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemExceptIds" [selectedList]="itemIds"
               [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemIdList = $event"
               (listOpen)="itemOpen()">
             </app-multi-select>
@@ -105,7 +107,7 @@
             </div>
             <button class="btn btn-export"
               data-qe-id="button-item-export">{{'general.button.export' | translate}}</button>
-            <button class="btn btn-clear" (click)="clearSearchItemsFromLegalList(tableLegal)"
+            <button class="btn btn-clear" (click)="clearSearchItemsFromLegalList(tableItem)"
               data-qe-id="button-item-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
@@ -154,8 +156,9 @@
                 <td> {{itemsFromLegal.code}} </td>
                 <td> {{itemsFromLegal.name}} </td>
                 <td>
-                  <a href="javascript:void(0)">{{'general.button.edit' | translate}}</a>
-                  <a href="javascript:void(0)">{{'general.button.view' | translate}}</a>
+                  <a href="javascript:void(0)" (click)="viewItemFromLegal(itemsFromLegal.id)">Xem</a>
+                  <a href="javascript:void(0)" (click)="editItemFromLegal(itemsFromLegal.id)">Sửa</a>
+                  <a href="javascript:void(0)" (click)="deleteItemFromLegal(itemsFromLegal.id)">Xoá</a>
                 </td>
               </tr>
             </ng-template>

@@ -1,3 +1,4 @@
+import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 import { LegalEntityRoutingModule } from './legal-entity-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -29,7 +30,7 @@ import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {EmployeePositionComponent} from './_page/employee-position/employee-position.component';
+import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,6 @@ import {EmployeePositionComponent} from './_page/employee-position/employee-posi
     LegalEntityRoutingModule,
     TranslateModule.forChild(),
     MatIconModule,
-    SelectModule,
     TableModule,
     FiltersModule,
     ErrorModule,
@@ -69,6 +69,8 @@ import {EmployeePositionComponent} from './_page/employee-position/employee-posi
     RadioButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    CropperModule,
+    SelectModule,
   ],
 })
 export class LegalEntityModule {
