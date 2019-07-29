@@ -271,8 +271,9 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     this.supplierDetailService.addBankAccount();
   }
 
-  saveBankAccount(bankAccount: any) { 
-    if (!this.contactForm.valid) {
+  saveBankAccount(bankAccount: any) {
+    console.log('this.contactForm.valid', this.contactForm.valid)
+    if (!this.bankAccountForm.valid) {
       this.generalService.validateAllFormFields(this.bankAccountForm);
     }else {
       this.supplierDetailService.saveBankAccount(bankAccount, this.index);

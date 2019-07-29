@@ -273,7 +273,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   }
 
   saveBankAccount(bankAccount: any) {
-    if (!this.contactForm.valid) {
+    if (!this.bankAccountForm.valid) {
       this.generalService.validateAllFormFields(this.bankAccountForm);
     } else {
       this.customerDetailService.saveBankAccount(bankAccount, this.index);

@@ -118,7 +118,15 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.pagination.pageNumber = 1;
     this.legalSearchEntity.skip = 0;
     this.legalSearchEntity.take = this.pagination.take;
-    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity);
+    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
+      if (this.legalList && this.legalList.length > 0) {
+        this.customerSearchEntity.legalEntityId = this.legalList[0].id;
+      } else {
+        this.customerSearchEntity.legalEntityId = '';
+      }
+
+      this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+    })
   }
 
   toDetail(legalId) {
@@ -194,10 +202,10 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 
-  clearSearchCustomer(tableSupplier: any) {
+  clearSearchCustomer(tablecustomer: any) {
     this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.customerDetailIds = this.customerIds;
-    tableSupplier.reset();
+    tablecustomer.reset();
   }
 
   bookMark() {

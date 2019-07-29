@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
-import {LegalSearchEntity} from '../../../../_backend/legal/legal.searchentity';
-import {LegalEntity} from '../../../../_backend/legal/legal.entity';
-import {SupplierSearchEntity} from '../../../../_backend/supplier/supplier.searchentity';
-import {SupplierEntity} from '../../../../_backend/supplier/supplier.entity';
-import {Subject, Subscription} from 'rxjs';
-import {TextFilter} from '../../../../../../_shared/models/filters/TextFilter';
-import {Router} from '@angular/router';
-import {BookmarkService} from '../../../../../../_services';
-import {SupplierOfLegalEntityService} from './supplier-of-legal-entity.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
+import { LegalEntity } from '../../../../_backend/legal/legal.entity';
+import { SupplierSearchEntity } from '../../../../_backend/supplier/supplier.searchentity';
+import { SupplierEntity } from '../../../../_backend/supplier/supplier.entity';
+import { Subject, Subscription } from 'rxjs';
+import { TextFilter } from '../../../../../../_shared/models/filters/TextFilter';
+import { Router } from '@angular/router';
+import { BookmarkService } from '../../../../../../_services';
+import { SupplierOfLegalEntityService } from './supplier-of-legal-entity.service';
 import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 
 @Component({
@@ -123,7 +123,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   onClickShowDetail(supplierId) {
     this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity/supplier-detail'],
-      {queryParams: {id: supplierId, legalEntityId: this.legalId}});
+      { queryParams: { id: supplierId, legalEntityId: this.legalId } });
   }
 
   toDetail(legalId) {
@@ -141,7 +141,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.legalSearchEntity.orderBy = event.sortField;
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
-    this.supplierOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res =>{
+    this.supplierOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
       this.supplierSearchEntity.legalEntityId = this.legalList[0].id;
       this.legalId = this.supplierSearchEntity.legalEntityId;
       this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
@@ -154,7 +154,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    if(this.supplierSearchEntity.legalEntityId !== undefined) {
+    if (this.supplierSearchEntity.legalEntityId !== undefined) {
       this.getListSupplier(this.supplierSearchEntity);
     }
   }
@@ -176,7 +176,16 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     this.pagination.pageNumber = 1;
     this.legalSearchEntity.skip = 0;
     this.legalSearchEntity.take = this.pagination.take;
-    this.supplierOfLegalEntityService.getListLegal(this.legalSearchEntity);
+    this.supplierOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
+      if (this.legalList && this.legalList.length > 0) {
+        this.supplierSearchEntity.legalEntityId = this.legalList[0].id;
+      } else {
+        this.supplierSearchEntity.legalEntityId = '';
+      }
+
+      this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
+    });
+
   }
 
   getListSupplier(supplier) {
@@ -195,13 +204,15 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     }
   }
 
-  onClickAddSupplier () {
+  onClickAddSupplier() {
     this.supplierSearchEntity.supplierIds = this.listSupplierId;
     this.supplierSearchEntity.legalEntityId = this.legalId;
-    this.supplierOfLegalEntityService.save(this.supplierSearchEntity).then(res => {
-      this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
-    }).catch(err => {
-    });
+    if (this.listSupplierId && this.listSupplierId.length > 0) {
+      this.supplierOfLegalEntityService.save(this.supplierSearchEntity).then(res => {
+        this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
+      }).catch(err => {
+      });
+    }
   }
 
   deleteSupplier(supplier) {
