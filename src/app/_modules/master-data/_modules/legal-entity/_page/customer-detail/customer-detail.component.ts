@@ -67,8 +67,11 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   bankAccountForm: FormGroup;
   legalEntiyId: string = '';
   index: number = -1;
+  routeLink: any;
 
   valueSelector = node => node;
+
+
 
   constructor(
     private route: ActivatedRoute,
@@ -134,6 +137,13 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+    let arr = [];
+    arr = this.router.url.split('/');
+    if (arr[3] === 'customer-group') {
+      this.routeLink = '/master-data/legal-entity/customer-group/';
+    } else {
+      this.routeLink = '/master-data/legal-entity/customer-of-legal-entity/'
+    }
   }
 
   ngOnDestroy() {
@@ -280,7 +290,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
       this.generalService.validateAllFormFields(this.customerDetailForm);
     } else {
       this.customerDetailService.save(this.customerDetailForm).then(res => {
-        this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity']);
+        this.router.navigate([this.routeLink]);
       });
     }
   }
@@ -314,6 +324,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity']);
+    console.log('this.routeLink', this.routeLink)
+    this.router.navigate([this.routeLink]);
   }
 }

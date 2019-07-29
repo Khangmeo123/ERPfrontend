@@ -152,7 +152,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   // table customer
 
   onClickAddCustomer () {
-    this.customerSearchEntity.customerIds = this.listCustomerId;
+    this.customerSearchEntity.customerDetailIds = this.listCustomerId;
     this.customerSearchEntity.legalEntityId = this.legalId;
     this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity).then(res => {
       this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
@@ -195,7 +195,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   clearSearchCustomer(tableSupplier: any) {
     this.customerSearchEntity = new CustomerSearchEntity();
-    this.customerSearchEntity.customerIds = this.customerIds;
+    this.customerSearchEntity.customerDetailIds = this.customerIds;
     tableSupplier.reset();
   }
 

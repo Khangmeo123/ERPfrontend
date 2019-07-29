@@ -268,7 +268,7 @@
                 {{ 'general.button.delete' | translate}}</a>
         </div>
         <div class="page-actions">
-            <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+            <button class="btn btn-cancel mr-2" (click)="cancel()" data-qe-id="dialog-button-cancel">
                 {{'general.button.cancel' | translate}}
             </button>
             <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="save()">
@@ -364,7 +364,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="page-actions">
-                    <button class="btn btn-cancel mr-2" (click)="bankAccountsModal = false" data-qe-id="dialog-button-cancel" (click)="cancel()">
+                    <button class="btn btn-cancel mr-2" data-qe-id="dialog-button-cancel" (click)="bankAccountsModal = false">
                         {{'general.button.cancel' | translate}}
                     </button>
                     <button class="btn btn-add mr-2" data-qe-id="button-save" (click) = "saveBankAccount(bankAccountForm.value)">
