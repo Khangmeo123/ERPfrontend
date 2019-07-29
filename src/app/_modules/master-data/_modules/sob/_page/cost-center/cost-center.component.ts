@@ -10,6 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 import { CostCenterService } from './cost-center.service';
 import { CostCenterEntity } from '../../../../_backend/cost-center/cost-center.entity';
 import { CostCenterSearchEntity } from '../../../../_backend/cost-center/cost-center.searchentity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 
 @Component({
   selector: 'app-cost-center',
@@ -56,6 +58,12 @@ export class CostCenterComponent implements OnInit {
 
   public setOfBookId: string = '';
 
+  public coaList: CoaEntity[] = [];
+
+  public coaSearchEntity: CoaSearchEntity = new CoaSearchEntity();
+
+  public selectedCoaList: CoaEntity[] = [];
+
   constructor(
     private costCenterService: CostCenterService,
     private generalService: GeneralService,
@@ -82,10 +90,20 @@ export class CostCenterComponent implements OnInit {
       }
     });
 
+    const coaListSub = this.costCenterService.coaList.subscribe((list: Entities) => {
+      this.coaList = list.exceptIds;
+      this.selectedCoaList = list.ids;
+    });
+
     this.subs.add(sobListSub)
       .add(costCenterSub)
+      .add(coaListSub)
       .add(costCenterFormSub)
       .add(costCenterCountSub);
+  }
+
+  getCoaList() {
+    this.costCenterService.getCoaList(this.coaSearchEntity);
   }
 
   get currentSob() {

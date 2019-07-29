@@ -30,6 +30,13 @@ export class FiscalYearRepository extends Repository {
     );
   }
 
+  getStatusList() {
+    return this.http.post<any[]>(this.apiUrl + '/list-status', '{}',
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => r.body),
+    );
+  }
+
   getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(

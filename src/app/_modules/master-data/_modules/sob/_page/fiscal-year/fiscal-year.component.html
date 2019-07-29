@@ -161,6 +161,16 @@
         </div>
       </div>
     </div>
+    <div class="row">
+      <div class="col-12">
+        <label for="fiscal-year-status">
+          {{ 'fiscal_year.content.status' | translate }}
+        </label>
+        <app-simple-select id="fiscal-year-status" [list]="statusList" (listOpen)="getStatusList()"
+                           key="name"
+                           (selectionChange)="statusId.setValue($event)"></app-simple-select>
+      </div>
+    </div>
   </div>
   <p-footer>
     <div class="d-flex">

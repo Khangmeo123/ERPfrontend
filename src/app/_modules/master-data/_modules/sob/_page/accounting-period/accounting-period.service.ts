@@ -1,22 +1,29 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { AccountingPeriodForm } from '../../../../_backend/accounting-period/accounting-period.form';
-import { AccountingPeriodEntity } from '../../../../_backend/accounting-period/accounting-period.entity';
+import { Entities } from 'src/app/_helpers/entity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { AccountingPeriodRepository } from './accounting-period.repository';
+import { AccountingPeriodEntity } from '../../../../_backend/accounting-period/accounting-period.entity';
+import { AccountingPeriodForm } from '../../../../_backend/accounting-period/accounting-period.form';
 import { AccountingPeriodSearchEntity } from '../../../../_backend/accounting-period/accounting-period.searchentity';
+import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
+import { FiscalYearEntity } from '../../../../_backend/fiscal-year/fiscal-year.entity';
 
 export class AccountingPeriodService {
   public accountingPeriodList: BehaviorSubject<AccountingPeriodEntity[]>;
   public accountingPeriodCount: BehaviorSubject<number>;
-  public currencyCount: BehaviorSubject<number>;
   public accountingPeriodForm: BehaviorSubject<FormGroup>;
 
-  constructor(
-    private fb: FormBuilder,
-    private accountingPeriodRepository: AccountingPeriodRepository,
-    private toastrService: ToastrService,
-  ) {
+  public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+
+  public fiscalYearList: BehaviorSubject<FiscalYearEntity[]> = new BehaviorSubject([]);
+
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+
+  constructor(private fb: FormBuilder, private accountingPeriodRepository: AccountingPeriodRepository, private toastrService: ToastrService) {
     this.accountingPeriodCount = new BehaviorSubject(0);
     this.accountingPeriodList = new BehaviorSubject([]);
     this.accountingPeriodForm = new BehaviorSubject(this.fb.group(
@@ -31,12 +38,39 @@ export class AccountingPeriodService {
         this.accountingPeriodList.next(list);
       }
       if (count) {
-        this.currencyCount.next(count);
+        this.accountingPeriodCount.next(count);
       }
     });
   }
 
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.accountingPeriodRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        this.sobList.next(list);
+      });
+  }
+
+  getFiscalYearList(fiscalYearSearchEntity: FiscalYearSearchEntity) {
+    this.accountingPeriodRepository.getFiscalYearList(fiscalYearSearchEntity)
+      .subscribe((list: FiscalYearEntity[]) => {
+        this.fiscalYearList.next(list);
+      });
+  }
+
+  getCoaList(coaSearchEntity: CoaSearchEntity) {
+    this.accountingPeriodRepository.getCoaList(coaSearchEntity)
+      .subscribe((list: Entities) => {
+        this.coaList.next(list);
+      });
+  }
+
   add() {
+    this.accountingPeriodForm.next(this.fb.group(
+      new AccountingPeriodForm(),
+    ));
+  }
+
+  cancel() {
     this.accountingPeriodForm.next(this.fb.group(
       new AccountingPeriodForm(),
     ));

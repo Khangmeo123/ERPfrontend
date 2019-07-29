@@ -156,7 +156,10 @@ export class BankAccountComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {
+  paginationOut(pagination: PaginationModel) {
+    this.bankAccountSearchEntity.skip = pagination.skip;
+    this.bankAccountSearchEntity.take = pagination.take;
+    this.bankAccountService.getList(this.bankAccountSearchEntity);
   }
 
   showDialog() {

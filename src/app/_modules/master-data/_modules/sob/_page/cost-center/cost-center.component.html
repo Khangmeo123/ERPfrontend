@@ -135,8 +135,9 @@
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="cost-center-id">{{ 'cost-center.content.account' | translate}}</label>
-          <input type="text" class="form-control"/>
+          <label for="chart-of-account">{{ 'cost-center.content.account' | translate}}</label>
+          <app-single-select id="chart-of-account" [list]="coaList" [selectedList]="selectedCoaList"
+                             (listOpen)="getCoaList()"></app-single-select>
         </div>
       </div>
       <div class="col-sm-6">

@@ -1,16 +1,17 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class AccountingPeriodEntity extends Entity {
-    // sobEntity:
-    sobId: string;
-    fiscalYearId: string;
+  // sobEntity:
+  setOfBookId: string;
 
-   fromValid: string;
-   toValid: string;
+  fiscalYearId: string;
 
-    description: string;
+  validFrom: string;
+  validTo: string;
 
-    constructor(accountingPeriodEntity?: any) {
-        super(accountingPeriodEntity);
-    }
+  description: string;
+
+  constructor(accountingPeriodEntity?: any) {
+    super(accountingPeriodEntity);
+  }
 }

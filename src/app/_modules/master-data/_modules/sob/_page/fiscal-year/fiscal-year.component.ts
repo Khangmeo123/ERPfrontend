@@ -58,6 +58,8 @@ export class FiscalYearComponent implements OnInit {
 
   public inventoryValuationMethodList = [];
 
+  public statusList = [];
+
   constructor(
     private fiscalYearService: FiscalYearService,
     private generalService: GeneralService,
@@ -79,6 +81,10 @@ export class FiscalYearComponent implements OnInit {
 
     const inventoryValuationMethodListSub = this.fiscalYearService.inventoryValuationMethodList.subscribe((list) => {
       this.inventoryValuationMethodList = list;
+    });
+
+    const statusListSub = this.fiscalYearService.statusList.subscribe((list) => {
+      this.statusList = list;
     });
 
     const fiscalYearFormSub = this.fiscalYearService.fiscalYearForm.subscribe((form: FormGroup) => {
@@ -127,6 +133,10 @@ export class FiscalYearComponent implements OnInit {
     }
   }
 
+  get statusId() {
+    return this.fiscalYearForm.get('statusId') as FormControl;
+  }
+
   valuationMethodSelector = (node) => node.code;
 
   ngOnInit() {
@@ -160,7 +170,10 @@ export class FiscalYearComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {
+  paginationOut(pagination: PaginationModel) {
+    this.fiscalYearSearchEntity.skip = pagination.skip;
+    this.fiscalYearSearchEntity.take = pagination.take;
+    this.fiscalYearService.getList(this.fiscalYearSearchEntity);
   }
 
   showDialog() {
@@ -187,6 +200,10 @@ export class FiscalYearComponent implements OnInit {
           this.isShowDialog = err;
         });
     }
+  }
+
+  getStatusList() {
+    this.fiscalYearService.getStatusList();
   }
 
   sort(event: any) {

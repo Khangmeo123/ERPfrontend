@@ -14,6 +14,7 @@ export class FiscalYearService {
   public fiscalYearForm: BehaviorSubject<FormGroup>;
   public fiscalYearCount: BehaviorSubject<number> = new BehaviorSubject(0);
   public inventoryValuationMethodList: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  public statusList: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor(private fb: FormBuilder, private fiscalYearRepository: FiscalYearRepository, private toastrService: ToastrService) {
     this.fiscalYearCount = new BehaviorSubject(0);
@@ -32,6 +33,13 @@ export class FiscalYearService {
         this.fiscalYearCount.next(count);
       }
     });
+  }
+
+  getStatusList() {
+    this.fiscalYearRepository.getStatusList()
+      .subscribe((list) => {
+        this.statusList.next(list);
+      });
   }
 
   getSobList(sobSearchEntity: SobSearchEntity) {
