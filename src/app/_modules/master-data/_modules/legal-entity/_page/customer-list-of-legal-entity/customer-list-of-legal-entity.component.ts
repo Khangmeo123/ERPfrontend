@@ -86,7 +86,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     });
 
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
-    this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify).add(customerListSub).add(customerListCountSub);
+    this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify).add(customerListSub)
+    .add(customerListCountSub).add(customerOfLegalListSub);
 
   }
 
