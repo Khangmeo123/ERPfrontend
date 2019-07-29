@@ -158,8 +158,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   paymentTermSearch(event) {
     this.supplierDetailEntity.code.startsWith = event;
-    this.supplierDetailEntity.name.startsWith
-     = event;
+    this.supplierDetailEntity.name.startsWith = event;
     this.paymentTermTyping.next(this.paymentTermSearchEntity);
   }
 

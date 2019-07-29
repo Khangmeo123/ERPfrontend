@@ -125,9 +125,17 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   // drop legal entity
+
+  openLegalEntityList(legalId: string) {
+    this.legalSearchEntity = new LegalSearchEntity();
+    if (legalId !== null && legalId !== undefined) {
+      this.legalSearchEntity.ids.push(legalId);
+    }
+    this.supplierGroupService.getListLegalEntity(this.legalSearchEntity);
+  }
   legalSearch(event) {
-    this.legalSearchEntity.code = event;
-    this.legalSearchEntity.name = event;
+    this.legalSearchEntity.code.startsWith = event;
+    this.legalSearchEntity.name.startsWith = event;
     this.leGalEntityTyping.next(this.legalSearchEntity);
   }
   selectLegal(event) {
@@ -149,7 +157,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   selectSupplierApp(event) {
-    console.log('selectSupplierApp', event)
+    this.listSupplierId = event;
   }
 
   getList() {
@@ -191,7 +199,6 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
 
   sortSupplierGroup(event) {
-    console.log('sortSupplierGroup')
     if (event.sortField && event.sortOrder) {
       this.supplierGroupSearchEntity.orderBy = event.sortField;
       this.supplierGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
@@ -242,14 +249,13 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   onClickDetail(id: string) {
-    // this.supplierSearchEntity.supplierGroupingId = id;
-    // this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+    this.legalId = id;
+    this.supplierSearchEntity.legalEntityId = id;
     this.getListDetail();
   }
 
 
   onClickShowDetail(supplierId) {
-    //  }
     this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'],
     { queryParams: { id: supplierId, legalEntityId: this.legalId }});
   }
