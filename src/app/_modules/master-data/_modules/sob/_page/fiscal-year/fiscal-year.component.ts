@@ -3,7 +3,7 @@ import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.m
 import { Subscription } from 'rxjs';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { ToastrService } from 'ngx-toastr';
 import { Entities } from '../../../../../../_helpers/entity';
@@ -56,6 +56,8 @@ export class FiscalYearComponent implements OnInit {
 
   public setOfBookId: string = '';
 
+  public inventoryValuationMethodList = [];
+
   constructor(
     private fiscalYearService: FiscalYearService,
     private generalService: GeneralService,
@@ -74,6 +76,10 @@ export class FiscalYearComponent implements OnInit {
       this.fiscalYearCount = count;
     });
 
+    const inventoryValuationMethodListSub = this.fiscalYearService.inventoryValuationMethodList.subscribe((list) => {
+      this.inventoryValuationMethodList = list;
+    });
+
     const fiscalYearFormSub = this.fiscalYearService.fiscalYearForm.subscribe((form: FormGroup) => {
       this.fiscalYearForm = form;
       if (this.setOfBookId) {
@@ -84,6 +90,7 @@ export class FiscalYearComponent implements OnInit {
     this.subs.add(sobListSub)
       .add(fiscalYearSub)
       .add(fiscalYearFormSub)
+      .add(inventoryValuationMethodListSub)
       .add(fiscalYearCountSub);
   }
 
@@ -92,6 +99,18 @@ export class FiscalYearComponent implements OnInit {
       return this.selectedSobList[0];
     }
     return null;
+  }
+
+  get startDate() {
+    return this.fiscalYearForm.get('startDate') as FormControl;
+  }
+
+  get endDate() {
+    return this.fiscalYearForm.get('endDate') as FormControl;
+  }
+
+  getInventoryValuationMethodList() {
+    this.fiscalYearService.getInventoryValuationMethodList();
   }
 
   add() {
@@ -103,10 +122,16 @@ export class FiscalYearComponent implements OnInit {
     }
   }
 
+  valuationMethodSelector = (node) => node.code;
+
   ngOnInit() {
     if (this.currentSob) {
       this.getList();
     }
+  }
+
+  get inventoryValuationMethod() {
+    return this.fiscalYearForm.get('inventoryValuationMethod') as FormControl;
   }
 
   changeSob(event) {
@@ -150,6 +175,7 @@ export class FiscalYearComponent implements OnInit {
     if (this.fiscalYearForm.invalid) {
       this.generalService.validateAllFormFields(this.fiscalYearForm);
     }
+  debugger
     if (this.fiscalYearForm.valid) {
       const data = this.fiscalYearForm.getRawValue();
       const entity = new FiscalYearEntity(data);

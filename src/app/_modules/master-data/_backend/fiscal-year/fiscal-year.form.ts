@@ -4,20 +4,16 @@ import { requiredField } from 'src/app/_helpers';
 import { FiscalYearEntity } from './fiscal-year.entity';
 
 export class FiscalYearForm extends FormModel {
-
   setOfBookId = new FormControl(null, [requiredField]);
 
   name = new FormControl(null, [requiredField]);
-  code = new FormControl(null, [requiredField]);
 
-  formValid = new FormControl(null, [requiredField]);
-  toValid = new FormControl(null, [requiredField]);
+  startDate = new FormControl(null, [requiredField]);
+  endDate = new FormControl(null, [requiredField]);
 
-  valuationMethodId = new FormControl(null, [requiredField]);
-  valuationMethodName = new FormControl(null, [requiredField]);
+  inventoryValuationMethod = new FormControl(null, [requiredField]);
 
-  statusId = new FormControl(null, [requiredField]);
-  statusName = new FormControl(null, [requiredField]);
+  statusId = new FormControl(null);
 
   errors = new FormGroup({});
 

@@ -46,6 +46,15 @@ export class FiscalYearRepository extends Repository {
     );
   }
 
+  getInventoryValuationMethodList(): Observable<any[]> {
+    return this.http.post<any[]>(this.apiUrl + '/list-inventory-valuation-method', '{}',
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => {
+        return r.body;
+      }),
+    );
+  }
+
   count(voucherSearchEntity: FiscalYearSearchEntity): Observable<number> {
     return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(voucherSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
