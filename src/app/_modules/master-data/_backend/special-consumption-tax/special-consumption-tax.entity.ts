@@ -1,30 +1,30 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class SpecialConsumptionTaxEntity extends Entity {
-    // sobEntity:
-    sobId: string;
+  // sobEntity:
+  setOfBookId: string;
 
-    taxCode: string;
+  taxCode: string;
 
-    // taxtypeEntity:
-    taxType: string;
+  // taxtypeEntity:
+  taxType: string;
 
-    // uomEntity:
-    //don vi tinh
-    uomId: string;
-    uomName: string;
-    uomCode: string;
+  // uomEntity:
+  //don vi tinh
+  uomId: string;
+  uomName: string;
+  uomCode: string;
 
-    // coaEntity:
-    //tai khoan tong hop
-    coaId: string;
-    coaName: string;
-    coaCode: string;
+  // coaEntity:
+  //tai khoan tong hop
+  chartOfAccountId: string;
+  chartOfAccountName: string;
+  chartOfAccountCode: string;
 
-    taxRate: number;
-    description: string;
+  taxRate: number;
+  description: string;
 
-    constructor(exciseTariffEntity?: any) {
-        super(exciseTariffEntity);
-    }
+  constructor(exciseTariffEntity?: any) {
+    super(exciseTariffEntity);
+  }
 }

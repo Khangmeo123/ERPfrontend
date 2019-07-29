@@ -1,19 +1,22 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { Entities } from '../../../../../../_helpers/entity';
 import { FiscalYearEntity } from '../../../../_backend/fiscal-year/fiscal-year.entity';
 import { FiscalYearRepository } from './fiscal-year.repository';
 import { FiscalYearForm } from '../../../../_backend/fiscal-year/fiscal-year.form';
 import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
 
 export class FiscalYearService {
-  public fiscalYearList: BehaviorSubject<FiscalYearEntity[]>;
-  public fiscalYearCount: BehaviorSubject<number>;
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public fiscalYearList: BehaviorSubject<FiscalYearEntity[]> = new BehaviorSubject([]);
   public fiscalYearForm: BehaviorSubject<FormGroup>;
+  public fiscalYearCount: BehaviorSubject<number> = new BehaviorSubject(0);
+  public inventoryValuationMethodList: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
 
   constructor(private fb: FormBuilder, private fiscalYearRepository: FiscalYearRepository, private toastrService: ToastrService) {
     this.fiscalYearCount = new BehaviorSubject(0);
-    this.fiscalYearList = new BehaviorSubject([]);
     this.fiscalYearForm = new BehaviorSubject(this.fb.group(
       new FiscalYearForm(),
     ));
@@ -31,7 +34,29 @@ export class FiscalYearService {
     });
   }
 
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.fiscalYearRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        if (list) {
+          this.sobList.next(list);
+        }
+      });
+  }
+
+  getInventoryValuationMethodList() {
+    this.fiscalYearRepository.getInventoryValuationMethodList()
+      .subscribe((list) => {
+        this.inventoryValuationMethodList.next(list);
+      });
+  }
+
   add() {
+    this.fiscalYearForm.next(this.fb.group(
+      new FiscalYearForm(),
+    ));
+  }
+
+  cancel() {
     this.fiscalYearForm.next(this.fb.group(
       new FiscalYearForm(),
     ));

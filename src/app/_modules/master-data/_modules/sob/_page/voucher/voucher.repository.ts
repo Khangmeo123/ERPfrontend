@@ -7,24 +7,24 @@ import { environment } from 'src/environments/environment';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { Entities } from '../../../../../../_helpers/entity';
-import { FiscalYearEntity } from '../../../../_backend/fiscal-year/fiscal-year.entity';
-import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
+import { VoucherListSearchEntity } from '../../../../_backend/voucher-list/voucher-list.searchentity';
+import { VoucherListEntity } from '../../../../_backend/voucher-list/voucher-list.entity';
 
 @Injectable({
   providedIn: 'root',
 })
-export class FiscalYearRepository extends Repository {
+export class VoucherListRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/fiscal-year';
+    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/payment-method';
   }
 
-  getList(voucherSearchEntity: FiscalYearSearchEntity): Observable<FiscalYearEntity[]> {
-    return this.http.post<FiscalYearEntity[]>(this.apiUrl + '/list', JSON.stringify(voucherSearchEntity),
+  getList(voucherSearchEntity: VoucherListSearchEntity): Observable<VoucherListEntity[]> {
+    return this.http.post<VoucherListEntity[]>(this.apiUrl + '/list', JSON.stringify(voucherSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         return r.body.map((item) => {
-          return new FiscalYearEntity(item);
+          return new VoucherListEntity(item);
         });
       }),
     );
@@ -46,27 +46,18 @@ export class FiscalYearRepository extends Repository {
     );
   }
 
-  getInventoryValuationMethodList(): Observable<any[]> {
-    return this.http.post<any[]>(this.apiUrl + '/list-inventory-valuation-method', '{}',
-      {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => {
-        return r.body;
-      }),
-    );
-  }
-
-  count(voucherSearchEntity: FiscalYearSearchEntity): Observable<number> {
+  count(voucherSearchEntity: VoucherListSearchEntity): Observable<number> {
     return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(voucherSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
   }
 
-  getId(voucherId: string): Observable<FiscalYearEntity> {
-    return this.http.post<FiscalYearEntity>(this.apiUrl + '/get', JSON.stringify({Id: voucherId}),
+  getId(voucherId: string): Observable<VoucherListEntity> {
+    return this.http.post<VoucherListEntity>(this.apiUrl + '/get', JSON.stringify({Id: voucherId}),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
-        return new FiscalYearEntity(r.body);
+        return new VoucherListEntity(r.body);
       }),
     );
   }
