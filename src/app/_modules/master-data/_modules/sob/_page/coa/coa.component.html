@@ -9,32 +9,18 @@
       </span>
     </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button class="btn btn-add" (click)="clearSearch(table)">
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
     </div>
-    <!--    <div class="page-actions">-->
-    <!--      <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>-->
-    <!--      <div class="btn-group" dropdown>-->
-    <!--        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"-->
-    <!--          aria-controls="dropdown-basic">-->
-    <!--          {{'general.button.import' | translate}}<span class="caret"></span>-->
-    <!--        </button>-->
-    <!--        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">-->
-    <!--          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a></li>-->
-    <!--          <li class="divider dropdown-divider"></li>-->
-    <!--          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.download_example' | translate}}</a>-->
-    <!--          </li>-->
-    <!--        </ul>-->
-    <!--      </div>-->
-    <!--      <button class="btn btn-export">{{'general.button.export' | translate}}</button>-->
-    <!--    </div>-->
+    
   </div>
   <div class="page-body mt-4">
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select [list]="sobList"
+                        data-qe-id="sobList"
                          key="name"
                          (selectionChange)="changeSob($event)"
                          [selectedList]="selectedSobList"
@@ -50,35 +36,35 @@
                    scrollHeight="500px"
                    [resizableColumns]="true">
         <ng-template pTemplate="header">
-          <tr>
-            <th>
+          <tr >
+            <th data-qe-id="table-thead-number">
               {{'coa.account_number' | translate}}
             </th>
-            <th>
+            <th data-qe-id="table-thead-name">
               {{'coa.account_name' | translate}}
             </th>
-            <th>
+            <th data-qe-id="table-thead-status">
               {{'coa.account_status' | translate}}
             </th>
-            <th>
+            <th data-qe-id="table-thead-description">
               {{'coa.account_description' | translate}}
             </th>
           </tr>
           <tr class="th-filter">
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="coa-filter-accountCode" (changeFilter)="getList()"
                                     [filter]="coaSearchEntity.accountCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="coa-filter-accountName" (changeFilter)="getList()"
                                     [filter]="coaSearchEntity.accountName"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="coa-filter-characteristicValue" (changeFilter)="getList()"
                                     [filter]="coaSearchEntity.characteristicValue"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="coa-filter-accountDescription" (changeFilter)="getList()"
                                     [filter]="coaSearchEntity.accountDescription"></app-advanced-filters>
             </th>
           </tr>
@@ -117,7 +103,7 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" id="account-code" name="accountCode" formControlName="accountCode">
+          <input type="text" class="form-control" data-qe-id="dialog-account-code" name="accountCode" formControlName="accountCode">
           <app-error data-qe-id="dialog-error-account-code"
                      *ngIf="(coaForm.controls.accountCode?.errors && coaForm.controls.accountCode?.touched) || !!coaForm.controls.error.get('accountCode')?.value"
                      [formGroup]="coaForm" [property]="'accountCode'" [placement]="'top'" class="error-form">
@@ -130,7 +116,7 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" id="account-name" name="accountName" formControlName="accountName">
+          <input type="text" class="form-control" data-qe-id="dialog-account-name" name="accountName" formControlName="accountName">
           <app-error data-qe-id="dialog-error-account-name"
                      *ngIf="(coaForm.controls.accountName?.errors && coaForm.controls.accountName?.touched) || !!coaForm.controls.error.get('accountName')?.value"
                      [formGroup]="coaForm" [property]="'accountName'" [placement]="'top'" class="error-form">
@@ -141,8 +127,9 @@
         <label for="account-characteristic">
           {{'coa.account_status' | translate}}
         </label>
-        <input type="hidden" #characteristicId id="account-characteristic" formControlName="characteristicId">
+        <input type="hidden" #characteristicId  formControlName="characteristicId">
         <app-simple-select (listOpen)="getCharacteristicList()"
+                            data-qe-id="dialog-account-characteristic"
                            [list]="characteristicList"
                            (selectionChange)="characteristicId.value = $event"
                            key="name"
@@ -156,13 +143,13 @@
         <app-single-select (listOpen)="getParentAccountList()"
                            [list]="parentAccountList"
                            [selectedList]="selectedParentAccountList"
-                           id="parent-account"></app-single-select>
+                           data-qe-id="parent-account"></app-single-select>
       </div>
       <div class="form-group col-12">
         <label for="account-description">
           {{'coa.description' | translate}}
         </label>
-        <textarea id="account-description" formControlName="accountDescription" class="form-control"
+        <textarea data-qe-id="account-description" formControlName="accountDescription" class="form-control"
                   rows="3"></textarea>
       </div>
     </div>
@@ -170,6 +157,7 @@
   <p-footer>
     <div class="d-flex">
       <button class="btn btn-delete"
+              data-qe-id="footer-button-delete"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
@@ -179,9 +167,9 @@
               *ngIf="coaForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel"
+        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
                 (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button class="btn btn-save" (click)="onClickSave()">
+        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

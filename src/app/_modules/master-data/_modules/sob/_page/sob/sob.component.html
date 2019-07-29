@@ -92,7 +92,7 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" id="code" class="form-control" formControlName="code">
+          <input type="text" data-qe-id="dialog-code" class="form-control" formControlName="code">
           <app-error data-qe-id="dialog-error-code"
                      *ngIf="(sobForm.controls.code?.errors && sobForm.controls.code?.touched) || !!sobForm.controls.error.get('code')?.value"
                      [formGroup]="sobForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -105,7 +105,7 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" id="name" formControlName="name">
+          <input type="text" class="form-control" data-qe-id="dialog-name" formControlName="name">
           <app-error data-qe-id="dialog-error-name"
                      *ngIf="(sobForm.controls.name?.errors && sobForm.controls.name?.touched) || !!sobForm.controls.error.get('name')?.value"
                      [formGroup]="sobForm" [property]="'name'" [placement]="'top'" class="error-form">
@@ -118,7 +118,7 @@
         <label for="chart-of-account-template">
           {{'sob.chart_account' | translate}}
         </label>
-        <app-single-select id="chart-of-account-template"
+        <app-single-select data-qe-id="dialog-chart-of-account-template"
                            [list]="coaList"
                            key="name"
                            [initialValue]="sobForm.controls.chartOfAccountTemplateName?.value"
@@ -132,7 +132,7 @@
         </label>
         <div class="div-form">
           <app-single-select [list]="currencyList"
-                             data-qe-id="currency"
+                             data-qe-id="dialog-currency"
                              key="code"
                              [initialValue]="sobForm.controls.currencyCode?.value"
                              (selectionChange)="onSelectId($event, 'currencyId')"
@@ -153,7 +153,7 @@
                            key="name"
                            [initialValue]="sobForm.controls.specialConsumptionTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'specialConsumptionTaxTemplateId')"
-                           id="special-consumption-tax-template"
+                           data-qe-id="dialog-special-consumption-tax-template"
                            (listOpen)="getSpecialConsumptionTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
@@ -164,7 +164,7 @@
                            key="name"
                            [initialValue]="sobForm.controls.valueAddedTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'valueAddedTaxTemplateId')"
-                           id="value-added-tax-template"
+                           data-qe-id="dialog-value-added-tax-template"
                            (listOpen)="getValueAddedTaxTemplates()"></app-single-select>
       </div>
     </div>
@@ -177,7 +177,7 @@
                            key="name"
                            [initialValue]="sobForm.controls.naturalResourceTaxTemplate?.value"
                            (selectionChange)="onSelectId($event, 'naturalResourceTaxTemplateId')"
-                           id="natural-resource-tax-template"
+                           data-qe-id="dialog-natural-resource-tax-template"
                            (listOpen)="getNaturalResourceTaxTemplates()"></app-single-select>
       </div>
       <div class="form-group col-6">
@@ -188,7 +188,7 @@
                            key="name"
                            [initialValue]="sobForm.controls.environmentTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'environmentTaxTemplateId')"
-                           id="environment-tax-template"
+                           data-qe-id="dialog-environment-tax-template"
                            (listOpen)="getEnvironmentTemplates()"></app-single-select>
       </div>
     </div>
@@ -200,7 +200,7 @@
         <app-single-select [list]="exportTaxTemplates"
                            key="name"
                            (selectionChange)="onSelectId($event, 'exportTaxTemplateId')"
-                           id="export-tax-template"
+                           data-qe-id="dialog-export-tax-template"
                            [initialValue]="sobForm.controls.exportTaxTemplateName?.value"
                            (listOpen)="getExportTaxTemplates()"></app-single-select>
       </div>
@@ -212,14 +212,14 @@
                            key="name"
                            [initialValue]="sobForm.controls.importTaxTemplateName?.value"
                            (selectionChange)="onSelectId($event, 'importTaxTemplateId')"
-                           id="import-tax-template"
+                           data-qe-id="dialog-import-tax-template"
                            (listOpen)="getImportTaxTemplates()"></app-single-select>
       </div>
     </div>
   </div>
   <p-footer>
     <div class="d-flex">
-      <button class="btn btn-delete" *ngIf="sobForm.value?.isDeleted"
+      <button data-qe-id="footer-button-delete" class="btn btn-delete" *ngIf="sobForm.value?.isDeleted"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
@@ -229,10 +229,10 @@
         {{'general.button.delete' | translate}}
       </button>
       <div class="flex-grow-1 d-flex justify-content-end">
-        <button class="btn btn-add mr-2" (click)="save()">
-          {{'general.button.add' | translate}}
+        <button data-qe-id="footer-button-save" class="btn btn-add mr-2" (click)="save()">
+          {{'general.button.save' | translate}}
         </button>
-        <button class="btn btn-cancel" (click)="cancelModal()">
+        <button data-qe-id="footer-button-cancel" class="btn btn-cancel" (click)="cancelModal()">
           {{'general.button.cancel' | translate}}
         </button>
       </div>
