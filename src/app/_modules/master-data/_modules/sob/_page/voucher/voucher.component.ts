@@ -72,6 +72,7 @@ export class VoucherComponent implements OnInit {
 
     const voucherListCountSub = this.voucherListService.voucherListCount.subscribe((count) => {
       this.voucherListCount = count;
+      this.pagination.totalItems = count;
     });
 
     const voucherListFormSub = this.voucherListService.voucherListForm.subscribe((form: FormGroup) => {

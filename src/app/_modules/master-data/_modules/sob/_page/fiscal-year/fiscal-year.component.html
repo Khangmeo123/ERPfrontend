@@ -33,7 +33,7 @@
       </button>
     </div>
   </div>
-  <div class="page-body mt-4 ">
+  <div class="page-body mt-4">
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
@@ -42,7 +42,7 @@
                          [selectedList]="selectedSobList"
                          key="name"></app-single-select>
     </div>
-    <div class="page-selection list">
+    <div class="page-section list">
       <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
                [scrollable]="true" [value]="fiscalYearList" scrollHeight="500px">
         <ng-template pTemplate="header">
@@ -129,12 +129,21 @@
         <div class="form-group">
           <label for="fiscal-year-to-valuation-method">{{ 'fiscal_year.content.valuation_method' | translate}}<span
             class="text-danger ml-2">*</span></label>
-          <app-simple-select (listOpen)="getInventoryValuationMethodList()"
-                             key="name"
-                             id="fiscal-year-to-valuation-method"
-                             (selectionChange)="inventoryValuationMethod.setValue($event)"
-                             [valueSelector]="valuationMethodSelector"
-                             [list]="inventoryValuationMethodList"></app-simple-select>
+          <div class="div-form d-flex">
+            <app-simple-select (listOpen)="getInventoryValuationMethodList()"
+                               class="flex-grow-1"
+                               key="name"
+                               id="fiscal-year-to-valuation-method"
+                               (selectionChange)="inventoryValuationMethod.setValue($event)"
+                               [valueSelector]="valuationMethodSelector"
+                               [list]="inventoryValuationMethodList"></app-simple-select>
+            <app-error
+              *ngIf="(fiscalYearForm.controls.inventoryValuationMethod?.errors && fiscalYearForm.controls.inventoryValuationMethod?.touched) || !!fiscalYearForm.controls.errors.get('inventoryValuationMethod')?.value"
+              [formGroup]="fiscalYearForm"
+              [placement]="'top'" [property]="'inventoryValuationMethod'" class="error-form"
+              data-qe-id="dialog-error-inventory-valuation-method">
+            </app-error>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">

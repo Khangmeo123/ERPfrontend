@@ -85,6 +85,7 @@ export class BankAccountComponent implements OnInit {
 
     const bankAccountCountSub = this.bankAccountService.bankAccountCount.subscribe((count) => {
       this.bankAccountCount = count;
+      this.pagination.totalItems = count;
     });
 
     const bankAccountFormSub = this.bankAccountService.bankAccountForm.subscribe((form: FormGroup) => {

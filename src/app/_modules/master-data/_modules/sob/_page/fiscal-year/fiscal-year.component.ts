@@ -74,6 +74,7 @@ export class FiscalYearComponent implements OnInit {
 
     const fiscalYearCountSub = this.fiscalYearService.fiscalYearCount.subscribe((count) => {
       this.fiscalYearCount = count;
+      this.pagination.totalItems = count;
     });
 
     const inventoryValuationMethodListSub = this.fiscalYearService.inventoryValuationMethodList.subscribe((list) => {
@@ -109,6 +110,10 @@ export class FiscalYearComponent implements OnInit {
     return this.fiscalYearForm.get('endDate') as FormControl;
   }
 
+  get inventoryValuationMethod() {
+    return this.fiscalYearForm.get('inventoryValuationMethod') as FormControl;
+  }
+
   getInventoryValuationMethodList() {
     this.fiscalYearService.getInventoryValuationMethodList();
   }
@@ -128,10 +133,6 @@ export class FiscalYearComponent implements OnInit {
     if (this.currentSob) {
       this.getList();
     }
-  }
-
-  get inventoryValuationMethod() {
-    return this.fiscalYearForm.get('inventoryValuationMethod') as FormControl;
   }
 
   changeSob(event) {
@@ -175,7 +176,6 @@ export class FiscalYearComponent implements OnInit {
     if (this.fiscalYearForm.invalid) {
       this.generalService.validateAllFormFields(this.fiscalYearForm);
     }
-  debugger
     if (this.fiscalYearForm.valid) {
       const data = this.fiscalYearForm.getRawValue();
       const entity = new FiscalYearEntity(data);

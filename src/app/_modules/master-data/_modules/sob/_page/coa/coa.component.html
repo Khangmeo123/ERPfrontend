@@ -83,13 +83,20 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-row let-rowNode let-rowData="rowData">
+        <ng-template pTemplate="body" let-row let-rowNode>
           <tr [ttRow]="rowNode">
             <td>
               <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+              {{rowNode.accountCode}}
             </td>
             <td>
               {{rowNode.accountName}}
+            </td>
+            <td>
+
+            </td>
+            <td>
+              {{rowNode.accountDescription}}
             </td>
           </tr>
         </ng-template>
