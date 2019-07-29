@@ -175,6 +175,9 @@
 			"code": "Mã khách hàng",
 			"name": "Tên khách hàng"
 		},
+		"header": {
+			"title": "Khách hàng của pháp nhân"
+		},
 		"name": "Tên pháp nhân",
 		"sob": "Mã bộ sổ"
 	},
@@ -885,6 +888,9 @@
 	"supplierGroup": {
 		"add": "Thêm nhóm nhà cung cấp",
 		"code": "Mã nhóm",
+		"header": {
+			"title": "Nhóm nhà cung cấp"
+		},
 		"name": "Tên nhóm",
 		"supplier": {
 			"code": "Mã nhà cung cấp",

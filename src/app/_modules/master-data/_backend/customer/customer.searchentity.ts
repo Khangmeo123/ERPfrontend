@@ -10,7 +10,8 @@ export class CustomerSearchEntity extends SearchEntity {
     statusId: string;
 
     legalEntityId: string;
-    customerIds: Array<any>;
+    customerGroupingId: string;
+    customerDetailIds: Array<any>;
 
     constructor(customerSearchEntity?: any) {
         super(customerSearchEntity);

@@ -71,6 +71,39 @@ export class CustomerGroupRepository extends Repository {
             );
     }
 
+
+    getListCustomerDetail(customerSearchEntity: CustomerSearchEntity): Observable<CustomerEntity[]> {
+        return this.http.post<CustomerEntity[]>(this.apiUrl + '/list-customer-detail', JSON.stringify(customerSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new CustomerEntity(item);
+                    });
+                }),
+            );
+    }
+
+    addCustomer(customerSearchEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/bulk-add-customer-detail', JSON.stringify(customerSearchEntity),
+        { observe: 'response', headers: this.getHeader() }).pipe(
+            map(r => r.body),
+        );
+    }
+
+    deleteCustomer(customerSearchEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/delete-customer-detail', JSON.stringify(customerSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    countCustomerDetail(customerSearchEntity: CustomerSearchEntity): Observable<number> {
+        return this.http.post<number>(this.apiUrl + '/count-customer-detail', JSON.stringify(customerSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
     getListLegalEntity(legalSearchEntity: LegalSearchEntity) {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-legal-entity', JSON.stringify(legalSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
@@ -86,13 +119,17 @@ export class CustomerGroupRepository extends Repository {
             );
     }
 
-    getListCustomerDetail(customerSearchEntity: CustomerSearchEntity): Observable<CustomerEntity[]> {
-        return this.http.post<CustomerEntity[]>(this.apiUrl + '/list-customer-detail', JSON.stringify(customerSearchEntity),
+    getListCustomer(customerSearchEntity: CustomerSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-customer-detail', JSON.stringify(customerSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    return r.body.map((item) => {
-                        return new CustomerEntity(item);
+                    r.body.ids = r.body.ids.map(item => {
+                        return new CustomerGroupEntity(item);
                     });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new CustomerGroupEntity(item);
+                    });
+                    return r.body;
                 }),
             );
     }

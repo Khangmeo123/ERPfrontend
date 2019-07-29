@@ -175,6 +175,9 @@
 			"code": "",
 			"name": ""
 		},
+		"header": {
+			"title": ""
+		},
 		"name": "",
 		"sob": ""
 	},
@@ -885,6 +888,9 @@
 	"supplierGroup": {
 		"add": "",
 		"code": "",
+		"header": {
+			"title": ""
+		},
 		"name": "",
 		"supplier": {
 			"code": "",

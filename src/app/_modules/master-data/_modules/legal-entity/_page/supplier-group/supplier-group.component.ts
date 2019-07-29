@@ -10,9 +10,9 @@ import { BookmarkService } from '../../../../../../_services';
 import { Router } from '@angular/router';
 import { SupplierGroupService } from './supplier-group.service';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-supplier-group',
@@ -22,7 +22,7 @@ import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/l
 })
 export class SupplierGroupComponent implements OnInit, OnDestroy {
 
-  pageTitle = _('supplierGroup.header.title');
+  pageTitle = translate('supplierGroup.header.title');
   isSaveBookMark: boolean = false;
   bookMarkId: string;
   display: boolean = false;
@@ -71,8 +71,12 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       if (res) {
         this.supplierDetailList = res;
       }
-    })
-
+    });
+    const supplierDetailCountSub = this.supplierGroupService.supplierGroupCount.subscribe(res => {
+      if (res) {
+        this.paginationdetail.totalItems = res;
+      }
+    });
     const supplierGroupFormSub = this.supplierGroupService.supplierGroupForm.subscribe(res => {
       if (res) {
         this.supplierGroupForm = res;
@@ -109,19 +113,21 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
     this.supplierGroupSubs.add(supplierGroupListSub).add(supplierGroupFormSub)
-      .add(supplierGroupListCountSub).add(bookMarkNotify).add(legalEntityListSub).add(supplierListSub);
-    this.supplierDetailSubs.add(supplierDetailListSub);
+      .add(supplierGroupListCountSub).add(bookMarkNotify).add(legalEntityListSub)
+      .add(supplierListSub).add(supplierDetailListSub).add(supplierDetailCountSub);
 
   }
 
   ngOnInit() {
     this.supplierGroupSearchEntity.skip = this.pagination.skip;
     this.supplierGroupSearchEntity.take = this.pagination.take;
+
+    this.supplierSearchEntity.skip = this.paginationdetail.skip;
+    this.supplierSearchEntity.take = this.paginationdetail.take;
   }
 
   ngOnDestroy() {
     this.supplierGroupSubs.unsubscribe();
-    this.supplierDetailSubs.unsubscribe();
   }
 
   // drop legal entity
@@ -147,12 +153,15 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   openSupplierList(id: []) {
     this.supplierSearchEntity = new SupplierSearchEntity();
     this.supplierSearchEntity.ids = id;
-    this.supplierGroupService.getListSupplierOfSupplierGroup(this.supplierSearchEntity);
+    if(this.legalEntityId !== '' && this.legalEntityId !== undefined){
+      this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+      this.supplierGroupService.getListSupplierOfSupplierGroup(this.supplierSearchEntity);
+    }
   }
 
   suppplierSearchApp(event) {
-    this.supplierSearchEntity.code = event;
-    this.supplierSearchEntity.name = event;
+    this.supplierSearchEntity.code.startsWith = event;
+    this.supplierSearchEntity.name.startsWith = event;
     this.supplierTyping.next(this.supplierSearchEntity);
   }
 
@@ -206,8 +215,8 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res => {
-        this.supplierSearchEntity.legalEntityId = this.supplierGroupList[0].id;
-        this.legalId = this.supplierSearchEntity.legalEntityId;
+        this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+        this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
         this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
       });
     }

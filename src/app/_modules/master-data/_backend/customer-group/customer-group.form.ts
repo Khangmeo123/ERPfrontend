@@ -8,8 +8,12 @@ export class CustomerGroupForm extends FormModel {
 
     name = new FormControl('', [requiredField]);
     code = new FormControl('', [requiredField]);
-
-    description = new FormControl('');
+    legalEntityId = new FormControl('', [requiredField]);
+    errors = new FormGroup({
+        name: new FormControl(''),
+        code: new FormControl(''),
+        legalEntityId: new FormControl('')
+    });
 
     constructor(customerGroupEntity?: CustomerGroupEntity) {
         super();

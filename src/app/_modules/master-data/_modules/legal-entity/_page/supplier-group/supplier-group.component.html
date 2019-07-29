@@ -117,7 +117,7 @@
             </div>
             <button class="btn btn-export"
               data-qe-id="button-add-supplier">{{'general.button.export' | translate}}</button>
-            <button class="btn btn-clear" (click)="clearSearch(table)"
+            <button class="btn btn-clear" (click)="clearSearch(tableSupplier)"
               data-qe-id="button-clear-supplier">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
@@ -144,11 +144,13 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code-supplier">
+                  <app-advanced-filters data-qe-id="table-thead-filter-code-supplier"
+                  [filter]="supplierSearchEntity.code" (changeFilter)="getListDetail()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-name-supplier">
+                  <app-advanced-filters data-qe-id="table-thead-filter-name-supplier"
+                  [filter]="supplierSearchEntity.name" (changeFilter)="getListDetail()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>

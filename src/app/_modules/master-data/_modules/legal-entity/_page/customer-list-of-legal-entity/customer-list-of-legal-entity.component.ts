@@ -10,6 +10,7 @@ import { CustomerOfLegalEntityService } from './customer-list-of-legal-entity.se
 import { Subscription, Subject } from 'rxjs';
 import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
 import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-customer-list-of-legal-entity',
@@ -19,7 +20,7 @@ import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/c
 })
 export class CustomerListOfLegalEntityComponent implements OnInit {
 
-  pageTitle = _('customerOfLegalEntity.header.title');
+  pageTitle = translate('customerOfLegalEntity.header.title');
   pagination = new PaginationModel();
   paginationdetail = new PaginationModel();
   display: boolean = false;

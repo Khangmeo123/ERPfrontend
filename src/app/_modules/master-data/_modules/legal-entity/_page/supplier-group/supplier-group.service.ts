@@ -88,7 +88,7 @@ export class SupplierGroupService {
           if (supllierGroupEntity.id === null || supllierGroupEntity.id === undefined || supllierGroupEntity.id === environment.emtyGuid) {
             this.supplierGroupRepository.add(supllierGroupEntity).subscribe(res => {
               if (res) {
-                this.getList(supllierGroupEntity);
+                this.getList(supplierGroupSearchEntity);
                 this.toastrService.success('Cập nhật thành công !');
                 resolve(false);
               }
@@ -103,7 +103,7 @@ export class SupplierGroupService {
           } else {
             this.supplierGroupRepository.update(supllierGroupEntity).subscribe(res => {
               if (res) {
-                this.getList(supllierGroupEntity);
+                this.getList(supplierGroupSearchEntity);
                 this.toastrService.success('Cập nhật thành công !');
                 resolve(false);
               }
