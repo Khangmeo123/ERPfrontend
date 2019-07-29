@@ -20,7 +20,7 @@
             </span>
             <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
               [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
-              (selectionChange)="selectLegal($event)" (listOpen)="legalSearch(supplierGroupSearchEntity.legalEntityId)">
+              (selectionChange)="selectLegal($event)" (listOpen)="openLegalEntityList(supplierGroupSearchEntity.legalEntityId)">
             </app-single-select>
           </div>
           <div class="col-sm-5 d-flex page-actions justify-content-end">
@@ -32,7 +32,7 @@
           </div>
         </div>
         <div class="page-section mt-2">
-          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single" [(selection)]="supplierGroupList[0]"
+          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single" [(selection)]="selectedSupplier"
             (onLazyLoad)="sortSupplierGroup($event)" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
             #tableSupplierGroup>
             <ng-template pTemplate="colgroup">
@@ -159,7 +159,7 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td> 
-                  <div class="edit" (click)="onClickShowDetail()">
+                  <div class="edit" (click)="onClickShowDetail(item.id)">
                       <mat-icon>edit</mat-icon>
                   </div>
                 </td>
