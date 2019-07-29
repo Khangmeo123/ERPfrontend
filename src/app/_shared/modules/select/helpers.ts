@@ -8,7 +8,7 @@ export const getListDirection = (element) => {
   return 'up';
 };
 
-export const buildTree = (flatList: IFlatItem[]) => {
+export const buildTree = (flatList: IFlatItem[]): any[] => {
   const map = {};
   flatList.forEach((flatItem: IFlatItem) => {
     if (!flatItem.parentId) {

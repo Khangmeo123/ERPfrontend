@@ -1,15 +1,18 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 
 export class BankAccountSearchEntity extends SearchEntity {
-    sobId: string;
-    coaId: string;
-    bankName: string;
-    bankCode: string;
-    accountName: string;
-    accountNumber: string;
-    description: string;
+  setOfBookId: string;
+  accountingCode: TextFilter = new TextFilter();
+  chartOfAccountId: TextFilter = new TextFilter();
+  bankName: TextFilter = new TextFilter();
+  bankCode: TextFilter = new TextFilter();
+  accountOwner: TextFilter = new TextFilter();
+  accountName: TextFilter = new TextFilter();
+  accountNumber: TextFilter = new TextFilter();
+  description: TextFilter = new TextFilter();
 
-    constructor(bankAccountSearchEntity?: any) {
-        super(bankAccountSearchEntity);
-    }
+  constructor(bankAccountSearchEntity?: any) {
+    super(bankAccountSearchEntity);
+  }
 }

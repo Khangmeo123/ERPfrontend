@@ -9,33 +9,40 @@
       </span>
     </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>
-      <div class="btn-group" dropdown>
-        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-          aria-controls="dropdown-basic">
-          {{'general.button.import' | translate}}<span class="caret"></span>
-        </button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a></li>
-          <li class="divider dropdown-divider"></li>
-          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.download_example' | translate}}</a>
-          </li>
-        </ul>
-      </div>
-      <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-add" (click)="clearSearch(table)">
+        {{'general.button.clear' | translate}}
+      </button>
     </div>
+    <!--    <div class="page-actions">-->
+    <!--      <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>-->
+    <!--      <div class="btn-group" dropdown>-->
+    <!--        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"-->
+    <!--          aria-controls="dropdown-basic">-->
+    <!--          {{'general.button.import' | translate}}<span class="caret"></span>-->
+    <!--        </button>-->
+    <!--        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">-->
+    <!--          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a></li>-->
+    <!--          <li class="divider dropdown-divider"></li>-->
+    <!--          <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.download_example' | translate}}</a>-->
+    <!--          </li>-->
+    <!--        </ul>-->
+    <!--      </div>-->
+    <!--      <button class="btn btn-export">{{'general.button.export' | translate}}</button>-->
+    <!--    </div>-->
   </div>
   <div class="page-body mt-4">
-    <div class="page-section d-flex align-items-center">
-      <div class="flex-shrink-1 mr-2">
-        {{'general.sob' | translate}}:
-      </div>
-      <div>
-        <app-single-select></app-single-select>
-      </div>
+    <div class="page-section form d-flex align-items-center">
+      <span class="sob mr-2">{{'general.sob' | translate}}: </span>
+      <app-single-select [list]="sobList"
+                         key="name"
+                         (selectionChange)="changeSob($event)"
+                         [selectedList]="selectedSobList"
+                         (listOpen)="getSobList()"></app-single-select>
     </div>
     <div class="page-section mt-2">
-      <p-table [value]="[]">
+      <p-treeTable [value]="coaList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
             <th>
@@ -53,83 +60,107 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="coaSE.accountNumber"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="coaSearchEntity.accountCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="coaSE.accountName"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="coaSearchEntity.accountName"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="coaSE.propertyId"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="coaSearchEntity.characteristicValue"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="coaSE.description"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="coaSearchEntity.accountDescription"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-      </p-table>
+      </p-treeTable>
     </div>
   </div>
 </div>
-<p-dialog modal="true" [(visible)]="modalState">
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
+          [style]="{width: '700px'}">
   <p-header>
     {{'bank_account.bank_accounts.add' | translate}}
   </p-header>
-  <form class="container">
+  <div class="container" [formGroup]="coaForm">
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="account-code">
           {{'coa.account_number' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-single-select></app-single-select>
+        <div class="div-form">
+          <input type="text" class="form-control" id="account-code" name="accountCode" formControlName="accountCode">
+          <app-error data-qe-id="dialog-error-account-code"
+                     *ngIf="(coaForm.controls.accountCode?.errors && coaForm.controls.accountCode?.touched) || !!coaForm.controls.error.get('accountCode')?.value"
+                     [formGroup]="coaForm" [property]="'accountCode'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="account-name">
           {{'coa.account_name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <div class="div-form">
+          <input type="text" class="form-control" id="account-name" name="accountName" formControlName="accountName">
+          <app-error data-qe-id="dialog-error-account-name"
+                     *ngIf="(coaForm.controls.accountName?.errors && coaForm.controls.accountName?.touched) || !!coaForm.controls.error.get('accountName')?.value"
+                     [formGroup]="coaForm" [property]="'accountName'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="account-characteristic">
           {{'coa.account_status' | translate}}
-          <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input type="hidden" #characteristicId id="account-characteristic" formControlName="characteristicId">
+        <app-simple-select (listOpen)="getCharacteristicList()"
+                           [list]="characteristicList"
+                           (selectionChange)="characteristicId.value = $event"
+                           key="name"
+        ></app-simple-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="parent-account">
           {{'coa.super_account' | translate}}
         </label>
-        <input type="text" class="form-control">
+        <input type="hidden" formControlName="parentId">
+        <app-single-select (listOpen)="getParentAccountList()"
+                           [list]="parentAccountList"
+                           [selectedList]="selectedParentAccountList"
+                           id="parent-account"></app-single-select>
       </div>
       <div class="form-group col-12">
-        <label>
+        <label for="account-description">
           {{'coa.description' | translate}}
         </label>
-        <textarea class="form-control" rows="3"></textarea>
+        <textarea id="account-description" formControlName="accountDescription" class="form-control"
+                  rows="3"></textarea>
       </div>
     </div>
-  </form>
+  </div>
   <p-footer>
-    <ng-template *ngIf="isAdd; else notAdd">
-      <button class="btn btn-add mr-2">
-        {{'general.button.add' | translate}}
-      </button>
-      <button class="btn btn-cancel">
-        {{'general.button.cancel' | translate}}
-      </button>
-    </ng-template>
-    <ng-template #notAdd>
-      <button class="btn btn-add mr-2">
-        {{'general.button.save' | translate}}
-      </button>
-      <button class="btn btn-cancel mr-2">
-        {{'general.button.cancel' | translate}}
-      </button>
-      <button class="btn btn-delete">
-        {{'general.button.delete' | translate}}
-      </button>
-    </ng-template>
+    <div class="d-flex">
+      <button class="btn btn-delete"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              placement="bottom"
+              (confirm)="onClickDelete()"
+              (cancel)="onClickCancel()"
+              *ngIf="coaForm.value?.isDeleted">
+        {{ 'general.button.delete' | translate}}</button>
+      <div class="flex-grow-1 justify-content-end d-flex">
+        <button class="btn btn-cancel"
+                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+        <button class="btn btn-save" (click)="onClickSave()">
+          {{ 'general.button.save' | translate}}</button>
+      </div>
+    </div>
   </p-footer>
 </p-dialog>

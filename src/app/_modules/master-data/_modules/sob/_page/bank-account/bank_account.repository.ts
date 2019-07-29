@@ -4,10 +4,13 @@ import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { CurrencyEntity } from '../../../../_backend/currency/currency.entity';
-import { CurrencySearchEntity } from '../../../../_backend/currency/currency.searchentity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { SobEntity } from '../../../../_backend/sob/sob.entity';
+import { Entities } from '../../../../../../_helpers/entity';
 import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-account.searchentity';
 import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
+import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
 
 @Injectable({
   providedIn: 'root',
@@ -15,7 +18,23 @@ import { BankAccountEntity } from '../../../../_backend/bank-account/bank-accoun
 export class BankAccountRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/setOfBook';
+    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/bank-account';
+  }
+
+  getCoaList(coaSearchEntity: ChartOfAccountSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account', JSON.stringify(coaSearchEntity),
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => {
+        const {
+          ids,
+          exceptIds,
+        } = r.body;
+        return {
+          ids: ids.map((item) => new CoaEntity(item)),
+          exceptIds: exceptIds.map((item) => new CoaEntity(item)),
+        };
+      }),
+    );
   }
 
   getList(bankAccountSearchEntity: BankAccountSearchEntity): Observable<BankAccountEntity[]> {
@@ -29,21 +48,19 @@ export class BankAccountRepository extends Repository {
     );
   }
 
-  getCurrencyList(currencySearchEntity: CurrencySearchEntity): Observable<CurrencyEntity[]> {
-    return this.http.post<CurrencyEntity[]>(this.apiUrl + '/currency/list', JSON.stringify(currencySearchEntity),
+  getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
-        return r.body.map((item) => {
-          return new CurrencyEntity(item);
-        });
+        const {
+          ids,
+          exceptIds,
+        } = r.body;
+        return {
+          ids: ids.map((item) => new SobEntity(item)),
+          exceptIds: exceptIds.map((item) => new SobEntity(item)),
+        };
       }),
-    );
-  }
-
-  countCurrency(currencySearchEntity: CurrencySearchEntity) {
-    return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(currencySearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => r.body),
     );
   }
 
