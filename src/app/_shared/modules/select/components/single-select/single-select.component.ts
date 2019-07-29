@@ -61,6 +61,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   set selectedText(value) {
 
   }
+
   @Input() valueSelector = (node) => node.id;
 
   ngOnInit() {
@@ -89,8 +90,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
     if (changes.list || changes.selectedList) {
       this.isLoading = false;
     }
-    if (changes.initValue) {
-      if (changes.initValue.currentValue.length === 0) {
+    if (changes.initialValue) {
+      if (changes.initialValue.currentValue.length === 0) {
         this.selectedList = null;
         this.selectedText = '';
       }

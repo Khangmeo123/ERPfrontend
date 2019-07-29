@@ -14,9 +14,9 @@ import { getListDirection } from '../../helpers';
 export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
   @Input() list = [];
 
-  @Input() initValue = null;
+  @Input() initialValue = null;
 
-  @Input() selectedItem = null;
+  selectedItem = null;
 
   @Input() disabled = false;
 
@@ -43,7 +43,7 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
     if (this.selectedItem) {
       return this.selectedItem[this.key];
     }
-    return this.initValue;
+    return this.initialValue;
   }
 
   set selectedText(value) {
@@ -101,8 +101,8 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.initValue) {
-      if (changes.initValue.currentValue.length === 0) {
+    if (changes.initialValue) {
+      if (changes.initialValue.currentValue.length === 0) {
         this.selectedItem = null;
         this.selectedText = '';
       }
