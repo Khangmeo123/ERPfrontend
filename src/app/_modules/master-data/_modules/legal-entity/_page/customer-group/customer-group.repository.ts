@@ -2,21 +2,22 @@ import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { CustomerGroupEntity } from 'src/app/_modules/master-data/_backend/customer-group/customer-group.entity';
 import { CustomerGroupSearchEntity } from 'src/app/_modules/master-data/_backend/customer-group/customer-group.searchentity';
-import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { CustomerGroupEntity } from 'src/app/_modules/master-data/_backend/customer-group/customer-group.entity';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import { map } from 'rxjs/operators';
 import { Entities } from 'src/app/_helpers/entity';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
 import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
 
+
 @Injectable({
     providedIn: 'root',
 })
 
-export class ListcustomerRepository extends Repository {
+export class CustomerGroupRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
         this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/customer-group';

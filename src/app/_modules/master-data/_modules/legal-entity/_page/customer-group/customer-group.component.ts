@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {TextFilter} from '../../../../../../_shared/models/filters/TextFilter';
 import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
 import {Router} from '@angular/router';
+import { BookmarkService } from 'src/app/_services';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-customer-group',
@@ -9,7 +11,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./customer-group.component.scss']
 })
 export class CustomerGroupComponent implements OnInit {
-
+  pageTitle: string = translate('customerGroup.header.title');
   isSavedBookMark = false;
 
   isSaveBookMark: boolean = false;
@@ -29,34 +31,12 @@ export class CustomerGroupComponent implements OnInit {
   public cancelClicked: boolean = false;
   isAddGroup: boolean = false
 
-  tmpCustomer = [
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-    },
-    {
-      code: 1,
-      name: 'Nguyễn Thị Hương',
-    },
-  ]
-
-  constructor(private router: Router) {
+  constructor(
+    private router: Router,
+    private bookmarkService: BookmarkService,) {
   }
 
   ngOnInit() {
-    console.log('tmpCustomer',this.tmpCustomer)
   }
 
   onClickSaveBookMark(event) {
@@ -90,4 +70,13 @@ export class CustomerGroupComponent implements OnInit {
 
   }
 
+
+  bookMark() {
+    this.isSaveBookMark = !this.isSaveBookMark;
+    if (this.isSaveBookMark) {
+      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+    } else {
+      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+    }
+  }
 }
