@@ -41,6 +41,7 @@
     "moment": "^2.24.0",
     "ng-click-outside": "^4.0.0",
     "ngx-bootstrap": "^5.0.0",
+    "ngx-cookie-service": "^2.2.0",
     "ngx-toastr": "^10.0.4",
     "pretty-checkbox": "^3.0.3",
     "primeicons": "^1.0.0",
