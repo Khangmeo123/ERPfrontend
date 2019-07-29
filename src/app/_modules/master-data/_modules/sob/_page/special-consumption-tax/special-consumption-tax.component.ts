@@ -80,6 +80,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
 
     const specialConsumptionTaxCountSub = this.specialConsumptionTaxService.specialConsumptionTaxCount.subscribe((count) => {
       this.specialConsumptionTaxCount = count;
+      this.pagination.totalItems = count;
     });
 
     const uomListSub = this.specialConsumptionTaxService.uomList.subscribe((entities: Entities) => {

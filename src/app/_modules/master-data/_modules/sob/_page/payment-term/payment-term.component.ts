@@ -69,6 +69,7 @@ export class PaymentTermComponent implements OnInit {
 
     const paymentTermCountSub = this.paymentTermService.paymentTermCount.subscribe((count) => {
       this.paymentTermCount = count;
+      this.pagination.totalItems = count;
     });
 
     const paymentTermFormSub = this.paymentTermService.paymentTermForm.subscribe((form: FormGroup) => {

@@ -1,15 +1,19 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { CostCenterEntity } from '../../../../_backend/cost-center/cost-center.entity';
+import { Entities } from 'src/app/_helpers/entity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { CostCenterRepository } from './cost-center.repository';
-import { CostCenterForm } from '../../../../_backend/cost-center/cost-center.form';
+import { CostCenterEntity } from '../../../../_backend/cost-center/cost-center.entity';
 import { CostCenterSearchEntity } from '../../../../_backend/cost-center/cost-center.searchentity';
+import { CostCenterForm } from '../../../../_backend/cost-center/cost-center.form';
 
 export class CostCenterService {
   public costCenterList: BehaviorSubject<CostCenterEntity[]>;
   public costCenterCount: BehaviorSubject<number>;
   public costCenterForm: BehaviorSubject<FormGroup>;
+
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   constructor(private fb: FormBuilder, private costCenterRepository: CostCenterRepository, private toastrService: ToastrService) {
     this.costCenterCount = new BehaviorSubject(0);
@@ -31,7 +35,20 @@ export class CostCenterService {
     });
   }
 
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.costCenterRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        this.sobList.next(list);
+      });
+  }
+
   add() {
+    this.costCenterForm.next(this.fb.group(
+      new CostCenterForm(),
+    ));
+  }
+
+  cancel() {
     this.costCenterForm.next(this.fb.group(
       new CostCenterForm(),
     ));

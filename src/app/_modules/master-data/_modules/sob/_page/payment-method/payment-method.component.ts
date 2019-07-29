@@ -69,6 +69,7 @@ export class PaymentMethodComponent implements OnInit {
 
     const paymentMethodCountSub = this.paymentMethodService.paymentMethodCount.subscribe((count) => {
       this.paymentMethodCount = count;
+      this.pagination.totalItems = count;
     });
 
     const paymentMethodFormSub = this.paymentMethodService.paymentMethodForm.subscribe((form: FormGroup) => {
