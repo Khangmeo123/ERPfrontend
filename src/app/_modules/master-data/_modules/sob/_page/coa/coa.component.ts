@@ -10,7 +10,6 @@ import { CoaService } from './coa.service';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { ToastrService } from 'ngx-toastr';
-import { buildTree } from '../../../../../../_shared/modules/select/helpers';
 import { CharacteristicEntity } from '../../../../_backend/characteristic/characteristic.entity';
 
 @Component({
@@ -76,8 +75,8 @@ export class CoaComponent implements OnInit {
       this.selectedSobList = list.ids;
     });
 
-    const coaSub = this.coaService.coaList.subscribe((list) => {
-      this.coaList = buildTree(list);
+    const coaSub = this.coaService.coaList.subscribe((list: any[]) => {
+      this.coaList = list;
     });
 
     const parentAccountSub = this.coaService.parentAccountList.subscribe((list) => {

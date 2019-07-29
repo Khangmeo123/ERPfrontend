@@ -41,8 +41,14 @@
                          (listOpen)="getSobList()"></app-single-select>
     </div>
     <div class="page-section mt-2">
-      <p-treeTable [value]="coaList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
+      <p-treeTable [value]="coaList"
+                   #table
+                   [customSort]="true"
+                   [lazy]="true"
+                   (onLazyLoad)="sort($event)"
+                   [scrollable]="true"
+                   scrollHeight="500px"
+                   [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
             <th>
@@ -58,7 +64,7 @@
               {{'coa.account_description' | translate}}
             </th>
           </tr>
-          <tr>
+          <tr class="th-filter">
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()"
                                     [filter]="coaSearchEntity.accountCode"></app-advanced-filters>
@@ -75,6 +81,16 @@
               <app-advanced-filters (changeFilter)="getList()"
                                     [filter]="coaSearchEntity.accountDescription"></app-advanced-filters>
             </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-rowNode let-rowData="rowData">
+          <tr [ttRow]="rowNode">
+            <td>
+              <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
+            </td>
+            <td>
+              {{rowNode.accountName}}
+            </td>
           </tr>
         </ng-template>
       </p-treeTable>
