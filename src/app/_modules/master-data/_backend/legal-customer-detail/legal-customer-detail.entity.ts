@@ -2,7 +2,7 @@ import { Entity } from 'src/app/_helpers/entity';
 import { InfoContactEntity } from '../info-contact/info-contact.entity';
 import { BankAccountEntity } from '../bank-account/bank-account.entity';
 
-export class LegalCustomerDetailEntity extends Entity {
+export class CustomerDetailOfLegalEntity extends Entity {
     id: string;
     code: string;
     name: string;
@@ -17,10 +17,10 @@ export class LegalCustomerDetailEntity extends Entity {
     staffInChargeName: string;
     businessGroupId: string;
 
-    supplierContacts: InfoContactEntity[];
-    supplierBankAccounts: BankAccountEntity[];
+    customerContacts: InfoContactEntity[];
+    customerBankAccounts: BankAccountEntity[];
 
-    constructor(supplierEntity?: any) {
-        super(supplierEntity);
+    constructor(customerEntity?: any) {
+        super(customerEntity);
     }
 }

@@ -23,8 +23,10 @@
 				"title": ""
 			},
 			"table": {
-				"asset_id": "",
+				"asset_code": "",
 				"asset_name": "",
+				"asset_status": "",
+				"asset_type": "",
 				"status": "",
 				"type": ""
 			}
@@ -125,43 +127,35 @@
 		"title": ""
 	},
 	"customer": {
-		"address": "",
-		"bank_account": {
-			"account_number": "",
-			"account_owner": "",
-			"bank_address": "",
-			"bank_branch": "",
-			"bank_name": "",
-			"id": "",
-			"province": ""
+		"bankAccount": {
+			"bank_address": ""
 		},
-		"bank_accounts": {
-			"add": "",
-			"title": ""
-		},
-		"code": "",
-		"contacts": {
-			"add": "",
-			"address": "",
-			"city": "",
-			"email": "",
-			"id": "",
-			"phone_number": "",
-			"recipient": "",
-			"title": ""
-		},
-		"details": {
-			"title": ""
+		"detail": {
+			"content": {
+				"code": "",
+				"name": "",
+				"note": "",
+				"status": "",
+				"taxNumber": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"tab": {
+				"title1": ""
+			}
 		},
 		"list": {
-			"title": ""
-		},
-		"more_details": "",
-		"name": "",
-		"phoneNumber": "",
-		"status": "",
-		"taxCode": "",
-		"tax_code": ""
+			"content": {
+				"code": "",
+				"name": "",
+				"status": "",
+				"taxNumber": ""
+			},
+			"header": {
+				"title": ""
+			}
+		}
 	},
 	"customerGroup": {
 		"add": "",
@@ -187,16 +181,20 @@
 		"name": "",
 		"sob": ""
 	},
-	"customer_group": "",
-	"customers": {
-		"details": {
-			"general": ""
-		}
+	"customer_group": {
+		"customer": {
+			"address": "",
+			"code": "",
+			"name": "",
+			"phone": "",
+			"tax_code": ""
+		},
+		"name": "",
+		"title": ""
 	},
 	"datePicker": {
 		"placeHolder": ""
 	},
-	"debt_load": "",
 	"department": {
 		"add": "",
 		"asset": {
@@ -247,6 +245,48 @@
 	},
 	"departments": {
 		"title": ""
+	},
+	"detailCustomerOfLegal": {
+		"bankAccount": {
+			"account_number": "",
+			"account_owner": "",
+			"add": "",
+			"bank_address": "",
+			"bank_division": "",
+			"bank_name": "",
+			"code": "",
+			"province": "",
+			"title": ""
+		},
+		"bankAccounts": {
+			"add": ""
+		},
+		"code": "",
+		"contacts": {
+			"add": "",
+			"address": "",
+			"city": "",
+			"code": "",
+			"email": "",
+			"phoneNumber": "",
+			"province": "",
+			"recipient": "",
+			"title": ""
+		},
+		"debt_load": "",
+		"detail": {
+			"title": ""
+		},
+		"due_in_days": "",
+		"more_details": "",
+		"name": "",
+		"payment_terms": "",
+		"pic": "",
+		"status": "",
+		"tab_1": {
+			"general": ""
+		},
+		"tax_code": ""
 	},
 	"detailEmployeeGroup": {
 		"bank_account": {
@@ -328,6 +368,7 @@
 			"code": "",
 			"email": "",
 			"phone_number": "",
+			"province": "",
 			"recipient": "",
 			"title": ""
 		},
@@ -344,86 +385,6 @@
 		"supplier_group": "",
 		"tab_1": {
 			"general": ""
-		},
-		"tax_code": ""
-	},
-	"detail_customer_group": {
-		"bank_account": {
-			"account_number": "",
-			"account_owner": "",
-			"bank_address": "",
-			"bank_division": "",
-			"bank_name": "",
-			"code": "",
-			"province": ""
-		},
-		"bank_accounts": {
-			"add": "",
-			"title": ""
-		},
-		"contacts": {
-			"add": "",
-			"address": "",
-			"city": "",
-			"code": "",
-			"email": "",
-			"phone_number": "",
-			"recipient": ""
-		},
-		"customer_group": "",
-		"debt_load": "",
-		"detail": {
-			"title": ""
-		},
-		"due_in_days": "",
-		"payment_terms": "",
-		"pic": "",
-		"tab_1": {
-			"general": ""
-		}
-	},
-	"detail_customer_of_legal_entity": {
-		"another_note": "",
-		"bank_accounts": {
-			"account_name": "",
-			"account_number": "",
-			"add": "",
-			"address": "",
-			"branch": "",
-			"city": "",
-			"index": "",
-			"name": ""
-		},
-		"bank_add_account ": "",
-		"code": "",
-		"contact": {
-			"add": "",
-			"address": "",
-			"city": "",
-			"email": "",
-			"index": "",
-			"name": "",
-			"phone": ""
-		},
-		"contact_add ": "",
-		"content": {
-			"detail": {
-				"customer_group": ""
-			}
-		},
-		"debt_load": "",
-		"due_in_date": "",
-		"header": {
-			"title": ""
-		},
-		"name": "",
-		"payment_term": "",
-		"pic_name": "",
-		"status": "",
-		"tab": {
-			"title_1": "",
-			"title_2": "",
-			"title_3": ""
 		},
 		"tax_code": ""
 	},
@@ -489,49 +450,6 @@
 			"unit": ""
 		}
 	},
-	"detail_supplier_of_entity": {
-		"code": "",
-		"debt_load": "",
-		"due_in_date": "",
-		"modal": {
-			"title": ""
-		},
-		"modal1": {
-			"title": ""
-		},
-		"name": "",
-		"note": "",
-		"payment_term": "",
-		"pic": "",
-		"status": "",
-		"supplier_group": "",
-		"tab": {
-			"title_1": "",
-			"title_2": "",
-			"title_3": ""
-		},
-		"table": {
-			"add_item": "",
-			"address": "",
-			"city": "",
-			"contact": "",
-			"email": "",
-			"index": "",
-			"phone": ""
-		},
-		"table1": {
-			"account_name": "",
-			"account_number": "",
-			"add_item": "",
-			"address_bank": "",
-			"bank_name": "",
-			"city": "",
-			"division": "",
-			"index": ""
-		},
-		"tax_code": "",
-		"title": ""
-	},
 	"division": {
 		"address": "",
 		"code": "",
@@ -548,11 +466,9 @@
 			"name": ""
 		}
 	},
-	"due_in_days": "",
 	"employee": {
 		"content": {
 			"table": {
-				"account_number": "",
 				"bassic_salary": "",
 				"birthday": "",
 				"coefficients_salary": "",
@@ -565,26 +481,52 @@
 				},
 				"id_emp": "",
 				"issue_by": "",
+				"salaryInsurance": "",
 				"salary_agreement": "",
 				"sex": "",
-				"status": "",
 				"tax_code": ""
 			}
 		},
 		"detail": {
+			"content": {
+				"birthday": "",
+				"code": "",
+				"dependents": "",
+				"gender": "",
+				"identityDate": "",
+				"identityNumber": "",
+				"identityPlace": "",
+				"jobLevel": "",
+				"jobTitle": "",
+				"name": "",
+				"salary": "",
+				"salaryCoefficient": "",
+				"status": "",
+				"taxNumber": ""
+			},
+			"header": {
+				"title": ""
+			},
 			"level": "",
 			"number_dependents": "",
 			"position": "",
 			"status": "",
 			"tab": {
+				"title1": "",
 				"title_1": "",
 				"title_2": "",
 				"title_3": ""
-			},
-			"title": ""
+			}
 		},
-		"header": {
-			"title": ""
+		"list": {
+			"content": {
+				"birthday": "",
+				"code": "",
+				"gender": "",
+				"identityNumber": "",
+				"name": "",
+				"status": ""
+			}
 		}
 	},
 	"employeeGroup": {
@@ -598,6 +540,13 @@
 			"title": ""
 		},
 		"name": ""
+	},
+	"employeeList": {
+		"list": {
+			"header": {
+				"title": ""
+			}
+		}
 	},
 	"employeeOfLegalEntity": {
 		"code": "",
@@ -674,74 +623,10 @@
 			"title": ""
 		}
 	},
-	"jobLevel": {
-		"header": {
-			"title": ""
-		}
-	},
-	"jobTitle": {
-		"header": {
-			"title": ""
-		}
-	},
-	"job_level": {
-		"job_level_code": "",
-		"job_level_description": "",
-		"job_level_jobTitle": "",
-		"job_level_level": "",
-		"job_level_name": "",
-		"modal": {
-			"title": ""
-		}
-	},
-	"job_title": {
-		"job_title_code": "",
-		"job_title_description": "",
-		"job_title_name": "",
-		"modal": {
-			"title": ""
-		}
-	},
-	"legal_entity": {
-		"add": "",
-		"code": "",
-		"header": {
-			"title": ""
-		},
-		"name": ""
-	},
-	"pagination": {
-		"entries": "",
-		"show": ""
-	},
-	"payment_method": {
-		"code": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"payment_method_name": ""
-	},
-	"payment_term": {
-		"code": "",
-		"discount_period": "",
-		"discount_rate": "",
-		"due_in_date": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": ""
-	},
-	"payment_terms": "",
-	"pic": "",
 	"item": {
 		"content": {
 			"detail": {
+				"codeFromMarket": "",
 				"item_id_ncc": "",
 				"item_id_tt": "",
 				"item_length": "",
@@ -769,7 +654,6 @@
 			},
 			"table": {
 				"item_cost": "",
-				"item_description": "",
 				"item_height": "",
 				"item_id": "",
 				"item_name": "",
@@ -778,13 +662,53 @@
 			}
 		},
 		"detail": {
+			"content": {
+				"0": {
+					"impt": ""
+				},
+				"characteristic": "",
+				"code": "",
+				"codeFromSupplier": "",
+				"description": "",
+				"ext": "",
+				"height": "",
+				"imt": "",
+				"length": "",
+				"name": "",
+				"nrt": "",
+				"primaryPrice": "",
+				"sct": "",
+				"status": "",
+				"tab": {
+					"emt": ""
+				},
+				"uom": "",
+				"vat": "",
+				"weight": "",
+				"width": ""
+			},
+			"header": {
+				"title": ""
+			},
 			"tab": {
+				"title1": "",
+				"title2": "",
 				"title_1": "",
 				"title_2": ""
 			}
 		},
-		"header": {
-			"title": ""
+		"list": {
+			"content": {
+				"code": "",
+				"description": "",
+				"name": "",
+				"primaryPrice": "",
+				"status": "",
+				"uom": ""
+			},
+			"header": {
+				"title": ""
+			}
 		}
 	},
 	"itemGroup": {
@@ -792,23 +716,84 @@
 		"header": {
 			"title": ""
 		},
-		"name": "",
 		"item": {
 			"code": "",
 			"name": ""
-		}
+		},
+		"name": ""
 	},
 	"itemOfLegalEntity": {
 		"code": "",
 		"header": {
 			"title": ""
 		},
-		"name": "",
 		"item": {
 			"code": "",
 			"name": ""
 		},
+		"name": "",
 		"sob": ""
+	},
+	"jobLevel": {
+		"header": {
+			"title": ""
+		}
+	},
+	"jobTitle": {
+		"header": {
+			"title": ""
+		}
+	},
+	"job_level": {
+		"job_level_code": "",
+		"job_level_description": "",
+		"job_level_name": "",
+		"modal": {
+			"title": ""
+		}
+	},
+	"job_title": {
+		"job_title_code": "",
+		"job_title_description": "",
+		"job_title_name": "",
+		"modal": {
+			"title": ""
+		}
+	},
+	"legal_entity": {
+		"add": "",
+		"code": "",
+		"name": ""
+	},
+	"noData": {
+		"helper": ""
+	},
+	"pagination": {
+		"entries": "",
+		"show": ""
+	},
+	"payment_method": {
+		"code": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"payment_method_name": ""
+	},
+	"payment_term": {
+		"code": "",
+		"discount_period": "",
+		"discount_rate": "",
+		"due_in_date": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": ""
 	},
 	"resource_tax": {
 		"header": {
@@ -850,10 +835,10 @@
 		"description": "",
 		"discount": "",
 		"from_date": "",
+		"item_group": "",
 		"modal": {
 			"title": ""
 		},
-		"item_group": "",
 		"title": "",
 		"to_date": ""
 	},
@@ -862,10 +847,10 @@
 		"description": "",
 		"discount": "",
 		"from_date": "",
+		"item_group": "",
 		"modal": {
 			"title": ""
 		},
-		"item_group": "",
 		"title": "",
 		"to_date": ""
 	},
@@ -873,27 +858,31 @@
 		"bank_account": {
 			"bank_address": ""
 		},
-		"content": {
-			"table": {
-				"supplier_address": "",
-				"supplier_id": "",
-				"supplier_name": "",
-				"supplier_phone": "",
-				"supplier_status": "",
-				"supplier_tax_code": ""
+		"detail": {
+			"content": {
+				"code": "",
+				"name": "",
+				"note": "",
+				"status": "",
+				"taxNumber": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"tab": {
+				"title1": ""
 			}
 		},
-		"detail": {
-			"note": "",
-			"status": "",
-			"supplier_tax_code": "",
-			"tab": {
-				"title_1": ""
+		"list": {
+			"content": {
+				"code": "",
+				"name": "",
+				"status": "",
+				"taxNumber": ""
 			},
-			"title": ""
-		},
-		"header": {
-			"title": ""
+			"header": {
+				"title": ""
+			}
 		}
 	},
 	"supplierGroup": {

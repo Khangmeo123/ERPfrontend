@@ -69,7 +69,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   legalEntiyId: string = '';
   index: number = -1;
 
-  editingItem: FormControl = null;
+  routeLink: any;
 
   valueSelector = node => node;
 
@@ -136,6 +136,13 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    let arr = [];
+    arr = this.router.url.split('/');
+    if (arr[3] === 'supplier-group') {
+      this.routeLink = '/master-data/legal-entity/supplier-group/';
+    } else {
+      this.routeLink = '/master-data/legal-entity/supplier-of-legal-entity/'
+    }
   }
 
   ngOnDestroy() {
@@ -249,7 +256,6 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     console.log(index);
     this.index = index;
     this.contactsModal = true;
-    this.editingItem = contact;
     this.supplierDetailService.editContact(contact);
   }
 
@@ -283,7 +289,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
       this.generalService.validateAllFormFields(this.supplierDetailForm);
     } else {
       this.supplierDetailService.save(this.supplierDetailForm).then(res => {
-        this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity']);
+        this.router.navigate([this.routeLink]);
       });
     }
   }
@@ -321,7 +327,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity']);
+    this.router.navigate([this.routeLink]);
   }
 
 }
