@@ -1,12 +1,12 @@
 <div class="cropper" role="button" (click)="file.click()">
   <div class="d-flex">
-    <div class="result flex-grow-1">
+    <div class="result flex-grow-1" [ngClass]="{'disabled': disabled}">
       <img [src]="result" alt="result" *ngIf="result">
       <div class="cropper-overlay" pTooltip="{{'cropper.browseImage' | translate}}" *ngIf="!result">
       </div>
     </div>
   </div>
-  <input type="file" #file (change)="onSelectFile($event)" accept="image/*">
+  <input type="file" #file (change)="onSelectFile($event)" accept="image/*" [disabled]="disabled">
 </div>
 
 <ng-template [ngIf]="selectedFile">

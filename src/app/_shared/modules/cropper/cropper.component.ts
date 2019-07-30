@@ -12,7 +12,7 @@ import { FormControl } from '@angular/forms';
 })
 export class CropperComponent implements OnInit {
   @Input() control: FormControl = new FormControl();
-
+  @Input() disabled: boolean = false;
   display = false;
 
   result = '';
