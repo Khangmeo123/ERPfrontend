@@ -9,8 +9,8 @@
             </span>
         </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button class="btn btn-add" (click)="clearSearch(table)">
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -20,6 +20,7 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select [list]="sobList"
+                        data-qe-id="sobList"
                          [selectedList]="selectedSobList"
                          key="name"
                          (selectionChange)="changeSob($event)"
@@ -33,39 +34,39 @@
             <th pResizableColumn [pSortableColumn]="'code'"
                 data-qe-id="table-thead-code"> {{ 'payment_term.code' | translate}}</th>
             <th pResizableColumn [pSortableColumn]="'name'"
-                data-qe-id="table-thead-code"> {{ 'payment_term.name' | translate}} </th>
+                data-qe-id="table-thead-name"> {{ 'payment_term.name' | translate}} </th>
             <th pResizableColumn [pSortableColumn]="'dueInDate'"
-                data-qe-id="table-thead-code"> {{ 'payment_term.due_in_date' | translate}} </th>
+                data-qe-id="table-thead-dueInDate"> {{ 'payment_term.due_in_date' | translate}} </th>
             <th pResizableColumn [pSortableColumn]="'discountPeriod'"
-                data-qe-id="table-thead-code"> {{ 'payment_term.discount_period' | translate}} </th>
+                data-qe-id="table-thead-discount-period"> {{ 'payment_term.discount_period' | translate}} </th>
             <th pResizableColumn [pSortableColumn]="'discountRate'"
-                data-qe-id="table-thead-code"> {{ 'payment_term.discount_rate' | translate}} </th>
+                data-qe-id="table-thead-discount-rate"> {{ 'payment_term.discount_rate' | translate}} </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="term-filter-code" (changeFilter)="getList()"
                                     [filter]="paymentTermSearchEntity.code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="term-filter-name" (changeFilter)="getList()"
                                     [filter]="paymentTermSearchEntity.name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="term-filter-dueInDate" (changeFilter)="getList()"
                                     [filter]="paymentTermSearchEntity.dueInDate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="term-filter-discount-period" (changeFilter)="getList()"
                                     [filter]="paymentTermSearchEntity.discountPeriod"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="term-filter-discount-rate" (changeFilter)="getList()"
                                     [filter]="paymentTermSearchEntity.discountRate"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-paymentTerm>
-          <tr>
+        <ng-template pTemplate="body" let-paymentTerm  let-index="index">
+          <tr (dblclick)="edit(paymentTerm.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{paymentTerm.code}} </td>
             <td> {{paymentTerm.name}} </td>
             <td> {{paymentTerm.dueInDate}} </td>
@@ -92,14 +93,14 @@
         <div class="form-group">
           <label for="payment-term-code">{{ 'payment_term.code' | translate}}<span
             class="text-danger ml-1">*</span></label>
-          <input type="text" class="form-control" id="payment-term-code"/>
+          <input type="text" class="form-control" data-qe-id="dialog-code"/>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-name">{{ 'payment_term.name' | translate}}<span
             class="text-danger ml-1">*</span></label>
-          <input type="text" class="form-control" id="payment-term-name"/>
+          <input type="text" class="form-control" data-qe-id="dialog-name"/>
         </div>
       </div>
     </div>
@@ -107,13 +108,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-code">{{ 'payment_term.due_in_date' | translate}}</label>
-          <input type="text" class="form-control"/>
+          <input type="text" data-qe-id="dialog-dueInDate" class="form-control"/>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-discount-period">{{ 'payment_term.discount_period' | translate}}</label>
-          <input type="text" class="form-control" id="payment-term-discount-period"/>
+          <input type="text" class="form-control" data-qe-id="dialog-term-discount-period"/>
         </div>
       </div>
     </div>
@@ -121,7 +122,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-discount-rate">{{ 'payment_term.discount_rate' | translate}}</label>
-          <input type="text" class="form-control" id="payment-term-discount-rate"/>
+          <input type="text" class="form-control" data-qe-id="dialog-term-discount-rate"/>
         </div>
       </div>
     </div>
@@ -129,6 +130,7 @@
   <p-footer>
     <div class="d-flex">
       <button class="btn btn-delete"
+              data-qe-id="footer-button-delete"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
@@ -138,9 +140,9 @@
               *ngIf="paymentTermForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel"
+        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
                 (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button class="btn btn-save" (click)="onClickSave()">
+        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

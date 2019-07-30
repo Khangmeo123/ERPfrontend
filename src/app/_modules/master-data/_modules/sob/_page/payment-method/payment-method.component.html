@@ -9,8 +9,8 @@
             </span>
         </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button class="btn btn-add" (click)="clearSearch(table)">
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -20,6 +20,7 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select [list]="sobList"
+                          data-qe-id="sobList"
                          key="name"
                          (selectionChange)="changeSob($event)"
                          [selectedList]="selectedSobList"
@@ -39,11 +40,11 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="payment-method-filter-code" (changeFilter)="getList()"
                                     [filter]="paymentMethodSearchEntity.code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="payment-method-filter-name" (changeFilter)="getList()"
                                     [filter]="paymentMethodSearchEntity.name"></app-advanced-filters>
             </th>
           </tr>
@@ -74,7 +75,7 @@
           <label for="payment-method-code">{{ 'payment_method.code' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" id="payment-method-code" formControlName="code"/>
+            <input type="text" class="form-control" data-qe-id="dialog-code" formControlName="code"/>
             <app-error data-qe-id="dialog-error-code"
                        *ngIf="(paymentMethodForm.controls.code?.errors && paymentMethodForm.controls.code?.touched) || !!paymentMethodForm.controls.errors.get('code')?.value"
                        [formGroup]="paymentMethodForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -87,7 +88,7 @@
           <label for="payment-method-name">{{ 'payment_method.payment_method_name' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" id="payment-method-name" formControlName="name"/>
+            <input type="text" class="form-control" data-qe-id="dialog-name" formControlName="name"/>
             <app-error data-qe-id="dialog-error-name"
                        *ngIf="(paymentMethodForm.controls.code?.errors && paymentMethodForm.controls.name?.touched) || !!paymentMethodForm.controls.errors.get('name')?.value"
                        [formGroup]="paymentMethodForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -100,6 +101,7 @@
   <p-footer>
     <div class="d-flex">
       <button class="btn btn-delete"
+              data-qe-id="footer-button-delete"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
@@ -109,9 +111,9 @@
               *ngIf="paymentMethodForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel"
+        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
                 (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button class="btn btn-save" (click)="onClickSave()">
+        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

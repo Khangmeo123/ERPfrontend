@@ -79,7 +79,7 @@
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-bankAccount let-index="index">
-        <tr (dblclick)="edit(sob.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+        <tr (dblclick)="edit(bankAccount.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
           <td>
             {{bankAccount.accountNumber}}
           </td>
