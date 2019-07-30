@@ -175,7 +175,7 @@
           <div class="div-form d-flex">
             <input type="hidden" formControlName="parentId" name="parentId" #parentId>
             <app-single-select class="flex-grow-1"
-                               data-qe-id="parent-id"
+                               data-qe-id="dialog-parent-id"
                                (selectionChange)="parentId.value = $event[0]"
                                (listOpen)="getList()"
                                [list]="specialConsumptionTaxList"
