@@ -1,21 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
 
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
-  styleUrls: ['./employee-list.component.scss'],
-  providers: [],
+  styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent implements OnInit {
-  pagination: PaginationModel = new PaginationModel();
 
-  employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
+  tmptable = [ 
+    {
+      code: '1',
+      name: 'Nguyễn Thị Hương'
+    }
+  ]
 
-  constructor(protected router: Router) {
-  }
+  constructor(protected router: Router) { }
 
   ngOnInit() {
   }
@@ -24,9 +24,4 @@ export class EmployeeListComponent implements OnInit {
     this.router.navigate(['/master-data/department/employee/detail-employee']);
   }
 
-  onPaginationChange(pagination) {
-    this.pagination = pagination;
-  }
-
-  getList() {}
 }

@@ -1,36 +1,31 @@
 <div class="page">
-
   <div class="page-header">
     <div class="page-title">
       {{'department.title' | translate}}
     </div>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()" [disabled]="!legalEntityId || !divisionId">
+      <button class="btn btn-add" (click)="toggleModal()">
         {{'general.button.add' | translate}}
       </button>
     </div>
   </div>
-
-  <div class="page-body mt-2">
+  <div class="page-body mt-4">
     <div class="page-section">
-      <p-table resizableColumns [value]="departmentList">
+      <p-table resizableColumns [value]="[]">
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn> {{'department.code' | translate}} </th>
             <th pResizableColumn> {{'department.name' | translate}} </th>
           </tr>
           <tr>
-            <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="departmentSearchEntity.code"></app-advanced-filters>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
             </th>
-            <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="departmentSearchEntity.name"></app-advanced-filters>
+            <th>
+              <app-advanced-filters></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-
         <ng-template pTemplate="body" let-department>
           <tr>
             <td>{{department.code}}</td>
@@ -38,48 +33,40 @@
           </tr>
         </ng-template>
       </p-table>
-      <div class="pagination">
-        <app-pagination [pagination]="pagination" (paginationOut)="onPaginationChange($event)"></app-pagination>
-      </div>
     </div>
   </div>
 </div>
-
 <p-dialog [modal]="true" appendTo="body" [(visible)]="modal">
   <p-header>
     {{'department.add' | translate}}
   </p-header>
-
   <div class="container">
     <div class="row">
       <div class="form-group col">
-        <label for="department-code">
+        <label>
           {{'department.code' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
-        <input type="text" class="form-control" id="department-code">
+        <input type="text" class="form-control">
       </div>
       <div class="form-group col">
-        <label for="department-name">
+        <label>
           {{'department.name' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
-        <input type="text" class="form-control" id="department-name">
+        <input type="text" class="form-control">
       </div>
     </div>
   </div>
-
-  <p-footer class="d-flex">
-    <button class="btn btn-delete" *ngIf="departmentForm.value?.isDeleted">
+  <p-footer>
+    <button class="btn btn-add mr-2">
+      {{'general.button.save' | translate}}
+    </button>
+    <button class="btn btn-cancel mr-2">
+      {{'general.button.cancel' | translate}}
+    </button>
+    <button class="btn btn-delete">
       {{'general.button.delete' | translate}}
     </button>
-    <div class="flex-grow-1">
-      <button class="btn btn-add mr-2">
-        {{'general.button.save' | translate}}
-      </button>
-      <button class="btn btn-cancel mr-2">
-        {{'general.button.cancel' | translate}}
-      </button>
-    </div>
   </p-footer>
 </p-dialog>
