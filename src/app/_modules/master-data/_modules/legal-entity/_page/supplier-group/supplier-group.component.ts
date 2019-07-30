@@ -52,7 +52,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   supplierDetailList: SupplierEntity[];
   supplierDetailSubs: Subscription = new Subscription();
 
-  listSupplierId = [];
+  listSupplierId: Array<any> = [];
   legalId: string;
 
 

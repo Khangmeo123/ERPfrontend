@@ -55,7 +55,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   customerDetailSubs: Subscription = new Subscription();
 
   customerGroupId: any;
-  listCustomerId: []
+  listCustomerId: Array<any> = [];
 
   constructor(
     private router: Router,

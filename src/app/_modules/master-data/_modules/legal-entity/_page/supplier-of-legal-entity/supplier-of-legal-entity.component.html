@@ -86,7 +86,8 @@
             </app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
-            <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier"> +
+            <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier" 
+            [disabled]="listSupplierId.length === 0">
               {{'general.button.add' | translate}}</button>
             <div class="btn-group" dropdown data-qe-id="button-import-supplier">
               <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
