@@ -19,7 +19,7 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
-                          data-qe-id="sobList"
+                          data-qe-id="sob-list"
                          (selectionChange)="changeSob($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
