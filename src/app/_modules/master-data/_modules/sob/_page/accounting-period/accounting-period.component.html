@@ -1,201 +1,161 @@
 <div class="page accounting-period">
-    <div class="page-header">
+  <div class="page-header">
         <span class="page-title">
             {{'accounting_period.header.title' | translate}}
-            <span (click)="onClickSaveBookMark($event)">
+          <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
-        <div class="page-actions">
-            <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown>
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                    aria-controls="dropdown-basic">
-                    {{'general.button.import' | translate}}<span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.import_file' | translate}}</a></li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.download_example' | translate}}</a>
-                    </li>
-                </ul>
-            </div>
-            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
-        </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-add" (click)="clearSearch(table)">
+        {{'general.button.clear' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div class="page-body mt-4 ">
+    <div class="page-section form mb-4 d-flex row">
+      <div class="col d-flex align-items-center">
+        <span class="sob mr-2">{{'general.sob' | translate}}: </span>
+        <app-single-select [list]="sobList"
+                           [selectedList]="selectedSobList"
+                           key="name"
+                           (selectionChange)="changeSob($event)"
+                           (listOpen)="getSobList()"></app-single-select>
+      </div>
+      <div class="col d-flex align-items-center">
+        <span class="sob mr-2">{{'accounting_period.status.fiscal_year' | translate}}:</span>
+        <app-single-select [list]="fiscalYearList"
+                           key="name"
+                           (selectionChange)="changeFiscalYear($event)"
+                           (listOpen)="getFiscalYearList()"></app-single-select>
+      </div>
     </div>
 
-    <div class="page-body mt-4 ">
-        <div class="page-section form mb-4 d-flex">
-            <div class="d-flex col-sm-3 align-items-center">
-                <span class="sob">{{'general.sob' | translate}}</span>
-                <app-single-select></app-single-select>
-            </div>
-            <div class="d-flex col-sm-3 align-items-center">
-                <span class="sob">{{'accounting_period.status.fiscal_year' | translate}}</span>
-                <app-single-select></app-single-select>
-            </div>
+    <div class="page-section list">
+      <p-table [value]="accountingPeriodList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>
+              {{'accounting_period.from_date' | translate}}
+            </th>
+            <th>
+              {{'accounting_period.to_date' | translate}}
+            </th>
+            <th>
+              {{'accounting_period.description' | translate}}
+            </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="accountingPeriodSearchEntity.validFrom"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="accountingPeriodSearchEntity.validTo"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="accountingPeriodSearchEntity.description"></app-advanced-filters>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-row let-index="index">
+          <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
 
-        </div>
-
-
-
-        <div class="page-section list">
-            <p-table>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th>
-                            {{'accounting_period.from_date' | translate}}
-                        </th>
-                        <th>
-                            {{'accounting_period.to_date' | translate}}
-                        </th>
-                        <th>
-                            {{'accounting_period.description' | translate}}
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="th-filter">
-                            <app-advanced-filters></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters></app-advanced-filters>
-                        </th>
-                    </tr>
-                </ng-template>
-                <!-- <ng-template pTemplate="body" let-accounting_period>
-                            <tr>
-                                <td pEditableColumn>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="accounting_period.code" required>
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{accounting_period.code}}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td pEditableColumn>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="accounting_period.type" required>
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{ accounting_period.type } }
-                                    </ng-template>
-                                  </p-cellEditor>
-                                </td>
-                                <td pEditableColumn>
-                                  <p-cellEditor>
-                                    <ng-template pTemplate="input">
-                                      <input type="text" class="form-control" [(ngModel)]="accounting_period.unit" required>
-                                    </ng-template>
-                                    <ng-template pTemplate="output">
-                                      {{accounting_period.unit}}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td pEditableColumn>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="accounting_period.percent" required>
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{accounting_period.percent}}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-                                <td pEditableColumn>
-                                    <p-cellEditor>
-                                        <ng-template pTemplate="input">
-                                            <input type="text" class="form-control" [(ngModel)]="accounting_period.description" required>
-                                        </ng-template>
-                                        <ng-template pTemplate="output">
-                                            {{ accounting_period.description }}
-                                        </ng-template>
-                                    </p-cellEditor>
-                                </td>
-        
-                            </tr>
-                        </ng-template> -->
-            </p-table>
-        </div>
-
-        <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
-        </div>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
 
+    <div class="pagination">
+      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+    </div>
+  </div>
 </div>
 
-
-<p-dialog [contentStyle]="{'overflow':'visible'}" [(visible)]="visible" appendTo="body" [style]="{width: '900px'}"
-    modal="true">
-    <p-header>
-        {{'accounting_period.modal.title' | translate}}
-    </p-header>
-    <form class="container">
-        <div class="row">
-            <div class="col-sm-3 icon-checked">
-                <div class="pretty p-icon p-curve p-has-indeterminate">
-                    <input type="checkbox" [checked]="isChecked" (change) = "onClickChange()"/>
-                    <div class="state">
-                        <i class="icon material-icons">done</i>
-                        <label>{{'accounting_period.modal.lable' | translate}} : </label>
-                    </div>
-                </div>
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
+          [style]="{width: '900px'}">
+  <p-header>
+    {{'accounting_period.modal.title' | translate}}
+  </p-header>
+  <div class="container" [formGroup]="accountingPeriodForm">
+    <div class="row">
+      <div class="col d-flex">
+        <div class="flex-shrink-1 mr-2 icon-checked">
+          <div class="pretty p-icon p-curve p-has-indeterminate">
+            <input id="new-accounting-period-checkbox" type="checkbox" [checked]="isChecked"
+                   (change)="onClickChange()"/>
+            <div class="state">
+              <i class="icon material-icons">done</i>
+              <label for="new-accounting-period-checkbox">{{'accounting_period.modal.label' | translate}} : </label>
             </div>
-            <div class="col-sm-2">
-                <app-single-select></app-single-select>
-            </div>
+          </div>
         </div>
-        <div class="row" *ngIf="!isChecked">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>{{ 'accounting_period.from_date' | translate}}</label>
-                    <app-date-picker></app-date-picker>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label>{{ 'accounting_period.to_date' | translate}}</label>
-                    <app-date-picker></app-date-picker>
-                </div>
-            </div>
+        <div class="flex-grow-1">
+          <app-simple-select></app-simple-select>
         </div>
-        <div class="row" *ngIf="!isChecked">
-            <div class="col-sm-12">
-                <label>
-                    {{'environment_tax.description' | translate}}
-                </label>
-                <textarea class="form-control" rows="4">
-                </textarea>
-            </div>
+      </div>
+    </div>
+    <div class="row mt-2" *ngIf="!isChecked">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>{{ 'accounting_period.from_date' | translate}}</label>
+          <div class="div-form d-flex">
+            <app-date-picker class="flex-grow-1" [control]="validFrom"></app-date-picker>
+            <app-error data-qe-id="dialog-error-valid-from"
+                       *ngIf="(accountingPeriodForm.controls.validFrom?.errors && accountingPeriodForm.controls.validFrom?.touched) || !!accountingPeriodForm.controls.errors.get('validFrom')?.value"
+                       [formGroup]="accountingPeriodForm" [property]="'validFrom'" [placement]="'top'"
+                       class="error-form">
+            </app-error>
+          </div>
         </div>
-    </form>
-    <p-footer *ngIf="isAdd; else notAdd">
-        <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label>{{ 'accounting_period.to_date' | translate}}</label>
+          <div class="div-form d-flex">
+            <app-date-picker class="flex-grow-1" [control]="validTo"></app-date-picker>
+            <app-error data-qe-id="dialog-error-valid-to"
+                       *ngIf="(accountingPeriodForm.controls.validTo?.errors && accountingPeriodForm.controls.validTo?.touched) || !!accountingPeriodForm.controls.errors.get('validTo')?.value"
+                       [formGroup]="accountingPeriodForm" [property]="'validTo'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row" *ngIf="!isChecked">
+      <div class="col-sm-12">
+        <label for="description">
+          {{'environment_tax.description' | translate}}
+        </label>
+        <textarea id="description" formControlName="description" name="description" class="form-control"
+                  rows="3"></textarea>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="d-flex">
+      <button class="btn btn-delete"
+              mwlConfirmationPopover
+              [popoverTitle]="popoverTitle"
+              [popoverMessage]="popoverMessage"
+              placement="bottom"
+              (confirm)="onClickDelete()"
+              (cancel)="onClickCancel()"
+              *ngIf="accountingPeriodForm.value?.isDeleted">
+        {{ 'general.button.delete' | translate}}</button>
+      <div class="flex-grow-1 justify-content-end d-flex">
+        <button class="btn btn-cancel"
+                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
         <button class="btn btn-save" (click)="onClickSave()">
-            {{ 'general.button.save' | translate}}</button>
-    </p-footer>
-    <ng-template #notAdd>
-        <p-footer>
-            <div class="page-actions">
-                <button class="btn btn-cancel"
-                    (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-                <button class="btn btn-save" (click)="onClickSave()">
-                    {{ 'general.button.save' | translate}}</button>
-                <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                    [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                    (cancel)="cancelClicked = true" (click)="onClickDelete()">
-                    {{ 'general.button.delete' | translate}}</button>
-            </div>
-        </p-footer>
-    </ng-template>
+          {{ 'general.button.save' | translate}}</button>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>

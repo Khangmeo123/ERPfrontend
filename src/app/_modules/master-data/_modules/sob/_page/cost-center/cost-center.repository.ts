@@ -9,6 +9,8 @@ import { Entities } from '../../../../../../_helpers/entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { CostCenterSearchEntity } from '../../../../_backend/cost-center/cost-center.searchentity';
 import { CostCenterEntity } from '../../../../_backend/cost-center/cost-center.entity';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -30,7 +32,23 @@ export class CostCenterRepository extends Repository {
         return {
           ids: ids.map((item) => new SobEntity(item)),
           exceptIds: exceptIds.map((item) => new SobEntity(item)),
-        }
+        };
+      }),
+    );
+  }
+
+  getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account', JSON.stringify(coaSearchEntity),
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => {
+        const {
+          ids,
+          exceptIds,
+        } = r.body;
+        return {
+          ids: ids.map((item) => new CoaEntity(item)),
+          exceptIds: exceptIds.map((item) => new CoaEntity(item)),
+        };
       }),
     );
   }

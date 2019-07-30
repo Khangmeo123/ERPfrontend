@@ -7,11 +7,15 @@ import { CostCenterRepository } from './cost-center.repository';
 import { CostCenterEntity } from '../../../../_backend/cost-center/cost-center.entity';
 import { CostCenterSearchEntity } from '../../../../_backend/cost-center/cost-center.searchentity';
 import { CostCenterForm } from '../../../../_backend/cost-center/cost-center.form';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 
 export class CostCenterService {
   public costCenterList: BehaviorSubject<CostCenterEntity[]>;
   public costCenterCount: BehaviorSubject<number>;
   public costCenterForm: BehaviorSubject<FormGroup>;
+
+  public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
@@ -39,6 +43,13 @@ export class CostCenterService {
     this.costCenterRepository.getSobList(sobSearchEntity)
       .subscribe((list: Entities) => {
         this.sobList.next(list);
+      });
+  }
+
+  getCoaList(coaSearchEntity: CoaSearchEntity) {
+    this.costCenterRepository.getCoaList(coaSearchEntity)
+      .subscribe((list: Entities) => {
+        this.coaList.next(list);
       });
   }
 

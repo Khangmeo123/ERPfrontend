@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, OnChanges } from '@angular/core';
 import { toggleMenu } from '../../../../animations/toggleMenu';
 import { ISelect } from '../../select.interface';
 import { getListDirection } from '../../helpers';
@@ -11,8 +11,10 @@ import { getListDirection } from '../../helpers';
     toggleMenu,
   ],
 })
-export class SimpleSelectComponent implements OnInit, ISelect {
+export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
   @Input() list = [];
+
+  @Input() initialValue = null;
 
   selectedItem = null;
 
@@ -41,7 +43,11 @@ export class SimpleSelectComponent implements OnInit, ISelect {
     if (this.selectedItem) {
       return this.selectedItem[this.key];
     }
-    return '';
+    return this.initialValue;
+  }
+
+  set selectedText(value) {
+
   }
 
   @Input() valueSelector = (node) => node.id;
@@ -75,7 +81,7 @@ export class SimpleSelectComponent implements OnInit, ISelect {
   }
 
   onSelect(event) {
-    const {data} = event;
+    const { data } = event;
     this.selectedItem = data;
     this.selectionChange.emit(this.valueSelector(data));
     this.isOpened = false;
@@ -92,5 +98,14 @@ export class SimpleSelectComponent implements OnInit, ISelect {
   }
 
   ngOnInit() {
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes.initialValue) {
+      if (changes.initialValue.currentValue.length === 0) {
+        this.selectedItem = null;
+        this.selectedText = '';
+      }
+    }
   }
 }
