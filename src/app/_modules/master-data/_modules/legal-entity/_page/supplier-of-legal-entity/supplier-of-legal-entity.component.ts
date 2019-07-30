@@ -42,7 +42,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   supplierExceptIds: SupplierEntity[];
   supplierTyping: Subject<SupplierSearchEntity> = new Subject();
   legalId: string;
-  listSupplierId = [];
+  listSupplierId: Array<any> = [];
 
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';

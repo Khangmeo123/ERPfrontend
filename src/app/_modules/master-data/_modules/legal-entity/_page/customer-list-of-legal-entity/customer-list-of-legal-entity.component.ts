@@ -41,7 +41,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   customerIds: CustomerEntity[];
   customerExceptIds: CustomerEntity[];
   customerTyping: Subject<CustomerSearchEntity> = new Subject();
-  listCustomerId = [];
+  listCustomerId: Array<any> = [];
 
 
   constructor(
