@@ -13,9 +13,9 @@ export class CustomerDetailOfLegalForm extends FormModel {
     debtLoad = new FormControl();
     paymentTermId = new FormControl('');
     paymentTermName = new FormControl('');
-    staffInChargeId = new FormControl();
-    staffInChargeName = new FormControl();
-    businessGroupId = new FormControl();
+    staffInChargeId = new FormControl('');
+    staffInChargeName = new FormControl('');
+    businessGroupId = new FormControl('');
 
     customerContacts = new FormArray([]);
     customerBankAccounts = new FormArray([]);
@@ -32,7 +32,18 @@ export class CustomerDetailOfLegalForm extends FormModel {
         if (customerDetailEntity !== null && customerDetailEntity !== undefined) {
             Object.keys(customerDetailEntity).forEach((item) => {
                 if (customerDetailEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(customerDetailEntity[item]);
+                    if (customerDetailEntity[item] && typeof customerDetailEntity[item] === 'object'
+                        && customerDetailEntity[item].constructor === Array) {
+                        customerDetailEntity[item].forEach(r => {
+                            const formGroup = new FormGroup({});
+                            Object.keys(r).forEach((result) => {
+                                formGroup.addControl(result, new FormControl(r[result]));
+                            });
+                            this[item].push(formGroup);
+                        })
+                    } else {
+                        this[item].setValue(customerDetailEntity[item]);
+                    }
                 }
             });
         }
