@@ -13,23 +13,23 @@
 
     <hr>
     <div class="page-body">
-        <accordion>
-            <accordion-group [isOpen]="true" [formGroup]="itemDetailForm">
+        <accordion [formGroup]="legalItemDetailForm">
+            <accordion-group [isOpen]="true">
                 <button (click)="isOpenTab1 = !isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'item.detail.tab.title_1' | translate }}</div>
+                    <div class="pull-left float-left">{{'legalItemDetail.tab.title_1' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                     </span>
                 </button>
                 <div class="row">
                     <div class="col-sm-3 col-md-2">
-                        <app-cropper [control]="itemDetailForm.get('img')"></app-cropper>
+                        <app-cropper [control]="legalItemDetailForm.get('image')"></app-cropper>
                     </div>
                     <div class="flex-grow-1 pr-2">
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="itemCode">{{ 'item.detail.content.code' | translate}}<span
+                                    <label for="itemCode">{{ 'legalItemDetail.content.code' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="code"
@@ -40,7 +40,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label
-                                        for="itemCodeFromSupplier">{{ 'item.detail.content.codeFromSupplier' | translate}}</label>
+                                        for="itemCodeFromSupplier">{{ 'legalItemDetail.content.codeFromSupplier' | translate}}</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="codeFromSupplier"
                                             data-qe-id="form-codeFromSupplier" id="itemCodeFromSupplier" />
@@ -50,7 +50,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label
-                                        for="itemCodeFromMarket">{{ 'item.content.detail.codeFromMarket' | translate}}</label>
+                                        for="itemCodeFromMarket">{{ 'legalItemDetail.detail.codeFromMarket' | translate}}</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="codeFromMarket"
                                             data-qe-id="form-codeFromMarket" id="itemCodeFromMarket" />
@@ -61,7 +61,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="itemName">{{ 'item.detail.content.name' | translate}}<span
+                                    <label for="itemName">{{ 'legalItemDetail.content.name' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="name"
@@ -72,7 +72,7 @@
 
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="bankid">{{ 'item.detail.content.characteristic' | translate}}<span
+                                    <label for="bankid">{{ 'legalItemDetail.content.characteristic' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="characteristicName"
@@ -82,10 +82,10 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="bankid">{{ 'item.detail.content.uom' | translate}}<span
+                                    <label for="bankid">{{ 'legalItemDetail.content.uom' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <input type="text" class="form-control" formControlName="uomName"
+                                        <input type="text" class="form-control" formControlName="unitOfMeasureName"
                                             data-qe-id="form-name" id="itemName" />
                                     </div>
                                 </div>
@@ -95,7 +95,7 @@
                             <div class="col-sm-4">
                                 <div class="form-group">
                                     <label
-                                        for="itemPrimaryPrice">{{ 'item.detail.content.primaryPrice' | translate}}<span
+                                        for="itemPrimaryPrice">{{ 'legalItemDetail.content.primaryPrice' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="primaryPrice"
@@ -105,7 +105,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="itemWeight">{{ 'item.detail.content.weight' | translate}} (kg)</label>
+                                    <label for="itemWeight">{{ 'legalItemDetail.content.weight' | translate}}
+                                        (kg)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="weight"
                                             data-qe-id="form-weight" id="itemWeight" />
@@ -114,7 +115,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="itemStatus">{{ 'item.detail.content.status' | translate}}<span
+                                    <label for="itemStatus">{{ 'legalItemDetail.content.status' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="statusName"
@@ -126,7 +127,7 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="bankid">{{ 'item.detail.content.height' | translate}} (cm)</label>
+                                    <label for="bankid">{{ 'legalItemDetail.content.height' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="height"
                                             data-qe-id="form-height" id="itemHeight" />
@@ -135,7 +136,8 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="itemlength">{{ 'item.detail.content.length' | translate}} (cm)</label>
+                                    <label for="itemlength">{{ 'legalItemDetail.content.length' | translate}}
+                                        (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="length"
                                             data-qe-id="form-length" id="itemlength" />
@@ -144,7 +146,7 @@
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    <label for="itemWidth">{{ 'item.detail.content.width' | translate}} (cm)</label>
+                                    <label for="itemWidth">{{ 'legalItemDetail.content.width' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="width"
                                             data-qe-id="form-width" id="itemWidth" />
@@ -153,13 +155,25 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-sm-12">
+                            <div class="col-sm-8">
                                 <div class="form-group">
                                     <label
-                                        for="itemDescription">{{ 'item.detail.content.description' | translate}}</label>
+                                        for="itemDescription">{{ 'legalItemDetail.content.description' | translate}}</label>
                                     <textarea class="form-control" rows="8" formControlName="description"
                                         id="itemDescription">
                                     </textarea>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    <label
+                                        for="itemDescription">{{ 'legalItemDetail.content.itemGroup' | translate}}</label>
+                                    <p-chips [(ngModel)]="legalItemDetailForm.controls.itemGroupings.value"
+                                        [ngModelOptions]="{standalone: true}" [disabled]="true" class="w-100">
+                                        <ng-template let-item pTemplate="item">
+                                            {{item.code}}
+                                        </ng-template>
+                                    </p-chips>
                                 </div>
                             </div>
                         </div>
@@ -269,19 +283,31 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'legalItemDetail.defaultValue.inventoryAccount' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <app-single-select [list]="invetoryAccountExceptIds" [selectedList]="invetoryAccountIds"
+                                [initialValue]="legalItemDetailForm.controls.inventoryAccountName.value"
+                                [key]="'accountName'" (search)="typingSearchInvetoryAccount($event)"
+                                (selectionChange)="legalItemDetailForm.controls.inventoryAccountId.setValue($event[0])"
+                                (listOpen)="openInvetoryAccount()"></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'legalItemDetail.defaultValue.returnAccount' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <app-single-select [list]="returnAccountExceptIds" [selectedList]="returnAccountIds"
+                                [initialValue]="legalItemDetailForm.controls.returnAccountName.value"
+                                [key]="'accountName'" (search)="typingSearchReturnAccount($event)"
+                                (selectionChange)="legalItemDetailForm.controls.returnAccountId.setValue($event[0])"
+                                (listOpen)="openReturnAccount()"></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'legalItemDetail.defaultValue.revenueAccount' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <app-single-select [list]="revenueAccountExceptIds" [selectedList]="revenueAccountIds"
+                                [initialValue]="legalItemDetailForm.controls.revenueAccountName.value"
+                                [key]="'accountName'" (search)="typingSearchRevenueAccount($event)"
+                                (selectionChange)="legalItemDetailForm.controls.revenueAccountId.setValue($event[0])"
+                                (listOpen)="openRevenueAccount()"></app-single-select>
                         </div>
                     </div>
                 </div>
@@ -290,19 +316,32 @@
                         <div class="form-group">
                             <label
                                 for="bankid">{{ 'legalItemDetail.defaultValue.salesAllowancesAccount' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <app-single-select [list]="saleAllowancesAccountExceptIds"
+                                [selectedList]="saleAllowancesAccountIds"
+                                [initialValue]="legalItemDetailForm.controls.salesAllowancesAccountName.value"
+                                [key]="'accountName'" (search)="typingSearchSaleAllowancesAccount($event)"
+                                (selectionChange)="legalItemDetailForm.controls.salesAllowancesAccountId.setValue($event[0])"
+                                (listOpen)="openSaleAllowancesAccount()"></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'legalItemDetail.defaultValue.expenseAccount' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <app-single-select [list]="expenseAccountExceptIds" [selectedList]="expenseAccountIds"
+                                [initialValue]="legalItemDetailForm.controls.expenseAccountName.value"
+                                [key]="'accountName'" (search)="typingSearchExpenseAccount($event)"
+                                (selectionChange)="legalItemDetailForm.controls.expenseAccountId.setValue($event[0])"
+                                (listOpen)="openExpenseAccount()"></app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'legalItemDetail.defaultValue.discountAccount' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <app-single-select [list]="discountAccountExceptIds" [selectedList]="discountAccountIds"
+                                [initialValue]="legalItemDetailForm.controls.discountAccountName.value"
+                                [key]="'accountName'" (search)="typingSearchDiscountAccount($event)"
+                                (selectionChange)="legalItemDetailForm.controls.discountAccountId.setValue($event[0])"
+                                (listOpen)="openDiscountAccount()"></app-single-select>
                         </div>
                     </div>
                 </div>
@@ -310,7 +349,7 @@
 
             <accordion-group>
                 <button (click)="isOpenTab4 = !isOpenTab4;" class="btn btn-link btn-block clearfix" accordion-heading>
-                    <div class="pull-left float-left">{{'detail_item_of_legal_entity.discounts.title' | translate }}
+                    <div class="pull-left float-left">{{'legalItemDetail.itemDiscounts.title' | translate }}
                     </div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -320,23 +359,28 @@
                 <div class="mt-2 row">
                     <div class="col-sm-2 d-flex align-items-center">
                         <div class="pretty p-icon p-curve p-has-indeterminate">
-                            <input type="checkbox" [checked]="isChecked" (change)="onClickChange()" />
+                            <input type="checkbox" formControlName="isDiscounted" />
                             <div class="state">
                                 <i class="icon material-icons">done</i>
-                                <label>{{'detail_item_of_legal_entity.discounts.title' | translate }}</label>
+                                <label>{{'legalItemDetail.itemDiscounts.title' | translate }}</label>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6 d-flex align-items-center"
-                        [ngStyle]="{'visibility': isChecked ? 'visible' : 'hidden'}">
-                        <span class="sob-label flex-shrink-1">
-                            {{'detail_item_of_legal_entity.discounts.discount_type' | translate}}
+                        [ngStyle]="{'visibility': legalItemDetailForm.controls.isDiscounted.value ? 'visible' : 'hidden'}">
+                        <span class="sob-label flex-shrink-1 mr-1">
+                            {{'legalItemDetail.itemDiscounts.discounType' | translate}}:
                         </span>
-                        <app-single-select></app-single-select>
+                        <app-simple-select [key]="'name'" [list]="discountTypeList"
+                            [initialValue]="legalItemDetailForm.controls.discountTypeName.value"
+                            (selectionChange)="legalItemDetailForm.controls.discountTypeCode.setValue($event)"
+                            (listOpen)="openDiscountTypeList()" data-qe-id="form-discountType" class="w-100">
+                        </app-simple-select>
                     </div>
 
                     <div class="col-sm-4 d-flex justify-content-end">
-                        <button class="btn btn-add" (click)="onClickAddDiscount()">
+                        <button class="btn btn-add" (click)="addItemDiscount()"
+                            [disabled]="!legalItemDetailForm.controls.isDiscounted.value">
                             {{'general.button.add' | translate}}
                         </button>
                     </div>
@@ -344,19 +388,40 @@
 
 
                 <div class="mt-2">
-                    <p-table [value]="[]">
+                    <p-table [value]="legalItemDetailForm.controls.itemDiscounts.value" [scrollable]="true"
+                        scrollHeight="500px" [resizableColumns]="true" #tableItemDiscount>
+                        <ng-template pTemplate="colgroup">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                        </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>
-                                    {{'detail_item_of_legal_entity.discounts.amount_from' | translate}}
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemDiscounts.quantityFrom' | translate}}
                                 </th>
-                                <th>
-                                    {{'detail_item_of_legal_entity.discounts.amount_to' | translate}}
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemDiscounts.quantityTo' | translate}}
                                 </th>
-                                <th>
-                                    {{'detail_item_of_legal_entity.discounts.title' | translate}}
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemDiscounts.rate' | translate}}
                                 </th>
-
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemDiscounts.action' | translate}}
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-itemDiscount let-index="rowIndex">
+                            <tr [attr.data-qe-id]="'table-tbody-legal-row-' + index">
+                                <td class="ui-resizable-column"> {{itemDiscount.quantityFrom}} </td>
+                                <td class="ui-resizable-column"> {{itemDiscount.quantityTo}} </td>
+                                <td class="ui-resizable-column"> {{itemDiscount.rate}} </td>
+                                <td class="ui-resizable-column">
+                                    <a href="javascript:;" (click)="editItemDiscount(itemDiscount, index)">Sửa</a>
+                                    <a href="javascript:;" (click)="deleteItemDiscount(index)">Xoá</a>
+                                </td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -408,7 +473,7 @@
             <accordion-group>
                 <button (click)="isOpenTab6 = !isOpenTab6;" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">
-                        {{'detail_item_of_legal_entity.bill_of_materias.title' | translate }}
+                        {{'legalItemDetail.itemMaterials.title' | translate }}
                     </div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -417,35 +482,56 @@
 
                 <div class="mt-2">
                     <div class="d-flex justify-content-end">
-                        <button class="btn btn-add" (click)="onClickAddBillOfMaterias()">
+                        <button class="btn btn-add" (click)="addItemMaterial()">
                             {{'general.button.add' | translate}}
                         </button>
                     </div>
                 </div>
 
-
                 <div class="mt-2">
-                    <p-table [value]="[]">
+                    <p-table [value]="legalItemDetailForm.controls.itemMaterials.value" [scrollable]="true"
+                        scrollHeight="500px" [resizableColumns]="true" #tableItemMaterial>
+                        <ng-template pTemplate="colgroup">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                        </ng-template>
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>
-                                    {{'detail_item_of_legal_entity.bill_of_materias.code_of_materias' | translate}}
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemMaterials.sourceItemCode' | translate}}
                                 </th>
-                                <th>
-                                    {{'detail_item_of_legal_entity.bill_of_materias.name_of_materias' | translate}}
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemMaterials.sourceItemName' | translate}}
                                 </th>
-                                <th>
-                                    {{'detail_item_of_legal_entity.bill_of_materias.unit' | translate}}
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemMaterials.unitOfMeasureCode' | translate}}
                                 </th>
-                                <th>
-                                    {{'detail_item_of_legal_entity.bill_of_materias.amount' | translate}}
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemMaterials.quantity' | translate}}
                                 </th>
+                                <th pResizableColumn>
+                                    {{'legalItemDetail.itemMaterials.action' | translate}}
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-itemMaterial let-index="rowIndex">
+                            <tr [attr.data-qe-id]="'table-tbody-legal-row-' + index">
+                                <td class="ui-resizable-column"> {{itemMaterial.sourceItemCode}} </td>
+                                <td class="ui-resizable-column"> {{itemMaterial.sourceItemName}} </td>
+                                <td class="ui-resizable-column"> {{itemMaterial.unitOfMeasureCode}} </td>
+                                <td class="ui-resizable-column"> {{itemMaterial.quantity}} </td>
+                                <td class="ui-resizable-column">
+                                    <a href="javascript:;" (click)="editItemMaterial(itemMaterial, index)">Sửa</a>
+                                    <a href="javascript:;" (click)="deleteItemMaterial(index)">Xoá</a>
+                                </td>
                             </tr>
                         </ng-template>
                     </p-table>
                 </div>
             </accordion-group>
-
         </accordion>
 
     </div>
@@ -465,61 +551,75 @@
 </div>
 
 
-<p-dialog modal="true" [(visible)]="isOpenModalDiscount">
+<p-dialog modal="true" [(visible)]="isOpenModalItemDiscount" [contentStyle]="{'overflow':'visible'}" appendTo="body"
+    [style]="{width: '900px'}">
     <p-header>
         {{'detail_item_of_legal_entity.discounts.modal_title' | translate}}
     </p-header>
-    <form class="container">
+    <form class="container" [formGroup]="itemDiscountForm">
         <div class="row">
             <div class="form-group col-6">
-                <label>
-                    {{'detail_item_of_legal_entity.discounts.amount_from' | translate}}
-                    <span class="text-danger mr-2">*</span>
+                <label for="quantityFrom">
+                    {{'legalItemDetail.itemDiscounts.quantityFrom' | translate}}<span class="text-danger ml-2">*</span>
                 </label>
-                <app-single-select></app-single-select>
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="quantityFrom"
+                        data-qe-id="dialog-itemDicount-quantityFrom" id="quantityFrom" />
+                    <app-error data-qe-id="dialog-error-quantityFrom"
+                        *ngIf="(itemDiscountForm.controls.quantityFrom?.errors && itemDiscountForm.controls.quantityFrom?.touched) || !!itemDiscountForm.controls.errors?.get('quantityFrom')?.value"
+                        [formGroup]="itemDiscountForm" [property]="'quantityFrom'" [placement]="'top'"
+                        class="error-form">
+                    </app-error>
+                </div>
             </div>
             <div class="form-group col-6">
-                <label>
-                    {{'detail_item_of_legal_entity.discounts.amount_to' | translate}}
+                <label for="quantityTo">
+                    {{'legalItemDetail.itemDiscounts.quantityTo' | translate}}<span class="text-danger ml-2">*</span>
                 </label>
-                <input type="text" class="form-control">
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="quantityTo"
+                        data-qe-id="dialog-itemDicount-quantityTo" id="quantityTo" />
+                    <app-error data-qe-id="dialog-error-quantityTo"
+                        *ngIf="(itemDiscountForm.controls.quantityTo?.errors && itemDiscountForm.controls.quantityTo?.touched) || !!itemDiscountForm.controls.errors?.get('quantityTo')?.value"
+                        [formGroup]="itemDiscountForm" [property]="'quantityTo'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="form-group col-12">
-                <label>
-                    {{'detail_item_of_legal_entity.discount' | translate}}
+                <label for="rate">
+                    {{'legalItemDetail.itemDiscounts.rate' | translate}}<span class="text-danger ml-2">*</span>
                 </label>
-                <input type="text" class="form-control">
+                <div class="div-form">
+                    <input type="text" class="form-control" formControlName="rate" data-qe-id="dialog-itemDicount-rate"
+                        id="rate" />
+                    <app-error data-qe-id="dialog-error-rate"
+                        *ngIf="(itemDiscountForm.controls.rate?.errors && itemDiscountForm.controls.rate?.touched) || !!itemDiscountForm.controls.errors?.get('rate')?.value"
+                        [formGroup]="itemDiscountForm" [property]="'rate'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
             </div>
         </div>
     </form>
     <p-footer>
-        <ng-template *ngIf="isAdd; else notAdd">
-            <button class="btn btn-add mr-2">
-                {{'general.button.add' | translate}}
-            </button>
-            <button class="btn btn-cancel">
-                {{'general.button.cancel' | translate}}
-            </button>
-        </ng-template>
-        <ng-template #notAdd>
-            <button class="btn btn-add mr-2">
-                {{'general.button.save' | translate}}
-            </button>
-            <button class="btn btn-cancel mr-2">
-                {{'general.button.cancel' | translate}}
-            </button>
-            <button class="btn btn-delete">
-                {{'general.button.delete' | translate}}
-            </button>
-        </ng-template>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                    <button class="btn btn-save" appNoDblClick (click)="saveItemDiscount(itemDiscountForm.value)"
+                        data-qe-id="dialog-button-save">
+                        {{ 'general.button.save' | translate}}</button>
+                    <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+                        (click)="isOpenModalItemDiscount = false">{{ 'general.button.cancel' | translate}}</button>
+                </div>
+            </div>
+        </div>
     </p-footer>
 </p-dialog>
 
 
 <p-dialog modal="true" [(visible)]="isOpenModalTransformationUnit" [contentStyle]="{'overflow':'visible'}"
-    appendTo="body" [style]="{width: '700px'}">
+    [style]="{width: '900px'}" appendTo="body">
     <p-header>
         {{'detail_item_of_legal_entity.transformation_unit.modal_title' | translate}}
     </p-header>
@@ -594,60 +694,77 @@
 </p-dialog>
 
 
-<p-dialog modal="true" [(visible)]="isOpenModalBillOfMaterias">
+<p-dialog modal="true" [(visible)]="isOpenModalItemMaterial" [contentStyle]="{'overflow':'visible'}" appendTo="body"
+    [style]="{width: '900px'}">
     <p-header>
-        {{'detail_item_of_legal_entity.bill_of_materias.modal_title' | translate}}
+        {{'legalItemDetail.itemMaterials.modal_title' | translate}}
     </p-header>
-    <form class="container">
+    <form class="container" [formGroup]="itemMaterialForm">
         <div class="row">
             <div class="form-group col-6">
                 <label>
-                    {{'detail_item_of_legal_entity.bill_of_materias.code_of_materias' | translate}}
+                    {{'legalItemDetail.itemMaterials.sourceItemCode' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <app-single-select></app-single-select>
+                <div class="div-form">
+                    <app-single-select class="w-100" [list]="itemExceptIds" [selectedList]="itemIds" [key]="'name'"
+                        (search)="typingSearchItemList($event)"
+                        (selectionChange)="itemMaterialForm.controls.sourceItemId.setValue($event)"
+                        (listOpen)="openItemList()">
+                    </app-single-select>
+                    <app-error data-qe-id="dialog-error-sourceItemCode"
+                        *ngIf="(itemMaterialForm.controls.sourceItemCode?.errors && itemMaterialForm.controls.sourceItemCode?.touched) || !!itemMaterialForm.controls.errors?.get('sourceItemCode')?.value"
+                        [formGroup]="itemMaterialForm" [property]="'sourceItemCode'" [placement]="'top'"
+                        class="error-form">
+                    </app-error>
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detail_item_of_legal_entity.bill_of_materias.name_of_materias' | translate}}
+                    {{'legalItemDetail.itemMaterials.sourceItemName' | translate}}
                 </label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="sourceItemName"
+                    data-qe-id="dialog-itemDicount-sourceItemName" id="sourceItemName" />
             </div>
         </div>
         <div class="row">
             <div class="form-group col-6">
                 <label>
-                    {{'detail_item_of_legal_entity.bill_of_materias.unit' | translate}}
+                    {{'legalItemDetail.itemMaterials.unitOfMeasureCode' | translate}}
                 </label>
-                <input type="text" class="form-control">
+                <div class="div-form">
+                    <app-single-select class="w-100" [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
+                        (search)="typingSearchUomList($event)"
+                        (selectionChange)="itemMaterialForm.controls.unitOfMeasureId.setValue($event)"
+                        (listOpen)="openUomList()">
+                    </app-single-select>
+                    <app-error data-qe-id="dialog-error-unitOfMeasureCode"
+                        *ngIf="(itemMaterialForm.controls.unitOfMeasureCode?.errors && itemMaterialForm.controls.unitOfMeasureCode?.touched) || !!itemMaterialForm.controls.errors?.get('unitOfMeasureCode')?.value"
+                        [formGroup]="itemMaterialForm" [property]="'unitOfMeasureCode'" [placement]="'top'"
+                        class="error-form">
+                    </app-error>
+                </div>
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detail_item_of_legal_entity.bill_of_materias.amount' | translate}}
+                    {{'legalItemDetail.itemMaterials.quantity' | translate}}
                 </label>
-                <input type="text" class="form-control">
+                <input type="text" class="form-control" formControlName="quantity"
+                    data-qe-id="dialog-itemDicount-quantity" id="quantity" />
             </div>
         </div>
     </form>
     <p-footer>
-        <ng-template *ngIf="isAdd; else notAdd">
-            <button class="btn btn-add mr-2">
-                {{'general.button.add' | translate}}
-            </button>
-            <button class="btn btn-cancel">
-                {{'general.button.cancel' | translate}}
-            </button>
-        </ng-template>
-        <ng-template #notAdd>
-            <button class="btn btn-add mr-2">
-                {{'general.button.save' | translate}}
-            </button>
-            <button class="btn btn-cancel mr-2">
-                {{'general.button.cancel' | translate}}
-            </button>
-            <button class="btn btn-delete">
-                {{'general.button.delete' | translate}}
-            </button>
-        </ng-template>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                    <button class="btn btn-save" appNoDblClick (click)="saveItemMaterial(itemMaterialForm.value)"
+                        data-qe-id="dialog-button-save">
+                        {{ 'general.button.save' | translate}}</button>
+                    <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+                        (click)="isOpenModalItemMaterial = false">{{ 'general.button.cancel' | translate}}</button>
+                </div>
+            </div>
+        </div>
     </p-footer>
 </p-dialog>

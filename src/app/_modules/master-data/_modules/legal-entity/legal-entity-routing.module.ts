@@ -12,7 +12,7 @@ import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity
 import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
 import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
 import { SupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
-import { ItemDetailComponent } from './_page/item-detail/item-detail.component';
+import { LegalItemDetailComponent } from './_page/item-detail/item-detail.component';
 import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { ItemOfLegalEntityComponent } from './_page/item-of-legal-entity/item-of-legal-entity.component';
 
@@ -37,8 +37,8 @@ const routes: Routes = [
       {
         path: 'item-of-legal-entity', component: ItemOfLegalEntityComponent,
       },
-      { path: 'item-group/item-detail', component: ItemDetailComponent },
-      { path: 'item-of-legal-entity/item-detail', component: ItemDetailComponent },
+      { path: 'item-group/item-detail', component: LegalItemDetailComponent },
+      { path: 'item-of-legal-entity/item-detail', component: LegalItemDetailComponent },
 
       { path: 'special-price-supplier', component: SpecialPriceSupplierComponent },
       { path: 'special-price-customer', component: SpecialPriceCustomerComponent },

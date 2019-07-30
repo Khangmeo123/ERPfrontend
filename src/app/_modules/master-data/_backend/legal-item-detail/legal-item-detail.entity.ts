@@ -29,11 +29,11 @@ export class LegalItemDetailEntity extends Entity {
 
     // itemDetail:
     itemDetailId: string;
-    itemGroupingIds: string[];
+    itemGroupings: string[];
     legalEntityId: string;
     defaultValue: number;
 
-    // inventory:
+    // inventoryAccount:
     inventoryAccountId: string;
     inventoryAccountCode: string;
     inventoryAccountName: string;
@@ -43,7 +43,7 @@ export class LegalItemDetailEntity extends Entity {
     returnAccountCode: string;
     returnAccountName: string;
 
-    // saleAllowance:
+    // saleAllowancesAccount:
     salesAllowancesAccountId: string;
     salesAllowancesAccountCode: string;
     salesAllowancesAccountName: string;
@@ -62,6 +62,8 @@ export class LegalItemDetailEntity extends Entity {
     discountAccountId: string;
     discountAccountCode: string;
     discountAccountName: string;
+    discountTypeCode: string;
+    discountTypeName: string;
     isDiscounted: boolean;
 
     itemDiscounts: any[];

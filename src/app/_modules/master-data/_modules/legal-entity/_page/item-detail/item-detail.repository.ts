@@ -3,7 +3,7 @@ import { UomEntity } from './../../../../_backend/uom/uom.entity';
 import { UomSearchEntity } from './../../../../_backend/uom/uom.searchentity';
 import { CoaEntity } from './../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from './../../../../_backend/coa/coa.searchentity';
-import { Entities } from './../../../../../../_helpers/entity';
+import { Entities, EnumEntity } from './../../../../../../_helpers/entity';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { HttpClient } from '@angular/common/http';
@@ -24,7 +24,7 @@ export class LegalItemDetailRepository extends Repository {
     }
 
     getLegalItemDetail(itemDetailId: string): Observable<LegalItemDetailEntity> {
-        return this.http.post<LegalItemDetailEntity>(this.apiUrl + '/get', JSON.stringify({ id: itemDetailId }),
+        return this.http.post<LegalItemDetailEntity>(this.apiUrl + '/get', JSON.stringify({ itemDetailId: itemDetailId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return new LegalItemDetailEntity(r.body);
@@ -32,6 +32,12 @@ export class LegalItemDetailRepository extends Repository {
             );
     }
 
+    updateLegalItemDetail(legalItemDetailEntity: any): Observable<LegalItemDetailEntity> {
+        return this.http.post<LegalItemDetailEntity>(this.apiUrl + '/update', JSON.stringify(legalItemDetailEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => new LegalItemDetailEntity(r.body)),
+            );
+    }
 
     dropDownCoa(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account', JSON.stringify(coaSearchEntity),
@@ -49,7 +55,7 @@ export class LegalItemDetailRepository extends Repository {
     }
 
     dropDownUom(uomSearchEntity: UomSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account', JSON.stringify(uomSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure', JSON.stringify(uomSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -63,8 +69,8 @@ export class LegalItemDetailRepository extends Repository {
             );
     }
 
-    dropDownListItem(itemSearchEntity: ItemSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account', JSON.stringify(itemSearchEntity),
+    dropDownItemList(itemSearchEntity: ItemSearchEntity): Observable<Entities> {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item', JSON.stringify(itemSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -75,6 +81,13 @@ export class LegalItemDetailRepository extends Repository {
                     });
                     return r.body;
                 }),
+            );
+    }
+
+    dropdownDiscountType(): Observable<EnumEntity[]> {
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-discount-type', JSON.stringify({}),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
             );
     }
 }

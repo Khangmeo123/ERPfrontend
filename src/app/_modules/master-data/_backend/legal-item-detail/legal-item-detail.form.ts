@@ -33,7 +33,7 @@ export class LegalItemDetailForm extends FormModel {
     itemDetailId = new FormControl('');
     legalEntityId = new FormControl('');
     defaultValue = new FormControl('');
-    itemGroupingIds: string[];
+    itemGroupings = new FormArray([]);
 
     // inventory:
     inventoryAccountId = new FormControl('');
@@ -64,7 +64,9 @@ export class LegalItemDetailForm extends FormModel {
     discountAccountId = new FormControl('');
     discountAccountCode = new FormControl('');
     discountAccountName = new FormControl('');
-    isDiscounted = new FormControl('');
+    isDiscounted = new FormControl(false);
+    discountTypeCode = new FormControl('');
+    discountTypeName = new FormControl('');
 
     itemDiscounts = new FormArray([]);
     transformationUnits = new FormArray([]);
@@ -87,6 +89,47 @@ export class LegalItemDetailForm extends FormModel {
                     } else {
                         this[item].setValue(legalItemDetailEntity[item]);
                     }
+                }
+            });
+        }
+    }
+}
+
+export class ItemMaterialForm extends FormModel {
+    sourceItemId = new FormControl('');
+    sourceItemCode = new FormControl('');
+    sourceItemName = new FormControl('');
+    unitOfMeasureId = new FormControl('');
+    unitOfMeasureCode = new FormControl('');
+    unitOfMeasureName = new FormControl('');
+    itemDetailId = new FormControl('');
+    itemDetailCode = new FormControl('');
+    itemDetailName = new FormControl('');
+    quantity = new FormControl('');
+
+    constructor(itemMaterial?: any) {
+        super();
+        if (itemMaterial !== null && itemMaterial !== undefined) {
+            Object.keys(itemMaterial).forEach((item) => {
+                if (itemMaterial.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].patchValue(itemMaterial[item]);
+                }
+            });
+        }
+    }
+}
+
+export class ItemDiscountForm extends FormModel {
+    quantityFrom = new FormControl('', [requiredField]);
+    quantityTo = new FormControl('', [requiredField]);
+    rate = new FormControl('', [requiredField]);
+
+    constructor(itemDiscount?: any) {
+        super();
+        if (itemDiscount !== null && itemDiscount !== undefined) {
+            Object.keys(itemDiscount).forEach((item) => {
+                if (itemDiscount.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].patchValue(itemDiscount[item]);
                 }
             });
         }
