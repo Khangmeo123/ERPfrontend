@@ -1,15 +1,12 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 
 export class EmployeeSearchEntity extends SearchEntity {
-    code: string;
-    name: string;
-    gender: boolean;
-    birthday: string;
-    identityNumber: string;
-    bankAccountId: string;
-    statusId: string;
+  code: TextFilter = new TextFilter();
 
-    constructor(employeeSearchEntity?: any) {
-        super(employeeSearchEntity);
-    }
+  name: TextFilter = new TextFilter();
+
+  constructor(employeeSearchEntity?: any) {
+    super(employeeSearchEntity);
+  }
 }

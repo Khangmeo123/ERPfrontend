@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BookmarkService } from '../../../../../../_services';
+import { DepartmentService } from './department.service';
 
 @Component({
   selector: 'app-department',
@@ -7,10 +8,10 @@ import { BookmarkService } from '../../../../../../_services';
   styleUrls: ['./department.component.scss'],
   providers: [
     BookmarkService,
+    DepartmentService,
   ],
 })
 export class DepartmentComponent implements OnInit {
-
   isSavedBookMark = false;
 
   routes = [

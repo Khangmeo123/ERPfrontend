@@ -14,7 +14,7 @@ export class JwtInterceptor implements HttpInterceptor {
             withCredentials: true,
             headers: new HttpHeaders({
                 'Content-Type': 'application/json',
-                'X-BusinessGroup': 'AE0E3884-FB32-4DA1-9A51-BE6E80402A67',
+                'X-BusinessGroup': '93B4BEF8-684C-4E42-B467-F70E02A5A3F3',
             }),
         });
         return next.handle(request);
