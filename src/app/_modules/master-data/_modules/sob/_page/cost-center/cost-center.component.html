@@ -10,8 +10,8 @@
         </span>
 
     <div class="page-actions">
-      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button class="btn btn-add" (click)="clearSearch(table)">
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -21,6 +21,7 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select [list]="sobList"
+                          data-qe-id="sobList"
                          [selectedList]="selectedSobList"
                          key="name"
                          (selectionChange)="changeSob($event)"
@@ -31,38 +32,42 @@
                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn>
-              {{ 'cost-center.content.id' | translate}}
-            </th>
-            <th pResizableColumn> {{ 'cost-center.content.name' | translate}} </th>
-            <th pResizableColumn> {{ 'cost-center.content.account' | translate}} </th>
-            <th pResizableColumn> {{ 'cost-center.content.from_date' | translate}} </th>
-            <th pResizableColumn> {{ 'cost-center.content.to_date' | translate}} </th>
-            <th pResizableColumn> {{ 'cost-center.content.description' | translate}} </th>
+            <th pResizableColumn [pSortableColumn]="'code'"
+            data-qe-id="table-thead-code">{{ 'cost-center.content.id' | translate}}</th>
+            <th pResizableColumn [pSortableColumn]="'name'"
+            data-qe-id="table-thead-name "> {{ 'cost-center.content.name' | translate}} </th>
+            <th pResizableColumn [pSortableColumn]="'account'"
+            data-qe-id="table-thead-account"> {{ 'cost-center.content.account' | translate}} </th>
+            <th pResizableColumn [pSortableColumn]="'from-date'"
+            data-qe-id="table-thead-from-date"> {{ 'cost-center.content.from_date' | translate}} </th>
+            <th pResizableColumn [pSortableColumn]="'to-date'"
+            data-qe-id="table-thead-to-date"> {{ 'cost-center.content.to_date' | translate}} </th>
+            <th pResizableColumn [pSortableColumn]="'description'"
+            data-qe-id="table-thead-description"> {{ 'cost-center.content.description' | translate}} </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-code" (changeFilter)="getList()"
                                     [filter]="costCenterSearchEntity.code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-name" (changeFilter)="getList()"
                                     [filter]="costCenterSearchEntity.name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-chartOfAccountCode" (changeFilter)="getList()"
                                     [filter]="costCenterSearchEntity.chartOfAccountCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-validFrom" (changeFilter)="getList()"
                                     [filter]="costCenterSearchEntity.validFrom"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-validTo" (changeFilter)="getList()"
                                     [filter]="costCenterSearchEntity.validTo"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-description" (changeFilter)="getList()"
                                     [filter]="costCenterSearchEntity.description"></app-advanced-filters>
             </th>
           </tr>
@@ -96,7 +101,7 @@
           <label for="cost-center-code">{{ 'cost-center.content.id' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" id="cost-center-code" formControlName="code" name="code"/>
+            <input type="text" class="form-control" data-qe-id="diaglog-code" formControlName="code" name="code"/>
             <app-error data-qe-id="dialog-error-code"
                        *ngIf="(costCenterForm.controls.code?.errors && costCenterForm.controls.code?.touched) || !!costCenterForm.controls.errors.get('code')?.value"
                        [formGroup]="costCenterForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -109,9 +114,9 @@
           <label for="cost-center-name">{{ 'cost-center.content.name' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" id="cost-center-name" formControlName="name" name="name"/>
+            <input type="text" class="form-control" data-qe-id="diaglog-name" formControlName="name" name="name"/>
             <app-error data-qe-id="dialog-error-name"
-                       *ngIf="(costCenterForm.controls.code?.errors && costCenterForm.controls.name?.touched) || !!costCenterForm.controls.errors.get('name')?.value"
+                       *ngIf="(costCenterForm.controls.name?.errors && costCenterForm.controls.name?.touched) || !!costCenterForm.controls.errors.get('name')?.value"
                        [formGroup]="costCenterForm" [property]="'code'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
@@ -122,13 +127,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="cost-center-valid-from">{{ 'cost-center.content.from_date' | translate}}</label>
-          <app-date-picker id="cost-center-valid-from" [control]="validFrom"></app-date-picker>
+          <app-date-picker data-qe-id="dialog-valid-from" [control]="validFrom"></app-date-picker>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="cost-center-valid-to">{{ 'cost-center.content.to_date' | translate}}</label>
-          <app-date-picker id="cost-center-valid-to" [control]="validTo"></app-date-picker>
+          <app-date-picker data-qe-id="dialog-valid-to" [control]="validTo"></app-date-picker>
         </div>
       </div>
     </div>
@@ -136,14 +141,14 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="chart-of-account">{{ 'cost-center.content.account' | translate}}</label>
-          <app-single-select id="chart-of-account" [list]="coaList" [selectedList]="selectedCoaList"
+          <app-single-select data-qe-id="dialog-account" [list]="coaList" [selectedList]="selectedCoaList"
                              (listOpen)="getCoaList()"></app-single-select>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="description">{{ 'cost-center.content.description' | translate}}</label>
-          <textarea id="description" formControlName="description" name="description" class="form-control"
+          <textarea data-qe-id="dialog-description" formControlName="description" name="description" class="form-control"
                     rows="6"></textarea>
         </div>
       </div>
@@ -154,6 +159,7 @@
   <p-footer>
     <div class="d-flex">
       <button class="btn btn-delete"
+              data-qe-id="footer-button-delete"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
@@ -163,9 +169,9 @@
               *ngIf="costCenterForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel"
+        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
                 (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button class="btn btn-save" (click)="onClickSave()">
+        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

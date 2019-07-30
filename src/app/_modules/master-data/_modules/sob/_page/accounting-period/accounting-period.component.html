@@ -9,8 +9,8 @@
             </span>
         </span>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button class="btn btn-add" (click)="clearSearch(table)">
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -21,6 +21,7 @@
       <div class="col d-flex align-items-center">
         <span class="sob mr-2">{{'general.sob' | translate}}: </span>
         <app-single-select [list]="sobList"
+                            data-qe-id="sobList"
                            [selectedList]="selectedSobList"
                            key="name"
                            (selectionChange)="changeSob($event)"
@@ -29,6 +30,7 @@
       <div class="col d-flex align-items-center">
         <span class="sob mr-2">{{'accounting_period.status.fiscal_year' | translate}}:</span>
         <app-single-select [list]="fiscalYearList"
+                          data-qe-id="fiscalYearList"
                            key="name"
                            (selectionChange)="changeFiscalYear($event)"
                            (listOpen)="getFiscalYearList()"></app-single-select>
@@ -40,34 +42,39 @@
                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th>
+            <th pResizableColumn [pSortableColumn]="'from-date'"
+            data-qe-id="table-thead-from-date">
               {{'accounting_period.from_date' | translate}}
             </th>
-            <th>
+            <th pResizableColumn [pSortableColumn]="'to-date'"
+            data-qe-id="table-thead-to-date">
               {{'accounting_period.to_date' | translate}}
             </th>
-            <th>
+            <th pResizableColumn [pSortableColumn]="'description'"
+            data-qe-id="table-thead-description">
               {{'accounting_period.description' | translate}}
             </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-validForm" (changeFilter)="getList()"
                                     [filter]="accountingPeriodSearchEntity.validFrom"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-validTo" (changeFilter)="getList()"
                                     [filter]="accountingPeriodSearchEntity.validTo"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-description" (changeFilter)="getList()"
                                     [filter]="accountingPeriodSearchEntity.description"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-row let-index="index">
-          <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-
+        <ng-template pTemplate="body" let-accountingPeriod let-index="index">
+          <tr (dblclick)="edit(accountingPeriod.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{accountingPeriod.validFrom}} </td>
+            <td>{{accountingPeriod.validTo}}</td>
+            <td>{{accountingPeriod.description}}</td>
           </tr>
         </ng-template>
       </p-table>
@@ -107,7 +114,7 @@
         <div class="form-group">
           <label>{{ 'accounting_period.from_date' | translate}}</label>
           <div class="div-form d-flex">
-            <app-date-picker class="flex-grow-1" [control]="validFrom"></app-date-picker>
+            <app-date-picker data-qe-id="dialog-valid-form" class="flex-grow-1" [control]="validFrom"></app-date-picker>
             <app-error data-qe-id="dialog-error-valid-from"
                        *ngIf="(accountingPeriodForm.controls.validFrom?.errors && accountingPeriodForm.controls.validFrom?.touched) || !!accountingPeriodForm.controls.errors.get('validFrom')?.value"
                        [formGroup]="accountingPeriodForm" [property]="'validFrom'" [placement]="'top'"
@@ -120,7 +127,7 @@
         <div class="form-group">
           <label>{{ 'accounting_period.to_date' | translate}}</label>
           <div class="div-form d-flex">
-            <app-date-picker class="flex-grow-1" [control]="validTo"></app-date-picker>
+            <app-date-picker data-qe-id="dialog-valid-to" class="flex-grow-1" [control]="validTo"></app-date-picker>
             <app-error data-qe-id="dialog-error-valid-to"
                        *ngIf="(accountingPeriodForm.controls.validTo?.errors && accountingPeriodForm.controls.validTo?.touched) || !!accountingPeriodForm.controls.errors.get('validTo')?.value"
                        [formGroup]="accountingPeriodForm" [property]="'validTo'" [placement]="'top'" class="error-form">
@@ -134,7 +141,7 @@
         <label for="description">
           {{'environment_tax.description' | translate}}
         </label>
-        <textarea id="description" formControlName="description" name="description" class="form-control"
+        <textarea data-qe-id="description" formControlName="description" name="description" class="form-control"
                   rows="3"></textarea>
       </div>
     </div>
@@ -142,6 +149,7 @@
   <p-footer>
     <div class="d-flex">
       <button class="btn btn-delete"
+      data-qe-id="footer-button-delele"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
@@ -151,9 +159,9 @@
               *ngIf="accountingPeriodForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel"
+        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
                 (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button class="btn btn-save" (click)="onClickSave()">
+        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

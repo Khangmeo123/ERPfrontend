@@ -8,27 +8,10 @@
                     </mat-icon>
                 </span>
             </span>
-    <!--            <div class="page-actions">-->
-    <!--                <button class="btn btn-add" (click)="toggleModal()"> + {{'general.button.add' | translate}}</button>-->
-    <!--                <div class="btn-group" dropdown>-->
-    <!--                    <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"-->
-    <!--                        aria-controls="dropdown-basic">-->
-    <!--                        {{'general.button.import' | translate}}<span class="caret"></span>-->
-    <!--                    </button>-->
-    <!--                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">-->
-    <!--                        <li role="menuitem"><a class="dropdown-item"-->
-    <!--                                href="#">{{'general.button.import_file' | translate}}</a></li>-->
-    <!--                        <li class="divider dropdown-divider"></li>-->
-    <!--                        <li role="menuitem"><a class="dropdown-item"-->
-    <!--                                href="#">{{'general.button.download_example' | translate}}</a>-->
-    <!--                        </li>-->
-    <!--                    </ul>-->
-    <!--                </div>-->
-    <!--                <button class="btn btn-export">{{'general.button.export' | translate}}</button>-->
-    <!--            </div>-->
+    
     <div class="page-actions">
-      <button class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button class="btn btn-add" (click)="clearSearch(table)">
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -37,6 +20,7 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select [list]="sobList"
+                        data-qe-id="sobList"
                          key="name"
                          (selectionChange)="changeSob($event)"
                          [selectedList]="selectedSobList"
@@ -47,28 +31,30 @@
                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
         <ng-template pTemplate="header">
           <tr>
-            <th>
+            <th pResizableColumn [pSortableColumn]="'code'"
+            data-qe-id="table-thead-code">
               {{'voucher.code' | translate}}
             </th>
-            <th>
+            <th pResizableColumn [pSortableColumn]="'name'"
+            data-qe-id="table-thead-name">
               {{'voucher.name' | translate}}
             </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-code" (changeFilter)="getList()"
                                     [filter]="voucherListSearchEntity.code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters data-qe-id="filter-name" (changeFilter)="getList()"
                                     [filter]="voucherListSearchEntity.name"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-row let-index="index">
-          <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> {{row.code}} </td>
-            <td> {{row.name}} </td>
+        <ng-template pTemplate="body" let-voucherList let-index="index">
+          <tr (dblclick)="edit(voucherList.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{voucherList.code}} </td>
+            <td> {{voucherList.name}} </td>
           </tr>
         </ng-template>
       </p-table>
@@ -93,7 +79,7 @@
             <span class="text-danger mr-2">*</span>
           </label>
           <div class="div-form">
-            <input id="code" class="form-control" type="text" placeholder="" formControlName="code" name="code">
+            <input data-qe-id="dialog-code" class="form-control" type="text" placeholder="" formControlName="code" name="code">
             <app-error data-qe-id="dialog-error-code"
                        *ngIf="(voucherListForm.controls.code?.errors && voucherListForm.controls.code?.touched) || !!voucherListForm.controls.errors.get('code')?.value"
                        [formGroup]="voucherListForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -109,9 +95,9 @@
             <span class="text-danger mr-2">*</span>
           </label>
           <div class="div-form">
-            <input type="text" class="form-control" id="name" formControlName="name" name="name"/>
+            <input type="text" class="form-control" data-qe-id="name" formControlName="name" name="name"/>
             <app-error data-qe-id="dialog-error-name"
-                       *ngIf="(voucherListForm.controls.code?.errors && voucherListForm.controls.name?.touched) || !!voucherListForm.controls.errors.get('name')?.value"
+                       *ngIf="(voucherListForm.controls.name?.errors && voucherListForm.controls.name?.touched) || !!voucherListForm.controls.errors.get('name')?.value"
                        [formGroup]="voucherListForm" [property]="'code'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
@@ -122,6 +108,7 @@
   <p-footer>
     <div class="d-flex">
       <button class="btn btn-delete"
+              data-qe-id="footer-button-delete"
               mwlConfirmationPopover
               [popoverTitle]="popoverTitle"
               [popoverMessage]="popoverMessage"
@@ -131,9 +118,9 @@
               *ngIf="voucherListForm.value?.isDeleted">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel"
+        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
                 (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button class="btn btn-save" (click)="onClickSave()">
+        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>
