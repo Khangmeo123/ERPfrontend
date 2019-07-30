@@ -18,6 +18,8 @@
     border-bottom: 1px solid $border-color;
     padding-top: 0;
     padding-bottom: 0;
+    max-height: 400px;
+    overflow-y: scroll;
 
     li.dropdown-item {
       cursor: pointer;
