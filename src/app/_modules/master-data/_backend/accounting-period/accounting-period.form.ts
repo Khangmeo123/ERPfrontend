@@ -5,6 +5,7 @@ import { requiredField } from 'src/app/_helpers';
 
 export class AccountingPeriodForm extends FormModel {
   setOfBookId = new FormControl(null, [requiredField]);
+
   fiscalYearId = new FormControl(null, [requiredField]);
 
   validFrom = new FormControl(null, [requiredField]);
