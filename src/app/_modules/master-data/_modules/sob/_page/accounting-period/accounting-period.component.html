@@ -84,22 +84,25 @@
   <p-header>
     {{'accounting_period.modal.title' | translate}}
   </p-header>
-  <form class="container">
+  <div class="container" [formGroup]="accountingPeriodForm">
     <div class="row">
-      <div class="col-sm-3 icon-checked">
-        <div class="pretty p-icon p-curve p-has-indeterminate">
-          <input type="checkbox" [checked]="isChecked" (change)="onClickChange()"/>
-          <div class="state">
-            <i class="icon material-icons">done</i>
-            <label>{{'accounting_period.modal.lable' | translate}} : </label>
+      <div class="col d-flex">
+        <div class="flex-shrink-1 mr-2 icon-checked">
+          <div class="pretty p-icon p-curve p-has-indeterminate">
+            <input id="new-accounting-period-checkbox" type="checkbox" [checked]="isChecked"
+                   (change)="onClickChange()"/>
+            <div class="state">
+              <i class="icon material-icons">done</i>
+              <label for="new-accounting-period-checkbox">{{'accounting_period.modal.label' | translate}} : </label>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="col-sm-2">
-        <app-single-select></app-single-select>
+        <div class="flex-grow-1">
+          <app-simple-select></app-simple-select>
+        </div>
       </div>
     </div>
-    <div class="row" *ngIf="!isChecked">
+    <div class="row mt-2" *ngIf="!isChecked">
       <div class="col-sm-6">
         <div class="form-group">
           <label>{{ 'accounting_period.from_date' | translate}}</label>
@@ -135,7 +138,7 @@
                   rows="3"></textarea>
       </div>
     </div>
-  </form>
+  </div>
   <p-footer>
     <div class="d-flex">
       <button class="btn btn-delete"
