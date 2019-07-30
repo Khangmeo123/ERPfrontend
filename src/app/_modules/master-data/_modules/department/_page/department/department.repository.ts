@@ -7,9 +7,8 @@ import { DepartmentEntity } from '../../../../_backend/department/department.ent
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
-import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
 import { DivisionSearchEntity } from '../../../../_backend/division/division.searchentity';
+import { Entities } from '../../../../../../_helpers/entity';
 
 @Injectable({
   providedIn: 'root',
@@ -52,8 +51,8 @@ export class DepartmentRepository extends Repository {
       );
   }
 
-  getLegalEntityList(legalSearchEntity: LegalSearchEntity): Observable<LegalEntity[]> {
-    return this.http.post<LegalEntity[]>(
+  getLegalEntityList(legalSearchEntity: LegalSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
       `${this.apiUrl}/list-legal-entity`,
       legalSearchEntity,
       {
@@ -62,14 +61,12 @@ export class DepartmentRepository extends Repository {
       },
     )
       .pipe(
-        map((response: HttpResponse<LegalEntity[]>) => {
-          return response.body.map((legalEntity) => new LegalEntity(legalEntity));
-        }),
+        map((response: HttpResponse<Entities>) => response.body),
       );
   }
 
-  getDivisionList(divisionSearchEntity: DivisionSearchEntity): Observable<DivisionEntity[]> {
-    return this.http.post<DivisionEntity[]>(
+  getDivisionList(divisionSearchEntity: DivisionSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
       `${this.apiUrl}/list-division`,
       divisionSearchEntity,
       {
@@ -78,9 +75,7 @@ export class DepartmentRepository extends Repository {
       },
     )
       .pipe(
-        map((response: HttpResponse<DivisionEntity[]>) => {
-          return response.body.map((division) => new DivisionEntity(division));
-        }),
+        map((response: HttpResponse<Entities>) => response.body),
       );
   }
 }

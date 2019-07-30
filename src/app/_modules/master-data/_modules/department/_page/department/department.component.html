@@ -18,13 +18,21 @@
           <span class="sob-label flex-shrink-1 mr-2">
               {{'general.legal_entity.name' | translate}}:
           </span>
-          <app-single-select></app-single-select>
+          <app-single-select [list]="legalEntityList"
+                             [selectedList]="selectedLegalEntityList"
+                             key="name"
+                             (selectionChange)="onSelectLegalEntity()"
+                             (listOpen)="getLegalEntityList()"></app-single-select>
         </div>
         <div class="col-3 d-flex align-items-center">
           <span class="sob-label flex-shrink-1 mr-2">
               {{'general.division' | translate}}:
           </span>
-          <app-single-select></app-single-select>
+          <app-single-select [list]="divisionList"
+                             [selectedList]="selectedDivisionList"
+                             key="name"
+                             (selectionChange)="onSelectDivision()"
+                             (listOpen)="getDivisionList()"></app-single-select>
         </div>
       </div>
     </div>
@@ -43,5 +51,6 @@
         <router-outlet></router-outlet>
       </div>
     </div>
+
   </div>
 </div>

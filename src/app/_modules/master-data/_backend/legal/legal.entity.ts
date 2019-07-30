@@ -6,9 +6,9 @@ export class LegalEntity extends Entity {
 
     code: string;
     name:string;
-    
 
-    constructor(legalEntity: any) {
+
+    constructor(legalEntity?: any) {
         super(legalEntity);
     }
 }

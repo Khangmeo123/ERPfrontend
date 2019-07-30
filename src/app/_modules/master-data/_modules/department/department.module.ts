@@ -23,9 +23,12 @@ import { DetailEmployeeComponent } from './_page/employee-list/detail-employee/d
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
-import { BsDropdownModule, AccordionModule } from 'ngx-bootstrap';
+import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
+import { DepartmentService } from './_page/department/department.service';
+import { ErrorModule } from '../../../../_shared/components/error/error.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -59,6 +62,12 @@ import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     PaginationModule,
+    ErrorModule,
+    FormsModule,
+    ReactiveFormsModule,
+  ],
+  providers: [
+    DepartmentService,
   ],
 })
 export class DepartmentModule {

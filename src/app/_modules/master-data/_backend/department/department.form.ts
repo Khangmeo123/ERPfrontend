@@ -9,15 +9,15 @@ export class DepartmentForm extends FormModel {
   ]);
 
   code: FormControl = new FormControl(null, [
-    requiredField
+    requiredField,
   ]);
 
   name: FormControl = new FormControl(null, [
-    requiredField
+    requiredField,
   ]);
 
   divisionId: FormControl = new FormControl(null, [
-    requiredField
+    requiredField,
   ]);
 
   errors: FormGroup = new FormGroup({});

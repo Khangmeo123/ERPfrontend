@@ -5,7 +5,7 @@
       {{'department.title' | translate}}
     </div>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()" [disabled]="!legalEntityId || !divisionId">
+      <button class="btn btn-add" (click)="add()" [disabled]="!legalEntity || !division">
         {{'general.button.add' | translate}}
       </button>
     </div>
@@ -13,7 +13,15 @@
 
   <div class="page-body mt-2">
     <div class="page-section">
-      <p-table resizableColumns [value]="departmentList">
+      <p-table resizableColumns
+               [value]="departmentList"
+               [customSort]="true"
+               [lazy]="true"
+               (onLazyLoad)="sort($event)"
+               [scrollable]="true"
+               scrollHeight="500px"
+               [resizableColumns]="true"
+               #table>
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn> {{'department.code' | translate}} </th>
@@ -33,8 +41,8 @@
 
         <ng-template pTemplate="body" let-department>
           <tr>
-            <td>{{department.code}}</td>
-            <td>{{department.name}}</td>
+            <td pResizableColumn>{{department.code}}</td>
+            <td pResizableColumn>{{department.name}}</td>
           </tr>
         </ng-template>
       </p-table>
@@ -50,21 +58,33 @@
     {{'department.add' | translate}}
   </p-header>
 
-  <div class="container">
+  <div class="container" [formGroup]="departmentForm">
     <div class="row">
       <div class="form-group col">
         <label for="department-code">
           {{'department.code' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
-        <input type="text" class="form-control" id="department-code">
+        <div class="div-form">
+          <input type="text" class="form-control" id="department-code" formControlName="code" name="code">
+          <app-error data-qe-id="department-code"
+                     *ngIf="(code?.errors && code?.touched) || !!errors.get('name')?.value"
+                     [formGroup]="departmentForm" property="code" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col">
         <label for="department-name">
           {{'department.name' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
-        <input type="text" class="form-control" id="department-name">
+        <div class="div-form">
+          <input type="text" class="form-control" id="department-name" formControlName="name" name="name">
+          <app-error data-qe-id="department-name"
+                     *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+                     [formGroup]="departmentForm" property="name" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
     </div>
   </div>
@@ -74,7 +94,7 @@
       {{'general.button.delete' | translate}}
     </button>
     <div class="flex-grow-1">
-      <button class="btn btn-add mr-2">
+      <button class="btn btn-add mr-2" (click)="save()">
         {{'general.button.save' | translate}}
       </button>
       <button class="btn btn-cancel mr-2">

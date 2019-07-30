@@ -3,12 +3,11 @@ import { DepartmentSearchEntity } from '../../../../_backend/department/departme
 import { DepartmentService } from '../department/department.service';
 import { DepartmentEntity } from '../../../../_backend/department/department.entity';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
-import { DivisionSearchEntity } from '../../../../_backend/division/division.searchentity';
+import { GeneralService } from '../../../../../../_helpers/general-service.service';
 
 @Component({
   selector: 'app-department-list',
@@ -17,7 +16,7 @@ import { DivisionSearchEntity } from '../../../../_backend/division/division.sea
     './department-list.component.scss',
   ],
   providers: [
-    DepartmentService,
+    GeneralService,
   ],
 })
 export class DepartmentListComponent implements OnInit {
@@ -27,56 +26,53 @@ export class DepartmentListComponent implements OnInit {
   public modal: boolean = false;
 
   /**
-   * Selected legal entity ID
-   */
-  public legalEntityId: string = null;
-
-  /**
-   * Selected division ID
-   */
-  public divisionId: string = null;
-
-  /**
    * Department list
    */
-
   public departmentList: DepartmentEntity[] = [];
 
   public departmentSearchEntity: DepartmentSearchEntity = new DepartmentSearchEntity();
 
   public departmentForm: FormGroup;
 
+  /**
+   * Pagination model
+   */
   public pagination: PaginationModel = new PaginationModel();
 
-  /**
-   * Legal Entity
-   */
-  public legalEntityList: LegalEntity[] = [];
+  public legalEntity: LegalEntity = null;
 
-  public selectedLegalEntity: LegalEntity[] = [];
-
-  public legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
-
-  /**
-   * Division
-   */
-  public divisionList: DivisionEntity[] = [];
-
-  public selectedDivisionList: DivisionEntity[] = [];
-
-  public divisionSearchEntity: DivisionSearchEntity = new DivisionSearchEntity();
+  public division: DivisionEntity = null;
 
   /**
    * Data subscriptions
    */
   public subscription: Subscription = new Subscription();
 
-  constructor(private departmentService: DepartmentService) {
+  constructor(private departmentService: DepartmentService, private generalService: GeneralService) {
     const departmentFormSub: Subscription = this.departmentService.departmentForm.subscribe((form: FormGroup) => {
       this.departmentForm = form;
     });
 
-    this.subscription.add(departmentFormSub);
+    const legalEntitySub: Subscription = this.departmentService.selectedLegalEntity.subscribe((legalEntity: LegalEntity) => {
+      this.legalEntity = legalEntity;
+    });
+
+    const divisionSub: Subscription = this.departmentService.selectedDivision.subscribe((division: DivisionEntity) => {
+      this.division = division;
+    });
+
+  }
+
+  get code(): FormControl {
+    return this.departmentForm.get('code') as FormControl;
+  }
+
+  get name(): FormControl {
+    return this.departmentForm.get('name') as FormControl;
+  }
+
+  get errors(): FormGroup {
+    return this.departmentForm.get('errors') as FormGroup;
   }
 
   ngOnInit() {
@@ -92,13 +88,28 @@ export class DepartmentListComponent implements OnInit {
   }
 
   onPaginationChange(pagination) {
-    this.pagination = pagination;
+    this.pagination = new PaginationModel(pagination);
+  }
+
+  add() {
+    this.departmentService.add();
+    this.toggleModal();
   }
 
   save() {
-
+    if (this.departmentForm.invalid) {
+      this.generalService.validateAllFormFields(this.departmentForm);
+    }
+    if (this.departmentForm.valid) {
+      console.log(this.departmentForm.value);
+    }
   }
 
+  /**
+   * Edit selected entity
+   *
+   * @param id string
+   */
   edit(id: string) {
 
   }
@@ -107,19 +118,7 @@ export class DepartmentListComponent implements OnInit {
 
   }
 
-  getLegalEntityList() {
-    this.departmentService.getLegalEntityList(this.legalSearchEntity);
-  }
-
-  onSelectLegalEntity() {
-
-  }
-
-  getDivisionList() {
-    this.departmentService.getDivisionList(this.divisionSearchEntity);
-  }
-
-  onSelectDivision() {
+  sort(event) {
 
   }
 }
