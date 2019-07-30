@@ -1,12 +1,12 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class LegalSearchEntity extends SearchEntity {
-    sobId: string;
+    legalEntityId: string;
    
-    code:string;
-    name:string;
+    code: string;
+    name: string;
 
-    constructor(legalSearchEntity: any) {
+    constructor(legalSearchEntity?: any) {
         super(legalSearchEntity);
     }
 }

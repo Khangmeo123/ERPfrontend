@@ -1,8 +1,8 @@
 <div class="page division">
     <div class="page-header">
         <span class="page-title">
-            {{'division.header.title' | translate}}
-            <span (click)="onClickSaveBookMark($event)">
+            {{pageTitle | translate}}
+            <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
@@ -10,8 +10,9 @@
 
         </span>
         <div class="page-actions">
-            <button class="btn btn-add" (click)="showChange()"> + {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown>
+            <button class="btn btn-add" (click)="add()" data-qe-id="button-add">
+                {{'general.button.add' | translate}}</button>
+            <div class="btn-group" dropdown data-qe-id="button-import">
                 <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
                     aria-controls="dropdown-basic">
                     {{'general.button.import' | translate}}<span class="caret"></span>
@@ -25,56 +26,84 @@
                     </li>
                 </ul>
             </div>
-            <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" data-qe-id="button-clear"
+                (click)="clearSearch(table)">{{'general.button.clear' | translate}}</button>
         </div>
     </div>
     <hr>
 
     <div class="page-body">
         <div class="row">
-            <div class="page-section mt-2 d-flex">
+            <div class="page-section mt-2 d-flex align-items-center">
                 <span class="sob-label flex-shrink-1">
-                    {{'general.legal_entity.name' | translate}}
+                    {{'general.legal_entity.name' | translate}} : 
                 </span>
-                <app-single-select></app-single-select>
+                <app-single-select data-qe-id="form-select-legal-entiy" [list]="legalExceptIds"
+                    [selectedList]="legalIds" [key]="'name'" (search)="legalSearch($event)"
+                    (selectionChange)="divisionForm.controls.legalEntityId.setValue($event[0])"
+                    (listOpen)="openlegalList(legalSearchEntity.legalEntityId)">
+                </app-single-select>
             </div>
         </div>
 
-        <div class="page-selection list">
-            <p-table>
+        <div class="page-selection list mt-2">
+            <p-table [value]="divisionGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pResizableColumn> {{ 'division.code' | translate}}</th>
-                        <th pResizableColumn> {{ 'division.name' | translate}} </th>
-                        <th pResizableColumn> {{ 'division.address' | translate}} </th>
+                        <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-division">
+                            {{ 'division.code' | translate}}
+                            <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name-division">
+                            {{ 'division.name' | translate}}
+                            <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+                        </th>
+                        <th pResizableColumn [pSortableColumn]="'address'" data-qe-id="table-thead-address-division">
+                            {{ 'division.address' | translate}}
+                            <p-sortIcon [field]="'address'" class="float-right"></p-sortIcon>
+                        </th>
 
                     </tr>
                     <tr>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.code"></app-advanced-filters>
+                            <app-advanced-filters [filter]="divisionSearchEntity.code" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-code-division"></app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.name"></app-advanced-filters>
+                            <app-advanced-filters [filter]="divisionSearchEntity.name" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-name-division"></app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="filters.address"></app-advanced-filters>
+                            <app-advanced-filters [filter]="divisionSearchEntity.address" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-address-division"></app-advanced-filters>
                         </th>
 
                     </tr>
                 </ng-template>
-                <!-- <ng-template pTemplate="body" let-list_supplier_of_legal_entity>
-                    <tr>
-                        <td> {{list_supplier_of_legal_entity.code}} </td>
-                        <td> {{list_supplier_of_legal_entity.name}} </td>
-                        <td> {{list_supplier_of_legal_entity.group}} </td>
-                        <td> {{list_supplier_of_legal_entity.tax_code}} </td>
-                        <td> {{list_supplier_of_legal_entity.address}} </td>
-                        <td> {{list_supplier_of_legal_entity.phone}} </td>
+                <ng-template pTemplate="body" let-division let-index="rowIndex">
+                    <tr [pSelectableRow]="division" [attr.data-qe-id]="'table-tbody-row-' + index">
+                        <td class="ui-resizable-column"> {{division.code}} </td>
+                        <td class="ui-resizable-column"> {{division.name}} </td>
+                        <td class="ui-resizable-column">
+                            <div class="edit" (click)="edit(division.id)">
+                                <mat-icon>edit</mat-icon>
+                            </div>
+
+                        </td>
                     </tr>
-                </ng-template> -->
+                </ng-template>
             </p-table>
             <div class="pagination">
-                <app-pagination></app-pagination>
+                <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"
+                    data-qe-id="pagination"></app-pagination>
             </div>
         </div>
     </div>
@@ -84,48 +113,59 @@
 
 
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
-    [style]="{width: '500px'}">
+    [style]="{width: '700px'}">
     <p-header>
         {{ 'division.modal.title' | translate}}
     </p-header>
-    <div class="container">
+    <form class="container" [formGroup]="divisionForm">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="bankid">{{ 'division.tab.code' | translate}}<span class="text-danger ml-2">*</span></label>
-                    <input type="text" class="form-control" />
+                    <label for="bankid">{{ 'division.tab.code' | translate}}<span
+                            class="text-danger ml-2">*</span></label>
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+                            id="code">
+                        <app-error data-qe-id="dialog-error-code"
+                            *ngIf="(divisionForm.controls.code?.errors && divisionForm.controls.code?.touched) || !!divisionForm.controls.error?.get('code')?.value"
+                            [formGroup]="divisionForm" [property]="'code'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
                 </div>
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="bankid">{{ 'division.tab.name' | translate}}<span class="text-danger ml-2">*</span></label>
-                    <input type="text" class="form-control" />
+                    <label for="bankid">{{ 'division.tab.name' | translate}}<span
+                            class="text-danger ml-2">*</span></label>
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+                            id="name">
+                        <app-error data-qe-id="dialog-error-code"
+                            *ngIf="(divisionForm.controls.name?.errors && divisionForm.controls.name?.touched) || !!divisionForm.controls.error?.get('name')?.value"
+                            [formGroup]="divisionForm" [property]="'name'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
                 </div>
             </div>
         </div>
         <div class="row">
-
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="bankname">{{ 'division.tab.address' | translate}}</label>
-                    <input type="text" class="form-control" />
+                    <input type="text" class="form-control" data-qe-id="dialog-form-address" formControlName="address"/>
                 </div>
             </div>
         </div>
 
-    </div>
+    </form>
     <p-footer>
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-cancel"
+                    <button class="btn btn-cancel" (click)="display = false"
                         (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-                    <button class="btn btn-save" (click)="onClickSave()">
+                    <button class="btn btn-save" (click)="save()">
                         {{ 'general.button.save' | translate}}</button>
-                    <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="confirmClicked = true"
-                        (cancel)="cancelClicked = true" (click)="onClickDelete()">
-                        {{ 'general.button.delete' | translate}}</button>
                 </div>
             </div>
         </div>

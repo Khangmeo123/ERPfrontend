@@ -6,6 +6,9 @@ import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/d
 import { DivisionSearchEntity } from 'src/app/_modules/master-data/_backend/division/division.searchentity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import { Entities } from 'src/app/_helpers/entity';
+import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 
 @Injectable({
     providedIn: 'root',
@@ -61,10 +64,32 @@ export class DivisionRepository extends Repository {
             );
     }
 
-    delete(divisionEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(divisionEntity),
+    active(divisionEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/active', JSON.stringify(divisionEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
+            );
+    }
+
+    deactive(divisionEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/deactive', JSON.stringify(divisionEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    getListLegalEntityDrop(legalSearchEntity: LegalSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/list-legal-entity', JSON.stringify(legalSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new LegalEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new LegalEntity(item);
+                    });
+                    return r.body;
+                }),
             );
     }
 }
