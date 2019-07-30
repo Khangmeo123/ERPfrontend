@@ -106,14 +106,15 @@
           </div>
         </div>
         <div class="page-section mt-2">
-          <ng-template pTemplate="colgroup">
-            <colgroup>
-              <col>
-              <col>
-            </colgroup>
-          </ng-template>
+          
           <p-table [value]="customerList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
             [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableCustomer>
+            <ng-template pTemplate="colgroup">
+                <colgroup>
+                  <col>
+                  <col>
+                </colgroup>
+              </ng-template>
             <ng-template pTemplate="header">
               <tr>
                 <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-customer">
