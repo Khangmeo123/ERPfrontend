@@ -74,7 +74,7 @@ export class AccountingPeriodComponent implements OnInit {
 
   public fiscalYearSearchEntity: FiscalYearSearchEntity = new FiscalYearSearchEntity();
 
-  public selectedFiscalYearList: FiscalYearEntity[] = [];
+  public periodTypeList: any[] = [];
 
   constructor(
     private accountingPeriodService: AccountingPeriodService,
@@ -99,7 +99,12 @@ export class AccountingPeriodComponent implements OnInit {
       this.accountingPeriodForm = form;
       if (this.setOfBookId) {
         this.accountingPeriodForm.controls.setOfBookId.setValue(this.setOfBookId);
+        this.accountingPeriodForm.controls.fiscalYearId.setValue(this.fiscalYearId);
       }
+    });
+
+    const periodTypeListSub = this.accountingPeriodService.periodTypeList.subscribe((list) => {
+      this.periodTypeList = list;
     });
 
     const coaListSub = this.accountingPeriodService.coaList.subscribe((list: Entities) => {
@@ -114,6 +119,7 @@ export class AccountingPeriodComponent implements OnInit {
     this.subs.add(sobListSub)
       .add(accountingPeriodSub)
       .add(coaListSub)
+      .add(periodTypeListSub)
       .add(fiscalYearListSub)
       .add(accountingPeriodFormSub)
       .add(accountingPeriodCountSub);
@@ -132,6 +138,10 @@ export class AccountingPeriodComponent implements OnInit {
 
   get validTo() {
     return this.accountingPeriodForm.get('validTo') as FormControl;
+  }
+
+  getPeriodTypeList() {
+    return this.accountingPeriodService.getPeriodTypeList();
   }
 
   onClickChange() {

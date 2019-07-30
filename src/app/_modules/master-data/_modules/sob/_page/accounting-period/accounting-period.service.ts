@@ -4,7 +4,6 @@ import { ToastrService } from 'ngx-toastr';
 import { Entities } from 'src/app/_helpers/entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { AccountingPeriodRepository } from './accounting-period.repository';
 import { AccountingPeriodEntity } from '../../../../_backend/accounting-period/accounting-period.entity';
 import { AccountingPeriodForm } from '../../../../_backend/accounting-period/accounting-period.form';
@@ -20,6 +19,8 @@ export class AccountingPeriodService {
   public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   public fiscalYearList: BehaviorSubject<FiscalYearEntity[]> = new BehaviorSubject([]);
+
+  public periodTypeList: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
@@ -41,6 +42,15 @@ export class AccountingPeriodService {
         this.accountingPeriodCount.next(count);
       }
     });
+  }
+
+  getPeriodTypeList() {
+    this.accountingPeriodRepository.getPeriodTypeList()
+      .subscribe((list) => {
+        if (list) {
+          this.periodTypeList.next(list);
+        }
+      });
   }
 
   getSobList(sobSearchEntity: SobSearchEntity) {

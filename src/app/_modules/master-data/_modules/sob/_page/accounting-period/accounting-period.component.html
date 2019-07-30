@@ -105,7 +105,7 @@
           </div>
         </div>
         <div class="flex-grow-1">
-          <app-simple-select></app-simple-select>
+          <app-simple-select (listOpen)="getPeriodTypeList()" [list]="periodTypeList"></app-simple-select>
         </div>
       </div>
     </div>
@@ -141,7 +141,7 @@
         <label for="description">
           {{'environment_tax.description' | translate}}
         </label>
-        <textarea data-qe-id="description" formControlName="description" name="description" class="form-control"
+        <textarea data-qe-id="description" id="description" formControlName="description" name="description" class="form-control"
                   rows="3"></textarea>
       </div>
     </div>

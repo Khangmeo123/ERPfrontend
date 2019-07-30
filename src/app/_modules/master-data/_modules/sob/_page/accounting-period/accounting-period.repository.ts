@@ -39,6 +39,13 @@ export class AccountingPeriodRepository extends Repository {
     );
   }
 
+  getPeriodTypeList() {
+    return this.http.post<any[]>(this.apiUrl + '/list-period-type', '',
+      {observe: 'response', headers: this.getHeader()}).pipe(
+      map(r => r.body),
+    );
+  }
+
   getFiscalYearList(fiscalYearSearchEntity: FiscalYearSearchEntity): Observable<FiscalYearEntity[]> {
     return this.http.post<FiscalYearEntity[]>(this.apiUrl + '/list-fiscal-year', JSON.stringify(fiscalYearSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
