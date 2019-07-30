@@ -170,27 +170,35 @@ export class ItemGroupService {
         return defered;
     }
 
-    addItemsToItemGroup(itemIds: string[], itemGroupId: string) {
-        this.itemGroupRepository.addItemsToItemGroup(itemIds, itemGroupId).subscribe(res => {
-            if (res) {
-
-            }
-        }, err => {
-            if (err) {
-
-            }
+    addItemsToItemGroup(itemIds: string[], itemGroupId: string): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.itemGroupRepository.addItemsToItemGroup(itemIds, itemGroupId).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve(res);
+                }
+            }, err => {
+                if (err) {
+                    reject(err);
+                }
+            });
         });
+        return defered;
     }
 
-    deleteItemFromItemGroup(itemId: string, itemGroupId: string) {
-        this.itemGroupRepository.deleteItemFromItemGroup(itemId, itemGroupId).subscribe(res => {
-            if (res) {
-                console.log(res);
-            }
-        }, err => {
-            if (err) {
-
-            }
+    deleteItemFromItemGroup(itemId: string, itemGroupId: string): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.itemGroupRepository.deleteItemFromItemGroup(itemId, itemGroupId).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve(res);
+                }
+            }, err => {
+                if (err) {
+                    reject(err);
+                }
+            });
         });
+        return defered;
     }
 }

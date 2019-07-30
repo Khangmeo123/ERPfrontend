@@ -233,6 +233,9 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
     if (this.itemGroupId !== null && this.itemGroupId !== undefined) {
       this.itemsFromItemGroupSearchEntity.itemGroupingId = this.itemGroupId;
     }
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.itemsFromItemGroupSearchEntity.legalEntityId = this.legalEntityId;
+    }
     this.itemGroupService.getItemsFromItemGroup(this.itemsFromItemGroupSearchEntity);
   }
 
@@ -258,25 +261,43 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   // item:
   itemOpen(id: string) {
     this.itemSearchEntity = new ItemSearchEntity();
-    this.itemSearchEntity.ids = [...this.itemsFromItemGroupIds];
+    if (this.itemsFromItemGroupIds.length > 0) {
+      this.itemSearchEntity.ids = [...this.itemsFromItemGroupIds];
+    }
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.itemSearchEntity.legalEntityId = this.legalEntityId;
+    }
     this.itemGroupService.dropDownItemList(this.itemSearchEntity);
   }
 
   itemTypingSearch(event: string) {
     this.itemSearchEntity = new ItemSearchEntity();
     this.itemSearchEntity.name.startsWith = event;
+    if (this.itemsFromItemGroupIds.length > 0) {
+      this.itemSearchEntity.ids = [...this.itemsFromItemGroupIds];
+    }
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.itemSearchEntity.legalEntityId = this.legalEntityId;
+    }
     this.itemTyping.next(this.itemSearchEntity);
   }
 
   addItemsToItemGroup() {
-    this.itemGroupService.addItemsToItemGroup(this.itemsFromItemGroupIds, this.itemGroupId);
-    this.itemsFromItemGroupIds = [];
-    this.clearSearchItemsFromItemGroup(this.tableItems);
+    this.itemGroupService.addItemsToItemGroup(this.itemsFromItemGroupIds, this.itemGroupId).then(res => {
+      if (res) {
+        this.itemsFromItemGroupIds = [];
+        this.itemIds = [];
+        this.clearSearchItemsFromItemGroup(this.tableItems);
+      }
+    });
   }
 
   deleteItemFromItemGroup(itemId: string) {
-    this.itemGroupService.deleteItemFromItemGroup(itemId, this.itemGroupId);
-    this.clearSearchItemsFromItemGroup(this.tableItems);
+    this.itemGroupService.deleteItemFromItemGroup(itemId, this.itemGroupId).then(res => {
+      if (res) {
+        this.clearSearchItemsFromItemGroup(this.tableItems);
+      }
+    });
   }
 
   editItemFromItemGroup(itemId: string) {

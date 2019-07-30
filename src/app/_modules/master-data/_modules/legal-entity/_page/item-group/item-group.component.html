@@ -90,18 +90,20 @@
       <div class="col-sm-6">
         <div class="row d-flex mt-2">
           <div class="col-sm-4 align-items-center">
-            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemIds" [selectedList]="itemExceptIds"
+            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemExceptIds" [selectedList]="itemIds"
               [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemsFromItemGroupIds = $event"
               (listOpen)="itemOpen()">
             </app-multi-select>
           </div>
 
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
-            <button class="btn btn-add" (click)="addItemsToItemGroup()" data-qe-id="button-items-add">
+            <button class="btn btn-add" (click)="addItemsToItemGroup()" data-qe-id="button-items-add"
+              [disabled]="itemsFromItemGroupIds.length === 0">
               {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-items-import">
+            <div class="btn-group" dropdown data-qe-id="button-items-import"
+              [isDisabled]="legalEntityId==null||legalEntityId==undefined">
               <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                aria-controls="dropdown-basic">
+                aria-controls="dropdown-basic" isDisabled="true">
                 {{'general.button.import' | translate}}<span class="caret"></span>
               </button>
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -113,8 +115,10 @@
                 </li>
               </ul>
             </div>
-            <button class="btn btn-export"
+            <button class="btn btn-export" [disabled]="legalEntityId==null||legalEntityId==undefined"
               data-qe-id="button-items-import">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearchItemsFromItemGroup(tableItems)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
 
@@ -162,9 +166,9 @@
                 <td class="ui-resizable-column"> {{items.code}} </td>
                 <td class="ui-resizable-column"> {{items.name}} </td>
                 <td class="ui-resizable-column">
-                  <a href="javascript:void(0)" (click)="deleteItemFromItemGroup()">Xoá</a>
-                  <a href="javascript:void(0)" (click)="editItemFromItemGroup()">Sửa</a>
-                  <a href="javascript:void(0)" (click)="viewItemFromItemGroup()">Xem</a>
+                  <a href="javascript:void(0)" (click)="deleteItemFromItemGroup(items.id)">Xoá</a>
+                  <a href="javascript:void(0)" (click)="editItemFromItemGroup(items.id)">Sửa</a>
+                  <a href="javascript:void(0)" (click)="viewItemFromItemGroup(items.id)">Xem</a>
                 </td>
               </tr>
             </ng-template>

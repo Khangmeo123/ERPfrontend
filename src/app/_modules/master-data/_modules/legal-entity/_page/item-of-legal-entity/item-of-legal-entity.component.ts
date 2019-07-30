@@ -152,7 +152,7 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
 
   sobOpen(id: string) {
     this.sobSearchEntity = new SobSearchEntity();
-    if (id !== null && id !== undefined) {
+    if (id !== null && id.length > 0) {
       this.sobSearchEntity.ids.push(id);
     }
     this.itemOfLegalEntityService.dropDownSobList(this.sobSearchEntity);

@@ -48,8 +48,8 @@
                 <th class="th-filter">
                   <app-single-select [list]="sobExceptIds" [selectedList]="sobIds" [key]="'name'"
                     (search)="sobTypingSearch($event)"
-                    (selectionChange)="legalSearchEntity.sobId = $event[0]; getLegalList()"
-                    (listOpen)="sobOpen(legalSearchEntity.sobId)">
+                    (selectionChange)="legalSearchEntity.setOfBookId = $event[0]; getLegalList()"
+                    (listOpen)="sobOpen(legalSearchEntity.setOfBookId)">
                   </app-single-select>
                 </th>
                 <th class="th-filter">
