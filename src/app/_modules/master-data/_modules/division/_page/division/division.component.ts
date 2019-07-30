@@ -11,7 +11,7 @@ import { DivisionSearchEntity } from 'src/app/_modules/master-data/_backend/divi
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { BookmarkService } from 'src/app/_services';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
-// import { translate } from 'src/app/_helpers/string';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-division',
@@ -20,7 +20,7 @@ import { GeneralService } from 'src/app/_helpers/general-service.service';
   providers: [DivisionService]
 })
 export class DivisionComponent implements OnInit {
-  pageTitle = ('division.header.title');
+  pageTitle = translate('division.header.title');
   public popoverTitle: string = 'Popover title';
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   public confirmClicked: boolean = false;
