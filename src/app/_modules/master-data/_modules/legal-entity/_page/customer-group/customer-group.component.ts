@@ -264,6 +264,8 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     }
     this.customerSearchEntity.customerGroupingId = this.customerGroupId;
     this.customerGroupService.saveCustomer(this.customerSearchEntity).then(res => {
+      this.customerSearchEntity.legalEntityId = this.legalEntityId;
+      this.customerSearchEntity.customerGroupingId = this.customerGroupId;
       this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
     }).catch(err => {
     });

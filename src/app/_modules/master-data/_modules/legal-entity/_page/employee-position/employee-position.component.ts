@@ -232,6 +232,8 @@ export class EmployeePositionComponent implements OnInit {
     }
     this.employeeSearchEntity.positionId = this.employeePositionId;
     this.employeePositionService.saveEmployee(this.employeeSearchEntity).then(res => {
+      this.employeeSearchEntity.legalEntityId = this.legalEntityId;
+      this.employeeSearchEntity.positionId = this.employeePositionId;
       this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
     }).catch(err => {
     });
