@@ -24,13 +24,14 @@
       </span>
       <app-single-select data-qe-id="form-select-sob" [list]="sobExceptIds" [selectedList]="sobIds" [key]="'name'"
         (search)="sobSearch($event)" (selectionChange)="selectSob($event)"
-        (listOpen)="sobSearch(legalSearchEntity.setOfBookId)"></app-single-select>
+        (listOpen)="openSobList(legalSearchEntity.setOfBookId)"></app-single-select>
     </div>
     <div class="page-section mt-2">
       <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
         scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
           <colgroup>
+            <col>
             <col>
             <col>
           </colgroup>
@@ -45,6 +46,7 @@
               {{'legal_entity.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
+            <th pResizableColumn></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -55,12 +57,18 @@
               <app-advanced-filters [filter]="legalSearchEntity.name" (changeFilter)="getList()"
                 data-qe-id="table-thead-filter-name"></app-advanced-filters>
             </th>
+            <th class="th-filter"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-legalEntity let-index="rowIndex">
-          <tr (dblclick)="edit(legalEntity.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+          <tr  [attr.data-qe-id]="'table-tbody-row-' + index">
             <td class="ui-resizable-column"> {{legalEntity.code}} </td>
             <td class="ui-resizable-column"> {{legalEntity.name}} </td>
+            <td>
+              <div class="edit" (click)="edit(legalEntity.id)">
+                <mat-icon>edit</mat-icon>
+              </div>
+            </td>
           </tr>
         </ng-template>
       </p-table>
@@ -118,10 +126,6 @@
             data-qe-id="dialog-button-cancel">{{ 'general.button.cancel' | translate}}</button>
           <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
             {{ 'general.button.save' | translate}}</button>
-          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-            data-qe-id="dialog-button-delete" *ngIf="legalForm.value?.isDeleted" [popoverMessage]="popoverMessage"
-            placement="bottom" (confirm)="delete()">
-            {{ 'general.button.delete' | translate}}</button>
         </div>
       </div>
     </div>

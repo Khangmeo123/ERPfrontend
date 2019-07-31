@@ -95,8 +95,8 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   }
 
   sobSearch(event) {
-    this.legalSearchEntity.code = event;
-    this.legalSearchEntity.name = event;
+    this.legalSearchEntity.code.startsWith = event;
+    this.legalSearchEntity.name.startsWith = event;
     this.sobTyping.next(this.legalSearchEntity);
   }
   selectSob(event) {
@@ -114,6 +114,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     if (!this.legalForm.valid) {
       this.genaralService.validateAllFormFields(this.legalForm);
     } else {
+      this.legalSearchEntity.setOfBookId = this.setOfBookId;
       this.legalService.save(this.legalForm.value, this.legalSearchEntity).then(res => {
         this.display = res;
       }).catch(err => {
@@ -140,6 +141,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     this.pagination.pageNumber = 1;
     this.legalSearchEntity.skip = 0;
     this.legalSearchEntity.take = this.pagination.take;
+    this.legalSearchEntity.setOfBookId = this.setOfBookId;
     this.legalService.getList(this.legalSearchEntity);
   }
 

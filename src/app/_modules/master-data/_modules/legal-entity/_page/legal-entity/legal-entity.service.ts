@@ -7,6 +7,7 @@ import { LegalForm } from 'src/app/_modules/master-data/_backend/legal/legal.for
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { Entities } from 'src/app/_helpers/entity';
+import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.searchentity';
 
 
 
@@ -126,8 +127,8 @@ export class LegalEntityService {
         return defered;
     }
 
-    getListSobOfLegal(legalSearchEntity: LegalSearchEntity) {
-        this.legalRepository.getListSobOfLegal(legalSearchEntity).subscribe(res => {
+    getListSobOfLegal(sobSearchEntity: SobSearchEntity) {
+        this.legalRepository.getListSobOfLegal(sobSearchEntity).subscribe(res => {
           if (res) {
             this.sobList.next(res);
           }
@@ -137,8 +138,8 @@ export class LegalEntityService {
           }
         });
       }
-    getListSobOfLegalByTyping(legalSearchEntity: Observable<LegalSearchEntity>) {
-        legalSearchEntity.pipe(debounceTime(400),
+    getListSobOfLegalByTyping(sobSearchEntity: Observable<SobSearchEntity>) {
+        sobSearchEntity.pipe(debounceTime(400),
         distinctUntilChanged(),
         switchMap(searchEntity => {
         return this.legalRepository.getListSobOfLegal(searchEntity)
