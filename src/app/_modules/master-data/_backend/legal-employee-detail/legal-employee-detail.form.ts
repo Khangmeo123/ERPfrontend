@@ -5,22 +5,22 @@ import { EmployeeDetailOfLegalEntity } from './legal-employee-detail.entity';
 export class LegalEmployeeDetailForm extends FormModel {
     code = new FormControl({ value: '', disabled: true });
     name = new FormControl({ value: '', disabled: true });
-    taxCode = new FormControl('');
-    jobTitleId = new FormControl('');
-    jobTitleName = new FormControl('');
-    jobLevelId = new FormControl('');
-    jobLevel = new FormControl();
+    taxCode = new FormControl({ value: '', disabled: true });
+    jobTitleId = new FormControl({ value: '', disabled: true });
+    jobTitleName = new FormControl({ value: '', disabled: true });
+    jobLevelId = new FormControl({ value: '', disabled: true });
+    jobLevel = new FormControl({ value: '', disabled: true });
     statusId = new FormControl({ value: '', disabled: true });
     statusName = new FormControl({ value: '', disabled: true }); //thiếu trường nầy này
-    gender = new FormControl('');
-    identityNumber = new FormControl('');
-    issueDate = new FormControl('');
-    issuePlace = new FormControl('');
-    salary = new FormControl();
-    salaryRatio = new FormControl();
-    insuranceSalary = new FormControl();
-    numberDependentPerson = new FormControl();
-    dob = new FormControl('');
+    gender = new FormControl({disabled: true });
+    identityNumber = new FormControl({ value: '', disabled: true });
+    issueDate = new FormControl({ value: '', disabled: true });
+    issuePlace = new FormControl({ value: '', disabled: true });
+    salary = new FormControl({ value: '', disabled: true });
+    salaryRatio = new FormControl({ value: '', disabled: true });
+    insuranceSalary = new FormControl({ value: '', disabled: true });
+    numberDependentPerson = new FormControl({ value: '', disabled: true });
+    dob = new FormControl({ value: '', disabled: true });
     employeeId = new FormControl(''); // trường này đôi thanh array employeeGroup
     legalEntityId = new FormControl('');
     bankAccountName = new FormControl('');
@@ -35,7 +35,6 @@ export class LegalEmployeeDetailForm extends FormModel {
     endDate = new FormControl('');
 
     employeeContacts = new FormArray([]);
-    employeeBankAccounts = new FormArray([]);
 
     constructor(employeeDetailEntity?: EmployeeDetailOfLegalEntity) {
         super();

@@ -90,7 +90,7 @@ export class SupplierDetailService {
     }
 
 
-    getListProvice(provinceSearchEntity: ProvinceSearchEntity) {
+    getListProvince(provinceSearchEntity: ProvinceSearchEntity) {
         this.supplierDetailRepository.getListProvince(provinceSearchEntity).subscribe(res => {
             if (res) {
                 this.proviceList.next(res);
@@ -101,7 +101,7 @@ export class SupplierDetailService {
             }
         });
     }
-    getListProviceByTyping(provinceSearchEntity: Observable<ProvinceSearchEntity>) {
+    getListProvinceByTyping(provinceSearchEntity: Observable<ProvinceSearchEntity>) {
         provinceSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
@@ -137,8 +137,8 @@ export class SupplierDetailService {
     }
 
 
-    getListBank(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
-        this.supplierDetailRepository.getListBankAccount(bankAccountSearchEntity).subscribe(res => {
+    getListBank(bankSearchEntity: BankSearchEntity) {
+        this.supplierDetailRepository.getListBankAccount(bankSearchEntity).subscribe(res => {
             if (res) {
                 this.bankList.next(res);
             }
@@ -148,7 +148,7 @@ export class SupplierDetailService {
             }
         });
     }
-    getListListBankByTyping(bankAccountSearchEntity: Observable<BankAccountOfLegalSearchEntity>) {
+    getListListBankByTyping(bankAccountSearchEntity: Observable<BankSearchEntity>) {
         bankAccountSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {

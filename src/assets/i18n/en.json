@@ -388,29 +388,6 @@
 		},
 		"tax_code": ""
 	},
-	"detail_employee_of_legal_entity": {
-		"bank_account": {
-			"account_name": "",
-			"account_number": "",
-			"bank_city": "",
-			"bank_division": "",
-			"bank_name": "",
-			"division_address": ""
-		},
-		"contact": {
-			"add": "",
-			"address": "",
-			"city": "",
-			"email": "",
-			"index": "",
-			"name": "",
-			"phone": ""
-		},
-		"group_employee": "",
-		"header": {
-			"title": ""
-		}
-	},
 	"detail_item_of_legal_entity": {
 		"bill_of_materias": {
 			"amount": "",
@@ -469,22 +446,11 @@
 	"employee": {
 		"content": {
 			"table": {
-				"bassic_salary": "",
-				"birthday": "",
-				"coefficients_salary": "",
-				"date_range": "",
-				"employee_id": "",
-				"employee_name": "",
 				"gender": {
 					"men": "",
 					"women": ""
 				},
-				"id_emp": "",
-				"issue_by": "",
-				"salaryInsurance": "",
-				"salary_agreement": "",
-				"sex": "",
-				"tax_code": ""
+				"salaryInsurance": ""
 			}
 		},
 		"detail": {
@@ -507,15 +473,8 @@
 			"header": {
 				"title": ""
 			},
-			"level": "",
-			"number_dependents": "",
-			"position": "",
-			"status": "",
 			"tab": {
-				"title1": "",
-				"title_1": "",
-				"title_2": "",
-				"title_3": ""
+				"title1": ""
 			}
 		},
 		"list": {
@@ -528,6 +487,53 @@
 				"status": ""
 			}
 		}
+	},
+	"employeeDetailOfLegal": {
+		"bankAccount": {
+			"accountName": "",
+			"accountNumber": "",
+			"city": "",
+			"division": "",
+			"divisionAddress": "",
+			"name": "",
+			"title": ""
+		},
+		"bassicSalary": "",
+		"birthday": "",
+		"code": "",
+		"contact": {
+			"add": "",
+			"address": "",
+			"city": "",
+			"email": "",
+			"index": "",
+			"name": "",
+			"phone": "",
+			"title": ""
+		},
+		"employeeGroup": "",
+		"gender": {
+			"men": "",
+			"title": "",
+			"women": ""
+		},
+		"general": {
+			"title": ""
+		},
+		"header": {
+			"title": ""
+		},
+		"identityNumber": "",
+		"issueDate": "",
+		"issuePlace": "",
+		"jobLevel": "",
+		"jobTitle": "",
+		"name": "",
+		"numberDependentPerson": "",
+		"salaryAgreement": "",
+		"salaryRatio": "",
+		"status": "",
+		"taxCode": ""
 	},
 	"employeeGroup": {
 		"add": "",
@@ -559,6 +565,11 @@
 		},
 		"name": "",
 		"sob": ""
+	},
+	"employeePosition": {
+		"header": {
+			"title": ""
+		}
 	},
 	"environment_tax": {
 		"description": "",

@@ -14,6 +14,7 @@ import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/prov
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
 import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { CustomerOfLegalEntityDetailRepository } from './customer-detail.repository';
+import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 
 @Injectable()
 export class CustomerDetailService {
@@ -87,7 +88,7 @@ export class CustomerDetailService {
     }
 
 
-    getListProvice(provinceSearchEntity: ProvinceSearchEntity) {
+    getListProvince(provinceSearchEntity: ProvinceSearchEntity) {
         this.customerDetailRepository.getListProvince(provinceSearchEntity).subscribe(res => {
             if (res) {
                 this.proviceList.next(res);
@@ -98,7 +99,7 @@ export class CustomerDetailService {
             }
         });
     }
-    getListProviceByTyping(provinceSearchEntity: Observable<ProvinceSearchEntity>) {
+    getListProvinceByTyping(provinceSearchEntity: Observable<ProvinceSearchEntity>) {
         provinceSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
@@ -134,8 +135,8 @@ export class CustomerDetailService {
     }
 
 
-    getListBank(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
-        this.customerDetailRepository.getListBankAccount(bankAccountSearchEntity).subscribe(res => {
+    getListBank(bankSearchEntity: BankSearchEntity) {
+        this.customerDetailRepository.getListBankAccount(bankSearchEntity).subscribe(res => {
             if (res) {
                 this.bankList.next(res);
             }
@@ -145,8 +146,8 @@ export class CustomerDetailService {
             }
         });
     }
-    getListListBankByTyping(bankAccountSearchEntity: Observable<BankAccountOfLegalSearchEntity>) {
-        bankAccountSearchEntity.pipe(debounceTime(400),
+    getListListBankByTyping(bankSearchEntity: Observable<BankSearchEntity>) {
+        bankSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
                 return this.customerDetailRepository.getListBankAccount(searchEntity)

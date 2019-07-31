@@ -14,6 +14,8 @@ import { PaymentTermEntity } from 'src/app/_modules/master-data/_backend/payment
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
 import { CustomerDetailOfLegalEntity } from 'src/app/_modules/master-data/_backend/legal-customer-detail/legal-customer-detail.entity';
+import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
+import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 
 @Injectable({
     providedIn: 'root',
@@ -65,15 +67,15 @@ export class CustomerOfLegalEntityDetailRepository extends Repository{
             );
     }
 
-    getListBankAccount(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
+    getListBankAccount(bankAccountSearchEntity: BankSearchEntity) {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-bank', JSON.stringify(bankAccountSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
-                        return new BankAccountOfLegalEntity(item);
+                        return new BankEntity(item);
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new BankAccountOfLegalEntity(item);
+                        return new BankEntity(item);
                     });
                     return r.body;
                 }),

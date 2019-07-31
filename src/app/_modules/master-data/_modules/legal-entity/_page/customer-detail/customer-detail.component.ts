@@ -13,6 +13,8 @@ import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/
 import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
+import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
+import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 
 @Component({
   selector: 'app-detail-customer-group',
@@ -51,11 +53,11 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   staffInChargeTyping: Subject<EmployeeSearchEntity> = new Subject();
   staffInChargeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
-  //list drop staff in changre
-  bankIds: BankAccountOfLegalEntity[];
-  bankExceptIds: BankAccountOfLegalEntity[];
-  bankTyping: Subject<BankAccountOfLegalSearchEntity> = new Subject();
-  bankSearchEntity: BankAccountOfLegalSearchEntity = new BankAccountOfLegalSearchEntity();
+  //list drop bank
+  bankIds: BankEntity[];
+  bankExceptIds: BankEntity[];
+  bankTyping: Subject<BankSearchEntity> = new Subject();
+  bankSearchEntity: BankSearchEntity = new BankSearchEntity();
 
   //list drop province
   provinceIds: ProvinceEntity[];
@@ -130,6 +132,10 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.customerDetailService.getListListBankByTyping(this.bankTyping);
+    this.customerDetailService.getListPaymentTermByTyping(this.paymentTermTyping);
+    this.customerDetailService.getListProvinceByTyping(this.provinceTyping);
+    this.customerDetailService.getListStaffInChargeByTyping(this.staffInChargeTyping);
     this.customerDetailSubs.add(customerFormSub).add(listPaymentTerm).add(listStaffInChangre)
       .add(contactForm).add(bankAccountForm).add(listProvince).add(listBank);
   }
@@ -193,7 +199,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   // list drop bank list
 
   openBankList(bankId: string) {
-    this.bankSearchEntity = new BankAccountOfLegalSearchEntity();
+    this.bankSearchEntity = new BankSearchEntity();
     if (bankId !== null && bankId !== undefined) {
       this.bankSearchEntity.ids.push(bankId);
     }
@@ -202,8 +208,8 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
 
 
   bankSearch(event) {
-    this.bankSearchEntity.bankName = event;
-    this.bankSearchEntity.bankName = event;
+    this.bankSearchEntity.code = event;
+    this.bankSearchEntity.name = event;
     this.bankTyping.next(this.bankSearchEntity);
   }
 
@@ -215,7 +221,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     if (provinceId !== null && provinceId !== undefined) {
       this.provinceSearchEntity.ids.push(provinceId);
     }
-    this.customerDetailService.getListProvice(this.provinceSearchEntity);
+    this.customerDetailService.getListProvince(this.provinceSearchEntity);
   }
 
 
@@ -324,7 +330,6 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    console.log('this.routeLink', this.routeLink)
     this.router.navigate([this.routeLink]);
   }
 }
