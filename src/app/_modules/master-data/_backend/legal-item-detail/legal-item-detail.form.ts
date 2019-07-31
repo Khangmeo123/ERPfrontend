@@ -96,10 +96,10 @@ export class LegalItemDetailForm extends FormModel {
 }
 
 export class ItemMaterialForm extends FormModel {
-    sourceItemId = new FormControl('');
+    sourceItemId = new FormControl('', requiredField);
     sourceItemCode = new FormControl('');
-    sourceItemName = new FormControl('');
-    unitOfMeasureId = new FormControl('');
+    sourceItemName = new FormControl({ value: '', disabled: true });
+    unitOfMeasureId = new FormControl('', requiredField);
     unitOfMeasureCode = new FormControl('');
     unitOfMeasureName = new FormControl('');
     itemDetailId = new FormControl('');

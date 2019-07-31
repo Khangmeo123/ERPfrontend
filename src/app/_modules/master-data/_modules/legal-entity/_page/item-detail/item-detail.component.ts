@@ -1,4 +1,3 @@
-import { ItemMaterial } from './../../../../_backend/legal-item-detail/legal-item-detail.entity';
 import { UomSearchEntity } from './../../../../_backend/uom/uom.searchentity';
 import { UomEntity } from './../../../../_backend/uom/uom.entity';
 import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/item.searchentity';
@@ -18,7 +17,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
   selector: 'app-detail-item-of-legal-entity',
   templateUrl: './item-detail.component.html',
   styleUrls: ['./item-detail.component.scss'],
-  providers: [LegalItemDetailService]
+  providers: [LegalItemDetailService],
 })
 export class LegalItemDetailComponent implements OnInit, OnDestroy {
 
@@ -203,7 +202,7 @@ export class LegalItemDetailComponent implements OnInit, OnDestroy {
 
     this.legalItemDetailSubs.add(itemDetailFormSub).add(inventoryAccountSub).add(returnAccountSub).add(itemMaterialForm)
       .add(saleAllowancesAccountSub).add(expenseAccountSub).add(revenueAccountSub).add(discountAccount)
-      .add(itemDiscountForm).add(discountTypeListSub);
+      .add(itemDiscountForm).add(discountTypeListSub).add(itemListSub).add(uomListSub);
   }
 
   ngOnInit() {
@@ -334,7 +333,7 @@ export class LegalItemDetailComponent implements OnInit, OnDestroy {
     if (this.legalItemDetailForm.get('discountAccountId').value) {
       this.discountAccountSearchEntity.ids.push(this.legalItemDetailForm.get('discountAccountId').value);
     }
-    this.legalItemDetailService.getRevenueAccountList(this.discountAccountSearchEntity);
+    this.legalItemDetailService.getDiscountAccountList(this.discountAccountSearchEntity);
   }
 
   typingSearchDiscountAccount(event: string) {
@@ -376,6 +375,10 @@ export class LegalItemDetailComponent implements OnInit, OnDestroy {
     if (this.discountTypeList.length === 0) {
       this.legalItemDetailService.getDiscountTypeList();
     }
+  }
+
+  returnDiscountTypeValue(node: any) {
+    return node.code;
   }
 
   // itemMaterials:
@@ -436,5 +439,19 @@ export class LegalItemDetailComponent implements OnInit, OnDestroy {
 
   deleteItemMaterial(index: number) {
     this.legalItemDetailService.deleteItemMaterial(index);
+  }
+
+  selectItem(event: any) {
+    this.itemMaterialForm.controls.sourceItemId.setValue(event.id);
+    this.itemMaterialForm.controls.sourceItemName.setValue(event.name);
+    this.itemMaterialForm.controls.sourceItemCode.setValue(event.code);
+  }
+
+  returnItemValue(node) {
+    return node;
+  }
+
+  returnUomValue(node) {
+    return node;
   }
 }

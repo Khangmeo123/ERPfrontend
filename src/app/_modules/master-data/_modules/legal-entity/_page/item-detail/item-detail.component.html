@@ -23,7 +23,7 @@
                 </button>
                 <div class="row">
                     <div class="col-sm-3 col-md-2">
-                        <app-cropper [control]="legalItemDetailForm.get('image')"></app-cropper>
+                        <app-cropper [control]="legalItemDetailForm.get('image')" [disabled]="true"></app-cropper>
                     </div>
                     <div class="flex-grow-1 pr-2">
                         <div class="row">
@@ -489,7 +489,7 @@
                 </div>
 
                 <div class="mt-2">
-                    <p-table [value]="legalItemDetailForm.controls.itemMaterials.value" [scrollable]="true"
+                    <p-table [value]="legalItemDetailForm.controls.itemMaterials.getRawValue()" [scrollable]="true"
                         scrollHeight="500px" [resizableColumns]="true" #tableItemMaterial>
                         <ng-template pTemplate="colgroup">
                             <colgroup>
@@ -707,14 +707,14 @@
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
-                    <app-single-select class="w-100" [list]="itemExceptIds" [selectedList]="itemIds" [key]="'name'"
-                        (search)="typingSearchItemList($event)"
-                        (selectionChange)="itemMaterialForm.controls.sourceItemId.setValue($event)"
-                        (listOpen)="openItemList()">
+                    <app-single-select class="w-100" [list]="itemExceptIds" [selectedList]="itemIds" [key]="'code'"
+                        [initialValue]="itemMaterialForm.controls.sourceItemCode.value" *ngIf="isOpenModalItemMaterial"
+                        [valueSelector]="returnItemValue" (search)="typingSearchItemList($event[0].id)"
+                        (selectionChange)="selectItem($event[0])" (listOpen)="openItemList()">
                     </app-single-select>
                     <app-error data-qe-id="dialog-error-sourceItemCode"
-                        *ngIf="(itemMaterialForm.controls.sourceItemCode?.errors && itemMaterialForm.controls.sourceItemCode?.touched) || !!itemMaterialForm.controls.errors?.get('sourceItemCode')?.value"
-                        [formGroup]="itemMaterialForm" [property]="'sourceItemCode'" [placement]="'top'"
+                        *ngIf="(itemMaterialForm.controls.sourceItemId?.errors && itemMaterialForm.controls.sourceItemId?.touched) || !!itemMaterialForm.controls.errors?.get('sourceItemId')?.value"
+                        [formGroup]="itemMaterialForm" [property]="'sourceItemId'" [placement]="'top'"
                         class="error-form">
                     </app-error>
                 </div>
@@ -731,16 +731,19 @@
             <div class="form-group col-6">
                 <label>
                     {{'legalItemDetail.itemMaterials.unitOfMeasureCode' | translate}}
+                    <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
-                    <app-single-select class="w-100" [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
-                        (search)="typingSearchUomList($event)"
-                        (selectionChange)="itemMaterialForm.controls.unitOfMeasureId.setValue($event)"
+                    <app-single-select class="w-100" [list]="uomExceptIds" [selectedList]="uomIds" [key]="'code'"
+                        *ngIf="isOpenModalItemMaterial" (search)="typingSearchUomList($event[0])"
+                        [initialValue]="itemMaterialForm.controls.unitOfMeasureCode.value"
+                        [valueSelector]="returnUomValue" (selectionChange)="itemMaterialForm.controls.unitOfMeasureId.setValue($event[0].id); 
+                        itemMaterialForm.controls.unitOfMeasureCode.setValue($event[0].code)"
                         (listOpen)="openUomList()">
                     </app-single-select>
-                    <app-error data-qe-id="dialog-error-unitOfMeasureCode"
-                        *ngIf="(itemMaterialForm.controls.unitOfMeasureCode?.errors && itemMaterialForm.controls.unitOfMeasureCode?.touched) || !!itemMaterialForm.controls.errors?.get('unitOfMeasureCode')?.value"
-                        [formGroup]="itemMaterialForm" [property]="'unitOfMeasureCode'" [placement]="'top'"
+                    <app-error data-qe-id="dialog-error-unitOfMeasureId"
+                        *ngIf="(itemMaterialForm.controls.unitOfMeasureId?.errors && itemMaterialForm.controls.unitOfMeasureId?.touched) || !!itemMaterialForm.controls.errors?.get('unitOfMeasureId')?.value"
+                        [formGroup]="itemMaterialForm" [property]="'unitOfMeasureId'" [placement]="'top'"
                         class="error-form">
                     </app-error>
                 </div>
@@ -758,8 +761,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-save" appNoDblClick (click)="saveItemMaterial(itemMaterialForm.value)"
-                        data-qe-id="dialog-button-save">
+                    <button class="btn btn-save" appNoDblClick
+                        (click)="saveItemMaterial(itemMaterialForm.getRawValue())" data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
                     <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                         (click)="isOpenModalItemMaterial = false">{{ 'general.button.cancel' | translate}}</button>
