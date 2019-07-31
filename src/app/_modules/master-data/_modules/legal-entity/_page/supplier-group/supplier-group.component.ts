@@ -278,7 +278,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   onClickAddSupplier() {
-    this.supplierSearchEntity.supplierIds = this.listSupplierId;
+    this.supplierSearchEntity.supplierDetailIds = this.listSupplierId;
     this.supplierSearchEntity.legalEntityId = this.legalId;
     this.supplierGroupService.saveSupplier(this.supplierSearchEntity).then(res => {
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);

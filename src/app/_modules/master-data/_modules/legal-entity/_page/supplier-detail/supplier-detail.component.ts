@@ -138,12 +138,14 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let arr = [];
-    arr = this.router.url.split('/');
-    if (arr[3] === 'supplier-group') {
-      this.routeLink = '/master-data/legal-entity/supplier-group/';
-    } else {
-      this.routeLink = '/master-data/legal-entity/supplier-of-legal-entity/'
+    const arr = this.router.url.split('/')[3];
+    switch (arr) {
+      case 'supplier-of-legal-entity':
+        this.routeLink = '/master-data/legal-entity/supplier-of-legal-entity';
+        break;
+      case 'supplier-group':
+        this.routeLink = '/master-data/legal-entity/supplier-group';
+        break;
     }
   }
 
@@ -223,7 +225,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     this.provinceTyping.next(this.provinceSearchEntity);
   }
 
-  
+
   selectedProvince(event) {
     const data = event.map(e => ({
       provinceId: e.id,
@@ -276,7 +278,6 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   saveBankAccount(bankAccount: any) {
-    console.log('this.contactForm.valid', this.contactForm.valid)
     if (!this.bankAccountForm.valid) {
       this.generalService.validateAllFormFields(this.bankAccountForm);
     }else {

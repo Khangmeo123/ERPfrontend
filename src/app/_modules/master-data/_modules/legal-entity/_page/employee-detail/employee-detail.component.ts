@@ -92,12 +92,14 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    let arr = [];
-    arr = this.router.url.split('/');
-    if (arr[3] === 'employee-position') {
-      this.routeLink = '/master-data/legal-entity/employee-position/';
-    } else {
-      this.routeLink = '/master-data/legal-entity/employee-of-legal-entity/'
+    const arr = this.router.url.split('/')[3];
+    switch (arr) {
+      case 'employee-of-legal-entity':
+        this.routeLink = '/master-data/legal-entity/employee-of-legal-entity';
+        break;
+      case 'employee-position':
+        this.routeLink = '/master-data/legal-entity/employee-position';
+        break;
     }
   }
 
@@ -116,9 +118,13 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
 
-  bankSearch(event) {
-    this.bankSearchEntity.code = event;
-    this.bankSearchEntity.name = event;
+  bankSearch(event: any, id: string) {
+    this.bankSearchEntity = new BankSearchEntity();
+    this.bankSearchEntity.code.startsWith = event;
+    this.bankSearchEntity.name.startsWith = event;
+    if (id !== null && id.length > 0) {
+      this.bankSearchEntity.ids.push(id);
+    }
     this.bankTyping.next(this.bankSearchEntity);
   }
 
@@ -184,16 +190,12 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
   // page action
 
-  save() {  
-    this.employeeDetailForm.value.code = this.employeeDetailForm.controls.code.value;
-    this.employeeDetailForm.value.name = this.employeeDetailForm.controls.name.value;
-    this.employeeDetailForm.value.taxCode = this.employeeDetailForm.controls.taxCode.value;
-    this.employeeDetailForm.value.status = this.employeeDetailForm.controls.status.value;
-    this.employeeDetailForm.value.note = this.employeeDetailForm.controls.note.value;
+  save() {
+   
     if (!this.employeeDetailForm.valid) {
       this.generalService.validateAllFormFields(this.employeeDetailForm);
     } else {
-      this.employeeDetailService.save(this.employeeDetailForm).then(res => {
+      this.employeeDetailService.save(this.employeeDetailForm.value).then(res => {
         this.router.navigate([this.routeLink]);
       });
     }

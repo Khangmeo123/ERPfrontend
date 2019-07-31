@@ -122,21 +122,18 @@ export class EmployeeDetailService {
 
     save(employeeDetailEntity: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (employeeDetailEntity.value.id !== null && employeeDetailEntity.value.id !== undefined
-                && employeeDetailEntity.value.id !== environment.emtyGuid) {
-                this.employeeDetailRepository.update(employeeDetailEntity.value).subscribe(res => {
-                    if (res) {
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve();
-                    }
-                }, err => {
-                    if (err) {
-                        this.employeeDetailForm.next(this.fb.group(
-                            new LegalEmployeeDetailForm(err),
-                        ));
-                    }
-                });
-            }
+            this.employeeDetailRepository.update(employeeDetailEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.employeeDetailForm.next(this.fb.group(
+                        new LegalEmployeeDetailForm(err),
+                    ));
+                }
+            });
         });
         return defered;
     }

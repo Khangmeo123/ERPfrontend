@@ -34,6 +34,7 @@ export class EmployeeDetailOfLegalEntity extends Entity {
     endDate: string;
 
     customerContacts: InfoContactEntity[];
+    employeePositions: string[];
 
     constructor(employeeEntity?: any) {
         super(employeeEntity);

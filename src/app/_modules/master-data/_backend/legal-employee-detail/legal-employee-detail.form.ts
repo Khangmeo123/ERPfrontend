@@ -12,7 +12,7 @@ export class LegalEmployeeDetailForm extends FormModel {
     jobLevel = new FormControl({ value: '', disabled: true });
     statusId = new FormControl({ value: '', disabled: true });
     statusName = new FormControl({ value: '', disabled: true }); //thiếu trường nầy này
-    gender = new FormControl({disabled: true });
+    gender = new FormControl();
     identityNumber = new FormControl({ value: '', disabled: true });
     issueDate = new FormControl({ value: '', disabled: true });
     issuePlace = new FormControl({ value: '', disabled: true });
@@ -26,6 +26,7 @@ export class LegalEmployeeDetailForm extends FormModel {
     bankAccountName = new FormControl('');
     bankAccountNumber = new FormControl('');
     bankId = new FormControl('');
+    bankName = new FormControl('');
     provinceId = new FormControl('');
     provinceName = new FormControl('');
     bankBranch = new FormControl('');
@@ -35,6 +36,7 @@ export class LegalEmployeeDetailForm extends FormModel {
     endDate = new FormControl('');
 
     employeeContacts = new FormArray([]);
+    employeePositions = new FormArray([]);
 
     constructor(employeeDetailEntity?: EmployeeDetailOfLegalEntity) {
         super();

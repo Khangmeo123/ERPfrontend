@@ -203,21 +203,18 @@ export class SupplierDetailService {
 
     save(supplierDetailEntity: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (supplierDetailEntity.value.id !== null && supplierDetailEntity.value.id !== undefined
-                && supplierDetailEntity.value.id !== environment.emtyGuid) {
-                this.supplierDetailRepository.update(supplierDetailEntity.value).subscribe(res => {
-                    if (res) {
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve();
-                    }
-                }, err => {
-                    if (err) {
-                        this.supplierDetailForm.next(this.fb.group(
-                            new SupplierDetailForm(err),
-                        ));
-                    }
-                });
-            }
+            this.supplierDetailRepository.update(supplierDetailEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.supplierDetailForm.next(this.fb.group(
+                        new SupplierDetailForm(err),
+                    ));
+                }
+            });
         });
         return defered;
     }

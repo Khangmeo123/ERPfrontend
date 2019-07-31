@@ -201,21 +201,18 @@ export class CustomerDetailService {
 
     save(customerDetailEntity: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (customerDetailEntity.value.id !== null && customerDetailEntity.value.id !== undefined
-                && customerDetailEntity.value.id !== environment.emtyGuid) {
-                this.customerDetailRepository.update(customerDetailEntity.value).subscribe(res => {
-                    if (res) {
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve();
-                    }
-                }, err => {
-                    if (err) {
-                        this.customerDetailForm.next(this.fb.group(
-                            new CustomerDetailOfLegalForm(err),
-                        ));
-                    }
-                });
-            }
+            this.customerDetailRepository.update(customerDetailEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.customerDetailForm.next(this.fb.group(
+                        new CustomerDetailOfLegalForm(err),
+                    ));
+                }
+            });
         });
         return defered;
     }

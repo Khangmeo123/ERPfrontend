@@ -30,6 +30,7 @@ import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picke
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {EmployeePositionComponent} from './_page/employee-position/employee-position.component';
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
   declarations: [
@@ -69,6 +70,7 @@ import {EmployeePositionComponent} from './_page/employee-position/employee-posi
     RadioButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    ChipsModule,
   ],
 })
 export class LegalEntityModule {

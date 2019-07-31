@@ -39,7 +39,8 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="employeeBirthday">{{ 'employeeDetailOfLegal.birthday' | translate}}</label>
-                            <app-date-picker [control]="employeeDetailForm.get('dob')"></app-date-picker>
+                            <app-date-picker [disabled]="true" [control]="employeeDetailForm.get('dob')">
+                            </app-date-picker>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -72,7 +73,7 @@
                         <div class="form-group">
                             <label
                                 for="employeeIdentityNumber">{{ 'employeeDetailOfLegal.identityNumber' | translate}}</label>
-                            <input type="text" class="form-control" formControlName="identityNumber"
+                            <input type="text" class="form-control" formControlName="identityNumber" pKeyFilter="int"
                                 id="employeeIdentityNumber">
                         </div>
                     </div>
@@ -91,12 +92,12 @@
                         <div class="form-group">
                             <label for="bankid">{{ 'employeeDetailOfLegal.gender.title' | translate}}</label>
                             <div class="ratio-button" style="display: flex">
-                                <p-radioButton name="groupname" [value]="true" formControlName="gender" [label]="'employeeDetailOfLegal.gender.men' | translate"></p-radioButton>
-                                <p-radioButton name="groupname" [value]="false" formControlName="gender" [label]="'employeeDetailOfLegal.gender.women' | translate"></p-radioButton>
-                                <!-- <p-radioButton formControlName="gender"
+                                <p-radioButton name="groupname" [disabled]=true [value]="true" formControlName="gender"
                                     [label]="'employeeDetailOfLegal.gender.men' | translate"></p-radioButton>
-                                <p-radioButton formControlName="gender" class="ml-1"
-                                    [label]="'employeeDetailOfLegal.gender.women' | translate"></p-radioButton> -->
+                                <p-radioButton class="ml-1" name="groupname" [disabled]=true [value]="false"
+                                    formControlName="gender" [label]="'employeeDetailOfLegal.gender.women' | translate">
+                                </p-radioButton>
+
                             </div>
                         </div>
                     </div>
@@ -127,7 +128,8 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'employeeDetailOfLegal.issueDate' | translate}}</label>
-                            <app-date-picker [control]="employeeDetailForm.get('issueDate')"></app-date-picker>
+                            <app-date-picker [disabled]="true" [control]="employeeDetailForm.get('issueDate')">
+                            </app-date-picker>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -163,7 +165,12 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'employeeDetailOfLegal.employeeGroup' | translate}}</label>
-                            <app-single-select></app-single-select>
+                            <p-chips class="w-100" [(ngModel)]="employeeDetailForm.controls.employeePositions.value"
+                                [ngModelOptions]="{standalone: true}" [disabled]="true" >
+                                <ng-template let-item pTemplate="item">
+                                    {{item.code}}
+                                </ng-template>
+                            </p-chips>
                         </div>
                     </div>
 
@@ -184,24 +191,25 @@
                                 for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.name' | translate}}</label>
                             <app-single-select data-qe-id="dialog-bank-account" [valueSelector]="valueSelector"
                                 [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'"
-                                (search)="bankSearch($event)"
+                                (search)="bankSearch($event, employeeDetailForm.controls.bankId.value)"
+                                [initialValue]="employeeDetailForm.controls.bankName.value"
                                 (selectionChange)="employeeDetailForm.controls.bankId.setValue($event.Id)"
                                 (listOpen)="openBankList(employeeDetailForm.bankId)"></app-single-select>
-                            <!-- [initialValue] ="employeeDetailForm.controls.bankName.value" -->
+
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label
                                 for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.accountName' | translate}}</label>
-                            <input type="text" class="form-control" formControlName="bankAccountName" />
+                            <input type="text" class="form-control"  formControlName="bankAccountName" />
                         </div>
                     </div>
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label
                                 for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.accountNumber' | translate}}</label>
-                            <input type="text" class="form-control" formControlName="bankAccountNumber" />
+                            <input type="text" class="form-control" formControlName="bankAccountNumber" pKeyFilter="int"/>
                         </div>
                     </div>
                 </div>
@@ -213,7 +221,8 @@
                             <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name"
                                 [valueSelector]="valueSelector" [list]="provinceExceptIds"
                                 [initialValue]="employeeDetailForm.controls.provinceName.value"
-                                [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
+                                [selectedList]="provinceIds" [key]="'name'"
+                                (search)="provinceSearch($event,employeeDetailForm.controls.provinceId.value)"
                                 (selectionChange)="employeeDetailForm.controls.provinceId.setValue($event.Id)"
                                 (listOpen)="openProvinceList(employeeDetailForm.provinceId)">
                             </app-single-select>
@@ -339,9 +348,8 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label
-                        for="employeeDetailOfLegalname">{{ 'employeeDetailOfLegal.contact.phone' | translate}}<span
-                        class="text-danger ml-2">*</span></label>
+                    <label for="employeeDetailOfLegalname">{{ 'employeeDetailOfLegal.contact.phone' | translate}}<span
+                            class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="phone" id="phone">
                         <app-error data-qe-id="form-error-phone"
@@ -362,10 +370,11 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="employeeDetailOfLegalname">{{ 'employeeDetailOfLegal.contact.city' | translate}}</label>
-                    <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds" *ngIf="displayContact "
-                        [initialValue]="contactForm.controls.provinceName.value"
+                    <app-single-select data-qe-id="detail-form-contact-province" [list]="provinceExceptIds"
+                        *ngIf="displayContact" [initialValue]="contactForm.controls.provinceName.value"
                         [valueSelector]="valueSelector" [selectedList]="provinceIds" [key]="'name'"
-                        (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="selectedProvince($event)"
+                        (search)="provinceSearch($event, contactForm.controls.provinceId.value)"
+                        (selectionChange)="selectedProvince($event)"
                         (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
                 </div>
             </div>
