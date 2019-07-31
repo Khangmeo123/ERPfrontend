@@ -41,7 +41,9 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
    *
    */
   public employeeList: EmployeeEntity[] = [];
+  public selectedEmployeeList: EmployeeEntity[] = [];
   public employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
+  public employeePagination: PaginationModel = new PaginationModel();
 
   /**
    * Pagination model
@@ -86,6 +88,7 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
         this.hrOrganizationList = hrOrganizationList;
         if (hrOrganizationList.length) {
           this.selectedDepartment = hrOrganizationList[0];
+          this.onSelectDepartment(this.selectedDepartment);
         } else {
           this.selectedDepartment = null;
         }
@@ -101,7 +104,7 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     });
 
     const employeeCountSub: Subscription = this.hrOrganizationService.employeeCount.subscribe((count: number) => {
-      this.pagination.totalItems = count;
+      this.employeePagination.totalItems = count;
     });
 
     this.subscription
@@ -126,13 +129,25 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     return this.hrOrganizationForm.get('errors') as FormGroup;
   }
 
+  get disabled() {
+    return !this.legalEntity || !this.division;
+  }
+
   getEmployeeList() {
     this.hrOrganizationService.getEmployeeList(this.employeeSearchEntity);
   }
 
+  onSearchEmployee(event) {
+    console.log(event);
+  }
+
   onSelectDepartment(event) {
-    this.employeeSearchEntity.departmentId = event.id;
-    this.getEmployeeList();
+    if (event) {
+      this.employeeSearchEntity.hrOrganizationId = event.id;
+      this.getEmployeeList();
+    } else {
+      this.employeeList = [];
+    }
   }
 
   ngOnDestroy(): void {
@@ -201,5 +216,13 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
       this.hrOrganizationSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
+  }
+
+  async removeEmployee(id: string) {
+    await this.hrOrganizationService.removeEmployee(id, this.selectedDepartment.id, this.employeeSearchEntity);
+  }
+
+  onViewDetail(id: string) {
+
   }
 }

@@ -145,6 +145,27 @@ export class HrOrganizationService {
   }
 
   /**
+   * Remove employee from department
+   *
+   * @param employeeId string
+   * @param hrOrganizationId string
+   * @param employeeSearchEntity EmployeeSearchEntity
+   * @return Promise<void>
+   */
+  removeEmployee(employeeId: string, hrOrganizationId: string, employeeSearchEntity: EmployeeSearchEntity): Promise<void> {
+    return this.hrOrganizationRepository.removeEmployeeFromOrganization(employeeId, hrOrganizationId)
+      .then(
+        (employeeEntity: EmployeeEntity) => {
+          this.toastrService.success(translate('general.service.update.success'));
+          this.getEmployeeList(employeeSearchEntity);
+        },
+      )
+      .catch(() => {
+        this.toastrService.error(translate('general.service.update.getFailed'));
+      });
+  }
+
+  /**
    * Create new hrOrganization form
    *
    * @return HrOrganizationForm

@@ -7,6 +7,7 @@ import { HrOrganizationSearchEntity } from '../../../../_backend/hr-organization
 import { HrOrganizationEntity } from '../../../../_backend/hr-organization/hr-organization.entity';
 import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
+import { Entities } from '../../../../../../_helpers/entity';
 
 export class HrOrganizationRepository extends Repository {
   constructor(public http: HttpClient) {
@@ -109,6 +110,25 @@ export class HrOrganizationRepository extends Repository {
       );
   }
 
+  searchEmployeeList(employeeSearchEntity: EmployeeSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
+      `${this.apiUrl}/search-employee`,
+      employeeSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<Entities>) => {
+          return {
+            ids: response.body.ids.map((entity) => new EmployeeEntity(entity)),
+            exceptIds: response.body.exceptIds.map((entity) => new EmployeeEntity(entity)),
+          };
+        }),
+      );
+  }
+
   countEmployee(employeeSearchEntity: EmployeeSearchEntity): Observable<number> {
     return this.http.post<number>(
       `${this.apiUrl}/count-employee`,
@@ -123,6 +143,26 @@ export class HrOrganizationRepository extends Repository {
           return response.body;
         }),
       );
+  }
+
+  removeEmployeeFromOrganization(employeeId: string, hrOrganizationId: string): Promise<EmployeeEntity> {
+    return new Promise((resolve, reject) => {
+      return this.http.post<EmployeeEntity>(
+        `${this.apiUrl}/delete-employee`,
+        {
+          employeeId,
+          hrOrganizationId,
+        },
+        {
+          observe: 'response',
+          headers: this.getHeader(),
+        },
+      )
+        .subscribe(
+          (response: HttpResponse<EmployeeEntity>) => resolve(response.body),
+          (error: Error) => reject(error),
+        );
+    });
   }
 }
 

@@ -4,17 +4,19 @@
     <div class="page-title mr-2">
       <app-multi-select [list]="list"
                         [selectedList]="selectedList"
-                        (search)="searchEmployee($event)"
-                        (listOpen)="getList.emit(employeeSearchEntity)"></app-multi-select>
+                        (search)="onSearchEmployee($event)"
+                        key="name"
+                        [disabled]="disabled"
+                        (listOpen)="onSearchEmployee($event)"></app-multi-select>
     </div>
     <div class="page-actions">
-      <button class="btn btn-add">
+      <button class="btn btn-add" [disabled]="disabled">
         {{'general.button.add' | translate}}
       </button>
-      <button class="btn btn-import">
+      <button class="btn btn-import" [disabled]="disabled">
         {{'general.button.import' | translate}}
       </button>
-      <button class="btn btn-export">
+      <button class="btn btn-export" [disabled]="disabled">
         {{'general.button.export' | translate}}
       </button>
     </div>
@@ -32,12 +34,12 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList.emit(employeeSearchEntity)"
-                                    [filter]="employeeSearchEntity.code"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList.emit(searchEntity)"
+                                    [filter]="searchEntity.code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList.emit(employeeSearchEntity)"
-                                    [filter]="employeeSearchEntity.name"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList.emit(searchEntity)"
+                                    [filter]="searchEntity.name"></app-advanced-filters>
             </th>
             <th class="th-filter"></th>
           </tr>
@@ -46,8 +48,17 @@
           <tr (dblclick)="onClickViewDetail()">
             <td>{{employee.code}}</td>
             <td>{{employee.name}}</td>
-            <td class="flex-shrink-1">
-              <a role="button" (click)="removeEmployee.emit(employee.id)">{{'general.button.delete' | translate}}</a>
+            <td>
+              <a role="button"
+                 class="btn btn-default"
+                 mwlConfirmationPopover
+                 [popoverTitle]="'general.department.delete.title' | translate"
+                 [popoverMessage]="'general.department.delete.message' | translate"
+                 confirmButtonType="danger"
+                 placement="left"
+                 (confirm)="onRemoveEmployee(employee.id)">
+                {{'general.button.delete' | translate}}
+              </a>
             </td>
           </tr>
         </ng-template>

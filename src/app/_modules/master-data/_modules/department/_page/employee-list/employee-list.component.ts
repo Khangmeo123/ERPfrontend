@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
@@ -9,9 +9,12 @@ import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.scss'],
   providers: [],
+  encapsulation: ViewEncapsulation.None,
 })
 export class EmployeeListComponent implements OnInit {
   @Input() list: EmployeeEntity[] = [];
+
+  @Input() pagination: PaginationModel = new PaginationModel();
 
   selectedList: EmployeeEntity[] = [];
 
@@ -21,9 +24,11 @@ export class EmployeeListComponent implements OnInit {
 
   @Output() removeEmployee: EventEmitter<string> = new EventEmitter<string>();
 
-  pagination: PaginationModel = new PaginationModel();
+  @Input() searchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
-  employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
+  @Output() searchEmployee: EventEmitter<EmployeeSearchEntity> = new EventEmitter<EmployeeSearchEntity>();
+
+  @Input() disabled: boolean = false;
 
   constructor(protected router: Router) {
   }
@@ -32,14 +37,18 @@ export class EmployeeListComponent implements OnInit {
   }
 
   async onClickViewDetail() {
-    await this.router.navigate(['/master-data/department/employee/detail-employee']);
+    await this.router.navigate(['/master-data/department/employee-detail']);
   }
 
   onPaginationChange(pagination) {
     this.pagination = pagination;
   }
 
-  searchEmployee(event) {
+  onSearchEmployee(event) {
+
+  }
+
+  onRemoveEmployee(event) {
     console.log(event);
   }
 }
