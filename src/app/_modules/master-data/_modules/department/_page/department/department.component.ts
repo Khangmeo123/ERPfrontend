@@ -5,7 +5,7 @@ import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
 import { DivisionSearchEntity } from '../../../../_backend/division/division.searchentity';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { Entities } from '../../../../../../_helpers/entity';
 
 @Component({
@@ -45,6 +45,8 @@ export class DepartmentComponent implements OnInit {
 
   public legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
 
+  public legalEntityTyping: Subject<LegalSearchEntity> = new Subject<LegalSearchEntity>();
+
   /**
    * Division
    */
@@ -53,6 +55,8 @@ export class DepartmentComponent implements OnInit {
   public selectedDivisionList: DivisionEntity[] = [];
 
   public divisionSearchEntity: DivisionSearchEntity = new DivisionSearchEntity();
+
+  public divisionEntityTyping: Subject<DivisionSearchEntity> = new Subject<DivisionSearchEntity>();
 
   /**
    * Data subscriptions
@@ -74,20 +78,6 @@ export class DepartmentComponent implements OnInit {
       .add(divisionListSub);
   }
 
-  get currentLegalEntity() {
-    if (this.legalEntityList.length) {
-      return this.legalEntityList[0];
-    }
-    return null;
-  }
-
-  get currentDivision() {
-    if (this.divisionList.length) {
-      return this.divisionList[0];
-    }
-    return null;
-  }
-
   ngOnInit() {
   }
 
@@ -100,6 +90,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   onSelectLegalEntity() {
+    this.legalSearchEntity.ids = this.selectedLegalEntityList.map((legalEntity: LegalEntity) => legalEntity.id);
     this.departmentService.selectLegalEntity(this.selectedLegalEntityList[0]);
   }
 
@@ -108,6 +99,21 @@ export class DepartmentComponent implements OnInit {
   }
 
   onSelectDivision() {
+    this.divisionSearchEntity.ids = this.selectedDivisionList.map((division: DivisionEntity) => division.id);
     this.departmentService.selectDivision(this.selectedDivisionList[0]);
+  }
+
+  onDivisionSearch(event) {
+    // this.divisionSearchEntity.code.startsWith = event;
+    this.divisionSearchEntity.name.startsWith = event;
+    this.divisionEntityTyping.next(this.divisionSearchEntity);
+    this.departmentService.getDivisionEntityListByTyping(this.divisionEntityTyping);
+  }
+
+  onLegalEntitySearch(event) {
+    // this.legalSearchEntity.code.startsWith = event;
+    this.legalSearchEntity.name.startsWith = event;
+    this.legalEntityTyping.next(this.legalSearchEntity);
+    this.departmentService.getLegalEntityListByTyping(this.legalEntityTyping);
   }
 }

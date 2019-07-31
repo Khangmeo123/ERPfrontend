@@ -11,12 +11,12 @@ import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity
 import { DivisionSearchEntity } from '../../../../_backend/division/division.searchentity';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
-export class DepartmentService extends GeneralService {
+export class DepartmentService {
 
   public departmentList: BehaviorSubject<DepartmentEntity[]> = new BehaviorSubject<DepartmentEntity[]>([]);
 
@@ -39,7 +39,6 @@ export class DepartmentService extends GeneralService {
   public selectedDivision: BehaviorSubject<DivisionEntity> = new BehaviorSubject<DivisionEntity>(null);
 
   constructor(private fb: FormBuilder, private departmentRepository: DepartmentRepository, private toastrService: ToastrService) {
-    super();
     this.departmentForm = new BehaviorSubject<FormGroup>(
       this.fb.group(
         new DepartmentForm(),
@@ -62,17 +61,6 @@ export class DepartmentService extends GeneralService {
       });
   }
 
-  /**
-   * Handle error for data retrieving
-   *
-   * @param error Error
-   * @return void
-   */
-  handleError(error: Error) {
-    this.toastrService.error(error.message);
-    return error;
-  }
-
   getLegalEntityList(legalSearchEntity: LegalSearchEntity): void {
     this.departmentRepository.getLegalEntityList(legalSearchEntity)
       .subscribe((list: Entities) => {
@@ -87,6 +75,36 @@ export class DepartmentService extends GeneralService {
       .subscribe((list: Entities) => {
         if (list) {
           this.divisionList.next(list);
+        }
+      });
+  }
+
+  getLegalEntityListByTyping(legalSearchEntity: Observable<LegalSearchEntity>) {
+    legalSearchEntity.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((searchEntity: LegalSearchEntity) => {
+        return this.departmentRepository.getLegalEntityList(searchEntity);
+      }),
+    )
+      .subscribe((entities: Entities) => {
+        if (entities) {
+          this.legalEntityList.next(entities);
+        }
+      });
+  }
+
+  getDivisionEntityListByTyping(divisionSearchEntity: Observable<DivisionSearchEntity>) {
+    divisionSearchEntity.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((searchEntity: DivisionSearchEntity) => {
+        return this.departmentRepository.getDivisionList(searchEntity);
+      }),
+    )
+      .subscribe((entities: Entities) => {
+        if (entities) {
+          this.divisionList.next(entities);
         }
       });
   }

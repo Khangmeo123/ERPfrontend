@@ -14,7 +14,6 @@ import { TableModule } from 'primeng/table';
 import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
 import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from '../../../../_shared/modules/date-picker/date-picker.module';
-import { DepartmentListComponent } from './_page/department-list/department-list.component';
 import { EmployeeListComponent } from './_page/employee-list/employee-list.component';
 import { AssetListComponent } from './_page/asset-list/asset-list.component';
 import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
@@ -29,6 +28,8 @@ import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.
 import { DepartmentService } from './_page/department/department.service';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HrOrganizationRepository } from './_page/hr-organization/hr-organization.repository';
+import { GeneralService } from '../../../../_helpers/general-service.service';
 
 
 @NgModule({
@@ -38,7 +39,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AssetComponent,
     WarehouseComponent,
     ProjectComponent,
-    DepartmentListComponent,
     EmployeeListComponent,
     AssetListComponent,
     WarehouseListComponent,
@@ -68,6 +68,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   providers: [
     DepartmentService,
+    HrOrganizationRepository,
+    GeneralService,
   ],
 })
 export class DepartmentModule {

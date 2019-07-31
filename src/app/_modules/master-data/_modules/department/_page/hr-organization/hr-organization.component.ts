@@ -1,14 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { DepartmentEntity } from '../../../../_backend/department/department.entity';
-import { DepartmentSearchEntity } from '../../../../_backend/department/department.search-entity';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
 import { Subscription } from 'rxjs';
-import { DepartmentService } from '../department/department.service';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';
+import { HrOrganizationEntity } from '../../../../_backend/hr-organization/hr-organization.entity';
+import { HrOrganizationSearchEntity } from '../../../../_backend/hr-organization/hr-organization.search-entity';
+import { HrOrganizationService } from './hr-organization.service';
+import { DepartmentService } from '../department/department.service';
+import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
+import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
 
 @Component({
   selector: 'app-employee',
@@ -16,6 +20,7 @@ import { translate } from '../../../../../../_helpers/string';
   styleUrls: ['./hr-organization.component.scss'],
   providers: [
     ToastrService,
+    HrOrganizationService,
   ],
 })
 export class HrOrganizationComponent implements OnInit, OnDestroy {
@@ -23,52 +28,111 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
    * Modal state
    */
   public modal: boolean = false;
+
   /**
-   * Department list
+   * HrOrganization list
    */
-  public departmentList: DepartmentEntity[] = [];
-  public departmentSearchEntity: DepartmentSearchEntity = new DepartmentSearchEntity();
-  public departmentForm: FormGroup;
+  public hrOrganizationList: HrOrganizationEntity[] = [];
+  public selectedDepartment: HrOrganizationEntity = null;
+  public hrOrganizationSearchEntity: HrOrganizationSearchEntity = new HrOrganizationSearchEntity();
+  public hrOrganizationForm: FormGroup;
+
+  /**
+   *
+   */
+  public employeeList: EmployeeEntity[] = [];
+  public employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
+
   /**
    * Pagination model
    */
   public pagination: PaginationModel = new PaginationModel();
   public legalEntity: LegalEntity = null;
   public division: DivisionEntity = null;
+
   /**
    * Data subscriptions
    */
   public subscription: Subscription = new Subscription();
 
-  constructor(private departmentService: DepartmentService, private toastrService: ToastrService) {
-    const departmentFormSub: Subscription = this.departmentService.departmentForm.subscribe((form: FormGroup) => {
-      this.departmentForm = form;
+  constructor(
+    private departmentService: DepartmentService,
+    private hrOrganizationService: HrOrganizationService,
+    private toastrService: ToastrService,
+    private generalService: GeneralService,
+  ) {
+    const hrOrganizationFormSub: Subscription = this.hrOrganizationService.hrOrganizationForm.subscribe((form: FormGroup) => {
+      this.hrOrganizationForm = form;
     });
 
     const legalEntitySub: Subscription = this.departmentService.selectedLegalEntity.subscribe((legalEntity: LegalEntity) => {
-      this.legalEntity = legalEntity;
+      if (legalEntity) {
+        this.legalEntity = legalEntity;
+        this.hrOrganizationSearchEntity.legalEntityId = legalEntity.id;
+        this.getList();
+      }
     });
 
     const divisionSub: Subscription = this.departmentService.selectedDivision.subscribe((division: DivisionEntity) => {
-      this.division = division;
+      if (division) {
+        this.division = division;
+        this.hrOrganizationSearchEntity.divisionId = division.id;
+        this.getList();
+      }
+    });
+
+    const hrOrganizationListSub: Subscription = this.hrOrganizationService.hrOrganizationList
+      .subscribe((hrOrganizationList: HrOrganizationEntity[]) => {
+        this.hrOrganizationList = hrOrganizationList;
+        if (hrOrganizationList.length) {
+          this.selectedDepartment = hrOrganizationList[0];
+        } else {
+          this.selectedDepartment = null;
+        }
+      });
+
+    const hrOrganizationCountSub: Subscription = this.hrOrganizationService.hrOrganizationCount
+      .subscribe((count: number) => {
+        this.pagination.totalItems = count;
+      });
+
+    const employeeListSub: Subscription = this.hrOrganizationService.employeeList.subscribe((list: EmployeeEntity[]) => {
+      this.employeeList = list;
+    });
+
+    const employeeCountSub: Subscription = this.hrOrganizationService.employeeCount.subscribe((count: number) => {
+      this.pagination.totalItems = count;
     });
 
     this.subscription
-      .add(departmentFormSub)
+      .add(hrOrganizationFormSub)
       .add(legalEntitySub)
+      .add(employeeCountSub)
+      .add(employeeListSub)
+      .add(hrOrganizationListSub)
+      .add(hrOrganizationCountSub)
       .add(divisionSub);
   }
 
   get code(): FormControl {
-    return this.departmentForm.get('code') as FormControl;
+    return this.hrOrganizationForm.get('code') as FormControl;
   }
 
   get name(): FormControl {
-    return this.departmentForm.get('name') as FormControl;
+    return this.hrOrganizationForm.get('name') as FormControl;
   }
 
   get errors(): FormGroup {
-    return this.departmentForm.get('errors') as FormGroup;
+    return this.hrOrganizationForm.get('errors') as FormGroup;
+  }
+
+  getEmployeeList() {
+    this.hrOrganizationService.getEmployeeList(this.employeeSearchEntity);
+  }
+
+  onSelectDepartment(event) {
+    this.employeeSearchEntity.departmentId = event.id;
+    this.getEmployeeList();
   }
 
   ngOnDestroy(): void {
@@ -76,7 +140,7 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.departmentService.getList(this.departmentSearchEntity);
+    this.hrOrganizationService.getList(this.hrOrganizationSearchEntity);
   }
 
   toggleModal() {
@@ -84,27 +148,31 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
   }
 
   getList() {
-
+    if (this.legalEntity && this.division) {
+      this.hrOrganizationService.getList(this.hrOrganizationSearchEntity);
+    }
   }
 
   onPaginationChange(pagination) {
-    this.pagination = new PaginationModel(pagination);
+    this.hrOrganizationSearchEntity.skip = pagination.skip;
+    this.hrOrganizationSearchEntity.take = pagination.take;
+    this.getList();
   }
 
   add() {
-    this.departmentService.add();
+    this.hrOrganizationService.add();
     this.toggleModal();
   }
 
   save() {
-    if (this.departmentForm.invalid) {
-      this.departmentService.validateAllFormFields(this.departmentForm);
+    if (this.hrOrganizationForm.invalid) {
+      this.generalService.validateAllFormFields(this.hrOrganizationForm);
     }
-    if (this.departmentForm.valid) {
-      const departmentEntity: DepartmentEntity = new DepartmentEntity(this.departmentForm.value);
-      (departmentEntity.id
-        ? this.departmentService.update(departmentEntity, this.departmentSearchEntity)
-        : this.departmentService.create(departmentEntity, this.departmentSearchEntity))
+    if (this.hrOrganizationForm.valid) {
+      const hrOrganizationEntity: HrOrganizationEntity = new HrOrganizationEntity(this.hrOrganizationForm.value);
+      (hrOrganizationEntity.id
+        ? this.hrOrganizationService.update(hrOrganizationEntity, this.hrOrganizationSearchEntity)
+        : this.hrOrganizationService.create(hrOrganizationEntity, this.hrOrganizationSearchEntity))
         .then(() => {
           this.toastrService.success(translate('general.service.save.success'));
           this.toggleModal();
@@ -121,14 +189,17 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
    * @param id string
    */
   edit(id: string) {
-
-  }
-
-  deactivate(id: string) {
-
+    this.hrOrganizationService.edit(id)
+      .then(() => {
+        this.toggleModal();
+      });
   }
 
   sort(event) {
-
+    if (event.sortField && event.sortOrder) {
+      this.hrOrganizationSearchEntity.orderBy = event.sortField;
+      this.hrOrganizationSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
+    }
+    this.getList();
   }
 }

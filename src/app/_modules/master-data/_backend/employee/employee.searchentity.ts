@@ -6,6 +6,8 @@ export class EmployeeSearchEntity extends SearchEntity {
 
   name: TextFilter = new TextFilter();
 
+  departmentId: string;
+
   constructor(employeeSearchEntity?: any) {
     super(employeeSearchEntity);
   }

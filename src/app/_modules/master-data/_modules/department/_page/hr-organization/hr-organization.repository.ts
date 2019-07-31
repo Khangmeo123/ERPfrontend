@@ -1,4 +1,3 @@
-import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Repository } from '../../../../../../_helpers/repository';
 import { environment } from '../../../../../../../environments/environment';
@@ -6,19 +5,18 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { HrOrganizationSearchEntity } from '../../../../_backend/hr-organization/hr-organization.search-entity';
 import { HrOrganizationEntity } from '../../../../_backend/hr-organization/hr-organization.entity';
+import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
+import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 
-@Injectable({
-  providedIn: 'root',
-})
 export class HrOrganizationRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/hrOrganization';
+    this.apiUrl = environment.apiUrlApps + 'master-data/department/hr-organization';
   }
 
   getList(hrOrganizationSearchEntity: HrOrganizationSearchEntity): Observable<HrOrganizationEntity[]> {
     return this.http.post<HrOrganizationEntity[]>(
-      `${this.apiUrl}/hr-organization/list-hrOrganization`,
+      `${this.apiUrl}/list-department`,
       hrOrganizationSearchEntity,
       {
         observe: 'response',
@@ -34,7 +32,7 @@ export class HrOrganizationRepository extends Repository {
 
   count(hrOrganizationSearchEntity: HrOrganizationSearchEntity): Observable<number> {
     return this.http.post<number>(
-      `${this.apiUrl}/hr-organization/count-hrOrganization`,
+      `${this.apiUrl}/count-department`,
       hrOrganizationSearchEntity,
       {
         observe: 'response',
@@ -48,9 +46,28 @@ export class HrOrganizationRepository extends Repository {
       );
   }
 
+  getById(id: string): Promise<HrOrganizationEntity> {
+    return new Promise((resolve, reject) => {
+      this.http.post<HrOrganizationEntity>(
+        `${this.apiUrl}/get-department`,
+        {
+          id,
+        },
+        {
+          observe: 'response',
+          headers: this.getHeader(),
+        },
+      )
+        .subscribe(
+          (response: HttpResponse<HrOrganizationEntity>) => resolve(response.body),
+          (error: Error) => reject(error),
+        );
+    });
+  }
+
   create(hrOrganizationEntity: HrOrganizationEntity): Observable<HrOrganizationEntity> {
     return this.http.post<HrOrganizationEntity>(
-      `${this.apiUrl}/hr-organization/create-hrOrganization`,
+      `${this.apiUrl}/create-department`,
       hrOrganizationEntity,
       {
         observe: 'response',
@@ -64,7 +81,7 @@ export class HrOrganizationRepository extends Repository {
 
   update(hrOrganizationEntity: HrOrganizationEntity): Observable<HrOrganizationEntity> {
     return this.http.post<HrOrganizationEntity>(
-      `${this.apiUrl}/hr-organization/update-hrOrganization`,
+      `${this.apiUrl}/update-department`,
       hrOrganizationEntity,
       {
         observe: 'response',
@@ -75,4 +92,37 @@ export class HrOrganizationRepository extends Repository {
         map((response: HttpResponse<HrOrganizationEntity>) => response.body),
       );
   }
+
+  getEmployeeList(employeeSearchEntity: EmployeeSearchEntity): Observable<EmployeeEntity[]> {
+    return this.http.post<EmployeeEntity[]>(
+      `${this.apiUrl}/list-employee`,
+      employeeSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<EmployeeEntity[]>) => {
+          return response.body.map((hrOrganization) => new EmployeeEntity(hrOrganization));
+        }),
+      );
+  }
+
+  countEmployee(employeeSearchEntity: EmployeeSearchEntity): Observable<number> {
+    return this.http.post<number>(
+      `${this.apiUrl}/count-employee`,
+      employeeSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<number>) => {
+          return response.body;
+        }),
+      );
+  }
 }
+

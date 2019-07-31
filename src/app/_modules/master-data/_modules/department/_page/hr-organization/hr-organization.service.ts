@@ -1,43 +1,35 @@
-import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { Entities } from '../../../../../../_helpers/entity';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
 import { HrOrganizationEntity } from '../../../../_backend/hr-organization/hr-organization.entity';
 import { HrOrganizationRepository } from './hr-organization.repository';
 import { HrOrganizationForm } from '../../../../_backend/hr-organization/hr-organization.form';
 import { HrOrganizationSearchEntity } from '../../../../_backend/hr-organization/hr-organization.search-entity';
+import { DepartmentService } from '../department/department.service';
+import { translate } from '../../../../../../_helpers/string';
+import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
+import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class HrOrganizationService extends GeneralService {
+export class HrOrganizationService {
 
   public hrOrganizationList: BehaviorSubject<HrOrganizationEntity[]> = new BehaviorSubject<HrOrganizationEntity[]>([]);
 
   public hrOrganizationCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
+  public employeeList: BehaviorSubject<EmployeeEntity[]> = new BehaviorSubject<EmployeeEntity[]>([]);
+
+  public employeeCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
   public hrOrganizationForm: BehaviorSubject<FormGroup>;
 
-  public legalEntityList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
-
-  /**
-   * Current legal entity
-   */
-  public selectedLegalEntity: BehaviorSubject<LegalEntity> = new BehaviorSubject<LegalEntity>(null);
-
-  public divisionList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
-
-  /**
-   * Current division
-   */
-  public selectedDivision: BehaviorSubject<DivisionEntity> = new BehaviorSubject<DivisionEntity>(null);
-
-  constructor(private fb: FormBuilder, private hrOrganizationRepository: HrOrganizationRepository, private toastrService: ToastrService) {
-    super();
+  constructor(
+    private fb: FormBuilder,
+    private hrOrganizationRepository: HrOrganizationRepository,
+    private toastrService: ToastrService,
+    private departmentService: DepartmentService,
+  ) {
     this.hrOrganizationForm = new BehaviorSubject<FormGroup>(
       this.fb.group(
         new HrOrganizationForm(),
@@ -58,37 +50,6 @@ export class HrOrganizationService extends GeneralService {
           this.hrOrganizationCount.next(count);
         }
       });
-  }
-
-  /**
-   * Handle error for data retrieving
-   *
-   * @param error Error
-   * @return void
-   */
-  handleError(error: Error) {
-    this.toastrService.error(error.message);
-    return error;
-  }
-
-  /**
-   * Select division for all tabs
-   *
-   * @param division DivisionEntity
-   * @return void
-   */
-  selectDivision(division: DivisionEntity) {
-    this.selectedDivision.next(division);
-  }
-
-  /**
-   * Select legal entity for all tabs
-   *
-   * @param legalEntity LegalEntity
-   * @return void
-   */
-  selectLegalEntity(legalEntity: LegalEntity) {
-    this.selectedLegalEntity.next(legalEntity);
   }
 
   /**
@@ -162,14 +123,36 @@ export class HrOrganizationService extends GeneralService {
   }
 
   /**
+   * Get entity by id for updating
+   *
+   * @param id string
+   * @return Promise<void>
+   */
+  edit(id: string): Promise<void> {
+    return this.hrOrganizationRepository.getById(id)
+      .then(
+        (hrOrganizationEntity: HrOrganizationEntity) => {
+          this.hrOrganizationForm.next(
+            this.fb.group(
+              new HrOrganizationForm(hrOrganizationEntity),
+            ),
+          );
+        },
+      )
+      .catch(() => {
+        this.toastrService.error(translate('general.service.update.getFailed'));
+      });
+  }
+
+  /**
    * Create new hrOrganization form
    *
    * @return HrOrganizationForm
    */
   newHrOrganizationForm(): HrOrganizationForm {
     const hrOrganizationForm: HrOrganizationForm = new HrOrganizationForm();
-    const legalEntity: LegalEntity = this.selectedLegalEntity.value;
-    const division: DivisionEntity = this.selectedDivision.value;
+    const legalEntity: LegalEntity = this.departmentService.selectedLegalEntity.value;
+    const division: DivisionEntity = this.departmentService.selectedDivision.value;
     if (legalEntity) {
       hrOrganizationForm.legalEntityId.setValue(legalEntity.id);
     }
@@ -177,5 +160,20 @@ export class HrOrganizationService extends GeneralService {
       hrOrganizationForm.divisionId.setValue(division.id);
     }
     return hrOrganizationForm;
+  }
+
+  getEmployeeList(employeeSearchEntity: EmployeeSearchEntity): void {
+    forkJoin(
+      this.hrOrganizationRepository.getEmployeeList(employeeSearchEntity),
+      this.hrOrganizationRepository.countEmployee(employeeSearchEntity),
+    )
+      .subscribe(([list, count]) => {
+        if (list) {
+          this.employeeList.next(list);
+        }
+        if (count) {
+          this.employeeCount.next(count);
+        }
+      });
   }
 }

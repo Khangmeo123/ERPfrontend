@@ -4,6 +4,8 @@ import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 export class DepartmentSearchEntity extends SearchEntity {
   legalEntityId: string;
 
+  divisionId: string;
+
   code: TextFilter = new TextFilter();
 
   name: TextFilter = new TextFilter();
