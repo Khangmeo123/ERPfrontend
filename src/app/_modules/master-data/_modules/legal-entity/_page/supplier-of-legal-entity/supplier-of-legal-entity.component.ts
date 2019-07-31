@@ -227,7 +227,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   clearSearchSupplier(tableSupplier: any) {
     this.supplierSearchEntity = new SupplierSearchEntity();
-    this.supplierSearchEntity.supplierIds = this.supplierIds;
+    this.supplierSearchEntity.supplierDetailIds = this.supplierIds;
     tableSupplier.reset();
   }
 
