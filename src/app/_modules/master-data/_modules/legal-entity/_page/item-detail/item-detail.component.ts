@@ -3,7 +3,7 @@ import { UomEntity } from './../../../../_backend/uom/uom.entity';
 import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/item.searchentity';
 import { CoaSearchEntity } from './../../../../_backend/coa/coa.searchentity';
 import { CoaEntity } from 'src/app/_modules/master-data/_backend/coa/coa.entity';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { LegalItemDetailService } from './item-detail.service';
@@ -371,6 +371,14 @@ export class LegalItemDetailComponent implements OnInit, OnDestroy {
     this.legalItemDetailService.deleteItemDiscount(index);
   }
 
+  clearItemDiscount() {
+    this.legalItemDetailForm.get('discountTypeName').setValue('');
+    const currentFormArray = this.legalItemDetailForm.get('itemDiscounts') as FormArray;
+    while (currentFormArray.length !== 0) {
+      currentFormArray.removeAt(0);
+    }
+  }
+
   openDiscountTypeList() {
     if (this.discountTypeList.length === 0) {
       this.legalItemDetailService.getDiscountTypeList();
@@ -453,5 +461,9 @@ export class LegalItemDetailComponent implements OnInit, OnDestroy {
 
   returnUomValue(node) {
     return node;
+  }
+
+  trackByFn(index, row) {
+    return index;
   }
 }
