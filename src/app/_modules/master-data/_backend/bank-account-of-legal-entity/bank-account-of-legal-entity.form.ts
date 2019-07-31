@@ -11,13 +11,14 @@ export class BankAccountOfLegalForm extends FormModel {
     accountNumber = new FormControl('', [requiredField]);
     accountName = new FormControl('', [requiredField]);
     branch = new FormControl('');
-    provinceId = new FormControl('');
+    provinceId = new FormControl('', [requiredField]);
     provinceName = new FormControl('');
 
     errors = new FormGroup({
-        bankId: new FormControl(),
-        accountName: new FormControl(),
-        accountNumber: new FormControl()
+        provinceId: new FormControl(''),
+        bankId: new FormControl(''),
+        accountName: new FormControl(''),
+        accountNumber: new FormControl('')
     });
 
     constructor(bankAccountOfLegalEntity?: BankAccountOfLegalEntity) {
