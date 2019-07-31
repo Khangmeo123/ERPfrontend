@@ -388,29 +388,6 @@
 		},
 		"tax_code": "Mã số thuế"
 	},
-	"detail_employee_of_legal_entity": {
-		"bank_account": {
-			"account_name": "Tên chủ tài khoản",
-			"account_number": "Số tài khoản",
-			"bank_city": "Tỉnh/Thành phố",
-			"bank_division": "Chi nhánh",
-			"bank_name": "Tên ngân hàng",
-			"division_address": "Địa chỉ chi nhánh"
-		},
-		"contact": {
-			"add": "Thêm thông tin liên hệ",
-			"address": "Địa chỉ",
-			"city": "Tỉnh/Thành phô",
-			"email": "Email",
-			"index": "STT",
-			"name": "Tên liên hệ",
-			"phone": "Số điện thoại"
-		},
-		"group_employee": "Nhóm nhân viên",
-		"header": {
-			"title": "Sửa thông tin nhân viên"
-		}
-	},
 	"detail_item_of_legal_entity": {
 		"bill_of_materias": {
 			"amount": "Số lượng",
@@ -469,22 +446,11 @@
 	"employee": {
 		"content": {
 			"table": {
-				"bassic_salary": "Lương đóng bảo hiểm",
-				"birthday": "Ngày sinh",
-				"coefficients_salary": "Hệ số lương",
-				"date_range": "Ngày cấp",
-				"employee_id": "Mã nhân viên",
-				"employee_name": "Tên nhân viên",
 				"gender": {
 					"men": "Nam",
 					"women": "Nữ"
 				},
-				"id_emp": "Số CMND",
-				"issue_by": "Nơi cấp",
-				"salaryInsurance": "",
-				"salary_agreement": "Lương thỏa thuận",
-				"sex": "Giới tính",
-				"tax_code": "Mã số thuế"
+				"salaryInsurance": ""
 			}
 		},
 		"detail": {
@@ -507,15 +473,8 @@
 			"header": {
 				"title": ""
 			},
-			"level": "Cấp bậc chức vụ",
-			"number_dependents": "Số người phụ thuộc",
-			"position": "Chức vụ",
-			"status": "Trạng thái",
 			"tab": {
-				"title1": "",
-				"title_1": "Thông tin chung",
-				"title_2": "Tài khoản ngân hàng",
-				"title_3": "Thông tin liên hệ"
+				"title1": ""
 			}
 		},
 		"list": {
@@ -528,6 +487,53 @@
 				"status": ""
 			}
 		}
+	},
+	"employeeDetailOfLegal": {
+		"bankAccount": {
+			"accountName": "Tên chủ tài khoản",
+			"accountNumber": "Số tài khoản",
+			"city": "Tỉnh/Thành phố",
+			"division": "Chi nhánh",
+			"divisionAddress": "Địa chỉ chi nhánh",
+			"name": "Tên ngân hàng",
+			"title": "Tài khoản ngân hàng"
+		},
+		"bassicSalary": "Lương đóng bảo hiểm",
+		"birthday": "Ngày sinh",
+		"code": "Mã nhân viên",
+		"contact": {
+			"add": "Thêm thông tin liên hệ",
+			"address": "Địa chỉ",
+			"city": "Tỉnh thành",
+			"email": "Email",
+			"index": "STT",
+			"name": "Tên người liên hệ",
+			"phone": "Số điện thoại",
+			"title": "Thông tin liên hệ"
+		},
+		"employeeGroup": "Nhóm nhân viên",
+		"gender": {
+			"men": "Nam",
+			"title": "Giới tính",
+			"women": "Nữ"
+		},
+		"general": {
+			"title": "Thông tin chung"
+		},
+		"header": {
+			"title": "Chỉnh sửa thông tin nhân viên"
+		},
+		"identityNumber": "Số CMND",
+		"issueDate": "Ngày cấp",
+		"issuePlace": "Nơi cấp",
+		"jobLevel": "Cấp bậc chức vụ",
+		"jobTitle": "Chức vụ",
+		"name": "Tên nhân viên",
+		"numberDependentPerson": "Số người phụ thuộc",
+		"salaryAgreement": "Lương thỏa thuận",
+		"salaryRatio": "Hệ số lương",
+		"status": "Trạng thái",
+		"taxCode": "Mã số thuế"
 	},
 	"employeeGroup": {
 		"add": "",
@@ -559,6 +565,11 @@
 		},
 		"name": "Tên pháp nhân",
 		"sob": "Mã bộ sổ"
+	},
+	"employeePosition": {
+		"header": {
+			"title": ""
+		}
 	},
 	"environment_tax": {
 		"description": "",

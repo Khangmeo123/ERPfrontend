@@ -84,7 +84,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isSaveBookMark = res;
     });
-
+    
+    this.customerOfLegalEntityService.getListCustomerOfLegalEntityByTyping(this.customerTyping);
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
     this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify).add(customerListSub)
     .add(customerListCountSub).add(customerOfLegalListSub);
@@ -95,6 +96,9 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   ngOnInit() {
     this.legalSearchEntity.skip = this.pagination.skip;
     this.legalSearchEntity.take = this.pagination.take;
+
+    this.customerSearchEntity.skip = this.paginationdetail.skip;
+    this.customerSearchEntity.take = this.paginationdetail.take;
   }
 
   
