@@ -167,7 +167,7 @@ export class VoucherComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.voucherListSearchEntity.orderBy = event.sortField;
-      this.voucherListSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.voucherListSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

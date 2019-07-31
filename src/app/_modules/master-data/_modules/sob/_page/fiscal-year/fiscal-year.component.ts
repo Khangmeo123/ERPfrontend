@@ -209,7 +209,7 @@ export class FiscalYearComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.fiscalYearSearchEntity.orderBy = event.sortField;
-      this.fiscalYearSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.fiscalYearSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

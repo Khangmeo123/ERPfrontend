@@ -133,7 +133,7 @@ export class CostCenterComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.costCenterSearchEntity.orderBy = event.sortField;
-      this.costCenterSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.costCenterSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

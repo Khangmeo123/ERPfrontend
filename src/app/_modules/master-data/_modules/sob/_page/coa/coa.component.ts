@@ -192,7 +192,7 @@ export class CoaComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.coaSearchEntity.orderBy = event.sortField;
-      this.coaSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.coaSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

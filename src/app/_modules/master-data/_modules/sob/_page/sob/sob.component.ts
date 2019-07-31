@@ -304,7 +304,7 @@ export class SobComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.sobSearchEntity.orderBy = event.sortField;
-      this.sobSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.sobSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

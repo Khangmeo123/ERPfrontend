@@ -185,7 +185,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.specialConsumptionTaxSearchEntity.orderBy = event.sortField;
-      this.specialConsumptionTaxSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.specialConsumptionTaxSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

@@ -191,7 +191,7 @@ export class BankAccountComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.bankAccountSearchEntity.orderBy = event.sortField;
-      this.bankAccountSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.bankAccountSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

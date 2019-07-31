@@ -100,7 +100,7 @@ export class PaymentTermComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.paymentTermSearchEntity.orderBy = event.sortField;
-      this.paymentTermSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.paymentTermSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

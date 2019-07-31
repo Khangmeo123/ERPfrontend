@@ -164,7 +164,7 @@ export class AccountingPeriodComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.accountingPeriodSearchEntity.orderBy = event.sortField;
-      this.accountingPeriodSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.accountingPeriodSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }
