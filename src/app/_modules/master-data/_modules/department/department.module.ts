@@ -18,7 +18,7 @@ import { EmployeeListComponent } from './_page/employee-list/employee-list.compo
 import { AssetListComponent } from './_page/asset-list/asset-list.component';
 import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
 import { ProjectListComponent } from './_page/project-list/project-list.component';
-import { DetailEmployeeComponent } from './_page/employee-list/detail-employee/detail-employee.component';
+import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
@@ -43,7 +43,7 @@ import { GeneralService } from '../../../../_helpers/general-service.service';
     AssetListComponent,
     WarehouseListComponent,
     ProjectListComponent,
-    DetailEmployeeComponent,
+    EmployeeDetailComponent,
     DepartmentRootComponent,
     WarehouseGroupComponent,
   ],

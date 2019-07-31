@@ -5,7 +5,7 @@ import {HrOrganizationComponent} from './_page/hr-organization/hr-organization.c
 import {AssetComponent} from './_page/asset/asset.component';
 import {WarehouseComponent} from './_page/warehouse/warehouse.component';
 import {ProjectComponent} from './_page/project/project.component';
-import {DetailEmployeeComponent} from './_page/employee-list/detail-employee/detail-employee.component';
+import {EmployeeDetailComponent} from './_page/employee-detail/employee-detail.component';
 import {DepartmentRootComponent} from './_page/department-root/department-root.component';
 import {WarehouseGroupComponent} from './_page/warehouse-group/warehouse-group.component';
 
@@ -15,15 +15,15 @@ const routes: Routes = [
     component: DepartmentRootComponent,
     children: [
       {
-        path: 'employee/detail-employee',
-        component: DetailEmployeeComponent,
+        path: 'employee-detail',
+        component: EmployeeDetailComponent,
       },
       {
         path: '',
         component: DepartmentComponent,
         children: [
           {
-            path: 'employee',
+            path: 'hr-organization',
             component: HrOrganizationComponent,
           },
           {
@@ -44,7 +44,7 @@ const routes: Routes = [
           },
           {
             path: '**',
-            redirectTo: 'employee',
+            redirectTo: 'hr-organization',
           },
         ],
       },

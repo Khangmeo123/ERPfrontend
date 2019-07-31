@@ -2,17 +2,17 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-detail-employee',
-  templateUrl: './detail-employee.component.html',
-  styleUrls: ['./detail-employee.component.scss']
+  templateUrl: './employee-detail.component.html',
+  styleUrls: ['./employee-detail.component.scss']
 })
-export class DetailEmployeeComponent implements OnInit {
+export class EmployeeDetailComponent implements OnInit {
   contactsModal = false;
 
   isOpenTab1: boolean = false;
   isOpenTab2: boolean = false;
   isOpenTab3: boolean = false;
 
-  
+
   constructor() { }
 
   ngOnInit() {

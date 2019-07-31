@@ -20,7 +20,7 @@ export class DepartmentComponent implements OnInit {
   routes = [
     {
       key: 'Nhân sự',
-      route: '/master-data/department/employee',
+      route: '/master-data/department/hr-organization',
     },
     {
       key: 'Tài sản',
