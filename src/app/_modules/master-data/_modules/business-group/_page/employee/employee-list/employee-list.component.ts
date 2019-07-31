@@ -33,8 +33,8 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   testValue = 'test';
-  downloadLink = environment.apiUrlApps + 'master-data/business-group/employee/download-template';
-  exportLink = environment.apiUrlApps + 'master-data/business-group/employee/export';
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/employee/employee-list/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/employee/employee-list/export';
 
   constructor(private employeeListService: EmployeeListService, private bookmarkService: BookmarkService, private router: Router) {
     const employeeListSub = this.employeeListService.employeeList.subscribe(res => {

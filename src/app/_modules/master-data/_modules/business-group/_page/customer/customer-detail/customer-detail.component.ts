@@ -38,6 +38,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     const customerFormSub = this.customerDetailService.customerForm.subscribe(res => {
       if (res) {
         this.customerForm = res;
+        debugger
       }
     });
     const statusListSub = this.customerDetailService.statusList.subscribe(res => {

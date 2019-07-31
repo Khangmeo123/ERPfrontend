@@ -41,6 +41,7 @@
                         <col>
                         <col>
                         <col>
+                        <col>
                     </colgroup>
                 </ng-template>
                 <ng-template pTemplate="header">
@@ -77,7 +78,7 @@
                         </th>
                         <th class="th-filter">
                             <app-simple-select [key]="'name'" [list]="statusList"
-                                [initValue]="supplierSearchEntity.statusId"
+                                [initialValue]="supplierSearchEntity.statusId"
                                 (selectionChange)="supplierSearchEntity.statusId = $event; getList()"
                                 (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
                             </app-simple-select>

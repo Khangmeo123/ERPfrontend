@@ -102,7 +102,7 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.initialValue) {
-      if (changes.initialValue.currentValue.length === 0) {
+      if (changes.initialValue.currentValue == null || changes.initialValue.currentValue.length === 0) {
         this.selectedItem = null;
         this.selectedText = '';
       }

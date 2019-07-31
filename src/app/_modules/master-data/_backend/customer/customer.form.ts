@@ -16,6 +16,11 @@ export class CustomerForm extends FormModel {
 
     infoContacts = new FormArray([]);
     bankAccounts = new FormArray([]);
+    errors = new FormGroup({
+        code: new FormControl(),
+        name: new FormControl(),
+        statusId: new FormControl(),
+    });
     constructor(customerEntity?: CustomerEntity) {
         super();
         this.mapData(customerEntity);

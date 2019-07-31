@@ -31,8 +31,8 @@ export class CustomerListComponent implements OnInit, OnDestroy {
   customerListSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  downloadLink = environment.apiUrlApps + 'master-data/business-group/customer/download-template';
-  exportLink = environment.apiUrlApps + 'master-data/business-group/customer/export';
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/customer/customer-list/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/customer/customer-list/export';
 
   constructor(private customerListService: CustomerListService, private bookmarkService: BookmarkService,
     private router: Router) {

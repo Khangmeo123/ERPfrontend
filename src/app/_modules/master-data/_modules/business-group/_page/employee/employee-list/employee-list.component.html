@@ -41,6 +41,9 @@
                         <col>
                         <col>
                         <col>
+                        <col>
+                        <col>
+                        <col>
                     </colgroup>
                 </ng-template>
                 <ng-template pTemplate="header">
@@ -83,7 +86,7 @@
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-simple-select [list]="genderList"
+                            <app-simple-select [list]="genderList" [initialValue]="employeeSearchEntity.gender"
                                 (selectionChange)="employeeSearchEntity.gender = $event; getList()"
                                 data-qe-id="table-thead-filter-status">
                             </app-simple-select>
@@ -100,7 +103,7 @@
                         </th>
                         <th class="th-filter">
                             <app-simple-select [key]="'name'" [list]="statusList"
-                                [initValue]="employeeSearchEntity.statusId"
+                                [initialValue]="employeeSearchEntity.statusId"
                                 (selectionChange)="employeeSearchEntity.statusId = $event; getList()"
                                 (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
                             </app-simple-select>

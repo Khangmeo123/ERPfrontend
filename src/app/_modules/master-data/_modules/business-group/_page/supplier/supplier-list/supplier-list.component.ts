@@ -30,8 +30,8 @@ export class SupplierListComponent implements OnInit, OnDestroy {
   supplierListSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  downloadLink = environment.apiUrlApps + 'master-data/business-group/supplier/download-template';
-  exportLink = environment.apiUrlApps + 'master-data/business-group/supplier/export';
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/supplier/supplier-list/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/supplier/supplier-list/export';
 
   constructor(private supplierListService: SupplierListService, private bookmarkService: BookmarkService,
     private router: Router) {

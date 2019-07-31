@@ -95,6 +95,7 @@
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <app-simple-select [key]="'name'" [list]="characteristicList"
+                                            [initialValue]="itemForm.controls.characteristic.value"
                                             (selectionChange)="itemForm.controls.characteristic.setValue($event)"
                                             (listOpen)="openCharacteristicList()" data-qe-id="form-characteristic"
                                             class="w-100">
@@ -164,7 +165,7 @@
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <app-simple-select [key]="'name'" [list]="statusList"
-                                            [initValue]="itemForm.controls.statusName.value"
+                                            [initialValue]="itemForm.controls.statusName.value"
                                             (selectionChange)="itemForm.controls.statusId.setValue($event)"
                                             (listOpen)="openStatusList()" data-qe-id="form-characteristic"
                                             class="w-100">
