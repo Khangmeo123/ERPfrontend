@@ -10,7 +10,7 @@
 
         </span>
         <div class="page-actions">
-            <button class="btn btn-add" (click)="add()" data-qe-id="button-add">
+            <button class="btn btn-add" (click)="add()" data-qe-id="button-add" [disabled]="this.divisionSearchEntity.legalEntityId == undefined">
                 {{'general.button.add' | translate}}</button>
             <div class="btn-group" dropdown data-qe-id="button-import">
                 <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
@@ -34,14 +34,14 @@
     <hr>
 
     <div class="page-body">
-        <div class="row">
-            <div class="page-section mt-2 d-flex align-items-center">
+        <div class="row mt-2 col-sm-6">
+            <div class="page-section d-flex align-items-center">
                 <span class="sob-label flex-shrink-1">
                     {{'general.legal_entity.name' | translate}} : 
                 </span>
                 <app-single-select data-qe-id="form-select-legal-entiy" [list]="legalExceptIds"
                     [selectedList]="legalIds" [key]="'name'" (search)="legalSearch($event)"
-                    (selectionChange)="divisionForm.controls.legalEntityId.setValue($event[0])"
+                    (selectionChange)="selectedLegal($event)"
                     (listOpen)="openlegalList(legalSearchEntity.legalEntityId)">
                 </app-single-select>
             </div>
@@ -70,7 +70,7 @@
                             {{ 'division.address' | translate}}
                             <p-sortIcon [field]="'address'" class="float-right"></p-sortIcon>
                         </th>
-
+                        <th pResizableColumn></th>
                     </tr>
                     <tr>
                         <th class="th-filter">
@@ -85,13 +85,15 @@
                             <app-advanced-filters [filter]="divisionSearchEntity.address" (changeFilter)="getList()"
                                 data-qe-id="table-thead-filter-address-division"></app-advanced-filters>
                         </th>
+                        <th class="th-filter"></th>
 
                     </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-division let-index="rowIndex">
-                    <tr [pSelectableRow]="division" [attr.data-qe-id]="'table-tbody-row-' + index">
+                    <tr [attr.data-qe-id]="'table-tbody-row-' + index">
                         <td class="ui-resizable-column"> {{division.code}} </td>
                         <td class="ui-resizable-column"> {{division.name}} </td>
+                        <td class="ui-resizable-column"> {{division.address}} </td>
                         <td class="ui-resizable-column">
                             <div class="edit" (click)="edit(division.id)">
                                 <mat-icon>edit</mat-icon>
