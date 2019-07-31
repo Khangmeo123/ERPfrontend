@@ -78,4 +78,32 @@ export class DepartmentRepository extends Repository {
         map((response: HttpResponse<Entities>) => response.body),
       );
   }
+
+  create(departmentEntity: DepartmentEntity): Observable<DepartmentEntity> {
+    return this.http.post<DepartmentEntity>(
+      `${this.apiUrl}/hr-organization/create-department`,
+      departmentEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<DepartmentEntity>) => response.body),
+      );
+  }
+
+  update(departmentEntity: DepartmentEntity): Observable<DepartmentEntity> {
+    return this.http.post<DepartmentEntity>(
+      `${this.apiUrl}/hr-organization/update-department`,
+      departmentEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<DepartmentEntity>) => response.body),
+      );
+  }
 }

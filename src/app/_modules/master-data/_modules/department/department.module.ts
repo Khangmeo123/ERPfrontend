@@ -4,7 +4,7 @@ import { DepartmentRoutingModule } from './department-routing.module';
 
 import { DepartmentComponent } from './_page/department/department.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { EmployeeComponent } from './_page/employee/employee.component';
+import { HrOrganizationComponent } from './_page/hr-organization/hr-organization.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { WarehouseComponent } from './_page/warehouse/warehouse.component';
 import { ProjectComponent } from './_page/project/project.component';
@@ -34,7 +34,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     DepartmentComponent,
-    EmployeeComponent,
+    HrOrganizationComponent,
     AssetComponent,
     WarehouseComponent,
     ProjectComponent,

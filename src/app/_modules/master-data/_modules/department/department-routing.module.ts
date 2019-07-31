@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DepartmentComponent} from './_page/department/department.component';
-import {EmployeeComponent} from './_page/employee/employee.component';
+import {HrOrganizationComponent} from './_page/hr-organization/hr-organization.component';
 import {AssetComponent} from './_page/asset/asset.component';
 import {WarehouseComponent} from './_page/warehouse/warehouse.component';
 import {ProjectComponent} from './_page/project/project.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
         children: [
           {
             path: 'employee',
-            component: EmployeeComponent,
+            component: HrOrganizationComponent,
           },
           {
             path: 'asset',

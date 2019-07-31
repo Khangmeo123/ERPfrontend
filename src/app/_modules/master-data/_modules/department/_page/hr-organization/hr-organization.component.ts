@@ -1,49 +1,40 @@
-import { Component, OnInit } from '@angular/core';
-import { DepartmentSearchEntity } from '../../../../_backend/department/department.search-entity';
-import { DepartmentService } from '../department/department.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DepartmentEntity } from '../../../../_backend/department/department.entity';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { DepartmentSearchEntity } from '../../../../_backend/department/department.search-entity';
 import { FormControl, FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
+import { Subscription } from 'rxjs';
+import { DepartmentService } from '../department/department.service';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';
 
 @Component({
-  selector: 'app-department-list',
-  templateUrl: './department-list.component.html',
-  styleUrls: [
-    './department-list.component.scss',
-  ],
+  selector: 'app-employee',
+  templateUrl: './hr-organization.component.html',
+  styleUrls: ['./hr-organization.component.scss'],
   providers: [
     ToastrService,
   ],
 })
-export class DepartmentListComponent implements OnInit {
+export class HrOrganizationComponent implements OnInit, OnDestroy {
   /**
    * Modal state
    */
   public modal: boolean = false;
-
   /**
    * Department list
    */
   public departmentList: DepartmentEntity[] = [];
-
   public departmentSearchEntity: DepartmentSearchEntity = new DepartmentSearchEntity();
-
   public departmentForm: FormGroup;
-
   /**
    * Pagination model
    */
   public pagination: PaginationModel = new PaginationModel();
-
   public legalEntity: LegalEntity = null;
-
   public division: DivisionEntity = null;
-
   /**
    * Data subscriptions
    */
@@ -62,6 +53,10 @@ export class DepartmentListComponent implements OnInit {
       this.division = division;
     });
 
+    this.subscription
+      .add(departmentFormSub)
+      .add(legalEntitySub)
+      .add(divisionSub);
   }
 
   get code(): FormControl {
@@ -74,6 +69,10 @@ export class DepartmentListComponent implements OnInit {
 
   get errors(): FormGroup {
     return this.departmentForm.get('errors') as FormGroup;
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   ngOnInit() {

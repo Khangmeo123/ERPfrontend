@@ -1,6 +1,6 @@
 import { Entity } from '../../../../_helpers/entity';
 
-export class DepartmentEntity extends Entity {
+export class HrOrganizationEntity extends Entity {
   legalEntityId: string;
   legalEntityCode: string;
   legalEntityName: string;
