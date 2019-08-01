@@ -16,7 +16,6 @@ import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from '../../../../_shared/modules/date-picker/date-picker.module';
 import { AssetListComponent } from './_page/asset-list/asset-list.component';
 import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
-import { ProjectListComponent } from './_page/project-list/project-list.component';
 import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -40,7 +39,6 @@ import { GeneralService } from '../../../../_helpers/general-service.service';
     ProjectOrganizationComponent,
     AssetListComponent,
     WarehouseListComponent,
-    ProjectListComponent,
     EmployeeDetailComponent,
     DepartmentRootComponent,
     WarehouseGroupComponent,
