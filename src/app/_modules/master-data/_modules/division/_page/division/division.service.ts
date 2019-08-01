@@ -2,7 +2,6 @@
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/divisionl.entity';
 import { DivisionRepository } from './division.repository';
 import { DivisionForm } from 'src/app/_modules/master-data/_backend/division/division.form';
 import { DivisionSearchEntity } from 'src/app/_modules/master-data/_backend/division/division.searchentity';
@@ -10,6 +9,7 @@ import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/l
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { Entities } from 'src/app/_helpers/entity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/division.entity';
 
 export class DivisionService {
   public divisionList: BehaviorSubject<DivisionEntity[]>;

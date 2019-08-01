@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/divisionl.entity';
 import { DivisionSearchEntity } from 'src/app/_modules/master-data/_backend/division/division.searchentity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { Entities } from 'src/app/_helpers/entity';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
+import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/division.entity';
 
 @Injectable({
     providedIn: 'root',

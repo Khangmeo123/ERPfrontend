@@ -10,7 +10,7 @@
 
         </span>
         <div class="page-actions">
-            <button class="btn btn-add" (click)="add()" data-qe-id="button-add" [disabled]="this.divisionSearchEntity.legalEntityId == undefined">
+            <button class="btn btn-add" (click)="add()" data-qe-id="button-add" [disabled]="legalEntityId == ''">
                 {{'general.button.add' | translate}}</button>
             <div class="btn-group" dropdown data-qe-id="button-import">
                 <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
