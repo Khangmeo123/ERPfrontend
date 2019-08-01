@@ -15,9 +15,9 @@ export class SupplierForm extends FormModel {
     statusName = new FormControl('', [requiredField]);
 
     errors = new FormGroup({
-        code: new FormControl(''),
-        name: new FormControl(''),
-        statusId: new FormControl(''),
+        code: new FormControl(),
+        name: new FormControl(),
+        statusId: new FormControl(),
     });
 
     constructor(supplierEntity?: SupplierEntity) {
