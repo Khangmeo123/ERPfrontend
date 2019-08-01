@@ -21,7 +21,7 @@ import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
     GeneralService,
     ToastrService,
     CostCenterService,
-  ]
+  ],
 })
 export class CostCenterComponent implements OnInit {
   isSaveBookMark: boolean = false;
@@ -102,10 +102,6 @@ export class CostCenterComponent implements OnInit {
       .add(costCenterCountSub);
   }
 
-  getCoaList() {
-    this.costCenterService.getCoaList(this.coaSearchEntity);
-  }
-
   get currentSob() {
     if (this.selectedSobList.length) {
       return this.selectedSobList[0];
@@ -119,6 +115,10 @@ export class CostCenterComponent implements OnInit {
 
   get validTo() {
     return this.costCenterForm.get('validTo') as FormControl;
+  }
+
+  getCoaList() {
+    this.costCenterService.getCoaList(this.coaSearchEntity);
   }
 
   add() {
@@ -169,7 +169,7 @@ export class CostCenterComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(pagination: PaginationModel) {
+  paginationOut(pagination) {
     this.costCenterSearchEntity.skip = pagination.skip;
     this.costCenterSearchEntity.take = pagination.take;
     this.costCenterService.getList(this.costCenterSearchEntity);

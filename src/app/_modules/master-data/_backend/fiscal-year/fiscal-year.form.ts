@@ -14,6 +14,7 @@ export class FiscalYearForm extends FormModel {
   inventoryValuationMethod = new FormControl(null, [requiredField]);
 
   statusId = new FormControl(null);
+  statusValue = new FormControl(null);
 
   errors = new FormGroup({});
 

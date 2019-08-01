@@ -9,7 +9,9 @@
             </span>
         </span>
     <div class="page-actions">
-      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()" [disabled]="!setOfBookId">
+        + {{'general.button.add' | translate}}
+      </button>
       <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
@@ -20,7 +22,7 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select [list]="sobList"
-                        data-qe-id="sob-list"
+                         data-qe-id="sob-list"
                          [selectedList]="selectedSobList"
                          key="name"
                          (selectionChange)="changeSob($event)"
@@ -65,7 +67,7 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-paymentTerm  let-index="index">
+        <ng-template pTemplate="body" let-paymentTerm let-index="index">
           <tr (dblclick)="edit(paymentTerm.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{paymentTerm.code}} </td>
             <td> {{paymentTerm.name}} </td>
@@ -87,34 +89,48 @@
   <p-header>
     {{ 'payment_term.modal.title' | translate}}
   </p-header>
-  <div class="container">
+  <div class="container" [formGroup]="paymentTermForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-code">{{ 'payment_term.code' | translate}}<span
             class="text-danger ml-1">*</span></label>
-          <input type="text" class="form-control" data-qe-id="dialog-code"/>
+          <div class="div-form">
+            <input type="text" class="form-control" id="payment-term-code" data-qe-id="dialog-code"
+                   formControlName="code"/>
+            <app-error data-qe-id="dialog-error-code"
+                       *ngIf="(code?.errors && code?.touched) || !!errors?.get('code')?.value"
+                       [formGroup]="paymentTermForm" [property]="'code'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-name">{{ 'payment_term.name' | translate}}<span
             class="text-danger ml-1">*</span></label>
-          <input type="text" class="form-control" data-qe-id="dialog-name"/>
+          <div class="div-form">
+            <input type="text" class="form-control" id="payment-term-name" data-qe-id="dialog-name"
+                   formControlName="name"/>
+            <app-error data-qe-id="dialog-error-name"
+                       *ngIf="(name?.errors && name?.touched) || !!errors?.get('name')?.value"
+                       [formGroup]="paymentTermForm" [property]="'name'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
       </div>
     </div>
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="payment-term-code">{{ 'payment_term.due_in_date' | translate}}</label>
-          <input type="text" data-qe-id="dialog-dueInDate" class="form-control"/>
+          <label for="payment-term-due-in-date">{{ 'payment_term.due_in_date' | translate}}</label>
+          <input id="payment-term-due-in-date" type="text" data-qe-id="dialog-dueInDate" class="form-control"/>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-discount-period">{{ 'payment_term.discount_period' | translate}}</label>
-          <input type="text" class="form-control" data-qe-id="dialog-term-discount-period"/>
+          <input id="payment-term-discount-period" type="text" class="form-control" data-qe-id="dialog-term-discount-period"/>
         </div>
       </div>
     </div>
@@ -122,7 +138,7 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="payment-term-discount-rate">{{ 'payment_term.discount_rate' | translate}}</label>
-          <input type="text" class="form-control" data-qe-id="dialog-term-discount-rate"/>
+          <input id="payment-term-discount-rate" type="text" class="form-control" data-qe-id="dialog-term-discount-rate"/>
         </div>
       </div>
     </div>

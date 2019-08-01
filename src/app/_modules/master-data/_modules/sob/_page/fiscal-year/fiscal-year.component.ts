@@ -19,7 +19,7 @@ import { FiscalYearService } from './fiscal-year.service';
     FiscalYearService,
     GeneralService,
     ToastrService,
-  ]
+  ],
 })
 export class FiscalYearComponent implements OnInit {
   isSaveBookMark: boolean = false;
@@ -120,6 +120,10 @@ export class FiscalYearComponent implements OnInit {
     return this.fiscalYearForm.get('inventoryValuationMethod') as FormControl;
   }
 
+  get statusId() {
+    return this.fiscalYearForm.get('statusId') as FormControl;
+  }
+
   getInventoryValuationMethodList() {
     this.fiscalYearService.getInventoryValuationMethodList();
   }
@@ -131,10 +135,6 @@ export class FiscalYearComponent implements OnInit {
     } else {
       this.toastrService.error('Phải chọn bộ sổ trước?');
     }
-  }
-
-  get statusId() {
-    return this.fiscalYearForm.get('statusId') as FormControl;
   }
 
   valuationMethodSelector = (node) => node.code;
@@ -170,10 +170,22 @@ export class FiscalYearComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(pagination: PaginationModel) {
+  paginationOut(pagination) {
     this.fiscalYearSearchEntity.skip = pagination.skip;
     this.fiscalYearSearchEntity.take = pagination.take;
     this.fiscalYearService.getList(this.fiscalYearSearchEntity);
+  }
+
+  get name() {
+    return this.fiscalYearForm.get('name') as FormControl;
+  }
+
+  get errors() {
+    return this.fiscalYearForm.get('errors') as FormGroup;
+  }
+
+  get statusValue() {
+    return this.fiscalYearForm.get('statusValue') as FormControl;
   }
 
   showDialog() {

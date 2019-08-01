@@ -7,6 +7,7 @@ import { PaymentMethodForm } from '../../../../_backend/payment-method/payment-m
 import { PaymentMethodSearchEntity } from '../../../../_backend/payment-method/payment-method.searchentity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
+import { translate } from '../../../../../../_helpers/string';
 
 export class PaymentMethodService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
@@ -74,7 +75,7 @@ export class PaymentMethodService {
         this.paymentMethodRepository.add(paymentMethodEntity).subscribe(res => {
           if (res) {
             this.getList(paymentMethodSearchEntity);
-            this.toastrService.success('Cập nhật thành công !');
+            this.toastrService.success(translate('general.update.success'));
             resolve(false);
           }
         }, err => {
@@ -88,8 +89,9 @@ export class PaymentMethodService {
       } else {
         this.paymentMethodRepository.update(paymentMethodEntity).subscribe(res => {
           if (res) {
+            console.log(res);
             this.getList(paymentMethodSearchEntity);
-            this.toastrService.success('Cập nhật thành công !');
+            this.toastrService.success(translate('general.update.success'));
             resolve(false);
           }
         }, err => {
@@ -110,7 +112,7 @@ export class PaymentMethodService {
       this.paymentMethodRepository.delete(paymentMethodEntity).subscribe(res => {
         if (res) {
           this.getList(paymentMethodSearchEntity);
-          this.toastrService.success('Cập nhật thành công !');
+          this.toastrService.success(translate('general.update.success'));
           resolve(false);
         }
       }, err => {

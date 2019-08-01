@@ -14,7 +14,7 @@
         {{'general.button.clear' | translate}}
       </button>
     </div>
-    
+
   </div>
   <div class="page-body mt-4">
     <div class="page-section form d-flex align-items-center">
@@ -73,16 +73,15 @@
           <tr [ttRow]="rowNode">
             <td>
               <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
-              {{rowNode.accountCode}}
+              {{row.accountCode}}
             </td>
             <td>
-              {{rowNode.accountName}}
+              {{row.accountName}}
             </td>
             <td>
-
             </td>
             <td>
-              {{rowNode.accountDescription}}
+              {{row.accountDescription}}
             </td>
           </tr>
         </ng-template>

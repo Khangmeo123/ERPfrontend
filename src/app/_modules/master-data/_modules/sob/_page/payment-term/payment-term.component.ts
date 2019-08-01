@@ -3,7 +3,7 @@ import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.m
 import { Subscription } from 'rxjs';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { PaymentTermEntity } from '../../../../_backend/payment-term/payment-term.entity';
 import { PaymentTermSearchEntity } from '../../../../_backend/payment-term/payment-term.searchentity';
@@ -17,7 +17,7 @@ import { Entities } from '../../../../../../_helpers/entity';
   providers: [
     GeneralService,
     PaymentTermService,
-  ]
+  ],
 })
 export class PaymentTermComponent implements OnInit {
   isSaveBookMark: boolean = false;
@@ -56,7 +56,7 @@ export class PaymentTermComponent implements OnInit {
 
   constructor(
     private paymentTermService: PaymentTermService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
   ) {
     const sobListSub = this.paymentTermService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
@@ -92,6 +92,18 @@ export class PaymentTermComponent implements OnInit {
     return null;
   }
 
+  get code() {
+    return this.paymentTermForm.get('code') as FormControl;
+  }
+
+  get name() {
+    return this.paymentTermForm.get('name') as FormControl;
+  }
+
+  get errors() {
+    return this.paymentTermForm.get('errors') as FormGroup;
+  }
+
   add() {
     this.paymentTermService.add();
     this.showDialog();
@@ -111,7 +123,8 @@ export class PaymentTermComponent implements OnInit {
     }
   }
 
-  changeSob([setOfBookId]) {
+  changeSob(event) {
+    const [setOfBookId] = event;
     this.paymentTermSearchEntity.setOfBookId = setOfBookId;
     this.paymentTermForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;

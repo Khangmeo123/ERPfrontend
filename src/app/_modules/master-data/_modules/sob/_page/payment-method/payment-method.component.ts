@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { Entities } from '../../../../../../_helpers/entity';
 import { PaymentMethodEntity } from '../../../../_backend/payment-method/payment-method.entity';
 import { PaymentMethodSearchEntity } from '../../../../_backend/payment-method/payment-method.searchentity';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-payment-method',
@@ -56,7 +56,7 @@ export class PaymentMethodComponent implements OnInit {
 
   constructor(
     private paymentMethodService: PaymentMethodService,
-    private generalService: GeneralService
+    private generalService: GeneralService,
   ) {
     const sobListSub = this.paymentMethodService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
@@ -90,6 +90,18 @@ export class PaymentMethodComponent implements OnInit {
       return this.selectedSobList[0];
     }
     return null;
+  }
+
+  get name() {
+    return this.paymentMethodForm.get('name') as FormControl;
+  }
+
+  get code() {
+    return this.paymentMethodForm.get('code') as FormControl;
+  }
+
+  get errors() {
+    return this.paymentMethodForm.get('errors') as FormControl;
   }
 
   add() {
@@ -158,6 +170,7 @@ export class PaymentMethodComponent implements OnInit {
   }
 
   sort(event: any) {
+    console.log(event);
     if (event.sortField && event.sortOrder) {
       this.paymentMethodSearchEntity.orderBy = event.sortField;
       this.paymentMethodSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';

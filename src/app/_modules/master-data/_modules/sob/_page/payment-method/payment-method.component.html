@@ -9,7 +9,9 @@
             </span>
         </span>
     <div class="page-actions">
-      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
+      <button data-qe-id="button-add" class="btn btn-add" (click)="add()" [disabled]="!setOfBookId">
+        + {{'general.button.add' | translate}}
+      </button>
       <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
         {{'general.button.clear' | translate}}
       </button>
@@ -20,7 +22,7 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select [list]="sobList"
-                          data-qe-id="sob-list"
+                         data-qe-id="sob-list"
                          key="name"
                          (selectionChange)="changeSob($event)"
                          [selectedList]="selectedSobList"
@@ -75,9 +77,10 @@
           <label for="payment-method-code">{{ 'payment_method.code' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" data-qe-id="dialog-code" formControlName="code"/>
+            <input type="text" class="form-control" id="payment-method-code" data-qe-id="dialog-code"
+                   formControlName="code"/>
             <app-error data-qe-id="dialog-error-code"
-                       *ngIf="(paymentMethodForm.controls.code?.errors && paymentMethodForm.controls.code?.touched) || !!paymentMethodForm.controls.errors.get('code')?.value"
+                       *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
                        [formGroup]="paymentMethodForm" [property]="'code'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
@@ -88,10 +91,11 @@
           <label for="payment-method-name">{{ 'payment_method.payment_method_name' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form">
-            <input type="text" class="form-control" data-qe-id="dialog-name" formControlName="name"/>
+            <input type="text" class="form-control" id="payment-method-name" data-qe-id="dialog-name"
+                   formControlName="name"/>
             <app-error data-qe-id="dialog-error-name"
-                       *ngIf="(paymentMethodForm.controls.code?.errors && paymentMethodForm.controls.name?.touched) || !!paymentMethodForm.controls.errors.get('name')?.value"
-                       [formGroup]="paymentMethodForm" [property]="'code'" [placement]="'top'" class="error-form">
+                       *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+                       [formGroup]="paymentMethodForm" [property]="'name'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
         </div>
