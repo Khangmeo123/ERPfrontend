@@ -7,11 +7,11 @@ import { FormModel } from 'src/app/_helpers/form-model';
 export class LegalForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(1, 50)]);
     code = new FormControl('', [requiredField, checkLength(2, 2)]);
-    setOfBookId = new FormControl('', [requiredField]);
+    setOfBookId = new FormControl();
     errors = new FormGroup({
         name: new FormControl(''),
         code: new FormControl(''),
-        setOfBookId: new FormControl('')
+        setOfBookId: new FormControl()
     });
 
     constructor(legalEntity?: LegalEntity) {

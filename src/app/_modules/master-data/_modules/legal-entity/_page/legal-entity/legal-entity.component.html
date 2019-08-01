@@ -39,11 +39,11 @@
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
-              {{'legal_entity.code' | translate}}
+              {{'legalEntity.code' | translate}}
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
-              {{'legal_entity.name' | translate}}
+              {{'legalEntity.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn></th>
@@ -82,20 +82,20 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
   [style]="{width: '900px'}">
   <p-header>
-    {{ 'legal_entity.add' | translate}}
+    {{ 'legalEntity.add' | translate}}
   </p-header>
   <div class="container" [formGroup]="legalForm">
     <div class="row">
       <div class="form-group col">
         <label for="legalEntityCode">
-          {{'legal_entity.code' | translate}}
+          {{'legalEntity.code' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
             id="legalEntityCode">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.error?.get('code')?.value"
+            *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.errors?.get('code')?.value"
             [formGroup]="legalForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
@@ -103,14 +103,14 @@
       </div>
       <div class="form-group col">
         <label for="legalEntityName">
-          {{'legal_entity.name' | translate}}
+          {{'legalEntity.name' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
             id="legalEntityName">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.error?.get('name')?.value"
+            *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.errors?.get('name')?.value"
             [formGroup]="legalForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>

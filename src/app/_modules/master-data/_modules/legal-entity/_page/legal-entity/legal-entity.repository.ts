@@ -69,7 +69,7 @@ export class LegalEntityRepository extends Repository {
     }
 
     getListSobOfLegal(sobSearchEntity: SobSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/DropListSetOfBook', JSON.stringify(sobSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {

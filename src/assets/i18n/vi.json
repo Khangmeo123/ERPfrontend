@@ -771,9 +771,15 @@
 			"title": "Thêm chức vụ"
 		}
 	},
-	"legal_entity": {
+	"legalEntity": {
 		"add": "Thêm pháp nhân",
 		"code": "Mã pháp nhân",
+		"header": {
+			"title": "Danh sách pháp nhân"
+		},
+		"name": "Tên pháp nhân"
+	},
+	"legal_entity": {
 		"name": "Tên pháp nhân"
 	},
 	"noData": {
