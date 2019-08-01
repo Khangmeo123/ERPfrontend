@@ -12,6 +12,7 @@ export class BankAccountOfLegalEntity extends Entity {
     branch: string;
     provinceId: string;
     provinceName: string;
+    address: string;
     constructor(bankAccountOfLegalEntity?: any) {
         super(bankAccountOfLegalEntity);
     }

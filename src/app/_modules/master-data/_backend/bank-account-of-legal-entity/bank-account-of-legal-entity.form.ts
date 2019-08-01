@@ -13,6 +13,7 @@ export class BankAccountOfLegalForm extends FormModel {
     branch = new FormControl('');
     provinceId = new FormControl('', [requiredField]);
     provinceName = new FormControl('');
+    address = new FormControl('');
 
     errors = new FormGroup({
         provinceId: new FormControl(''),

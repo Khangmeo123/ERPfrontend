@@ -140,7 +140,10 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.supplierGroupService.getListLegalEntity(this.legalSearchEntity);
   }
   legalSearch(event) {
-    this.legalSearchEntity.code.startsWith = event;
+    this.legalSearchEntity = new LegalSearchEntity();
+    if (this.legalEntityId !== undefined && this.legalEntityId !== null) {
+      this.legalSearchEntity.ids.push(this.legalEntityId);
+    }
     this.legalSearchEntity.name.startsWith = event;
     this.leGalEntityTyping.next(this.legalSearchEntity);
   }
@@ -168,8 +171,10 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   suppplierSearchApp(event) {
-    this.supplierSearchEntity.code.startsWith = event;
     this.supplierSearchEntity.name.startsWith = event;
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+    }
     this.supplierTyping.next(this.supplierSearchEntity);
   }
 

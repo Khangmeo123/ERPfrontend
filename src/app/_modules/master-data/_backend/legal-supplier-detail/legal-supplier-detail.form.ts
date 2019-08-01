@@ -10,9 +10,9 @@ export class SupplierDetailForm extends FormModel {
     status = new FormControl({ value: '', disabled: true });
     dueInDays = new FormControl();
     debtLoad = new FormControl();
-    paymentTermId = new FormControl('');
+    paymentTermId = new FormControl();
     paymentTermName = new FormControl('');
-    staffInChargeId = new FormControl('');
+    staffInChargeId = new FormControl();
     staffInChargeName = new FormControl('');
     supplierGroupingName = new FormControl({ value: '', disabled: true });
 

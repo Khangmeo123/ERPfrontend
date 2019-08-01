@@ -161,7 +161,6 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   openPaymentTermList(paymenttermId: string) {
     this.paymentTermSearchEntity = new PaymentTermSearchEntity();
     this.paymentTermSearchEntity.legalEntityId = this.legalEntiyId;
-    console.log(this.paymentTermSearchEntity.legalEntityId)
     if (paymenttermId !== null && paymenttermId !== undefined && paymenttermId !== '') {
       this.paymentTermSearchEntity.ids.push(paymenttermId);
     }
@@ -169,6 +168,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   paymentTermSearch(event) {
+    this.paymentTermSearchEntity = new PaymentTermSearchEntity();
     this.supplierDetailEntity.code.startsWith = event;
     this.supplierDetailEntity.name.startsWith = event;
     this.paymentTermTyping.next(this.paymentTermSearchEntity);
@@ -178,7 +178,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
 
   openStaffInChargeList(staffInChangeId: string) {
     this.staffInChargeSearchEntity = new EmployeeSearchEntity();
-    if (staffInChangeId !== null && staffInChangeId !== undefined) {
+    if (staffInChangeId !== null && staffInChangeId !== undefined && staffInChangeId !== '') {
       this.staffInChargeSearchEntity.ids.push(staffInChangeId);
     }
     this.legalSupplierDetailService.getListStaffInCharge(this.staffInChargeSearchEntity);
@@ -186,11 +186,11 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
 
 
   staffInChargeSearch(event) {
+    this.staffInChargeSearchEntity = new EmployeeSearchEntity();
     this.staffInChargeSearchEntity.code = event;
     this.staffInChargeSearchEntity.name = event;
     this.staffInChargeTyping.next(this.staffInChargeSearchEntity);
   }
-
 
   // list drop bank list
 

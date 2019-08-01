@@ -106,9 +106,10 @@
                                 {{'detailSupplierGroup.pic' | translate}}
                             </label>
                             <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChargeExceptIds"
+                                [valueSelector]="valueSelector"
                                 [selectedList]="staffInChargeIds" [key]="'name'" (search)="staffInChargeSearch($event)"
                                 (selectionChange)="supplierDetailForm.controls.staffInChargeId.setValue($event[0].id)"
-                                (listOpen)="openStaffInChargeList(staffInChargeSearchEntity.staffInChargeId)"
+                                (listOpen)="openStaffInChargeList(supplierDetailForm.controls.staffInChargeId.value)"
                                 [initialValue] ="supplierDetailForm.controls.staffInChargeName.value">
                                 
                             </app-single-select>
@@ -326,7 +327,7 @@
                 <label>
                     {{'detailSupplierGroup.bank_account.bank_division' | translate}}
                 </label>
-                <input type="text" class="form-control" fomControlName="branch">
+                <input type="text" class="form-control" formControlName="branch">
             </div>
             <div class="form-group col-6">
                 <label>
@@ -351,7 +352,7 @@
                 <label>
                     {{'supplier.bank_account.bank_address' | translate}}
                 </label>
-                <input type="text" class="form-control"  fomControlName="branch" data-qe-id="detail-form-bank-address" >
+                <input type="text" class="form-control"  fomControlName="address" data-qe-id="detail-form-bank-address" >
             </div>
         </div>
     </form>

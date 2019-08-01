@@ -11,6 +11,7 @@ export class BankAccountOfLegalSearchEntity extends SearchEntity {
     branch: string;
     provinceId: string;
     provinceName: string;
+    address: string;
     constructor(bankAccountOfLegalSearchEntity?: any) {
         super(bankAccountOfLegalSearchEntity);
     }
