@@ -129,6 +129,17 @@
 
                             </app-single-select>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label for="bankid">{{ 'detailCustomerOfLegal.customerGroup' | translate}}</label>
+                                <p-chips class="w-100" [(ngModel)]="customerDetailForm.controls.customerGroups.value"
+                                    [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                    <ng-template let-item pTemplate="item">
+                                        {{item.code}}
+                                    </ng-template>
+                                </p-chips>
+                            </div>
+                        </div>
                     </div>
                 </accordion-group>
                 <accordion-group>
@@ -177,17 +188,29 @@
                                     <th pResizableColumn data-qe-id="table-thead-contacts-address">
                                         {{'detailCustomerOfLegal.contacts.address' | translate}}
                                     </th>
+                                    <th pResizableColumn></th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-contact let-index="rowIndex">
-                                <tr (dblclick)="editContact(contact,index)"
-                                    [attr.data-qe-id]="'table-tbody-row-' + index">
-                                    <td> {{index}}</td>
-                                    <td> {{contact.name}} </td>
-                                    <td> {{contact.phone}} </td>
-                                    <td> {{contact.email}} </td>
-                                    <td> {{contact.provinceName}}</td>
-                                    <td> {{contact.address}} </td>
+                                <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+                                    <td class="ui-resizable-column"> {{index}}</td>
+                                    <td class="ui-resizable-column"> {{contact.name}} </td>
+                                    <td class="ui-resizable-column"> {{contact.phone}} </td>
+                                    <td class="ui-resizable-column"> {{contact.email}} </td>
+                                    <td class="ui-resizable-column"> {{contact.provinceName}}</td>
+                                    <td class="ui-resizable-column"> {{contact.address}} </td>
+                                    <td class="ui-resizable-column">
+                                        <div class="d-flex">
+                                            <div class="edit mr-2" (click)="editContact(contact, index)">
+                                                <mat-icon>edit</mat-icon>
+                                            </div>
+                                            <div class="delete" (click)="deleteContact(index)">
+                                                <mat-icon>delete</mat-icon>
+                                            </div>
+
+                                        </div>
+
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -244,18 +267,30 @@
                                     <th pResizableColumn data-qe-id="table-thead-bank-address">
                                         {{'detailCustomerOfLegal.bankAccount.bank_address' | translate}}
                                     </th>
+                                    <th pResizableColumn></th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
-                                <tr (dblclick)="editBankAccount(bankAccount, index)"
-                                    [attr.data-qe-id]="'table-tbody-row-' + index">
-                                    <td> {{index}}</td>
-                                    <td> {{bankAccount.bankName}} </td>
-                                    <td> {{bankAccount.accountName}} </td>
-                                    <td> {{bankAccount.accountNumber}} </td>
-                                    <td> {{bankAccount.provinceName}} </td>
-                                    <td> {{bankAccount.branch}}</td>
-                                    <td> {{bankAccount.address}} </td>
+                                <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+                                    <td class="ui-resizable-column"> {{index}}</td>
+                                    <td class="ui-resizable-column"> {{bankAccount.bankName}} </td>
+                                    <td class="ui-resizable-column"> {{bankAccount.accountName}} </td>
+                                    <td class="ui-resizable-column"> {{bankAccount.accountNumber}} </td>
+                                    <td class="ui-resizable-column"> {{bankAccount.provinceName}} </td>
+                                    <td class="ui-resizable-column"> {{bankAccount.branch}}</td>
+                                    <td class="ui-resizable-column"> {{bankAccount.address}} </td>
+                                    <td class="ui-resizable-column">
+                                        <div class="d-flex">
+                                            <div class="edit mr-2" (click)="editBankAccount(bankAccount, index)">
+                                                <mat-icon>edit</mat-icon>
+                                            </div>
+                                            <div class="delete" (click)="deletebankAccount(index)">
+                                                <mat-icon>delete</mat-icon>
+                                            </div>
+
+                                        </div>
+
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -293,15 +328,10 @@
                     {{'detailCustomerOfLegal.bankAccount.bank_name' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <app-single-select *ngIf="bankAccountsModal"
-                    data-qe-id="dialog-bank-account" 
-                    [valueSelector]="valueSelector"
-                    [list]="bankExceptIds" 
-                    [selectedList]="bankIds" 
-                    [key]="'name'" 
+                <app-single-select *ngIf="bankAccountsModal" data-qe-id="dialog-bank-account"
+                    [valueSelector]="valueSelector" [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'"
                     (search)="bankSearch($event, bankAccountForm.controls.bankId.value)"
-                    (selectionChange)="selectedBank($event)" 
-                    (listOpen)="openBankList(bankAccountForm.bankId)"
+                    (selectionChange)="selectedBank($event)" (listOpen)="openBankList(bankAccountForm.bankId)"
                     [initialValue]="bankAccountForm.controls.bankName.value"></app-single-select>
             </div>
             <div class="form-group col-6">
@@ -345,10 +375,11 @@
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
-                    <app-single-select *ngIf="bankAccountsModal" class="w-100" data-qe-id="detail-form-bank-account-province-name"
-                        [valueSelector]="valueSelector" [list]="provinceExceptIds"
-                        [initialValue]="bankAccountForm.controls.provinceName.value" [selectedList]="provinceIds"
-                        [key]="'name'" (search)="provinceSearch($event, bankAccountForm.controls.provinceId.value)"
+                    <app-single-select *ngIf="bankAccountsModal" class="w-100"
+                        data-qe-id="detail-form-bank-account-province-name" [valueSelector]="valueSelector"
+                        [list]="provinceExceptIds" [initialValue]="bankAccountForm.controls.provinceName.value"
+                        [selectedList]="provinceIds" [key]="'name'"
+                        (search)="provinceSearch($event, bankAccountForm.controls.provinceId.value)"
                         (selectionChange)="selectedProvinceBankAccount($event)"
                         (listOpen)="openProvinceList(customerDetailForm.get('customerBankAccounts').provinceId)">
                     </app-single-select>
@@ -436,11 +467,11 @@
                     {{'detailCustomerOfLegal.contacts.province' | translate}}
                 </label>
                 <app-single-select data-qe-id="detail-form-general-contact-province" *ngIf="contactsModal"
-                    [initialValue]="contactForm.controls.provinceName.value"
-                    [list]="provinceExceptIds"
+                    [initialValue]="contactForm.controls.provinceName.value" [list]="provinceExceptIds"
                     [valueSelector]="valueSelector" [selectedList]="provinceIds" [key]="'name'"
-                    (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="selectedProvince($event)"
-                    (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
+                    (search)="provinceSearch($event, contactForm.controls.provinceId.value)"
+                    (selectionChange)="selectedProvince($event)" (listOpen)="openProvinceList(contactForm.provinceId)">
+                </app-single-select>
 
             </div>
 

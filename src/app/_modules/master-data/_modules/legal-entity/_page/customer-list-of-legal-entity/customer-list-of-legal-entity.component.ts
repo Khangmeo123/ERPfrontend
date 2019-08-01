@@ -145,9 +145,11 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res =>{
-      this.customerSearchEntity.legalEntityId = this.legalList[0].id;
-      this.legalId = this.customerSearchEntity.legalEntityId;
-      this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+      if(this.legalList && this.legalList.length > 0) {
+        this.customerSearchEntity.legalEntityId = this.legalList[0].id;
+        this.legalId = this.customerSearchEntity.legalEntityId;
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+      }
     });
   }
 

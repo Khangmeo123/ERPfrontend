@@ -123,20 +123,17 @@ export class SupplierGroupService {
 
     saveSupplier(supplierGroupSearchEntity: SupplierSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (supplierGroupSearchEntity.id === null || supplierGroupSearchEntity.id === undefined 
-                || supplierGroupSearchEntity.id === environment.emtyGuid) {
-                this.supplierGroupRepository.addSupplier(supplierGroupSearchEntity).subscribe(res => {
-                    if (res) {
-                        this.getListSupplierDetail(supplierGroupSearchEntity);
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve(false);
-                    }
-                }, err => {
-                    if (err) {
-                        reject(true);
-                    }
-                });
-            }
+            this.supplierGroupRepository.addSupplier(supplierGroupSearchEntity).subscribe(res => {
+                if (res) {
+                    this.getListSupplierDetail(supplierGroupSearchEntity);
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve(false);
+                }
+            }, err => {
+                if (err) {
+                    reject(true);
+                }
+            });
         });
         return defered;
     }

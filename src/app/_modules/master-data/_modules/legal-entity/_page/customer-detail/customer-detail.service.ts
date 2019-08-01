@@ -162,7 +162,7 @@ export class CustomerDetailService {
         this.contactForm.next(this.fb.group(new InfoContactForm()));
     }
 
-    saveContact(contactValue: any, index: any) {
+    saveContact(contactValue: any, index: number) {
         const indexContact = Number(index);
         const currentForm = this.customerDetailForm.getValue();
         const arrayContact = currentForm.get('customerContacts') as FormArray;
@@ -175,14 +175,22 @@ export class CustomerDetailService {
         }
         this.customerDetailForm.next(currentForm);
     }
+
     editContact(contact) {
         this.contactForm.next(this.fb.group(new InfoContactForm(contact)));
+    }
+
+    deleteContact(index: number) {
+        const currentCustomerDetail = this.customerDetailForm.getValue();
+        const currentContact = currentCustomerDetail.get('customerContacts') as FormArray;
+        currentContact.removeAt(index);
+        this.customerDetailForm.next(currentCustomerDetail);
     }
     addBankAccount() {
         this.bankAccountForm.next(this.fb.group(new BankAccountOfLegalForm()));
     }
 
-    saveBankAccount(bankAccountValue: any, index: any) {
+    saveBankAccount(bankAccountValue: any, index: number) {
         const indexbankAccount = Number(index);
         const currentForm = this.customerDetailForm.getValue();
         const arrayBankAccount = currentForm.get('customerBankAccounts') as FormArray;
@@ -197,6 +205,13 @@ export class CustomerDetailService {
     }
     editbankAccount(bankAccountForm) {
         this.bankAccountForm.next(this.fb.group(new BankAccountOfLegalForm(bankAccountForm)));
+    }
+
+    deleteBankAccount(index: number) {
+        const currentCustomerDetail = this.customerDetailForm.getValue();
+        const currentBankAccount = currentCustomerDetail.get('customerBankAccounts') as FormArray;
+        currentBankAccount.removeAt(index);
+        this.customerDetailForm.next(currentCustomerDetail);
     }
 
     save(customerDetailEntity: any): Promise<boolean> {

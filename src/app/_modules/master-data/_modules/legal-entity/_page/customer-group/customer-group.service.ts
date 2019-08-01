@@ -137,20 +137,17 @@ export class CustomerGroupService {
 
       saveCustomer(customerSearchEntity: CustomerSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (customerSearchEntity.id === null || customerSearchEntity.id === undefined 
-                || customerSearchEntity.id === environment.emtyGuid) {
-                this.customerGroupRepository.addCustomer(customerSearchEntity).subscribe(res => {
-                    if (res) {
-                        this.getListCustomerDetail(customerSearchEntity);
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve(false);
-                    }
-                }, err => {
-                    if (err) {
-                        reject(true);
-                    }
-                });
-            }
+            this.customerGroupRepository.addCustomer(customerSearchEntity).subscribe(res => {
+                if (res) {
+                    this.getListCustomerDetail(customerSearchEntity);
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve(false);
+                }
+            }, err => {
+                if (err) {
+                    reject(true);
+                }
+            });
         });
         return defered;
     }
