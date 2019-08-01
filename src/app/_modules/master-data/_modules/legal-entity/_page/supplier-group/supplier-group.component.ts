@@ -53,7 +53,6 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   supplierDetailSubs: Subscription = new Subscription();
 
   listSupplierId: Array<any> = [];
-  legalId: string;
   supplierGroupingId: string;
 
 
@@ -229,12 +228,13 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       this.supplierGroupSearchEntity.orderBy = event.sortField;
       this.supplierGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
-
-    if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
+    if (this.legalEntityId !== '' && this.legalEntityId !== undefined && this.legalEntityId !== null) {
       this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res => {
-        this.supplierSearchEntity.legalEntityId = this.legalEntityId;
-        this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
-        this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
+        if(this.supplierGroupList && this.supplierGroupList.length > 0) {
+          this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+          this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
+          this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
+        }
       });
     }
   }
@@ -283,18 +283,18 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
   onClickShowDetail(supplierId) {
     this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'],
-      { queryParams: { id: supplierId, legalEntityId: this.legalId } });
+      { queryParams: { id: supplierId, legalEntityId: this.legalEntityId } });
   }
 
   onClickAddSupplier() {
     this.supplierSearchEntity.supplierDetailIds = this.listSupplierId;
-    this.supplierSearchEntity.legalEntityId = this.legalId;
+    this.supplierSearchEntity.legalEntityId = this.legalEntityId;
     if ((this.supplierGroupingId === '' || this.supplierGroupingId === undefined) && this.supplierGroupList.length > 0) {
       this.supplierGroupingId = this.supplierGroupList[0].id;
     }
     this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
     this.supplierGroupService.saveSupplier(this.supplierSearchEntity).then(res => {
-      this.supplierSearchEntity.legalEntityId = this.legalId;
+      this.supplierSearchEntity.legalEntityId = this.legalEntityId;
       this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
     }).catch(err => {
