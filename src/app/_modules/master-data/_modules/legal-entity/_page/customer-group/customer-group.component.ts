@@ -44,7 +44,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   legalEntityIds: LegalEntity[];
   legalEntityExceptIds: LegalEntity[];
   leGalEntityTyping: Subject<LegalSearchEntity> = new Subject();
-  legalEntityId: string = '';
+  legalEntityId: string = null;
   legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
 
   customerIds: CustomerEntity[];

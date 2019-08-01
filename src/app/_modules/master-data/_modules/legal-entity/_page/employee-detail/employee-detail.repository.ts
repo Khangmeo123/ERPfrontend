@@ -9,6 +9,7 @@ import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/prov
 import { Entities } from 'src/app/_helpers/entity';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
+import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 
 @Injectable({
     providedIn: 'root',
@@ -50,10 +51,10 @@ export class EmployeeOfLegalEntityDetailRepository extends Repository{
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
-                        return new ProvinceEntity(item);
+                        return new BankEntity(item);
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new ProvinceEntity(item);
+                        return new BankEntity(item);
                     });
                     return r.body;
                 }),

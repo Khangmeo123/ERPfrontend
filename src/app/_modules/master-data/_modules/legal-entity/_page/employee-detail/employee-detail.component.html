@@ -193,8 +193,8 @@
                                 [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'"
                                 (search)="bankSearch($event, employeeDetailForm.controls.bankId.value)"
                                 [initialValue]="employeeDetailForm.controls.bankName.value"
-                                (selectionChange)="employeeDetailForm.controls.bankId.setValue($event.Id)"
-                                (listOpen)="openBankList(employeeDetailForm.bankId)"></app-single-select>
+                                (selectionChange)="employeeDetailForm.controls.bankId.setValue($event[0])"
+                                (listOpen)="openBankList(employeeDetailForm.controls.bankId.value)"></app-single-select>
 
                         </div>
                     </div>

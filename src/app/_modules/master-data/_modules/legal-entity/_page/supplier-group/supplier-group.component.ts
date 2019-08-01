@@ -42,7 +42,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   legalEntityIds: LegalEntity[];
   legalEntityExceptIds: LegalEntity[];
   leGalEntityTyping: Subject<LegalSearchEntity> = new Subject();
-  legalEntityId: string = '';
+  legalEntityId: string = null;
   legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
 
   supplierIds: SupplierEntity[];
@@ -186,7 +186,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       if (this.supplierGroupList && this.supplierGroupList.length > 0) {
         this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
       } else {
-        this.supplierSearchEntity.supplierGroupingId = '';
+        this.supplierSearchEntity.supplierGroupingId = null;
       }
 
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);

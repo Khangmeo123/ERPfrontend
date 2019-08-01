@@ -38,7 +38,7 @@ export class EmployeePositionComponent implements OnInit {
   legalEntityIds: LegalEntity[];
   legalEntityExceptIds: LegalEntity[];
   leGalEntityTyping: Subject<LegalSearchEntity> = new Subject();
-  legalEntityId: string = '';
+  legalEntityId: string = null;
   legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
 
   employeeIds: EmployeeEntity[];

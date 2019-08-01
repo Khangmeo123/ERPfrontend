@@ -67,7 +67,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
 
   contactForm: FormGroup;
   bankAccountForm: FormGroup;
-  legalEntiyId: string = '';
+  legalEntiyId: string = null;
   index: number = -1;
   routeLink: any;
 
