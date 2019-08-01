@@ -95,6 +95,13 @@ export class DivisionComponent implements OnInit {
     this.divisionService.getListLegalEntity(this.legalSearchEntity);
   }
 
+  selectedLegal (event) {
+    this.legalEntiyId = event[0];
+    this.divisionSearchEntity.legalEntityId = event[0];
+    this.legalSearchEntity.legalEntityId = event[0];
+    this.divisionService.getList(this.divisionSearchEntity);
+  }
+
   legalSearch(event) {
     this.legalSearchEntity.code.startsWith = event;
     this.legalSearchEntity.name.startsWith = event;
@@ -118,13 +125,18 @@ export class DivisionComponent implements OnInit {
       this.divisionSearchEntity.orderBy = event.sortField;
       this.divisionSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
-    this.getList();
+
+    if(this.divisionSearchEntity.legalEntityId && this.divisionSearchEntity.legalEntityId !== undefined){
+      this.getList();
+    }
+    
   }
 
   save() {
     if (!this.divisionForm.valid) {
       this.genaralService.validateAllFormFields(this.divisionForm);
     } else {
+      this.divisionSearchEntity.legalEntityId = this.legalEntiyId;
       this.divisionService.save(this.divisionForm.value, this.divisionSearchEntity).then(res => {
         this.display = res;
       }).catch(err => {

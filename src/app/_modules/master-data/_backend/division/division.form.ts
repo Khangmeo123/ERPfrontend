@@ -5,9 +5,10 @@ import { DivisionEntity } from './divisionl.entity';
 
 
 export class DivisionForm extends FormModel {
-    name = new FormControl('', [requiredField, checkLength(3, 50)]);
-    code = new FormControl('', [requiredField, checkLength(3, 10)]);
-    address = new FormControl();
+    name = new FormControl('', [requiredField, checkLength(1, 50)]);
+    code = new FormControl('', [requiredField, checkLength(1, 3)]);
+    address = new FormControl('');
+    legalEntityId = new FormControl();
 
 
     errors = new FormGroup({
@@ -17,5 +18,12 @@ export class DivisionForm extends FormModel {
 
     constructor(divisionEntity?: DivisionEntity) {
         super();
+        if (divisionEntity !== null && divisionEntity !== undefined) {
+            Object.keys(divisionEntity).forEach((item) => {
+                if (divisionEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+                    this[item].patchValue(divisionEntity[item]);
+                }
+            });
+        }
     }
 }
