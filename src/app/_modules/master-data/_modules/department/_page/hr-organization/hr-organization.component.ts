@@ -242,16 +242,8 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     await this.hrOrganizationService.removeEmployee(id, this.selectedDepartment.id, this.employeeSearchEntity);
   }
 
-  /**
-   * View details of employee
-   *
-   * @param employee EmployeeEntity
-   */
-  async onViewDetail(employee: EmployeeEntity) {
-    this.departmentService.selectEmployee(employee);
-    await this.router.navigate([
-      '/master-data/department/employee-detail',
-    ]);
+  toDepartmentEmployeeDetail(employeeId: string) {
+    this.router.navigate(['/master-data/department/employee-detail'], { queryParams: { id: employeeId, route: 'hr-organization' } });
   }
 
   onSelectEmployeeToAdd(event) {

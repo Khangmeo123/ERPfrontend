@@ -5,6 +5,8 @@ export class InfoContactEntity extends Entity {
     phone: string;
     email: string;
     address: string;
+    provinceName: string;
+    provinceId: string;
     relationship: string;
 
     constructor(infoContactEntity?: any) {

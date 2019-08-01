@@ -17,7 +17,7 @@ import { DatePickerModule } from '../../../../_shared/modules/date-picker/date-p
 import { AssetListComponent } from './_page/asset-list/asset-list.component';
 import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
 import { ProjectListComponent } from './_page/project-list/project-list.component';
-import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
+import { DepartmentEmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
@@ -29,7 +29,7 @@ import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HrOrganizationRepository } from './_page/hr-organization/hr-organization.repository';
 import { GeneralService } from '../../../../_helpers/general-service.service';
-
+import { ChipsModule } from 'primeng/chips';
 
 @NgModule({
   declarations: [
@@ -41,7 +41,7 @@ import { GeneralService } from '../../../../_helpers/general-service.service';
     AssetListComponent,
     WarehouseListComponent,
     ProjectListComponent,
-    EmployeeDetailComponent,
+    DepartmentEmployeeDetailComponent,
     DepartmentRootComponent,
     WarehouseGroupComponent,
   ],
@@ -63,6 +63,8 @@ import { GeneralService } from '../../../../_helpers/general-service.service';
     ErrorModule,
     FormsModule,
     ReactiveFormsModule,
+    ChipsModule,
+
   ],
   providers: [
     DepartmentService,
