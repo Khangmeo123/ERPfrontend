@@ -1,7 +1,7 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { requiredField, checkLength } from 'src/app/_helpers';
-import { DivisionEntity } from './divisionl.entity';
+import { DivisionEntity } from './division.entity';
 
 
 export class DivisionForm extends FormModel {

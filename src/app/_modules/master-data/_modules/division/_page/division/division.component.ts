@@ -3,7 +3,6 @@ import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { Router } from '@angular/router';
 import { Subscription, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/divisionl.entity';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { DivisionService } from './division.service';
@@ -12,6 +11,7 @@ import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.m
 import { BookmarkService } from 'src/app/_services';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { translate } from 'src/app/_helpers/string';
+import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/division.entity';
 
 @Component({
   selector: 'app-division',
@@ -40,7 +40,7 @@ export class DivisionComponent implements OnInit {
   legalTyping: Subject<LegalSearchEntity> = new Subject();
   legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
 
-  legalEntiyId: string = '';
+  legalEntityId: string = '';
   selectedDivision: any;
   pagination = new PaginationModel();
 
@@ -95,18 +95,22 @@ export class DivisionComponent implements OnInit {
     this.divisionService.getListLegalEntity(this.legalSearchEntity);
   }
 
+  legalSearch(event) {
+    this.legalSearchEntity = new LegalSearchEntity();
+    if (this.legalEntityId !== undefined && this.legalEntityId !== null) {
+      this.legalSearchEntity.ids.push(this.legalEntityId);
+    }
+    this.legalSearchEntity.name.startsWith = event;
+    this.legalTyping.next(this.legalSearchEntity);
+  }
+
   selectedLegal (event) {
-    this.legalEntiyId = event[0];
-    this.divisionSearchEntity.legalEntityId = event[0];
+    this.legalEntityId = event[0];
     this.legalSearchEntity.legalEntityId = event[0];
     this.divisionService.getList(this.divisionSearchEntity);
   }
 
-  legalSearch(event) {
-    this.legalSearchEntity.code.startsWith = event;
-    this.legalSearchEntity.name.startsWith = event;
-    this.legalTyping.next(this.legalSearchEntity);
-  }
+  
 
   getList() {
     this.pagination.pageNumber = 1;
@@ -136,7 +140,8 @@ export class DivisionComponent implements OnInit {
     if (!this.divisionForm.valid) {
       this.genaralService.validateAllFormFields(this.divisionForm);
     } else {
-      this.divisionSearchEntity.legalEntityId = this.legalEntiyId;
+      this.divisionSearchEntity.legalEntityId = this.legalEntityId;
+      this.divisionForm.value.legalEntityId = this.legalEntityId;
       this.divisionService.save(this.divisionForm.value, this.divisionSearchEntity).then(res => {
         this.display = res;
       }).catch(err => {
@@ -157,7 +162,7 @@ export class DivisionComponent implements OnInit {
 
   clearSearch(table: any) {
     this.divisionSearchEntity = new DivisionSearchEntity();
-    this.divisionSearchEntity.legalEntityId = this.legalEntiyId;
+    this.divisionSearchEntity.legalEntityId = this.legalEntityId;
     table.reset();
   }
 
