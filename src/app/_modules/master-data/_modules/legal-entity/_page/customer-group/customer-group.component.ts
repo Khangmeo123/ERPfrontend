@@ -192,9 +192,11 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     }
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
-        this.customerSearchEntity.legalEntityId = this.legalEntityId;
-        this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
-        this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
+        if(this.customerGroupList && this.customerGroupList.length > 0) {
+          this.customerSearchEntity.legalEntityId = this.legalEntityId;
+          this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
+          this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
+        }
       });
     }
   }
@@ -209,7 +211,17 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     this.pagination.pageNumber = 1;
     this.customerGroupSearchEntity.skip = 0;
     this.customerGroupSearchEntity.take = this.pagination.take;
-    this.customerGroupService.getList(this.customerGroupSearchEntity);
+    this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
+      this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
+        if (this.customerGroupList && this.customerGroupList.length > 0) {
+          this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
+        } else {
+          this.customerSearchEntity.customerGroupingId = null;
+        }
+  
+        this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
+      });
+    });
   }
 
   edit(customerGroupId: string) {

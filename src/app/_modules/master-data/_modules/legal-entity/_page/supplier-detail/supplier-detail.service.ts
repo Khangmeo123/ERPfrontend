@@ -178,6 +178,14 @@ export class LegalSupplierDetailService {
     editContact(contact) {
         this.contactForm.next(this.fb.group(new InfoContactForm(contact)));
     }
+
+    deleteContact(index: number) {
+        const currentCustomerDetail = this.supplierDetailForm.getValue();
+        const currentContact = currentCustomerDetail.get('customerContacts') as FormArray;
+        currentContact.removeAt(index);
+        this.supplierDetailForm.next(currentCustomerDetail);
+    }
+
     addBankAccount() {
         this.bankAccountForm.next(this.fb.group(new BankAccountOfLegalForm()));
     }
@@ -197,6 +205,13 @@ export class LegalSupplierDetailService {
     }
     editbankAccount(bankAccountForm) {
         this.bankAccountForm.next(this.fb.group(new BankAccountOfLegalForm(bankAccountForm)));
+    }
+
+    deleteBankAccount(index: number) {
+        const currentCustomerDetail = this.supplierDetailForm.getValue();
+        const currentBankAccount = currentCustomerDetail.get('customerBankAccounts') as FormArray;
+        currentBankAccount.removeAt(index);
+        this.supplierDetailForm.next(currentCustomerDetail);
     }
 
     save(supplierDetailEntity: any): Promise<boolean> {

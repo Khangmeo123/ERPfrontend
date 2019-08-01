@@ -127,9 +127,6 @@
 		"title": ""
 	},
 	"customer": {
-		"bankAccount": {
-			"bank_address": ""
-		},
 		"detail": {
 			"content": {
 				"code": "",
@@ -248,12 +245,12 @@
 	},
 	"detailCustomerOfLegal": {
 		"bankAccount": {
-			"account_number": "",
-			"account_owner": "",
+			"accountNumber": "",
+			"accountOwner": "",
 			"add": "",
-			"bank_address": "",
-			"bank_division": "",
-			"bank_name": "",
+			"bankAddress": "",
+			"bankDivision": "",
+			"bankName": "",
 			"code": "",
 			"province": "",
 			"title": ""
@@ -273,20 +270,21 @@
 			"recipient": "",
 			"title": ""
 		},
-		"debt_load": "",
+		"customerGroup": "",
+		"debtLoad": "",
 		"detail": {
 			"title": ""
 		},
-		"due_in_days": "",
-		"more_details": "",
+		"dueInDays": "",
+		"general": {
+			"title": ""
+		},
 		"name": "",
-		"payment_terms": "",
+		"note": "",
+		"paymentTerms": "",
 		"pic": "",
 		"status": "",
-		"tab_1": {
-			"general": ""
-		},
-		"tax_code": ""
+		"taxCode": ""
 	},
 	"detailEmployeeGroup": {
 		"bank_account": {
@@ -346,18 +344,18 @@
 		"tax_code": ""
 	},
 	"detailSupplierGroup": {
-		"bank_account": {
-			"account_number": "",
-			"account_owner": "",
+		"bankAccount": {
+			"accountNumber": "",
+			"accountOwner": "",
 			"add": "",
-			"bank_address": "",
-			"bank_division": "",
-			"bank_name": "",
+			"bankAddress": "",
+			"bankDivision": "",
+			"bankName": "",
 			"code": "",
 			"province": "",
 			"title": ""
 		},
-		"bank_accounts": {
+		"bankAccounts": {
 			"add": ""
 		},
 		"code": "",
@@ -367,54 +365,31 @@
 			"city": "",
 			"code": "",
 			"email": "",
-			"phone_number": "",
+			"phoneNumber": "",
 			"province": "",
 			"recipient": "",
 			"title": ""
 		},
-		"debt_load": "",
+		"debtLoad": "",
 		"detail": {
 			"title": ""
 		},
-		"due_in_days": "",
-		"more_details": "",
+		"dueInDays": "",
+		"general": {
+			"title": ""
+		},
 		"name": "",
-		"payment_terms": "",
+		"note": "",
+		"paymentTerms": "",
 		"pic": "",
 		"status": "",
-		"supplier_group": "",
-		"tab_1": {
-			"general": ""
-		},
-		"tax_code": ""
+		"supplierGroup": "",
+		"taxCode": ""
 	},
 	"detail_item_of_legal_entity": {
-		"bill_of_materias": {
-			"amount": "",
-			"code_of_materias": "",
-			"modal_title": "",
-			"name_of_materias": "",
-			"title": "",
-			"unit": ""
-		},
-		"default_value": {
-			"discount_account": "",
-			"expense_account": "",
-			"inventory_account": "",
-			"return_account": "",
-			"revenue_account": "",
-			"sales_allowances_account": "",
-			"title": ""
-		},
-		"discount": "",
 		"discounts": {
-			"amount_from": "",
-			"amount_to": "",
-			"discount_type": "",
-			"modal_title": "",
-			"title": ""
+			"modal_title": ""
 		},
-		"item_group": "",
 		"transformation_unit": {
 			"amount": "",
 			"description": "",
@@ -604,6 +579,7 @@
 		}
 	},
 	"general": {
+		"action": "",
 		"button": {
 			"add": "",
 			"cancel": "",
@@ -637,17 +613,7 @@
 	"item": {
 		"content": {
 			"detail": {
-				"codeFromMarket": "",
-				"item_id_ncc": "",
-				"item_id_tt": "",
-				"item_length": "",
-				"item_properti": "",
-				"item_weight": "",
-				"item_width": ""
-			},
-			"modal": {
-				"add_des": "",
-				"title": ""
+				"codeFromMarket": ""
 			},
 			"tab": {
 				"enviroment_tax": "",
@@ -662,14 +628,6 @@
 				"special_consumption_tax_id": "",
 				"value_add_tax": "",
 				"value_add_tax_id": ""
-			},
-			"table": {
-				"item_cost": "",
-				"item_height": "",
-				"item_id": "",
-				"item_name": "",
-				"item_status": "",
-				"item_unit": ""
 			}
 		},
 		"detail": {
@@ -704,7 +662,6 @@
 			"tab": {
 				"title1": "",
 				"title2": "",
-				"title_1": "",
 				"title_2": ""
 			}
 		},
@@ -723,13 +680,18 @@
 		}
 	},
 	"itemGroup": {
+		"action": "",
 		"code": "",
 		"header": {
 			"title": ""
 		},
 		"item": {
+			"action": "",
 			"code": "",
 			"name": ""
+		},
+		"modal": {
+			"title": ""
 		},
 		"name": ""
 	},
@@ -739,11 +701,12 @@
 			"title": ""
 		},
 		"item": {
+			"action": "",
 			"code": "",
 			"name": ""
 		},
 		"name": "",
-		"sob": ""
+		"sobCode": ""
 	},
 	"jobLevel": {
 		"header": {
@@ -778,6 +741,58 @@
 			"title": ""
 		},
 		"name": ""
+	},
+	"legalItemDetail": {
+		"content": {
+			"characteristic": "",
+			"code": "",
+			"codeFromSupplier": "",
+			"description": "",
+			"height": "",
+			"itemGroup": "",
+			"length": "",
+			"name": "",
+			"primaryPrice": "",
+			"status": "",
+			"uom": "",
+			"weight": "",
+			"width": ""
+		},
+		"defaultValue": {
+			"discountAccount": "",
+			"expenseAccount": "",
+			"inventoryAccount": "",
+			"returnAccount": "",
+			"revenueAccount": "",
+			"salesAllowancesAccount": "",
+			"title": ""
+		},
+		"detail": {
+			"codeFromMarket": ""
+		},
+		"header": {
+			"title": ""
+		},
+		"itemDiscounts": {
+			"action": "",
+			"discounType": "",
+			"quantityFrom": "",
+			"quantityTo": "",
+			"rate": "",
+			"title": ""
+		},
+		"itemMaterials": {
+			"action": "",
+			"modal_title": "",
+			"quantity": "",
+			"sourceItemCode": "",
+			"sourceItemName": "",
+			"title": "",
+			"unitOfMeasureCode": ""
+		},
+		"tab": {
+			"title_1": ""
+		}
 	},
 	"legal_entity": {
 		"name": ""
@@ -872,9 +887,6 @@
 		"to_date": ""
 	},
 	"supplier": {
-		"bank_account": {
-			"bank_address": ""
-		},
 		"detail": {
 			"content": {
 				"code": "",

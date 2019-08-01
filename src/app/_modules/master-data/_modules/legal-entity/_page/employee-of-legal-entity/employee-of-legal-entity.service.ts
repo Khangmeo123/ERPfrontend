@@ -87,20 +87,17 @@ export class EmployeeOfLegalEntityService {
 
     saveEmployee(employeeSearchEntity: EmployeeSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (employeeSearchEntity.id === null || employeeSearchEntity.id === undefined 
-                || employeeSearchEntity.id === environment.emtyGuid) {
-                this.employeeOflegalEntityRepository.addEmployee(employeeSearchEntity).subscribe(res => {
-                    if (res) {
-                        this.getListEmployeeDetail(employeeSearchEntity);
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve(false);
-                    }
-                }, err => {
-                    if (err) {
-                        reject(true);
-                    }
-                });
-            }
+            this.employeeOflegalEntityRepository.addEmployee(employeeSearchEntity).subscribe(res => {
+                if (res) {
+                    this.getListEmployeeDetail(employeeSearchEntity);
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve(false);
+                }
+            }, err => {
+                if (err) {
+                    reject(true);
+                }
+            });
         });
         return defered;
     }

@@ -89,20 +89,17 @@ export class CustomerOfLegalEntityService {
 
     saveCustomer(customerSearchEntity: CustomerSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (customerSearchEntity.id === null || customerSearchEntity.id === undefined 
-                || customerSearchEntity.id === environment.emtyGuid) {
-                this.customerOflegalEntityRepository.addCustomer(customerSearchEntity).subscribe(res => {
-                    if (res) {
-                        this.getListCustomer(customerSearchEntity);
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve(false);
-                    }
-                }, err => {
-                    if (err) {
-                        reject(true);
-                    }
-                });
-            }
+            this.customerOflegalEntityRepository.addCustomer(customerSearchEntity).subscribe(res => {
+                if (res) {
+                    this.getListCustomer(customerSearchEntity);
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve(false);
+                }
+            }, err => {
+                if (err) {
+                    reject(true);
+                }
+            });
         });
         return defered;
     }

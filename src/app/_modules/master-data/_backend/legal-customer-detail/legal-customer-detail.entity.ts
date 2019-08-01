@@ -19,6 +19,7 @@ export class CustomerDetailOfLegalEntity extends Entity {
 
     customerContacts: InfoContactEntity[];
     customerBankAccounts: BankAccountEntity[];
+    customerGroups: string[]
 
     constructor(customerEntity?: any) {
         super(customerEntity);

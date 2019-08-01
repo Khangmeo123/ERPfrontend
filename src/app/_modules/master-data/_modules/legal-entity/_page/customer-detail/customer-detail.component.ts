@@ -278,6 +278,10 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     this.customerDetailService.editContact(contact);
   }
 
+  deleteContact(index: number) {
+    this.customerDetailService.deleteContact(index);
+  }
+
 
   // Bank account
 
@@ -334,6 +338,10 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     this.index = index;
     this.bankAccountsModal = true;
     this.customerDetailService.editbankAccount(bankAccount);
+  }
+
+  deletebankAccount(index: number) {
+    this.customerDetailService.deleteBankAccount(index);
   }
 
   cancel() {

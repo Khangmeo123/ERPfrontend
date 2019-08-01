@@ -17,7 +17,7 @@
             <accordion>
                 <accordion-group [isOpen]="true" [formGroup]="supplierDetailForm">
                     <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
-                        <div class="pull-left float-left">{{'detailSupplierGroup.tab_1.general' | translate }}</div>
+                        <div class="pull-left float-left">{{'detailSupplierGroup.general.title' | translate }}</div>
                         <span class="float-right pull-right" accordion-heading>
                             <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                         </span>
@@ -42,7 +42,7 @@
 
                         <div class="form-group col">
                             <label for="tax_code">
-                                {{'detailSupplierGroup.tax_code' | translate}}
+                                {{'detailSupplierGroup.taxCode' | translate}}
                             </label>
                             <input type="text" class="form-control" id="tax_code"
                                 data-qe-id="detail-form-general-tax-code" formControlName="taxCode">
@@ -69,7 +69,7 @@
                         <!-- <div class="form-group col"></div> -->
                         <div class="form-group col-8">
                             <label for="supplier_more_details">
-                                {{'detailSupplierGroup.more_details' | translate}}
+                                {{'detailSupplierGroup.note' | translate}}
                             </label>
                             <textarea name="supplier_more_details" id="supplier_more_details" rows="1"
                                 class="form-control" data-qe-id="detail-form-general-more-detail"
@@ -77,7 +77,7 @@
                         </div>
                         <div class="form-group col-4">
                             <label>
-                                {{'detailSupplierGroup.payment_terms' | translate}}
+                                {{'detailSupplierGroup.paymentTerms' | translate}}
                             </label>
                             <app-single-select data-qe-id="detail-form-general-payment-term"
                                 [valueSelector]="valueSelector"
@@ -89,14 +89,14 @@
                         </div>
                         <div class="form-group col-4">
                             <label>
-                                {{'detailSupplierGroup.due_in_days' | translate}}
+                                {{'detailSupplierGroup.dueInDays' | translate}}
                             </label>
                             <input type="text" class="form-control" data-qe-id="detail-form-general-due-in-days"
                                 formControlName="dueInDays">
                         </div>
                         <div class="form-group col-4">
                             <label>
-                                {{'detailSupplierGroup.debt_load' | translate}}
+                                {{'detailSupplierGroup.debtLoad' | translate}}
                             </label>
                             <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load"
                                 formControlName="debtLoad">
@@ -116,7 +116,7 @@
                         </div>
                         <div class="form-group col-4">
                             <label>
-                                {{'detailSupplierGroup.supplier_group' | translate}}
+                                {{'detailSupplierGroup.supplierGroup' | translate}}
                             </label>
                             <p-chips class="w-100" [(ngModel)]="supplierDetailForm.controls.supplierGroupings.value"
                                 [ngModelOptions]="{standalone: true}" [disabled]="true" >
@@ -162,7 +162,7 @@
                                         {{'detailSupplierGroup.contacts.recipient' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-contacts-phone-number">
-                                        {{'detailSupplierGroup.contacts.phone_number' | translate}}
+                                        {{'detailSupplierGroup.contacts.phoneNumber' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-contacts-email">
                                         {{'detailSupplierGroup.contacts.email' | translate}}
@@ -173,16 +173,27 @@
                                     <th pResizableColumn data-qe-id="table-thead-contacts-address">
                                         {{'detailSupplierGroup.contacts.address' | translate}}
                                     </th>
+                                    <th pResizableColumn>{{'general.action' | translate}}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-contact let-index="rowIndex">
-                                <tr (dblclick)="editContact(contact,index)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <tr [attr.data-qe-id]="'table-tbody-row-' + index">
                                     <td> {{index}}</td>
                                     <td> {{contact.name}} </td>
                                     <td> {{contact.phone}} </td>
                                     <td> {{contact.email}} </td>
                                     <td> {{contact.provinceName}}</td>
                                     <td> {{contact.address}} </td>
+                                    <td class="ui-resizable-column">
+                                            <div class="d-flex">
+                                                <div class="edit mr-2" (click)="editContact(contact,index)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </div>
+                                                <div class="delete" (click)="deleteContact(index)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </div>
+                                            </div>
+                                        </td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -191,7 +202,7 @@
                 </accordion-group>
                 <accordion-group>
                     <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
-                        <div class="pull-left float-left">{{'detailSupplierGroup.bank_account.title' | translate }}
+                        <div class="pull-left float-left">{{'detailSupplierGroup.bankAccount.title' | translate }}
                         </div>
                         <span class="float-right pull-right" accordion-heading>
                             <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -199,7 +210,7 @@
                     </button>
                     <div class="d-flex justify-content-end">
                         <button class="btn btn-add" (click)="addBankAccount()" data-qe-id="button-add-bank-account">
-                            {{'detailSupplierGroup.bank_account.add' | translate}}
+                            {{'detailSupplierGroup.bankAccount.add' | translate}}
                         </button>
                     </div>
                     <div class="mt-2">
@@ -219,30 +230,30 @@
                             <ng-template pTemplate="header">
                                 <tr>
                                     <th pResizableColumn data-qe-id="table-thead-bank-code">
-                                        {{'detailSupplierGroup.bank_account.code' | translate}}
+                                        {{'detailSupplierGroup.bankAccount.code' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-name">
-                                        {{'detailSupplierGroup.bank_account.bank_name' | translate}}
+                                        {{'detailSupplierGroup.bankAccount.bankName' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-account-owner">
-                                        {{'detailSupplierGroup.bank_account.account_owner' | translate}}
+                                        {{'detailSupplierGroup.bankAccount.accountOwner' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-account-number">
-                                        {{'detailSupplierGroup.bank_account.account_number' | translate}}
+                                        {{'detailSupplierGroup.bankAccount.accountNumber' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-province">
-                                        {{'detailSupplierGroup.bank_account.province' | translate}}
+                                        {{'detailSupplierGroup.bankAccount.province' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-division">
-                                        {{'detailSupplierGroup.bank_account.bank_division' | translate}}
+                                        {{'detailSupplierGroup.bankAccount.bankDivision' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-address">
-                                        {{'detailSupplierGroup.bank_account.bank_address' | translate}}
+                                        {{'detailSupplierGroup.bankAccount.bankAddress' | translate}}
                                     </th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
-                                <tr (dblclick)="editBankAccount(bankAccount, index)" [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <tr [attr.data-qe-id]="'table-tbody-row-' + index">
                                     <td> {{index}}</td>
                                     <td> {{bankAccount.bankName}} </td>
                                     <td> {{bankAccount.accountName}} </td>
@@ -250,6 +261,16 @@
                                     <td> {{bankAccount.provinceName}} </td>
                                     <td> {{bankAccount.branch}}</td>
                                     <td> {{bankAccount.address}} </td>
+                                    <td class="ui-resizable-column">
+                                            <div class="d-flex">
+                                                <div class="edit mr-2" (click)="editBankAccount(bankAccount, index)">
+                                                    <mat-icon>edit</mat-icon>
+                                                </div>
+                                                <div class="delete" (click)="deletebankAccount(index)">
+                                                    <mat-icon>delete</mat-icon>
+                                                </div>
+                                            </div>
+                                        </td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -265,7 +286,7 @@
                 {{ 'general.button.delete' | translate}}</a>
         </div>
         <div class="page-actions">
-            <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+            <button class="btn btn-cancel mr-2" (click)="cancel()" data-qe-id="dialog-button-cancel">
                 {{'general.button.cancel' | translate}}
             </button>
             <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="save()">
@@ -278,13 +299,13 @@
 
 <p-dialog modal="true" [(visible)]="bankAccountsModal" [contentStyle]="{'overflow':'visible'}">
     <p-header>
-        {{'detailSupplierGroup.bank_accounts.add' | translate}}
+        {{'detailSupplierGroup.bankAccounts.add' | translate}}
     </p-header>
     <form class="container" [formGroup]="bankAccountForm">
         <div class="row">
             <div class="form-group col-6">
                 <label>
-                    {{'detailSupplierGroup.bank_account.bank_name' | translate}}
+                    {{'detailSupplierGroup.bankAccount.bankName' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <app-single-select data-qe-id="dialog-bank-account" *ngIf="bankAccountsModal"
@@ -299,7 +320,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailSupplierGroup.bank_account.account_owner' | translate}}
+                    {{'detailSupplierGroup.bankAccount.accountOwner' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
@@ -312,7 +333,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailSupplierGroup.bank_account.account_number' | translate}}
+                    {{'detailSupplierGroup.bankAccount.accountNumber' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
@@ -325,13 +346,13 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailSupplierGroup.bank_account.bank_division' | translate}}
+                    {{'detailSupplierGroup.bankAccount.bankDivision' | translate}}
                 </label>
                 <input type="text" class="form-control" formControlName="branch">
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailSupplierGroup.bank_account.province' | translate}}
+                    {{'detailSupplierGroup.bankAccount.province' | translate}}
                 </label>
                 <div class="div-form">
                     <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name"  *ngIf="bankAccountsModal"
@@ -350,7 +371,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'supplier.bank_account.bank_address' | translate}}
+                    {{'detailSupplierGroup.bankAccount.bankAddress' | translate}}
                 </label>
                 <input type="text" class="form-control"  fomControlName="address" data-qe-id="detail-form-bank-address" >
             </div>
@@ -401,7 +422,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailSupplierGroup.contacts.phone_number' | translate}}
+                    {{'detailSupplierGroup.contacts.phoneNumber' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">

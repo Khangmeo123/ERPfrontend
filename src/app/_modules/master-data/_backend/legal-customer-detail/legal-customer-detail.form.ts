@@ -19,6 +19,7 @@ export class CustomerDetailOfLegalForm extends FormModel {
 
     customerContacts = new FormArray([]);
     customerBankAccounts = new FormArray([]);
+    customerGroups = new FormArray([]);
 
     errors = new FormGroup({
         name: new FormControl(''),

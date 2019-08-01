@@ -92,20 +92,17 @@ export class SupplierOfLegalEntityService {
 
     save(supplierSearchEntity: SupplierSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (supplierSearchEntity.id === null || supplierSearchEntity.id === undefined 
-                || supplierSearchEntity.id === environment.emtyGuid) {
-                this.supplierOflegalEntityRepository.addSupplier(supplierSearchEntity).subscribe(res => {
-                    if (res) {
-                        this.getListSupplier(supplierSearchEntity);
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve(false);
-                    }
-                }, err => {
-                    if (err) {
-                        reject(true);
-                    }
-                });
-            }
+            this.supplierOflegalEntityRepository.addSupplier(supplierSearchEntity).subscribe(res => {
+                if (res) {
+                    this.getListSupplier(supplierSearchEntity);
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve(false);
+                }
+            }, err => {
+                if (err) {
+                    reject(true);
+                }
+            });
         });
         return defered;
     }
