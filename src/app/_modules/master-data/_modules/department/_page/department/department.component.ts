@@ -3,7 +3,7 @@ import { BookmarkService } from '../../../../../../_services';
 import { DepartmentService } from './department.service';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
-import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
+import { DivisionEntity } from '../../../../_backend/division/division.entity';
 import { DivisionSearchEntity } from '../../../../_backend/division/division.searchentity';
 import { Subject, Subscription } from 'rxjs';
 import { Entities } from '../../../../../../_helpers/entity';

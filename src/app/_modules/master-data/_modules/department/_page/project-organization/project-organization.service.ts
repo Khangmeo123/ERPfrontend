@@ -2,7 +2,7 @@ import { ToastrService } from 'ngx-toastr';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
+import { DivisionEntity } from '../../../../_backend/division/division.entity';
 import { ProjectOrganizationEntity } from '../../../../_backend/project-organization/project-organization.entity';
 import { ProjectOrganizationRepository } from './project-organization.repository';
 import { ProjectOrganizationForm } from '../../../../_backend/project-organization/project-organization.form';

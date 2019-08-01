@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
+import { DivisionEntity } from '../../../../_backend/division/division.entity';
 import { Subject, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';

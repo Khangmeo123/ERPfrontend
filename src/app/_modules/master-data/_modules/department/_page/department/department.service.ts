@@ -10,7 +10,7 @@ import { Entities } from '../../../../../../_helpers/entity';
 import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
 import { DivisionSearchEntity } from '../../../../_backend/division/division.searchentity';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
+import { DivisionEntity } from '../../../../_backend/division/division.entity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 
