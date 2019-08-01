@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HrOrganizationComponent } from './_page/hr-organization/hr-organization.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { WarehouseComponent } from './_page/warehouse/warehouse.component';
-import { ProjectComponent } from './_page/project/project.component';
+import { ProjectOrganizationComponent } from './_page/project-organization/project-organization.component';
 import { MatIconModule } from '@angular/material';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { TableModule } from 'primeng/table';
@@ -37,7 +37,7 @@ import { GeneralService } from '../../../../_helpers/general-service.service';
     HrOrganizationComponent,
     AssetComponent,
     WarehouseComponent,
-    ProjectComponent,
+    ProjectOrganizationComponent,
     AssetListComponent,
     WarehouseListComponent,
     ProjectListComponent,

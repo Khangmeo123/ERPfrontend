@@ -3,7 +3,7 @@
   <div class="page-header">
     <span class="page-title">
       {{'departments.title' | translate}}
-      <span role="button" (click)="onClickSaveBookMark($event)">
+      <span (click)="onClickSaveBookMark($event)" role="button">
           <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
               star
           </mat-icon>
@@ -18,32 +18,32 @@
           <span class="sob-label flex-shrink-1 mr-2">
               {{'general.legal_entity.name' | translate}}:
           </span>
-          <app-single-select [list]="legalEntityList"
-                             [selectedList]="selectedLegalEntityList"
-                             key="name"
-                             (selectionChange)="onSelectLegalEntity()"
+          <app-single-select (listOpen)="getLegalEntityList()"
                              (search)="onLegalEntitySearch($event)"
-                             (listOpen)="getLegalEntityList()"></app-single-select>
+                             (selectionChange)="onSelectLegalEntity()"
+                             [list]="legalEntityList"
+                             [selectedList]="selectedLegalEntityList"
+                             key="name"></app-single-select>
         </div>
         <div class="col-3 d-flex align-items-center">
           <span class="sob-label flex-shrink-1 mr-2">
               {{'general.division' | translate}}:
           </span>
-          <app-single-select [list]="divisionList"
-                             [selectedList]="selectedDivisionList"
-                             key="name"
-                             (selectionChange)="onSelectDivision()"
+          <app-single-select (listOpen)="getDivisionList()"
                              (search)="onDivisionSearch($event)"
-                             (listOpen)="getDivisionList()"></app-single-select>
+                             (selectionChange)="onSelectDivision()"
+                             [list]="divisionList"
+                             [selectedList]="selectedDivisionList"
+                             key="name"></app-single-select>
         </div>
       </div>
     </div>
 
     <div class="page-section">
       <ul class="fems-tab clearfix">
-        <li class="pointer"
-            *ngFor="let item of routes; let i = index"
+        <li *ngFor="let item of routes; let i = index"
             [routerLink]="item.route"
+            class="pointer"
             routerLinkActive="active">
           {{item.key}}
         </li>

@@ -13,7 +13,11 @@ import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.sea
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Injectable } from '@angular/core';
 
+@Injectable({
+  providedIn: 'root',
+})
 export class HrOrganizationService {
 
   public hrOrganizationList: BehaviorSubject<HrOrganizationEntity[]> = new BehaviorSubject<HrOrganizationEntity[]>([]);

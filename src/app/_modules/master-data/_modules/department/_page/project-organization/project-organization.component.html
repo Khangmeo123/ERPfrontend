@@ -4,7 +4,7 @@
 
       <div class="page-header">
         <div class="page-title">
-          {{'hrOrganization.title' | translate}}
+          {{'projectOrganization.title' | translate}}
         </div>
         <div class="page-actions">
           <button (click)="add()" [disabled]="disabled" class="btn btn-add">
@@ -23,32 +23,47 @@
                    [lazy]="true"
                    [resizableColumns]="true"
                    [scrollable]="true"
-                   [value]="hrOrganizationList"
+                   [value]="projectOrganizationList"
                    resizableColumns
                    scrollHeight="500px"
                    selectionMode="single">
             <ng-template pTemplate="header">
               <tr>
-                <th pResizableColumn> {{'hrOrganization.code' | translate}} </th>
-                <th pResizableColumn> {{'hrOrganization.name' | translate}} </th>
+                <th pResizableColumn> {{'projectOrganization.code' | translate}} </th>
+                <th pResizableColumn> {{'projectOrganization.name' | translate}} </th>
+                <th pResizableColumn> {{'projectOrganization.manager' | translate}} </th>
+                <th pResizableColumn> {{'projectOrganization.startDate' | translate}} </th>
+                <th pResizableColumn> {{'projectOrganization.endDate' | translate}} </th>
               </tr>
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters (changeFilter)="getList()"
-                                        [filter]="hrOrganizationSearchEntity.code"></app-advanced-filters>
+                                        [filter]="projectOrganizationSearchEntity.code"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters (changeFilter)="getList()"
-                                        [filter]="hrOrganizationSearchEntity.name"></app-advanced-filters>
+                                        [filter]="projectOrganizationSearchEntity.name"></app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters (changeFilter)="getList()"
+                                        [filter]="projectOrganizationSearchEntity.managerName"></app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters (changeFilter)="getList()"
+                                        [filter]="projectOrganizationSearchEntity.startDate"></app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters (changeFilter)="getList()"
+                                        [filter]="projectOrganizationSearchEntity.endDate"></app-advanced-filters>
                 </th>
               </tr>
             </ng-template>
 
-            <ng-template let-hrOrganization let-index let-rowData pTemplate="body">
-              <tr (dblclick)="edit(hrOrganization.id)" [attr.data-qe-id]="'table-tbody-row-' + index"
+            <ng-template let-projectOrganization let-index let-rowData pTemplate="body">
+              <tr (dblclick)="edit(projectOrganization.id)" [attr.data-qe-id]="'table-tbody-row-' + index"
                   [pSelectableRow]="rowData">
-                <td pResizableColumn>{{hrOrganization.code}}</td>
-                <td pResizableColumn>{{hrOrganization.name}}</td>
+                <td pResizableColumn>{{projectOrganization.code}}</td>
+                <td pResizableColumn>{{projectOrganization.name}}</td>
               </tr>
             </ng-template>
           </p-table>
@@ -61,42 +76,84 @@
 
     <p-dialog [(visible)]="modal" [modal]="true" appendTo="body">
       <p-header>
-        {{'hrOrganization.add' | translate}}
+        {{'department.project.add' | translate}}
       </p-header>
-
-      <div [formGroup]="hrOrganizationForm" class="container">
+      <div [formGroup]="projectOrganizationForm" class="container">
         <div class="row">
           <div class="form-group col">
-            <label for="hrOrganization-code">
-              {{'hrOrganization.code' | translate}}
+            <label for="project-code">
+              {{'department.project.code' | translate}}
               <span class="text-danger ml-2">*</span>
             </label>
             <div class="div-form">
-              <input class="form-control" formControlName="code" id="hrOrganization-code" name="code" type="text">
+              <input class="form-control" formControlName="code" id="project-code" name="code" type="text">
               <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('name')?.value"
-                         [formGroup]="hrOrganizationForm"
+                         [formGroup]="projectOrganizationForm"
                          [placement]="'top'" class="error-form" data-qe-id="hrOrganization-code" property="code">
               </app-error>
             </div>
           </div>
           <div class="form-group col">
-            <label for="hrOrganization-name">
-              {{'hrOrganization.name' | translate}}
+            <label for="project-name">
+              {{'department.project.name' | translate}}
               <span class="text-danger ml-2">*</span>
             </label>
             <div class="div-form">
-              <input class="form-control" formControlName="name" id="hrOrganization-name" name="name" type="text">
+              <input class="form-control" formControlName="name" id="project-name" name="name" type="text">
               <app-error *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
-                         [formGroup]="hrOrganizationForm"
+                         [formGroup]="projectOrganizationForm"
                          [placement]="'top'" class="error-form" data-qe-id="hrOrganization-name" property="name">
               </app-error>
             </div>
           </div>
         </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="project-manager">
+              {{'department.project.manager' | translate}}
+              <span class="text-danger ml-2">*</span>
+            </label>
+            <div class="div-form d-flex">
+              <app-single-select id="project-manager"
+                                 class="flex-grow-1"
+                                 (search)="onSearchManagerByTyping($event)"
+                                 (listOpen)="onSearchManager()"
+                                 [list]="managerList"
+                                 key="name"
+                                 [selectedList]="selectedManagerList"
+                                 (selectionChange)="onSelectManager($event)"
+              ></app-single-select>
+              <app-error *ngIf="(managerId?.errors && managerId?.touched) || !!errors.get('managerId')?.value"
+                         [formGroup]="projectOrganizationForm"
+                         [placement]="'top'" class="error-form" data-qe-id="projectOrganization-managerId"
+                         property="managerId">
+              </app-error>
+            </div>
+          </div>
+          <div class="form-group col">
+            <label for="project-description">
+              {{'department.project.description' | translate}}
+            </label>
+            <textarea id="project-description" formControlName="description" name="description" class="form-control" rows="1"></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col">
+            <label for="project-start-date">
+              {{'department.project.startDate' | translate}}
+            </label>
+            <app-date-picker id="project-start-date" [control]="startDate"></app-date-picker>
+          </div>
+          <div class="form-group col">
+            <label for="project-end-date">
+              {{'department.project.endDate' | translate}}
+            </label>
+            <app-date-picker id="project-end-date" [control]="endDate"></app-date-picker>
+          </div>
+        </div>
       </div>
-
       <p-footer class="d-flex">
-        <button *ngIf="hrOrganizationForm.value?.isDeleted" class="btn btn-delete">
+        <button *ngIf="projectOrganizationForm.value?.isDeleted" class="btn btn-delete">
           {{'general.button.delete' | translate}}
         </button>
         <div class="flex-grow-1">
@@ -143,8 +200,8 @@
           <p-table [value]="employeeList" resizableColumns>
             <ng-template pTemplate="header">
               <tr>
-                <th pResizableColumn> {{'department.employee.code' | translate}} </th>
-                <th pResizableColumn> {{'department.employee.name' | translate}} </th>
+                <th pResizableColumn> {{'project.employee.code' | translate}} </th>
+                <th pResizableColumn> {{'project.employee.name' | translate}} </th>
                 <th pResizableColumn> {{'general.actions.title' | translate}} </th>
               </tr>
               <tr>
@@ -165,8 +222,8 @@
                 <td>{{employee.name}}</td>
                 <td>
                   <a (confirm)="removeEmployee(employee.id)"
-                     [popoverMessage]="'general.department.delete.message' | translate"
-                     [popoverTitle]="'general.department.delete.title' | translate"
+                     [popoverMessage]="'general.project.delete.message' | translate"
+                     [popoverTitle]="'general.project.delete.title' | translate"
                      class="btn btn-default"
                      confirmButtonType="danger"
                      mwlConfirmationPopover

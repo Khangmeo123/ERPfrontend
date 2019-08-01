@@ -4,8 +4,8 @@
             {{'detailEmployeeGroup.header.title' | translate}}
         </span>
     <div class="page-actions">
-      <button class="btn btn-cancel" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-      <button class="btn btn-save" (click)="onClickSave()">
+      <button (click)="onClickCancel()" class="btn btn-cancel">{{ 'general.button.cancel' | translate}}</button>
+      <button (click)="onClickSave()" class="btn btn-save">
         {{ 'general.button.save' | translate}}</button>
     </div>
   </div>
@@ -13,10 +13,10 @@
   <div class="page-body">
     <accordion>
       <accordion-group [isOpen]="true">
-        <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+        <button (click)="onClickOpen($event)" accordion-heading class="btn btn-link btn-block clearfix">
           <div class="pull-left float-left">{{'detailEmployeeGroup.general.title' | translate }}</div>
-          <span class="float-right pull-right" accordion-heading>
-            <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
           </span>
         </button>
         <div class="row">
@@ -24,7 +24,7 @@
             <div class="form-group">
               <label for="employee-code">{{ 'detailEmployeeGroup.code' | translate}}<span
                 class="text-danger ml-2">*</span></label>
-              <input type="text" class="form-control" id="employee-code"/>
+              <input class="form-control" id="employee-code" type="text"/>
             </div>
           </div>
           <div class="col-sm-4">
@@ -38,7 +38,7 @@
               <label for="employee-salary-agreement">
                 {{ 'detailEmployeeGroup.salary_agreement' | translate}}
               </label>
-              <input type="text" class="form-control" id="employee-salary-agreement">
+              <input class="form-control" id="employee-salary-agreement" type="text">
             </div>
           </div>
 
@@ -48,21 +48,21 @@
             <div class="form-group">
               <label for="employee-name"> {{ 'detailEmployeeGroup.name' | translate}}<span
                 class="text-danger ml-2">*</span></label>
-              <input type="text" class="form-control" id="employee-name"/>
+              <input class="form-control" id="employee-name" type="text"/>
             </div>
           </div>
 
           <div class="col-sm-4">
             <div class="form-group">
               <label for="employee-id-card-number">{{ 'detailEmployeeGroup.id_emp' | translate}}</label>
-              <input type="text" class="form-control" id="employee-id-card-number"/>
+              <input class="form-control" id="employee-id-card-number" type="text"/>
             </div>
           </div>
           <div class="col-sm-4">
 
             <div class="form-group">
               <label for="employee-salary-ratio">{{ 'detailEmployeeGroup.salary_ratio' | translate}}</label>
-              <input type="text" class="form-control" id="employee-salary-ratio"/>
+              <input class="form-control" id="employee-salary-ratio" type="text"/>
             </div>
           </div>
 
@@ -72,11 +72,11 @@
             <div class="form-group">
               <label for="employee-gender">{{ 'detailEmployeeGroup.gender.title' | translate}}</label>
               <div class="ratio-button" id="employee-gender">
-                <p-radioButton name="gender" value="male"
-                               class="mr-4"
-                               [label]="'detailEmployeeGroup.gender.men' | translate"></p-radioButton>
-                <p-radioButton name="gender" value="female"
-                               [label]="'detailEmployeeGroup.gender.women' | translate"></p-radioButton>
+                <p-radioButton [label]="'detailEmployeeGroup.gender.men' | translate" class="mr-4"
+                               name="gender"
+                               value="male"></p-radioButton>
+                <p-radioButton [label]="'detailEmployeeGroup.gender.women' | translate" name="gender"
+                               value="female"></p-radioButton>
               </div>
             </div>
           </div>
@@ -84,13 +84,13 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label for="employee-id-card-issuer">{{ 'detailEmployeeGroup.issue_by' | translate}}</label>
-              <input type="text" class="form-control" id="employee-id-card-issuer"/>
+              <input class="form-control" id="employee-id-card-issuer" type="text"/>
             </div>
           </div>
           <div class="col-sm-4">
             <div class="form-group">
               <label for="employee-basic-salary">{{ 'detailEmployeeGroup.basicSalary' | translate}}</label>
-              <input type="text" class="form-control" id="employee-basic-salary"/>
+              <input class="form-control" id="employee-basic-salary" type="text"/>
             </div>
           </div>
         </div>
@@ -111,7 +111,7 @@
             <div class="form-group">
               <label
                 for="employee-num-of-dependent-persons">{{ 'detailEmployeeGroup.numberOfDependent' | translate}}</label>
-              <input type="text" class="form-control" id="employee-num-of-dependent-persons"/>
+              <input class="form-control" id="employee-num-of-dependent-persons" type="text"/>
             </div>
           </div>
         </div>
@@ -125,7 +125,7 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label for="employee-tax-code">{{ 'detailEmployeeGroup.tax_code' | translate}}</label>
-              <input type="text" class="form-control" id="employee-tax-code"/>
+              <input class="form-control" id="employee-tax-code" type="text"/>
             </div>
           </div>
           <div class="col-sm-4">
@@ -146,10 +146,10 @@
         </div>
       </accordion-group>
       <accordion-group>
-        <button (click)="onClickOpenTab3()" class="btn btn-link btn-block clearfix" accordion-heading>
+        <button (click)="onClickOpenTab3()" accordion-heading class="btn btn-link btn-block clearfix">
           <div class="pull-left float-left">{{'detailEmployeeGroup.bankAccount.title' | translate }}</div>
-          <span class="float-right pull-right" accordion-heading>
-                        <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          <span accordion-heading class="float-right pull-right">
+                        <i [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
                     </span>
         </button>
         <div class="mt-2">
@@ -165,14 +165,14 @@
               <div class="form-group">
                 <label
                   for="accountOwner">{{ 'detailEmployeeGroup.bankAccount.accountOwner' | translate}}</label>
-                <input type="text" class="form-control" id="accountOwner"/>
+                <input class="form-control" id="accountOwner" type="text"/>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label
                   for="accountNumber">{{ 'detailEmployeeGroup.bankAccount.accountNumber' | translate}}</label>
-                <input type="text" class="form-control" id="accountNumber"/>
+                <input class="form-control" id="accountNumber" type="text"/>
               </div>
             </div>
           </div>
@@ -181,21 +181,21 @@
               <div class="form-group">
                 <label
                   for="province">{{ 'detailEmployeeGroup.bankAccount.province' | translate}}</label>
-                <input type="text" class="form-control" id="province"/>
+                <input class="form-control" id="province" type="text"/>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label
                   for="division">{{ 'detailEmployeeGroup.bankAccount.division' | translate}}</label>
-                <input type="text" class="form-control" id="division"/>
+                <input class="form-control" id="division" type="text"/>
               </div>
             </div>
             <div class="col-sm-4">
               <div class="form-group">
                 <label
                   for="divisionAddress">{{ 'detailEmployeeGroup.bankAccount.divisionAddress' | translate}}</label>
-                <input type="text" class="form-control" id="divisionAddress"/>
+                <input class="form-control" id="divisionAddress" type="text"/>
               </div>
             </div>
 
@@ -203,14 +203,14 @@
         </div>
       </accordion-group>
       <accordion-group>
-        <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+        <button (click)="onClickOpenTab2()" accordion-heading class="btn btn-link btn-block clearfix">
           <div class="pull-left float-left">{{'detailEmployeeGroup.contacts.title' | translate }}</div>
-          <span class="float-right pull-right" accordion-heading>
-                        <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          <span accordion-heading class="float-right pull-right">
+                        <i [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
                     </span>
         </button>
         <div class="d-flex justify-content-end">
-          <button class="btn btn-add" (click)="toggleContactsModal()">
+          <button (click)="toggleContactsModal()" class="btn btn-add">
             {{'detailEmployeeGroup.contacts.add' | translate}}
 
           </button>
@@ -247,10 +247,10 @@
       </accordion-group>
 
       <accordion-group>
-        <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+        <button (click)="onClickOpenTab2()" accordion-heading class="btn btn-link btn-block clearfix">
           <div class="pull-left float-left">{{'detailEmployeeGroup.own_asset.title' | translate }}</div>
-          <span class="float-right pull-right" accordion-heading>
-                            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          <span accordion-heading class="float-right pull-right">
+                            <i [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
                         </span>
         </button>
 
@@ -284,24 +284,24 @@
   </div>
   <div class="page-footer-actions d-flex mt-2">
     <div class="flex-grow-1">
-      <button class="btn btn-delete"
-              mwlConfirmationPopover
-              [popoverTitle]="'employeeDetail.delete.confirm.title' | translate"
+      <button (confirm)="onClickDelete()"
               [popoverMessage]="'employeeDetail.delete.confirm.message' | translate"
-              placement="bottom"
-              (confirm)="onClickDelete()">
+              [popoverTitle]="'employeeDetail.delete.confirm.title' | translate"
+              class="btn btn-delete"
+              mwlConfirmationPopover
+              placement="bottom">
         {{ 'general.button.delete' | translate}}</button>
     </div>
     <div class="flex-shrink-1 justify-content-end">
-      <button class="btn btn-cancel mr-2" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-      <button class="btn btn-save" (click)="onClickSave()">
+      <button (click)="onClickCancel()" class="btn btn-cancel mr-2">{{ 'general.button.cancel' | translate}}</button>
+      <button (click)="onClickSave()" class="btn btn-save">
         {{ 'general.button.save' | translate}}</button>
     </div>
   </div>
 </div>
 
 
-<p-dialog modal="true" [(visible)]="contactsModal">
+<p-dialog [(visible)]="contactsModal" modal="true">
   <p-header>
     {{'detailEmployeeGroup.contacts.add' | translate}}
   </p-header>
@@ -312,31 +312,31 @@
           {{'detailEmployeeGroup.contacts.recipient' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input class="form-control" type="text">
       </div>
       <div class="form-group col-6">
         <label>
           {{'detailEmployeeGroup.contacts.phone_number' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input class="form-control" type="text">
       </div>
       <div class="form-group col-6">
         <label>
           {{'detailEmployeeGroup.contacts.email' | translate}}
         </label>
-        <input type="text" class="form-control">
+        <input class="form-control" type="text">
       </div>
       <div class="form-group col-6">
         <label>
           {{'detailEmployeeGroup.contacts.address' | translate}}
         </label>
-        <input type="text" class="form-control">
+        <input class="form-control" type="text">
       </div>
     </div>
   </form>
   <p-footer class="d-flex justify-content-end">
-    <div class="flex-grow-1" *ngIf="contactForm?.value?.isDeleted">
+    <div *ngIf="contactForm?.value?.isDeleted" class="flex-grow-1">
       <button class="btn btn-delete">
         {{'general.button.delete' | translate}}
       </button>

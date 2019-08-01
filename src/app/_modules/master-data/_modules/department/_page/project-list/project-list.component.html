@@ -4,14 +4,14 @@
       {{'department.project.title' | translate}}
     </div>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()">
+      <button (click)="toggleModal()" class="btn btn-add">
         {{'general.button.add' | translate}}
       </button>
     </div>
   </div>
   <div class="page-body mt-4">
     <div class="page-section">
-      <p-table resizableColumns [value]="[]">
+      <p-table [value]="[]" resizableColumns>
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn> {{'department.project.code' | translate}} </th>
@@ -38,7 +38,7 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-project>
+        <ng-template let-project pTemplate="body">
           <tr>
             <td>{{project.code}}</td>
             <td>{{project.name}}</td>
@@ -51,7 +51,7 @@
     </div>
   </div>
 </div>
-<p-dialog [modal]="true" appendTo="body" [(visible)]="modal">
+<p-dialog [(visible)]="modal" [modal]="true" appendTo="body">
   <p-header>
     {{'department.project.add' | translate}}
   </p-header>
@@ -62,14 +62,14 @@
           {{'department.project.code' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input class="form-control" type="text">
       </div>
       <div class="form-group col">
         <label>
           {{'department.project.name' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input class="form-control" type="text">
       </div>
     </div>
     <div class="row">
@@ -78,7 +78,7 @@
           {{'department.project.manager' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <input class="form-control" type="text">
       </div>
       <div class="form-group col">
         <label>

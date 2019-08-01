@@ -3,42 +3,42 @@ import { Repository } from '../../../../../../_helpers/repository';
 import { environment } from '../../../../../../../environments/environment';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { HrOrganizationSearchEntity } from '../../../../_backend/hr-organization/hr-organization.search-entity';
-import { HrOrganizationEntity } from '../../../../_backend/hr-organization/hr-organization.entity';
 import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 import { Entities } from '../../../../../../_helpers/entity';
+import { ProjectOrganizationSearchEntity } from '../../../../_backend/project-organization/project-organization.search-entity';
+import { ProjectOrganizationEntity } from '../../../../_backend/project-organization/project-organization.entity';
 import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class HrOrganizationRepository extends Repository {
+export class ProjectOrganizationRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/department/hr-organization';
+    this.apiUrl = environment.apiUrlApps + 'master-data/department/project-organization';
   }
 
-  getList(hrOrganizationSearchEntity: HrOrganizationSearchEntity): Observable<HrOrganizationEntity[]> {
-    return this.http.post<HrOrganizationEntity[]>(
-      `${this.apiUrl}/list-department`,
-      hrOrganizationSearchEntity,
+  getList(projectOrganizationSearchEntity: ProjectOrganizationSearchEntity): Observable<ProjectOrganizationEntity[]> {
+    return this.http.post<ProjectOrganizationEntity[]>(
+      `${this.apiUrl}/list-project`,
+      projectOrganizationSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     )
       .pipe(
-        map((response: HttpResponse<HrOrganizationEntity[]>) => {
-          return response.body.map((hrOrganization) => new HrOrganizationEntity(hrOrganization));
+        map((response: HttpResponse<ProjectOrganizationEntity[]>) => {
+          return response.body.map((projectOrganization) => new ProjectOrganizationEntity(projectOrganization));
         }),
       );
   }
 
-  count(hrOrganizationSearchEntity: HrOrganizationSearchEntity): Observable<number> {
+  count(projectOrganizationSearchEntity: ProjectOrganizationSearchEntity): Observable<number> {
     return this.http.post<number>(
-      `${this.apiUrl}/count-department`,
-      hrOrganizationSearchEntity,
+      `${this.apiUrl}/count-project`,
+      projectOrganizationSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -51,10 +51,10 @@ export class HrOrganizationRepository extends Repository {
       );
   }
 
-  getById(id: string): Promise<HrOrganizationEntity> {
+  getById(id: string): Promise<ProjectOrganizationEntity> {
     return new Promise((resolve, reject) => {
-      this.http.post<HrOrganizationEntity>(
-        `${this.apiUrl}/get-department`,
+      this.http.post<ProjectOrganizationEntity>(
+        `${this.apiUrl}/get-project`,
         {
           id,
         },
@@ -64,37 +64,37 @@ export class HrOrganizationRepository extends Repository {
         },
       )
         .subscribe(
-          (response: HttpResponse<HrOrganizationEntity>) => resolve(response.body),
+          (response: HttpResponse<ProjectOrganizationEntity>) => resolve(response.body),
           (error: Error) => reject(error),
         );
     });
   }
 
-  create(hrOrganizationEntity: HrOrganizationEntity): Observable<HrOrganizationEntity> {
-    return this.http.post<HrOrganizationEntity>(
-      `${this.apiUrl}/create-department`,
-      hrOrganizationEntity,
+  create(projectOrganizationEntity: ProjectOrganizationEntity): Observable<ProjectOrganizationEntity> {
+    return this.http.post<ProjectOrganizationEntity>(
+      `${this.apiUrl}/create-project`,
+      projectOrganizationEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     )
       .pipe(
-        map((response: HttpResponse<HrOrganizationEntity>) => response.body),
+        map((response: HttpResponse<ProjectOrganizationEntity>) => response.body),
       );
   }
 
-  update(hrOrganizationEntity: HrOrganizationEntity): Observable<HrOrganizationEntity> {
-    return this.http.post<HrOrganizationEntity>(
-      `${this.apiUrl}/update-department`,
-      hrOrganizationEntity,
+  update(projectOrganizationEntity: ProjectOrganizationEntity): Observable<ProjectOrganizationEntity> {
+    return this.http.post<ProjectOrganizationEntity>(
+      `${this.apiUrl}/update-project`,
+      projectOrganizationEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     )
       .pipe(
-        map((response: HttpResponse<HrOrganizationEntity>) => response.body),
+        map((response: HttpResponse<ProjectOrganizationEntity>) => response.body),
       );
   }
 
@@ -109,7 +109,7 @@ export class HrOrganizationRepository extends Repository {
     )
       .pipe(
         map((response: HttpResponse<EmployeeEntity[]>) => {
-          return response.body.map((hrOrganization) => new EmployeeEntity(hrOrganization));
+          return response.body.map((projectOrganization) => new EmployeeEntity(projectOrganization));
         }),
       );
   }
@@ -149,13 +149,13 @@ export class HrOrganizationRepository extends Repository {
       );
   }
 
-  removeEmployeeFromOrganization(employeeId: string, hrOrganizationId: string): Promise<EmployeeEntity> {
+  removeEmployeeFromOrganization(employeeId: string, projectOrganizationId: string): Promise<EmployeeEntity> {
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
         `${this.apiUrl}/delete-employee`,
         {
           employeeId,
-          hrOrganizationId,
+          projectOrganizationId,
         },
         {
           observe: 'response',
@@ -169,10 +169,10 @@ export class HrOrganizationRepository extends Repository {
     });
   }
 
-  addEmployeeToDepartment(employeeIds: string[], hrOrganizationId: string, employeeSearchEntity: EmployeeSearchEntity): Promise<void> {
+  addEmployeeToDepartment(employeeIds: string[], projectOrganizationId: string, employeeSearchEntity: EmployeeSearchEntity): Promise<void> {
     const payload = employeeIds.map((id: string) => ({
       employeeId: id,
-      hrOrganizationId,
+      projectOrganizationId,
     }));
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
