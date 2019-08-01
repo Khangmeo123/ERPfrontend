@@ -192,9 +192,12 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     }
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
-        this.customerSearchEntity.legalEntityId = this.legalEntityId;
-        this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
-        this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
+        if(this.customerGroupList && this.customerGroupList.length > 0) {
+          this.customerSearchEntity.legalEntityId = this.legalEntityId;
+          this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
+          this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
+        }
+        
       });
     }
   }
