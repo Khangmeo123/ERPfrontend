@@ -201,10 +201,22 @@ export class SobComponent implements OnInit, OnDestroy {
       .add(valueAddedTaxSub);
   }
 
-  onSelectId(data: string[], field: string) {
+  get name() {
+    return this.sobForm.get('name') as FormControl;
+  }
+
+  get code() {
+    return this.sobForm.get('code') as FormControl;
+  }
+
+  get errors() {
+    return this.sobForm.get('errors') as FormControl;
+  }
+
+  onSelectId(data, field: string) {
     const control: FormControl = this.sobForm.get(field) as FormControl;
     if (control !== null) {
-      if (data.length) {
+      if (data && data.length) {
         control.setValue(data[0]);
       } else {
         control.setValue(null);
