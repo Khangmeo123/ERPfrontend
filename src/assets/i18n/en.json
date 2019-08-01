@@ -771,9 +771,15 @@
 			"title": ""
 		}
 	},
-	"legal_entity": {
+	"legalEntity": {
 		"add": "",
 		"code": "",
+		"header": {
+			"title": ""
+		},
+		"name": ""
+	},
+	"legal_entity": {
 		"name": ""
 	},
 	"noData": {

@@ -10,6 +10,9 @@ import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { FormGroup } from '@angular/forms';
 import { Subscription, Subject } from 'rxjs';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.searchentity';
+import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
+import { translate } from 'src/app/_helpers/string';
 
 
 @Component({
@@ -19,7 +22,7 @@ import { GeneralService } from 'src/app/_helpers/general-service.service';
   providers: [LegalEntityService]
 })
 export class LegalEntityComponent implements OnInit, OnDestroy {
-  pageTitle = _('legal_entity.header.title');
+  pageTitle = translate('legalEntity.header.title');
   isSaveBookMark: boolean = false;
   bookMarkId: string;
   filters = {
@@ -38,10 +41,11 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   legalForm: FormGroup;
   legalSubs: Subscription = new Subscription();
 
-  sobIds: LegalEntity[];
-  sobExceptIds: LegalEntity[];
-  sobTyping: Subject<LegalSearchEntity> = new Subject();
-  setOfBookId: string = '';
+  sobIds: SobEntity[];
+  sobExceptIds: SobEntity[];
+  sobTyping: Subject<SobSearchEntity> = new Subject();
+  setOfBookId: any;
+  sobSearchEntity: SobSearchEntity = new SobSearchEntity();
 
   constructor(
     private bookmarkService: BookmarkService,
@@ -88,16 +92,22 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     this.legalSubs.unsubscribe();
   }
 
-  openSobList(id: string) {
-    this.legalSearchEntity = new LegalSearchEntity();
-    this.legalSearchEntity.ids.push(id);
-    this.legalService.getListSobOfLegal(this.legalSearchEntity);
+  openSobList(setOfBookId: string) {
+    this.sobSearchEntity = new SobSearchEntity();
+    if (setOfBookId !== null && setOfBookId !== undefined) {
+      this.sobSearchEntity.ids.push(setOfBookId);
+    }
+    this.legalService.getListSobOfLegal(this.sobSearchEntity);
   }
 
-  sobSearch(event) {
-    this.legalSearchEntity.code = event;
-    this.legalSearchEntity.name = event;
-    this.sobTyping.next(this.legalSearchEntity);
+  sobSearch(event: any) {
+    this.sobSearchEntity = new SobSearchEntity();
+    if (this.setOfBookId !== undefined && this.setOfBookId !== null) {
+      this.legalSearchEntity.ids.push(this.setOfBookId);
+    }
+    this.sobSearchEntity.code.startsWith = event;
+    this.sobSearchEntity.name.startsWith = event;
+    this.sobTyping.next(this.sobSearchEntity);
   }
   selectSob(event) {
     this.legalSearchEntity.setOfBookId = event[0];
@@ -114,6 +124,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     if (!this.legalForm.valid) {
       this.genaralService.validateAllFormFields(this.legalForm);
     } else {
+      this.legalSearchEntity.setOfBookId = this.setOfBookId;
       this.legalService.save(this.legalForm.value, this.legalSearchEntity).then(res => {
         this.display = res;
       }).catch(err => {
@@ -140,6 +151,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     this.pagination.pageNumber = 1;
     this.legalSearchEntity.skip = 0;
     this.legalSearchEntity.take = this.pagination.take;
+    this.legalSearchEntity.setOfBookId = this.setOfBookId;
     this.legalService.getList(this.legalSearchEntity);
   }
 
