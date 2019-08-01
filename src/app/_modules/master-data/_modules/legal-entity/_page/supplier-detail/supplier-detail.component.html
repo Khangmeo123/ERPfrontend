@@ -83,7 +83,7 @@
                                 [valueSelector]="valueSelector"
                                 [list]="paymentTermExceptIds" [selectedList]="paymentTermIds" [key]="'name'"
                                 (search)="paymentTermSearch($event)" [initialValue] ="supplierDetailForm.controls.paymentTermName.value"
-                                (selectionChange)="supplierDetailForm.controls.paymentTermId.setValue($event[0])"
+                                (selectionChange)="supplierDetailForm.controls.paymentTermId.setValue($event[0].id)"
                                 (listOpen)="openPaymentTermList(supplierDetailForm.controls.paymentTermId.value)">
                             </app-single-select>
                         </div>
@@ -107,7 +107,7 @@
                             </label>
                             <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChargeExceptIds"
                                 [selectedList]="staffInChargeIds" [key]="'name'" (search)="staffInChargeSearch($event)"
-                                (selectionChange)="supplierDetailForm.controls.staffInChargeId.setValue($event[0])"
+                                (selectionChange)="supplierDetailForm.controls.staffInChargeId.setValue($event[0].id)"
                                 (listOpen)="openStaffInChargeList(staffInChargeSearchEntity.staffInChargeId)"
                                 [initialValue] ="supplierDetailForm.controls.staffInChargeName.value">
                                 
@@ -421,7 +421,7 @@
                 <label>
                     {{'detailSupplierGroup.contacts.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-general-payment-term" 
+                <app-single-select data-qe-id="detail-form-contact-province" 
                     *ngIf="contactsModal"
                     [list]="provinceExceptIds" [valueSelector]="valueSelector"
                     [selectedList]="provinceIds" [key]="'name'" 
