@@ -29,8 +29,6 @@ export class JobLevelComponent implements OnInit, OnDestroy {
   jobLevelSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  downloadLink = environment.apiUrlApps + 'master-data/business-group/job-level/download-template';
-  exportLink = environment.apiUrlApps + 'master-data/business-group/job-level/export';
 
   constructor(private jobLevelService: JobLevelService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {

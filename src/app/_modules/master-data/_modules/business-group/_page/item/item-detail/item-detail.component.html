@@ -22,7 +22,8 @@
                 </button>
                 <div class="row">
                     <div class="col-sm-3 col-md-2">
-                        <app-cropper [control]="itemForm.get('image')"></app-cropper>
+                        <app-cropper [control]="itemForm.get('image')" [imageDataURL]="itemForm.controls.image.value">
+                        </app-cropper>
                     </div>
                     <div class="flex-grow-1 pr-2">
                         <div class="row">
@@ -121,8 +122,8 @@
                                             data-qe-id="table-thead-filter-uom" class="w-100">
                                         </app-single-select>
                                         <app-error data-qe-id="form-error-uom"
-                                            *ngIf="(itemForm.controls.uomId?.errors && itemForm.controls.uomId?.touched) || !!itemForm.controls.errors.get('uomId')?.value"
-                                            [formGroup]="itemForm" [property]="'uomId'" [placement]="'top'"
+                                            *ngIf="(itemForm.controls.unitOfMeasureId?.errors && itemForm.controls.unitOfMeasureId?.touched) || !!itemForm.controls.errors.get('unitOfMeasureId')?.value"
+                                            [formGroup]="itemForm" [property]="'unitOfMeasureId'" [placement]="'top'"
                                             class="error-form">
                                         </app-error>
                                     </div>
@@ -137,7 +138,8 @@
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <app-input-number [control]="itemForm.get('primaryPrice')" class="w-100"
-                                            inputId="itemPrimaryPrice" data-qe-id="form-primaryPrice">
+                                            [allowNegative]="false" inputId="itemPrimaryPrice"
+                                            data-qe-id="form-primaryPrice">
                                         </app-input-number>
                                         <app-error data-qe-id="form-error-primaryPrice"
                                             *ngIf="(itemForm.controls.primaryPrice?.errors && itemForm.controls.primaryPrice?.touched) || !!itemForm.controls.errors.get('primaryPrice')?.value"
@@ -152,7 +154,7 @@
                                     <label for="itemWeight">{{ 'item.detail.content.weight' | translate}} (kg)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="weight"
-                                            data-qe-id="form-weight" id="itemWeight" />
+                                            data-qe-id="form-weight" id="itemWeight" [pKeyFilter]="int" />
                                         <app-error data-qe-id="form-error-weight"
                                             *ngIf="(itemForm.controls.weight?.errors && itemForm.controls.weight?.touched) || !!itemForm.controls.errors.get('weight')?.value"
                                             [formGroup]="itemForm" [property]="'weight'" [placement]="'top'"
@@ -187,7 +189,7 @@
                                     <label for="bankid">{{ 'item.detail.content.height' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="height"
-                                            data-qe-id="form-height" id="itemHeight" />
+                                            data-qe-id="form-height" id="itemHeight" [pKeyFilter]="int" />
                                         <app-error data-qe-id="form-error-height"
                                             *ngIf="(itemForm.controls.height?.errors && itemForm.controls.height?.touched) || !!itemForm.controls.errors.get('height')?.value"
                                             [formGroup]="itemForm" [property]="'height'" [placement]="'top'"
@@ -201,7 +203,7 @@
                                     <label for="itemlength">{{ 'item.detail.content.length' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="length"
-                                            data-qe-id="form-length" id="itemlength" />
+                                            data-qe-id="form-length" id="itemlength" [pKeyFilter]="int" />
                                         <app-error data-qe-id="form-error-length"
                                             *ngIf="(itemForm.controls.length?.errors && itemForm.controls.length?.touched) || !!itemForm.controls.errors.get('length')?.value"
                                             [formGroup]="itemForm" [property]="'length'" [placement]="'top'"
@@ -215,7 +217,7 @@
                                     <label for="itemWidth">{{ 'item.detail.content.width' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="width"
-                                            data-qe-id="form-width" id="itemWidth" />
+                                            data-qe-id="form-width" id="itemWidth" [pKeyFilter]="int" />
                                         <app-error data-qe-id="form-error-width"
                                             *ngIf="(itemForm.controls.width?.errors && itemForm.controls.width?.touched) || !!itemForm.controls.errors.get('width')?.value"
                                             [formGroup]="itemForm" [property]="'width'" [placement]="'top'"

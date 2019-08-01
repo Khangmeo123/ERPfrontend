@@ -39,6 +39,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
 
   constructor(private route: ActivatedRoute, private itemDetailService: ItemDetailService, private router: Router,
     private generalService: GeneralService) {
+
     this.route.queryParams
       .subscribe(params => {
         this.itemDetailService.getId(params.id);
