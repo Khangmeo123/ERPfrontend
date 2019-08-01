@@ -105,13 +105,17 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     this.legalSubs.unsubscribe();
   }
 
-  openSupplierList(id: []) {
+  openSupplierList() {
     this.supplierSearchEntity = new SupplierSearchEntity();
-    this.supplierSearchEntity.ids = id;
+    this.supplierSearchEntity.ids = this.listSupplierId;
     this.supplierOfLegalEntityService.getListSupplierOflegalEntity(this.supplierSearchEntity);
   }
 
   supplierSearch(event) {
+    this.supplierSearchEntity.ids = this.listSupplierId;
+    if (this.legalId !== null && this.legalId !== undefined) {
+      this.supplierSearchEntity.legalEntityId = this.legalId;
+    }
     this.supplierSearchEntity.code.startsWith = event;
     this.supplierSearchEntity.name.startsWith = event;
     this.supplierTyping.next(this.supplierSearchEntity);
@@ -141,7 +145,6 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.legalSearchEntity.orderBy = event.sortField;
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
-    console.log(this.legalSearchEntity.orderType )
     this.supplierOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
       if (this.legalId && this.legalId !== undefined) {
         this.supplierSearchEntity.legalEntityId = this.legalId;
@@ -149,6 +152,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       } else {
         if (this.legalList && this.legalList.length > 0) {
           this.supplierSearchEntity.legalEntityId = this.legalList[0].id;
+          this.legalId = this.supplierSearchEntity.legalEntityId;
           this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
         }
       }

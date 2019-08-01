@@ -111,7 +111,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
   openBankList(bankId: string) {
     this.bankSearchEntity = new BankSearchEntity();
-    if (bankId !== null && bankId !== undefined) {
+    if (bankId !== null && bankId !== undefined && bankId !== '') {
       this.bankSearchEntity.ids.push(bankId);
     }
     this.employeeDetailService.getListBank(this.bankSearchEntity);

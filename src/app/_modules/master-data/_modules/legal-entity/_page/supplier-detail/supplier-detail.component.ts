@@ -161,7 +161,8 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   openPaymentTermList(paymenttermId: string) {
     this.paymentTermSearchEntity = new PaymentTermSearchEntity();
     this.paymentTermSearchEntity.legalEntityId = this.legalEntiyId;
-    if (paymenttermId !== null && paymenttermId !== undefined) {
+    console.log(this.paymentTermSearchEntity.legalEntityId)
+    if (paymenttermId !== null && paymenttermId !== undefined && paymenttermId !== '') {
       this.paymentTermSearchEntity.ids.push(paymenttermId);
     }
     this.legalSupplierDetailService.getListPaymentTerm(this.paymentTermSearchEntity);
@@ -213,7 +214,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
 
   openProvinceList(provinceId: string) {
     this.provinceSearchEntity = new ProvinceSearchEntity();
-    if (provinceId !== null && provinceId !== undefined) {
+    if (provinceId !== null && provinceId !== undefined && provinceId !== '') {
       this.provinceSearchEntity.ids.push(provinceId);
     }
     this.legalSupplierDetailService.getListProvince(this.provinceSearchEntity);

@@ -96,10 +96,11 @@
                                 {{'detailSupplierGroup.payment_terms' | translate}}
                             </label>
                             <app-single-select data-qe-id="detail-form-general-payment-term"
+                                [valueSelector]="valueSelector"
                                 [list]="paymentTermExceptIds" [selectedList]="paymentTermIds" [key]="'name'"
                                 (search)="paymentTermSearch($event)" [initialValue] ="supplierDetailForm.controls.paymentTermName.value"
                                 (selectionChange)="supplierDetailForm.controls.paymentTermId.setValue($event[0])"
-                                (listOpen)="openPaymentTermList(paymentTermSearchEntity.paymentTermId)">
+                                (listOpen)="openPaymentTermList(supplierDetailForm.controls.paymentTermId.value)">
                             </app-single-select>
                         </div>
                         <div class="form-group col-4">
@@ -297,7 +298,7 @@
                     {{'detailSupplierGroup.bank_account.bank_name' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <app-single-select data-qe-id="dialog-bank-account"
+                <app-single-select data-qe-id="dialog-bank-account" *ngIf="bankAccountsModal"
                     [valueSelector]="valueSelector"
                     [list]="bankExceptIds" 
                     [selectedList]="bankIds"
@@ -344,7 +345,7 @@
                     {{'detailSupplierGroup.bank_account.province' | translate}}
                 </label>
                 <div class="div-form">
-                    <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name" 
+                    <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name"  *ngIf="bankAccountsModal"
                     [valueSelector]="valueSelector"
                     [list]="provinceExceptIds" [initialValue] ="bankAccountForm.controls.provinceName.value"
                     [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
@@ -432,10 +433,13 @@
                 <label>
                     {{'detailSupplierGroup.contacts.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds" [valueSelector]="valueSelector"
-                    [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
+                <app-single-select data-qe-id="detail-form-general-payment-term" 
+                    *ngIf="contactsModal"
+                    [list]="provinceExceptIds" [valueSelector]="valueSelector"
+                    [selectedList]="provinceIds" [key]="'name'" 
+                    (search)="provinceSearch($event)"
                     (selectionChange)="selectedProvince($event)"
-                    (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
+                    (listOpen)="openProvinceList(contactForm.controls.provinceId.value)"></app-single-select>
             </div>
 
         </div>
