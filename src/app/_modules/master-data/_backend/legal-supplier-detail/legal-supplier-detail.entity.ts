@@ -19,6 +19,7 @@ export class LegalSupplierDetailEntity extends Entity {
 
     supplierContacts: InfoContactEntity[];
     supplierBankAccounts: BankAccountOfLegalForm[];
+    supplierGroupings: string[];
 
     constructor(supplierEntity?: any) {
         super(supplierEntity);

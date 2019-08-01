@@ -18,6 +18,7 @@ export class SupplierDetailForm extends FormModel {
 
     supplierContacts = new FormArray([]);
     supplierBankAccounts = new FormArray([]);
+    supplierGroupings = new FormArray([]);
 
     errors = new FormGroup({
         name: new FormControl(''),

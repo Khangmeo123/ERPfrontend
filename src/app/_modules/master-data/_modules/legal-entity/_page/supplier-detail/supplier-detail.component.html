@@ -28,32 +28,16 @@
                                 {{'detailSupplierGroup.code' | translate}}
                                 <span class="text-danger ml-1"> * </span>
                             </label>
-                            <div class="div-form">
-                                <input type="text" class="form-control" id="supplier_code"
+                            <input type="text" class="form-control" id="supplier_code"
                                     data-qe-id="detail-form-general-code" formControlName="code">
-                                <app-error
-                                    *ngIf="(supplierDetailForm?.controls.code?.errors  && supplierDetailForm.controls.code?.touched )|| !!supplierDetailForm.controls.errors?.get('code')?.value"
-                                    [formGroup]="supplierDetailForm" [property]="'code'" [placement]="'top'"
-                                    class="error-form">
-                                </app-error>
-                            </div>
-
                         </div>
                         <div class="form-group col">
                             <label for="supplier_name">
                                 {{'detailSupplierGroup.name' | translate}}
                                 <span class="text-danger ml-1"> * </span>
                             </label>
-                            <div class="div-form">
-                                <input type="text" class="form-control" id="supplier_name"
+                            <input type="text" class="form-control" id="supplier_name"
                                     data-qe-id="detail-form-general-name" formControlName="name">
-                                <app-error
-                                    *ngIf="(supplierDetailForm.controls.name?.errors  && supplierDetailForm.controls.name?.touched )|| !!supplierDetailForm.controls.errors?.get('name')?.value"
-                                    [formGroup]="supplierDetailForm" [property]="'name'" [placement]="'top'"
-                                    class="error-form">
-                                </app-error>
-                            </div>
-
                         </div>
 
                         <div class="form-group col">
@@ -133,8 +117,12 @@
                             <label>
                                 {{'detailSupplierGroup.supplier_group' | translate}}
                             </label>
-                            <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load"
-                                formControlName="supplierGroupingName">
+                            <p-chips class="w-100" [(ngModel)]="supplierDetailForm.controls.supplierGroupings.value"
+                                [ngModelOptions]="{standalone: true}" [disabled]="true" >
+                                <ng-template let-item pTemplate="item">
+                                    {{item.code}}
+                                </ng-template>
+                            </p-chips>
                         </div>
                     </div>
                 </accordion-group>
