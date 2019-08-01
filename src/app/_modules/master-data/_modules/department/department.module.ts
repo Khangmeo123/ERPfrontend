@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HrOrganizationComponent } from './_page/hr-organization/hr-organization.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { WarehouseComponent } from './_page/warehouse/warehouse.component';
-import { ProjectComponent } from './_page/project/project.component';
+import { ProjectOrganizationComponent } from './_page/project-organization/project-organization.component';
 import { MatIconModule } from '@angular/material';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { TableModule } from 'primeng/table';
@@ -16,7 +16,6 @@ import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from '../../../../_shared/modules/date-picker/date-picker.module';
 import { AssetListComponent } from './_page/asset-list/asset-list.component';
 import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
-import { ProjectListComponent } from './_page/project-list/project-list.component';
 import { DepartmentEmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
@@ -37,10 +36,9 @@ import { ChipsModule } from 'primeng/chips';
     HrOrganizationComponent,
     AssetComponent,
     WarehouseComponent,
-    ProjectComponent,
+    ProjectOrganizationComponent,
     AssetListComponent,
     WarehouseListComponent,
-    ProjectListComponent,
     DepartmentEmployeeDetailComponent,
     DepartmentRootComponent,
     WarehouseGroupComponent,

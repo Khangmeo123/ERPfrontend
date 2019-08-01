@@ -8,6 +8,8 @@ export class EmployeeSearchEntity extends SearchEntity {
 
   departmentId: string;
   hrOrganizationId: string;
+  projectId: string;
+  projectOrganizationId: string;
 
   constructor(employeeSearchEntity?: any) {
     super(employeeSearchEntity);

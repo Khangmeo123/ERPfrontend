@@ -3,7 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
-import { Subscription } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';
 import { HrOrganizationEntity } from '../../../../_backend/hr-organization/hr-organization.entity';
@@ -13,7 +13,7 @@ import { DepartmentService } from '../department/department.service';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Entities } from '../../../../../../_helpers/entity';
 
 @Component({
@@ -52,6 +52,7 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
   public employeeNotInDepartmentList: EmployeeEntity[] = [];
   public selectedEmployeeToAddToDepartmentList: EmployeeEntity[] = [];
   public employeeNotInDepartmentSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
+  public employeeTyping: Subject<EmployeeSearchEntity> = new Subject<EmployeeSearchEntity>();
 
   /**
    * Pagination model
@@ -71,7 +72,6 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     private toastrService: ToastrService,
     private generalService: GeneralService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
   ) {
     const hrOrganizationFormSub: Subscription = this.hrOrganizationService.hrOrganizationForm.subscribe((form: FormGroup) => {
       this.hrOrganizationForm = form;
@@ -149,6 +149,17 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     return !this.legalEntity || !this.division;
   }
 
+  async onAddToDepartment() {
+    const {
+      ids,
+    } = this.employeeNotInDepartmentSearchEntity;
+    this.employeeNotInDepartmentSearchEntity = new EmployeeSearchEntity();
+    this.hrOrganizationService.addEmployeeToDepartment(ids, this.selectedDepartment.id, this.employeeSearchEntity)
+      .then(() => {
+        this.selectedEmployeeToAddToDepartmentList = [];
+      });
+  }
+
   getEmployeeList() {
     this.hrOrganizationService.getEmployeeList(this.employeeSearchEntity);
   }
@@ -158,6 +169,7 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
   }
 
   searchEmployee() {
+    this.employeeNotInDepartmentSearchEntity.hrOrganizationId = this.selectedDepartment.id;
     this.hrOrganizationService.searchEmployee(this.employeeNotInDepartmentSearchEntity);
   }
 
@@ -248,5 +260,17 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
 
   onSelectEmployeeToAdd(event) {
     this.employeeNotInDepartmentSearchEntity.ids = event;
+  }
+
+  searchEmployeeByTyping() {
+    this.hrOrganizationService.searchEmployeeByTyping(this.employeeTyping);
+  }
+
+  onSearchEmployeeByTyping(event) {
+    const employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
+    employeeSearchEntity.ids = this.selectedEmployeeToAddToDepartmentList.map((employee: EmployeeEntity) => employee.id);
+    employeeSearchEntity.name.startsWith = event;
+    this.employeeTyping.next(employeeSearchEntity);
+    this.searchEmployeeByTyping();
   }
 }

@@ -16,8 +16,8 @@
       <accordion-group [isOpen]="true">
         <button (click)="isOpenTab1 = !isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
           <div class="pull-left float-left">{{'detailEmployeeGroup.general.title' | translate }}</div>
-          <span class="float-right pull-right" accordion-heading>
-            <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
           </span>
         </button>
         <div class="row">
@@ -365,8 +365,8 @@
         {{ 'general.button.delete' | translate}}</button>
     </div>
     <div class="flex-shrink-1 justify-content-end">
-      <button class="btn btn-cancel mr-2" (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-      <button class="btn btn-save" (click)="onClickSave()">
+      <button (click)="onClickCancel()" class="btn btn-cancel mr-2">{{ 'general.button.cancel' | translate}}</button>
+      <button (click)="onClickSave()" class="btn btn-save">
         {{ 'general.button.save' | translate}}</button>
     </div>
   </div>

@@ -4,8 +4,9 @@ import { DepartmentComponent } from './_page/department/department.component';
 import { HrOrganizationComponent } from './_page/hr-organization/hr-organization.component';
 import { AssetComponent } from './_page/asset/asset.component';
 import { WarehouseComponent } from './_page/warehouse/warehouse.component';
-import { ProjectComponent } from './_page/project/project.component';
+import { ProjectOrganizationComponent } from './_page/project-organization/project-organization.component';
 import { DepartmentEmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
+
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
 
@@ -40,7 +41,7 @@ const routes: Routes = [
           },
           {
             path: 'project',
-            component: ProjectComponent,
+            component: ProjectOrganizationComponent,
           },
           {
             path: '**',
