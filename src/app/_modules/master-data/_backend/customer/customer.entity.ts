@@ -11,8 +11,8 @@ export class CustomerEntity extends Entity {
     statusId: string;
     statusName: string;
     statusCode: string;
+    customerGroupingId: string;
     
-
     infoContacts: InfoContactEntity[];
     bankAccounts: BankAccountEntity[];
 

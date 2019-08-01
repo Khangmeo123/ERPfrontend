@@ -94,7 +94,6 @@ export class SupplierOfLegalEntityService {
         const defered = new Promise<boolean>((resolve, reject) => {
             this.supplierOflegalEntityRepository.addSupplier(supplierSearchEntity).subscribe(res => {
                 if (res) {
-                    debugger
                     this.getListSupplier(supplierSearchEntity);
                     this.toastrService.success('Cập nhật thành công !');
                     resolve(false);

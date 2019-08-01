@@ -264,6 +264,10 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     this.legalSupplierDetailService.editContact(contact);
   }
 
+  deleteContact(index: number) {
+    this.legalSupplierDetailService.deleteContact(index);
+  }
+
 
   // Bank account
 
@@ -322,8 +326,8 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     this.legalSupplierDetailService.editbankAccount(bankAccount);
   }
 
-  onClickDelete() {
-
+  deletebankAccount(index: number) {
+    this.legalSupplierDetailService.deleteBankAccount(index);
   }
 
   cancel() {

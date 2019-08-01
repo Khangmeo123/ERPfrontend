@@ -17,7 +17,7 @@
             <accordion>
                 <accordion-group [isOpen]="true" [formGroup]="customerDetailForm">
                     <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
-                        <div class="pull-left float-left">{{'detailCustomerOfLegal.tab_1.general' | translate }}</div>
+                        <div class="pull-left float-left">{{'detailCustomerOfLegal.general.title' | translate }}</div>
                         <span class="float-right pull-right" accordion-heading>
                             <i class="fas " [ngClass]="isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
                         </span>
@@ -58,7 +58,7 @@
 
                         <div class="form-group col">
                             <label for="tax_code">
-                                {{'detailCustomerOfLegal.tax_code' | translate}}
+                                {{'detailCustomerOfLegal.taxCode' | translate}}
                             </label>
                             <input type="text" class="form-control" id="tax_code"
                                 data-qe-id="detail-form-general-tax-code" formControlName="taxCode">
@@ -85,7 +85,7 @@
                         <!-- <div class="form-group col"></div> -->
                         <div class="form-group col-8">
                             <label for="customer_more_details">
-                                {{'detailCustomerOfLegal.more_details' | translate}}
+                                {{'detailCustomerOfLegal.note' | translate}}
                             </label>
                             <textarea name="customer_more_details" id="customer_more_details" rows="1"
                                 class="form-control" data-qe-id="detail-form-general-more-detail"
@@ -93,7 +93,7 @@
                         </div>
                         <div class="form-group col-4">
                             <label>
-                                {{'detailCustomerOfLegal.payment_terms' | translate}}
+                                {{'detailCustomerOfLegal.paymentTerms' | translate}}
                             </label>
                             <app-single-select data-qe-id="detail-form-general-payment-term"
                                 [list]="paymentTermExceptIds" [selectedList]="paymentTermIds" [key]="'name'"
@@ -105,14 +105,14 @@
                         </div>
                         <div class="form-group col-4">
                             <label>
-                                {{'detailCustomerOfLegal.due_in_days' | translate}}
+                                {{'detailCustomerOfLegal.dueInDays' | translate}}
                             </label>
                             <input type="text" class="form-control" data-qe-id="detail-form-general-due-in-days"
                                 formControlName="dueInDays">
                         </div>
                         <div class="form-group col-4">
                             <label>
-                                {{'detailCustomerOfLegal.debt_load' | translate}}
+                                {{'detailCustomerOfLegal.debtLoad' | translate}}
                             </label>
                             <input type="text" class="form-control" data-qe-id="detail-form-general-debt-load"
                                 formControlName="debtLoad">
@@ -188,7 +188,7 @@
                                     <th pResizableColumn data-qe-id="table-thead-contacts-address">
                                         {{'detailCustomerOfLegal.contacts.address' | translate}}
                                     </th>
-                                    <th pResizableColumn></th>
+                                    <th pResizableColumn>{{'general.action' | translate}}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-contact let-index="rowIndex">
@@ -250,24 +250,24 @@
                                         {{'detailCustomerOfLegal.bankAccount.code' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-name">
-                                        {{'detailCustomerOfLegal.bankAccount.bank_name' | translate}}
+                                        {{'detailCustomerOfLegal.bankAccount.bankName' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-account-owner">
-                                        {{'detailCustomerOfLegal.bankAccount.account_owner' | translate}}
+                                        {{'detailCustomerOfLegal.bankAccount.accountOwner' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-account-number">
-                                        {{'detailCustomerOfLegal.bankAccount.account_number' | translate}}
+                                        {{'detailCustomerOfLegal.bankAccount.accountNumber' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-province">
                                         {{'detailCustomerOfLegal.bankAccount.province' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-division">
-                                        {{'detailCustomerOfLegal.bankAccount.bank_division' | translate}}
+                                        {{'detailCustomerOfLegal.bankAccount.bankDivision' | translate}}
                                     </th>
                                     <th pResizableColumn data-qe-id="table-thead-bank-address">
-                                        {{'detailCustomerOfLegal.bankAccount.bank_address' | translate}}
+                                        {{'detailCustomerOfLegal.bankAccount.bankAddress' | translate}}
                                     </th>
-                                    <th pResizableColumn></th>
+                                    <th pResizableColumn>{{'general.action' | translate}}</th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
@@ -287,9 +287,7 @@
                                             <div class="delete" (click)="deletebankAccount(index)">
                                                 <mat-icon>delete</mat-icon>
                                             </div>
-
                                         </div>
-
                                     </td>
                                 </tr>
                             </ng-template>
@@ -325,7 +323,7 @@
         <div class="row">
             <div class="form-group col-6">
                 <label>
-                    {{'detailCustomerOfLegal.bankAccount.bank_name' | translate}}
+                    {{'detailCustomerOfLegal.bankAccount.bankName' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <app-single-select *ngIf="bankAccountsModal" data-qe-id="dialog-bank-account"
@@ -336,7 +334,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailCustomerOfLegal.bankAccount.account_owner' | translate}}
+                    {{'detailCustomerOfLegal.bankAccount.accountOwner' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
@@ -350,7 +348,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailCustomerOfLegal.bankAccount.account_number' | translate}}
+                    {{'detailCustomerOfLegal.bankAccount.accountNumber' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
@@ -365,7 +363,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'detailCustomerOfLegal.bankAccount.bank_division' | translate}}
+                    {{'detailCustomerOfLegal.bankAccount.bankDivision' | translate}}
                 </label>
                 <input type="text" class="form-control" fomControlName="branch">
             </div>
@@ -392,7 +390,7 @@
             </div>
             <div class="form-group col-6">
                 <label>
-                    {{'customer.bankAccount.bank_address' | translate}}
+                    {{'detailCustomerOfLegal.bankAccount.bankAddress' | translate}}
                 </label>
                 <input type="text" class="form-control" fomControlName="branch" data-qe-id="detail-form-bank-address">
             </div>
