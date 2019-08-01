@@ -12,8 +12,8 @@ export class SupplierDetailForm extends FormModel {
     debtLoad = new FormControl();
     paymentTermId = new FormControl('');
     paymentTermName = new FormControl('');
-    staffInChargeId = new FormControl();
-    staffInChargeName = new FormControl();
+    staffInChargeId = new FormControl('');
+    staffInChargeName = new FormControl('');
     supplierGroupingName = new FormControl({ value: '', disabled: true });
 
     supplierContacts = new FormArray([]);

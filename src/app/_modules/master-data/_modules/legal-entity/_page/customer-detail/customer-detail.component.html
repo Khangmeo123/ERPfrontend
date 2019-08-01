@@ -293,9 +293,15 @@
                     {{'detailCustomerOfLegal.bankAccount.bank_name' | translate}}
                     <span class="text-danger mr-2">*</span>
                 </label>
-                <app-single-select data-qe-id="dialog-bank-account" [valueSelector]="valueSelector"
-                    [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'" (search)="bankSearch($event)"
-                    (selectionChange)="selectedBank($event)" (listOpen)="openBankList(bankAccountForm.bankId)"
+                <app-single-select *ngIf="bankAccountsModal"
+                    data-qe-id="dialog-bank-account" 
+                    [valueSelector]="valueSelector"
+                    [list]="bankExceptIds" 
+                    [selectedList]="bankIds" 
+                    [key]="'name'" 
+                    (search)="bankSearch($event, bankAccountForm.controls.bankId.value)"
+                    (selectionChange)="selectedBank($event)" 
+                    (listOpen)="openBankList(bankAccountForm.bankId)"
                     [initialValue]="bankAccountForm.controls.bankName.value"></app-single-select>
             </div>
             <div class="form-group col-6">
@@ -336,13 +342,22 @@
             <div class="form-group col-6">
                 <label>
                     {{'detailCustomerOfLegal.bankAccount.province' | translate}}
+                    <span class="text-danger mr-2">*</span>
                 </label>
-                <app-single-select data-qe-id="detail-form-bank-account-province-name" [valueSelector]="valueSelector"
-                    [list]="provinceExceptIds" [initialValue]="bankAccountForm.controls.provinceName.value"
-                    [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
-                    (selectionChange)="selectedProvinceBankAccount($event)"
-                    (listOpen)="openProvinceList(customerDetailForm.get('customerBankAccounts').provinceId)">
-                </app-single-select>
+                <div class="div-form">
+                    <app-single-select *ngIf="bankAccountsModal" class="w-100" data-qe-id="detail-form-bank-account-province-name"
+                        [valueSelector]="valueSelector" [list]="provinceExceptIds"
+                        [initialValue]="bankAccountForm.controls.provinceName.value" [selectedList]="provinceIds"
+                        [key]="'name'" (search)="provinceSearch($event, bankAccountForm.controls.provinceId.value)"
+                        (selectionChange)="selectedProvinceBankAccount($event)"
+                        (listOpen)="openProvinceList(customerDetailForm.get('customerBankAccounts').provinceId)">
+                    </app-single-select>
+                    <app-error data-qe-id="form-error-phone"
+                        *ngIf="(bankAccountForm.controls.provinceId?.errors && bankAccountForm.controls.provinceId?.touched) || !!bankAccountForm.controls.errors?.get('provinceId')?.value"
+                        [formGroup]="bankAccountForm" [property]="'provinceId'" [placement]="'top'" class="error-form">
+                    </app-error>
+                </div>
+
             </div>
             <div class="form-group col-6">
                 <label>
@@ -420,10 +435,13 @@
                 <label>
                     {{'detailCustomerOfLegal.contacts.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-general-payment-term" [list]="provinceExceptIds"
+                <app-single-select data-qe-id="detail-form-general-contact-province" *ngIf="contactsModal"
+                    [initialValue]="contactForm.controls.provinceName.value"
+                    [list]="provinceExceptIds"
                     [valueSelector]="valueSelector" [selectedList]="provinceIds" [key]="'name'"
-                    (search)="provinceSearch($event)" (selectionChange)="selectedProvince($event)"
+                    (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="selectedProvince($event)"
                     (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
+
             </div>
 
         </div>

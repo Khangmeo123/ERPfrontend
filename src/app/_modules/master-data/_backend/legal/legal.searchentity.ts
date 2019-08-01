@@ -3,7 +3,7 @@ import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
 export class LegalSearchEntity extends SearchEntity {
     setOfBookCode: TextFilter = new TextFilter();
-    setOfBookId: string;
+    setOfBookId: string = '';
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
 

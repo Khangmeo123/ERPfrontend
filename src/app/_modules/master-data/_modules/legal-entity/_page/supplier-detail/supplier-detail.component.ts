@@ -11,8 +11,8 @@ import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/empl
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
 import { InfoContactEntity } from 'src/app/_modules/master-data/_backend/info-contact/info-contact.entity';
-import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
-import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.entity';
+import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
+import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 import { LegalSupplierDetailService } from './supplier-detail.service';
 
 @Component({
@@ -52,10 +52,10 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   staffInChargeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
   //list drop staff in changre
-  bankIds: BankAccountOfLegalEntity[];
-  bankExceptIds: BankAccountOfLegalEntity[];
-  bankTyping: Subject<BankAccountOfLegalSearchEntity> = new Subject();
-  bankSearchEntity: BankAccountOfLegalSearchEntity = new BankAccountOfLegalSearchEntity();
+  bankIds: BankEntity[];
+  bankExceptIds: BankEntity[];
+  bankTyping: Subject<BankSearchEntity> = new Subject();
+  bankSearchEntity: BankSearchEntity = new BankSearchEntity();
 
   //list drop province
   provinceIds: ProvinceEntity[];
@@ -129,18 +129,23 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
         this.bankAccountForm = res;
       }
     });
-
+    this.supplierDetailService.getListListBankByTyping(this.bankTyping);
+    this.supplierDetailService.getListPaymentTermByTyping(this.paymentTermTyping);
+    this.supplierDetailService.getListProvinceByTyping(this.provinceTyping);
+    this.supplierDetailService.getListStaffInChargeByTyping(this.staffInChargeTyping);
     this.supplierDetailSubs.add(supplierFormSub).add(listPaymentTerm).add(listStaffInChangre)
     .add(contactForm).add(bankAccountForm).add(listProvince).add(listBank);
   }
 
   ngOnInit(): void {
-    let arr = [];
-    arr = this.router.url.split('/');
-    if (arr[3] === 'supplier-group') {
-      this.routeLink = '/master-data/legal-entity/supplier-group/';
-    } else {
-      this.routeLink = '/master-data/legal-entity/supplier-of-legal-entity/'
+    const arr = this.router.url.split('/')[3];
+    switch (arr) {
+      case 'supplier-of-legal-entity':
+        this.routeLink = '/master-data/legal-entity/supplier-of-legal-entity';
+        break;
+      case 'supplier-group':
+        this.routeLink = '/master-data/legal-entity/supplier-group';
+        break;
     }
   }
 
@@ -189,7 +194,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   // list drop bank list
 
   openBankList(bankId: string) {
-    this.bankSearchEntity = new BankAccountOfLegalSearchEntity();
+    this.bankSearchEntity = new BankSearchEntity();
     if (bankId !== null && bankId !== undefined) {
       this.bankSearchEntity.ids.push(bankId);
     }
@@ -198,8 +203,8 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
 
 
   bankSearch(event) {
-    this.bankSearchEntity.bankName = event;
-    this.bankSearchEntity.bankName = event;
+    this.bankSearchEntity.code = event;
+    this.bankSearchEntity.name = event;
     this.bankTyping.next(this.bankSearchEntity);
   }
 
@@ -211,7 +216,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     if (provinceId !== null && provinceId !== undefined) {
       this.provinceSearchEntity.ids.push(provinceId);
     }
-    this.legalSupplierDetailService.getListProvice(this.provinceSearchEntity);
+    this.legalSupplierDetailService.getListProvince(this.provinceSearchEntity);
   }
 
 
@@ -271,7 +276,6 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   saveBankAccount(bankAccount: any) {
-    console.log('this.contactForm.valid', this.contactForm.valid)
     if (!this.bankAccountForm.valid) {
       this.generalService.validateAllFormFields(this.bankAccountForm);
     }else {

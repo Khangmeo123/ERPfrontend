@@ -343,13 +343,20 @@
                 <label>
                     {{'detailSupplierGroup.bank_account.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-bank-account-province-name" 
+                <div class="div-form">
+                    <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name" 
                     [valueSelector]="valueSelector"
                     [list]="provinceExceptIds" [initialValue] ="bankAccountForm.controls.provinceName.value"
                     [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
                     (selectionChange)="selectedProvinceBankAccount($event)"
                     (listOpen)="openProvinceList(supplierDetailForm.get('supplierBankAccounts').provinceId)">
                 </app-single-select>
+                <app-error data-qe-id="form-error-phone"
+                    *ngIf="(bankAccountForm.controls.provinceId?.errors && bankAccountForm.controls.provinceId?.touched) || !!bankAccountForm.controls.errors?.get('provinceId')?.value"
+                    [formGroup]="bankAccountForm" [property]="'provinceId'" [placement]="'top'" class="error-form">
+                </app-error>
+                </div>
+                
             </div>
             <div class="form-group col-6">
                 <label>

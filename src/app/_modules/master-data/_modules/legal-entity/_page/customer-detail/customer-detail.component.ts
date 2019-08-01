@@ -13,6 +13,8 @@ import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/
 import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
+import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
+import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 
 @Component({
   selector: 'app-detail-customer-group',
@@ -51,11 +53,11 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   staffInChargeTyping: Subject<EmployeeSearchEntity> = new Subject();
   staffInChargeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
-  //list drop staff in changre
-  bankIds: BankAccountOfLegalEntity[];
-  bankExceptIds: BankAccountOfLegalEntity[];
-  bankTyping: Subject<BankAccountOfLegalSearchEntity> = new Subject();
-  bankSearchEntity: BankAccountOfLegalSearchEntity = new BankAccountOfLegalSearchEntity();
+  //list drop bank
+  bankIds: BankEntity[];
+  bankExceptIds: BankEntity[];
+  bankTyping: Subject<BankSearchEntity> = new Subject();
+  bankSearchEntity: BankSearchEntity = new BankSearchEntity();
 
   //list drop province
   provinceIds: ProvinceEntity[];
@@ -130,6 +132,10 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
       }
     });
 
+    this.customerDetailService.getListListBankByTyping(this.bankTyping);
+    this.customerDetailService.getListPaymentTermByTyping(this.paymentTermTyping);
+    this.customerDetailService.getListProvinceByTyping(this.provinceTyping);
+    this.customerDetailService.getListStaffInChargeByTyping(this.staffInChargeTyping);
     this.customerDetailSubs.add(customerFormSub).add(listPaymentTerm).add(listStaffInChangre)
       .add(contactForm).add(bankAccountForm).add(listProvince).add(listBank);
   }
@@ -137,12 +143,14 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
-    let arr = [];
-    arr = this.router.url.split('/');
-    if (arr[3] === 'customer-group') {
-      this.routeLink = '/master-data/legal-entity/customer-group/';
-    } else {
-      this.routeLink = '/master-data/legal-entity/customer-of-legal-entity/'
+    const arr = this.router.url.split('/')[3];
+    switch (arr) {
+      case 'customer-of-legal-entity':
+        this.routeLink = '/master-data/legal-entity/customer-of-legal-entity';
+        break;
+      case 'customer-group':
+        this.routeLink = '/master-data/legal-entity/customer-group';
+        break;
     }
   }
 
@@ -193,7 +201,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   // list drop bank list
 
   openBankList(bankId: string) {
-    this.bankSearchEntity = new BankAccountOfLegalSearchEntity();
+    this.bankSearchEntity = new BankSearchEntity();
     if (bankId !== null && bankId !== undefined) {
       this.bankSearchEntity.ids.push(bankId);
     }
@@ -201,9 +209,13 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   }
 
 
-  bankSearch(event) {
-    this.bankSearchEntity.bankName = event;
-    this.bankSearchEntity.bankName = event;
+  bankSearch(event: any, id: string) {
+    this.bankSearchEntity = new BankSearchEntity();
+    this.bankSearchEntity.code.startsWith = event;
+    this.bankSearchEntity.name.startsWith = event;
+    if (id !== null && id.length > 0) {
+      this.bankSearchEntity.ids.push(id);
+    }
     this.bankTyping.next(this.bankSearchEntity);
   }
 
@@ -215,14 +227,20 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     if (provinceId !== null && provinceId !== undefined) {
       this.provinceSearchEntity.ids.push(provinceId);
     }
-    this.customerDetailService.getListProvice(this.provinceSearchEntity);
+    this.customerDetailService.getListProvince(this.provinceSearchEntity);
   }
 
 
-  provinceSearch(event) {
-    this.provinceSearchEntity.name = event;
+  provinceSearch(event: any, id: string) {
+    this.provinceSearchEntity = new ProvinceSearchEntity();
+    this.provinceSearchEntity.name.startsWith = event;
+    if (id !== null && id.length > 0) {
+      this.provinceSearchEntity.ids.push(id);
+    }
     this.provinceTyping.next(this.provinceSearchEntity);
   }
+
+
   selectedProvince(event) {
     const data = event.map(e => ({
       provinceId: e.id,
@@ -281,15 +299,10 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     }
   }
   save() {
-    this.customerDetailForm.value.code = this.customerDetailForm.controls.code.value;
-    this.customerDetailForm.value.name = this.customerDetailForm.controls.name.value;
-    this.customerDetailForm.value.taxCode = this.customerDetailForm.controls.taxCode.value;
-    this.customerDetailForm.value.status = this.customerDetailForm.controls.status.value;
-    this.customerDetailForm.value.note = this.customerDetailForm.controls.note.value;
     if (!this.customerDetailForm.valid) {
       this.generalService.validateAllFormFields(this.customerDetailForm);
     } else {
-      this.customerDetailService.save(this.customerDetailForm).then(res => {
+      this.customerDetailService.save(this.customerDetailForm.value).then(res => {
         this.router.navigate([this.routeLink]);
       });
     }
@@ -324,7 +337,6 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   }
 
   cancel() {
-    console.log('this.routeLink', this.routeLink)
     this.router.navigate([this.routeLink]);
   }
 }

@@ -87,7 +87,7 @@ export class LegalSupplierDetailService {
     }
 
 
-    getListProvice(provinceSearchEntity: ProvinceSearchEntity) {
+    getListProvince(provinceSearchEntity: ProvinceSearchEntity) {
         this.supplierDetailRepository.getListProvince(provinceSearchEntity).subscribe(res => {
             if (res) {
                 this.proviceList.next(res);
@@ -98,7 +98,7 @@ export class LegalSupplierDetailService {
             }
         });
     }
-    getListProviceByTyping(provinceSearchEntity: Observable<ProvinceSearchEntity>) {
+    getListProvinceByTyping(provinceSearchEntity: Observable<ProvinceSearchEntity>) {
         provinceSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
@@ -134,8 +134,8 @@ export class LegalSupplierDetailService {
     }
 
 
-    getListBank(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
-        this.supplierDetailRepository.getListBankAccount(bankAccountSearchEntity).subscribe(res => {
+    getListBank(bankSearchEntity: BankSearchEntity) {
+        this.supplierDetailRepository.getListBankAccount(bankSearchEntity).subscribe(res => {
             if (res) {
                 this.bankList.next(res);
             }
@@ -145,7 +145,7 @@ export class LegalSupplierDetailService {
             }
         });
     }
-    getListListBankByTyping(bankAccountSearchEntity: Observable<BankAccountOfLegalSearchEntity>) {
+    getListListBankByTyping(bankAccountSearchEntity: Observable<BankSearchEntity>) {
         bankAccountSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
@@ -200,21 +200,18 @@ export class LegalSupplierDetailService {
 
     save(supplierDetailEntity: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (supplierDetailEntity.value.id !== null && supplierDetailEntity.value.id !== undefined
-                && supplierDetailEntity.value.id !== environment.emtyGuid) {
-                this.supplierDetailRepository.update(supplierDetailEntity.value).subscribe(res => {
-                    if (res) {
-                        this.toastrService.success('Cập nhật thành công !');
-                        resolve();
-                    }
-                }, err => {
-                    if (err) {
-                        this.supplierDetailForm.next(this.fb.group(
-                            new SupplierDetailForm(err),
-                        ));
-                    }
-                });
-            }
+            this.supplierDetailRepository.update(supplierDetailEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.supplierDetailForm.next(this.fb.group(
+                        new SupplierDetailForm(err),
+                    ));
+                }
+            });
         });
         return defered;
     }

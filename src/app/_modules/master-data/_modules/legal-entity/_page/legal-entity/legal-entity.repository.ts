@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { map } from 'rxjs/operators';
 import { Entities } from 'src/app/_helpers/entity';
+import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.searchentity';
 
 @Injectable({
     providedIn: 'root',
@@ -67,8 +68,8 @@ export class LegalEntityRepository extends Repository {
             );
     }
 
-    getListSobOfLegal(legalSearchEntity: LegalSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/DropListSetOfBook', JSON.stringify(legalSearchEntity),
+    getListSobOfLegal(sobSearchEntity: SobSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {

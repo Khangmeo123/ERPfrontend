@@ -24,7 +24,7 @@
       </span>
       <app-single-select data-qe-id="form-select-sob" [list]="sobExceptIds" [selectedList]="sobIds" [key]="'name'"
         (search)="sobSearch($event)" (selectionChange)="selectSob($event)"
-        (listOpen)="sobSearch(legalSearchEntity.setOfBookId)"></app-single-select>
+        (listOpen)="openSobList(legalSearchEntity.setOfBookId)"></app-single-select>
     </div>
     <div class="page-section mt-2">
       <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
@@ -33,18 +33,20 @@
           <colgroup>
             <col>
             <col>
+            <col>
           </colgroup>
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
-              {{'legal_entity.code' | translate}}
+              {{'legalEntity.code' | translate}}
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
-              {{'legal_entity.name' | translate}}
+              {{'legalEntity.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
+            <th pResizableColumn></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -55,12 +57,18 @@
               <app-advanced-filters [filter]="legalSearchEntity.name" (changeFilter)="getList()"
                 data-qe-id="table-thead-filter-name"></app-advanced-filters>
             </th>
+            <th class="th-filter"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-legalEntity let-index="rowIndex">
-          <tr (dblclick)="edit(legalEntity.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+          <tr  [attr.data-qe-id]="'table-tbody-row-' + index">
             <td class="ui-resizable-column"> {{legalEntity.code}} </td>
             <td class="ui-resizable-column"> {{legalEntity.name}} </td>
+            <td>
+              <div class="edit" (click)="edit(legalEntity.id)">
+                <mat-icon>edit</mat-icon>
+              </div>
+            </td>
           </tr>
         </ng-template>
       </p-table>
@@ -74,20 +82,20 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
   [style]="{width: '900px'}">
   <p-header>
-    {{ 'legal_entity.add' | translate}}
+    {{ 'legalEntity.add' | translate}}
   </p-header>
   <div class="container" [formGroup]="legalForm">
     <div class="row">
       <div class="form-group col">
         <label for="legalEntityCode">
-          {{'legal_entity.code' | translate}}
+          {{'legalEntity.code' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
             id="legalEntityCode">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.error?.get('code')?.value"
+            *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.errors?.get('code')?.value"
             [formGroup]="legalForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
@@ -95,14 +103,14 @@
       </div>
       <div class="form-group col">
         <label for="legalEntityName">
-          {{'legal_entity.name' | translate}}
+          {{'legalEntity.name' | translate}}
           <span class="text-danger ml-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
             id="legalEntityName">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.error?.get('name')?.value"
+            *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.errors?.get('name')?.value"
             [formGroup]="legalForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
@@ -118,10 +126,6 @@
             data-qe-id="dialog-button-cancel">{{ 'general.button.cancel' | translate}}</button>
           <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
             {{ 'general.button.save' | translate}}</button>
-          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-            data-qe-id="dialog-button-delete" *ngIf="legalForm.value?.isDeleted" [popoverMessage]="popoverMessage"
-            placement="bottom" (confirm)="delete()">
-            {{ 'general.button.delete' | translate}}</button>
         </div>
       </div>
     </div>

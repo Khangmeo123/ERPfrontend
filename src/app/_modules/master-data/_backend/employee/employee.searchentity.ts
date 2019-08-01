@@ -10,6 +10,11 @@ export class EmployeeSearchEntity extends SearchEntity {
     identityNumber: TextFilter = new TextFilter();
     statusId: string;
     staffInChargeId: string;
+    legalEntityId: string;
+    employeeIds: Array<any>;
+    positionId: string;
+    employeeDetailIds: Array<any>;
+
 
     constructor(employeeSearchEntity?: any) {
         super(employeeSearchEntity);

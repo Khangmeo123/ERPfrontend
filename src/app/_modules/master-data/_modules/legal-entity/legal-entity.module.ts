@@ -1,3 +1,4 @@
+import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 import { LegalEntityRoutingModule } from './legal-entity-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -24,12 +25,13 @@ import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity
 import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
 import { ItemOfLegalEntityComponent } from './_page/item-of-legal-entity/item-of-legal-entity.component';
 import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
-import { ItemDetailComponent } from './_page/item-detail/item-detail.component';
+import { LegalItemDetailComponent } from './_page/item-detail/item-detail.component';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ChipsModule } from 'primeng/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import {EmployeePositionComponent} from './_page/employee-position/employee-position.component';
+import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
 
 @NgModule({
   declarations: [
@@ -48,13 +50,12 @@ import {EmployeePositionComponent} from './_page/employee-position/employee-posi
     EmployeeOfLegalEntityComponent,
     ItemOfLegalEntityComponent,
     EmployeeDetailComponent,
-    ItemDetailComponent],
+    LegalItemDetailComponent],
   imports: [
     CommonModule,
     LegalEntityRoutingModule,
     TranslateModule.forChild(),
     MatIconModule,
-    SelectModule,
     TableModule,
     FiltersModule,
     ErrorModule,
@@ -69,6 +70,10 @@ import {EmployeePositionComponent} from './_page/employee-position/employee-posi
     RadioButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    CropperModule,
+    SelectModule,
+    ChipsModule,
+    FormsModule,
   ],
 })
 export class LegalEntityModule {

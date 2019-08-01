@@ -8,7 +8,7 @@ export class SupplierSearchEntity extends SearchEntity {
     statusId: string;
     legalEntityId: string;
     supplierGroupingId: string;
-    supplierIds: Array<any>;
+    supplierDetailIds: Array<any>;
 
 
     constructor(employeeSearchEntity?: any) {

@@ -83,15 +83,15 @@ export class LegalSupplierDetailRepository extends Repository{
             );
     }
 
-    getListBankAccount(bankAccountSearchEntity: BankAccountOfLegalSearchEntity) {
+    getListBankAccount(bankAccountSearchEntity: BankSearchEntity) {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-bank', JSON.stringify(bankAccountSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
-                        return new BankAccountOfLegalEntity(item);
+                        return new BankEntity(item);
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new BankAccountOfLegalEntity(item);
+                        return new BankEntity(item);
                     });
                     return r.body;
                 }),

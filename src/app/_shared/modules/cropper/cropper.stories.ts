@@ -11,7 +11,7 @@ import { TranslateModule } from '@ngx-translate/core';
   template: `
     <div class="container">
       <div class="row">
-        <app-cropper [control]="image" (output)="onChange($event)"></app-cropper>
+        <app-cropper [control]="image" (output)="onChange($event)" [disabled]="true"></app-cropper>
       </div>
     </div>`,
 })

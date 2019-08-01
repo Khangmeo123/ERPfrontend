@@ -94,7 +94,7 @@
             <app-multi-select data-qe-id="form-multi-select-customer" [list]="customerExceptIds"
               [selectedList]="customerIds" [key]="'name'" (search)="customerSearchApp($event)"
               (selectionChange)="selectCustomerApp($event)"
-              (listOpen)="openCustomerList(customerGroupSearchEntity.ids)"></app-multi-select>
+              (listOpen)="openCustomerList(customerSearchEntity.ids)"></app-multi-select>
           </div>
           <div class="col-sm-8 page-actions d-flex justify-content-end mt-2">
             <button class="btn btn-add" (click)="onClickAddCustomer()" data-qe-id="button-add"
@@ -140,7 +140,7 @@
                   {{'customerGroup.customer.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th></th>
+                <th pResizableColumn></th>
               </tr>
               <tr>
                 <th class="th-filter">
@@ -151,7 +151,7 @@
                   <app-advanced-filters [filter]="customerSearchEntity.name" (changeFilter)="getListDetail()"
                     data-qe-id="table-thead-filter-name-customer"></app-advanced-filters>
                 </th>
-                <th></th>
+                <th class="th-filter"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>

@@ -212,7 +212,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   }
 
   onClickAddSupplier() {
-    this.supplierSearchEntity.supplierIds = this.listSupplierId;
+    this.supplierSearchEntity.supplierDetailIds = this.listSupplierId;
     this.supplierSearchEntity.legalEntityId = this.legalId;
     if (this.listSupplierId && this.listSupplierId.length > 0) {
       this.supplierOfLegalEntityService.save(this.supplierSearchEntity).then(res => {
@@ -234,7 +234,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   clearSearchSupplier(tableSupplier: any) {
     this.supplierSearchEntity = new SupplierSearchEntity();
-    this.supplierSearchEntity.supplierIds = this.supplierIds;
+    this.supplierSearchEntity.supplierDetailIds = this.supplierIds;
     tableSupplier.reset();
   }
 

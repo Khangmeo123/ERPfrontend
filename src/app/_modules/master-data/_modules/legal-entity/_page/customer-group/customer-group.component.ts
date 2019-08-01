@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
-import {Router} from '@angular/router';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { Router } from '@angular/router';
 import { BookmarkService } from 'src/app/_services';
 import { translate } from 'src/app/_helpers/string';
 import { CustomerGroupSearchEntity } from 'src/app/_modules/master-data/_backend/customer-group/customer-group.searchentity';
@@ -63,60 +63,69 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     private customerGroupService: CustomerGroupService,
     private genaralService: GeneralService) {
 
-      const customerGroupListSub = this.customerGroupService.customerGroupList.subscribe(res => {
-        if (res) {
-          this.customerGroupList = res;
-          this.selectedCustomer = res[0];
-        }
-      });
-      const legalEntityListSub = this.customerGroupService.legalListDrop.subscribe(res => {
-        if (res) {
-          this.legalEntityIds = res.ids;
-          this.legalEntityExceptIds = res.exceptIds;
-        }
-      });
+    const customerGroupListSub = this.customerGroupService.customerGroupList.subscribe(res => {
+      if (res) {
+        this.customerGroupList = res;
+        this.selectedCustomer = res[0];
+      }
+    });
 
-      const customerrGroupFormSub = this.customerGroupService.customerGroupForm.subscribe(res => {
-        if (res) {
-          this.customerGroupForm = res;
-        }
-      });
+    const customerGroupCountSub = this.customerGroupService.customerGroupCount.subscribe(res => {
+      if (res) {
+        this.pagination.totalItems = res;
+      }
+    });
+    const legalEntityListSub = this.customerGroupService.legalListDrop.subscribe(res => {
+      if (res) {
+        this.legalEntityIds = res.ids;
+        this.legalEntityExceptIds = res.exceptIds;
+      }
+    });
 
-      const customerDetailListSub = this.customerGroupService.customerDetailList.subscribe(res => {
-        if (res) {
-          this.customerDetailList = res;
-        }
-      });
+    const customerrGroupFormSub = this.customerGroupService.customerGroupForm.subscribe(res => {
+      if (res) {
+        this.customerGroupForm = res;
+      }
+    });
 
-      const customerDetailCountSub = this.customerGroupService.customerDetailCount.subscribe(res => {
-        if (res) {
-          this.paginationdetail.totalItems = res;
-        }
-      });
+    const customerDetailListSub = this.customerGroupService.customerDetailList.subscribe(res => {
+      if (res) {
+        this.customerDetailList = res;
+      }
+    });
 
-      const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
-        this.isSaveBookMark = res;
-      });
+    const customerDetailCountSub = this.customerGroupService.customerDetailCount.subscribe(res => {
+      if (res) {
+        this.paginationdetail.totalItems = res;
+      }
+    });
 
-      const customerDetaiDrop = this.customerGroupService.customerListDrop.subscribe(res => {
-        if (res) {
-          this.customerIds = res.ids;
-          this.customerExceptIds = res.exceptIds;
-        }
-      });
-  
-      this.customerGroupService.getLisLegalEntityByTyping(this.leGalEntityTyping);
-      this.customerGroupService.getListcustomerOfCustomerGroupByTyping(this.customerTyping);
-      this.customerGroupSubs.add(legalEntityListSub).add(bookMarkNotify).add(customerGroupListSub)
-      .add(customerrGroupFormSub).add(customerDetailListSub).add(customerDetailCountSub).add(customerDetaiDrop);
+    const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
+      this.isSaveBookMark = res;
+    });
+
+    const customerDetaiDrop = this.customerGroupService.customerListDrop.subscribe(res => {
+      if (res) {
+        this.customerIds = res.ids;
+        this.customerExceptIds = res.exceptIds;
+      }
+    });
+
+    this.customerGroupService.getLisLegalEntityByTyping(this.leGalEntityTyping);
+    this.customerGroupService.getListcustomerOfCustomerGroupByTyping(this.customerTyping);
+    this.customerGroupSubs.add(legalEntityListSub).add(bookMarkNotify).add(customerGroupListSub)
+      .add(customerrGroupFormSub).add(customerDetailListSub).add(customerDetailCountSub).add(customerDetaiDrop).add(customerGroupCountSub);
   }
 
-  
+
 
   ngOnInit() {
 
     this.customerGroupSearchEntity.skip = this.pagination.skip;
     this.customerGroupSearchEntity.take = this.pagination.take;
+
+    this.customerSearchEntity.skip = this.paginationdetail.skip;
+    this.customerSearchEntity.take = this.paginationdetail.take;
 
   }
 
@@ -141,14 +150,16 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   selectLegal(event) {
     this.customerGroupSearchEntity.legalEntityId = event[0];
     this.legalEntityId = event[0];
-    if(this.customerGroupList && this.customerGroupList.length > 0) {
-      this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
+
+    this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
+      if (this.customerGroupList && this.customerGroupList.length > 0) {
         this.customerSearchEntity.legalEntityId = this.legalEntityId;
         this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
         this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
-      });
-    }
-    
+      }
+
+    });
+
   }
 
   // drop list customer
@@ -156,7 +167,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   openCustomerList(id: []) {
     this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.ids = id;
-    if(this.legalEntityId !== '' && this.legalEntityId !== undefined){
+    if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.customerSearchEntity.legalEntityId = this.legalEntityId;
       this.customerGroupService.getListCustomer(this.customerSearchEntity);
     }
@@ -213,7 +224,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   }
 
 
-  addGroup () {
+  addGroup() {
     this.isAddGroup = !this.isAddGroup;
     this.customerGroupService.add(this.customerGroupSearchEntity.legalEntityId);
   }
@@ -240,19 +251,21 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
 
   // list customer detail 
 
-  onClickShowDetail(customerId){
-    this.router.navigate(['/master-data/legal-entity/customer-group/customer-detail'], 
-    { queryParams: { id: customerId, legalEntityId: this.legalEntityId } });
+  onClickShowDetail(customerId) {
+    this.router.navigate(['/master-data/legal-entity/customer-group/customer-detail'],
+      { queryParams: { id: customerId, legalEntityId: this.legalEntityId } });
   }
 
   onClickAddCustomer() {
     this.customerSearchEntity.customerDetailIds = this.listCustomerId;
     this.customerSearchEntity.legalEntityId = this.legalEntityId;
-    if((this.customerGroupId === '' || this.customerGroupId === undefined) && this.customerGroupList.length > 0) {
+    if ((this.customerGroupId === '' || this.customerGroupId === undefined) && this.customerGroupList.length > 0) {
       this.customerGroupId = this.customerGroupList[0].id;
     }
     this.customerSearchEntity.customerGroupingId = this.customerGroupId;
     this.customerGroupService.saveCustomer(this.customerSearchEntity).then(res => {
+      this.customerSearchEntity.legalEntityId = this.legalEntityId;
+      this.customerSearchEntity.customerGroupingId = this.customerGroupId;
       this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
     }).catch(err => {
     });
@@ -269,7 +282,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     }
   }
 
-  getListDetail(){
+  getListDetail() {
     this.paginationdetail.pageNumber = 1;
     this.customerSearchEntity.skip = 0;
     this.customerSearchEntity.take = this.paginationdetail.take;
@@ -285,7 +298,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   paginationDetailOut(pagination: PaginationModel) {
     this.customerSearchEntity.skip = pagination.skip;
     this.customerSearchEntity.take = pagination.take;
-    this.customerGroupService.getList(this.customerGroupSearchEntity);
+    this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
   }
 
 
