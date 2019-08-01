@@ -11,6 +11,7 @@ import { DepartmentService } from '../department/department.service';
 import { translate } from '../../../../../../_helpers/string';
 import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
+import { Entities } from '../../../../../../_helpers/entity';
 
 export class HrOrganizationService {
 
@@ -23,6 +24,8 @@ export class HrOrganizationService {
   public employeeCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
   public hrOrganizationForm: BehaviorSubject<FormGroup>;
+
+  public employeeNotInDepartmentList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   constructor(
     private fb: FormBuilder,
@@ -195,6 +198,13 @@ export class HrOrganizationService {
         if (count) {
           this.employeeCount.next(count);
         }
+      });
+  }
+
+  searchEmployee(employeeSearchEntity: EmployeeSearchEntity): void {
+    this.hrOrganizationRepository.searchEmployee(employeeSearchEntity)
+      .subscribe((entities: Entities) => {
+        this.employeeNotInDepartmentList.next(entities);
       });
   }
 }

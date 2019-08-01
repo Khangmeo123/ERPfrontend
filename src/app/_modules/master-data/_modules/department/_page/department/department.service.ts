@@ -12,6 +12,7 @@ import { DivisionSearchEntity } from '../../../../_backend/division/division.sea
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -37,6 +38,11 @@ export class DepartmentService {
    * Current division
    */
   public selectedDivision: BehaviorSubject<DivisionEntity> = new BehaviorSubject<DivisionEntity>(null);
+
+  /**
+   * Current employee
+   */
+  public selectedEmployee: BehaviorSubject<EmployeeEntity> = new BehaviorSubject<EmployeeEntity>(null);
 
   constructor(private fb: FormBuilder, private departmentRepository: DepartmentRepository, private toastrService: ToastrService) {
     this.departmentForm = new BehaviorSubject<FormGroup>(
@@ -127,6 +133,22 @@ export class DepartmentService {
    */
   selectLegalEntity(legalEntity: LegalEntity) {
     this.selectedLegalEntity.next(legalEntity);
+  }
+
+  /**
+   * Select employee
+   *
+   * @param employee EmployeeEntity
+   */
+  selectEmployee(employee: EmployeeEntity) {
+    this.selectedEmployee.next(employee);
+  }
+
+  /**
+   * Unselect current employee
+   */
+  unselectEmployee() {
+    this.selectedEmployee.next(null);
   }
 
   /**

@@ -28,6 +28,7 @@
         </span>
         </div>
         <app-select-list [dataSource]="list" *ngIf="list.length; else empty"
+                         [key]="key"
                          (selectionChange)="select($event)"></app-select-list>
         <ng-template #empty>
           <app-no-data></app-no-data>

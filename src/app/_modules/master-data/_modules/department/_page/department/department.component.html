@@ -39,8 +39,10 @@
 
     <div class="page-section">
       <ul class="fems-tab clearfix">
-        <li class="pointer" *ngFor="let item of routes; let i = index" [routerLink]="item.route"
-            routerLinkActive="active" role="link">
+        <li class="pointer"
+            *ngFor="let item of routes; let i = index"
+            [routerLink]="item.route"
+            routerLinkActive="active">
           {{item.key}}
         </li>
       </ul>

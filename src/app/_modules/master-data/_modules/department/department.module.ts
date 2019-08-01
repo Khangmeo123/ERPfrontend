@@ -14,7 +14,6 @@ import { TableModule } from 'primeng/table';
 import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
 import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from '../../../../_shared/modules/date-picker/date-picker.module';
-import { EmployeeListComponent } from './_page/employee-list/employee-list.component';
 import { AssetListComponent } from './_page/asset-list/asset-list.component';
 import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
 import { ProjectListComponent } from './_page/project-list/project-list.component';
@@ -39,7 +38,6 @@ import { GeneralService } from '../../../../_helpers/general-service.service';
     AssetComponent,
     WarehouseComponent,
     ProjectComponent,
-    EmployeeListComponent,
     AssetListComponent,
     WarehouseListComponent,
     ProjectListComponent,

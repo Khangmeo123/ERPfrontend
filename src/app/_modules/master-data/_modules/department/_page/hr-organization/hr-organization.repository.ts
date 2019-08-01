@@ -110,7 +110,7 @@ export class HrOrganizationRepository extends Repository {
       );
   }
 
-  searchEmployeeList(employeeSearchEntity: EmployeeSearchEntity): Observable<Entities> {
+  searchEmployee(employeeSearchEntity: EmployeeSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
       `${this.apiUrl}/search-employee`,
       employeeSearchEntity,

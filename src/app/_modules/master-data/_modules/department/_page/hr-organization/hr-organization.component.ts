@@ -13,6 +13,8 @@ import { DepartmentService } from '../department/department.service';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Entities } from '../../../../../../_helpers/entity';
 
 @Component({
   selector: 'app-employee',
@@ -25,7 +27,7 @@ import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.sea
 })
 export class HrOrganizationComponent implements OnInit, OnDestroy {
   /**
-   * Modal state
+   * Department modal state
    */
   public modal: boolean = false;
 
@@ -38,12 +40,18 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
   public hrOrganizationForm: FormGroup;
 
   /**
-   *
+   * Employees in selected department
    */
   public employeeList: EmployeeEntity[] = [];
-  public selectedEmployeeList: EmployeeEntity[] = [];
   public employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
   public employeePagination: PaginationModel = new PaginationModel();
+
+  /**
+   * Employees not in selected department
+   */
+  public employeeNotInDepartmentList: EmployeeEntity[] = [];
+  public selectedEmployeeToAddToDepartmentList: EmployeeEntity[] = [];
+  public employeeNotInDepartmentSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
   /**
    * Pagination model
@@ -62,6 +70,8 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     private hrOrganizationService: HrOrganizationService,
     private toastrService: ToastrService,
     private generalService: GeneralService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
   ) {
     const hrOrganizationFormSub: Subscription = this.hrOrganizationService.hrOrganizationForm.subscribe((form: FormGroup) => {
       this.hrOrganizationForm = form;
@@ -107,8 +117,14 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
       this.employeePagination.totalItems = count;
     });
 
+    const employeeNotInDepartmentSub = this.hrOrganizationService.employeeNotInDepartmentList.subscribe((entities: Entities) => {
+      this.employeeNotInDepartmentList = entities.exceptIds;
+      this.selectedEmployeeToAddToDepartmentList = entities.ids;
+    });
+
     this.subscription
       .add(hrOrganizationFormSub)
+      .add(employeeNotInDepartmentSub)
       .add(legalEntitySub)
       .add(employeeCountSub)
       .add(employeeListSub)
@@ -137,8 +153,12 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     this.hrOrganizationService.getEmployeeList(this.employeeSearchEntity);
   }
 
-  onSearchEmployee(event) {
-    console.log(event);
+  onSearchEmployee() {
+    this.searchEmployee();
+  }
+
+  searchEmployee() {
+    this.hrOrganizationService.searchEmployee(this.employeeNotInDepartmentSearchEntity);
   }
 
   onSelectDepartment(event) {
@@ -222,7 +242,19 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     await this.hrOrganizationService.removeEmployee(id, this.selectedDepartment.id, this.employeeSearchEntity);
   }
 
-  onViewDetail(id: string) {
+  /**
+   * View details of employee
+   *
+   * @param employee EmployeeEntity
+   */
+  async onViewDetail(employee: EmployeeEntity) {
+    this.departmentService.selectEmployee(employee);
+    await this.router.navigate([
+      '/master-data/department/employee-detail',
+    ]);
+  }
 
+  onSelectEmployeeToAdd(event) {
+    this.employeeNotInDepartmentSearchEntity.ids = event;
   }
 }

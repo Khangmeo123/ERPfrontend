@@ -116,11 +116,12 @@
 
       <div class="page-header">
         <div class="page-title mr-2">
-          <app-multi-select [list]="employeeList"
-                            [selectedList]="selectedEmployeeList"
+          <app-multi-select [list]="employeeNotInDepartmentList"
+                            [selectedList]="selectedEmployeeToAddToDepartmentList"
                             key="name"
                             [disabled]="disabled"
-                            (listOpen)="onSearchEmployee($event)"></app-multi-select>
+                            (selectionChange)="onSelectEmployeeToAdd($event)"
+                            (listOpen)="onSearchEmployee()"></app-multi-select>
         </div>
         <div class="page-actions">
           <button class="btn btn-add" [disabled]="disabled">
@@ -135,7 +136,7 @@
         </div>
       </div>
 
-      <div class="page-body mt-4">
+      <div class="page-body mt-2">
 
         <div class="page-section">
           <p-table resizableColumns [value]="employeeList">
@@ -158,7 +159,7 @@
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-employee>
-              <tr (dblclick)="onViewDetail(employee.id)">
+              <tr (dblclick)="onViewDetail(employee)">
                 <td>{{employee.code}}</td>
                 <td>{{employee.name}}</td>
                 <td>
