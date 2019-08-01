@@ -22,12 +22,7 @@ export class EmployeeDetailComponent implements OnInit {
   isOpenTab2: boolean = false;
   isOpenTab3: boolean = false;
 
-  public employee: EmployeeEntity = new EmployeeEntity({
-    hrOrganizationId: '7a8dd522-3015-4f10-9a7a-1e4353346a23',
-    id: '7006cc57-07ef-44cc-956c-146415296d83',
-    code: '00001',
-    name: 'Nguyen Van An',
-  });
+  public employee: EmployeeEntity = new EmployeeEntity();
 
   public subscription: Subscription = new Subscription();
 
