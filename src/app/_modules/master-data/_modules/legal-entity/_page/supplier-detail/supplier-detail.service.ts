@@ -14,6 +14,7 @@ import { environment } from 'src/environments/environment';
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
 import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { BankAccountOfLegalForm } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.form';
+import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 
 @Injectable()
 export class LegalSupplierDetailService {

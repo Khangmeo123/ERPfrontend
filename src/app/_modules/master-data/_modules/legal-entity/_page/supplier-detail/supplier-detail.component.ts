@@ -129,10 +129,10 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
         this.bankAccountForm = res;
       }
     });
-    this.supplierDetailService.getListListBankByTyping(this.bankTyping);
-    this.supplierDetailService.getListPaymentTermByTyping(this.paymentTermTyping);
-    this.supplierDetailService.getListProvinceByTyping(this.provinceTyping);
-    this.supplierDetailService.getListStaffInChargeByTyping(this.staffInChargeTyping);
+    this.legalSupplierDetailService.getListListBankByTyping(this.bankTyping);
+    this.legalSupplierDetailService.getListPaymentTermByTyping(this.paymentTermTyping);
+    this.legalSupplierDetailService.getListProvinceByTyping(this.provinceTyping);
+    this.legalSupplierDetailService.getListStaffInChargeByTyping(this.staffInChargeTyping);
     this.supplierDetailSubs.add(supplierFormSub).add(listPaymentTerm).add(listStaffInChangre)
     .add(contactForm).add(bankAccountForm).add(listProvince).add(listBank);
   }
@@ -284,15 +284,10 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     }
   }
   save() {  
-    this.supplierDetailForm.value.code = this.supplierDetailForm.controls.code.value;
-    this.supplierDetailForm.value.name = this.supplierDetailForm.controls.name.value;
-    this.supplierDetailForm.value.taxCode = this.supplierDetailForm.controls.taxCode.value;
-    this.supplierDetailForm.value.status = this.supplierDetailForm.controls.status.value;
-    this.supplierDetailForm.value.note = this.supplierDetailForm.controls.note.value;
     if (!this.supplierDetailForm.valid) {
       this.generalService.validateAllFormFields(this.supplierDetailForm);
     } else {
-      this.legalSupplierDetailService.save(this.supplierDetailForm).then(res => {
+      this.legalSupplierDetailService.save(this.supplierDetailForm.value).then(res => {
         this.router.navigate([this.routeLink]);
       });
     }

@@ -182,7 +182,15 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.pagination.pageNumber = 1;
     this.supplierGroupSearchEntity.skip = 0;
     this.supplierGroupSearchEntity.take = this.pagination.take;
-    this.supplierGroupService.getList(this.supplierGroupSearchEntity);
+    this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res => {
+      if (this.supplierGroupList && this.supplierGroupList.length > 0) {
+        this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
+      } else {
+        this.supplierSearchEntity.supplierGroupingId = '';
+      }
+
+      this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
+    });
   }
 
   getListDetail() {
