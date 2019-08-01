@@ -22,6 +22,7 @@
                              [selectedList]="selectedLegalEntityList"
                              key="name"
                              (selectionChange)="onSelectLegalEntity()"
+                             (search)="onLegalEntitySearch($event)"
                              (listOpen)="getLegalEntityList()"></app-single-select>
         </div>
         <div class="col-3 d-flex align-items-center">
@@ -32,6 +33,7 @@
                              [selectedList]="selectedDivisionList"
                              key="name"
                              (selectionChange)="onSelectDivision()"
+                             (search)="onDivisionSearch($event)"
                              (listOpen)="getDivisionList()"></app-single-select>
         </div>
       </div>

@@ -120,11 +120,12 @@
                             [selectedList]="selectedEmployeeToAddToDepartmentList"
                             key="name"
                             [disabled]="disabled"
+                            (search)="onSearchEmployeeByTyping($event)"
                             (selectionChange)="onSelectEmployeeToAdd($event)"
                             (listOpen)="onSearchEmployee()"></app-multi-select>
         </div>
         <div class="page-actions">
-          <button class="btn btn-add" [disabled]="disabled">
+          <button class="btn btn-add" [disabled]="disabled" (click)="onAddToDepartment()">
             {{'general.button.add' | translate}}
           </button>
           <button class="btn btn-import" [disabled]="disabled">

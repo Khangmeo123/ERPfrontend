@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, forkJoin } from 'rxjs';
+import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/divisionl.entity';
@@ -12,6 +12,7 @@ import { translate } from '../../../../../../_helpers/string';
 import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
 import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
 import { Entities } from '../../../../../../_helpers/entity';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 export class HrOrganizationService {
 
@@ -206,5 +207,41 @@ export class HrOrganizationService {
       .subscribe((entities: Entities) => {
         this.employeeNotInDepartmentList.next(entities);
       });
+  }
+
+  /**
+   *
+   * @param employeeIds list of employee to add to organization
+   * @param hrOrganizationId organizationId to add the list of employees to
+   * @param employeeSearchEntity searchEntity to get the list after adding
+   *
+   * @return Promise<void>
+   */
+  addEmployeeToDepartment(employeeIds: string[], hrOrganizationId: string, employeeSearchEntity: EmployeeSearchEntity): Promise<void> {
+    return this.hrOrganizationRepository.addEmployeeToDepartment(employeeIds, hrOrganizationId, employeeSearchEntity)
+      .then(() => {
+        this.toastrService.success(translate('department.addToDepartment.success'));
+        this.getEmployeeList(employeeSearchEntity);
+      })
+      .catch((error: Error) => {
+        this.toastrService.error(translate('department.addToDepartment.error'));
+        /* tslint:disable-next-line */
+        console.log(error);
+      });
+  }
+
+  searchEmployeeByTyping(employeeSearchEntity: Observable<EmployeeSearchEntity>): void {
+    employeeSearchEntity.pipe(
+      debounceTime(400),
+      distinctUntilChanged(),
+      switchMap((searchEntity: EmployeeSearchEntity) => {
+        return this.hrOrganizationRepository.searchEmployee(searchEntity);
+      }),
+    )
+      .subscribe(
+        (list: Entities) => {
+          this.employeeNotInDepartmentList.next(list);
+        },
+      );
   }
 }

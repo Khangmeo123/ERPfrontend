@@ -164,5 +164,25 @@ export class HrOrganizationRepository extends Repository {
         );
     });
   }
-}
 
+  addEmployeeToDepartment(employeeIds: string[], hrOrganizationId: string, employeeSearchEntity: EmployeeSearchEntity): Promise<void> {
+    const payload = employeeIds.map((id: string) => ({
+      employeeId: id,
+      hrOrganizationId,
+    }));
+    return new Promise((resolve, reject) => {
+      return this.http.post<EmployeeEntity>(
+        `${this.apiUrl}/create-employee`,
+        payload,
+        {
+          observe: 'response',
+          headers: this.getHeader(),
+        },
+      )
+        .subscribe(
+          (response: HttpResponse<null>) => resolve(),
+          (error: Error) => reject(error),
+        );
+    });
+  }
+}

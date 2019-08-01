@@ -86,6 +86,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   getLegalEntityList() {
+    this.legalSearchEntity = new LegalSearchEntity();
     this.departmentService.getLegalEntityList(this.legalSearchEntity);
   }
 
@@ -95,6 +96,7 @@ export class DepartmentComponent implements OnInit {
   }
 
   getDivisionList() {
+    this.divisionSearchEntity = new DivisionSearchEntity();
     this.departmentService.getDivisionList(this.divisionSearchEntity);
   }
 
@@ -104,14 +106,12 @@ export class DepartmentComponent implements OnInit {
   }
 
   onDivisionSearch(event) {
-    // this.divisionSearchEntity.code.startsWith = event;
     this.divisionSearchEntity.name.startsWith = event;
     this.divisionEntityTyping.next(this.divisionSearchEntity);
     this.departmentService.getDivisionEntityListByTyping(this.divisionEntityTyping);
   }
 
   onLegalEntitySearch(event) {
-    // this.legalSearchEntity.code.startsWith = event;
     this.legalSearchEntity.name.startsWith = event;
     this.legalEntityTyping.next(this.legalSearchEntity);
     this.departmentService.getLegalEntityListByTyping(this.legalEntityTyping);
