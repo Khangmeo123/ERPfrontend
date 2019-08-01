@@ -2,20 +2,25 @@ import { storiesOf } from '@storybook/angular/dist/client/preview';
 import { moduleMetadata } from '@storybook/angular';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CropperModule } from './cropper.module';
 import { BrowserAnimationsModule, NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
-    <div class="container">
-      <div class="row">
-        <app-cropper [control]="image" (output)="onChange($event)" [disabled]="true"></app-cropper>
-      </div>
-    </div>`,
+      <div class="container">
+          <div class="row">
+              <app-cropper
+                      [control]="image"
+                      (output)="onChange($event)"
+                      [disabled]="disabled"></app-cropper>
+          </div>
+      </div>`,
 })
 class CropperStories {
+  @Input() disabled: boolean = false;
+
   form: FormGroup = new FormGroup({
     image: new FormControl(),
   });
@@ -53,4 +58,10 @@ storiesOf('Cropper', module)
   )
   .add('default', () => ({
     component: CropperStories,
+  }))
+  .add('disabled', () => ({
+    component: CropperStories,
+    props: {
+      disabled: true,
+    },
   }));
