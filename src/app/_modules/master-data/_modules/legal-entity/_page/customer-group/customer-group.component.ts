@@ -177,7 +177,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   sortCustomerGroup(event) {
     if (event.sortField && event.sortOrder) {
       this.customerGroupSearchEntity.orderBy = event.sortField;
-      this.customerGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.customerGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
@@ -261,7 +261,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   sortCustomerDetail(event) {
     if (event.sortField && event.sortOrder) {
       this.customerSearchEntity.orderBy = event.sortField;
-      this.customerSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.customerSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.customerSearchEntity.customerGroupingId !== undefined) {
       this.customerSearchEntity.customerGroupingId = this.customerGroupId;

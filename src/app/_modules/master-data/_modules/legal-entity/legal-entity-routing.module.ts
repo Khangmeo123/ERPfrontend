@@ -11,7 +11,7 @@ import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-leg
 import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/supplier-of-legal-entity.component';
 import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
 import {EmployeePositionComponent} from './_page/employee-position/employee-position.component';
-import {SupplierDetailComponent} from './_page/supplier-detail/supplier-detail.component';
+import {LegalSupplierDetailComponent} from './_page/supplier-detail/supplier-detail.component';
 import {ItemDetailComponent} from './_page/item-detail/item-detail.component';
 import {EmployeeDetailComponent} from './_page/employee-detail/employee-detail.component';
 
@@ -25,8 +25,8 @@ const routes: Routes = [
       { path: 'customer-of-legal-entity/customer-detail', component: CustomerDetailComponent },
 
       { path: 'supplier-group', component: SupplierGroupComponent },
-      { path: 'supplier-group/supplier-detail', component: SupplierDetailComponent },
-      { path: 'supplier-of-legal-entity/supplier-detail', component: SupplierDetailComponent },
+      { path: 'supplier-group/supplier-detail', component: LegalSupplierDetailComponent },
+      { path: 'supplier-of-legal-entity/supplier-detail', component: LegalSupplierDetailComponent },
 
       { path: 'employee-position', component: EmployeePositionComponent },
       { path: 'employee-position/employee-detail', component: EmployeeDetailComponent },

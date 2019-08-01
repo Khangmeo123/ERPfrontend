@@ -2,7 +2,6 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
-import { SupplierDetailService } from './supplier-detail.service';
 import { Subscription, Subject } from 'rxjs';
 import { LegalSupplierDetailEntity } from 'src/app/_modules/master-data/_backend/legal-supplier-detail/legal-supplier-detail.entity';
 import { PaymentTermEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.entity';
@@ -11,18 +10,18 @@ import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/e
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
-import { isFulfilled } from 'q';
 import { InfoContactEntity } from 'src/app/_modules/master-data/_backend/info-contact/info-contact.entity';
 import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.entity';
+import { LegalSupplierDetailService } from './supplier-detail.service';
 
 @Component({
   selector: 'app-detail-supplier-group',
   templateUrl: './supplier-detail.component.html',
   styleUrls: ['./supplier-detail.component.scss'],
-  providers: [SupplierDetailService]
+  providers: [LegalSupplierDetailService]
 })
-export class SupplierDetailComponent implements OnInit, OnDestroy {
+export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
 
   form = new FormGroup({
     name: new FormControl(),
@@ -75,43 +74,43 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private supplierDetailService: SupplierDetailService,
+    private legalSupplierDetailService: LegalSupplierDetailService,
     private router: Router,
     private generalService: GeneralService) {
 
     this.route.queryParams.subscribe(params => {
       this.legalEntiyId = params.legalEntityId;
-      this.supplierDetailService.getId(params.id);
+      this.legalSupplierDetailService.getId(params.id);
     });
-    const supplierFormSub = this.supplierDetailService.supplierDetailForm.subscribe(res => {
+    const supplierFormSub = this.legalSupplierDetailService.supplierDetailForm.subscribe(res => {
       console.log(res)
       if (res) {
         this.supplierDetailForm = res;
       }
     });
 
-    const listPaymentTerm = this.supplierDetailService.paymenttermList.subscribe(res => {
+    const listPaymentTerm = this.legalSupplierDetailService.paymenttermList.subscribe(res => {
       if (res) {
         this.paymentTermIds = res.ids;
         this.paymentTermExceptIds = res.exceptIds;
       }
     });
 
-    const listStaffInChangre = this.supplierDetailService.staffInChargeList.subscribe(res => {
+    const listStaffInChangre = this.legalSupplierDetailService.staffInChargeList.subscribe(res => {
       if (res) {
         this.staffInChargeIds = res.ids;
         this.staffInChargeExceptIds = res.exceptIds;
       }
     });
 
-    const listProvince = this.supplierDetailService.proviceList.subscribe(res => {
+    const listProvince = this.legalSupplierDetailService.proviceList.subscribe(res => {
       if (res) {
         this.provinceIds = res.ids;
         this.provinceExceptIds = res.exceptIds;
       }
     });
 
-    const listBank = this.supplierDetailService.bankList.subscribe(res => {
+    const listBank = this.legalSupplierDetailService.bankList.subscribe(res => {
       if (res) {
         this.bankIds = res.ids;
         this.bankExceptIds = res.exceptIds;
@@ -119,13 +118,13 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     });
 
 
-    const contactForm = this.supplierDetailService.contactForm.subscribe(res => {
+    const contactForm = this.legalSupplierDetailService.contactForm.subscribe(res => {
       if (res) {
         this.contactForm = res;
       }
     });
 
-    const bankAccountForm = this.supplierDetailService.bankAccountForm.subscribe(res => {
+    const bankAccountForm = this.legalSupplierDetailService.bankAccountForm.subscribe(res => {
       if (res) {
         this.bankAccountForm = res;
       }
@@ -160,7 +159,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     if (paymenttermId !== null && paymenttermId !== undefined) {
       this.paymentTermSearchEntity.ids.push(paymenttermId);
     }
-    this.supplierDetailService.getListPaymentTerm(this.paymentTermSearchEntity);
+    this.legalSupplierDetailService.getListPaymentTerm(this.paymentTermSearchEntity);
   }
 
   paymentTermSearch(event) {
@@ -176,7 +175,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     if (staffInChangeId !== null && staffInChangeId !== undefined) {
       this.staffInChargeSearchEntity.ids.push(staffInChangeId);
     }
-    this.supplierDetailService.getListStaffInCharge(this.staffInChargeSearchEntity);
+    this.legalSupplierDetailService.getListStaffInCharge(this.staffInChargeSearchEntity);
   }
 
 
@@ -194,7 +193,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     if (bankId !== null && bankId !== undefined) {
       this.bankSearchEntity.ids.push(bankId);
     }
-    this.supplierDetailService.getListBank(this.bankSearchEntity);
+    this.legalSupplierDetailService.getListBank(this.bankSearchEntity);
   }
 
 
@@ -212,7 +211,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     if (provinceId !== null && provinceId !== undefined) {
       this.provinceSearchEntity.ids.push(provinceId);
     }
-    this.supplierDetailService.getListProvice(this.provinceSearchEntity);
+    this.legalSupplierDetailService.getListProvice(this.provinceSearchEntity);
   }
 
 
@@ -240,14 +239,14 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   addContact() {
     this.contactsModal = !this.contactsModal;
-    this.supplierDetailService.addContact();
+    this.legalSupplierDetailService.addContact();
   }
 
   saveContact(contactValue: any) {
     if (!this.contactForm.valid) {
       this.generalService.validateAllFormFields(this.contactForm);
     }else {
-      this.supplierDetailService.saveContact(contactValue, this.index);
+      this.legalSupplierDetailService.saveContact(contactValue, this.index);
       this.contactsModal = !this.contactsModal;
     }
   }
@@ -256,7 +255,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     console.log(index);
     this.index = index;
     this.contactsModal = true;
-    this.supplierDetailService.editContact(contact);
+    this.legalSupplierDetailService.editContact(contact);
   }
 
 
@@ -268,7 +267,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
 
   addBankAccount() {
     this.bankAccountsModal = !this.bankAccountsModal;
-    this.supplierDetailService.addBankAccount();
+    this.legalSupplierDetailService.addBankAccount();
   }
 
   saveBankAccount(bankAccount: any) {
@@ -276,7 +275,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     if (!this.bankAccountForm.valid) {
       this.generalService.validateAllFormFields(this.bankAccountForm);
     }else {
-      this.supplierDetailService.saveBankAccount(bankAccount, this.index);
+      this.legalSupplierDetailService.saveBankAccount(bankAccount, this.index);
       this.bankAccountsModal = !this.bankAccountsModal;
     }
   }
@@ -289,7 +288,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     if (!this.supplierDetailForm.valid) {
       this.generalService.validateAllFormFields(this.supplierDetailForm);
     } else {
-      this.supplierDetailService.save(this.supplierDetailForm).then(res => {
+      this.legalSupplierDetailService.save(this.supplierDetailForm).then(res => {
         this.router.navigate([this.routeLink]);
       });
     }
@@ -320,7 +319,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   editBankAccount(bankAccount, index) {
     this.index = index;
     this.bankAccountsModal = true;
-    this.supplierDetailService.editbankAccount(bankAccount);
+    this.legalSupplierDetailService.editbankAccount(bankAccount);
   }
 
   onClickDelete() {

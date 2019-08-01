@@ -23,7 +23,7 @@ import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/
     providedIn: 'root',
 })
 
-export class SupplierDetailRepository extends Repository{
+export class LegalSupplierDetailRepository extends Repository{
     constructor(public http: HttpClient) {
         super(http);
         this.apiUrl = environment.apiUrlApps + 'master-data/legal-entity/supplier-detail';

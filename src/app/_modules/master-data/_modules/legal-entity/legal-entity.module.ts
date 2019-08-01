@@ -7,7 +7,7 @@ import { ItemGroupComponent } from './_page/item-group/item-group.component';
 import { SpecialPriceSupplierComponent } from './_page/special-price-supplier/special-price-supplier.component';
 import { SpecialPriceCustomerComponent } from './_page/special-price-customer/special-price-customer.component';
 import { CustomerDetailComponent } from './_page/customer-detail/customer-detail.component';
-import { SupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
+import { LegalSupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
 import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material';
@@ -41,7 +41,7 @@ import {EmployeePositionComponent} from './_page/employee-position/employee-posi
     SpecialPriceSupplierComponent,
     SpecialPriceCustomerComponent,
     CustomerDetailComponent,
-    SupplierDetailComponent,
+    LegalSupplierDetailComponent,
     CustomersInGroupComponent,
     CustomerListOfLegalEntityComponent,
     SupplierOfLegalEntityComponent,

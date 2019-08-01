@@ -158,7 +158,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.legalSearchEntity.orderBy = event.sortField;
-      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

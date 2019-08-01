@@ -139,19 +139,26 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   sortLegalEntiy(event: any) {
     if (event.sortField && event.sortOrder) {
       this.legalSearchEntity.orderBy = event.sortField;
-      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
+    console.log(this.legalSearchEntity.orderType )
     this.supplierOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
-      this.supplierSearchEntity.legalEntityId = this.legalList[0].id;
-      this.legalId = this.supplierSearchEntity.legalEntityId;
-      this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
+      if (this.legalId && this.legalId !== undefined) {
+        this.supplierSearchEntity.legalEntityId = this.legalId;
+        this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
+      } else {
+        if (this.legalList && this.legalList.length > 0) {
+          this.supplierSearchEntity.legalEntityId = this.legalList[0].id;
+          this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
+        }
+      }
     });
   }
 
   sortSupplier(event) {
     if (event.sortField && event.sortOrder) {
       this.supplierSearchEntity.orderBy = event.sortField;
-      this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
 
     if (this.supplierSearchEntity.legalEntityId !== undefined) {

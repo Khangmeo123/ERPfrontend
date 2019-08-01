@@ -216,7 +216,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   sortSupplierGroup(event) {
     if (event.sortField && event.sortOrder) {
       this.supplierGroupSearchEntity.orderBy = event.sortField;
-      this.supplierGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.supplierGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
 
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
@@ -231,7 +231,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   sortSupplier(event) {
     if (event.sortField && event.sortOrder) {
       this.supplierSearchEntity.orderBy = event.sortField;
-      this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.supplierSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.supplierSearchEntity.legalEntityId !== undefined) {
       this.getListDetail();

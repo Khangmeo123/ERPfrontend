@@ -2,24 +2,21 @@ import { LegalSupplierDetailEntity } from 'src/app/_modules/master-data/_backend
 import { BehaviorSubject, Observable } from 'rxjs';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 import { Entities, EnumEntity } from 'src/app/_helpers/entity';
-import { SupplierDetailRepository } from './supplier-detail.repository';
+import { LegalSupplierDetailRepository } from './supplier-detail.repository';
 import { ToastrService } from 'ngx-toastr';
 import { SupplierDetailForm } from 'src/app/_modules/master-data/_backend/legal-supplier-detail/legal-supplier-detail.form';
 import { Injectable } from '@angular/core';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { PaymentTermSearchEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.searchentity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
-import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 import { InfoContactForm } from 'src/app/_modules/master-data/_backend/info-contact/info-contact.form';
-import { BankAccountForm } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.form';
 import { environment } from 'src/environments/environment';
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
-import { BankAccountSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.searchentity';
 import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { BankAccountOfLegalForm } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.form';
 
 @Injectable()
-export class SupplierDetailService {
+export class LegalSupplierDetailService {
     public supplierGeneral: BehaviorSubject<LegalSupplierDetailEntity>;
     public supplierDetailForm: BehaviorSubject<FormGroup>;
 
@@ -32,7 +29,7 @@ export class SupplierDetailService {
     public bankAccountForm: BehaviorSubject<FormGroup>;
     constructor(
         private fb: FormBuilder,
-        private supplierDetailRepository: SupplierDetailRepository,
+        private supplierDetailRepository: LegalSupplierDetailRepository,
         private toastrService: ToastrService) {
         this.supplierDetailForm = new BehaviorSubject(this.fb.group(
             new SupplierDetailForm(),
