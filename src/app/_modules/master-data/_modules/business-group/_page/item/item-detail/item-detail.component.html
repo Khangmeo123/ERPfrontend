@@ -22,7 +22,7 @@
                 </button>
                 <div class="row">
                     <div class="col-sm-3 col-md-2">
-                        <app-cropper [control]="itemForm.get('img')"></app-cropper>
+                        <app-cropper [control]="itemForm.get('image')"></app-cropper>
                     </div>
                     <div class="flex-grow-1 pr-2">
                         <div class="row">
@@ -95,8 +95,8 @@
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <app-simple-select [key]="'name'" [list]="characteristicList"
-                                            [initialValue]="itemForm.controls.characteristic.value"
-                                            (selectionChange)="itemForm.controls.characteristic.setValue($event)"
+                                            [initialValue]="itemForm.controls.characteristicName.value"
+                                            (selectionChange)="itemForm.controls.characteristicId.setValue($event)"
                                             (listOpen)="openCharacteristicList()" data-qe-id="form-characteristic"
                                             class="w-100">
                                         </app-simple-select>
@@ -114,9 +114,10 @@
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
-                                            (search)="searchUom($event)"
-                                            (selectionChange)="itemForm.controls.uomId.setValue($event[0].id)"
-                                            (listOpen)="openUomList(itemForm.controls.uomId.value)"
+                                            [initialValue]="itemForm.controls.unitOfMeasureName.value"
+                                            (search)="searchUom($event, itemForm.controls.unitOfMeasureId.value)"
+                                            (selectionChange)="itemForm.controls.unitOfMeasureId.setValue($event[0])"
+                                            (listOpen)="openUomList(itemForm.controls.unitOfMeasureId.value)"
                                             data-qe-id="table-thead-filter-uom" class="w-100">
                                         </app-single-select>
                                         <app-error data-qe-id="form-error-uom"
@@ -135,8 +136,9 @@
                                         for="itemPrimaryPrice">{{ 'item.detail.content.primaryPrice' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <input type="text" class="form-control" formControlName="primaryPrice"
-                                            data-qe-id="form-primaryPrice" id="itemPrimaryPrice" />
+                                        <app-input-number [control]="itemForm.get('primaryPrice')" class="w-100"
+                                            inputId="itemPrimaryPrice" data-qe-id="form-primaryPrice">
+                                        </app-input-number>
                                         <app-error data-qe-id="form-error-primaryPrice"
                                             *ngIf="(itemForm.controls.primaryPrice?.errors && itemForm.controls.primaryPrice?.touched) || !!itemForm.controls.errors.get('primaryPrice')?.value"
                                             [formGroup]="itemForm" [property]="'primaryPrice'" [placement]="'top'"

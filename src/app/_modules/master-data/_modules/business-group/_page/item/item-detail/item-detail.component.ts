@@ -8,12 +8,12 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 import { UomEntity } from './../../../../../_backend/uom/uom.entity';
 import { FormGroup } from '@angular/forms';
 import { ItemDetailService } from './item-detail.service';
-import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 import { translate } from 'src/app/_helpers/string';
 @Component({
   selector: 'app-item-detail',
   templateUrl: './item-detail.component.html',
-  styleUrls: ['./item-detail.component.scss']
+  styleUrls: ['./item-detail.component.scss'],
+  providers: [ItemDetailService],
 })
 export class ItemDetailComponent implements OnInit, OnDestroy {
   pageTitle: string = translate('item.detail.header.title');
@@ -65,7 +65,7 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.itemDetailService.getUomListByTyping(this.uomTyping);
-    this.itemDetailSubs.add(itemFormSub).add(characteristicListSub).add(statusListSub);
+    this.itemDetailSubs.add(itemFormSub).add(characteristicListSub).add(statusListSub).add(uomListSub);
   }
 
   ngOnInit() {
@@ -116,8 +116,11 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
     this.itemDetailService.getUomList(this.uomSearchEntity);
   }
 
-  searchUom(event: string) {
+  searchUom(event: string, uomId: string) {
     this.uomSearchEntity = new UomSearchEntity();
+    if (uomId !== null && uomId.length > 0) {
+      this.uomSearchEntity.ids.push(uomId);
+    }
     this.uomSearchEntity.name.startsWith = event;
     this.uomTyping.next(this.uomSearchEntity);
   }

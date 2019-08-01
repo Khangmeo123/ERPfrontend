@@ -11,12 +11,12 @@ export class ItemForm extends FormModel {
     name = new FormControl('', [requiredField]);
 
     // characteristicEntity:
-    characteristicName = new FormControl('', [requiredField]);
+    characteristicName = new FormControl('');
     characteristicId = new FormControl('', [requiredField]);
 
     // unitEntity:
-    uomName = new FormControl('', [requiredField]);
-    uomId = new FormControl('');
+    unitOfMeasureName = new FormControl('');
+    unitOfMeasureId = new FormControl('', [requiredField]);
 
     primaryPrice = new FormControl('', [requiredField]);
     weight = new FormControl('');
@@ -28,14 +28,14 @@ export class ItemForm extends FormModel {
     height = new FormControl('');
     length = new FormControl('');
     width = new FormControl('');
-    img = new FormControl('');
+    image = new FormControl('');
     description = new FormControl('');
 
     errors = new FormGroup({
         code: new FormControl(''),
         name: new FormControl(''),
         primaryPrice: new FormControl(''),
-        propertyId: new FormControl(''),
+        characteristicId: new FormControl(''),
         uomId: new FormControl(''),
         statusId: new FormControl(''),
     });

@@ -9,9 +9,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { ItemDetailRepository } from './item-detail.repository';
 import { environment } from 'src/environments/environment';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ItemDetailService {
   public itemForm: BehaviorSubject<FormGroup>;
   public itemListCount: BehaviorSubject<number>;

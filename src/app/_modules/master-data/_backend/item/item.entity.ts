@@ -11,8 +11,8 @@ export class ItemEntity extends Entity {
     characteristicId: string;
 
     // unitEntity:
-    uomName: string;
-    uomId: string;
+    unitOfMeasureName: string;
+    unitOfMeasureId: string;
 
     unitPrice: number;
     weight: number;
@@ -24,7 +24,7 @@ export class ItemEntity extends Entity {
     height: number;
     length: number;
     width: number;
-    img: string;
+    image: string;
     description: string;
 
     constructor(itemEntity: any) {

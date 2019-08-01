@@ -7,7 +7,7 @@ export class ItemSearchEntity extends SearchEntity {
     name: TextFilter = new TextFilter();
     description: TextFilter = new TextFilter();
     primaryPrice: NumberFilter = new NumberFilter();
-    uomId: string;
+    unitOfMeasureId: string = '';
     statusId: string = '';
 
     constructor(itemSearchEntity?: any) {

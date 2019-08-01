@@ -9,7 +9,6 @@ import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { translate } from 'src/app/_helpers/string';
-import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-uom',
@@ -29,8 +28,6 @@ export class UomComponent implements OnInit, OnDestroy {
   uomSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  downloadLink = environment.apiUrlApps + 'master-data/business-group/uom/download-template';
-  exportLink = environment.apiUrlApps + 'master-data/business-group/uom/export';
 
   constructor(private uomService: UomService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {

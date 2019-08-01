@@ -42,6 +42,9 @@
                         <col>
                         <col>
                         <col>
+                        <col>
+                        <col>
+                        <col>
                     </colgroup>
                 </ng-template>
                 <ng-template pTemplate="header">
@@ -58,9 +61,9 @@
                             {{ 'item.list.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-uom" [pSortableColumn]="'uom'">
-                            {{ 'item.list.content.uom' | translate}}
-                            <p-sortIcon [field]="'uom'" class="float-right"></p-sortIcon>
+                        <th pResizableColumn data-qe-id="table-thead-unitOfMeasure" [pSortableColumn]="'unitOfMeasure'">
+                            {{ 'item.list.content.unitOfMeasure' | translate}}
+                            <p-sortIcon [field]="'unitOfMeasure'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-primaryPrice" [pSortableColumn]="'primaryPrice'">
                             {{ 'item.list.content.primaryPrice' | translate}}
@@ -89,8 +92,11 @@
                         </th>
                         <th class="th-filter">
                             <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
-                                (search)="searchUom($event)" (selectionChange)="itemSearchEntity.uomId = $event.Id"
-                                (listOpen)="openUomList(itemSearchEntity.uomId)" data-qe-id="table-thead-filter-uom">
+                                [initialValue]="itemSearchEntity.unitOfMeasureId"
+                                (search)="searchUom($event, itemSearchEntity.unitOfMeasureId)"
+                                (selectionChange)="itemSearchEntity.unitOfMeasureId = $event[0]; getList()"
+                                (listOpen)="openUomList(itemSearchEntity.unitOfMeasureId)"
+                                data-qe-id="table-thead-filter-uom">
                             </app-single-select>
                         </th>
                         <th class="th-filter">
@@ -101,8 +107,8 @@
                         <th class="th-filter">
                             <app-simple-select [key]="'name'" [list]="statusList"
                                 [initialValue]="itemSearchEntity.statusId"
-                                (selectionChange)="itemSearchEntity.statusId = $event" (listOpen)="openStatusList()"
-                                data-qe-id="table-thead-filter-status">
+                                (selectionChange)="itemSearchEntity.statusId = $event; getList()"
+                                (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
                             </app-simple-select>
                         </th>
                     </tr>
@@ -112,8 +118,8 @@
                         <td> {{item.code}} </td>
                         <td> {{item.name}} </td>
                         <td> {{item.description}} </td>
-                        <td> {{item.uomName}} </td>
-                        <td> {{item.unitPrice}} </td>
+                        <td> {{item.unitOfMeasureName}} </td>
+                        <td> {{item.primaryPrice}} </td>
                         <td> {{item.statusName}} </td>
                     </tr>
                 </ng-template>
