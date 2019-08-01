@@ -188,6 +188,10 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.employeeDetailService.editContact(contact);
   }
 
+  deleteContact(index) {
+    
+  }
+
   // page action
 
   save() {

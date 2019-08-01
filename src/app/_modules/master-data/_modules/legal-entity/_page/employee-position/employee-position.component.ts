@@ -157,7 +157,9 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   employeeSearch(event) {
-    this.employeeSearchEntity.code.startsWith = event;
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.employeeSearchEntity.legalEntityId = this.legalEntityId;
+    }
     this.employeeSearchEntity.name.startsWith = event;
     this.employeeTyping.next(this.employeeSearchEntity);
   }
@@ -190,12 +192,13 @@ export class EmployeePositionComponent implements OnInit {
       this.employeePositionSearchEntity.orderBy = event.sortField;
       this.employeePositionSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
-
-    if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
+    if (this.legalEntityId !== '' && this.legalEntityId !== undefined && this.legalEntityId !== null) {
       this.employeePositionService.getList(this.employeePositionSearchEntity).then(res => {
-        this.employeeSearchEntity.legalEntityId = this.legalEntityId;
-        this.employeeSearchEntity.positionId = this.employeeDetailList[0].id;
-        this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
+        if(this.employeePositionList && this.employeePositionList.length > 0) {
+          this.employeeSearchEntity.legalEntityId = this.legalEntityId;
+          this.employeeSearchEntity.positionId = this.employeeDetailList[0].id;
+          this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
+        }
       });
     }
   }
@@ -210,7 +213,14 @@ export class EmployeePositionComponent implements OnInit {
     this.pagination.pageNumber = 1;
     this.employeePositionSearchEntity.skip = 0;
     this.employeePositionSearchEntity.take = this.pagination.take;
-    this.employeePositionService.getList(this.employeePositionSearchEntity);
+    this.employeePositionService.getList(this.employeePositionSearchEntity).then(res => {
+      if (this.employeePositionList && this.employeePositionList.length > 0) {
+        this.employeeSearchEntity.positionId = this.employeePositionList[0].id;
+      } else {
+        this.employeeSearchEntity.positionId = null;
+      }
+
+    });
   }
 
   edit(positionId: string) {
@@ -237,6 +247,12 @@ export class EmployeePositionComponent implements OnInit {
       this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
     }).catch(err => {
     });
+  }
+
+  onClickDetail(employeePositionId) {
+    this.employeePositionId = employeePositionId;
+    this.employeeSearchEntity.positionId = employeePositionId;
+    this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
   }
 
   //list employee

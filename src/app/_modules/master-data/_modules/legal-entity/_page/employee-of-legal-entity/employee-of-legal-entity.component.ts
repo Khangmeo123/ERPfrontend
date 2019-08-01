@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
-import {Router} from '@angular/router';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { translate } from 'src/app/_helpers/string';
@@ -42,46 +42,46 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     private employeeOfLegalEntityService: EmployeeOfLegalEntityService,
     protected router: Router,
     private genaralService: GeneralService,
-    private bookmarkService: BookmarkService,) { 
-      const legalListSub = this.employeeOfLegalEntityService.legalEntityList.subscribe(res => {
-        if (res) {
-          this.legalList = res;
-          this.selectedList = res[0];
-        }
-      });
+    private bookmarkService: BookmarkService, ) {
+    const legalListSub = this.employeeOfLegalEntityService.legalEntityList.subscribe(res => {
+      if (res) {
+        this.legalList = res;
+        this.selectedList = res[0];
+      }
+    });
 
-      const legalListCountSub = this.employeeOfLegalEntityService.legalEntityCount.subscribe(res => {
-        if (res) {
-          this.pagination.totalItems = res;
-        }
-      });
+    const legalListCountSub = this.employeeOfLegalEntityService.legalEntityCount.subscribe(res => {
+      if (res) {
+        this.pagination.totalItems = res;
+      }
+    });
 
-      const employeeOfLegalListSub = this.employeeOfLegalEntityService.employeeListOflegalEntity.subscribe(res => {
-        console.log(res);
-        if (res) {
-          this.employeeIds = res.ids;
-          this.employeeExceptIds = res.exceptIds;
-        }
-      });
-      const employeeListSub = this.employeeOfLegalEntityService.employeeList.subscribe(res => {
-        if (res) {
-          this.employeeList = res;
-        }
-      });
-      const employeeListCountSub = this.employeeOfLegalEntityService.employeeCount.subscribe(res => {
-        if (res) {
-          this.paginationdetail.totalItems = res;
-        }
-      });
+    const employeeOfLegalListSub = this.employeeOfLegalEntityService.employeeListOflegalEntity.subscribe(res => {
+      console.log(res);
+      if (res) {
+        this.employeeIds = res.ids;
+        this.employeeExceptIds = res.exceptIds;
+      }
+    });
+    const employeeListSub = this.employeeOfLegalEntityService.employeeList.subscribe(res => {
+      if (res) {
+        this.employeeList = res;
+      }
+    });
+    const employeeListCountSub = this.employeeOfLegalEntityService.employeeCount.subscribe(res => {
+      if (res) {
+        this.paginationdetail.totalItems = res;
+      }
+    });
 
-      const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
-        this.isSaveBookMark = res;
-      });
-      this.employeeOfLegalEntityService.getListDropEmployeeByTyping(this.employeeTyping);
-      this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
-      this.employeeSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify)
+    const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
+      this.isSaveBookMark = res;
+    });
+    this.employeeOfLegalEntityService.getListDropEmployeeByTyping(this.employeeTyping);
+    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.employeeSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify)
       .add(employeeOfLegalListSub).add(employeeListSub).add(employeeListCountSub);
-    }
+  }
 
 
   ngOnInit() {
@@ -111,11 +111,16 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   //list legal entity
 
   getListLegalEntity() {
-    console.log('getListLegalEntity')
     this.pagination.pageNumber = 1;
     this.legalSearchEntity.skip = 0;
     this.legalSearchEntity.take = this.pagination.take;
     this.employeeOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
+      if (this.legalList && this.legalList.length > 0) {
+        this.employeeSearchEntity.legalEntityId = this.legalList[0].id;
+      } else {
+        this.employeeSearchEntity.legalEntityId = '';
+      }
+
       this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
     })
   }
@@ -136,10 +141,17 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
       this.legalSearchEntity.orderBy = event.sortField;
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
-    this.employeeOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res =>{
-      this.employeeSearchEntity.legalEntityId = this.legalList[0].id;
-      this.legalId = this.employeeSearchEntity.legalEntityId;
-      this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
+    this.employeeOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
+      if (this.legalId && this.legalId !== undefined) {
+        this.employeeSearchEntity.legalEntityId = this.legalId;
+        this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
+      } else {
+        if (this.legalList && this.legalList.length > 0) {
+          this.employeeSearchEntity.legalEntityId = this.legalList[0].id;
+          this.legalId = this.employeeSearchEntity.legalEntityId;
+          this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
+        }
+      }
     });
   }
 
@@ -164,12 +176,12 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
       this.employeeSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    if(this.employeeSearchEntity.legalEntityId !== '') {
+    if (this.employeeSearchEntity.legalEntityId !== '') {
       this.getListEmployee(this.employeeSearchEntity);
     }
   }
 
-  paginationDetailOut(pagination: PaginationModel){
+  paginationDetailOut(pagination: PaginationModel) {
     this.employeeSearchEntity.skip = pagination.skip;
     this.employeeSearchEntity.take = pagination.take;
     this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
@@ -191,7 +203,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   }
 
   onClickShowDetail(employeeId) {
-    this.router.navigate(['/master-data/legal-entity/employee-of-legal-entity/employee-detail'], {queryParams : {id: employeeId}});
+    this.router.navigate(['/master-data/legal-entity/employee-of-legal-entity/employee-detail'], { queryParams: { id: employeeId } });
   }
 
   bookMark() {
