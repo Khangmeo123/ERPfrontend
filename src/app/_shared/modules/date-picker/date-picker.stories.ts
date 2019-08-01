@@ -5,33 +5,34 @@ import { DatePickerModule } from './date-picker.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MomentDateModule } from '@angular/material-moment-adapter';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { Component } from '@angular/core';
-import { dateField } from '../../../_helpers';
+import { Component, Input } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
-    <div class="container">
-      <div class="row">
-        <div class="col-12">
-          <form [formGroup]="form">
-            <app-date-picker [control]="date"></app-date-picker>
-          </form>
-        </div>
-        <div class="col-12 mt-2">
+      <div class="container">
+          <div class="row">
+              <div class="col-12">
+                  <form [formGroup]="form">
+                      <app-date-picker [disabled]="disabled" [control]="date"></app-date-picker>
+                  </form>
+              </div>
+              <div class="col-12 mt-2">
           <span>
             Value: {{date.value}}
           </span>
-        </div>
-        <div class="col-12 mt-2" *ngIf="date.errors?.invalidDate">
-          <div class="alert alert-danger">
-            {{date.errors?.invalidDate}}
+              </div>
+              <div class="col-12 mt-2" *ngIf="date.errors?.invalidDate">
+                  <div class="alert alert-danger">
+                      {{date.errors?.invalidDate}}
+                  </div>
+              </div>
           </div>
-        </div>
-      </div>
-    </div>`,
+      </div>`,
 })
-export class DatePickerStories {
+export class DatePickerStoriesComponent {
+  @Input() disabled: boolean = false;
+
   form = new FormGroup({
     date: new FormControl(null),
   });
@@ -49,7 +50,7 @@ storiesOf('DatePicker', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        DatePickerStories,
+        DatePickerStoriesComponent,
       ],
       imports: [
         CommonModule,
@@ -63,6 +64,12 @@ storiesOf('DatePicker', module)
     }),
   )
   .add('default', () => ({
-    component: DatePickerStories,
+    component: DatePickerStoriesComponent,
     props: {},
+  }))
+  .add('disabled', () => ({
+    component: DatePickerStoriesComponent,
+    props: {
+      disabled: true,
+    },
   }));
