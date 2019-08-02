@@ -108,6 +108,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
   onApplyFilter(value) {
     this.filter[this.type.code] = value;
+    this.filterValue = value;
     this.changeFilter.emit();
   }
 
