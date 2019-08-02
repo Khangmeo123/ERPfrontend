@@ -170,6 +170,7 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
   legalEntityOnRowSelect(event) {
     if (event.data) {
       this.legalEntityId = event.data.id;
+      this.exportItemDetailLink = this.exportLink + this.legalEntityId;
       this.clearSearchItemsFromLegalList(this.tableItem);
     }
   }

@@ -54,7 +54,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   itemExceptIds: ItemEntity[];
   itemSearchEntity: ItemSearchEntity = new ItemSearchEntity();
   itemTyping: Subject<ItemSearchEntity> = new Subject();
-  exportLink = environment.apiUrlApps + '/master-data/legal-entity/item-of-legal-entity/export-item-detail?itemGroupingId=';
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/item-group/export-item-detail?itemGroupingId=';
   exportItemDetailLink: string;
 
   constructor(private itemGroupService: ItemGroupService, private genaralService: GeneralService,
@@ -225,6 +225,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   itemGroupOnRowSelect(event: any) {
     if (event.data) {
       this.itemGroupId = event.data.id;
+      this.exportItemDetailLink = this.exportLink + this.itemGroupId;
       this.clearSearchItemsFromItemGroup(this.tableItems);
     }
   }
