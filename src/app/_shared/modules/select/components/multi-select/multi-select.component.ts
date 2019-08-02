@@ -124,7 +124,8 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
     this.onChange();
   }
 
-  unselect({index, data}) {
+  unselect(event) {
+    const {index, data} = event;
     this.selectedList = [
       ...this.selectedList.slice(0, index),
       ...this.selectedList.slice(index + 1),
