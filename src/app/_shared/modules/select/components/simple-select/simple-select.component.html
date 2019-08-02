@@ -8,7 +8,9 @@
   <app-select-body [@toggleMenu]="listState" *ngIf="isOpened">
     <app-select-spinner *ngIf="list.length === 0; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
-      <app-select-list [dataSource]="list" *ngIf="list.length; else empty" [key]="key"
+      <app-select-list [dataSource]="list"
+                       *ngIf="hasData; else empty"
+                       [key]="key"
                        (selectionChange)="onSelect($event)"></app-select-list>
       <ng-template #empty>
         <app-no-data></app-no-data>
