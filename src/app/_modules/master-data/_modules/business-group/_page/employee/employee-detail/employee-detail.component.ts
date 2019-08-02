@@ -96,7 +96,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     if (!this.employeeForm.valid) {
       this.generalService.validateAllFormFields(this.employeeForm);
     } else {
-      this.employeeDetailService.save(this.employeeForm.value).then(res => {
+      this.employeeDetailService.save(this.employeeForm.getRawValue()).then(res => {
         this.router.navigate(['/master-data/business-group/employee/employee-list']);
       });
     }
