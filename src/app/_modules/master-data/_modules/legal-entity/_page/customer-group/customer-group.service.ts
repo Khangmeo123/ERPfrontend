@@ -152,19 +152,18 @@ export class CustomerGroupService {
         return defered;
     }
 
-    deleteCustomer(customerSearchEntity: CustomerSearchEntity): Promise<boolean> {
+    deleteCustomer(customerId: string, customerGroupId: string): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-          this.customerGroupRepository.deleteCustomer(customerSearchEntity).subscribe(res => {
-            if (res) {
-              this.getListCustomer(customerSearchEntity);
-              this.toastrService.success('Cập nhật thành công !');
-              resolve(false);
-            }
-          }, err => {
-            if (err) {
-              reject(true);
-            }
-          });
+            this.customerGroupRepository.deleteCustomer(customerId, customerGroupId).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve(res);
+                }
+            }, err => {
+                if (err) {
+                    reject(err);
+                }
+            });
         });
         return defered;
       }

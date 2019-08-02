@@ -90,12 +90,7 @@ export class CustomerGroupRepository extends Repository {
         );
     }
 
-    deleteCustomer(customerSearchEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/delete-customer-detail', JSON.stringify(customerSearchEntity),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => r.body),
-            );
-    }
+    
 
     countCustomerDetail(customerSearchEntity: CustomerSearchEntity): Observable<number> {
         return this.http.post<number>(this.apiUrl + '/count-customer-detail', JSON.stringify(customerSearchEntity),
@@ -133,4 +128,15 @@ export class CustomerGroupRepository extends Repository {
                 }),
             );
     }
+
+    deleteCustomer(customerId: string, customerGroupId: string) {
+        return this.http.post<any>(this.apiUrl + '/delete-customer-detail', JSON.stringify({
+            customerGroupingId: customerGroupId,
+            customerDetailId: customerId,
+        }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
 }

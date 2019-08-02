@@ -111,13 +111,12 @@ export class SupplierOfLegalEntityService {
         const defered = new Promise<boolean>((resolve, reject) => {
           this.supplierOflegalEntityRepository.deleteSupplier(supplierSearchEntity).subscribe(res => {
             if (res) {
-              this.getListSupplier(supplierSearchEntity);
               this.toastrService.success('Cập nhật thành công !');
-              resolve(false);
+              resolve(true);
             }
           }, err => {
             if (err) {
-              reject(true);
+              reject(false);
             }
           });
         });

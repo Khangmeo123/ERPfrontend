@@ -109,6 +109,9 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   openCustomerList(id: []) {
     this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.ids = id;
+    if (this.legalId !== '' && this.legalId !== undefined) {
+      this.customerSearchEntity.legalEntityId = this.legalId;
+    }
     this.customerOfLegalEntityService.getListCustomerOflegalEntity(this.customerSearchEntity);
   }
 
@@ -224,7 +227,6 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   clearSearchCustomer(tablecustomer: any) {
     this.customerSearchEntity = new CustomerSearchEntity();
-    this.customerSearchEntity.customerDetailIds = this.customerIds;
     tablecustomer.reset();
   }
 

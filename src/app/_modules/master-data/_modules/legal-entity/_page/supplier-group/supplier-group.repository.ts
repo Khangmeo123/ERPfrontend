@@ -126,8 +126,11 @@ export class ListSupplierRepository extends Repository {
         );
     }
 
-    deleteSupplier(employeeEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/delete-supplier-detail', JSON.stringify(employeeEntity),
+    deleteSupplier(supplierId: string, supplierGroupId: string) {
+        return this.http.post<any>(this.apiUrl + '/delete-supplier-detail', JSON.stringify({
+            supplierGroupingId: supplierGroupId,
+            supplierDetailId: supplierId,
+        }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

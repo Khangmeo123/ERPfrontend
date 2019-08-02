@@ -102,4 +102,21 @@ export class EmployeeOfLegalEntityService {
         return defered;
     }
 
+    deleteCustomerFormLegal(customerSearchEntity: EmployeeSearchEntity): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+          this.employeeOflegalEntityRepository.deleteEmployeeFormLegal(customerSearchEntity).subscribe(res => {
+            if (res) {
+              this.toastrService.success('Cập nhật thành công !');
+              resolve(true);
+            }
+          }, err => {
+            if (err) {
+              reject(false);
+            }
+          });
+        });
+        return defered;
+      }
+
+
 }

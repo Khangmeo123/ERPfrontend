@@ -196,4 +196,20 @@ export class EmployeePositionService {
                 }
             });
     }
+
+    deleteEmployeeFormPosition(employeeId: string, employeePositionId: string): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.employeePositionRepository.deleteEmployeeFromPosition(employeeId, employeePositionId).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve(res);
+                }
+            }, err => {
+                if (err) {
+                    reject(err);
+                }
+            });
+        });
+        return defered;
+    }
 }

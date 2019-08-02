@@ -173,6 +173,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     this.customerSearchEntity.ids = id;
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.customerSearchEntity.legalEntityId = this.legalEntityId;
+      this.customerSearchEntity.customerGroupingId = this.customerGroupId;
       this.customerGroupService.getListCustomer(this.customerSearchEntity);
     }
   }
@@ -298,8 +299,8 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
       this.getListDetail();
     }
   }
-  deleteCustomerFromGroup(customer: any) {
-    this.customerGroupService.deleteCustomer(customer).then(res => {
+  deleteCustomerFromGroup(customerId: string) {
+    this.customerGroupService.deleteCustomer(customerId, this.customerGroupId).then(res => {
       if (res) {
         this.clearSearch(this.tableCustomer);
         this.customerSearchEntity.legalEntityId = this.legalEntityId;

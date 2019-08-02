@@ -148,9 +148,15 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td> 
-                  <div class="edit" (click)="onClickShowDetail(item.id)">
-                      <mat-icon>edit</mat-icon>
+                  <div class="d-flex">
+                      <div class="edit" (click)="onClickShowDetail(item.id)">
+                          <mat-icon>edit</mat-icon>
+                      </div>
+                      <div class="delete" (click)="deleteSupplierFormGroup(item.id)">
+                          <mat-icon>delete</mat-icon>
+                      </div>
                   </div>
+                  
                 </td>
               </tr>
             </ng-template>

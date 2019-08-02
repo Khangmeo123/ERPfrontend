@@ -101,7 +101,8 @@
             <button class="btn btn-add" (click)="addEmployee()" data-qe-id="button-add"
               [disabled]="listEmployeeId.length === 0">
               {{'general.button.add' | translate}}</button>
-            <a class="btn btn-export" [href]="exportLink + employeePositionId" data-qe-id="button-export">{{'general.button.export' | translate}}</a>
+            <a class="btn btn-export" [href]="exportLink + employeePositionId"
+              data-qe-id="button-export">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearch(tableEmployee)"
               data-qe-id="button-clear-employee">{{'general.button.clear' | translate}}</button>
           </div>
@@ -145,9 +146,15 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td>
-                  <div class="edit" (click)="onClickShowDetail(item.id)">
-                    <mat-icon>edit</mat-icon>
+                  <div class="d-flex">
+                    <div class="edit mr-2" (click)="editEmployeeDetail(item.id)">
+                      <mat-icon>edit</mat-icon>
+                    </div>
+                    <div class="delete" (click)="deleteEmployeeFormPosition(item.id)">
+                      <mat-icon>delete</mat-icon>
+                    </div>
                   </div>
+
                 </td>
               </tr>
             </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
@@ -50,6 +50,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   selectedRow: any;
 
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/supplier-of-legal-entity/export?legalEntityId=';
+  @ViewChild('tableSupplier', { static: false }) public tableSupplier: TemplateRef<any>;
 
   constructor(
     protected router: Router,
@@ -111,6 +112,9 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   openSupplierList() {
     this.supplierSearchEntity = new SupplierSearchEntity();
     this.supplierSearchEntity.ids = this.listSupplierId;
+    if (this.legalId !== '' && this.legalId !== undefined) {
+      this.supplierSearchEntity.legalEntityId = this.legalId;
+    }
     this.supplierOfLegalEntityService.getListSupplierOflegalEntity(this.supplierSearchEntity);
   }
 
@@ -232,6 +236,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   deleteSupplierFromLegal(supplier) {
     this.supplierOfLegalEntityService.delete(supplier).then(res => {
       if(res) {
+        this.clearSearchSupplier(this.tableSupplier);
         this.supplierSearchEntity.legalEntityId = this.legalId;
         this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
       }
@@ -241,7 +246,6 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   clearSearchSupplier(tableSupplier: any) {
     this.supplierSearchEntity = new SupplierSearchEntity();
-    this.supplierSearchEntity.supplierDetailIds = this.supplierIds;
     tableSupplier.reset();
   }
 

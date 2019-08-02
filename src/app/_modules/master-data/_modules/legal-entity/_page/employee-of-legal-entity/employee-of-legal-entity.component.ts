@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
@@ -32,6 +32,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
 
   employeeSubs: Subscription = new Subscription();
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/employee-of-legal-entity/export?legalEntityId=';
+  @ViewChild('tableEmployee', { static: false }) public tableEmployee: TemplateRef<any>;
 
   //Drop employee
   employeeIds: EmployeeEntity[];
@@ -98,7 +99,10 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   openEmployeeList(id: []) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
     this.employeeSearchEntity.ids = id;
-    this.employeeOfLegalEntityService.getListDropEmployee(this.employeeSearchEntity);
+    if (this.legalId !== '' && this.legalId !== undefined) {
+      this.employeeSearchEntity.legalEntityId = this.legalId;
+      this.employeeOfLegalEntityService.getListDropEmployee(this.employeeSearchEntity);
+    }
   }
 
   employeeSearch(event) {
@@ -189,7 +193,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
   }
 
-  clearSearchemployee(tableemployee: any) {
+  clearSearchEmployee(tableemployee: any) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
     // this.employeeSearchEntity.employeeDetailIds = this.employeeIds;
     tableemployee.reset();
@@ -204,8 +208,18 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     });
   }
 
-  onClickShowDetail(employeeId) {
+  editSupplierDetail(employeeId) {
     this.router.navigate(['/master-data/legal-entity/employee-of-legal-entity/employee-detail'], { queryParams: { id: employeeId } });
+  }
+
+  deleteSupplierFormLegal(employee){
+    this.employeeOfLegalEntityService.deleteCustomerFormLegal(employee).then(res => {
+      if (res) {
+        this.clearSearchEmployee(this.tableEmployee);
+        this.employeeSearchEntity.legalEntityId = this.legalId;
+        this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity)
+      }
+    });
   }
 
   bookMark() {

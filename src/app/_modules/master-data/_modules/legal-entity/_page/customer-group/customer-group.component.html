@@ -149,7 +149,7 @@
                       <div class="edit" (click)="onClickShowDetail(item.id)">
                           <mat-icon>edit</mat-icon>
                         </div>
-                        <div class="delete" (click)="deleteCustomerFromGroup(item)">
+                        <div class="delete" (click)="deleteCustomerFromGroup(item.id)">
                             <mat-icon>delete</mat-icon>
                           </div>
                   </div>
@@ -187,7 +187,7 @@
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
             id="customerrGroupCode">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(customerGroupForm.controls.code?.errors && customerGroupForm.controls.code?.touched) || !!customerGroupForm.controls.error?.get('code')?.value"
+            *ngIf="(customerGroupForm.controls.code?.errors && customerGroupForm.controls.code?.touched) || !!customerGroupForm.controls.errors?.get('code')?.value"
             [formGroup]="customerGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
@@ -201,7 +201,7 @@
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
             id="customerGroupName">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(customerGroupForm.controls.name?.errors && customerGroupForm.controls.name?.touched) || !!customerGroupForm.controls.error?.get('name')?.value"
+            *ngIf="(customerGroupForm.controls.name?.errors && customerGroupForm.controls.name?.touched) || !!customerGroupForm.controls.errors?.get('name')?.value"
             [formGroup]="customerGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
