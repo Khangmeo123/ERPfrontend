@@ -11,10 +11,11 @@ export class EmployeeSearchEntity extends SearchEntity {
   statusId: string = '';
   staffInChargeId: string;
   legalEntityId: string;
-  employeeIds: Array<any>;
+  employeeIds: Array<string>;
   positionId: string;
-  employeeDetailIds: Array<any>;
-
+  employeeDetailIds: Array<string>;
+  hrOrganizationId: string;
+  projectOrganizationId: string;
   constructor(employeeSearchEntity?: any) {
     super(employeeSearchEntity);
   }

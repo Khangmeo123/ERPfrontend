@@ -22,6 +22,8 @@ export class DepartmentEmployeeDetailComponent implements OnInit, OnDestroy {
 
   isOpenTab1: boolean = false;
   isOpenTab2: boolean = false;
+  isOpenTab3: boolean = false;
+  isOpenTab4: boolean = false;
 
   // Form general employee detail
   departmentEmployeeDetailSubs: Subscription = new Subscription();
@@ -111,6 +113,9 @@ export class DepartmentEmployeeDetailComponent implements OnInit, OnDestroy {
     this.departmentEmployeeDetailSubs.unsubscribe();
   }
 
+  deactiveItemDetail() {
+
+  }
   // list drop bank list
 
   openBankList(bankId: string) {

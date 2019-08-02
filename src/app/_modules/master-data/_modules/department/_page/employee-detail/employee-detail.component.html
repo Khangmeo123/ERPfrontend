@@ -167,7 +167,7 @@
           <div class="col-sm-4">
             <div class="form-group">
               <label for="employee-group">{{ 'detailEmployeeGroup.general.employeePositions' | translate}}</label>
-              <p-chips class="w-100" [(ngModel)]="departmentEmployeeDetailForm.controls.employeePositions.value"
+              <p-chips class="w-100" [ngModel]="departmentEmployeeDetailForm.controls.employeePositions.value"
                 [ngModelOptions]="{standalone: true}" [disabled]="true">
                 <ng-template let-item pTemplate="item">
                   {{item.code}}
@@ -182,7 +182,7 @@
         <button (click)="isOpenTab2 = !isOpenTab2" class="btn btn-link btn-block clearfix" accordion-heading>
           <div class="pull-left float-left">{{'detailEmployeeGroup.bankAccount.title' | translate }}</div>
           <span class="float-right pull-right" accordion-heading>
-            <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
           </span>
         </button>
         <div class="mt-2">
@@ -252,7 +252,7 @@
         <button (click)="isOpenTab3 = !isOpenTab3" class="btn btn-link btn-block clearfix" accordion-heading>
           <div class="pull-left float-left">{{'detailEmployeeGroup.contacts.title' | translate }}</div>
           <span class="float-right pull-right" accordion-heading>
-            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+            <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
           </span>
         </button>
         <div class="d-flex justify-content-end">
@@ -324,7 +324,7 @@
         <button (click)="isOpenTab4 = !isOpenTab4" class="btn btn-link btn-block clearfix" accordion-heading>
           <div class="pull-left float-left">{{'detailEmployeeGroup.own_asset.title' | translate }}</div>
           <span class="float-right pull-right" accordion-heading>
-            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+            <i class="fas " [ngClass]="!isOpenTab4 ? 'fa-caret-down' : 'fa-caret-up'"></i>
           </span>
         </button>
 
@@ -361,12 +361,12 @@
       <button class="btn btn-delete" mwlConfirmationPopover
         [popoverTitle]="'employeeDetail.delete.confirm.title' | translate"
         [popoverMessage]="'employeeDetail.delete.confirm.message' | translate" placement="bottom"
-        (confirm)="onClickDelete()">
+        (confirm)="deactiveItemDetail()">
         {{ 'general.button.delete' | translate}}</button>
     </div>
     <div class="flex-shrink-1 justify-content-end">
-      <button (click)="onClickCancel()" class="btn btn-cancel mr-2">{{ 'general.button.cancel' | translate}}</button>
-      <button (click)="onClickSave()" class="btn btn-save">
+      <button (click)="cancel()" class="btn btn-cancel mr-2">{{ 'general.button.cancel' | translate}}</button>
+      <button (click)="save()" class="btn btn-save">
         {{ 'general.button.save' | translate}}</button>
     </div>
   </div>
