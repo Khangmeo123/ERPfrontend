@@ -30,13 +30,15 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   employeeDetailForm: FormGroup;
   employeeDetailEntity: EmployeeDetailOfLegalEntity = new EmployeeDetailOfLegalEntity();
 
-  //list drop province
+  // list drop province
   provinceIds: ProvinceEntity[];
   provinceExceptIds: ProvinceEntity[];
+  province2Ids: ProvinceEntity[];
+  province2ExceptIds: ProvinceEntity[];
   provinceTyping: Subject<ProvinceSearchEntity> = new Subject();
   provinceSearchEntity: ProvinceSearchEntity = new ProvinceSearchEntity();
 
-  //list drop bank
+  // list drop bank
   bankIds: BankEntity[];
   bankExceptIds: BankEntity[];
   bankTyping: Subject<BankSearchEntity> = new Subject();
@@ -72,6 +74,12 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
         this.provinceExceptIds = res.exceptIds;
       }
     });
+    const listProvinceContact = this.employeeDetailService.proviceList.subscribe(res => {
+      if (res) {
+        this.province2Ids = res.ids;
+        this.province2ExceptIds = res.exceptIds;
+      }
+    });
 
     const listBank = this.employeeDetailService.bankList.subscribe(res => {
       if (res) {
@@ -88,7 +96,7 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
     this.employeeDetailService.getListListBankByTyping(this.bankTyping);
     this.employeeDetailService.getListProvinceByTyping(this.provinceTyping);
-    this.employeeDetailSubs.add(employeeFormSub).add(listProvince).add(listBank).add(contactForm);
+    this.employeeDetailSubs.add(employeeFormSub).add(listProvince).add(listBank).add(contactForm).add(listProvinceContact);
   }
 
   ngOnInit() {
@@ -128,11 +136,9 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.bankTyping.next(this.bankSearchEntity);
   }
 
-  // list drop province
-
   openProvinceList(provinceId: string) {
     this.provinceSearchEntity = new ProvinceSearchEntity();
-    if (provinceId !== null && provinceId !== undefined) {
+    if (provinceId !== null && provinceId !== undefined && provinceId !== '') {
       this.provinceSearchEntity.ids.push(provinceId);
     }
     this.employeeDetailService.getListProvince(this.provinceSearchEntity);
@@ -147,18 +153,26 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     }
     this.provinceTyping.next(this.provinceSearchEntity);
   }
-  selectedProvince(event) {
-    const data = event.map(e => ({
-      provinceId: e.id,
-      provinceName: e.name,
-    }));
-    this.contactForm.setValue({
-      ...this.contactForm.value,
-      ...data[0],
-    });
+
+  // list drop province
+
+  openProvinceListContact(provinceId: string) {
+    this.provinceSearchEntity = new ProvinceSearchEntity();
+    if (provinceId !== null && provinceId !== undefined && provinceId !== '') {
+      this.provinceSearchEntity.ids.push(provinceId);
+    }
+    this.employeeDetailService.getListProvince(this.provinceSearchEntity);
   }
 
 
+  provinceSearchContact(event: any, id: string) {
+    this.provinceSearchEntity = new ProvinceSearchEntity();
+    this.provinceSearchEntity.name.startsWith = event;
+    if (id !== null && id.length > 0) {
+      this.provinceSearchEntity.ids.push(id);
+    }
+    this.provinceTyping.next(this.provinceSearchEntity);
+  }
 
   onClickOpenTab1() {
     this.isOpenTab1 = !this.isOpenTab1;
@@ -189,17 +203,16 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteContact(index) {
-    
+    this.employeeDetailService.deleteContact(index);
   }
 
   // page action
 
   save() {
-   
     if (!this.employeeDetailForm.valid) {
       this.generalService.validateAllFormFields(this.employeeDetailForm);
     } else {
-      this.employeeDetailService.save(this.employeeDetailForm.value).then(res => {
+      this.employeeDetailService.save(this.employeeDetailForm.getRawValue()).then(res => {
         this.router.navigate([this.routeLink]);
       });
     }

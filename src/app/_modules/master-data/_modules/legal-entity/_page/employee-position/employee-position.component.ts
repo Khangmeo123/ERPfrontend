@@ -13,6 +13,7 @@ import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.e
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/employee.entity';
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-company-position',
@@ -50,6 +51,8 @@ export class EmployeePositionComponent implements OnInit {
 
   listEmployeeId: Array<any> = [];
   employeePositionId: any;
+
+  exportLink = environment.apiUrlApps +'master-data/legal-entity/employee-position/export?positionId=';
 
   constructor(
     private employeePositionService: EmployeePositionService,
@@ -139,6 +142,7 @@ export class EmployeePositionComponent implements OnInit {
       if (this.employeePositionList && this.employeePositionList.length > 0) {
         this.employeeSearchEntity.legalEntityId = this.legalEntityId;
         this.employeeSearchEntity.positionId = this.employeePositionList[0].id;
+        this.employeePositionId = this.employeeDetailList[0].id;
         this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
       }
     });
@@ -164,7 +168,7 @@ export class EmployeePositionComponent implements OnInit {
     this.employeeTyping.next(this.employeeSearchEntity);
   }
 
-  selectemployeeApp(event) {
+  selectEmployee (event) {
     this.listEmployeeId = event;
   }
 
@@ -197,6 +201,7 @@ export class EmployeePositionComponent implements OnInit {
         if(this.employeePositionList && this.employeePositionList.length > 0) {
           this.employeeSearchEntity.legalEntityId = this.legalEntityId;
           this.employeeSearchEntity.positionId = this.employeeDetailList[0].id;
+          this.employeePositionId = this.employeeDetailList[0].id;
           this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
         }
       });
@@ -219,7 +224,7 @@ export class EmployeePositionComponent implements OnInit {
       } else {
         this.employeeSearchEntity.positionId = null;
       }
-
+      this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
     });
   }
 

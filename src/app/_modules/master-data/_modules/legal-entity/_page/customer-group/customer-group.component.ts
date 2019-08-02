@@ -13,6 +13,7 @@ import { CustomerGroupService } from './customer-group.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
 import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-customer-group',
@@ -56,6 +57,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
 
   customerGroupId: any;
   listCustomerId: Array<any> = [];
+  exportLink = environment.apiUrlApps +'master-data/legal-entity/customer-group/export?customerGroupId=';
 
   constructor(
     private router: Router,
@@ -155,6 +157,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
       if (this.customerGroupList && this.customerGroupList.length > 0) {
         this.customerSearchEntity.legalEntityId = this.legalEntityId;
         this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
+        this.customerGroupId = this.customerGroupList[0].id;
         this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
       }
 
@@ -195,6 +198,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
         if(this.customerGroupList && this.customerGroupList.length > 0) {
           this.customerSearchEntity.legalEntityId = this.legalEntityId;
           this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
+          this.customerGroupId = this.customerGroupList[0].id;
           this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
         }
       });

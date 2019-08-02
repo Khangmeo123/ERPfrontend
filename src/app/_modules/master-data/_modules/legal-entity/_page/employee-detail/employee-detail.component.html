@@ -12,8 +12,8 @@
     </div>
     <hr>
     <div class="page-body">
-        <accordion>
-            <accordion-group [isOpen]="true" [formGroup]="employeeDetailForm">
+        <accordion [formGroup]="employeeDetailForm">
+            <accordion-group [isOpen]="true" >
                 <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'employeeDetailOfLegal.general.title' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
@@ -177,7 +177,7 @@
                 </div>
             </accordion-group>
 
-            <accordion-group [formGroup]="employeeDetailForm">
+            <accordion-group>
                 <button (click)="onClickOpenTab1()" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'employeeDetailOfLegal.bankAccount.title' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
@@ -193,7 +193,8 @@
                                 [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'"
                                 (search)="bankSearch($event, employeeDetailForm.controls.bankId.value)"
                                 [initialValue]="employeeDetailForm.controls.bankName.value"
-                                (selectionChange)="employeeDetailForm.controls.bankId.setValue($event[0].id)"
+                                (selectionChange)="employeeDetailForm.controls.bankId.setValue($event[0].id);
+                                employeeDetailForm.controls.bankName.setValue($event[0].name)"
                                 (listOpen)="openBankList(employeeDetailForm.controls.bankId.value)"></app-single-select>
 
                         </div>
@@ -216,16 +217,14 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="form-group">
-                            <label
-                                for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.city' | translate}}</label>
-                            <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name"
-                                [valueSelector]="valueSelector" [list]="provinceExceptIds"
-                                [initialValue]="employeeDetailForm.controls.provinceName.value"
-                                [selectedList]="provinceIds" [key]="'name'"
-                                (search)="provinceSearch($event,employeeDetailForm.controls.provinceId.value)"
-                                (selectionChange)="employeeDetailForm.controls.provinceId.setValue($event.Id)"
-                                (listOpen)="openProvinceList(employeeDetailForm.provinceId)">
-                            </app-single-select>
+                            <label>{{ 'employeeDetailOfLegal.bankAccount.city' | translate}}</label>
+                            <app-single-select class="w-100" data-qe-id="form-content-province" [valueSelector]="valueSelector"
+                            [list]="provinceExceptIds" [initialValue]="employeeDetailForm.controls.provinceName.value"
+                            [selectedList]="provinceIds" [key]="'name'"
+                            (search)="provinceSearch($event,employeeDetailForm.controls.provinceId.value)"
+                            (selectionChange)="employeeDetailForm.controls.provinceId.setValue($event[0])"
+                            (listOpen)="openProvinceList(employeeDetailForm.controls.provinceId.value)">
+                          </app-single-select>
                         </div>
                     </div>
                     <div class="col-sm-4">
@@ -381,12 +380,13 @@
             <div class="col-sm-6">
                 <div class="form-group">
                     <label for="employeeDetailOfLegalname">{{ 'employeeDetailOfLegal.contact.city' | translate}}</label>
-                    <app-single-select data-qe-id="detail-form-contact-province" [list]="provinceExceptIds"
-                        *ngIf="displayContact" [initialValue]="contactForm.controls.provinceName.value"
-                        [valueSelector]="valueSelector" [selectedList]="provinceIds" [key]="'name'"
-                        (search)="provinceSearch($event, contactForm.controls.provinceId.value)"
-                        (selectionChange)="selectedProvince($event)"
-                        (listOpen)="openProvinceList(contactForm.provinceId)"></app-single-select>
+                    <app-single-select data-qe-id="detail-form-contact-province" [list]="province2ExceptIds" *ngIf="displayContact"
+                    [initialValue]="contactForm.controls.provinceName.value" [valueSelector]="valueSelector"
+                    [selectedList]="province2Ids" [key]="'name'"
+                    (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="contactForm.controls.provinceId.setValue($event[0].id); 
+                    contactForm.controls.provinceName.setValue($event[0].name);"
+                    (listOpen)="openProvinceList(contactForm.controls.provinceId.value)">
+                  </app-single-select>
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ import { GeneralService } from '../../../../../../_helpers/general-service.servi
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { translate } from 'src/app/_helpers/string';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-supplier-group',
@@ -55,7 +56,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   listSupplierId: Array<any> = [];
   supplierGroupingId: string;
 
-
+  exportLink = environment.apiUrlApps +'master-data/legal-entity/supplier-group/export?supplierGroupId=';
   constructor(
     private bookmarkService: BookmarkService,
     private router: Router,
@@ -154,6 +155,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       if (this.supplierGroupList && this.supplierGroupList.length > 0) {
         this.supplierSearchEntity.legalEntityId = this.legalEntityId;
         this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
+        this.supplierGroupingId = this.supplierGroupList[0].id;
         this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
       }
 
@@ -192,7 +194,8 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       } else {
         this.supplierSearchEntity.supplierGroupingId = null;
       }
-
+      console.log('this.supplierGroupingId', this.supplierGroupingId)
+      this.supplierGroupingId = this.supplierSearchEntity.supplierGroupingId;
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
     });
   }
@@ -238,10 +241,12 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
         if(this.supplierGroupList && this.supplierGroupList.length > 0) {
           this.supplierSearchEntity.legalEntityId = this.legalEntityId;
           this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
+          this.supplierGroupingId = this.supplierGroupList[0].id;
           this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
         }
       });
     }
+    
   }
 
   sortSupplier(event) {

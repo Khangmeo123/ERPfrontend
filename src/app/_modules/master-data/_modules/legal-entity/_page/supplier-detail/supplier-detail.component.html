@@ -313,7 +313,8 @@
                     [list]="bankExceptIds" 
                     [selectedList]="bankIds"
                     [key]="'name'" (search)="bankSearch($event)" 
-                    (selectionChange)="selectedBank($event)"
+                    (selectionChange)="bankAccountForm.controls.bankId.setValue($event[0].id); 
+                    bankAccountForm.controls.bankName.setValue($event[0].name);"
                     (listOpen)="openBankList(bankAccountForm.bankId)"
                     [initialValue] ="bankAccountForm.controls.bankName.value"
                     ></app-single-select>
@@ -359,7 +360,8 @@
                     [valueSelector]="valueSelector"
                     [list]="provinceExceptIds" [initialValue] ="bankAccountForm.controls.provinceName.value"
                     [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
-                    (selectionChange)="selectedProvinceBankAccount($event)"
+                    (selectionChange)="bankAccountForm.controls.provinceId.setValue($event[0].id); 
+                                        bankAccountForm.controls.provinceName.setValue($event[0].name);"
                     (listOpen)="openProvinceList(supplierDetailForm.get('supplierBankAccounts').provinceId)">
                 </app-single-select>
                 <app-error data-qe-id="form-error-phone"
@@ -389,7 +391,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="page-actions">
-                    <button class="btn btn-cancel mr-2" (click)="bankAccountsModal = false" data-qe-id="dialog-button-cancel" (click)="cancel()">
+                    <button class="btn btn-cancel mr-2" (click)="bankAccountsModal = false" data-qe-id="dialog-button-cancel">
                         {{'general.button.cancel' | translate}}
                     </button>
                     <button class="btn btn-add mr-2" data-qe-id="button-save" (click) = "saveBankAccount(bankAccountForm.value)">
@@ -439,17 +441,17 @@
                 </label>
                 <input type="text" class="form-control" formControlName="email">
             </div>
-            <div class="form-group col-6">
+            <div class="form-group col-6"  *ngIf="contactsModal">
                 <label>
                     {{'detailSupplierGroup.contacts.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-contact-province" 
-                    *ngIf="contactsModal"
-                    [list]="provinceExceptIds" [valueSelector]="valueSelector"
-                    [selectedList]="provinceIds" [key]="'name'" 
-                    (search)="provinceSearch($event)"
-                    (selectionChange)="selectedProvince($event)"
-                    (listOpen)="openProvinceList(contactForm.controls.provinceId.value)"></app-single-select>
+                <app-single-select data-qe-id="detail-form-contact-province" [list]="province2ExceptIds" *ngIf="contactsModal"
+                    [initialValue]="contactForm.controls.provinceName.value" [valueSelector]="valueSelector"
+                    [selectedList]="province2Ids" [key]="'name'"
+                    (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="contactForm.controls.provinceId.setValue($event[0].id); 
+                    contactForm.controls.provinceName.setValue($event[0].name);"
+                    (listOpen)="openProvinceList(contactForm.controls.provinceId.value)">
+                  </app-single-select>
             </div>
 
         </div>

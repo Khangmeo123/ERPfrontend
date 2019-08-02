@@ -60,6 +60,8 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   //list drop province
   provinceIds: ProvinceEntity[];
   provinceExceptIds: ProvinceEntity[];
+  province2Ids: ProvinceEntity[];
+  province2ExceptIds: ProvinceEntity[];
   provinceTyping: Subject<ProvinceSearchEntity> = new Subject();
   provinceSearchEntity: ProvinceSearchEntity = new ProvinceSearchEntity();
 
@@ -83,7 +85,6 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
       this.legalSupplierDetailService.getId(params.id);
     });
     const supplierFormSub = this.legalSupplierDetailService.supplierDetailForm.subscribe(res => {
-      console.log(res)
       if (res) {
         this.supplierDetailForm = res;
       }
@@ -107,6 +108,13 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
       if (res) {
         this.provinceIds = res.ids;
         this.provinceExceptIds = res.exceptIds;
+      }
+    });
+
+    const listProvinceContact = this.legalSupplierDetailService.proviceList.subscribe(res => {
+      if (res) {
+        this.province2Ids = res.ids;
+        this.province2ExceptIds = res.exceptIds;
       }
     });
 
@@ -225,17 +233,6 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     this.provinceSearchEntity.name = event;
     this.provinceTyping.next(this.provinceSearchEntity);
   }
-  selectedProvince(event) {
-    const data = event.map(e => ({
-      provinceId: e.id,
-      provinceName: e.name,
-    }));
-    this.contactForm.setValue({
-      ...this.contactForm.value,
-      ...data[0],
-    });
-  }
-
   
 
   // Contact info:
@@ -244,7 +241,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   addContact() {
-    this.contactsModal = !this.contactsModal;
+    this.contactsModal = true;
     this.legalSupplierDetailService.addContact();
   }
 
@@ -258,7 +255,6 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   }
 
   editContact(contact: any, index: any) {
-    console.log(index);
     this.index = index;
     this.contactsModal = true;
     this.legalSupplierDetailService.editContact(contact);
@@ -292,32 +288,10 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     if (!this.supplierDetailForm.valid) {
       this.generalService.validateAllFormFields(this.supplierDetailForm);
     } else {
-      this.legalSupplierDetailService.save(this.supplierDetailForm.value).then(res => {
+      this.legalSupplierDetailService.save(this.supplierDetailForm.getRawValue()).then(res => {
         this.router.navigate([this.routeLink]);
       });
     }
-  }
-
-  selectedBank(event){
-    const data = event.map(e => ({
-      bankId: e.id,
-      bankName: e.name,
-    }));
-    this.bankAccountForm.setValue({
-      ...this.bankAccountForm.value,
-      ...data[0],
-    });
-  }
-
-  selectedProvinceBankAccount(event) {
-    const data = event.map(e => ({
-      provinceId: e.id,
-      provinceName: e.name,
-    }));
-    this.bankAccountForm.setValue({
-      ...this.bankAccountForm.value,
-      ...data[0],
-    });
   }
 
   editBankAccount(bankAccount, index) {

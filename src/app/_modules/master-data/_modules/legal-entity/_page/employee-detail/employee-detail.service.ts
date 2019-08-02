@@ -120,6 +120,13 @@ export class EmployeeDetailService {
         this.contactForm.next(this.fb.group(new InfoContactForm(contact)));
     }
 
+    deleteContact(index: number) {
+        const currentCustomerDetail = this.employeeDetailForm.getValue();
+        const currentContact = currentCustomerDetail.get('employeeContacts') as FormArray;
+        currentContact.removeAt(index);
+        this.employeeDetailForm.next(currentCustomerDetail);
+    }
+
     save(employeeDetailEntity: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
             this.employeeDetailRepository.update(employeeDetailEntity).subscribe(res => {

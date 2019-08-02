@@ -11,6 +11,7 @@ import { Subscription, Subject } from 'rxjs';
 import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
 import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
 import { translate } from 'src/app/_helpers/string';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-customer-list-of-legal-entity',
@@ -42,6 +43,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   customerExceptIds: CustomerEntity[];
   customerTyping: Subject<CustomerSearchEntity> = new Subject();
   listCustomerId: Array<any> = [];
+
+  exportLink = environment.apiUrlApps +'master-data/legal-entity/customer-of-legal-entity/export?legalEntityId=';
 
 
   constructor(

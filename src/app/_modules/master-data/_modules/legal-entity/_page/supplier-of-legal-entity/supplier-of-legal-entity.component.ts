@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { BookmarkService } from '../../../../../../_services';
 import { SupplierOfLegalEntityService } from './supplier-of-legal-entity.service';
 import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-supplier-of-legal-entity',
@@ -47,6 +48,8 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   selectedRow: any;
+
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/supplier-of-legal-entity/export?legalEntityId=';
 
   constructor(
     protected router: Router,

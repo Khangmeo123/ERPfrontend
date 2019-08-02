@@ -10,6 +10,7 @@ import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/empl
 import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/employee.entity';
 import { EmployeeOfLegalEntityService } from './employee-of-legal-entity.service';
 import { Subscription, Subject } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-employee-of-legal-entity',
@@ -30,6 +31,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   employeeList: EmployeeEntity[];
 
   employeeSubs: Subscription = new Subscription();
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/employee-of-legal-entity/export?legalEntityId=';
 
   //Drop employee
   employeeIds: EmployeeEntity[];
@@ -117,11 +119,11 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.employeeOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
       if (this.legalList && this.legalList.length > 0) {
         this.employeeSearchEntity.legalEntityId = this.legalList[0].id;
+        this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
       } else {
-        this.employeeSearchEntity.legalEntityId = '';
+        this.employeeSearchEntity.legalEntityId = null;
+        this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
       }
-
-      this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
     })
   }
 
@@ -139,7 +141,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   sortLegalEntiy(event) {
     if (event.sortField && event.sortOrder) {
       this.legalSearchEntity.orderBy = event.sortField;
-      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.employeeOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
       if (this.legalId && this.legalId !== undefined) {
@@ -173,7 +175,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   sort(event) {
     if (event.sortField && event.sortOrder) {
       this.employeeSearchEntity.orderBy = event.sortField;
-      this.employeeSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.employeeSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
 
     if (this.employeeSearchEntity.legalEntityId !== '') {

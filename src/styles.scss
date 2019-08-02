@@ -243,4 +243,8 @@ body {
 
 .ui-chips > ul.ui-inputtext {
   width: 100% !important;
+  
+}
+body .ui-state-disabled, body .ui-widget:disabled {
+  background: #e9ecef;
 }

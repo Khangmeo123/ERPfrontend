@@ -103,22 +103,7 @@
             <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier"
             [disabled]="listSupplierId.length === 0">
               {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-import-supplier">
-              <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                aria-controls="dropdown-basic">
-                {{'general.button.import' | translate}}<span class="caret"></span>
-              </button>
-              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a>
-                </li>
-                <li class="divider dropdown-divider"></li>
-                <li role="menuitem"><a class="dropdown-item"
-                    href="#">{{'general.button.download_example' | translate}}</a>
-                </li>
-              </ul>
-            </div>
-            <button class="btn btn-export"
-              data-qe-id="button-add-supplier">{{'general.button.export' | translate}}</button>
+            <a class="btn btn-export" [href]="exportLink + supplierGroupingId" data-qe-id="button-export-supplier" >{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearch(tableSupplier)"
               data-qe-id="button-clear-supplier">{{'general.button.clear' | translate}}</button>
           </div>
