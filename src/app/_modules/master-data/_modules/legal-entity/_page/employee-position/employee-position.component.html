@@ -192,7 +192,7 @@
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
             id="employeePositionCode">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(employeePositionForm.controls.code?.errors && employeePositionForm.controls.code?.touched) || !!employeePositionForm.controls.error?.get('code')?.value"
+            *ngIf="(employeePositionForm.controls.code?.errors && employeePositionForm.controls.code?.touched) || !!employeePositionForm.controls.errors?.get('code')?.value"
             [formGroup]="employeePositionForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
@@ -206,7 +206,7 @@
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
             id="employeePositionName">
           <app-error data-qe-id="dialog-error-name"
-            *ngIf="(employeePositionForm.controls.name?.errors && employeePositionForm.controls.name?.touched) || !!employeePositionForm.controls.error?.get('name')?.value"
+            *ngIf="(employeePositionForm.controls.name?.errors && employeePositionForm.controls.name?.touched) || !!employeePositionForm.controls.errors?.get('name')?.value"
             [formGroup]="employeePositionForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>

@@ -22,7 +22,7 @@ export class EmployeePositionForm extends FormModel {
         if (employeePositionEntity !== null && employeePositionEntity !== undefined) {
             Object.keys(employeePositionEntity).forEach((item) => {
                 if (employeePositionEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(employeePositionEntity[item]);
+                    this[item].patchValue(employeePositionEntity[item]);
                 }
             });
         }
