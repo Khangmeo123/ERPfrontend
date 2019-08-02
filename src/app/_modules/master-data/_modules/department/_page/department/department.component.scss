@@ -30,7 +30,7 @@ $background: #1C4E80;
     border: 0;
   }
 
-  
+
 }
 
 ul.fems-tab {
@@ -39,17 +39,17 @@ ul.fems-tab {
   border-bottom: solid 1px $background;
 }
 
-  ul.fems-tab li.active {
-    background-color: $background;
-    color: #fff;
-  }
+ul.fems-tab li.active {
+  background-color: $background;
+  color: #fff;
+}
 
-  ul.fems-tab li {
-    display: table-cell;
-    vertical-align: middle;
-    width: 1000em;
-    padding: 5px 10px;
-    text-align: center;
-    // font-weight: bold;
-    font-size: 14px;
-  }
+ul.fems-tab li {
+  display: table-cell;
+  vertical-align: middle;
+  width: 1000em;
+  padding: 5px 10px;
+  text-align: center;
+  // font-weight: bold;
+  font-size: 14px;
+}

@@ -1,30 +1,31 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {DepartmentComponent} from './_page/department/department.component';
-import {EmployeeComponent} from './_page/employee/employee.component';
-import {AssetComponent} from './_page/asset/asset.component';
-import {WarehouseComponent} from './_page/warehouse/warehouse.component';
-import {ProjectComponent} from './_page/project/project.component';
-import {DetailEmployeeComponent} from './_page/employee-list/detail-employee/detail-employee.component';
-import {DepartmentRootComponent} from './_page/department-root/department-root.component';
-import {WarehouseGroupComponent} from './_page/warehouse-group/warehouse-group.component';
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { DepartmentComponent } from './_page/department/department.component';
+import { HrOrganizationComponent } from './_page/hr-organization/hr-organization.component';
+import { AssetComponent } from './_page/asset/asset.component';
+import { WarehouseComponent } from './_page/warehouse/warehouse.component';
+import { ProjectOrganizationComponent } from './_page/project-organization/project-organization.component';
+import { DepartmentEmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
+
+import { DepartmentRootComponent } from './_page/department-root/department-root.component';
+import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
 
 const routes: Routes = [
+  {
+    path: 'employee-detail',
+    component: DepartmentEmployeeDetailComponent,
+  },
   {
     path: '',
     component: DepartmentRootComponent,
     children: [
       {
-        path: 'employee/detail-employee',
-        component: DetailEmployeeComponent,
-      },
-      {
         path: '',
         component: DepartmentComponent,
         children: [
           {
-            path: 'employee',
-            component: EmployeeComponent,
+            path: 'hr-organization',
+            component: HrOrganizationComponent,
           },
           {
             path: 'asset',
@@ -40,11 +41,11 @@ const routes: Routes = [
           },
           {
             path: 'project',
-            component: ProjectComponent,
+            component: ProjectOrganizationComponent,
           },
           {
             path: '**',
-            redirectTo: 'employee',
+            redirectTo: 'hr-organization',
           },
         ],
       },

@@ -18,7 +18,7 @@ export function dateField(control: AbstractControl) {
 
 export function checkLength(from = 1, to = 100) {
   return (c: AbstractControl) => {
-    return (c.value.length > to || c.value.length < from) ? {
+    return (c.value && (c.value.length > to || c.value.length < from)) ? {
       invalidLength: 'Số kí tự phải trong khoảng' + '[' + from + ' ,' + to + ']',
     } : null;
   };

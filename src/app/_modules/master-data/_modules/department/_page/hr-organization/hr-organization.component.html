@@ -1,0 +1,181 @@
+<div class="row">
+  <div class="col">
+    <div class="page">
+
+      <div class="page-header">
+        <div class="page-title">
+          {{'hrOrganization.title' | translate}}
+        </div>
+        <div class="page-actions">
+          <button (click)="add()" [disabled]="disabled" class="btn btn-add">
+            {{'general.button.add' | translate}}
+          </button>
+        </div>
+      </div>
+
+      <div class="page-body mt-2">
+        <div class="page-section">
+          <p-table #table (onLazyLoad)="sort($event)" (selectionChange)="onSelectDepartment($event)"
+                   [(selection)]="selectedDepartment" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+                   [scrollable]="true" [value]="hrOrganizationList" resizableColumns scrollHeight="500px"
+                   selectionMode="single">
+            <ng-template pTemplate="header">
+              <tr>
+                <th pResizableColumn> {{'hrOrganization.code' | translate}} </th>
+                <th pResizableColumn> {{'hrOrganization.name' | translate}} </th>
+              </tr>
+              <tr>
+                <th class="th-filter">
+                  <app-advanced-filters (changeFilter)="getList()" [filter]="hrOrganizationSearchEntity.code">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters (changeFilter)="getList()" [filter]="hrOrganizationSearchEntity.name">
+                  </app-advanced-filters>
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template let-hrOrganization let-index let-rowData pTemplate="body">
+              <tr (dblclick)="edit(hrOrganization.id)" [attr.data-qe-id]="'table-tbody-row-' + index"
+                  [pSelectableRow]="rowData">
+                <td pResizableColumn>{{hrOrganization.code}}</td>
+                <td pResizableColumn>{{hrOrganization.name}}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <div class="pagination">
+            <app-pagination (paginationOut)="onPaginationChange($event)" [pagination]="pagination"></app-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p-dialog [(visible)]="modal" [modal]="true" appendTo="body" [contentStyle]="{overflow: 'visible'}">
+      <p-header>
+        {{'hrOrganization.add' | translate}}
+      </p-header>
+
+      <div [formGroup]="hrOrganizationForm" class="container">
+        <div class="row">
+          <div class="form-group col">
+            <label for="hrOrganization-code">
+              {{'hrOrganization.code' | translate}}
+              <span class="text-danger ml-2">*</span>
+            </label>
+            <div class="div-form">
+              <input class="form-control" formControlName="code" id="hrOrganization-code" name="code" type="text">
+              <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('name')?.value"
+                         [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form"
+                         data-qe-id="hrOrganization-code"
+                         property="code">
+              </app-error>
+            </div>
+          </div>
+          <div class="form-group col">
+            <label for="hrOrganization-name">
+              {{'hrOrganization.name' | translate}}
+              <span class="text-danger ml-2">*</span>
+            </label>
+            <div class="div-form">
+              <input class="form-control" formControlName="name" id="hrOrganization-name" name="name" type="text">
+              <app-error *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+                         [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form"
+                         data-qe-id="hrOrganization-name"
+                         property="name">
+              </app-error>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p-footer class="d-flex">
+        <button *ngIf="hrOrganizationForm.value?.isDeleted" class="btn btn-delete">
+          {{'general.button.delete' | translate}}
+        </button>
+        <div class="flex-grow-1">
+          <button class="btn btn-cancel mr-2" (click)="cancel()">
+            {{'general.button.cancel' | translate}}
+          </button>
+          <button (click)="save()" class="btn btn-add">
+            {{'general.button.save' | translate}}
+          </button>
+        </div>
+      </p-footer>
+    </p-dialog>
+
+  </div>
+  <div class="col">
+    <div class="page">
+
+      <div class="page-header">
+        <div class="page-title mr-2">
+          <app-multi-select (listOpen)="onSearchEmployee()" (search)="onSearchEmployeeByTyping($event)"
+                            (selectionChange)="onSelectEmployeeToAdd($event)" [disabled]="disabled"
+                            [list]="employeeNotInDepartmentList"
+                            [selectedList]="selectedEmployeeToAddToDepartmentList" key="name"></app-multi-select>
+        </div>
+        <div class="page-actions">
+          <button (click)="onAddToDepartment()" [disabled]="disabled || !selectedEmployeeToAddToDepartmentList?.length"
+                  class="btn btn-add">
+            {{'general.button.add' | translate}}
+          </button>
+          <button [disabled]="disabled" class="btn btn-import">
+            {{'general.button.import' | translate}}
+          </button>
+          <button [disabled]="disabled" class="btn btn-export">
+            {{'general.button.export' | translate}}
+          </button>
+        </div>
+      </div>
+
+      <div class="page-body mt-2">
+
+        <div class="page-section">
+          <p-table [value]="employeeList" resizableColumns>
+            <ng-template pTemplate="header">
+              <tr>
+                <th pResizableColumn> {{'department.employee.code' | translate}} </th>
+                <th pResizableColumn> {{'department.employee.name' | translate}} </th>
+                <th pResizableColumn> {{'general.actions.title' | translate}} </th>
+              </tr>
+              <tr>
+                <th class="th-filter">
+                  <app-advanced-filters (changeFilter)="getEmployeeList()" [filter]="employeeSearchEntity.code">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters (changeFilter)="getEmployeeList()" [filter]="employeeSearchEntity.code">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter"></th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-employee>
+              <tr (dblclick)="toDepartmentEmployeeDetail(employee.id)">
+                <td>{{employee.code}}</td>
+                <td>{{employee.name}}</td>
+                <td>
+                  <a (confirm)="removeEmployee(employee.id)"
+                     [popoverMessage]="'general.department.delete.message' | translate"
+                     [popoverTitle]="'general.department.delete.title' | translate" class="btn btn-default"
+                     confirmButtonType="danger" mwlConfirmationPopover placement="left" role="button">
+                    {{'general.button.delete' | translate}}
+                  </a>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+          <div class="pagination">
+            <app-pagination (paginationOut)="onPaginationChange(pagination)" [pagination]="employeePagination">
+            </app-pagination>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
