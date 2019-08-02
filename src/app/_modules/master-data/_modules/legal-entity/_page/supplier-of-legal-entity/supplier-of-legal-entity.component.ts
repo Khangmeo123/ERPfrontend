@@ -229,12 +229,12 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     }
   }
 
-  deleteSupplier(supplier) {
-    this.supplierSearchEntity.id = supplier.id;
-    this.supplierSearchEntity.name = supplier.name;
-    this.supplierSearchEntity.code = supplier.code;
-    this.supplierOfLegalEntityService.delete(this.supplierSearchEntity).then(res => {
-      this.getListSupplier(this.supplierSearchEntity);
+  deleteSupplierFromLegal(supplier) {
+    this.supplierOfLegalEntityService.delete(supplier).then(res => {
+      if(res) {
+        this.supplierSearchEntity.legalEntityId = this.legalId;
+        this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
+      }
     }).catch(err => {
     });
   }

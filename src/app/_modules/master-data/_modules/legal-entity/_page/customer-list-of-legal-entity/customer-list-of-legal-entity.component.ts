@@ -193,9 +193,9 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   deleteCustomerFormLegal(customer: any) {
     this.customerOfLegalEntityService.delete(customer).then(res => {
-      console.log(res)
       if (res) {
         this.clearSearchCustomer(this.tableCustomer);
+        this.customerSearchEntity.legalEntityId = this.legalId;
         this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity)
       }
     });

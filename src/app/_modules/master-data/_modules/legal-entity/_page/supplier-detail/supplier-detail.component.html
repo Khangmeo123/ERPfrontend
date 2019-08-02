@@ -250,6 +250,8 @@
                                     <th pResizableColumn data-qe-id="table-thead-bank-address">
                                         {{'detailSupplierGroup.bankAccount.bankAddress' | translate}}
                                     </th>
+                                    <th pResizableColumn> {{'general.action' | translate}}
+                                    </th>
                                 </tr>
                             </ng-template>
                             <ng-template pTemplate="body" let-bankAccount let-index="rowIndex">
@@ -262,15 +264,15 @@
                                     <td> {{bankAccount.branch}}</td>
                                     <td> {{bankAccount.address}} </td>
                                     <td class="ui-resizable-column">
-                                            <div class="d-flex">
-                                                <div class="edit mr-2" (click)="editBankAccount(bankAccount, index)">
-                                                    <mat-icon>edit</mat-icon>
-                                                </div>
-                                                <div class="delete" (click)="deletebankAccount(index)">
-                                                    <mat-icon>delete</mat-icon>
-                                                </div>
+                                        <div class="d-flex">
+                                            <div class="edit mr-2" (click)="editBankAccount(bankAccount, index)">
+                                                <mat-icon>edit</mat-icon>
                                             </div>
-                                        </td>
+                                            <div class="delete" (click)="deletebankAccount(index)">
+                                                <mat-icon>delete</mat-icon>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -375,7 +377,7 @@
                 <label>
                     {{'detailSupplierGroup.bankAccount.bankAddress' | translate}}
                 </label>
-                <input type="text" class="form-control"  fomControlName="address" data-qe-id="detail-form-bank-address" >
+                <input type="text" class="form-control"  formControlName="address" data-qe-id="detail-form-bank-address" >
             </div>
         </div>
     </form>
