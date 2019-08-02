@@ -9,12 +9,12 @@ export class PaymentTermSearchEntity extends SearchEntity {
     dueInDate: number;
     discountPeriod: number;
     discountRate: number;
-
+    legalEntityId: string;
 
 
 
     
-    constructor(paymentTermSearchEntity: any) {
+    constructor(paymentTermSearchEntity?: any) {
         super(paymentTermSearchEntity);
     }
 }

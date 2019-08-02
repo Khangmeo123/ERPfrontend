@@ -9,6 +9,7 @@ export class CustomerForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(3, 100)]);
     taxCode = new FormControl();
     note = new FormControl();
+    customerGroupingId = new FormControl();
 
     // statusEntity
     statusId = new FormControl('', [requiredField]);

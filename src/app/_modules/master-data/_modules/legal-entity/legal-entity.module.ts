@@ -1,24 +1,14 @@
+import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 import { LegalEntityRoutingModule } from './legal-entity-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomerGroupComponent } from './_page/customer-group/customer-group.component';
 import { SupplierGroupComponent } from './_page/supplier-group/supplier-group.component';
-import { CompanyPositionComponent } from './_page/company-position/company-position.component';
 import { ItemGroupComponent } from './_page/item-group/item-group.component';
 import { SpecialPriceSupplierComponent } from './_page/special-price-supplier/special-price-supplier.component';
 import { SpecialPriceCustomerComponent } from './_page/special-price-customer/special-price-customer.component';
-import { ConfigureCustomerGroupComponent } from './_page/customer-group/configure-customer-group/configure-customer-group.component';
-import { ListCustomerGroupComponent } from './_page/customer-group/list-customer-group/list-customer-group.component';
-import { DetailCustomerGroupComponent } from './_page/customer-group/detail-customer-group/detail-customer-group.component';
-import { ConfigureSupplierGroupComponent } from './_page/supplier-group/configure-supplier-group/configure-supplier-group.component';
-import { ListSupplierGroupComponent } from './_page/supplier-group/list-supplier-group/list-supplier-group.component';
-import { DetailSupplierGroupComponent } from './_page/supplier-group/detail-supplier-group/detail-supplier-group.component';
-import { ConfigureItemGroupComponent } from './_page/item-group/configure-item-group/configure-item-group.component';
-import { ListItemGroupComponent } from './_page/item-group/list-item-group/list-item-group.component';
-import { DetailItemGroupComponent } from './_page/item-group/detail-item-group/detail-item-group.component';
-import { ConfigureCompanyPositionComponent } from './_page/company-position/configure-company-position/configure-company-position.component';
-import { ListCompanyPositionComponent } from './_page/company-position/list-company-position/list-company-position.component';
-import { DetailCompanyPositionComponent } from './_page/company-position/detail-company-position/detail-company-position.component';
+import { CustomerDetailComponent } from './_page/customer-detail/customer-detail.component';
+import { LegalSupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
 import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatIconModule } from '@angular/material';
@@ -34,40 +24,56 @@ import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-leg
 import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/supplier-of-legal-entity.component';
 import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
 import { ItemOfLegalEntityComponent } from './_page/item-of-legal-entity/item-of-legal-entity.component';
-import { DetailCustomerOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/detail-customer-of-legal-entity/detail-customer-of-legal-entity.component';
-import { CustomerListComponent } from './_page/customer-list-of-legal-entity/customer-list/customer-list.component';
-import { ListSupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/list-supplier-of-legal-entity/list-supplier-of-legal-entity.component';
-import { DetailSupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/detail-supplier-of-legal-entity/detail-supplier-of-legal-entity.component';
-import { ListEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/list-employee-of-legal-entity/list-employee-of-legal-entity.component';
-import { DetailEmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/detail-employee-of-legal-entity/detail-employee-of-legal-entity.component';
-import { ListItemOfLegalEntityComponent } from './_page/item-of-legal-entity/list-item-of-legal-entity/list-item-of-legal-entity.component';
-import { DetailItemOfLegalEntityComponent } from './_page/item-of-legal-entity/detail-item-of-legal-entity/detail-item-of-legal-entity.component';
+import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
+import { LegalItemDetailComponent } from './_page/item-detail/item-detail.component';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { ChipsModule } from 'primeng/chips';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
 
 @NgModule({
-  declarations: [LegalEntityComponent, CustomerGroupComponent, SupplierGroupComponent, CompanyPositionComponent, ItemGroupComponent,
-    SpecialPriceSupplierComponent, SpecialPriceCustomerComponent, ConfigureCustomerGroupComponent, ListCustomerGroupComponent,
-    DetailCustomerGroupComponent, ConfigureSupplierGroupComponent, ListSupplierGroupComponent, DetailSupplierGroupComponent,
-    ConfigureItemGroupComponent, ListItemGroupComponent, DetailItemGroupComponent, ConfigureCompanyPositionComponent,
-    ListCompanyPositionComponent, DetailCompanyPositionComponent, CustomersInGroupComponent, CustomerListOfLegalEntityComponent, SupplierOfLegalEntityComponent, EmployeeOfLegalEntityComponent, ItemOfLegalEntityComponent, DetailCustomerOfLegalEntityComponent, CustomerListComponent, ListSupplierOfLegalEntityComponent, DetailSupplierOfLegalEntityComponent, ListEmployeeOfLegalEntityComponent, DetailEmployeeOfLegalEntityComponent, ListItemOfLegalEntityComponent, DetailItemOfLegalEntityComponent],
+  declarations: [
+    LegalEntityComponent,
+    CustomerGroupComponent,
+    SupplierGroupComponent,
+    EmployeePositionComponent,
+    ItemGroupComponent,
+    SpecialPriceSupplierComponent,
+    SpecialPriceCustomerComponent,
+    CustomerDetailComponent,
+    LegalSupplierDetailComponent,
+    CustomersInGroupComponent,
+    CustomerListOfLegalEntityComponent,
+    SupplierOfLegalEntityComponent,
+    EmployeeOfLegalEntityComponent,
+    ItemOfLegalEntityComponent,
+    EmployeeDetailComponent,
+    LegalItemDetailComponent],
   imports: [
     CommonModule,
     LegalEntityRoutingModule,
     TranslateModule.forChild(),
     MatIconModule,
-    SelectModule,
     TableModule,
     FiltersModule,
     ErrorModule,
     DialogModule,
-    ConfirmationPopoverModule.forRoot(),
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger',
+    }),
     BsDropdownModule.forRoot(),
     AccordionModule.forRoot(),
     PaginationModule,
     DatePickerModule,
     RadioButtonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    CropperModule,
+    SelectModule,
+    ChipsModule,
+    FormsModule,
   ],
 })
 export class LegalEntityModule {

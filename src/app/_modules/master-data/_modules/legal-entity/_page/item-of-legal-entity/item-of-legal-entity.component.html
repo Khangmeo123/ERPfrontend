@@ -1,1 +1,169 @@
-<router-outlet></router-outlet>
+<div class="page list-item-of-legal-entity">
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6 page-1">
+        <div class="row d-flex ">
+          <div class="col-sm-12 page-actions d-flex justify-content-end">
+            <button class="btn btn-clear" (click)="clearSearchLegalList(tableLegal)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+          </div>
+        </div>
+        <div class="page-section mt-2">
+          <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortLegalList($event)"
+            (onRowSelect)="legalEntityOnRowSelect($event)" selectionMode="single" [(selection)]="legalEntitySelectedRow"
+            [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableLegal>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th pResizableColumn [pSortableColumn]="'sobCode'" data-qe-id="table-thead-legal-setOfBookCode">
+                  {{'itemOfLegalEntity.content.legal.setOfBookCode' | translate}}
+                  <p-sortIcon [field]="'sobCode'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-legal-code">
+                  {{'itemOfLegalEntity.content.legal.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-legal-name">
+                  {{'itemOfLegalEntity.content.legal.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+                </th>
+              </tr>
+              <tr>
+                <th class="th-filter">
+                  <app-single-select [list]="sobExceptIds" [selectedList]="sobIds" [key]="'code'"
+                    [initialValue]="legalSearchEntity.setOfBookId" (search)="sobTypingSearch($event)"
+                    (selectionChange)="legalSearchEntity.setOfBookId = $event[0]; getLegalList()"
+                    (listOpen)="sobOpen(legalSearchEntity.setOfBookId)">
+                  </app-single-select>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="legalSearchEntity.code" (changeFilter)="getLegalList()"
+                    data-qe-id="table-thead-filter-code">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="legalSearchEntity.name" (changeFilter)="getLegalList()"
+                    data-qe-id="table-thead-filter-name">
+                  </app-advanced-filters>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-legalEntity let-index="rowIndex">
+              <tr [attr.data-qe-id]="'table-tbody-legal-row-' + index" [pSelectableRow]="legalEntity">
+                <td class="ui-resizable-column"> {{legalEntity.setOfBookCode}} </td>
+                <td class="ui-resizable-column"> {{legalEntity.code}} </td>
+                <td class="ui-resizable-column"> {{legalEntity.name}} </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+        <div class="pagination">
+          <app-pagination [pagination]="paginationLegalList" (paginationOut)="paginationOutLegalList($event)"
+            data-qe-id="pagination-legal">
+          </app-pagination>
+        </div>
+      </div>
+
+      <div class="col-sm-6">
+        <div class="row d-flex ">
+          <div class="col-sm-4 align-items-center">
+            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemExceptIds" [selectedList]="itemIds"
+              [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemIdList = $event"
+              (listOpen)="itemOpen()" [disabled]="legalEntityId==null||legalEntityId==undefined">
+            </app-multi-select>
+          </div>
+          <div class="col-sm-8 page-actions  d-flex justify-content-end">
+            <button class="btn btn-add" (click)="addItemsToLegal()" data-qe-id="button-item-add"
+              [disabled]="legalEntityId==null||legalEntityId==undefined">
+              {{'general.button.add' | translate}}</button>
+            <a class="btn btn-export" data-qe-id="button-export" target="_blank"
+              [href]="exportItemDetailLink">{{'general.button.export' | translate}}</a>
+            <button class="btn btn-clear" (click)="clearSearchItemsFromLegalList(tableItem)"
+              data-qe-id="button-item-clear">{{'general.button.clear' | translate}}</button>
+          </div>
+        </div>
+
+        <div class="page-section mt-2">
+          <p-table [value]="itemsFromLegalList" [customSort]="true" [lazy]="true"
+            (onLazyLoad)="sortItemsFromLegalList($event)" [scrollable]="true" scrollHeight="500px"
+            [resizableColumns]="true" #tableItem>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-legal-code">
+                  {{'itemOfLegalEntity.content.itemDetail.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-legal-name">
+                  {{'itemOfLegalEntity.content.itemDetail.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn>
+                  {{'general.action' | translate}}
+                </th>
+              </tr>
+              <tr>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="itemsFromLegalSearchEntity.code"
+                    (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-code">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="itemsFromLegalSearchEntity.name"
+                    (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-name">
+                  </app-advanced-filters>
+                </th>
+                <th  class="th-filter"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-itemsFromLegal let-index="rowIndex">
+              <tr [attr.data-qe-id]="'table-tbody-filter-item-row-' + index">
+                <td> {{itemsFromLegal.code}} </td>
+                <td> {{itemsFromLegal.name}} </td>
+                <td>
+                    <div class="d-flex">
+                        <div class="edit mr-2" (click)="editItemFromLegal(itemsFromLegal.id)">
+                            <mat-icon>edit</mat-icon>
+                          </div>
+                        <div class="delete" (click)="deleteItemFromLegal(itemsFromLegal.id)">
+                            <mat-icon>delete</mat-icon>
+                          </div>
+                    </div>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+        <div class="pagination">
+          <app-pagination [pagination]="paginationItemsFromLegal"
+            (paginationOut)="paginationOutItemsFromLegalList($event)" data-qe-id="pagination-item">
+          </app-pagination>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

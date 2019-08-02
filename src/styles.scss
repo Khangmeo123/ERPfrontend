@@ -132,6 +132,7 @@ body {
   padding: 2px 3px !important;
 }
 
+
 .btn.btn-add,
 .btn.btn-clear,
 .btn.btn-import,
@@ -160,6 +161,7 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 20px;
 
     .page-title {
       font-size: 21px;
@@ -212,6 +214,8 @@ body {
     display: flex;
     justify-content: flex-end;
   }
+
+  
 }
 
 .ui-table-scrollable-header, .ui-table-scrollable-footer {
@@ -231,4 +235,20 @@ body {
 .cdk-overlay-container {
   position: fixed !important;
   z-index: 1010 !important; /* set value you need */
+}
+
+.page-actions-delete {
+  float: left;
+}
+
+.ui-chips > ul.ui-inputtext {
+  width: 100% !important;
+}
+body .ui-state-disabled, body .ui-widget:disabled {
+  background: #e9ecef;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
 }

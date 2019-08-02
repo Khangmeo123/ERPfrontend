@@ -12,6 +12,7 @@ export class PaymentTermForm extends FormModel {
 
     discountPeriod = new FormControl('');
     discountRate = new FormControl('');
+    legalEntityId = new FormControl('');
 
 
     constructor(paymentTermEntity?: PaymentTermEntity) {

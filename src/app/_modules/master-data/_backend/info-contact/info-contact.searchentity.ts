@@ -5,6 +5,8 @@ export class InfoContactSearchEntity extends SearchEntity {
     phone: string;
     email: string;
     address: string;
+    provinceId: string;
+    provinceName: string;
 
     constructor(infoContactSearchEntity?: any) {
         super(infoContactSearchEntity);

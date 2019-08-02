@@ -11,7 +11,11 @@ export class CustomerEntity extends Entity {
     // statusEntity
     statusId: string;
     statusName: string;
+    statusCode: string;
+    customerGroupingId: string;
 
+    infoContacts: InfoContactEntity[];
+    bankAccounts: BankAccountEntity[];
 
     constructor(customerEntity?: any) {
         super(customerEntity);

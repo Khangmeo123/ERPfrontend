@@ -139,7 +139,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Khách hàng của pháp nhân',
-        route: '/master-data/legal-entity/customer-list-of-legal-entity',
+        route: '/master-data/legal-entity/customer-of-legal-entity',
       },
       {
         label: 'Quản lý nhóm KH',
@@ -159,7 +159,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Quản lý nhóm nhân viên',
-        route: '/master-data/legal-entity/company-position',
+        route: '/master-data/legal-entity/employee-position',
       },
       {
         label: 'Sản phẩm của pháp nhân',

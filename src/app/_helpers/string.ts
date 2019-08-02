@@ -9,4 +9,3 @@ export const generateRandomString = (length: number) => {
 export function translate(str: string) {
   return str;
 };
-

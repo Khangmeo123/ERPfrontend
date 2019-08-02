@@ -6,6 +6,9 @@ export class CustomerSearchEntity extends SearchEntity {
     name: TextFilter = new TextFilter();
     taxCode: TextFilter = new TextFilter();
     statusId: string = '';
+    legalEntityId: string;
+    customerGroupingId: string;
+    customerDetailIds: Array<any>;
 
     constructor(customerSearchEntity?: any) {
         super(customerSearchEntity);
