@@ -88,11 +88,11 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isSaveBookMark = res;
     });
-    
+
     this.customerOfLegalEntityService.getListCustomerOfLegalEntityByTyping(this.customerTyping);
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
     this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify).add(customerListSub)
-    .add(customerListCountSub).add(customerOfLegalListSub);
+      .add(customerListCountSub).add(customerOfLegalListSub);
 
   }
 
@@ -105,8 +105,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerSearchEntity.take = this.paginationdetail.take;
   }
 
-  
-  openCustomerList(id: []) {
+
+  openCustomerList(id: string[]) {
     this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.ids = id;
     if (this.legalId !== '' && this.legalId !== undefined) {
@@ -151,8 +151,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       this.legalSearchEntity.orderBy = event.sortField;
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
-    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res =>{
-      if(this.legalList && this.legalList.length > 0) {
+    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
+      if (this.legalList && this.legalList.length > 0) {
         this.customerSearchEntity.legalEntityId = this.legalList[0].id;
         this.legalId = this.customerSearchEntity.legalEntityId;
         this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
@@ -173,7 +173,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   // table customer
 
-  onClickAddCustomer () {
+  onClickAddCustomer() {
     this.customerSearchEntity.customerDetailIds = this.listCustomerId;
     this.customerSearchEntity.legalEntityId = this.legalId;
     this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity).then(res => {
@@ -189,9 +189,9 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 
-  onClickShowDetail(customerId : string) {
-    this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'], 
-    {queryParams: {id: customerId, legalEntityId: this.legalId}});
+  onClickShowDetail(customerId: string) {
+    this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'],
+      { queryParams: { id: customerId, legalEntityId: this.legalId } });
   }
 
   deleteCustomerFormLegal(customer: any) {
@@ -214,12 +214,12 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       this.customerSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
 
-    if(this.customerSearchEntity.legalEntityId !== '') {
+    if (this.customerSearchEntity.legalEntityId !== '') {
       this.getListCustomer(this.customerSearchEntity);
     }
   }
 
-  paginationDetailOut(pagination: PaginationModel){
+  paginationDetailOut(pagination: PaginationModel) {
     this.customerSearchEntity.skip = pagination.skip;
     this.customerSearchEntity.take = pagination.take;
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);

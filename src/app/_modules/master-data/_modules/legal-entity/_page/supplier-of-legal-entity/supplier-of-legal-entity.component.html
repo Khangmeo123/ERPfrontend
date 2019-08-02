@@ -2,7 +2,7 @@
   <div class="page-header">
     <span class="page-title">
       {{'supplierOfLegalEntity.header.title' | translate}}
-      <span (click)="bookMark($event)">
+      <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
@@ -70,8 +70,7 @@
             </ng-template>
           </p-table>
           <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationGroupOut($event)"
-              data-qe-id="pagination">
+            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
             </app-pagination>
           </div>
         </div>

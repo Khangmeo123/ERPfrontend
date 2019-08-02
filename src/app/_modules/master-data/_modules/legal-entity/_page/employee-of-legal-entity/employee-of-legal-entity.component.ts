@@ -34,7 +34,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/employee-of-legal-entity/export?legalEntityId=';
   @ViewChild('tableEmployee', { static: false }) public tableEmployee: TemplateRef<any>;
 
-  //Drop employee
+  // Drop employee
   employeeIds: EmployeeEntity[];
   employeeExceptIds: EmployeeEntity[];
   employeeTyping: Subject<EmployeeSearchEntity> = new Subject();
@@ -95,8 +95,8 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.employeeSearchEntity.take = this.paginationdetail.take;
   }
 
-  //drop employee
-  openEmployeeList(id: []) {
+  // drop employee
+  openEmployeeList(id: string[]) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
     this.employeeSearchEntity.ids = id;
     if (this.legalId !== '' && this.legalId !== undefined) {
@@ -114,7 +114,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.listEmployeeId = event;
   }
 
-  //list legal entity
+  // list legal entity
 
   getListLegalEntity() {
     this.pagination.pageNumber = 1;
@@ -212,7 +212,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.router.navigate(['/master-data/legal-entity/employee-of-legal-entity/employee-detail'], { queryParams: { id: employeeId } });
   }
 
-  deleteSupplierFormLegal(employee){
+  deleteSupplierFormLegal(employee) {
     this.employeeOfLegalEntityService.deleteCustomerFormLegal(employee).then(res => {
       if (res) {
         this.clearSearchEmployee(this.tableEmployee);

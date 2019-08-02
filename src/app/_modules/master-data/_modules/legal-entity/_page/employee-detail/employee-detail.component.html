@@ -14,7 +14,7 @@
     <div class="page-body">
         <accordion [formGroup]="employeeDetailForm">
             <accordion-group [isOpen]="true">
-                <button (click)="onClickOpen($event)" class="btn btn-link btn-block clearfix" accordion-heading>
+                <button (click)="isOpenTab1=!isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
                     <div class="pull-left float-left">{{'employeeDetailOfLegal.general.title' | translate }}</div>
                     <span class="float-right pull-right" accordion-heading>
                         <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
@@ -165,7 +165,7 @@
                     <div class="col-sm-4">
                         <div class="form-group">
                             <label for="bankid">{{ 'employeeDetailOfLegal.employeeGroup' | translate}}</label>
-                            <p-chips class="w-100" [(ngModel)]="employeeDetailForm.controls.employeePositions.value"
+                            <p-chips class="w-100" [ngModel]="employeeDetailForm.controls.employeePositions.value"
                                 [ngModelOptions]="{standalone: true}" [disabled]="true">
                                 <ng-template let-item pTemplate="item">
                                     {{item.code}}
@@ -324,7 +324,7 @@
     <div class="page-footer d-flex">
         <div class="page-actions-delete">
             <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
-                (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                (confirm)="deleteEmployDetail()">
                 {{ 'general.button.delete' | translate}}</a>
         </div>
         <div class="page-actions">

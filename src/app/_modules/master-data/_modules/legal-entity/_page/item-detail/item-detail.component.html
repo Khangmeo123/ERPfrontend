@@ -168,7 +168,7 @@
                                 <div class="form-group">
                                     <label
                                         for="itemDescription">{{ 'legalItemDetail.content.itemGroup' | translate}}</label>
-                                    <p-chips [(ngModel)]="legalItemDetailForm.controls.itemGroupings.value"
+                                    <p-chips [ngModel]="legalItemDetailForm.controls.itemGroupings.value"
                                         [ngModelOptions]="{standalone: true}" [disabled]="true" class="w-100">
                                         <ng-template let-item pTemplate="item">
                                             {{item.code}}
@@ -489,7 +489,7 @@
                 </div>
 
                 <div class="mt-2">
-                    <p-table [value]="legalItemDetailForm.controls.itemMaterials.getRawValue()" [scrollable]="true"
+                    <p-table [value]="legalItemDetailForm.controls.itemMaterials.value" [scrollable]="true"
                         scrollHeight="500px" [resizableColumns]="true" #tableItemMaterial>
                         <ng-template pTemplate="colgroup">
                             <colgroup>
@@ -540,7 +540,8 @@
     <div class="page-footer">
         <div>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" data-qe-id="button-delete">
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deleteItemDetail()"
+                data-qe-id="button-delete">
                 {{ 'general.button.delete' | translate}}</button>
         </div>
         <div class="page-actions">
@@ -620,7 +621,7 @@
 </p-dialog>
 
 
-<p-dialog modal="true" [(visible)]="isOpenModalTransformationUnit" [contentStyle]="{'overflow':'visible'}"
+<!-- <p-dialog modal="true" [(visible)]="isOpenModalTransformationUnit" [contentStyle]="{'overflow':'visible'}"
     [style]="{width: '900px'}" appendTo="body">
     <p-header>
         {{'detail_item_of_legal_entity.transformation_unit.modal_title' | translate}}
@@ -693,7 +694,7 @@
             </button>
         </ng-template>
     </p-footer>
-</p-dialog>
+</p-dialog> -->
 
 
 <p-dialog modal="true" [(visible)]="isOpenModalItemMaterial" [contentStyle]="{'overflow':'visible'}" appendTo="body"

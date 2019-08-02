@@ -10,7 +10,6 @@ import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/e
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
-import { InfoContactEntity } from 'src/app/_modules/master-data/_backend/info-contact/info-contact.entity';
 import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 import { LegalSupplierDetailService } from './supplier-detail.service';
@@ -45,19 +44,19 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   paymentTermTyping: Subject<PaymentTermSearchEntity> = new Subject();
   paymentTermSearchEntity: PaymentTermSearchEntity = new PaymentTermSearchEntity();
 
-  //list drop staff in changre
+  // list drop staff in changre
   staffInChargeIds: EmployeeEntity[];
   staffInChargeExceptIds: EmployeeEntity[];
   staffInChargeTyping: Subject<EmployeeSearchEntity> = new Subject();
   staffInChargeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
 
-  //list drop staff in changre
+  // list drop staff in changre
   bankIds: BankEntity[];
   bankExceptIds: BankEntity[];
   bankTyping: Subject<BankSearchEntity> = new Subject();
   bankSearchEntity: BankSearchEntity = new BankSearchEntity();
 
-  //list drop province
+  // list drop province
   provinceIds: ProvinceEntity[];
   provinceExceptIds: ProvinceEntity[];
   province2Ids: ProvinceEntity[];
@@ -69,7 +68,8 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   bankAccountForm: FormGroup;
   legalEntiyId: string = null;
   index: number = -1;
-
+  popoverTitle: string = 'Popover title';
+  popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   routeLink: any;
 
   valueSelector = node => node;
@@ -142,7 +142,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     this.legalSupplierDetailService.getListProvinceByTyping(this.provinceTyping);
     this.legalSupplierDetailService.getListStaffInChargeByTyping(this.staffInChargeTyping);
     this.supplierDetailSubs.add(supplierFormSub).add(listPaymentTerm).add(listStaffInChangre)
-    .add(contactForm).add(bankAccountForm).add(listProvince).add(listBank);
+      .add(contactForm).add(bankAccountForm).add(listProvince).add(listBank);
   }
 
   ngOnInit(): void {
@@ -165,6 +165,9 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     this.isOpenTab1 = !this.isOpenTab1; // open tab general
   }
 
+  deactiveSupplierDetail() {
+
+  }
   // list drop payment term
   openPaymentTermList(paymenttermId: string) {
     this.paymentTermSearchEntity = new PaymentTermSearchEntity();
@@ -233,7 +236,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
     this.provinceSearchEntity.name = event;
     this.provinceTyping.next(this.provinceSearchEntity);
   }
-  
+
 
   // Contact info:
   onClickOpenTab2() {
@@ -248,7 +251,7 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   saveContact(contactValue: any) {
     if (!this.contactForm.valid) {
       this.generalService.validateAllFormFields(this.contactForm);
-    }else {
+    } else {
       this.legalSupplierDetailService.saveContact(contactValue, this.index);
       this.contactsModal = !this.contactsModal;
     }
@@ -279,12 +282,12 @@ export class LegalSupplierDetailComponent implements OnInit, OnDestroy {
   saveBankAccount(bankAccount: any) {
     if (!this.bankAccountForm.valid) {
       this.generalService.validateAllFormFields(this.bankAccountForm);
-    }else {
+    } else {
       this.legalSupplierDetailService.saveBankAccount(bankAccount, this.index);
       this.bankAccountsModal = !this.bankAccountsModal;
     }
   }
-  save() {  
+  save() {
     if (!this.supplierDetailForm.valid) {
       this.generalService.validateAllFormFields(this.supplierDetailForm);
     } else {

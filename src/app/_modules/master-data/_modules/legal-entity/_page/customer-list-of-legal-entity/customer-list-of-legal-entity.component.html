@@ -2,7 +2,7 @@
   <div class="page-header">
     <span class="page-title">
       {{pageTitle | translate}}
-      <span (click)="bookMark($event)">
+      <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
@@ -84,24 +84,25 @@
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
             <button class="btn btn-add" (click)="onClickAddCustomer()" data-qe-id="button-add-customer"
-            [disabled]="listCustomerId.length === 0">
+              [disabled]="listCustomerId.length === 0">
               {{'general.button.add' | translate}}</button>
-           
-            <a class="btn btn-export" [href]="exportLink + legalId" data-qe-id="button-export">{{'general.button.export' | translate}}</a>
+
+            <a class="btn btn-export" [href]="exportLink + legalId"
+              data-qe-id="button-export">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearchCustomer(tableCustomer)"
               data-qe-id="button-clear-customer">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
-          
+
           <p-table [value]="customerList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
             [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableCustomer>
             <ng-template pTemplate="colgroup">
-                <colgroup>
-                  <col>
-                  <col>
-                </colgroup>
-              </ng-template>
+              <colgroup>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
             <ng-template pTemplate="header">
               <tr>
                 <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-customer">
@@ -132,14 +133,14 @@
                 <td> {{item.name}} </td>
                 <td>
                   <div class="d-flex">
-                      <div class="edit" (click)="onClickShowDetail(item.id)">
-                          <mat-icon>edit</mat-icon>
-                        </div>
-                      <div class="delete" (click)="deleteCustomerFormLegal(item)">
-                          <mat-icon>delete</mat-icon>
-                        </div>
+                    <div class="edit" (click)="onClickShowDetail(item.id)">
+                      <mat-icon>edit</mat-icon>
+                    </div>
+                    <div class="delete" (click)="deleteCustomerFormLegal(item)">
+                      <mat-icon>delete</mat-icon>
+                    </div>
                   </div>
-                 
+
                 </td>
               </tr>
             </ng-template>

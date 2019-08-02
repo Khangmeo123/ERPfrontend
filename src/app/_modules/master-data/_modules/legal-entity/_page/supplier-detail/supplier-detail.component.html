@@ -29,7 +29,7 @@
                                 <span class="text-danger ml-1"> * </span>
                             </label>
                             <input type="text" class="form-control" id="supplier_code"
-                                    data-qe-id="detail-form-general-code" formControlName="code">
+                                data-qe-id="detail-form-general-code" formControlName="code">
                         </div>
                         <div class="form-group col">
                             <label for="supplier_name">
@@ -37,7 +37,7 @@
                                 <span class="text-danger ml-1"> * </span>
                             </label>
                             <input type="text" class="form-control" id="supplier_name"
-                                    data-qe-id="detail-form-general-name" formControlName="name">
+                                data-qe-id="detail-form-general-name" formControlName="name">
                         </div>
 
                         <div class="form-group col">
@@ -80,9 +80,9 @@
                                 {{'detailSupplierGroup.paymentTerms' | translate}}
                             </label>
                             <app-single-select data-qe-id="detail-form-general-payment-term"
-                                [valueSelector]="valueSelector"
-                                [list]="paymentTermExceptIds" [selectedList]="paymentTermIds" [key]="'name'"
-                                (search)="paymentTermSearch($event)" [initialValue] ="supplierDetailForm.controls.paymentTermName.value"
+                                [valueSelector]="valueSelector" [list]="paymentTermExceptIds"
+                                [selectedList]="paymentTermIds" [key]="'name'" (search)="paymentTermSearch($event)"
+                                [initialValue]="supplierDetailForm.controls.paymentTermName.value"
                                 (selectionChange)="supplierDetailForm.controls.paymentTermId.setValue($event[0].id)"
                                 (listOpen)="openPaymentTermList(supplierDetailForm.controls.paymentTermId.value)">
                             </app-single-select>
@@ -106,20 +106,20 @@
                                 {{'detailSupplierGroup.pic' | translate}}
                             </label>
                             <app-single-select data-qe-id="detail-form-general-pic" [list]="staffInChargeExceptIds"
-                                [valueSelector]="valueSelector"
-                                [selectedList]="staffInChargeIds" [key]="'name'" (search)="staffInChargeSearch($event)"
+                                [valueSelector]="valueSelector" [selectedList]="staffInChargeIds" [key]="'name'"
+                                (search)="staffInChargeSearch($event)"
                                 (selectionChange)="supplierDetailForm.controls.staffInChargeId.setValue($event[0].id)"
                                 (listOpen)="openStaffInChargeList(supplierDetailForm.controls.staffInChargeId.value)"
-                                [initialValue] ="supplierDetailForm.controls.staffInChargeName.value">
-                                
+                                [initialValue]="supplierDetailForm.controls.staffInChargeName.value">
+
                             </app-single-select>
                         </div>
                         <div class="form-group col-4">
                             <label>
                                 {{'detailSupplierGroup.supplierGroup' | translate}}
                             </label>
-                            <p-chips class="w-100" [(ngModel)]="supplierDetailForm.controls.supplierGroupings.value"
-                                [ngModelOptions]="{standalone: true}" [disabled]="true" >
+                            <p-chips class="w-100" [ngModel]="supplierDetailForm.controls.supplierGroupings.value"
+                                [ngModelOptions]="{standalone: true}" [disabled]="true">
                                 <ng-template let-item pTemplate="item">
                                     {{item.code}}
                                 </ng-template>
@@ -185,15 +185,15 @@
                                     <td> {{contact.provinceName}}</td>
                                     <td> {{contact.address}} </td>
                                     <td class="ui-resizable-column">
-                                            <div class="d-flex">
-                                                <div class="edit mr-2" (click)="editContact(contact,index)">
-                                                    <mat-icon>edit</mat-icon>
-                                                </div>
-                                                <div class="delete" (click)="deleteContact(index)">
-                                                    <mat-icon>delete</mat-icon>
-                                                </div>
+                                        <div class="d-flex">
+                                            <div class="edit mr-2" (click)="editContact(contact,index)">
+                                                <mat-icon>edit</mat-icon>
                                             </div>
-                                        </td>
+                                            <div class="delete" (click)="deleteContact(index)">
+                                                <mat-icon>delete</mat-icon>
+                                            </div>
+                                        </div>
+                                    </td>
                                 </tr>
                             </ng-template>
                         </p-table>
@@ -284,7 +284,7 @@
     <div class="page-footer d-flex">
         <div class="page-actions-delete">
             <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
-                (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                (confirm)="deactiveSupplierDetail()">
                 {{ 'general.button.delete' | translate}}</a>
         </div>
         <div class="page-actions">
@@ -311,15 +311,11 @@
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <app-single-select data-qe-id="dialog-bank-account" *ngIf="bankAccountsModal"
-                    [valueSelector]="valueSelector"
-                    [list]="bankExceptIds" 
-                    [selectedList]="bankIds"
-                    [key]="'name'" (search)="bankSearch($event)" 
-                    (selectionChange)="bankAccountForm.controls.bankId.setValue($event[0].id); 
+                    [valueSelector]="valueSelector" [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'"
+                    (search)="bankSearch($event)" (selectionChange)="bankAccountForm.controls.bankId.setValue($event[0].id); 
                     bankAccountForm.controls.bankName.setValue($event[0].name);"
                     (listOpen)="openBankList(bankAccountForm.bankId)"
-                    [initialValue] ="bankAccountForm.controls.bankName.value"
-                    ></app-single-select>
+                    [initialValue]="bankAccountForm.controls.bankName.value"></app-single-select>
             </div>
             <div class="form-group col-6">
                 <label>
@@ -327,7 +323,8 @@
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
-                    <input type="text" class="form-control" formControlName="accountName" id="accountName" data-qe-id="detail-form-bank-account-name">
+                    <input type="text" class="form-control" formControlName="accountName" id="accountName"
+                        data-qe-id="detail-form-bank-account-name">
                     <app-error data-qe-id="form-error-name"
                         *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.errors?.get('accountName')?.value"
                         [formGroup]="bankAccountForm" [property]="'accountName'" [placement]="'top'" class="error-form">
@@ -340,10 +337,12 @@
                     <span class="text-danger mr-2">*</span>
                 </label>
                 <div class="div-form">
-                    <input type="text" class="form-control" formControlName="accountNumber" id="accountNumber" data-qe-id="detail-form-bank-account-number" >
+                    <input type="text" class="form-control" formControlName="accountNumber" id="accountNumber"
+                        data-qe-id="detail-form-bank-account-number">
                     <app-error data-qe-id="form-error-name"
                         *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.errors?.get('accountNumber')?.value"
-                        [formGroup]="bankAccountForm" [property]="'accountNumber'" [placement]="'top'" class="error-form">
+                        [formGroup]="bankAccountForm" [property]="'accountNumber'" [placement]="'top'"
+                        class="error-form">
                     </app-error>
                 </div>
             </div>
@@ -358,45 +357,38 @@
                     {{'detailSupplierGroup.bankAccount.province' | translate}}
                 </label>
                 <div class="div-form">
-                    <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name"  *ngIf="bankAccountsModal"
-                    [valueSelector]="valueSelector"
-                    [list]="provinceExceptIds" [initialValue] ="bankAccountForm.controls.provinceName.value"
-                    [selectedList]="provinceIds" [key]="'name'" (search)="provinceSearch($event)"
-                    (selectionChange)="bankAccountForm.controls.provinceId.setValue($event[0].id); 
+                    <app-single-select class="w-100" data-qe-id="detail-form-bank-account-province-name"
+                        *ngIf="bankAccountsModal" [valueSelector]="valueSelector" [list]="provinceExceptIds"
+                        [initialValue]="bankAccountForm.controls.provinceName.value" [selectedList]="provinceIds"
+                        [key]="'name'" (search)="provinceSearch($event)" (selectionChange)="bankAccountForm.controls.provinceId.setValue($event[0].id); 
                                         bankAccountForm.controls.provinceName.setValue($event[0].name);"
-                    (listOpen)="openProvinceList(supplierDetailForm.get('supplierBankAccounts').provinceId)">
-                </app-single-select>
-                <app-error data-qe-id="form-error-phone"
-                    *ngIf="(bankAccountForm.controls.provinceId?.errors && bankAccountForm.controls.provinceId?.touched) || !!bankAccountForm.controls.errors?.get('provinceId')?.value"
-                    [formGroup]="bankAccountForm" [property]="'provinceId'" [placement]="'top'" class="error-form">
-                </app-error>
+                        (listOpen)="openProvinceList(supplierDetailForm.get('supplierBankAccounts').provinceId)">
+                    </app-single-select>
+                    <app-error data-qe-id="form-error-phone"
+                        *ngIf="(bankAccountForm.controls.provinceId?.errors && bankAccountForm.controls.provinceId?.touched) || !!bankAccountForm.controls.errors?.get('provinceId')?.value"
+                        [formGroup]="bankAccountForm" [property]="'provinceId'" [placement]="'top'" class="error-form">
+                    </app-error>
                 </div>
-                
+
             </div>
             <div class="form-group col-6">
                 <label>
                     {{'detailSupplierGroup.bankAccount.bankAddress' | translate}}
                 </label>
-                <input type="text" class="form-control"  formControlName="address" data-qe-id="detail-form-bank-address" >
+                <input type="text" class="form-control" formControlName="address" data-qe-id="detail-form-bank-address">
             </div>
         </div>
     </form>
     <p-footer>
         <div class="row">
             <div class="col-sm-6">
-                <div class="page-actions-delete">
-                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
-                        data-qe-id="button-delete">
-                        {{ 'general.button.delete' | translate}}</a>
-                </div>
-            </div>
-            <div class="col-sm-6">
                 <div class="page-actions">
-                    <button class="btn btn-cancel mr-2" (click)="bankAccountsModal = false" data-qe-id="dialog-button-cancel">
+                    <button class="btn btn-cancel mr-2" (click)="bankAccountsModal = false"
+                        data-qe-id="dialog-button-cancel">
                         {{'general.button.cancel' | translate}}
                     </button>
-                    <button class="btn btn-add mr-2" data-qe-id="button-save" (click) = "saveBankAccount(bankAccountForm.value)">
+                    <button class="btn btn-add mr-2" data-qe-id="button-save"
+                        (click)="saveBankAccount(bankAccountForm.value)">
                         {{'general.button.save' | translate}}
                     </button>
                 </div>
@@ -443,17 +435,17 @@
                 </label>
                 <input type="text" class="form-control" formControlName="email">
             </div>
-            <div class="form-group col-6"  *ngIf="contactsModal">
+            <div class="form-group col-6" *ngIf="contactsModal">
                 <label>
                     {{'detailSupplierGroup.contacts.province' | translate}}
                 </label>
-                <app-single-select data-qe-id="detail-form-contact-province" [list]="province2ExceptIds" *ngIf="contactsModal"
-                    [initialValue]="contactForm.controls.provinceName.value" [valueSelector]="valueSelector"
-                    [selectedList]="province2Ids" [key]="'name'"
+                <app-single-select data-qe-id="detail-form-contact-province" [list]="province2ExceptIds"
+                    *ngIf="contactsModal" [initialValue]="contactForm.controls.provinceName.value"
+                    [valueSelector]="valueSelector" [selectedList]="province2Ids" [key]="'name'"
                     (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="contactForm.controls.provinceId.setValue($event[0].id); 
                     contactForm.controls.provinceName.setValue($event[0].name);"
                     (listOpen)="openProvinceList(contactForm.controls.provinceId.value)">
-                  </app-single-select>
+                </app-single-select>
             </div>
 
         </div>
@@ -469,16 +461,9 @@
     <p-footer>
         <div class="row">
             <div class="col-sm-6">
-                <!-- <div class="page-actions-delete">
-                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
-                        data-qe-id="button-delete">
-                        {{ 'general.button.delete' | translate}}</a>
-                </div> -->
-            </div>
-            <div class="col-sm-6">
                 <div class="page-actions">
-                    <button class="btn btn-cancel mr-2" (click)="contactsModal = false" data-qe-id="dialog-button-cancel">
+                    <button class="btn btn-cancel mr-2" (click)="contactsModal = false"
+                        data-qe-id="dialog-button-cancel">
                         {{'general.button.cancel' | translate}}
                     </button>
                     <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="saveContact(contactForm.value)">

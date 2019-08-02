@@ -56,10 +56,10 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   listSupplierId: Array<any> = [];
   supplierGroupingId: string;
 
-  exportLink = environment.apiUrlApps +'master-data/legal-entity/supplier-group/export?supplierGroupId=';
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/supplier-group/export?supplierGroupId=';
   @ViewChild('tableSupplier', { static: false }) public tableSupplier: TemplateRef<any>;
 
-  
+
   constructor(
     private bookmarkService: BookmarkService,
     private router: Router,
@@ -136,10 +136,10 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
   // drop legal entity
 
-  openLegalEntityList(legalId: string) {
+  openLegalEntityList() {
     this.legalSearchEntity = new LegalSearchEntity();
-    if (legalId !== null && legalId !== undefined) {
-      this.legalSearchEntity.ids.push(legalId);
+    if (this.legalEntityId !== undefined && this.legalEntityId !== null) {
+      this.legalSearchEntity.ids.push(this.legalEntityId);
     }
     this.supplierGroupService.getListLegalEntity(this.legalSearchEntity);
   }
@@ -166,7 +166,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
   }
   // drop supplier
-  openSupplierList(id: []) {
+  openSupplierList(id: string[]) {
     this.supplierSearchEntity = new SupplierSearchEntity();
     this.supplierSearchEntity.ids = id;
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
@@ -242,7 +242,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     }
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined && this.legalEntityId !== null) {
       this.supplierGroupService.getList(this.supplierGroupSearchEntity).then(res => {
-        if(this.supplierGroupList && this.supplierGroupList.length > 0) {
+        if (this.supplierGroupList && this.supplierGroupList.length > 0) {
           this.supplierSearchEntity.legalEntityId = this.legalEntityId;
           this.supplierSearchEntity.supplierGroupingId = this.supplierGroupList[0].id;
           this.supplierGroupingId = this.supplierGroupList[0].id;
@@ -250,7 +250,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
         }
       });
     }
-    
+
   }
 
   sortSupplier(event) {

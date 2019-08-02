@@ -9,15 +9,13 @@ import { PaymentTermEntity } from 'src/app/_modules/master-data/_backend/payment
 import { PaymentTermSearchEntity } from 'src/app/_modules/master-data/_backend/payment-term/payment-term.searchentity';
 import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/employee.entity';
 import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
-import { BankAccountOfLegalEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.entity';
-import { BankAccountOfLegalSearchEntity } from 'src/app/_modules/master-data/_backend/bank-account-of-legal-entity/bank-account-of-legal-entity.searchentity';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
 import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
 
 @Component({
-  selector: 'app-detail-customer-group',
+  selector: 'app-detail-customer-detail',
   templateUrl: './customer-detail.component.html',
   styleUrls: ['./customer-detail.component.scss'],
   providers: [CustomerDetailService]
@@ -47,7 +45,7 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   paymentTermTyping: Subject<PaymentTermSearchEntity> = new Subject();
   paymentTermSearchEntity: PaymentTermSearchEntity = new PaymentTermSearchEntity();
 
-  //list drop staff in changre
+  // list drop staff in changre
   staffInChargeIds: EmployeeEntity[];
   staffInChargeExceptIds: EmployeeEntity[];
   staffInChargeTyping: Subject<EmployeeSearchEntity> = new Subject();
@@ -70,9 +68,10 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
   legalEntiyId: string = null;
   index: number = -1;
   routeLink: any;
+  popoverTitle: string = 'Popover title';
+  popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
 
   valueSelector = node => node;
-
 
 
   constructor(
@@ -163,6 +162,9 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     this.isOpenTab1 = !this.isOpenTab1;
   }
 
+  deactiveCustomerDetail() {
+
+  }
   // list drop payment term
   openPaymentTermList(paymenttermId: string) {
     this.paymentTermSearchEntity = new PaymentTermSearchEntity();

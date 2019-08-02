@@ -57,7 +57,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
 
   customerGroupId: any;
   listCustomerId: Array<any> = [];
-  exportLink = environment.apiUrlApps +'master-data/legal-entity/customer-group/export?customerGroupId=';
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/customer-group/export?customerGroupId=';
   @ViewChild('tableCustomer', { static: false }) public tableCustomer: TemplateRef<any>;
 
   constructor(
@@ -168,7 +168,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
 
   // drop list customer
 
-  openCustomerList(id: []) {
+  openCustomerList(id: string[]) {
     this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.ids = id;
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
@@ -197,7 +197,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     }
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
-        if(this.customerGroupList && this.customerGroupList.length > 0) {
+        if (this.customerGroupList && this.customerGroupList.length > 0) {
           this.customerSearchEntity.legalEntityId = this.legalEntityId;
           this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
           this.customerGroupId = this.customerGroupList[0].id;
@@ -224,7 +224,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
         } else {
           this.customerSearchEntity.customerGroupingId = null;
         }
-  
+
         this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
       });
     });

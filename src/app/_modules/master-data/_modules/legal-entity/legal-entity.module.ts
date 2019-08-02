@@ -19,7 +19,6 @@ import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
-import { CustomersInGroupComponent } from './_page/customer-group/customers-in-group/customers-in-group.component';
 import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/customer-list-of-legal-entity.component';
 import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/supplier-of-legal-entity.component';
 import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
@@ -44,7 +43,6 @@ import { EmployeePositionComponent } from './_page/employee-position/employee-po
     SpecialPriceCustomerComponent,
     CustomerDetailComponent,
     LegalSupplierDetailComponent,
-    CustomersInGroupComponent,
     CustomerListOfLegalEntityComponent,
     SupplierOfLegalEntityComponent,
     EmployeeOfLegalEntityComponent,

@@ -100,7 +100,7 @@
                                 (search)="paymentTermSearch($event)"
                                 [initialValue]="customerDetailForm.controls.paymentTermName.value"
                                 (selectionChange)="customerDetailForm.controls.paymentTermId.setValue($event[0])"
-                                (listOpen)="openPaymentTermList(paymentTermSearchEntity.paymentTermId)">
+                                (listOpen)="openPaymentTermList(customerDetailForm.controls.paymentTermId.value)">
                             </app-single-select>
                         </div>
                         <div class="form-group col-4">
@@ -132,7 +132,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label for="bankid">{{ 'detailCustomerOfLegal.customerGroup' | translate}}</label>
-                                <p-chips class="w-100" [(ngModel)]="customerDetailForm.controls.customerGroups.value"
+                                <p-chips class="w-100" [ngModel]="customerDetailForm.controls.customerGroups.value"
                                     [ngModelOptions]="{standalone: true}" [disabled]="true">
                                     <ng-template let-item pTemplate="item">
                                         {{item.code}}
@@ -300,7 +300,7 @@
     <div class="page-footer d-flex">
         <div class="page-actions-delete">
             <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
-                (confirm)="confirmClicked = true" (cancel)="cancelClicked = true" (click)="onClickDelete()">
+                (confirm)="deactiveCustomerDetail()">
                 {{ 'general.button.delete' | translate}}</a>
         </div>
         <div class="page-actions">
@@ -399,14 +399,6 @@
     <p-footer>
         <div class="row">
             <div class="col-sm-6">
-                <div class="page-actions-delete">
-                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
-                        data-qe-id="button-delete">
-                        {{ 'general.button.delete' | translate}}</a>
-                </div>
-            </div>
-            <div class="col-sm-6">
                 <div class="page-actions">
                     <button class="btn btn-cancel mr-2" data-qe-id="dialog-button-cancel"
                         (click)="bankAccountsModal = false">
@@ -485,14 +477,6 @@
     </form>
     <p-footer>
         <div class="row">
-            <div class="col-sm-6">
-                <div class="page-actions-delete">
-                    <a mwlConfirmationPopover [popoverTitle]="popoverTitle" data-qe-id="dialog-button-delete"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
-                        data-qe-id="button-delete">
-                        {{ 'general.button.delete' | translate}}</a>
-                </div>
-            </div>
             <div class="col-sm-6">
                 <div class="page-actions">
                     <button class="btn btn-cancel mr-2" (click)="contactsModal = false"

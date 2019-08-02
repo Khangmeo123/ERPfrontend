@@ -20,7 +20,7 @@
             </span>
             <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
               [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
-              (selectionChange)="selectLegal($event)" (listOpen)="openLegalEntityList(legalSearchEntity.legalEntityId)">
+              (selectionChange)="selectLegal($event)" (listOpen)="openLegalEntityList()">
             </app-single-select>
           </div>
           <div class="col-sm-5 page-actions d-flex justify-content-end">

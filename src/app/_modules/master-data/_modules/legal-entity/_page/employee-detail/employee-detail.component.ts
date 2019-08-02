@@ -21,9 +21,11 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
 
 
   displayContact: boolean = false;
-
+  popoverTitle: string = 'Popover title';
+  popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   isOpenTab1: boolean = false;
   isOpenTab2: boolean = false;
+  isOpenTab3: boolean = false;
 
   // Form general employee detail
   employeeDetailSubs: Subscription = new Subscription();
@@ -115,6 +117,9 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.employeeDetailSubs.unsubscribe();
   }
 
+  deleteEmployDetail() {
+
+  }
   // list drop bank list
 
   openBankList(bankId: string) {

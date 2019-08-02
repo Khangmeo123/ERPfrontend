@@ -22,8 +22,8 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 export class LegalItemDetailComponent implements OnInit, OnDestroy {
 
   pageTitle = translate('legalItemDetail.header.title');
-  public popoverTitle: string = 'Popover title';
-  public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+  popoverTitle: string = 'Popover title';
+  popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   isOpenTab1: boolean = false;
   isOpenTab2: boolean = false;
   isOpenTab3: boolean = false;
@@ -219,6 +219,10 @@ export class LegalItemDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.legalItemDetailSubs.unsubscribe();
+  }
+
+  deleteItemDetail() {
+
   }
 
   saveLegalItemDetail() {

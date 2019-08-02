@@ -2,8 +2,8 @@
   <div class="page-header">
     <div class="page-title">
       {{pageTitle}}
-      <span (click)="onClickSaveBookMark($event)">
-        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+      <span (click)="bookMark()">
+        <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
       </span>

@@ -16,7 +16,7 @@ import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/empl
 import { environment } from 'src/environments/environment.prod';
 
 @Component({
-  selector: 'app-company-position',
+  selector: 'app-employee-position',
   templateUrl: './employee-position.component.html',
   styleUrls: ['./employee-position.component.scss'],
   providers: [EmployeePositionService]
@@ -123,10 +123,10 @@ export class EmployeePositionComponent implements OnInit {
 
   // drop legal entity
 
-  openLegalEntityList(legalId: string) {
+  openLegalEntityList() {
     this.legalSearchEntity = new LegalSearchEntity();
-    if (legalId !== null && legalId !== undefined) {
-      this.legalSearchEntity.ids.push(legalId);
+    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+      this.legalSearchEntity.ids.push(this.legalEntityId);
     }
     this.employeePositionService.getListLegalEntity(this.legalSearchEntity);
   }
@@ -138,7 +138,6 @@ export class EmployeePositionComponent implements OnInit {
   selectLegal(event) {
     this.employeePositionSearchEntity.legalEntityId = event[0];
     this.legalEntityId = event[0];
-
     this.employeePositionService.getList(this.employeePositionSearchEntity).then(res => {
       if (this.employeePositionList && this.employeePositionList.length > 0) {
         this.employeeSearchEntity.legalEntityId = this.legalEntityId;
@@ -152,7 +151,7 @@ export class EmployeePositionComponent implements OnInit {
 
   // drop list employee
 
-  openEmployeeList(id: []) {
+  openEmployeeList(id: string[]) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
     this.employeeSearchEntity.ids = id;
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {

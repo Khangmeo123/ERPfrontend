@@ -16,12 +16,11 @@
         <div class="mt-2 row">
           <div class="col-sm-7 d-flex align-items-center">
             <span class="sob-label flex-shrink-1">
-              {{'general.legal_entity.name' | translate}} : 
+              {{'general.legal_entity.name' | translate}} :
             </span>
             <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
               [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
-              (selectionChange)="selectLegal($event)"
-              (listOpen)="openLegalEntityList(supplierGroupSearchEntity.legalEntityId)">
+              (selectionChange)="selectLegal($event)" (listOpen)="openLegalEntityList()">
             </app-single-select>
           </div>
           <div class="col-sm-5 d-flex page-actions justify-content-end">
@@ -33,9 +32,9 @@
           </div>
         </div>
         <div class="page-section mt-2">
-          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single" [(selection)]="selectedSupplier"
-            (onLazyLoad)="sortSupplierGroup($event)" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
-            #tableSupplierGroup>
+          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single"
+            [(selection)]="selectedSupplier" (onLazyLoad)="sortSupplierGroup($event)" [scrollable]="true"
+            scrollHeight="500px" [resizableColumns]="true" #tableSupplierGroup>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -77,9 +76,9 @@
                 <td class="ui-resizable-column"> {{supplierGroup.name}} </td>
                 <td class="ui-resizable-column">
                   <div class="edit" (click)="edit(supplierGroup.id)">
-                      <mat-icon>edit</mat-icon>
+                    <mat-icon>edit</mat-icon>
                   </div>
-                  
+
                 </td>
               </tr>
             </ng-template>
@@ -101,9 +100,10 @@
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
             <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier"
-            [disabled]="listSupplierId.length === 0">
+              [disabled]="listSupplierId.length === 0">
               {{'general.button.add' | translate}}</button>
-            <a class="btn btn-export" [href]="exportLink + supplierGroupingId" data-qe-id="button-export-supplier" >{{'general.button.export' | translate}}</a>
+            <a class="btn btn-export" [href]="exportLink + supplierGroupingId"
+              data-qe-id="button-export-supplier">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearch(tableSupplier)"
               data-qe-id="button-clear-supplier">{{'general.button.clear' | translate}}</button>
           </div>
@@ -132,12 +132,12 @@
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters data-qe-id="table-thead-filter-code-supplier"
-                  [filter]="supplierSearchEntity.code" (changeFilter)="getListDetail()">
+                    [filter]="supplierSearchEntity.code" (changeFilter)="getListDetail()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters data-qe-id="table-thead-filter-name-supplier"
-                  [filter]="supplierSearchEntity.name" (changeFilter)="getListDetail()">
+                    [filter]="supplierSearchEntity.name" (changeFilter)="getListDetail()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>
@@ -147,16 +147,16 @@
               <tr>
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
-                <td> 
+                <td>
                   <div class="d-flex">
-                      <div class="edit" (click)="onClickShowDetail(item.id)">
-                          <mat-icon>edit</mat-icon>
-                      </div>
-                      <div class="delete" (click)="deleteSupplierFormGroup(item.id)">
-                          <mat-icon>delete</mat-icon>
-                      </div>
+                    <div class="edit" (click)="onClickShowDetail(item.id)">
+                      <mat-icon>edit</mat-icon>
+                    </div>
+                    <div class="delete" (click)="deleteSupplierFormGroup(item.id)">
+                      <mat-icon>delete</mat-icon>
+                    </div>
                   </div>
-                  
+
                 </td>
               </tr>
             </ng-template>

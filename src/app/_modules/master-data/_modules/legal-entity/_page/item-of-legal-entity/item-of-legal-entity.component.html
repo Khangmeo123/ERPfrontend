@@ -3,7 +3,7 @@
     <span class="page-title">
       {{pageTitle | translate}}
       <span (click)="bookMark()">
-        <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
+        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
       </span>
@@ -135,7 +135,7 @@
                     (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-name">
                   </app-advanced-filters>
                 </th>
-                <th  class="th-filter"></th>
+                <th class="th-filter"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-itemsFromLegal let-index="rowIndex">
@@ -143,14 +143,14 @@
                 <td> {{itemsFromLegal.code}} </td>
                 <td> {{itemsFromLegal.name}} </td>
                 <td>
-                    <div class="d-flex">
-                        <div class="edit mr-2" (click)="editItemFromLegal(itemsFromLegal.id)">
-                            <mat-icon>edit</mat-icon>
-                          </div>
-                        <div class="delete" (click)="deleteItemFromLegal(itemsFromLegal.id)">
-                            <mat-icon>delete</mat-icon>
-                          </div>
+                  <div class="d-flex">
+                    <div class="edit mr-2" (click)="editItemFromLegal(itemsFromLegal.id)">
+                      <mat-icon>edit</mat-icon>
                     </div>
+                    <div class="delete" (click)="deleteItemFromLegal(itemsFromLegal.id)">
+                      <mat-icon>delete</mat-icon>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </ng-template>

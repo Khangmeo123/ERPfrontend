@@ -264,7 +264,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   }
 
   // item:
-  itemOpen(id: string) {
+  itemOpen() {
     this.itemSearchEntity = new ItemSearchEntity();
     if (this.itemsFromItemGroupIds.length > 0) {
       this.itemSearchEntity.ids = [...this.itemsFromItemGroupIds];

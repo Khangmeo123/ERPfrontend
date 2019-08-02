@@ -10,10 +10,10 @@ import { LegalEntityComponent } from './_page/legal-entity/legal-entity.componen
 import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/customer-list-of-legal-entity.component';
 import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/supplier-of-legal-entity.component';
 import { EmployeeOfLegalEntityComponent } from './_page/employee-of-legal-entity/employee-of-legal-entity.component';
-import {EmployeePositionComponent} from './_page/employee-position/employee-position.component';
-import {LegalSupplierDetailComponent} from './_page/supplier-detail/supplier-detail.component';
-import {LegalItemDetailComponent } from './_page/item-detail/item-detail.component';
-import {EmployeeDetailComponent} from './_page/employee-detail/employee-detail.component';
+import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
+import { LegalSupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
+import { LegalItemDetailComponent } from './_page/item-detail/item-detail.component';
+import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { ItemOfLegalEntityComponent } from './_page/item-of-legal-entity/item-of-legal-entity.component';
 
 const routes: Routes = [
