@@ -31,8 +31,8 @@
             </ng-template>
             <ng-template pTemplate="header">
               <tr>
-                <th pResizableColumn [pSortableColumn]="'sobCode'" data-qe-id="table-thead-legal-sobCode">
-                  {{'itemOfLegalEntity.sobCode' | translate}}
+                <th pResizableColumn [pSortableColumn]="'sobCode'" data-qe-id="table-thead-legal-setOfBookCode">
+                  {{'itemOfLegalEntity.setOfBookCode' | translate}}
                   <p-sortIcon [field]="'sobCode'" class="float-right"></p-sortIcon>
                 </th>
                 <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-legal-code">
@@ -46,7 +46,7 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-single-select [list]="sobExceptIds" [selectedList]="sobIds" [key]="'name'"
+                  <app-single-select [list]="sobExceptIds" [selectedList]="sobIds" [key]="'code'"
                     [initialValue]="legalSearchEntity.setOfBookId" (search)="sobTypingSearch($event)"
                     (selectionChange)="legalSearchEntity.setOfBookId = $event[0]; getLegalList()"
                     (listOpen)="sobOpen(legalSearchEntity.setOfBookId)">
