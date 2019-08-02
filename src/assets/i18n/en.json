@@ -19,17 +19,13 @@
 	},
 	"asset": {
 		"content": {
+			"code": "",
 			"modal": {
 				"title": ""
 			},
-			"table": {
-				"asset_code": "",
-				"asset_name": "",
-				"asset_status": "",
-				"asset_type": "",
-				"status": "",
-				"type": ""
-			}
+			"name": "",
+			"status": "",
+			"type": ""
 		},
 		"header": {
 			"title": ""
@@ -37,17 +33,12 @@
 	},
 	"bank": {
 		"content": {
-			"modal": {
-				"bank_code": "",
-				"bank_description": "",
-				"bank_name": "",
-				"title": ""
-			},
-			"table": {
-				"bank_code": "",
-				"bank_description": "",
-				"bank_name": ""
-			}
+			"code": "",
+			"description": "",
+			"name": ""
+		},
+		"dialog": {
+			"title": ""
 		},
 		"header": {
 			"title": ""
@@ -75,16 +66,23 @@
 	"bookmarks": {
 		"title": ""
 	},
+	"businessGroup": {
+		"content": {
+			"code": "",
+			"description": "",
+			"name": ""
+		},
+		"dialog": {
+			"error": {
+				"title": ""
+			},
+			"title": ""
+		}
+	},
 	"business_group": {
-		"code": "",
-		"description": "",
 		"header": {
 			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": ""
+		}
 	},
 	"coa": {
 		"account_description": "",
@@ -118,13 +116,17 @@
 		"crop": ""
 	},
 	"currency": {
-		"currency_code": "",
-		"currency_description": "",
-		"currency_name": "",
-		"header": {
+		"content": {
+			"code": "",
+			"description": "",
+			"name": ""
+		},
+		"dialog": {
 			"title": ""
 		},
-		"title": ""
+		"header": {
+			"title": ""
+		}
 	},
 	"customer": {
 		"detail": {
@@ -133,7 +135,7 @@
 				"name": "",
 				"note": "",
 				"status": "",
-				"taxNumber": ""
+				"taxCode": ""
 			},
 			"header": {
 				"title": ""
@@ -147,7 +149,7 @@
 				"code": "",
 				"name": "",
 				"status": "",
-				"taxNumber": ""
+				"taxCode": ""
 			},
 			"header": {
 				"title": ""
@@ -403,19 +405,17 @@
 		}
 	},
 	"division": {
-		"address": "",
-		"code": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": "",
-		"tab": {
+		"content": {
+			"action": "",
 			"address": "",
 			"code": "",
 			"name": ""
+		},
+		"dialog": {
+			"title": ""
+		},
+		"header": {
+			"title": ""
 		}
 	},
 	"employee": {
@@ -425,25 +425,25 @@
 					"men": "",
 					"women": ""
 				},
-				"salaryInsurance": ""
+				"insuranceSalary": ""
 			}
 		},
 		"detail": {
 			"content": {
-				"birthday": "",
 				"code": "",
-				"dependents": "",
+				"dob": "",
 				"gender": "",
-				"identityDate": "",
 				"identityNumber": "",
-				"identityPlace": "",
+				"issueDate": "",
+				"issuePlace": "",
 				"jobLevel": "",
 				"jobTitle": "",
 				"name": "",
+				"numberDependentPerson": "",
 				"salary": "",
-				"salaryCoefficient": "",
+				"salaryRatio": "",
 				"status": "",
-				"taxNumber": ""
+				"taxCode": ""
 			},
 			"header": {
 				"title": ""
@@ -454,12 +454,15 @@
 		},
 		"list": {
 			"content": {
-				"birthday": "",
 				"code": "",
+				"dob": "",
 				"gender": "",
 				"identityNumber": "",
 				"name": "",
 				"status": ""
+			},
+			"header": {
+				"title": ""
 			}
 		}
 	},
@@ -522,13 +525,6 @@
 		},
 		"name": ""
 	},
-	"employeeList": {
-		"list": {
-			"header": {
-				"title": ""
-			}
-		}
-	},
 	"employeeOfLegalEntity": {
 		"code": "",
 		"employee": {
@@ -585,9 +581,12 @@
 			"cancel": "",
 			"clear": "",
 			"delete": "",
+			"downloadTemplate": "",
+			"downloadTempplate": "",
 			"download_example": "",
 			"export": "",
 			"import": "",
+			"importFile": "",
 			"import_file": "",
 			"ok": "",
 			"save": ""
@@ -597,6 +596,17 @@
 		},
 		"detail": "",
 		"division": "",
+		"error": {
+			"direction": "",
+			"fileImport": ""
+		},
+		"gender": {
+			"female": "",
+			"male": ""
+		},
+		"legalEntity": {
+			"name": ""
+		},
 		"legal_entity": {
 			"name": ""
 		},
@@ -612,9 +622,6 @@
 	},
 	"item": {
 		"content": {
-			"detail": {
-				"codeFromMarket": ""
-			},
 			"tab": {
 				"enviroment_tax": "",
 				"enviroment_tax_id": "",
@@ -632,27 +639,17 @@
 		},
 		"detail": {
 			"content": {
-				"0": {
-					"impt": ""
-				},
 				"characteristic": "",
 				"code": "",
+				"codeFromMarket": "",
 				"codeFromSupplier": "",
 				"description": "",
-				"ext": "",
 				"height": "",
-				"imt": "",
 				"length": "",
 				"name": "",
-				"nrt": "",
 				"primaryPrice": "",
-				"sct": "",
 				"status": "",
-				"tab": {
-					"emt": ""
-				},
 				"uom": "",
-				"vat": "",
 				"weight": "",
 				"width": ""
 			},
@@ -661,7 +658,6 @@
 			},
 			"tab": {
 				"title1": "",
-				"title2": "",
 				"title_2": ""
 			}
 		},
@@ -672,7 +668,7 @@
 				"name": "",
 				"primaryPrice": "",
 				"status": "",
-				"uom": ""
+				"unitOfMeasure": ""
 			},
 			"header": {
 				"title": ""
@@ -700,7 +696,6 @@
 	"itemOfLegalEntity": {
 		"content": {
 			"itemDetail": {
-				"action": "",
 				"code": "",
 				"name": ""
 			},
@@ -715,6 +710,13 @@
 		}
 	},
 	"jobLevel": {
+		"content": {
+			"description": "",
+			"level": ""
+		},
+		"dialog": {
+			"title": ""
+		},
 		"header": {
 			"title": ""
 		}
@@ -724,19 +726,13 @@
 			"title": ""
 		}
 	},
-	"job_level": {
-		"job_level_code": "",
-		"job_level_description": "",
-		"job_level_name": "",
-		"modal": {
-			"title": ""
-		}
-	},
-	"job_title": {
-		"job_title_code": "",
-		"job_title_description": "",
-		"job_title_name": "",
-		"modal": {
+	"jobTtitle": {
+		"content": {
+			"code": "",
+			"description": "",
+			"name": ""
+		},
+		"dialog": {
 			"title": ""
 		}
 	},
@@ -778,7 +774,6 @@
 			"title": ""
 		},
 		"itemDiscounts": {
-			"action": "",
 			"discounType": "",
 			"quantityFrom": "",
 			"quantityTo": "",
@@ -786,7 +781,6 @@
 			"title": ""
 		},
 		"itemMaterials": {
-			"action": "",
 			"modal_title": "",
 			"quantity": "",
 			"sourceItemCode": "",
@@ -897,7 +891,7 @@
 				"name": "",
 				"note": "",
 				"status": "",
-				"taxNumber": ""
+				"taxCode": ""
 			},
 			"header": {
 				"title": ""
@@ -911,7 +905,7 @@
 				"code": "",
 				"name": "",
 				"status": "",
-				"taxNumber": ""
+				"taxCode": ""
 			},
 			"header": {
 				"title": ""
@@ -953,17 +947,13 @@
 	},
 	"uom": {
 		"content": {
+			"code": "",
+			"description": "",
 			"modal": {
 				"title": "",
-				"uom_code": "",
-				"uom_description": "",
-				"uom_name": ""
+				"uom_description": ""
 			},
-			"table": {
-				"uom_code": "",
-				"uom_description": "",
-				"uom_name": ""
-			}
+			"name": ""
 		},
 		"header": {
 			"title": ""

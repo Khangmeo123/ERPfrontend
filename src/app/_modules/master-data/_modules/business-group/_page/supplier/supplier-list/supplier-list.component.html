@@ -1,7 +1,7 @@
 <div class="page supplier-list">
     <div class="page-header">
         <span class="page-title">
-            {{pageTitle}}
+            {{pageTitle | translate}}
             <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star

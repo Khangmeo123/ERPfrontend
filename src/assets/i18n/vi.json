@@ -19,17 +19,13 @@
 	},
 	"asset": {
 		"content": {
+			"code": "Mã tài sản",
 			"modal": {
 				"title": "Thêm tài sản"
 			},
-			"table": {
-				"asset_code": "",
-				"asset_name": "Tên tài sản",
-				"asset_status": "",
-				"asset_type": "",
-				"status": "Trạng thái",
-				"type": "Loại tài sản"
-			}
+			"name": "Tên tài sản",
+			"status": "Trạng thái",
+			"type": "Loại tài sản"
 		},
 		"header": {
 			"title": "Danh sách tài sản"
@@ -37,17 +33,12 @@
 	},
 	"bank": {
 		"content": {
-			"modal": {
-				"bank_code": "Mã ngân hàng",
-				"bank_description": "Mô tả",
-				"bank_name": "Tên ngân hàng",
-				"title": "Thêm mới ngân hàng"
-			},
-			"table": {
-				"bank_code": "Mã ngân hàng",
-				"bank_description": "Mô tả",
-				"bank_name": "Tên ngân hàng"
-			}
+			"code": "Mã ngân hàng",
+			"description": "Tên ngân hàng",
+			"name": "Mô tả"
+		},
+		"dialog": {
+			"title": "Thêm ngân hàng"
 		},
 		"header": {
 			"title": "Danh sách ngân hàng"
@@ -75,16 +66,23 @@
 	"bookmarks": {
 		"title": "Dấu trang"
 	},
+	"businessGroup": {
+		"content": {
+			"code": "Mã nhóm kinh doanh",
+			"description": "Mô tả",
+			"name": "Tên nhóm kinh doanh"
+		},
+		"dialog": {
+			"error": {
+				"title": "Danh sách lỗi"
+			},
+			"title": "Thêm nhóm kinh doanh"
+		}
+	},
 	"business_group": {
-		"code": "Mã nhóm kinh doanh",
-		"description": "Mô tả",
 		"header": {
 			"title": "Quản lý nhóm kinh doanh"
-		},
-		"modal": {
-			"title": "Thêm nhóm kinh doanh"
-		},
-		"name": "Tên nhóm kinh doanh"
+		}
 	},
 	"coa": {
 		"account_description": "Mô tả",
@@ -118,39 +116,43 @@
 		"crop": "Cắt ảnh"
 	},
 	"currency": {
-		"currency_code": "Mã tiền tệ",
-		"currency_description": "Mô tả",
-		"currency_name": "Tên loại tiền tệ",
+		"content": {
+			"code": "Mã tiền tệ",
+			"description": "Mô tả",
+			"name": "Tên loại tiền tệ"
+		},
+		"dialog": {
+			"title": "Thêm loại tiền tệ"
+		},
 		"header": {
 			"title": "Đơn vị tiền tệ"
-		},
-		"title": "Đơn vị tiền tệ"
+		}
 	},
 	"customer": {
 		"detail": {
 			"content": {
-				"code": "",
-				"name": "",
-				"note": "",
-				"status": "",
-				"taxNumber": ""
+				"code": "Mã khách hàng",
+				"name": "Tên khách hàng",
+				"note": "Lưu ý khác",
+				"status": "Trạng thái",
+				"taxCode": "Mã số thuế"
 			},
 			"header": {
-				"title": ""
+				"title": "Chỉnh sửa thông tin khách hàng"
 			},
 			"tab": {
-				"title1": ""
+				"title1": "Thông tin chung"
 			}
 		},
 		"list": {
 			"content": {
-				"code": "",
-				"name": "",
-				"status": "",
-				"taxNumber": ""
+				"code": "Mã khách hàng",
+				"name": "Tên khách hàng",
+				"status": "Trạng thái",
+				"taxCode": "Mã số thuế"
 			},
 			"header": {
-				"title": ""
+				"title": "Danh sách khách hàng"
 			}
 		}
 	},
@@ -403,19 +405,17 @@
 		}
 	},
 	"division": {
-		"address": "Địa chỉ",
-		"code": "Mã chi nhánh",
+		"content": {
+			"action": "",
+			"address": "",
+			"code": "",
+			"name": ""
+		},
+		"dialog": {
+			"title": ""
+		},
 		"header": {
 			"title": "Danh sách chi nhánh"
-		},
-		"modal": {
-			"title": "Thêm chi nhánh"
-		},
-		"name": "Tên chi nhánh",
-		"tab": {
-			"address": "Địa chỉ",
-			"code": "Mã chi nhánh",
-			"name": "Tên chi nhánh"
 		}
 	},
 	"employee": {
@@ -425,41 +425,44 @@
 					"men": "Nam",
 					"women": "Nữ"
 				},
-				"salaryInsurance": ""
+				"insuranceSalary": "Lương đóng bảo hiểm"
 			}
 		},
 		"detail": {
 			"content": {
-				"birthday": "",
-				"code": "",
-				"dependents": "",
-				"gender": "",
-				"identityDate": "",
-				"identityNumber": "",
-				"identityPlace": "",
-				"jobLevel": "",
-				"jobTitle": "",
-				"name": "",
-				"salary": "",
-				"salaryCoefficient": "",
-				"status": "",
-				"taxNumber": ""
+				"code": "Mã nhân viên",
+				"dob": "Ngày sinh",
+				"gender": "Giới tính",
+				"identityNumber": "Số CMND",
+				"issueDate": "Ngày cấp",
+				"issuePlace": "Nơi cấp",
+				"jobLevel": "Cấp bậc chức vụ",
+				"jobTitle": "Chức vụ",
+				"name": "Tên nhân viên",
+				"numberDependentPerson": "Số người phụ thuộc",
+				"salary": "Lương cơ bản",
+				"salaryRatio": "Hệ số lương",
+				"status": "Trạng thái",
+				"taxCode": "Mã số thuế"
 			},
 			"header": {
-				"title": ""
+				"title": "Thêm mới nhân viên"
 			},
 			"tab": {
-				"title1": ""
+				"title1": "Thông tin nhân viên"
 			}
 		},
 		"list": {
 			"content": {
-				"birthday": "",
-				"code": "",
-				"gender": "",
-				"identityNumber": "",
-				"name": "",
-				"status": ""
+				"code": "Mã nhân viên",
+				"dob": "Ngày sinh",
+				"gender": "Giới tính",
+				"identityNumber": "Số CMND",
+				"name": "Tên nhân viên",
+				"status": "Trạng thái"
+			},
+			"header": {
+				"title": "Danh sách nhân viên"
 			}
 		}
 	},
@@ -522,13 +525,6 @@
 		},
 		"name": "Tên nhóm"
 	},
-	"employeeList": {
-		"list": {
-			"header": {
-				"title": ""
-			}
-		}
-	},
 	"employeeOfLegalEntity": {
 		"code": "Mã pháp nhân",
 		"employee": {
@@ -585,9 +581,12 @@
 			"cancel": "Hủy",
 			"clear": "Bỏ lọc",
 			"delete": "Xóa",
+			"downloadTemplate": "",
+			"downloadTempplate": "",
 			"download_example": "Tải file mẫu",
 			"export": "Xuất Excel",
 			"import": "Nhập hàng loạt",
+			"importFile": "",
 			"import_file": "Nhập hàng loạt",
 			"ok": "",
 			"save": "Lưu"
@@ -597,14 +596,21 @@
 		},
 		"detail": "Chi tiết",
 		"division": "Tên chi nhánh",
+		"error": {
+			"direction": "",
+			"fileImport": ""
+		},
+		"gender": {
+			"female": "Nữ",
+			"male": "Nam"
+		},
+		"legalEntity": {
+			"name": ""
+		},
 		"legal_entity": {
 			"name": "Tên pháp nhân"
 		},
-		"sob": "Số bộ sổ",
-		"gender": {
-			"male": "Nam",
-			"female": "Nữ"
-		}
+		"sob": "Số bộ sổ"
 	},
 	"import_tax": {
 		"header": {
@@ -616,9 +622,6 @@
 	},
 	"item": {
 		"content": {
-			"detail": {
-				"codeFromMarket": ""
-			},
 			"tab": {
 				"enviroment_tax": "Thuế môi trường (%)",
 				"enviroment_tax_id": "Mã thuế môi trường",
@@ -636,50 +639,39 @@
 		},
 		"detail": {
 			"content": {
-				"0": {
-					"impt": ""
-				},
-				"characteristic": "",
-				"code": "",
-				"codeFromSupplier": "",
-				"description": "",
-				"ext": "",
-				"height": "",
-				"imt": "",
-				"length": "",
-				"name": "",
-				"nrt": "",
-				"primaryPrice": "",
-				"sct": "",
-				"status": "",
-				"tab": {
-					"emt": ""
-				},
-				"uom": "",
-				"vat": "",
-				"weight": "",
-				"width": ""
+				"characteristic": "Tính chất hàng",
+				"code": "Mã sản phẩm",
+				"codeFromMarket": "Mã SP trên thị trường ",
+				"codeFromSupplier": "Mã SP từ NCC",
+				"description": "Mô tả",
+				"height": "Chiều cao",
+				"length": "Chiều dài",
+				"name": "Tên sản phẩm",
+				"primaryPrice": "Đơn giá cơ bản",
+				"status": "Trạng thái",
+				"uom": "Đơn vị cơ bản",
+				"weight": "Cân nặng",
+				"width": "Chiều rộng"
 			},
 			"header": {
-				"title": ""
+				"title": "Danh sách sản phẩm"
 			},
 			"tab": {
 				"title1": "",
-				"title2": "",
 				"title_2": "Thông tin thuế suất"
 			}
 		},
 		"list": {
 			"content": {
-				"code": "",
-				"description": "",
-				"name": "",
-				"primaryPrice": "",
-				"status": "",
-				"uom": ""
+				"code": "Mã sản phẩm",
+				"description": "Mô tả",
+				"name": "Tên sản phẩm",
+				"primaryPrice": "Đơn giá cơ bản",
+				"status": "Trang thái",
+				"unitOfMeasure": "Đơn vị cơ bản"
 			},
 			"header": {
-				"title": ""
+				"title": "Danh sách sản phẩm"
 			}
 		}
 	},
@@ -704,7 +696,6 @@
 	"itemOfLegalEntity": {
 		"content": {
 			"itemDetail": {
-				"action": "",
 				"code": "Mã sản phẩm",
 				"name": "Tên sản phẩm"
 			},
@@ -719,6 +710,13 @@
 		}
 	},
 	"jobLevel": {
+		"content": {
+			"description": "Mô tả",
+			"level": "Cấp bậc"
+		},
+		"dialog": {
+			"title": "Thêm cấp bậc công việc"
+		},
 		"header": {
 			"title": "Cấp bậc công việc"
 		}
@@ -728,19 +726,13 @@
 			"title": "Chức vụ công việc"
 		}
 	},
-	"job_level": {
-		"job_level_code": "Mã cấp bậc",
-		"job_level_description": "Mô tả",
-		"job_level_name": "Tên cấp bậc",
-		"modal": {
-			"title": "Thêm cấp bậc"
-		}
-	},
-	"job_title": {
-		"job_title_code": "Mã chức vụ",
-		"job_title_description": "Mô tả",
-		"job_title_name": "Tên chức vụ",
-		"modal": {
+	"jobTtitle": {
+		"content": {
+			"code": "Mã chức vụ",
+			"description": "Mô tả",
+			"name": "Tên chức vụ"
+		},
+		"dialog": {
 			"title": "Thêm chức vụ"
 		}
 	},
@@ -782,7 +774,6 @@
 			"title": "Chỉnh sửa sản phẩm"
 		},
 		"itemDiscounts": {
-			"action": "",
 			"discounType": "Loại chiết khấu",
 			"quantityFrom": "Số lượng từ",
 			"quantityTo": "Số lượng đến",
@@ -790,7 +781,6 @@
 			"title": "Chiết khấu"
 		},
 		"itemMaterials": {
-			"action": "",
 			"modal_title": "Thêm vật liệu",
 			"quantity": "Số lương",
 			"sourceItemCode": "Mã nguyên vật liệu",
@@ -897,28 +887,28 @@
 	"supplier": {
 		"detail": {
 			"content": {
-				"code": "",
-				"name": "",
-				"note": "",
-				"status": "",
-				"taxNumber": ""
+				"code": "Mã nhà cung cấp",
+				"name": "Tên nhà cung cấp",
+				"note": "Lưu ý khác",
+				"status": "Trạng thái",
+				"taxCode": "Mã số thuế"
 			},
 			"header": {
-				"title": ""
+				"title": "Thêm mới nhà cung cấp"
 			},
 			"tab": {
-				"title1": ""
+				"title1": "Thông tin chung"
 			}
 		},
 		"list": {
 			"content": {
-				"code": "",
-				"name": "",
-				"status": "",
-				"taxNumber": ""
+				"code": "Mã nhà cung cấp",
+				"name": "Tên nhà cung cấp",
+				"status": "Trạng thái",
+				"taxCode": "Mã số thuế"
 			},
 			"header": {
-				"title": ""
+				"title": "Danh sách nhà cung cấp"
 			}
 		}
 	},
@@ -957,17 +947,13 @@
 	},
 	"uom": {
 		"content": {
+			"code": "Mã đơn vị",
+			"description": "Mô tả",
 			"modal": {
 				"title": "Thêm đơn vị tính sản phẩm",
-				"uom_code": "Mã đơn vị",
-				"uom_description": "Mô tả",
-				"uom_name": "Tên đơn vị"
+				"uom_description": "Mô tả"
 			},
-			"table": {
-				"uom_code": "Mã đơn vị",
-				"uom_description": "Mô tả",
-				"uom_name": "Tên đơn vị"
-			}
+			"name": "Tên đơn vị"
 		},
 		"header": {
 			"title": "Đơn vị tính sản phẩm"
