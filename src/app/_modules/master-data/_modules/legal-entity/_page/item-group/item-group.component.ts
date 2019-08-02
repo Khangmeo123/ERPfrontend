@@ -13,6 +13,7 @@ import { ItemGroupService } from './item-group.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.entity';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-group',
@@ -53,6 +54,8 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   itemExceptIds: ItemEntity[];
   itemSearchEntity: ItemSearchEntity = new ItemSearchEntity();
   itemTyping: Subject<ItemSearchEntity> = new Subject();
+  exportLink = environment.apiUrlApps + '/master-data/legal-entity/item-of-legal-entity/export-item-detail?itemGroupingId=';
+  exportItemDetailLink: string;
 
   constructor(private itemGroupService: ItemGroupService, private genaralService: GeneralService,
     private bookmarkService: BookmarkService, private router: Router) {
@@ -161,6 +164,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
         if (this.itemGroupList.length > 0) {
           this.itemGroupSelectedRow = this.itemGroupList[0];
           this.itemGroupId = this.itemGroupList[0].id;
+          this.exportItemDetailLink = this.exportLink + this.itemGroupId;
         }
         this.clearSearchItemsFromItemGroup(this.tableItems);
       }

@@ -244,3 +244,8 @@ body {
 .ui-chips > ul.ui-inputtext {
   width: 100% !important;
 }
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}

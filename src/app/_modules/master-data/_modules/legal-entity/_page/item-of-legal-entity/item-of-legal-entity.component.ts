@@ -12,6 +12,7 @@ import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.enti
 import { Subject, Subscription } from 'rxjs';
 import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
 import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.searchentity';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-of-legal-entity',
@@ -47,8 +48,9 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
   sobExceptIds: SobEntity[];
   sobSearchEntity: SobSearchEntity = new SobSearchEntity();
   sobTyping: Subject<SobSearchEntity> = new Subject();
-
   ItemOfLegalEntitySubs: Subscription = new Subscription();
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/item-of-legal-entity/export-item-detail?legalEntityId=';
+  exportItemDetailLink: string;
 
   constructor(private itemOfLegalEntityService: ItemOfLegalEntityService, private genaralService: GeneralService,
     private bookmarkService: BookmarkService, private router: Router) {
@@ -125,6 +127,7 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
         if (this.legalList.length > 0) {
           this.legalEntitySelectedRow = this.legalList[0];
           this.legalEntityId = this.legalList[0].id;
+          this.exportItemDetailLink = this.exportLink + this.legalEntityId;
           this.clearSearchItemsFromLegalList(this.tableItem);
         }
       }

@@ -43,15 +43,15 @@
             <ng-template pTemplate="header">
               <tr>
                 <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-itemGroup-code">
-                  {{'itemGroup.code' | translate}}
+                  {{'itemGroup.content.item.code' | translate}}
                   <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                 </th>
                 <th [pSortableColumn]="'name'" data-qe-id="table-thead-itemGroup-name">
-                  {{'itemGroup.name' | translate}}
+                  {{'itemGroup.content.item.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
                 <th>
-                  {{'itemGroup.action' | translate}}
+                  {{'itemGroup.content.item.action' | translate}}
                 </th>
               </tr>
               <tr>
@@ -100,23 +100,9 @@
             <button class="btn btn-add" (click)="addItemsToItemGroup()" data-qe-id="button-items-add"
               [disabled]="itemsFromItemGroupIds.length === 0">
               {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-items-import"
-              [isDisabled]="legalEntityId==null||legalEntityId==undefined">
-              <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                aria-controls="dropdown-basic">
-                {{'general.button.import' | translate}}<span class="caret"></span>
-              </button>
-              <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.import_file' | translate}}</a>
-                </li>
-                <li class="divider dropdown-divider"></li>
-                <li role="menuitem"><a class="dropdown-item"
-                    href="#">{{'general.button.download_example' | translate}}</a>
-                </li>
-              </ul>
-            </div>
-            <button class="btn btn-export" [disabled]="legalEntityId==null||legalEntityId==undefined"
-              data-qe-id="button-items-import">{{'general.button.export' | translate}}</button>
+            <a class="btn btn-export" data-qe-id="button-export" target="_blank"
+              [ngClass]="{'disabled': legalEntityId==null||legalEntityId==undefined}"
+              [href]="exportItemDetailLink">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearchItemsFromItemGroup(tableItems)"
               data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
           </div>
@@ -136,15 +122,15 @@
             <ng-template pTemplate="header">
               <tr>
                 <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-items-code">
-                  {{'itemGroup.item.code' | translate}}
+                  {{'itemGroup.content.itemDetail.code' | translate}}
                   <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                 </th>
                 <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-items-name">
-                  {{'itemGroup.item.name' | translate}}
+                  {{'itemGroup.content.itemDetail..name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
                 <th>
-                  {{'itemGroup.item.action' | translate}}
+                  {{'itemGroup.content.itemDetail..action' | translate}}
                 </th>
               </tr>
               <tr>
@@ -187,13 +173,14 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowItemGroupDialog" appendTo="body"
   [style]="{width: '900px'}">
   <p-header>
-    {{ 'itemGroup.modal.title' | translate}}
+    {{ 'itemGroup.dialog.title' | translate}}
   </p-header>
   <div class="container" [formGroup]="itemGroupForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="itemGroupCode">{{ 'itemGroup.code' | translate}}<span class="text-danger ml-2">*</span></label>
+          <label for="itemGroupCode">{{ 'itemGroup.content.item.code' | translate}}<span
+              class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
               id="itemGroupCode" />
@@ -206,7 +193,7 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="itemGroupFormName">{{ 'itemGroup.name' | translate}}<span
+          <label for="itemGroupFormName">{{ 'itemGroup.content.item.name' | translate}}<span
               class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
