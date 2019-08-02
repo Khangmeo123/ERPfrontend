@@ -12,10 +12,10 @@
                        selected="true"
                        [key]="key"
                        (selectionChange)="unselect($event)"
-                       *ngIf="selectedNodes.length"></app-select-list>
+                       *ngIf="hasSelectedData"></app-select-list>
       <p-tree [selectionMode]="mode"
               [value]="treeData"
-              *ngIf="treeData.length; else empty"
+              *ngIf="hasData; else empty"
               [(selection)]="selection"></p-tree>
       <ng-template #empty>
         <app-no-data></app-no-data>
