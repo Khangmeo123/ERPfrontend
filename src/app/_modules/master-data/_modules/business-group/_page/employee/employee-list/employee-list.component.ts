@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
   providers: [EmployeeListService],
 })
 export class EmployeeListComponent implements OnInit, OnDestroy {
-  pageTitle: string = translate('employeeList.list.header.title');
+  pageTitle: string = translate('employee.list.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;

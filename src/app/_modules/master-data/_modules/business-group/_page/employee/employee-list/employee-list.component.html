@@ -1,7 +1,7 @@
 <div class="page employee-list">
     <div class="page-header">
         <span class="page-title">
-            {{pageTitle}}
+            {{pageTitle | translate}}
             <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
