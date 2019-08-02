@@ -1,14 +1,18 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 
-export class NaturalResourceTaxSearchentity extends SearchEntity {
-    sobId: string;
-    taxCode: string;
-    taxType: string;
-    uomId: string;
-    taxRate: number;
-    description: string;
+export class NaturalResourceTaxSearchEntity extends SearchEntity {
+  setOfBookId: string;
 
-    constructor(resoureTariffSearchEntity?: any) {
-        super(resoureTariffSearchEntity);
-    }
+  name: TextFilter = new TextFilter();
+
+  taxCode: string;
+  taxType: string;
+  uomId: string;
+  taxRate: number;
+  description: string;
+
+  constructor(resoureTariffSearchEntity?: any) {
+    super(resoureTariffSearchEntity);
+  }
 }

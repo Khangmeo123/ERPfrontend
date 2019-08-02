@@ -3,7 +3,7 @@ import { PaginationModel } from '../../../../../../_shared/modules/pagination/pa
 import { Subscription } from 'rxjs';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { FormGroup } from '@angular/forms';
 import { SpecialConsumptionTaxService } from './special-consumption-tax.service';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
@@ -52,7 +52,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
 
   public specialConsumptionTaxCount: number = 0;
 
-  public specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity = new SpecialConsumptionTaxSearchentity();
+  public specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
 
   public specialConsumptionTaxForm: FormGroup;
 
@@ -191,7 +191,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   }
 
   clearSearch(table: any) {
-    this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchentity();
+    this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
     table.reset();
   }
 

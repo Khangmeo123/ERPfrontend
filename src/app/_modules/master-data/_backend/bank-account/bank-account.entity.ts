@@ -17,7 +17,7 @@ export class BankAccountEntity extends Entity {
   bankName: string;
 
   accountNumber: string;
-  accountName: string;
+  name: string;
   description: string;
 
   constructor(bankAccountEntity?: any) {

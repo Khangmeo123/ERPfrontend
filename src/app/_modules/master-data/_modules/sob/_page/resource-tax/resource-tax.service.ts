@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
 import { ResourceTaxRepository } from './resource-tax.repository';
 import { NaturalResourceTaxForm } from '../../../../_backend/natural-resource-tax/natural-resource-tax.form';
-import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
+import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
 
 export class ResourceTaxService {
   public resourceTaxList: BehaviorSubject<NaturalResourceTaxEntity[]>;
@@ -19,7 +19,7 @@ export class ResourceTaxService {
     ));
   }
 
-  getList(resourceTaxSearchEntity: NaturalResourceTaxSearchentity) {
+  getList(resourceTaxSearchEntity: NaturalResourceTaxSearchEntity) {
     forkJoin(this.resourceTaxRepository.getList(resourceTaxSearchEntity),
       this.resourceTaxRepository.count(resourceTaxSearchEntity)).subscribe(([list, count]) => {
       if (list) {
@@ -51,7 +51,7 @@ export class ResourceTaxService {
     });
   }
 
-  save(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
+  save(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       if (resourceTaxEntity.id === null || resourceTaxEntity.id === undefined) {
         this.resourceTaxRepository.add(resourceTaxEntity).subscribe(res => {
@@ -88,7 +88,7 @@ export class ResourceTaxService {
 
   }
 
-  deactivate(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
+  deactivate(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.resourceTaxRepository.deactivate(resourceTaxEntity).subscribe(res => {
         if (res) {

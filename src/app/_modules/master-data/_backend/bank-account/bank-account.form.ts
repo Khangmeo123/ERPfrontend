@@ -15,7 +15,7 @@ export class BankAccountForm extends FormModel {
   bankName = new FormControl(null, [requiredField]);
 
   accountNumber = new FormControl(null, [requiredField]);
-  accountName = new FormControl(null, [requiredField]);
+  name = new FormControl(null, [requiredField]);
   accountOwner = new FormControl(null, [requiredField]);
   accountingCode = new FormControl(null, [requiredField]);
 

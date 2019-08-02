@@ -85,7 +85,9 @@
   </div>
 </div>
 
-<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+<p-dialog [(visible)]="isShowDialog"
+          *ngIf="isShowDialog"
+          [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
           modal="true">
   <p-header>
     {{'sob.add' | translate}}
@@ -128,6 +130,8 @@
                            (selectionChange)="onSelectId($event, 'chartOfAccountTemplateId')"
                            [initialValue]="sobForm.controls.chartOfAccountTemplateName?.value"
                            [list]="coaList"
+                           (search)="onSearchChartOfAccount($event)"
+                           [selectedList]="selectedCoaList"
                            data-qe-id="dialog-chart-of-account-template"
                            id="sob-chart-of-account-template"
                            key="name"></app-single-select>
@@ -140,8 +144,10 @@
         <div class="div-form">
           <app-single-select (listOpen)="getCurrencyList()"
                              (selectionChange)="onSelectId($event, 'currencyId')"
+                             (search)="onSearchCurrency($event)"
                              [initialValue]="sobForm.controls.currencyCode?.value"
                              [list]="currencyList"
+                             [selectedList]="selectedCurrencyList"
                              data-qe-id="dialog-currency"
                              id="sob-currency"
                              key="code"></app-single-select>
@@ -158,10 +164,12 @@
         <label for="special-consumption-tax-template">
           {{'sob.special_consumption_tax' | translate}}
         </label>
-        <app-single-select (listOpen)="getSpecialConsumptionTaxTemplates()"
+        <app-single-select (listOpen)="getSpecialConsumptionTaxTemplateList()"
                            (selectionChange)="onSelectId($event, 'specialConsumptionTaxTemplateId')"
                            [initialValue]="sobForm.controls.specialConsumptionTaxTemplateName?.value"
-                           [list]="specialConsumptionTaxTemplates"
+                           [list]="specialConsumptionTaxTemplateList"
+                           (search)="onSearchSpecialConsumptionTaxTemplate($event)"
+                           [selectedList]="selectedSpecialConsumptionTaxTemplateList"
                            data-qe-id="dialog-special-consumption-tax-template"
                            id="special-consumption-tax-template"
                            key="name"></app-single-select>
@@ -170,10 +178,12 @@
         <label for="value-added-tax-template">
           {{'sob.value_added_tax' | translate}}
         </label>
-        <app-single-select (listOpen)="getValueAddedTaxTemplates()"
+        <app-single-select (listOpen)="getValueAddedTaxTemplateList()"
                            (selectionChange)="onSelectId($event, 'valueAddedTaxTemplateId')"
                            [initialValue]="sobForm.controls.valueAddedTaxTemplateName?.value"
-                           [list]="valueAddedTaxTemplates"
+                           [list]="valueAddedTaxTemplateList"
+                           (search)="onSearchValueAddedTaxTemplate($event)"
+                           [selectedList]="selectedValueAddedTaxTemplateList"
                            data-qe-id="dialog-value-added-tax-template"
                            id="value-added-tax-template"
                            key="name"></app-single-select>
@@ -184,10 +194,12 @@
         <label for="natural-resource-tax-template">
           {{'sob.resource_tax' | translate}}
         </label>
-        <app-single-select (listOpen)="getNaturalResourceTaxTemplates()"
+        <app-single-select (listOpen)="getNaturalResourceTaxTemplateList()"
                            (selectionChange)="onSelectId($event, 'naturalResourceTaxTemplateId')"
                            [initialValue]="sobForm.controls.naturalResourceTaxTemplate?.value"
-                           [list]="naturalResourceTaxTemplates"
+                           [list]="naturalResourceTaxTemplateList"
+                           [selectedList]="selectedNaturalResourceTaxTemplateList"
+                           (search)="onSearchNaturalResourceTemplate($event)"
                            data-qe-id="dialog-natural-resource-tax-template"
                            id="natural-resource-tax-template"
                            key="name"></app-single-select>
@@ -196,10 +208,12 @@
         <label for="environment-tax-template">
           {{'sob.enviroment_tax' | translate}}
         </label>
-        <app-single-select (listOpen)="getEnvironmentTemplates()"
+        <app-single-select (listOpen)="getEnvironmentTemplateList()"
                            (selectionChange)="onSelectId($event, 'environmentTaxTemplateId')"
                            [initialValue]="sobForm.controls.environmentTaxTemplateName?.value"
-                           [list]="environmentTaxTemplates"
+                           [list]="environmentTaxTemplateList"
+                           (search)="onSearchEnvironmentTaxTemplate($event)"
+                           [selectedList]="selectedEnvironmentTaxTemplateList"
                            data-qe-id="dialog-environment-tax-template"
                            id="environment-tax-template"
                            key="name"></app-single-select>
@@ -210,10 +224,12 @@
         <label for="export-tax-template">
           {{'sob.export_tax' | translate}}
         </label>
-        <app-single-select (listOpen)="getExportTaxTemplates()"
+        <app-single-select (listOpen)="getExportTaxTemplateList()"
                            (selectionChange)="onSelectId($event, 'exportTaxTemplateId')"
                            [initialValue]="sobForm.controls.exportTaxTemplateName?.value"
-                           [list]="exportTaxTemplates"
+                           [list]="exportTaxTemplateList"
+                           (search)="onSearchExportTaxTemplate($event)"
+                           [selectedList]="selectedExportTaxTemplateList"
                            data-qe-id="dialog-export-tax-template"
                            id="export-tax-template"
                            key="name"></app-single-select>
@@ -222,11 +238,13 @@
         <label for="import-tax-template">
           {{'sob.import_tax' | translate}}
         </label>
-        <app-single-select (listOpen)="getImportTaxTemplates()"
+        <app-single-select (listOpen)="getImportTaxTemplateList()"
                            (selectionChange)="onSelectId($event, 'importTaxTemplateId')"
                            [initialValue]="sobForm.controls.importTaxTemplateName?.value"
-                           [list]="importTaxTemplates"
+                           [list]="importTaxTemplateList"
+                           [selectedList]="selectedImportTaxTemplateList"
                            data-qe-id="dialog-import-tax-template"
+                           (search)="onSearchImportTaxTemplate($event)"
                            id="import-tax-template"
                            key="name"></app-single-select>
       </div>

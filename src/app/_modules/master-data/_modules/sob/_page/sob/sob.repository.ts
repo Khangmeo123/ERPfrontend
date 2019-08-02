@@ -19,9 +19,9 @@ import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-
 import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
 import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
 import { EnvironmentTaxEntity } from '../../../../_backend/environment-tax/environment-tax.entity';
-import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
+import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
 import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
-import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
 
 @Injectable({
@@ -68,7 +68,7 @@ export class SobRepository extends Repository {
     );
   }
 
-  getImportTaxTemplates(importTaxSearchEntity: ImportTaxSearchEntity): Observable<Entities> {
+  getImportTaxTemplateList(importTaxSearchEntity: ImportTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(this.apiUrl + '/list-import-tax-template', JSON.stringify(importTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
@@ -80,7 +80,7 @@ export class SobRepository extends Repository {
     );
   }
 
-  getExportTaxTemplates(exportTaxSearchEntity: ExportTaxSearchEntity): Observable<Entities> {
+  getExportTaxTemplateList(exportTaxSearchEntity: ExportTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(this.apiUrl + '/list-export-tax-template', JSON.stringify(exportTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
@@ -92,7 +92,7 @@ export class SobRepository extends Repository {
     );
   }
 
-  getValueAddedTaxTemplates(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity): Observable<Entities> {
+  getValueAddedTaxTemplateList(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(this.apiUrl + '/list-value-added-tax-template', JSON.stringify(valueAddedTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
@@ -120,7 +120,7 @@ export class SobRepository extends Repository {
     );
   }
 
-  getEnvironmentTaxTemplates(environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Observable<Entities> {
+  getEnvironmentTaxTemplateList(environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(this.apiUrl + '/list-environment-tax-template', JSON.stringify(environmentTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
@@ -132,7 +132,7 @@ export class SobRepository extends Repository {
     );
   }
 
-  getNaturalResourceTaxTemplates(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchentity): Observable<Entities> {
+  getNaturalResourceTaxTemplateList(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(this.apiUrl + '/list-natural-resource-tax-template', JSON.stringify(naturalResourceTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
@@ -144,7 +144,7 @@ export class SobRepository extends Repository {
     );
   }
 
-  getSpecialConsumptionTaxTemplates(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Observable<Entities> {
+  getSpecialConsumptionTaxTemplateList(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
       this.apiUrl + '/list-special-consumption-tax-template',
       JSON.stringify(specialConsumptionTaxSearchEntity),

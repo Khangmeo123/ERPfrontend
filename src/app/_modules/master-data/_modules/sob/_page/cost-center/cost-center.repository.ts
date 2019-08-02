@@ -57,7 +57,6 @@ export class CostCenterRepository extends Repository {
     return this.http.post<CostCenterEntity[]>(this.apiUrl + '/list', costCenterSearchEntity,
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
-        console.log(r.body);
         return r.body.map((item) => {
           return new CostCenterEntity(item);
         });

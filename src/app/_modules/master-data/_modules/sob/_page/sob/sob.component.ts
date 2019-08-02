@@ -15,8 +15,8 @@ import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-ta
 import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
 import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
 import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
-import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
-import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
+import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { ImportTaxEntity } from '../../../../_backend/import-tax/import-tax.entity';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
@@ -58,41 +58,41 @@ export class SobComponent implements OnInit, OnDestroy {
 
   selectedCoaList: CoaEntity[] = [];
 
-  importTaxTemplates: ImportTaxEntity[] = [];
+  importTaxTemplateList: ImportTaxEntity[] = [];
 
   importTaxSearchEntity: ImportTaxSearchEntity = new ImportTaxSearchEntity();
 
-  selectedImportTaxTemplates: ImportTaxEntity[] = [];
+  selectedImportTaxTemplateList: ImportTaxEntity[] = [];
 
-  exportTaxTemplates: ExportTaxEntity[] = [];
+  exportTaxTemplateList: ExportTaxEntity[] = [];
 
-  selectedExportTaxTemplates: ExportTaxEntity[] = [];
+  selectedExportTaxTemplateList: ExportTaxEntity[] = [];
 
   exportTaxSearchEntity: ExportTaxSearchEntity = new ExportTaxSearchEntity();
 
-  environmentTaxTemplates: EnvironmentTaxEntity[] = [];
+  environmentTaxTemplateList: EnvironmentTaxEntity[] = [];
 
-  selectedEnvironmentTaxTemplates: EnvironmentTaxEntity[] = [];
+  selectedEnvironmentTaxTemplateList: EnvironmentTaxEntity[] = [];
 
   environmentTaxSearchEntity: EnvironmentTaxSearchEntity = new EnvironmentTaxSearchEntity();
 
-  valueAddedTaxTemplates: ValueAddedTaxEntity[] = [];
+  valueAddedTaxTemplateList: ValueAddedTaxEntity[] = [];
 
-  selectedValueAddedTaxTemplates: ValueAddedTaxEntity[] = [];
+  selectedValueAddedTaxTemplateList: ValueAddedTaxEntity[] = [];
 
   valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity = new ValueAddedTaxSearchEntity();
 
-  naturalResourceTaxTemplates: NaturalResourceTaxEntity[] = [];
+  naturalResourceTaxTemplateList: NaturalResourceTaxEntity[] = [];
 
-  selectedNaturalResourceTaxTemplates: NaturalResourceTaxEntity[] = [];
+  selectedNaturalResourceTaxTemplateList: NaturalResourceTaxEntity[] = [];
 
-  naturalResourceTaxSearchEntity: NaturalResourceTaxSearchentity = new NaturalResourceTaxSearchentity();
+  naturalResourceTaxSearchEntity: NaturalResourceTaxSearchEntity = new NaturalResourceTaxSearchEntity();
 
-  specialConsumptionTaxTemplates: SpecialConsumptionTaxEntity[] = [];
+  specialConsumptionTaxTemplateList: SpecialConsumptionTaxEntity[] = [];
 
-  selectedSpecialConsumptionTaxTemplates: SpecialConsumptionTaxEntity[] = [];
+  selectedSpecialConsumptionTaxTemplateList: SpecialConsumptionTaxEntity[] = [];
 
-  specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity = new SpecialConsumptionTaxSearchentity();
+  specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
 
   sobForm: FormGroup;
 
@@ -144,45 +144,45 @@ export class SobComponent implements OnInit, OnDestroy {
       }
     });
 
-    const importTaxSub = this.sobService.importTaxTemplates.subscribe((res) => {
+    const importTaxSub = this.sobService.importTaxTemplateList.subscribe((res) => {
       if (res) {
-        this.importTaxTemplates = res.exceptIds;
-        this.selectedImportTaxTemplates = res.ids;
+        this.importTaxTemplateList = res.exceptIds;
+        this.selectedImportTaxTemplateList = res.ids;
       }
     });
 
-    const exportTaxSub = this.sobService.exportTaxTemplates.subscribe((res) => {
+    const exportTaxSub = this.sobService.exportTaxTemplateList.subscribe((res) => {
       if (res) {
-        this.exportTaxTemplates = res.exceptIds;
-        this.selectedExportTaxTemplates = res.ids;
+        this.exportTaxTemplateList = res.exceptIds;
+        this.selectedExportTaxTemplateList = res.ids;
       }
     });
 
-    const environmentTaxSub = this.sobService.environmentTaxTemplates.subscribe((res) => {
+    const environmentTaxSub = this.sobService.environmentTaxTemplateList.subscribe((res) => {
       if (res) {
-        this.environmentTaxTemplates = res.exceptIds;
-        this.selectedEnvironmentTaxTemplates = res.ids;
+        this.environmentTaxTemplateList = res.exceptIds;
+        this.selectedEnvironmentTaxTemplateList = res.ids;
       }
     });
 
-    const naturalResourceTaxSub = this.sobService.naturalResourceTaxTemplates.subscribe((res) => {
+    const naturalResourceTaxSub = this.sobService.naturalResourceTaxTemplateList.subscribe((res) => {
       if (res) {
-        this.naturalResourceTaxTemplates = res.exceptIds;
-        this.selectedNaturalResourceTaxTemplates = res.ids;
+        this.naturalResourceTaxTemplateList = res.exceptIds;
+        this.selectedNaturalResourceTaxTemplateList = res.ids;
       }
     });
 
-    const valueAddedTaxSub = this.sobService.valueAddedTaxTemplates.subscribe((res) => {
+    const valueAddedTaxSub = this.sobService.valueAddedTaxTemplateList.subscribe((res) => {
       if (res) {
-        this.valueAddedTaxTemplates = res.exceptIds;
-        this.selectedValueAddedTaxTemplates = res.ids;
+        this.valueAddedTaxTemplateList = res.exceptIds;
+        this.selectedValueAddedTaxTemplateList = res.ids;
       }
     });
 
-    const specialConsumptionTaxSub = this.sobService.specialConsumptionTaxTemplates.subscribe((res) => {
+    const specialConsumptionTaxSub = this.sobService.specialConsumptionTaxTemplateList.subscribe((res) => {
       if (res) {
-        this.specialConsumptionTaxTemplates = res.exceptIds;
-        this.selectedSpecialConsumptionTaxTemplates = res.ids;
+        this.specialConsumptionTaxTemplateList = res.exceptIds;
+        this.selectedSpecialConsumptionTaxTemplateList = res.ids;
       }
     });
 
@@ -225,34 +225,76 @@ export class SobComponent implements OnInit, OnDestroy {
     }
   }
 
-  getImportTaxTemplates() {
+  getImportTaxTemplateList() {
     this.importTaxSearchEntity = new ImportTaxSearchEntity();
-    this.sobService.getImportTaxTemplates(this.importTaxSearchEntity);
+    if (this.sobForm.controls.importTaxTemplateId.value) {
+      this.importTaxSearchEntity.ids = [
+        this.sobForm.controls.importTaxTemplateId.value,
+      ];
+    } else {
+      this.importTaxSearchEntity.ids = this.selectedImportTaxTemplateList.map((item) => item.id);
+    }
+    this.sobService.getImportTaxTemplateList(this.importTaxSearchEntity);
   }
 
-  getExportTaxTemplates() {
+  getExportTaxTemplateList() {
     this.exportTaxSearchEntity = new ExportTaxSearchEntity();
-    this.sobService.getExportTaxTemplates(this.exportTaxSearchEntity);
+    if (this.sobForm.controls.exportTaxTemplateId.value) {
+      this.exportTaxSearchEntity.ids = [
+        this.sobForm.controls.exportTaxTemplateId.value,
+      ];
+    } else {
+      this.exportTaxSearchEntity.ids = this.selectedExportTaxTemplateList.map((item) => item.id);
+    }
+    this.sobService.getExportTaxTemplateList(this.exportTaxSearchEntity);
   }
 
-  getEnvironmentTemplates() {
+  getEnvironmentTemplateList() {
     this.environmentTaxSearchEntity = new EnvironmentTaxSearchEntity();
-    this.sobService.getEnvironmentTaxTemplates(this.environmentTaxSearchEntity);
+    if (this.sobForm.controls.environmentTaxTemplateId.value) {
+      this.environmentTaxSearchEntity.ids = [
+        this.sobForm.controls.environmentTaxTemplateId.value,
+      ];
+    } else {
+      this.environmentTaxSearchEntity.ids = this.selectedEnvironmentTaxTemplateList.map((item) => item.id);
+    }
+    this.sobService.getEnvironmentTaxTemplateList(this.environmentTaxSearchEntity);
   }
 
-  getNaturalResourceTaxTemplates() {
-    this.naturalResourceTaxSearchEntity = new NaturalResourceTaxSearchentity();
-    this.sobService.getNaturalResourceTaxTemplates(this.naturalResourceTaxSearchEntity);
+  getNaturalResourceTaxTemplateList() {
+    this.naturalResourceTaxSearchEntity = new NaturalResourceTaxSearchEntity();
+    if (this.sobForm.controls.naturalResourceTaxTemplateId.value) {
+      this.naturalResourceTaxSearchEntity.ids = [
+        this.sobForm.controls.naturalResourceTaxTemplateId.value,
+      ];
+    } else {
+      this.naturalResourceTaxSearchEntity.ids = this.selectedNaturalResourceTaxTemplateList.map((item) => item.id);
+    }
+    this.sobService.getNaturalResourceTaxTemplateList(this.naturalResourceTaxSearchEntity);
   }
 
-  getValueAddedTaxTemplates() {
+  getValueAddedTaxTemplateList() {
     this.valueAddedTaxSearchEntity = new ValueAddedTaxSearchEntity();
-    this.sobService.getValueAddedTaxTemplates(this.valueAddedTaxSearchEntity);
+    if (this.sobForm.controls.valueAddedTaxTemplateId.value) {
+      this.valueAddedTaxSearchEntity.ids = [
+        this.sobForm.controls.valueAddedTaxTemplateId.value,
+      ];
+    } else {
+      this.valueAddedTaxSearchEntity.ids = this.selectedValueAddedTaxTemplateList.map((item) => item.id);
+    }
+    this.sobService.getValueAddedTaxTemplateList(this.valueAddedTaxSearchEntity);
   }
 
-  getSpecialConsumptionTaxTemplates() {
-    this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchentity();
-    this.sobService.getSpecialConsumptionTaxTemplates(this.specialConsumptionTaxSearchEntity);
+  getSpecialConsumptionTaxTemplateList() {
+    this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
+    if (this.sobForm.controls.specialConsumptionTaxTemplateId.value) {
+      this.specialConsumptionTaxSearchEntity.ids = [
+        this.sobForm.controls.specialConsumptionTaxTemplateId.value,
+      ];
+    } else {
+      this.specialConsumptionTaxSearchEntity.ids = this.selectedSpecialConsumptionTaxTemplateList.map((item) => item.id);
+    }
+    this.sobService.getSpecialConsumptionTaxTemplateList(this.specialConsumptionTaxSearchEntity);
   }
 
   toggleModal() {
@@ -266,6 +308,14 @@ export class SobComponent implements OnInit, OnDestroy {
   }
 
   getCurrencyList() {
+    this.currencySearchEntity = new CurrencySearchEntity();
+    if (this.sobForm.controls.currencyId.value) {
+      this.currencySearchEntity.ids = [
+        this.sobForm.controls.currencyId.value,
+      ];
+    } else {
+      this.currencySearchEntity.ids = this.selectedCurrencyList.map((item) => item.id);
+    }
     this.sobService.getCurrencyList(this.currencySearchEntity);
   }
 
@@ -310,7 +360,6 @@ export class SobComponent implements OnInit, OnDestroy {
   save() {
     if (!this.sobForm.valid) {
       this.generalService.validateAllFormFields(this.sobForm);
-      console.log(this.sobForm.getRawValue());
     } else {
       this.sobService.save(this.sobForm.value, this.sobSearchEntity).then(res => {
         this.isShowDialog = res;
@@ -337,6 +386,46 @@ export class SobComponent implements OnInit, OnDestroy {
   clearSearch(table: any) {
     this.sobSearchEntity = new SobSearchEntity();
     table.reset();
+  }
+
+  onSearchCurrency(event) {
+    this.currencySearchEntity.code.startsWith = event;
+    this.sobService.getCurrencyList(this.currencySearchEntity);
+  }
+
+  onSearchChartOfAccount(event) {
+    this.coaSearchEntity.name.startsWith = event;
+    this.sobService.getCoaList(this.coaSearchEntity);
+  }
+
+  onSearchImportTaxTemplate(event) {
+    this.importTaxSearchEntity.name.startsWith = event;
+    this.sobService.getCoaList(this.coaSearchEntity);
+  }
+
+  onSearchExportTaxTemplate(event) {
+    this.exportTaxSearchEntity.name.startsWith = event;
+    this.sobService.getExportTaxTemplateList(this.exportTaxSearchEntity);
+  }
+
+  onSearchValueAddedTaxTemplate(event) {
+    this.valueAddedTaxSearchEntity.name.startsWith = event;
+    this.sobService.getValueAddedTaxTemplateList(this.valueAddedTaxSearchEntity);
+  }
+
+  onSearchNaturalResourceTemplate(event) {
+    this.naturalResourceTaxSearchEntity.name.startsWith = event;
+    this.sobService.getNaturalResourceTaxTemplateList(this.naturalResourceTaxSearchEntity);
+  }
+
+  onSearchSpecialConsumptionTaxTemplate(event) {
+    this.specialConsumptionTaxSearchEntity.name.startsWith = event;
+    this.sobService.getSpecialConsumptionTaxTemplateList(this.specialConsumptionTaxSearchEntity);
+  }
+
+  onSearchEnvironmentTaxTemplate(event) {
+    this.environmentTaxSearchEntity.name.startsWith = event;
+    this.sobService.getEnvironmentTaxTemplateList(this.environmentTaxSearchEntity);
   }
 
   bookMark() {

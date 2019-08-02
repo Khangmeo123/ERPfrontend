@@ -4,9 +4,9 @@ export class CoaEntity extends Entity {
   // sobEntity:
   setOfBookId: string;
 
-  accountCode: string;
-  accountName: string;
-  accountDescription: string;
+  code: string;
+  name: string;
+  description: string;
 
   characteristicId: string;
   characteristicValue: string;

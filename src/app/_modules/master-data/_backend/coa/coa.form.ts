@@ -6,9 +6,9 @@ import { requiredField } from 'src/app/_helpers';
 export class CoaForm extends FormModel {
   setOfBookId = new FormControl(null);
 
-  accountCode = new FormControl(null, [requiredField]);
-  accountName = new FormControl(null, [requiredField]);
-  accountDescription = new FormControl(null);
+  code = new FormControl(null, [requiredField]);
+  name = new FormControl(null, [requiredField]);
+  description = new FormControl(null);
 
   characteristicId = new FormControl(null);
   characteristicValue = new FormControl(null);

@@ -4,7 +4,7 @@ import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
+import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
 import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class ResourceTaxRepository extends Repository {
     this.apiUrl = environment.apiUrlApps + 'master-data/setOfBook';
   }
 
-  getList(resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Observable<NaturalResourceTaxEntity[]> {
+  getList(resourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Observable<NaturalResourceTaxEntity[]> {
     return this.http.post<NaturalResourceTaxEntity[]>(this.apiUrl + '/list', JSON.stringify(resourceTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
@@ -27,7 +27,7 @@ export class ResourceTaxRepository extends Repository {
     );
   }
 
-  count(resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Observable<number> {
+  count(resourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Observable<number> {
     return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(resourceTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),

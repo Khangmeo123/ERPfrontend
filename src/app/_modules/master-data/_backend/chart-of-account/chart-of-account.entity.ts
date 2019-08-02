@@ -3,10 +3,10 @@ import { Entity } from '../../../../_helpers/entity';
 export class ChartOfAccountEntity extends Entity {
   id: string;
 
-  accountCode: string;
+  code: string;
   aliasCode: string;
-  accountName: string;
-  accountDescription: string;
+  name: string;
+  description: string;
 
   constructor(coaEntity?: any) {
     super(coaEntity);

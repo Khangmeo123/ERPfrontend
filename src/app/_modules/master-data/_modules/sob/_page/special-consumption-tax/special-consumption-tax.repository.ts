@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
-import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
@@ -20,7 +20,7 @@ export class SpecialConsumptionTaxRepository extends Repository {
     this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/special-consumption-tax';
   }
 
-  getList(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Observable<SpecialConsumptionTaxEntity[]> {
+  getList(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Observable<SpecialConsumptionTaxEntity[]> {
     return this.http.post<SpecialConsumptionTaxEntity[]>(this.apiUrl + '/list', JSON.stringify(specialConsumptionTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
@@ -31,7 +31,7 @@ export class SpecialConsumptionTaxRepository extends Repository {
     );
   }
 
-  count(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Observable<number> {
+  count(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Observable<number> {
     return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(specialConsumptionTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),

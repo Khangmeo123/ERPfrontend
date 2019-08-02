@@ -8,7 +8,7 @@ export class BankAccountSearchEntity extends SearchEntity {
   bankName: TextFilter = new TextFilter();
   bankCode: TextFilter = new TextFilter();
   accountOwner: TextFilter = new TextFilter();
-  accountName: TextFilter = new TextFilter();
+  name: TextFilter = new TextFilter();
   accountNumber: TextFilter = new TextFilter();
   description: TextFilter = new TextFilter();
 

@@ -53,36 +53,36 @@
           </tr>
           <tr class="th-filter">
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.accountCode"
-                                    data-qe-id="filter-accountCode"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.code"
+                                    data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.accountName"
-                                    data-qe-id="filter-accountName"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.name"
+                                    data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.characteristicValue"
                                     data-qe-id="filter-characteristicValue"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.accountDescription"
-                                    data-qe-id="filter-accountDescription"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.description"
+                                    data-qe-id="filter-description"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
         <ng-template let-row pTemplate="body">
           <tr>
             <td>
-              {{row.accountCode}}
+              {{row.code}}
             </td>
             <td>
-              {{row.accountName}}
+              {{row.name}}
             </td>
             <td>
               {{row.characteristicName}}
             </td>
             <td>
-              {{row.accountDescription}}
+              {{row.description}}
             </td>
           </tr>
         </ng-template>
@@ -106,13 +106,13 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="account-code" class="form-control" data-qe-id="dialog-account-code" formControlName="accountCode"
-                 name="accountCode"
+          <input id="account-code" class="form-control" data-qe-id="dialog-account-code" formControlName="code"
+                 name="code"
                  type="text">
           <app-error
-            *ngIf="(coaForm.controls.accountCode?.errors && coaForm.controls.accountCode?.touched) || !!coaForm.controls.error.get('accountCode')?.value"
+            *ngIf="(coaForm.controls.code?.errors && coaForm.controls.code?.touched) || !!coaForm.controls.error.get('code')?.value"
             [formGroup]="coaForm"
-            [placement]="'top'" [property]="'accountCode'" class="error-form" data-qe-id="dialog-error-account-code">
+            [placement]="'top'" [property]="'code'" class="error-form" data-qe-id="dialog-error-account-code">
           </app-error>
         </div>
       </div>
@@ -122,13 +122,13 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="account-name" class="form-control" data-qe-id="dialog-account-name" formControlName="accountName"
-                 name="accountName"
+          <input id="account-name" class="form-control" data-qe-id="dialog-account-name" formControlName="name"
+                 name="name"
                  type="text">
           <app-error
-            *ngIf="(coaForm.controls.accountName?.errors && coaForm.controls.accountName?.touched) || !!coaForm.controls.error.get('accountName')?.value"
+            *ngIf="(coaForm.controls.name?.errors && coaForm.controls.name?.touched) || !!coaForm.controls.error.get('name')?.value"
             [formGroup]="coaForm"
-            [placement]="'top'" [property]="'accountName'" class="error-form" data-qe-id="dialog-error-account-name">
+            [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-account-name">
           </app-error>
         </div>
       </div>
@@ -152,7 +152,7 @@
         <app-single-select (listOpen)="getParentAccountList()"
                            [list]="parentAccountList"
                            id="parent-account"
-                           key="accountName"
+                           key="name"
                            [selectedList]="selectedParentAccountList"
                            data-qe-id="parent-account"></app-single-select>
       </div>
@@ -163,7 +163,7 @@
         <textarea class="form-control"
                   id="account-description"
                   data-qe-id="account-description"
-                  formControlName="accountDescription"
+                  formControlName="description"
                   rows="3"></textarea>
       </div>
     </div>

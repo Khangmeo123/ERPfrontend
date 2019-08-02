@@ -97,7 +97,7 @@
             {{bankAccount.accountOwner}}
           </td>
           <td>
-            {{bankAccount.accountDescription}}
+            {{bankAccount.description}}
           </td>
         </tr>
       </ng-template>
@@ -124,14 +124,14 @@
           <app-single-select (listOpen)="getCoaList()"
                              (selectionChange)="accountingCode.value = $event[0]"
                              [list]="coaList"
-                             key="accountName"
+                             key="name"
                              [selectedList]="selectedCoaList"
                              class="flex-grow-1"
                              data-qe-id="dialog-accounting-code"></app-single-select>
           <app-error
-            *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.error.get('accountName')?.value"
+            *ngIf="(bankAccountForm.controls.name?.errors && bankAccountForm.controls.name?.touched) || !!bankAccountForm.controls.error.get('name')?.value"
             [formGroup]="bankAccountForm"
-            [placement]="'top'" [property]="'accountName'" class="error-form" data-qe-id="dialog-error-account-code">
+            [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-account-code">
           </app-error>
         </div>
       </div>

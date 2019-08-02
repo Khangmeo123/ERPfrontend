@@ -6,7 +6,7 @@ import { Entities } from '../../../../../../_helpers/entity';
 import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
 import { SpecialConsumptionTaxRepository } from './special-consumption-tax.repository';
 import { SpecialConsumptionTaxForm } from '../../../../_backend/special-consumption-tax/special-consumption-tax.form';
-import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
 
 export class SpecialConsumptionTaxService {
@@ -23,7 +23,7 @@ export class SpecialConsumptionTaxService {
     ));
   }
 
-  getList(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity) {
+  getList(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity) {
     forkJoin(this.specialConsumptionTaxRepository.getList(specialConsumptionTaxSearchEntity),
       this.specialConsumptionTaxRepository.count(specialConsumptionTaxSearchEntity)).subscribe(([list, count]) => {
       if (list) {
@@ -77,7 +77,7 @@ export class SpecialConsumptionTaxService {
     });
   }
 
-  save(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Promise<boolean> {
+  save(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       if (specialConsumptionTaxEntity.id === null || specialConsumptionTaxEntity.id === undefined) {
         this.specialConsumptionTaxRepository.add(specialConsumptionTaxEntity).subscribe(res => {
@@ -114,7 +114,7 @@ export class SpecialConsumptionTaxService {
 
   }
 
-  deactivate(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Promise<boolean> {
+  deactivate(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
       this.specialConsumptionTaxRepository.deactivate(specialConsumptionTaxEntity).subscribe(res => {
         if (res) {

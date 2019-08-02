@@ -4,9 +4,9 @@ import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 export class CoaSearchEntity extends SearchEntity {
   setOfBookId: string;
 
-  accountCode: TextFilter = new TextFilter();
-  accountName: TextFilter = new TextFilter();
-  accountDescription: TextFilter = new TextFilter();
+  code: TextFilter = new TextFilter();
+  name: TextFilter = new TextFilter();
+  description: TextFilter = new TextFilter();
 
   characteristicValue: TextFilter = new TextFilter();
 

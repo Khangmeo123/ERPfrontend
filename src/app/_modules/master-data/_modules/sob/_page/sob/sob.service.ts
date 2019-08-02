@@ -12,8 +12,8 @@ import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-ta
 import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
 import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
 import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
-import { NaturalResourceTaxSearchentity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
-import { SpecialConsumptionTaxSearchentity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
+import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 export class SobService {
 
@@ -21,13 +21,13 @@ export class SobService {
   public sobCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
   public currencyList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
-  public importTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public importTaxTemplateList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
   public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
-  public exportTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
-  public environmentTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
-  public specialConsumptionTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
-  public valueAddedTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
-  public naturalResourceTaxTemplates: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public exportTaxTemplateList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public environmentTaxTemplateList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public specialConsumptionTaxTemplateList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public valueAddedTaxTemplateList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public naturalResourceTaxTemplateList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   public sobForm: BehaviorSubject<FormGroup>;
 
@@ -46,50 +46,50 @@ export class SobService {
     });
   }
 
-  getImportTaxTemplates(importTaxSearchEntity: ImportTaxSearchEntity) {
-    this.sobRepository.getImportTaxTemplates(importTaxSearchEntity).subscribe((list) => {
+  getImportTaxTemplateList(importTaxSearchEntity: ImportTaxSearchEntity) {
+    this.sobRepository.getImportTaxTemplateList(importTaxSearchEntity).subscribe((list) => {
       if (list) {
-        this.importTaxTemplates.next(list);
+        this.importTaxTemplateList.next(list);
       }
     });
   }
 
-  getExportTaxTemplates(exportTaxSearchEntity: ExportTaxSearchEntity) {
-    this.sobRepository.getExportTaxTemplates(exportTaxSearchEntity).subscribe((list) => {
+  getExportTaxTemplateList(exportTaxSearchEntity: ExportTaxSearchEntity) {
+    this.sobRepository.getExportTaxTemplateList(exportTaxSearchEntity).subscribe((list) => {
       if (list) {
-        this.exportTaxTemplates.next(list);
+        this.exportTaxTemplateList.next(list);
       }
     });
   }
 
-  getEnvironmentTaxTemplates(environmentTaxSearchEntity: EnvironmentTaxSearchEntity) {
-    this.sobRepository.getEnvironmentTaxTemplates(environmentTaxSearchEntity).subscribe((list) => {
+  getEnvironmentTaxTemplateList(environmentTaxSearchEntity: EnvironmentTaxSearchEntity) {
+    this.sobRepository.getEnvironmentTaxTemplateList(environmentTaxSearchEntity).subscribe((list) => {
       if (list) {
-        this.environmentTaxTemplates.next(list);
+        this.environmentTaxTemplateList.next(list);
       }
     });
   }
 
-  getValueAddedTaxTemplates(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity) {
-    this.sobRepository.getValueAddedTaxTemplates(valueAddedTaxSearchEntity).subscribe((list) => {
+  getValueAddedTaxTemplateList(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity) {
+    this.sobRepository.getValueAddedTaxTemplateList(valueAddedTaxSearchEntity).subscribe((list) => {
       if (list) {
-        this.valueAddedTaxTemplates.next(list);
+        this.valueAddedTaxTemplateList.next(list);
       }
     });
   }
 
-  getNaturalResourceTaxTemplates(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchentity) {
-    this.sobRepository.getNaturalResourceTaxTemplates(naturalResourceTaxSearchEntity).subscribe((list) => {
+  getNaturalResourceTaxTemplateList(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchEntity) {
+    this.sobRepository.getNaturalResourceTaxTemplateList(naturalResourceTaxSearchEntity).subscribe((list) => {
       if (list) {
-        this.naturalResourceTaxTemplates.next(list);
+        this.naturalResourceTaxTemplateList.next(list);
       }
     });
   }
 
-  getSpecialConsumptionTaxTemplates(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity) {
-    this.sobRepository.getSpecialConsumptionTaxTemplates(specialConsumptionTaxSearchEntity).subscribe((list) => {
+  getSpecialConsumptionTaxTemplateList(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity) {
+    this.sobRepository.getSpecialConsumptionTaxTemplateList(specialConsumptionTaxSearchEntity).subscribe((list) => {
       if (list) {
-        this.specialConsumptionTaxTemplates.next(list);
+        this.specialConsumptionTaxTemplateList.next(list);
       }
     });
   }
