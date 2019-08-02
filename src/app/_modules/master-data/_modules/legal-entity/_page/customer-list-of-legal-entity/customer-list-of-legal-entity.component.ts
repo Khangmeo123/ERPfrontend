@@ -44,7 +44,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   customerTyping: Subject<CustomerSearchEntity> = new Subject();
   listCustomerId: Array<any> = [];
 
-  exportLink = environment.apiUrlApps +'master-data/legal-entity/customer-of-legal-entity/export?legalEntityId=';
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/customer-of-legal-entity/export?legalEntityId=';
   @ViewChild('tableCustomer', { static: false }) public tableCustomer: TemplateRef<any>;
 
 
@@ -193,8 +193,10 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   deleteCustomerFormLegal(customer: any) {
     this.customerOfLegalEntityService.delete(customer).then(res => {
+      console.log(res)
       if (res) {
         this.clearSearchCustomer(this.tableCustomer);
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity)
       }
     });
   }

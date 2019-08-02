@@ -21,7 +21,7 @@
             {{'select.availableList' | translate}}
           </span>
         </div>
-        <app-select-list [dataSource]="list" (selectionChange)="select($event)"></app-select-list>
+        <app-select-list [dataSource]="list" (selectionChange)="select($event)" [key]="key"></app-select-list>
       </ng-container>
       <ng-template #empty>
         <app-no-data></app-no-data>
