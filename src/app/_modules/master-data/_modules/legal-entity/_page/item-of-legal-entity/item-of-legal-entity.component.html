@@ -1,7 +1,7 @@
 <div class="page list-item-of-legal-entity">
   <div class="page-header">
     <span class="page-title">
-      {{pageTitle}}
+      {{pageTitle | translate}}
       <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
           star
@@ -120,8 +120,8 @@
                   {{'itemOfLegalEntity.content.itemDetail.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th>
-                  {{'itemOfLegalEntity.content.itemDetail.action' | translate}}
+                <th pResizableColumn>
+                  {{'general.action' | translate}}
                 </th>
               </tr>
               <tr>
@@ -135,7 +135,7 @@
                     (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-name">
                   </app-advanced-filters>
                 </th>
-                <th></th>
+                <th  class="th-filter"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-itemsFromLegal let-index="rowIndex">

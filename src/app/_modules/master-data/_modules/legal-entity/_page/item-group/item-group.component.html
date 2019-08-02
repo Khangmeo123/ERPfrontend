@@ -1,7 +1,7 @@
 <div class="page list-item-group">
   <div class="page-header">
     <span class="page-title">
-      {{pageTitle}}
+      {{pageTitle | translate}}
       <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSavedBookMark ? '#3D464D' : '#FCE205'}">
           star
@@ -46,12 +46,12 @@
                   {{'itemGroup.content.item.code' | translate}}
                   <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                 </th>
-                <th [pSortableColumn]="'name'" data-qe-id="table-thead-itemGroup-name">
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-itemGroup-name">
                   {{'itemGroup.content.item.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th>
-                  {{'itemGroup.content.item.action' | translate}}
+                <th pResizableColumn>
+                  {{'general.action' | translate}}
                 </th>
               </tr>
               <tr>
@@ -132,11 +132,11 @@
                   <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                 </th>
                 <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-items-name">
-                  {{'itemGroup.content.itemDetail..name' | translate}}
+                  {{'itemGroup.content.itemDetail.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th>
-                  {{'itemGroup.content.itemDetail..action' | translate}}
+                <th pResizableColumn>
+                  {{'general.action' | translate}}
                 </th>
               </tr>
               <tr>
@@ -160,7 +160,7 @@
                 <td class="ui-resizable-column">
                   <div class="d-flex">
                     <div class="delete" (click)="deleteItemFromItemGroup(items.id)">
-                      <mat-icon>remove_red_eye</mat-icon>
+                      <mat-icon>delete</mat-icon>
                     </div>
                     <div class="edit mr-2" (click)="editItemFromItemGroup(items.id)">
                       <mat-icon>edit</mat-icon>

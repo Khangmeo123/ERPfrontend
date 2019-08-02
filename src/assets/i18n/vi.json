@@ -680,33 +680,39 @@
 		}
 	},
 	"itemGroup": {
-		"action": "",
-		"code": "Mã nhóm",
+		"content": {
+			"item": {
+				"code": "Mã nhóm",
+				"name": "Tên nhóm"
+			},
+			"itemDetail": {
+				"code": "Mã sản phẩm",
+				"name": "Tên sản phẩm"
+			}
+		},
+		"dialog": {
+			"title": "Thêm nhóm sản phẩm"
+		},
 		"header": {
 			"title": "Nhóm sản phẩm"
-		},
-		"item": {
-			"action": "",
-			"code": "Mã sản phâm",
-			"name": "Tên sản phẩm"
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": "Tên nhóm"
+		}
 	},
 	"itemOfLegalEntity": {
-		"code": "Mã pháp nhân",
+		"content": {
+			"itemDetail": {
+				"action": "",
+				"code": "Mã sản phẩm",
+				"name": "Tên sản phẩm"
+			},
+			"legal": {
+				"code": "Mã pháp nhân",
+				"name": "Tên pháp nhân",
+				"setOfBookCode": "Mã bộ sổ"
+			}
+		},
 		"header": {
 			"title": "Danh sách sản phẩm của pháp nhân"
-		},
-		"item": {
-			"action": "",
-			"code": "Mã sản phẩm",
-			"name": "Tên sản phẩm"
-		},
-		"name": "Tên pháp nhân",
-		"sobCode": ""
+		}
 	},
 	"jobLevel": {
 		"header": {
@@ -744,19 +750,20 @@
 	},
 	"legalItemDetail": {
 		"content": {
-			"characteristic": "",
-			"code": "",
-			"codeFromSupplier": "",
-			"description": "",
-			"height": "",
-			"itemGroup": "",
-			"length": "",
-			"name": "",
-			"primaryPrice": "",
-			"status": "",
-			"uom": "",
-			"weight": "",
-			"width": ""
+			"characteristic": "Tính chất hàng",
+			"code": "Mã sản phẩm",
+			"codeFromMarket": "Mã SP từ thị trường",
+			"codeFromSupplier": "Mã SP từ NCC",
+			"description": "Mô tả",
+			"height": "Chiều cao",
+			"itemGroup": "Nhóm sản phẩm",
+			"length": "Chiều dài",
+			"name": "Tên sản phẩm",
+			"primaryPrice": "Đơn giá cơ bản ",
+			"status": "Trạng thái",
+			"unitOfMeasure": "Đơn vị cơ bản",
+			"weight": "Cân nặng",
+			"width": "Chiều rộng"
 		},
 		"defaultValue": {
 			"discountAccount": "",
@@ -766,9 +773,6 @@
 			"revenueAccount": "",
 			"salesAllowancesAccount": "",
 			"title": ""
-		},
-		"detail": {
-			"codeFromMarket": ""
 		},
 		"header": {
 			"title": ""

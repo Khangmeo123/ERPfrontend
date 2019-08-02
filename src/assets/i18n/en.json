@@ -680,33 +680,39 @@
 		}
 	},
 	"itemGroup": {
-		"action": "",
-		"code": "",
+		"content": {
+			"item": {
+				"code": "",
+				"name": ""
+			},
+			"itemDetail": {
+				"code": "",
+				"name": ""
+			}
+		},
+		"dialog": {
+			"title": ""
+		},
 		"header": {
 			"title": ""
-		},
-		"item": {
-			"action": "",
-			"code": "",
-			"name": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": ""
+		}
 	},
 	"itemOfLegalEntity": {
-		"code": "",
+		"content": {
+			"itemDetail": {
+				"action": "",
+				"code": "",
+				"name": ""
+			},
+			"legal": {
+				"code": "",
+				"name": "",
+				"setOfBookCode": ""
+			}
+		},
 		"header": {
 			"title": ""
-		},
-		"item": {
-			"action": "",
-			"code": "",
-			"name": ""
-		},
-		"name": "",
-		"sobCode": ""
+		}
 	},
 	"jobLevel": {
 		"header": {
@@ -746,6 +752,7 @@
 		"content": {
 			"characteristic": "",
 			"code": "",
+			"codeFromMarket": "",
 			"codeFromSupplier": "",
 			"description": "",
 			"height": "",
@@ -754,7 +761,7 @@
 			"name": "",
 			"primaryPrice": "",
 			"status": "",
-			"uom": "",
+			"unitOfMeasure": "",
 			"weight": "",
 			"width": ""
 		},
@@ -766,9 +773,6 @@
 			"revenueAccount": "",
 			"salesAllowancesAccount": "",
 			"title": ""
-		},
-		"detail": {
-			"codeFromMarket": ""
 		},
 		"header": {
 			"title": ""
