@@ -6,6 +6,6 @@
        (keyup)="onKeyUp($event)"
        (keydown)="onKeyDown($event)"
        (input)="onInput($event)"
-       [value]="value"
+       [ngModel]="value"
        maxlength="19"
        (change)="onChange()">

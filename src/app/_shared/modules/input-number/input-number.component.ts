@@ -10,22 +10,49 @@ import { generateRandomString } from '../../../_helpers/string';
   ],
 })
 export class InputNumberComponent implements OnInit {
+  /**
+   * Form control which this input is bound to
+   */
   @Input() control: FormControl = new FormControl();
 
+  /**
+   * Thousand separator for number, default ',' for Vietnamese
+   */
   @Input() thousandSeparator = ',';
 
+  /**
+   * Decimal separator for number, default '.' for Vietnamese
+   */
   @Input() decimalSeparator = '.';
 
+  /**
+   * Decimal precision
+   */
   @Input() precision = 4;
 
+  /**
+   * Allow only integer, decimal separator will be ignored
+   */
   @Input() onlyInteger = false;
 
+  /**
+   * Allow input negative number or not
+   */
   @Input() allowNegative = true;
 
+  /**
+   * Id of the input element
+   */
   @Input() inputId = generateRandomString(10);
 
+  /**
+   * Placeholder of the input element
+   */
   @Input() placeHolder: string = '';
 
+  /**
+   * On number value change
+   */
   @Output() numberChange = new EventEmitter();
 
   checkControl = false;
@@ -33,12 +60,14 @@ export class InputNumberComponent implements OnInit {
   get value() {
     const value: number = this.control.value;
     if (typeof value === 'number') {
-      const [integerPart, decimalPart = null] = value.toString().split('.');
-      let result = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, this.thousandSeparator);
-      if (decimalPart) {
-        result += `${this.decimalSeparator}${decimalPart}`;
+      if (!Number.isNaN(value)) {
+        const [integerPart, decimalPart = null] = value.toString().split('.');
+        let result = integerPart.replace(/\B(?=(\d{3})+(?!\d))/g, this.thousandSeparator);
+        if (decimalPart) {
+          result += `${this.decimalSeparator}${decimalPart}`;
+        }
+        return result;
       }
-      return result;
     }
     return null;
   }
@@ -50,15 +79,19 @@ export class InputNumberComponent implements OnInit {
     }
     let str = value.split(this.thousandSeparator).join('');
     str = str.split(this.decimalSeparator).join('.');
+
     const isNegative = str[0] === '-';
+
     if (str === '-') {
       this.control.setValue('-');
       return;
     }
+
     if (isNegative) {
       str = str.substr(1);
     }
-    const result = this.allowNegative ? parseFloat(str) : parseInt(str, 10);
+
+    const result: number = this.allowNegative ? parseFloat(str) : parseInt(str, 10);
     this.control.setValue(isNegative ? -result : result);
   }
 
@@ -112,6 +145,12 @@ export class InputNumberComponent implements OnInit {
   }
 
   onInput(event) {
-    this.value = event.target.value;
+    const {value} = event.target;
+    console.log(value);
+    if (/^-?([0-9]+[.,])*([0-9]+)$/gm.test(value)) {
+      this.value = value;
+    } else {
+      event.target.value = null;
+    }
   }
 }
