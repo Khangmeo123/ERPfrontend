@@ -6,14 +6,16 @@ export class SpecialConsumptionTaxEntity extends Entity {
 
   taxCode: string;
 
+  name: string;
+
   // taxtypeEntity:
   taxType: string;
 
   // uomEntity:
   //don vi tinh
-  uomId: string;
-  uomName: string;
-  uomCode: string;
+  unitOfMeasureId: string;
+  unitOfMeasureName: string;
+  unitOfMeasureCode: string;
 
   // coaEntity:
   //tai khoan tong hop

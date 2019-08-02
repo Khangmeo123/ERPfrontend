@@ -34,15 +34,26 @@
         <ng-template pTemplate="header">
           <tr>
             <th [pSortableColumn]="'code'" data-qe-id="table-thead-code"
-                pResizableColumn> {{ 'payment_term.code' | translate}}</th>
+                pResizableColumn>
+              {{ 'payment_term.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+            </th>
             <th [pSortableColumn]="'name'" data-qe-id="table-thead-name"
-                pResizableColumn> {{ 'payment_term.name' | translate}} </th>
+                pResizableColumn> {{ 'payment_term.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+            </th>
             <th [pSortableColumn]="'dueInDays'" data-qe-id="table-thead-dueInDays"
-                pResizableColumn> {{ 'payment_term.due_in_date' | translate}} </th>
+                pResizableColumn> {{ 'payment_term.due_in_date' | translate}}
+              <p-sortIcon [field]="'dueInDays'" class="float-right"></p-sortIcon>
+            </th>
             <th [pSortableColumn]="'discountPeriod'" data-qe-id="table-thead-discount-period"
-                pResizableColumn> {{ 'payment_term.discount_period' | translate}} </th>
+                pResizableColumn> {{ 'payment_term.discount_period' | translate}}
+              <p-sortIcon [field]="'discountPeriod'" class="float-right"></p-sortIcon>
+            </th>
             <th [pSortableColumn]="'discountRate'" data-qe-id="table-thead-discount-rate"
-                pResizableColumn> {{ 'payment_term.discount_rate' | translate}} </th>
+                pResizableColumn> {{ 'payment_term.discount_rate' | translate}}
+              <p-sortIcon [field]="'discountRate'" class="float-right"></p-sortIcon>
+            </th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -157,7 +168,7 @@
     <div class="d-flex">
       <button (cancel)="onClickCancel()"
               (confirm)="onClickDelete()"
-              *ngIf="paymentTermForm.value?.isDeleted"
+              *ngIf="paymentTermForm.value?.id"
               [popoverMessage]="popoverMessage"
               [popoverTitle]="popoverTitle"
               class="btn btn-delete"

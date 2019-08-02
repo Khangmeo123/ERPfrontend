@@ -1,7 +1,7 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { SpecialConsumptionTaxEntity } from 'src/app/_modules/master-data/_backend/special-consumption-tax/special-consumption-tax.entity';
-import { requiredField } from 'src/app/_helpers';
+import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class SpecialConsumptionTaxForm extends FormModel {
 
@@ -9,17 +9,18 @@ export class SpecialConsumptionTaxForm extends FormModel {
 
   code = new FormControl(null, [requiredField]);
 
-  name = new FormControl(null, [requiredField]);
+  name = new FormControl(null, [requiredField, checkLength(3, 500)]);
 
   unitOfMeasureId = new FormControl(null);
   unitOfMeasureName = new FormControl(null);
 
-  chartOfAccountId = new FormControl(null);
-  chartOfAccountName = new FormControl(null);
-
-  parentId: FormControl = new FormControl(null);
+  parentId = new FormControl(null);
+  parentCode = new FormControl(null);
+  parentName = new FormControl(null);
 
   rate = new FormControl(null);
+
+  discount: FormControl = new FormControl(null);
 
   description = new FormControl(null);
 

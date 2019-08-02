@@ -172,7 +172,7 @@
     <div class="d-flex">
       <button (cancel)="onClickCancel()"
               (confirm)="onClickDelete()"
-              *ngIf="coaForm.value?.isDeleted"
+              *ngIf="coaForm.value?.id"
               [popoverMessage]="popoverMessage"
               [popoverTitle]="popoverTitle"
               class="btn btn-delete"

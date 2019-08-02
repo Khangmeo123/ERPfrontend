@@ -15,8 +15,8 @@ export class ProductForm extends FormModel {
     propertyId = new FormControl('', [requiredField]);
 
     // unitEntity:
-    uomName = new FormControl('', [requiredField]);
-    uomId = new FormControl('', [requiredField]);
+    unitOfMeasureName = new FormControl('', [requiredField]);
+    unitOfMeasureId = new FormControl('', [requiredField]);
 
     unitPrice = new FormControl('', [requiredField]);
     weight = new FormControl('');

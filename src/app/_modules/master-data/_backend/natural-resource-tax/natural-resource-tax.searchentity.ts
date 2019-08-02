@@ -8,7 +8,7 @@ export class NaturalResourceTaxSearchEntity extends SearchEntity {
 
   taxCode: string;
   taxType: string;
-  uomId: string;
+  unitOfMeasureId: string;
   taxRate: number;
   description: string;
 

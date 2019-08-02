@@ -13,9 +13,9 @@ export class ProductEntity extends Entity {
     propertyId: string;
 
     // unitEntity:
-    uomName: string;
-    uomCode: string;
-    uomId: string;
+    unitOfMeasureName: string;
+    unitOfMeasureCode: string;
+    unitOfMeasureId: string;
 
     unitPrice: number;
     weight: number;

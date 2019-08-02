@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { SpecialConsumptionTaxService } from './special-consumption-tax.service';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { Entities } from '../../../../../../_helpers/entity';
@@ -21,7 +21,7 @@ import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
     SpecialConsumptionTaxService,
     GeneralService,
     ToastrService,
-  ]
+  ],
 })
 export class SpecialConsumptionTaxComponent implements OnInit {
   isSaveBookMark: boolean = false;
@@ -63,6 +63,12 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   public uomSearchEntity: UomSearchEntity = new UomSearchEntity();
 
   public setOfBookId: string = null;
+
+  public parentTaxList: SpecialConsumptionTaxEntity[] = [];
+
+  public selectedParentTaxList: SpecialConsumptionTaxEntity[] = [];
+
+  public parentTaxSearchEntity: SpecialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
 
   constructor(
     private specialConsumptionTaxService: SpecialConsumptionTaxService,
@@ -109,6 +115,18 @@ export class SpecialConsumptionTaxComponent implements OnInit {
     return null;
   }
 
+  get code() {
+    return this.specialConsumptionTaxForm.get('code') as FormControl;
+  }
+
+  get name() {
+    return this.specialConsumptionTaxForm.get('name') as FormControl;
+  }
+
+  get errors() {
+    return this.specialConsumptionTaxForm.get('errors') as FormGroup;
+  }
+
   add() {
     if (this.setOfBookId) {
       this.specialConsumptionTaxService.add();
@@ -149,7 +167,10 @@ export class SpecialConsumptionTaxComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {
+  paginationOut(pagination) {
+    this.sobSearchEntity.skip = pagination.skip;
+    this.sobSearchEntity.take = pagination.take;
+    this.specialConsumptionTaxService.getList(this.specialConsumptionTaxSearchEntity);
   }
 
   getUomList() {
@@ -192,6 +213,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
 
   clearSearch(table: any) {
     this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
+    this.specialConsumptionTaxSearchEntity.setOfBookId = this.setOfBookId;
     table.reset();
   }
 

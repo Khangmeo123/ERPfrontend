@@ -10,7 +10,7 @@ export class ImportTaxSearchEntity extends SearchEntity {
 
   name: TextFilter = new TextFilter();
 
-  uomId: string;
+  unitOfMeasureId: string;
 
   taxRate: number;
 

@@ -10,7 +10,7 @@
         </span>
 
     <div class="page-actions">
-      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!setOfBookId">
         + {{'general.button.add' | translate}}</button>
       <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
@@ -89,9 +89,10 @@
           <tr (dblclick)="edit(tax.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{tax.code}} </td>
             <td> {{tax.name}} </td>
-            <td> {{tax.dueInDays}} </td>
-            <td> {{tax.discountPeriod}} </td>
-            <td> {{tax.discountRate}} </td>
+            <td> {{tax.unitOfMeasureName}} </td>
+            <td> {{tax.rate}} </td>
+            <td> {{tax.description}} </td>
+            <td> {{tax.disabled}} </td>
           </tr>
         </ng-template>
       </p-table>
@@ -105,7 +106,7 @@
 </div>
 
 
-<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '700px'}" appendTo="body"
+<p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '700px'}" appendTo="body"
           modal="true">
   <p-header>
     {{'special_consumption_tax.modal.title' | translate}}
@@ -123,7 +124,7 @@
                    id="tax-code"
                    type="text">
             <app-error
-              *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"
+              *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
               [formGroup]="specialConsumptionTaxForm"
               [placement]="'top'" [property]="'code'" class="error-form"
               data-qe-id="dialog-error-code">
@@ -168,7 +169,7 @@
             <input class="form-control" id="tax-name" data-qe-id="dialog-name" formControlName="name" name="name"
                    type="text">
             <app-error
-              *ngIf="(specialConsumptionTaxForm.controls.name?.errors && specialConsumptionTaxForm.controls.name?.touched) || !!specialConsumptionTaxForm.controls.errors.get('name')?.value"
+              *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
               [formGroup]="specialConsumptionTaxForm"
               [placement]="'top'" [property]="'name'" class="error-form"
               data-qe-id="dialog-error-name">
@@ -186,6 +187,7 @@
                                (selectionChange)="parentId.value = $event[0]"
                                [list]="specialConsumptionTaxList"
                                [selectedList]="[]"
+                               key="name"
                                class="flex-grow-1"
                                data-qe-id="dialog-parent-id"></app-single-select>
           </div>
@@ -207,7 +209,7 @@
     <div class="d-flex">
       <button (cancel)="onClickCancel()"
               (confirm)="onClickDelete()"
-              *ngIf="specialConsumptionTaxForm.value?.isDeleted"
+              *ngIf="specialConsumptionTaxForm.value?.id"
               [popoverMessage]="popoverMessage"
               [popoverTitle]="popoverTitle"
               class="btn btn-delete"

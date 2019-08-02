@@ -9,7 +9,7 @@
     </span>
     </div>
     <div class="page-actions">
-      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!sobForm.value?.id">
         {{'general.button.add' | translate}}
       </button>
       <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
@@ -100,7 +100,8 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input class="form-control" data-qe-id="dialog-code" formControlName="code" id="sob-code" type="text">
+          <input class="form-control" data-qe-id="dialog-code" formControlName="code" name="code" id="sob-code"
+                 type="text">
           <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
                      [formGroup]="sobForm"
                      [placement]="'top'" [property]="'code'" class="error-form" data-qe-id="dialog-error-code">
@@ -127,6 +128,7 @@
           {{'sob.chart_account' | translate}}
         </label>
         <app-single-select (listOpen)="getCoaList()"
+                           [disabled]="sobForm?.value?.id"
                            (selectionChange)="onSelectId($event, 'chartOfAccountTemplateId')"
                            [initialValue]="sobForm.controls.chartOfAccountTemplateName?.value"
                            [list]="coaList"
@@ -143,6 +145,7 @@
         </label>
         <div class="div-form">
           <app-single-select (listOpen)="getCurrencyList()"
+                             [disabled]="sobForm?.value?.id"
                              (selectionChange)="onSelectId($event, 'currencyId')"
                              (search)="onSearchCurrency($event)"
                              [initialValue]="sobForm.controls.currencyCode?.value"
@@ -152,7 +155,7 @@
                              id="sob-currency"
                              key="code"></app-single-select>
           <app-error
-            *ngIf="(sobForm.controls.currencyId?.errors && sobForm.controls.currencyId?.touched) || !!sobForm.controls.error.get('currencyId')?.value"
+            *ngIf="(currencyId?.errors && currencyId?.touched) || !!errors.get('currencyId')?.value"
             [formGroup]="sobForm"
             [placement]="'top'" [property]="'currencyId'" class="error-form" data-qe-id="dialog-error-currency-id">
           </app-error>
@@ -165,6 +168,7 @@
           {{'sob.special_consumption_tax' | translate}}
         </label>
         <app-single-select (listOpen)="getSpecialConsumptionTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
                            (selectionChange)="onSelectId($event, 'specialConsumptionTaxTemplateId')"
                            [initialValue]="sobForm.controls.specialConsumptionTaxTemplateName?.value"
                            [list]="specialConsumptionTaxTemplateList"
@@ -179,6 +183,7 @@
           {{'sob.value_added_tax' | translate}}
         </label>
         <app-single-select (listOpen)="getValueAddedTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
                            (selectionChange)="onSelectId($event, 'valueAddedTaxTemplateId')"
                            [initialValue]="sobForm.controls.valueAddedTaxTemplateName?.value"
                            [list]="valueAddedTaxTemplateList"
@@ -195,6 +200,7 @@
           {{'sob.resource_tax' | translate}}
         </label>
         <app-single-select (listOpen)="getNaturalResourceTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
                            (selectionChange)="onSelectId($event, 'naturalResourceTaxTemplateId')"
                            [initialValue]="sobForm.controls.naturalResourceTaxTemplate?.value"
                            [list]="naturalResourceTaxTemplateList"
@@ -209,6 +215,7 @@
           {{'sob.enviroment_tax' | translate}}
         </label>
         <app-single-select (listOpen)="getEnvironmentTemplateList()"
+                           [disabled]="sobForm?.value?.id"
                            (selectionChange)="onSelectId($event, 'environmentTaxTemplateId')"
                            [initialValue]="sobForm.controls.environmentTaxTemplateName?.value"
                            [list]="environmentTaxTemplateList"
@@ -225,6 +232,7 @@
           {{'sob.export_tax' | translate}}
         </label>
         <app-single-select (listOpen)="getExportTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
                            (selectionChange)="onSelectId($event, 'exportTaxTemplateId')"
                            [initialValue]="sobForm.controls.exportTaxTemplateName?.value"
                            [list]="exportTaxTemplateList"
@@ -239,6 +247,7 @@
           {{'sob.import_tax' | translate}}
         </label>
         <app-single-select (listOpen)="getImportTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
                            (selectionChange)="onSelectId($event, 'importTaxTemplateId')"
                            [initialValue]="sobForm.controls.importTaxTemplateName?.value"
                            [list]="importTaxTemplateList"
@@ -251,26 +260,13 @@
     </div>
   </div>
   <p-footer>
-    <div class="d-flex">
-      <button (cancel)="cancelModal()"
-              (confirm)="deactivate()"
-              *ngIf="sobForm.value?.isDeleted"
-              [popoverMessage]="popoverMessage"
-              [popoverTitle]="popoverTitle"
-              class="btn btn-delete"
-              data-qe-id="footer-button-delete"
-              mwlConfirmationPopover
-              placement="bottom">
-        {{'general.button.delete' | translate}}
+    <div class="flex-grow-1 d-flex justify-content-end">
+      <button (click)="cancelModal()" class="btn btn-cancel" data-qe-id="footer-button-cancel">
+        {{'general.button.cancel' | translate}}
       </button>
-      <div class="flex-grow-1 d-flex justify-content-end">
-        <button (click)="save()" class="btn btn-add mr-2" data-qe-id="footer-button-save">
-          {{'general.button.save' | translate}}
-        </button>
-        <button (click)="cancelModal()" class="btn btn-cancel" data-qe-id="footer-button-cancel">
-          {{'general.button.cancel' | translate}}
-        </button>
-      </div>
+      <button (click)="save()" class="btn btn-add ml-2" data-qe-id="footer-button-save">
+        {{'general.button.save' | translate}}
+      </button>
     </div>
   </p-footer>
 </p-dialog>

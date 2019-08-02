@@ -154,7 +154,7 @@
     <div class="d-flex">
       <button (cancel)="onClickCancel()"
               (confirm)="onClickDelete()"
-              *ngIf="accountingPeriodForm.value?.isDeleted"
+              *ngIf="accountingPeriodForm.value?.id"
               [popoverMessage]="popoverMessage"
               [popoverTitle]="popoverTitle"
               class="btn btn-delete"

@@ -3,15 +3,17 @@ import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 import { NumberFilter } from '../../../../_shared/models/filters/NumberFilter';
 
 export class SpecialConsumptionTaxSearchEntity extends SearchEntity {
-    setOfBookId: string;
+  setOfBookId: string;
 
-    code: TextFilter = new TextFilter();
-    name: TextFilter = new TextFilter();
-    unitOfMeasureName: TextFilter = new TextFilter();
-    rate: NumberFilter = new NumberFilter();
-    description: TextFilter = new TextFilter();
+  code: TextFilter = new TextFilter();
+  name: TextFilter = new TextFilter();
 
-    constructor(exciseTariffSearchEntity?: any) {
-        super(exciseTariffSearchEntity);
-    }
+  unitOfMeasureName: TextFilter = new TextFilter();
+
+  rate: NumberFilter = new NumberFilter();
+  description: TextFilter = new TextFilter();
+
+  constructor(exciseTariffSearchEntity?: any) {
+    super(exciseTariffSearchEntity);
+  }
 }

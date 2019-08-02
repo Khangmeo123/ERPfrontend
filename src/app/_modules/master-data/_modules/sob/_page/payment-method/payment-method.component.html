@@ -35,9 +35,11 @@
           <tr>
             <th [pSortableColumn]="'code'" data-qe-id="table-thead-code" pResizableColumn>
               {{ 'payment_method.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th [pSortableColumn]="'name'" data-qe-id="table-thead-name" pResizableColumn>
               {{ 'payment_method.payment_method_name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
           </tr>
           <tr>
@@ -106,7 +108,7 @@
     <div class="d-flex">
       <button (cancel)="onClickCancel()"
               (confirm)="onClickDelete()"
-              *ngIf="paymentMethodForm.value?.isDeleted"
+              *ngIf="paymentMethodForm.value?.id"
               [popoverMessage]="popoverMessage"
               [popoverTitle]="popoverTitle"
               class="btn btn-delete"

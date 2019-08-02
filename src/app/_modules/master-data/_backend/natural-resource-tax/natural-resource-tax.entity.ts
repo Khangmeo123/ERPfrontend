@@ -10,9 +10,9 @@ export class NaturalResourceTaxEntity extends Entity {
     taxType : string;
 
     // uomEntity:
-    uomId: string;
-    uomName: string;
-    uomCode: string;
+    unitOfMeasureId: string;
+    unitOfMeasureName: string;
+    unitOfMeasureCode: string;
 
     // coaEntity:
     coaId: string;

@@ -1,5 +1,5 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobRepository } from './sob.repository';
@@ -129,9 +129,14 @@ export class SobService {
   edit(sobId: string) {
     this.sobRepository.getId(sobId).subscribe(res => {
       if (res) {
-        this.sobForm.next(this.fb.group(
+        const form: FormGroup = this.fb.group(
           new SobForm(res),
-        ));
+        );
+        form.controls.code = new FormControl({
+          value: form.value.code,
+          disabled: true,
+        });
+        this.sobForm.next(form);
       }
     }, err => {
       if (err) {

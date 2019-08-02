@@ -12,6 +12,7 @@ import { BankAccountService } from './bank-account.service';
 import { ChartOfAccountEntity } from '../../../../_backend/chart-of-account/chart-of-account.entity';
 import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
 import { ToastrService } from 'ngx-toastr';
+import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 
 @Component({
   selector: 'app-bank-account',
@@ -110,6 +111,8 @@ export class BankAccountComponent implements OnInit {
   }
 
   getCoaList() {
+    this.coaSearchEntity = new CoaSearchEntity();
+    this.coaSearchEntity.setOfBookId = this.setOfBookId;
     this.bankAccountService.getCoaList(this.coaSearchEntity);
   }
 

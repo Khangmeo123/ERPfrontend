@@ -206,6 +206,10 @@ export class SobComponent implements OnInit, OnDestroy {
     return this.sobForm.get('name') as FormControl;
   }
 
+  get currencyId() {
+    return this.sobForm.get('currencyId') as FormControl;
+  }
+
   get code() {
     return this.sobForm.get('code') as FormControl;
   }

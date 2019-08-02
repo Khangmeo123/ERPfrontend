@@ -179,7 +179,7 @@
       <button (cancel)="onClickCancel()"
 
               (confirm)="onClickDelete()"
-              *ngIf="fiscalYearForm.value?.isDeleted"
+              *ngIf="fiscalYearForm.value?.id"
               [popoverMessage]="popoverMessage"
               [popoverTitle]="popoverTitle"
               class="btn btn-delete"
