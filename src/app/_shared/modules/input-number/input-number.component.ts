@@ -145,8 +145,7 @@ export class InputNumberComponent implements OnInit {
   }
 
   onInput(event) {
-    const {value} = event.target;
-    console.log(value);
+    const { value } = event.target;
     if (/^-?([0-9]+[.,])*([0-9]+)$/gm.test(value)) {
       this.value = value;
     } else {
