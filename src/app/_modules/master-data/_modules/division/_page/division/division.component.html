@@ -117,7 +117,7 @@
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="code">
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(divisionForm.controls.code?.errors && divisionForm.controls.code?.touched) || !!divisionForm.controls.error?.get('code')?.value"
+                            *ngIf="(divisionForm.controls.code?.errors && divisionForm.controls.code?.touched) || !!divisionForm.controls.errors?.get('code')?.value"
                             [formGroup]="divisionForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -131,7 +131,7 @@
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="name">
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(divisionForm.controls.name?.errors && divisionForm.controls.name?.touched) || !!divisionForm.controls.error?.get('name')?.value"
+                            *ngIf="(divisionForm.controls.name?.errors && divisionForm.controls.name?.touched) || !!divisionForm.controls.errors?.get('name')?.value"
                             [formGroup]="divisionForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -153,8 +153,8 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-cancel" (click)="display = false"
-                        (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
+                    <button class="btn btn-cancel"
+                        (click)="display = false">{{ 'general.button.cancel' | translate}}</button>
                     <button class="btn btn-save" (click)="save()">
                         {{ 'general.button.save' | translate}}</button>
                 </div>
