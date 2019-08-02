@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
-import {Router} from '@angular/router';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { Router } from '@angular/router';
 import { translate } from 'src/app/_helpers/string';
 import { BookmarkService } from 'src/app/_services';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
@@ -52,64 +52,65 @@ export class EmployeePositionComponent implements OnInit {
   listEmployeeId: Array<any> = [];
   employeePositionId: any;
 
-  exportLink = environment.apiUrlApps +'master-data/legal-entity/employee-position/export?positionId=';
+  exportLink = environment.apiUrlApps + 'master-data/legal-entity/employee-position/export?positionId=';
+  @ViewChild('tableEmployee', { static: false }) public tableEmployee: TemplateRef<any>;
 
   constructor(
     private employeePositionService: EmployeePositionService,
     protected router: Router,
     private bookmarkService: BookmarkService,
     private genaralService: GeneralService) {
-      const employeePositionListSub = this.employeePositionService.employeePositionList.subscribe(res => {
-        if (res) {
-          this.employeePositionList = res;
-          this.selectedEmployeePosition = res[0];
-        }
-      });
-      const legalEntityListSub = this.employeePositionService.legalListDrop.subscribe(res => {
-        if (res) {
-          this.legalEntityIds = res.ids;
-          this.legalEntityExceptIds = res.exceptIds;
-        }
-      });
-      const employeePositionFormSub = this.employeePositionService.employeePositionForm.subscribe(res => {
-        if (res) {
-          this.employeePositionForm = res;
-        }
-      });
+    const employeePositionListSub = this.employeePositionService.employeePositionList.subscribe(res => {
+      if (res) {
+        this.employeePositionList = res;
+        this.selectedEmployeePosition = res[0];
+      }
+    });
+    const legalEntityListSub = this.employeePositionService.legalListDrop.subscribe(res => {
+      if (res) {
+        this.legalEntityIds = res.ids;
+        this.legalEntityExceptIds = res.exceptIds;
+      }
+    });
+    const employeePositionFormSub = this.employeePositionService.employeePositionForm.subscribe(res => {
+      if (res) {
+        this.employeePositionForm = res;
+      }
+    });
 
-      const employeePositionCountSub = this.employeePositionService.employeePositionCount.subscribe(res => {
-        if (res) {
-          this.pagination.totalItems = res;
-        }
-      });
+    const employeePositionCountSub = this.employeePositionService.employeePositionCount.subscribe(res => {
+      if (res) {
+        this.pagination.totalItems = res;
+      }
+    });
 
-      const employeeDetaiDrop = this.employeePositionService.employeeListDrop.subscribe(res => {
-        if (res) {
-          this.employeeIds = res.ids;
-          this.employeeExceptIds = res.exceptIds;
-        }
-      });
+    const employeeDetaiDrop = this.employeePositionService.employeeListDrop.subscribe(res => {
+      if (res) {
+        this.employeeIds = res.ids;
+        this.employeeExceptIds = res.exceptIds;
+      }
+    });
 
-      const employeeDetailListSub = this.employeePositionService.employeeDetailList.subscribe(res => {
-        if (res) {
-          this.employeeDetailList = res;
-        }
-      });
-  
-      const employeeDetailCountSub = this.employeePositionService.employeeDetailCount.subscribe(res => {
-        if (res) {
-          this.paginationdetail.totalItems = res;
-        }
-      });
-      
-      const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
-        this.isSaveBookMark = res;
-      });
+    const employeeDetailListSub = this.employeePositionService.employeeDetailList.subscribe(res => {
+      if (res) {
+        this.employeeDetailList = res;
+      }
+    });
 
-      this.employeePositionService.getLisLegalEntityByTyping(this.leGalEntityTyping);
-      this.employeePositionSubs.add(employeePositionListSub).add(legalEntityListSub).add(employeePositionFormSub)
+    const employeeDetailCountSub = this.employeePositionService.employeeDetailCount.subscribe(res => {
+      if (res) {
+        this.paginationdetail.totalItems = res;
+      }
+    });
+
+    const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
+      this.isSaveBookMark = res;
+    });
+
+    this.employeePositionService.getLisLegalEntityByTyping(this.leGalEntityTyping);
+    this.employeePositionSubs.add(employeePositionListSub).add(legalEntityListSub).add(employeePositionFormSub)
       .add(employeePositionCountSub).add(bookMarkNotify).add(employeeDetaiDrop).add(employeeDetailListSub).add(employeeDetailCountSub);
-    }
+  }
 
   ngOnInit() {
 
@@ -142,7 +143,7 @@ export class EmployeePositionComponent implements OnInit {
       if (this.employeePositionList && this.employeePositionList.length > 0) {
         this.employeeSearchEntity.legalEntityId = this.legalEntityId;
         this.employeeSearchEntity.positionId = this.employeePositionList[0].id;
-        this.employeePositionId = this.employeeDetailList[0].id;
+        this.employeePositionId = this.employeePositionList[0].id;
         this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
       }
     });
@@ -168,7 +169,7 @@ export class EmployeePositionComponent implements OnInit {
     this.employeeTyping.next(this.employeeSearchEntity);
   }
 
-  selectEmployee (event) {
+  selectEmployee(event) {
     this.listEmployeeId = event;
   }
 
@@ -194,11 +195,11 @@ export class EmployeePositionComponent implements OnInit {
   sortEmployeePosition(event) {
     if (event.sortField && event.sortOrder) {
       this.employeePositionSearchEntity.orderBy = event.sortField;
-      this.employeePositionSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.employeePositionSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined && this.legalEntityId !== null) {
       this.employeePositionService.getList(this.employeePositionSearchEntity).then(res => {
-        if(this.employeePositionList && this.employeePositionList.length > 0) {
+        if (this.employeePositionList && this.employeePositionList.length > 0) {
           this.employeeSearchEntity.legalEntityId = this.legalEntityId;
           this.employeeSearchEntity.positionId = this.employeeDetailList[0].id;
           this.employeePositionId = this.employeeDetailList[0].id;
@@ -264,14 +265,14 @@ export class EmployeePositionComponent implements OnInit {
   sortEmployeeDetail(event) {
     if (event.sortField && event.sortOrder) {
       this.employeeSearchEntity.orderBy = event.sortField;
-      this.employeeSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.employeeSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.employeeSearchEntity.positionId !== undefined) {
       this.employeeSearchEntity.positionId = this.employeePositionId;
       this.getListDetail();
     }
   }
-  
+
   getListDetail() {
     this.paginationdetail.pageNumber = 1;
     this.employeeSearchEntity.skip = 0;
@@ -289,9 +290,17 @@ export class EmployeePositionComponent implements OnInit {
     this.employeeSearchEntity.take = pagination.take;
     this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
   }
-  onClickShowDetail (employeePositionId) {
+  editEmployeeDetail(employeePositionId) {
     this.router.navigate(['/master-data/legal-entity/employee-position/employee-detail'],
-    { queryParams: { id: employeePositionId} });
+      { queryParams: { id: employeePositionId } });
+  }
+
+  deleteEmployeeFormPosition(employeeId: string) {
+    this.employeePositionService.deleteEmployeeFormPosition(employeeId, this.employeePositionId).then(res => {
+      if (res) {
+        this.clearSearch(this.tableEmployee);
+      }
+    });
   }
 
   bookMark() {

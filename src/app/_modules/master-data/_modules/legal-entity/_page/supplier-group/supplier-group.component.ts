@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { SupplierGroupSearchEntity } from '../../../../_backend/supplier-group/supplier-group.searchentity';
 import { SupplierGroupEntity } from '../../../../_backend/supplier-group/supplier-group.entity';
@@ -57,6 +57,9 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   supplierGroupingId: string;
 
   exportLink = environment.apiUrlApps +'master-data/legal-entity/supplier-group/export?supplierGroupId=';
+  @ViewChild('tableSupplier', { static: false }) public tableSupplier: TemplateRef<any>;
+
+  
   constructor(
     private bookmarkService: BookmarkService,
     private router: Router,
@@ -281,6 +284,23 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       this.display = res;
     }).catch(err => {
       this.display = err;
+    });
+  }
+
+  clearSearch(tableSupplier: any) {
+    this.supplierSearchEntity = new SupplierSearchEntity();
+    this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+    tableSupplier.reset();
+  }
+
+  deleteSupplierFormGroup(supplierId: string) {
+    this.supplierGroupService.deleteSupplier(supplierId, this.supplierGroupingId).then(res => {
+      if (res) {
+        this.clearSearch(this.tableSupplier);
+        this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+        this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
+        this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
+      }
     });
   }
 

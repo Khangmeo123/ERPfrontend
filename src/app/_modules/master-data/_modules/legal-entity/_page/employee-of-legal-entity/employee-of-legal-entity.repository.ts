@@ -78,4 +78,11 @@ export class EmployeeOfLegalEntityRepository extends Repository {
                 map(r => r.body),
             );
     }
+
+    deleteEmployeeFormLegal(employeeSearchEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/delete-employee-detail', JSON.stringify(employeeSearchEntity),
+        { observe: 'response', headers: this.getHeader() }).pipe(
+            map(r => r.body),
+        );
+    }
 }

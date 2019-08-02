@@ -298,8 +298,8 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
       this.getListDetail();
     }
   }
-  deleteCustomerFromGroup(customer: any) {
-    this.customerGroupService.deleteCustomer(customer).then(res => {
+  deleteCustomerFromGroup(customerId: string) {
+    this.customerGroupService.deleteCustomer(customerId, this.customerGroupId).then(res => {
       if (res) {
         this.clearSearch(this.tableCustomer);
         this.customerSearchEntity.legalEntityId = this.legalEntityId;

@@ -158,6 +158,22 @@ export class SupplierGroupService {
         return defered;
     }
 
+    deleteSupplier(supplierId: string, supplierGroupId: string): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.supplierGroupRepository.deleteSupplier(supplierId, supplierGroupId).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve(res);
+                }
+            }, err => {
+                if (err) {
+                    reject(err);
+                }
+            });
+        });
+        return defered;
+    }
+
 
     getListLegalEntity(legalSearchEntity: LegalSearchEntity) {
         this.supplierGroupRepository.getListLegalEntity(legalSearchEntity).subscribe(res => {

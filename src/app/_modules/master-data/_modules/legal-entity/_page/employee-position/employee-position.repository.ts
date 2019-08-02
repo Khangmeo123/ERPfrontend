@@ -119,4 +119,15 @@ export class EmployeePositionRepository extends Repository {
             );
     }
 
+
+    deleteEmployeeFromPosition(employeeId: string, employeePositionId: string) {
+        return this.http.post<any>(this.apiUrl + '/delete-employee-detail', JSON.stringify({
+            positionId: employeePositionId,
+            employeeDetailId: employeeId,
+        }),
+        { observe: 'response', headers: this.getHeader() }).pipe(
+            map(r => r.body),
+        );
+    }
+
 }

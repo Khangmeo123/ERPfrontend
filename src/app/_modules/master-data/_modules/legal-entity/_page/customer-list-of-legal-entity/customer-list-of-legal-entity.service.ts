@@ -108,13 +108,12 @@ export class CustomerOfLegalEntityService {
         const defered = new Promise<boolean>((resolve, reject) => {
           this.customerOflegalEntityRepository.deleteCustomer(customerSearchEntity).subscribe(res => {
             if (res) {
-              this.getListCustomer(customerSearchEntity);
               this.toastrService.success('Cập nhật thành công !');
-              resolve(false);
+              resolve(true);
             }
           }, err => {
             if (err) {
-              reject(true);
+              reject(false);
             }
           });
         });

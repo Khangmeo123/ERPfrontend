@@ -224,7 +224,6 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   clearSearchCustomer(tablecustomer: any) {
     this.customerSearchEntity = new CustomerSearchEntity();
-    this.customerSearchEntity.customerDetailIds = this.customerIds;
     tablecustomer.reset();
   }
 
