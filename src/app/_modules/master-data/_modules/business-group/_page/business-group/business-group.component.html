@@ -40,15 +40,15 @@
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
-              {{ 'business_group.code' | translate}}
+              {{ 'businessGroup.content.code' | translate}}
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
-              {{ 'business_group.name' | translate}}
+              {{ 'businessGroup.content.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'description'" data-qe-id="table-thead-description">
-              {{ 'business_group.description' | translate}}
+              {{ 'businessGroup.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
           </tr>
@@ -89,13 +89,13 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
   [style]="{width: '900px'}">
   <p-header>
-    {{ 'business_group.modal.title' | translate}}
+    {{ 'businessGroup.dialog.title' | translate}}
   </p-header>
   <div class="container" [formGroup]="businessGroupForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="businessGroupCode">{{ 'business_group.code' | translate}}<span
+          <label for="businessGroupCode">{{ 'businessGroup.content.code' | translate}}<span
               class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
@@ -109,7 +109,7 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="businessGroupName">{{ 'business_group.name' | translate}}<span
+          <label for="businessGroupName">{{ 'businessGroup.content.name' | translate}}<span
               class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
@@ -125,7 +125,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label for="businessGroupDescription">{{ 'business_group.description' | translate}}</label>
+          <label for="businessGroupDescription">{{ 'businessGroup.content.description' | translate}}</label>
           <textarea class="form-control" rows="4" formControlName="description" data-qe-id="dialog-form-description"
             id="businessGroupDescription">
           </textarea>
@@ -152,7 +152,7 @@
 </p-dialog>
 <p-dialog modal="true" [(visible)]="isShowDialogError" appendTo="body" [style]="{width: '600px'}">
   <p-header>
-    {{ 'business_group.dialog.error.title' | translate}}
+    {{ 'businessGroup.dialog.error.title' | translate}}
   </p-header>
   <div class="container" [formGroup]="businessGroupForm">
     <div class="row">

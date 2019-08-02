@@ -18,10 +18,10 @@
                 </button>
                 <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                     <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.import_file' | translate}}</a></li>
+                            href="#">{{'general.button.importFile' | translate}}</a></li>
                     <li class="divider dropdown-divider"></li>
                     <li role="menuitem"><a class="dropdown-item" target="_blank"
-                            [href]="downloadLink">{{'general.button.download_example' | translate}}</a>
+                            [href]="downloadLink">{{'general.button.downloadTempplate' | translate}}</a>
                     </li>
                 </ul>
             </div>
@@ -46,19 +46,19 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'asset.content.table.asset_code' | translate}}
+                            {{ 'asset.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'asset.content.table.asset_name' | translate}}
+                            {{ 'asset.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-type" [pSortableColumn]="'type'">
-                            {{ 'asset.content.table.asset_type' | translate}}
+                            {{ 'asset.content.type' | translate}}
                             <p-sortIcon [field]="'type'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
-                            {{ 'asset.content.table.asset_status' | translate}}
+                            {{ 'asset.content.status' | translate}}
                             <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -115,7 +115,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="assetCode">{{ 'asset.content.table.asset_code' | translate}}<span
+                    <label for="assetCode">{{ 'asset.content.code' | translate}}<span
                             class="text-danger">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
@@ -129,7 +129,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="assetName">{{ 'asset.content.table.asset_name' | translate}}<span
+                    <label for="assetName">{{ 'asset.content.name' | translate}}<span
                             class="text-danger">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
@@ -145,8 +145,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="assetid">{{ 'asset.content.table.type' | translate}}<span
-                            class="text-danger">*</span></label>
+                    <label for="assetid">{{ 'asset.content.type' | translate}}<span class="text-danger">*</span></label>
                     <div class="div-form">
                         <app-simple-select [key]="'name'" [list]="assetTypes" class="w-100" *ngIf="isShowDialog"
                             [initialValue]="assetForm.controls.typeName.value"
@@ -162,7 +161,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="assetname">{{ 'asset.content.table.status' | translate}}<span
+                    <label for="assetname">{{ 'asset.content.status' | translate}}<span
                             class="text-danger">*</span></label>
                     <div class="div-form">
                         <app-simple-select [key]="'name'" [list]="assetStatuses" class="w-100" *ngIf="isShowDialog"

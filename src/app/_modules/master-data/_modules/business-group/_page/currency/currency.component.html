@@ -30,16 +30,16 @@
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-              {{'currency.currency_code' | translate}}
+              {{'currency.content.code' | translate}}
 
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-              {{'currency.currency_name' | translate}}
+              {{'currency.content.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-              {{'currency.currency_description' | translate}}
+              {{'currency.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
           </tr>
@@ -74,13 +74,13 @@
   </div>
   <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" [style]="{width: '900px'}">
     <p-header>
-      {{ 'currency.title' | translate}}
+      {{ 'currency.dialog.title' | translate}}
     </p-header>
     <div class="container" [formGroup]="currencyForm">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currencyCode">{{ 'currency.currency_code' | translate}} <span
+            <label for="currencyCode">{{ 'currency.content.code' | translate}} <span
                 class="text-danger ml-2">*</span></label>
             <div class="div-form">
               <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
@@ -94,7 +94,7 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currencyName">{{ 'currency.currency_name' | translate}}<span
+            <label for="currencyName">{{ 'currency.content.name' | translate}}<span
                 class="text-danger ml-2">*</span></label>
             <div class="div-form">
               <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
@@ -110,7 +110,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <label for="currencyDescription">{{ 'currency.currency_description' | translate}}</label>
+            <label for="currencyDescription">{{ 'currency.content.description' | translate}}</label>
             <textarea class="form-control" rows="4" id="currencyDescription" formControlName="description"
               data-qe-id="dialog-form-description"></textarea>
           </div>

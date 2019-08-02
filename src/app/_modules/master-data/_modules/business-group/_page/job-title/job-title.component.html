@@ -30,15 +30,15 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'job_title.job_title_code' | translate}}
+                            {{ 'jobTtitle.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'job_title.job_title_name' | translate}}
+                            {{ 'jobTtitle.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'job_title.job_title_description' | translate}}
+                            {{ 'jobTtitle.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -75,13 +75,13 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
-        {{ 'job_title.modal.title' | translate}}
+        {{ 'jobTtitle.dialog..title' | translate}}
     </p-header>
     <div class="container" [formGroup]="jobTitleForm">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="jobTitleCode">{{ 'job_title.job_title_code' | translate}}<span
+                    <label for="jobTitleCode">{{ 'jobTtitle.content.code' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
@@ -95,7 +95,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="jobTitleName">{{ 'job_title.job_title_name' | translate}}<span
+                    <label for="jobTitleName">{{ 'jobTtitle.content.name' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
@@ -112,7 +112,7 @@
 
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="job_titleid">{{ 'job_title.job_title_description' | translate}}</label>
+                    <label for="job_titleid">{{ 'jobTtitle.content.description' | translate}}</label>
                     <textarea class="form-control" rows="4" formControlName="description"
                         data-qe-id="dialog-form-description">
                     </textarea>

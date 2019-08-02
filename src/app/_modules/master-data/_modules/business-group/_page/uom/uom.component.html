@@ -30,15 +30,15 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'uom.content.table.uom_code' | translate}}
+                            {{ 'uom.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'uom.content.table.uom_name' | translate}}
+                            {{ 'uom.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'uom.content.table.uom_description' | translate}}
+                            {{ 'uom.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -83,7 +83,7 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="uomCode">{{ 'uom.content.modal.uom_code' | translate}}<span
+                    <label for="uomCode">{{ 'uom.content.code' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
@@ -97,7 +97,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="uomName">{{ 'uom.content.modal.uom_name' | translate}}<span
+                    <label for="uomName">{{ 'uom.content.name' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"

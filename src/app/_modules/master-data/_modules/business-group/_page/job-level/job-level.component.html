@@ -29,11 +29,11 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-level" [pSortableColumn]="'level'">
-                            {{ 'jobLevel.table.level' | translate}}
+                            {{ 'jobLevel.content.level' | translate}}
                             <p-sortIcon [field]="'level'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'jobLevel.table.description' | translate}}
+                            {{ 'jobLevel.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -71,7 +71,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="jobLevel">{{ 'jobLevel.dialog.level' | translate}}<span
+                    <label for="jobLevel">{{ 'jobLevel.content.level' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" pKeyFilter="num" formControlName="level" class="form-control">
@@ -84,7 +84,7 @@
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="job_levelid">{{ 'jobLevel.dialog.description' | translate}}</label>
+                    <label for="job_levelid">{{ 'jobLevel.content.description' | translate}}</label>
                     <textarea class="form-control" rows="4" formControlName="description">
                     </textarea>
                 </div>

@@ -18,10 +18,10 @@
                 </button>
                 <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
                     <li role="menuitem"><button class="dropdown-item"
-                            (click)="file.click()">{{'general.button.import_file' | translate}}</button></li>
+                            (click)="file.click()">{{'general.button.importFile' | translate}}</button></li>
                     <li class="divider dropdown-divider"></li>
                     <li role="menuitem"><a class="dropdown-item" target="_blank"
-                            [href]="downloadLink">{{'general.button.download_example' | translate}}</a>
+                            [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
                     </li>
                 </ul>
                 <input type="file" accept=".xlsx" (click)="file.value = null" (change)="importTemplate(file.files)"
@@ -48,15 +48,15 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'bank.content.table.bank_code' | translate}}
+                            {{ 'bank.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'bank.content.table.bank_name' | translate}}
+                            {{ 'bank.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'bank.content.table.bank_description' | translate}}
+                            {{ 'bank.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -95,13 +95,13 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
-        {{ 'bank.content.modal.title' | translate}}
+        {{ 'bank.dialog.title' | translate}}
     </p-header>
     <div class="container" [formGroup]="bankForm">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="bankCode">{{ 'bank.content.modal.bank_code' | translate}}<span
+                    <label for="bankCode">{{ 'bank.content.code' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
@@ -115,7 +115,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="bankName">{{ 'bank.content.modal.bank_name' | translate}}<span
+                    <label for="bankName">{{ 'bank.content.name' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
@@ -131,7 +131,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="bankDescription">{{ 'bank.content.modal.bank_description' | translate}}</label>
+                    <label for="bankDescription">{{ 'bank.content.description' | translate}}</label>
                     <textarea class="form-control" rows="4" formControlName="description"
                         data-qe-id="dialog-form-description" id="bankDescription">
                      </textarea>
