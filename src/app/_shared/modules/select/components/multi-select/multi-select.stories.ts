@@ -1,18 +1,20 @@
-import {storiesOf} from '@storybook/angular/dist/client/preview';
-import {moduleMetadata} from '@storybook/angular';
-import {CommonModule} from '@angular/common';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {SelectModule} from '../../select.module';
-import {sampleList} from '../../sample/list.sample';
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import { storiesOf } from '@storybook/angular/dist/client/preview';
+import { moduleMetadata } from '@storybook/angular';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SelectModule } from '../../select.module';
+import { sampleList } from '../../sample/list.sample';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   template: `
-    <app-multi-select [list]="list" (selectionChange)="onChange($event)" (listOpen)="onOpen($event)"></app-multi-select>`,
+      <app-multi-select [list]="list" (selectionChange)="onChange($event)" key="label" (listOpen)="onOpen($event)"></app-multi-select>`,
 })
-class MultiSelectStories {
+class MultiSelectStoriesComponent {
   @Input() list = [];
+
+  @Input() sampleList = sampleList;
 
   @Output() listChange = new EventEmitter();
 
@@ -22,12 +24,13 @@ class MultiSelectStories {
     this.listChange.emit(event);
   }
 
+  @Input()
   onOpen(event) {
     setTimeout(() => {
       this.list = [
-        ...sampleList,
+        ...this.sampleList,
       ];
-    }, 2000);
+    }, 1000);
   }
 }
 
@@ -35,7 +38,7 @@ storiesOf('Multi Select', module)
   .addDecorator(
     moduleMetadata({
       declarations: [
-        MultiSelectStories,
+        MultiSelectStoriesComponent,
       ],
       imports: [
         CommonModule,
@@ -46,14 +49,15 @@ storiesOf('Multi Select', module)
     }),
   )
   .add('default', () => ({
-    component: MultiSelectStories,
+    component: MultiSelectStoriesComponent,
     props: {
       list: sampleList,
-      listChange: (event) => {
-        console.log(event);
-      },
-      listOpen: (event) => {
-        console.log(event);
-      },
+    },
+  }))
+  .add('no-data', () => ({
+    component: MultiSelectStoriesComponent,
+    props: {
+      list: sampleList,
+      sampleList: [],
     },
   }));
