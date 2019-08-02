@@ -179,7 +179,7 @@ export class PaymentMethodComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.paymentMethodService.delete(this.paymentMethodForm.value, this.paymentMethodSearchEntity)
+    this.paymentMethodService.deactivate(this.paymentMethodForm.value, this.paymentMethodSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

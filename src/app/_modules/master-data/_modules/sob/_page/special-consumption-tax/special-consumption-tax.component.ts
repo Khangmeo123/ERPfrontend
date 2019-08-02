@@ -196,7 +196,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.specialConsumptionTaxService.delete(this.specialConsumptionTaxForm.value, this.specialConsumptionTaxSearchEntity)
+    this.specialConsumptionTaxService.deactivate(this.specialConsumptionTaxForm.value, this.specialConsumptionTaxSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

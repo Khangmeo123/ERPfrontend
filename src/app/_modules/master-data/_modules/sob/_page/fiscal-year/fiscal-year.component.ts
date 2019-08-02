@@ -232,7 +232,7 @@ export class FiscalYearComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.fiscalYearService.delete(this.fiscalYearForm.value, this.fiscalYearSearchEntity)
+    this.fiscalYearService.deactivate(this.fiscalYearForm.value, this.fiscalYearSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

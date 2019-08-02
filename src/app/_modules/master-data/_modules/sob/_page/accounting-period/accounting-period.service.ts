@@ -137,9 +137,9 @@ export class AccountingPeriodService {
 
   }
 
-  delete(accountingPeriodEntity: any, accountingPeriodSearchEntity: AccountingPeriodSearchEntity): Promise<boolean> {
+  deactivate(accountingPeriodEntity: any, accountingPeriodSearchEntity: AccountingPeriodSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.accountingPeriodRepository.delete(accountingPeriodEntity).subscribe(res => {
+      this.accountingPeriodRepository.deactivate(accountingPeriodEntity).subscribe(res => {
         if (res) {
           this.getList(accountingPeriodSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

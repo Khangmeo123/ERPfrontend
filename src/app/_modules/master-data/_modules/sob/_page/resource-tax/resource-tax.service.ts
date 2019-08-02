@@ -88,9 +88,9 @@ export class ResourceTaxService {
 
   }
 
-  delete(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
+  deactivate(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.resourceTaxRepository.delete(resourceTaxEntity).subscribe(res => {
+      this.resourceTaxRepository.deactivate(resourceTaxEntity).subscribe(res => {
         if (res) {
           this.getList(resourceTaxSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

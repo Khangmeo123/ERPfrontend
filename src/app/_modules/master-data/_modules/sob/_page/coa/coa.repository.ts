@@ -89,8 +89,8 @@ export class CoaRepository extends Repository {
     );
   }
 
-  delete(coaEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(coaEntity),
+  deactivate(coaEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(coaEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

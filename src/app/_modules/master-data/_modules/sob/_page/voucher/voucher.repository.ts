@@ -77,8 +77,8 @@ export class VoucherListRepository extends Repository {
     );
   }
 
-  delete(voucherEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(voucherEntity),
+  deactivate(voucherEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(voucherEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

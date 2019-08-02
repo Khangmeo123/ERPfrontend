@@ -94,8 +94,8 @@ export class SpecialConsumptionTaxRepository extends Repository {
     );
   }
 
-  delete(specialConsumptionTaxEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(specialConsumptionTaxEntity),
+  deactivate(specialConsumptionTaxEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(specialConsumptionTaxEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

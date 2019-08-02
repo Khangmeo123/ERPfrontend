@@ -248,7 +248,7 @@ export class AccountingPeriodComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.accountingPeriodService.delete(this.accountingPeriodForm.value, this.accountingPeriodSearchEntity)
+    this.accountingPeriodService.deactivate(this.accountingPeriodForm.value, this.accountingPeriodSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

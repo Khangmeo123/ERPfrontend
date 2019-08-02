@@ -107,9 +107,9 @@ export class PaymentMethodService {
 
   }
 
-  delete(paymentMethodEntity: any, paymentMethodSearchEntity: PaymentMethodSearchEntity): Promise<boolean> {
+  deactivate(paymentMethodEntity: any, paymentMethodSearchEntity: PaymentMethodSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.paymentMethodRepository.delete(paymentMethodEntity).subscribe(res => {
+      this.paymentMethodRepository.deactivate(paymentMethodEntity).subscribe(res => {
         if (res) {
           this.getList(paymentMethodSearchEntity);
           this.toastrService.success(translate('general.update.success'));

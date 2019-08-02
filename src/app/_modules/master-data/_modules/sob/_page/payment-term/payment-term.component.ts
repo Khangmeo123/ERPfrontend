@@ -186,7 +186,7 @@ export class PaymentTermComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.paymentTermService.delete(this.paymentTermForm.value, this.paymentTermSearchEntity)
+    this.paymentTermService.deactivate(this.paymentTermForm.value, this.paymentTermSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

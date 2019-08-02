@@ -178,7 +178,7 @@ export class VoucherComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.voucherListService.delete(this.voucherListForm.value, this.voucherListSearchEntity)
+    this.voucherListService.deactivate(this.voucherListForm.value, this.voucherListSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

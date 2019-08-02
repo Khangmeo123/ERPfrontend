@@ -111,8 +111,8 @@ export class AccountingPeriodRepository extends Repository {
     );
   }
 
-  delete(accountingPeriodEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(accountingPeriodEntity),
+  deactivate(accountingPeriodEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(accountingPeriodEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

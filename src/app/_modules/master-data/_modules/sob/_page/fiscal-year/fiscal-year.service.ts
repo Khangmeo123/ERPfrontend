@@ -121,9 +121,9 @@ export class FiscalYearService {
 
   }
 
-  delete(fiscalYearEntity: any, fiscalYearSearchEntity: FiscalYearSearchEntity): Promise<boolean> {
+  deactivate(fiscalYearEntity: any, fiscalYearSearchEntity: FiscalYearSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.fiscalYearRepository.delete(fiscalYearEntity).subscribe(res => {
+      this.fiscalYearRepository.deactivate(fiscalYearEntity).subscribe(res => {
         if (res) {
           this.getList(fiscalYearSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

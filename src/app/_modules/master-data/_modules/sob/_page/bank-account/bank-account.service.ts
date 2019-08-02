@@ -114,9 +114,9 @@ export class BankAccountService {
 
   }
 
-  delete(bankAccountEntity: any, bankAccountSearchEntity: BankAccountSearchEntity): Promise<boolean> {
+  deactivate(bankAccountEntity: any, bankAccountSearchEntity: BankAccountSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.bankAccountRepository.delete(bankAccountEntity).subscribe(res => {
+      this.bankAccountRepository.deactivate(bankAccountEntity).subscribe(res => {
         if (res) {
           this.getList(bankAccountSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

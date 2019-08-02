@@ -114,9 +114,9 @@ export class SpecialConsumptionTaxService {
 
   }
 
-  delete(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Promise<boolean> {
+  deactivate(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.specialConsumptionTaxRepository.delete(specialConsumptionTaxEntity).subscribe(res => {
+      this.specialConsumptionTaxRepository.deactivate(specialConsumptionTaxEntity).subscribe(res => {
         if (res) {
           this.getList(specialConsumptionTaxSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

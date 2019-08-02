@@ -226,26 +226,32 @@ export class SobComponent implements OnInit, OnDestroy {
   }
 
   getImportTaxTemplates() {
+    this.importTaxSearchEntity = new ImportTaxSearchEntity();
     this.sobService.getImportTaxTemplates(this.importTaxSearchEntity);
   }
 
   getExportTaxTemplates() {
+    this.exportTaxSearchEntity = new ExportTaxSearchEntity();
     this.sobService.getExportTaxTemplates(this.exportTaxSearchEntity);
   }
 
   getEnvironmentTemplates() {
+    this.environmentTaxSearchEntity = new EnvironmentTaxSearchEntity();
     this.sobService.getEnvironmentTaxTemplates(this.environmentTaxSearchEntity);
   }
 
   getNaturalResourceTaxTemplates() {
+    this.naturalResourceTaxSearchEntity = new NaturalResourceTaxSearchentity();
     this.sobService.getNaturalResourceTaxTemplates(this.naturalResourceTaxSearchEntity);
   }
 
   getValueAddedTaxTemplates() {
+    this.valueAddedTaxSearchEntity = new ValueAddedTaxSearchEntity();
     this.sobService.getValueAddedTaxTemplates(this.valueAddedTaxSearchEntity);
   }
 
   getSpecialConsumptionTaxTemplates() {
+    this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchentity();
     this.sobService.getSpecialConsumptionTaxTemplates(this.specialConsumptionTaxSearchEntity);
   }
 
@@ -293,8 +299,8 @@ export class SobComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.sobService.delete(this.sobForm.value, this.sobSearchEntity).then(res => {
+  deactivate() {
+    this.sobService.deactivate(this.sobForm.value, this.sobSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;
@@ -322,7 +328,7 @@ export class SobComponent implements OnInit, OnDestroy {
     this.getList();
   }
 
-  paginationOut(pagination: PaginationModel) {
+  paginationOut(pagination) {
     this.sobSearchEntity.skip = pagination.skip;
     this.sobSearchEntity.take = pagination.take;
     this.sobService.getList(this.sobSearchEntity);

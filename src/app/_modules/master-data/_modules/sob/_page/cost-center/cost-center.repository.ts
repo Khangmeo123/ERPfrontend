@@ -96,8 +96,8 @@ export class CostCenterRepository extends Repository {
     );
   }
 
-  delete(costCenterEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(costCenterEntity),
+  deactivate(costCenterEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(costCenterEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

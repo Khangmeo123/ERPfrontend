@@ -199,7 +199,7 @@ export class BankAccountComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.bankAccountService.delete(this.bankAccountForm.value, this.bankAccountSearchEntity)
+    this.bankAccountService.deactivate(this.bankAccountForm.value, this.bankAccountSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

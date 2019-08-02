@@ -95,8 +95,8 @@ export class BankAccountRepository extends Repository {
     );
   }
 
-  delete(bankAccountEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(bankAccountEntity),
+  deactivate(bankAccountEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(bankAccountEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

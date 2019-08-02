@@ -201,7 +201,7 @@ export class CostCenterComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.costCenterService.delete(this.costCenterForm.value, this.costCenterSearchEntity)
+    this.costCenterService.deactivate(this.costCenterForm.value, this.costCenterSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

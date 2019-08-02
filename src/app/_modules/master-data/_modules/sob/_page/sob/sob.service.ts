@@ -177,9 +177,9 @@ export class SobService {
 
   }
 
-  delete(sobEntity: any, sobSearchEntity: SobSearchEntity): Promise<boolean> {
+  deactivate(sobEntity: any, sobSearchEntity: SobSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.sobRepository.delete(sobEntity).subscribe(res => {
+      this.sobRepository.deactivate(sobEntity).subscribe(res => {
         if (res) {
           this.getList(sobSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

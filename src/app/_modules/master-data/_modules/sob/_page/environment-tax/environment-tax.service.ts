@@ -88,9 +88,9 @@ export class EnvironmentTaxService {
 
   }
 
-  delete(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
+  deactivate(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.environmentTaxRepository.delete(environmentTaxEntity).subscribe(res => {
+      this.environmentTaxRepository.deactivate(environmentTaxEntity).subscribe(res => {
         if (res) {
           this.getList(environmentTaxSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

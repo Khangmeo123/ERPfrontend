@@ -104,9 +104,9 @@ export class PaymentTermService {
     });
   }
 
-  delete(paymentTermEntity: any, paymentTermSearchEntity: PaymentTermSearchEntity): Promise<boolean> {
+  deactivate(paymentTermEntity: any, paymentTermSearchEntity: PaymentTermSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.paymentTermRepository.delete(paymentTermEntity).subscribe(res => {
+      this.paymentTermRepository.deactivate(paymentTermEntity).subscribe(res => {
         if (res) {
           this.getList(paymentTermSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

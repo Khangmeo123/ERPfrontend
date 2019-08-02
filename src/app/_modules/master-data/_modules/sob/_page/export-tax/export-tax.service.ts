@@ -88,9 +88,9 @@ export class ExportTaxService {
 
   }
 
-  delete(exportTaxEntity: any, exportTaxSearchEntity: ExportTaxSearchEntity): Promise<boolean> {
+  deactivate(exportTaxEntity: any, exportTaxSearchEntity: ExportTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.exportTaxRepository.delete(exportTaxEntity).subscribe(res => {
+      this.exportTaxRepository.deactivate(exportTaxEntity).subscribe(res => {
         if (res) {
           this.getList(exportTaxSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

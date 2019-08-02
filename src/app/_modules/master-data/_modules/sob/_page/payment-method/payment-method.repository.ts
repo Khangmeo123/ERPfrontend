@@ -77,8 +77,8 @@ export class PaymentMethodRepository extends Repository {
     );
   }
 
-  delete(paymentMethodEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(paymentMethodEntity),
+  deactivate(paymentMethodEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(paymentMethodEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

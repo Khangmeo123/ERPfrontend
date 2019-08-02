@@ -58,8 +58,8 @@ export class ResourceTaxRepository extends Repository {
     );
   }
 
-  delete(resourceTaxEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(resourceTaxEntity),
+  deactivate(resourceTaxEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(resourceTaxEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

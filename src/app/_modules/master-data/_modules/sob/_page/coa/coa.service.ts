@@ -123,9 +123,9 @@ export class CoaService {
 
   }
 
-  delete(coaEntity: any, coaSearchEntity: CoaSearchEntity): Promise<boolean> {
+  deactivate(coaEntity: any, coaSearchEntity: CoaSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.coaRepository.delete(coaEntity).subscribe(res => {
+      this.coaRepository.deactivate(coaEntity).subscribe(res => {
         if (res) {
           this.getList(coaSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

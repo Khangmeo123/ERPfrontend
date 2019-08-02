@@ -58,8 +58,8 @@ export class ImportTaxRepository extends Repository {
     );
   }
 
-  delete(importTaxEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(importTaxEntity),
+  deactivate(importTaxEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(importTaxEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

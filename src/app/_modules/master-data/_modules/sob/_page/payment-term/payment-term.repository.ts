@@ -77,8 +77,8 @@ export class PaymentTermRepository extends Repository {
     );
   }
 
-  delete(paymentTermEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(paymentTermEntity),
+  deactivate(paymentTermEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(paymentTermEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

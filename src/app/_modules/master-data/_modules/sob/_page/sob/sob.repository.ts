@@ -57,7 +57,7 @@ export class SobRepository extends Repository {
   }
 
   getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-coa-template', JSON.stringify(coaSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account-template', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -172,8 +172,8 @@ export class SobRepository extends Repository {
     );
   }
 
-  delete(sobEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(sobEntity),
+  deactivate(sobEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(sobEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

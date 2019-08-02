@@ -212,7 +212,7 @@ export class CoaComponent implements OnInit {
   }
 
   onClickDelete() {
-    this.coaService.delete(this.coaForm.value, this.coaSearchEntity)
+    this.coaService.deactivate(this.coaForm.value, this.coaSearchEntity)
       .then(res => {
         this.isShowDialog = res;
       })

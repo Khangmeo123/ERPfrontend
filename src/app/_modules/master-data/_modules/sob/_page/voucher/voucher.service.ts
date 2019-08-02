@@ -105,9 +105,9 @@ export class VoucherListService {
 
   }
 
-  delete(voucherListEntity: any, voucherListSearchEntity: VoucherListSearchEntity): Promise<boolean> {
+  deactivate(voucherListEntity: any, voucherListSearchEntity: VoucherListSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.voucherListRepository.delete(voucherListEntity).subscribe(res => {
+      this.voucherListRepository.deactivate(voucherListEntity).subscribe(res => {
         if (res) {
           this.getList(voucherListSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

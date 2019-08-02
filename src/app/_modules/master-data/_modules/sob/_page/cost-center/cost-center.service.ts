@@ -115,9 +115,9 @@ export class CostCenterService {
 
   }
 
-  delete(costCenterEntity: any, costCenterSearchEntity: CostCenterSearchEntity): Promise<boolean> {
+  deactivate(costCenterEntity: any, costCenterSearchEntity: CostCenterSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.costCenterRepository.delete(costCenterEntity).subscribe(res => {
+      this.costCenterRepository.deactivate(costCenterEntity).subscribe(res => {
         if (res) {
           this.getList(costCenterSearchEntity);
           this.toastrService.success('Cập nhật thành công !');
