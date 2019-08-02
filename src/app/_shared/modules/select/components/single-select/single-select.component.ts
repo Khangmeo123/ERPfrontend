@@ -92,7 +92,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       this.isLoading = false;
     }
     if (changes.initialValue) {
-      if (changes.initialValue.currentValue) {
+      if (!changes.initialValue.currentValue) {
         this.selectedList = null;
         this.selectedText = '';
       }
