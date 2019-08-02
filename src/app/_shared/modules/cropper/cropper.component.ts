@@ -13,15 +13,17 @@ import { FormControl } from '@angular/forms';
 export class CropperComponent implements OnInit {
   @Input() control: FormControl = new FormControl();
 
+  @Input() disabled: boolean = false;
+
   display = false;
 
-  result = '';
+  result = null;
 
   selectedFile: File;
 
   cropper: Cropper;
 
-  imageData = '';
+  imageData = null;
 
   @Output() output = new EventEmitter();
 
@@ -41,8 +43,10 @@ export class CropperComponent implements OnInit {
   }
 
   set imageDataURL(data) {
+    console.log(data);
     this.control.setValue(data);
     this.imageData = data;
+    this.result = data;
   }
 
   get filename() {

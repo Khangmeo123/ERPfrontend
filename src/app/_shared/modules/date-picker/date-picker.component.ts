@@ -25,13 +25,15 @@ import { DatePipe } from '@angular/common';
     {
       provide: MAT_DATE_FORMATS,
       useValue: DEFAULT_DATE_FORMAT,
-    }
+    },
   ],
 })
 export class DatePickerComponent implements OnInit, OnChanges {
   checkCtrl = false;
 
   @Input() control = new FormControl();
+
+  @Input() disabled: boolean = false;
 
   @Input() displayToggler = false;
 
@@ -92,7 +94,7 @@ export class DatePickerComponent implements OnInit, OnChanges {
   }
 
   onMouseDown(datePicker) {
-    datePicker.open();
+    this.openDatePicker(datePicker);
   }
 
   onKeyUp(event) {
@@ -129,6 +131,12 @@ export class DatePickerComponent implements OnInit, OnChanges {
         }
         return;
       }
+    }
+  }
+
+  openDatePicker(matDatePicker) {
+    if (!this.disabled) {
+      matDatePicker.open();
     }
   }
 }

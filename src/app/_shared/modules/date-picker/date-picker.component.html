@@ -3,6 +3,7 @@
     <input type="text"
            class="form-control"
            [readOnly]="inputReadOnly"
+           [disabled]="disabled"
            (keydown)="onKeyDown($event)"
            (keyup)="onKeyUp($event)"
            (mousedown)="onMouseDown(matDatepicker)"
@@ -14,7 +15,7 @@
            placeholder="{{'datePicker.placeHolder' | translate}}">
     <mat-datepicker #matDatepicker></mat-datepicker>
     <div class="input-group-append">
-      <div class="input-group-text" role="button" (click)="matDatepicker.open()">
+      <div class="input-group-text" role="button" (click)="openDatePicker(matDatepicker)">
         <mat-icon>calendar_today</mat-icon>
       </div>
     </div>
