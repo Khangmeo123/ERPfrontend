@@ -143,9 +143,14 @@
                 <td> {{itemsFromLegal.code}} </td>
                 <td> {{itemsFromLegal.name}} </td>
                 <td>
-                  <a href="javascript:void(0)" (click)="viewItemFromLegal(itemsFromLegal.id)">Xem</a>
-                  <a href="javascript:void(0)" (click)="editItemFromLegal(itemsFromLegal.id)">Sửa</a>
-                  <a href="javascript:void(0)" (click)="deleteItemFromLegal(itemsFromLegal.id)">Xoá</a>
+                    <div class="d-flex">
+                        <div class="edit mr-2" (click)="editItemFromLegal(itemsFromLegal.id)">
+                            <mat-icon>edit</mat-icon>
+                          </div>
+                        <div class="delete" (click)="deleteItemFromLegal(itemsFromLegal.id)">
+                            <mat-icon>delete</mat-icon>
+                          </div>
+                    </div>
                 </td>
               </tr>
             </ng-template>

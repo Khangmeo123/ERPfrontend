@@ -73,8 +73,14 @@
                 <td class="ui-resizable-column"> {{itemGroup.code}} </td>
                 <td class="ui-resizable-column"> {{itemGroup.name}} </td>
                 <td class="ui-resizable-column">
-                  <a href="javascript:void(0)" (click)="editItemGroup(itemGroup.id)">Sửa</a>
-                  <a href="javascript:void(0)" (click)="viewItemGroup(itemGroup.id)">Xem</a>
+                  <div class="d-flex">
+                    <div class="edit mr-2" (click)="editItemGroup(itemGroup.id)">
+                      <mat-icon>edit</mat-icon>
+                    </div>
+                    <div class="delete" (click)="viewItemGroup(itemGroup.id)">
+                      <mat-icon>remove_red_eye</mat-icon>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </ng-template>
@@ -152,9 +158,17 @@
                 <td class="ui-resizable-column"> {{items.code}} </td>
                 <td class="ui-resizable-column"> {{items.name}} </td>
                 <td class="ui-resizable-column">
-                  <a href="javascript:void(0)" (click)="deleteItemFromItemGroup(items.id)">Xoá</a>
-                  <a href="javascript:void(0)" (click)="editItemFromItemGroup(items.id)">Sửa</a>
-                  <a href="javascript:void(0)" (click)="viewItemFromItemGroup(items.id)">Xem</a>
+                  <div class="d-flex">
+                    <div class="delete" (click)="deleteItemFromItemGroup(items.id)">
+                      <mat-icon>remove_red_eye</mat-icon>
+                    </div>
+                    <div class="edit mr-2" (click)="editItemFromItemGroup(items.id)">
+                      <mat-icon>edit</mat-icon>
+                    </div>
+                    <div class="view" (click)="viewItemFromItemGroup(items.id)">
+                      <mat-icon>remove_red_eye</mat-icon>
+                    </div>
+                  </div>
                 </td>
               </tr>
             </ng-template>

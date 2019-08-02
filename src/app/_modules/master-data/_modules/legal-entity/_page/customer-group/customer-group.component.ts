@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
 import { BookmarkService } from 'src/app/_services';
@@ -58,6 +58,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   customerGroupId: any;
   listCustomerId: Array<any> = [];
   exportLink = environment.apiUrlApps +'master-data/legal-entity/customer-group/export?customerGroupId=';
+  @ViewChild('tableCustomer', { static: false }) public tableCustomer: TemplateRef<any>;
 
   constructor(
     private router: Router,
@@ -297,7 +298,13 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
       this.getListDetail();
     }
   }
-
+  deleteCustomerFromGroup(customer: any) {
+    this.customerGroupService.deleteCustomer(customer).then(res => {
+      if (res) {
+        this.clearSearch(this.tableCustomer);
+      }
+    });
+  }
   getListDetail() {
     this.paginationdetail.pageNumber = 1;
     this.customerSearchEntity.skip = 0;

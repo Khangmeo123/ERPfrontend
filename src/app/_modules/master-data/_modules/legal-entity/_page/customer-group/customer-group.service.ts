@@ -152,6 +152,23 @@ export class CustomerGroupService {
         return defered;
     }
 
+    deleteCustomer(customerSearchEntity: CustomerSearchEntity): Promise<boolean> {
+        const defered = new Promise<boolean>((resolve, reject) => {
+          this.customerGroupRepository.deleteCustomer(customerSearchEntity).subscribe(res => {
+            if (res) {
+              this.getListCustomer(customerSearchEntity);
+              this.toastrService.success('Cập nhật thành công !');
+              resolve(false);
+            }
+          }, err => {
+            if (err) {
+              reject(true);
+            }
+          });
+        });
+        return defered;
+      }
+
     getListLegalEntity(legalSearchEntity: LegalSearchEntity) {
         this.customerGroupRepository.getListLegalEntity(legalSearchEntity).subscribe(res => {
             if (res) {

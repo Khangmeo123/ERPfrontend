@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { BookmarkService } from '../../../../../../_services';
 import { Router } from '@angular/router';
@@ -45,6 +45,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   listCustomerId: Array<any> = [];
 
   exportLink = environment.apiUrlApps +'master-data/legal-entity/customer-of-legal-entity/export?legalEntityId=';
+  @ViewChild('tableCustomer', { static: false }) public tableCustomer: TemplateRef<any>;
 
 
   constructor(
@@ -185,9 +186,17 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 
-  onClickShowDetail(customerId) {
+  onClickShowDetail(customerId : string) {
     this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'], 
     {queryParams: {id: customerId, legalEntityId: this.legalId}});
+  }
+
+  deleteCustomerFormLegal(customer: any) {
+    this.customerOfLegalEntityService.delete(customer).then(res => {
+      if (res) {
+        this.clearSearchCustomer(this.tableCustomer);
+      }
+    });
   }
 
   showDialog() {

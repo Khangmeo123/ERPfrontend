@@ -101,7 +101,7 @@
               [disabled]="listCustomerId.length === 0">
               {{'general.button.add' | translate}}</button>
             <a class="btn btn-export" [href]="exportLink + customerGroupId" data-qe-id="button-export">{{'general.button.export' | translate}}</a>
-            <button class="btn btn-clear" (click)="clearSearch(tablecustomer)"
+            <button class="btn btn-clear" (click)="clearSearch(tableCustomer)"
               data-qe-id="button-clear-customer">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
@@ -109,7 +109,7 @@
         <div class="page-section mt-2">
           <p-table [value]="customerDetailList" [customSort]="true" [lazy]="true"
             (onLazyLoad)="sortCustomerDetail($event)" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
-            #tablecustomer>
+            #tableCustomer>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -145,9 +145,15 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td>
-                  <div class="edit" (click)="onClickShowDetail(item.id)">
-                    <mat-icon>edit</mat-icon>
+                  <div class="d-flex">
+                      <div class="edit" (click)="onClickShowDetail(item.id)">
+                          <mat-icon>edit</mat-icon>
+                        </div>
+                        <div class="delete" (click)="deleteCustomerFromGroup(item)">
+                            <mat-icon>delete</mat-icon>
+                          </div>
                   </div>
+                  
                 </td>
               </tr>
             </ng-template>
