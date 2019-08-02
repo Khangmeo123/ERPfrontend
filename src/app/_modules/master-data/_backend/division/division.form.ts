@@ -9,12 +9,10 @@ export class DivisionForm extends FormModel {
     code = new FormControl('', [requiredField, checkLength(1, 3)]);
     address = new FormControl('');
     legalEntityId = new FormControl();
-
-
     errors = new FormGroup({
         name: new FormControl(''),
         code: new FormControl(''),
-    })
+    });
 
     constructor(divisionEntity?: DivisionEntity) {
         super();

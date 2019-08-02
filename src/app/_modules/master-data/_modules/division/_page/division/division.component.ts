@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { Router } from '@angular/router';
 import { Subscription, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
@@ -17,7 +16,7 @@ import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/d
   selector: 'app-division',
   templateUrl: './division.component.html',
   styleUrls: ['./division.component.scss'],
-  providers: [DivisionService]
+  providers: [DivisionService],
 })
 export class DivisionComponent implements OnInit {
   pageTitle = translate('division.header.title');
@@ -40,7 +39,7 @@ export class DivisionComponent implements OnInit {
   legalTyping: Subject<LegalSearchEntity> = new Subject();
   legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
 
-  legalEntityId: string = '';
+  legalEntityId: string;
   selectedDivision: any;
   pagination = new PaginationModel();
 
@@ -87,10 +86,10 @@ export class DivisionComponent implements OnInit {
   ngOnInit() {
   }
 
-  openlegalList(legalId: string) {
+  openlegalList() {
     this.legalSearchEntity = new LegalSearchEntity();
-    if (legalId !== null && legalId !== undefined) {
-      this.legalSearchEntity.ids.push(legalId);
+    if (this.legalEntityId !== undefined && this.legalEntityId !== null) {
+      this.legalSearchEntity.ids.push(this.legalEntityId);
     }
     this.divisionService.getListLegalEntity(this.legalSearchEntity);
   }
@@ -127,7 +126,7 @@ export class DivisionComponent implements OnInit {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.divisionSearchEntity.orderBy = event.sortField;
-      this.divisionSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.divisionSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
 
     if (this.divisionSearchEntity.legalEntityId && this.divisionSearchEntity.legalEntityId !== undefined) {
