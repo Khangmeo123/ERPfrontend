@@ -85,13 +85,6 @@ export class PaymentMethodComponent implements OnInit {
       .add(paymentMethodCountSub);
   }
 
-  get currentSob() {
-    if (this.selectedSobList.length) {
-      return this.selectedSobList[0];
-    }
-    return null;
-  }
-
   get name() {
     return this.paymentMethodForm.get('name') as FormControl;
   }
@@ -140,7 +133,10 @@ export class PaymentMethodComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {
+  paginationOut(pagination) {
+    this.pagination.skip = pagination.skip;
+    this.pagination.take = pagination.take;
+    this.getList();
   }
 
   showDialog() {

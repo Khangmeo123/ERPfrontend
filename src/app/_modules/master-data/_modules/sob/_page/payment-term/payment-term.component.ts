@@ -148,7 +148,10 @@ export class PaymentTermComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {
+  paginationOut(pagination) {
+    this.pagination.skip = pagination.skip;
+    this.pagination.take = pagination.take;
+    this.getList();
   }
 
   showDialog() {
