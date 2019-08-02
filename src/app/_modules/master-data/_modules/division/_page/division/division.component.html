@@ -36,8 +36,8 @@
     <div class="page-body">
         <div class="row mt-2 col-sm-6">
             <div class="page-section d-flex align-items-center">
-                <span class="sob-label flex-shrink-1">
-                    {{'general.legal_entity.name' | translate}} : 
+                <span class="sob-label flex-shrink-1 mr-2">
+                    {{'general.legalEntity.name' | translate}} :
                 </span>
                 <app-single-select data-qe-id="form-select-legal-entiy" [list]="legalExceptIds"
                     [selectedList]="legalIds" [key]="'name'" (search)="legalSearch($event)"
@@ -59,15 +59,15 @@
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-division">
-                            {{ 'division.code' | translate}}
+                            {{ 'division.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name-division">
-                            {{ 'division.name' | translate}}
+                            {{ 'division.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn [pSortableColumn]="'address'" data-qe-id="table-thead-address-division">
-                            {{ 'division.address' | translate}}
+                            {{ 'division.content.address' | translate}}
                             <p-sortIcon [field]="'address'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn></th>
@@ -117,13 +117,13 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
     [style]="{width: '700px'}">
     <p-header>
-        {{ 'division.modal.title' | translate}}
+        {{ 'division.dialog.title' | translate}}
     </p-header>
     <form class="container" [formGroup]="divisionForm">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="bankid">{{ 'division.tab.code' | translate}}<span
+                    <label for="bankid">{{ 'division.content.code' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
@@ -137,7 +137,7 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="bankid">{{ 'division.tab.name' | translate}}<span
+                    <label for="bankid">{{ 'division.content.name' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
@@ -153,8 +153,9 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="bankname">{{ 'division.tab.address' | translate}}</label>
-                    <input type="text" class="form-control" data-qe-id="dialog-form-address" formControlName="address"/>
+                    <label for="bankname">{{ 'division.content.address' | translate}}</label>
+                    <input type="text" class="form-control" data-qe-id="dialog-form-address"
+                        formControlName="address" />
                 </div>
             </div>
         </div>

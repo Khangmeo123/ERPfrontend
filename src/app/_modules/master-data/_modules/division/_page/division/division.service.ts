@@ -136,7 +136,7 @@ export class DivisionService {
     legalSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
-        return this.divisionRepository.getListLegalEntityDrop(searchEntity)
+        return this.divisionRepository.getListLegalEntityDrop(searchEntity);
       })).subscribe(res => {
         if (res) {
           this.legalEntityList.next(res);

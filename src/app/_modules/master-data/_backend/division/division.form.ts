@@ -13,7 +13,7 @@ export class DivisionForm extends FormModel {
 
     errors = new FormGroup({
         name: new FormControl(''),
-        code: new FormControl('')
+        code: new FormControl(''),
     })
 
     constructor(divisionEntity?: DivisionEntity) {

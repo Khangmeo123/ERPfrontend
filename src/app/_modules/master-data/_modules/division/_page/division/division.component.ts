@@ -25,7 +25,7 @@ export class DivisionComponent implements OnInit {
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   public confirmClicked: boolean = false;
   public cancelClicked: boolean = false;
-  
+
   display = false;
   isSaveBookMark = false;
   // Form general customer detail
@@ -34,7 +34,7 @@ export class DivisionComponent implements OnInit {
   divisionSearchEntity: DivisionSearchEntity = new DivisionSearchEntity();
   divisionGroupList: DivisionEntity[];
 
-  // list drop 
+  // list drop:
   legalIds: LegalEntity[];
   legalExceptIds: LegalEntity[];
   legalTyping: Subject<LegalSearchEntity> = new Subject();
@@ -46,7 +46,7 @@ export class DivisionComponent implements OnInit {
 
 
   constructor(
-    protected router: Router, 
+    protected router: Router,
     private divisionService: DivisionService,
     private bookmarkService: BookmarkService,
     private genaralService: GeneralService) {
@@ -82,8 +82,8 @@ export class DivisionComponent implements OnInit {
     });
     this.divisionService.getListLegalEntityByTyping(this.legalTyping);
     this.divisionSubs.add(listLegal).add(divisionListSub).add(divisionCountSub).add(divisionFormSub).add(bookMarkNotify);
-   }
-  
+  }
+
   ngOnInit() {
   }
 
@@ -104,13 +104,13 @@ export class DivisionComponent implements OnInit {
     this.legalTyping.next(this.legalSearchEntity);
   }
 
-  selectedLegal (event) {
+  selectedLegal(event) {
     this.legalEntityId = event[0];
     this.legalSearchEntity.legalEntityId = event[0];
     this.divisionService.getList(this.divisionSearchEntity);
   }
 
-  
+
 
   getList() {
     this.pagination.pageNumber = 1;
@@ -130,10 +130,10 @@ export class DivisionComponent implements OnInit {
       this.divisionSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
     }
 
-    if(this.divisionSearchEntity.legalEntityId && this.divisionSearchEntity.legalEntityId !== undefined){
+    if (this.divisionSearchEntity.legalEntityId && this.divisionSearchEntity.legalEntityId !== undefined) {
       this.getList();
     }
-    
+
   }
 
   save() {
