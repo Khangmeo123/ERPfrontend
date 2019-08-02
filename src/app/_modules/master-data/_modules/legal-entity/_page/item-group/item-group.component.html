@@ -103,7 +103,7 @@
             <div class="btn-group" dropdown data-qe-id="button-items-import"
               [isDisabled]="legalEntityId==null||legalEntityId==undefined">
               <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                aria-controls="dropdown-basic" isDisabled="true">
+                aria-controls="dropdown-basic">
                 {{'general.button.import' | translate}}<span class="caret"></span>
               </button>
               <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
@@ -128,7 +128,6 @@
             [resizableColumns]="true" #tableItems>
             <ng-template pTemplate="colgroup">
               <colgroup>
-                <col>
                 <col>
                 <col>
                 <col>
