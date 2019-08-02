@@ -154,7 +154,7 @@
                                     <label for="itemWeight">{{ 'item.detail.content.weight' | translate}} (kg)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="weight"
-                                            data-qe-id="form-weight" id="itemWeight" [pKeyFilter]="int" />
+                                            data-qe-id="form-weight" id="itemWeight" pKeyFilter="int" />
                                         <app-error data-qe-id="form-error-weight"
                                             *ngIf="(itemForm.controls.weight?.errors && itemForm.controls.weight?.touched) || !!itemForm.controls.errors.get('weight')?.value"
                                             [formGroup]="itemForm" [property]="'weight'" [placement]="'top'"
@@ -189,7 +189,7 @@
                                     <label for="bankid">{{ 'item.detail.content.height' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="height"
-                                            data-qe-id="form-height" id="itemHeight" [pKeyFilter]="int" />
+                                            data-qe-id="form-height" id="itemHeight" pKeyFilter="int" />
                                         <app-error data-qe-id="form-error-height"
                                             *ngIf="(itemForm.controls.height?.errors && itemForm.controls.height?.touched) || !!itemForm.controls.errors.get('height')?.value"
                                             [formGroup]="itemForm" [property]="'height'" [placement]="'top'"
@@ -203,7 +203,7 @@
                                     <label for="itemlength">{{ 'item.detail.content.length' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="length"
-                                            data-qe-id="form-length" id="itemlength" [pKeyFilter]="int" />
+                                            data-qe-id="form-length" id="itemlength" pKeyFilter="int" />
                                         <app-error data-qe-id="form-error-length"
                                             *ngIf="(itemForm.controls.length?.errors && itemForm.controls.length?.touched) || !!itemForm.controls.errors.get('length')?.value"
                                             [formGroup]="itemForm" [property]="'length'" [placement]="'top'"
@@ -217,7 +217,7 @@
                                     <label for="itemWidth">{{ 'item.detail.content.width' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="width"
-                                            data-qe-id="form-width" id="itemWidth" [pKeyFilter]="int" />
+                                            data-qe-id="form-width" id="itemWidth" pKeyFilter="int" />
                                         <app-error data-qe-id="form-error-width"
                                             *ngIf="(itemForm.controls.width?.errors && itemForm.controls.width?.touched) || !!itemForm.controls.errors.get('width')?.value"
                                             [formGroup]="itemForm" [property]="'width'" [placement]="'top'"
