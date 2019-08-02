@@ -9,8 +9,9 @@
       </span>
     </span>
     <div class="page-actions">
-      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+        + {{'general.button.add' | translate}}</button>
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -19,24 +20,24 @@
   <div class="page-body mt-4">
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
-      <app-single-select [list]="sobList"
-                        data-qe-id="sob-list"
-                         key="name"
+      <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         [list]="sobList"
                          [selectedList]="selectedSobList"
-                         (listOpen)="getSobList()"></app-single-select>
+                         data-qe-id="sob-list"
+                         key="name"></app-single-select>
     </div>
     <div class="page-section mt-2">
-      <p-treeTable [value]="coaList"
-                   #table
+      <p-treeTable #table
+                   (onLazyLoad)="sort($event)"
                    [customSort]="true"
                    [lazy]="true"
-                   (onLazyLoad)="sort($event)"
+                   [resizableColumns]="true"
                    [scrollable]="true"
-                   scrollHeight="500px"
-                   [resizableColumns]="true">
+                   [value]="coaList"
+                   scrollHeight="500px">
         <ng-template pTemplate="header">
-          <tr >
+          <tr>
             <th data-qe-id="table-thead-number">
               {{'coa.account_number' | translate}}
             </th>
@@ -52,24 +53,24 @@
           </tr>
           <tr class="th-filter">
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-accountCode" (changeFilter)="getList()"
-                                    [filter]="coaSearchEntity.accountCode"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.accountCode"
+                                    data-qe-id="filter-accountCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-accountName" (changeFilter)="getList()"
-                                    [filter]="coaSearchEntity.accountName"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.accountName"
+                                    data-qe-id="filter-accountName"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-characteristicValue" (changeFilter)="getList()"
-                                    [filter]="coaSearchEntity.characteristicValue"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.characteristicValue"
+                                    data-qe-id="filter-characteristicValue"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-accountDescription" (changeFilter)="getList()"
-                                    [filter]="coaSearchEntity.accountDescription"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.accountDescription"
+                                    data-qe-id="filter-accountDescription"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-row let-rowNode>
+        <ng-template let-row let-rowNode pTemplate="body">
           <tr [ttRow]="rowNode">
             <td>
               <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
@@ -89,12 +90,12 @@
     </div>
   </div>
 </div>
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
-          [style]="{width: '700px'}">
+<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '700px'}" appendTo="body"
+          modal="true">
   <p-header>
     {{'bank_account.bank_accounts.add' | translate}}
   </p-header>
-  <div class="container" [formGroup]="coaForm">
+  <div [formGroup]="coaForm" class="container">
     <div class="row">
       <div class="form-group col-6">
         <label for="account-code">
@@ -102,10 +103,12 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" data-qe-id="dialog-account-code" name="accountCode" formControlName="accountCode">
-          <app-error data-qe-id="dialog-error-account-code"
-                     *ngIf="(coaForm.controls.accountCode?.errors && coaForm.controls.accountCode?.touched) || !!coaForm.controls.error.get('accountCode')?.value"
-                     [formGroup]="coaForm" [property]="'accountCode'" [placement]="'top'" class="error-form">
+          <input class="form-control" data-qe-id="dialog-account-code" formControlName="accountCode" name="accountCode"
+                 type="text">
+          <app-error
+            *ngIf="(coaForm.controls.accountCode?.errors && coaForm.controls.accountCode?.touched) || !!coaForm.controls.error.get('accountCode')?.value"
+            [formGroup]="coaForm"
+            [placement]="'top'" [property]="'accountCode'" class="error-form" data-qe-id="dialog-error-account-code">
           </app-error>
         </div>
       </div>
@@ -115,10 +118,12 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" data-qe-id="dialog-account-name" name="accountName" formControlName="accountName">
-          <app-error data-qe-id="dialog-error-account-name"
-                     *ngIf="(coaForm.controls.accountName?.errors && coaForm.controls.accountName?.touched) || !!coaForm.controls.error.get('accountName')?.value"
-                     [formGroup]="coaForm" [property]="'accountName'" [placement]="'top'" class="error-form">
+          <input class="form-control" data-qe-id="dialog-account-name" formControlName="accountName" name="accountName"
+                 type="text">
+          <app-error
+            *ngIf="(coaForm.controls.accountName?.errors && coaForm.controls.accountName?.touched) || !!coaForm.controls.error.get('accountName')?.value"
+            [formGroup]="coaForm"
+            [placement]="'top'" [property]="'accountName'" class="error-form" data-qe-id="dialog-error-account-name">
           </app-error>
         </div>
       </div>
@@ -126,11 +131,11 @@
         <label for="account-characteristic">
           {{'coa.account_status' | translate}}
         </label>
-        <input type="hidden" #characteristicId  formControlName="characteristicId">
+        <input #characteristicId formControlName="characteristicId" type="hidden">
         <app-simple-select (listOpen)="getCharacteristicList()"
-                            data-qe-id="dialog-account-characteristic"
-                           [list]="characteristicList"
                            (selectionChange)="characteristicId.value = $event"
+                           [list]="characteristicList"
+                           data-qe-id="dialog-account-characteristic"
                            key="name"
         ></app-simple-select>
       </div>
@@ -138,7 +143,7 @@
         <label for="parent-account">
           {{'coa.super_account' | translate}}
         </label>
-        <input type="hidden" formControlName="parentId">
+        <input formControlName="parentId" type="hidden">
         <app-single-select (listOpen)="getParentAccountList()"
                            [list]="parentAccountList"
                            [selectedList]="selectedParentAccountList"
@@ -148,27 +153,27 @@
         <label for="account-description">
           {{'coa.description' | translate}}
         </label>
-        <textarea data-qe-id="account-description" formControlName="accountDescription" class="form-control"
+        <textarea class="form-control" data-qe-id="account-description" formControlName="accountDescription"
                   rows="3"></textarea>
       </div>
     </div>
   </div>
   <p-footer>
     <div class="d-flex">
-      <button class="btn btn-delete"
+      <button (cancel)="onClickCancel()"
+              (confirm)="onClickDelete()"
+              *ngIf="coaForm.value?.isDeleted"
+              [popoverMessage]="popoverMessage"
+              [popoverTitle]="popoverTitle"
+              class="btn btn-delete"
               data-qe-id="footer-button-delete"
               mwlConfirmationPopover
-              [popoverTitle]="popoverTitle"
-              [popoverMessage]="popoverMessage"
-              placement="bottom"
-              (confirm)="onClickDelete()"
-              (cancel)="onClickCancel()"
-              *ngIf="coaForm.value?.isDeleted">
+              placement="bottom">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
-                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
+        <button (click)="onClickCancel()" class="btn btn-cancel"
+                data-qe-id="footer-button-cancel">{{ 'general.button.cancel' | translate}}</button>
+        <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

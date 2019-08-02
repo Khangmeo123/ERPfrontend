@@ -70,7 +70,7 @@ export class PaymentMethodService {
   }
 
   save(paymentMethodEntity: any, paymentMethodSearchEntity: PaymentMethodSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (paymentMethodEntity.id === null || paymentMethodEntity.id === undefined) {
         this.paymentMethodRepository.add(paymentMethodEntity).subscribe(res => {
           if (res) {
@@ -104,11 +104,11 @@ export class PaymentMethodService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(paymentMethodEntity: any, paymentMethodSearchEntity: PaymentMethodSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.paymentMethodRepository.delete(paymentMethodEntity).subscribe(res => {
         if (res) {
           this.getList(paymentMethodSearchEntity);
@@ -124,6 +124,6 @@ export class PaymentMethodService {
         }
       });
     });
-    return defered;
+
   }
 }

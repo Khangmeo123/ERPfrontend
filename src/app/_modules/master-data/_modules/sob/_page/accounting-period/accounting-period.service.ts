@@ -101,7 +101,7 @@ export class AccountingPeriodService {
   }
 
   save(accountingPeriodEntity: any, accountingPeriodSearchEntity: AccountingPeriodSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (accountingPeriodEntity.id === null || accountingPeriodEntity.id === undefined) {
         this.accountingPeriodRepository.add(accountingPeriodEntity).subscribe(res => {
           if (res) {
@@ -134,11 +134,11 @@ export class AccountingPeriodService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(accountingPeriodEntity: any, accountingPeriodSearchEntity: AccountingPeriodSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.accountingPeriodRepository.delete(accountingPeriodEntity).subscribe(res => {
         if (res) {
           this.getList(accountingPeriodSearchEntity);
@@ -154,6 +154,6 @@ export class AccountingPeriodService {
         }
       });
     });
-    return defered;
+
   }
 }

@@ -52,7 +52,7 @@ export class EnvironmentTaxService {
   }
 
   save(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (environmentTaxEntity.id === null || environmentTaxEntity.id === undefined) {
         this.environmentTaxRepository.add(environmentTaxEntity).subscribe(res => {
           if (res) {
@@ -85,11 +85,11 @@ export class EnvironmentTaxService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.environmentTaxRepository.delete(environmentTaxEntity).subscribe(res => {
         if (res) {
           this.getList(environmentTaxSearchEntity);
@@ -105,6 +105,6 @@ export class EnvironmentTaxService {
         }
       });
     });
-    return defered;
+
   }
 }

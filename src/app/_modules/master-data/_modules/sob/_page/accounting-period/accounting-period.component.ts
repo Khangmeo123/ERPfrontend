@@ -60,7 +60,7 @@ export class AccountingPeriodComponent implements OnInit {
 
   public accountingPeriodForm: FormGroup;
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   public fiscalYearId: string = '';
 

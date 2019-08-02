@@ -69,7 +69,7 @@ export class VoucherListService {
   }
 
   save(voucherListEntity: any, voucherListSearchEntity: VoucherListSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (voucherListEntity.id === null || voucherListEntity.id === undefined) {
         this.voucherListRepository.add(voucherListEntity).subscribe(res => {
           if (res) {
@@ -102,11 +102,11 @@ export class VoucherListService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(voucherListEntity: any, voucherListSearchEntity: VoucherListSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.voucherListRepository.delete(voucherListEntity).subscribe(res => {
         if (res) {
           this.getList(voucherListSearchEntity);
@@ -122,6 +122,6 @@ export class VoucherListService {
         }
       });
     });
-    return defered;
+
   }
 }

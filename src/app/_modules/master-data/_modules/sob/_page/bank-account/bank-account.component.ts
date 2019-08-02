@@ -62,7 +62,7 @@ export class BankAccountComponent implements OnInit {
 
   public coaSearchEntity: ChartOfAccountSearchEntity = new ChartOfAccountSearchEntity();
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   constructor(
     private bankAccountService: BankAccountService,

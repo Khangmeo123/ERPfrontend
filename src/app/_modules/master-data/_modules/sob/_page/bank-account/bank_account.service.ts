@@ -78,7 +78,7 @@ export class BankAccountService {
   }
 
   save(bankAccountEntity: any, bankAccountSearchEntity: BankAccountSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (bankAccountEntity.id === null || bankAccountEntity.id === undefined) {
         this.bankAccountRepository.add(bankAccountEntity).subscribe(res => {
           if (res) {
@@ -111,11 +111,11 @@ export class BankAccountService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(bankAccountEntity: any, bankAccountSearchEntity: BankAccountSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.bankAccountRepository.delete(bankAccountEntity).subscribe(res => {
         if (res) {
           this.getList(bankAccountSearchEntity);
@@ -131,6 +131,6 @@ export class BankAccountService {
         }
       });
     });
-    return defered;
+
   }
 }

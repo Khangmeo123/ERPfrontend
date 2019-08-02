@@ -52,7 +52,7 @@ export class ResourceTaxService {
   }
 
   save(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (resourceTaxEntity.id === null || resourceTaxEntity.id === undefined) {
         this.resourceTaxRepository.add(resourceTaxEntity).subscribe(res => {
           if (res) {
@@ -85,11 +85,11 @@ export class ResourceTaxService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(resourceTaxEntity: any, resourceTaxSearchEntity: NaturalResourceTaxSearchentity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.resourceTaxRepository.delete(resourceTaxEntity).subscribe(res => {
         if (res) {
           this.getList(resourceTaxSearchEntity);
@@ -105,6 +105,6 @@ export class ResourceTaxService {
         }
       });
     });
-    return defered;
+
   }
 }

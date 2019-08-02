@@ -54,7 +54,7 @@ export class VoucherComponent implements OnInit {
 
   public voucherListForm: FormGroup;
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   constructor(
     private voucherListService: VoucherListService,

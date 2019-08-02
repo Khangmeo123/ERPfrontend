@@ -8,9 +8,9 @@ describe('ResourceTaxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResourceTaxComponent ]
+      declarations: [ResourceTaxComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

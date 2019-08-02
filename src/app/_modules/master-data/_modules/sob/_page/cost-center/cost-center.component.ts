@@ -56,7 +56,7 @@ export class CostCenterComponent implements OnInit {
 
   public costCenterForm: FormGroup;
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   public coaList: CoaEntity[] = [];
 

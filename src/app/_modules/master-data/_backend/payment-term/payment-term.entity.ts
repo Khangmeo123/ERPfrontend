@@ -1,18 +1,18 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class PaymentTermEntity extends Entity {
-    // sobEntity:
-    
-    sobId: string;
+  // sobEntity:
 
-    name: string;
-    code: string;
-    dueInDate: number;
-    discountPeriod: number;
-    discountRate: number;
-   
+  setOfBookId: string;
 
-    constructor(paymentTermEntity?: any) {
-        super(paymentTermEntity);
-    }
+  name: string;
+  code: string;
+  dueInDays: number;
+  discountPeriod: number;
+  discountRate: number;
+
+
+  constructor(paymentTermEntity?: any) {
+    super(paymentTermEntity);
+  }
 }

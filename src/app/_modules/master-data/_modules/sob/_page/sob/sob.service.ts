@@ -141,7 +141,7 @@ export class SobService {
   }
 
   save(sobEntity: any, sobSearchEntity: SobSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (sobEntity.id === null || sobEntity.id === undefined) {
         this.sobRepository.add(sobEntity).subscribe(res => {
           if (res) {
@@ -174,11 +174,11 @@ export class SobService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(sobEntity: any, sobSearchEntity: SobSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.sobRepository.delete(sobEntity).subscribe(res => {
         if (res) {
           this.getList(sobSearchEntity);
@@ -194,6 +194,6 @@ export class SobService {
         }
       });
     });
-    return defered;
+
   }
 }

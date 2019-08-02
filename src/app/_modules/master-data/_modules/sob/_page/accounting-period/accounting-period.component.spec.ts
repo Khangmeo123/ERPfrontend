@@ -8,9 +8,9 @@ describe('AccountingPeriodComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ AccountingPeriodComponent ]
+      declarations: [AccountingPeriodComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

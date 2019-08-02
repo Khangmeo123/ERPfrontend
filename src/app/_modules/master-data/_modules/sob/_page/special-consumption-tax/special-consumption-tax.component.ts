@@ -62,7 +62,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
 
   public uomSearchEntity: UomSearchEntity = new UomSearchEntity();
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   constructor(
     private specialConsumptionTaxService: SpecialConsumptionTaxService,

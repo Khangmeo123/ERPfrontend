@@ -8,10 +8,11 @@
                 </mat-icon>
             </span>
         </span>
-    
+
     <div class="page-actions">
-      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+        + {{'general.button.add' | translate}}</button>
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -20,74 +21,75 @@
   <div class="page-body mt-4 ">
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
-      <app-single-select [list]="sobList"
-                          data-qe-id="sob-list"
-                         key="name"
+      <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         [list]="sobList"
                          [selectedList]="selectedSobList"
-                         (listOpen)="getSobList()"></app-single-select>
+                         data-qe-id="sob-list"
+                         key="name"></app-single-select>
     </div>
 
     <div class="page-section list">
-      <p-table [value]="specialConsumptionTaxList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+               [scrollable]="true" [value]="specialConsumptionTaxList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
-            <th  pResizableColumn [pSortableColumn]="'code'"
-            data-qe-id="table-thead-code">
+            <th [pSortableColumn]="'code'" data-qe-id="table-thead-code"
+                pResizableColumn>
               {{'tax.code' | translate}}
             </th>
-            <th  pResizableColumn [pSortableColumn]="'name'"
-            data-qe-id="table-thead-name">
+            <th [pSortableColumn]="'name'" data-qe-id="table-thead-name"
+                pResizableColumn>
               {{'tax.name' | translate}}
             </th>
-            <th  pResizableColumn [pSortableColumn]="'unit'"
-            data-qe-id="table-thead-unit">
+            <th [pSortableColumn]="'unit'" data-qe-id="table-thead-unit"
+                pResizableColumn>
               {{'tax.unit' | translate}}
             </th>
-            <th  pResizableColumn [pSortableColumn]="'discount'"
-            data-qe-id="table-thead-discount">
+            <th [pSortableColumn]="'discount'" data-qe-id="table-thead-discount"
+                pResizableColumn>
               {{'tax.discount' | translate}}
             </th>
-            <th  pResizableColumn [pSortableColumn]="'description'"
-            data-qe-id="table-thead-description">
+            <th [pSortableColumn]="'description'" data-qe-id="table-thead-description"
+                pResizableColumn>
               {{'tax.description' | translate}}
             </th>
-            <th  pResizableColumn [pSortableColumn]="'disable'"
-            data-qe-id="table-thead-disable">
+            <th [pSortableColumn]="'disable'" data-qe-id="table-thead-disable"
+                pResizableColumn>
               {{'tax.disable' | translate}}
             </th>
 
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-code" (changeFilter)="getList()"
-                                    [filter]="specialConsumptionTaxSearchEntity.code"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.code"
+                                    data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-name"  (changeFilter)="getList()"
-                                    [filter]="specialConsumptionTaxSearchEntity.name"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.name"
+                                    data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters  data-qe-id="filter-unit" (changeFilter)="getList()"
-                                    [filter]="specialConsumptionTaxSearchEntity.unitOfMeasureName"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="specialConsumptionTaxSearchEntity.unitOfMeasureName"
+                                    data-qe-id="filter-unit"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-rate" (changeFilter)="getList()"
-                                    [filter]="specialConsumptionTaxSearchEntity.rate"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.rate"
+                                    data-qe-id="filter-rate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-description" (changeFilter)="getList()"
-                                    [filter]="specialConsumptionTaxSearchEntity.description"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.description"
+                                    data-qe-id="filter-description"></app-advanced-filters>
             </th>
             <th class="th-filter"></th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-tax  let-index="index">
+        <ng-template let-index="index" let-tax pTemplate="body">
           <tr (dblclick)="edit(tax.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{tax.code}} </td>
             <td> {{tax.name}} </td>
-            <td> {{tax.dueInDate}} </td>
+            <td> {{tax.dueInDays}} </td>
             <td> {{tax.discountPeriod}} </td>
             <td> {{tax.discountRate}} </td>
           </tr>
@@ -96,19 +98,19 @@
     </div>
 
     <div class="pagination">
-      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+      <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination"></app-pagination>
     </div>
   </div>
 
 </div>
 
 
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
-          [style]="{width: '700px'}">
+<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '700px'}" appendTo="body"
+          modal="true">
   <p-header>
     {{'special_consumption_tax.modal.title' | translate}}
   </p-header>
-  <div class="container" [formGroup]="specialConsumptionTaxForm">
+  <div [formGroup]="specialConsumptionTaxForm" class="container">
     <div class="row">
       <div class="col-6">
         <div class="mt-4 mb-4">
@@ -117,12 +119,13 @@
             <span class="text-danger mr-2">*</span>
           </label>
           <div class="div-form">
-            <input class="form-control" type="text" data-qe-id="dialog-code" formControlName="code"
-                   name="code">
-            <app-error data-qe-id="dialog-error-code"
-                       *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"
-                       [formGroup]="specialConsumptionTaxForm" [property]="'code'" [placement]="'top'"
-                       class="error-form">
+            <input class="form-control" data-qe-id="dialog-code" formControlName="code" name="code"
+                   type="text">
+            <app-error
+              *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"
+              [formGroup]="specialConsumptionTaxForm"
+              [placement]="'top'" [property]="'code'" class="error-form"
+              data-qe-id="dialog-error-code">
             </app-error>
           </div>
         </div>
@@ -132,15 +135,15 @@
             {{'tax.unit' | translate}}
           </label>
           <div class="div-form d-flex">
-            <input type="hidden"  name="unitOfMeasureId" formControlName="unitOfMeasureId"
-                   #unitOfMeasureId>
-            <app-single-select class="flex-grow-1"
-                                data-qe-id="dialog-unit-of-measure"
+            <input #unitOfMeasureId formControlName="unitOfMeasureId" name="unitOfMeasureId"
+                   type="hidden">
+            <app-single-select (listOpen)="getUomList()"
+                               (selectionChange)="unitOfMeasureId.value = $event[0]"
                                [list]="uomList"
-                               key="name"
                                [selectedList]="selectedUomList"
-                               (listOpen)="getUomList()"
-                               (selectionChange)="unitOfMeasureId.value = $event[0]"></app-single-select>
+                               class="flex-grow-1"
+                               data-qe-id="dialog-unit-of-measure"
+                               key="name"></app-single-select>
           </div>
         </div>
 
@@ -148,7 +151,7 @@
           <label for="discount">
             {{'tax.discount' | translate}}
           </label>
-          <input data-qe-id="dialog-discount" class="form-control" type="text"  formControlName="rate" name="rate">
+          <input class="form-control" data-qe-id="dialog-discount" formControlName="rate" name="rate" type="text">
         </div>
       </div>
 
@@ -159,11 +162,12 @@
             <span class="text-danger mr-2">*</span>
           </label>
           <div class="div-form">
-            <input class="form-control" type="text" data-qe-id="dialog-name" name="name" formControlName="name">
-            <app-error data-qe-id="dialog-error-name"
-                       *ngIf="(specialConsumptionTaxForm.controls.name?.errors && specialConsumptionTaxForm.controls.name?.touched) || !!specialConsumptionTaxForm.controls.errors.get('name')?.value"
-                       [formGroup]="specialConsumptionTaxForm" [property]="'name'" [placement]="'top'"
-                       class="error-form">
+            <input class="form-control" data-qe-id="dialog-name" formControlName="name" name="name" type="text">
+            <app-error
+              *ngIf="(specialConsumptionTaxForm.controls.name?.errors && specialConsumptionTaxForm.controls.name?.touched) || !!specialConsumptionTaxForm.controls.errors.get('name')?.value"
+              [formGroup]="specialConsumptionTaxForm"
+              [placement]="'top'" [property]="'name'" class="error-form"
+              data-qe-id="dialog-error-name">
             </app-error>
           </div>
         </div>
@@ -173,13 +177,13 @@
             {{'tax.parent_account' | translate}}
           </label>
           <div class="div-form d-flex">
-            <input type="hidden" formControlName="parentId" name="parentId" #parentId>
-            <app-single-select class="flex-grow-1"
-                               data-qe-id="dialog-parent-id"
+            <input #parentId formControlName="parentId" name="parentId" type="hidden">
+            <app-single-select (listOpen)="getList()"
                                (selectionChange)="parentId.value = $event[0]"
-                               (listOpen)="getList()"
                                [list]="specialConsumptionTaxList"
-                               [selectedList]="[]"></app-single-select>
+                               [selectedList]="[]"
+                               class="flex-grow-1"
+                               data-qe-id="dialog-parent-id"></app-single-select>
           </div>
         </div>
 
@@ -188,7 +192,7 @@
             {{'tax.description' | translate}}
           </label>
           <div class="div-form">
-            <input data-qe-id="dialog-description" class="form-control" formControlName="description" type="text-area">
+            <input class="form-control" data-qe-id="dialog-description" formControlName="description" type="text-area">
           </div>
         </div>
       </div>
@@ -196,21 +200,21 @@
   </div>
   <p-footer>
     <div class="d-flex">
-      <button class="btn btn-delete"
+      <button (cancel)="onClickCancel()"
+              (confirm)="onClickDelete()"
+              *ngIf="specialConsumptionTaxForm.value?.isDeleted"
+              [popoverMessage]="popoverMessage"
+              [popoverTitle]="popoverTitle"
+              class="btn btn-delete"
               data-qe-id="footer-button-delete"
               mwlConfirmationPopover
-              [popoverTitle]="popoverTitle"
-              [popoverMessage]="popoverMessage"
-              placement="bottom"
-              (confirm)="onClickDelete()"
-              (cancel)="onClickCancel()"
-              *ngIf="specialConsumptionTaxForm.value?.isDeleted">
+              placement="bottom">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button data-qe-id="footer-button-cancel" class="btn btn-cancel" (click)="onClickCancel()">
+        <button (click)="onClickCancel()" class="btn btn-cancel" data-qe-id="footer-button-cancel">
           {{ 'general.button.cancel' | translate}}
         </button>
-        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
+        <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
           {{ 'general.button.save' | translate}}
         </button>
       </div>

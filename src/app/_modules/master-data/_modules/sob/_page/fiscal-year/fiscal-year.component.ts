@@ -54,7 +54,7 @@ export class FiscalYearComponent implements OnInit {
 
   public fiscalYearForm: FormGroup;
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   public inventoryValuationMethodList = [];
 
@@ -124,6 +124,18 @@ export class FiscalYearComponent implements OnInit {
     return this.fiscalYearForm.get('statusId') as FormControl;
   }
 
+  get name() {
+    return this.fiscalYearForm.get('name') as FormControl;
+  }
+
+  get errors() {
+    return this.fiscalYearForm.get('errors') as FormGroup;
+  }
+
+  get statusValue() {
+    return this.fiscalYearForm.get('statusValue') as FormControl;
+  }
+
   getInventoryValuationMethodList() {
     this.fiscalYearService.getInventoryValuationMethodList();
   }
@@ -174,18 +186,6 @@ export class FiscalYearComponent implements OnInit {
     this.fiscalYearSearchEntity.skip = pagination.skip;
     this.fiscalYearSearchEntity.take = pagination.take;
     this.fiscalYearService.getList(this.fiscalYearSearchEntity);
-  }
-
-  get name() {
-    return this.fiscalYearForm.get('name') as FormControl;
-  }
-
-  get errors() {
-    return this.fiscalYearForm.get('errors') as FormGroup;
-  }
-
-  get statusValue() {
-    return this.fiscalYearForm.get('statusValue') as FormControl;
   }
 
   showDialog() {

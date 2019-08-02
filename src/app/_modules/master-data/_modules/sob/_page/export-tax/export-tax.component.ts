@@ -9,10 +9,14 @@ import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.m
 export class ExportTaxComponent implements OnInit {
 
   visible = false;
-  constructor() { }
   pagination = new PaginationModel();
+
+  constructor() {
+  }
+
   ngOnInit() {
   }
+
   toggleModal() {
     this.visible = !this.visible;
   }

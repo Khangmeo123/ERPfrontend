@@ -52,7 +52,7 @@ export class PaymentTermComponent implements OnInit {
 
   public paymentTermForm: FormGroup;
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   constructor(
     private paymentTermService: PaymentTermService,
@@ -86,7 +86,7 @@ export class PaymentTermComponent implements OnInit {
   }
 
   get currentSob() {
-    if (this.selectedSobList.length) {
+    if (this.selectedSobList && this.selectedSobList.length) {
       return this.selectedSobList[0];
     }
     return null;

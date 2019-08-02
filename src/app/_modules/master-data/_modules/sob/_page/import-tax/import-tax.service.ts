@@ -52,7 +52,7 @@ export class ImportTaxService {
   }
 
   save(importTaxEntity: any, importTaxSearchEntity: ImportTaxSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (importTaxEntity.id === null || importTaxEntity.id === undefined) {
         this.importTaxRepository.add(importTaxEntity).subscribe(res => {
           if (res) {
@@ -85,11 +85,11 @@ export class ImportTaxService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(importTaxEntity: any, importTaxSearchEntity: ImportTaxSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.importTaxRepository.delete(importTaxEntity).subscribe(res => {
         if (res) {
           this.getList(importTaxSearchEntity);
@@ -105,6 +105,6 @@ export class ImportTaxService {
         }
       });
     });
-    return defered;
+
   }
 }

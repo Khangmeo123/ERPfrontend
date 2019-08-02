@@ -69,7 +69,7 @@ export class PaymentTermService {
   }
 
   save(paymentTermEntity: any, paymentTermSearchEntity: PaymentTermSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (paymentTermEntity.id === null || paymentTermEntity.id === undefined) {
         this.paymentTermRepository.add(paymentTermEntity).subscribe(res => {
           if (res) {
@@ -102,11 +102,10 @@ export class PaymentTermService {
         });
       }
     });
-    return defered;
   }
 
   delete(paymentTermEntity: any, paymentTermSearchEntity: PaymentTermSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.paymentTermRepository.delete(paymentTermEntity).subscribe(res => {
         if (res) {
           this.getList(paymentTermSearchEntity);
@@ -122,6 +121,5 @@ export class PaymentTermService {
         }
       });
     });
-    return defered;
   }
 }

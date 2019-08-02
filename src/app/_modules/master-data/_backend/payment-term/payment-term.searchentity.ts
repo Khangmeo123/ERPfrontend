@@ -8,7 +8,7 @@ export class PaymentTermSearchEntity extends SearchEntity {
   name: TextFilter = new TextFilter();
   code: TextFilter = new TextFilter();
 
-  dueInDate: NumberFilter = new NumberFilter();
+  dueInDays: NumberFilter = new NumberFilter();
   discountPeriod: NumberFilter = new NumberFilter();
   discountRate: NumberFilter = new NumberFilter();
 

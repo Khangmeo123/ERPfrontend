@@ -1,20 +1,21 @@
-import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl } from '@angular/forms';
-import { requiredField } from 'src/app/_helpers';
+import { FormModel } from '../../../../_helpers/form-model';
+import { FormControl, FormGroup } from '@angular/forms';
+import { checkLength, requiredField } from 'src/app/_helpers';
 import { PaymentTermEntity } from './payment-term.entity';
 
 export class PaymentTermForm extends FormModel {
 
-  setOfBookId = new FormControl('');
+  setOfBookId = new FormControl(null, [requiredField]);
 
-  name = new FormControl('', [requiredField]);
-  code = new FormControl('', [requiredField]);
+  code = new FormControl(null, [requiredField, checkLength(3, 10)]);
+  name = new FormControl(null, [requiredField, checkLength(1, 100)]);
 
-  dueInDate = new FormControl('');
+  dueInDays = new FormControl(null);
 
-  discountPeriod = new FormControl('');
-  discountRate = new FormControl('');
+  discountPeriod = new FormControl(null);
+  discountRate = new FormControl(null);
 
+  errors: FormGroup = new FormGroup({});
 
   constructor(paymentTermEntity?: PaymentTermEntity) {
     super();

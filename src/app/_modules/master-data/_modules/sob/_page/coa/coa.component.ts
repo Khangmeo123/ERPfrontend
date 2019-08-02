@@ -61,7 +61,7 @@ export class CoaComponent implements OnInit {
 
   public coaForm: FormGroup;
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   public characteristicList: CharacteristicEntity[] = [];
 

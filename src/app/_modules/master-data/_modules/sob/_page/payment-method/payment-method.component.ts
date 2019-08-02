@@ -52,7 +52,7 @@ export class PaymentMethodComponent implements OnInit {
 
   public paymentMethodForm: FormGroup;
 
-  public setOfBookId: string = '';
+  public setOfBookId: string = null;
 
   constructor(
     private paymentMethodService: PaymentMethodService,
@@ -110,7 +110,7 @@ export class PaymentMethodComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.currentSob) {
+    if (this.setOfBookId) {
       this.getList();
     }
   }
@@ -170,7 +170,6 @@ export class PaymentMethodComponent implements OnInit {
   }
 
   sort(event: any) {
-    console.log(event);
     if (event.sortField && event.sortOrder) {
       this.paymentMethodSearchEntity.orderBy = event.sortField;
       this.paymentMethodSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';

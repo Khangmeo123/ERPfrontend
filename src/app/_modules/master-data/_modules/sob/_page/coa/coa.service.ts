@@ -87,7 +87,7 @@ export class CoaService {
   }
 
   save(coaEntity: any, coaSearchEntity: CoaSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (coaEntity.id === null || coaEntity.id === undefined) {
         this.coaRepository.add(coaEntity).subscribe(res => {
           if (res) {
@@ -120,11 +120,11 @@ export class CoaService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(coaEntity: any, coaSearchEntity: CoaSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.coaRepository.delete(coaEntity).subscribe(res => {
         if (res) {
           this.getList(coaSearchEntity);
@@ -140,6 +140,6 @@ export class CoaService {
         }
       });
     });
-    return defered;
+
   }
 }

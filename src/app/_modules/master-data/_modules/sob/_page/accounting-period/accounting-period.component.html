@@ -9,8 +9,9 @@
             </span>
         </span>
     <div class="page-actions">
-      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+        + {{'general.button.add' | translate}}</button>
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -20,57 +21,57 @@
     <div class="page-section form mb-4 d-flex row">
       <div class="col d-flex align-items-center">
         <span class="sob mr-2">{{'general.sob' | translate}}: </span>
-        <app-single-select [list]="sobList"
-                            data-qe-id="sob-list"
-                           [selectedList]="selectedSobList"
-                           key="name"
+        <app-single-select (listOpen)="getSobList()"
                            (selectionChange)="changeSob($event)"
-                           (listOpen)="getSobList()"></app-single-select>
+                           [list]="sobList"
+                           [selectedList]="selectedSobList"
+                           data-qe-id="sob-list"
+                           key="name"></app-single-select>
       </div>
       <div class="col d-flex align-items-center">
         <span class="sob mr-2">{{'accounting_period.status.fiscal_year' | translate}}:</span>
-        <app-single-select [list]="fiscalYearList"
-                          data-qe-id="fiscalYearList"
-                           key="name"
+        <app-single-select (listOpen)="getFiscalYearList()"
                            (selectionChange)="changeFiscalYear($event)"
-                           (listOpen)="getFiscalYearList()"></app-single-select>
+                           [list]="fiscalYearList"
+                           data-qe-id="fiscalYearList"
+                           key="name"></app-single-select>
       </div>
     </div>
 
     <div class="page-section list">
-      <p-table [value]="accountingPeriodList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+               [scrollable]="true" [value]="accountingPeriodList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn [pSortableColumn]="'from-date'"
-            data-qe-id="table-thead-from-date">
+            <th [pSortableColumn]="'from-date'" data-qe-id="table-thead-from-date"
+                pResizableColumn>
               {{'accounting_period.from_date' | translate}}
             </th>
-            <th pResizableColumn [pSortableColumn]="'to-date'"
-            data-qe-id="table-thead-to-date">
+            <th [pSortableColumn]="'to-date'" data-qe-id="table-thead-to-date"
+                pResizableColumn>
               {{'accounting_period.to_date' | translate}}
             </th>
-            <th pResizableColumn [pSortableColumn]="'description'"
-            data-qe-id="table-thead-description">
+            <th [pSortableColumn]="'description'" data-qe-id="table-thead-description"
+                pResizableColumn>
               {{'accounting_period.description' | translate}}
             </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-validForm" (changeFilter)="getList()"
-                                    [filter]="accountingPeriodSearchEntity.validFrom"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="accountingPeriodSearchEntity.validFrom"
+                                    data-qe-id="filter-validForm"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-validTo" (changeFilter)="getList()"
-                                    [filter]="accountingPeriodSearchEntity.validTo"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="accountingPeriodSearchEntity.validTo"
+                                    data-qe-id="filter-validTo"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-description" (changeFilter)="getList()"
-                                    [filter]="accountingPeriodSearchEntity.description"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="accountingPeriodSearchEntity.description"
+                                    data-qe-id="filter-description"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-accountingPeriod let-index="index">
+        <ng-template let-accountingPeriod let-index="index" pTemplate="body">
           <tr (dblclick)="edit(accountingPeriod.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{accountingPeriod.validFrom}} </td>
             <td>{{accountingPeriod.validTo}}</td>
@@ -81,23 +82,23 @@
     </div>
 
     <div class="pagination">
-      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+      <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination"></app-pagination>
     </div>
   </div>
 </div>
 
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
-          [style]="{width: '900px'}">
+<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+          modal="true">
   <p-header>
     {{'accounting_period.modal.title' | translate}}
   </p-header>
-  <div class="container" [formGroup]="accountingPeriodForm">
+  <div [formGroup]="accountingPeriodForm" class="container">
     <div class="row">
       <div class="col d-flex">
         <div class="flex-shrink-1 mr-2 icon-checked">
           <div class="pretty p-icon p-curve p-has-indeterminate">
-            <input id="new-accounting-period-checkbox" type="checkbox" [checked]="isChecked"
-                   (change)="onClickChange()"/>
+            <input (change)="onClickChange()" [checked]="isChecked" id="new-accounting-period-checkbox"
+                   type="checkbox"/>
             <div class="state">
               <i class="icon material-icons">done</i>
               <label for="new-accounting-period-checkbox">{{'accounting_period.modal.label' | translate}} : </label>
@@ -109,16 +110,17 @@
         </div>
       </div>
     </div>
-    <div class="row mt-2" *ngIf="!isChecked">
+    <div *ngIf="!isChecked" class="row mt-2">
       <div class="col-sm-6">
         <div class="form-group">
           <label>{{ 'accounting_period.from_date' | translate}}</label>
           <div class="div-form d-flex">
-            <app-date-picker data-qe-id="dialog-valid-form" class="flex-grow-1" [control]="validFrom"></app-date-picker>
-            <app-error data-qe-id="dialog-error-valid-from"
-                       *ngIf="(accountingPeriodForm.controls.validFrom?.errors && accountingPeriodForm.controls.validFrom?.touched) || !!accountingPeriodForm.controls.errors.get('validFrom')?.value"
-                       [formGroup]="accountingPeriodForm" [property]="'validFrom'" [placement]="'top'"
-                       class="error-form">
+            <app-date-picker [control]="validFrom" class="flex-grow-1" data-qe-id="dialog-valid-form"></app-date-picker>
+            <app-error
+              *ngIf="(accountingPeriodForm.controls.validFrom?.errors && accountingPeriodForm.controls.validFrom?.touched) || !!accountingPeriodForm.controls.errors.get('validFrom')?.value"
+              [formGroup]="accountingPeriodForm"
+              [placement]="'top'" [property]="'validFrom'" class="error-form"
+              data-qe-id="dialog-error-valid-from">
             </app-error>
           </div>
         </div>
@@ -127,41 +129,43 @@
         <div class="form-group">
           <label>{{ 'accounting_period.to_date' | translate}}</label>
           <div class="div-form d-flex">
-            <app-date-picker data-qe-id="dialog-valid-to" class="flex-grow-1" [control]="validTo"></app-date-picker>
-            <app-error data-qe-id="dialog-error-valid-to"
-                       *ngIf="(accountingPeriodForm.controls.validTo?.errors && accountingPeriodForm.controls.validTo?.touched) || !!accountingPeriodForm.controls.errors.get('validTo')?.value"
-                       [formGroup]="accountingPeriodForm" [property]="'validTo'" [placement]="'top'" class="error-form">
+            <app-date-picker [control]="validTo" class="flex-grow-1" data-qe-id="dialog-valid-to"></app-date-picker>
+            <app-error
+              *ngIf="(accountingPeriodForm.controls.validTo?.errors && accountingPeriodForm.controls.validTo?.touched) || !!accountingPeriodForm.controls.errors.get('validTo')?.value"
+              [formGroup]="accountingPeriodForm"
+              [placement]="'top'" [property]="'validTo'" class="error-form" data-qe-id="dialog-error-valid-to">
             </app-error>
           </div>
         </div>
       </div>
     </div>
-    <div class="row" *ngIf="!isChecked">
+    <div *ngIf="!isChecked" class="row">
       <div class="col-sm-12">
         <label for="description">
           {{'environment_tax.description' | translate}}
         </label>
-        <textarea data-qe-id="description" id="description" formControlName="description" name="description" class="form-control"
+        <textarea class="form-control" data-qe-id="description" formControlName="description" id="description"
+                  name="description"
                   rows="3"></textarea>
       </div>
     </div>
   </div>
   <p-footer>
     <div class="d-flex">
-      <button class="btn btn-delete"
-      data-qe-id="footer-button-delele"
-              mwlConfirmationPopover
-              [popoverTitle]="popoverTitle"
-              [popoverMessage]="popoverMessage"
-              placement="bottom"
+      <button (cancel)="onClickCancel()"
               (confirm)="onClickDelete()"
-              (cancel)="onClickCancel()"
-              *ngIf="accountingPeriodForm.value?.isDeleted">
+              *ngIf="accountingPeriodForm.value?.isDeleted"
+              [popoverMessage]="popoverMessage"
+              [popoverTitle]="popoverTitle"
+              class="btn btn-delete"
+              data-qe-id="footer-button-delele"
+              mwlConfirmationPopover
+              placement="bottom">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button data-qe-id="footer-button-cancel" class="btn btn-cancel"
-                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button data-qe-id="footer-button-save" class="btn btn-save" (click)="onClickSave()">
+        <button (click)="onClickCancel()" class="btn btn-cancel"
+                data-qe-id="footer-button-cancel">{{ 'general.button.cancel' | translate}}</button>
+        <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

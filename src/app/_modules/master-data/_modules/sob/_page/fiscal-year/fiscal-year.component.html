@@ -9,9 +9,9 @@
             </span>
         </span>
     <div class="page-actions">
-      <button data-qe-id="button-add" (click)="add()" class="btn btn-add">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
         + {{'general.button.add' | translate}}</button>
-      <button data-qe-id="button-clear" (click)="clearSearch(table)" class="btn btn-add">
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -20,10 +20,10 @@
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
-                         data-qe-id="sob-list"
                          (selectionChange)="changeSob($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
+                         data-qe-id="sob-list"
                          key="name"></app-single-select>
     </div>
     <div class="page-section list">
@@ -31,41 +31,42 @@
                [scrollable]="true" [value]="fiscalYearList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn [pSortableColumn]="'name'"
-                data-qe-id="table-thead-name"> {{ 'fiscal_year.content.name' | translate}} </th>
-            <th pResizableColumn [pSortableColumn]="'from-date'"
-                data-qe-id="table-thead-from-date"> {{ 'fiscal_year.content.from_date' | translate}} </th>
-            <th pResizableColumn [pSortableColumn]="'to-date'"
-                data-qe-id="table-thead-to-date"> {{ 'fiscal_year.content.to_date' | translate}} </th>
-            <th pResizableColumn [pSortableColumn]="'valuation-method'"
-                data-qe-id="table-thead-valuation-method"> {{ 'fiscal_year.content.valuation_method' | translate}} </th>
-            <th pResizableColumn [pSortableColumn]="'status'"
-                data-qe-id="table-thead-status"> {{ 'fiscal_year.content.status' | translate}} </th>
+            <th [pSortableColumn]="'name'" data-qe-id="table-thead-name"
+                pResizableColumn> {{ 'fiscal_year.content.name' | translate}} </th>
+            <th [pSortableColumn]="'from-date'" data-qe-id="table-thead-from-date"
+                pResizableColumn> {{ 'fiscal_year.content.from_date' | translate}} </th>
+            <th [pSortableColumn]="'to-date'" data-qe-id="table-thead-to-date"
+                pResizableColumn> {{ 'fiscal_year.content.to_date' | translate}} </th>
+            <th [pSortableColumn]="'valuation-method'" data-qe-id="table-thead-valuation-method"
+                pResizableColumn> {{ 'fiscal_year.content.valuation_method' | translate}} </th>
+            <th [pSortableColumn]="'status'" data-qe-id="table-thead-status"
+                pResizableColumn> {{ 'fiscal_year.content.status' | translate}} </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-name" (changeFilter)="getList()"
-                                    [filter]="fiscalYearSearchEntity.name"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.name"
+                                    data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-startDate" (changeFilter)="getList()"
-                                    [filter]="fiscalYearSearchEntity.startDate"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.startDate"
+                                    data-qe-id="filter-startDate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-endDate" (changeFilter)="getList()"
-                                    [filter]="fiscalYearSearchEntity.endDate"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.endDate"
+                                    data-qe-id="filter-endDate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-valueation" (changeFilter)="getList()"
-                                    [filter]="fiscalYearSearchEntity.inventoryValuationMethodName"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="fiscalYearSearchEntity.inventoryValuationMethodName"
+                                    data-qe-id="filter-valueation"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="filter-status" (changeFilter)="getList()"
-                                    [filter]="fiscalYearSearchEntity.statusValue"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.statusValue"
+                                    data-qe-id="filter-status"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-index="index" let-row>
+        <ng-template let-index="index" let-row pTemplate="body">
           <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{row.name}} </td>
             <td>{{row.startDate}}</td>
@@ -93,7 +94,7 @@
           <label for="fiscal-year-name">{{ 'fiscal_year.content.name' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form">
-            <input id="fiscal-year-name" class="form-control" formControlName="name" data-qe-id="dialog-name"
+            <input class="form-control" data-qe-id="dialog-name" formControlName="name" id="fiscal-year-name"
                    name="name" type="text"/>
             <app-error
               *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
@@ -108,8 +109,8 @@
           <label for="fiscal-year-start-date">{{ 'fiscal_year.content.from_date' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form d-flex">
-            <app-date-picker id="fiscal-year-start-date" [control]="startDate" class="flex-grow-1"
-                             data-qe-id="dialog-start-date"></app-date-picker>
+            <app-date-picker [control]="startDate" class="flex-grow-1" data-qe-id="dialog-start-date"
+                             id="fiscal-year-start-date"></app-date-picker>
             <app-error
               *ngIf="(startDate?.errors && startDate?.touched) || !!errors.get('startDate')?.value"
               [formGroup]="fiscalYearForm"
@@ -126,14 +127,14 @@
             class="text-danger ml-2">*</span></label>
           <div class="div-form d-flex">
             <app-simple-select (listOpen)="getInventoryValuationMethodList()"
-                               class="flex-grow-1"
-                               key="name"
-                               id="fiscal-year-to-valuation-method"
-                               data-qe-id="dialog-to-valuation-method"
-                               [initialValue]="inventoryValuationMethod.value"
                                (selectionChange)="inventoryValuationMethod.setValue($event)"
+                               [initialValue]="inventoryValuationMethod.value"
+                               [list]="inventoryValuationMethodList"
                                [valueSelector]="valuationMethodSelector"
-                               [list]="inventoryValuationMethodList"></app-simple-select>
+                               class="flex-grow-1"
+                               data-qe-id="dialog-to-valuation-method"
+                               id="fiscal-year-to-valuation-method"
+                               key="name"></app-simple-select>
             <app-error
               *ngIf="(inventoryValuationMethod?.errors && inventoryValuationMethod?.touched) || !!errors.get('inventoryValuationMethod')?.value"
               [formGroup]="fiscalYearForm"
@@ -148,8 +149,8 @@
           <label for="fiscal-year-end-date">{{ 'fiscal_year.content.to_date' | translate}}<span
             class="text-danger ml-2">*</span></label>
           <div class="div-form d-flex">
-            <app-date-picker id="fiscal-year-end-date" [control]="endDate" class="flex-grow-1"
-                             data-qe-id="dialog-end-date"></app-date-picker>
+            <app-date-picker [control]="endDate" class="flex-grow-1" data-qe-id="dialog-end-date"
+                             id="fiscal-year-end-date"></app-date-picker>
             <app-error
               *ngIf="(endDate?.errors && endDate?.touched) || !!errors.get('endDate')?.value"
               [formGroup]="fiscalYearForm"
@@ -164,11 +165,12 @@
         <label for="fiscal-year-status">
           {{ 'fiscal_year.content.status' | translate }}
         </label>
-        <app-simple-select id="fiscal-year-status"
-                           date-qe-id="dialog-status" [list]="statusList" (listOpen)="getStatusList()"
-                           key="name"
-                           [initialValue]="statusValue.value"
-                           (selectionChange)="statusId.setValue($event)"></app-simple-select>
+        <app-simple-select (listOpen)="getStatusList()"
+                           (selectionChange)="statusId.setValue($event)" [initialValue]="statusValue.value"
+                           [list]="statusList"
+                           date-qe-id="dialog-status"
+                           id="fiscal-year-status"
+                           key="name"></app-simple-select>
       </div>
     </div>
   </div>
@@ -177,18 +179,18 @@
       <button (cancel)="onClickCancel()"
 
               (confirm)="onClickDelete()"
-              data-qe-id="footer-button-delete"
               *ngIf="fiscalYearForm.value?.isDeleted"
               [popoverMessage]="popoverMessage"
               [popoverTitle]="popoverTitle"
               class="btn btn-delete"
+              data-qe-id="footer-button-delete"
               mwlConfirmationPopover
               placement="bottom">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button data-qe-id="footer-button-cancel" (click)="onClickCancel()"
-                class="btn btn-cancel">{{ 'general.button.cancel' | translate}}</button>
-        <button data-qe-id="footer-button-save" (click)="onClickSave()" class="btn btn-save">
+        <button (click)="onClickCancel()" class="btn btn-cancel"
+                data-qe-id="footer-button-cancel">{{ 'general.button.cancel' | translate}}</button>
+        <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

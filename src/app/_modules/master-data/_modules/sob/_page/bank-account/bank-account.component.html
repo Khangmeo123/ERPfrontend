@@ -4,14 +4,15 @@
       {{'bank_account.details.title' | translate}}
     </span>
     <div class="page-actions">
-      <button data-qe-id="button-add" class="btn btn-add" (click)="add()"> + {{'general.button.add' | translate}}</button>
-      <button data-qe-id="button-import" class="btn btn-import">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+        + {{'general.button.add' | translate}}</button>
+      <button class="btn btn-import" data-qe-id="button-import">
         {{'general.button.import' | translate}}
       </button>
-      <button  data-qe-id="button-export" class="btn btn-export">
+      <button class="btn btn-export" data-qe-id="button-export">
         {{'general.button.export' | translate}}
       </button>
-      <button data-qe-id="button-clear" class="btn btn-add" (click)="clearSearch(table)">
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
       </button>
     </div>
@@ -19,23 +20,23 @@
   <div class="page-body mt-4">
     <div class="page-section form d-flex align-items-center">
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
-      <app-single-select [list]="sobList"
-                         key="name"
-                         data-qe-id="sob-list"
+      <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         [list]="sobList"
                          [selectedList]="selectedSobList"
-                         (listOpen)="getSobList()"></app-single-select>
+                         data-qe-id="sob-list"
+                         key="name"></app-single-select>
     </div>
   </div>
   <div class="page-section mt-2">
-    <p-table [value]="bankAccountList" #table [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-             [scrollable]="true" scrollHeight="500px" [resizableColumns]="true">
+    <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+             [scrollable]="true" [value]="bankAccountList" scrollHeight="500px">
       <ng-template pTemplate="header">
         <tr>
-          <th  data-qe-id="table-thead-accouting-code" >
+          <th data-qe-id="table-thead-accouting-code">
             {{'bank_account.accounting_code' | translate}}
           </th>
-          <th  data-qe-id="table-thead-bank-code">
+          <th data-qe-id="table-thead-bank-code">
             {{'bank_account.bank_code' | translate}}
           </th>
           <th data-qe-id="table-thead-bank-code">
@@ -53,32 +54,32 @@
         </tr>
         <tr>
           <th class="th-filter">
-            <app-advanced-filters  data-qe-id="filter-accountingCode" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.accountingCode"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.accountingCode"
+                                  data-qe-id="filter-accountingCode"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters data-qe-id="filter-bankCode" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.bankCode"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.bankCode"
+                                  data-qe-id="filter-bankCode"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters data-qe-id="filter-bankName" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.bankName"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.bankName"
+                                  data-qe-id="filter-bankName"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters data-qe-id="filter-accountNumber" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.accountNumber"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.accountNumber"
+                                  data-qe-id="filter-accountNumber"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters data-qe-id="filter-accountOwner" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.accountOwner"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.accountOwner"
+                                  data-qe-id="filter-accountOwner"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters data-qe-id="filter-description" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.description"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.description"
+                                  data-qe-id="filter-description"></app-advanced-filters>
           </th>
         </tr>
       </ng-template>
-      <ng-template pTemplate="body" let-bankAccount let-index="index">
+      <ng-template let-bankAccount let-index="index" pTemplate="body">
         <tr (dblclick)="edit(bankAccount.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
           <td>
             {{bankAccount.accountNumber}}
@@ -102,16 +103,16 @@
       </ng-template>
     </p-table>
     <div class="pagination mt-2">
-      <app-pagination [pagination]="pagination" (paginationOut)="paginationOutput($event)"></app-pagination>
+      <app-pagination (paginationOut)="paginationOutput($event)" [pagination]="pagination"></app-pagination>
     </div>
   </div>
 </div>
 
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog">
+<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" modal="true">
   <p-header>
     {{'bank_account.bank_accounts.add' | translate}}
   </p-header>
-  <div class="container" [formGroup]="bankAccountForm">
+  <div [formGroup]="bankAccountForm" class="container">
     <div class="row">
       <div class="form-group col-6">
         <label for="accounting-code">
@@ -119,16 +120,17 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form d-flex">
-          <input type="hidden"  #accountingCode formControlName="accountingCode">
+          <input #accountingCode formControlName="accountingCode" type="hidden">
           <app-single-select (listOpen)="getCoaList()"
-                              data-qe-id="dialog-accounting-code"
-                             class="flex-grow-1"
+                             (selectionChange)="accountingCode.value = $event[0]"
                              [list]="coaList"
                              [selectedList]="selectedCoaList"
-                             (selectionChange)="accountingCode.value = $event[0]"></app-single-select>
-          <app-error data-qe-id="dialog-error-account-code"
-                     *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.error.get('accountName')?.value"
-                     [formGroup]="bankAccountForm" [property]="'accountName'" [placement]="'top'" class="error-form">
+                             class="flex-grow-1"
+                             data-qe-id="dialog-accounting-code"></app-single-select>
+          <app-error
+            *ngIf="(bankAccountForm.controls.accountName?.errors && bankAccountForm.controls.accountName?.touched) || !!bankAccountForm.controls.error.get('accountName')?.value"
+            [formGroup]="bankAccountForm"
+            [placement]="'top'" [property]="'accountName'" class="error-form" data-qe-id="dialog-error-account-code">
           </app-error>
         </div>
       </div>
@@ -138,10 +140,11 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" data-qe-id="dialog-bank-code" formControlName="bankCode">
-          <app-error data-qe-id="dialog-error-bank-code"
-                     *ngIf="(bankAccountForm.controls.bankCode?.errors && bankAccountForm.controls.bankCode?.touched) || !!bankAccountForm.controls.error.get('bankCode')?.value"
-                     [formGroup]="bankAccountForm" [property]="'bankCode'" [placement]="'top'" class="error-form">
+          <input class="form-control" data-qe-id="dialog-bank-code" formControlName="bankCode" type="text">
+          <app-error
+            *ngIf="(bankAccountForm.controls.bankCode?.errors && bankAccountForm.controls.bankCode?.touched) || !!bankAccountForm.controls.error.get('bankCode')?.value"
+            [formGroup]="bankAccountForm"
+            [placement]="'top'" [property]="'bankCode'" class="error-form" data-qe-id="dialog-error-bank-code">
           </app-error>
         </div>
       </div>
@@ -151,10 +154,12 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" data-qe-id="dialog-account-number" formControlName="accountNumber">
-          <app-error data-qe-id="dialog-error-account-number"
-                     *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountNumber')?.value"
-                     [formGroup]="bankAccountForm" [property]="'accountNumber'" [placement]="'top'" class="error-form">
+          <input class="form-control" data-qe-id="dialog-account-number" formControlName="accountNumber" type="text">
+          <app-error
+            *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountNumber')?.value"
+            [formGroup]="bankAccountForm"
+            [placement]="'top'" [property]="'accountNumber'" class="error-form"
+            data-qe-id="dialog-error-account-number">
           </app-error>
         </div>
       </div>
@@ -164,10 +169,11 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" data-qe-id="dialog-account-owner" formControlName="accountOwner">
-          <app-error data-qe-id="dialog-error-account-number"
-                     *ngIf="(bankAccountForm.controls.accountOwner?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountOwner')?.value"
-                     [formGroup]="bankAccountForm" [property]="'accountOwner'" [placement]="'top'" class="error-form">
+          <input class="form-control" data-qe-id="dialog-account-owner" formControlName="accountOwner" type="text">
+          <app-error
+            *ngIf="(bankAccountForm.controls.accountOwner?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountOwner')?.value"
+            [formGroup]="bankAccountForm"
+            [placement]="'top'" [property]="'accountOwner'" class="error-form" data-qe-id="dialog-error-account-number">
           </app-error>
         </div>
       </div>
@@ -175,26 +181,26 @@
         <label for="description">
           {{'bank_account.bank_accounts.description' | translate}}
         </label>
-        <textarea data-qe-id="description" class="form-control" rows="3" formControlName="description"></textarea>
+        <textarea class="form-control" data-qe-id="description" formControlName="description" rows="3"></textarea>
       </div>
     </div>
   </div>
   <p-footer>
     <div class="d-flex">
-      <button class="btn btn-delete"
+      <button (cancel)="onClickCancel()"
+              (confirm)="onClickDelete()"
+              *ngIf="bankAccountForm.value?.isDeleted"
+              [popoverMessage]="popoverMessage"
+              [popoverTitle]="popoverTitle"
+              class="btn btn-delete"
               data-qe-id="footer-button-delete"
               mwlConfirmationPopover
-              [popoverTitle]="popoverTitle"
-              [popoverMessage]="popoverMessage"
-              placement="bottom"
-              (confirm)="onClickDelete()"
-              (cancel)="onClickCancel()"
-              *ngIf="bankAccountForm.value?.isDeleted">
+              placement="bottom">
         {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
-        <button class="btn btn-cancel" data-qe-id="footer-button-cancel"
-                (click)="onClickCancel()">{{ 'general.button.cancel' | translate}}</button>
-        <button class="btn btn-save" data-qe-id="footer-button-save" (click)="onClickSave()">
+        <button (click)="onClickCancel()" class="btn btn-cancel"
+                data-qe-id="footer-button-cancel">{{ 'general.button.cancel' | translate}}</button>
+        <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
           {{ 'general.button.save' | translate}}</button>
       </div>
     </div>

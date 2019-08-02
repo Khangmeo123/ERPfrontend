@@ -8,7 +8,6 @@ import { CostCenterEntity } from '../../../../_backend/cost-center/cost-center.e
 import { CostCenterSearchEntity } from '../../../../_backend/cost-center/cost-center.searchentity';
 import { CostCenterForm } from '../../../../_backend/cost-center/cost-center.form';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 
 export class CostCenterService {
   public costCenterList: BehaviorSubject<CostCenterEntity[]>;
@@ -80,7 +79,7 @@ export class CostCenterService {
   }
 
   save(costCenterEntity: any, costCenterSearchEntity: CostCenterSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (costCenterEntity.id === null || costCenterEntity.id === undefined) {
         this.costCenterRepository.add(costCenterEntity).subscribe(res => {
           if (res) {
@@ -113,11 +112,11 @@ export class CostCenterService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(costCenterEntity: any, costCenterSearchEntity: CostCenterSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.costCenterRepository.delete(costCenterEntity).subscribe(res => {
         if (res) {
           this.getList(costCenterSearchEntity);
@@ -133,6 +132,5 @@ export class CostCenterService {
         }
       });
     });
-    return defered;
   }
 }

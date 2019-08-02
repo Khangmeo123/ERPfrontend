@@ -85,7 +85,7 @@ export class FiscalYearService {
   }
 
   save(fiscalYearEntity: any, fiscalYearSearchEntity: FiscalYearSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (fiscalYearEntity.id === null || fiscalYearEntity.id === undefined) {
         this.fiscalYearRepository.add(fiscalYearEntity).subscribe(res => {
           if (res) {
@@ -118,11 +118,11 @@ export class FiscalYearService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(fiscalYearEntity: any, fiscalYearSearchEntity: FiscalYearSearchEntity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.fiscalYearRepository.delete(fiscalYearEntity).subscribe(res => {
         if (res) {
           this.getList(fiscalYearSearchEntity);
@@ -138,6 +138,6 @@ export class FiscalYearService {
         }
       });
     });
-    return defered;
+
   }
 }

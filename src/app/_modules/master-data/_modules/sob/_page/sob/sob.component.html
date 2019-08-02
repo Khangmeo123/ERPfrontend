@@ -9,59 +9,59 @@
     </span>
     </div>
     <div class="page-actions">
-      <button class="btn btn-add" data-qe-id="button-add" (click)="add()">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
         {{'general.button.add' | translate}}
       </button>
-      <button class="btn btn-add" data-qe-id="button-clear" (click)="clearSearch(table)">
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
       </button>
     </div>
   </div>
   <div class="page-body mt-2">
     <div class="page-section">
-      <p-table [value]="sobList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true"
+               [resizableColumns]="true" [scrollable]="true" [value]="sobList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
+            <th [pSortableColumn]="'code'" data-qe-id="table-thead-code" pResizableColumn>
               {{ 'sob.code' | translate}}
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
+            <th [pSortableColumn]="'name'" data-qe-id="table-thead-name" pResizableColumn>
               {{ 'sob.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn [pSortableColumn]="'currencyCode'" data-qe-id="table-thead-currency-name">
+            <th [pSortableColumn]="'currencyCode'" data-qe-id="table-thead-currency-name" pResizableColumn>
               {{ 'sob.currency' | translate}}
               <p-sortIcon [field]="'currencyCode'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn [pSortableColumn]="'chartOfAccountTemplateName'"
-                data-qe-id="table-thead-chart-of-account-template-name">
+            <th [pSortableColumn]="'chartOfAccountTemplateName'" data-qe-id="table-thead-chart-of-account-template-name"
+                pResizableColumn>
               {{ 'sob.chart_account' | translate}}
               <p-sortIcon [field]="'chartOfAccountTemplateName'" class="float-right"></p-sortIcon>
             </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="sob-filter-code" [filter]="sobSearchEntity.code"
-                                    (changeFilter)="getList()"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="sobSearchEntity.code"
+                                    data-qe-id="sob-filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="sob-filter-name" [filter]="sobSearchEntity.name"
-                                    (changeFilter)="getList()"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="sobSearchEntity.name"
+                                    data-qe-id="sob-filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="sob-filter-currencyCode" [filter]="sobSearchEntity.currencyCode"
-                                    (changeFilter)="getList()"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="sobSearchEntity.currencyCode"
+                                    data-qe-id="sob-filter-currencyCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters data-qe-id="sob-filter-chartOfAccountName"
+              <app-advanced-filters (changeFilter)="getList()"
                                     [filter]="sobSearchEntity.chartOfAccountName"
-                                    (changeFilter)="getList()"></app-advanced-filters>
+                                    data-qe-id="sob-filter-chartOfAccountName"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-sob let-index="index">
+        <ng-template let-index="index" let-sob pTemplate="body">
           <tr (dblclick)="edit(sob.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td>
               {{sob.code}}
@@ -82,12 +82,12 @@
   </div>
 </div>
 
-<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" [style]="{width: '900px'}"
-          appendTo="body">
+<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+          modal="true">
   <p-header>
     {{'sob.add' | translate}}
   </p-header>
-  <div class="container" [formGroup]="sobForm">
+  <div [formGroup]="sobForm" class="container">
     <div class="row">
       <div class="form-group col-6">
         <label for="sob-code">
@@ -95,10 +95,10 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="sob-code" type="text" data-qe-id="dialog-code" class="form-control" formControlName="code">
-          <app-error data-qe-id="dialog-error-code"
-                     *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
-                     [formGroup]="sobForm" [property]="'code'" [placement]="'top'" class="error-form">
+          <input class="form-control" data-qe-id="dialog-code" formControlName="code" id="sob-code" type="text">
+          <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
+                     [formGroup]="sobForm"
+                     [placement]="'top'" [property]="'code'" class="error-form" data-qe-id="dialog-error-code">
           </app-error>
         </div>
       </div>
@@ -108,10 +108,10 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input type="text" id="sob-name" class="form-control" data-qe-id="dialog-name" formControlName="name">
-          <app-error data-qe-id="dialog-error-code"
-                     *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
-                     [formGroup]="sobForm" [property]="'name'" [placement]="'top'" class="error-form">
+          <input class="form-control" data-qe-id="dialog-name" formControlName="name" id="sob-name" type="text">
+          <app-error *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+                     [formGroup]="sobForm"
+                     [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-code">
           </app-error>
         </div>
       </div>
@@ -121,13 +121,13 @@
         <label for="sob-chart-of-account-template">
           {{'sob.chart_account' | translate}}
         </label>
-        <app-single-select data-qe-id="dialog-chart-of-account-template"
-                           [list]="coaList"
-                           id="sob-chart-of-account-template"
-                           key="name"
-                           [initialValue]="sobForm.controls.chartOfAccountTemplateName?.value"
+        <app-single-select (listOpen)="getCoaList()"
                            (selectionChange)="onSelectId($event, 'chartOfAccountTemplateId')"
-                           (listOpen)="getCoaList()"></app-single-select>
+                           [initialValue]="sobForm.controls.chartOfAccountTemplateName?.value"
+                           [list]="coaList"
+                           data-qe-id="dialog-chart-of-account-template"
+                           id="sob-chart-of-account-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label for="sob-currency">
@@ -135,16 +135,17 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <app-single-select [list]="currencyList"
-                             data-qe-id="dialog-currency"
-                             key="code"
-                             id="sob-currency"
-                             [initialValue]="sobForm.controls.currencyCode?.value"
+          <app-single-select (listOpen)="getCurrencyList()"
                              (selectionChange)="onSelectId($event, 'currencyId')"
-                             (listOpen)="getCurrencyList()"></app-single-select>
-          <app-error data-qe-id="dialog-error-currency-id"
-                     *ngIf="(sobForm.controls.currencyId?.errors && sobForm.controls.currencyId?.touched) || !!sobForm.controls.error.get('currencyId')?.value"
-                     [formGroup]="sobForm" [property]="'currencyId'" [placement]="'top'" class="error-form">
+                             [initialValue]="sobForm.controls.currencyCode?.value"
+                             [list]="currencyList"
+                             data-qe-id="dialog-currency"
+                             id="sob-currency"
+                             key="code"></app-single-select>
+          <app-error
+            *ngIf="(sobForm.controls.currencyId?.errors && sobForm.controls.currencyId?.touched) || !!sobForm.controls.error.get('currencyId')?.value"
+            [formGroup]="sobForm"
+            [placement]="'top'" [property]="'currencyId'" class="error-form" data-qe-id="dialog-error-currency-id">
           </app-error>
         </div>
       </div>
@@ -154,25 +155,25 @@
         <label for="special-consumption-tax-template">
           {{'sob.special_consumption_tax' | translate}}
         </label>
-        <app-single-select [list]="specialConsumptionTaxTemplates"
-                           key="name"
-                           id="special-consumption-tax-template"
-                           [initialValue]="sobForm.controls.specialConsumptionTaxTemplateName?.value"
+        <app-single-select (listOpen)="getSpecialConsumptionTaxTemplates()"
                            (selectionChange)="onSelectId($event, 'specialConsumptionTaxTemplateId')"
+                           [initialValue]="sobForm.controls.specialConsumptionTaxTemplateName?.value"
+                           [list]="specialConsumptionTaxTemplates"
                            data-qe-id="dialog-special-consumption-tax-template"
-                           (listOpen)="getSpecialConsumptionTaxTemplates()"></app-single-select>
+                           id="special-consumption-tax-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label for="value-added-tax-template">
           {{'sob.value_added_tax' | translate}}
         </label>
-        <app-single-select [list]="valueAddedTaxTemplates"
-                           key="name"
-                           id="value-added-tax-template"
-                           [initialValue]="sobForm.controls.valueAddedTaxTemplateName?.value"
+        <app-single-select (listOpen)="getValueAddedTaxTemplates()"
                            (selectionChange)="onSelectId($event, 'valueAddedTaxTemplateId')"
+                           [initialValue]="sobForm.controls.valueAddedTaxTemplateName?.value"
+                           [list]="valueAddedTaxTemplates"
                            data-qe-id="dialog-value-added-tax-template"
-                           (listOpen)="getValueAddedTaxTemplates()"></app-single-select>
+                           id="value-added-tax-template"
+                           key="name"></app-single-select>
       </div>
     </div>
     <div class="row">
@@ -180,25 +181,25 @@
         <label for="natural-resource-tax-template">
           {{'sob.resource_tax' | translate}}
         </label>
-        <app-single-select [list]="naturalResourceTaxTemplates"
-                           key="name"
-                           id="natural-resource-tax-template"
-                           [initialValue]="sobForm.controls.naturalResourceTaxTemplate?.value"
+        <app-single-select (listOpen)="getNaturalResourceTaxTemplates()"
                            (selectionChange)="onSelectId($event, 'naturalResourceTaxTemplateId')"
+                           [initialValue]="sobForm.controls.naturalResourceTaxTemplate?.value"
+                           [list]="naturalResourceTaxTemplates"
                            data-qe-id="dialog-natural-resource-tax-template"
-                           (listOpen)="getNaturalResourceTaxTemplates()"></app-single-select>
+                           id="natural-resource-tax-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label for="environment-tax-template">
           {{'sob.enviroment_tax' | translate}}
         </label>
-        <app-single-select [list]="environmentTaxTemplates"
-                           key="name"
-                           [initialValue]="sobForm.controls.environmentTaxTemplateName?.value"
+        <app-single-select (listOpen)="getEnvironmentTemplates()"
                            (selectionChange)="onSelectId($event, 'environmentTaxTemplateId')"
+                           [initialValue]="sobForm.controls.environmentTaxTemplateName?.value"
+                           [list]="environmentTaxTemplates"
                            data-qe-id="dialog-environment-tax-template"
                            id="environment-tax-template"
-                           (listOpen)="getEnvironmentTemplates()"></app-single-select>
+                           key="name"></app-single-select>
       </div>
     </div>
     <div class="row">
@@ -206,44 +207,44 @@
         <label for="export-tax-template">
           {{'sob.export_tax' | translate}}
         </label>
-        <app-single-select [list]="exportTaxTemplates"
-                           key="name"
-                           id="export-tax-template"
+        <app-single-select (listOpen)="getExportTaxTemplates()"
                            (selectionChange)="onSelectId($event, 'exportTaxTemplateId')"
-                           data-qe-id="dialog-export-tax-template"
                            [initialValue]="sobForm.controls.exportTaxTemplateName?.value"
-                           (listOpen)="getExportTaxTemplates()"></app-single-select>
+                           [list]="exportTaxTemplates"
+                           data-qe-id="dialog-export-tax-template"
+                           id="export-tax-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
         <label for="import-tax-template">
           {{'sob.import_tax' | translate}}
         </label>
-        <app-single-select [list]="importTaxTemplates"
-                           key="name"
-                           id="import-tax-template"
-                           [initialValue]="sobForm.controls.importTaxTemplateName?.value"
+        <app-single-select (listOpen)="getImportTaxTemplates()"
                            (selectionChange)="onSelectId($event, 'importTaxTemplateId')"
+                           [initialValue]="sobForm.controls.importTaxTemplateName?.value"
+                           [list]="importTaxTemplates"
                            data-qe-id="dialog-import-tax-template"
-                           (listOpen)="getImportTaxTemplates()"></app-single-select>
+                           id="import-tax-template"
+                           key="name"></app-single-select>
       </div>
     </div>
   </div>
   <p-footer>
     <div class="d-flex">
-      <button data-qe-id="footer-button-delete" class="btn btn-delete" *ngIf="sobForm.value?.isDeleted"
-              mwlConfirmationPopover
-              [popoverTitle]="popoverTitle"
+      <button (cancel)="cancelModal()" (confirm)="delete()" *ngIf="sobForm.value?.isDeleted"
               [popoverMessage]="popoverMessage"
-              placement="bottom"
-              (confirm)="delete()"
-              (cancel)="cancelModal()">
+              [popoverTitle]="popoverTitle"
+              class="btn btn-delete"
+              data-qe-id="footer-button-delete"
+              mwlConfirmationPopover
+              placement="bottom">
         {{'general.button.delete' | translate}}
       </button>
       <div class="flex-grow-1 d-flex justify-content-end">
-        <button data-qe-id="footer-button-save" class="btn btn-add mr-2" (click)="save()">
+        <button (click)="save()" class="btn btn-add mr-2" data-qe-id="footer-button-save">
           {{'general.button.save' | translate}}
         </button>
-        <button data-qe-id="footer-button-cancel" class="btn btn-cancel" (click)="cancelModal()">
+        <button (click)="cancelModal()" class="btn btn-cancel" data-qe-id="footer-button-cancel">
           {{'general.button.cancel' | translate}}
         </button>
       </div>

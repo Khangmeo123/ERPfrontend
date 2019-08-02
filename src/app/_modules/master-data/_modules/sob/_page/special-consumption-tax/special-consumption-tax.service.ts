@@ -78,7 +78,7 @@ export class SpecialConsumptionTaxService {
   }
 
   save(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       if (specialConsumptionTaxEntity.id === null || specialConsumptionTaxEntity.id === undefined) {
         this.specialConsumptionTaxRepository.add(specialConsumptionTaxEntity).subscribe(res => {
           if (res) {
@@ -111,11 +111,11 @@ export class SpecialConsumptionTaxService {
         });
       }
     });
-    return defered;
+
   }
 
   delete(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchentity): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+    return new Promise<boolean>((resolve, reject) => {
       this.specialConsumptionTaxRepository.delete(specialConsumptionTaxEntity).subscribe(res => {
         if (res) {
           this.getList(specialConsumptionTaxSearchEntity);
@@ -131,6 +131,6 @@ export class SpecialConsumptionTaxService {
         }
       });
     });
-    return defered;
+
   }
 }
