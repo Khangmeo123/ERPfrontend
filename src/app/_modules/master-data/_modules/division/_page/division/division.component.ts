@@ -106,7 +106,7 @@ export class DivisionComponent implements OnInit {
 
   selectedLegal (event) {
     this.legalEntityId = event[0];
-    this.legalSearchEntity.legalEntityId = event[0];
+    this.divisionSearchEntity.legalEntityId = event[0];
     this.divisionService.getList(this.divisionSearchEntity);
   }
 
