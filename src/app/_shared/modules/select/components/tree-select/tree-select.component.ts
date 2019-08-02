@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild, ViewEncapsulation} from '@angular/core';
-import {ISelect, SelectMode} from '../../select.interface';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {buildTree, getListDirection, initiateSelectedNodes} from '../../helpers';
-import {addItemToArray, removeItemByIndex} from '../../../../../_helpers/array.helper';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect, SelectMode } from '../../select.interface';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { buildTree, getListDirection, initiateSelectedNodes } from '../../helpers';
+import { addItemToArray, removeItemByIndex } from '../../../../../_helpers/array.helper';
 
 @Component({
   selector: 'app-tree-select',
@@ -18,6 +18,27 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
   @Input() selectedSuffix = 'selected';
 
   @Input() disabled = false;
+  @Input() mode: SelectMode = 'single';
+  @Input() dataSource: any[] = [];
+  @Input() key = 'label';
+  @Input() selectedIds = [];
+  @Input() firstLoad = false;
+  @Output() firstLoadData = new EventEmitter();
+  @Input() scaleX = '';
+  @Output() selectionChange = new EventEmitter();
+  listDirection = 'down';
+  treeData: any[] = [];
+  selectedNodes: any[] = [];
+  isLoading = false;
+  isOpened = false;
+
+  get hasData() {
+    return this.treeData && this.treeData.length;
+  }
+
+  get hasSelectedData() {
+    return this.selectedNodes && this.selectedNodes.length;
+  }
 
   get selection() {
     if (this.isSingle) {
@@ -78,35 +99,10 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
     return this.mode === 'checkbox';
   }
 
-  @Input() mode: SelectMode = 'single';
-
-  @Input() dataSource: any[] = [];
-
-  @Input() key = 'label';
-
-  @Input() selectedIds = [];
-
-  @Input() firstLoad = false;
-
-  @Output() firstLoadData = new EventEmitter();
-
-  @Input() scaleX = '';
-
-  @Output() selectionChange = new EventEmitter();
-
-  listDirection = 'down';
-
-  treeData: any[] = [];
-
-  selectedNodes: any[] = [];
-
-  isLoading = false;
-
-  isOpened = false;
-
   @Input() valueSelector = (node) => node.id;
 
-  ngOnInit() {}
+  ngOnInit() {
+  }
 
   openList(event) {
     if (!this.isOpened) {
@@ -160,11 +156,14 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
     this.listDirection = getListDirection(event.target);
   }
 
-  onSelect(data) {}
+  onSelect(data) {
+  }
 
-  onUnselect(event) {}
+  onUnselect(event) {
+  }
 
-  unselect({index}) {
+  unselect(event) {
+    const {index} = event;
     if (this.isSingle) {
       this.selectedNodes = [];
     } else {
