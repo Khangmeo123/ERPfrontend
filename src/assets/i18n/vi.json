@@ -766,36 +766,36 @@
 			"width": "Chiều rộng"
 		},
 		"defaultValue": {
-			"discountAccount": "",
-			"expenseAccount": "",
-			"inventoryAccount": "",
-			"returnAccount": "",
-			"revenueAccount": "",
-			"salesAllowancesAccount": "",
-			"title": ""
+			"discountAccount": "TK chiết khấu",
+			"expenseAccount": "TK chi phí",
+			"inventoryAccount": "TK kho",
+			"returnAccount": "TK trả lại",
+			"revenueAccount": "TK doanh thu",
+			"salesAllowancesAccount": "TK giảm giá",
+			"title": "Giá trị ngầm định"
 		},
 		"header": {
-			"title": ""
+			"title": "Chỉnh sửa sản phẩm"
 		},
 		"itemDiscounts": {
 			"action": "",
-			"discounType": "",
-			"quantityFrom": "",
-			"quantityTo": "",
-			"rate": "",
-			"title": ""
+			"discounType": "Loại chiết khấu",
+			"quantityFrom": "Số lượng từ",
+			"quantityTo": "Số lượng đến",
+			"rate": "Chiết khâu",
+			"title": "Chiết khấu"
 		},
 		"itemMaterials": {
 			"action": "",
-			"modal_title": "",
-			"quantity": "",
-			"sourceItemCode": "",
-			"sourceItemName": "",
-			"title": "",
-			"unitOfMeasureCode": ""
+			"modal_title": "Thêm vật liệu",
+			"quantity": "Số lương",
+			"sourceItemCode": "Mã nguyên vật liệu",
+			"sourceItemName": "Tên nguyên vật liệu",
+			"title": "Định mức nguyên vật liệu",
+			"unitOfMeasureCode": "Đơn vị tính"
 		},
 		"tab": {
-			"title_1": ""
+			"title_1": "Thông tin chung"
 		}
 	},
 	"legal_entity": {
