@@ -120,6 +120,7 @@
           </label>
           <div class="div-form">
             <input class="form-control" data-qe-id="dialog-code" formControlName="code" name="code"
+                   id="tax-code"
                    type="text">
             <app-error
               *ngIf="(specialConsumptionTaxForm.controls.code?.errors && specialConsumptionTaxForm.controls.code?.touched) || !!specialConsumptionTaxForm.controls.errors.get('code')?.value"
@@ -136,6 +137,7 @@
           </label>
           <div class="div-form d-flex">
             <input #unitOfMeasureId formControlName="unitOfMeasureId" name="unitOfMeasureId"
+                   id="unit-of-measure"
                    type="hidden">
             <app-single-select (listOpen)="getUomList()"
                                (selectionChange)="unitOfMeasureId.value = $event[0]"
@@ -151,7 +153,8 @@
           <label for="discount">
             {{'tax.discount' | translate}}
           </label>
-          <input class="form-control" data-qe-id="dialog-discount" formControlName="rate" name="rate" type="text">
+          <input class="form-control" id="discount" data-qe-id="dialog-discount" formControlName="rate" name="rate"
+                 type="text">
         </div>
       </div>
 
@@ -162,7 +165,8 @@
             <span class="text-danger mr-2">*</span>
           </label>
           <div class="div-form">
-            <input class="form-control" data-qe-id="dialog-name" formControlName="name" name="name" type="text">
+            <input class="form-control" id="tax-name" data-qe-id="dialog-name" formControlName="name" name="name"
+                   type="text">
             <app-error
               *ngIf="(specialConsumptionTaxForm.controls.name?.errors && specialConsumptionTaxForm.controls.name?.touched) || !!specialConsumptionTaxForm.controls.errors.get('name')?.value"
               [formGroup]="specialConsumptionTaxForm"
@@ -177,7 +181,7 @@
             {{'tax.parent_account' | translate}}
           </label>
           <div class="div-form d-flex">
-            <input #parentId formControlName="parentId" name="parentId" type="hidden">
+            <input #parentId formControlName="parentId" id="parent-id" name="parentId" type="hidden">
             <app-single-select (listOpen)="getList()"
                                (selectionChange)="parentId.value = $event[0]"
                                [list]="specialConsumptionTaxList"
@@ -192,7 +196,8 @@
             {{'tax.description' | translate}}
           </label>
           <div class="div-form">
-            <input class="form-control" data-qe-id="dialog-description" formControlName="description" type="text-area">
+            <input class="form-control" id="description" data-qe-id="dialog-description" formControlName="description"
+                   type="text-area">
           </div>
         </div>
       </div>

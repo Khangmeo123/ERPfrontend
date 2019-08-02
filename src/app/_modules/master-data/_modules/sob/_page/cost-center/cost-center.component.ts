@@ -122,12 +122,8 @@ export class CostCenterComponent implements OnInit {
   }
 
   add() {
-    if (this.setOfBookId) {
-      this.costCenterService.add();
-      this.showDialog();
-    } else {
-      this.toastrService.error('Phải chọn bộ sổ trước?');
-    }
+    this.costCenterService.add();
+    this.showDialog();
   }
 
   sort(event: any) {

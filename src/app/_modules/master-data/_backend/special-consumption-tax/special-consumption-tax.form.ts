@@ -20,6 +20,7 @@ export class SpecialConsumptionTaxForm extends FormModel {
   parentId: FormControl = new FormControl(null);
 
   rate = new FormControl(null);
+
   description = new FormControl(null);
 
   errors: FormGroup = new FormGroup({});

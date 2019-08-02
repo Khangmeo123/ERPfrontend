@@ -54,9 +54,10 @@ export class CostCenterRepository extends Repository {
   }
 
   getList(costCenterSearchEntity: CostCenterSearchEntity): Observable<CostCenterEntity[]> {
-    return this.http.post<CostCenterEntity[]>(this.apiUrl + '/list', JSON.stringify(costCenterSearchEntity),
+    return this.http.post<CostCenterEntity[]>(this.apiUrl + '/list', costCenterSearchEntity,
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
+        console.log(r.body);
         return r.body.map((item) => {
           return new CostCenterEntity(item);
         });
@@ -65,7 +66,7 @@ export class CostCenterRepository extends Repository {
   }
 
   count(costCenterSearchEntity: CostCenterSearchEntity): Observable<number> {
-    return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(costCenterSearchEntity),
+    return this.http.post<number>(this.apiUrl + '/count', costCenterSearchEntity,
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );

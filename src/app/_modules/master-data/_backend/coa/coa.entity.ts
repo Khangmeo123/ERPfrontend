@@ -4,19 +4,19 @@ export class CoaEntity extends Entity {
   // sobEntity:
   setOfBookId: string;
 
-  accountCode: string = null;
-  accountName: string = null;
+  accountCode: string;
+  accountName: string;
   accountDescription: string;
 
-  characteristicId: string = null;
-  characteristicValue: string = null;
+  characteristicId: string;
+  characteristicValue: string;
 
-  parentId: string = null;
-  parentAccountCode: string = null;
+  parentId: string;
+  parentAccountCode: string;
 
   disabled: boolean;
 
-  constructor(coaEntity?: any) {
-    super(coaEntity);
+  constructor(entity?: any) {
+    super(entity);
   }
 }

@@ -4,7 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
-import { BankAccountRepository } from './bank_account.repository';
+import { BankAccountRepository } from './bank-account.repository';
 import { BankAccountForm } from '../../../../_backend/bank-account/bank-account.form';
 import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-account.searchentity';
 import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';

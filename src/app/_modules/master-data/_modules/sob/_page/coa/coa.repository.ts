@@ -23,9 +23,13 @@ export class CoaRepository extends Repository {
   getList(coaSearchEntity: CoaSearchEntity): Observable<CoaEntity[]> {
     return this.http.post<CoaEntity[]>(this.apiUrl + '/list', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => r.body.map(
-        (item) => new CoaEntity(item)
-      )),
+      map(r => {
+        return r.body.map(
+          (item) => {
+            return new CoaEntity(item);
+          },
+        );
+      }),
     );
   }
 

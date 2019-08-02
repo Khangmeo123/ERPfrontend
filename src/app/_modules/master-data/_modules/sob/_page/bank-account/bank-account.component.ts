@@ -8,7 +8,7 @@ import { GeneralService } from '../../../../../../_helpers/general-service.servi
 import { Entities } from '../../../../../../_helpers/entity';
 import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
 import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-account.searchentity';
-import { BankAccountService } from './bank_account.service';
+import { BankAccountService } from './bank-account.service';
 import { ChartOfAccountEntity } from '../../../../_backend/chart-of-account/chart-of-account.entity';
 import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
 import { ToastrService } from 'ngx-toastr';
@@ -21,7 +21,7 @@ import { ToastrService } from 'ngx-toastr';
     BankAccountService,
     GeneralService,
     ToastrService,
-  ]
+  ],
 })
 export class BankAccountComponent implements OnInit {
   isSaveBookMark: boolean = false;
@@ -122,17 +122,14 @@ export class BankAccountComponent implements OnInit {
     }
   }
 
-  paginationOutput(event) {
-
-  }
-
   ngOnInit() {
     if (this.currentSob) {
       this.getList();
     }
   }
 
-  changeSob([setOfBookId]) {
+  changeSob(event) {
+    const [setOfBookId] = event;
     this.bankAccountSearchEntity.setOfBookId = setOfBookId;
     this.bankAccountForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;
@@ -156,7 +153,7 @@ export class BankAccountComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(pagination: PaginationModel) {
+  paginationOut(pagination) {
     this.bankAccountSearchEntity.skip = pagination.skip;
     this.bankAccountSearchEntity.take = pagination.take;
     this.bankAccountService.getList(this.bankAccountSearchEntity);

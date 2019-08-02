@@ -3,7 +3,7 @@ import { PaginationModel } from '../../../../../../_shared/modules/pagination/pa
 import { Subscription } from 'rxjs';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { Entities } from '../../../../../../_helpers/entity';
 import { CoaService } from './coa.service';
@@ -29,7 +29,7 @@ export class CoaComponent implements OnInit {
 
   isShowDialog = false;
 
-  pagination = new PaginationModel();
+  public pagination: PaginationModel = new PaginationModel();
 
   public popoverTitle: string = 'Popover title';
 
@@ -85,6 +85,7 @@ export class CoaComponent implements OnInit {
 
     const coaCountSub = this.coaService.coaCount.subscribe((count) => {
       this.coaCount = count;
+      this.pagination.totalItems = count;
     });
 
     const coaFormSub = this.coaService.coaForm.subscribe((form: FormGroup) => {
@@ -115,6 +116,10 @@ export class CoaComponent implements OnInit {
     return null;
   }
 
+  get characteristicId() {
+    return this.coaForm.get('characteristicId') as FormControl;
+  }
+
   getParentAccountList() {
     this.coaService.getParentAccountList(this.parentAccountSearchEntity);
   }
@@ -138,7 +143,8 @@ export class CoaComponent implements OnInit {
     }
   }
 
-  changeSob([setOfBookId]) {
+  changeSob(event) {
+    const [setOfBookId] = event;
     this.coaSearchEntity.setOfBookId = setOfBookId;
     this.coaForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;
@@ -162,7 +168,10 @@ export class CoaComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(event) {
+  paginationOut(pagination) {
+    this.coaSearchEntity.skip = pagination.skip;
+    this.coaSearchEntity.take = pagination.take;
+    this.coaService.getList(this.coaSearchEntity);
   }
 
   showDialog() {

@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!setOfBookId">
         + {{'general.button.add' | translate}}</button>
       <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
@@ -28,14 +28,14 @@
                          key="name"></app-single-select>
     </div>
     <div class="page-section mt-2">
-      <p-treeTable #table
-                   (onLazyLoad)="sort($event)"
-                   [customSort]="true"
-                   [lazy]="true"
-                   [resizableColumns]="true"
-                   [scrollable]="true"
-                   [value]="coaList"
-                   scrollHeight="500px">
+      <p-table #table
+               (onLazyLoad)="sort($event)"
+               [customSort]="true"
+               [lazy]="true"
+               [resizableColumns]="true"
+               [scrollable]="true"
+               [value]="coaList"
+               scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
             <th data-qe-id="table-thead-number">
@@ -70,23 +70,26 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template let-row let-rowNode pTemplate="body">
-          <tr [ttRow]="rowNode">
+        <ng-template let-row pTemplate="body">
+          <tr>
             <td>
-              <p-treeTableToggler [rowNode]="rowNode"></p-treeTableToggler>
               {{row.accountCode}}
             </td>
             <td>
               {{row.accountName}}
             </td>
             <td>
+              {{row.characteristicName}}
             </td>
             <td>
               {{row.accountDescription}}
             </td>
           </tr>
         </ng-template>
-      </p-treeTable>
+      </p-table>
+      <div class="pagination">
+        <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination"></app-pagination>
+      </div>
     </div>
   </div>
 </div>
@@ -103,7 +106,8 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input class="form-control" data-qe-id="dialog-account-code" formControlName="accountCode" name="accountCode"
+          <input id="account-code" class="form-control" data-qe-id="dialog-account-code" formControlName="accountCode"
+                 name="accountCode"
                  type="text">
           <app-error
             *ngIf="(coaForm.controls.accountCode?.errors && coaForm.controls.accountCode?.touched) || !!coaForm.controls.error.get('accountCode')?.value"
@@ -118,7 +122,8 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input class="form-control" data-qe-id="dialog-account-name" formControlName="accountName" name="accountName"
+          <input id="account-name" class="form-control" data-qe-id="dialog-account-name" formControlName="accountName"
+                 name="accountName"
                  type="text">
           <app-error
             *ngIf="(coaForm.controls.accountName?.errors && coaForm.controls.accountName?.touched) || !!coaForm.controls.error.get('accountName')?.value"
@@ -131,10 +136,10 @@
         <label for="account-characteristic">
           {{'coa.account_status' | translate}}
         </label>
-        <input #characteristicId formControlName="characteristicId" type="hidden">
         <app-simple-select (listOpen)="getCharacteristicList()"
-                           (selectionChange)="characteristicId.value = $event"
+                           (selectionChange)="characteristicId.setValue($event)"
                            [list]="characteristicList"
+                           id="account-characteristic"
                            data-qe-id="dialog-account-characteristic"
                            key="name"
         ></app-simple-select>
@@ -146,6 +151,8 @@
         <input formControlName="parentId" type="hidden">
         <app-single-select (listOpen)="getParentAccountList()"
                            [list]="parentAccountList"
+                           id="parent-account"
+                           key="accountName"
                            [selectedList]="selectedParentAccountList"
                            data-qe-id="parent-account"></app-single-select>
       </div>
@@ -153,7 +160,10 @@
         <label for="account-description">
           {{'coa.description' | translate}}
         </label>
-        <textarea class="form-control" data-qe-id="account-description" formControlName="accountDescription"
+        <textarea class="form-control"
+                  id="account-description"
+                  data-qe-id="account-description"
+                  formControlName="accountDescription"
                   rows="3"></textarea>
       </div>
     </div>

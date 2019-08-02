@@ -10,7 +10,7 @@
         </span>
 
     <div class="page-actions">
-      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!setOfBookId">
         + {{'general.button.add' | translate}}</button>
       <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
@@ -90,7 +90,7 @@
     </div>
   </div>
 </div>
-<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+<p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
           modal="true">
   <p-header>
     {{ 'cost-center.content.modal.title' | translate}}
@@ -147,8 +147,11 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="chart-of-account">{{ 'cost-center.content.account' | translate}}</label>
-          <app-single-select (listOpen)="getCoaList()" [list]="coaList" [selectedList]="selectedCoaList"
+          <app-single-select (listOpen)="getCoaList()"
+                             [list]="coaList"
+                             [selectedList]="selectedCoaList"
                              data-qe-id="dialog-account"
+                             [key]="'accountName'"
                              id="chart-of-account"></app-single-select>
         </div>
       </div>

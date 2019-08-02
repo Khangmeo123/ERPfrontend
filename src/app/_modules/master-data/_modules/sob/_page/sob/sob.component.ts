@@ -187,7 +187,8 @@ export class SobComponent implements OnInit, OnDestroy {
     });
 
     this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
-    this.sobSubs.add(sobListSub)
+    this.sobSubs
+      .add(sobListSub)
       .add(sobFormSub)
       .add(sobCountSub)
       .add(bookMarkNotify)

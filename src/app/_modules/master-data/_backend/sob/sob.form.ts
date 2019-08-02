@@ -4,32 +4,33 @@ import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity'
 import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class SobForm extends FormModel {
-  code = new FormControl('', [requiredField, checkLength(2, 2)]);
-  name = new FormControl('', [requiredField, checkLength(3, 50)]);
+  id = new FormControl(null, [requiredField]);
+  code = new FormControl(null, [requiredField, checkLength(2, 2)]);
+  name = new FormControl(null, [requiredField, checkLength(3, 50)]);
 
-  chartOfAccountTemplateId = new FormControl('');
-  chartOfAccountTemplateName = new FormControl('');
+  chartOfAccountTemplateId = new FormControl(null);
+  chartOfAccountTemplateName = new FormControl(null);
 
-  currencyId = new FormControl('', [requiredField]);
-  currencyCode = new FormControl('', []);
+  currencyId = new FormControl(null, [requiredField]);
+  currencyCode = new FormControl(null, []);
 
-  specialConsumptionTaxTemplateId = new FormControl('');
-  specialConsumptionTaxTemplateName = new FormControl('');
+  specialConsumptionTaxTemplateId = new FormControl(null);
+  specialConsumptionTaxTemplateName = new FormControl(null);
 
-  valueAddedTaxTemplateId = new FormControl('');
-  valueAddedTaxTemplateName = new FormControl('');
+  valueAddedTaxTemplateId = new FormControl(null);
+  valueAddedTaxTemplateName = new FormControl(null);
 
-  naturalResourceTaxTemplateId = new FormControl('');
-  naturalResourceTaxTemplateName = new FormControl('');
+  naturalResourceTaxTemplateId = new FormControl(null);
+  naturalResourceTaxTemplateName = new FormControl(null);
 
-  environmentTaxTemplateId = new FormControl('');
-  environmentTaxTemplateName = new FormControl('');
+  environmentTaxTemplateId = new FormControl(null);
+  environmentTaxTemplateName = new FormControl(null);
 
-  exportTaxTemplateId = new FormControl('');
-  exportTaxTemplateName = new FormControl('');
+  exportTaxTemplateId = new FormControl(null);
+  exportTaxTemplateName = new FormControl(null);
 
-  importTaxTemplateId = new FormControl('');
-  importTaxTemplateName = new FormControl('');
+  importTaxTemplateId = new FormControl(null);
+  importTaxTemplateName = new FormControl(null);
 
   errors = new FormGroup({});
 
