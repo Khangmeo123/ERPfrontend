@@ -112,6 +112,9 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   openSupplierList() {
     this.supplierSearchEntity = new SupplierSearchEntity();
     this.supplierSearchEntity.ids = this.listSupplierId;
+    if (this.legalId !== '' && this.legalId !== undefined) {
+      this.supplierSearchEntity.legalEntityId = this.legalId;
+    }
     this.supplierOfLegalEntityService.getListSupplierOflegalEntity(this.supplierSearchEntity);
   }
 

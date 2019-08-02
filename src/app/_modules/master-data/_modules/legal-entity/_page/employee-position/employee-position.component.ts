@@ -157,6 +157,7 @@ export class EmployeePositionComponent implements OnInit {
     this.employeeSearchEntity.ids = id;
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.employeeSearchEntity.legalEntityId = this.legalEntityId;
+      this.employeeSearchEntity.positionId = this.employeePositionId;
       this.employeePositionService.getDropListEmployee(this.employeeSearchEntity);
     }
   }

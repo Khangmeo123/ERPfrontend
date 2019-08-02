@@ -99,7 +99,10 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   openEmployeeList(id: []) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
     this.employeeSearchEntity.ids = id;
-    this.employeeOfLegalEntityService.getListDropEmployee(this.employeeSearchEntity);
+    if (this.legalId !== '' && this.legalId !== undefined) {
+      this.employeeSearchEntity.legalEntityId = this.legalId;
+      this.employeeOfLegalEntityService.getListDropEmployee(this.employeeSearchEntity);
+    }
   }
 
   employeeSearch(event) {

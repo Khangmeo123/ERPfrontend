@@ -171,6 +171,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.supplierSearchEntity.ids = id;
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+      this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
       this.supplierGroupService.getListSupplierOfSupplierGroup(this.supplierSearchEntity);
     }
   }
