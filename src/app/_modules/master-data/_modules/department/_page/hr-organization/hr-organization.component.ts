@@ -230,6 +230,11 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     }
   }
 
+  cancel() {
+    this.hrOrganizationService.cancel();
+    this.toggleModal();
+  }
+
   /**
    * Edit selected entity
    *
@@ -255,7 +260,7 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
   }
 
   toDepartmentEmployeeDetail(employeeId: string) {
-    this.router.navigate(['/master-data/department/employee-detail'], { queryParams: { id: employeeId, route: 'hr-organization' } });
+    this.router.navigate(['/master-data/department/employee-detail'], {queryParams: {id: employeeId, route: 'hr-organization'}});
   }
 
   onSelectEmployeeToAdd(event) {

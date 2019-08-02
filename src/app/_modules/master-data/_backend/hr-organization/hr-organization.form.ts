@@ -1,6 +1,6 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
-import { requiredField } from '../../../../_helpers';
+import { checkLength, requiredField } from '../../../../_helpers';
 import { HrOrganizationEntity } from './hr-organization.entity';
 
 export class HrOrganizationForm extends FormModel {
@@ -10,10 +10,12 @@ export class HrOrganizationForm extends FormModel {
 
   code: FormControl = new FormControl(null, [
     requiredField,
+    checkLength(3, 3),
   ]);
 
   name: FormControl = new FormControl(null, [
     requiredField,
+    checkLength(3, 50),
   ]);
 
   divisionId: FormControl = new FormControl(null, [

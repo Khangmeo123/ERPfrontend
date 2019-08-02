@@ -16,9 +16,9 @@
       <div class="page-body mt-2">
         <div class="page-section">
           <p-table #table (onLazyLoad)="sort($event)" (selectionChange)="onSelectDepartment($event)"
-            [(selection)]="selectedDepartment" [customSort]="true" [lazy]="true" [resizableColumns]="true"
-            [scrollable]="true" [value]="hrOrganizationList" resizableColumns scrollHeight="500px"
-            selectionMode="single">
+                   [(selection)]="selectedDepartment" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+                   [scrollable]="true" [value]="hrOrganizationList" resizableColumns scrollHeight="500px"
+                   selectionMode="single">
             <ng-template pTemplate="header">
               <tr>
                 <th pResizableColumn> {{'hrOrganization.code' | translate}} </th>
@@ -38,7 +38,7 @@
 
             <ng-template let-hrOrganization let-index let-rowData pTemplate="body">
               <tr (dblclick)="edit(hrOrganization.id)" [attr.data-qe-id]="'table-tbody-row-' + index"
-                [pSelectableRow]="rowData">
+                  [pSelectableRow]="rowData">
                 <td pResizableColumn>{{hrOrganization.code}}</td>
                 <td pResizableColumn>{{hrOrganization.name}}</td>
               </tr>
@@ -51,7 +51,7 @@
       </div>
     </div>
 
-    <p-dialog [(visible)]="modal" [modal]="true" appendTo="body">
+    <p-dialog [(visible)]="modal" [modal]="true" appendTo="body" [contentStyle]="{overflow: 'visible'}">
       <p-header>
         {{'hrOrganization.add' | translate}}
       </p-header>
@@ -66,8 +66,9 @@
             <div class="div-form">
               <input class="form-control" formControlName="code" id="hrOrganization-code" name="code" type="text">
               <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('name')?.value"
-                [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form" data-qe-id="hrOrganization-code"
-                property="code">
+                         [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form"
+                         data-qe-id="hrOrganization-code"
+                         property="code">
               </app-error>
             </div>
           </div>
@@ -79,8 +80,9 @@
             <div class="div-form">
               <input class="form-control" formControlName="name" id="hrOrganization-name" name="name" type="text">
               <app-error *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
-                [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form" data-qe-id="hrOrganization-name"
-                property="name">
+                         [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form"
+                         data-qe-id="hrOrganization-name"
+                         property="name">
               </app-error>
             </div>
           </div>
@@ -92,11 +94,11 @@
           {{'general.button.delete' | translate}}
         </button>
         <div class="flex-grow-1">
-          <button (click)="save()" class="btn btn-add mr-2">
-            {{'general.button.save' | translate}}
-          </button>
-          <button class="btn btn-cancel mr-2">
+          <button class="btn btn-cancel mr-2" (click)="cancel()">
             {{'general.button.cancel' | translate}}
+          </button>
+          <button (click)="save()" class="btn btn-add">
+            {{'general.button.save' | translate}}
           </button>
         </div>
       </p-footer>
@@ -109,11 +111,13 @@
       <div class="page-header">
         <div class="page-title mr-2">
           <app-multi-select (listOpen)="onSearchEmployee()" (search)="onSearchEmployeeByTyping($event)"
-            (selectionChange)="onSelectEmployeeToAdd($event)" [disabled]="disabled" [list]="employeeNotInDepartmentList"
-            [selectedList]="selectedEmployeeToAddToDepartmentList" key="name"></app-multi-select>
+                            (selectionChange)="onSelectEmployeeToAdd($event)" [disabled]="disabled"
+                            [list]="employeeNotInDepartmentList"
+                            [selectedList]="selectedEmployeeToAddToDepartmentList" key="name"></app-multi-select>
         </div>
         <div class="page-actions">
-          <button (click)="onAddToDepartment()" [disabled]="disabled" class="btn btn-add">
+          <button (click)="onAddToDepartment()" [disabled]="disabled || !selectedEmployeeToAddToDepartmentList?.length"
+                  class="btn btn-add">
             {{'general.button.add' | translate}}
           </button>
           <button [disabled]="disabled" class="btn btn-import">
@@ -154,9 +158,9 @@
                 <td>{{employee.name}}</td>
                 <td>
                   <a (confirm)="removeEmployee(employee.id)"
-                    [popoverMessage]="'general.department.delete.message' | translate"
-                    [popoverTitle]="'general.department.delete.title' | translate" class="btn btn-default"
-                    confirmButtonType="danger" mwlConfirmationPopover placement="left" role="button">
+                     [popoverMessage]="'general.department.delete.message' | translate"
+                     [popoverTitle]="'general.department.delete.title' | translate" class="btn btn-default"
+                     confirmButtonType="danger" mwlConfirmationPopover placement="left" role="button">
                     {{'general.button.delete' | translate}}
                   </a>
                 </td>

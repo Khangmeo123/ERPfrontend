@@ -157,11 +157,11 @@
           {{'general.button.delete' | translate}}
         </button>
         <div class="flex-grow-1">
-          <button (click)="save()" class="btn btn-add mr-2">
-            {{'general.button.save' | translate}}
-          </button>
-          <button class="btn btn-cancel mr-2">
+          <button class="btn btn-cancel mr-2" (click)="cancel()">
             {{'general.button.cancel' | translate}}
+          </button>
+          <button (click)="save()" class="btn btn-add">
+            {{'general.button.save' | translate}}
           </button>
         </div>
       </p-footer>

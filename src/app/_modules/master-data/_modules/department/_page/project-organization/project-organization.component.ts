@@ -178,6 +178,11 @@ export class ProjectOrganizationComponent implements OnInit, OnDestroy {
     return !this.legalEntity || !this.division;
   }
 
+  cancel() {
+    this.projectOrganizationService.cancel();
+    this.toggleModal();
+  }
+
   async onAddToDepartment() {
     const {
       ids,

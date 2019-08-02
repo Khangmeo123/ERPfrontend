@@ -1,6 +1,6 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
-import { requiredField } from '../../../../_helpers';
+import { checkLength, requiredField } from '../../../../_helpers';
 import { ProjectOrganizationEntity } from './project-organization.entity';
 
 export class ProjectOrganizationForm extends FormModel {
@@ -10,6 +10,7 @@ export class ProjectOrganizationForm extends FormModel {
 
   code: FormControl = new FormControl(null, [
     requiredField,
+    checkLength(3, 3),
   ]);
 
   name: FormControl = new FormControl(null, [
