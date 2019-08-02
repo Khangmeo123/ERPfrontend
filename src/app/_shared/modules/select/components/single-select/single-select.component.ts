@@ -51,10 +51,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   get selectedText() {
-    if (this.selectedList) {
-      if (this.hasSelected) {
-        return this.selectedList[0][this.key];
-      }
+    if (this.hasSelected) {
+      return this.selectedList[0][this.key];
     }
     return this.initialValue;
   }
@@ -78,7 +76,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   beforeCloseList(event) {
   }
 
-  unselect({ data }) {
+  unselect(event) {
+    const {data} = event;
     this.selectedList = [];
     this.list = [
       ...this.list,
@@ -92,7 +91,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       this.isLoading = false;
     }
     if (changes.initialValue) {
-      if (changes.initialValue.currentValue.length === 0) {
+      if (!changes.initialValue.currentValue) {
         this.selectedList = null;
         this.selectedText = '';
       }
@@ -107,8 +106,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   select(event) {
-    const { data, index } = event;
-    if (this.selectedList.length) {
+    const {data, index} = event;
+    if (this.hasSelected) {
       if (this.selectedList[0].id === data.id) {
         return this.unselect(event);
       }
