@@ -11,12 +11,22 @@ import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
 
 export class SpecialConsumptionTaxService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+
   public specialConsumptionTaxList: BehaviorSubject<SpecialConsumptionTaxEntity[]> = new BehaviorSubject([]);
+
   public specialConsumptionTaxForm: BehaviorSubject<FormGroup>;
+
   public specialConsumptionTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
+
   public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
-  constructor(private fb: FormBuilder, private specialConsumptionTaxRepository: SpecialConsumptionTaxRepository, private toastrService: ToastrService) {
+  public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  constructor(
+    private fb: FormBuilder,
+    private specialConsumptionTaxRepository: SpecialConsumptionTaxRepository,
+    private toastrService: ToastrService,
+  ) {
     this.specialConsumptionTaxCount = new BehaviorSubject(0);
     this.specialConsumptionTaxForm = new BehaviorSubject(this.fb.group(
       new SpecialConsumptionTaxForm(),
@@ -111,7 +121,6 @@ export class SpecialConsumptionTaxService {
         });
       }
     });
-
   }
 
   deactivate(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Promise<boolean> {
@@ -131,6 +140,12 @@ export class SpecialConsumptionTaxService {
         }
       });
     });
+  }
 
+  getParentTaxList(parentTaxSearchEntity: SpecialConsumptionTaxSearchEntity): void {
+    this.specialConsumptionTaxRepository.getParentTaxList(parentTaxSearchEntity)
+      .subscribe((entities: Entities) => {
+        this.parentTaxList.next(entities);
+      });
   }
 }

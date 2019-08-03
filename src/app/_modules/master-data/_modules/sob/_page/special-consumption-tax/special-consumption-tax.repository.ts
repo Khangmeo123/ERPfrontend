@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
@@ -99,5 +99,24 @@ export class SpecialConsumptionTaxRepository extends Repository {
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
+  }
+
+  public getParentTaxList(parentTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
+      `${this.apiUrl}/list-parent-tax`,
+      parentTaxSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<Entities>) => {
+          const entities: Entities = new Entities();
+          entities.ids = response.body.ids.map((item) => new SpecialConsumptionTaxEntity(item));
+          entities.exceptIds = response.body.exceptIds.map((item) => new SpecialConsumptionTaxEntity(item));
+          return entities;
+        }),
+      );
   }
 }

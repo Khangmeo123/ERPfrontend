@@ -102,11 +102,10 @@
       <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination"></app-pagination>
     </div>
   </div>
-
 </div>
 
-
-<p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '700px'}" appendTo="body"
+<p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}"
+          [style]="{width: '700px'}" appendTo="body"
           modal="true">
   <p-header>
     {{'special_consumption_tax.modal.title' | translate}}

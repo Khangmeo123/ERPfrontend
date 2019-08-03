@@ -226,4 +226,15 @@ export class SpecialConsumptionTaxComponent implements OnInit {
         this.isShowDialog = err;
       });
   }
+
+  onGetParentTaxList() {
+    this.parentTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
+    this.parentTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.specialConsumptionTaxService.getParentTaxList(this.parentTaxSearchEntity);
+  }
+
+  onSearchParentTaxList(event) {
+    this.parentTaxSearchEntity.name.startsWith = event;
+    this.specialConsumptionTaxService.getParentTaxList(this.parentTaxSearchEntity);
+  }
 }
