@@ -253,6 +253,12 @@ a.disabled {
   cursor: default;
 }
 
+input[type="text"].disabled {
+  background: #dddddd;
+  pointer-events: none;
+  cursor: default;
+}
+
 .ui-table {
   .ui-table-tbody {
     > tr.ui-state-highlight {
