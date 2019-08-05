@@ -12,6 +12,15 @@ export class Repository {
         return headers;
     }
 
+    downLoadFile(data: any, typeApplication: string) {
+        const blob = new Blob([data], { type: typeApplication });
+        const url = window.URL.createObjectURL(blob);
+        const pwa = window.open(url);
+        if (!pwa || pwa.closed || typeof pwa.closed === 'undefined') {
+            alert('Please disable your Pop-up blocker and try again.');
+        }
+    }
+
     toCamel(o): any {
         let newO;
         let origKey;

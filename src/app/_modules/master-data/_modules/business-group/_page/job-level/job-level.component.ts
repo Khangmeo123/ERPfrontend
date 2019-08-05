@@ -1,5 +1,4 @@
-import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
-import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
+import { translate } from 'src/app/_helpers/string';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { JobLevelSearchEntity } from 'src/app/_modules/master-data/_backend/job-level/job-level.searchentity';
@@ -10,7 +9,7 @@ import { JobLevelService } from './job-level.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-level',
@@ -19,22 +18,17 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [JobLevelService]
 })
 export class JobLevelComponent implements OnInit, OnDestroy {
-  pageTitle = _('jobLevel.header.title');
+  pageTitle = translate('jobLevel.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
   pagination: PaginationModel = new PaginationModel();
-  // jobTitleIds: JobTitleEntity[];
-  // jobTitleExceptIds: JobTitleEntity[];
-  // jobTitleTyping: Subject<JobTitleSearchEntity> = new Subject();
-  // jobTitleSearchEntity: JobTitleSearchEntity = new JobTitleSearchEntity();
   jobLevelSearchEntity: JobLevelSearchEntity = new JobLevelSearchEntity();
   jobLevelList: JobLevelEntity[];
   jobLevelForm: FormGroup;
   jobLevelSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
 
   constructor(private jobLevelService: JobLevelService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {
@@ -56,13 +50,6 @@ export class JobLevelComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isBookMark = res;
     });
-    // const jobTitleSub = this.jobLevelService.jobTitleList.subscribe(res => {
-    //   if (res) {
-    //     this.jobTitleExceptIds = res.exceptIds;
-    //     this.jobTitleIds = res.ids;
-    //   }
-    // })
-    // this.jobLevelService.getListJobTitleByTyping(this.jobTitleTyping);
     this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
     this.jobLevelSubs.add(jobLevelListSub).add(jobLevelFormSub).add(jobLevelCountSub).add(bookMarkNotify);
   }
@@ -116,7 +103,7 @@ export class JobLevelComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.jobLevelSearchEntity.orderBy = event.sortField;
-      this.jobLevelSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.jobLevelSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }
@@ -140,16 +127,4 @@ export class JobLevelComponent implements OnInit, OnDestroy {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
   }
-
-  // openjobTitle(id: string) {
-  //   this.jobTitleSearchEntity = new JobTitleSearchEntity();
-  //   this.jobTitleSearchEntity.ids.push(id);
-  //   this.jobLevelService.getListJobTitle(this.jobTitleSearchEntity);
-  // }
-
-  // jobTitleSearch(event) {
-  //   this.jobTitleSearchEntity.code = event;
-  //   this.jobTitleSearchEntity.name = event;
-  //   this.jobTitleTyping.next(this.jobTitleSearchEntity);
-  // }
 }

@@ -2,7 +2,7 @@
     <div class="page-header">
         <span class="page-title">
             {{ pageTitle | translate}}
-            <span (click)="bookMark($event)">
+            <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
@@ -11,21 +11,8 @@
         <div class="page-actions">
             <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
                 {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-import">
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                    aria-controls="dropdown-basic">
-                    {{'general.button.import' | translate}}<span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.import_file' | translate}}</a></li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.download_example' | translate}}</a>
-                    </li>
-                </ul>
-            </div>
-            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
     </div>
     <hr>
@@ -33,18 +20,25 @@
         <div class="page-section list">
             <p-table [value]="jobTitleList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                 [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'job_title.job_title_code' | translate}}
+                            {{ 'jobTtitle.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'job_title.job_title_name' | translate}}
+                            {{ 'jobTtitle.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'job_title.job_title_description' | translate}}
+                            {{ 'jobTtitle.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -67,7 +61,7 @@
                     <tr (dblclick)="edit(jobTitle.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
                         <td> {{jobTitle.code}} </td>
                         <td> {{jobTitle.name}} </td>
-                        <td> {{jobTitle.des}} </td>
+                        <td> {{jobTitle.description}} </td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -81,19 +75,19 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
-        {{ 'job_title.modal.title' | translate}}
+        {{ 'jobTtitle.dialog.title' | translate}}
     </p-header>
     <div class="container" [formGroup]="jobTitleForm">
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="jobTitleCode">{{ 'job_title.job_title_code' | translate}}<span
+                    <label for="jobTitleCode">{{ 'jobTtitle.content.code' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="jobTitleCode" />
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(jobTitleForm.controls.code?.errors && jobTitleForm.controls.code?.touched) || !!jobTitleForm.controls.error.get('code')?.value"
+                            *ngIf="(jobTitleForm.controls.code?.errors && jobTitleForm.controls.code?.touched) || !!jobTitleForm.controls.errors.get('code')?.value"
                             [formGroup]="jobTitleForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -101,13 +95,13 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="jobTitleName">{{ 'job_title.job_title_name' | translate}}<span
+                    <label for="jobTitleName">{{ 'jobTtitle.content.name' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="jobTitleName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(jobTitleForm.controls.name?.errors && jobTitleForm.controls.name?.touched) || !!jobTitleForm.controls.error.get('name')?.value"
+                            *ngIf="(jobTitleForm.controls.name?.errors && jobTitleForm.controls.name?.touched) || !!jobTitleForm.controls.errors.get('name')?.value"
                             [formGroup]="jobTitleForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -118,8 +112,9 @@
 
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="job_titleid">{{ 'job_title.job_title_description' | translate}}</label>
-                    <textarea class="form-control" rows="4" formControlName="description">
+                    <label for="job_titleid">{{ 'jobTtitle.content.description' | translate}}</label>
+                    <textarea class="form-control" rows="4" formControlName="description"
+                        data-qe-id="dialog-form-description">
                     </textarea>
                 </div>
             </div>
@@ -129,7 +124,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+                    <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
                     <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                         (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>

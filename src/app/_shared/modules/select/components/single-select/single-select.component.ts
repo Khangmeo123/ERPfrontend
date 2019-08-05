@@ -56,7 +56,6 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
     }
     return this.initialValue;
   }
-
   set selectedText(value) {
 
   }

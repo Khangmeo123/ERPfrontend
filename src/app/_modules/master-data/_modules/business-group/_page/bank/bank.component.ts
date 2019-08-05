@@ -1,3 +1,4 @@
+import { environment } from './../../../../../../../environments/environment.prod';
 
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, Routes } from '@angular/router';
@@ -9,7 +10,7 @@ import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/ban
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BankService } from './bank.service';
 import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-bank',
@@ -18,7 +19,7 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [BankService],
 })
 export class BankComponent implements OnInit, OnDestroy {
-  pageTitle = _('bank.header.title');
+  pageTitle = translate('bank.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
@@ -30,6 +31,8 @@ export class BankComponent implements OnInit, OnDestroy {
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   brands: any[];
+  downloadLink = environment.apiUrlApps + 'master-data/business-group/bank/download-template';
+  exportLink = environment.apiUrlApps + 'master-data/business-group/bank/export';
 
   constructor(private bankService: BankService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {
@@ -104,7 +107,7 @@ export class BankComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.bankSearchEntity.orderBy = event.sortField;
-      this.bankSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.bankSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }
@@ -127,5 +130,9 @@ export class BankComponent implements OnInit, OnDestroy {
     } else {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
+  }
+
+  importTemplate(file: File) {
+    this.bankService.importFile(file);
   }
 }

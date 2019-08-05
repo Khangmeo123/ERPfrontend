@@ -8,7 +8,7 @@ import { UomService } from './uom.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-uom',
@@ -17,7 +17,7 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [UomService]
 })
 export class UomComponent implements OnInit, OnDestroy {
-  pageTitle = _('uom.header.title');
+  pageTitle = translate('uom.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
@@ -28,7 +28,6 @@ export class UomComponent implements OnInit, OnDestroy {
   uomSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
 
   constructor(private uomService: UomService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {
@@ -103,7 +102,7 @@ export class UomComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.uomSearchEntity.orderBy = event.sortField;
-      this.uomSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.uomSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

@@ -2,7 +2,7 @@
     <div class="page-header">
         <span class="page-title">
             {{pageTitle | translate}}
-            <span (click)="bookMark($event)">
+            <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
@@ -11,21 +11,6 @@
         <div class="page-actions">
             <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
                 {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown>
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                    data-qe-id="button-import" aria-controls="dropdown-basic">
-                    {{'general.button.import' | translate}}<span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.import_file' | translate}}</a></li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.download_example' | translate}}</a>
-                    </li>
-                </ul>
-            </div>
-            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
             <button class="btn btn-clear" (click)="clearSearch(table)"
                 data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
@@ -35,18 +20,25 @@
         <div class="page-selection list">
             <p-table [value]="uomList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
                 scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
                         <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'uom.content.table.uom_code' | translate}}
+                            {{ 'uom.content.code' | translate}}
                             <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'uom.content.table.uom_name' | translate}}
+                            {{ 'uom.content.name' | translate}}
                             <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                         </th>
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'uom.content.table.uom_description' | translate}}
+                            {{ 'uom.content.description' | translate}}
                             <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
@@ -91,13 +83,13 @@
         <div class="row">
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="uomCode">{{ 'uom.content.modal.uom_code' | translate}}<span
+                    <label for="uomCode">{{ 'uom.content.code' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                             id="uomCode" />
                         <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(uomForm.controls.code?.errors && uomForm.controls.code?.touched) || !!uomForm.controls.error.get('code')?.value"
+                            *ngIf="(uomForm.controls.code?.errors && uomForm.controls.code?.touched) || !!uomForm.controls.errors.get('code')?.value"
                             [formGroup]="uomForm" [property]="'code'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -105,13 +97,13 @@
             </div>
             <div class="col-sm-6">
                 <div class="form-group">
-                    <label for="uomName">{{ 'uom.content.modal.uom_name' | translate}}<span
+                    <label for="uomName">{{ 'uom.content.name' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
                         <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                             id="uomName" />
                         <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(uomForm.controls.name?.errors && uomForm.controls.name?.touched) || !!uomForm.controls.error.get('name')?.value"
+                            *ngIf="(uomForm.controls.name?.errors && uomForm.controls.name?.touched) || !!uomForm.controls.errors.get('name')?.value"
                             [formGroup]="uomForm" [property]="'name'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
@@ -122,7 +114,8 @@
             <div class="col-sm-12">
                 <div class="form-group">
                     <label for="uomDescription">{{ 'uom.content.modal.uom_description' | translate}}</label>
-                    <textarea class="form-control" rows="6" formControlName="description" id="uomDescription">
+                    <textarea class="form-control" rows="6" formControlName="description" id="uomDescription"
+                        data-qe-id="dialog-form-description">
                     </textarea>
                 </div>
             </div>
@@ -132,7 +125,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+                    <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
                     <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                         (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>

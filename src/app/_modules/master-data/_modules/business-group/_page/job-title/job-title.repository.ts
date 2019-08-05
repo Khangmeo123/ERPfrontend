@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class JobTitleRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/job-title';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/job-title';
     }
 
     getList(jobTitleSearchEntity: JobTitleSearchEntity): Observable<JobTitleEntity[]> {

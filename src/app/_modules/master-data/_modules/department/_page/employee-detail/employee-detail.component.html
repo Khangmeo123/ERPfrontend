@@ -1,0 +1,447 @@
+<div class="page detailEmployeeGroup-detail">
+  <div class="page-header">
+    <span class="page-title">
+      {{'detailEmployeeGroup.header.title' | translate}}
+    </span>
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()"
+        data-qe-id="button.cancel">{{ 'general.button.cancel' | translate}}</button>
+      <button class="btn btn-save" (click)="save()" data-qe-id="button.save">
+        {{ 'general.button.save' | translate}}</button>
+    </div>
+  </div>
+  <hr>
+  <div class="page-body">
+    <accordion [formGroup]="departmentEmployeeDetailForm">
+      <accordion-group [isOpen]="true">
+        <button (click)="isOpenTab1 = !isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
+          <div class="pull-left float-left">{{'detailEmployeeGroup.general.title' | translate }}</div>
+          <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
+          </span>
+        </button>
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>{{ 'detailEmployeeGroup.general.code' | translate}}<span class="text-danger ml-2">*</span></label>
+              <input type="text" class="form-control" data-qe-id="form-content-code" formControlName="code" />
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-birthday">{{ 'detailEmployeeGroup.general.dob' | translate}}</label>
+              <app-date-picker data-qe-id="form-content-dob" [control]="departmentEmployeeDetailForm.get('dob')"
+                [disabled]="true">
+              </app-date-picker>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>
+                {{ 'detailEmployeeGroup.general.salary' | translate}}
+              </label>
+              <input type="text" class="form-control" data-qe-id="form-content-salary" formControlName="salary" />
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-name"> {{ 'detailEmployeeGroup.general.name' | translate}}<span
+                  class="text-danger ml-2">*</span></label>
+              <input type="text" class="form-control" data-qe-id="form-content-name" formControlName="name" />
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>{{ 'detailEmployeeGroup.general.identityNumber' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-identityNumber"
+                formControlName="identityNumber" />
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-salary-ratio">{{ 'detailEmployeeGroup.general.salaryRatio' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-salaryRatio"
+                formControlName="salaryRatio" />
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-gender">{{ 'detailEmployeeGroup.general.gender' | translate}}</label>
+              <div class="ratio-button" data-qe-id="form-content-gender">
+                <p-radioButton name="gender" value="true" formControlName="gender" class="mr-2"
+                  [label]="'detailEmployeeGroup.gender.men' | translate"></p-radioButton>
+                <p-radioButton name="gender" value="false" formControlName="gender"
+                  [label]="'detailEmployeeGroup.gender.women' | translate">
+                </p-radioButton>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>{{ 'detailEmployeeGroup.general.issuePlace' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-issuePlace"
+                formControlName="issuePlace" />
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>{{ 'detailEmployeeGroup.general.insuranceSalary' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-insuranceSalary"
+                formControlName="insuranceSalary" />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>{{ 'detailEmployeeGroup.general.jobTitle' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-jobTitleName"
+                formControlName="jobTitleName" />
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-issued-date">{{ 'detailEmployeeGroup.general.issueDate' | translate}}</label>
+              <app-date-picker data-qe-id="form-content-issueDate"
+                [control]="departmentEmployeeDetailForm.get('issueDate')" [disabled]="true">
+              </app-date-picker>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>{{ 'detailEmployeeGroup.general.numberDependentPerson' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-numberDependentPerson"
+                formControlName="numberDependentPerson" />
+            </div>
+          </div>
+
+        </div>
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label>{{ 'detailEmployeeGroup.general.jobLevel' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-jobLevel" formControlName="jobLevel" />
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-tax-code">{{ 'detailEmployeeGroup.general.taxCode' | translate}}</label>
+              <input type="text" class="form-control" data-qe-id="form-content-taxCode" formControlName="taxCode" />
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-status">{{ 'detailEmployeeGroup.general.status' | translate}}<span
+                  class="text-danger ml-2">*</span></label>
+              <input type="text" class="form-control" data-qe-id="form-content-statusName"
+                formControlName="statusName" />
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+
+          <div class="col-sm-4">
+            <div class="form-group">
+              <label for="employee-group">{{ 'detailEmployeeGroup.general.employeePositions' | translate}}</label>
+              <p-chips class="w-100" [ngModel]="departmentEmployeeDetailForm.controls.employeePositions.value"
+                [ngModelOptions]="{standalone: true}" [disabled]="true">
+                <ng-template let-item pTemplate="item">
+                  {{item.code}}
+                </ng-template>
+              </p-chips>
+            </div>
+          </div>
+
+        </div>
+      </accordion-group>
+      <accordion-group>
+        <button (click)="isOpenTab2 = !isOpenTab2" class="btn btn-link btn-block clearfix" accordion-heading>
+          <div class="pull-left float-left">{{'detailEmployeeGroup.bankAccount.title' | translate }}</div>
+          <span class="float-right pull-right" accordion-heading>
+            <i class="fas " [ngClass]="!isOpenTab2 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          </span>
+        </button>
+        <div class="mt-2">
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>{{ 'detailEmployeeGroup.bankAccount.bankName' | translate}}</label>
+                <app-single-select data-qe-id="form-content-account" [valueSelector]="valueSelector"
+                  [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'"
+                  (search)="bankSearch($event, departmentEmployeeDetailForm.controls.bankId.value)"
+                  [initialValue]="departmentEmployeeDetailForm.controls.bankName.value"
+                  (selectionChange)="departmentEmployeeDetailForm.controls.bankId.setValue($event[0])"
+                  (listOpen)="openBankList(departmentEmployeeDetailForm.controls.bankId.value)"></app-single-select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label
+                  for="departmentEmployeeDetailbankAccountName">{{ 'detailEmployeeGroup.bankAccount.bankAccountName' | translate}}</label>
+                <input type="text" class="form-control" formControlName="bankAccountName"
+                  id="departmentEmployeeDetailbankAccountName" data-qe-id="form-content-bankAccountName" />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label
+                  for="departmentEmployeeDetailBankAccountNumber">{{ 'detailEmployeeGroup.bankAccount.bankAccountNumber' | translate}}</label>
+                <input type="text" class="form-control" formControlName="bankAccountNumber"
+                  id="departmentEmployeeDetailBankAccountNumber" data-qe-id="form-content-bankAccountNumber" />
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label>{{ 'detailEmployeeGroup.bankAccount.province' | translate}}</label>
+                <app-single-select class="w-100" data-qe-id="form-content-province" [valueSelector]="valueSelector"
+                  [list]="provinceExceptIds" [initialValue]="departmentEmployeeDetailForm.controls.provinceName.value"
+                  [selectedList]="provinceIds" [key]="'name'"
+                  (search)="provinceSearch($event,departmentEmployeeDetailForm.controls.provinceId.value)"
+                  (selectionChange)="departmentEmployeeDetailForm.controls.provinceId.setValue($event[0])"
+                  (listOpen)="openProvinceList(departmentEmployeeDetailForm.controls.provinceId.value)">
+                </app-single-select>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label
+                  for="departmentEmployeeDetailBankBranch">{{ 'detailEmployeeGroup.bankAccount.bankBranch' | translate}}</label>
+                <input type="text" class="form-control" formControlName="bankBranch"
+                  id="departmentEmployeeDetailBankBranch" data-qe-id="form-content-bankBranch" />
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="form-group">
+                <label
+                  for="departmentEmployeeDetailBankAddress">{{ 'detailEmployeeGroup.bankAccount.divisionAddress' | translate}}</label>
+                <input type="text" class="form-control" formControlName="bankAddress"
+                  id="departmentEmployeeDetailBankAddress" data-qe-id="form-content-bankAddress" />
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </accordion-group>
+      <accordion-group>
+        <button (click)="isOpenTab3 = !isOpenTab3" class="btn btn-link btn-block clearfix" accordion-heading>
+          <div class="pull-left float-left">{{'detailEmployeeGroup.contacts.title' | translate }}</div>
+          <span class="float-right pull-right" accordion-heading>
+            <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          </span>
+        </button>
+        <div class="d-flex justify-content-end">
+          <button class="btn btn-add" (click)="addContact()">
+            {{'detailEmployeeGroup.contacts.add' | translate}}
+
+          </button>
+        </div>
+
+        <div class="mt-2">
+
+          <p-table [value]="departmentEmployeeDetailForm.get('employeeContacts').value" [scrollable]="true"
+            scrollHeight="500px" [resizableColumns]="true" #table>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th pResizableColumn data-qe-id="table-thead-contacts-code">
+                  {{'detailEmployeeGroup.contacts.code' | translate}}
+                </th>
+                <th pResizableColumn data-qe-id="table-thead-contacts-recipient">
+                  {{'detailEmployeeGroup.contacts.recipient' | translate}}
+                </th>
+                <th pResizableColumn data-qe-id="table-thead-contacts-phone">
+                  {{'detailEmployeeGroup.contacts.phone' | translate}}
+                </th>
+                <th pResizableColumn data-qe-id="table-thead-contacts-email">
+                  {{'detailEmployeeGroup.contacts.email' | translate}}
+                </th>
+                <th pResizableColumn data-qe-id="table-thead-contacts-city">
+                  {{'detailEmployeeGroup.contacts.province' | translate}}
+                </th>
+                <th pResizableColumn data-qe-id="table-thead-contacts-address">
+                  {{'detailEmployeeGroup.contacts.address' | translate}}
+                </th>
+                <th pResizableColumn data-qe-id="table-thead-contacts-address">
+                  {{'detailEmployeeGroup.contacts.action' | translate}}
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-contact let-index="rowIndex">
+              <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+                <td> {{index + 1}}</td>
+                <td> {{contact.name}} </td>
+                <td> {{contact.phone}} </td>
+                <td> {{contact.email}} </td>
+                <td> {{contact.provinceName}}</td>
+                <td> {{contact.address}} </td>
+                <td>
+                  <a href="javascript:;" (click)="deleteContact(index)">Xoá</a>
+                  <a href="javascript:;" (click)="editContact(contact, index)">Sửa</a>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+      </accordion-group>
+      <accordion-group *ngIf="false">
+        <button (click)="isOpenTab4 = !isOpenTab4" class="btn btn-link btn-block clearfix" accordion-heading>
+          <div class="pull-left float-left">{{'detailEmployeeGroup.own_asset.title' | translate }}</div>
+          <span class="float-right pull-right" accordion-heading>
+            <i class="fas " [ngClass]="!isOpenTab4 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+          </span>
+        </button>
+
+        <div class="mt-2">
+
+          <p-table [value]="[]">
+            <ng-template pTemplate="header">
+              <tr>
+                <th>
+                  {{'detailEmployeeGroup.own_asset.code' | translate}}
+                </th>
+                <th>
+                  {{'detailEmployeeGroup.own_asset.name' | translate}}
+                </th>
+                <th>
+                  {{'detailEmployeeGroup.own_asset.type' | translate}}
+                </th>
+                <th>
+                  {{'detailEmployeeGroup.own_asset.from_date' | translate}}
+                </th>
+                <th>
+                  {{'detailEmployeeGroup.own_asset.to_date' | translate}}
+                </th>
+              </tr>
+            </ng-template>
+          </p-table>
+        </div>
+
+      </accordion-group>
+    </accordion>
+  </div>
+  <div class="page-footer-actions d-flex mt-2">
+    <div class="flex-grow-1">
+      <button class="btn btn-delete" mwlConfirmationPopover
+        [popoverTitle]="'employeeDetail.delete.confirm.title' | translate"
+        [popoverMessage]="'employeeDetail.delete.confirm.message' | translate" placement="bottom"
+        (confirm)="deactiveItemDetail()">
+        {{ 'general.button.delete' | translate}}</button>
+    </div>
+    <div class="flex-shrink-1 justify-content-end">
+      <button (click)="cancel()" class="btn btn-cancel mr-2">{{ 'general.button.cancel' | translate}}</button>
+      <button (click)="save()" class="btn btn-save">
+        {{ 'general.button.save' | translate}}</button>
+    </div>
+  </div>
+</div>
+
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayContact" appendTo="body"
+  [style]="{width: '900px'}">
+  <p-header>
+    {{'detailEmployeeGroup.contacts.add' | translate}}
+  </p-header>
+  <form class="container" [formGroup]="contactForm">
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'detailEmployeeGroup.contacts.recipient' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="name" id="name">
+          <app-error data-qe-id="form-error-name"
+            *ngIf="(contactForm.controls.name?.errors && contactForm.controls.name?.touched) || !!contactForm.controls.errors?.get('name')?.value"
+            [formGroup]="contactForm" [property]="'name'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailEmployeeGroup.contacts.phone_number' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="phone" id="phone">
+          <app-error data-qe-id="form-error-phone"
+            *ngIf="(contactForm.controls.phone?.errors && contactForm.controls.phone?.touched) || !!contactForm.controls.errors?.get('phone')?.value"
+            [formGroup]="contactForm" [property]="'phone'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'detailEmployeeGroup.contacts.email' | translate}}
+        </label>
+        <input type="text" class="form-control" formControlName="email" />
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'detailEmployeeGroup.contacts.province' | translate}}
+        </label>
+        <app-single-select data-qe-id="detail-form-contact-province" [list]="provinceExceptIds" *ngIf="displayContact"
+          [initialValue]="contactForm.controls.provinceName.value" [valueSelector]="valueSelector"
+          [selectedList]="provinceIds" [key]="'name'"
+          (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="contactForm.controls.provinceId.setValue($event[0].id); 
+          contactForm.controls.provinceName.setValue($event[0].name);"
+          (listOpen)="openProvinceList(contactForm.controls.provinceId.value)">
+        </app-single-select>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="employeeDetailOfLegalid">{{ 'employeeDetailOfLegal.contact.address' | translate}}</label>
+          <input type="text" class="form-control" formControlName="address" />
+        </div>
+      </div>
+    </div>
+  </form>
+  <p-footer class="d-flex justify-content-end" (click)="saveContact(contactForm.getRawValue())">
+    <button class="btn btn-add mr-2">
+      {{'general.button.save' | translate}}
+    </button>
+    <button class="btn btn-cancel mr-2" (click)="displayContact = false">
+      {{'general.button.cancel' | translate}}
+    </button>
+  </p-footer>
+</p-dialog>

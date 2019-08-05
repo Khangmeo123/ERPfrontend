@@ -8,7 +8,7 @@ import { Subscription } from 'rxjs';
 import { BusinessGroupEntity } from 'src/app/_modules/master-data/_backend/business-group/business-group.entity';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-business-group',
@@ -17,9 +17,10 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [BusinessGroupService]
 })
 export class BusinessGroupComponent implements OnInit, OnDestroy {
-  pageTitle = _('business_group.header.title');
+  pageTitle = translate('business_group.header.title');
   isSaveBookMark: boolean = false;
   isShowDialog: boolean = false;
+  isShowDialogError: boolean = false;
   pagination: PaginationModel = new PaginationModel();
   businessGroupSearchEntity: BusinessGroupSearchEntity = new BusinessGroupSearchEntity();
   businessGroupList: BusinessGroupEntity[];
@@ -101,7 +102,7 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.businessGroupSearchEntity.orderBy = event.sortField;
-      this.businessGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.businessGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

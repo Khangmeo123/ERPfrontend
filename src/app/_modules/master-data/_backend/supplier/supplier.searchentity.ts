@@ -1,12 +1,14 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
-export class EmployeeSearchEntity extends SearchEntity {
-    code: string;
-    name: string;
-    address: string;
-    taxNumber: string;
-    phone: string;
-    statusId: string;
+export class SupplierSearchEntity extends SearchEntity {
+    code: TextFilter = new TextFilter();
+    name: TextFilter = new TextFilter();
+    taxCode: TextFilter = new TextFilter();
+    statusId: string = '';
+    legalEntityId: string;
+    supplierGroupingId: string;
+    supplierDetailIds: Array<any>;
 
     constructor(employeeSearchEntity?: any) {
         super(employeeSearchEntity);

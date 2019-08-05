@@ -1,3 +1,4 @@
+import { Repository } from 'src/app/_helpers/repository';
 import { Injectable } from '@angular/core';
 import { HttpRequest, HttpHandler, HttpEvent, HttpInterceptor } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
@@ -7,7 +8,7 @@ import { AuthenticationService, SpinnerService } from '../_services';
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
     constructor(private authenticationService: AuthenticationService,
-        private spinnerService: SpinnerService) { }
+        private spinnerService: SpinnerService, private Repository: Repository) { }
 
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         // this.spinnerService.show();
@@ -21,6 +22,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                     this.authenticationService.logout();
                     location.reload(true);
                 }
+                err.error = this.Repository.toCamel(err.error);
                 return throwError(err.error);
             }))
     }

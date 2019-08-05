@@ -2,7 +2,7 @@
     <div class="page-header">
         <span class="page-title">
             {{ pageTitle | translate}}
-            <span (click)="bookMark($event)">
+            <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
@@ -11,21 +11,8 @@
         <div class="page-actions">
             <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
                 {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-import">
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                    aria-controls="dropdown-basic">
-                    {{'general.button.import' | translate}}<span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.import_file' | translate}}</a></li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.download_example' | translate}}</a>
-                    </li>
-                </ul>
-            </div>
-            <button class="btn btn-export" data-qe-id="button-export">{{'general.button.export' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearch(table)"
+                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
         </div>
     </div>
     <hr>
@@ -33,37 +20,28 @@
         <div class="page-section list">
             <p-table [value]="jobLevelList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
                 [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+                <ng-template pTemplate="colgroup">
+                    <colgroup>
+                        <col>
+                        <col>
+                    </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                     <tr>
-                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'job_level.job_level_code' | translate}}
+                        <th pResizableColumn data-qe-id="table-thead-level" [pSortableColumn]="'level'">
+                            {{ 'jobLevel.content.level' | translate}}
+                            <p-sortIcon [field]="'level'" class="float-right"></p-sortIcon>
                         </th>
-                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'job_level.job_level_name' | translate}}
-                        </th>
-                        <!-- <th pResizableColumn data-qe-id="table-thead-jobTitle" [pSortableColumn]="'jobTitle'">
-                            {{ 'job_level.job_level_jobTitle' | translate}}
-                        </th> -->
                         <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'job_level.job_level_description' | translate}}
+                            {{ 'jobLevel.content.description' | translate}}
+                            <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
                         </th>
                     </tr>
                     <tr>
                         <th class="th-filter">
-                            <app-advanced-filters [filter]="jobLevelSearchEntity.code" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-code"></app-advanced-filters>
+                            <app-advanced-filters [filter]="jobLevelSearchEntity.level" (changeFilter)="getList()"
+                                data-qe-id="table-thead-filter-level"></app-advanced-filters>
                         </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="jobLevelSearchEntity.name" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-name"></app-advanced-filters>
-                        </th>
-                        <!-- <th class="th-filter">
-                            <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
-                                (search)="jobTitleSearch($event)"
-                                (selectionChange)="jobTitleSearchEntity.jobTitleId = $event.Id"
-                                (listOpen)="jobTitleSearch(jobTitleSearchEntity.jobTitleId)">
-                            </app-single-select>
-                        </th> -->
                         <th class="th-filter">
                             <app-advanced-filters [filter]="jobLevelSearchEntity.description" (changeFilter)="getList()"
                                 data-qe-id="table-thead-filter-description"></app-advanced-filters>
@@ -72,9 +50,7 @@
                 </ng-template>
                 <ng-template pTemplate="body" let-jobLevel let-index="rowIndex">
                     <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td> {{jobLevel.code}} </td>
-                        <td> {{jobLevel.name}} </td>
-                        <!-- <td> {{jobLevel.jobTitleName}} </td> -->
+                        <td> {{jobLevel.level}} </td>
                         <td> {{jobLevel.description}} </td>
                     </tr>
                 </ng-template>
@@ -89,56 +65,26 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
     [style]="{width: '900px'}">
     <p-header>
-        {{ 'job_level.modal.title' | translate}}
+        {{ 'jobLevel.dialog.title' | translate}}
     </p-header>
     <div class="container" [formGroup]="jobLevelForm">
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="joLevelCode">{{ 'job_level.job_level_code' | translate}}<span
+                    <label for="jobLevel">{{ 'jobLevel.content.level' | translate}}<span
                             class="text-danger ml-2">*</span></label>
                     <div class="div-form">
-                        <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-                            id="joLevelCode" />
+                        <input type="text" pKeyFilter="num" formControlName="level" class="form-control">
                         <app-error data-qe-id="dialog-form-code"
-                            *ngIf="(jobLevelForm.controls.code?.errors && jobLevelForm.controls.code?.touched) || !!jobLevelForm.controls.error.get('code')?.value"
-                            [formGroup]="jobLevelForm" [property]="'code'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <!-- <div class="form-group">
-                    <label for="job_levelname">{{ 'job_level.job_level_level' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <app-single-select [list]="jobTitleExceptIds" [selectedList]="jobTitleIds" [key]="'name'"
-                            (search)="jobTitleSearch($event)"
-                            (selectionChange)="jobLevelForm.controls.jobTitleId.setValue($event.Id); jobLevelForm.controls.jobTitleName.setValue($event.Name);"
-                            (listOpen)="jobTitleSearch(jobLevelForm.controls.jobTileId.value)">
-                        </app-single-select>
-                        <app-error
-                            *ngIf="(jobLevelForm.controls.jobTileId?.errors && jobLevelForm.controls.jobTileId?.touched) || !!jobLevelForm.controls.error.get('jobTileId')?.value"
-                            [formGroup]="jobLevelForm" [property]="'jobTileId'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div> -->
-                <div class="form-group">
-                    <label for="jobLevelName">{{ 'job_level.job_level_name' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-                            id="jobLevelName" />
-                        <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(jobLevelForm.controls.name?.errors && jobLevelForm.controls.name?.touched) || !!jobLevelForm.controls.error.get('name')?.value"
-                            [formGroup]="jobLevelForm" [property]="'name'" [placement]="'top'" class="error-form">
+                            *ngIf="(jobLevelForm.controls.level?.errors && jobLevelForm.controls.level?.touched) || !!jobLevelForm.controls.errors.get('level')?.value"
+                            [formGroup]="jobLevelForm" [property]="'level'" [placement]="'top'" class="error-form">
                         </app-error>
                     </div>
                 </div>
             </div>
             <div class="col-sm-12">
                 <div class="form-group">
-                    <label for="job_levelid">{{ 'job_level.job_level_description' | translate}}</label>
+                    <label for="job_levelid">{{ 'jobLevel.content.description' | translate}}</label>
                     <textarea class="form-control" rows="4" formControlName="description">
                     </textarea>
                 </div>
@@ -149,7 +95,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions">
-                    <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+                    <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
                         {{ 'general.button.save' | translate}}</button>
                     <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                         (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>

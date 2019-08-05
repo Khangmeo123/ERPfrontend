@@ -8,7 +8,8 @@ import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
 import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
-import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import { translate } from 'src/app/_helpers/string';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-job-title',
@@ -17,7 +18,7 @@ import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
   providers: [JobTitleService],
 })
 export class JobTitleComponent implements OnInit, OnDestroy {
-  pageTitle = _('jobTitle.header.title');
+  pageTitle = translate('jobTitle.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
@@ -28,7 +29,6 @@ export class JobTitleComponent implements OnInit, OnDestroy {
   jobTitleSubs: Subscription = new Subscription();
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  brands: any[];
 
   constructor(private jobTitleService: JobTitleService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
     private router: Router) {
@@ -103,7 +103,7 @@ export class JobTitleComponent implements OnInit, OnDestroy {
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.jobTitleSearchEntity.orderBy = event.sortField;
-      this.jobTitleSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.jobTitleSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getList();
   }

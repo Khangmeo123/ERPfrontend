@@ -1,1 +1,232 @@
-<router-outlet></router-outlet>
+<div class="page list-supplier-group">
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
+    </span>
+
+  </div>
+  <div class="page-body">
+    <div class="row">
+      <div class="col-sm-6 page-1">
+        <div class="mt-2 row">
+          <div class="col-sm-7 d-flex align-items-center">
+            <span class="sob-label flex-shrink-1">
+              {{'general.legal_entity.name' | translate}} :
+            </span>
+            <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
+              [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
+              (selectionChange)="selectLegal($event)" (listOpen)="openLegalEntityList()">
+            </app-single-select>
+          </div>
+          <div class="col-sm-5 d-flex page-actions justify-content-end">
+            <button class="btn btn-add" [disabled]="supplierGroupSearchEntity.legalEntityId == undefined"
+              (click)="onClickAddGroup()" data-qe-id="button-add-supplier-group">
+              {{'general.button.add' | translate}}</button>
+            <button class="btn btn-clear" (click)="clearSearchGroup(tableSupplierGroup)"
+              data-qe-id="button-clear-supplier-group">{{'general.button.clear' | translate}}</button>
+          </div>
+        </div>
+        <div class="page-section mt-2">
+          <p-table [value]="supplierGroupList" [customSort]="true" [lazy]="true" selectionMode="single"
+            [(selection)]="selectedSupplier" (onLazyLoad)="sortSupplierGroup($event)" [scrollable]="true"
+            scrollHeight="500px" [resizableColumns]="true" #tableSupplierGroup>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-supplier-group">
+                  {{'supplierGroup.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name-supplier-group">
+                  {{'supplierGroup.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn>{{'general.action' | translate}}</th>
+              </tr>
+              <tr>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="supplierGroupSearchEntity.code" (changeFilter)="getList()"
+                    data-qe-id="table-thead-filter-code-supplier-group">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="supplierGroupSearchEntity.name" (changeFilter)="getList()"
+                    data-qe-id="table-thead-filter-name-supplier-group">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                </th>
+              </tr>
+            </ng-template>
+
+            <ng-template pTemplate="body" let-supplierGroup let-index="rowIndex">
+              <tr [pSelectableRow]="supplierGroup" (click)="onClickDetail(supplierGroup.id)"
+                [attr.data-qe-id]="'table-tbody-row-' + index">
+                <td class="ui-resizable-column"> {{supplierGroup.code}} </td>
+                <td class="ui-resizable-column"> {{supplierGroup.name}} </td>
+                <td class="ui-resizable-column">
+                  <div class="edit" (click)="edit(supplierGroup.id)">
+                    <mat-icon>edit</mat-icon>
+                  </div>
+
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <div class="pagination">
+            <app-pagination [pagination]="pagination" (paginationOut)="paginationGroupOut($event)"
+              data-qe-id="pagination">
+            </app-pagination>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 mt-2">
+        <div class="row d-flex ">
+          <div class="col-sm-4 align-items-center">
+            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="supplierExceptIds"
+              [selectedList]="supplierIds" [key]="'name'" (search)="suppplierSearchApp($event)"
+              (selectionChange)="selectSupplierApp($event)"
+              (listOpen)="openSupplierList(supplierGroupSearchEntity.ids)"></app-multi-select>
+          </div>
+          <div class="col-sm-8 page-actions  d-flex justify-content-end">
+            <button class="btn btn-add" (click)="onClickAddSupplier()" data-qe-id="button-add-supplier"
+              [disabled]="listSupplierId.length === 0">
+              {{'general.button.add' | translate}}</button>
+            <a class="btn btn-export" [href]="exportLink + supplierGroupingId"
+              data-qe-id="button-export-supplier">{{'general.button.export' | translate}}</a>
+            <button class="btn btn-clear" (click)="clearSearch(tableSupplier)"
+              data-qe-id="button-clear-supplier">{{'general.button.clear' | translate}}</button>
+          </div>
+        </div>
+        <div class="page-section mt-2">
+          <p-table [value]="supplierDetailList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortSupplier($event)"
+            [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableSupplier>
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-supplier">
+                  {{'supplierGroup.supplier.code' | translate}}
+                  <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name-supplier">
+                  {{'supplierGroup.supplier.name' | translate}}
+                  <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+                </th>
+                <th pResizableColumn>{{'general.action' | translate}}</th>
+              </tr>
+              <tr>
+                <th class="th-filter">
+                  <app-advanced-filters data-qe-id="table-thead-filter-code-supplier"
+                    [filter]="supplierSearchEntity.code" (changeFilter)="getListDetail()">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters data-qe-id="table-thead-filter-name-supplier"
+                    [filter]="supplierSearchEntity.name" (changeFilter)="getListDetail()">
+                  </app-advanced-filters>
+                </th>
+                <th class="th-filter"></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-item>
+              <tr>
+                <td> {{item.code}} </td>
+                <td> {{item.name}} </td>
+                <td>
+                  <div class="d-flex">
+                    <div class="edit" (click)="onClickShowDetail(item.id)">
+                      <mat-icon>edit</mat-icon>
+                    </div>
+                    <div class="delete" (click)="deleteSupplierFormGroup(item.id)">
+                      <mat-icon>delete</mat-icon>
+                    </div>
+                  </div>
+
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+          <div class="pagination">
+            <app-pagination [pagination]="paginationdetail" (paginationOut)="paginationDetailOut($event)"
+              data-qe-id="pagination">
+            </app-pagination>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-dialog modal="true" [(visible)]="display" [contentStyle]="{'overflow':'visible'}" [style]="{width: '700px'}">
+  <p-header>
+    {{'supplierGroup.add' | translate}}
+  </p-header>
+  <form class="container" [formGroup]="supplierGroupForm">
+    <div class="row">
+      <div class="form-group col-6">
+        <label>
+          {{'supplierGroup.code' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+            id="supplierGroupCode">
+          <app-error data-qe-id="dialog-error-code"
+            *ngIf="(supplierGroupForm.controls.code?.errors && supplierGroupForm.controls.code?.touched) || !!supplierGroupForm.controls.errors?.get('code')?.value"
+            [formGroup]="supplierGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+      <div class="form-group col-6">
+        <label>
+          {{'supplierGroup.name' | translate}}
+          <span class="text-danger mr-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+            id="supplierGroupName">
+          <app-error data-qe-id="dialog-error-code"
+            *ngIf="(supplierGroupForm.controls.name?.errors && supplierGroupForm.controls.name?.touched) || !!supplierGroupForm.controls.errors?.get('name')?.value"
+            [formGroup]="supplierGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+    </div>
+  </form>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="page-actions-delete">
+          <a *ngIf="supplierGroupForm.value?.isDeleted" class="btn" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+            data-qe-id="dialog-button-delete" [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
+            {{ 'general.button.delete' | translate}}</a>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="page-actions">
+          <button class="btn btn-cancel mr-2" (click)="display = false" data-qe-id="dialog-button-cancel">
+            {{'general.button.cancel' | translate}}
+          </button>
+          <button class="btn btn-add mr-2" (click)="save()" data-qe-id="dialog-button-save">
+            {{'general.button.save' | translate}}
+          </button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>

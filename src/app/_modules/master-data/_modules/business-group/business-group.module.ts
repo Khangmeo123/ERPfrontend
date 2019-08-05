@@ -1,3 +1,7 @@
+import { CustomerDetailComponent } from './_page/customer/customer-detail/customer-detail.component';
+import { EmployeeDetailComponent } from './_page/employee/employee-detail/employee-detail.component';
+import { DirectiveModule } from './../../../../_shared/directive/directive.module';
+import { ItemDetailComponent } from './_page/item/item-detail/item-detail.component';
 import { JobTitleComponent } from './_page/job-title/job-title.component';
 import { JobLevelComponent } from './_page/job-level/job-level.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -16,17 +20,8 @@ import { BankComponent } from './_page/bank/bank.component';
 import { CurrencyComponent } from './_page/currency/currency.component';
 import { CustomerComponent } from './_page/customer/customer.component';
 import { EmployeeComponent } from './_page/employee/employee.component';
-import { ProductComponent } from './_page/product/product.component';
 import { SupplierComponent } from './_page/supplier/supplier.component';
 import { UomComponent } from './_page/uom/uom.component';
-import { DetailCustomerComponent } from './_page/customer/detail-customer/detail-customer.component';
-import { ListCustomerComponent } from './_page/customer/list-customer/list-customer.component';
-import { DetailSupplierComponent } from './_page/supplier/detail-supplier/detail-supplier.component';
-import { ListEmployeeComponent } from './_page/employee/list-employee/list-employee.component';
-import { DetailEmployeeComponent } from './_page/employee/detail-employee/detail-employee.component';
-import { ListProductComponent } from './_page/product/list-product/list-product.component';
-import { DetailProductComponent } from './_page/product/detail-product/detail-product.component';
-import { ListSupplierComponent } from './_page/supplier/list-supplier/list-supplier.component';
 import { DialogModule } from 'primeng/dialog';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
@@ -39,8 +34,16 @@ import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { CropperModule } from 'src/app/_shared/modules/cropper/cropper.module';
 import { DropdownModule } from 'primeng/dropdown';
 import { ToastrModule } from 'ngx-toastr';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
+import { ItemComponent } from './_page/item/item.component';
+import { ItemListComponent } from './_page/item/item-list/item-list.component';
+import { EmployeeListComponent } from './_page/employee/employee-list/employee-list.component';
+import { SupplierListComponent } from './_page/supplier/supplier-list/supplier-list.component';
+import { SupplierDetailComponent } from './_page/supplier/supplier-detail/supplier-detail.component';
+import { CustomerListComponent } from './_page/customer/customer-list/customer-list.component';
+import { InputNumberModule } from 'src/app/_shared/modules/input-number/input-number.module';
+import { PipeModule } from 'src/app/_shared/pipe/pipe.module';
 
 @NgModule({
   declarations: [
@@ -51,17 +54,17 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
     CurrencyComponent,
     CustomerComponent,
     EmployeeComponent,
-    ProductComponent,
+    ItemComponent,
     SupplierComponent,
     UomComponent,
-    DetailCustomerComponent,
-    ListCustomerComponent,
-    ListEmployeeComponent,
-    DetailEmployeeComponent,
-    ListProductComponent,
-    DetailProductComponent,
-    ListSupplierComponent,
-    DetailSupplierComponent,
+    CustomerDetailComponent,
+    CustomerListComponent,
+    EmployeeListComponent,
+    EmployeeDetailComponent,
+    ItemListComponent,
+    ItemDetailComponent,
+    SupplierListComponent,
+    SupplierDetailComponent,
     CurrencyComponent,
     JobLevelComponent,
     JobTitleComponent,
@@ -79,11 +82,7 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
-    ToastrModule.forRoot({
-      timeOut: 1000,
-      positionClass: 'toast-bottom-right',
-      preventDuplicates: true,
-    }),
+    ToastrModule,
     AccordionModule.forRoot(),
     RadioButtonModule,
     DatePickerModule,
@@ -94,6 +93,10 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
     SelectModule,
     BsDropdownModule.forRoot(),
     DropdownModule,
+    DirectiveModule,
+    InputNumberModule,
+    PipeModule,
+    CropperModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

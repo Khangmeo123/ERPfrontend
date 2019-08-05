@@ -6,6 +6,7 @@ import { UomForm } from 'src/app/_modules/master-data/_backend/uom/uom.form';
 import { ToastrService } from 'ngx-toastr';
 import { UomEntity } from 'src/app/_modules/master-data/_backend/uom/uom.entity';
 import { UomSearchEntity } from 'src/app/_modules/master-data/_backend/uom/uom.searchentity';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class UomService {
@@ -54,7 +55,7 @@ export class UomService {
 
   save(uomEntity: any, uomSearchEntity: UomSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (uomEntity.id === null || uomEntity.id === undefined) {
+      if (uomEntity.id === null || uomEntity.id === undefined || uomEntity.id === environment.emtyGuid) {
         this.uomRepository.add(uomEntity).subscribe(res => {
           if (res) {
             this.getList(uomSearchEntity);

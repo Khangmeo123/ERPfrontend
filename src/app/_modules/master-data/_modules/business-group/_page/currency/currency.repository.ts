@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class CurrencyRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/currency';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/currency';
     }
 
     getList(currencySearchEntity: CurrencySearchEntity): Observable<CurrencyEntity[]> {

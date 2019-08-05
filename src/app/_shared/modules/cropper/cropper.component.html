@@ -2,7 +2,7 @@
   <div class="d-flex">
     <div class="result flex-grow-1" [ngClass]="{'disabled': disabled}">
       <img [src]="result" alt="result" *ngIf="result">
-      <div class="overlay" pTooltip="{{'cropper.browseImage' | translate}}" *ngIf="!result">
+      <div class="cropper-overlay" pTooltip="{{'cropper.browseImage' | translate}}" *ngIf="!result">
       </div>
     </div>
   </div>

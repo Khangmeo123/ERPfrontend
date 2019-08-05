@@ -2,7 +2,7 @@
   <div class="page-header">
     <span class="page-title">
       {{ pageTitle | translate}}
-      <span (click)="bookMark($event)">
+      <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
@@ -18,6 +18,16 @@
   <hr>
   <div class="page-body">
     <div class="page-section list">
+      <div class="error-div w-100">
+        <div class="alert alert-danger" role="alert" *ngIf="false">
+          <i class="fa fa-times-circle"></i>
+          <span>
+            {{'general.error.fileImport' | translate}}
+            <a href="javascript:;"
+              (click)="isShowDialogError = !isShowDialogError">{{'general.error.direction' | translate}}</a>
+          </span>
+        </div>
+      </div>
       <p-table [value]="businessGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
         [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
@@ -30,15 +40,15 @@
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
-              {{ 'business_group.code' | translate}}
+              {{ 'businessGroup.content.code' | translate}}
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
-              {{ 'business_group.name' | translate}}
+              {{ 'businessGroup.content.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn [pSortableColumn]="'description'" data-qe-id="table-thead-description">
-              {{ 'business_group.description' | translate}}
+              {{ 'businessGroup.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
           </tr>
@@ -79,18 +89,19 @@
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
   [style]="{width: '900px'}">
   <p-header>
-    {{ 'business_group.modal.title' | translate}}
+    {{ 'businessGroup.dialog.title' | translate}}
   </p-header>
   <div class="container" [formGroup]="businessGroupForm">
     <div class="row">
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="businessGroupCode">{{ 'business_group.code' | translate}}<span class="text-danger ml-2">*</span></label>
+          <label for="businessGroupCode">{{ 'businessGroup.content.code' | translate}}<span
+              class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
               id="businessGroupCode" />
             <app-error data-qe-id="dialog-error-code"
-              *ngIf="(businessGroupForm.controls.code?.errors && businessGroupForm.controls.code?.touched) || !!businessGroupForm.controls.error.get('code')?.value"
+              *ngIf="(businessGroupForm.controls.code?.errors && businessGroupForm.controls.code?.touched) || !!businessGroupForm.controls.errors?.get('code')?.value"
               [formGroup]="businessGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
@@ -98,12 +109,13 @@
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label for="businessGroupName">{{ 'business_group.name' | translate}}<span class="text-danger ml-2">*</span></label>
+          <label for="businessGroupName">{{ 'businessGroup.content.name' | translate}}<span
+              class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
               id="businessGroupName" />
             <app-error data-qe-id="dialog-error-name"
-              *ngIf="(businessGroupForm.controls.name?.errors && businessGroupForm.controls.name?.touched) || !!businessGroupForm.controls.error.get('name')?.value"
+              *ngIf="(businessGroupForm.controls.name?.errors && businessGroupForm.controls.name?.touched) || !!businessGroupForm.controls.errors?.get('name')?.value"
               [formGroup]="businessGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
@@ -113,7 +125,7 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="form-group">
-          <label for="businessGroupDescription">{{ 'business_group.description' | translate}}</label>
+          <label for="businessGroupDescription">{{ 'businessGroup.content.description' | translate}}</label>
           <textarea class="form-control" rows="4" formControlName="description" data-qe-id="dialog-form-description"
             id="businessGroupDescription">
           </textarea>
@@ -125,14 +137,36 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="page-actions">
-          <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+          <button class="btn btn-save" appNoDblClick (click)="save()" data-qe-id="dialog-button-save">
             {{ 'general.button.save' | translate}}</button>
           <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
             (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
           <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-            data-qe-id="dialog-button-cancel" *ngIf="businessGroupForm.value?.isDeleted"
+            data-qe-id="dialog-button-delete" *ngIf="businessGroupForm.value?.isDeleted"
             [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
             {{ 'general.button.delete' | translate}}</button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>
+<p-dialog modal="true" [(visible)]="isShowDialogError" appendTo="body" [style]="{width: '600px'}">
+  <p-header>
+    {{ 'businessGroup.dialog.error.title' | translate}}
+  </p-header>
+  <div class="container" [formGroup]="businessGroupForm">
+    <div class="row">
+      <div class="col-md-12">
+        <div [innerHTML]="" class="text-danger"></div>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions">
+          <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+            (click)="isShowDialogError = false">{{ 'general.button.cancel' | translate}}</button>
         </div>
       </div>
     </div>

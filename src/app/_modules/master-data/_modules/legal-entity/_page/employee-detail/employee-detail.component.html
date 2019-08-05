@@ -1,0 +1,418 @@
+<div class="page employeeDetailOfLegal-detail">
+    <div class="page-header">
+        <span class="page-title">
+            {{'employeeDetailOfLegal.header.title' | translate}}
+        </span>
+        <div class="page-actions">
+            <button class="btn btn-cancel" data-qe-id="button-cancel"
+                (click)="cancel()">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-save" data-qe-id="button-save" (click)="save()">
+                {{ 'general.button.save' | translate}}</button>
+        </div>
+    </div>
+    <hr>
+    <div class="page-body">
+        <accordion [formGroup]="employeeDetailForm">
+            <accordion-group [isOpen]="true">
+                <button (click)="isOpenTab1=!isOpenTab1" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'employeeDetailOfLegal.general.title' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="employeeCode">{{ 'employeeDetailOfLegal.code' | translate}}<span
+                                    class="text-danger ml-2">*</span></label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="employeeCode"
+                                    data-qe-id="detail-form-general-code" formControlName="code">
+                                <app-error
+                                    *ngIf="(employeeDetailForm?.controls.code?.errors  && employeeDetailForm.controls.code?.touched )|| !!employeeDetailForm.controls.errors?.get('code')?.value"
+                                    [formGroup]="employeeDetailForm" [property]="'code'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="employeeBirthday">{{ 'employeeDetailOfLegal.birthday' | translate}}</label>
+                            <app-date-picker [disabled]="true" [control]="employeeDetailForm.get('dob')">
+                            </app-date-picker>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="employeeSalary">{{ 'employeeDetailOfLegal.salaryAgreement' | translate}}</label>
+                            <input type="text" id="employeeSalary" class="form-control" pKeyFilter="int"
+                                formControlName="salary">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="employeeName"> {{ 'employeeDetailOfLegal.name' | translate}}<span
+                                    class="text-danger ml-2">*</span></label>
+                            <div class="div-form">
+                                <input type="text" class="form-control" id="employeeName"
+                                    data-qe-id="detail-form-general-name" formControlName="name">
+                                <app-error
+                                    *ngIf="(employeeDetailForm.controls.name?.errors  && employeeDetailForm.controls.name?.touched )|| !!employeeDetailForm.controls.errors?.get('name')?.value"
+                                    [formGroup]="employeeDetailForm" [property]="'name'" [placement]="'top'"
+                                    class="error-form">
+                                </app-error>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label
+                                for="employeeIdentityNumber">{{ 'employeeDetailOfLegal.identityNumber' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="identityNumber" pKeyFilter="int"
+                                id="employeeIdentityNumber">
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+
+                        <div class="form-group">
+                            <label for="salaryRatio">{{ 'employeeDetailOfLegal.salaryRatio' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" formControlName="salaryRatio"
+                                id="salaryRatio">
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.gender.title' | translate}}</label>
+                            <div class="ratio-button" style="display: flex">
+                                <p-radioButton name="groupname" [disabled]=true [value]="true" formControlName="gender"
+                                    [label]="'employeeDetailOfLegal.gender.men' | translate"></p-radioButton>
+                                <p-radioButton class="ml-1" name="groupname" [disabled]=true [value]="false"
+                                    formControlName="gender" [label]="'employeeDetailOfLegal.gender.women' | translate">
+                                </p-radioButton>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.issuePlace' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="issuePlace" id="issuePlace" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.bassicSalary' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int" formControlName="salary"
+                                id="salary" />
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.jobTitle' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="jobTitleName" id="salary" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.issueDate' | translate}}</label>
+                            <app-date-picker [disabled]="true" [control]="employeeDetailForm.get('issueDate')">
+                            </app-date-picker>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.numberDependentPerson' | translate}}</label>
+                            <input type="text" class="form-control" pKeyFilter="int"
+                                formControlName="numberDependentPerson" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.jobLevel' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="jobLevel" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.taxCode' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="taxCode" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.status' | translate}}<span
+                                    class="text-danger ml-2">*</span></label>
+                            <input type="text" class="form-control" formControlName="statusName" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label for="bankid">{{ 'employeeDetailOfLegal.employeeGroup' | translate}}</label>
+                            <p-chips class="w-100" [ngModel]="employeeDetailForm.controls.employeePositions.value"
+                                [ngModelOptions]="{standalone: true}" [disabled]="true">
+                                <ng-template let-item pTemplate="item">
+                                    {{item.code}}
+                                </ng-template>
+                            </p-chips>
+                        </div>
+                    </div>
+
+                </div>
+            </accordion-group>
+
+            <accordion-group>
+                <button (click)="onClickOpenTab1()" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'employeeDetailOfLegal.bankAccount.title' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab1 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label
+                                for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.name' | translate}}</label>
+                            <app-single-select data-qe-id="dialog-bank-account" [valueSelector]="valueSelector"
+                                [list]="bankExceptIds" [selectedList]="bankIds" [key]="'name'"
+                                (search)="bankSearch($event, employeeDetailForm.controls.bankId.value)"
+                                [initialValue]="employeeDetailForm.controls.bankName.value" (selectionChange)="employeeDetailForm.controls.bankId.setValue($event[0].id);
+                                employeeDetailForm.controls.bankName.setValue($event[0].name)"
+                                (listOpen)="openBankList(employeeDetailForm.controls.bankId.value)"></app-single-select>
+
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label
+                                for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.accountName' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="bankAccountName" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label
+                                for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.accountNumber' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="bankAccountNumber"
+                                pKeyFilter="int" />
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label>{{ 'employeeDetailOfLegal.bankAccount.city' | translate}}</label>
+                            <app-single-select class="w-100" data-qe-id="form-content-province"
+                                [valueSelector]="valueSelector" [list]="provinceExceptIds"
+                                [initialValue]="employeeDetailForm.controls.provinceName.value"
+                                [selectedList]="provinceIds" [key]="'name'"
+                                (search)="provinceSearch($event,employeeDetailForm.controls.provinceId.value)"
+                                (selectionChange)="employeeDetailForm.controls.provinceId.setValue($event[0].id);
+                            employeeDetailForm.controls.provinceName.setValue($event[0].name)"
+                                (listOpen)="openProvinceList(employeeDetailForm.controls.provinceId.value)">
+                            </app-single-select>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label
+                                for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.division' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="bankBranch" />
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="form-group">
+                            <label
+                                for="employeeDetailOfLegalCode">{{ 'employeeDetailOfLegal.bankAccount.divisionAddress' | translate}}</label>
+                            <input type="text" class="form-control" formControlName="bankAddress" />
+                        </div>
+                    </div>
+
+                </div>
+
+            </accordion-group>
+
+            <accordion-group>
+                <button (click)="onClickOpenTab2()" class="btn btn-link btn-block clearfix" accordion-heading>
+                    <div class="pull-left float-left">{{'employeeDetailOfLegal.contact.title' | translate }}</div>
+                    <span class="float-right pull-right" accordion-heading>
+                        <i class="fas " [ngClass]="!isOpenTab3 ? 'fa-caret-down' : 'fa-caret-up'"></i>
+                    </span>
+                </button>
+                <div class="d-flex justify-content-end">
+                    <button class="btn btn-add" (click)="addContact()">
+                        {{'employeeDetailOfLegal.contact.add' | translate}}
+                    </button>
+                </div>
+                <div class="mt-2">
+                    <p-table [value]="employeeDetailForm.get('employeeContacts').value" [scrollable]="true"
+                        scrollHeight="500px" [resizableColumns]="true" #table>
+                        <ng-template pTemplate="colgroup">
+                            <colgroup>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                                <col>
+                            </colgroup>
+                        </ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th pResizableColumn data-qe-id="table-thead-contacts-code">
+                                    {{'employeeDetailOfLegal.contact.index' | translate}}
+                                </th>
+                                <th pResizableColumn data-qe-id="table-thead-contacts-recipient">
+                                    {{'employeeDetailOfLegal.contact.name' | translate}}
+                                </th>
+                                <th pResizableColumn data-qe-id="table-thead-contacts-phone-number">
+                                    {{'employeeDetailOfLegal.contact.phone' | translate}}
+                                </th>
+                                <th pResizableColumn data-qe-id="table-thead-contacts-email">
+                                    {{'employeeDetailOfLegal.contact.email' | translate}}
+                                </th>
+                                <th pResizableColumn data-qe-id="table-thead-contacts-city">
+                                    {{'employeeDetailOfLegal.contact.city' | translate}}
+                                </th>
+                                <th pResizableColumn data-qe-id="table-thead-contacts-address">
+                                    {{'employeeDetailOfLegal.contact.address' | translate}}
+                                </th>
+                                <th pResizableColumn>{{'general.action' | translate}}</th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-contact let-index="rowIndex">
+                            <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+                                <td> {{index}}</td>
+                                <td> {{contact.name}} </td>
+                                <td> {{contact.phone}} </td>
+                                <td> {{contact.email}} </td>
+                                <td> {{contact.provinceName}}</td>
+                                <td> {{contact.address}} </td>
+                                <td class="ui-resizable-column">
+                                    <div class="d-flex">
+                                        <div class="edit mr-2" (click)="editContact(contact,index)">
+                                            <mat-icon>edit</mat-icon>
+                                        </div>
+                                        <div class="delete" (click)="deleteContact(index)">
+                                            <mat-icon>delete</mat-icon>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+                </div>
+            </accordion-group>
+        </accordion>
+    </div>
+    <div class="page-footer d-flex">
+        <div class="page-actions-delete">
+            <a mwlConfirmationPopover [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom"
+                (confirm)="deleteEmployDetail()">
+                {{ 'general.button.delete' | translate}}</a>
+        </div>
+        <div class="page-actions">
+            <button class="btn btn-cancel mr-2" (click)="cancel()" data-qe-id="dialog-button-cancel">
+                {{'general.button.cancel' | translate}}
+            </button>
+            <button class="btn btn-add mr-2" data-qe-id="button-save" (click)="save()">
+                {{'general.button.save' | translate}}
+            </button>
+        </div>
+    </div>
+</div>
+
+<p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="displayContact" appendTo="body"
+    [style]="{width: '900px'}">
+    <p-header>
+        {{ 'employeeDetailOfLegal.contact.add' | translate}}
+    </p-header>
+    <form class="container" [formGroup]="contactForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="employeeDetailOfLegalcode">{{ 'employeeDetailOfLegal.contact.name' | translate}}<span
+                            class="text-danger ml-2">*</span></label>
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="name" id="name">
+                        <app-error data-qe-id="form-error-name"
+                            *ngIf="(contactForm.controls.name?.errors && contactForm.controls.name?.touched) || !!contactForm.controls.errors?.get('name')?.value"
+                            [formGroup]="contactForm" [property]="'name'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="employeeDetailOfLegalname">{{ 'employeeDetailOfLegal.contact.phone' | translate}}<span
+                            class="text-danger ml-2">*</span></label>
+                    <div class="div-form">
+                        <input type="text" class="form-control" formControlName="phone" id="phone">
+                        <app-error data-qe-id="form-error-phone"
+                            *ngIf="(contactForm.controls.phone?.errors && contactForm.controls.phone?.touched) || !!contactForm.controls.errors?.get('phone')?.value"
+                            [formGroup]="contactForm" [property]="'phone'" [placement]="'top'" class="error-form">
+                        </app-error>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="employeeDetailOfLegalid">{{ 'employeeDetailOfLegal.contact.email' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="email" />
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <label for="employeeDetailOfLegalname">{{ 'employeeDetailOfLegal.contact.city' | translate}}</label>
+                    <app-single-select data-qe-id="detail-form-contact-province" [list]="province2ExceptIds"
+                        *ngIf="displayContact" [initialValue]="contactForm.controls.provinceName.value"
+                        [valueSelector]="valueSelector" [selectedList]="province2Ids" [key]="'name'"
+                        (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="contactForm.controls.provinceId.setValue($event[0].id); 
+                    contactForm.controls.provinceName.setValue($event[0].name);"
+                        (listOpen)="openProvinceList(contactForm.controls.provinceId.value)">
+                    </app-single-select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="form-group">
+                    <label
+                        for="employeeDetailOfLegalid">{{ 'employeeDetailOfLegal.contact.address' | translate}}</label>
+                    <input type="text" class="form-control" formControlName="address" />
+                </div>
+            </div>
+        </div>
+    </form>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions">
+                    <button class="btn btn-cancel"
+                        (click)="displayContact = false">{{ 'general.button.cancel' | translate}}</button>
+                    <button class="btn btn-save" (click)="saveContact(contactForm.value)">
+                        {{ 'general.button.save' | translate}}</button>
+
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

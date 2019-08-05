@@ -5,12 +5,14 @@ import { BankAccountEntity } from '../bank-account/bank-account.entity';
 export class CustomerEntity extends Entity {
     code: string;
     name: string;
-    taxNumber: string;
+    taxCode: string;
     note: string;
+
     // statusEntity
     statusId: string;
     statusName: string;
     statusCode: string;
+    customerGroupingId: string;
 
     infoContacts: InfoContactEntity[];
     bankAccounts: BankAccountEntity[];

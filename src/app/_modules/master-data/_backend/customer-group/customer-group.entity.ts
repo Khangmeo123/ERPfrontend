@@ -8,9 +8,10 @@ export class CustomerGroupEntity extends Entity {
     name:string;
 
     description:string;
+    legalEntityId: string;
     
 
-    constructor(customerGroupEntity: any) {
+    constructor(customerGroupEntity?: any) {
         super(customerGroupEntity);
     }
 }

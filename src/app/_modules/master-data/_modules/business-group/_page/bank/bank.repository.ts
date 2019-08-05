@@ -13,7 +13,7 @@ import { environment } from 'src/environments/environment';
 export class BankRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'master-data/bank';
+        this.apiUrl = environment.apiUrlApps + 'master-data/business-group/bank';
     }
 
     getList(bankSearchEntity: BankSearchEntity): Observable<BankEntity[]> {
@@ -60,6 +60,15 @@ export class BankRepository extends Repository {
 
     delete(bankEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(bankEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    importFile(file: File) {
+        const formData = new FormData();
+        formData.append('file', File[0]);
+        return this.http.post<boolean>(this.apiUrl + '/import', formData,
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

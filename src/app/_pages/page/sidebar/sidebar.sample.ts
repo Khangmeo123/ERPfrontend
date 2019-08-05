@@ -16,7 +16,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Quản lý sản phẩm',
-        route: '/master-data/business-group/product',
+        route: '/master-data/business-group/item',
       },
       {
         label: 'Đơn vị tính sản phẩm',
@@ -139,7 +139,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Khách hàng của pháp nhân',
-        route: '/master-data/legal-entity/customer-list-of-legal-entity',
+        route: '/master-data/legal-entity/customer-of-legal-entity',
       },
       {
         label: 'Quản lý nhóm KH',
@@ -159,15 +159,15 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Quản lý nhóm nhân viên',
-        route: '/master-data/legal-entity/company-position',
+        route: '/master-data/legal-entity/employee-position',
       },
       {
         label: 'Sản phẩm của pháp nhân',
-        route: '/master-data/legal-entity/product-of-legal-entity',
+        route: '/master-data/legal-entity/item-of-legal-entity',
       },
       {
         label: 'Quản lý nhóm sản phẩm',
-        route: '/master-data/legal-entity/product-group',
+        route: '/master-data/legal-entity/item-group',
       },
       {
         label: 'Giá đặc biệt NCC',

@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 // $fa-font-path:"~font-awesome/fonts";
-
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -81,14 +79,17 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+
   .input-form {
     width: 90%;
   }
-  .error-form{
+
+  .error-form {
     width: 10%;
   }
 }
-.full-width{
+
+.full-width {
   width: 100%;
 }
 
@@ -105,31 +106,32 @@ body {
 }
 
 
-.title-page{
+.title-page {
   display: flex;
 
   div {
-      font-size: 21px;
-      color: $color-title;
-      text-transform: uppercase;
-      font-weight: bold;
+    font-size: 21px;
+    color: $color-title;
+    text-transform: uppercase;
+    font-weight: bold;
   }
 
   mat-icon {
-      font-size: 23px;
-      padding: 5px;
-      padding-top: 2px;
-      cursor: pointer;
+    font-size: 23px;
+    padding: 2px 5px 5px;
+    cursor: pointer;
   }
 }
 
 .th-filter {
   background-color: #ffffff !important;
+  padding: 0.25rem 0.5rem!important;
 }
 
 .card-header {
   padding: 2px 3px !important;
 }
+
 
 .btn.btn-add,
 .btn.btn-clear,
@@ -155,10 +157,11 @@ body {
 }
 
 .page {
-  .page-header {
+  .page-header,.page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 20px;
 
     .page-title {
       font-size: 21px;
@@ -183,28 +186,21 @@ body {
         margin-right: 0.5rem !important
       }
     }
-
-    .page-body {
-      .page-section {
-
-      }
-
-      .page-section.form {
-
-      }
-
-      .page-section.list {
-
-      }
-    }
-
-    .pagination {
-
-    }
   }
 
-  .page-footer {
+  .page-body {
+    margin: 15px 0px 15px 0px;
+    .page-section {
 
+    }
+
+    .page-section.form {
+
+    }
+
+    .page-section.list {
+
+    }
   }
 
   mat-icon {
@@ -218,16 +214,18 @@ body {
     display: flex;
     justify-content: flex-end;
   }
+
+  
 }
 
 .ui-table-scrollable-header, .ui-table-scrollable-footer {
-  overflow: unset!important;
+  overflow: unset !important;
 }
 
 .ui-table-resizable {
-  .ui-table-thead{
-     tr{
-       th {
+  .ui-table-thead {
+    tr {
+      th {
         overflow: visible;
       }
     }
@@ -237,4 +235,35 @@ body {
 .cdk-overlay-container {
   position: fixed !important;
   z-index: 1010 !important; /* set value you need */
+}
+
+.page-actions-delete {
+  float: left;
+}
+
+.ui-chips > ul.ui-inputtext {
+  width: 100% !important;
+}
+body .ui-state-disabled, body .ui-widget:disabled {
+  background: #e9ecef;
+}
+
+a.disabled {
+  pointer-events: none;
+  cursor: default;
+}
+
+input[type="text"].disabled {
+  background: #dddddd;
+  pointer-events: none;
+  cursor: default;
+}
+
+.ui-table {
+  .ui-table-tbody {
+    > tr.ui-state-highlight {
+      background: #1C4E80!important;
+      color: #ffffff;
+    }
+  }
 }

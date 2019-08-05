@@ -2,7 +2,7 @@
   <div class="page-header">
     <span class="page-title">
       {{ pageTitle | translate}}
-      <span (click)="bookMark($event)">
+      <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
           star
         </mat-icon>
@@ -15,23 +15,31 @@
         data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
   </div>
-  <div class="page-body mt-4">
+  <hr>
+  <div class="page-body">
     <div class="page-section list">
       <p-table [value]="currencyList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
         scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-              {{'currency.currency_code' | translate}}
+              {{'currency.content.code' | translate}}
 
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-              {{'currency.currency_name' | translate}}
+              {{'currency.content.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-              {{'currency.currency_description' | translate}}
+              {{'currency.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
           </tr>
@@ -66,18 +74,19 @@
   </div>
   <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" [style]="{width: '900px'}">
     <p-header>
-      {{ 'currency.title' | translate}}
+      {{ 'currency.dialog.title' | translate}}
     </p-header>
     <div class="container" [formGroup]="currencyForm">
       <div class="row">
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currencyCode">{{ 'currency.currency_code' | translate}} <span class="text-danger ml-2">*</span></label>
+            <label for="currencyCode">{{ 'currency.content.code' | translate}} <span
+                class="text-danger ml-2">*</span></label>
             <div class="div-form">
               <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
                 id="currencyCode" />
               <app-error data-qe-id="dialog-error-code"
-                *ngIf="(currencyForm.controls.code?.errors && currencyForm.controls.code?.touched) || !!currencyForm.controls.error.get('code')?.value"
+                *ngIf="(currencyForm.controls.code?.errors && currencyForm.controls.code?.touched) || !!currencyForm.controls.errors.get('code')?.value"
                 [formGroup]="currencyForm" [property]="'code'" [placement]="'top'" class="error-form">
               </app-error>
             </div>
@@ -85,12 +94,13 @@
         </div>
         <div class="col-sm-6">
           <div class="form-group">
-            <label for="currencyName">{{ 'currency.currency_name' | translate}}<span class="text-danger ml-2">*</span></label>
+            <label for="currencyName">{{ 'currency.content.name' | translate}}<span
+                class="text-danger ml-2">*</span></label>
             <div class="div-form">
               <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
                 id="currencyName" />
               <app-error data-qe-id="dialog-error-name"
-                *ngIf="(currencyForm.controls.name?.errors && currencyForm.controls.name?.touched) || !!currencyForm.controls.error.get('name')?.value"
+                *ngIf="(currencyForm.controls.name?.errors && currencyForm.controls.name?.touched) || !!currencyForm.controls.errors.get('name')?.value"
                 [formGroup]="currencyForm" [property]="'name'" [placement]="'top'" class="error-form">
               </app-error>
             </div>
@@ -100,7 +110,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="form-group">
-            <label for="currencyDescription">{{ 'currency.currency_description' | translate}}</label>
+            <label for="currencyDescription">{{ 'currency.content.description' | translate}}</label>
             <textarea class="form-control" rows="4" id="currencyDescription" formControlName="description"
               data-qe-id="dialog-form-description"></textarea>
           </div>
@@ -111,7 +121,7 @@
       <div class="row">
         <div class="col-sm-12">
           <div class="page-actions">
-            <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
+            <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
               {{ 'general.button.save' | translate}}</button>
             <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
               (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>

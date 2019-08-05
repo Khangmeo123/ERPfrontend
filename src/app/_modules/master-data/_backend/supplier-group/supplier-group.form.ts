@@ -8,17 +8,23 @@ export class SupplierGroupForm extends FormModel {
 
     name = new FormControl('', [requiredField]);
     code = new FormControl('', [requiredField]);
+    legalEntityId = new FormControl('', [requiredField]);
+    errors = new FormGroup({
+        name: new FormControl(''),
+        code: new FormControl(''),
+        legalEntityId: new FormControl('')
+    });
 
-    description = new FormControl('');
 
     constructor(supplierGroupEntity?: SupplierGroupEntity) {
         super();
         if (supplierGroupEntity !== null && supplierGroupEntity !== undefined) {
             Object.keys(supplierGroupEntity).forEach((item) => {
                 if (supplierGroupEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(supplierGroupEntity[item]);
+                    this[item].patchValue(supplierGroupEntity[item]);
                 }
             });
         }
     }
 }
+

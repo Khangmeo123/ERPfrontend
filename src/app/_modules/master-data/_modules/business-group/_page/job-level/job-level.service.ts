@@ -10,6 +10,7 @@ import { JobLevelSearchEntity } from 'src/app/_modules/master-data/_backend/job-
 import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class JobLevelService {
@@ -61,7 +62,7 @@ export class JobLevelService {
 
   save(jobLevelEntity: any, jobLevelSearchEntity: JobLevelSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (jobLevelEntity.id === null || jobLevelEntity.id === undefined) {
+      if (jobLevelEntity.id === null || jobLevelEntity.id === undefined || jobLevelEntity.id === environment.emtyGuid) {
         this.jobLevelRepository.add(jobLevelEntity).subscribe(res => {
           if (res) {
             this.getList(jobLevelSearchEntity);
@@ -115,27 +116,4 @@ export class JobLevelService {
     });
     return defered;
   }
-
-  // getListJobTitle(jobTitleSearchEntity: JobTitleSearchEntity) {
-  //   this.jobLevelRepository.getListJobTitle(jobTitleSearchEntity).subscribe(res => {
-  //     if (res) {
-  //       this.jobTitleList.next(res);
-  //     }
-  //   }, err => {
-  //     if (err) {
-  //       console.log(err);
-  //     }
-  //   });
-  // }
-  // getListJobTitleByTyping(jobTitleSearchEntity: Observable<JobTitleSearchEntity>) {
-  //   jobTitleSearchEntity.pipe(debounceTime(400),
-  //     distinctUntilChanged(),
-  //     switchMap(searchEntity => {
-  //       return this.jobLevelRepository.getListJobTitle(searchEntity)
-  //     })).subscribe(res => {
-  //       if (res) {
-  //         this.jobTitleList.next(res);
-  //       }
-  //     });
-  // }
 }
