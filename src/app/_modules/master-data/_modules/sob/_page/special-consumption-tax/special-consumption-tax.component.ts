@@ -73,8 +73,12 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   constructor(
     private specialConsumptionTaxService: SpecialConsumptionTaxService,
     private generalService: GeneralService,
-    private toastrService: ToastrService,
   ) {
+    const parentTaxSub: Subscription = this.specialConsumptionTaxService.parentTaxList.subscribe((parentTaxList) => {
+      this.parentTaxList = parentTaxList.exceptIds;
+      this.selectedParentTaxList = parentTaxList.ids;
+    });
+
     const sobListSub = this.specialConsumptionTaxService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
       this.selectedSobList = list.ids;
@@ -105,6 +109,7 @@ export class SpecialConsumptionTaxComponent implements OnInit {
       .add(specialConsumptionTaxSub)
       .add(specialConsumptionTaxFormSub)
       .add(uomListSub)
+      .add(parentTaxSub)
       .add(specialConsumptionTaxCountSub);
   }
 
@@ -127,13 +132,17 @@ export class SpecialConsumptionTaxComponent implements OnInit {
     return this.specialConsumptionTaxForm.get('errors') as FormGroup;
   }
 
+  get unitOfMeasureId() {
+    return this.specialConsumptionTaxForm.get('unitOfMeasureId') as FormControl;
+  }
+
+  get parentId() {
+    return this.specialConsumptionTaxForm.get('parentId') as FormControl;
+  }
+
   add() {
-    if (this.setOfBookId) {
-      this.specialConsumptionTaxService.add();
-      this.showDialog();
-    } else {
-      this.toastrService.error('Phải chọn bộ sổ trước');
-    }
+    this.specialConsumptionTaxService.add();
+    this.showDialog();
   }
 
   ngOnInit() {
@@ -168,12 +177,18 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   }
 
   paginationOut(pagination) {
-    this.sobSearchEntity.skip = pagination.skip;
-    this.sobSearchEntity.take = pagination.take;
+    this.specialConsumptionTaxSearchEntity.skip = pagination.skip;
+    this.specialConsumptionTaxSearchEntity.take = pagination.take;
     this.specialConsumptionTaxService.getList(this.specialConsumptionTaxSearchEntity);
   }
 
   getUomList() {
+    this.uomSearchEntity = new UomSearchEntity();
+    if (this.unitOfMeasureId.value) {
+      this.uomSearchEntity.ids = [
+        this.unitOfMeasureId.value,
+      ];
+    }
     this.specialConsumptionTaxService.getUnitOfMeasureList(this.uomSearchEntity);
   }
 
@@ -230,11 +245,27 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   onGetParentTaxList() {
     this.parentTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
     this.parentTaxSearchEntity.setOfBookId = this.setOfBookId;
+    if (this.parentId.value) {
+      this.parentTaxSearchEntity.ids = [
+        this.parentId.value,
+      ];
+    }
     this.specialConsumptionTaxService.getParentTaxList(this.parentTaxSearchEntity);
   }
 
   onSearchParentTaxList(event) {
     this.parentTaxSearchEntity.name.startsWith = event;
     this.specialConsumptionTaxService.getParentTaxList(this.parentTaxSearchEntity);
+  }
+
+  onDisableChange(tax) {
+    return (
+      tax.disabled
+        ? this.specialConsumptionTaxService.enable(tax)
+        : this.specialConsumptionTaxService.disable(tax)
+    )
+      .then(() => {
+        tax.disabled = !tax.disabled;
+      });
   }
 }

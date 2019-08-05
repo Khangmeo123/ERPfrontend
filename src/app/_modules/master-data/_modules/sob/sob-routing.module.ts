@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { BankAccountComponent } from './_page/bank-account/bank-account.component';
 import { CoaComponent } from './_page/coa/coa.component';
-import { ResourceTaxComponent } from './_page/resource-tax/resource-tax.component';
+import { NaturalResourceTaxComponent } from './_page/natural-resource-tax/natural-resource-tax.component';
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
 import { AccountingPeriodComponent } from './_page/accounting-period/accounting-period.component';
@@ -24,7 +24,7 @@ const routes: Routes = [
       {path: 'bank-account', component: BankAccountComponent},
       {path: 'coa', component: CoaComponent},
       {path: 'special-consumption-tax', component: SpecialConsumptionTaxComponent},
-      {path: 'resource-tax', component: ResourceTaxComponent},
+      {path: 'resource-tax', component: NaturalResourceTaxComponent},
       {path: 'cost-center', component: CostCenterComponent},
       {path: 'fiscal-year', component: FiscalYearComponent},
       {path: 'accounting-period', component: AccountingPeriodComponent},

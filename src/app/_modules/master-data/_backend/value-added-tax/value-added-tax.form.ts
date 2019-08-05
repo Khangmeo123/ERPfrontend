@@ -2,33 +2,43 @@ import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
 import { ValueAddedTaxEntity } from 'src/app/_modules/master-data/_backend/value-added-tax/value-added-tax.entity';
 import { requiredField, checkLength } from 'src/app/_helpers';
+import { SpecialConsumptionTaxEntity } from '../special-consumption-tax/special-consumption-tax.entity';
 
 export class ValueAddedTaxForm extends FormModel {
 
-    taxCode = new FormControl('', [requiredField]);
-    taxType = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-    //don vi tinh
-    unitOfMeasureId = new FormControl('');
-    unitOfMeasureName = new FormControl('');
+  id: FormControl = new FormControl(null);
 
-    //tai khoan tong hop
-    coaId = new FormControl('');
-    coaName = new FormControl('');
+  code = new FormControl(null, [requiredField]);
 
+  name = new FormControl(null, [requiredField, checkLength(3, 500)]);
 
+  unitOfMeasureId = new FormControl(null);
+  unitOfMeasureName = new FormControl(null);
 
-    taxRate = new FormControl('');
-    description = new FormControl('');
+  parentId = new FormControl(null);
+  parentCode = new FormControl(null);
+  parentName = new FormControl(null);
 
-    constructor(vatEntity?: ValueAddedTaxEntity) {
-        super();
-        if (vatEntity !== null && vatEntity !== undefined) {
-            Object.keys(vatEntity).forEach((item) => {
-                if (vatEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(vatEntity[item]);
-                }
-            });
+  rate = new FormControl(null);
+
+  discount: FormControl = new FormControl(null);
+
+  description = new FormControl(null);
+
+  errors: FormGroup = new FormGroup({
+    code: new FormControl(null),
+  });
+
+  constructor(valueAddedTaxEntity?: SpecialConsumptionTaxEntity) {
+    super();
+    if (valueAddedTaxEntity !== null && valueAddedTaxEntity !== undefined) {
+      Object.keys(valueAddedTaxEntity).forEach((item) => {
+        if (valueAddedTaxEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(valueAddedTaxEntity[item]);
         }
+      });
     }
+  }
 }

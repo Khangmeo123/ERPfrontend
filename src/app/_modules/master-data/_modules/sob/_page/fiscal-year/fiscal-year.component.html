@@ -33,11 +33,11 @@
           <tr>
             <th [pSortableColumn]="'name'" data-qe-id="table-thead-name"
                 pResizableColumn> {{ 'fiscal_year.content.name' | translate}} </th>
-            <th [pSortableColumn]="'from-date'" data-qe-id="table-thead-from-date"
+            <th [pSortableColumn]="'startDate'" data-qe-id="table-thead-from-date"
                 pResizableColumn> {{ 'fiscal_year.content.from_date' | translate}} </th>
-            <th [pSortableColumn]="'to-date'" data-qe-id="table-thead-to-date"
+            <th [pSortableColumn]="'endDate'" data-qe-id="table-thead-to-date"
                 pResizableColumn> {{ 'fiscal_year.content.to_date' | translate}} </th>
-            <th [pSortableColumn]="'valuation-method'" data-qe-id="table-thead-valuation-method"
+            <th [pSortableColumn]="'valuationMethod'" data-qe-id="table-thead-valuation-method"
                 pResizableColumn> {{ 'fiscal_year.content.valuation_method' | translate}} </th>
             <th [pSortableColumn]="'status'" data-qe-id="table-thead-status"
                 pResizableColumn> {{ 'fiscal_year.content.status' | translate}} </th>
@@ -56,13 +56,22 @@
                                     data-qe-id="filter-endDate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="fiscalYearSearchEntity.inventoryValuationMethodName"
-                                    data-qe-id="filter-valueation"></app-advanced-filters>
+              <app-simple-select (listOpen)="getInventoryValuationMethodList()"
+                                 (selectionChange)="onValuationMethodFilter($event)"
+                                 [initialValue]="fiscalYearSearchEntity.inventoryValuationMethod"
+                                 [list]="inventoryValuationMethodList"
+                                 [valueSelector]="valuationMethodSelector"
+                                 class="flex-grow-1"
+                                 data-qe-id="dialog-to-valuation-method"
+                                 key="name"></app-simple-select>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.statusValue"
-                                    data-qe-id="filter-status"></app-advanced-filters>
+              <app-simple-select (listOpen)="getStatusList()"
+                                 (selectionChange)="onStatusFilter($event)"
+                                 [initialValue]="fiscalYearSearchEntity.status"
+                                 [list]="statusList"
+                                 date-qe-id="dialog-status"
+                                 key="name"></app-simple-select>
             </th>
           </tr>
         </ng-template>

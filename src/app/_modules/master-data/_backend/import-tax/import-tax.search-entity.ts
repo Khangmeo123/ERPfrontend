@@ -2,7 +2,7 @@ import { SearchEntity } from 'src/app/_helpers/search-entity';
 import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 import { NumberFilter } from '../../../../_shared/models/filters/NumberFilter';
 
-export class ValueAddedTaxSearchEntity extends SearchEntity {
+export class ImportTaxSearchEntity extends SearchEntity {
   setOfBookId: string;
 
   code: TextFilter = new TextFilter();
@@ -13,7 +13,7 @@ export class ValueAddedTaxSearchEntity extends SearchEntity {
   rate: NumberFilter = new NumberFilter();
   description: TextFilter = new TextFilter();
 
-  constructor(valueAddedTaxSearchEntity?: any) {
-    super(valueAddedTaxSearchEntity);
+  constructor(importTaxSearchEntity?: any) {
+    super(importTaxSearchEntity);
   }
 }

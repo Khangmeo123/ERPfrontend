@@ -1,28 +1,32 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class ExportTaxEntity extends Entity {
-    // sobEntity:
-    sobId: string;
+  // sobEntity:
+  setOfBookId: string;
 
-    taxCode: string;
+  taxCode: string;
 
-    // taxtypeEntity:
-    taxType : string;
+  name: string;
 
-    // uomEntity:
-    unitOfMeasureId: string;
-    unitOfMeasureName: string;
-    unitOfMeasureCode: string;
+  // taxtypeEntity:
+  taxType: string;
 
-    // coaEntity:
-    coaId: string;
-    coaName: string;
-    coaCode: string;
+  // uomEntity:
+  // don vi tinh
+  unitOfMeasureId: string;
+  unitOfMeasureName: string;
+  unitOfMeasureCode: string;
 
-    taxRate: number;
-    description: string;
+  // coaEntity:
+  // tai khoan tong hop
+  chartOfAccountId: string;
+  chartOfAccountName: string;
+  chartOfAccountCode: string;
 
-    constructor(exportTariffEntity?: any) {
-        super(exportTariffEntity);
-    }
+  rate: number;
+  description: string;
+
+  constructor(exportTaxEntity?: any) {
+    super(exportTaxEntity);
+  }
 }

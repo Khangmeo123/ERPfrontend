@@ -7,6 +7,8 @@ export class SpecialConsumptionTaxForm extends FormModel {
 
   setOfBookId = new FormControl(null, [requiredField]);
 
+  id: FormControl = new FormControl(null);
+
   code = new FormControl(null, [requiredField]);
 
   name = new FormControl(null, [requiredField, checkLength(3, 500)]);
@@ -24,14 +26,16 @@ export class SpecialConsumptionTaxForm extends FormModel {
 
   description = new FormControl(null);
 
-  errors: FormGroup = new FormGroup({});
+  errors: FormGroup = new FormGroup({
+    code: new FormControl(null),
+  });
 
-  constructor(exciseTariffEntity?: SpecialConsumptionTaxEntity) {
+  constructor(specialConsumptionTaxEntity?: SpecialConsumptionTaxEntity) {
     super();
-    if (exciseTariffEntity !== null && exciseTariffEntity !== undefined) {
-      Object.keys(exciseTariffEntity).forEach((item) => {
-        if (exciseTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-          this[item].setValue(exciseTariffEntity[item]);
+    if (specialConsumptionTaxEntity !== null && specialConsumptionTaxEntity !== undefined) {
+      Object.keys(specialConsumptionTaxEntity).forEach((item) => {
+        if (specialConsumptionTaxEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(specialConsumptionTaxEntity[item]);
         }
       });
     }

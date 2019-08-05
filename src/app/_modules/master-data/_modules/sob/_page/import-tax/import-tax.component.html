@@ -1,140 +1,104 @@
 <div class="page import-tax">
   <div class="page-header">
-            <span class="page-title">
-                {{'import_tax.header.title' | translate}}
-              <span (click)="onClickSaveBookMark($event)">
-                    <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
-                        star
-                    </mat-icon>
-                </span>
+        <span class="page-title">
+            {{'importTax.header.title' | translate}}
+          <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
             </span>
+        </span>
+
     <div class="page-actions">
-      <button (click)="toggleModal()" class="btn btn-add"> + {{'general.button.add' | translate}}</button>
-      <div class="btn-group" dropdown>
-        <button aria-controls="dropdown-basic" class="btn btn-import dropdown-toggle" dropdownToggle id="button-basic"
-                type="button">
-          {{'general.button.import' | translate}}<span class="caret"></span>
-        </button>
-        <ul *dropdownMenu aria-labelledby="button-basic" class="dropdown-menu" id="dropdown-basic" role="menu">
-          <li role="menuitem"><a class="dropdown-item"
-                                 href="#">{{'general.button.import_file' | translate}}</a></li>
-          <li class="divider dropdown-divider"></li>
-          <li role="menuitem"><a class="dropdown-item"
-                                 href="#">{{'general.button.download_example' | translate}}</a>
-          </li>
-        </ul>
-      </div>
-      <button class="btn btn-export">{{'general.button.export' | translate}}</button>
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!setOfBookId">
+        + {{'general.button.add' | translate}}</button>
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
+        {{'general.button.clear' | translate}}
+      </button>
     </div>
   </div>
 
   <div class="page-body mt-4 ">
-    <div class="page-section form mb-4 d-flex">
-      <span class="sob">{{'general.sob' | translate}}</span>
-      <app-single-select></app-single-select>
+    <div class="page-section form d-flex align-items-center">
+      <span class="sob mr-2">{{'general.sob' | translate}}: </span>
+      <app-single-select (listOpen)="getSobList()"
+                         (selectionChange)="changeSob($event)"
+                         [list]="sobList"
+                         [selectedList]="selectedSobList"
+                         data-qe-id="sob-list"
+                         key="name"></app-single-select>
     </div>
 
-
     <div class="page-section list">
-      <p-table>
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+               [scrollable]="true" [value]="importTaxList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
-            <th>
+            <th [pSortableColumn]="'code'" data-qe-id="table-thead-code"
+                pResizableColumn>
               {{'tax.code' | translate}}
             </th>
-            <th>
+            <th [pSortableColumn]="'name'" data-qe-id="table-thead-name"
+                pResizableColumn>
               {{'tax.name' | translate}}
             </th>
-            <th>
+            <th [pSortableColumn]="'unit'" data-qe-id="table-thead-unit"
+                pResizableColumn>
               {{'tax.unit' | translate}}
             </th>
-            <th>
-              {{'tax.discount' | translate}} (%)
+            <th [pSortableColumn]="'discount'" data-qe-id="table-thead-discount"
+                pResizableColumn>
+              {{'tax.discount' | translate}}
             </th>
-            <th>
+            <th [pSortableColumn]="'description'" data-qe-id="table-thead-description"
+                pResizableColumn>
               {{'tax.description' | translate}}
             </th>
-            <th>
-              {{'tax.disable' | translate}}
+            <th [pSortableColumn]="'disable'" data-qe-id="table-thead-disable"
+                pResizableColumn>
+              {{'tax.available' | translate}}
             </th>
 
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="importTaxSearchEntity.code"
+                                    data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="importTaxSearchEntity.name"
+                                    data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="importTaxSearchEntity.unitOfMeasureName"
+                                    data-qe-id="filter-unit"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="importTaxSearchEntity.rate"
+                                    data-qe-id="filter-rate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="importTaxSearchEntity.description"
+                                    data-qe-id="filter-description"></app-advanced-filters>
             </th>
-            <th class="th-filter">
-            </th>
-
+            <th class="th-filter"></th>
           </tr>
         </ng-template>
-        <!-- <ng-template pTemplate="body" let-tax>
-                <tr>
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="text" class="form-control" [(ngModel)]="tax.code" required>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{tax.code}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="text" class="form-control" [(ngModel)]="tax.type" required>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ tax.type } }
-                        </ng-template>
-                      </p-cellEditor>
-                    </td>
-                    <td pEditableColumn>
-                      <p-cellEditor>
-                        <ng-template pTemplate="input">
-                          <input type="text" class="form-control" [(ngModel)]="tax.unit" required>
-                        </ng-template>
-                        <ng-template pTemplate="output">
-                          {{tax.unit}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="text" class="form-control" [(ngModel)]="tax.discount" required>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{tax.discount}}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
-                    <td pEditableColumn>
-                        <p-cellEditor>
-                            <ng-template pTemplate="input">
-                                <input type="text" class="form-control" [(ngModel)]="tax.description" required>
-                            </ng-template>
-                            <ng-template pTemplate="output">
-                                {{ tax.description }}
-                            </ng-template>
-                        </p-cellEditor>
-                    </td>
-
-                </tr>
-            </ng-template> -->
+        <ng-template let-index="index" let-tax pTemplate="body">
+          <tr (dblclick)="edit(tax.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{tax.code}} </td>
+            <td> {{tax.name}} </td>
+            <td> {{tax.unitOfMeasureName}} </td>
+            <td> {{tax.rate}} </td>
+            <td> {{tax.description}} </td>
+            <td>
+              <p-inputSwitch [ngModel]="!tax.disabled"
+                             (onChange)="onDisableChange(tax)">
+              </p-inputSwitch>
+            </td>
+          </tr>
+        </ng-template>
       </p-table>
     </div>
 
@@ -142,85 +106,119 @@
       <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination"></app-pagination>
     </div>
   </div>
-
 </div>
 
-
-<p-dialog [(visible)]="visible" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+<p-dialog [(visible)]="isShowDialog"
+          *ngIf="isShowDialog"
+          [contentStyle]="{'overflow':'visible'}"
+          [style]="{width: '700px'}"
+          appendTo="body"
           modal="true">
   <p-header>
-    {{'import_tax.modal.title' | translate}}
+    {{'importTax.modal.title' | translate}}
   </p-header>
-  <form class="container">
+  <div [formGroup]="importTaxForm" class="container">
     <div class="row">
       <div class="col-6">
         <div class="mt-4 mb-4">
-          <label>
+          <label for="tax-code">
             {{'tax.code' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-          <input class="form-control" placeholder="" type="text">
+          <div class="div-form">
+            <input class="form-control" data-qe-id="dialog-code" formControlName="code" name="code"
+                   id="tax-code"
+                   type="text">
+            <app-error
+              *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
+              [formGroup]="importTaxForm"
+              [placement]="'top'" [property]="'code'" class="error-form"
+              data-qe-id="dialog-error-code">
+            </app-error>
+          </div>
         </div>
 
         <div class="mb-4">
-          <label>
+          <label for="unit-of-measure">
             {{'tax.unit' | translate}}
           </label>
-          <app-single-select></app-single-select>
+          <div class="div-form d-flex">
+            <app-single-select (listOpen)="getUomList()"
+                               id="unit-of-measure"
+                               (selectionChange)="unitOfMeasureId.setValue($event[0])"
+                               [list]="uomList"
+                               [selectedList]="selectedUomList"
+                               [initialValue]="importTaxForm?.controls?.unitOfMeasureName?.value"
+                               class="flex-grow-1"
+                               data-qe-id="dialog-unit-of-measure"
+                               key="name"></app-single-select>
+          </div>
         </div>
 
         <div class="mb-4">
-          <label>
-            {{'tax.discount' | translate}} (%)
+          <label for="discount">
+            {{'tax.discount' | translate}}
           </label>
-          <input class="form-control" placeholder="" type="text">
+          <input class="form-control" id="discount" data-qe-id="dialog-discount" formControlName="rate" name="rate"
+                 type="text">
         </div>
       </div>
 
       <div class="col-6">
         <div class="mt-4 mb-4">
-          <label>
+          <label for="tax-name">
             {{'tax.name' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-          <input class="form-control" placeholder="a" type="text">
+          <div class="div-form">
+            <input class="form-control" id="tax-name" data-qe-id="dialog-name" formControlName="name" name="name"
+                   type="text">
+            <app-error
+              *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+              [formGroup]="importTaxForm"
+              [placement]="'top'" [property]="'name'" class="error-form"
+              data-qe-id="dialog-error-name">
+            </app-error>
+          </div>
         </div>
 
         <div class=" mb-4">
-          <label>
+          <label for="parent-id">
             {{'tax.parent_account' | translate}}
-            <span class="text-danger mr-2">*</span>
           </label>
-
-          <app-single-select></app-single-select>
+          <div class="div-form d-flex">
+            <app-single-select (listOpen)="onGetParentTaxList()"
+                               id="parent-id"
+                               [disabled]="importTaxForm?.value?.id"
+                               (search)="onSearchParentTaxList($event)"
+                               (selectionChange)="parentId.setValue($event[0])"
+                               [list]="parentTaxList"
+                               [selectedList]="selectedParentTaxList"
+                               [initialValue]="importTaxForm?.controls?.parentName?.value"
+                               key="name"
+                               class="flex-grow-1"
+                               data-qe-id="dialog-parent-id"></app-single-select>
+          </div>
         </div>
 
         <div class=" mb-4">
-          <label>
+          <label for="description">
             {{'tax.description' | translate}}
           </label>
-          <input class="form-control" placeholder="" type="text-area">
+          <div class="div-form">
+            <input class="form-control" id="description" data-qe-id="dialog-description" formControlName="description"
+                   type="text-area">
+          </div>
         </div>
       </div>
     </div>
-  </form>
-  <p-footer *ngIf="isAdd; else notAdd">
-    <button (click)="onClickCancel()" class="btn btn-cancel">{{ 'general.button.cancel' | translate}}</button>
-    <button (click)="onClickSave()" class="btn btn-save">
-      {{ 'general.button.save' | translate}}</button>
+  </div>
+  <p-footer class="d-flex justify-content-end">
+    <button (click)="onClickCancel()" class="btn btn-cancel" data-qe-id="footer-button-cancel">
+      {{ 'general.button.cancel' | translate}}
+    </button>
+    <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
+      {{ 'general.button.save' | translate}}
+    </button>
   </p-footer>
-  <ng-template #notAdd>
-    <p-footer>
-      <div class="page-actions">
-        <button (click)="onClickCancel()"
-                class="btn btn-cancel">{{ 'general.button.cancel' | translate}}</button>
-        <button (click)="onClickSave()" class="btn btn-save">
-          {{ 'general.button.save' | translate}}</button>
-        <button (cancel)="cancelClicked = true" (click)="onClickDelete()" (confirm)="confirmClicked = true"
-                [popoverMessage]="popoverMessage" [popoverTitle]="popoverTitle" class="btn btn-delete"
-                mwlConfirmationPopover placement="bottom">
-          {{ 'general.button.delete' | translate}}</button>
-      </div>
-    </p-footer>
-  </ng-template>
 </p-dialog>

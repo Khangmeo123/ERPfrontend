@@ -228,6 +228,7 @@ export class FiscalYearComponent implements OnInit {
 
   clearSearch(table: any) {
     this.fiscalYearSearchEntity = new FiscalYearSearchEntity();
+    this.fiscalYearSearchEntity.setOfBookId = this.setOfBookId;
     table.reset();
   }
 
@@ -239,5 +240,15 @@ export class FiscalYearComponent implements OnInit {
       .catch(err => {
         this.isShowDialog = err;
       });
+  }
+
+  onValuationMethodFilter(event) {
+    this.fiscalYearSearchEntity.inventoryValuationMethod = event;
+    this.getList();
+  }
+
+  onStatusFilter(event) {
+    this.fiscalYearSearchEntity.status = event;
+    this.getList();
   }
 }

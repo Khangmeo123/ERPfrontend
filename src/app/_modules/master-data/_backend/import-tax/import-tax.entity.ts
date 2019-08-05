@@ -2,27 +2,31 @@ import { Entity } from 'src/app/_helpers/entity';
 
 export class ImportTaxEntity extends Entity {
   // sobEntity:
-  sobId: string;
+  setOfBookId: string;
 
   taxCode: string;
+
+  name: string;
 
   // taxtypeEntity:
   taxType: string;
 
   // uomEntity:
+  // don vi tinh
   unitOfMeasureId: string;
   unitOfMeasureName: string;
   unitOfMeasureCode: string;
 
   // coaEntity:
-  coaId: string;
-  coaName: string;
-  coaCode: string;
+  // tai khoan tong hop
+  chartOfAccountId: string;
+  chartOfAccountName: string;
+  chartOfAccountCode: string;
 
-  taxRate: number;
+  rate: number;
   description: string;
 
-  constructor(importTariffEntity?: any) {
-    super(importTariffEntity);
+  constructor(importTaxEntity?: any) {
+    super(importTaxEntity);
   }
 }

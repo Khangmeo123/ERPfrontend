@@ -1,19 +1,34 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { Entities } from '../../../../../../_helpers/entity';
+import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
+import { translate } from '../../../../../../_helpers/string';
+import { ImportTaxForm } from '../../../../_backend/import-tax/import-tax.form';
+import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.search-entity';
 import { ImportTaxEntity } from '../../../../_backend/import-tax/import-tax.entity';
 import { ImportTaxRepository } from './import-tax.repository';
-import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.searchEntity';
-import { ImportTaxForm } from '../../../../_backend/import-tax/import-tax.form';
 
 export class ImportTaxService {
-  public importTaxList: BehaviorSubject<ImportTaxEntity[]>;
-  public importTaxCount: BehaviorSubject<number>;
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+
+  public importTaxList: BehaviorSubject<ImportTaxEntity[]> = new BehaviorSubject([]);
+
   public importTaxForm: BehaviorSubject<FormGroup>;
 
-  constructor(private fb: FormBuilder, private importTaxRepository: ImportTaxRepository, private toastrService: ToastrService) {
+  public importTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
+
+  public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  constructor(
+    private fb: FormBuilder,
+    private importTaxRepository: ImportTaxRepository,
+    private toastrService: ToastrService,
+  ) {
     this.importTaxCount = new BehaviorSubject(0);
-    this.importTaxList = new BehaviorSubject([]);
     this.importTaxForm = new BehaviorSubject(this.fb.group(
       new ImportTaxForm(),
     ));
@@ -31,24 +46,56 @@ export class ImportTaxService {
     });
   }
 
+  getUnitOfMeasureList(uomSearchEntity: UomSearchEntity) {
+    this.importTaxRepository.getUnitOfMeasureList(uomSearchEntity)
+      .subscribe((list) => {
+        this.uomList.next(list);
+      });
+  }
+
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.importTaxRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        if (list) {
+          this.sobList.next(list);
+        }
+      });
+  }
+
+  resetForm() {
+    this.uomList.next(new Entities());
+    this.parentTaxList.next(new Entities());
+    this.importTaxForm.next(
+      this.fb.group(
+        new ImportTaxForm(),
+      ),
+    );
+  }
+
   add() {
-    this.importTaxForm.next(this.fb.group(
-      new ImportTaxForm(),
-    ));
+    this.resetForm();
+  }
+
+  cancel() {
+    this.resetForm();
   }
 
   edit(importTaxId: string) {
-    this.importTaxRepository.getId(importTaxId).subscribe(res => {
-      if (res) {
-        this.importTaxForm.next(this.fb.group(
-          new ImportTaxForm(res),
-        ));
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    this.resetForm();
+    this.importTaxRepository.getId(importTaxId)
+      .subscribe(res => {
+        if (res) {
+          this.importTaxForm.next(
+            this.fb.group(
+              new ImportTaxForm(res),
+            ),
+          );
+        }
+      }, err => {
+        if (err) {
+          console.log(err);
+        }
+      });
   }
 
   save(importTaxEntity: any, importTaxSearchEntity: ImportTaxSearchEntity): Promise<boolean> {
@@ -85,7 +132,6 @@ export class ImportTaxService {
         });
       }
     });
-
   }
 
   deactivate(importTaxEntity: any, importTaxSearchEntity: ImportTaxSearchEntity): Promise<boolean> {
@@ -105,6 +151,34 @@ export class ImportTaxService {
         }
       });
     });
+  }
 
+  getParentTaxList(parentTaxSearchEntity: ImportTaxSearchEntity): void {
+    this.importTaxRepository.getParentTaxList(parentTaxSearchEntity)
+      .subscribe((entities: Entities) => {
+        this.parentTaxList.next(entities);
+      });
+  }
+
+  disable(taxEntity: ImportTaxEntity) {
+    return this.importTaxRepository.disable(taxEntity)
+      .then(() => {
+        this.toastrService.success(translate('general.update.success'));
+      })
+      .catch((error) => {
+        this.toastrService.error(translate('general.update.failure'));
+        throw error;
+      });
+  }
+
+  enable(taxEntity: ImportTaxEntity) {
+    return this.importTaxRepository.enable(taxEntity)
+      .then(() => {
+        this.toastrService.success(translate('general.update.success'));
+      })
+      .catch((error) => {
+        this.toastrService.error(translate('general.update.failure'));
+        throw error;
+      });
   }
 }

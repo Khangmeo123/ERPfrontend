@@ -1,34 +1,43 @@
 import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { NaturalResourceTaxEntity } from 'src/app/_modules/master-data/_backend/natural-resource-tax/natural-resource-tax.entity';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import { FormControl, FormGroup } from '@angular/forms';
+import { checkLength, requiredField } from 'src/app/_helpers';
+import { SpecialConsumptionTaxEntity } from '../special-consumption-tax/special-consumption-tax.entity';
 
 export class NaturalResourceTaxForm extends FormModel {
 
-    taxCode = new FormControl('', [requiredField]);
-    taxType = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-    //don vi tinh
-    unitOfMeasureId = new FormControl('');
-    unitOfMeasureName = new FormControl('');
+  id: FormControl = new FormControl(null);
 
-    //tai khoan tong hop
-    coaId = new FormControl('');
-    coaName = new FormControl('');
+  code = new FormControl(null, [requiredField]);
 
+  name = new FormControl(null, [requiredField, checkLength(3, 500)]);
 
+  unitOfMeasureId = new FormControl(null);
+  unitOfMeasureName = new FormControl(null);
 
-    taxRate = new FormControl('');
-    description = new FormControl('');
+  parentId = new FormControl(null);
+  parentCode = new FormControl(null);
+  parentName = new FormControl(null);
 
-    constructor(resoureTariffEntity?: NaturalResourceTaxEntity) {
-        super();
-        if (resoureTariffEntity !== null && resoureTariffEntity !== undefined) {
-            Object.keys(resoureTariffEntity).forEach((item) => {
-                if (resoureTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(resoureTariffEntity[item]);
-                }
-            });
+  rate = new FormControl(null);
+
+  discount: FormControl = new FormControl(null);
+
+  description = new FormControl(null);
+
+  errors: FormGroup = new FormGroup({
+    code: new FormControl(null),
+  });
+
+  constructor(naturalResourceTaxEntity?: SpecialConsumptionTaxEntity) {
+    super();
+    if (naturalResourceTaxEntity !== null && naturalResourceTaxEntity !== undefined) {
+      Object.keys(naturalResourceTaxEntity).forEach((item) => {
+        if (naturalResourceTaxEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(naturalResourceTaxEntity[item]);
         }
+      });
     }
+  }
 }

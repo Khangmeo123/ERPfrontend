@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ResourceTaxComponent } from './resource-tax.component';
+import { ResourceTaxComponent } from './natural-resource-tax.component';
 
 describe('ResourceTaxComponent', () => {
   let component: ResourceTaxComponent;
@@ -8,7 +8,7 @@ describe('ResourceTaxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ResourceTaxComponent]
+      declarations: [ResourceTaxComponent],
     })
       .compileComponents();
   }));

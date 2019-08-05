@@ -5,19 +5,19 @@ import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
 import { translate } from '../../../../../../_helpers/string';
-import { EnvironmentTaxForm } from '../../../../_backend/environment-tax/environment-tax.form';
-import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.search-entity';
-import { EnvironmentTaxEntity } from '../../../../_backend/environment-tax/environment-tax.entity';
-import { EnvironmentTaxRepository } from './environment-tax.repository';
+import { ValueAddedTaxRepository } from './value-added-tax.repository';
+import { ValueAddedTaxForm } from '../../../../_backend/value-added-tax/value-added-tax.form';
+import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
+import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-added-tax.entity';
 
-export class EnvironmentTaxService {
+export class ValueAddedTaxService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
-  public environmentTaxList: BehaviorSubject<EnvironmentTaxEntity[]> = new BehaviorSubject([]);
+  public valueAddedTaxList: BehaviorSubject<ValueAddedTaxEntity[]> = new BehaviorSubject([]);
 
-  public environmentTaxForm: BehaviorSubject<FormGroup>;
+  public valueAddedTaxForm: BehaviorSubject<FormGroup>;
 
-  public environmentTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
+  public valueAddedTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
   public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
@@ -25,36 +25,36 @@ export class EnvironmentTaxService {
 
   constructor(
     private fb: FormBuilder,
-    private environmentTaxRepository: EnvironmentTaxRepository,
+    private valueAddedTaxRepository: ValueAddedTaxRepository,
     private toastrService: ToastrService,
   ) {
-    this.environmentTaxCount = new BehaviorSubject(0);
-    this.environmentTaxForm = new BehaviorSubject(this.fb.group(
-      new EnvironmentTaxForm(),
+    this.valueAddedTaxCount = new BehaviorSubject(0);
+    this.valueAddedTaxForm = new BehaviorSubject(this.fb.group(
+      new ValueAddedTaxForm(),
     ));
   }
 
-  getList(environmentTaxSearchEntity: EnvironmentTaxSearchEntity) {
-    forkJoin(this.environmentTaxRepository.getList(environmentTaxSearchEntity),
-      this.environmentTaxRepository.count(environmentTaxSearchEntity)).subscribe(([list, count]) => {
+  getList(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity) {
+    forkJoin(this.valueAddedTaxRepository.getList(valueAddedTaxSearchEntity),
+      this.valueAddedTaxRepository.count(valueAddedTaxSearchEntity)).subscribe(([list, count]) => {
       if (list) {
-        this.environmentTaxList.next(list);
+        this.valueAddedTaxList.next(list);
       }
       if (count) {
-        this.environmentTaxCount.next(count);
+        this.valueAddedTaxCount.next(count);
       }
     });
   }
 
   getUnitOfMeasureList(uomSearchEntity: UomSearchEntity) {
-    this.environmentTaxRepository.getUnitOfMeasureList(uomSearchEntity)
+    this.valueAddedTaxRepository.getUnitOfMeasureList(uomSearchEntity)
       .subscribe((list) => {
         this.uomList.next(list);
       });
   }
 
   getSobList(sobSearchEntity: SobSearchEntity) {
-    this.environmentTaxRepository.getSobList(sobSearchEntity)
+    this.valueAddedTaxRepository.getSobList(sobSearchEntity)
       .subscribe((list: Entities) => {
         if (list) {
           this.sobList.next(list);
@@ -65,9 +65,9 @@ export class EnvironmentTaxService {
   resetForm() {
     this.uomList.next(new Entities());
     this.parentTaxList.next(new Entities());
-    this.environmentTaxForm.next(
+    this.valueAddedTaxForm.next(
       this.fb.group(
-        new EnvironmentTaxForm(),
+        new ValueAddedTaxForm(),
       ),
     );
   }
@@ -80,14 +80,14 @@ export class EnvironmentTaxService {
     this.resetForm();
   }
 
-  edit(environmentTaxId: string) {
+  edit(valueAddedTaxId: string) {
     this.resetForm();
-    this.environmentTaxRepository.getId(environmentTaxId)
+    this.valueAddedTaxRepository.getId(valueAddedTaxId)
       .subscribe(res => {
         if (res) {
-          this.environmentTaxForm.next(
+          this.valueAddedTaxForm.next(
             this.fb.group(
-              new EnvironmentTaxForm(res),
+              new ValueAddedTaxForm(res),
             ),
           );
         }
@@ -98,34 +98,34 @@ export class EnvironmentTaxService {
       });
   }
 
-  save(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
+  save(valueAddedTaxEntity: any, valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      if (environmentTaxEntity.id === null || environmentTaxEntity.id === undefined) {
-        this.environmentTaxRepository.add(environmentTaxEntity).subscribe(res => {
+      if (valueAddedTaxEntity.id === null || valueAddedTaxEntity.id === undefined) {
+        this.valueAddedTaxRepository.add(valueAddedTaxEntity).subscribe(res => {
           if (res) {
-            this.getList(environmentTaxSearchEntity);
+            this.getList(valueAddedTaxSearchEntity);
             this.toastrService.success('Cập nhật thành công !');
             resolve(false);
           }
         }, err => {
           if (err) {
-            this.environmentTaxForm.next(this.fb.group(
-              new EnvironmentTaxForm(err),
+            this.valueAddedTaxForm.next(this.fb.group(
+              new ValueAddedTaxForm(err),
             ));
             reject(true);
           }
         });
       } else {
-        this.environmentTaxRepository.update(environmentTaxEntity).subscribe(res => {
+        this.valueAddedTaxRepository.update(valueAddedTaxEntity).subscribe(res => {
           if (res) {
-            this.getList(environmentTaxSearchEntity);
+            this.getList(valueAddedTaxSearchEntity);
             this.toastrService.success('Cập nhật thành công !');
             resolve(false);
           }
         }, err => {
           if (err) {
-            this.environmentTaxForm.next(this.fb.group(
-              new EnvironmentTaxForm(err),
+            this.valueAddedTaxForm.next(this.fb.group(
+              new ValueAddedTaxForm(err),
             ));
             reject(true);
           }
@@ -134,18 +134,18 @@ export class EnvironmentTaxService {
     });
   }
 
-  deactivate(environmentTaxEntity: any, environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Promise<boolean> {
+  deactivate(valueAddedTaxEntity: any, valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity): Promise<boolean> {
     return new Promise<boolean>((resolve, reject) => {
-      this.environmentTaxRepository.deactivate(environmentTaxEntity).subscribe(res => {
+      this.valueAddedTaxRepository.deactivate(valueAddedTaxEntity).subscribe(res => {
         if (res) {
-          this.getList(environmentTaxSearchEntity);
+          this.getList(valueAddedTaxSearchEntity);
           this.toastrService.success('Cập nhật thành công !');
           resolve(false);
         }
       }, err => {
         if (err) {
-          this.environmentTaxForm.next(this.fb.group(
-            new EnvironmentTaxForm(err),
+          this.valueAddedTaxForm.next(this.fb.group(
+            new ValueAddedTaxForm(err),
           ));
           reject(true);
         }
@@ -153,15 +153,15 @@ export class EnvironmentTaxService {
     });
   }
 
-  getParentTaxList(parentTaxSearchEntity: EnvironmentTaxSearchEntity): void {
-    this.environmentTaxRepository.getParentTaxList(parentTaxSearchEntity)
+  getParentTaxList(parentTaxSearchEntity: ValueAddedTaxSearchEntity): void {
+    this.valueAddedTaxRepository.getParentTaxList(parentTaxSearchEntity)
       .subscribe((entities: Entities) => {
         this.parentTaxList.next(entities);
       });
   }
 
-  disable(taxEntity: EnvironmentTaxEntity) {
-    return this.environmentTaxRepository.disable(taxEntity)
+  disable(taxEntity: ValueAddedTaxEntity) {
+    return this.valueAddedTaxRepository.disable(taxEntity)
       .then(() => {
         this.toastrService.success(translate('general.update.success'));
       })
@@ -171,8 +171,8 @@ export class EnvironmentTaxService {
       });
   }
 
-  enable(taxEntity: EnvironmentTaxEntity) {
-    return this.environmentTaxRepository.enable(taxEntity)
+  enable(taxEntity: ValueAddedTaxEntity) {
+    return this.valueAddedTaxRepository.enable(taxEntity)
       .then(() => {
         this.toastrService.success(translate('general.update.success'));
       })

@@ -4,7 +4,7 @@ import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity'
 import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class SobForm extends FormModel {
-  id = new FormControl(null, [requiredField]);
+  id = new FormControl(null);
   code = new FormControl(null, [requiredField, checkLength(2, 2)]);
   name = new FormControl(null, [requiredField, checkLength(3, 50)]);
 

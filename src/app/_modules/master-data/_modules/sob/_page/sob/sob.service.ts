@@ -8,11 +8,11 @@ import { SobForm } from '../../../../_backend/sob/sob.form';
 import { CurrencySearchEntity } from '../../../../_backend/currency/currency.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.searchEntity';
-import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
-import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.searchEntity';
+import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.search-entity';
+import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.search-entity';
+import { EnvironmentTaxSearchEntity } from '../../../../_backend/environment-tax/environment-tax.search-entity';
 import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
-import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.searchentity';
+import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.search-entity';
 import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 export class SobService {

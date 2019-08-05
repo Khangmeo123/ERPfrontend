@@ -1,7 +1,7 @@
-<div class="page special-consumption-tax">
+<div class="page natural-resource-tax">
   <div class="page-header">
         <span class="page-title">
-            {{'special_consumption_tax.header.title' | translate}}
+            {{'naturalResourceTax.header.title' | translate}}
           <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -31,7 +31,7 @@
 
     <div class="page-section list">
       <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
-               [scrollable]="true" [value]="specialConsumptionTaxList" scrollHeight="500px">
+               [scrollable]="true" [value]="naturalResourceTaxList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
             <th [pSortableColumn]="'code'" data-qe-id="table-thead-code"
@@ -62,24 +62,24 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.code"
+              <app-advanced-filters (changeFilter)="getList()" [filter]="naturalResourceTaxSearchEntity.code"
                                     data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.name"
+              <app-advanced-filters (changeFilter)="getList()" [filter]="naturalResourceTaxSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="specialConsumptionTaxSearchEntity.unitOfMeasureName"
+                                    [filter]="naturalResourceTaxSearchEntity.unitOfMeasureName"
                                     data-qe-id="filter-unit"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.rate"
+              <app-advanced-filters (changeFilter)="getList()" [filter]="naturalResourceTaxSearchEntity.rate"
                                     data-qe-id="filter-rate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.description"
+              <app-advanced-filters (changeFilter)="getList()" [filter]="naturalResourceTaxSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
             <th class="th-filter"></th>
@@ -115,9 +115,9 @@
           appendTo="body"
           modal="true">
   <p-header>
-    {{'special_consumption_tax.modal.title' | translate}}
+    {{'naturalResourceTax.modal.title' | translate}}
   </p-header>
-  <div [formGroup]="specialConsumptionTaxForm" class="container">
+  <div [formGroup]="naturalResourceTaxForm" class="container">
     <div class="row">
       <div class="col-6">
         <div class="mt-4 mb-4">
@@ -131,7 +131,7 @@
                    type="text">
             <app-error
               *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
-              [formGroup]="specialConsumptionTaxForm"
+              [formGroup]="naturalResourceTaxForm"
               [placement]="'top'" [property]="'code'" class="error-form"
               data-qe-id="dialog-error-code">
             </app-error>
@@ -148,7 +148,7 @@
                                (selectionChange)="unitOfMeasureId.setValue($event[0])"
                                [list]="uomList"
                                [selectedList]="selectedUomList"
-                               [initialValue]="specialConsumptionTaxForm?.controls?.unitOfMeasureName?.value"
+                               [initialValue]="naturalResourceTaxForm?.controls?.unitOfMeasureName?.value"
                                class="flex-grow-1"
                                data-qe-id="dialog-unit-of-measure"
                                key="name"></app-single-select>
@@ -175,7 +175,7 @@
                    type="text">
             <app-error
               *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
-              [formGroup]="specialConsumptionTaxForm"
+              [formGroup]="naturalResourceTaxForm"
               [placement]="'top'" [property]="'name'" class="error-form"
               data-qe-id="dialog-error-name">
             </app-error>
@@ -189,12 +189,12 @@
           <div class="div-form d-flex">
             <app-single-select (listOpen)="onGetParentTaxList()"
                                id="parent-id"
-                               [disabled]="specialConsumptionTaxForm?.value?.id"
+                               [disabled]="naturalResourceTaxForm?.value?.id"
                                (search)="onSearchParentTaxList($event)"
                                (selectionChange)="parentId.setValue($event[0])"
                                [list]="parentTaxList"
                                [selectedList]="selectedParentTaxList"
-                               [initialValue]="specialConsumptionTaxForm?.controls?.parentName?.value"
+                               [initialValue]="naturalResourceTaxForm?.controls?.parentName?.value"
                                key="name"
                                class="flex-grow-1"
                                data-qe-id="dialog-parent-id"></app-single-select>

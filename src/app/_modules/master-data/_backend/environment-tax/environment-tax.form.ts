@@ -1,34 +1,43 @@
 import { FormModel } from '../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { EnvironmentTaxEntity } from 'src/app/_modules/master-data/_backend/environment-tax/environment-tax.entity';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import { FormControl, FormGroup } from '@angular/forms';
+import { checkLength, requiredField } from 'src/app/_helpers';
+import { SpecialConsumptionTaxEntity } from '../special-consumption-tax/special-consumption-tax.entity';
 
 export class EnvironmentTaxForm extends FormModel {
 
-    taxCode = new FormControl('', [requiredField]);
-    taxType = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-    //don vi tinh
-    unitOfMeasureId = new FormControl('');
-    unitOfMeasureName = new FormControl('');
+  id: FormControl = new FormControl(null);
 
-    //tai khoan tong hop
-    coaId = new FormControl('');
-    coaName = new FormControl('');
+  code = new FormControl(null, [requiredField]);
 
+  name = new FormControl(null, [requiredField, checkLength(3, 500)]);
 
+  unitOfMeasureId = new FormControl(null);
+  unitOfMeasureName = new FormControl(null);
 
-    taxRate = new FormControl('');
-    description = new FormControl('');
+  parentId = new FormControl(null);
+  parentCode = new FormControl(null);
+  parentName = new FormControl(null);
 
-    constructor(environmentTariffEntity?: EnvironmentTaxEntity) {
-        super();
-        if (environmentTariffEntity !== null && environmentTariffEntity !== undefined) {
-            Object.keys(environmentTariffEntity).forEach((item) => {
-                if (environmentTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(environmentTariffEntity[item]);
-                }
-            });
+  rate = new FormControl(null);
+
+  discount: FormControl = new FormControl(null);
+
+  description = new FormControl(null);
+
+  errors: FormGroup = new FormGroup({
+    code: new FormControl(null),
+  });
+
+  constructor(environmentTaxEntity?: SpecialConsumptionTaxEntity) {
+    super();
+    if (environmentTaxEntity !== null && environmentTaxEntity !== undefined) {
+      Object.keys(environmentTaxEntity).forEach((item) => {
+        if (environmentTaxEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(environmentTaxEntity[item]);
         }
+      });
     }
+  }
 }

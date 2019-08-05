@@ -19,7 +19,7 @@ import { ToastrService } from 'ngx-toastr';
     GeneralService,
     VoucherListService,
     ToastrService,
-  ]
+  ],
 })
 export class VoucherComponent implements OnInit {
   isSaveBookMark: boolean = false;
@@ -46,7 +46,7 @@ export class VoucherComponent implements OnInit {
 
   public sobSearchEntity: SobSearchEntity = new SobSearchEntity();
 
-  public voucherListList: VoucherListEntity[] = [];
+  public voucherList: VoucherListEntity[] = [];
 
   public voucherListCount: number = 0;
 
@@ -66,8 +66,8 @@ export class VoucherComponent implements OnInit {
       this.selectedSobList = list.ids;
     });
 
-    const voucherListSub = this.voucherListService.voucherListList.subscribe((list) => {
-      this.voucherListList = list;
+    const voucherListSub = this.voucherListService.voucherList.subscribe((list) => {
+      this.voucherList = list;
     });
 
     const voucherListCountSub = this.voucherListService.voucherListCount.subscribe((count) => {
@@ -96,12 +96,8 @@ export class VoucherComponent implements OnInit {
   }
 
   add() {
-    if (this.setOfBookId) {
-      this.voucherListService.add();
-      this.showDialog();
-    } else {
-      this.toastrService.error('Phải chọn bộ sổ trước?');
-    }
+    this.voucherListService.add();
+    this.showDialog();
   }
 
   ngOnInit() {
@@ -174,6 +170,7 @@ export class VoucherComponent implements OnInit {
 
   clearSearch(table: any) {
     this.voucherListSearchEntity = new VoucherListSearchEntity();
+    this.voucherListSearchEntity.setOfBookId = this.setOfBookId;
     table.reset();
   }
 

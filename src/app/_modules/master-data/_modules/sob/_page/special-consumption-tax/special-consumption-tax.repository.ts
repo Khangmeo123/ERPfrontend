@@ -119,4 +119,38 @@ export class SpecialConsumptionTaxRepository extends Repository {
         }),
       );
   }
+
+  public disable(taxEntity: SpecialConsumptionTaxEntity): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.http.post<SpecialConsumptionTaxEntity>(
+        `${this.apiUrl}/disable`,
+        taxEntity,
+        {
+          observe: 'response',
+          headers: this.getHeader(),
+        },
+      )
+        .subscribe(
+          () => resolve(),
+          (error) => reject(error),
+        );
+    });
+  }
+
+  public enable(taxEntity: SpecialConsumptionTaxEntity): Promise<void> {
+    return new Promise((resolve, reject) => {
+      this.http.post<SpecialConsumptionTaxEntity>(
+        `${this.apiUrl}/enable`,
+        taxEntity,
+        {
+          observe: 'response',
+          headers: this.getHeader(),
+        },
+      )
+        .subscribe(
+          () => resolve(),
+          (error) => reject(error),
+        );
+    });
+  }
 }

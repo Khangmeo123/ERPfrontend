@@ -10,7 +10,7 @@
             </span>
 
     <div class="page-actions">
-      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!setOfBookId">
         + {{'general.button.add' | translate}}</button>
       <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
@@ -29,7 +29,7 @@
     </div>
     <div class="page-section list">
       <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
-               [scrollable]="true" [value]="voucherListList" scrollHeight="500px">
+               [scrollable]="true" [value]="voucherList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
             <th [pSortableColumn]="'code'" data-qe-id="table-thead-code"
@@ -111,16 +111,6 @@
   </div>
   <p-footer>
     <div class="d-flex">
-      <button (cancel)="onClickCancel()"
-              (confirm)="onClickDelete()"
-              *ngIf="voucherListForm.value?.id"
-              [popoverMessage]="popoverMessage"
-              [popoverTitle]="popoverTitle"
-              class="btn btn-delete"
-              data-qe-id="footer-button-delete"
-              mwlConfirmationPopover
-              placement="bottom">
-        {{ 'general.button.delete' | translate}}</button>
       <div class="flex-grow-1 justify-content-end d-flex">
         <button (click)="onClickCancel()" class="btn btn-cancel"
                 data-qe-id="footer-button-cancel">{{ 'general.button.cancel' | translate}}</button>

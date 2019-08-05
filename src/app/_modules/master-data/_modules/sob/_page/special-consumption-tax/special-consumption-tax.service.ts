@@ -8,6 +8,7 @@ import { SpecialConsumptionTaxRepository } from './special-consumption-tax.repos
 import { SpecialConsumptionTaxForm } from '../../../../_backend/special-consumption-tax/special-consumption-tax.form';
 import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
+import { translate } from '../../../../../../_helpers/string';
 
 export class SpecialConsumptionTaxService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
@@ -61,30 +62,40 @@ export class SpecialConsumptionTaxService {
       });
   }
 
+  resetForm() {
+    this.uomList.next(new Entities());
+    this.parentTaxList.next(new Entities());
+    this.specialConsumptionTaxForm.next(
+      this.fb.group(
+        new SpecialConsumptionTaxForm(),
+      ),
+    );
+  }
+
   add() {
-    this.specialConsumptionTaxForm.next(this.fb.group(
-      new SpecialConsumptionTaxForm(),
-    ));
+    this.resetForm();
   }
 
   cancel() {
-    this.specialConsumptionTaxForm.next(this.fb.group(
-      new SpecialConsumptionTaxForm(),
-    ));
+    this.resetForm();
   }
 
   edit(specialConsumptionTaxId: string) {
-    this.specialConsumptionTaxRepository.getId(specialConsumptionTaxId).subscribe(res => {
-      if (res) {
-        this.specialConsumptionTaxForm.next(this.fb.group(
-          new SpecialConsumptionTaxForm(res),
-        ));
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    this.resetForm();
+    this.specialConsumptionTaxRepository.getId(specialConsumptionTaxId)
+      .subscribe(res => {
+        if (res) {
+          this.specialConsumptionTaxForm.next(
+            this.fb.group(
+              new SpecialConsumptionTaxForm(res),
+            ),
+          );
+        }
+      }, err => {
+        if (err) {
+          console.log(err);
+        }
+      });
   }
 
   save(specialConsumptionTaxEntity: any, specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Promise<boolean> {
@@ -146,6 +157,28 @@ export class SpecialConsumptionTaxService {
     this.specialConsumptionTaxRepository.getParentTaxList(parentTaxSearchEntity)
       .subscribe((entities: Entities) => {
         this.parentTaxList.next(entities);
+      });
+  }
+
+  disable(taxEntity: SpecialConsumptionTaxEntity) {
+    return this.specialConsumptionTaxRepository.disable(taxEntity)
+      .then(() => {
+        this.toastrService.success(translate('general.update.success'));
+      })
+      .catch((error) => {
+        this.toastrService.error(translate('general.update.failure'));
+        throw error;
+      });
+  }
+
+  enable(taxEntity: SpecialConsumptionTaxEntity) {
+    return this.specialConsumptionTaxRepository.enable(taxEntity)
+      .then(() => {
+        this.toastrService.success(translate('general.update.success'));
+      })
+      .catch((error) => {
+        this.toastrService.error(translate('general.update.failure'));
+        throw error;
       });
   }
 }

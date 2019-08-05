@@ -10,7 +10,7 @@ import { VoucherListSearchEntity } from '../../../../_backend/voucher-list/vouch
 
 export class VoucherListService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
-  public voucherListList: BehaviorSubject<VoucherListEntity[]> = new BehaviorSubject([]);
+  public voucherList: BehaviorSubject<VoucherListEntity[]> = new BehaviorSubject([]);
   public voucherListForm: BehaviorSubject<FormGroup>;
   public voucherListCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
@@ -25,7 +25,7 @@ export class VoucherListService {
     forkJoin(this.voucherListRepository.getList(voucherListSearchEntity),
       this.voucherListRepository.count(voucherListSearchEntity)).subscribe(([list, count]) => {
       if (list) {
-        this.voucherListList.next(list);
+        this.voucherList.next(list);
       }
       if (count) {
         this.voucherListCount.next(count);

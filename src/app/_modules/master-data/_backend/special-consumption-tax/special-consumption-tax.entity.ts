@@ -12,21 +12,21 @@ export class SpecialConsumptionTaxEntity extends Entity {
   taxType: string;
 
   // uomEntity:
-  //don vi tinh
+  // don vi tinh
   unitOfMeasureId: string;
   unitOfMeasureName: string;
   unitOfMeasureCode: string;
 
   // coaEntity:
-  //tai khoan tong hop
+  // tai khoan tong hop
   chartOfAccountId: string;
   chartOfAccountName: string;
   chartOfAccountCode: string;
 
-  taxRate: number;
+  rate: number;
   description: string;
 
-  constructor(exciseTariffEntity?: any) {
-    super(exciseTariffEntity);
+  constructor(specialConsumptionTaxEntity?: any) {
+    super(specialConsumptionTaxEntity);
   }
 }

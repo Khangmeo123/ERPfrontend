@@ -1,31 +1,42 @@
 import { FormModel } from '../../../../_helpers/form-model';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { ImportTaxEntity } from 'src/app/_modules/master-data/_backend/import-tax/import-tax.entity';
-import { requiredField } from 'src/app/_helpers';
+import { checkLength, requiredField } from 'src/app/_helpers';
+import { SpecialConsumptionTaxEntity } from '../special-consumption-tax/special-consumption-tax.entity';
 
 export class ImportTaxForm extends FormModel {
 
-  taxCode = new FormControl('', [requiredField]);
-  taxType = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-  // don vi tien te
-  unitOfMeasureId = new FormControl('');
-  unitOfMeasureName = new FormControl('');
+  id: FormControl = new FormControl(null);
 
-  // tai khoan tong hop
-  coaId = new FormControl('');
-  coaName = new FormControl('');
+  code = new FormControl(null, [requiredField]);
 
+  name = new FormControl(null, [requiredField, checkLength(3, 500)]);
 
-  taxRate = new FormControl('');
-  description = new FormControl('');
+  unitOfMeasureId = new FormControl(null);
+  unitOfMeasureName = new FormControl(null);
 
-  constructor(importTariffEntity?: ImportTaxEntity) {
+  parentId = new FormControl(null);
+  parentCode = new FormControl(null);
+  parentName = new FormControl(null);
+
+  rate = new FormControl(null);
+
+  discount: FormControl = new FormControl(null);
+
+  description = new FormControl(null);
+
+  errors: FormGroup = new FormGroup({
+    code: new FormControl(null),
+  });
+
+  constructor(importTaxEntity?: SpecialConsumptionTaxEntity) {
     super();
-    if (importTariffEntity !== null && importTariffEntity !== undefined) {
-      Object.keys(importTariffEntity).forEach((item) => {
-        if (importTariffEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-          this[item].setValue(importTariffEntity[item]);
+    if (importTaxEntity !== null && importTaxEntity !== undefined) {
+      Object.keys(importTaxEntity).forEach((item) => {
+        if (importTaxEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(importTaxEntity[item]);
         }
       });
     }

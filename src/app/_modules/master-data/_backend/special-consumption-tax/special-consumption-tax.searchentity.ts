@@ -13,7 +13,7 @@ export class SpecialConsumptionTaxSearchEntity extends SearchEntity {
   rate: NumberFilter = new NumberFilter();
   description: TextFilter = new TextFilter();
 
-  constructor(exciseTariffSearchEntity?: any) {
-    super(exciseTariffSearchEntity);
+  constructor(specialConsumptionTaxSearchEntity?: any) {
+    super(specialConsumptionTaxSearchEntity);
   }
 }

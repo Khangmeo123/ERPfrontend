@@ -8,7 +8,7 @@ import { CoaComponent } from './_page/coa/coa.component';
 import { AccountingPeriodComponent } from './_page/accounting-period/accounting-period.component';
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
-import { ResourceTaxComponent } from './_page/resource-tax/resource-tax.component';
+import { NaturalResourceTaxComponent } from './_page/natural-resource-tax/natural-resource-tax.component';
 import { VoucherComponent } from './_page/voucher/voucher.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
@@ -34,6 +34,7 @@ import { SpecialConsumptionTaxComponent } from './_page/special-consumption-tax/
 import { BsDropdownModule } from 'ngx-bootstrap';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { TreeTableModule } from 'primeng/treetable';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { TreeTableModule } from 'primeng/treetable';
     FiscalYearComponent,
     PaymentMethodComponent,
     PaymentTermComponent,
-    ResourceTaxComponent,
+    NaturalResourceTaxComponent,
     VoucherComponent,
     ValueAddedTaxComponent,
     EnvironmentTaxComponent,
@@ -77,8 +78,9 @@ import { TreeTableModule } from 'primeng/treetable';
     RadioButtonModule,
     BsDropdownModule.forRoot(),
     ErrorModule,
-    TreeTableModule
-  ]
+    TreeTableModule,
+    InputSwitchModule,
+  ],
 })
 export class SobModule {
 }

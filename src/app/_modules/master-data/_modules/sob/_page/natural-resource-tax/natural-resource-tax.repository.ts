@@ -8,31 +8,31 @@ import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
-import { ImportTaxEntity } from '../../../../_backend/import-tax/import-tax.entity';
-import { ImportTaxSearchEntity } from '../../../../_backend/import-tax/import-tax.search-entity';
+import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
+import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.search-entity';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ImportTaxRepository extends Repository {
+export class NaturalResourceTaxRepository extends Repository {
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/import-tax';
+    this.apiUrl = environment.apiUrlApps + 'master-data/set-of-book/natural-resource-tax';
   }
 
-  getList(importTaxSearchEntity: ImportTaxSearchEntity): Observable<ImportTaxEntity[]> {
-    return this.http.post<ImportTaxEntity[]>(this.apiUrl + '/list', JSON.stringify(importTaxSearchEntity),
+  getList(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Observable<NaturalResourceTaxEntity[]> {
+    return this.http.post<NaturalResourceTaxEntity[]>(this.apiUrl + '/list', JSON.stringify(naturalResourceTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         return r.body.map((item) => {
-          return new ImportTaxEntity(item);
+          return new NaturalResourceTaxEntity(item);
         });
       }),
     );
   }
 
-  count(importTaxSearchEntity: ImportTaxSearchEntity): Observable<number> {
-    return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(importTaxSearchEntity),
+  count(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Observable<number> {
+    return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(naturalResourceTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
@@ -70,38 +70,38 @@ export class ImportTaxRepository extends Repository {
     );
   }
 
-  getId(importTaxId: string): Observable<ImportTaxEntity> {
-    return this.http.post<ImportTaxEntity>(this.apiUrl + '/get', JSON.stringify({Id: importTaxId}),
+  getId(naturalResourceTaxId: string): Observable<NaturalResourceTaxEntity> {
+    return this.http.post<NaturalResourceTaxEntity>(this.apiUrl + '/get', JSON.stringify({Id: naturalResourceTaxId}),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
-        return new ImportTaxEntity(r.body);
+        return new NaturalResourceTaxEntity(r.body);
       }),
     );
   }
 
 
-  add(importTaxEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(importTaxEntity),
+  add(naturalResourceTaxEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(naturalResourceTaxEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
   }
 
-  update(importTaxEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/update', JSON.stringify(importTaxEntity),
+  update(naturalResourceTaxEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/update', JSON.stringify(naturalResourceTaxEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
   }
 
-  deactivate(importTaxEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(importTaxEntity),
+  deactivate(naturalResourceTaxEntity: any): Observable<boolean> {
+    return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(naturalResourceTaxEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
   }
 
-  public getParentTaxList(parentTaxSearchEntity: ImportTaxSearchEntity): Observable<Entities> {
+  public getParentTaxList(parentTaxSearchEntity: NaturalResourceTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
       `${this.apiUrl}/list-parent-tax`,
       parentTaxSearchEntity,
@@ -113,16 +113,16 @@ export class ImportTaxRepository extends Repository {
       .pipe(
         map((response: HttpResponse<Entities>) => {
           const entities: Entities = new Entities();
-          entities.ids = response.body.ids.map((item) => new ImportTaxEntity(item));
-          entities.exceptIds = response.body.exceptIds.map((item) => new ImportTaxEntity(item));
+          entities.ids = response.body.ids.map((item) => new NaturalResourceTaxEntity(item));
+          entities.exceptIds = response.body.exceptIds.map((item) => new NaturalResourceTaxEntity(item));
           return entities;
         }),
       );
   }
 
-  public disable(taxEntity: ImportTaxEntity): Promise<void> {
+  public disable(taxEntity: NaturalResourceTaxEntity): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.http.post<ImportTaxEntity>(
+      this.http.post<NaturalResourceTaxEntity>(
         `${this.apiUrl}/disable`,
         taxEntity,
         {
@@ -137,9 +137,9 @@ export class ImportTaxRepository extends Repository {
     });
   }
 
-  public enable(taxEntity: ImportTaxEntity): Promise<void> {
+  public enable(taxEntity: NaturalResourceTaxEntity): Promise<void> {
     return new Promise((resolve, reject) => {
-      this.http.post<ImportTaxEntity>(
+      this.http.post<NaturalResourceTaxEntity>(
         `${this.apiUrl}/enable`,
         taxEntity,
         {

@@ -1,19 +1,34 @@
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ExportTaxRepository } from './export-tax.repository';
-import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
-import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.searchEntity';
+import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
+import { Entities } from '../../../../../../_helpers/entity';
+import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
+import { translate } from '../../../../../../_helpers/string';
 import { ExportTaxForm } from '../../../../_backend/export-tax/export-tax.form';
+import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.search-entity';
+import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
+import { ExportTaxRepository } from './export-tax.repository';
 
 export class ExportTaxService {
-  public exportTaxList: BehaviorSubject<ExportTaxEntity[]>;
-  public exportTaxCount: BehaviorSubject<number>;
+  public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+
+  public exportTaxList: BehaviorSubject<ExportTaxEntity[]> = new BehaviorSubject([]);
+
   public exportTaxForm: BehaviorSubject<FormGroup>;
 
-  constructor(private fb: FormBuilder, private exportTaxRepository: ExportTaxRepository, private toastrService: ToastrService) {
+  public exportTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
+
+  public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  constructor(
+    private fb: FormBuilder,
+    private exportTaxRepository: ExportTaxRepository,
+    private toastrService: ToastrService,
+  ) {
     this.exportTaxCount = new BehaviorSubject(0);
-    this.exportTaxList = new BehaviorSubject([]);
     this.exportTaxForm = new BehaviorSubject(this.fb.group(
       new ExportTaxForm(),
     ));
@@ -31,24 +46,56 @@ export class ExportTaxService {
     });
   }
 
+  getUnitOfMeasureList(uomSearchEntity: UomSearchEntity) {
+    this.exportTaxRepository.getUnitOfMeasureList(uomSearchEntity)
+      .subscribe((list) => {
+        this.uomList.next(list);
+      });
+  }
+
+  getSobList(sobSearchEntity: SobSearchEntity) {
+    this.exportTaxRepository.getSobList(sobSearchEntity)
+      .subscribe((list: Entities) => {
+        if (list) {
+          this.sobList.next(list);
+        }
+      });
+  }
+
+  resetForm() {
+    this.uomList.next(new Entities());
+    this.parentTaxList.next(new Entities());
+    this.exportTaxForm.next(
+      this.fb.group(
+        new ExportTaxForm(),
+      ),
+    );
+  }
+
   add() {
-    this.exportTaxForm.next(this.fb.group(
-      new ExportTaxForm(),
-    ));
+    this.resetForm();
+  }
+
+  cancel() {
+    this.resetForm();
   }
 
   edit(exportTaxId: string) {
-    this.exportTaxRepository.getId(exportTaxId).subscribe(res => {
-      if (res) {
-        this.exportTaxForm.next(this.fb.group(
-          new ExportTaxForm(res),
-        ));
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
+    this.resetForm();
+    this.exportTaxRepository.getId(exportTaxId)
+      .subscribe(res => {
+        if (res) {
+          this.exportTaxForm.next(
+            this.fb.group(
+              new ExportTaxForm(res),
+            ),
+          );
+        }
+      }, err => {
+        if (err) {
+          console.log(err);
+        }
+      });
   }
 
   save(exportTaxEntity: any, exportTaxSearchEntity: ExportTaxSearchEntity): Promise<boolean> {
@@ -85,7 +132,6 @@ export class ExportTaxService {
         });
       }
     });
-
   }
 
   deactivate(exportTaxEntity: any, exportTaxSearchEntity: ExportTaxSearchEntity): Promise<boolean> {
@@ -105,6 +151,34 @@ export class ExportTaxService {
         }
       });
     });
+  }
 
+  getParentTaxList(parentTaxSearchEntity: ExportTaxSearchEntity): void {
+    this.exportTaxRepository.getParentTaxList(parentTaxSearchEntity)
+      .subscribe((entities: Entities) => {
+        this.parentTaxList.next(entities);
+      });
+  }
+
+  disable(taxEntity: ExportTaxEntity) {
+    return this.exportTaxRepository.disable(taxEntity)
+      .then(() => {
+        this.toastrService.success(translate('general.update.success'));
+      })
+      .catch((error) => {
+        this.toastrService.error(translate('general.update.failure'));
+        throw error;
+      });
+  }
+
+  enable(taxEntity: ExportTaxEntity) {
+    return this.exportTaxRepository.enable(taxEntity)
+      .then(() => {
+        this.toastrService.success(translate('general.update.success'));
+      })
+      .catch((error) => {
+        this.toastrService.error(translate('general.update.failure'));
+        throw error;
+      });
   }
 }
