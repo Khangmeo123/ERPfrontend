@@ -1,7 +1,7 @@
 export const sampleSidebarMenu = [
   {
     label: 'Dữ liệu đầu vào',
-    icon: 'fa fa-tv',
+    icon: 'data_usage',
     route: '/master-data',
     exact: true,
     children: [
@@ -192,7 +192,102 @@ export const sampleSidebarMenu = [
         label: 'Quản lý phòng ban',
         route: '/master-data/department',
         exact: false,
-      },
+      }
     ],
   },
+  {
+    label: 'Quản lý xuất nhập kho',
+    icon: 'playlist_add_check',
+    route: '/inventory',
+    exact: true,
+    children: [
+      {
+        label: 'Bảng tổng quan',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Thông tin tồn kho	',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        divider: true,
+      },
+      {
+        label: 'Phiếu Nhập kho hàng mua',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Phiếu Nhập kho khác',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Yêu cầu nhập kho hàng trả lại từ KH',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Phiếu nhập kho hàng trả lại từ KH',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        divider: true,
+      },
+      {
+        label: 'Phiếu xuất kho hàng bán',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Phiếu xuất kho khác',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Yêu cầu xuất kho hàng trả lại NCC',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Phiếu xuất kho trả NCC',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        divider: true,
+      },
+      {
+        label: 'Yêu cầu điều chuyển kho',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Phiếu điều chuyển kho',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        divider: true,
+      },
+      {
+        label: 'Lịch kiểm kê kho',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Phiếu kiểm kê kho',
+        route: '/master-data/department',
+        exact: false,
+      },
+      {
+        label: 'Phiếu điều chỉnh tồn kho',
+        route: '/master-data/department',
+        exact: false,
+      },
+    ]
+  }
 ];

@@ -1,48 +1,68 @@
-
-.sub-nav {
-  .material-icons {
-    font-size: 18px;
-  }
-
-  ul.flags {
-    margin-bottom: -10px;
-    li:hover {
-      background-color: #f4f4f4 !important;
-      margin-right: 5px;
+.navbar {
+  .logo {
+    img {
+      width: 132px;
     }
   }
 
-  font-size: 13px;
-  color: #3d464d;
-  position: absolute;
-  z-index: 100;
-  width: 200px;
-  padding: 20px 0 5px;
-  border-radius: 2px;
-  border: 1px solid rgb(234, 234, 234);
-  background-color: #ffffff;
-  right: 0;
-  margin-top: 3px;
-  box-shadow: 3px 3px 15px rgba(91, 101, 130, 0.1);
+  .icon-avatar {
+    img {
+      width: 24px;
+    }
+  }
 
-  ul {
-    margin: -10px 0px -10px -12px !important;
-    //margin-left: 12px !important;
-    display: block !important;
-
-    li.list:hover {
-      background-color: rgb(244, 244, 244);
+  .navbar-nav {
+    padding-left: none !important;
+  }
+  .sub-nav {
+    .material-icons {
+      font-size: 18px;
     }
 
-    .content-drop {
-      max-width: 160px;
-
+    ul.flags {
+      margin-bottom: -10px;
+      li:hover {
+        background-color: #f4f4f4 !important;
+        margin-right: 5px;
+      }
     }
 
-    li.list {
-      padding: 10px 10px 10px 0;
-      margin-left: -10px;
+    font-size: 13px;
+    color: #3d464d;
+    position: absolute;
+    z-index: 100;
+    width: 200px;
+    padding: 20px 0 5px;
+    border-radius: 2px;
+    border: 1px solid rgb(234, 234, 234);
+    background-color: #ffffff;
+    right: 0;
+    margin-top: 3px;
+    box-shadow: 3px 3px 15px rgba(91, 101, 130, 0.1);
 
+    ul {
+      margin: -10px 0px -10px -12px !important;
+      //margin-left: 12px !important;
+      display: block !important;
+
+      li.list:hover {
+        background-color: rgb(244, 244, 244);
+      }
+
+      .content-drop {
+        max-width: 160px;
+      }
+
+      .default-avatar {
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      li.list {
+        padding: 10px 10px 10px 0;
+        margin-left: -10px;
 
         .ui-helper-clearfix {
           margin-top: -10px;
@@ -54,7 +74,7 @@
             position: absolute;
             top: 4px;
             left: 5px;
-            bottom: 5px
+            bottom: 5px;
           }
 
           div {
@@ -64,19 +84,29 @@
           }
         }
 
-
-
         ul {
           margin-left: 10% !important;
         }
-    }
+      }
 
-    li {
-      display: flow-root;
+      li {
+        display: flow-root;
 
-      .col-sm-4, .col-sm-6 {
-        padding-left: 0px !important;
+        .col-sm-4,
+        .col-sm-6 {
+          padding-left: 0px !important;
+        }
       }
     }
+  }
+  .icon-flags {
+    cursor: pointer;
+    margin-top: 10px;
+  }
+
+  .drop-flags {
+    width: 150px;
+    right: 55px;
+    height: 90px;
   }
 }

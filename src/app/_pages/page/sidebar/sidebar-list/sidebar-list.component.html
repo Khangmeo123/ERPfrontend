@@ -1,12 +1,11 @@
 <ng-container *ngFor="let item of menu">
   <li class="divider" *ngIf="item.divider; else notDivider">
-    <div class="divider-content"></div>
   </li>
   <ng-template #notDivider>
     <li *ngIf="item.children; else notGroup" class="menu-item menu-item-{{level}} d-flex"
       (click)="toggleChildren(item)">
       <a class="flex-grow-1">
-        <i [class]="item.icon" *ngIf="!!item.icon; else notHaveIcon"></i>
+        <mat-icon *ngIf="!!item.icon; else notHaveIcon">{{item.icon}}</mat-icon>
         <ng-template #notHaveIcon>
           <div class="icon-placeholder"></div>
         </ng-template>
