@@ -6,7 +6,7 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
-$color-button: #1C4E80;
+$color-button: #007EE5;
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 $hamburger-padding-x: 0px !default;
@@ -17,7 +17,8 @@ $hamburger-layer-spacing: 5px !default;
 $hamburger-layer-color: #9b9ea2 !default;
 $hamburger-layer-border-radius: 4px !default;
 $hamburger-hover-opacity: 0.7 !default;
-$color-title: #1C4E80;
+$color-title: #007EE5;
+$background-color: #ffffff;
 
 @import '~bootstrap/scss/bootstrap';
 // @import '~font-awesome/scss/font-awesome';
@@ -124,7 +125,7 @@ body {
 }
 
 .th-filter {
-  background-color: #ffffff !important;
+  background-color: $background-color !important;
   padding: 0.25rem 0.5rem!important;
 }
 
@@ -133,13 +134,16 @@ body {
 }
 
 
-.btn.btn-add,
+
 .btn.btn-clear,
 .btn.btn-import,
 .btn.btn-export,
-.btn.btn-save {
-  background: $color-button;
-  color: $white;
+.btn.btn-save,
+.btn.btn-history,
+.btn.btn-print {
+  background: $background-color;
+  color: $black;
+  border: 1px solid #C5C5C5;
 }
 
 .btn.btn-update {
@@ -157,11 +161,17 @@ body {
 }
 
 .page {
+  .page-header {
+    background-color: $background-color !important;
+    height: 60px;
+    padding: 15px;
+  }
   .page-header,.page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 20px;
+    
 
     .page-title {
       font-size: 21px;
@@ -191,7 +201,8 @@ body {
   .page-body {
     margin: 15px 0px 15px 0px;
     .page-section {
-
+      background-color: $background-color;
+      margin-top: -5px;
     }
 
     .page-section.form {
@@ -266,4 +277,76 @@ input[type="text"].disabled {
       color: #ffffff;
     }
   }
+}
+
+.btn.btn-add,
+.btn.btn-send,
+ {
+  border: $color-button solid 1px;
+  background-color: $color-button;
+  color: #ffffff;
+}
+
+
+.btn-label {
+  position: relative;
+  display: inline-block;
+  left: -12px;
+  padding: 5px 12px;
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 5px 0 0 5px;
+  width: 28px;
+  height: 28px;
+  i {
+    font-size: 15px;
+    margin-left: -5px;
+    line-height: 1
+  }
+}
+.btn-labeled {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex;
+}
+// .btn {
+//   margin-bottom: 10px;
+// }
+
+.button-label {
+  margin-top: 3px;
+  margin-left: -3px;
+}
+
+.save-book-mark {
+  color: #3D464D;
+}
+
+.not-save-book-mark {
+  color: #FCE205;
+}
+
+.view-detail {
+  color: #007EE5;
+}
+
+.edit {
+  color: #FDB32B;
+}
+
+
+.n-p-r {
+  padding-right: 0 !important;
+}
+
+
+.n-p-l {
+  padding-left: 0 !important;
+}
+
+.n-p-t {
+  padding-top: 0 !important;
+}
+
+.n-p-b {
+  padding-bottom: 0 !important;
 }

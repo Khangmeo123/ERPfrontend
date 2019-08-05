@@ -1,19 +1,4 @@
 {
-	"accounting_period": {
-		"description": "Mô tả",
-		"from_date": "Từ ngày",
-		"header": {
-			"title": "Kỳ kế toán"
-		},
-		"modal": {
-			"lable": "Thêm kỳ kế toán theo",
-			"title": "Thêm kỳ kế toán"
-		},
-		"status": {
-			"fiscal_year": "Năm"
-		},
-		"to_date": "Đến ngày"
-	},
 	"advancedFilter": {
 		"placeholder": ""
 	},
@@ -95,22 +80,6 @@
 		},
 		"super_account": "Tài khoản tổng hợp"
 	},
-	"cost-center": {
-		"content": {
-			"account": "Tài khoản ngầm định",
-			"description": "Mô tả",
-			"from_date": "Hiệu lực từ ngày",
-			"id": "Mã trung tâm",
-			"modal": {
-				"title": "Thêm trung tâm chi phí"
-			},
-			"name": "Tên trung tâm",
-			"to_date": "Đến ngày"
-		},
-		"header": {
-			"title": "Trung tâm chi phí"
-		}
-	},
 	"cropper": {
 		"browseImage": "Chọn ảnh",
 		"crop": "Cắt ảnh"
@@ -180,22 +149,14 @@
 		"name": "Tên pháp nhân",
 		"sob": "Mã bộ sổ"
 	},
-	"customer_group": {
-		"customer": {
-			"address": "",
-			"code": "",
-			"name": "",
-			"phone": "",
-			"tax_code": ""
-		},
-		"name": "",
-		"title": ""
-	},
 	"datePicker": {
 		"placeHolder": "ngày/tháng/năm"
 	},
 	"department": {
-		"add": "Thêm phòng ban",
+		"addToDepartment": {
+			"error": "",
+			"success": ""
+		},
 		"asset": {
 			"actions": "",
 			"add": "Thông tin tài sản",
@@ -206,13 +167,10 @@
 			"toDate": "Đến ngày",
 			"type": "Loại tài sản"
 		},
-		"code": "Mã phòng ban",
 		"employee": {
-			"actions": "",
 			"code": "Mã nhân viên",
 			"name": "Tên nhân viên"
 		},
-		"name": "Tên phòng ban",
 		"project": {
 			"add": "Thêm dự án",
 			"code": "Mã dự án",
@@ -220,10 +178,8 @@
 			"endDate": "Ngày kết thúc",
 			"manager": "Người quản lý",
 			"name": "Tên dự án",
-			"startDate": "Ngày bắt đầu",
-			"title": "Thông tin dự án"
+			"startDate": "Ngày bắt đầu"
 		},
-		"title": "Thông tin phòng ban",
 		"warehouse": {
 			"add": "Thêm kho",
 			"address": "Địa chỉ",
@@ -289,50 +245,53 @@
 		"taxCode": "Mã số thuế"
 	},
 	"detailEmployeeGroup": {
-		"bank_account": {
-			"account_number": "Số tài khoản",
-			"account_owner": "Tên chủ tài khoản",
-			"bank_address": "Địa chỉ ngân hàng",
-			"bank_division": "Chi nhánh ngân hàng",
-			"bank_name": "Tên ngân hàng",
-			"province": "Tỉnh/Thành phố",
-			"title": "Tài khoản ngân hàng"
+		"bankAccount": {
+			"bankAccountName": "",
+			"bankAccountNumber": "",
+			"bankBranch": "",
+			"bankName": "",
+			"divisionAddress": "",
+			"province": "",
+			"title": ""
 		},
-		"bassic_salary": "Lương bảo hiểm",
-		"birthday": "Ngày sinh",
-		"code": "Mã nhân viên",
 		"contacts": {
+			"action": "",
 			"add": "Thêm thông tin liên hệ",
 			"address": "Địa chỉ",
-			"city": "Tỉnh thành",
 			"code": "STT",
 			"email": "Email",
+			"phone": "",
 			"phone_number": "Số điện thoại",
+			"province": "",
 			"recipient": "Tên người liên hệ",
 			"title": "Thông tin liên hệ"
 		},
-		"date_range": "Ngày cấp",
-		"detail": {
-			"status": "Trạng thái"
-		},
-		"employee_group": "Nhóm nhân viên",
 		"gender": {
 			"men": "Nam",
-			"title": "Giới tính",
 			"women": "Nữ"
 		},
 		"general": {
+			"code": "",
+			"dob": "",
+			"employeePositions": "",
+			"gender": "",
+			"identityNumber": "",
+			"insuranceSalary": "",
+			"issueDate": "",
+			"issuePlace": "",
+			"jobLevel": "",
+			"jobTitle": "",
+			"name": "",
+			"numberDependentPerson": "",
+			"salary": "",
+			"salaryRatio": "",
+			"status": "",
+			"taxCode": "",
 			"title": "Thông tin chung"
 		},
 		"header": {
 			"title": "Chỉnh sửa thông tin nhân viên"
 		},
-		"id_emp": "Số CMND",
-		"issue_by": "Nơi cấp",
-		"jobLevel": "Cấp bậc chức vụ",
-		"jobTitle": "Chức vụ",
-		"name": "Tên nhân viên",
-		"numberOfDependent": "Số người phụ thuộc",
 		"own_asset": {
 			"code": "Mã tài sản",
 			"from_date": "Hiệu lực từ ngày",
@@ -340,10 +299,7 @@
 			"title": "Tài sản đang quản lý",
 			"to_date": "Đến ngày",
 			"type": "Loại tài sản"
-		},
-		"salary_agreement": "Lương thỏa thuận",
-		"salary_ratio": "Hệ số lương",
-		"tax_code": "Mã số thuế"
+		}
 	},
 	"detailSupplierGroup": {
 		"bankAccount": {
@@ -466,6 +422,14 @@
 			}
 		}
 	},
+	"employeeDetail": {
+		"delete": {
+			"confirm": {
+				"message": "",
+				"title": ""
+			}
+		}
+	},
 	"employeeDetailOfLegal": {
 		"bankAccount": {
 			"accountName": "Tên chủ tài khoản",
@@ -542,40 +506,11 @@
 			"title": ""
 		}
 	},
-	"environment_tax": {
-		"description": "",
-		"header": {
-			"title": "Biểu thuế môi trường"
-		},
-		"modal": {
-			"title": "Thêm thuế môi trường"
-		}
-	},
-	"export_tax": {
-		"header": {
-			"title": "Biểu thuế xuất khấu"
-		},
-		"modal": {
-			"title": "Thêm thuế xuất khấu"
-		}
-	},
-	"fiscal_year": {
-		"content": {
-			"from_date": "Từ ngày",
-			"modal": {
-				"title": "Thêm năm tài chính"
-			},
-			"name": "Tên",
-			"status": "Trạng thái",
-			"to_date": "Đến ngày",
-			"valuation_method": "Phương pháp định giá ngầm định"
-		},
-		"header": {
-			"title": "Năm tài chính"
-		}
-	},
 	"general": {
-		"action": "Thao tác",
+		"action": "Tác vụ",
+		"actions": {
+			"title": ""
+		},
 		"button": {
 			"add": "Thêm",
 			"cancel": "Hủy",
@@ -594,12 +529,19 @@
 		"customer_group": {
 			"name": "Tên nhà cung cấp"
 		},
+		"department": {
+			"delete": {
+				"message": "",
+				"title": ""
+			}
+		},
 		"detail": "Chi tiết",
 		"division": "Tên chi nhánh",
 		"error": {
 			"direction": "",
 			"fileImport": ""
 		},
+		"fromDate": "Từ ngày",
 		"gender": {
 			"female": "Nữ",
 			"male": "Nam"
@@ -610,15 +552,43 @@
 		"legal_entity": {
 			"name": "Tên pháp nhân"
 		},
-		"sob": "Số bộ sổ"
-	},
-	"import_tax": {
-		"header": {
-			"title": "Biểu thuế nhập khẩu"
+		"project": {
+			"delete": {
+				"message": "",
+				"title": ""
+			}
 		},
-		"modal": {
-			"title": "Thêm thuế nhập khẩu"
-		}
+		"service": {
+			"save": {
+				"success": ""
+			},
+			"update": {
+				"getFailed": "",
+				"success": ""
+			}
+		},
+		"sob": "Số bộ sổ",
+		"status": "Trạng thái",
+		"toDate": "Đến ngày"
+	},
+	"goodsReceiptPO": {
+		"createdDate": "Ngày tạo",
+		"creator": "Người tạo",
+		"description": "Mô tả",
+		"documentNumber": "Số chứng từ",
+		"header": {
+			"title": "Phiếu nhập kho hàng mua"
+		},
+		"inventoryAddress": "Địa chỉ kho",
+		"inventoryCode": "Mã kho",
+		"receiptedDate": "Ngày thực hiện",
+		"status": "Trạng thái"
+	},
+	"hrOrganization": {
+		"add": "",
+		"code": "",
+		"name": "",
+		"title": ""
 	},
 	"item": {
 		"content": {
@@ -792,9 +762,6 @@
 			"title_1": "Thông tin chung"
 		}
 	},
-	"legal_entity": {
-		"name": "Tên pháp nhân"
-	},
 	"noData": {
 		"helper": ""
 	},
@@ -802,36 +769,19 @@
 		"entries": "bản ghi",
 		"show": "Hiện thị"
 	},
-	"payment_method": {
-		"code": "Mã phương thức",
-		"header": {
-			"title": "Phương thức thanh toán"
-		},
-		"modal": {
-			"title": "Thêm phương thức thanh toán"
-		},
-		"payment_method_name": "Tên loại phương thức thanh toán"
-	},
-	"payment_term": {
-		"code": "Mã điều khoản",
-		"discount_period": "Thời hạn hưởng chiết khấu",
-		"discount_rate": "Tỉ lệ chiết khấu",
-		"due_in_date": "Ngày được nợ",
-		"header": {
-			"title": "Điều khoản thanh toán"
-		},
-		"modal": {
-			"title": "Thêm điều khoản thanh toán"
-		},
-		"name": "Tên điều khoản"
-	},
-	"resource_tax": {
-		"header": {
-			"title": "Biểu thuế tài nguyên"
-		},
-		"modal": {
-			"title": "Thêm thuế tài nguyên"
+	"project": {
+		"employee": {
+			"code": "",
+			"name": ""
 		}
+	},
+	"projectOrganization": {
+		"code": "",
+		"endDate": "",
+		"manager": "",
+		"name": "",
+		"startDate": "",
+		"title": ""
 	},
 	"select": {
 		"availableList": "Có thể chọn",
@@ -851,14 +801,6 @@
 		"special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
 		"title": "Danh sách bộ sổ",
 		"value_added_tax": "Biểu thuế GTGT"
-	},
-	"special_consumption_tax": {
-		"header": {
-			"title": "Biểu thuế tiêu thụ đặc biệt"
-		},
-		"modal": {
-			"title": "Thêm thuế tiêu thụ đặc biệt"
-		}
 	},
 	"special_price_customer": {
 		"code": "Mã sản phẩm",
@@ -936,15 +878,6 @@
 			"name": "Tên nhà cung cấp"
 		}
 	},
-	"tax": {
-		"code": "Mã thuế",
-		"description": "Mô tả",
-		"disable": "Vô hiệu",
-		"discount": "Chiết khấu",
-		"name": "Tên loại thuế",
-		"parent_account": "Tài khoản tổng hợp",
-		"unit": "Đơn vị tính"
-	},
 	"uom": {
 		"content": {
 			"code": "Mã đơn vị",
@@ -958,23 +891,5 @@
 		"header": {
 			"title": "Đơn vị tính sản phẩm"
 		}
-	},
-	"value_added_tax": {
-		"header": {
-			"title": "Biểu thuế giá trị gia tăng"
-		},
-		"modal": {
-			"title": "Thêm thuế giá trị gia tăng"
-		}
-	},
-	"voucher": {
-		"code": "Mã chứng từ",
-		"header": {
-			"title": "Thông tin chứng từ"
-		},
-		"modal": {
-			"title": "Thêm chứng từ"
-		},
-		"name": "Tên loại chứng từ"
 	}
 }

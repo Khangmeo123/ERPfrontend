@@ -9,6 +9,7 @@ const routes: Routes = [
   {
     path: '', component: PageComponent, children: [
       { path: 'master-data', loadChildren: () => import('./_modules/master-data/master-data.module').then(m => m.MasterDataModule) },
+      { path: 'inventory', loadChildren: () => import('./_modules/inventory/inventory.module').then(m => m.InventoryModule) },
     ], /*canActivate: [AuthGuard]*/
   },
   { path: '**', redirectTo: 'home', pathMatch: 'full' },

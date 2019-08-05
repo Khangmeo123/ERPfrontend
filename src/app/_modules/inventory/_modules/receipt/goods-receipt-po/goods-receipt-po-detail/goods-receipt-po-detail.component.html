@@ -1,0 +1,57 @@
+<div class="page goods-receipt-po">
+    <div class="page-header">
+        <span class="page-title">
+            {{pageTitle | translate}}
+        </span>
+        <div class="page-actions d-flex">
+            <button class="btn btn-labeled btn-send">
+                <span class="btn-label"><i class="material-icons">send</i></span>
+                <span class="button-label">
+                    {{'general.button.send' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-save">
+                <span class="btn-label"><i class="material-icons">save</i></span>
+                <span class="button-label">
+                    {{'general.button.save' | translate}}
+                </span></button>
+            <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
+                <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle
+                    aria-controls="dropdown-basic">
+                    <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
+                    <span class="button-label">
+                        {{'general.action' | translate}}
+                    </span></button>
+
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                    aria-labelledby="button-basic">
+                    <li role="menuitem">
+                        <button class="btn btn-labeled btn-history">
+                            <span class="btn-label"><i class="material-icons">history</i></span>
+                            <span class="button-label">
+                                {{'general.button.history' | translate}}
+                            </span></button>
+                    </li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem"> <button class="btn btn-labeled btn-print">
+                            <span class="btn-label"><i class="material-icons">local_printshop</i></span>
+                            <span class="button-label">
+                                {{'general.button.print' | translate}}
+                            </span></button>
+                    </li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem"> <button class="btn btn-labeled btn-print">
+                            <span class="btn-label"><i class="material-icons">file_copy</i></span>
+                            <span class="button-label">
+                                {{'general.button.referenceDocument' | translate}}
+                            </span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="page-section pt-3 pb-3 pl-3 pr-3">
+
+        </div>
+    </div>
+</div>

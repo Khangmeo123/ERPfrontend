@@ -4,11 +4,13 @@ import { DeliveryOrderComponent } from './delivery-order/delivery-order.componen
 import { GoodsReturnRequestComponent } from './goods-return-request/goods-return-request.component';
 import { GoodsReturnComponent } from './goods-return/goods-return.component';
 import { GoodsIssueComponent } from './goods-issue/goods-issue.component';
+import { IssueRoutingModule } from './issue-routing.module';
 
 @NgModule({
   declarations: [DeliveryOrderComponent, GoodsReturnRequestComponent, GoodsReturnComponent, GoodsIssueComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    IssueRoutingModule,
   ]
 })
 export class IssueModule { }

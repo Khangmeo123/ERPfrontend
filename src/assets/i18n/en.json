@@ -1,19 +1,4 @@
 {
-	"accounting_period": {
-		"description": "",
-		"from_date": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"lable": "",
-			"title": ""
-		},
-		"status": {
-			"fiscal_year": ""
-		},
-		"to_date": ""
-	},
 	"advancedFilter": {
 		"placeholder": ""
 	},
@@ -95,22 +80,6 @@
 		},
 		"super_account": ""
 	},
-	"cost-center": {
-		"content": {
-			"account": "",
-			"description": "",
-			"from_date": "",
-			"id": "",
-			"modal": {
-				"title": ""
-			},
-			"name": "",
-			"to_date": ""
-		},
-		"header": {
-			"title": ""
-		}
-	},
 	"cropper": {
 		"browseImage": "",
 		"crop": ""
@@ -180,22 +149,14 @@
 		"name": "",
 		"sob": ""
 	},
-	"customer_group": {
-		"customer": {
-			"address": "",
-			"code": "",
-			"name": "",
-			"phone": "",
-			"tax_code": ""
-		},
-		"name": "",
-		"title": ""
-	},
 	"datePicker": {
 		"placeHolder": ""
 	},
 	"department": {
-		"add": "",
+		"addToDepartment": {
+			"error": "",
+			"success": ""
+		},
 		"asset": {
 			"actions": "",
 			"add": "",
@@ -206,13 +167,10 @@
 			"toDate": "",
 			"type": ""
 		},
-		"code": "",
 		"employee": {
-			"actions": "",
 			"code": "",
 			"name": ""
 		},
-		"name": "",
 		"project": {
 			"add": "",
 			"code": "",
@@ -220,10 +178,8 @@
 			"endDate": "",
 			"manager": "",
 			"name": "",
-			"startDate": "",
-			"title": ""
+			"startDate": ""
 		},
-		"title": "",
 		"warehouse": {
 			"add": "",
 			"address": "",
@@ -289,50 +245,53 @@
 		"taxCode": ""
 	},
 	"detailEmployeeGroup": {
-		"bank_account": {
-			"account_number": "",
-			"account_owner": "",
-			"bank_address": "",
-			"bank_division": "",
-			"bank_name": "",
+		"bankAccount": {
+			"bankAccountName": "",
+			"bankAccountNumber": "",
+			"bankBranch": "",
+			"bankName": "",
+			"divisionAddress": "",
 			"province": "",
 			"title": ""
 		},
-		"bassic_salary": "",
-		"birthday": "",
-		"code": "",
 		"contacts": {
+			"action": "",
 			"add": "",
 			"address": "",
-			"city": "",
 			"code": "",
 			"email": "",
+			"phone": "",
 			"phone_number": "",
+			"province": "",
 			"recipient": "",
 			"title": ""
 		},
-		"date_range": "",
-		"detail": {
-			"status": ""
-		},
-		"employee_group": "",
 		"gender": {
 			"men": "",
-			"title": "",
 			"women": ""
 		},
 		"general": {
+			"code": "",
+			"dob": "",
+			"employeePositions": "",
+			"gender": "",
+			"identityNumber": "",
+			"insuranceSalary": "",
+			"issueDate": "",
+			"issuePlace": "",
+			"jobLevel": "",
+			"jobTitle": "",
+			"name": "",
+			"numberDependentPerson": "",
+			"salary": "",
+			"salaryRatio": "",
+			"status": "",
+			"taxCode": "",
 			"title": ""
 		},
 		"header": {
 			"title": ""
 		},
-		"id_emp": "",
-		"issue_by": "",
-		"jobLevel": "",
-		"jobTitle": "",
-		"name": "",
-		"numberOfDependent": "",
 		"own_asset": {
 			"code": "",
 			"from_date": "",
@@ -340,10 +299,7 @@
 			"title": "",
 			"to_date": "",
 			"type": ""
-		},
-		"salary_agreement": "",
-		"salary_ratio": "",
-		"tax_code": ""
+		}
 	},
 	"detailSupplierGroup": {
 		"bankAccount": {
@@ -466,6 +422,14 @@
 			}
 		}
 	},
+	"employeeDetail": {
+		"delete": {
+			"confirm": {
+				"message": "",
+				"title": ""
+			}
+		}
+	},
 	"employeeDetailOfLegal": {
 		"bankAccount": {
 			"accountName": "",
@@ -542,40 +506,11 @@
 			"title": ""
 		}
 	},
-	"environment_tax": {
-		"description": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
-	},
-	"export_tax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
-	},
-	"fiscal_year": {
-		"content": {
-			"from_date": "",
-			"modal": {
-				"title": ""
-			},
-			"name": "",
-			"status": "",
-			"to_date": "",
-			"valuation_method": ""
-		},
-		"header": {
-			"title": ""
-		}
-	},
 	"general": {
 		"action": "",
+		"actions": {
+			"title": ""
+		},
 		"button": {
 			"add": "",
 			"cancel": "",
@@ -594,12 +529,19 @@
 		"customer_group": {
 			"name": ""
 		},
+		"department": {
+			"delete": {
+				"message": "",
+				"title": ""
+			}
+		},
 		"detail": "",
 		"division": "",
 		"error": {
 			"direction": "",
 			"fileImport": ""
 		},
+		"fromDate": "",
 		"gender": {
 			"female": "",
 			"male": ""
@@ -610,15 +552,43 @@
 		"legal_entity": {
 			"name": ""
 		},
-		"sob": ""
+		"project": {
+			"delete": {
+				"message": "",
+				"title": ""
+			}
+		},
+		"service": {
+			"save": {
+				"success": ""
+			},
+			"update": {
+				"getFailed": "",
+				"success": ""
+			}
+		},
+		"sob": "",
+		"status": "",
+		"toDate": ""
 	},
-	"import_tax": {
+	"goodsReceiptPO": {
+		"createdDate": "",
+		"creator": "",
+		"description": "",
+		"documentNumber": "",
 		"header": {
 			"title": ""
 		},
-		"modal": {
-			"title": ""
-		}
+		"inventoryAddress": "",
+		"inventoryCode": "",
+		"receiptedDate": "",
+		"status": ""
+	},
+	"hrOrganization": {
+		"add": "",
+		"code": "",
+		"name": "",
+		"title": ""
 	},
 	"item": {
 		"content": {
@@ -792,9 +762,6 @@
 			"title_1": ""
 		}
 	},
-	"legal_entity": {
-		"name": ""
-	},
 	"noData": {
 		"helper": ""
 	},
@@ -802,36 +769,19 @@
 		"entries": "",
 		"show": ""
 	},
-	"payment_method": {
-		"code": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"payment_method_name": ""
-	},
-	"payment_term": {
-		"code": "",
-		"discount_period": "",
-		"discount_rate": "",
-		"due_in_date": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": ""
-	},
-	"resource_tax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
+	"project": {
+		"employee": {
+			"code": "",
+			"name": ""
 		}
+	},
+	"projectOrganization": {
+		"code": "",
+		"endDate": "",
+		"manager": "",
+		"name": "",
+		"startDate": "",
+		"title": ""
 	},
 	"select": {
 		"availableList": "",
@@ -851,14 +801,6 @@
 		"special_consumption_tax": "",
 		"title": "",
 		"value_added_tax": ""
-	},
-	"special_consumption_tax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
 	},
 	"special_price_customer": {
 		"code": "",
@@ -936,15 +878,6 @@
 			"name": ""
 		}
 	},
-	"tax": {
-		"code": "",
-		"description": "",
-		"disable": "",
-		"discount": "",
-		"name": "",
-		"parent_account": "",
-		"unit": ""
-	},
 	"uom": {
 		"content": {
 			"code": "",
@@ -958,23 +891,5 @@
 		"header": {
 			"title": ""
 		}
-	},
-	"value_added_tax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
-	},
-	"voucher": {
-		"code": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": ""
 	}
 }

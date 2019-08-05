@@ -4,6 +4,8 @@ import { GoodsReceiptPOComponent } from './goods-receipt-po/goods-receipt-po.com
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { ReturnRequestComponent } from './return-request/return-request.component';
 import { ReturnComponent } from './return/return.component';
+import { GoodsReceiptPoListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
+import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
 
 const routes: Routes = [
   {
@@ -11,6 +13,13 @@ const routes: Routes = [
       {
         path: 'goods-receipt-po',
         component: GoodsReceiptPOComponent,
+        children: [
+
+          { path: 'goods-receipt-po-list', component: GoodsReceiptPoListComponent },
+          { path: 'goods-receipt-po-detail', component: GoodsReceiptPoDetailComponent },
+          { path: '', redirectTo: 'goods-receipt-po-list', pathMatch: 'full' }
+
+        ]
       },
       {
         path: 'goods-receipt',

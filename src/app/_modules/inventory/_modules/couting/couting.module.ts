@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvetoryCountingCycleComponent } from './invetory-counting-cycle/invetory-counting-cycle.component';
 import { InventoryCountingComponent } from './inventory-counting/inventory-counting.component';
 import { InventoryPostingComponent } from './inventory-posting/inventory-posting.component';
 import { InventoryCountingCycleComponent } from './inventory-counting-cycle/inventory-counting-cycle.component';
+import { CountingRoutingModule } from './couting-routing.module';
 
 @NgModule({
-  declarations: [InvetoryCountingCycleComponent, InventoryCountingComponent, InventoryPostingComponent, InventoryCountingCycleComponent],
+  declarations: [InventoryCountingCycleComponent, InventoryCountingComponent, InventoryPostingComponent, InventoryCountingCycleComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    CountingRoutingModule,
   ]
 })
 export class CoutingModule { }

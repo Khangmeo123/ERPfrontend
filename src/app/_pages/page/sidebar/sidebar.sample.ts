@@ -215,12 +215,12 @@ export const sampleSidebarMenu = [
         divider: true,
       },
       {
-        label: 'Phiếu Nhập kho hàng mua',
-        route: '/master-data/department',
+        label: 'Phiếu nhập kho hàng mua',
+        route: '/inventory/receipt/goods-receipt-po',
         exact: false,
       },
       {
-        label: 'Phiếu Nhập kho khác',
+        label: 'Phiếu nhập kho khác',
         route: '/master-data/department',
         exact: false,
       },
