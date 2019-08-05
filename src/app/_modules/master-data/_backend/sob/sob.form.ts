@@ -5,6 +5,7 @@ import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class SobForm extends FormModel {
   id = new FormControl(null);
+
   code = new FormControl(null, [requiredField, checkLength(2, 2)]);
   name = new FormControl(null, [requiredField, checkLength(3, 50)]);
 
@@ -32,7 +33,11 @@ export class SobForm extends FormModel {
   importTaxTemplateId = new FormControl(null);
   importTaxTemplateName = new FormControl(null);
 
-  errors = new FormGroup({});
+  errors = new FormGroup({
+    code: new FormControl(null),
+    name: new FormControl(null),
+    currencyId: new FormControl(null),
+  });
 
   constructor(sobEntity?: SobEntity) {
     super();
