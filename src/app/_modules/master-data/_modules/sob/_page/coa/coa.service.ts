@@ -12,7 +12,7 @@ import { CharacteristicEntity } from '../../../../_backend/characteristic/charac
 export class CoaService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
   public coaList: BehaviorSubject<CoaEntity[]> = new BehaviorSubject([]);
-  public parentAccountList: BehaviorSubject<CoaEntity[]> = new BehaviorSubject([]);
+  public parentAccountList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
   public coaForm: BehaviorSubject<FormGroup>;
   public coaCount: BehaviorSubject<number> = new BehaviorSubject(0);
   public characteristicList: BehaviorSubject<CharacteristicEntity[]> = new BehaviorSubject([]);
@@ -32,7 +32,7 @@ export class CoaService {
   }
 
   getParentAccountList(coaSearchEntity: CoaSearchEntity) {
-    this.coaRepository.getList(coaSearchEntity).subscribe((list) => {
+    this.coaRepository.getParentChartOfAccountList(coaSearchEntity).subscribe((list) => {
       if (list) {
         this.parentAccountList.next(list);
       }
@@ -60,16 +60,19 @@ export class CoaService {
       });
   }
 
-  add() {
+  resetForm() {
+    this.parentAccountList.next(new Entities());
     this.coaForm.next(this.fb.group(
       new CoaForm(),
     ));
   }
 
+  add() {
+    this.resetForm();
+  }
+
   cancel() {
-    this.coaForm.next(this.fb.group(
-      new CoaForm(),
-    ));
+    this.resetForm();
   }
 
   edit(coaId: string) {
@@ -140,6 +143,5 @@ export class CoaService {
         }
       });
     });
-
   }
 }

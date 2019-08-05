@@ -8,6 +8,7 @@ import { BankAccountRepository } from './bank-account.repository';
 import { BankAccountForm } from '../../../../_backend/bank-account/bank-account.form';
 import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-account.searchentity';
 import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
+import { BankSearchEntity } from '../../../../_backend/bank/bank.searchentity';
 
 export class BankAccountService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
@@ -15,6 +16,7 @@ export class BankAccountService {
   public bankAccountForm: BehaviorSubject<FormGroup>;
   public bankAccountCount: BehaviorSubject<number> = new BehaviorSubject(0);
   public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public bankList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   constructor(private fb: FormBuilder, private bankAccountRepository: BankAccountRepository, private toastrService: ToastrService) {
     this.bankAccountCount = new BehaviorSubject(0);
@@ -131,6 +133,14 @@ export class BankAccountService {
         }
       });
     });
+  }
 
+  getBankList(bankSearchEntity: BankSearchEntity): void {
+    this.bankAccountRepository.getBankList(bankSearchEntity)
+      .subscribe(
+        (entities) => {
+          this.bankList.next(entities);
+        },
+      );
   }
 }

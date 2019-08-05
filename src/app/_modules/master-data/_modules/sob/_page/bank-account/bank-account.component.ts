@@ -3,7 +3,7 @@ import { PaginationModel } from '../../../../../../_shared/modules/pagination/pa
 import { Subscription } from 'rxjs';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { Entities } from '../../../../../../_helpers/entity';
 import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
@@ -13,6 +13,8 @@ import { ChartOfAccountEntity } from '../../../../_backend/chart-of-account/char
 import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
 import { ToastrService } from 'ngx-toastr';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import { BankEntity } from '../../../../_backend/bank/bank.entity';
+import { BankSearchEntity } from '../../../../_backend/bank/bank.searchentity';
 
 @Component({
   selector: 'app-bank-account',
@@ -65,6 +67,12 @@ export class BankAccountComponent implements OnInit {
 
   public setOfBookId: string = null;
 
+  public bankList: BankEntity[] = [];
+
+  public selectedBankList: BankEntity[] = [];
+
+  public bankSearchEntity: BankSearchEntity = new BankSearchEntity();
+
   constructor(
     private bankAccountService: BankAccountService,
     private generalService: GeneralService,
@@ -96,10 +104,16 @@ export class BankAccountComponent implements OnInit {
       }
     });
 
+    const bankListSub = this.bankAccountService.bankList.subscribe((entities) => {
+      this.bankList = entities.exceptIds;
+      this.selectedBankList = entities.ids;
+    });
+
     this.subs.add(sobListSub)
       .add(bankAccountSub)
       .add(bankAccountFormSub)
       .add(coaListSub)
+      .add(bankListSub)
       .add(bankAccountCountSub);
   }
 
@@ -110,9 +124,34 @@ export class BankAccountComponent implements OnInit {
     return null;
   }
 
+  get chartOfAccountId() {
+    return this.bankAccountForm.get('chartOfAccountId') as FormControl;
+  }
+
+  get errors() {
+    return this.bankAccountForm.get('errors') as FormGroup;
+  }
+
+  get bankId() {
+    return this.bankAccountForm.get('bankId') as FormControl;
+  }
+
+  get no() {
+    return this.bankAccountForm.get('no') as FormControl;
+  }
+
+  get name() {
+    return this.bankAccountForm.get('name') as FormControl;
+  }
+
   getCoaList() {
     this.coaSearchEntity = new CoaSearchEntity();
     this.coaSearchEntity.setOfBookId = this.setOfBookId;
+    this.bankAccountService.getCoaList(this.coaSearchEntity);
+  }
+
+  searchCoaList(event) {
+    this.coaSearchEntity.name.startsWith = event;
     this.bankAccountService.getCoaList(this.coaSearchEntity);
   }
 
@@ -136,6 +175,7 @@ export class BankAccountComponent implements OnInit {
     this.bankAccountSearchEntity.setOfBookId = setOfBookId;
     this.bankAccountForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;
+    this.coaSearchEntity.setOfBookId = setOfBookId;
     this.getList();
   }
 
@@ -209,5 +249,24 @@ export class BankAccountComponent implements OnInit {
       .catch(err => {
         this.isShowDialog = err;
       });
+  }
+
+  onSelectBank(event) {
+    this.bankSearchEntity.ids = event;
+    this.bankId.setValue(event[0]);
+  }
+
+  onGetBankList() {
+    const ids = this.bankSearchEntity.ids;
+    this.bankSearchEntity = new BankSearchEntity();
+    this.bankSearchEntity.ids = [
+      ...ids,
+    ];
+    this.bankAccountService.getBankList(this.bankSearchEntity);
+  }
+
+  onSearchBankList(event) {
+    this.bankSearchEntity.code.startsWith = event;
+    this.bankAccountService.getBankList(this.bankSearchEntity);
   }
 }

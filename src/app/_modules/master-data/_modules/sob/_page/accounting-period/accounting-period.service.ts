@@ -9,16 +9,17 @@ import { AccountingPeriodEntity } from '../../../../_backend/accounting-period/a
 import { AccountingPeriodForm } from '../../../../_backend/accounting-period/accounting-period.form';
 import { AccountingPeriodSearchEntity } from '../../../../_backend/accounting-period/accounting-period.searchentity';
 import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
-import { FiscalYearEntity } from '../../../../_backend/fiscal-year/fiscal-year.entity';
 
 export class AccountingPeriodService {
   public accountingPeriodList: BehaviorSubject<AccountingPeriodEntity[]>;
+
   public accountingPeriodCount: BehaviorSubject<number>;
+
   public accountingPeriodForm: BehaviorSubject<FormGroup>;
 
   public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
-  public fiscalYearList: BehaviorSubject<FiscalYearEntity[]> = new BehaviorSubject([]);
+  public fiscalYearList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   public periodTypeList: BehaviorSubject<any[]> = new BehaviorSubject([]);
 
@@ -66,7 +67,7 @@ export class AccountingPeriodService {
 
   getFiscalYearList(fiscalYearSearchEntity: FiscalYearSearchEntity) {
     this.accountingPeriodRepository.getFiscalYearList(fiscalYearSearchEntity)
-      .subscribe((list: FiscalYearEntity[]) => {
+      .subscribe((list: Entities) => {
         this.fiscalYearList.next(list);
       });
   }

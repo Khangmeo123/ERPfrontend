@@ -45,8 +45,8 @@
           <th data-qe-id="table-thead-account-number">
             {{'bank_account.account_number' | translate}}
           </th>
-          <th data-qe-id="table-thead-account-owner">
-            {{'bank_account.account_owner' | translate}}
+          <th data-qe-id="table-thead-account-name">
+            {{'bank_account.account_name' | translate}}
           </th>
           <th data-qe-id="table-thead-description">
             {{'bank_account.description' | translate}}
@@ -66,12 +66,12 @@
                                   data-qe-id="filter-bankName"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.accountNumber"
-                                  data-qe-id="filter-accountNumber"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.no"
+                                  data-qe-id="filter-no"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.accountOwner"
-                                  data-qe-id="filter-accountOwner"></app-advanced-filters>
+            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.name"
+                                  data-qe-id="filter-name"></app-advanced-filters>
           </th>
           <th class="th-filter">
             <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.description"
@@ -91,10 +91,10 @@
             {{bankAccount.bankName}}
           </td>
           <td>
-            {{bankAccount.accountNumber}}
+            {{bankAccount.no}}
           </td>
           <td>
-            {{bankAccount.accountOwner}}
+            {{bankAccount.name}}
           </td>
           <td>
             {{bankAccount.description}}
@@ -108,30 +108,33 @@
   </div>
 </div>
 
-<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" modal="true">
+<p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}" modal="true">
   <p-header>
     {{'bank_account.bank_accounts.add' | translate}}
   </p-header>
   <div [formGroup]="bankAccountForm" class="container">
     <div class="row">
       <div class="form-group col-6">
-        <label for="accounting-code">
+        <label for="chart-of-account">
           {{'bank_account.bank_accounts.accounting_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form d-flex">
-          <input #accountingCode formControlName="accountingCode" type="hidden" id="accounting-code">
           <app-single-select (listOpen)="getCoaList()"
-                             (selectionChange)="accountingCode.value = $event[0]"
+                             id="chart-of-account"
+                             (selectionChange)="chartOfAccountId.setValue($event[0])"
+                             (search)="searchCoaList($event)"
                              [list]="coaList"
                              key="name"
+                             [initialValue]="bankAccountForm?.controls?.chartOfAccountName?.value"
                              [selectedList]="selectedCoaList"
                              class="flex-grow-1"
                              data-qe-id="dialog-accounting-code"></app-single-select>
           <app-error
-            *ngIf="(bankAccountForm.controls.name?.errors && bankAccountForm.controls.name?.touched) || !!bankAccountForm.controls.error.get('name')?.value"
+            *ngIf="(chartOfAccountId?.errors && chartOfAccountId?.touched) || !!errors.get('chartOfAccountId')?.value"
             [formGroup]="bankAccountForm"
-            [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-account-code">
+            [placement]="'top'" [property]="'chartOfAccountId'" class="error-form"
+            data-qe-id="dialog-error-chart-of-account">
           </app-error>
         </div>
       </div>
@@ -141,11 +144,20 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="bank-code" class="form-control" data-qe-id="dialog-bank-code" formControlName="bankCode" type="text">
+          <app-single-select [list]="bankList"
+                             id="bank-code"
+                             class="flex-grow-1"
+                             (listOpen)="onGetBankList()"
+                             [initialValue]="bankAccountForm?.controls?.bankCode?.value"
+                             [selectedList]="selectedBankList"
+                             (selectionChange)="onSelectBank($event)"
+                             (search)="onSearchBankList($event)"
+                             key="code"
+          ></app-single-select>
           <app-error
-            *ngIf="(bankAccountForm.controls.bankCode?.errors && bankAccountForm.controls.bankCode?.touched) || !!bankAccountForm.controls.error.get('bankCode')?.value"
+            *ngIf="(bankId?.errors && bankId?.touched) || !!errors.get('bankId')?.value"
             [formGroup]="bankAccountForm"
-            [placement]="'top'" [property]="'bankCode'" class="error-form" data-qe-id="dialog-error-bank-code">
+            [placement]="'top'" [property]="'bankId'" class="error-form" data-qe-id="dialog-error-bank-code">
           </app-error>
         </div>
       </div>
@@ -155,26 +167,28 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="account-number" class="form-control" data-qe-id="dialog-account-number" formControlName="accountNumber" type="text">
+          <input id="account-number" class="form-control" data-qe-id="dialog-account-number" formControlName="no"
+                 type="text">
           <app-error
-            *ngIf="(bankAccountForm.controls.accountNumber?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountNumber')?.value"
+            *ngIf="(no?.errors && no?.touched) || !!errors.get('no')?.value"
             [formGroup]="bankAccountForm"
-            [placement]="'top'" [property]="'accountNumber'" class="error-form"
+            [placement]="'top'" [property]="'no'" class="error-form"
             data-qe-id="dialog-error-account-number">
           </app-error>
         </div>
       </div>
       <div class="form-group col-6">
-        <label for="account-owner">
-          {{'bank_account.bank_accounts.account_owner' | translate}}
+        <label for="account-name">
+          {{'bank_account.bank_accounts.account_name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="account-owner" class="form-control" data-qe-id="dialog-account-owner" formControlName="accountOwner" type="text">
+          <input id="account-name" class="form-control" data-qe-id="dialog-account-name" formControlName="name"
+                 type="text">
           <app-error
-            *ngIf="(bankAccountForm.controls.accountOwner?.errors && bankAccountForm.controls.accountNumber?.touched) || !!bankAccountForm.controls.error.get('accountOwner')?.value"
+            *ngIf="(name?.errors && no?.touched) || !!errors.get('name')?.value"
             [formGroup]="bankAccountForm"
-            [placement]="'top'" [property]="'accountOwner'" class="error-form" data-qe-id="dialog-error-account-number">
+            [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-account-number">
           </app-error>
         </div>
       </div>
@@ -182,7 +196,8 @@
         <label for="description">
           {{'bank_account.bank_accounts.description' | translate}}
         </label>
-        <textarea id="description" class="form-control" data-qe-id="description" formControlName="description" rows="3"></textarea>
+        <textarea id="description" class="form-control" data-qe-id="description" formControlName="description"
+                  rows="3"></textarea>
       </div>
     </div>
   </div>

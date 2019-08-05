@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
@@ -11,6 +11,8 @@ import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-
 import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
+import { BankSearchEntity } from '../../../../_backend/bank/bank.searchentity';
+import { BankEntity } from '../../../../_backend/bank/bank.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -100,5 +102,26 @@ export class BankAccountRepository extends Repository {
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
+  }
+
+  getBankList(bankSearchEntity: BankSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
+      `${this.apiUrl}/list-bank`,
+      bankSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<Entities>) => {
+            const entities = new Entities();
+            entities.ids = response.body.ids.map((item) => new BankEntity(item));
+            entities.exceptIds = response.body.exceptIds.map((item) => new BankEntity(item));
+            return entities;
+          },
+        ),
+      );
   }
 }

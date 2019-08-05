@@ -51,9 +51,11 @@ export class CoaComponent implements OnInit {
 
   public parentAccountList: CoaEntity[] = [];
 
-  public parentAccountSearchEntity: CoaSearchEntity = new CoaSearchEntity();
+  public selectedParentAccountList: CoaSearchEntity[] = [];
 
-  public selectedParentAccountList: CoaEntity[] = [];
+  public parentSearchEntity: CoaSearchEntity = new CoaSearchEntity();
+
+  public parentAccountSearchEntity: CoaSearchEntity = new CoaSearchEntity();
 
   public coaCount: number = 0;
 
@@ -79,8 +81,9 @@ export class CoaComponent implements OnInit {
       this.coaList = list;
     });
 
-    const parentAccountSub = this.coaService.parentAccountList.subscribe((list) => {
-      this.parentAccountList = list;
+    const parentAccountSub = this.coaService.parentAccountList.subscribe((entities: Entities) => {
+      this.parentAccountList = entities.exceptIds;
+      this.selectedParentAccountList = entities.ids;
     });
 
     const coaCountSub = this.coaService.coaCount.subscribe((count) => {
@@ -121,11 +124,26 @@ export class CoaComponent implements OnInit {
   }
 
   getParentAccountList() {
-    this.coaService.getParentAccountList(this.parentAccountSearchEntity);
+    const ids = this.parentSearchEntity.ids;
+    this.parentSearchEntity = new CoaSearchEntity();
+    this.parentSearchEntity.ids = [
+      ...ids,
+    ];
+    this.parentSearchEntity.setOfBookId = this.setOfBookId;
+    this.coaService.getParentAccountList(this.parentSearchEntity);
+  }
+
+  searchParentTaxList(event) {
+    this.parentSearchEntity.code.startsWith = event;
+    this.coaService.getParentAccountList(this.parentSearchEntity);
   }
 
   getCharacteristicList() {
     this.coaService.getCharacteristicList();
+  }
+
+  onSelectParentChartOfAccount(event) {
+    this.parentSearchEntity.ids = event;
   }
 
   add() {
@@ -219,5 +237,10 @@ export class CoaComponent implements OnInit {
       .catch(err => {
         this.isShowDialog = err;
       });
+  }
+
+  onFilterCharacteristic(event) {
+    this.coaSearchEntity.characteristicValue = event;
+    this.getList();
   }
 }

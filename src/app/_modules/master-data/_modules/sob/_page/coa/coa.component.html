@@ -61,8 +61,13 @@
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.characteristicValue"
-                                    data-qe-id="filter-characteristicValue"></app-advanced-filters>
+              <app-simple-select (listOpen)="getCharacteristicList()"
+                                 (selectionChange)="onFilterCharacteristic(event)"
+                                 [list]="characteristicList"
+                                 [initialValue]="coaForm?.controls?.characteristicValue?.value"
+                                 data-qe-id="dialog-account-characteristic"
+                                 key="name"
+              ></app-simple-select>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.description"
@@ -79,7 +84,7 @@
               {{row.name}}
             </td>
             <td>
-              {{row.characteristicName}}
+              {{row.characteristicValue}}
             </td>
             <td>
               {{row.description}}
@@ -93,7 +98,8 @@
     </div>
   </div>
 </div>
-<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '700px'}" appendTo="body"
+<p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}"
+          [style]="{width: '700px'}" appendTo="body"
           modal="true">
   <p-header>
     {{'bank_account.bank_accounts.add' | translate}}
@@ -140,6 +146,7 @@
                            (selectionChange)="characteristicId.setValue($event)"
                            [list]="characteristicList"
                            id="account-characteristic"
+                           [initialValue]="coaForm?.controls?.characteristicValue?.value"
                            data-qe-id="dialog-account-characteristic"
                            key="name"
         ></app-simple-select>
@@ -151,7 +158,10 @@
         <input formControlName="parentId" type="hidden">
         <app-single-select (listOpen)="getParentAccountList()"
                            [list]="parentAccountList"
+                           (search)="searchParentTaxList($event)"
+                           (selectionChange)="onSelectParentChartOfAccount($event)"
                            id="parent-account"
+                           [initialValue]="coaForm?.controls?.parentCode?.value"
                            key="name"
                            [selectedList]="selectedParentAccountList"
                            data-qe-id="parent-account"></app-single-select>

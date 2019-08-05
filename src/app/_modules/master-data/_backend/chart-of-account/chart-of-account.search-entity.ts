@@ -6,6 +6,7 @@ export class ChartOfAccountSearchEntity extends SearchEntity {
   setOfBookId: string;
 
   code: TextFilter = new TextFilter();
+  name: TextFilter = new TextFilter();
 
   constructor(coaSearchEntity?: any) {
     super(coaSearchEntity);

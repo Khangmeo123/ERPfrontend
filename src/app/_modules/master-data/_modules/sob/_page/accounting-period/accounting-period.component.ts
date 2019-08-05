@@ -23,7 +23,7 @@ import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-
     GeneralService,
     ToastrService,
     AccountingPeriodService,
-  ]
+  ],
 })
 export class AccountingPeriodComponent implements OnInit {
   isSaveBookMark: boolean = false;
@@ -72,6 +72,8 @@ export class AccountingPeriodComponent implements OnInit {
 
   public fiscalYearList: FiscalYearEntity[] = [];
 
+  public selectedFiscalYearList: FiscalYearEntity[] = [];
+
   public fiscalYearSearchEntity: FiscalYearSearchEntity = new FiscalYearSearchEntity();
 
   public periodTypeList: any[] = [];
@@ -112,8 +114,9 @@ export class AccountingPeriodComponent implements OnInit {
       this.selectedCoaList = list.ids;
     });
 
-    const fiscalYearListSub = this.accountingPeriodService.fiscalYearList.subscribe((list: FiscalYearEntity[]) => {
-      this.fiscalYearList = list;
+    const fiscalYearListSub = this.accountingPeriodService.fiscalYearList.subscribe((list: Entities) => {
+      this.fiscalYearList = list.exceptIds;
+      this.selectedFiscalYearList = list.ids;
     });
 
     this.subs.add(sobListSub)
@@ -192,6 +195,7 @@ export class AccountingPeriodComponent implements OnInit {
     this.accountingPeriodSearchEntity.setOfBookId = setOfBookId;
     this.accountingPeriodForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;
+    this.fiscalYearSearchEntity.setOfBookId = this.setOfBookId;
     this.getList();
   }
 

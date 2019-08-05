@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
@@ -31,6 +31,25 @@ export class CoaRepository extends Repository {
         );
       }),
     );
+  }
+
+  getParentChartOfAccountList(parentSearchEntity: CoaSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
+      `${this.apiUrl}/list-parent-chart-of-account`,
+      parentSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<Entities>) => {
+          const entities: Entities = new Entities();
+          entities.ids = response.body.ids.map((item) => new CoaEntity(item));
+          entities.exceptIds = response.body.exceptIds.map((item) => new CoaEntity(item));
+          return entities;
+        }),
+      );
   }
 
   getCharacteristicList(): Observable<CharacteristicEntity[]> {

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { Observable } from 'rxjs';
@@ -46,11 +46,24 @@ export class AccountingPeriodRepository extends Repository {
     );
   }
 
-  getFiscalYearList(fiscalYearSearchEntity: FiscalYearSearchEntity): Observable<FiscalYearEntity[]> {
-    return this.http.post<FiscalYearEntity[]>(this.apiUrl + '/list-fiscal-year', JSON.stringify(fiscalYearSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => r.body.map((item) => new FiscalYearEntity(item))),
-    );
+  getFiscalYearList(fiscalYearSearchEntity: FiscalYearSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
+      this.apiUrl + '/list-fiscal-year',
+      JSON.stringify(fiscalYearSearchEntity),
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      })
+      .pipe(
+        map(
+          (response: HttpResponse<Entities>) => {
+            const entities: Entities = new Entities();
+            entities.ids = response.body.ids.map((item) => new FiscalYearEntity(item));
+            entities.exceptIds = response.body.exceptIds.map((item) => new FiscalYearEntity(item));
+            return entities;
+          },
+        ),
+      );
   }
 
   getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
