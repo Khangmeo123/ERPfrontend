@@ -1,28 +1,30 @@
-import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import { FormModel } from '../../../../_helpers/form-model';
+import { FormControl, FormGroup } from '@angular/forms';
+import { checkLength, requiredField } from 'src/app/_helpers';
 import { PaymentTermEntity } from './payment-term.entity';
 
 export class PaymentTermForm extends FormModel {
 
-    name = new FormControl('', [requiredField]);
-    code = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-    dueInDate = new FormControl('');
+  code = new FormControl(null, [requiredField, checkLength(3, 10)]);
+  name = new FormControl(null, [requiredField, checkLength(1, 100)]);
 
-    discountPeriod = new FormControl('');
-    discountRate = new FormControl('');
-    legalEntityId = new FormControl('');
+  dueInDays = new FormControl(null);
 
+  discountPeriod = new FormControl(null);
+  discountRate = new FormControl(null);
 
-    constructor(paymentTermEntity?: PaymentTermEntity) {
-        super();
-        if (paymentTermEntity !== null && paymentTermEntity !== undefined) {
-            Object.keys(paymentTermEntity).forEach((item) => {
-                if (paymentTermEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(paymentTermEntity[item]);
-                }
-            });
+  errors: FormGroup = new FormGroup({});
+
+  constructor(paymentTermEntity?: PaymentTermEntity) {
+    super();
+    if (paymentTermEntity !== null && paymentTermEntity !== undefined) {
+      Object.keys(paymentTermEntity).forEach((item) => {
+        if (paymentTermEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(paymentTermEntity[item]);
         }
+      });
     }
+  }
 }

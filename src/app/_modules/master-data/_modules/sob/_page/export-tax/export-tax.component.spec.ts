@@ -8,9 +8,9 @@ describe('ExportTaxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ExportTaxComponent ]
+      declarations: [ExportTaxComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

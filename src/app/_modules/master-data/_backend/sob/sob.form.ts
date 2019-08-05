@@ -1,55 +1,52 @@
-import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
+import { FormModel } from '../../../../_helpers/form-model';
+import { FormControl, FormGroup } from '@angular/forms';
 import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class SobForm extends FormModel {
-    code = new FormControl('', [requiredField]);
-    name = new FormControl('', [requiredField]);
+  id = new FormControl(null);
 
-    //he thong tai khoan ke toan
-    coaId = new FormControl('');
-    coaName = new FormControl('');
+  code = new FormControl(null, [requiredField, checkLength(2, 2)]);
+  name = new FormControl(null, [requiredField, checkLength(3, 50)]);
 
-    //don vi tien te
-    currencyId = new FormControl('', [requiredField]);
-    currencyName = new FormControl('', [requiredField]);
+  chartOfAccountTemplateId = new FormControl(null);
+  chartOfAccountTemplateName = new FormControl(null);
 
-    //bieu thue tieu thu dac biet
-    sctId = new FormControl('');
-    sctName = new FormControl('');
+  currencyId = new FormControl(null, [requiredField]);
+  currencyCode = new FormControl(null, []);
 
-    //bieu thue gia tri gia tang
-    vatId = new FormControl('');
-    vatName = new FormControl('');
+  specialConsumptionTaxTemplateId = new FormControl(null);
+  specialConsumptionTaxTemplateName = new FormControl(null);
 
-    //bieu thue tai nguyen
-    nrtId = new FormControl('');
-    nrtName = new FormControl('');
+  valueAddedTaxTemplateId = new FormControl(null);
+  valueAddedTaxTemplateName = new FormControl(null);
 
+  naturalResourceTaxTemplateId = new FormControl(null);
+  naturalResourceTaxTemplateName = new FormControl(null);
 
-    //bieu thue moi truong
-    entId = new FormControl('');
-    entName = new FormControl('');
+  environmentTaxTemplateId = new FormControl(null);
+  environmentTaxTemplateName = new FormControl(null);
 
+  exportTaxTemplateId = new FormControl(null);
+  exportTaxTemplateName = new FormControl(null);
 
-    //bieu thue xuat khau
-    extId = new FormControl('');
-    extName = new FormControl('');
+  importTaxTemplateId = new FormControl(null);
+  importTaxTemplateName = new FormControl(null);
 
-    //bieu thue nhap khau
-    imtId = new FormControl('');
-    imtName = new FormControl('');
+  errors = new FormGroup({
+    code: new FormControl(null),
+    name: new FormControl(null),
+    currencyId: new FormControl(null),
+  });
 
-
-    constructor(sobEntity?: SobEntity) {
-        super();
-        if (sobEntity !== null && sobEntity !== undefined) {
-            Object.keys(sobEntity).forEach((item) => {
-                if (sobEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(sobEntity[item]);
-                }
-            });
+  constructor(sobEntity?: SobEntity) {
+    super();
+    if (sobEntity !== null && sobEntity !== undefined) {
+      Object.keys(sobEntity).forEach((item) => {
+        if (sobEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(sobEntity[item]);
         }
+      });
     }
+  }
 }

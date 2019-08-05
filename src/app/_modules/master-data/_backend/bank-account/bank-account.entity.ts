@@ -2,27 +2,25 @@ import { Entity } from 'src/app/_helpers/entity';
 
 export class BankAccountEntity extends Entity {
 
-    sobId: string;
+  setOfBookId: string;
 
-    // coaEntity:
-    coaId: string;
-    coaName: string;
-    coaCode: string;
+  // coaEntity:
+  chartOfAccountId: string;
+  chartOfAccountName: string;
+  chartOfAccountCode: string;
 
-    // bankEntity:
-    bankId: string;
-    bankCode: string;
-    bankName: string;
+  accountingCode: string;
 
-    accountNumber: string;
-    accountName: string;
-    description: string;
-    branch: string;
-    provinceId: string;
-    provinceName: string;
-    address: string;
+  // bankEntity:
+  bankId: string;
+  bankCode: string;
+  bankName: string;
 
-    constructor(bankAccountEntity?: any) {
-        super(bankAccountEntity);
-    }
+  no: string;
+  name: string;
+  description: string;
+
+  constructor(bankAccountEntity?: any) {
+    super(bankAccountEntity);
+  }
 }

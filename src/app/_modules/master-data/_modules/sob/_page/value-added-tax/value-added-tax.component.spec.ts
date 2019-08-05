@@ -8,9 +8,9 @@ describe('ValueAddedTaxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ValueAddedTaxComponent ]
+      declarations: [ValueAddedTaxComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

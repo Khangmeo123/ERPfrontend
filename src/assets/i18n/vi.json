@@ -32,11 +32,11 @@
 	"bank_account": {
 		"account_number": "Số tài khoản",
 		"account_owner": "Chủ tài khoản",
-		"accountant_code": "Mã tài khoản kế toán",
+		"accounting_code": "Mã tài khoản kế toán",
 		"bank_accounts": {
 			"account_number": "Số tài khoản",
 			"account_owner": "Chủ tài khoản",
-			"accountant_code": "Mã tài khoản kế toán",
+			"accounting_code": "Mã tài khoản kế toán",
 			"add": "Thêm tài khoản ngân hàng",
 			"bank_code": "Mã ngân hàng",
 			"description": "Mô tả"
