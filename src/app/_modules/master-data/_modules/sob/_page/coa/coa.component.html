@@ -70,8 +70,8 @@
             </th>
           </tr>
         </ng-template>
-        <ng-template let-row pTemplate="body">
-          <tr>
+        <ng-template let-row pTemplate="body" let-index="index">
+          <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td>
               {{row.code}}
             </td>
