@@ -78,8 +78,8 @@
             <td> {{costCenter.code}} </td>
             <td> {{costCenter.name}} </td>
             <td>{{costCenter.chartOfAccountCode}}</td>
-            <td>{{costCenter.validFrom}}</td>
-            <td>{{costCenter.validTo}}</td>
+            <td>{{costCenter.validFrom | date: 'dd/MM/yyyy'}}</td>
+            <td>{{costCenter.validTo | date: 'dd/MM/yyyy'}}</td>
             <td> {{costCenter.description}} </td>
           </tr>
         </ng-template>
@@ -90,7 +90,11 @@
     </div>
   </div>
 </div>
-<p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+<p-dialog [(visible)]="isShowDialog"
+          *ngIf="isShowDialog"
+          [contentStyle]="{'overflow':'visible'}"
+          [style]="{width: '900px'}"
+          appendTo="body"
           modal="true">
   <p-header>
     {{ 'cost-center.content.modal.title' | translate}}
@@ -151,6 +155,7 @@
                              [list]="coaList"
                              [selectedList]="selectedCoaList"
                              data-qe-id="dialog-account"
+                             [initialValue]="costCenterForm?.controls?.chartOfAccountName?.value"
                              [key]="'name'"
                              id="chart-of-account"></app-single-select>
         </div>

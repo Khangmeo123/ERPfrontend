@@ -1,5 +1,5 @@
 import { FormModel } from '../../../../_helpers/form-model';
-import { FormControl } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CoaEntity } from 'src/app/_modules/master-data/_backend/coa/coa.entity';
 import { requiredField } from 'src/app/_helpers';
 
@@ -18,6 +18,11 @@ export class CoaForm extends FormModel {
   parentAccountCode = new FormControl(null);
 
   disabled = new FormControl(null);
+
+  errors: FormGroup = new FormGroup({
+    code: new FormControl(),
+    name: new FormControl(),
+  });
 
   constructor(coaEntity?: CoaEntity) {
     super();

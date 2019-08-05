@@ -78,8 +78,8 @@
         <ng-template let-index="index" let-row pTemplate="body">
           <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{row.name}} </td>
-            <td>{{row.startDate}}</td>
-            <td>{{row.endDate}}</td>
+            <td>{{row.startDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{row.endDate | date: 'dd/MM/yyyy'}}</td>
             <td>{{row.inventoryValuationMethod}}</td>
             <td> {{row.statusValue}} </td>
           </tr>

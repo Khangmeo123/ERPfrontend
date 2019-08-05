@@ -28,6 +28,7 @@ export class NaturalResourceTaxForm extends FormModel {
 
   errors: FormGroup = new FormGroup({
     code: new FormControl(null),
+    name: new FormControl(null),
   });
 
   constructor(naturalResourceTaxEntity?: SpecialConsumptionTaxEntity) {

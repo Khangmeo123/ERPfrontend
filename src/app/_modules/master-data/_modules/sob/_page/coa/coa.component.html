@@ -62,7 +62,7 @@
             </th>
             <th class="th-filter">
               <app-simple-select (listOpen)="getCharacteristicList()"
-                                 (selectionChange)="onFilterCharacteristic(event)"
+                                 (selectionChange)="onFilterCharacteristic($event)"
                                  [list]="characteristicList"
                                  [initialValue]="coaForm?.controls?.characteristicValue?.value"
                                  data-qe-id="dialog-account-characteristic"

@@ -28,6 +28,7 @@ export class SpecialConsumptionTaxForm extends FormModel {
 
   errors: FormGroup = new FormGroup({
     code: new FormControl(null),
+    name: new FormControl(null),
   });
 
   constructor(specialConsumptionTaxEntity?: SpecialConsumptionTaxEntity) {

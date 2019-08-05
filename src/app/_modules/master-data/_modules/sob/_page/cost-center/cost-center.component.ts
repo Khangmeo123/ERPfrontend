@@ -118,6 +118,10 @@ export class CostCenterComponent implements OnInit {
   }
 
   getCoaList() {
+    const ids = this.coaSearchEntity.ids;
+    this.coaSearchEntity = new CoaSearchEntity();
+    this.coaSearchEntity.ids = ids;
+    this.coaSearchEntity.setOfBookId = this.setOfBookId;
     this.costCenterService.getCoaList(this.coaSearchEntity);
   }
 

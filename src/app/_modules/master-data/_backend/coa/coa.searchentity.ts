@@ -8,7 +8,7 @@ export class CoaSearchEntity extends SearchEntity {
   name: TextFilter = new TextFilter();
   description: TextFilter = new TextFilter();
 
-  characteristicValue: string;
+  characteristicId: string;
 
   parentAccountCode: TextFilter = new TextFilter();
 

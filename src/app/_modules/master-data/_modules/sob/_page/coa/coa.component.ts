@@ -139,7 +139,9 @@ export class CoaComponent implements OnInit {
   }
 
   getCharacteristicList() {
-    this.coaService.getCharacteristicList();
+    if (!this.characteristicList.length) {
+      this.coaService.getCharacteristicList();
+    }
   }
 
   onSelectParentChartOfAccount(event) {
@@ -240,7 +242,7 @@ export class CoaComponent implements OnInit {
   }
 
   onFilterCharacteristic(event) {
-    this.coaSearchEntity.characteristicValue = event;
+    this.coaSearchEntity.characteristicId = event;
     this.getList();
   }
 }

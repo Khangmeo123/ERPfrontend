@@ -1,17 +1,19 @@
 import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CostCenterEntity } from 'src/app/_modules/master-data/_backend/cost-center/cost-center.entity';
-import { requiredField } from 'src/app/_helpers';
+import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class CostCenterForm extends FormModel {
 
   setOfBookId = new FormControl(null, [requiredField]);
 
   name = new FormControl(null, [requiredField]);
-  code = new FormControl(null, [requiredField]);
+  code = new FormControl(null, [requiredField, checkLength(3, 10)]);
 
   validFrom = new FormControl(null);
   validTo = new FormControl(null);
+
+  chartOfAccountName = new FormControl(null);
 
   chartOfAccountId = new FormControl(null);
 
