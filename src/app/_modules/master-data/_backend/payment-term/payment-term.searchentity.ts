@@ -4,7 +4,7 @@ import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 
 export class PaymentTermSearchEntity extends SearchEntity {
   setOfBookId: string;
-
+  legalEntityId: string;
   name: TextFilter = new TextFilter();
   code: TextFilter = new TextFilter();
 

@@ -19,7 +19,6 @@ import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.co
 import { DepartmentEmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
 import { RadioButtonModule } from 'primeng/radiobutton';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
@@ -29,6 +28,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HrOrganizationRepository } from './_page/hr-organization/hr-organization.repository';
 import { GeneralService } from '../../../../_helpers/general-service.service';
 import { ChipsModule } from 'primeng/chips';
+import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
 
 @NgModule({
   declarations: [
