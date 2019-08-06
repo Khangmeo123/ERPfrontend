@@ -28,7 +28,7 @@ export class DepartmentComponent implements OnInit {
     },
     {
       key: 'Kho bãi',
-      route: '/master-data/department/warehouse-group',
+      route: '/master-data/department/warehouse',
     },
     {
       key: 'Dự án',
