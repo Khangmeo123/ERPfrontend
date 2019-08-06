@@ -1,3 +1,4 @@
+import { WarehouseDetailComponent } from './_page/warehouse-detail/warehouse-detail.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DepartmentRoutingModule } from './department-routing.module';
@@ -21,7 +22,6 @@ import { DepartmentRootComponent } from './_page/department-root/department-root
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
-import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { DepartmentService } from './_page/department/department.service';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
@@ -41,7 +41,9 @@ import { ChipsModule } from 'primeng/chips';
     WarehouseListComponent,
     DepartmentEmployeeDetailComponent,
     DepartmentRootComponent,
-    WarehouseGroupComponent,
+    WarehouseComponent,
+    WarehouseListComponent,
+    WarehouseDetailComponent,
   ],
   imports: [
     CommonModule,

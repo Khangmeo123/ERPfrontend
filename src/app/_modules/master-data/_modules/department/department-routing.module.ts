@@ -1,3 +1,4 @@
+import { WarehouseListComponent } from './_page/warehouse-list/warehouse-list.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DepartmentComponent } from './_page/department/department.component';
@@ -8,7 +9,7 @@ import { ProjectOrganizationComponent } from './_page/project-organization/proje
 import { DepartmentEmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 
 import { DepartmentRootComponent } from './_page/department-root/department-root.component';
-import { WarehouseGroupComponent } from './_page/warehouse-group/warehouse-group.component';
+import { WarehouseDetailComponent } from './_page/warehouse-detail/warehouse-detail.component';
 
 const routes: Routes = [
   {
@@ -32,12 +33,23 @@ const routes: Routes = [
             component: AssetComponent,
           },
           {
-            path: 'warehouse-group',
-            component: WarehouseGroupComponent,
-          },
-          {
-            path: 'warehouse-group/warehouse',
+            path: 'warehouse',
             component: WarehouseComponent,
+            children: [
+              {
+                path: '',
+                redirectTo: 'warehouse-list',
+                pathMatch: 'full',
+              },
+              {
+                path: 'warehouse-detail',
+                component: WarehouseDetailComponent,
+              },
+              {
+                path: 'warehouse-list',
+                component: WarehouseListComponent,
+              },
+            ],
           },
           {
             path: 'project',
