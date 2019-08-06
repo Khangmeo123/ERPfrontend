@@ -37,6 +37,17 @@ export class SidebarListComponent implements OnInit {
     const {
       routeUrl,
     } = this;
+    this.menu.forEach(item => {
+      if (routeUrl.includes(item.route)) {
+        if (item.children && item.children.length) {
+          item.isOpened = !item.isOpened;
+        }
+      } else {
+        if (item.children && item.children.length) {
+          item.isShowed = !item.isShowed;
+        }
+      }
+    });
   }
 
   toggleChildren(item: SidebarItem) {

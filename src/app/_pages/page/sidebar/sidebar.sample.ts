@@ -225,20 +225,4 @@ export const sampleSidebarMenu = [
       },
     ],
   },
-  {
-    label: 'Quản lý kho bãi',
-    icon: 'fa fa-tv',
-    route: '/inventory',
-    exact: true,
-    isOpened: false,
-    isShowed: true,
-    children: [
-      {
-        label: 'Quản lý nhóm kinh doanh',
-        route: '/inventory/general/dashboard',
-        exact: true,
-        isShowed: true,
-      },
-    ],
-  },
 ];
