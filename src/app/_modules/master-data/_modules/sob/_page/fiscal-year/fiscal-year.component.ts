@@ -6,7 +6,7 @@ import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
 import {FormControl, FormGroup} from '@angular/forms';
 import {GeneralService} from '../../../../../../_helpers/general-service.service';
 import {ToastrService} from 'ngx-toastr';
-import {Entities} from '../../../../../../_helpers/entity';
+import {Entities, EnumEntity} from '../../../../../../_helpers/entity';
 import {FiscalYearEntity} from '../../../../_backend/fiscal-year/fiscal-year.entity';
 import {FiscalYearSearchEntity} from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
 import {FiscalYearService} from './fiscal-year.service';
@@ -60,6 +60,8 @@ export class FiscalYearComponent implements OnInit {
   public inventoryValuationMethodList = [];
 
   public statusList = [];
+
+  public valuationMethodFilter: EnumEntity = new EnumEntity();
 
   constructor(
     private fiscalYearService: FiscalYearService,
@@ -118,8 +120,8 @@ export class FiscalYearComponent implements OnInit {
     return this.fiscalYearForm.get('endDate') as FormControl;
   }
 
-  get inventoryValuationMethodId() {
-    return this.fiscalYearForm.get('inventoryValuationMethodId') as FormControl;
+  get valuationMethodId() {
+    return this.fiscalYearForm.get('valuationMethodId') as FormControl;
   }
 
   get statusId() {
@@ -134,8 +136,8 @@ export class FiscalYearComponent implements OnInit {
     return this.fiscalYearForm.get('errors') as FormGroup;
   }
 
-  get statusValue() {
-    return this.fiscalYearForm.get('statusValue') as FormControl;
+  get statusDisplay() {
+    return this.fiscalYearForm.get('statusDisplay') as FormControl;
   }
 
   getInventoryValuationMethodList() {
@@ -151,8 +153,6 @@ export class FiscalYearComponent implements OnInit {
     }
   }
 
-  valuationMethodSelector = (node) => node.code;
-
   ngOnInit() {
     if (this.currentSob) {
       this.getList();
@@ -160,8 +160,12 @@ export class FiscalYearComponent implements OnInit {
   }
 
   onSelectInventoryValuationMethod(event) {
-    this.inventoryValuationMethodId.setValue(event);
+    const {id} = event;
+    this.valuationMethodFilter = event;
+    this.valuationMethodId.setValue(id);
   }
+
+  valuationMethodFilterSelector = node => node;
 
   changeSob(event) {
     const [setOfBookId] = event;
@@ -249,12 +253,12 @@ export class FiscalYearComponent implements OnInit {
   }
 
   onValuationMethodFilter(event) {
-    this.fiscalYearSearchEntity.inventoryValuationMethod = event;
+    this.fiscalYearSearchEntity.valuationMethodId = event;
     this.getList();
   }
 
   onStatusFilter(event) {
-    this.fiscalYearSearchEntity.status = event;
+    this.fiscalYearSearchEntity.statusId = event;
     this.getList();
   }
 }

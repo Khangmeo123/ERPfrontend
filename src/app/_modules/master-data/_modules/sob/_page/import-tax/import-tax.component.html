@@ -70,9 +70,13 @@
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="importTaxSearchEntity.unitOfMeasureName"
-                                    data-qe-id="filter-unit"></app-advanced-filters>
+              <app-single-select [list]="uomFilterList"
+                                 [selectedList]="selectedUomFilterList"
+                                 (listOpen)="onOpenUomFilter()"
+                                 key="name"
+                                 (selectionChange)="onSelectUomFilter($event)"
+                                 (search)="onSearchUomFilter($event)"
+              ></app-single-select>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()" [filter]="importTaxSearchEntity.rate"

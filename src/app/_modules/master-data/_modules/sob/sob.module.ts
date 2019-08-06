@@ -9,7 +9,6 @@ import { AccountingPeriodComponent } from './_page/accounting-period/accounting-
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
 import { NaturalResourceTaxComponent } from './_page/natural-resource-tax/natural-resource-tax.component';
-import { VoucherComponent } from './_page/voucher/voucher.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -47,7 +46,6 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     PaymentMethodComponent,
     PaymentTermComponent,
     NaturalResourceTaxComponent,
-    VoucherComponent,
     ValueAddedTaxComponent,
     EnvironmentTaxComponent,
     ImportTaxComponent,

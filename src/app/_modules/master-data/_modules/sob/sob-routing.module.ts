@@ -7,7 +7,6 @@ import { NaturalResourceTaxComponent } from './_page/natural-resource-tax/natura
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
 import { AccountingPeriodComponent } from './_page/accounting-period/accounting-period.component';
-import { VoucherComponent } from './_page/voucher/voucher.component';
 import { PaymentMethodComponent } from './_page/payment-method/payment-method.component';
 import { PaymentTermComponent } from './_page/payment-term/payment-term.component';
 import { SobComponent } from './_page/sob/sob.component';
@@ -28,7 +27,6 @@ const routes: Routes = [
       {path: 'cost-center', component: CostCenterComponent},
       {path: 'fiscal-year', component: FiscalYearComponent},
       {path: 'accounting-period', component: AccountingPeriodComponent},
-      {path: 'voucher', component: VoucherComponent},
       {path: 'payment-method', component: PaymentMethodComponent},
       {path: 'value-added-tax', component: ValueAddedTaxComponent},
       {path: 'environment-tax', component: EnvironmentTaxComponent},

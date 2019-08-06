@@ -110,11 +110,18 @@ export class AccountingPeriodRepository extends Repository {
   }
 
 
-  add(accountingPeriodEntity: any): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(accountingPeriodEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
-      map(r => r.body),
-    );
+  add(accountingPeriodEntity: AccountingPeriodEntity): Observable<boolean> {
+    if (accountingPeriodEntity.periodTypeId) {
+      return this.http.post<boolean>(this.apiUrl + '/bulk-create', JSON.stringify(accountingPeriodEntity),
+        {observe: 'response', headers: this.getHeader()}).pipe(
+        map(r => r.body),
+      );
+    } else {
+      return this.http.post<boolean>(this.apiUrl + '/create', JSON.stringify(accountingPeriodEntity),
+        {observe: 'response', headers: this.getHeader()}).pipe(
+        map(r => r.body),
+      );
+    }
   }
 
   update(accountingPeriodEntity: any): Observable<boolean> {

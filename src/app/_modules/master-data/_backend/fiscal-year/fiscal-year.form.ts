@@ -11,10 +11,11 @@ export class FiscalYearForm extends FormModel {
   startDate = new FormControl(null, [requiredField]);
   endDate = new FormControl(null, [requiredField]);
 
-  inventoryValuationMethodId = new FormControl(null, [requiredField]);
+  valuationMethodId = new FormControl(null, [requiredField]);
+  valuationMethodDisplay = new FormControl(null);
 
   statusId = new FormControl(null);
-  statusValue = new FormControl(null);
+  statusDisplay = new FormControl(null);
 
   errors = new FormGroup({});
 

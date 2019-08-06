@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../_helpers/entity';
-import { ExportTaxEntity } from '../../../../_backend/export-tax/export-tax.entity';
-import { ToastrService } from 'ngx-toastr';
-import { UomEntity } from '../../../../_backend/uom/uom.entity';
-import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
-import { ExportTaxService } from './export-tax.service';
-import { ExportTaxSearchEntity } from '../../../../_backend/export-tax/export-tax.search-entity';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../_helpers/entity';
+import {ExportTaxEntity} from '../../../../_backend/export-tax/export-tax.entity';
+import {ToastrService} from 'ngx-toastr';
+import {UomEntity} from '../../../../_backend/uom/uom.entity';
+import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
+import {ExportTaxService} from './export-tax.service';
+import {ExportTaxSearchEntity} from '../../../../_backend/export-tax/export-tax.search-entity';
 
 @Component({
   selector: 'app-export-tax',
@@ -62,6 +62,12 @@ export class ExportTaxComponent implements OnInit {
 
   public uomSearchEntity: UomSearchEntity = new UomSearchEntity();
 
+  public uomFilterList: UomEntity[] = [];
+
+  public selectedUomFilterList: UomEntity[] = [];
+
+  public uomFilterSearchEntity: UomSearchEntity = new UomSearchEntity();
+
   public setOfBookId: string = null;
 
   public parentTaxList: ExportTaxEntity[] = [];
@@ -105,10 +111,16 @@ export class ExportTaxComponent implements OnInit {
       }
     });
 
+    const uomFilterListSub = this.exportTaxService.uomFilterList.subscribe((entities: Entities) => {
+      this.uomFilterList = entities.exceptIds;
+      this.selectedUomFilterList = entities.ids;
+    });
+
     this.subs.add(sobListSub)
       .add(exportTaxSub)
       .add(exportTaxFormSub)
       .add(uomListSub)
+      .add(uomFilterListSub)
       .add(parentTaxSub)
       .add(exportTaxCountSub);
   }
@@ -267,5 +279,27 @@ export class ExportTaxComponent implements OnInit {
       .then(() => {
         tax.disabled = !tax.disabled;
       });
+  }
+
+  onOpenUomFilter() {
+    const ids = this.uomFilterSearchEntity.ids;
+    this.uomFilterSearchEntity = new UomSearchEntity();
+    this.uomFilterSearchEntity.ids = [...ids];
+    this.exportTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSelectUomFilter(event) {
+    this.uomFilterSearchEntity.ids = event;
+    if (event.length) {
+      this.exportTaxSearchEntity.unitOfMeasureId.equal = event[0];
+    } else {
+      this.exportTaxSearchEntity.unitOfMeasureId.equal = null;
+    }
+    this.getList();
+  }
+
+  onSearchUomFilter(event) {
+    this.uomFilterSearchEntity.name.startsWith = event;
+    this.exportTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
   }
 }

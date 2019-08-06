@@ -1,6 +1,21 @@
 {
+	"accountingPeriod": {
+		"description": "Mô tả",
+		"endPeriod": "Ngày kết thúc",
+		"header": {
+			"title": "Kỳ kế toán"
+		},
+		"modal": {
+			"label": "Thêm kỳ kế toán",
+			"title": ""
+		},
+		"startPeriod": "Ngày bắt đầu",
+		"status": {
+			"fiscal_year": "Năm tài chính"
+		}
+	},
 	"advancedFilter": {
-		"placeholder": ""
+		"placeholder": "Tìm kiếm..."
 	},
 	"asset": {
 		"content": {
@@ -29,7 +44,7 @@
 			"title": "Danh sách ngân hàng"
 		}
 	},
-	"bank_account": {
+	"bankAccount": {
 		"account_number": "Số tài khoản",
 		"account_owner": "Chủ tài khoản",
 		"accounting_code": "Mã tài khoản kế toán",
@@ -79,6 +94,22 @@
 			"title": "Hệ thống tài khoản"
 		},
 		"super_account": "Tài khoản tổng hợp"
+	},
+	"cost-center": {
+		"content": {
+			"account": "Tài khoản",
+			"description": "Mô tả",
+			"from_date": "Ngày bắt đầu",
+			"id": "Mã trung tâm",
+			"modal": {
+				"title": "Thêm trung tâm chi phí"
+			},
+			"name": "Tên trung tâm",
+			"to_date": "Ngày kết thúc"
+		},
+		"header": {
+			"title": "Trung tâm chi phí"
+		}
 	},
 	"cropper": {
 		"browseImage": "Chọn ảnh",
@@ -154,8 +185,8 @@
 	},
 	"department": {
 		"addToDepartment": {
-			"error": "",
-			"success": ""
+			"error": "Thêm phòng ban không thành công",
+			"success": "Thêm phòng ban thành công"
 		},
 		"asset": {
 			"actions": "",
@@ -362,7 +393,6 @@
 	},
 	"division": {
 		"content": {
-			"action": "",
 			"address": "Địa chỉ",
 			"code": "mã chi nhánh",
 			"name": "Tên chi nhánh"
@@ -506,11 +536,42 @@
 			"title": ""
 		}
 	},
+	"environmentTax": {
+		"header": {
+			"title": "Biểu thuế môi trường"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế môi trường"
+		}
+	},
+	"environment_tax": {
+		"description": "Mô tả"
+	},
+	"exportTax": {
+		"header": {
+			"title": "Biểu thuế xuất khẩu"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế xuất khẩu"
+		}
+	},
+	"fiscal_year": {
+		"content": {
+			"from_date": "Ngày bắt đầu",
+			"modal": {
+				"title": "Thêm năm tài chính"
+			},
+			"name": "Tên",
+			"status": "Trạng thái",
+			"to_date": "Ngày kết thúc",
+			"valuation_method": "Phương pháp định giá ngầm định"
+		},
+		"header": {
+			"title": "Năm tài chính"
+		}
+	},
 	"general": {
 		"action": "Thao tác",
-		"actions": {
-			"title": ""
-		},
 		"button": {
 			"add": "Thêm",
 			"cancel": "Hủy",
@@ -566,13 +627,25 @@
 				"success": ""
 			}
 		},
-		"sob": "Số bộ sổ"
+		"sob": "Số bộ sổ",
+		"update": {
+			"failure": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
+		}
 	},
 	"hrOrganization": {
-		"add": "Thêm phong",
+		"add": "Thêm phòng",
 		"code": "Mã phòng ban",
 		"name": "Tên phòng ban",
 		"title": "Thông tin phòng ban"
+	},
+	"importTax": {
+		"header": {
+			"title": "Biểu thuế nhập khẩu"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế nhập khẩu"
+		}
 	},
 	"item": {
 		"content": {
@@ -746,12 +819,43 @@
 			"title_1": "Thông tin chung"
 		}
 	},
+	"naturalResourceTax": {
+		"header": {
+			"title": "Biểu thuế tài nguyên"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế tài nguyên"
+		}
+	},
 	"noData": {
-		"helper": ""
+		"helper": "Không có dữ liệu"
 	},
 	"pagination": {
 		"entries": "bản ghi",
 		"show": "Hiện thị"
+	},
+	"payment_method": {
+		"code": "Mã phương thức",
+		"header": {
+			"title": "Phương thức thanh toán"
+		},
+		"modal": {
+			"title": "Thêm phương thức thanh toán"
+		},
+		"payment_method_name": "Tên phương thức thanh toán"
+	},
+	"payment_term": {
+		"code": "Mã điều khoản",
+		"discount_period": "Thời hạn chiết khấu",
+		"discount_rate": "Tỉ lệ chiết khấu",
+		"due_in_date": "Ngày được nợ",
+		"header": {
+			"title": "Điều khoản thanh toán"
+		},
+		"modal": {
+			"title": "Điều khoản thanh toán"
+		},
+		"name": "Tên điều khoản"
 	},
 	"project": {
 		"employee": {
@@ -785,6 +889,14 @@
 		"special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
 		"title": "Danh sách bộ sổ",
 		"value_added_tax": "Biểu thuế GTGT"
+	},
+	"specialConsumptionTax": {
+		"header": {
+			"title": "Biểu thuế tiêu thụ đặc biệt"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế tiêu thụ đặc biệt"
+		}
 	},
 	"special_price_customer": {
 		"code": "Mã sản phẩm",
@@ -862,6 +974,15 @@
 			"name": "Tên nhà cung cấp"
 		}
 	},
+	"tax": {
+		"available": "Hiệu lực",
+		"code": "Mã",
+		"description": "Mô tả",
+		"discount": "Chiết khấu",
+		"name": "Tên",
+		"parent_account": "Thuế cha",
+		"unit": "Đơn vị tính"
+	},
 	"uom": {
 		"content": {
 			"code": "Mã đơn vị",
@@ -874,6 +995,14 @@
 		},
 		"header": {
 			"title": "Đơn vị tính sản phẩm"
+		}
+	},
+	"valueAddedTax": {
+		"header": {
+			"title": "Thuế giá trị gia tăng"
+		},
+		"modal": {
+			"title": "Thêm thuế giá trị gia tăng"
 		}
 	}
 }

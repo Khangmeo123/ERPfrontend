@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../_helpers/entity';
-import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
-import { ToastrService } from 'ngx-toastr';
-import { UomEntity } from '../../../../_backend/uom/uom.entity';
-import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
-import { NaturalResourceTaxService } from './natural-resource-tax.service';
-import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.search-entity';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../_helpers/entity';
+import {NaturalResourceTaxEntity} from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
+import {ToastrService} from 'ngx-toastr';
+import {UomEntity} from '../../../../_backend/uom/uom.entity';
+import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
+import {NaturalResourceTaxService} from './natural-resource-tax.service';
+import {NaturalResourceTaxSearchEntity} from '../../../../_backend/natural-resource-tax/natural-resource-tax.search-entity';
 
 @Component({
   selector: 'app-natural-resource-tax',
@@ -62,6 +62,12 @@ export class NaturalResourceTaxComponent implements OnInit {
 
   public uomSearchEntity: UomSearchEntity = new UomSearchEntity();
 
+  public uomFilterList: UomEntity[] = [];
+
+  public selectedUomFilterList: UomEntity[] = [];
+
+  public uomFilterSearchEntity: UomSearchEntity = new UomSearchEntity();
+
   public setOfBookId: string = null;
 
   public parentTaxList: NaturalResourceTaxEntity[] = [];
@@ -105,10 +111,16 @@ export class NaturalResourceTaxComponent implements OnInit {
       }
     });
 
+    const uomFilterListSub = this.naturalResourceTaxService.uomFilterList.subscribe((entities: Entities) => {
+      this.uomFilterList = entities.exceptIds;
+      this.selectedUomFilterList = entities.ids;
+    });
+
     this.subs.add(sobListSub)
       .add(naturalResourceTaxSub)
       .add(naturalResourceTaxFormSub)
       .add(uomListSub)
+      .add(uomFilterListSub)
       .add(parentTaxSub)
       .add(naturalResourceTaxCountSub);
   }
@@ -267,5 +279,27 @@ export class NaturalResourceTaxComponent implements OnInit {
       .then(() => {
         tax.disabled = !tax.disabled;
       });
+  }
+
+  onOpenUomFilter() {
+    const ids = this.uomFilterSearchEntity.ids;
+    this.uomFilterSearchEntity = new UomSearchEntity();
+    this.uomFilterSearchEntity.ids = [...ids];
+    this.naturalResourceTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSelectUomFilter(event) {
+    this.uomFilterSearchEntity.ids = event;
+    if (event.length) {
+      this.naturalResourceTaxSearchEntity.unitOfMeasureId.equal = event[0];
+    } else {
+      this.naturalResourceTaxSearchEntity.unitOfMeasureId.equal = null;
+    }
+    this.getList();
+  }
+
+  onSearchUomFilter(event) {
+    this.uomFilterSearchEntity.name.startsWith = event;
+    this.naturalResourceTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
   }
 }

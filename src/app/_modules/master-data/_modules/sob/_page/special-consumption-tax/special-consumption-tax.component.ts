@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { SpecialConsumptionTaxService } from './special-consumption-tax.service';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../_helpers/entity';
-import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
-import { ToastrService } from 'ngx-toastr';
-import { UomEntity } from '../../../../_backend/uom/uom.entity';
-import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../_helpers/entity';
+import {SpecialConsumptionTaxEntity} from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
+import {ToastrService} from 'ngx-toastr';
+import {UomEntity} from '../../../../_backend/uom/uom.entity';
+import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
+import {SpecialConsumptionTaxService} from './special-consumption-tax.service';
+import {SpecialConsumptionTaxSearchEntity} from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 @Component({
   selector: 'app-special-consumption-tax',
@@ -62,6 +62,12 @@ export class SpecialConsumptionTaxComponent implements OnInit {
 
   public uomSearchEntity: UomSearchEntity = new UomSearchEntity();
 
+  public uomFilterList: UomEntity[] = [];
+
+  public selectedUomFilterList: UomEntity[] = [];
+
+  public uomFilterSearchEntity: UomSearchEntity = new UomSearchEntity();
+
   public setOfBookId: string = null;
 
   public parentTaxList: SpecialConsumptionTaxEntity[] = [];
@@ -105,10 +111,16 @@ export class SpecialConsumptionTaxComponent implements OnInit {
       }
     });
 
+    const uomFilterListSub = this.specialConsumptionTaxService.uomFilterList.subscribe((entities: Entities) => {
+      this.uomFilterList = entities.exceptIds;
+      this.selectedUomFilterList = entities.ids;
+    });
+
     this.subs.add(sobListSub)
       .add(specialConsumptionTaxSub)
       .add(specialConsumptionTaxFormSub)
       .add(uomListSub)
+      .add(uomFilterListSub)
       .add(parentTaxSub)
       .add(specialConsumptionTaxCountSub);
   }
@@ -267,5 +279,27 @@ export class SpecialConsumptionTaxComponent implements OnInit {
       .then(() => {
         tax.disabled = !tax.disabled;
       });
+  }
+
+  onOpenUomFilter() {
+    const ids = this.uomFilterSearchEntity.ids;
+    this.uomFilterSearchEntity = new UomSearchEntity();
+    this.uomFilterSearchEntity.ids = [...ids];
+    this.specialConsumptionTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSelectUomFilter(event) {
+    this.uomFilterSearchEntity.ids = event;
+    if (event.length) {
+      this.specialConsumptionTaxSearchEntity.unitOfMeasureId.equal = event[0];
+    } else {
+      this.specialConsumptionTaxSearchEntity.unitOfMeasureId.equal = null;
+    }
+    this.getList();
+  }
+
+  onSearchUomFilter(event) {
+    this.uomFilterSearchEntity.name.startsWith = event;
+    this.specialConsumptionTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
   }
 }

@@ -6,8 +6,10 @@ export class AccountingPeriodEntity extends Entity {
 
   fiscalYearId: string;
 
-  validFrom: string;
-  validTo: string;
+  periodTypeId: string;
+
+  startPeriod: string;
+  endPeriod: string;
 
   description: string;
 

@@ -1,7 +1,7 @@
 <div class="page accounting-period">
   <div class="page-header">
         <span class="page-title">
-            {{'accounting_period.header.title' | translate}}
+            {{'accountingPeriod.header.title' | translate}}
           <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -9,7 +9,7 @@
             </span>
         </span>
     <div class="page-actions">
-      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!(setOfBookId && fiscalYearId)">
         + {{'general.button.add' | translate}}</button>
       <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
         {{'general.button.clear' | translate}}
@@ -29,10 +29,11 @@
                            key="name"></app-single-select>
       </div>
       <div class="col d-flex align-items-center">
-        <span class="sob mr-2">{{'accounting_period.status.fiscal_year' | translate}}:</span>
+        <span class="sob mr-2">{{'accountingPeriod.status.fiscal_year' | translate}}:</span>
         <app-single-select (listOpen)="getFiscalYearList()"
                            (selectionChange)="changeFiscalYear($event)"
                            [list]="fiscalYearList"
+                           [disabled]="!setOfBookId"
                            data-qe-id="fiscalYearList"
                            key="name"></app-single-select>
       </div>
@@ -45,36 +46,39 @@
           <tr>
             <th [pSortableColumn]="'startPeriod'" data-qe-id="table-thead-from-date"
                 pResizableColumn>
-              {{'accounting_period.from_date' | translate}}
+              {{'accountingPeriod.startPeriod' | translate}}
             </th>
             <th [pSortableColumn]="'endPeriod'" data-qe-id="table-thead-to-date"
                 pResizableColumn>
-              {{'accounting_period.to_date' | translate}}
+              {{'accountingPeriod.endPeriod' | translate}}
             </th>
             <th [pSortableColumn]="'description'" data-qe-id="table-thead-description"
                 pResizableColumn>
-              {{'accounting_period.description' | translate}}
+              {{'accountingPeriod.description' | translate}}
             </th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="accountingPeriodSearchEntity.validFrom"
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="accountingPeriodSearchEntity.startPeriod"
                                     data-qe-id="filter-validForm"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="accountingPeriodSearchEntity.validTo"
-                                    data-qe-id="filter-validTo"></app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="accountingPeriodSearchEntity.endPeriod"
+                                    data-qe-id="filter-endPeriod"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="accountingPeriodSearchEntity.description"
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="accountingPeriodSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
           </tr>
         </ng-template>
         <ng-template let-accountingPeriod let-index="index" pTemplate="body">
           <tr (dblclick)="edit(accountingPeriod.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> {{accountingPeriod.validFrom}} </td>
-            <td>{{accountingPeriod.validTo}}</td>
+            <td> {{accountingPeriod.startPeriod | date: 'dd/MM/yyyy'}}  </td>
+            <td>{{accountingPeriod.endPeriod | date: 'dd/MM/yyyy'}} </td>
             <td>{{accountingPeriod.description}}</td>
           </tr>
         </ng-template>
@@ -90,56 +94,85 @@
 <p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
           modal="true">
   <p-header>
-    {{'accounting_period.modal.title' | translate}}
+    {{'accountingPeriod.modal.title' | translate}}
   </p-header>
   <div [formGroup]="accountingPeriodForm" class="container">
     <div class="row">
-      <div class="col d-flex">
+      <div class="col d-flex" *ngIf="!accountingPeriodForm?.value?.id">
         <div class="flex-shrink-1 mr-2 icon-checked">
           <div class="pretty p-icon p-curve p-has-indeterminate">
-            <input (change)="onClickChange()" [checked]="isChecked" id="new-accounting-period-checkbox"
+            <input (change)="onChangePeriodType($event)"
+                   id="new-accounting-period-checkbox"
+                   value="auto-generate"
                    type="checkbox"/>
             <div class="state">
               <i class="icon material-icons">done</i>
-              <label for="new-accounting-period-checkbox">{{'accounting_period.modal.label' | translate}} : </label>
+              <label for="new-accounting-period-checkbox">{{'accountingPeriod.modal.label' | translate}} : </label>
             </div>
           </div>
         </div>
         <div class="flex-grow-1">
-          <app-simple-select key="display" (listOpen)="getPeriodTypeList()" [list]="periodTypeList"></app-simple-select>
+          <div class="div-form d-flex">
+            <app-simple-select class="flex-grow-1"
+                               (listOpen)="getPeriodTypeList()"
+                               [disabled]="!autoGenerate"
+                               (selectionChange)="onSelectPeriodType($event)"
+                               key="display"
+                               [initialValue]="periodTypeId?.value"
+                               [list]="periodTypeList"></app-simple-select>
+            <app-error
+              *ngIf="(periodTypeId?.errors && periodTypeId?.touched) || !!errors.get('periodTypeId')?.value"
+              [formGroup]="accountingPeriodForm"
+              [placement]="'top'" [property]="'periodTypeId'" class="error-form"
+              data-qe-id="dialog-error-period-type">
+            </app-error>
+          </div>
         </div>
       </div>
     </div>
-    <div *ngIf="!isChecked" class="row mt-2">
+    <div *ngIf="!autoGenerate" class="row mt-2">
       <div class="col-sm-6">
         <div class="form-group">
-          <label>{{ 'accounting_period.from_date' | translate}}</label>
+          <label for="start-period">
+            {{ 'accountingPeriod.startPeriod' | translate}}
+            <span class="text-danger ml-2">*</span>
+          </label>
           <div class="div-form d-flex">
-            <app-date-picker [control]="validFrom" class="flex-grow-1" data-qe-id="dialog-valid-form"></app-date-picker>
+            <app-date-picker [control]="startPeriod"
+                             id="start-period"
+                             class="flex-grow-1"
+                             data-qe-id="dialog-valid-form"></app-date-picker>
             <app-error
-              *ngIf="(accountingPeriodForm.controls.validFrom?.errors && accountingPeriodForm.controls.validFrom?.touched) || !!accountingPeriodForm.controls.errors.get('validFrom')?.value"
+              *ngIf="(startPeriod?.errors && startPeriod?.touched) || !!errors.get('startPeriod')?.value"
               [formGroup]="accountingPeriodForm"
-              [placement]="'top'" [property]="'validFrom'" class="error-form"
-              data-qe-id="dialog-error-valid-from">
+              [placement]="'top'" [property]="'startPeriod'" class="error-form"
+              data-qe-id="dialog-error-start-period">
             </app-error>
           </div>
         </div>
       </div>
       <div class="col-sm-6">
         <div class="form-group">
-          <label>{{ 'accounting_period.to_date' | translate}}</label>
+          <label for="end-period">
+            {{ 'accountingPeriod.endPeriod' | translate}}
+            <span class="text-danger ml-2">*</span>
+          </label>
           <div class="div-form d-flex">
-            <app-date-picker [control]="validTo" class="flex-grow-1" data-qe-id="dialog-valid-to"></app-date-picker>
+            <app-date-picker
+              id="end-period"
+              [control]="endPeriod"
+              class="flex-grow-1"
+              data-qe-id="dialog-end-period"></app-date-picker>
             <app-error
-              *ngIf="(accountingPeriodForm.controls.validTo?.errors && accountingPeriodForm.controls.validTo?.touched) || !!accountingPeriodForm.controls.errors.get('validTo')?.value"
+              *ngIf="(endPeriod?.errors && endPeriod?.touched) || !!errors.get('endPeriod')?.value"
               [formGroup]="accountingPeriodForm"
-              [placement]="'top'" [property]="'validTo'" class="error-form" data-qe-id="dialog-error-valid-to">
+              [placement]="'top'" [property]="'endPeriod'" class="error-form" data-qe-id="dialog-error-end-period">
             </app-error>
           </div>
         </div>
       </div>
     </div>
-    <div *ngIf="!isChecked" class="row">
+    <div *ngIf="!autoGenerate" class="row">
       <div class="col-sm-12">
         <label for="description">
           {{'environment_tax.description' | translate}}

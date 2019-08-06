@@ -8,6 +8,7 @@ export class SpecialConsumptionTaxSearchEntity extends SearchEntity {
   code: TextFilter = new TextFilter();
   name: TextFilter = new TextFilter();
 
+  unitOfMeasureId: TextFilter = new TextFilter();
   unitOfMeasureName: TextFilter = new TextFilter();
 
   rate: NumberFilter = new NumberFilter();

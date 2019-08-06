@@ -1,7 +1,7 @@
-<div class="page bank_account-details">
+<div class="page bankAccount-details">
   <div class="page-header">
     <span class="page-title">
-      {{'bank_account.details.title' | translate}}
+      {{'bankAccount.details.title' | translate}}
     </span>
     <div class="page-actions">
       <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!setOfBookId">
@@ -34,22 +34,22 @@
       <ng-template pTemplate="header">
         <tr>
           <th data-qe-id="table-thead-accounting-code">
-            {{'bank_account.accounting_code' | translate}}
+            {{'bankAccount.accounting_code' | translate}}
           </th>
           <th data-qe-id="table-thead-bank-code">
-            {{'bank_account.bank_code' | translate}}
+            {{'bankAccount.bank_code' | translate}}
           </th>
           <th data-qe-id="table-thead-bank-code">
-            {{'bank_account.bank_name' | translate}}
+            {{'bankAccount.bank_name' | translate}}
           </th>
           <th data-qe-id="table-thead-account-number">
-            {{'bank_account.account_number' | translate}}
+            {{'bankAccount.account_number' | translate}}
           </th>
           <th data-qe-id="table-thead-account-name">
-            {{'bank_account.account_name' | translate}}
+            {{'bankAccount.account_name' | translate}}
           </th>
           <th data-qe-id="table-thead-description">
-            {{'bank_account.description' | translate}}
+            {{'bankAccount.description' | translate}}
           </th>
         </tr>
         <tr>
@@ -110,13 +110,13 @@
 
 <p-dialog [(visible)]="isShowDialog" *ngIf="isShowDialog" [contentStyle]="{'overflow':'visible'}" modal="true">
   <p-header>
-    {{'bank_account.bank_accounts.add' | translate}}
+    {{'bankAccount.bankAccounts.add' | translate}}
   </p-header>
   <div [formGroup]="bankAccountForm" class="container">
     <div class="row">
       <div class="form-group col-6">
         <label for="chart-of-account">
-          {{'bank_account.bank_accounts.accounting_code' | translate}}
+          {{'bankAccount.bankAccounts.accounting_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form d-flex">
@@ -140,7 +140,7 @@
       </div>
       <div class="form-group col-6">
         <label for="bank-code">
-          {{'bank_account.bank_accounts.bank_code' | translate}}
+          {{'bankAccount.bankAccounts.bank_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
@@ -163,7 +163,7 @@
       </div>
       <div class="form-group col-6">
         <label for="account-number">
-          {{'bank_account.bank_accounts.account_number' | translate}}
+          {{'bankAccount.bankAccounts.account_number' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
@@ -179,7 +179,7 @@
       </div>
       <div class="form-group col-6">
         <label for="account-name">
-          {{'bank_account.bank_accounts.account_name' | translate}}
+          {{'bankAccount.bankAccounts.account_name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
@@ -194,7 +194,7 @@
       </div>
       <div class="form-group col-12">
         <label for="description">
-          {{'bank_account.bank_accounts.description' | translate}}
+          {{'bankAccount.bankAccounts.description' | translate}}
         </label>
         <textarea id="description" class="form-control" data-qe-id="description" formControlName="description"
                   rows="3"></textarea>

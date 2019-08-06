@@ -8,7 +8,7 @@ export class EnvironmentTaxSearchEntity extends SearchEntity {
   code: TextFilter = new TextFilter();
   name: TextFilter = new TextFilter();
 
-  unitOfMeasureName: TextFilter = new TextFilter();
+  unitOfMeasureId: TextFilter = new TextFilter();
 
   rate: NumberFilter = new NumberFilter();
   description: TextFilter = new TextFilter();

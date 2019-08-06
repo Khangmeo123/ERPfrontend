@@ -7,8 +7,8 @@ export class AccountingPeriodSearchEntity extends SearchEntity {
 
   fiscalYearId: string;
 
-  validFrom: DateFilter = new DateFilter();
-  validTo: DateFilter = new DateFilter();
+  startPeriod: DateFilter = new DateFilter();
+  endPeriod: DateFilter = new DateFilter();
 
   description: TextFilter = new TextFilter();
 

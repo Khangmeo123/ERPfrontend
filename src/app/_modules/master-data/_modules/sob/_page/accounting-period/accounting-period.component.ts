@@ -7,13 +7,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { ToastrService } from 'ngx-toastr';
 import { Entities } from '../../../../../../_helpers/entity';
 import { AccountingPeriodEntity } from '../../../../_backend/accounting-period/accounting-period.entity';
 import { AccountingPeriodSearchEntity } from '../../../../_backend/accounting-period/accounting-period.searchentity';
 import { AccountingPeriodService } from './accounting-period.service';
 import { FiscalYearEntity } from '../../../../_backend/fiscal-year/fiscal-year.entity';
 import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
+import { requiredField } from '../../../../../../_helpers';
+import {debug} from 'util';
 
 @Component({
   selector: 'app-accounting-period',
@@ -21,7 +22,6 @@ import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-
   styleUrls: ['./accounting-period.component.scss'],
   providers: [
     GeneralService,
-    ToastrService,
     AccountingPeriodService,
   ],
 })
@@ -30,7 +30,7 @@ export class AccountingPeriodComponent implements OnInit {
 
   bookMarkId: string;
 
-  isChecked = false;
+  autoGenerate = false;
 
   isShowDialog = false;
 
@@ -62,7 +62,7 @@ export class AccountingPeriodComponent implements OnInit {
 
   public setOfBookId: string = null;
 
-  public fiscalYearId: string = '';
+  public fiscalYearId: string = null;
 
   public coaList: CoaEntity[] = [];
 
@@ -81,7 +81,6 @@ export class AccountingPeriodComponent implements OnInit {
   constructor(
     private accountingPeriodService: AccountingPeriodService,
     private generalService: GeneralService,
-    private toastrService: ToastrService,
   ) {
     const sobListSub = this.accountingPeriodService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
@@ -135,20 +134,67 @@ export class AccountingPeriodComponent implements OnInit {
     return null;
   }
 
-  get validFrom() {
-    return this.accountingPeriodForm.get('validFrom') as FormControl;
+  get periodTypeId() {
+    return this.accountingPeriodForm.get('periodTypeId') as FormControl;
   }
 
-  get validTo() {
-    return this.accountingPeriodForm.get('validTo') as FormControl;
+  get startPeriod() {
+    return this.accountingPeriodForm.get('startPeriod') as FormControl;
+  }
+
+  get endPeriod() {
+    return this.accountingPeriodForm.get('endPeriod') as FormControl;
+  }
+
+  get errors() {
+    return this.accountingPeriodForm.get('errors') as FormGroup;
+  }
+
+  onSelectPeriodType(event) {
+    this.periodTypeId.setValue(event);
   }
 
   getPeriodTypeList() {
     return this.accountingPeriodService.getPeriodTypeList();
   }
 
-  onClickChange() {
-    this.isChecked = !this.isChecked;
+  onChangePeriodType(event) {
+    const {
+      target: {
+        value,
+        checked,
+      },
+    } = event;
+    this.autoGenerate = checked;
+    if (checked) {
+      this.periodTypeId.setValidators([
+        requiredField,
+      ]);
+
+      this.startPeriod.clearValidators();
+      this.startPeriod.setValue(null);
+
+      this.endPeriod.clearValidators();
+      this.endPeriod.setValue(null);
+
+      this.periodTypeId.updateValueAndValidity();
+      this.startPeriod.updateValueAndValidity();
+      this.endPeriod.updateValueAndValidity();
+    } else {
+      this.periodTypeId.clearValidators();
+      this.periodTypeId.setValue(null);
+
+      this.startPeriod.setValidators([
+        requiredField,
+      ]);
+      this.endPeriod.setValidators([
+        requiredField,
+      ]);
+
+      this.periodTypeId.updateValueAndValidity();
+      this.startPeriod.updateValueAndValidity();
+      this.endPeriod.updateValueAndValidity();
+    }
   }
 
   getCoaList() {
@@ -156,12 +202,8 @@ export class AccountingPeriodComponent implements OnInit {
   }
 
   add() {
-    if (this.setOfBookId) {
-      this.accountingPeriodService.add();
-      this.showDialog();
-    } else {
-      this.toastrService.error('Phải chọn bộ sổ trước?');
-    }
+    this.accountingPeriodService.add();
+    this.showDialog();
   }
 
   sort(event: any) {
@@ -179,6 +221,13 @@ export class AccountingPeriodComponent implements OnInit {
   }
 
   getFiscalYearList() {
+    this.fiscalYearSearchEntity = new FiscalYearSearchEntity();
+    this.fiscalYearSearchEntity.setOfBookId = this.setOfBookId;
+    if (this.fiscalYearId) {
+      this.fiscalYearSearchEntity.ids = [
+        this.fiscalYearId,
+      ];
+    }
     return this.accountingPeriodService.getFiscalYearList(this.fiscalYearSearchEntity);
   }
 
@@ -186,7 +235,7 @@ export class AccountingPeriodComponent implements OnInit {
     const [fiscalYearId] = event;
     this.accountingPeriodSearchEntity.fiscalYearId = fiscalYearId;
     this.accountingPeriodForm.controls.fiscalYearId.setValue(fiscalYearId);
-    this.setOfBookId = fiscalYearId;
+    this.fiscalYearId = fiscalYearId;
     this.getList();
   }
 
@@ -204,6 +253,12 @@ export class AccountingPeriodComponent implements OnInit {
   }
 
   getSobList() {
+    this.sobSearchEntity = new SobSearchEntity();
+    if (this.setOfBookId) {
+      this.sobSearchEntity.ids = [
+        this.setOfBookId,
+      ];
+    }
     this.accountingPeriodService.getSobList(this.sobSearchEntity);
   }
 
@@ -230,6 +285,8 @@ export class AccountingPeriodComponent implements OnInit {
     this.accountingPeriodService.cancel();
     this.isShowDialog = false;
   }
+
+  periodTypeSelector = (node) => node.code;
 
   onClickSave() {
     if (this.accountingPeriodForm.invalid) {

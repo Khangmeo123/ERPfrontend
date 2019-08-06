@@ -1,7 +1,7 @@
 <div class="page special-consumption-tax">
   <div class="page-header">
         <span class="page-title">
-            {{'special_consumption_tax.header.title' | translate}}
+            {{'specialConsumptionTax.header.title' | translate}}
           <span (click)="onClickSaveBookMark($event)">
                 <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
                     star
@@ -70,9 +70,13 @@
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="specialConsumptionTaxSearchEntity.unitOfMeasureName"
-                                    data-qe-id="filter-unit"></app-advanced-filters>
+              <app-single-select [list]="uomFilterList"
+                                 [selectedList]="selectedUomFilterList"
+                                 (listOpen)="onOpenUomFilter()"
+                                 key="name"
+                                 (selectionChange)="onSelectUomFilter($event)"
+                                 (search)="onSearchUomFilter($event)"
+              ></app-single-select>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()" [filter]="specialConsumptionTaxSearchEntity.rate"
@@ -115,7 +119,7 @@
           appendTo="body"
           modal="true">
   <p-header>
-    {{'special_consumption_tax.modal.title' | translate}}
+    {{'specialConsumptionTax.modal.title' | translate}}
   </p-header>
   <div [formGroup]="specialConsumptionTaxForm" class="container">
     <div class="row">

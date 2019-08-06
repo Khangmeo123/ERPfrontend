@@ -5,10 +5,10 @@ import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
 import { translate } from '../../../../../../_helpers/string';
-import { NaturalResourceTaxRepository } from './natural-resource-tax.repository';
 import { NaturalResourceTaxForm } from '../../../../_backend/natural-resource-tax/natural-resource-tax.form';
-import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
 import { NaturalResourceTaxSearchEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.search-entity';
+import { NaturalResourceTaxEntity } from '../../../../_backend/natural-resource-tax/natural-resource-tax.entity';
+import { NaturalResourceTaxRepository } from './natural-resource-tax.repository';
 
 export class NaturalResourceTaxService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
@@ -20,6 +20,8 @@ export class NaturalResourceTaxService {
   public naturalResourceTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
   public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  public uomFilterList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
@@ -50,6 +52,13 @@ export class NaturalResourceTaxService {
     this.naturalResourceTaxRepository.getUnitOfMeasureList(uomSearchEntity)
       .subscribe((list) => {
         this.uomList.next(list);
+      });
+  }
+
+  getUnitOfMeasureFilterList(uomSearchEntity: UomSearchEntity) {
+    this.naturalResourceTaxRepository.getUnitOfMeasureList(uomSearchEntity)
+      .subscribe((list) => {
+        this.uomFilterList.next(list);
       });
   }
 

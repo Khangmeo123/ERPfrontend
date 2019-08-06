@@ -21,6 +21,8 @@ export class ExportTaxService {
 
   public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
+  public uomFilterList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
   public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   constructor(
@@ -50,6 +52,13 @@ export class ExportTaxService {
     this.exportTaxRepository.getUnitOfMeasureList(uomSearchEntity)
       .subscribe((list) => {
         this.uomList.next(list);
+      });
+  }
+
+  getUnitOfMeasureFilterList(uomSearchEntity: UomSearchEntity) {
+    this.exportTaxRepository.getUnitOfMeasureList(uomSearchEntity)
+      .subscribe((list) => {
+        this.uomFilterList.next(list);
       });
   }
 

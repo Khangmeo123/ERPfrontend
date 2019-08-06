@@ -8,14 +8,21 @@ export class AccountingPeriodForm extends FormModel {
 
   fiscalYearId = new FormControl(null, [requiredField]);
 
-  startPeriod = new FormControl(null, [requiredField]);
-  endPeriod = new FormControl(null, [requiredField]);
+  periodTypeId: FormControl = new FormControl(null);
+
+  startPeriod = new FormControl(null, [
+    requiredField,
+  ]);
+  endPeriod = new FormControl(null, [
+    requiredField,
+  ]);
 
   description = new FormControl(null);
 
   errors: FormGroup = new FormGroup({
     startPeriod: new FormControl(),
     endPeriod: new FormControl(),
+    periodTypeId: new FormControl(),
   });
 
   constructor(accountingPeriodEntity?: AccountingPeriodEntity) {

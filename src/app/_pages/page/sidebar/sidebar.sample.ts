@@ -130,11 +130,6 @@ export const sampleSidebarMenu = [
         route: '/master-data/sob/accounting-period',
       },
       {
-        label: 'Quản lý chứng từ',
-        isShowed: true,
-        route: '/master-data/sob/voucher',
-      },
-      {
         label: 'Phương thức thanh toán',
         isShowed: true,
         route: '/master-data/sob/payment-method',

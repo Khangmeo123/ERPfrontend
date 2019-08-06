@@ -9,7 +9,8 @@ export class FiscalYearEntity extends Entity {
 
   name: string;
 
-  inventoryValuationMethod: string;
+  valuationMethodId: string;
+  valuationMethodDisplay: string;
 
   disabled: boolean;
   isValidated: boolean;
@@ -18,7 +19,7 @@ export class FiscalYearEntity extends Entity {
   endDate: string;
 
   statusId: string;
-  statusValue: string;
+  statusDisplay: string;
 
   errors: {
     [key: string]: any;

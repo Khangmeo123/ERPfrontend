@@ -5,10 +5,10 @@ import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
 import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
 import { translate } from '../../../../../../_helpers/string';
-import { ValueAddedTaxRepository } from './value-added-tax.repository';
 import { ValueAddedTaxForm } from '../../../../_backend/value-added-tax/value-added-tax.form';
 import { ValueAddedTaxSearchEntity } from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
 import { ValueAddedTaxEntity } from '../../../../_backend/value-added-tax/value-added-tax.entity';
+import { ValueAddedTaxRepository } from './value-added-tax.repository';
 
 export class ValueAddedTaxService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
@@ -20,6 +20,8 @@ export class ValueAddedTaxService {
   public valueAddedTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
   public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  public uomFilterList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
@@ -50,6 +52,13 @@ export class ValueAddedTaxService {
     this.valueAddedTaxRepository.getUnitOfMeasureList(uomSearchEntity)
       .subscribe((list) => {
         this.uomList.next(list);
+      });
+  }
+
+  getUnitOfMeasureFilterList(uomSearchEntity: UomSearchEntity) {
+    this.valueAddedTaxRepository.getUnitOfMeasureList(uomSearchEntity)
+      .subscribe((list) => {
+        this.uomFilterList.next(list);
       });
   }
 

@@ -3,12 +3,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { Entities } from '../../../../../../_helpers/entity';
-import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
-import { SpecialConsumptionTaxRepository } from './special-consumption-tax.repository';
-import { SpecialConsumptionTaxForm } from '../../../../_backend/special-consumption-tax/special-consumption-tax.form';
-import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 import { UomSearchEntity } from '../../../../_backend/uom/uom.searchentity';
 import { translate } from '../../../../../../_helpers/string';
+import { SpecialConsumptionTaxForm } from '../../../../_backend/special-consumption-tax/special-consumption-tax.form';
+import { SpecialConsumptionTaxSearchEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
+import { SpecialConsumptionTaxEntity } from '../../../../_backend/special-consumption-tax/special-consumption-tax.entity';
+import { SpecialConsumptionTaxRepository } from './special-consumption-tax.repository';
 
 export class SpecialConsumptionTaxService {
   public sobList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
@@ -20,6 +20,8 @@ export class SpecialConsumptionTaxService {
   public specialConsumptionTaxCount: BehaviorSubject<number> = new BehaviorSubject(0);
 
   public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
+  public uomFilterList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
@@ -50,6 +52,13 @@ export class SpecialConsumptionTaxService {
     this.specialConsumptionTaxRepository.getUnitOfMeasureList(uomSearchEntity)
       .subscribe((list) => {
         this.uomList.next(list);
+      });
+  }
+
+  getUnitOfMeasureFilterList(uomSearchEntity: UomSearchEntity) {
+    this.specialConsumptionTaxRepository.getUnitOfMeasureList(uomSearchEntity)
+      .subscribe((list) => {
+        this.uomFilterList.next(list);
       });
   }
 

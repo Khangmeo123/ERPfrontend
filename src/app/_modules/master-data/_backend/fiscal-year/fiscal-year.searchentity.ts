@@ -10,8 +10,11 @@ export class FiscalYearSearchEntity extends SearchEntity {
   startDate: DateFilter = new DateFilter();
   endDate: DateFilter = new DateFilter();
 
-  inventoryValuationMethod: string = null;
-  status: string = null;
+  valuationMethodId: string = null;
+  valuationMethodDisplay: string = null;
+
+  statusId: string = null;
+  statusValue: string = null;
 
   constructor(fiscalYearSearchEntity?: any) {
     super(fiscalYearSearchEntity);
