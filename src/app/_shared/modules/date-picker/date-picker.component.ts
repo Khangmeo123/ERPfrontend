@@ -81,15 +81,19 @@ export class DatePickerComponent implements OnInit, OnChanges {
       }
     }
     if (changes.control) {
-      if (changes.control.currentValue.value) {
-        this.date = new Date(changes.control.currentValue.value);
+      if (changes.control.currentValue) {
+        if (changes.control.currentValue.value) {
+          this.date = new Date(changes.control.currentValue.value);
+        }
       }
     }
   }
 
   ngOnInit() {
-    if (this.control.value) {
-      this.date = new Date(this.control.value);
+    if (this.control) {
+      if (this.control.value) {
+        this.date = new Date(this.control.value);
+      }
     }
   }
 
