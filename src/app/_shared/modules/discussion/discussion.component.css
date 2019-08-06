@@ -1,0 +1,139 @@
+/* CSS Test begin */
+.comment-box {
+    margin-top: 10px !important;
+    width: 100%;
+}
+.media{
+    padding-bottom: 4px;
+}
+/* CSS Test end */
+
+.comment-box img {
+    width: 50px;
+    height: 50px;
+}
+.comment-box .media-left {
+    padding-right: 10px;
+    width: 65px;
+}
+.comment-box .media-body p {
+    border: 1px solid #d1d1d1;
+    padding: 10px;
+}
+.comment-box .media-body .media p {
+    margin-bottom: 0;
+}
+.comment-box .media-heading {
+    background-color: #f5f5f5;
+    border: 1px solid #d1d1d1;
+    position: relative;
+    padding: 0 10px 5px;
+    margin-bottom: -1px;
+}
+.comment-box .media-heading:before {
+    content: "";
+    width: 12px;
+    height: 12px;
+    background-color: #f5f5f5;
+    border-color: #d1d1d1;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 10px;
+    left: -6px;
+}
+
+* >>> .SearchWho {
+    background-color: #fff;
+    color: #2A92D8 !important;
+    cursor: default;
+    display: inline;
+}
+
+* >>> font {
+    color: black !important;
+}
+* >>> .AtWho {
+    background-color: #fff;
+    color: #2A92D8 !important;
+    cursor: default;
+    display: inline;
+    text-decoration: underline;
+}
+
+* >>> .InputPost{
+    padding-top: 4px;
+    padding-bottom: 4px;
+    border-radius: 4px;
+    padding-left: 10px;
+    outline:none;
+    min-height: 60px;
+    font-size: 12px;
+    margin: 16px;
+    background-color: white;
+    border: solid 1px #199ED8;
+    min-height: 100px;
+}
+
+* >>> .InputComment{
+    padding-bottom: 4px;
+    border-radius: 4px;
+    padding-left: 10px;
+    outline:none;
+    border: solid 1px #199ED8;
+    margin-bottom: 10px;
+    margin-top: 3px;
+    background: white;
+}
+
+.InputDiscussion{
+    margin-top: 10px;
+}
+
+.DisplayName{
+    color: #365899;
+    font-size: 14px;
+    padding-right: 20px;
+}
+
+.text-muted{
+    margin-left: 10px;
+    font-size: 9px !important ;
+    color: #0275d8 !important;
+}
+
+.btn-comment{
+    background-color: transparent;
+    color: #2A92D8;
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.user-photo{
+    border-radius: 50%;
+    border: solid 1px #ddd;
+    width: 30px !important;
+    height: 30px !important;
+
+}
+
+.SeeMore{
+    cursor: default;
+    font-size: 9px;
+    color: #0275d8;
+}
+
+.btn-send{
+    background-color: #199ED8;
+    color : white;
+}
+
+.media-left{
+    width: 45px !important;
+}
+
+legend.scheduler-border {
+    width: 120px;
+}
