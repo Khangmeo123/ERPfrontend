@@ -95,7 +95,7 @@
                                     <label for="bankid">{{ 'item.detail.content.characteristic' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <app-simple-select [key]="'name'" [list]="characteristicList"
+                                        <app-simple-select [key]="'display'" [list]="characteristicList"
                                             [initialValue]="itemForm.controls.characteristicName.value"
                                             (selectionChange)="itemForm.controls.characteristicId.setValue($event)"
                                             (listOpen)="openCharacteristicList()" data-qe-id="form-characteristic"
@@ -168,7 +168,7 @@
                                     <label for="itemStatus">{{ 'item.detail.content.status' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <app-simple-select [key]="'name'" [list]="statusList"
+                                        <app-simple-select [key]="'display'" [list]="statusList"
                                             [initialValue]="itemForm.controls.statusName.value"
                                             (selectionChange)="itemForm.controls.statusId.setValue($event)"
                                             (listOpen)="openStatusList()" data-qe-id="form-characteristic"

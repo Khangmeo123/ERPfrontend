@@ -43,11 +43,11 @@
                [scrollable]="true" [value]="accountingPeriodList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
-            <th [pSortableColumn]="'from-date'" data-qe-id="table-thead-from-date"
+            <th [pSortableColumn]="'startPeriod'" data-qe-id="table-thead-from-date"
                 pResizableColumn>
               {{'accounting_period.from_date' | translate}}
             </th>
-            <th [pSortableColumn]="'to-date'" data-qe-id="table-thead-to-date"
+            <th [pSortableColumn]="'endPeriod'" data-qe-id="table-thead-to-date"
                 pResizableColumn>
               {{'accounting_period.to_date' | translate}}
             </th>
@@ -106,7 +106,7 @@
           </div>
         </div>
         <div class="flex-grow-1">
-          <app-simple-select (listOpen)="getPeriodTypeList()" [list]="periodTypeList"></app-simple-select>
+          <app-simple-select key="display" (listOpen)="getPeriodTypeList()" [list]="periodTypeList"></app-simple-select>
         </div>
       </div>
     </div>

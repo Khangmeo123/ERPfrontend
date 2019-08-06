@@ -53,7 +53,7 @@ export class CoaRepository extends Repository {
   }
 
   getCharacteristicList(): Observable<CharacteristicEntity[]> {
-    return this.http.post<CharacteristicEntity[]>(this.apiUrl + '/list-characteristic', '{}',
+    return this.http.post<CharacteristicEntity[]>(this.apiUrl + '/enum-list-characteristic', '{}',
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         return r.body.map((item) => new CharacteristicEntity(item));
@@ -62,7 +62,7 @@ export class CoaRepository extends Repository {
   }
 
   getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {

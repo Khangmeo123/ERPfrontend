@@ -37,7 +37,7 @@ export class Entities {
 export class EnumEntity {
     id: string;
     name: string;
-
+    display: string;
     constructor() {
 
     }

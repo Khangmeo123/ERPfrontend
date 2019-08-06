@@ -74,14 +74,14 @@
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-simple-select [key]="'name'" [list]="assetTypes"
+                            <app-simple-select [key]="'display'" [list]="assetTypes"
                                 [initialValue]="assetSearchEntity.typeId"
                                 (selectionChange)="assetSearchEntity.typeId = $event; getList()"
                                 (listOpen)="openAssetTypes($event)">
                             </app-simple-select>
                         </th>
                         <th class="th-filter">
-                            <app-simple-select [key]="'name'" [list]="assetStatuses"
+                            <app-simple-select [key]="'display'" [list]="assetStatuses"
                                 [initialValue]="assetSearchEntity.typeId"
                                 (selectionChange)="assetSearchEntity.statusId = $event; getList()"
                                 (listOpen)="openAssetStatuses($event)">
@@ -147,7 +147,7 @@
                 <div class="form-group">
                     <label for="assetid">{{ 'asset.content.type' | translate}}<span class="text-danger">*</span></label>
                     <div class="div-form">
-                        <app-simple-select [key]="'name'" [list]="assetTypes" class="w-100" *ngIf="isShowDialog"
+                        <app-simple-select [key]="'display'" [list]="assetTypes" class="w-100" *ngIf="isShowDialog"
                             [initialValue]="assetForm.controls.typeName.value"
                             (selectionChange)="assetForm.controls.typeId.setValue($event)"
                             (listOpen)="openAssetTypes($event)" data-qe-id="dialog-form-typeId">
@@ -164,7 +164,7 @@
                     <label for="assetname">{{ 'asset.content.status' | translate}}<span
                             class="text-danger">*</span></label>
                     <div class="div-form">
-                        <app-simple-select [key]="'name'" [list]="assetStatuses" class="w-100" *ngIf="isShowDialog"
+                        <app-simple-select [key]="'display'" [list]="assetStatuses" class="w-100" *ngIf="isShowDialog"
                             [initialValue]="assetForm.controls.statusName.value"
                             (selectionChange)="assetForm.controls.statusId.setValue($event)"
                             (listOpen)="openAssetStatuses($event)">

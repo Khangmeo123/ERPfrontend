@@ -19,15 +19,16 @@ export const sampleSidebarMenu = [
         isShowed: true,
       },
       {
-        label: 'Quản lý sản phẩm',
-        route: '/master-data/business-group/item',
-        isShowed: true,
-      },
-      {
         label: 'Đơn vị tính sản phẩm',
         route: '/master-data/business-group/unit',
         isShowed: true,
       },
+      {
+        label: 'Quản lý sản phẩm',
+        route: '/master-data/business-group/item',
+        isShowed: true,
+      },
+
       {
         label: 'Quản lý tài sản',
         route: '/master-data/business-group/asset',

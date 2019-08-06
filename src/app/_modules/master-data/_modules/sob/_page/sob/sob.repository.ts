@@ -45,7 +45,7 @@ export class SobRepository extends Repository {
   }
 
   getCurrencyList(currencySearchEntity: CurrencySearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-currency', JSON.stringify(currencySearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-currency', JSON.stringify(currencySearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -57,7 +57,7 @@ export class SobRepository extends Repository {
   }
 
   getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account-template', JSON.stringify(coaSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account-template', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -69,7 +69,7 @@ export class SobRepository extends Repository {
   }
 
   getImportTaxTemplateList(importTaxSearchEntity: ImportTaxSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-import-tax-template', JSON.stringify(importTaxSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-import-tax-template', JSON.stringify(importTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -81,7 +81,7 @@ export class SobRepository extends Repository {
   }
 
   getExportTaxTemplateList(exportTaxSearchEntity: ExportTaxSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-export-tax-template', JSON.stringify(exportTaxSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-export-tax-template', JSON.stringify(exportTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -93,7 +93,7 @@ export class SobRepository extends Repository {
   }
 
   getValueAddedTaxTemplateList(valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-value-added-tax-template', JSON.stringify(valueAddedTaxSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-value-added-tax-template', JSON.stringify(valueAddedTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -121,7 +121,7 @@ export class SobRepository extends Repository {
   }
 
   getEnvironmentTaxTemplateList(environmentTaxSearchEntity: EnvironmentTaxSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-environment-tax-template', JSON.stringify(environmentTaxSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-environment-tax-template', JSON.stringify(environmentTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -133,7 +133,7 @@ export class SobRepository extends Repository {
   }
 
   getNaturalResourceTaxTemplateList(naturalResourceTaxSearchEntity: NaturalResourceTaxSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-natural-resource-tax-template', JSON.stringify(naturalResourceTaxSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-natural-resource-tax-template', JSON.stringify(naturalResourceTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {
         return {
@@ -146,7 +146,7 @@ export class SobRepository extends Repository {
 
   getSpecialConsumptionTaxTemplateList(specialConsumptionTaxSearchEntity: SpecialConsumptionTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      this.apiUrl + '/list-special-consumption-tax-template',
+      this.apiUrl + '/drop-list-special-consumption-tax-template',
       JSON.stringify(specialConsumptionTaxSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(({body: {ids, exceptIds}}) => {

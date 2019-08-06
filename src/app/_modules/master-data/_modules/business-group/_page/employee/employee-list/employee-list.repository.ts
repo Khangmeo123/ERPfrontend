@@ -36,7 +36,7 @@ export class EmployeeListRepository extends Repository {
     }
 
     getStatusList(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-status', JSON.stringify({}),
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-list-status', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

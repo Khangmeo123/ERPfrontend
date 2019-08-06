@@ -216,7 +216,7 @@ export class AccountingPeriodComponent implements OnInit {
     this.isShowDialog = true;
   }
 
-  paginationOut(pagination: PaginationModel) {
+  paginationOut(pagination) {
     this.accountingPeriodSearchEntity.skip = pagination.skip;
     this.accountingPeriodSearchEntity.take = pagination.take;
     this.accountingPeriodService.getList(this.accountingPeriodSearchEntity);

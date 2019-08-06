@@ -60,10 +60,9 @@
                                  (selectionChange)="onValuationMethodFilter($event)"
                                  [initialValue]="fiscalYearSearchEntity.inventoryValuationMethod"
                                  [list]="inventoryValuationMethodList"
-                                 [valueSelector]="valuationMethodSelector"
                                  class="flex-grow-1"
                                  data-qe-id="dialog-to-valuation-method"
-                                 key="name"></app-simple-select>
+                                 key="display"></app-simple-select>
             </th>
             <th class="th-filter">
               <app-simple-select (listOpen)="getStatusList()"
@@ -71,7 +70,7 @@
                                  [initialValue]="fiscalYearSearchEntity.status"
                                  [list]="statusList"
                                  date-qe-id="dialog-status"
-                                 key="name"></app-simple-select>
+                                 key="display"></app-simple-select>
             </th>
           </tr>
         </ng-template>
@@ -80,7 +79,7 @@
             <td> {{row.name}} </td>
             <td>{{row.startDate | date: 'dd/MM/yyyy'}}</td>
             <td>{{row.endDate | date: 'dd/MM/yyyy'}}</td>
-            <td>{{row.inventoryValuationMethod}}</td>
+            <td>{{row.inventoryValuationMethodId}}</td>
             <td> {{row.statusValue}} </td>
           </tr>
         </ng-template>
@@ -136,18 +135,17 @@
             class="text-danger ml-2">*</span></label>
           <div class="div-form d-flex">
             <app-simple-select (listOpen)="getInventoryValuationMethodList()"
-                               (selectionChange)="inventoryValuationMethod.setValue($event)"
-                               [initialValue]="inventoryValuationMethod.value"
+                               (selectionChange)="onSelectInventoryValuationMethod($event)"
+                               [initialValue]="inventoryValuationMethodId.value"
                                [list]="inventoryValuationMethodList"
-                               [valueSelector]="valuationMethodSelector"
                                class="flex-grow-1"
                                data-qe-id="dialog-to-valuation-method"
                                id="fiscal-year-to-valuation-method"
-                               key="name"></app-simple-select>
+                               key="display"></app-simple-select>
             <app-error
-              *ngIf="(inventoryValuationMethod?.errors && inventoryValuationMethod?.touched) || !!errors.get('inventoryValuationMethod')?.value"
+              *ngIf="(inventoryValuationMethodId?.errors && inventoryValuationMethodId?.touched) || !!errors.get('inventoryValuationMethodId')?.value"
               [formGroup]="fiscalYearForm"
-              [placement]="'top'" [property]="'inventoryValuationMethod'" class="error-form"
+              [placement]="'top'" [property]="'inventoryValuationMethodId'" class="error-form"
               data-qe-id="dialog-error-inventory-valuation-method">
             </app-error>
           </div>
@@ -179,7 +177,7 @@
                            [list]="statusList"
                            date-qe-id="dialog-status"
                            id="fiscal-year-status"
-                           key="name"></app-simple-select>
+                           key="display"></app-simple-select>
       </div>
     </div>
   </div>

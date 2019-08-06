@@ -39,7 +39,7 @@ export class ValueAddedTaxRepository extends Repository {
   }
 
   getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {
@@ -55,7 +55,7 @@ export class ValueAddedTaxRepository extends Repository {
   }
 
   getUnitOfMeasureList(uomSearchEntity: UomSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-unit-of-measure', JSON.stringify(uomSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure', JSON.stringify(uomSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {
@@ -103,7 +103,7 @@ export class ValueAddedTaxRepository extends Repository {
 
   public getParentTaxList(parentTaxSearchEntity: ValueAddedTaxSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/list-parent-tax`,
+      `${this.apiUrl}/drop-list-parent-tax`,
       parentTaxSearchEntity,
       {
         observe: 'response',

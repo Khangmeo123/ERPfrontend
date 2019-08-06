@@ -22,7 +22,7 @@ export class CostCenterRepository extends Repository {
   }
 
   getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {
@@ -38,7 +38,7 @@ export class CostCenterRepository extends Repository {
   }
 
   getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account', JSON.stringify(coaSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {

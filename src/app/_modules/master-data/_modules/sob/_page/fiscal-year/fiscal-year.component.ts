@@ -1,15 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { ToastrService } from 'ngx-toastr';
-import { Entities } from '../../../../../../_helpers/entity';
-import { FiscalYearEntity } from '../../../../_backend/fiscal-year/fiscal-year.entity';
-import { FiscalYearSearchEntity } from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
-import { FiscalYearService } from './fiscal-year.service';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from 'src/app/_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {ToastrService} from 'ngx-toastr';
+import {Entities} from '../../../../../../_helpers/entity';
+import {FiscalYearEntity} from '../../../../_backend/fiscal-year/fiscal-year.entity';
+import {FiscalYearSearchEntity} from '../../../../_backend/fiscal-year/fiscal-year.searchentity';
+import {FiscalYearService} from './fiscal-year.service';
+import {debug} from 'util';
 
 @Component({
   selector: 'app-fiscal-year',
@@ -97,6 +98,7 @@ export class FiscalYearComponent implements OnInit {
     this.subs.add(sobListSub)
       .add(fiscalYearSub)
       .add(fiscalYearFormSub)
+      .add(statusListSub)
       .add(inventoryValuationMethodListSub)
       .add(fiscalYearCountSub);
   }
@@ -116,8 +118,8 @@ export class FiscalYearComponent implements OnInit {
     return this.fiscalYearForm.get('endDate') as FormControl;
   }
 
-  get inventoryValuationMethod() {
-    return this.fiscalYearForm.get('inventoryValuationMethod') as FormControl;
+  get inventoryValuationMethodId() {
+    return this.fiscalYearForm.get('inventoryValuationMethodId') as FormControl;
   }
 
   get statusId() {
@@ -155,6 +157,10 @@ export class FiscalYearComponent implements OnInit {
     if (this.currentSob) {
       this.getList();
     }
+  }
+
+  onSelectInventoryValuationMethod(event) {
+    this.inventoryValuationMethodId.setValue(event);
   }
 
   changeSob(event) {

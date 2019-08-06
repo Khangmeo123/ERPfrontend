@@ -149,12 +149,8 @@ export class CoaComponent implements OnInit {
   }
 
   add() {
-    if (this.currentSob) {
-      this.coaService.add();
-      this.showDialog();
-    } else {
-      this.toastrService.error('Phải chọn bộ sổ trước');
-    }
+    this.coaService.add();
+    this.showDialog();
   }
 
   ngOnInit() {

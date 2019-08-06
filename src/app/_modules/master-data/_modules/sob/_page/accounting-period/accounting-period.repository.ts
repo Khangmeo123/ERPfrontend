@@ -24,7 +24,7 @@ export class AccountingPeriodRepository extends Repository {
   }
 
   getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {
@@ -40,7 +40,7 @@ export class AccountingPeriodRepository extends Repository {
   }
 
   getPeriodTypeList() {
-    return this.http.post<any[]>(this.apiUrl + '/list-period-type', '',
+    return this.http.post<any[]>(this.apiUrl + '/enum-list-period-type', '',
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => r.body),
     );
@@ -48,7 +48,7 @@ export class AccountingPeriodRepository extends Repository {
 
   getFiscalYearList(fiscalYearSearchEntity: FiscalYearSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      this.apiUrl + '/list-fiscal-year',
+      this.apiUrl + '/drop-list-fiscal-year',
       JSON.stringify(fiscalYearSearchEntity),
       {
         observe: 'response',
@@ -67,7 +67,7 @@ export class AccountingPeriodRepository extends Repository {
   }
 
   getCoaList(coaSearchEntity: CoaSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account', JSON.stringify(coaSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {

@@ -66,7 +66,7 @@
                                  [list]="characteristicList"
                                  [initialValue]="coaForm?.controls?.characteristicValue?.value"
                                  data-qe-id="dialog-account-characteristic"
-                                 key="name"
+                                 key="display"
               ></app-simple-select>
             </th>
             <th class="th-filter">
@@ -116,7 +116,7 @@
                  name="code"
                  type="text">
           <app-error
-            *ngIf="(coaForm.controls.code?.errors && coaForm.controls.code?.touched) || !!coaForm.controls.error.get('code')?.value"
+            *ngIf="(coaForm.controls.code?.errors && coaForm.controls.code?.touched) || !!coaForm.controls.errors.get('code')?.value"
             [formGroup]="coaForm"
             [placement]="'top'" [property]="'code'" class="error-form" data-qe-id="dialog-error-account-code">
           </app-error>
@@ -132,7 +132,7 @@
                  name="name"
                  type="text">
           <app-error
-            *ngIf="(coaForm.controls.name?.errors && coaForm.controls.name?.touched) || !!coaForm.controls.error.get('name')?.value"
+            *ngIf="(coaForm.controls.name?.errors && coaForm.controls.name?.touched) || !!coaForm.controls.errors.get('name')?.value"
             [formGroup]="coaForm"
             [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-account-name">
           </app-error>
@@ -148,7 +148,7 @@
                            id="account-characteristic"
                            [initialValue]="coaForm?.controls?.characteristicValue?.value"
                            data-qe-id="dialog-account-characteristic"
-                           key="name"
+                           key="display"
         ></app-simple-select>
       </div>
       <div class="form-group col-6">
