@@ -47,4 +47,8 @@ export class GoodsReceiptPoListComponent implements OnInit {
     this.router.navigate(['inventory/receipt/goods-receipt-po/goods-receipt-po-detail'])
   }
 
+  addGoodsReceipt() {
+    this.router.navigate(['inventory/receipt/goods-receipt-po/goods-receipt-po-detail'])
+  }
+
 }
