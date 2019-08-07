@@ -239,7 +239,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Phiếu xuất kho hàng bán',
-        route: '/master-data/department',
+        route: '/inventory/issue/delivery-order',
         exact: false,
       },
       {

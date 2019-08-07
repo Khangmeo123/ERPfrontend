@@ -20,6 +20,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
 import {ReturnListComponent} from './return/return-list/return-list.component';
 import {ReturnDetailComponent} from './return/return-detail/return-detail.component';
+import { GoodsReceiptDetailComponent } from './goods-receipt/goods-receipt-detail/goods-receipt-detail.component';
+import { GoodsReceiptListComponent } from './goods-receipt/goods-receipt-list/goods-receipt-list.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import {ReturnDetailComponent} from './return/return-detail/return-detail.compon
     GoodsReceiptPoDetailComponent,
     GoodsReceiptPoListComponent,
     ReturnListComponent,
-    ReturnDetailComponent],
+    ReturnDetailComponent,
+    GoodsReceiptDetailComponent,
+    GoodsReceiptListComponent,],
   imports: [
     CommonModule,
     ReceiptRoutingModule,

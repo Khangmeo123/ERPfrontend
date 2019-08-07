@@ -2,38 +2,7 @@
 //   min-height: 65px;
 //   height: auto;
 // }
-.validation-div {
-  position: relative;
-  width: 100%;
-}
 
-// style tooltip error 
-.invalid-validation {
-  display: none !important;
-  position: absolute;
-  text-align: left;
-  top: 100%;
-  z-index: 5;
-  display: block;
-  width: 100%;
-  padding: 0.5rem;
-  margin-top: 0.1rem;
-  font-size: 0.875rem;
-  line-height: 1;
-  color: #fff;
-  background-color: rgba(220, 53, 69, 0.8);
-  border-radius: 0.2rem;
-  white-space: normal;
-}
-
-// style input error
-.error-border-color:hover + .invalid-validation  {
-  display: block !important;
-  
-}
-.error-border-color {
-    border: 1px solid rgba(220, 53, 69, 0.8);
-}
 
 
 
