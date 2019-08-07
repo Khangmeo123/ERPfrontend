@@ -577,14 +577,13 @@
 			"cancel": "Hủy",
 			"clear": "Bỏ lọc",
 			"delete": "Xóa",
-			"downloadTemplate": "",
-			"downloadTempplate": "",
+			"downloadTemplate": "Tải file mẫu",
 			"download_example": "Tải file mẫu",
 			"export": "Xuất Excel",
 			"import": "Nhập hàng loạt",
-			"importFile": "",
+			"importFile": "Nhập hàng loạt",
 			"import_file": "Nhập hàng loạt",
-			"ok": "",
+			"ok": "OK",
 			"save": "Lưu"
 		},
 		"customer_group": {

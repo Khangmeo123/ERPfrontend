@@ -169,9 +169,9 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
 
   // drop list customer
 
-  openCustomerList(id: string[]) {
+  openCustomerList() {
     this.customerSearchEntity = new CustomerSearchEntity();
-    this.customerSearchEntity.ids = id;
+    this.customerSearchEntity.ids = this.listCustomerId;
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
       this.customerSearchEntity.legalEntityId = this.legalEntityId;
       this.customerSearchEntity.customerGroupingId = this.customerGroupId;

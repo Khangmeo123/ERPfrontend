@@ -52,7 +52,7 @@ export class EmployeeDetailRepository extends Repository {
     }
 
     getJobTitleList(jobTitleSearchEntity: JobTitleSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/list-job-title', JSON.stringify(jobTitleSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-job-title', JSON.stringify(jobTitleSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -67,7 +67,7 @@ export class EmployeeDetailRepository extends Repository {
     }
 
     getJobLevelList(jobLevelSearchEntity: JobLevelSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/list-job-level', JSON.stringify(jobLevelSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-job-level', JSON.stringify(jobLevelSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {

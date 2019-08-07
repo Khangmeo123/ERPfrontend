@@ -17,7 +17,7 @@ import {environment} from 'src/environments/environment';
   selector: 'app-customer-list-of-legal-entity',
   templateUrl: './customer-list-of-legal-entity.component.html',
   styleUrls: ['./customer-list-of-legal-entity.component.scss'],
-  providers: [CustomerOfLegalEntityService]
+  providers: [CustomerOfLegalEntityService],
 })
 export class CustomerListOfLegalEntityComponent implements OnInit {
 
@@ -38,7 +38,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   customerList: CustomerEntity[];
 
   legalSubs: Subscription = new Subscription();
-  legalId: string;
+  legalId: string = null;
   customerIds: CustomerEntity[];
   customerExceptIds: CustomerEntity[];
   customerTyping: Subject<CustomerSearchEntity> = new Subject();
