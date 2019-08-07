@@ -100,7 +100,7 @@ export class ProjectOrganizationRepository extends Repository {
 
   getEmployeeList(employeeSearchEntity: EmployeeSearchEntity): Observable<EmployeeEntity[]> {
     return this.http.post<EmployeeEntity[]>(
-      `${this.apiUrl}/list-employee`,
+      `${this.apiUrl}/list-employee-detail`,
       employeeSearchEntity,
       {
         observe: 'response',
@@ -116,7 +116,7 @@ export class ProjectOrganizationRepository extends Repository {
 
   searchEmployee(employeeSearchEntity: EmployeeSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/search-employee`,
+      `${this.apiUrl}/drop-list-employee-detail`,
       employeeSearchEntity,
       {
         observe: 'response',
@@ -135,7 +135,7 @@ export class ProjectOrganizationRepository extends Repository {
 
   countEmployee(employeeSearchEntity: EmployeeSearchEntity): Observable<number> {
     return this.http.post<number>(
-      `${this.apiUrl}/count-employee`,
+      `${this.apiUrl}/count-employee-detail`,
       employeeSearchEntity,
       {
         observe: 'response',
@@ -152,7 +152,7 @@ export class ProjectOrganizationRepository extends Repository {
   removeEmployeeFromOrganization(employeeId: string, projectOrganizationId: string): Promise<EmployeeEntity> {
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
-        `${this.apiUrl}/delete-employee`,
+        `${this.apiUrl}/delete-employee-detail`,
         {
           employeeId,
           projectOrganizationId,
@@ -176,7 +176,7 @@ export class ProjectOrganizationRepository extends Repository {
     }));
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
-        `${this.apiUrl}/create-employee`,
+        `${this.apiUrl}/add-employee-detail`,
         payload,
         {
           observe: 'response',
