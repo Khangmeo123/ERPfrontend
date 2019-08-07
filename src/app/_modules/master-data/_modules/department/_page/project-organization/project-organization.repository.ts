@@ -1,14 +1,14 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Repository } from '../../../../../../_helpers/repository';
-import { environment } from '../../../../../../../environments/environment';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
-import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
-import { Entities } from '../../../../../../_helpers/entity';
-import { ProjectOrganizationSearchEntity } from '../../../../_backend/project-organization/project-organization.search-entity';
-import { ProjectOrganizationEntity } from '../../../../_backend/project-organization/project-organization.entity';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Repository} from '../../../../../../_helpers/repository';
+import {environment} from '../../../../../../../environments/environment';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {EmployeeSearchEntity} from '../../../../_backend/employee/employee.searchentity';
+import {EmployeeEntity} from '../../../../_backend/employee/employee.entity';
+import {Entities} from '../../../../../../_helpers/entity';
+import {ProjectOrganizationSearchEntity} from '../../../../_backend/project-organization/project-organization.search-entity';
+import {ProjectOrganizationEntity} from '../../../../_backend/project-organization/project-organization.entity';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -149,12 +149,12 @@ export class ProjectOrganizationRepository extends Repository {
       );
   }
 
-  removeEmployeeFromOrganization(employeeId: string, projectOrganizationId: string): Promise<EmployeeEntity> {
+  removeEmployeeFromOrganization(employeeDetailId: string, projectOrganizationId: string): Promise<EmployeeEntity> {
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
         `${this.apiUrl}/delete-employee`,
         {
-          employeeId,
+          employeeDetailId,
           projectOrganizationId,
         },
         {
@@ -169,14 +169,18 @@ export class ProjectOrganizationRepository extends Repository {
     });
   }
 
-  addEmployeeToDepartment(employeeIds: string[], projectOrganizationId: string, employeeSearchEntity: EmployeeSearchEntity): Promise<void> {
-    const payload = employeeIds.map((id: string) => ({
-      employeeId: id,
-      projectOrganizationId,
+  addEmployeeToDepartment(
+    employeeDetailIds: string[],
+    hrOrganizationId: string,
+    employeeSearchEntity: EmployeeSearchEntity,
+  ): Promise<void> {
+    const payload = employeeDetailIds.map((employeeDetailId: string) => ({
+      employeeDetailId,
+      hrOrganizationId,
     }));
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
-        `${this.apiUrl}/create-employee`,
+        `${this.apiUrl}/add-employee-detail`,
         payload,
         {
           observe: 'response',
