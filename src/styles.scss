@@ -251,37 +251,11 @@ body {
   }
 }
 
-.ui-table-scrollable-header,
-.ui-table-scrollable-footer {
-  overflow: unset !important;
-}
-
-.ui-table-resizable {
-  .ui-table-thead {
-    tr {
-      th {
-        overflow: visible;
-      }
-    }
-  }
-}
-
-.cdk-overlay-container {
-  position: fixed !important;
-  z-index: 1010 !important; /* set value you need */
-}
 
 .page-actions-delete {
   float: left;
 }
 
-.ui-chips > ul.ui-inputtext {
-  width: 100% !important;
-}
-body .ui-state-disabled,
-body .ui-widget:disabled {
-  background: #e9ecef;
-}
 
 a.disabled {
   pointer-events: none;
@@ -391,20 +365,6 @@ input[type="text"].disabled {
   padding-bottom: 0 !important;
 }
 
-.mat-tab-group.mat-primary .mat-ink-bar,
-.mat-tab-nav-bar.mat-primary .mat-ink-bar {
-  background-color: $color-button !important;
-}
-
-.mat-tab-label-active {
-  .mat-tab-label-content {
-    color: $color-button !important;
-  }
-}
-
-.mat-tab-label {
-  opacity: 1 !important;
-}
 
 .form-upload-file {
   .upload-btn-wrapper input[type="file"] {
@@ -448,9 +408,6 @@ input[type="text"].disabled {
   color: $color-button;
 }
 
-.ui-dialog .ui-dialog-titlebar {
-  background-color: #ffffff !important;
-}
 
 .open-status {
   padding: 6px;
@@ -480,6 +437,3 @@ input[type="text"].disabled {
   border: 1px solid #E89922;
 }
 
-.mat-tab-body-content {
-  overflow-x:hidden !important;
-}

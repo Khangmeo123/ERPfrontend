@@ -1,0 +1,39 @@
+.ui-table-scrollable-header,
+.ui-table-scrollable-footer {
+  overflow: unset !important;
+}
+
+.ui-table-resizable {
+  .ui-table-thead {
+    tr {
+      th {
+        overflow: visible;
+      }
+    }
+  }
+}
+
+
+
+// dialog
+
+.cdk-overlay-container {
+    position: fixed !important;
+    z-index: 1010 !important; /* set value you need */
+}
+
+.ui-dialog .ui-dialog-titlebar {
+    background-color: #ffffff !important;
+  }
+  
+
+// chips
+.ui-chips > ul.ui-inputtext {
+    width: 100% !important;
+  }
+  body .ui-state-disabled,
+  body .ui-widget:disabled {
+    background: #e9ecef;
+  }
+  
+  

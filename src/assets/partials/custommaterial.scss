@@ -1,0 +1,19 @@
+$color-title: #007ee5;
+// tabs
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $color-title !important;
+}
+
+.mat-tab-label-active {
+  .mat-tab-label-content {
+    color: $color-title !important;
+  }
+}
+
+.mat-tab-label {
+  opacity: 1 !important;
+}
+.mat-tab-body-content {
+    overflow-x:hidden !important;
+}
