@@ -13,44 +13,44 @@
             <span class="ml-2 done-status">{{'general.done'| translate}}</span>
         </div>
         <div class="page-actions d-flex">
-            <button class="btn btn-labeled btn-clear">
+            <button class="btn btn-labeled btn-clear" data-qe-id="button-clear">
                 <span class="btn-label">
                     <img src="/assets/img/filter.svg" width="16">
                 </span>
                 <span class="button-label">
                     {{'general.button.clear' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-reverse">
+            <button class="btn btn-labeled btn-reverse" data-qe-id="button-reverse">
                 <span class="btn-label"><i class="material-icons">replay</i></span>
                 <span class="button-label">
                     {{'general.button.reverse' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-approve">
+            <button class="btn btn-labeled btn-approve" data-qe-id="button-approve">
                 <span class="btn-label"><i class="material-icons">check</i></span>
                 <span class="button-label">
                     {{'general.button.approve' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-rejected">
+            <button class="btn btn-labeled btn-rejected" data-qe-id="button-rejected">
                 <span class="btn-label"><i class="material-icons">block</i></span>
                 <span class="button-label">
                     {{'general.button.rejected' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-receive">
+            <button class="btn btn-labeled btn-receive" data-qe-id="button-receive">
                 <span class="btn-label"><i class="material-icons">assignment_returned</i></span>
                 <span class="button-label">
                     {{'general.button.receive' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-send">
+            <button class="btn btn-labeled btn-send" data-qe-id="button-send">
                 <span class="btn-label"><i class="material-icons">send</i></span>
                 <span class="button-label">
                     {{'general.button.send' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-save">
+            <button class="btn btn-labeled btn-save" data-qe-id="button-save">
                 <span class="btn-label"><i class="material-icons">save</i></span>
                 <span class="button-label">
                     {{'general.button.save' | translate}}
                 </span></button>
-            <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
+            <div class="btn-group btn-labeled" dropdown data-qe-id="button-action">
                 <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle
                     aria-controls="dropdown-basic">
                     <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
@@ -74,7 +74,7 @@
             </div>
         </div>
     </div>
-    <div class="page-body">
+    <div class="page-body" [formGroup]="goodsReceiptPOForm">
         <div class="page-section">
             <div class="page-section-form-header">
                 <span class="form-title">
@@ -96,19 +96,49 @@
                             {{'goodsReceiptPODetail.supplierCode' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-single-select data-qe-id="detail-form-supplier-code"></app-single-select>
+                        <div class="div-form">
+                            <app-single-select [list]="supplierExceptIds" [selectedList]="supplierIds" [key]="'code'"
+                                [initialValue]="goodsReceiptPOForm.controls.supplierCode.value"
+                                [valueSelector]="returnSupplier"
+                                (search)="typingSearchSupplier($event, goodsReceiptPOForm.controls.supplierDetailId.value)"
+                                (selectionChange)="chooseSupplier($event)"
+                                (listOpen)="dropListSupplier(goodsReceiptPOForm.controls.supplierDetailId.value)"
+                                data-qe-id="detail-form-supplier-code" class="w-100">
+                            </app-single-select>
+                            <app-error data-qe-id="form-error-supplierCode"
+                                *ngIf="(goodsReceiptPOForm.controls.supplierDetailId?.errors && goodsReceiptPOForm.controls.supplierDetailId?.touched) || !!goodsReceiptPOForm.controls.errors.get('supplierDetailId')?.value"
+                                [formGroup]="goodsReceiptPOForm" [property]="'supplierDetailId'" [placement]="'top'"
+                                class="error-form">
+                            </app-error>
+                        </div>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.supplierName' | translate}}
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-supplier-name">
+                        <input type="text" class="form-control disabled" formControlName="supplierName"
+                            data-qe-id="detail-form-supplier-name">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.supplierAddress' | translate}}
                         </label>
                         <app-single-select data-qe-id="detail-form-supplier-address"></app-single-select>
+                        <div class="div-form">
+                            <app-single-select [list]="supplierAddressExceptIds" [selectedList]="supplierAddressIds"
+                                [disabled]="goodsReceiptPOForm.controls.supplierDetailId.value === null || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0"
+                                [key]="'address'" [initialValue]="goodsReceiptPOForm.controls.supplierAddress.value"
+                                (search)="typingSearchSupplierAddress($event, goodsReceiptPOForm.controls.supplierContactId.value)"
+                                (selectionChange)="goodsReceiptPOForm.controls.supplierContactId.setValue($event[0])"
+                                (listOpen)="dropListSupplierAddress(goodsReceiptPOForm.controls.supplierContactId.value)"
+                                data-qe-id="detail-form-supplier-address" class="w-100">
+                            </app-single-select>
+                            <app-error data-qe-id="form-error-supplierAddress"
+                                *ngIf="(goodsReceiptPOForm.controls.supplierContactId?.errors && goodsReceiptPOForm.controls.supplierContactId?.touched) || !!goodsReceiptPOForm.controls.errors.get('supplierContactId')?.value"
+                                [formGroup]="goodsReceiptPOForm" [property]="'supplierContactId'" [placement]="'top'"
+                                class="error-form">
+                            </app-error>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -120,7 +150,9 @@
                             {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <input type="text" class="form-control" (click)="showGoodsReceipt()" data-qe-id="detail-form-goods-receipt">
+                        <input type="text" class="form-control" (click)="showPurchaseOrder()"
+                            data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderNames" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null 
+                            || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0}">
                     </div>
                 </div>
             </div>
@@ -132,20 +164,30 @@
                             {{'goodsReceiptPODetail.documentNumber' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-document-number">
+                        <input type="text" class="form-control" data-qe-id="detail-form-document-number"
+                            formControlName="documentNumber" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null 
+                            || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0}">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.inventoryCode' | translate}}
                         </label>
-                        <app-single-select data-qe-id="detail-form-inventory-address"></app-single-select>
-
+                        <app-single-select [list]="inventoryOrganizationExceptIds"
+                            [selectedList]="inventoryOrganizationIds"
+                            [disabled]="goodsReceiptPOForm.controls.supplierDetailId.value === null || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0"
+                            [key]="'address'" [initialValue]="goodsReceiptPOForm.controls.supplierAddress.value"
+                            (search)="typingSearchInvetoryOrganization($event, goodsReceiptPOForm.controls.inventoryOrganizationId.value)"
+                            (selectionChange)="goodsReceiptPOForm.controls.inventoryOrganizationId.setValue($event[0])"
+                            (listOpen)="dropListInventoryOrganization(goodsReceiptPOForm.controls.inventoryOrganizationId.value)"
+                            data-qe-id="detail-form-inventory-address" class="w-100">
+                        </app-single-select>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.inventoryAddress' | translate}}
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-inventory-code" disabled>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-inventory-code"
+                            formControlName="inventoryOrganizationStreet">
                     </div>
                 </div>
                 <div class="row">
@@ -154,20 +196,28 @@
                             {{'goodsReceiptPODetail.personInCharge' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
-
+                        <app-single-select [list]="ownerExceptIds" [selectedList]="ownerIds"
+                            [disabled]="goodsReceiptPOForm.controls.supplierDetailId.value === null || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0"
+                            [key]="'name'" [initialValue]="goodsReceiptPOForm.controls.ownerName.value"
+                            (search)="typingSearchOwner($event, goodsReceiptPOForm.controls.ownerId.value)"
+                            (selectionChange)="goodsReceiptPOForm.controls.ownerId.setValue($event[0])"
+                            (listOpen)="dropListOwner(goodsReceiptPOForm.controls.ownerId.value)"
+                            data-qe-id="detail-form-person-in-charge" class="w-100">
+                        </app-single-select>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.receiver' | translate}}
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-receiver" disabled>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-buyerName"
+                            formControlName="buyerName">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.creator' | translate}}
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-creator" disabled>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-creator"
+                            formControlName="requesterName">
                     </div>
                 </div>
                 <div class="row">
@@ -176,20 +226,24 @@
                             {{'goodsReceiptPODetail.receiptedDate' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-date-picker data-qe-id="detail-form-receipted-date">
+                        <app-date-picker [control]="goodsReceiptPOForm.get('dueDate')"
+                            data-qe-id="detail-form-receipted-date">
                         </app-date-picker>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.createdDate' | translate}}
                         </label>
-                        <app-date-picker data-qe-id="detail-form-created-date" [disabled]="true"></app-date-picker>
+                        <app-date-picker [control]="goodsReceiptPOForm.get('documentDate')"
+                            data-qe-id="detail-form-created-date" [disabled]="true">
+                        </app-date-picker>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 form-group">
                         <label>{{ 'goodsReceiptPODetail.description' | translate}}</label>
-                        <textarea class="form-control" rows="4" data-qe-id="detail-form-description">
+                        <textarea class="form-control" rows="4" data-qe-id="detail-form-remark"
+                            formControlName="remark">
                          </textarea>
                     </div>
                 </div>
@@ -534,7 +588,6 @@
     </p-footer>
 </p-dialog>
 
-
 <p-dialog [modal]="true" appendTo="body" [(visible)]="displayAmount" [contentStyle]="{'overflow':'visible'}"
     [style]="{width: '80%'}" [responsive]="true">
     <p-header>
@@ -629,7 +682,7 @@
     </p-footer>
 </p-dialog>
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayGoodsReceipt" [contentStyle]="{'overflow':'visible'}"
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayPurchseOrders" [contentStyle]="{'overflow':'visible'}"
     [style]="{width: '80%'}" [responsive]="true">
     <p-header>
         <span class="dialog-header">{{'goodsReceiptPODetail.goodsReceipt.supplierName' | translate}}</span>
@@ -637,7 +690,7 @@
     <div class="dialog-body">
         <div class="row mt-3">
             <div class="col-sm-12">
-                <p-table resizableColumns [value]="">
+                <p-table resizableColumns [value]="purchaseOrdersList">
                     <ng-template pTemplate="header">
                         <tr>
                             <th width="2.5%" pResizableColumn data-qe-id="table-thead-goodsReceipt-check-box">
@@ -649,14 +702,62 @@
                                     </div>
                                 </div>
                             </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-item-code">
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-createdDate">
                                 {{'goodsReceiptPODetail.goodsReceipt.createdDate' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-item-name">
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-documentNo">
                                 {{'goodsReceiptPODetail.goodsReceipt.documentNo' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-unit">
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-buyer">
                                 {{'goodsReceiptPODetail.goodsReceipt.buyer' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-quantity">
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-creator">
                                 {{'goodsReceiptPODetail.goodsReceipt.creator' | translate}} </th>
+                        </tr>
+                        <tr>
+                            <th class="th-filter"></th>
+                            <th class="th-filter">
+                                <app-advanced-filters [filter]="purchaseOrdersSearchEntity.documentDate"
+                                    (changeFilter)="getList()" data-qe-id="table-thead-filter-documentDate">
+                                </app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-advanced-filters [filter]="purchaseOrdersSearchEntity.documentDate"
+                                    (changeFilter)="getList()" data-qe-id="table-thead-filter-dueDate">
+                                </app-advanced-filters>
+                            </th>
+                            <th class="th-filter">
+                                <app-single-select [list]="buyerExceptIds" [selectedList]="buyerIds" [key]="'name'"
+                                    [initialValue]="purchaseOrdersSearchEntity.buyerId"
+                                    (search)="typingSearchBuyer($event, purchaseOrdersSearchEntity.buyerId)"
+                                    (selectionChange)="purchaseOrdersSearchEntity.buyerId = $event[0];"
+                                    (listOpen)="dropListBuyer(purchaseOrdersSearchEntity.buyerId)"
+                                    data-qe-id="table-thead-filter-buyer">
+                                </app-single-select>
+                            </th>
+                            <th class="th-filter">
+                                <app-single-select [list]="ownerExceptIds" [selectedList]="ownerIds" [key]="'name'"
+                                    [initialValue]="purchaseOrdersSearchEntity.ownerId"
+                                    (search)="typingSearchOwner($event, purchaseOrdersSearchEntity.ownerId)"
+                                    (selectionChange)="purchaseOrdersSearchEntity.ownerId = $event[0];"
+                                    (listOpen)="dropListOwner(purchaseOrdersSearchEntity.ownerId)"
+                                    data-qe-id="table-thead-filter-owner">
+                                </app-single-select>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-purchaseOrder let-index="rowIndex">
+                        <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+                            <td>
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" [(ngModel)]="purchaseOrder.isSelected" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td> {{goodsReceiptPO.documentDate | date: 'dd/MM/yyyy'}} </td>
+                            <td> {{goodsReceiptPO.documentNumber}} </td>
+                            <td> {{goodsReceiptPO.buyerName}} </td>
+                            <td> {{goodsReceiptPO.ownerName}} </td>
                         </tr>
                     </ng-template>
                 </p-table>

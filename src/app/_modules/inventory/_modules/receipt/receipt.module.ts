@@ -20,6 +20,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
+import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.
     InputSwitchModule,
     FiltersModule,
     DiscussionModule,
+    ErrorModule,
   ],
 })
 export class ReceiptModule { }

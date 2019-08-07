@@ -27,6 +27,17 @@ export class GoodsReceiptPOSearchEntity extends SearchEntity {
     }
 };
 
+export class PurchaseOrdersSearchEntity extends SearchEntity {
+    supplierDetailId: string;
+    documentNumber = new NumberFilter();
+    documentDate = new DateFilter();
+    ownerId: string;
+    buyerId: string;
+
+    constructor() {
+        super();
+    }
+}
 export class GoodsReceiptPORequesterSearchEntity extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
@@ -49,9 +60,16 @@ export class GoodsReceiptPOInventoryOrganizationSearchEntity extends SearchEntit
 export class GoodsReceiptPOSupplierSearchEntity extends SearchEntity {
     code = new TextFilter();
     name = new TextFilter();
+    constructor() {
+        super();
+    }
 }
 
 export class GoodsReceiptPOSupplierAddressSearchEntity extends SearchEntity {
     address = new TextFilter();
     name = new TextFilter();
+    constructor() {
+        super();
+    }
 }
+

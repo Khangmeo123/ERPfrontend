@@ -1,3 +1,5 @@
+import { PurchaseOrdersSearchEntity } from './../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import { PurchaseOrdersEntity } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -19,14 +21,23 @@ export class GoodsReceiptPODetailService {
     public supplierList: BehaviorSubject<Entities>;
     public supplierAddressList: BehaviorSubject<Entities>;
     public invetoryOrganizationList: BehaviorSubject<Entities>;
-    public requesterList: BehaviorSubject<Entities>;
-
+    public buyerList: BehaviorSubject<Entities>;
+    public ownerList: BehaviorSubject<Entities>;
+    public ownerPOList: BehaviorSubject<Entities>;
+    public purchaseOrdersList: BehaviorSubject<PurchaseOrdersEntity[]>;
     constructor(
         private fb: FormBuilder,
         private goodsReceiptPORepository: GoodsReceiptPODetailRepository,
         private toastrService: ToastrService,
     ) {
         this.goodsReceiptPOForm = new BehaviorSubject(this.fb.group(new GoodsReceiptPOForm()));
+        this.supplierList = new BehaviorSubject(new Entities());
+        this.supplierAddressList = new BehaviorSubject(new Entities());
+        this.invetoryOrganizationList = new BehaviorSubject(new Entities());
+        this.ownerList = new BehaviorSubject(new Entities());
+        this.ownerPOList = new BehaviorSubject(new Entities());
+        this.buyerList = new BehaviorSubject(new Entities());
+        this.purchaseOrdersList = new BehaviorSubject([]);
     }
 
     getDetail(goodsReceiptPOId?) {
@@ -79,6 +90,18 @@ export class GoodsReceiptPODetailService {
         return defered;
     }
 
+    getPurchaseOrdersList(purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity) {
+        this.goodsReceiptPORepository.getPurchaseOrdersList(purchaseOrdersSearchEntity).subscribe(res => {
+            if (res) {
+                this.purchaseOrdersList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
     // supplier:
     dropListSupplier(goodsReceiptPOSupplierSearchEntity: GoodsReceiptPOSupplierSearchEntity) {
         this.goodsReceiptPORepository.dropListSupplier(goodsReceiptPOSupplierSearchEntity).subscribe(res => {
@@ -129,11 +152,11 @@ export class GoodsReceiptPODetailService {
             });
     }
 
-    // requester:
-    dropListRequester(goodsReceiptPOListRequesterSearchEntity: GoodsReceiptPORequesterSearchEntity) {
-        this.goodsReceiptPORepository.dropListRequester(goodsReceiptPOListRequesterSearchEntity).subscribe(res => {
+    // buyer:
+    dropListBuyer(goodsReceiptPOListOwnerSearchEntity: GoodsReceiptPORequesterSearchEntity) {
+        this.goodsReceiptPORepository.dropListBuyer(goodsReceiptPOListOwnerSearchEntity).subscribe(res => {
             if (res) {
-                this.requesterList.next(res);
+                this.buyerList.next(res);
             }
         }, err => {
             if (err) {
@@ -142,23 +165,73 @@ export class GoodsReceiptPODetailService {
         });
     }
 
-    typingSearchRequester(goodsReceiptPOListRequesterSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
-        goodsReceiptPOListRequesterSearchEntity.pipe(debounceTime(400),
+    typingSearchBuyer(goodsReceiptPOListOwnerSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
+        goodsReceiptPOListOwnerSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListRequester(searchEntity);
+                return this.goodsReceiptPORepository.dropListBuyer(searchEntity);
             })).subscribe(res => {
                 if (res) {
-                    this.requesterList.next(res);
+                    this.buyerList.next(res);
+                }
+            });
+    }
+
+    // owner:
+    dropListOwner(goodsReceiptPOListOwnerSearchEntity: GoodsReceiptPORequesterSearchEntity) {
+        this.goodsReceiptPORepository.dropListOwner(goodsReceiptPOListOwnerSearchEntity).subscribe(res => {
+            if (res) {
+                this.ownerList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchOwner(goodsReceiptPOListOwnerSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
+        goodsReceiptPOListOwnerSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListOwner(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.ownerList.next(res);
+                }
+            });
+    }
+
+    // ownerPO:
+    dropListOwnerPO(goodsReceiptPOListOwnerSearchEntity: GoodsReceiptPORequesterSearchEntity) {
+        this.goodsReceiptPORepository.dropListOwner(goodsReceiptPOListOwnerSearchEntity).subscribe(res => {
+            if (res) {
+                this.ownerPOList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchOwnerPO(goodsReceiptPOListOwnerSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
+        goodsReceiptPOListOwnerSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListOwner(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.ownerPOList.next(res);
                 }
             });
     }
 
     // inventoryOrganization:
     dropListInvetoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity) {
-        this.goodsReceiptPORepository.dropListRequester(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
+        this.goodsReceiptPORepository.dropListOwner(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
             if (res) {
-                this.requesterList.next(res);
+                this.ownerList.next(res);
             }
         }, err => {
             if (err) {
@@ -172,10 +245,10 @@ export class GoodsReceiptPODetailService {
         goodsReceiptPOInventoryOrganizationSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListRequester(searchEntity);
+                return this.goodsReceiptPORepository.dropListOwner(searchEntity);
             })).subscribe(res => {
                 if (res) {
-                    this.requesterList.next(res);
+                    this.ownerList.next(res);
                 }
             });
     }

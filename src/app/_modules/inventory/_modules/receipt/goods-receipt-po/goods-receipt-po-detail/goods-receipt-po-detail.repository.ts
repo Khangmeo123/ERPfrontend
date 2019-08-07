@@ -7,6 +7,7 @@ import {
     GoodsReceiptPOSupplierEntity,
     GoodsReceiptPOSupplierAddressEntity,
     GoodsReceiptPORequesterEntity,
+    PurchaseOrdersEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -15,6 +16,7 @@ import {
     GoodsReceiptPOSupplierAddressSearchEntity,
     GoodsReceiptPORequesterSearchEntity,
     GoodsReceiptPOInventoryOrganizationSearchEntity,
+    PurchaseOrdersSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Entities } from 'src/app/_helpers/entity';
 
@@ -24,7 +26,7 @@ import { Entities } from 'src/app/_helpers/entity';
 export class GoodsReceiptPODetailRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po';
+        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po-detail';
     }
 
     getDetail(goodsReceiptPOId: string): Observable<GoodsReceiptPOEntity> {
@@ -57,8 +59,19 @@ export class GoodsReceiptPODetailRepository extends Repository {
             );
     }
 
+    getPurchaseOrdersList(purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity) {
+        return this.http.post<GoodsReceiptPOEntity[]>(this.apiUrl + '/list-purchase-order', JSON.stringify(purchaseOrdersSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new PurchaseOrdersEntity(item);
+                    });
+                }),
+            );
+    }
+
     dropListSupplier(goodsReceiptPOSupplierSearchEntity: GoodsReceiptPOSupplierSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-requester', JSON.stringify(goodsReceiptPOSupplierSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-supplier', JSON.stringify(goodsReceiptPOSupplierSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -73,7 +86,8 @@ export class GoodsReceiptPODetailRepository extends Repository {
     }
 
     dropListSupplierAddress(goodsReceiptPOSupplierAddressSearchEntity: GoodsReceiptPOSupplierAddressSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-requester', JSON.stringify(goodsReceiptPOSupplierAddressSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-supplier-address',
+            JSON.stringify(goodsReceiptPOSupplierAddressSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -87,8 +101,23 @@ export class GoodsReceiptPODetailRepository extends Repository {
             );
     }
 
-    dropListRequester(goodsReceiptPORequesterSearchEntity: GoodsReceiptPORequesterSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-requester', JSON.stringify(goodsReceiptPORequesterSearchEntity),
+    dropListOwner(goodsReceiptPORequesterSearchEntity: GoodsReceiptPORequesterSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-owner', JSON.stringify(goodsReceiptPORequesterSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new GoodsReceiptPORequesterEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new GoodsReceiptPORequesterEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListBuyer(goodsReceiptPORequesterSearchEntity: GoodsReceiptPORequesterSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-owner', JSON.stringify(goodsReceiptPORequesterSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -103,7 +132,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
     }
 
     dropListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory-organization',
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory',
             JSON.stringify(goodsReceiptPOInventoryOrganizationSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

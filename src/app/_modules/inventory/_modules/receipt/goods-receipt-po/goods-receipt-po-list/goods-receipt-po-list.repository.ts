@@ -20,7 +20,7 @@ import { Injectable } from '@angular/core';
 export class GoodsReceiptPOListRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po';
+        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po-list';
     }
 
     getList(goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity): Observable<GoodsReceiptPOEntity[]> {
@@ -57,7 +57,7 @@ export class GoodsReceiptPOListRepository extends Repository {
     }
 
     dropListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory-organization',
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory',
             JSON.stringify(goodsReceiptPOInventoryOrganizationSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

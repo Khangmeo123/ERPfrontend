@@ -183,6 +183,7 @@ export class GoodsReceiptPoListComponent implements OnInit, OnDestroy {
     this.inventoryOrganizationSearchEntity.name.startsWith = event;
     this.inventoryOrganizationTyping.next(this.inventoryOrganizationSearchEntity);
   }
+
   // status:
   enumListStatus() {
     if (this.statusList.length === 0) {

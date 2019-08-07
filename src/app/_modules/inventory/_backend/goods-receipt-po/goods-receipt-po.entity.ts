@@ -5,7 +5,9 @@ export class GoodsReceiptPOEntity extends Entity {
 
     supplierDetailId: string;
     supplierContactId: string;
-    supplierContactFullName: string;
+    supplierCode: string;
+    supplierName: string;
+    supplierAddress: string;
     currencyId: string;
     currencyName: string;
     documentNumber: string;
@@ -23,10 +25,12 @@ export class GoodsReceiptPOEntity extends Entity {
     inventoryOrganizationId: string;
     inventoryOrganizationCode: string;
     inventoryOrganizationName: string;
+    inventoryOrganizationStreet: string;
     generalDiscountRate: number;
     generalDiscountCost: number;
     goodsReceiptPOContents: GoodsReceiptPOContent[];
-    purchaseOrders: PurchaseOrders[];
+    purchaseOrders: PurchaseOrdersEntity[];
+    purchaseOrderNames: string;
     fileAttachments: FileAttachments[];
 
     constructor(goodsReceiptPOEntity?: any) {
@@ -58,9 +62,13 @@ export class GoodsReceiptPOContent extends Entity {
     }
 }
 
-export class PurchaseOrders extends Entity {
+export class PurchaseOrdersEntity extends Entity {
     name: string;
     documentNumber: string;
+    documentDate: string;
+    ownerName: string;
+    buyerName: string;
+    isSelected: boolean;
 
     constructor(purchaseOrders?: any) {
         super(purchaseOrders);
