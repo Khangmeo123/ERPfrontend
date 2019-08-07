@@ -17,6 +17,7 @@ import { SelectModule } from 'src/app/_shared/modules/select/select.module';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
 
 @NgModule({
   declarations: [
@@ -43,6 +44,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     MatTabsModule,
     DialogModule,
     InputSwitchModule,
+    DiscussionModule,
   ]
 })
 export class ReceiptModule { }

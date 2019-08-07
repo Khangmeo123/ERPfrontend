@@ -620,6 +620,9 @@
 			"title ": "Thông tin lô"
 		},
 		"binLocation": "Vị trí lưu kho",
+		"button": {
+			"add": "Nhập phiếu"
+		},
 		"createdDate": "Ngày tạo",
 		"creator": "Người tạo",
 		"description": "Mô tả",
@@ -627,7 +630,14 @@
 		"form": {
 			"title": "Thông tin chung"
 		},
-		"goodsReceipt": "Nhập phiếu từ đơn mua hàng",
+		"goodsReceipt": {
+			"buyer": "Người mua",
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"documentNo": "Số chứng từ",
+			"title": "Nhập phiếu từ đơn mua hàng",
+			"title ": ""
+		},
 		"header": {
 			"title": "Phiếu nhập kho hàng mua"
 		},

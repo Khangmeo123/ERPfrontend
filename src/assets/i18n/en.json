@@ -620,6 +620,9 @@
 			"title ": ""
 		},
 		"binLocation": "",
+		"button": {
+			"add": ""
+		},
 		"createdDate": "",
 		"creator": "",
 		"description": "",
@@ -627,7 +630,14 @@
 		"form": {
 			"title": ""
 		},
-		"goodsReceipt": "",
+		"goodsReceipt": {
+			"buyer": "",
+			"createdDate": "",
+			"creator": "",
+			"documentNo": "",
+			"title": "",
+			"title ": ""
+		},
 		"header": {
 			"title": ""
 		},

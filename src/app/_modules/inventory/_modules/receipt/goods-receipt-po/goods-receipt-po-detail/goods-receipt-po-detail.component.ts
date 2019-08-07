@@ -29,6 +29,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit {
   displayBatches: boolean = false;
   displayCDA: boolean = false;
   displayAmount: boolean = false;
+  displayGoodsReceipt: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -52,6 +53,10 @@ export class GoodsReceiptPoDetailComponent implements OnInit {
 
   showAmount() {
     this.displayAmount = true;
+  }
+
+  showGoodsReceipt() {
+    this.displayGoodsReceipt = true;
   }
 
   backToList() {
