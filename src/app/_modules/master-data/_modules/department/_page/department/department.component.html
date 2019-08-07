@@ -33,6 +33,7 @@
                              (search)="onDivisionSearch($event)"
                              (selectionChange)="onSelectDivision()"
                              [list]="divisionList"
+                             [disabled]="!legalEntity"
                              [selectedList]="selectedDivisionList"
                              key="name"></app-single-select>
         </div>

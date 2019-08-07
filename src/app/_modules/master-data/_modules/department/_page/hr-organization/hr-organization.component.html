@@ -116,7 +116,7 @@
                             [selectedList]="selectedEmployeeToAddToDepartmentList" key="name"></app-multi-select>
         </div>
         <div class="page-actions">
-          <button (click)="onAddToDepartment()" [disabled]="disabled || !selectedEmployeeToAddToDepartmentList?.length"
+          <button (click)="onAddToDepartment()" [disabled]="disabled || !employeeNotInDepartmentSearchEntity?.ids?.length"
                   class="btn btn-add">
             {{'general.button.add' | translate}}
           </button>

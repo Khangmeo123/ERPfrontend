@@ -169,7 +169,10 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
   }
 
   searchEmployee() {
+    this.employeeNotInDepartmentSearchEntity = new EmployeeSearchEntity();
     this.employeeNotInDepartmentSearchEntity.hrOrganizationId = this.selectedDepartment.id;
+    this.employeeNotInDepartmentSearchEntity.divisionId = this.division.id;
+    this.employeeNotInDepartmentSearchEntity.legalEntityId = this.legalEntity.id;
     this.hrOrganizationService.searchEmployee(this.employeeNotInDepartmentSearchEntity);
   }
 

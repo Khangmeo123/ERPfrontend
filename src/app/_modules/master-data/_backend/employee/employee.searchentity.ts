@@ -11,6 +11,7 @@ export class EmployeeSearchEntity extends SearchEntity {
   statusId: string = '';
   staffInChargeId: string;
   legalEntityId: string;
+  divisionId: string;
   employeeIds: Array<string>;
   positionId: string;
   employeeDetailIds: Array<string>;
