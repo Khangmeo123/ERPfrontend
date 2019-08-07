@@ -4,6 +4,8 @@ import { DeliveryOrderComponent } from './delivery-order/delivery-order.componen
 import { GoodsReturnRequestComponent } from './goods-return-request/goods-return-request.component';
 import { GoodsReturnComponent } from './goods-return/goods-return.component';
 import { GoodsIssueComponent } from './goods-issue/goods-issue.component';
+import { DeliveryOrderListComponent } from './delivery-order/delivery-order-list/delivery-order-list.component';
+import { DeliveryOrderDetailComponent } from './delivery-order/delivery-order-detail/delivery-order-detail.component';
 
 const routes: Routes = [
   {
@@ -11,6 +13,21 @@ const routes: Routes = [
       {
         path: 'delivery-order',
         component: DeliveryOrderComponent,
+        children: [
+          {
+            path: 'delivery-order-list',
+            component: DeliveryOrderListComponent,
+          },
+          {
+            path: 'delivery-order-detail',
+            component: DeliveryOrderDetailComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'delivery-order-list',
+            pathMatch: 'full',
+          },
+        ],
       },
       {
         path: 'goods-return-request',

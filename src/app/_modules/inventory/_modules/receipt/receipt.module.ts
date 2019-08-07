@@ -21,6 +21,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
+import { ReturnListComponent } from './return/return-list/return-list.component';
+import { ReturnDetailComponent } from './return/return-detail/return-detail.component';
+import { GoodsReceiptDetailComponent } from './goods-receipt/goods-receipt-detail/goods-receipt-detail.component';
+import { GoodsReceiptListComponent } from './goods-receipt/goods-receipt-list/goods-receipt-list.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +33,11 @@ import { ErrorModule } from 'src/app/_shared/components/error/error.module';
     ReturnRequestComponent,
     ReturnComponent,
     GoodsReceiptPoDetailComponent,
-    GoodsReceiptPoListComponent],
+    GoodsReceiptPoListComponent,
+    ReturnListComponent,
+    ReturnDetailComponent,
+    GoodsReceiptDetailComponent,
+    GoodsReceiptListComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,

@@ -6,6 +6,10 @@ import { ReturnRequestComponent } from './return-request/return-request.componen
 import { ReturnComponent } from './return/return.component';
 import { GoodsReceiptPoListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
 import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
+import { ReturnListComponent} from './return/return-list/return-list.component';
+import { ReturnDetailComponent} from './return/return-detail/return-detail.component';
+import { GoodsReceiptListComponent } from './goods-receipt/goods-receipt-list/goods-receipt-list.component';
+import { GoodsReceiptDetailComponent } from './goods-receipt/goods-receipt-detail/goods-receipt-detail.component';
 
 const routes: Routes = [
   {
@@ -32,6 +36,21 @@ const routes: Routes = [
       {
         path: 'goods-receipt',
         component: GoodsReceiptComponent,
+        children: [
+          {
+            path: 'goods-receipt-list',
+            component: GoodsReceiptListComponent,
+          },
+          {
+            path: 'goods-receipt-detail',
+            component: GoodsReceiptDetailComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'goods-receipt-list',
+            pathMatch: 'full',
+          },
+        ],
       },
       {
         path: 'return-request',
@@ -40,6 +59,21 @@ const routes: Routes = [
       {
         path: 'return',
         component: ReturnComponent,
+        children: [
+          {
+            path: 'return-list',
+            component: ReturnListComponent,
+          },
+          {
+            path: 'return-detail',
+            component: ReturnDetailComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'return-list',
+            pathMatch: 'full',
+          },
+        ],
       },
     ],
   },
