@@ -14,12 +14,20 @@ const routes: Routes = [
         path: 'goods-receipt-po',
         component: GoodsReceiptPOComponent,
         children: [
-
-          { path: 'goods-receipt-po-list', component: GoodsReceiptPoListComponent },
-          { path: 'goods-receipt-po-detail', component: GoodsReceiptPoDetailComponent },
-          { path: '', redirectTo: 'goods-receipt-po-list', pathMatch: 'full' }
-
-        ]
+          {
+            path: 'goods-receipt-po-list',
+            component: GoodsReceiptPoListComponent,
+          },
+          {
+            path: 'goods-receipt-po-detail',
+            component: GoodsReceiptPoDetailComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'goods-receipt-po-list',
+            pathMatch: 'full',
+          },
+        ],
       },
       {
         path: 'goods-receipt',
