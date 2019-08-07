@@ -980,7 +980,7 @@
 		"description": "Mô tả",
 		"discount": "Chiết khấu",
 		"name": "Tên",
-		"parent_account": "Thuế cha",
+		"parent_account": "Tài khoản tổng hợp",
 		"unit": "Đơn vị tính"
 	},
 	"uom": {
