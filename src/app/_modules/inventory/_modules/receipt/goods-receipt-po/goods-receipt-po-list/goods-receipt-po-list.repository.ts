@@ -13,11 +13,14 @@ import {
     GoodsReceiptPOInventoryOrganizationSearchEntity,
 } from './../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Entities, EnumEntity } from 'src/app/_helpers/entity';
-
-export class GoodsReceiptPORepository extends Repository {
+import { Injectable } from '@angular/core';
+@Injectable({
+    providedIn: 'root',
+})
+export class GoodsReceiptPOListRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlApps + 'inventory/receipt/goods-receipt-po';
+        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po';
     }
 
     getList(goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity): Observable<GoodsReceiptPOEntity[]> {

@@ -32,7 +32,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   genderList: any[] = [{ label: 'Nam', id: true }, { label: 'Nữ', id: false }];
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  testValue = 'test';
   downloadLink = environment.apiUrlApps + 'master-data/business-group/employee/employee-list/download-template';
   exportLink = environment.apiUrlApps + 'master-data/business-group/employee/employee-list/export';
 
@@ -88,7 +87,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   clearSearch(table: any) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
     table.reset();
-    this.testValue = '';
   }
 
   sort(event: any) {

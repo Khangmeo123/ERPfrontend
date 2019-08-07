@@ -11,10 +11,11 @@ import {
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { FormBuilder } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { GoodsReceiptPORepository } from './goods-receipt-po-list.repository';
+import { GoodsReceiptPOListRepository } from './goods-receipt-po-list.repository';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-
-export class GoodsReceiptPOService {
+import { Injectable } from '@angular/core';
+@Injectable()
+export class GoodsReceiptPOListService {
     public goodsReceiptPOList: BehaviorSubject<GoodsReceiptPOEntity[]>;
     public goodsReceiptPOCount: BehaviorSubject<number>;
     public requesterList: BehaviorSubject<Entities>;
@@ -22,7 +23,7 @@ export class GoodsReceiptPOService {
     public statusList: BehaviorSubject<EnumEntity[]>;
     constructor(
         private fb: FormBuilder,
-        private goodsReceiptPORepository: GoodsReceiptPORepository,
+        private goodsReceiptPORepository: GoodsReceiptPOListRepository,
         private toastrService: ToastrService,
     ) {
         this.goodsReceiptPOList = new BehaviorSubject([]);
@@ -44,8 +45,8 @@ export class GoodsReceiptPOService {
             });
     }
 
-    dropListRequester(goodsReceiptPOListRequesterSearchEntity: GoodsReceiptPORequesterSearchEntity) {
-        this.goodsReceiptPORepository.dropListRequester(goodsReceiptPOListRequesterSearchEntity).subscribe(res => {
+    dropListRequester(goodsReceiptPORequesterSearchEntity: GoodsReceiptPORequesterSearchEntity) {
+        this.goodsReceiptPORepository.dropListRequester(goodsReceiptPORequesterSearchEntity).subscribe(res => {
             if (res) {
                 this.requesterList.next(res);
             }
@@ -56,8 +57,8 @@ export class GoodsReceiptPOService {
         });
     }
 
-    typingSearchRequester(goodsReceiptPOListRequesterSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
-        goodsReceiptPOListRequesterSearchEntity.pipe(debounceTime(400),
+    typingSearchRequester(goodsReceiptPORequesterSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
+        goodsReceiptPORequesterSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
                 return this.goodsReceiptPORepository.dropListRequester(searchEntity);

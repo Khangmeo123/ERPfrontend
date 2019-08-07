@@ -17,6 +17,8 @@ import { SelectModule } from 'src/app/_shared/modules/select/select.module';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     GoodsReceiptPoListComponent],
   imports: [
     CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
     ReceiptRoutingModule,
     MatIconModule,
     TranslateModule.forChild(),
@@ -43,6 +47,7 @@ import { InputSwitchModule } from 'primeng/inputswitch';
     MatTabsModule,
     DialogModule,
     InputSwitchModule,
-  ]
+    FiltersModule,
+  ],
 })
 export class ReceiptModule { }

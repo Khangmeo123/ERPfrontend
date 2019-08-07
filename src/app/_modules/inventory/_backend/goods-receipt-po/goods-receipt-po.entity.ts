@@ -68,7 +68,7 @@ export class PurchaseOrders extends Entity {
 }
 
 export class FileAttachments extends Entity {
-    filename: string;
+    fileName: string;
 
     constructor(fileAttachments?: any) {
         super(fileAttachments);
@@ -86,3 +86,15 @@ export class GoodsReceiptPOInventoryOrganizationEntity extends Entity {
     shortName: string;
 }
 
+export class GoodsReceiptPOSupplierEntity extends Entity {
+    code: string;
+    name: string;
+    taxCode: string;
+    status: string;
+    note: string;
+}
+
+export class GoodsReceiptPOSupplierAddressEntity extends Entity {
+    name: string;
+    address: string;
+}
