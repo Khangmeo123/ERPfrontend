@@ -29,9 +29,9 @@ export class DiscussionComponent {
     set discussionId(value: string) {
         this.id = value;
         this.discussionService.discussionId = value;
-        this.postToSend.discussionId = value;
+        this.postToSend.documentId = value;
         Object.assign(this.currentUser, this.discussionService.userEntity);
-        // this.getPosts();
+        this.getPosts();
     }
 
     get discussionId(): string {
@@ -46,8 +46,6 @@ export class DiscussionComponent {
 
     getPosts() {
         this.searchPostEntity = new SearchPostEntity();
-        this.searchPostEntity.take = 1000;
-        this.searchPostEntity.skip = 0;
         this.searchPostEntity.discussionId = this.discussionService.discussionId;
         this.discussionService.getPosts(this.searchPostEntity).subscribe(p => {
             this.postEntities = p;
@@ -61,7 +59,7 @@ export class DiscussionComponent {
 
     getComments(postEntity: PostEntity) {
         this.discussionService.getComments(postEntity.id).subscribe(p => {
-            postEntity.CommentEntities = p.CommentEntities;
+            postEntity.comments = p.CommentEntities;
         });
     }
 
@@ -84,7 +82,7 @@ export class DiscussionComponent {
 
     sendPost(event?) {
         const post: any = {};
-        post.UserId = this.currentUser.id;
+        // post.UserId = this.currentUser.id;
         post.DiscussionId = this.discussionService.discussionId;
         post.Location = window.location.href;
         if (event == null) {
@@ -142,8 +140,8 @@ export class DiscussionComponent {
     deleteComment(i: number, j: number) {
         // this.postToSend.content = document.getElementById(this.postInputDiscussionComponent.id).innerHTML;
         // document.getElementById(this.postInputDiscussionComponent.id).innerHTML = '';
-        this.discussionService.deleteComment(this.postEntities[i].CommentEntities[j]).subscribe(p => {
-            this.postEntities[i].CommentEntities.splice(j, 1);
+        this.discussionService.deleteComment(this.postEntities[i].comments[j]).subscribe(p => {
+            this.postEntities[i].comments.splice(j, 1);
         });
     }
 }

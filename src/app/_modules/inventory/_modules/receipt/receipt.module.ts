@@ -19,6 +19,7 @@ import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
+import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
     DialogModule,
     InputSwitchModule,
     FiltersModule,
+    DiscussionModule,
   ],
 })
 export class ReceiptModule { }

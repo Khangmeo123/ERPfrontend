@@ -1,7 +1,7 @@
 <div class="page goods-receipt-po">
     <div class="page-header justify-content-between">
         <div class="justify-content-start align-items-center">
-            <span class="back-to-list" (click) = "backToList()">
+            <span class="back-to-list" (click)="backToList()">
                 <i class="material-icons">arrow_back_ios</i>
             </span>
             <span class="page-title">
@@ -13,6 +13,13 @@
             <span class="ml-2 done-status">{{'general.done'| translate}}</span>
         </div>
         <div class="page-actions d-flex">
+            <button class="btn btn-labeled btn-clear">
+                <span class="btn-label">
+                    <img src="/assets/img/filter.svg" width="16">
+                </span>
+                <span class="button-label">
+                    {{'general.button.clear' | translate}}
+                </span></button>
             <button class="btn btn-labeled btn-reverse">
                 <span class="btn-label"><i class="material-icons">replay</i></span>
                 <span class="button-label">
@@ -108,12 +115,12 @@
             <div class="line"></div>
             <div class="page-section-form-body">
                 <div class="row">
-                    <div class="col-sm-4 form-group">
+                    <div class="col-sm-8 form-group">
                         <label>
-                            {{'goodsReceiptPODetail.goodsReceipt' | translate}}
+                            {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-single-select data-qe-id="detail-form-goods-receipt"></app-single-select>
+                        <input type="text" class="form-control" (click)="showGoodsReceipt()" data-qe-id="detail-form-goods-receipt">
                     </div>
                 </div>
             </div>
@@ -612,6 +619,60 @@
                             {{'general.button.save' | translate}}
                         </span></button>
                     <button class="btn btn-labeled btn-cancel" (click)="displayAmount = false">
+                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+                        <span class="button-label">
+                            {{'general.button.cancel' | translate}}
+                        </span></button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayGoodsReceipt" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '80%'}" [responsive]="true">
+    <p-header>
+        <span class="dialog-header">{{'goodsReceiptPODetail.goodsReceipt.supplierName' | translate}}</span>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table resizableColumns [value]="">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-goodsReceipt-check-box">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-item-code">
+                                {{'goodsReceiptPODetail.goodsReceipt.createdDate' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-item-name">
+                                {{'goodsReceiptPODetail.goodsReceipt.documentNo' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-unit">
+                                {{'goodsReceiptPODetail.goodsReceipt.buyer' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReceipt-quantity">
+                                {{'goodsReceiptPODetail.goodsReceipt.creator' | translate}} </th>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-save-dialog">
+                        <span class="btn-label"><i class="material-icons">save</i></span>
+                        <span class="button-label">
+                            {{'goodsReceiptPODetail.button.add' | translate}}
+                        </span></button>
+                    <button class="btn btn-labeled btn-cancel" (click)="displayGoodsReceipt = false">
                         <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
                         <span class="button-label">
                             {{'general.button.cancel' | translate}}

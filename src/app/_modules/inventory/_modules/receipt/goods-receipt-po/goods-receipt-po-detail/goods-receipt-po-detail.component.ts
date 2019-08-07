@@ -32,6 +32,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   displayBatches: boolean = false;
   displayCDA: boolean = false;
   displayAmount: boolean = false;
+  displayGoodsReceipt: boolean = false;
   goodsReceiptPOSubs: Subscription = new Subscription();
   goodsReceiptPOForm: FormGroup;
   // supplier:
@@ -99,6 +100,10 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   showAmount() {
     this.displayAmount = true;
+  }
+
+  showGoodsReceipt() {
+    this.displayGoodsReceipt = true;
   }
 
   backToList() {

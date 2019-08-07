@@ -8,8 +8,6 @@ export class SearchPostEntity {
     createdDate: string;
     updatedDate: string;
     commentEntities: Array<CommentEntity>;
-    skip: number;
-    take: number;
     constructor(catalog: any = null) {
     }
 }
