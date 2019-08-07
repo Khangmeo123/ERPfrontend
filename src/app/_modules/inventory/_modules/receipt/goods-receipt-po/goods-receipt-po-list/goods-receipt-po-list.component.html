@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add">
+      <button type="button" class="btn btn-labeled btn-add" (click) = "addGoodsReceipt()">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
@@ -38,11 +38,7 @@
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
-        <div class="col-sm-2 d-flex align-items-center status n-p-r">
-          <label>{{'general.status' | translate}}</label>
-
-        </div>
-        <button type="button" class="btn btn-labeled btn-add">
+        <button type="button" class="btn btn-labeled btn-add get-data">
           {{'general.button.getData' | translate}}</button>
       </div>
 

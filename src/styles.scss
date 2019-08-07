@@ -6,7 +6,7 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
-$color-button: #007EE5;
+$color-button: #007ee5;
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 $hamburger-padding-x: 0px !default;
@@ -17,57 +17,59 @@ $hamburger-layer-spacing: 5px !default;
 $hamburger-layer-color: #9b9ea2 !default;
 $hamburger-layer-border-radius: 4px !default;
 $hamburger-hover-opacity: 0.7 !default;
-$color-title: #007EE5;
+$color-title: #007ee5;
 $background-color: #ffffff;
+$color-danger: #E64C4F;
 
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 // @import '~font-awesome/scss/font-awesome';
 // @import '~hamburgers/_sass/hamburgers/hamburgers';
-@import '~ngx-toastr/toastr-bs4-alert';
+@import "~ngx-toastr/toastr-bs4-alert";
 
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/brands';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/brands";
 
-@import './assets/lightning-admin';
+@import "./assets/lightning-admin";
 
 @import "./scss/scrollbars";
 
 /* REQUIRED */
-@import '~pretty-checkbox/src/scss/variables';
-@import '~pretty-checkbox/src/scss/core';
+@import "~pretty-checkbox/src/scss/variables";
+@import "~pretty-checkbox/src/scss/core";
 
 /* OPTIONALS */
-@import '~pretty-checkbox/src/scss/elements/default/fill';
-@import '~pretty-checkbox/src/scss/elements/default/outline';
-@import '~pretty-checkbox/src/scss/elements/default/thick';
+@import "~pretty-checkbox/src/scss/elements/default/fill";
+@import "~pretty-checkbox/src/scss/elements/default/outline";
+@import "~pretty-checkbox/src/scss/elements/default/thick";
 
-@import '~pretty-checkbox/src/scss/elements/font-icon/general';
+@import "~pretty-checkbox/src/scss/elements/font-icon/general";
 
-@import '~pretty-checkbox/src/scss/elements/svg/general';
+@import "~pretty-checkbox/src/scss/elements/svg/general";
 
-@import '~pretty-checkbox/src/scss/elements/image/general';
+@import "~pretty-checkbox/src/scss/elements/image/general";
 
-@import '~pretty-checkbox/src/scss/elements/switch/general';
-@import '~pretty-checkbox/src/scss/elements/switch/fill';
-@import '~pretty-checkbox/src/scss/elements/switch/slim';
+@import "~pretty-checkbox/src/scss/elements/switch/general";
+@import "~pretty-checkbox/src/scss/elements/switch/fill";
+@import "~pretty-checkbox/src/scss/elements/switch/slim";
 
-@import '~pretty-checkbox/src/scss/extras/toggle';
-@import '~pretty-checkbox/src/scss/extras/plain';
-@import '~pretty-checkbox/src/scss/extras/round';
-@import '~pretty-checkbox/src/scss/extras/curve';
-@import '~pretty-checkbox/src/scss/extras/animation';
-@import '~pretty-checkbox/src/scss/extras/disabled';
-@import '~pretty-checkbox/src/scss/extras/locked';
-@import '~pretty-checkbox/src/scss/extras/colors';
-@import '~pretty-checkbox/src/scss/extras/print';
+@import "~pretty-checkbox/src/scss/extras/toggle";
+@import "~pretty-checkbox/src/scss/extras/plain";
+@import "~pretty-checkbox/src/scss/extras/round";
+@import "~pretty-checkbox/src/scss/extras/curve";
+@import "~pretty-checkbox/src/scss/extras/animation";
+@import "~pretty-checkbox/src/scss/extras/disabled";
+@import "~pretty-checkbox/src/scss/extras/locked";
+@import "~pretty-checkbox/src/scss/extras/colors";
+@import "~pretty-checkbox/src/scss/extras/print";
 
-@import '~pretty-checkbox/src/scss/states/hover';
-@import '~pretty-checkbox/src/scss/states/focus';
-@import '~pretty-checkbox/src/scss/states/indeterminate';
+@import "~pretty-checkbox/src/scss/states/hover";
+@import "~pretty-checkbox/src/scss/states/focus";
+@import "~pretty-checkbox/src/scss/states/indeterminate";
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -106,7 +108,6 @@ body {
   box-shadow: none;
 }
 
-
 .title-page {
   display: flex;
 
@@ -126,24 +127,23 @@ body {
 
 .th-filter {
   background-color: $background-color !important;
-  padding: 0.25rem 0.5rem!important;
+  padding: 0.25rem 0.5rem !important;
 }
 
 .card-header {
   padding: 2px 3px !important;
 }
 
-
-
 .btn.btn-clear,
 .btn.btn-import,
 .btn.btn-export,
 .btn.btn-save,
 .btn.btn-history,
-.btn.btn-print {
+.btn.btn-print,
+.btn.btn-cancel {
   background: $background-color;
   color: $black;
-  border: 1px solid #C5C5C5;
+  border: 1px solid #c5c5c5;
 }
 
 .btn.btn-update {
@@ -151,13 +151,15 @@ body {
   color: $white;
 }
 
-.btn.btn-delete {
-  background: $danger;
+.btn.btn-reverse {
+  background: $color-danger;
   color: $white;
 }
 
-.btn.btn-cancel {
-  border: 1px solid $secondary;
+.btn.btn-delete
+ {
+  border: 1px solid $color-danger;
+  color: $color-danger;
 }
 
 .page {
@@ -166,15 +168,29 @@ body {
     height: 60px;
     padding: 15px;
   }
-  .page-header,.page-footer {
+
+  .line {
+    border-bottom: 1px solid #707070;
+    opacity: 0.2;
+  }
+
+  .page-section-form-header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .form-title {
+      color: $color-title;
+    }
+  }
+  .page-header,
+  .page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     margin-bottom: 20px;
-    
 
     .page-title {
-      font-size: 21px;
+      font-size: 20px;
       color: $color-title;
       text-transform: uppercase;
       font-weight: bold;
@@ -193,7 +209,7 @@ body {
       }
 
       .btn-import {
-        margin-right: 0.5rem !important
+        margin-right: 0.5rem !important;
       }
     }
   }
@@ -202,15 +218,13 @@ body {
     margin: 15px 0px 15px 0px;
     .page-section {
       background-color: $background-color;
-      margin-top: -5px;
+      // margin-top: -5px;
     }
 
     .page-section.form {
-
     }
 
     .page-section.list {
-
     }
   }
 
@@ -225,11 +239,10 @@ body {
     display: flex;
     justify-content: flex-end;
   }
-
-  
 }
 
-.ui-table-scrollable-header, .ui-table-scrollable-footer {
+.ui-table-scrollable-header,
+.ui-table-scrollable-footer {
   overflow: unset !important;
 }
 
@@ -255,7 +268,8 @@ body {
 .ui-chips > ul.ui-inputtext {
   width: 100% !important;
 }
-body .ui-state-disabled, body .ui-widget:disabled {
+body .ui-state-disabled,
+body .ui-widget:disabled {
   background: #e9ecef;
 }
 
@@ -273,7 +287,7 @@ input[type="text"].disabled {
 .ui-table {
   .ui-table-tbody {
     > tr.ui-state-highlight {
-      background: #1C4E80!important;
+      background: #1c4e80 !important;
       color: #ffffff;
     }
   }
@@ -281,26 +295,40 @@ input[type="text"].disabled {
 
 .btn.btn-add,
 .btn.btn-send,
- {
+.btn.btn-save-dialog {
   border: $color-button solid 1px;
   background-color: $color-button;
   color: #ffffff;
 }
 
+.btn.btn-rejected {
+  background: #FDB32B;
+  color: #ffffff;
+}
+
+.btn.btn-approve,.btn.btn-receive {
+  background: #07D79B;
+  color: #ffffff;
+}
 
 .btn-label {
   position: relative;
   display: inline-block;
   left: -12px;
   padding: 5px 12px;
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 5px 0 0 5px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 0px 0 0 5px;
   width: 28px;
   height: 28px;
   i {
     font-size: 15px;
     margin-left: -5px;
-    line-height: 1
+    line-height: 1;
+  }
+
+  img {
+    margin-left: -9px;
+    margin-top: -9px;
   }
 }
 .btn-labeled {
@@ -318,26 +346,28 @@ input[type="text"].disabled {
 }
 
 .save-book-mark {
-  color: #3D464D;
+  color: #3d464d;
 }
 
 .not-save-book-mark {
-  color: #FCE205;
+  color: #fce205;
 }
 
 .view-detail {
-  color: #007EE5;
+  color: #007ee5;
 }
 
 .edit {
-  color: #FDB32B;
+  color: #fdb32b;
 }
 
+.delete {
+  color: #EE534D;
+}
 
 .n-p-r {
   padding-right: 0 !important;
 }
-
 
 .n-p-l {
   padding-left: 0 !important;
@@ -349,4 +379,97 @@ input[type="text"].disabled {
 
 .n-p-b {
   padding-bottom: 0 !important;
+}
+
+.mat-tab-group.mat-primary .mat-ink-bar,
+.mat-tab-nav-bar.mat-primary .mat-ink-bar {
+  background-color: $color-button !important;
+}
+
+.mat-tab-label-active {
+  .mat-tab-label-content {
+    color: $color-button !important;
+  }
+}
+
+.mat-tab-label {
+  opacity: 1 !important;
+}
+
+.form-upload-file {
+  .upload-btn-wrapper input[type="file"] {
+    font-size: 100px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .results {
+    padding: 16px;
+    .results-item {
+      .results-item-name {
+        padding: 6px;
+        background-color: #EAEAEA;
+        font-size: 12px;
+        border-radius: 5px;
+      }
+      .material-icons {
+        font-size: 12px;
+      }
+      .icon-upload {
+        .material-icons {
+          -ms-transform: rotate(-20deg); /* IE 9 */
+          -webkit-transform: rotate(-20deg); /* Safari 3-8 */
+          transform: rotate(-20deg);
+        }
+      }
+      .close-attach {
+        color: #ee534d;
+        cursor: pointer;
+        margin-top: 6px;
+      }
+    }
+  }
+}
+
+
+.dialog-header {
+  color: $color-button;
+}
+
+.ui-dialog .ui-dialog-titlebar {
+  background-color: #ffffff !important;
+}
+
+.open-status {
+  padding: 6px;
+  border-radius: 5px;
+  color: #3D464D;
+  border: 1px solid #CDCDCD;
+}
+
+.pending-status {
+  padding: 6px;
+  border-radius: 5px;
+  color: #745AEF;
+  border: 1px solid #745AEF;
+}
+
+.pending-receive-status {
+  padding: 6px;
+  border-radius: 5px;
+  color: #07D79B;
+  border: 1px solid #07D79B;
+}
+
+.done-status {
+  padding: 6px;
+  border-radius: 5px;
+  color: #E89922;
+  border: 1px solid #E89922;
+}
+
+.mat-tab-body-content {
+  overflow-x:hidden !important;
 }
