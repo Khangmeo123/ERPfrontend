@@ -231,7 +231,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Phiếu nhập kho hàng trả lại từ KH',
-        route: '/master-data/department',
+        route: '/inventory/receipt/return',
         exact: false,
       },
       {

@@ -6,6 +6,8 @@ import { ReturnRequestComponent } from './return-request/return-request.componen
 import { ReturnComponent } from './return/return.component';
 import { GoodsReceiptPoListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
 import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
+import {ReturnListComponent} from './return/return-list/return-list.component';
+import {ReturnDetailComponent} from './return/return-detail/return-detail.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,21 @@ const routes: Routes = [
       {
         path: 'return',
         component: ReturnComponent,
+        children: [
+          {
+            path: 'return-list',
+            component: ReturnListComponent,
+          },
+          {
+            path: 'return-detail',
+            component: ReturnDetailComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'return-list',
+            pathMatch: 'full',
+          },
+        ],
       },
     ],
   },

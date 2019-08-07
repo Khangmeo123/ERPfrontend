@@ -18,6 +18,8 @@ import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picke
 import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
+import {ReturnListComponent} from './return/return-list/return-list.component';
+import {ReturnDetailComponent} from './return/return-detail/return-detail.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.
     ReturnRequestComponent,
     ReturnComponent,
     GoodsReceiptPoDetailComponent,
-    GoodsReceiptPoListComponent],
+    GoodsReceiptPoListComponent,
+    ReturnListComponent,
+    ReturnDetailComponent],
   imports: [
     CommonModule,
     ReceiptRoutingModule,

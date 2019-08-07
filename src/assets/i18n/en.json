@@ -635,8 +635,8 @@
 			"createdDate": "",
 			"creator": "",
 			"documentNo": "",
-			"title": "",
-			"title ": ""
+			"supplierName": "",
+			"title": ""
 		},
 		"header": {
 			"title": ""
@@ -878,6 +878,106 @@
 		"name": "",
 		"startDate": "",
 		"title": ""
+	},
+	"return": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"description": "",
+			"documentNumber": "",
+			"form": {
+				"title": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"receiver": "",
+			"return": {
+				"title": ""
+			},
+			"returnRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"cda": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"header": {
+				"title": ""
+			},
+			"inventory": "",
+			"receiptRequirementID": "",
+			"receiptedDate": "",
+			"status": ""
+		}
 	},
 	"select": {
 		"availableList": "",
