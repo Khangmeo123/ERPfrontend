@@ -24,3 +24,22 @@ export class GoodsReceiptPOSearchEntity extends SearchEntity {
         super(goodsReceiptPOSearchEntity);
     }
 };
+
+export class GoodsReceiptPORequesterSearchEntity extends SearchEntity {
+    code: TextFilter = new TextFilter();
+    name: TextFilter = new TextFilter();
+
+    constructor() {
+        super();
+    }
+}
+
+export class GoodsReceiptPOInventoryOrganizationSearchEntity extends SearchEntity {
+    code: TextFilter = new TextFilter();
+    name: TextFilter = new TextFilter();
+    shortName: TextFilter = new TextFilter();
+
+    constructor() {
+        super();
+    }
+}

@@ -1,4 +1,5 @@
 import { Entity } from './../../../../_helpers/entity';
+import { extend } from 'webdriver-js-extender';
 
 export class GoodsReceiptPOEntity extends Entity {
 
@@ -73,3 +74,15 @@ export class FileAttachments extends Entity {
         super(fileAttachments);
     }
 }
+
+export class GoodsReceiptPORequesterEntity extends Entity {
+    code: string;
+    name: string;
+}
+
+export class GoodsReceiptPOInventoryOrganizationEntity extends Entity {
+    code: string;
+    name: string;
+    shortName: string;
+}
+
