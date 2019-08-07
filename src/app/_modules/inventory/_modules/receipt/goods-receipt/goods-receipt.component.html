@@ -1,1 +1,20 @@
-<p>goods-receipt works!</p>
+<div class="page goods-receipt-po">
+    <div class="page-header">
+        <span class="page-title">
+            {{pageTitle | translate}}
+            <span (click)="bookMark()">
+                <mat-icon [ngClass]="!isBookMark ? 'save-book-mark': 'not-save-book-mark'">
+                    star
+                </mat-icon>
+            </span>
+        </span>
+        <div class="page-actions">
+            <button type="button" class="btn btn-labeled btn-add" (click)="addGoodsReceipt()">
+                <span class="btn-label"><i class="material-icons">add</i></span>
+                <span class="button-label">
+                    {{'general.button.add' | translate}}
+                </span></button>
+        </div>
+
+    </div>
+</div>
