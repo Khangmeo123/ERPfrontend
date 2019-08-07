@@ -37,6 +37,7 @@ export const sampleSidebarMenu = [
       {
         label: 'Quản lý nhân viên',
         route: '/master-data/business-group/employee',
+        isShowed: true,
       },
       {
         label: 'Quản lý khách hàng',

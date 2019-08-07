@@ -203,6 +203,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.employeeSearchEntity.employeeIds = this.listEmployeeId;
     this.employeeSearchEntity.legalEntityId = this.legalId;
     this.employeeOfLegalEntityService.saveEmployee(this.employeeSearchEntity).then(res => {
+      this.employeeIds = [];
       this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
     }).catch(err => {
     });

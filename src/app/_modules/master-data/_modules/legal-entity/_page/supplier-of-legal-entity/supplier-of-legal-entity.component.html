@@ -80,6 +80,7 @@
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-supplier" [list]="supplierExceptIds"
+                              [disabled]="!legalId"
               [selectedList]="supplierIds" [key]="'name'" (search)="supplierSearch($event)"
               (selectionChange)="selectSupplier($event)" (listOpen)="openSupplierList()">
             </app-multi-select>

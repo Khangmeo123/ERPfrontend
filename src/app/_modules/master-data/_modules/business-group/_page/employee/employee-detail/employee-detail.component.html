@@ -167,7 +167,7 @@
                             <label for="employeeStatus">{{ 'employee.detail.content.status' | translate}}<span
                                     class="text-danger ml-2">*</span></label>
                             <div class="div-form">
-                                <app-simple-select [key]="'name'" [list]="statusList"
+                                <app-simple-select [key]="'display'" [list]="statusList"
                                     [initialValue]="employeeForm.controls.statusName.value"
                                     (selectionChange)="employeeForm.controls.statusId.setValue($event)"
                                     (listOpen)="openStatusList()" data-qe-id="form-characteristic" class="w-100">

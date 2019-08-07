@@ -225,6 +225,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   clearSelection() {
     this.supplierSearchEntity = new SupplierSearchEntity();
+    this.listSupplierId = [];
     this.supplierSearchEntity.legalEntityId = this.legalId;
     this.supplierIds = [];
   }
