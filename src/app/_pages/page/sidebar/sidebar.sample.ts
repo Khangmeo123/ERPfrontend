@@ -221,7 +221,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Phiếu nhập kho khác',
-        route: '/master-data/department',
+        route: '/inventory/receipt/goods-receipt',
         exact: false,
       },
       {

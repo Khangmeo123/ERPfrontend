@@ -181,6 +181,15 @@ body {
     .form-title {
       color: $color-title;
     }
+    padding-bottom: 15px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .page-section-form-body {
+    padding-top: 15px;
+    padding-left: 3px;
+    padding-right: 3px;
   }
   .page-header,
   .page-footer {
@@ -219,7 +228,7 @@ body {
     .page-section {
       background-color: $background-color;
       margin: 15px 0px 15px 0px;
-      // margin-top: -5px;
+      padding: 15px;
     }
 
     .page-section.form {
