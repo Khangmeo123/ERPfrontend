@@ -24,7 +24,7 @@ export class DepartmentComponent implements OnInit {
     },
     {
       key: 'Tài sản',
-      route: '/master-data/department/asset',
+      route: '/master-data/department/asset-organization',
     },
     {
       key: 'Kho bãi',
@@ -32,7 +32,7 @@ export class DepartmentComponent implements OnInit {
     },
     {
       key: 'Dự án',
-      route: '/master-data/department/project',
+      route: '/master-data/department/project-organization',
     },
   ];
 

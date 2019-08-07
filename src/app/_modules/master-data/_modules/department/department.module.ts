@@ -5,7 +5,7 @@ import { DepartmentRoutingModule } from './department-routing.module';
 import { DepartmentComponent } from './_page/department/department.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { HrOrganizationComponent } from './_page/hr-organization/hr-organization.component';
-import { AssetComponent } from './_page/asset/asset.component';
+import { AssetOrganizationComponent } from './_page/asset-organization/asset-organization.component';
 import { WarehouseComponent } from './_page/warehouse/warehouse.component';
 import { ProjectOrganizationComponent } from './_page/project-organization/project-organization.component';
 import { MatIconModule } from '@angular/material';
@@ -34,7 +34,7 @@ import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
   declarations: [
     DepartmentComponent,
     HrOrganizationComponent,
-    AssetComponent,
+    AssetOrganizationComponent,
     WarehouseComponent,
     ProjectOrganizationComponent,
     AssetListComponent,

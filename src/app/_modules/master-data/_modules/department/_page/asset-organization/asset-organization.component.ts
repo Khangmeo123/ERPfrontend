@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-asset',
-  templateUrl: './asset.component.html',
-  styleUrls: ['./asset.component.scss'],
+  templateUrl: './asset-organization.component.html',
+  styleUrls: ['./asset-organization.component.scss'],
 })
-export class AssetComponent implements OnInit {
+export class AssetOrganizationComponent implements OnInit {
   editAsset = false;
 
   constructor() {

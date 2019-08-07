@@ -214,8 +214,26 @@ export const sampleSidebarMenu = [
         isShowed: true,
       },
       {
-        label: 'Quản lý phòng ban',
-        route: '/master-data/department',
+        label: 'Quản lý nhân sự',
+        route: '/master-data/department/hr-organization',
+        isShowed: true,
+        exact: false,
+      },
+      {
+        label: 'Quản lý tài sản',
+        route: '/master-data/department/asset-organization',
+        isShowed: true,
+        exact: false,
+      },
+      {
+        label: 'Quản lý kho bãi',
+        route: '/master-data/department/warehouse-group',
+        isShowed: true,
+        exact: false,
+      },
+      {
+        label: 'Quản lý dự án',
+        route: '/master-data/department/project-organization',
         isShowed: true,
         exact: false,
       },

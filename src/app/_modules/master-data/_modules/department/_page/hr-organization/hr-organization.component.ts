@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 import { Entities } from '../../../../../../_helpers/entity';
 
 @Component({
-  selector: 'app-employee',
+  selector: 'app-hr-organization',
   templateUrl: './hr-organization.component.html',
   styleUrls: ['./hr-organization.component.scss'],
   providers: [
