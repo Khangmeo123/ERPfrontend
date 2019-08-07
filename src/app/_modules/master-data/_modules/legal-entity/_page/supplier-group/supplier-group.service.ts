@@ -85,7 +85,7 @@ export class SupplierGroupService {
 
     save(supllierGroupEntity: any, supplierGroupSearchEntity: SupplierGroupSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-          if (supllierGroupEntity.id === null || supllierGroupEntity.id === undefined || supllierGroupEntity.id === environment.emtyGuid) {
+          if (supllierGroupEntity.id === null || supllierGroupEntity.id === undefined || supllierGroupEntity.id === environment.emptyGuid) {
             this.supplierGroupRepository.add(supllierGroupEntity).subscribe(res => {
               if (res) {
                 this.getList(supplierGroupSearchEntity);

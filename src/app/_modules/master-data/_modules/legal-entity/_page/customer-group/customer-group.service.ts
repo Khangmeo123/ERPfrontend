@@ -87,7 +87,7 @@ export class CustomerGroupService {
 
     save(customerGroupEntity: any, customerGroupSearchEntity: CustomerGroupSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-          if (customerGroupEntity.id === null || customerGroupEntity.id === undefined || customerGroupEntity.id === environment.emtyGuid) {
+          if (customerGroupEntity.id === null || customerGroupEntity.id === undefined || customerGroupEntity.id === environment.emptyGuid) {
             this.customerGroupRepository.add(customerGroupEntity).subscribe(res => {
               if (res) {
                 this.getList(customerGroupSearchEntity);
@@ -213,5 +213,5 @@ export class CustomerGroupService {
                 }
             });
     }
-    
+
 }

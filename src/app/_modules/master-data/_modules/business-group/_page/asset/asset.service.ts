@@ -60,7 +60,7 @@ export class AssetService {
 
   save(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (assetEntity.id === null || assetEntity.id === undefined || assetEntity.id === environment.emtyGuid) {
+      if (assetEntity.id === null || assetEntity.id === undefined || assetEntity.id === environment.emptyGuid) {
         this.assetRepository.add(assetEntity).subscribe(res => {
           if (res) {
             this.getList(assetSearchEntity);

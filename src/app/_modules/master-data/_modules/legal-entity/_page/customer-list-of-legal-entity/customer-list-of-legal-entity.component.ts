@@ -177,10 +177,13 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   onClickAddCustomer() {
     this.customerSearchEntity.customerDetailIds = this.listCustomerId;
     this.customerSearchEntity.legalEntityId = this.legalId;
-    this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity).then(res => {
-      this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
-    }).catch(err => {
-    });
+    this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity)
+      .then(res => {
+        this.customerIds = [];
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+      })
+      .catch(err => {
+      });
   }
 
   getListCustomer(customer) {
@@ -199,7 +202,6 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerOfLegalEntityService.delete(customer).then(res => {
       if (res) {
         this.clearSearchCustomer(this.tableCustomer);
-        this.customerSearchEntity.legalEntityId = this.legalId;
         this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
       }
     });
@@ -226,9 +228,10 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 
-  clearSearchCustomer(tablecustomer: any) {
+  clearSearchCustomer(tableCustomer: any) {
     this.customerSearchEntity = new CustomerSearchEntity();
-    tablecustomer.reset();
+    this.customerSearchEntity.legalEntityId = this.legalId;
+    tableCustomer.reset();
   }
 
   bookMark() {

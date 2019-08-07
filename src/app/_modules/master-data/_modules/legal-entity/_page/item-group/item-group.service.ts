@@ -93,7 +93,7 @@ export class ItemGroupService {
 
     saveItemGroupToLegal(itemGroupEntity: any, itemGroupSearchEntity: ItemGroupSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            if (itemGroupEntity.id === null || itemGroupEntity.id === undefined || itemGroupEntity.id === environment.emtyGuid) {
+            if (itemGroupEntity.id === null || itemGroupEntity.id === undefined || itemGroupEntity.id === environment.emptyGuid) {
                 this.itemGroupRepository.addItemGroupsFromLegal(itemGroupEntity).subscribe(res => {
                     if (res) {
                         this.getItemGroupListFromLegal(itemGroupSearchEntity);

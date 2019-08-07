@@ -55,7 +55,7 @@ export class UomService {
 
   save(uomEntity: any, uomSearchEntity: UomSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (uomEntity.id === null || uomEntity.id === undefined || uomEntity.id === environment.emtyGuid) {
+      if (uomEntity.id === null || uomEntity.id === undefined || uomEntity.id === environment.emptyGuid) {
         this.uomRepository.add(uomEntity).subscribe(res => {
           if (res) {
             this.getList(uomSearchEntity);

@@ -174,7 +174,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   sortItemGroupList(event: any) {
     if (event.sortField && event.sortOrder) {
       this.itemGroupSearchEntity.orderBy = event.sortField;
-      this.itemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.itemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
       this.getItemGroupList();
@@ -247,7 +247,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   sortItemsFromItemGroup(event: any) {
     if (event.sortField && event.sortOrder) {
       this.itemsFromItemGroupSearchEntity.orderBy = event.sortField;
-      this.itemsFromItemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.itemsFromItemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getitemsFromItemGroupList();
   }
