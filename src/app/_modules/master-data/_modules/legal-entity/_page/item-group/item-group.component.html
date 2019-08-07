@@ -18,21 +18,23 @@
               {{'general.legal_entity.name' | translate}}:
             </span>
             <app-single-select [list]="legalExceptIds" [selectedList]="legalIds" [key]="'name'"
-              (search)="legalEntityTypingSearch($event)" (selectionChange)="legalEntitySelection($event)"
-              (listOpen)="legalEntityOpen()"></app-single-select>
+                               (search)="legalEntityTypingSearch($event)"
+                               (selectionChange)="legalEntitySelection($event)"
+                               (listOpen)="legalEntityOpen()"></app-single-select>
           </div>
           <div class="col-sm-5 d-flex page-actions justify-content-end">
             <button class="btn btn-add" (click)="addItemGroup()" data-qe-id="button-itemGroup-add"
-              [disabled]="legalEntityId==null||legalEntityId==undefined">
+                    [disabled]="legalEntityId==null||legalEntityId==undefined">
               {{'general.button.add' | translate}}</button>
             <button class="btn btn-clear" (click)="clearSearchItemGroup(tableItemGroup)"
-              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+                    data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
           <p-table [value]="itemGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortItemGroupList($event)"
-            (onRowSelect)="itemGroupOnRowSelect($event)" selectionMode="single" [(selection)]="itemGroupSelectedRow"
-            [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableItemGroup>
+                   (onRowSelect)="itemGroupOnRowSelect($event)" selectionMode="single"
+                   [(selection)]="itemGroupSelectedRow"
+                   [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableItemGroup>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -57,12 +59,12 @@
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters [filter]="itemGroupSearchEntity.code" (changeFilter)="getItemGroupList()"
-                    data-qe-id="table-thead-filter-code">
+                                        data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters [filter]="itemGroupSearchEntity.name" (changeFilter)="getItemGroupList()"
-                    data-qe-id="table-thead-filter-name">
+                                        data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>
@@ -74,11 +76,11 @@
                 <td class="ui-resizable-column"> {{itemGroup.name}} </td>
                 <td class="ui-resizable-column">
                   <div class="d-flex">
-                    <div class="edit mr-2" (click)="editItemGroup(itemGroup.id)">
+                    <div class="edit mr-2" (click)="editItemGroup(itemGroup.id, $event)">
                       <mat-icon>edit</mat-icon>
                     </div>
-                    <div class="delete" (click)="viewItemGroup(itemGroup.id)">
-                      <mat-icon>remove_red_eye</mat-icon>
+                    <div class="delete" (click)="deleteItemGroup(itemGroup, $event)">
+                      <mat-icon>delete</mat-icon>
                     </div>
                   </div>
                 </td>
@@ -88,7 +90,7 @@
         </div>
         <div class="pagination">
           <app-pagination [pagination]="paginationItemGroup" (paginationOut)="paginationOutItemGroup($event)"
-            data-qe-id="pagination-itemGroup">
+                          data-qe-id="pagination-itemGroup">
           </app-pagination>
         </div>
       </div>
@@ -97,27 +99,29 @@
         <div class="row d-flex mt-2">
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemExceptIds" [selectedList]="itemIds"
-              [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemsFromItemGroupIds = $event"
-              (listOpen)="itemOpen()">
+                              [key]="'name'" (search)="itemTypingSearch($event)"
+                              (selectionChange)="itemsFromItemGroupIds = $event"
+                              [disabled]="!itemGroupId || !legalEntityId"
+                              (listOpen)="itemOpen()">
             </app-multi-select>
           </div>
 
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
             <button class="btn btn-add" (click)="addItemsToItemGroup()" data-qe-id="button-items-add"
-              [disabled]="itemsFromItemGroupIds.length === 0">
+                    [disabled]="itemsFromItemGroupIds.length === 0">
               {{'general.button.add' | translate}}</button>
             <a class="btn btn-export" data-qe-id="button-export" target="_blank"
-              [ngClass]="{'disabled': legalEntityId==null||legalEntityId==undefined}"
-              [href]="exportItemDetailLink">{{'general.button.export' | translate}}</a>
+               [ngClass]="{'disabled': legalEntityId==null||legalEntityId==undefined}"
+               [href]="exportItemDetailLink">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearchItemsFromItemGroup(tableItems)"
-              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+                    data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
 
         <div class="page-section mt-2">
           <p-table [value]="itemsFromItemGroupList" [customSort]="true" [lazy]="true"
-            (onLazyLoad)="sortItemsFromItemGroup($event)" [scrollable]="true" scrollHeight="500px"
-            [resizableColumns]="true" #tableItems>
+                   (onLazyLoad)="sortItemsFromItemGroup($event)" [scrollable]="true" scrollHeight="500px"
+                   [resizableColumns]="true" #tableItems>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -142,12 +146,14 @@
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.code"
-                    (changeFilter)="getitemsFromItemGroupList()" data-qe-id="table-thead-filter-code">
+                                        (changeFilter)="getitemsFromItemGroupList()"
+                                        data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.name"
-                    (changeFilter)="getitemsFromItemGroupList()" data-qe-id="table-thead-filter-name">
+                                        (changeFilter)="getitemsFromItemGroupList()"
+                                        data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>
@@ -159,7 +165,7 @@
                 <td class="ui-resizable-column"> {{items.name}} </td>
                 <td class="ui-resizable-column">
                   <div class="d-flex">
-                    <div class="delete" (click)="deleteItemFromItemGroup(items.id)">
+                    <div class="delete mr-2" (click)="deleteItemFromItemGroup(items.id)">
                       <mat-icon>delete</mat-icon>
                     </div>
                     <div class="edit mr-2" (click)="editItemFromItemGroup(items.id)">
@@ -176,7 +182,7 @@
         </div>
         <div class="pagination">
           <app-pagination [pagination]="paginationItems" (paginationOut)="paginationOutItemsFromItemGroup($event)"
-            data-qe-id="pagination-items">
+                          data-qe-id="pagination-items">
           </app-pagination>
         </div>
       </div>
@@ -185,7 +191,7 @@
 </div>
 
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowItemGroupDialog" appendTo="body"
-  [style]="{width: '900px'}">
+          [style]="{width: '900px'}">
   <p-header>
     {{ 'itemGroup.dialog.title' | translate}}
   </p-header>
@@ -194,13 +200,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="itemGroupCode">{{ 'itemGroup.content.item.code' | translate}}<span
-              class="text-danger ml-2">*</span></label>
+            class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-              id="itemGroupCode" />
+                   id="itemGroupCode"/>
             <app-error data-qe-id="dialog-error-code"
-              *ngIf="(itemGroupForm.controls.code?.errors && itemGroupForm.controls.code?.touched) || !!itemGroupForm.controls.errors?.get('code')?.value"
-              [formGroup]="itemGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
+                       *ngIf="(itemGroupForm.controls.code?.errors && itemGroupForm.controls.code?.touched) || !!itemGroupForm.controls.errors?.get('code')?.value"
+                       [formGroup]="itemGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
         </div>
@@ -208,13 +214,13 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="itemGroupFormName">{{ 'itemGroup.content.item.name' | translate}}<span
-              class="text-danger ml-2">*</span></label>
+            class="text-danger ml-2">*</span></label>
           <div class="div-form">
             <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-              id="itemGroupFormName" />
+                   id="itemGroupFormName"/>
             <app-error data-qe-id="dialog-error-name"
-              *ngIf="(itemGroupForm.controls.name?.errors && itemGroupForm.controls.name?.touched) || !!itemGroupForm.controls.errors?.get('name')?.value"
-              [formGroup]="itemGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
+                       *ngIf="(itemGroupForm.controls.name?.errors && itemGroupForm.controls.name?.touched) || !!itemGroupForm.controls.errors?.get('name')?.value"
+                       [formGroup]="itemGroupForm" [property]="'name'" [placement]="'top'" class="error-form">
             </app-error>
           </div>
         </div>
@@ -228,11 +234,7 @@
           <button class="btn btn-save" appNoDblClick (click)="saveItemGroup()" data-qe-id="dialog-button-save">
             {{ 'general.button.save' | translate}}</button>
           <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
-            (click)="isShowItemGroupDialog = false">{{ 'general.button.cancel' | translate}}</button>
-          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-            data-qe-id="dialog-button-cancel" *ngIf="itemGroupForm.value?.isDeleted" [popoverMessage]="popoverMessage"
-            placement="bottom" (confirm)="deactiveItemGroup()">
-            {{ 'general.button.delete' | translate}}</button>
+                  (click)="isShowItemGroupDialog = false">{{ 'general.button.cancel' | translate}}</button>
         </div>
       </div>
     </div>
