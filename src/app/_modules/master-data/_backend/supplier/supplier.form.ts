@@ -12,7 +12,7 @@ export class SupplierForm extends FormModel {
 
     // status
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('');
+    statusDisplay = new FormControl('');
 
     errors = new FormGroup({
         code: new FormControl(),

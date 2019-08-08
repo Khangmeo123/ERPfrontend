@@ -156,8 +156,8 @@
             <div class="form-group">
               <label for="employee-status">{{ 'detailEmployeeGroup.general.status' | translate}}<span
                   class="text-danger ml-2">*</span></label>
-              <input type="text" class="form-control" data-qe-id="form-content-statusName"
-                formControlName="statusName" />
+              <input type="text" class="form-control" data-qe-id="form-content-statusDisplay"
+                formControlName="statusDisplay" />
             </div>
           </div>
         </div>
@@ -421,7 +421,7 @@
         <app-single-select data-qe-id="detail-form-contact-province" [list]="provinceExceptIds" *ngIf="displayContact"
           [initialValue]="contactForm.controls.provinceName.value" [valueSelector]="valueSelector"
           [selectedList]="provinceIds" [key]="'name'"
-          (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="contactForm.controls.provinceId.setValue($event[0].id); 
+          (search)="provinceSearch($event, contactForm.controls.provinceId.value)" (selectionChange)="contactForm.controls.provinceId.setValue($event[0].id);
           contactForm.controls.provinceName.setValue($event[0].name);"
           (listOpen)="openProvinceList(contactForm.controls.provinceId.value)">
         </app-single-select>

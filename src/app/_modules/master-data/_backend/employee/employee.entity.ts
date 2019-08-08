@@ -17,7 +17,7 @@ export class EmployeeEntity extends Entity {
 
   // statusEntity:
   statusId: string;
-  statusName: string;
+  statusDisplay: string;
 
   // jobTitleEntity:
   jobTitleId: string;

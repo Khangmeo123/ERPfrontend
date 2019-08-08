@@ -11,7 +11,7 @@ export class ItemForm extends FormModel {
     name = new FormControl('', [requiredField]);
 
     // characteristicEntity:
-    characteristicName = new FormControl('');
+    characteristicDisplay = new FormControl('');
     characteristicId = new FormControl('', [requiredField]);
 
     // unitEntity:
@@ -22,7 +22,7 @@ export class ItemForm extends FormModel {
     weight = new FormControl('');
 
     // statusEntity:
-    statusName = new FormControl('');
+    statusDisplay = new FormControl('');
     statusId = new FormControl('', [requiredField]);
 
     height = new FormControl('');

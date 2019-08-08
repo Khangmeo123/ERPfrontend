@@ -21,7 +21,7 @@ export class EmployeeForm extends FormModel {
 
     // statusEntity:
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('');
+    statusDisplay = new FormControl('');
 
     // jobTitleEntity:
     jobTitleId = new FormControl();
