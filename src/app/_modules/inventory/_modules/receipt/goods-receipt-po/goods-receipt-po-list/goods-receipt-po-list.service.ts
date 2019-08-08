@@ -70,9 +70,9 @@ export class GoodsReceiptPOListService {
     }
 
     dropListInvetoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity) {
-        this.goodsReceiptPORepository.dropListRequester(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
+        this.goodsReceiptPORepository.dropListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
             if (res) {
-                this.requesterList.next(res);
+                this.inventoryOrganizationList.next(res);
             }
         }, err => {
             if (err) {
@@ -86,10 +86,10 @@ export class GoodsReceiptPOListService {
         goodsReceiptPOInventoryOrganizationSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListRequester(searchEntity);
+                return this.goodsReceiptPORepository.dropListInventoryOrganization(searchEntity);
             })).subscribe(res => {
                 if (res) {
-                    this.requesterList.next(res);
+                    this.inventoryOrganizationList.next(res);
                 }
             });
     }

@@ -1,13 +1,15 @@
 import {
   GoodsReceiptPOInventoryOrganizationEntity,
   PurchaseOrdersEntity,
+  GoodsReceiptPOTaxEntity,
+  GoodsReceiptPOItemDetailEntity,
+  GoodsReceiptPOUnitOfMeasureEntity,
 } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { SupplierSearchEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.searchentity';
 import { Subscription, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GoodsReceiptPODetailService } from './goods-receipt-po-detail.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
@@ -22,6 +24,9 @@ import {
   GoodsReceiptPOSupplierSearchEntity,
   GoodsReceiptPOSupplierAddressSearchEntity,
   PurchaseOrdersSearchEntity,
+  GoodsReceiptPOTaxSearchEntity,
+  GoodsReceiptPOItemDetailSearchEntity,
+  GoodsReceiptPOUnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 
 @Component({
@@ -41,7 +46,10 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   goodsReceiptPOSubs: Subscription = new Subscription();
   goodsReceiptPOForm: FormGroup;
   purchaseOrdersList: PurchaseOrdersEntity[];
-  purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity;
+  purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
+  deletedList: number[] = [];
+  popoverTitle: string = '';
+  popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   // supplier:
   supplierIds: GoodsReceiptPOSupplierEntity[];
   supplierExceptIds: GoodsReceiptPOSupplierEntity[];
@@ -73,12 +81,33 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   inventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity =
     new GoodsReceiptPOInventoryOrganizationSearchEntity();
   inventoryOrganizationTyping: Subject<GoodsReceiptPOInventoryOrganizationSearchEntity> = new Subject();
+  // tax:
+  taxIds: GoodsReceiptPOTaxEntity[];
+  taxExceptIds: GoodsReceiptPOTaxEntity[];
+  taxSearchEntity: GoodsReceiptPOTaxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
+  taxTyping: Subject<GoodsReceiptPOTaxSearchEntity> = new Subject();
+  // itemDetail:
+  itemDetailIds: GoodsReceiptPOItemDetailEntity[];
+  itemDetailExceptIds: GoodsReceiptPOItemDetailEntity[];
+  itemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+  itemDetailTyping: Subject<GoodsReceiptPOItemDetailSearchEntity> = new Subject();
+  // unitOfMeasure:
+  unitOfMeasureIds: GoodsReceiptPOUnitOfMeasureEntity[];
+  unitOfMeasureExceptIds: GoodsReceiptPOUnitOfMeasureEntity[];
+  unitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+  unitOfMeasureTyping: Subject<GoodsReceiptPOUnitOfMeasureSearchEntity> = new Subject();
 
   constructor(
     private goodsReceiptPOService: GoodsReceiptPODetailService,
     private genaralService: GeneralService,
     private bookmarkService: BookmarkService,
+    private route: ActivatedRoute,
     private router: Router) {
+
+    this.route.queryParams
+      .subscribe(params => {
+        this.goodsReceiptPOService.getDetail(params.id);
+      });
     const goodsReceiptFormSub = this.goodsReceiptPOService.goodsReceiptPOForm.subscribe(res => {
       if (res) {
         this.goodsReceiptPOForm = res;
@@ -121,6 +150,14 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.goodsReceiptPOService.typingSearchOwnerPO(this.ownerPOTyping);
+    // buyer:
+    const buyerListSub = this.goodsReceiptPOService.buyerList.subscribe(res => {
+      if (res) {
+        this.buyerIds = res.ids;
+        this.buyerExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchBuyer(this.buyerTyping);
     // invetoryOrganization:
     const inventoryOrganizationSub = this.goodsReceiptPOService.invetoryOrganizationList.subscribe(res => {
       if (res) {
@@ -129,6 +166,31 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.goodsReceiptPOService.typingSearchInvetoryOrganization(this.inventoryOrganizationTyping);
+    // tax:
+    const taxListSub = this.goodsReceiptPOService.taxList.subscribe(res => {
+      if (res) {
+        this.taxIds = res.ids;
+        this.taxExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchTax(this.taxTyping);
+    // itemDetail:
+    const itemListSub = this.goodsReceiptPOService.itemList.subscribe(res => {
+      if (res) {
+        this.itemDetailIds = res.ids;
+        this.itemDetailExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchItem(this.itemDetailTyping);
+    // unitOfMeasure:
+    const unitOfMeasureListSub = this.goodsReceiptPOService.unitOfMeasureList.subscribe(res => {
+      if (res) {
+        this.unitOfMeasureIds = res.ids;
+        this.unitOfMeasureExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
+
 
     // add subcription:
     this.goodsReceiptPOSubs.add(goodsReceiptFormSub)
@@ -137,7 +199,11 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       .add(ownerSub)
       .add(inventoryOrganizationSub)
       .add(purchaseOrdersListSub)
-      .add(ownerPOSub);
+      .add(ownerPOSub)
+      .add(taxListSub)
+      .add(unitOfMeasureListSub)
+      .add(itemListSub)
+      .add(buyerListSub);
   }
 
   ngOnInit() {
@@ -146,6 +212,10 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.goodsReceiptPOSubs.unsubscribe();
+  }
+
+  trackByFn(index, row) {
+    return index;
   }
 
   readURL(event: any) {
@@ -166,15 +236,16 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     this.displayAmount = true;
   }
 
-  getPurchaseOrdersList() {
-    this.purchaseOrdersSearchEntity.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
-    this.goodsReceiptPOService.getPurchaseOrdersList(this.purchaseOrdersSearchEntity);
-  }
-
   showPurchaseOrders() {
     this.purchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
-    this.getPurchaseOrdersList();
+    this.purchaseOrdersSearchEntity.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
+    this.goodsReceiptPOService.getPurchaseOrdersList(this.purchaseOrdersSearchEntity);
     this.displayPurchseOrders = true;
+  }
+
+  sortDatePurchaseOrders(event: string, tablePurchaseOrders: any) {
+    const date = event.replace(/\//g, '-') + 'T00:00:00';
+    tablePurchaseOrders.filter(date, 'documentDate', 'equals');
   }
 
   backToList() {
@@ -296,4 +367,76 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     this.supplierAddressSearchEntity.name.startsWith = event;
     this.supplierAddressTyping.next(this.supplierAddressSearchEntity);
   }
+
+  // item:
+  dropListItemDetail(id: string) {
+    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.itemDetailSearchEntity.ids.push(id);
+    }
+    this.goodsReceiptPOService.dropListItem(this.itemDetailSearchEntity);
+  }
+
+  typingSearchItemDetail(event: string, id: string) {
+    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.itemDetailSearchEntity.ids.push(id);
+    }
+    this.itemDetailSearchEntity.name.startsWith = event;
+    this.itemDetailTyping.next(this.itemDetailSearchEntity);
+  }
+
+  // tax:
+  dropListTax(id: string) {
+    this.taxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.taxSearchEntity.ids.push(id);
+    }
+    this.goodsReceiptPOService.dropListTax(this.taxSearchEntity);
+  }
+
+  typingSearchTax(event: string, id: string) {
+    this.taxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.taxSearchEntity.ids.push(id);
+    }
+    this.taxSearchEntity.name.startsWith = event;
+    this.taxTyping.next(this.taxSearchEntity);
+  }
+
+  // unitOfMeasre:
+  dropListUnitOfMeasure(id: string) {
+    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.unitOfMeasureSearchEntity.ids.push(id);
+    }
+    this.goodsReceiptPOService.dropListUnitOfMeasure(this.unitOfMeasureSearchEntity);
+  }
+
+  typingSearchUnitOfMeasure(event: string, id: string) {
+    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.unitOfMeasureSearchEntity.ids.push(id);
+    }
+    this.unitOfMeasureSearchEntity.name.startsWith = event;
+    this.unitOfMeasureTyping.next(this.unitOfMeasureSearchEntity);
+  }
+
+  // goodsReceiptPO content:
+  addDeletedList(indexNumber: number) {
+    if (this.deletedList.length > 0 && this.deletedList.includes(indexNumber)) {
+      this.deletedList.splice(this.deletedList.indexOf(indexNumber), 1);
+    } else {
+      this.deletedList.push(indexNumber);
+    }
+  }
+
+  deleteItem() {
+    this.goodsReceiptPOService.deleteItemFromContent(this.deletedList);
+  }
+
+  recalculateContents() {
+    this.goodsReceiptPOService.recalculateContents(this.goodsReceiptPOForm);
+  }
+
 }

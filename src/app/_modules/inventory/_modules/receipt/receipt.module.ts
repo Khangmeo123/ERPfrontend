@@ -25,7 +25,7 @@ import { ReturnListComponent } from './return/return-list/return-list.component'
 import { ReturnDetailComponent } from './return/return-detail/return-detail.component';
 import { GoodsReceiptDetailComponent } from './goods-receipt/goods-receipt-detail/goods-receipt-detail.component';
 import { GoodsReceiptListComponent } from './goods-receipt/goods-receipt-list/goods-receipt-list.component';
-
+import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 @NgModule({
   declarations: [
     GoodsReceiptPOComponent,
@@ -60,6 +60,9 @@ import { GoodsReceiptListComponent } from './goods-receipt/goods-receipt-list/go
     FiltersModule,
     DiscussionModule,
     ErrorModule,
+    ConfirmationPopoverModule.forRoot({
+      confirmButtonType: 'danger',
+    }),
   ],
 })
 export class ReceiptModule { }

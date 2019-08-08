@@ -24,7 +24,7 @@ export class FormModel {
                                     });
                                     formGroup.addControl(result, errorForm);
                                 } else {
-                                    formGroup.addControl(result, new FormControl(''));
+                                    formGroup.addControl(result, new FormControl(element[result]));
                                 }
                             });
                             this[item].push(formGroup);

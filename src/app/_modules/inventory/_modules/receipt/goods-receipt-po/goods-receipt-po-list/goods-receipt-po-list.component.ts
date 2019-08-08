@@ -180,7 +180,7 @@ export class GoodsReceiptPoListComponent implements OnInit, OnDestroy {
     if (id !== null && id.length > 0) {
       this.inventoryOrganizationSearchEntity.ids.push(id);
     }
-    this.inventoryOrganizationSearchEntity.name.startsWith = event;
+    this.inventoryOrganizationSearchEntity.code.startsWith = event;
     this.inventoryOrganizationTyping.next(this.inventoryOrganizationSearchEntity);
   }
 

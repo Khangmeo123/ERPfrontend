@@ -8,11 +8,18 @@
         </mat-icon>
       </span>
     </span>
-    <div class="page-actions">
+    <div class="page-actions d-flex">
       <button type="button" class="btn btn-labeled btn-add" (click)="addGoodsReceipt()" data-qe-id="button-add">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
+        </span></button>
+      <button class="btn btn-labeled btn-clear" data-qe-id="button-clear" (click)="clearSearch(table)">
+        <span class="btn-label">
+          <img src="/assets/img/filter.svg" width="16">
+        </span>
+        <span class="button-label">
+          {{'general.button.clear' | translate}}
         </span></button>
     </div>
 
@@ -40,7 +47,8 @@
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
-        <button type="button" class="btn btn-labeled btn-add get-data">
+        <button type="button" class="btn btn-labeled btn-add get-data" data-qe-id="button-fetchData"
+          (click)="getList()">
           {{'general.button.getData' | translate}}</button>
       </div>
 
@@ -109,7 +117,7 @@
             </th>
             <th class="th-filter">
               <app-single-select [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
-                [key]="'name'" [initialValue]="goodsReceiptPOSearchEntity.inventoryOrganizationId"
+                [key]="'code'" [initialValue]="goodsReceiptPOSearchEntity.inventoryOrganizationId"
                 (search)="typingSearchInvetoryOrganization($event, goodsReceiptPOSearchEntity.inventoryOrganizationId)"
                 (selectionChange)="goodsReceiptPOSearchEntity.inventoryOrganizationId = $event[0]; getList()"
                 (listOpen)="dropListInventoryOrganization(goodsReceiptPOSearchEntity.inventoryOrganizationId)"
@@ -136,7 +144,8 @@
               </app-single-select>
             </th>
             <th class="th-filter">
-              <app-simple-select [key]="'name'" [list]="statusList" [initialValue]="goodsReceiptPOSearchEntity.statusId"
+              <app-simple-select [key]="'display'" [list]="statusList"
+                [initialValue]="goodsReceiptPOSearchEntity.statusId"
                 (selectionChange)="goodsReceiptPOSearchEntity.statusId = $event; getList()"
                 (listOpen)="enumListStatus()">
               </app-simple-select>
@@ -146,20 +155,29 @@
         </ng-template>
         <ng-template pTemplate="body" let-goodsReceiptPO let-index="rowIndex">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> {{goodsReceiptPO.documentDate | date: 'dd/MM/yyyy'}} </td>
-            <td> {{goodsReceiptPO.documentNumber}} </td>
-            <td> {{goodsReceiptPO.dueDate | date: 'dd/MM/yyyy'}} </td>
-            <td> {{goodsReceiptPO.inventoryOrganizationCode}} </td>
-            <td> {{goodsReceiptPO.inventoryOrganizationAddress}} </td>
-            <td> {{goodsReceiptPO.remarks }} </td>
-            <td> {{goodsReceiptPO.requester }} </td>
-            <td> {{goodsReceiptPO.status }} </td>
-            <td>
-              <div class="d-flex">
+            <td class="ui-resizable-column"> {{goodsReceiptPO.documentDate | date: 'dd/MM/yyyy'}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.documentNumber}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.dueDate | date: 'dd/MM/yyyy'}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.inventoryOrganizationCode}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.inventoryOrganizationStreet}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.remarks }} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.requesterName }} </td>
+            <td class="text-center ui-resizable-column">
+              <div [ngSwitch]="goodsReceiptPO.statusName">
+                <span class="ml-2 open-status" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</span>
+                <span class="ml-2 pending-status"
+                  *ngSwitchCase="'PENDING_APPROVAL'">{{'general.pending'| translate}}</span>
+                <span class="ml-2 pending-receive-status"
+                  *ngSwitchCase="'PENDING_RECEIVE'">{{'general.pendingReceive'| translate}}</span>
+                <span class="ml-2 done-status" *ngSwitchCase="'DONE'">{{'general.done'| translate}}</span>
+              </div>
+            </td>
+            <td class="ui-resizable-column">
+              <div class="d-flex justify-content-center">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click)="editGoodsReceiptPO()">
+                <div class="edit" (click)="editGoodsReceiptPO(goodsReceiptPO.id)">
                   <mat-icon>edit</mat-icon>
                 </div>
               </div>
@@ -168,7 +186,8 @@
         </ng-template>
       </p-table>
       <div class="pagination">
-        <app-pagination data-qe-id="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+        <app-pagination data-qe-id="pagination" [pagination]="pagination" (paginationOut)="paginationOut($event)"
+          data-qe-id="pagination">
         </app-pagination>
       </div>
     </div>

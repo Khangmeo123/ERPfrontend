@@ -1,5 +1,5 @@
+import { Entities } from 'src/app/_helpers/entity';
 import { Entity } from './../../../../_helpers/entity';
-import { extend } from 'webdriver-js-extender';
 
 export class GoodsReceiptPOEntity extends Entity {
 
@@ -32,7 +32,7 @@ export class GoodsReceiptPOEntity extends Entity {
     purchaseOrders: PurchaseOrdersEntity[];
     purchaseOrderNames: string;
     fileAttachments: FileAttachments[];
-
+    totalGoodsReceiptPOContents: number;
     constructor(goodsReceiptPOEntity?: any) {
         super(goodsReceiptPOEntity);
     }
@@ -105,4 +105,21 @@ export class GoodsReceiptPOSupplierEntity extends Entity {
 export class GoodsReceiptPOSupplierAddressEntity extends Entity {
     name: string;
     address: string;
+}
+
+export class GoodsReceiptPOTaxEntity extends Entity {
+    code: string;
+    name: string;
+}
+
+export class GoodsReceiptPOUnitOfMeasureEntity extends Entity {
+    name: string;
+    type: string;
+    description: string;
+    code: string;
+}
+
+export class GoodsReceiptPOItemDetailEntity extends Entity {
+    code: string;
+    name: string;
 }

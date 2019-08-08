@@ -1,6 +1,11 @@
-import { PurchaseOrdersSearchEntity } from './../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import {
+    PurchaseOrdersSearchEntity,
+    GoodsReceiptPOItemDetailSearchEntity,
+    GoodsReceiptPOTaxSearchEntity,
+    GoodsReceiptPOUnitOfMeasureSearchEntity,
+} from './../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { PurchaseOrdersEntity } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
@@ -14,7 +19,7 @@ import {
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { GoodsReceiptPODetailRepository } from './goods-receipt-po-detail.repository';
-
+import * as _ from 'lodash';
 @Injectable()
 export class GoodsReceiptPODetailService {
     public goodsReceiptPOForm: BehaviorSubject<FormGroup>;
@@ -25,6 +30,9 @@ export class GoodsReceiptPODetailService {
     public ownerList: BehaviorSubject<Entities>;
     public ownerPOList: BehaviorSubject<Entities>;
     public purchaseOrdersList: BehaviorSubject<PurchaseOrdersEntity[]>;
+    public itemList: BehaviorSubject<Entities>;
+    public taxList: BehaviorSubject<Entities>;
+    public unitOfMeasureList: BehaviorSubject<Entities>;
     constructor(
         private fb: FormBuilder,
         private goodsReceiptPORepository: GoodsReceiptPODetailRepository,
@@ -38,15 +46,19 @@ export class GoodsReceiptPODetailService {
         this.ownerPOList = new BehaviorSubject(new Entities());
         this.buyerList = new BehaviorSubject(new Entities());
         this.purchaseOrdersList = new BehaviorSubject([]);
+        this.itemList = new BehaviorSubject(new Entities());
+        this.taxList = new BehaviorSubject(new Entities());
+        this.unitOfMeasureList = new BehaviorSubject(new Entities());
     }
 
     getDetail(goodsReceiptPOId?) {
         if (goodsReceiptPOId !== null && goodsReceiptPOId !== undefined) {
             this.goodsReceiptPORepository.getDetail(goodsReceiptPOId).subscribe(res => {
                 if (res) {
-                    this.goodsReceiptPOForm.next(this.fb.group(
+                    const goodsReceiptPOForm = this.fb.group(
                         new GoodsReceiptPOForm(res),
-                    ));
+                    );
+                    this.recalculateContents(goodsReceiptPOForm);
                 }
             }, err => {
                 if (err) {
@@ -229,9 +241,9 @@ export class GoodsReceiptPODetailService {
 
     // inventoryOrganization:
     dropListInvetoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity) {
-        this.goodsReceiptPORepository.dropListOwner(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
+        this.goodsReceiptPORepository.dropListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
             if (res) {
-                this.ownerList.next(res);
+                this.invetoryOrganizationList.next(res);
             }
         }, err => {
             if (err) {
@@ -245,11 +257,123 @@ export class GoodsReceiptPODetailService {
         goodsReceiptPOInventoryOrganizationSearchEntity.pipe(debounceTime(400),
             distinctUntilChanged(),
             switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListOwner(searchEntity);
+                return this.goodsReceiptPORepository.dropListInventoryOrganization(searchEntity);
             })).subscribe(res => {
                 if (res) {
-                    this.ownerList.next(res);
+                    this.invetoryOrganizationList.next(res);
                 }
             });
+    }
+
+    // item:
+    dropListItem(goodsReceiptPOItemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity) {
+        this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity).subscribe(res => {
+            if (res) {
+                this.itemList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchItem(goodsReceiptPOItemDetailSearchEntity:
+        Observable<GoodsReceiptPOItemDetailSearchEntity>) {
+        goodsReceiptPOItemDetailSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListItem(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.itemList.next(res);
+                }
+            });
+    }
+
+    // tax:
+    dropListTax(goodsReceiptPOTaxSearchEntity: GoodsReceiptPOTaxSearchEntity) {
+        this.goodsReceiptPORepository.dropListTax(goodsReceiptPOTaxSearchEntity).subscribe(res => {
+            if (res) {
+                this.taxList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchTax(goodsReceiptPOTaxSearchEntity:
+        Observable<GoodsReceiptPOTaxSearchEntity>) {
+        goodsReceiptPOTaxSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListTax(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.taxList.next(res);
+                }
+            });
+    }
+
+    // unitOfMeasure:
+    dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity) {
+        this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity).subscribe(res => {
+            if (res) {
+                this.unitOfMeasureList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity:
+        Observable<GoodsReceiptPOUnitOfMeasureSearchEntity>) {
+        goodsReceiptPOUnitOfMeasureSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListUnitOfMeasure(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.unitOfMeasureList.next(res);
+                }
+            });
+    }
+
+    // goodsReceiptPOContents:
+    deleteItemFromContent(deletedList: number[]) {
+        const sortedArray = deletedList.reverse();
+        const currentForm = this.goodsReceiptPOForm.getValue();
+        const currentArray = currentForm.get('goodsReceiptPOContents') as FormArray;
+        for (let i = sortedArray.length - 1; i >= 0; i--) {
+            currentArray.removeAt(sortedArray[i]);
+        }
+        this.goodsReceiptPOForm.next(currentForm);
+    }
+
+    recalculateContents(goodsReceiptPOForm: FormGroup) {
+        const currentArray = goodsReceiptPOForm.get('goodsReceiptPOContents') as FormArray;
+        let totalGoodsReceiptPOContents = 0;
+        for (const control of currentArray.controls) {
+            if (control instanceof FormGroup) {
+                const unitPrice = control.get('unitPrice').value;
+                const taxRate = control.get('taxRate').value;
+                const generalDiscountCost = control.get('generalDiscountCost').value;
+                const quantity = control.get('quantity').value;
+                const taxNumber = unitPrice * (taxRate / 100);
+                const totalValue = Math.round((unitPrice + taxNumber - generalDiscountCost) * quantity);
+                if (control.get('total')) {
+                    control.get('total').setValue(totalValue);
+                } else {
+                    control.addControl('total', new FormControl(totalValue));
+                }
+                totalGoodsReceiptPOContents += totalValue;
+            }
+        }
+        goodsReceiptPOForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
+        this.goodsReceiptPOForm.next(goodsReceiptPOForm);
     }
 }

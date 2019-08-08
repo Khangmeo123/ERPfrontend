@@ -25,6 +25,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(private appService: AppService, public translateService: TranslateService) {
     this.translateService.setDefaultLang('vi');
+    this.translateService.use('vi');
     this.languageSelected = this.language[0];
   }
 

@@ -20,7 +20,7 @@ import { Injectable } from '@angular/core';
 export class GoodsReceiptPOListRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po-list';
+        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-list';
     }
 
     getList(goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity): Observable<GoodsReceiptPOEntity[]> {

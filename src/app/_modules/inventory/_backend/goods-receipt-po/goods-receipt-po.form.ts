@@ -1,4 +1,4 @@
-import { FormControl, FormArray } from '@angular/forms';
+import { FormControl, FormArray, FormGroup } from '@angular/forms';
 import { FormModel } from 'src/app/_helpers/form-model';
 import { requiredField } from 'src/app/_helpers';
 
@@ -31,8 +31,15 @@ export class GoodsReceiptPOForm extends FormModel {
     generalDiscountCost = new FormControl('');
     purchaseOrderNames = new FormControl('');
     goodsReceiptPOContents = new FormArray([]);
+    totalGoodsReceiptPOContents = new FormControl('');
     purchaseOrders = new FormArray([]);
     fileAttachments = new FormArray([]);
+    errors = new FormGroup({
+        supplierDetailId: new FormControl(),
+        dueDate: new FormControl(),
+        ownerId: new FormControl(),
+        inventoryOrganizationId: new FormControl(),
+    });
 
     constructor(goodsReceiptPOEntity?: any) {
         super();

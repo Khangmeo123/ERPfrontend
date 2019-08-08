@@ -8,6 +8,9 @@ import {
     GoodsReceiptPOSupplierAddressEntity,
     GoodsReceiptPORequesterEntity,
     PurchaseOrdersEntity,
+    GoodsReceiptPOItemDetailEntity,
+    GoodsReceiptPOUnitOfMeasureEntity,
+    GoodsReceiptPOTaxEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -17,6 +20,9 @@ import {
     GoodsReceiptPORequesterSearchEntity,
     GoodsReceiptPOInventoryOrganizationSearchEntity,
     PurchaseOrdersSearchEntity,
+    GoodsReceiptPOItemDetailSearchEntity,
+    GoodsReceiptPOUnitOfMeasureSearchEntity,
+    GoodsReceiptPOTaxSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Entities } from 'src/app/_helpers/entity';
 
@@ -26,7 +32,7 @@ import { Entities } from 'src/app/_helpers/entity';
 export class GoodsReceiptPODetailRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po-detail';
+        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-detail';
     }
 
     getDetail(goodsReceiptPOId: string): Observable<GoodsReceiptPOEntity> {
@@ -117,7 +123,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
     }
 
     dropListBuyer(goodsReceiptPORequesterSearchEntity: GoodsReceiptPORequesterSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-owner', JSON.stringify(goodsReceiptPORequesterSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-buyer', JSON.stringify(goodsReceiptPORequesterSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -141,6 +147,54 @@ export class GoodsReceiptPODetailRepository extends Repository {
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
                         return new GoodsReceiptPORequesterEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListItem(goodsReceiptPOItemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item',
+            JSON.stringify(goodsReceiptPOItemDetailSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new GoodsReceiptPOItemDetailEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new GoodsReceiptPOItemDetailEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item',
+            JSON.stringify(goodsReceiptPOUnitOfMeasureSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new GoodsReceiptPOUnitOfMeasureEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new GoodsReceiptPOUnitOfMeasureEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListTax(goodsReceiptPOTaxSearchEntity: GoodsReceiptPOTaxSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item',
+            JSON.stringify(goodsReceiptPOTaxSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new GoodsReceiptPOTaxEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new GoodsReceiptPOTaxEntity(item);
                     });
                     return r.body;
                 }),

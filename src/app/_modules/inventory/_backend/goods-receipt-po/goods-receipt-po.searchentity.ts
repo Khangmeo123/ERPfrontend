@@ -19,7 +19,7 @@ export class GoodsReceiptPOSearchEntity extends SearchEntity {
     buyerId: string;
     ownerId: string;
     requesterId: string = null;
-    remarks: string;
+    remarks = new TextFilter();
     generalDiscountRate: NumberFilter = new NumberFilter();
 
     constructor(goodsReceiptPOSearchEntity?: any) {
@@ -31,8 +31,8 @@ export class PurchaseOrdersSearchEntity extends SearchEntity {
     supplierDetailId: string;
     documentNumber = new NumberFilter();
     documentDate = new DateFilter();
-    ownerId: string;
-    buyerId: string;
+    ownerId: string = null;
+    buyerId: string = null;
 
     constructor() {
         super();
@@ -73,3 +73,19 @@ export class GoodsReceiptPOSupplierAddressSearchEntity extends SearchEntity {
     }
 }
 
+export class GoodsReceiptPOTaxSearchEntity extends SearchEntity {
+    code = new TextFilter();
+    name = new TextFilter();
+}
+
+export class GoodsReceiptPOUnitOfMeasureSearchEntity extends SearchEntity {
+    name = new TextFilter();
+    type = new TextFilter();
+    description = new TextFilter();
+    code = new TextFilter();
+}
+
+export class GoodsReceiptPOItemDetailSearchEntity extends SearchEntity {
+    code = new TextFilter();
+    name = new TextFilter();
+}

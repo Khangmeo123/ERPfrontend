@@ -76,7 +76,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   unselect(event) {
-    const {data} = event;
+    const { data } = event;
     this.selectedList = [];
     this.list = [
       ...this.list,
@@ -105,7 +105,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   select(event) {
-    const {data, index} = event;
+    const { data, index } = event;
     if (this.hasSelected) {
       if (this.selectedList[0].id === data.id) {
         return this.unselect(event);
