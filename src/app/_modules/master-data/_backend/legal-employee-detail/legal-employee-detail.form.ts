@@ -11,7 +11,7 @@ export class LegalEmployeeDetailForm extends FormModel {
     jobLevelId = new FormControl({ value: '', disabled: true });
     jobLevel = new FormControl({ value: '', disabled: true });
     statusId = new FormControl({ value: '', disabled: true });
-    statusName = new FormControl({ value: '', disabled: true }); //thiếu trường nầy này
+    statusDisplay = new FormControl({ value: '', disabled: true }); //thiếu trường nầy này
     gender = new FormControl();
     identityNumber = new FormControl({ value: '', disabled: true });
     issueDate = new FormControl({ value: '', disabled: true });

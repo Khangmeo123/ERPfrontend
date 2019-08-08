@@ -94,7 +94,7 @@
                         <td> {{asset.code}} </td>
                         <td> {{asset.name}} </td>
                         <td> {{asset.typeName}} </td>
-                        <td> {{asset.statusName}} </td>
+                        <td> {{asset.statusDisplay}} </td>
                     </tr>
                 </ng-template>
             </p-table>
@@ -165,7 +165,7 @@
                             class="text-danger">*</span></label>
                     <div class="div-form">
                         <app-simple-select [key]="'display'" [list]="assetStatuses" class="w-100" *ngIf="isShowDialog"
-                            [initialValue]="assetForm.controls.statusName.value"
+                            [initialValue]="assetForm.controls.statusDisplay.value"
                             (selectionChange)="assetForm.controls.statusId.setValue($event)"
                             (listOpen)="openAssetStatuses($event)">
                         </app-simple-select>

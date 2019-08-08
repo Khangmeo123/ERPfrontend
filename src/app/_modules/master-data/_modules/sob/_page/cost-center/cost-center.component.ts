@@ -1,17 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../_helpers/entity';
-import { ToastrService } from 'ngx-toastr';
-import { CostCenterService } from './cost-center.service';
-import { CostCenterEntity } from '../../../../_backend/cost-center/cost-center.entity';
-import { CostCenterSearchEntity } from '../../../../_backend/cost-center/cost-center.searchentity';
-import { CoaEntity } from '../../../../_backend/coa/coa.entity';
-import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from 'src/app/_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../_helpers/entity';
+import {ToastrService} from 'ngx-toastr';
+import {CostCenterService} from './cost-center.service';
+import {CostCenterEntity} from '../../../../_backend/cost-center/cost-center.entity';
+import {CostCenterSearchEntity} from '../../../../_backend/cost-center/cost-center.searchentity';
+import {CoaEntity} from '../../../../_backend/coa/coa.entity';
+import {CoaSearchEntity} from '../../../../_backend/coa/coa.searchentity';
 
 @Component({
   selector: 'app-cost-center',
@@ -117,12 +117,8 @@ export class CostCenterComponent implements OnInit {
     return this.costCenterForm.get('validTo') as FormControl;
   }
 
-  getCoaList() {
-    const ids = this.coaSearchEntity.ids;
-    this.coaSearchEntity = new CoaSearchEntity();
-    this.coaSearchEntity.ids = ids;
-    this.coaSearchEntity.setOfBookId = this.setOfBookId;
-    this.costCenterService.getCoaList(this.coaSearchEntity);
+  getCoaList(coaSearchEntity: CoaSearchEntity) {
+    this.costCenterService.getCoaList(coaSearchEntity);
   }
 
   add() {
@@ -147,6 +143,7 @@ export class CostCenterComponent implements OnInit {
   changeSob(event) {
     const [setOfBookId] = event;
     this.costCenterSearchEntity.setOfBookId = setOfBookId;
+    this.coaSearchEntity.setOfBookId = this.setOfBookId;
     this.costCenterForm.controls.setOfBookId.setValue(setOfBookId);
     this.setOfBookId = setOfBookId;
     this.getList();
@@ -199,6 +196,10 @@ export class CostCenterComponent implements OnInit {
     }
   }
 
+  get chartOfAccountId() {
+    return this.costCenterForm.get('chartOfAccountId') as FormControl;
+  }
+
   clearSearch(table: any) {
     this.costCenterSearchEntity = new CostCenterSearchEntity();
     table.reset();
@@ -212,5 +213,40 @@ export class CostCenterComponent implements OnInit {
       .catch(err => {
         this.isShowDialog = err;
       });
+  }
+
+  onSelectChartOfAccount(event) {
+    if (event) {
+      if (event.length) {
+        this.chartOfAccountId.setValue(event[0]);
+      } else {
+        this.chartOfAccountId.setValue(null);
+      }
+    }
+  }
+
+  onSearchChartOfAccount(event) {
+    this.coaSearchEntity.code.startsWith = event;
+    this.getCoaList(this.coaSearchEntity);
+  }
+
+  onOpenCoaList() {
+    const ids = this.coaSearchEntity.ids;
+    this.coaSearchEntity = new CoaSearchEntity();
+    this.coaSearchEntity.ids = ids;
+    this.coaSearchEntity.setOfBookId = this.setOfBookId;
+    this.getCoaList(this.coaSearchEntity);
+  }
+
+  onFilterChartOfAccount(event) {
+    this.coaSearchEntity.ids = event;
+    if (event) {
+      if (event.length) {
+        this.costCenterSearchEntity.chartOfAccountId = event[0];
+      } else {
+        this.costCenterSearchEntity.chartOfAccountId = null;
+      }
+    }
+    this.getList();
   }
 }

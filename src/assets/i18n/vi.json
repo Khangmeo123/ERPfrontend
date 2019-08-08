@@ -7,7 +7,7 @@
     },
     "modal": {
       "label": "Thêm kỳ kế toán",
-      "title": "Tên kỳ kế toán"
+      "title": "Kỳ kế toán"
     },
     "startPeriod": "Ngày bắt đầu",
     "status": {
@@ -40,8 +40,8 @@
   "bank": {
     "content": {
       "code": "Mã ngân hàng",
-      "description": "Tên ngân hàng",
-      "name": "Mô tả"
+      "description": "Mô tả",
+      "name": "Tên ngân hàng"
     },
     "dialog": {
       "title": "Thêm ngân hàng"
@@ -51,14 +51,14 @@
     }
   },
   "bankAccount": {
-    "account_name": "Tên tài khoản",
     "account_number": "Số tài khoản",
+    "account_owner": "Chủ tài khoản",
     "accounting_code": "Mã tài khoản kế toán",
-    "bankAccounts": {
-      "account_name": "Tên tài khoản",
+    "bank_accounts": {
       "account_number": "Số tài khoản",
-      "accounting_code": "Mã tài khoản",
-      "add": "Thêm",
+      "account_owner": "Chủ tài khoản",
+      "accounting_code": "Mã tài khoản kế toán",
+      "add": "Thêm tài khoản ngân hàng",
       "bank_code": "Mã ngân hàng",
       "description": "Mô tả"
     },
@@ -195,7 +195,7 @@
       "success": "Thêm phòng ban thành công"
     },
     "asset": {
-      "actions": "Hành động",
+      "actions": "Thao tác",
       "add": "Thông tin tài sản",
       "code": "Mã tài sản",
       "fromDate": "Quản lý từ ngày",
@@ -292,7 +292,7 @@
       "title": "Tài khoản ngân hàng"
     },
     "contacts": {
-      "action": "Hành động",
+      "action": "Thao tác",
       "add": "Thêm thông tin liên hệ",
       "address": "Địa chỉ",
       "code": "STT",
@@ -400,7 +400,7 @@
   "division": {
     "content": {
       "address": "Địa chỉ",
-      "code": "mã chi nhánh",
+      "code": "Mã chi nhánh",
       "name": "Tên chi nhánh"
     },
     "dialog": {
@@ -597,7 +597,7 @@
     },
     "department": {
       "delete": {
-        "message": "Bạn muốn xóa phòng ban này?",
+        "message": "Bạn chắc chắn muốn xóa?",
         "title": "Xác nhận xóa"
       }
     },
@@ -625,7 +625,7 @@
     },
     "service": {
       "save": {
-        "success": "Lưu thành công"
+        "success": "Thành công"
       },
       "update": {
         "getFailed": "Cập nhật thất bại",

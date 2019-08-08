@@ -7,7 +7,7 @@ export class LegalItemDetailEntity extends Entity {
     codeFromMarket: string;
 
     // characteristicEntity:
-    characteristicName: string;
+    characteristicDisplay: string;
     characteristicId: string;
 
     // unitEntity:
@@ -18,7 +18,7 @@ export class LegalItemDetailEntity extends Entity {
     weight: number;
 
     // statusEntity:
-    statusName: string;
+    statusDisplay: string;
     statusId: string;
 
     height: number;

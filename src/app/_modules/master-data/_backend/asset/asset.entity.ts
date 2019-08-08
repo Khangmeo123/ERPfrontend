@@ -9,7 +9,7 @@ export class AssetEntity extends Entity {
     typeId: string;
 
     // statusEntity:
-    statusName: string;
+    statusDisplay: string;
     statusId: string;
 
     constructor(assetEntity?: any) {

@@ -13,7 +13,7 @@ export class CustomerForm extends FormModel {
 
     // statusEntity
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('');
+    statusDisplay = new FormControl('');
 
     infoContacts = new FormArray([]);
     bankAccounts = new FormArray([]);

@@ -56,8 +56,15 @@
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="costCenterSearchEntity.chartOfAccountCode"
-                                    data-qe-id="filter-chartOfAccountCode"></app-advanced-filters>
+              <app-single-select (listOpen)="onOpenCoaList()"
+                                 [list]="coaList"
+                                 [selectedList]="selectedCoaList"
+                                 data-qe-id="dialog-account"
+                                 [key]="'name'"
+                                 [disabled]="!setOfBookId"
+                                 (selectionChange)="onFilterChartOfAccount($event)"
+                                 (search)="onSearchChartOfAccount($event)"
+                                 id="chart-of-account"></app-single-select>
             </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()" [filter]="costCenterSearchEntity.validFrom"
@@ -151,12 +158,14 @@
       <div class="col-sm-6">
         <div class="form-group">
           <label for="chart-of-account">{{ 'cost-center.content.account' | translate}}</label>
-          <app-single-select (listOpen)="getCoaList()"
+          <app-single-select (listOpen)="onOpenCoaList()"
                              [list]="coaList"
                              [selectedList]="selectedCoaList"
                              data-qe-id="dialog-account"
                              [initialValue]="costCenterForm?.controls?.chartOfAccountName?.value"
                              [key]="'name'"
+                             (selectionChange)="onSelectChartOfAccount($event)"
+                             (search)="onSearchChartOfAccount($event)"
                              id="chart-of-account"></app-single-select>
         </div>
       </div>
