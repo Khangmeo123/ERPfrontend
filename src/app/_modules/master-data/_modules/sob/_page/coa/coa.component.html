@@ -64,7 +64,7 @@
               <app-simple-select (listOpen)="getCharacteristicList()"
                                  (selectionChange)="onFilterCharacteristic($event)"
                                  [list]="characteristicList"
-                                 [initialValue]="coaForm?.controls?.characteristicValue?.value"
+                                 [initialValue]="coaForm?.controls?.characteristicDisplay?.value"
                                  data-qe-id="dialog-account-characteristic"
                                  key="display"
               ></app-simple-select>
@@ -84,7 +84,7 @@
               {{row.name}}
             </td>
             <td>
-              {{row.characteristicValue}}
+              {{row.characteristicDisplay}}
             </td>
             <td>
               {{row.description}}
@@ -146,7 +146,7 @@
                            (selectionChange)="characteristicId.setValue($event)"
                            [list]="characteristicList"
                            id="account-characteristic"
-                           [initialValue]="coaForm?.controls?.characteristicValue?.value"
+                           [initialValue]="coaForm?.controls?.characteristicDisplay?.value"
                            data-qe-id="dialog-account-characteristic"
                            key="display"
         ></app-simple-select>

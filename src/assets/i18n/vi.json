@@ -34,8 +34,8 @@
 	"bank": {
 		"content": {
 			"code": "Mã ngân hàng",
-			"description": "Tên ngân hàng",
-			"name": "Mô tả"
+			"description": "Mô tả",
+			"name": "Tên ngân hàng"
 		},
 		"dialog": {
 			"title": "Thêm ngân hàng"

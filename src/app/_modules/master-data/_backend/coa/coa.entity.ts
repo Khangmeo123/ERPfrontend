@@ -9,10 +9,10 @@ export class CoaEntity extends Entity {
   description: string;
 
   characteristicId: string;
-  characteristicValue: string;
+  characteristicDisplay: string;
 
   parentId: string;
-  parentAccountCode: string;
+  parentCode: string;
 
   disabled: boolean;
 

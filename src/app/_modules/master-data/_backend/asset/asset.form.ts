@@ -12,7 +12,7 @@ export class AssetForm extends FormModel {
     typeName = new FormControl('');
     // statusEntity:
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('');
+    statusDisplay = new FormControl('');
     errors = new FormGroup({
         name: new FormControl(''),
         code: new FormControl(''),

@@ -71,7 +71,7 @@
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
                                         <app-simple-select [key]="'display'" [list]="statusList"
-                                            [initialValue]="supplierForm.controls.statusName.value"
+                                            [initialValue]="supplierForm.controls.statusDisplay.value"
                                             (selectionChange)="supplierForm.controls.statusId.setValue($event)"
                                             (listOpen)="openStatusList()" data-qe-id="form-characteristic"
                                             class="w-100">

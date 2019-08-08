@@ -1,16 +1,16 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../_helpers/entity';
-import { CoaService } from './coa.service';
-import { CoaEntity } from '../../../../_backend/coa/coa.entity';
-import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { ToastrService } from 'ngx-toastr';
-import { CharacteristicEntity } from '../../../../_backend/characteristic/characteristic.entity';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../_helpers/entity';
+import {CoaService} from './coa.service';
+import {CoaEntity} from '../../../../_backend/coa/coa.entity';
+import {CoaSearchEntity} from '../../../../_backend/coa/coa.searchentity';
+import {ToastrService} from 'ngx-toastr';
+import {CharacteristicEntity} from '../../../../_backend/characteristic/characteristic.entity';
 
 @Component({
   selector: 'app-coa',
@@ -123,6 +123,10 @@ export class CoaComponent implements OnInit {
     return this.coaForm.get('characteristicId') as FormControl;
   }
 
+  get parentId() {
+    return this.coaForm.get('parentId') as FormControl;
+  }
+
   getParentAccountList() {
     const ids = this.parentSearchEntity.ids;
     this.parentSearchEntity = new CoaSearchEntity();
@@ -145,7 +149,9 @@ export class CoaComponent implements OnInit {
   }
 
   onSelectParentChartOfAccount(event) {
-    this.parentSearchEntity.ids = event;
+    if (event && event.length) {
+      this.parentId.setValue(event[0]);
+    }
   }
 
   add() {

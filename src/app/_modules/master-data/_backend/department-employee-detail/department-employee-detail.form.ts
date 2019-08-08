@@ -11,7 +11,7 @@ export class DepartmentEmployeeDetailForm extends FormModel {
     jobLevelId = new FormControl({ value: '', disabled: true });
     jobLevel = new FormControl({ value: '', disabled: true });
     statusId = new FormControl({ value: '', disabled: true });
-    statusName = new FormControl({ value: '', disabled: true });
+    statusDisplay = new FormControl({ value: '', disabled: true });
     gender = new FormControl({ value: false, disabled: true });
     identityNumber = new FormControl({ value: '', disabled: true });
     issueDate = new FormControl({ value: '', disabled: true });

@@ -1,7 +1,7 @@
-import { FormModel } from '../../../../_helpers/form-model';
-import { FormControl, FormGroup } from '@angular/forms';
-import { CoaEntity } from 'src/app/_modules/master-data/_backend/coa/coa.entity';
-import { requiredField } from 'src/app/_helpers';
+import {FormModel} from '../../../../_helpers/form-model';
+import {FormControl, FormGroup} from '@angular/forms';
+import {CoaEntity} from 'src/app/_modules/master-data/_backend/coa/coa.entity';
+import {requiredField} from 'src/app/_helpers';
 
 export class CoaForm extends FormModel {
   setOfBookId = new FormControl(null);
@@ -11,11 +11,10 @@ export class CoaForm extends FormModel {
   description = new FormControl(null);
 
   characteristicId = new FormControl(null);
-  characteristicValue = new FormControl(null);
-
+  characteristicDisplay = new FormControl(null);
 
   parentId = new FormControl(null);
-  parentAccountCode = new FormControl(null);
+  parentCode = new FormControl(null);
 
   disabled = new FormControl(null);
 
