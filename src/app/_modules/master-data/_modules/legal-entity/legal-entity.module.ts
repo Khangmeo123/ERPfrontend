@@ -31,6 +31,9 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ChipsModule } from 'primeng/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
+import { BinLocationComponent } from './_page/bin-location/bin-location.component';
+import { CodeFormularComponent } from './_page/code-formular/code-formular.component';
+import { CodeFormulaDetailComponent } from './_page/code-formular/code-formula-detail/code-formula-detail.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +51,11 @@ import { EmployeePositionComponent } from './_page/employee-position/employee-po
     EmployeeOfLegalEntityComponent,
     ItemOfLegalEntityComponent,
     EmployeeDetailComponent,
-    LegalItemDetailComponent],
+    LegalItemDetailComponent,
+    BinLocationComponent,
+    CodeFormularComponent,
+    CodeFormulaDetailComponent,
+  ],
   imports: [
     CommonModule,
     LegalEntityRoutingModule,

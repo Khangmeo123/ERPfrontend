@@ -1,0 +1,30 @@
+.page {
+  .page-body {
+    .page-section.legal-entity {
+      display: flex;
+      align-items: center;
+
+      .legal-entity-select-box {
+        flex-grow: 1;
+        margin-right: 0.5rem;
+        display: flex;
+
+        span {
+          display: flex;
+          align-items: center;
+          margin-right: 0.5rem;
+        }
+      }
+
+      .actions {
+        button {
+          margin-right: 0.5rem;
+        }
+
+        button:last-of-type {
+          margin-right: unset;
+        }
+      }
+    }
+  }
+}

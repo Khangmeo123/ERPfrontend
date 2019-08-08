@@ -1,0 +1,169 @@
+<div class="page bin-location">
+
+  <div class="page-header">
+    <div class="page-title">
+      {{'binLocation.title' | translate}}
+    </div>
+  </div>
+
+  <div class="page-body container-fluid">
+
+    <div class="page-section legal-entity">
+
+      <div class="legal-entity-select-box">
+        <span>
+          {{'general.legal_entity.name' | translate}}:
+        </span>
+        <app-single-select id="legal-entity-select-box"
+        ></app-single-select>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-import">
+          {{'general.button.import' | translate}}
+        </button>
+        <button class="btn btn-export">
+          {{'general.button.export' | translate}}
+        </button>
+      </div>
+    </div>
+
+    <div class="page-section row">
+      <div class="col">
+        <p-table [value]="level1List">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                {{'binLocation.layer1.code'}}
+              </th>
+              <th>
+                {{'binLocation.layer1.name'}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row let-index="index">
+            <tr>
+              <td>
+                {{row.code}}
+              </td>
+              <td>
+                {{row.name}}
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+
+      <div class="col">
+        <p-table [value]="level2List">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                {{'binLocation.layer2.code'}}
+              </th>
+              <th>
+                {{'binLocation.layer2.name'}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row let-index="index">
+            <tr>
+              <td>
+                {{row.code}}
+              </td>
+              <td>
+                {{row.name}}
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+
+      <div class="col">
+        <p-table [value]="level3List">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                {{'binLocation.layer3.code'}}
+              </th>
+              <th>
+                {{'binLocation.layer3.name'}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row let-index="index">
+            <tr>
+              <td>
+                {{row.code}}
+              </td>
+              <td>
+                {{row.name}}
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+
+      <div class="col">
+        <p-table [value]="level4List">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                {{'binLocation.layer4.code'}}
+              </th>
+              <th>
+                {{'binLocation.layer4.name'}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters></app-advanced-filters>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-row let-index="index">
+            <tr>
+              <td>
+                {{row.code}}
+              </td>
+              <td>
+                {{row.name}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+
+  </div>
+</div>
