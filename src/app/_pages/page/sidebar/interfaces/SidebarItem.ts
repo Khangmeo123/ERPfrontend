@@ -5,4 +5,6 @@ export interface SidebarItem {
   icon?: string;
   children?: SidebarItem[];
   exact?: boolean;
+  isOpened?: boolean;
+  isShowed?: boolean;
 }

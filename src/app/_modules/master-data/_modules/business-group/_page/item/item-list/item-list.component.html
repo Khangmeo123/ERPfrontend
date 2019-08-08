@@ -92,7 +92,7 @@
                         </th>
                         <th class="th-filter">
                             <app-single-select [list]="uomExceptIds" [selectedList]="uomIds" [key]="'name'"
-                                [initialValue]="itemSearchEntity.unitOfMeasureId"
+                                [initialValue]="itemSearchEntity.unitOfMeasureId || null"
                                 (search)="searchUom($event, itemSearchEntity.unitOfMeasureId)"
                                 (selectionChange)="itemSearchEntity.unitOfMeasureId = $event[0]; getList()"
                                 (listOpen)="openUomList(itemSearchEntity.unitOfMeasureId)"
@@ -105,8 +105,8 @@
                             </app-advanced-filters>
                         </th>
                         <th class="th-filter">
-                            <app-simple-select [key]="'name'" [list]="statusList"
-                                [initialValue]="itemSearchEntity.statusId"
+                            <app-simple-select [key]="'display'" [list]="statusList"
+                                [initialValue]="itemSearchEntity.statusId || null"
                                 (selectionChange)="itemSearchEntity.statusId = $event; getList()"
                                 (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
                             </app-simple-select>

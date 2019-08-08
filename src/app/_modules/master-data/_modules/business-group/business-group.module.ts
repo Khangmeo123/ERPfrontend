@@ -23,7 +23,7 @@ import { EmployeeComponent } from './_page/employee/employee.component';
 import { SupplierComponent } from './_page/supplier/supplier.component';
 import { UomComponent } from './_page/uom/uom.component';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';

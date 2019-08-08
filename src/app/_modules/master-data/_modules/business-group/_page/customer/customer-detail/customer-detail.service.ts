@@ -37,7 +37,7 @@ export class CustomerDetailService {
 
   save(customerEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (customerEntity.id === null || customerEntity.id === undefined || customerEntity.id === environment.emtyGuid) {
+      if (customerEntity.id === null || customerEntity.id === undefined || customerEntity.id === environment.emptyGuid) {
         this.customerDetailRepository.add(customerEntity).subscribe(res => {
           if (res) {
             this.toastrService.success('Cập nhật thành công !');

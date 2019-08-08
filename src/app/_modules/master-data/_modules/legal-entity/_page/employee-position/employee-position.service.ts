@@ -86,7 +86,7 @@ export class EmployeePositionService {
     save(employeePositionEntity: any, employeePositionSearchEntity: EmployeePositionSearchEntity): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
             if (employeePositionEntity.id === null || employeePositionEntity.id === undefined
-                || employeePositionEntity.id === environment.emtyGuid) {
+                || employeePositionEntity.id === environment.emptyGuid) {
                 this.employeePositionRepository.add(employeePositionEntity).subscribe(res => {
                     if (res) {
                         this.getList(employeePositionSearchEntity);

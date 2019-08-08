@@ -55,7 +55,7 @@ export class BankService {
 
   save(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (bankEntity.id === null || bankEntity.id === undefined || bankEntity.id === environment.emtyGuid) {
+      if (bankEntity.id === null || bankEntity.id === undefined || bankEntity.id === environment.emptyGuid) {
         this.bankRepository.add(bankEntity).subscribe(res => {
           if (res) {
             this.getList(bankSearchEntity);

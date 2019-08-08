@@ -35,8 +35,7 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
 
   isLoading = false;
 
-  constructor() {
-  }
+  constructor() {}
 
   get listState() {
     return this.isOpened ? 'opened' : 'closed';

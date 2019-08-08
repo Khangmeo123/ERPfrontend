@@ -1,25 +1,25 @@
-import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { SupplierGroupSearchEntity } from '../../../../_backend/supplier-group/supplier-group.searchentity';
-import { SupplierGroupEntity } from '../../../../_backend/supplier-group/supplier-group.entity';
-import { FormGroup } from '@angular/forms';
-import { Subject, Subscription } from 'rxjs';
-import { SupplierEntity } from '../../../../_backend/supplier/supplier.entity';
-import { SupplierSearchEntity } from '../../../../_backend/supplier/supplier.searchentity';
-import { BookmarkService } from '../../../../../../_services';
-import { Router } from '@angular/router';
-import { SupplierGroupService } from './supplier-group.service';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
-import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
-import { translate } from 'src/app/_helpers/string';
-import { environment } from 'src/environments/environment';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {SupplierGroupSearchEntity} from '../../../../_backend/supplier-group/supplier-group.searchentity';
+import {SupplierGroupEntity} from '../../../../_backend/supplier-group/supplier-group.entity';
+import {FormGroup} from '@angular/forms';
+import {Subject, Subscription} from 'rxjs';
+import {SupplierEntity} from '../../../../_backend/supplier/supplier.entity';
+import {SupplierSearchEntity} from '../../../../_backend/supplier/supplier.searchentity';
+import {BookmarkService} from '../../../../../../_services';
+import {Router} from '@angular/router';
+import {SupplierGroupService} from './supplier-group.service';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {LegalEntity} from 'src/app/_modules/master-data/_backend/legal/legal.entity';
+import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import {translate} from 'src/app/_helpers/string';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-supplier-group',
   templateUrl: './supplier-group.component.html',
   styleUrls: ['./supplier-group.component.scss'],
-  providers: [SupplierGroupService]
+  providers: [SupplierGroupService],
 })
 export class SupplierGroupComponent implements OnInit, OnDestroy {
 
@@ -57,7 +57,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   supplierGroupingId: string;
 
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/supplier-group/export?supplierGroupId=';
-  @ViewChild('tableSupplier', { static: false }) public tableSupplier: TemplateRef<any>;
+  @ViewChild('tableSupplier', {static: false}) public tableSupplier: TemplateRef<any>;
 
 
   constructor(
@@ -115,7 +115,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.supplierGroupService.getLisLegalEntityByTyping(this.leGalEntityTyping);
     this.supplierGroupService.getListSupplierOfSupplierGroupByTyping(this.supplierTyping);
 
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
     this.supplierGroupSubs.add(supplierGroupListSub).add(supplierGroupFormSub)
       .add(supplierGroupListCountSub).add(bookMarkNotify).add(legalEntityListSub)
       .add(supplierListSub).add(supplierDetailListSub).add(supplierDetailCountSub);
@@ -143,6 +143,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     }
     this.supplierGroupService.getListLegalEntity(this.legalSearchEntity);
   }
+
   legalSearch(event) {
     this.legalSearchEntity = new LegalSearchEntity();
     if (this.legalEntityId !== undefined && this.legalEntityId !== null) {
@@ -151,6 +152,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.legalSearchEntity.name.startsWith = event;
     this.leGalEntityTyping.next(this.legalSearchEntity);
   }
+
   selectLegal(event) {
     this.supplierGroupSearchEntity.legalEntityId = event[0];
     this.legalEntityId = event[0];
@@ -165,18 +167,19 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     });
 
   }
+
   // drop supplier
-  openSupplierList(id: string[]) {
+  openSupplierList() {
     this.supplierSearchEntity = new SupplierSearchEntity();
-    this.supplierSearchEntity.ids = id;
-    if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
+    this.supplierSearchEntity.ids = this.listSupplierId;
+    if (this.legalEntityId) {
       this.supplierSearchEntity.legalEntityId = this.legalEntityId;
       this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
       this.supplierGroupService.getListSupplierOfSupplierGroup(this.supplierSearchEntity);
     }
   }
 
-  suppplierSearchApp(event) {
+  supplierSearchApp(event) {
     this.supplierSearchEntity.name.startsWith = event;
     if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
       this.supplierSearchEntity.legalEntityId = this.legalEntityId;
@@ -198,7 +201,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
       } else {
         this.supplierSearchEntity.supplierGroupingId = null;
       }
-      console.log('this.supplierGroupingId', this.supplierGroupingId)
+      console.log('this.supplierGroupingId', this.supplierGroupingId);
       this.supplierGroupingId = this.supplierSearchEntity.supplierGroupingId;
       this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
     });
@@ -275,9 +278,10 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     }
   }
 
-  edit(supplierGroupId: string) {
+  edit(supplierGroupId: string, event) {
     this.supplierGroupService.edit(supplierGroupId);
     this.display = true;
+    event.stopPropagation();
   }
 
   delete() {
@@ -291,18 +295,17 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   clearSearch(tableSupplier: any) {
     this.supplierSearchEntity = new SupplierSearchEntity();
     this.supplierSearchEntity.legalEntityId = this.legalEntityId;
+    this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
     tableSupplier.reset();
   }
 
   deleteSupplierFormGroup(supplierId: string) {
-    this.supplierGroupService.deleteSupplier(supplierId, this.supplierGroupingId).then(res => {
-      if (res) {
-        this.clearSearch(this.tableSupplier);
-        this.supplierSearchEntity.legalEntityId = this.legalEntityId;
-        this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
-        this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
-      }
-    });
+    this.supplierGroupService.deleteSupplier(supplierId, this.supplierGroupingId)
+      .then(res => {
+        if (res) {
+          this.clearSearch(this.tableSupplier);
+        }
+      });
   }
 
   onClickDetail(id: string) {
@@ -314,13 +317,13 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
 
   onClickShowDetail(supplierId) {
     this.router.navigate(['/master-data/legal-entity/supplier-group/supplier-detail'],
-      { queryParams: { id: supplierId, legalEntityId: this.legalEntityId } });
+      {queryParams: {id: supplierId, legalEntityId: this.legalEntityId}});
   }
 
   onClickAddSupplier() {
     this.supplierSearchEntity.supplierDetailIds = this.listSupplierId;
     this.supplierSearchEntity.legalEntityId = this.legalEntityId;
-    if ((this.supplierGroupingId === '' || this.supplierGroupingId === undefined) && this.supplierGroupList.length > 0) {
+    if ((!this.supplierGroupingId) && this.supplierGroupList.length > 0) {
       this.supplierGroupingId = this.supplierGroupList[0].id;
     }
     this.supplierSearchEntity.supplierGroupingId = this.supplierGroupingId;
@@ -336,9 +339,9 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 

@@ -137,7 +137,7 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
   sortLegalList(event: any) {
     if (event.sortField && event.sortOrder) {
       this.legalSearchEntity.orderBy = event.sortField;
-      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getLegalList();
   }
@@ -188,7 +188,7 @@ export class ItemOfLegalEntityComponent implements OnInit, OnDestroy {
   sortItemsFromLegalList(event: any) {
     if (event.sortField && event.sortOrder) {
       this.itemsFromLegalSearchEntity.orderBy = event.sortField;
-      this.itemsFromLegalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.itemsFromLegalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getItemsFromLegalList();
   }

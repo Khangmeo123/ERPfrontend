@@ -62,7 +62,7 @@ export class JobLevelService {
 
   save(jobLevelEntity: any, jobLevelSearchEntity: JobLevelSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (jobLevelEntity.id === null || jobLevelEntity.id === undefined || jobLevelEntity.id === environment.emtyGuid) {
+      if (jobLevelEntity.id === null || jobLevelEntity.id === undefined || jobLevelEntity.id === environment.emptyGuid) {
         this.jobLevelRepository.add(jobLevelEntity).subscribe(res => {
           if (res) {
             this.getList(jobLevelSearchEntity);

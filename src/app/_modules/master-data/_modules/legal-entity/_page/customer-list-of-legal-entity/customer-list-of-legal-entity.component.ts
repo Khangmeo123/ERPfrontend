@@ -1,23 +1,23 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { BookmarkService } from '../../../../../../_services';
-import { Router } from '@angular/router';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
-import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
-import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
-import { CustomerOfLegalEntityService } from './customer-list-of-legal-entity.service';
-import { Subscription, Subject } from 'rxjs';
-import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
-import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
-import { translate } from 'src/app/_helpers/string';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit, ViewChild, TemplateRef} from '@angular/core';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {BookmarkService} from '../../../../../../_services';
+import {Router} from '@angular/router';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import {LegalEntity} from 'src/app/_modules/master-data/_backend/legal/legal.entity';
+import {CustomerOfLegalEntityService} from './customer-list-of-legal-entity.service';
+import {Subscription, Subject} from 'rxjs';
+import {CustomerSearchEntity} from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
+import {CustomerEntity} from 'src/app/_modules/master-data/_backend/customer/customer.entity';
+import {translate} from 'src/app/_helpers/string';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-customer-list-of-legal-entity',
   templateUrl: './customer-list-of-legal-entity.component.html',
   styleUrls: ['./customer-list-of-legal-entity.component.scss'],
-  providers: [CustomerOfLegalEntityService]
+  providers: [CustomerOfLegalEntityService],
 })
 export class CustomerListOfLegalEntityComponent implements OnInit {
 
@@ -38,14 +38,14 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   customerList: CustomerEntity[];
 
   legalSubs: Subscription = new Subscription();
-  legalId: string;
+  legalId: string = null;
   customerIds: CustomerEntity[];
   customerExceptIds: CustomerEntity[];
   customerTyping: Subject<CustomerSearchEntity> = new Subject();
   listCustomerId: Array<any> = [];
 
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/customer-of-legal-entity/export?legalEntityId=';
-  @ViewChild('tableCustomer', { static: false }) public tableCustomer: TemplateRef<any>;
+  @ViewChild('tableCustomer', {static: false}) public tableCustomer: TemplateRef<any>;
 
 
   constructor(
@@ -90,7 +90,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     });
 
     this.customerOfLegalEntityService.getListCustomerOfLegalEntityByTyping(this.customerTyping);
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
     this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify).add(customerListSub)
       .add(customerListCountSub).add(customerOfLegalListSub);
 
@@ -120,6 +120,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerSearchEntity.name.startsWith = event;
     this.customerTyping.next(this.customerSearchEntity);
   }
+
   selectCustomer(event) {
     this.listCustomerId = event;
   }
@@ -137,7 +138,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       }
 
       this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
-    })
+    });
   }
 
   toDetail(legalId) {
@@ -176,10 +177,13 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   onClickAddCustomer() {
     this.customerSearchEntity.customerDetailIds = this.listCustomerId;
     this.customerSearchEntity.legalEntityId = this.legalId;
-    this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity).then(res => {
-      this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
-    }).catch(err => {
-    });
+    this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity)
+      .then(res => {
+        this.customerIds = [];
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+      })
+      .catch(err => {
+      });
   }
 
   getListCustomer(customer) {
@@ -191,15 +195,14 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   onClickShowDetail(customerId: string) {
     this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'],
-      { queryParams: { id: customerId, legalEntityId: this.legalId } });
+      {queryParams: {id: customerId, legalEntityId: this.legalId}});
   }
 
   deleteCustomerFormLegal(customer: any) {
     this.customerOfLegalEntityService.delete(customer).then(res => {
       if (res) {
         this.clearSearchCustomer(this.tableCustomer);
-        this.customerSearchEntity.legalEntityId = this.legalId;
-        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity)
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
       }
     });
   }
@@ -225,17 +228,18 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 
-  clearSearchCustomer(tablecustomer: any) {
+  clearSearchCustomer(tableCustomer: any) {
     this.customerSearchEntity = new CustomerSearchEntity();
-    tablecustomer.reset();
+    this.customerSearchEntity.legalEntityId = this.legalId;
+    tableCustomer.reset();
   }
 
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 

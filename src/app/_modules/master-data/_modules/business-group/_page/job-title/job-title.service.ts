@@ -55,7 +55,7 @@ export class JobTitleService {
 
   save(jobTitleEntity: any, jobTitleSearchEntity: JobTitleSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (jobTitleEntity.id === null || jobTitleEntity.id === undefined || jobTitleEntity.id === environment.emtyGuid) {
+      if (jobTitleEntity.id === null || jobTitleEntity.id === undefined || jobTitleEntity.id === environment.emptyGuid) {
         this.jobTitleRepository.add(jobTitleEntity).subscribe(res => {
           if (res) {
             this.getList(jobTitleSearchEntity);

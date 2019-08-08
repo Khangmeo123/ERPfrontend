@@ -33,27 +33,18 @@
                              (search)="onDivisionSearch($event)"
                              (selectionChange)="onSelectDivision()"
                              [list]="divisionList"
+                             [disabled]="!legalEntity"
                              [selectedList]="selectedDivisionList"
                              key="name"></app-single-select>
         </div>
       </div>
     </div>
 
-    <div class="page-section">
-      <ul class="fems-tab clearfix">
-        <li *ngFor="let item of routes; let i = index"
-            [routerLink]="item.route"
-            class="pointer"
-            routerLinkActive="active">
-          {{item.key}}
-        </li>
-      </ul>
-    </div>
+    <hr>
 
     <div class="page-section">
-      <div class="tab-pane">
-        <router-outlet></router-outlet>
-      </div>
+      <router-outlet>
+      </router-outlet>
     </div>
 
   </div>

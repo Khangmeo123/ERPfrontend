@@ -78,6 +78,7 @@
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-customer" [list]="customerExceptIds"
+                              [disabled]="!legalId"
               [selectedList]="customerIds" [key]="'name'" (search)="customerSearch($event)"
               (selectionChange)="selectCustomer($event)" (listOpen)="openCustomerList(customerSearchEntity.ids)">
             </app-multi-select>

@@ -15,8 +15,8 @@
       <div class="col-sm-6 page-1">
         <div class="mt-2 row">
           <div class="col-sm-7 d-flex align-items-center">
-            <span class="sob-label flex-shrink-1">
-              {{'general.legal_entity.name' | translate}} :
+            <span class="sob-label flex-shrink-1 mr-2">
+              {{'general.legal_entity.name' | translate}}:
             </span>
             <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
               [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"

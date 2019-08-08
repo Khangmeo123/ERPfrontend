@@ -1,18 +1,13 @@
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 
 export class VoucherListSearchEntity extends SearchEntity {
-    sobId: string;
-   
-    code: string;
-    name: string;
-    debtId: string;
-    creditId: string;
-    typeName: string;
-    description: string;
+  setOfBookId: string;
 
-   
-    
-    constructor(voucherListSearchEntity: any) {
-        super(voucherListSearchEntity);
-    }
+  code: TextFilter = new TextFilter();
+  name: TextFilter = new TextFilter();
+
+  constructor(voucherListSearchEntity?: any) {
+    super(voucherListSearchEntity);
+  }
 }

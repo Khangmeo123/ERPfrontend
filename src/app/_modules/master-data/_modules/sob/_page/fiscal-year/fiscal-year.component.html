@@ -1,0 +1,203 @@
+<div class="page fiscal-year-list">
+  <div class="page-header">
+        <span class="page-title">
+            {{'fiscal_year.header.title' | translate}}
+          <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+        </span>
+    <div class="page-actions">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
+        + {{'general.button.add' | translate}}</button>
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
+        {{'general.button.clear' | translate}}
+      </button>
+    </div>
+  </div>
+  <div class="page-body mt-4">
+    <div class="page-section form d-flex align-items-center">
+      <span class="sob mr-2">{{'general.sob' | translate}}: </span>
+      <app-single-select (listOpen)="getSobList()"
+                         (selectionChange)="changeSob($event)"
+                         [list]="sobList"
+                         [selectedList]="selectedSobList"
+                         data-qe-id="sob-list"
+                         key="name"></app-single-select>
+    </div>
+    <div class="page-section list">
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+               [scrollable]="true" [value]="fiscalYearList" scrollHeight="500px">
+        <ng-template pTemplate="header">
+          <tr>
+            <th [pSortableColumn]="'name'" data-qe-id="table-thead-name"
+                pResizableColumn> {{ 'fiscal_year.content.name' | translate}} </th>
+            <th [pSortableColumn]="'startDate'" data-qe-id="table-thead-from-date"
+                pResizableColumn> {{ 'fiscal_year.content.from_date' | translate}} </th>
+            <th [pSortableColumn]="'endDate'" data-qe-id="table-thead-to-date"
+                pResizableColumn> {{ 'fiscal_year.content.to_date' | translate}} </th>
+            <th [pSortableColumn]="'valuationMethod'" data-qe-id="table-thead-valuation-method"
+                pResizableColumn> {{ 'fiscal_year.content.valuation_method' | translate}} </th>
+            <th [pSortableColumn]="'status'" data-qe-id="table-thead-status"
+                pResizableColumn> {{ 'fiscal_year.content.status' | translate}} </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.name"
+                                    data-qe-id="filter-name"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.startDate"
+                                    data-qe-id="filter-startDate"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.endDate"
+                                    data-qe-id="filter-endDate"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-simple-select (listOpen)="getInventoryValuationMethodList()"
+                                 (selectionChange)="onValuationMethodFilter($event)"
+                                 [list]="inventoryValuationMethodList"
+                                 class="flex-grow-1"
+                                 data-qe-id="dialog-to-valuation-method"
+                                 key="display"></app-simple-select>
+            </th>
+            <th class="th-filter">
+              <app-simple-select (listOpen)="getStatusList()"
+                                 (selectionChange)="onStatusFilter($event)"
+                                 [list]="statusList"
+                                 date-qe-id="dialog-status"
+                                 key="display"></app-simple-select>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template let-index="index" let-row pTemplate="body">
+          <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{row.name}} </td>
+            <td>{{row.startDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{row.endDate | date: 'dd/MM/yyyy'}}</td>
+            <td>{{row.valuationMethodDisplay}}</td>
+            <td> {{row.statusDisplay}} </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="pagination">
+        <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination"></app-pagination>
+      </div>
+    </div>
+  </div>
+</div>
+<p-dialog [(visible)]="isShowDialog" [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+          modal="true">
+  <p-header>
+    {{ 'fiscal_year.content.modal.title' | translate}}
+  </p-header>
+  <div [formGroup]="fiscalYearForm" class="container">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="fiscal-year-name">{{ 'fiscal_year.content.name' | translate}}<span
+            class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input class="form-control" data-qe-id="dialog-name" formControlName="name" id="fiscal-year-name"
+                   name="name" type="text"/>
+            <app-error
+              *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+              [formGroup]="fiscalYearForm"
+              [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-name">
+            </app-error>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="fiscal-year-start-date">{{ 'fiscal_year.content.from_date' | translate}}<span
+            class="text-danger ml-2">*</span></label>
+          <div class="div-form d-flex">
+            <app-date-picker [control]="startDate" class="flex-grow-1" data-qe-id="dialog-start-date"
+                             id="fiscal-year-start-date"></app-date-picker>
+            <app-error
+              *ngIf="(startDate?.errors && startDate?.touched) || !!errors.get('startDate')?.value"
+              [formGroup]="fiscalYearForm"
+              [placement]="'top'" [property]="'startDate'" class="error-form" data-qe-id="dialog-error-start-date">
+            </app-error>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="fiscal-year-to-valuation-method">{{ 'fiscal_year.content.valuation_method' | translate}}<span
+            class="text-danger ml-2">*</span></label>
+          <div class="div-form d-flex">
+            <app-simple-select (listOpen)="getInventoryValuationMethodList()"
+                               (selectionChange)="onSelectInventoryValuationMethod($event)"
+                               [initialValue]="fiscalYearForm?.controls?.valuationMethodDisplay?.value"
+                               [list]="inventoryValuationMethodList"
+                               class="flex-grow-1"
+                               data-qe-id="dialog-to-valuation-method"
+                               id="fiscal-year-to-valuation-method"
+                               key="display"></app-simple-select>
+            <app-error
+              *ngIf="(valuationMethodId?.errors && valuationMethodId?.touched) || !!errors.get('inventoryValuationMethodId')?.value"
+              [formGroup]="fiscalYearForm"
+              [placement]="'top'" [property]="'valuationMethodId'" class="error-form"
+              data-qe-id="dialog-error-inventory-valuation-method">
+            </app-error>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="fiscal-year-end-date">{{ 'fiscal_year.content.to_date' | translate}}<span
+            class="text-danger ml-2">*</span></label>
+          <div class="div-form d-flex">
+            <app-date-picker [control]="endDate" class="flex-grow-1" data-qe-id="dialog-end-date"
+                             id="fiscal-year-end-date"></app-date-picker>
+            <app-error
+              *ngIf="(endDate?.errors && endDate?.touched) || !!errors.get('endDate')?.value"
+              [formGroup]="fiscalYearForm"
+              [placement]="'top'" [property]="'endDate'" class="error-form" data-qe-id="dialog-error-endDate">
+            </app-error>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <label for="fiscal-year-status">
+          {{ 'fiscal_year.content.status' | translate }}
+        </label>
+        <app-simple-select (listOpen)="getStatusList()"
+                           (selectionChange)="statusId.setValue($event)" [initialValue]="statusDisplay.value"
+                           [list]="statusList"
+                           date-qe-id="dialog-status"
+                           id="fiscal-year-status"
+                           key="display"></app-simple-select>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="d-flex">
+      <button (cancel)="onClickCancel()"
+
+              (confirm)="onClickDelete()"
+              *ngIf="fiscalYearForm.value?.id"
+              [popoverMessage]="popoverMessage"
+              [popoverTitle]="popoverTitle"
+              class="btn btn-delete"
+              data-qe-id="footer-button-delete"
+              mwlConfirmationPopover
+              placement="bottom">
+        {{ 'general.button.delete' | translate}}</button>
+      <div class="flex-grow-1 justify-content-end d-flex">
+        <button (click)="onClickCancel()" class="btn btn-cancel"
+                data-qe-id="footer-button-cancel">{{ 'general.button.cancel' | translate}}</button>
+        <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
+          {{ 'general.button.save' | translate}}</button>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>

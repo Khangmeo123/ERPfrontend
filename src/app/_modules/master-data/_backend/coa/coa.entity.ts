@@ -1,24 +1,22 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class CoaEntity extends Entity {
-    // sobEntity:
-    sobId: string;
+  // sobEntity:
+  setOfBookId: string;
 
-    accountNumber: string;
-    accountName: string;
+  code: string;
+  name: string;
+  description: string;
 
-    // propertyEntity:
-    propertyId: string;
-    propertyCode: string;
-    propertyName: string;
+  characteristicId: string;
+  characteristicValue: string;
 
-    // coaEntity:
-    coaParentId: string;
-    coaParentAccountNumber: string;
+  parentId: string;
+  parentAccountCode: string;
 
-    description: string;
+  disabled: boolean;
 
-    constructor(coaEntity?: any) {
-        super(coaEntity);
-    }
+  constructor(entity?: any) {
+    super(entity);
+  }
 }

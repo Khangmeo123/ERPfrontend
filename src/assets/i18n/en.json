@@ -1,7 +1,28 @@
 {
-	"advancedFilter": {
-		"placeholder": ""
+	"accountingPeriod": {
+		"description": "",
+		"endPeriod": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"label": "",
+			"title": ""
+		},
+		"startPeriod": "",
+		"status": {
+			"fiscal_year": ""
+		}
 	},
+  "advancedFilter": {
+    "placeholder": "Search...",
+    "equal": "Equals",
+    "notEqual": "Not equals",
+    "startsWith": "Starts with",
+    "endsWith": "Ends with",
+    "contains": "Contains",
+    "notContains": "Not contains"
+  },
 	"asset": {
 		"content": {
 			"code": "",
@@ -29,14 +50,14 @@
 			"title": ""
 		}
 	},
-	"bank_account": {
+	"bankAccount": {
+		"account_name": "",
 		"account_number": "",
-		"account_owner": "",
-		"accountant_code": "",
-		"bank_accounts": {
+		"accounting_code": "",
+		"bankAccounts": {
+			"account_name": "",
 			"account_number": "",
-			"account_owner": "",
-			"accountant_code": "",
+			"accounting_code": "",
 			"add": "",
 			"bank_code": "",
 			"description": ""
@@ -79,6 +100,22 @@
 			"title": ""
 		},
 		"super_account": ""
+	},
+	"cost-center": {
+		"content": {
+			"account": "",
+			"description": "",
+			"from_date": "",
+			"id": "",
+			"modal": {
+				"title": ""
+			},
+			"name": "",
+			"to_date": ""
+		},
+		"header": {
+			"title": ""
+		}
 	},
 	"cropper": {
 		"browseImage": "",
@@ -362,7 +399,6 @@
 	},
 	"division": {
 		"content": {
-			"action": "",
 			"address": "",
 			"code": "",
 			"name": ""
@@ -506,18 +542,48 @@
 			"title": ""
 		}
 	},
-	"general": {
-		"action": "",
-		"actions": {
+	"environmentTax": {
+		"header": {
 			"title": ""
 		},
+		"modal": {
+			"title": ""
+		}
+	},
+	"environment_tax": {
+		"description": ""
+	},
+	"exportTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
+	"fiscal_year": {
+		"content": {
+			"from_date": "",
+			"modal": {
+				"title": ""
+			},
+			"name": "",
+			"status": "",
+			"to_date": "",
+			"valuation_method": ""
+		},
+		"header": {
+			"title": ""
+		}
+	},
+	"general": {
+		"action": "",
 		"button": {
 			"add": "",
 			"cancel": "",
 			"clear": "",
 			"delete": "",
 			"downloadTemplate": "",
-			"downloadTempplate": "",
 			"download_example": "",
 			"export": "",
 			"import": "",
@@ -566,13 +632,25 @@
 				"success": ""
 			}
 		},
-		"sob": ""
+		"sob": "",
+		"update": {
+			"failure": "",
+			"success": ""
+		}
 	},
 	"hrOrganization": {
 		"add": "",
 		"code": "",
 		"name": "",
 		"title": ""
+	},
+	"importTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
 	},
 	"item": {
 		"content": {
@@ -746,12 +824,43 @@
 			"title_1": ""
 		}
 	},
+	"naturalResourceTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
 	"noData": {
 		"helper": ""
 	},
 	"pagination": {
 		"entries": "",
 		"show": ""
+	},
+	"payment_method": {
+		"code": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"payment_method_name": ""
+	},
+	"payment_term": {
+		"code": "",
+		"discount_period": "",
+		"discount_rate": "",
+		"due_in_date": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": ""
 	},
 	"project": {
 		"employee": {
@@ -785,6 +894,14 @@
 		"special_consumption_tax": "",
 		"title": "",
 		"value_added_tax": ""
+	},
+	"specialConsumptionTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
 	},
 	"special_price_customer": {
 		"code": "",
@@ -862,6 +979,15 @@
 			"name": ""
 		}
 	},
+	"tax": {
+		"available": "",
+		"code": "",
+		"description": "",
+		"discount": "",
+		"name": "",
+		"parent_account": "",
+		"unit": ""
+	},
 	"uom": {
 		"content": {
 			"code": "",
@@ -873,6 +999,14 @@
 			"name": ""
 		},
 		"header": {
+			"title": ""
+		}
+	},
+	"valueAddedTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
 			"title": ""
 		}
 	}

@@ -8,9 +8,9 @@ describe('EnvironmentTaxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ EnvironmentTaxComponent ]
+      declarations: [EnvironmentTaxComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

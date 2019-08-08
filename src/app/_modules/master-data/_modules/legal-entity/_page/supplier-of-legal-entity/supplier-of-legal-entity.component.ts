@@ -1,16 +1,16 @@
-import { Component, OnDestroy, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
-import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { SupplierSearchEntity } from '../../../../_backend/supplier/supplier.searchentity';
-import { SupplierEntity } from '../../../../_backend/supplier/supplier.entity';
-import { Subject, Subscription } from 'rxjs';
-import { TextFilter } from '../../../../../../_shared/models/filters/TextFilter';
-import { Router } from '@angular/router';
-import { BookmarkService } from '../../../../../../_services';
-import { SupplierOfLegalEntityService } from './supplier-of-legal-entity.service';
-import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
-import { environment } from 'src/environments/environment.prod';
+import {Component, OnDestroy, OnInit, ViewChild, TemplateRef} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {LegalSearchEntity} from '../../../../_backend/legal/legal.searchentity';
+import {LegalEntity} from '../../../../_backend/legal/legal.entity';
+import {SupplierSearchEntity} from '../../../../_backend/supplier/supplier.searchentity';
+import {SupplierEntity} from '../../../../_backend/supplier/supplier.entity';
+import {Subject, Subscription} from 'rxjs';
+import {TextFilter} from '../../../../../../_shared/models/filters/TextFilter';
+import {Router} from '@angular/router';
+import {BookmarkService} from '../../../../../../_services';
+import {SupplierOfLegalEntityService} from './supplier-of-legal-entity.service';
+import {_} from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
+import {environment} from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-supplier-of-legal-entity',
@@ -50,7 +50,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   selectedRow: any;
 
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/supplier-of-legal-entity/export?legalEntityId=';
-  @ViewChild('tableSupplier', { static: false }) public tableSupplier: TemplateRef<any>;
+  @ViewChild('tableSupplier', {static: false}) public tableSupplier: TemplateRef<any>;
 
   constructor(
     protected router: Router,
@@ -91,7 +91,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
       this.isSaveBookMark = res;
     });
 
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
     this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify)
       .add(supplierListSub).add(supplierListCountSub).add(supplierOfLegalListSub);
   }
@@ -127,6 +127,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     this.supplierSearchEntity.name.startsWith = event;
     this.supplierTyping.next(this.supplierSearchEntity);
   }
+
   selectSupplier(event) {
     this.listSupplierId = event;
   }
@@ -134,7 +135,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   onClickShowDetail(supplierId) {
     this.router.navigate(['/master-data/legal-entity/supplier-of-legal-entity/supplier-detail'],
-      { queryParams: { id: supplierId, legalEntityId: this.legalId } });
+      {queryParams: {id: supplierId, legalEntityId: this.legalId}});
   }
 
   toDetail(legalId) {
@@ -216,26 +217,36 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
+  }
+
+  clearSelection() {
+    this.supplierSearchEntity = new SupplierSearchEntity();
+    this.listSupplierId = [];
+    this.supplierSearchEntity.legalEntityId = this.legalId;
+    this.supplierIds = [];
   }
 
   onClickAddSupplier() {
     this.supplierSearchEntity.supplierDetailIds = this.listSupplierId;
     this.supplierSearchEntity.legalEntityId = this.legalId;
     if (this.listSupplierId && this.listSupplierId.length > 0) {
-      this.supplierOfLegalEntityService.save(this.supplierSearchEntity).then(res => {
-        this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
-      }).catch(err => {
-      });
+      this.supplierOfLegalEntityService.save(this.supplierSearchEntity)
+        .then(res => {
+          this.clearSelection();
+          this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
+        })
+        .catch(err => {
+        });
     }
   }
 
   deleteSupplierFromLegal(supplier) {
     this.supplierOfLegalEntityService.delete(supplier).then(res => {
-      if(res) {
+      if (res) {
         this.clearSearchSupplier(this.tableSupplier);
         this.supplierSearchEntity.legalEntityId = this.legalId;
         this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
@@ -245,7 +256,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   }
 
   clearSearchSupplier(tableSupplier: any) {
-    this.supplierSearchEntity = new SupplierSearchEntity();
+    this.clearSelection();
     tableSupplier.reset();
   }
 

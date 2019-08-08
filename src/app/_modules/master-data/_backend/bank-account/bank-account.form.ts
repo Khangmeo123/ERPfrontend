@@ -1,40 +1,39 @@
-import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
+import { FormModel } from '../../../../_helpers/form-model';
+import { FormControl, FormGroup } from '@angular/forms';
 import { BankAccountEntity } from 'src/app/_modules/master-data/_backend/bank-account/bank-account.entity';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import { requiredField } from 'src/app/_helpers';
 
 export class BankAccountForm extends FormModel {
-    coaId = new FormControl('', [requiredField]);
-    coaCode = new FormControl('', [requiredField]);
-    coaName = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null);
 
-    bankId = new FormControl('', [requiredField]);
-    bankCode = new FormControl('', [requiredField]);
-    bankName = new FormControl('', [requiredField]);
-    accountNumber = new FormControl('', [requiredField]);
+  chartOfAccountId = new FormControl(null, [requiredField]);
+  chartOfAccountCode = new FormControl(null);
+  chartOfAccountName = new FormControl(null);
 
-    accountName = new FormControl('', [requiredField]);
-    branch = new FormControl('');
-    provinceId = new FormControl('');
-    provinceName = new FormControl('');
+  bankId = new FormControl(null, [requiredField]);
+  bankCode = new FormControl(null);
+  bankName = new FormControl(null);
 
-    description = new FormControl('');
-    address = new FormControl('');
+  no = new FormControl(null, [requiredField]);
+  name = new FormControl(null, [requiredField]);
 
-    errors = new FormGroup({
-        bankName: new FormControl(),
-        accountName: new FormControl(),
-        accountNumber: new FormControl()
-    });
+  description = new FormControl(null);
 
-    constructor(bankAccountEntity?: BankAccountEntity) {
-        super();
-        if (bankAccountEntity !== null && bankAccountEntity !== undefined) {
-            Object.keys(bankAccountEntity).forEach((item) => {
-                if (bankAccountEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(bankAccountEntity[item]);
-                }
-            });
+  errors: FormGroup = new FormGroup({
+    chartOfAccountId: new FormControl(),
+    bankId: new FormControl(),
+    no: new FormControl(),
+    name: new FormControl(),
+  });
+
+  constructor(bankAccountEntity?: BankAccountEntity) {
+    super();
+    if (bankAccountEntity !== null && bankAccountEntity !== undefined) {
+      Object.keys(bankAccountEntity).forEach((item) => {
+        if (bankAccountEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(bankAccountEntity[item]);
         }
+      });
     }
+  }
 }

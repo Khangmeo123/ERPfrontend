@@ -38,7 +38,7 @@ export class ItemListRepository extends Repository {
     }
 
     getUomList(uomSearchEntity: UomSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/list-uom', JSON.stringify(uomSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure', JSON.stringify(uomSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -53,7 +53,7 @@ export class ItemListRepository extends Repository {
     }
 
     getStatusList(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-status', JSON.stringify({}),
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-list-status', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

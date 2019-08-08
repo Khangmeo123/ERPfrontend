@@ -8,9 +8,9 @@ describe('SpecialConsumptionTaxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SpecialConsumptionTaxComponent ]
+      declarations: [SpecialConsumptionTaxComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

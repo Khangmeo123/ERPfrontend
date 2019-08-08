@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { map } from 'rxjs/operators';

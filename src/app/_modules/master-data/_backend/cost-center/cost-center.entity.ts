@@ -9,9 +9,9 @@ export class CostCenterEntity extends Entity {
     fromValid: string;
     toValid: string;
 
-    // coaEntity:
-    coaId: string;
-    coaAccountNumber: string;
+    chartOfAccountId: string;
+    chartOfAccountCode: string;
+    chartOfAccountName: string;
 
     description: string;
 

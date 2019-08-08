@@ -53,7 +53,7 @@ export class DepartmentRepository extends Repository {
 
   getLegalEntityList(legalSearchEntity: LegalSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/list-legal-entity`,
+      `${this.apiUrl}/drop-list-legal-entity`,
       legalSearchEntity,
       {
         observe: 'response',
@@ -67,7 +67,7 @@ export class DepartmentRepository extends Repository {
 
   getDivisionList(divisionSearchEntity: DivisionSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/list-division`,
+      `${this.apiUrl}/drop-list-division`,
       divisionSearchEntity,
       {
         observe: 'response',
