@@ -14,9 +14,15 @@
 			"fiscal_year": ""
 		}
 	},
-	"advancedFilter": {
-		"placeholder": ""
-	},
+  "advancedFilter": {
+    "placeholder": "Search...",
+    "equal": "Equals",
+    "notEqual": "Not equals",
+    "startsWith": "Starts with",
+    "endsWith": "Ends with",
+    "contains": "Contains",
+    "notContains": "Not contains"
+  },
 	"asset": {
 		"content": {
 			"code": "",
@@ -578,7 +584,6 @@
 			"clear": "",
 			"delete": "",
 			"downloadTemplate": "",
-			"downloadTempplate": "",
 			"download_example": "",
 			"export": "",
 			"import": "",
