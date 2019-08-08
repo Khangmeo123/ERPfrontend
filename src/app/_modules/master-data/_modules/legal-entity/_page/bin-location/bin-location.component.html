@@ -15,6 +15,14 @@
           {{'general.legal_entity.name' | translate}}:
         </span>
         <app-single-select id="legal-entity-select-box"
+                           key="name"
+                           [initialValue]="legalEntity?.name"
+                           [valueSelector]="legalEntitySelector"
+                           [list]="legalEntityList"
+                           [selectedList]="selectedLegalEntityList"
+                           (listOpen)="onOpenLegalEntityList()"
+                           (search)="onSearchLegalEntity($event)"
+                           (selectionChange)="onSelectLegalEntity($event)"
         ></app-single-select>
       </div>
 
@@ -30,32 +38,45 @@
 
     <div class="page-section row">
       <div class="col">
-        <p-table [value]="level1List">
+        <p-table [resizableColumns]="true" [value]="level1List">
           <ng-template pTemplate="header">
             <tr>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer1.code'}}
               </th>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer1.name'}}
+              </th>
+              <th class="bin-location-actions">
+                {{'binLocation.action' | translate}}
               </th>
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.code"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.name"></app-advanced-filters>
+              </th>
+              <th class="bin-location-actions">
+                <a role="button" (click)="add()">
+                  <mat-icon>add_circle</mat-icon>
+                </a>
               </th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-row let-index="index">
+          <ng-template pTemplate="body" let-rowData let-index="index">
             <tr>
-              <td>
-                {{row.code}}
+              <td class="ui-resizable-column">
+                {{rowData.code}}
               </td>
-              <td>
-                {{row.name}}
+              <td class="ui-resizable-column">
+                {{rowData.name}}
+              </td>
+              <td class="bin-location-actions">
+                <a role="button" (click)="edit(rowData)">
+                  <mat-icon>edit</mat-icon>
+                </a>
               </td>
             </tr>
           </ng-template>
@@ -64,32 +85,32 @@
       </div>
 
       <div class="col">
-        <p-table [value]="level2List">
+        <p-table [resizableColumns]="true" [value]="level2List">
           <ng-template pTemplate="header">
             <tr>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer2.code'}}
               </th>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer2.name'}}
               </th>
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.code"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.name"></app-advanced-filters>
               </th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-row let-index="index">
+          <ng-template pTemplate="body" let-rowData let-index="index">
             <tr>
-              <td>
-                {{row.code}}
+              <td class="ui-resizable-column">
+                {{rowData.code}}
               </td>
-              <td>
-                {{row.name}}
+              <td class="ui-resizable-column">
+                {{rowData.name}}
               </td>
             </tr>
           </ng-template>
@@ -98,32 +119,32 @@
       </div>
 
       <div class="col">
-        <p-table [value]="level3List">
+        <p-table [resizableColumns]="true" [value]="level3List">
           <ng-template pTemplate="header">
             <tr>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer3.code'}}
               </th>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer3.name'}}
               </th>
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.code"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.name"></app-advanced-filters>
               </th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-row let-index="index">
+          <ng-template pTemplate="body" let-rowData let-index="index">
             <tr>
-              <td>
-                {{row.code}}
+              <td class="ui-resizable-column">
+                {{rowData.code}}
               </td>
-              <td>
-                {{row.name}}
+              <td class="ui-resizable-column">
+                {{rowData.name}}
               </td>
             </tr>
           </ng-template>
@@ -132,32 +153,32 @@
       </div>
 
       <div class="col">
-        <p-table [value]="level4List">
+        <p-table [resizableColumns]="true" [value]="level4List">
           <ng-template pTemplate="header">
             <tr>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer4.code'}}
               </th>
-              <th>
+              <th pResizableColumn class="ui-resizable-column">
                 {{'binLocation.layer4.name'}}
               </th>
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.code"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.name"></app-advanced-filters>
               </th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-row let-index="index">
+          <ng-template pTemplate="body" let-rowData let-index="index">
             <tr>
-              <td>
-                {{row.code}}
+              <td class="ui-resizable-column">
+                {{rowData.code}}
               </td>
-              <td>
-                {{row.name}}
+              <td class="ui-resizable-column">
+                {{rowData.name}}
               </td>
             </tr>
           </ng-template>
@@ -167,3 +188,45 @@
 
   </div>
 </div>
+
+<p-dialog modal="true"
+          [(visible)]="modal"
+          appendTo="body">
+  <p-header>
+    {{'binLocation.modal.title' | translate}}
+  </p-header>
+
+  <div class="container" [formGroup]="binLocationForm">
+    <div class="row">
+      <div class="col">
+        <label for="bin-location-code">
+          {{'binLocation.code' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" class="form-control" formGroupName="code" id="bin-location-code">
+      </div>
+      <div class="col">
+        <label for="bin-location-name">
+          {{'binLocation.name' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" class="form-control" formGroupName="name" id="bin-location-name">
+      </div>
+    </div>
+  </div>
+
+  <p-footer class="d-flex">
+    <button class="btn btn-delete">
+      {{'general.button.delete' | translate}}
+    </button>
+
+    <div class="flex-grow-1">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="save()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
