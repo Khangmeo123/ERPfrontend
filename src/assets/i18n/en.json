@@ -152,6 +152,21 @@
 	"datePicker": {
 		"placeHolder": ""
 	},
+	"deliveryOrder": {
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"receiptedDate": "",
+			"status": ""
+		}
+	},
 	"department": {
 		"addToDepartment": {
 			"error": "",
@@ -528,6 +543,7 @@
 			"importFile": "",
 			"import_file": "",
 			"ok": "",
+			"post": "",
 			"print": "",
 			"receive": "",
 			"referenceDocument": "",
@@ -583,6 +599,101 @@
 		},
 		"sob": "",
 		"toDate": ""
+	},
+	"goodsReceipt": {
+		"createdDate": "",
+		"creator": "",
+		"description": "",
+		"documentNumber": "",
+		"header": {
+			"title": ""
+		},
+		"inventoryAddress": "",
+		"inventoryCode": "",
+		"receiptedDate": "",
+		"status": ""
+	},
+	"goodsReceiptDetail": {
+		"amount": {
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"quantity": "",
+			"quantitySaved": "",
+			"title ": "",
+			"unitOfMeasure": ""
+		},
+		"batches": {
+			"batchCode": "",
+			"expiryDate": "",
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"manufacturingDate": "",
+			"quantityInEachBatch": "",
+			"quantitySaved": "",
+			"startScanBatchesNo": "",
+			"title ": ""
+		},
+		"binLocation": "",
+		"button": {
+			"add": ""
+		},
+		"createdDate": "",
+		"creator": "",
+		"description": "",
+		"documentNumber": "",
+		"form": {
+			"post": {
+				"title": ""
+			},
+			"title": ""
+		},
+		"goodsReceipt": {
+			"buyer": "",
+			"createdDate": "",
+			"creator": "",
+			"documentNo": "",
+			"supplierName": ""
+		},
+		"header": {
+			"title": ""
+		},
+		"inventoryAddress": "",
+		"inventoryCode": "",
+		"personInCharge": "",
+		"qrCode": {
+			"code": "",
+			"expiryDate": "",
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"manufacturingDate": "",
+			"quantity": "",
+			"scanCode": "",
+			"scanQRCode": "",
+			"serial": "",
+			"title ": ""
+		},
+		"receiptedDate": "",
+		"receiver": "",
+		"tab1": {
+			"amount": "",
+			"batches": "",
+			"cda": "",
+			"discount": "",
+			"discountAmount": "",
+			"itemNo": "",
+			"purchaseOrderNumber": "",
+			"quantity": "",
+			"title": "",
+			"total": "",
+			"unitOfMeasure": "",
+			"valueAddedTax": ""
+		},
+		"tab2": {
+			"title": ""
+		}
 	},
 	"goodsReceiptPO": {
 		"createdDate": "",

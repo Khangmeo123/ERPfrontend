@@ -41,8 +41,8 @@ export class InputDiscussionComponent implements OnInit {
     @Input() InputClass: string = 'InputComment';
     @Input() TextBlockClass: string = '';
     @Input() Id: string = this.MakeRandomId();
-    @Input() BindingObject: any = { Content: '' };
-    @Input() PropertyToBindWithContent: string = 'Content';
+    @Input() BindingObject: any = { content: '' };
+    @Input() PropertyToBindWithContent: string = 'content';
     @Input() DisableWhenEnter: boolean = false;
     TopPopUp: number = 0;
     LeftPopUp: number = 0;

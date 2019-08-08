@@ -5,8 +5,9 @@ export class CommentEntity {
     postId: string = null;
     content: string = null;
     creatorId: string = null;
+    creatorName: string = null;
     time: string = null;
-    // userEntity: UserEntity = new UserEntity();
+    userEntity: UserEntity = new UserEntity();
     isEdit: boolean = false;
     disabled: boolean = false;
 

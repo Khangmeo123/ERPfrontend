@@ -17,13 +17,13 @@
     width: 65px;
 }
 .comment-box .media-body p {
-    border: 1px solid #d1d1d1;
-    padding: 10px;
+    /* border: 1px solid #d1d1d1; */
+    padding-left: 10px;
 }
 .comment-box .media-body .media p {
     margin-bottom: 0;
 }
-.comment-box .media-heading {
+/* .comment-box .media-heading {
     background-color: #f5f5f5;
     border: 1px solid #d1d1d1;
     position: relative;
@@ -43,11 +43,11 @@
     position: absolute;
     top: 10px;
     left: -6px;
-}
+} */
 
 * >>> .SearchWho {
     background-color: #fff;
-    color: #2A92D8 !important;
+    color: #007EE5 !important;
     cursor: default;
     display: inline;
 }
@@ -57,51 +57,49 @@
 }
 * >>> .AtWho {
     background-color: #fff;
-    color: #2A92D8 !important;
+    color: #007EE5 !important;
     cursor: default;
     display: inline;
     text-decoration: underline;
 }
 
 * >>> .InputPost{
+    padding-left: 10px;
     padding-top: 4px;
     padding-bottom: 4px;
     border-radius: 4px;
-    padding-left: 10px;
     outline:none;
-    min-height: 60px;
+    min-height: 38px;
     font-size: 12px;
-    margin: 16px;
     background-color: white;
-    border: solid 1px #199ED8;
-    min-height: 100px;
+    border: 1px solid #ced4da;
 }
 
 * >>> .InputComment{
     padding-bottom: 4px;
     border-radius: 4px;
-    padding-left: 10px;
+    padding: 8px;
     outline:none;
-    border: solid 1px #199ED8;
     margin-bottom: 10px;
     margin-top: 3px;
     background: white;
+    border: 1px solid #ced4da;
 }
 
 .InputDiscussion{
     margin-top: 10px;
 }
 
-.DisplayName{
-    color: #365899;
-    font-size: 14px;
+.display-name{
+    color: #007EE5;
+    font-size: 12px;
     padding-right: 20px;
 }
 
 .text-muted{
     margin-left: 10px;
     font-size: 9px !important ;
-    color: #0275d8 !important;
+    color: #3D464D !important;
 }
 
 .btn-comment{
@@ -121,12 +119,12 @@
 
 .SeeMore{
     cursor: default;
-    font-size: 9px;
-    color: #0275d8;
+    font-size: 12px;
+    color: #C7C7C7;
 }
 
 .btn-send{
-    background-color: #199ED8;
+    background-color: #007EE5;
     color : white;
 }
 
