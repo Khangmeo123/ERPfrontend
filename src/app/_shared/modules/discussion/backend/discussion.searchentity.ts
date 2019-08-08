@@ -1,13 +1,13 @@
 import { CommentEntity } from './Comment.Entity';
+import { SearchEntity } from 'src/app/_helpers/search-entity';
 
-export class SearchPostEntity {
+export class SearchPostEntity{
     id: string;
-    discussionId: string;
+    documentId: string;
     content: string;
-    userId: string;
-    createdDate: string;
-    updatedDate: string;
-    commentEntities: Array<CommentEntity>;
-    constructor(catalog: any = null) {
+    creatorId: string;
+    time: string;
+    comments: Array<CommentEntity>;
+    constructor(postSearchEntity: any = null) {
     }
 }

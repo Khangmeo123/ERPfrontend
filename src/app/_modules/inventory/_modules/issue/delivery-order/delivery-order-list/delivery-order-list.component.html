@@ -1,4 +1,4 @@
-<div class="page goods-receipt-po">
+ <div class="page delivery-order-list">
   <div class="page-header">
     <span class="page-title">
       {{pageTitle | translate}}
@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add" (click) = "addReturn()">
+      <button type="button" class="btn btn-labeled btn-add" (click) = "adddeliveryOrder()">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
@@ -42,11 +42,10 @@
           {{'general.button.getData' | translate}}</button>
       </div>
 
-      <p-table [value]="returnList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+      <p-table [value]="deliveryOrderList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
         [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
           <colgroup>
-            <col>
             <col>
             <col>
             <col>
@@ -60,82 +59,83 @@
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn data-qe-id="table-thead-created-date">
-              {{ 'return.list.createdDate' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
-            </th>
-            <th pResizableColumn data-qe-id="table-thead-receipt-requirement-id">
-              {{ 'return.list.receiptRequirementID' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
-            </th>
-            <th pResizableColumn data-qe-id="table-thead-receipted-date">
-              {{ 'return.list.receiptedDate' | translate}}
+              {{ 'deliveryOrder.list.createdDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-document-number">
-              {{ 'return.list.documentNumber' | translate}}
+              {{ 'deliveryOrder.list.documentNumber' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-inventory">
-              {{ 'return.list.inventory' | translate}}
+            <th pResizableColumn data-qe-id="table-thead-receipted-date">
+              {{ 'deliveryOrder.list.receiptedDate' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+           
+            <th pResizableColumn data-qe-id="table-thead-inventory-code">
+              {{ 'deliveryOrder.list.inventoryCode' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-inventory-address">
+              {{ 'deliveryOrder.list.inventoryAddress' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-description">
-              {{ 'return.list.description' | translate}}
+              {{ 'deliveryOrder.list.description' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-creator">
-              {{ 'return.list.creator' | translate}}
+              {{ 'deliveryOrder.list.creator' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-status">
-              {{ 'return.list.status' | translate}}
+              {{ 'deliveryOrder.list.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
             <!-- <th class="th-filter">
-                <app-advanced-filters [filter]="return.listSearchEntity.code" (changeFilter)="getList()"
+                <app-advanced-filters [filter]="deliveryOrder.listSearchEntity.code" (changeFilter)="getList()"
                     data-qe-id="table-thead-filter-code">
                 </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-advanced-filters [filter]="return.listSearchEntity.name" (changeFilter)="getList()"
+                <app-advanced-filters [filter]="deliveryOrder.listSearchEntity.name" (changeFilter)="getList()"
                     data-qe-id="table-thead-filter-name">
                 </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="return.listTypes"
-                    [initialValue]="return.listSearchEntity.typeId"
-                    (selectionChange)="return.listSearchEntity.typeId = $event; getList()"
-                    (listOpen)="openreturn.listTypes($event)">
+                <app-simple-select [key]="'name'" [list]="deliveryOrder.listTypes"
+                    [initialValue]="deliveryOrder.listSearchEntity.typeId"
+                    (selectionChange)="deliveryOrder.listSearchEntity.typeId = $event; getList()"
+                    (listOpen)="opendeliveryOrder.listTypes($event)">
                 </app-simple-select>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="return.listStatuses"
-                    [initialValue]="return.listSearchEntity.typeId"
-                    (selectionChange)="return.listSearchEntity.statusId = $event; getList()"
-                    (listOpen)="openreturn.listStatuses($event)">
+                <app-simple-select [key]="'name'" [list]="deliveryOrder.listStatuses"
+                    [initialValue]="deliveryOrder.listSearchEntity.typeId"
+                    (selectionChange)="deliveryOrder.listSearchEntity.statusId = $event; getList()"
+                    (listOpen)="opendeliveryOrder.listStatuses($event)">
                 </app-simple-select>
             </th> -->
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-return let-index="rowIndex">
+        <ng-template pTemplate="body" let-deliveryOrder let-index="rowIndex">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td>  </td>
-            <td>  </td>
             <td> </td>
             <td> </td>
             <td> </td>
-            <td> {{return.description }} </td>
-            <td> {{return.creator }} </td>
-            <td> {{return.status }} </td>
+            <td> </td>
+            <td> </td>
+            <td> {{deliveryOrder.description }} </td>
+            <td> {{deliveryOrder.creator }} </td>
+            <td> {{deliveryOrder.status }} </td>
             <td>
               <div class="d-flex">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click) = "editReturn()">
+                <div class="edit" (click) = "editdeliveryOrder()">
                   <mat-icon>edit</mat-icon>
                 </div>
 

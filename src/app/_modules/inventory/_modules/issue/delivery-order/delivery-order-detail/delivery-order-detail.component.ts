@@ -3,13 +3,13 @@ import { translate } from 'src/app/_helpers/string';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-return-detail',
+  selector: 'app-delivery-order-detail',
   templateUrl: './delivery-order-detail.component.html',
   styleUrls: ['./delivery-order-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
 export class DeliveryOrderDetailComponent implements OnInit {
-  pageTitle = translate('return.detail.header.title');
+  pageTitle = translate('deliveryOrder.detail.header.title');
   fileNameList: Array<any> = []
   tableTemp = [
     {
@@ -29,7 +29,7 @@ export class DeliveryOrderDetailComponent implements OnInit {
   displayBatches: boolean = false;
   displayCDA: boolean = false;
   displayAmount: boolean = false;
-  displayReturn: boolean = false;
+  displaydeliveryOrder: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -55,11 +55,11 @@ export class DeliveryOrderDetailComponent implements OnInit {
     this.displayAmount = true;
   }
 
-  showReturn() {
-    this.displayReturn = true;
+  showdeliveryOrder() {
+    this.displaydeliveryOrder = true;
   }
 
   backToList() {
-    this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
+    this.router.navigate(['/inventory/issue/delivery-order/delivery-order-list']);
   }
 }

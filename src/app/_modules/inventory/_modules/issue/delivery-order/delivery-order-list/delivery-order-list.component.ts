@@ -3,13 +3,13 @@ import {translate} from '../../../../../../_helpers/string';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-return-list',
+  selector: 'app-delivery-order-list',
   templateUrl: './delivery-order-list.component.html',
   styleUrls: ['./delivery-order-list.component.scss']
 })
 export class DeliveryOrderListComponent implements OnInit {
-  pageTitle = translate('return.list.header.title')
-  returnList = [
+  pageTitle = translate('deliveryOrder.list.header.title')
+  deliveryOrderList = [
     {
       name: 'Nguyen Van A',
       createDate: '20/11/2019',
@@ -43,12 +43,12 @@ export class DeliveryOrderListComponent implements OnInit {
 
   }
 
-  editReturn() {
-    this.router.navigate(['inventory/receipt/return/return-detail']);
+  editdeliveryOrder() {
+    this.router.navigate(['inventory/issue/delivery-order/delivery-order-detail']);
   }
 
-  addReturn() {
-    this.router.navigate(['inventory/receipt/return/return-detail']);
+  adddeliveryOrder() {
+    this.router.navigate(['inventory/issue/deliveryOrder/delivery-order-detail']);
   }
 
 }
