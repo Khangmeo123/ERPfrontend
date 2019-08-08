@@ -7,7 +7,7 @@
     },
     "modal": {
       "label": "Thêm kỳ kế toán",
-      "title": ""
+      "title": "Kỳ kế toán"
     },
     "startPeriod": "Ngày bắt đầu",
     "status": {
@@ -195,7 +195,7 @@
       "success": "Thêm phòng ban thành công"
     },
     "asset": {
-      "actions": "",
+      "actions": "Thao tác",
       "add": "Thông tin tài sản",
       "code": "Mã tài sản",
       "fromDate": "Quản lý từ ngày",
@@ -292,7 +292,7 @@
       "title": "Tài khoản ngân hàng"
     },
     "contacts": {
-      "action": "",
+      "action": "Thao tác",
       "add": "Thêm thông tin liên hệ",
       "address": "Địa chỉ",
       "code": "STT",
@@ -400,7 +400,7 @@
   "division": {
     "content": {
       "address": "Địa chỉ",
-      "code": "mã chi nhánh",
+      "code": "Mã chi nhánh",
       "name": "Tên chi nhánh"
     },
     "dialog": {
@@ -461,8 +461,8 @@
   "employeeDetail": {
     "delete": {
       "confirm": {
-        "message": "",
-        "title": ""
+        "message": "Bạn chắc chắn muốn xóa?",
+        "title": "Xác nhận xóa"
       }
     }
   },
@@ -514,7 +514,7 @@
     "taxCode": "Mã số thuế"
   },
   "employeeGroup": {
-    "add": "",
+    "add": "Thêm",
     "code": "Mã nhóm",
     "employee": {
       "code": "Mã nhân viên",
@@ -539,7 +539,7 @@
   },
   "employeePosition": {
     "header": {
-      "title": ""
+      "title": "Quản lý nhóm nhân viên"
     }
   },
   "environmentTax": {
@@ -597,15 +597,15 @@
     },
     "department": {
       "delete": {
-        "message": "",
-        "title": ""
+        "message": "Bạn chắc chắn muốn xóa?",
+        "title": "Xác nhận xóa"
       }
     },
     "detail": "Chi tiết",
     "division": "Tên chi nhánh",
     "error": {
       "direction": "",
-      "fileImport": ""
+      "fileImport": "Lỗi nhập file"
     },
     "gender": {
       "female": "Nữ",
@@ -619,17 +619,17 @@
     },
     "project": {
       "delete": {
-        "message": "",
-        "title": ""
+        "message": "Bạn chắc chắn muốn xóa?",
+        "title": "Xác nhận xóa"
       }
     },
     "service": {
       "save": {
-        "success": ""
+        "success": "Thành công"
       },
       "update": {
-        "getFailed": "",
-        "success": ""
+        "getFailed": "Cập nhật thất bại",
+        "success": "Cập nhật thành công"
       }
     },
     "sob": "Số bộ sổ",
