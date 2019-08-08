@@ -15,7 +15,7 @@ import { BinLocationEntity } from '../../../../_backend/bin-location/bin-locatio
 export class BinLocationRepository extends Repository {
   constructor(http?: HttpClient) {
     super(http);
-    this.apiUrl = `${environment.apiUrlApps}/master-data/legal-entity/bin-location`;
+    this.apiUrl = `${environment.apiUrlApps}master-data/legal-entity/bin-location`;
   }
 
   getUrl(url: string) {
