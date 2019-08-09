@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CodeFormularComponent } from './code-formular.component';
+import { CodeFormulaComponent } from './code-formula.component';
 
-describe('CodeFormularComponent', () => {
-  let component: CodeFormularComponent;
-  let fixture: ComponentFixture<CodeFormularComponent>;
+describe('CodeFormulaComponent', () => {
+  let component: CodeFormulaComponent;
+  let fixture: ComponentFixture<CodeFormulaComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodeFormularComponent ],
+      declarations: [ CodeFormulaComponent ],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CodeFormularComponent);
+    fixture = TestBed.createComponent(CodeFormulaComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,10 +3,12 @@ import {BinLocationRepository} from './bin-location.repository';
 import {BehaviorSubject} from 'rxjs';
 import {LegalSearchEntity} from '../../../../_backend/legal/legal.searchentity';
 import {Entities} from '../../../../../../_helpers/entity';
-import {BinLocationSearchEntity} from '../../../../_backend/bin-location/bin-location.search-entity';
-import {BinLocationEntity} from '../../../../_backend/bin-location/bin-location.entity';
+import {BinLocationFieldSearchEntity, BinLocationSearchEntity} from '../../../../_backend/bin-location/bin-location.search-entity';
+import {BinLocationEntity, BinLocationFieldEntity} from '../../../../_backend/bin-location/bin-location.entity';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {BinLocationForm} from '../../../../_backend/bin-location/bin-location.form';
+import {ToastrService} from 'ngx-toastr';
+import {translate} from '../../../../../../_helpers/string';
 
 @Injectable({
   providedIn: 'root',
@@ -25,7 +27,11 @@ export class BinLocationService {
 
   public binLocationForm: BehaviorSubject<FormGroup>;
 
-  constructor(private binLocationRepository: BinLocationRepository, private fb: FormBuilder) {
+  public binLocationFieldEntity: BehaviorSubject<BinLocationFieldEntity> = new BehaviorSubject(new BinLocationFieldEntity());
+
+  public level: number;
+
+  constructor(private binLocationRepository: BinLocationRepository, private fb: FormBuilder, private toastrService: ToastrService) {
     this.binLocationForm = new BehaviorSubject<FormGroup>(
       this.fb.group(
         new BinLocationForm(),
@@ -108,16 +114,6 @@ export class BinLocationService {
     });
   }
 
-  updateSubLevelEntity(level: number, binLocationEntity: BinLocationEntity): Promise<BinLocationEntity> {
-    return new Promise<BinLocationEntity>((resolve, reject) => {
-      return this.binLocationRepository.updateSubLevelEntity(level, binLocationEntity)
-        .subscribe(
-          (responseEntity: BinLocationEntity) => resolve(responseEntity),
-          (error: Error) => reject(error),
-        );
-    });
-  }
-
   resetForm() {
     this.binLocationForm.next(
       this.fb.group(
@@ -126,19 +122,76 @@ export class BinLocationService {
     );
   }
 
-  add() {
+  add(level: number) {
     this.resetForm();
+    this.level = level;
   }
 
   cancel() {
     this.resetForm();
+    this.level = null;
   }
 
-  edit(binLocationEntity: BinLocationEntity) {
+  edit(binLocationEntity: BinLocationEntity, level: number) {
     this.binLocationForm.next(
       this.fb.group(
         new BinLocationForm(binLocationEntity),
       ),
     );
+    this.level = level;
+  }
+
+  save(binLocationEntity: BinLocationEntity, binLocationSearchEntity: BinLocationSearchEntity): Promise<BinLocationEntity> {
+    return new Promise<BinLocationEntity>((resolve, reject) => {
+      return (
+        binLocationEntity.id
+          ? this.binLocationRepository.updateSubLevelEntity(this.level, binLocationEntity)
+          : this.binLocationRepository.createSubLevelEntity(this.level, binLocationEntity)
+      )
+        .subscribe(
+          (entity: BinLocationEntity) => {
+            this.toastrService.success(translate('binLocation.update.success'));
+            this[`getSubLevel${this.level}List`](binLocationSearchEntity);
+            resolve(entity);
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('binLocation.update.error'));
+            reject(error);
+          },
+        );
+    });
+  }
+
+  delete(binLocationEntity: BinLocationEntity, binLocationSearchEntity: BinLocationSearchEntity): Promise<BinLocationEntity> {
+    return new Promise<BinLocationEntity>((resolve, reject) => {
+      return this.binLocationRepository.deleteSubLevelEntity(this.level, binLocationEntity)
+        .subscribe(
+          (entity: BinLocationEntity) => {
+            this.toastrService.success(translate('binLocation.update.success'));
+            this[`getSubLevel${this.level}List`](binLocationSearchEntity);
+            resolve(entity);
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('binLocation.update.error'));
+            reject(error);
+          },
+        );
+    });
+  }
+
+  getBinLocationFieldEntity(binLocationFieldSearchEntity: BinLocationFieldSearchEntity): Promise<BinLocationFieldEntity> {
+    return new Promise<BinLocationFieldEntity>((resolve, reject) => {
+      return this.binLocationRepository.getBinLocationFieldEntity(binLocationFieldSearchEntity)
+        .subscribe(
+          (binLocationFieldEntity: BinLocationFieldEntity) => {
+            this.binLocationFieldEntity.next(binLocationFieldEntity);
+            resolve(binLocationFieldEntity);
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('binLocation.getFieldEntity.error'));
+            reject(error);
+          },
+        );
+    });
   }
 }

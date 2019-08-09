@@ -16,8 +16,8 @@ import { LegalItemDetailComponent } from './_page/item-detail/item-detail.compon
 import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { ItemOfLegalEntityComponent } from './_page/item-of-legal-entity/item-of-legal-entity.component';
 import { BinLocationComponent } from './_page/bin-location/bin-location.component';
-import { CodeFormularComponent } from './_page/code-formular/code-formular.component';
-import { CodeFormulaDetailComponent } from './_page/code-formular/code-formula-detail/code-formula-detail.component';
+import { CodeFormulaComponent } from './_page/code-formula/code-formula.component';
+import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-detail/code-formula-detail.component';
 
 const routes: Routes = [
   {
@@ -111,7 +111,7 @@ const routes: Routes = [
         children: [
           {
             path: 'code-formula/code-formula-list',
-            component: CodeFormularComponent,
+            component: CodeFormulaComponent,
           },
           {
             path: 'code-formula/code-formula-detail',

@@ -6,8 +6,8 @@ import {Observable} from 'rxjs';
 import {environment} from '../../../../../../../environments/environment';
 import {Entities} from '../../../../../../_helpers/entity';
 import {map} from 'rxjs/operators';
-import {BinLocationSearchEntity} from '../../../../_backend/bin-location/bin-location.search-entity';
-import {BinLocationEntity} from '../../../../_backend/bin-location/bin-location.entity';
+import {BinLocationFieldSearchEntity, BinLocationSearchEntity} from '../../../../_backend/bin-location/bin-location.search-entity';
+import {BinLocationEntity, BinLocationFieldEntity} from '../../../../_backend/bin-location/bin-location.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -92,6 +92,20 @@ export class BinLocationRepository extends Repository {
       );
   }
 
+  createSubLevelEntity(level: number, binLocationEntity: BinLocationEntity): Observable<BinLocationEntity> {
+    return this.http.post<BinLocationEntity>(
+      this.getUrl(`create-sub-level-${level}`),
+      binLocationEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<BinLocationEntity>) => response.body),
+      );
+  }
+
   updateSubLevelEntity(level: number, binLocationEntity: BinLocationEntity): Observable<BinLocationEntity> {
     return this.http.post<BinLocationEntity>(
       this.getUrl(`update-sub-level-${level}`),
@@ -103,6 +117,34 @@ export class BinLocationRepository extends Repository {
     )
       .pipe(
         map((response: HttpResponse<BinLocationEntity>) => response.body),
+      );
+  }
+
+  deleteSubLevelEntity(level: number, binLocationEntity: BinLocationEntity): Observable<BinLocationEntity> {
+    return this.http.post<BinLocationEntity>(
+      this.getUrl(`delete-sub-level-${level}`),
+      binLocationEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<BinLocationEntity>) => response.body),
+      );
+  }
+
+  getBinLocationFieldEntity(binLocationFieldSearchEntity: BinLocationFieldSearchEntity): Observable<BinLocationFieldEntity> {
+    return this.http.post<BinLocationFieldEntity>(
+      this.getUrl('get-field'),
+      binLocationFieldSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<BinLocationFieldEntity>) => response.body),
       );
   }
 }

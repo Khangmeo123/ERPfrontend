@@ -2,11 +2,12 @@ import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulatio
 import {BinLocationService} from './bin-location.service';
 import {LegalEntity} from '../../../../_backend/legal/legal.entity';
 import {Subscription} from 'rxjs';
-import {BinLocationEntity} from '../../../../_backend/bin-location/bin-location.entity';
+import {BinLocationEntity, BinLocationFieldEntity} from '../../../../_backend/bin-location/bin-location.entity';
 import {Entities} from '../../../../../../_helpers/entity';
 import {LegalSearchEntity} from '../../../../_backend/legal/legal.searchentity';
 import {BinLocationSearchEntity} from '../../../../_backend/bin-location/bin-location.search-entity';
-import {FormGroup} from '@angular/forms';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
 
 @Component({
   selector: 'app-bin-location',
@@ -14,6 +15,7 @@ import {FormGroup} from '@angular/forms';
   styleUrls: ['./bin-location.component.scss'],
   providers: [
     BinLocationService,
+    GeneralService,
   ],
   encapsulation: ViewEncapsulation.None,
 })
@@ -49,7 +51,9 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
 
   public binLocationForm: FormGroup;
 
-  constructor(private binLocationService: BinLocationService) {
+  public binLocationFieldEntity: BinLocationFieldEntity = null;
+
+  constructor(private binLocationService: BinLocationService, private generalService: GeneralService) {
 
     const legalEntitySub: Subscription = this.binLocationService.legalEntityList.subscribe((entities: Entities) => {
       this.legalEntityList = entities.exceptIds;
@@ -76,24 +80,44 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
       this.binLocationForm = form;
     });
 
+    const binLocationFieldSub: Subscription = this.binLocationService.binLocationFieldEntity
+      .subscribe((binLocationFieldEntity: BinLocationFieldEntity) => {
+        this.binLocationFieldEntity = binLocationFieldEntity;
+      });
+
     this.subscription
       .add(legalEntitySub)
       .add(level1Sub)
       .add(level2Sub)
       .add(level3Sub)
       .add(level4Sub)
-      .add(binLocationFormSub);
+      .add(binLocationFormSub)
+      .add(binLocationFieldSub);
+  }
+
+  get code() {
+    return this.binLocationForm.get('code') as FormControl;
+  }
+
+  get name() {
+    return this.binLocationForm.get('name') as FormControl;
+  }
+
+  get errors() {
+    return this.binLocationForm.get('errors') as FormControl;
   }
 
   public legalEntitySelector = node => node;
 
-  ngOnInit(): void {
-    this.getLegalEntityList()
-      .then(() => {
-        if (this.legalEntityList.length) {
-          this.selectLegalEntity(this.legalEntityList[0]);
-        }
-      });
+  async ngOnInit() {
+    await this.getLegalEntityList();
+    if (this.legalEntityList.length) {
+      const legalEntity: LegalEntity = this.legalEntityList[0];
+      const binLocationFieldSearchEntity: BinLocationSearchEntity = new BinLocationSearchEntity();
+      binLocationFieldSearchEntity.legalEntityId = legalEntity.id;
+      await this.binLocationService.getBinLocationFieldEntity(binLocationFieldSearchEntity);
+      this.selectLegalEntity(legalEntity);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -146,12 +170,6 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
     }
   }
 
-  async onChangeRowData(event, level: number, rowData: BinLocationEntity) {
-    if (event.key === 'Enter') {
-      this.binLocationService.updateSubLevelEntity(level, rowData);
-    }
-  }
-
   openModal() {
     this.modal = true;
   }
@@ -160,13 +178,13 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
     this.modal = false;
   }
 
-  add() {
-    this.binLocationService.add();
+  add(level: number) {
+    this.binLocationService.add(level);
     this.openModal();
   }
 
-  edit(binLocationEntity: BinLocationEntity) {
-    this.binLocationService.edit(binLocationEntity);
+  edit(binLocationEntity: BinLocationEntity, level: number) {
+    this.binLocationService.edit(binLocationEntity, level);
     this.openModal();
   }
 
@@ -176,6 +194,18 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   save() {
+    if (this.binLocationForm.invalid) {
+      this.generalService.validateAllFormFields(this.binLocationForm);
+    }
+    if (this.binLocationForm.valid) {
+      return this.binLocationService.save(this.binLocationForm.value, this[`level${this.binLocationService.level}SearchEntity`]);
+    }
+  }
 
+  delete(binLocationEntity: BinLocationEntity) {
+    this.binLocationService.delete(binLocationEntity, this[`level${this.binLocationService.level}SearchEntity`])
+      .then(() => {
+        this.closeModal();
+      });
   }
 }
