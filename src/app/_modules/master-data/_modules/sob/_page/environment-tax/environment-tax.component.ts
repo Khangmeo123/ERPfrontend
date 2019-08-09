@@ -164,11 +164,19 @@ export class EnvironmentTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.environmentTaxSearchEntity.setOfBookId = setOfBookId;
-    this.environmentTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.environmentTaxSearchEntity.setOfBookId = setOfBookId;
+      this.environmentTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.environmentTaxService.getSobList(this.sobSearchEntity);
   }
 
   getList() {

@@ -62,7 +62,7 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="codeFormulaSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" [filter]="codeFormulaSearchEntity.code"
                                     (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter">
@@ -78,7 +78,7 @@
                                     (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="codeFormulaSearchEntity.identifierStringValues"
+              <app-advanced-filters defaultType="contains" [filter]="codeFormulaSearchEntity.identifierStringValues"
                                     (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter code-formula-actions"></th>

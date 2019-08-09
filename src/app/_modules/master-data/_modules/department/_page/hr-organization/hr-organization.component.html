@@ -26,11 +26,13 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getList()" [filter]="hrOrganizationSearchEntity.code">
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                        [filter]="hrOrganizationSearchEntity.code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getList()" [filter]="hrOrganizationSearchEntity.name">
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                        [filter]="hrOrganizationSearchEntity.name">
                   </app-advanced-filters>
                 </th>
               </tr>
@@ -142,11 +144,13 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getEmployeeList()" [filter]="employeeSearchEntity.code">
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getEmployeeList()"
+                                        [filter]="employeeSearchEntity.code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getEmployeeList()" [filter]="employeeSearchEntity.code">
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getEmployeeList()"
+                                        [filter]="employeeSearchEntity.code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>

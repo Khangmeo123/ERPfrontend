@@ -22,6 +22,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -54,27 +55,33 @@
         </tr>
         <tr>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.accountingCode"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.accountingCode"
                                   data-qe-id="filter-accountingCode"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.bankCode"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.bankCode"
                                   data-qe-id="filter-bankCode"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.bankName"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.bankName"
                                   data-qe-id="filter-bankName"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.no"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.no"
                                   data-qe-id="filter-no"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.name"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.name"
                                   data-qe-id="filter-name"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.description"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.description"
                                   data-qe-id="filter-description"></app-advanced-filters>
           </th>
         </tr>
@@ -119,7 +126,7 @@
           {{'bankAccount.bankAccounts.accounting_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <div class="div-form d-flex">
+        <div class="div-form d-flex" id="chart-of-account">
           <app-single-select (listOpen)="getCoaList()"
                              id="chart-of-account"
                              (selectionChange)="chartOfAccountId.setValue($event[0])"
@@ -143,7 +150,7 @@
           {{'bankAccount.bankAccounts.bank_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <div class="div-form">
+        <div class="div-form" id="bank-code">
           <app-single-select [list]="bankList"
                              id="bank-code"
                              class="flex-grow-1"

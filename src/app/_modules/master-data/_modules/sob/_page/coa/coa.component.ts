@@ -166,11 +166,14 @@ export class CoaComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.coaSearchEntity.setOfBookId = setOfBookId;
-    this.coaForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event.length) {
+      const [setOfBookId] = event;
+      this.coaSearchEntity.setOfBookId = setOfBookId;
+      this.coaForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
   }
 
   getList() {
@@ -178,6 +181,9 @@ export class CoaComponent implements OnInit {
   }
 
   getSobList() {
+    const ids = this.sobSearchEntity.ids;
+    this.sobSearchEntity = new SobSearchEntity();
+    this.sobSearchEntity.ids = ids;
     this.coaService.getSobList(this.sobSearchEntity);
   }
 
@@ -246,5 +252,10 @@ export class CoaComponent implements OnInit {
   onFilterCharacteristic(event) {
     this.coaSearchEntity.characteristicId = event;
     this.getList();
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.coaService.getSobList(this.sobSearchEntity);
   }
 }

@@ -164,11 +164,19 @@ export class ImportTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.importTaxSearchEntity.setOfBookId = setOfBookId;
-    this.importTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.importTaxSearchEntity.setOfBookId = setOfBookId;
+      this.importTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.importTaxService.getSobList(this.sobSearchEntity);
   }
 
   getList() {

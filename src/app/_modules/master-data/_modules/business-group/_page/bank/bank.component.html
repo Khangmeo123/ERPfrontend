@@ -1,160 +1,167 @@
 <div class="page bank-list">
-    <div class="page-header">
+  <div class="page-header">
         <span class="page-title">
             {{ pageTitle | translate}}
-            <span (click)="bookMark()">
+          <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
-        <div class="page-actions">
-            <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
-                {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-import">
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                    aria-controls="dropdown-basic">
-                    {{'general.button.import' | translate}}<span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><button class="dropdown-item"
-                            (click)="file.click()">{{'general.button.importFile' | translate}}</button></li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item" target="_blank"
-                            [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
-                    </li>
-                </ul>
-                <input type="file" accept=".xlsx" (click)="file.value = null" (change)="importTemplate(file.files)"
-                    #file hidden>
-            </div>
-            <a class="btn btn-export" data-qe-id="button-export" target="_blank"
-                [href]="exportLink">{{'general.button.export' | translate}}</a>
-            <button class="btn btn-clear" (click)="clearSearch(table)"
-                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
-        </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
+        {{'general.button.add' | translate}}</button>
+      <div class="btn-group" dropdown data-qe-id="button-import">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                aria-controls="dropdown-basic">
+          {{'general.button.import' | translate}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem">
+            <button class="dropdown-item"
+                    (click)="file.click()">{{'general.button.importFile' | translate}}</button>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank"
+                                 [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
+          </li>
+        </ul>
+        <input type="file" accept=".xlsx" (click)="file.value = null" (change)="importTemplate(file.files)"
+               #file hidden>
+      </div>
+      <a class="btn btn-export" data-qe-id="button-export" target="_blank"
+         [href]="exportLink">{{'general.button.export' | translate}}</a>
+      <button class="btn btn-clear" (click)="clearSearch(table)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
-    <hr>
-    <div class="page-body">
-        <div class="page-section list">
-            <p-table [value]="bankList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
-                <ng-template pTemplate="colgroup">
-                    <colgroup>
-                        <col>
-                        <col>
-                        <col>
-                    </colgroup>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'bank.content.code' | translate}}
-                            <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'bank.content.name' | translate}}
-                            <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'bank.content.description' | translate}}
-                            <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="bankSearchEntity.code" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-code">
-                            </app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="bankSearchEntity.name" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-name">
-                            </app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="bankSearchEntity.description" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-description"></app-advanced-filters>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-bank let-index="rowIndex">
-                    <tr (dblclick)="edit(bank.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td> {{bank.code}} </td>
-                        <td> {{bank.name}} </td>
-                        <td> {{bank.description}} </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-        <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
-            </app-pagination>
-        </div>
+  </div>
+  <hr>
+  <div class="page-body">
+    <div class="page-section list">
+      <p-table [value]="bankList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
+              {{ 'bank.content.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
+              {{ 'bank.content.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
+              {{ 'bank.content.description' | translate}}
+              <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
+            </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters
+                defaultType="startsWith"
+                [filter]="bankSearchEntity.code" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-code">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters
+                defaultType="startsWith"
+                [filter]="bankSearchEntity.name" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-name">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith"
+                                    [filter]="bankSearchEntity.description" (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-description"></app-advanced-filters>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-bank let-index="rowIndex">
+          <tr (dblclick)="edit(bank.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{bank.code}} </td>
+            <td> {{bank.name}} </td>
+            <td> {{bank.description}} </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
+    <div class="pagination">
+      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+      </app-pagination>
+    </div>
+  </div>
 </div>
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
-    [style]="{width: '900px'}">
-    <p-header>
-        {{ 'bank.dialog.title' | translate}}
-    </p-header>
-    <div class="container" [formGroup]="bankForm">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="bankCode">{{ 'bank.content.code' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-                            id="bankCode" />
-                        <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(bankForm.controls.code?.errors && bankForm.controls.code?.touched) || !!bankForm.controls.errors.get('code')?.value"
-                            [formGroup]="bankForm" [property]="'code'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="bankName">{{ 'bank.content.name' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-                            id="bankName" />
-                        <app-error data-qe-id="dialog-error-name"
-                            *ngIf="(bankForm.controls.name?.errors && bankForm.controls.name?.touched) || !!bankForm.controls.errors.get('name')?.value"
-                            [formGroup]="bankForm" [property]="'name'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div>
-            </div>
+          [style]="{width: '900px'}">
+  <p-header>
+    {{ 'bank.dialog.title' | translate}}
+  </p-header>
+  <div class="container" [formGroup]="bankForm">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bankCode">{{ 'bank.content.code' | translate}}<span
+            class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
+                   id="bankCode"/>
+            <app-error data-qe-id="dialog-error-code"
+                       *ngIf="(bankForm.controls.code?.errors && bankForm.controls.code?.touched) || !!bankForm.controls.errors.get('code')?.value"
+                       [formGroup]="bankForm" [property]="'code'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="bankDescription">{{ 'bank.content.description' | translate}}</label>
-                    <textarea class="form-control" rows="4" formControlName="description"
-                        data-qe-id="dialog-form-description" id="bankDescription">
-                     </textarea>
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bankName">{{ 'bank.content.name' | translate}}<span
+            class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
+                   id="bankName"/>
+            <app-error data-qe-id="dialog-error-name"
+                       *ngIf="(bankForm.controls.name?.errors && bankForm.controls.name?.touched) || !!bankForm.controls.errors.get('name')?.value"
+                       [formGroup]="bankForm" [property]="'name'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
+      </div>
     </div>
-    <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions">
-                    <div class="page-actions">
-                        <button class="btn btn-save" appNoDblClick (click)="save()" data-qe-id="dialog-button-save">
-                            {{ 'general.button.save' | translate}}</button>
-                        <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
-                            (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
-                        <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                            data-qe-id="dialog-button-delete" *ngIf="bankForm.value?.isDeleted"
-                            [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
-                            {{ 'general.button.delete' | translate}}</button>
-                    </div>
-                </div>
-            </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="bankDescription">{{ 'bank.content.description' | translate}}</label>
+          <textarea class="form-control" rows="4" formControlName="description"
+                    data-qe-id="dialog-form-description" id="bankDescription">
+                     </textarea>
         </div>
-    </p-footer>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions">
+          <div class="page-actions">
+            <button class="btn btn-save" appNoDblClick (click)="save()" data-qe-id="dialog-button-save">
+              {{ 'general.button.save' | translate}}</button>
+            <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+                    (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
+            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                    data-qe-id="dialog-button-delete" *ngIf="bankForm.value?.isDeleted"
+                    [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
+              {{ 'general.button.delete' | translate}}</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>

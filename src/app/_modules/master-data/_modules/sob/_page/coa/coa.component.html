@@ -22,6 +22,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -53,11 +54,11 @@
           </tr>
           <tr class="th-filter">
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="coaSearchEntity.code"
                                     data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="coaSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
@@ -70,7 +71,8 @@
               ></app-simple-select>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.description"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="coaSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
           </tr>

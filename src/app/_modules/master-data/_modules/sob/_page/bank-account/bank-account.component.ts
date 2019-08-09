@@ -1,20 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../_helpers/entity';
-import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
-import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-account.searchentity';
-import { BankAccountService } from './bank-account.service';
-import { ChartOfAccountEntity } from '../../../../_backend/chart-of-account/chart-of-account.entity';
-import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
-import { ToastrService } from 'ngx-toastr';
-import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { BankEntity } from '../../../../_backend/bank/bank.entity';
-import { BankSearchEntity } from '../../../../_backend/bank/bank.searchentity';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../_helpers/entity';
+import {BankAccountEntity} from '../../../../_backend/bank-account/bank-account.entity';
+import {BankAccountSearchEntity} from '../../../../_backend/bank-account/bank-account.searchentity';
+import {BankAccountService} from './bank-account.service';
+import {ChartOfAccountEntity} from '../../../../_backend/chart-of-account/chart-of-account.entity';
+import {ChartOfAccountSearchEntity} from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
+import {ToastrService} from 'ngx-toastr';
+import {CoaSearchEntity} from '../../../../_backend/coa/coa.searchentity';
+import {BankEntity} from '../../../../_backend/bank/bank.entity';
+import {BankSearchEntity} from '../../../../_backend/bank/bank.searchentity';
 
 @Component({
   selector: 'app-bank-account',
@@ -171,12 +171,16 @@ export class BankAccountComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.bankAccountSearchEntity.setOfBookId = setOfBookId;
-    this.bankAccountForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.coaSearchEntity.setOfBookId = setOfBookId;
-    this.getList();
+    if (event.length) {
+      const [setOfBookId] = event;
+      this.bankAccountSearchEntity.setOfBookId = setOfBookId;
+      this.bankAccountForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.coaSearchEntity.setOfBookId = setOfBookId;
+      this.getList();
+    } else {
+      this.selectedSobList = [];
+    }
   }
 
   getList() {
@@ -184,6 +188,12 @@ export class BankAccountComponent implements OnInit {
   }
 
   getSobList() {
+    this.sobSearchEntity = new SobSearchEntity();
+    if (this.selectedSobList.length) {
+      this.sobSearchEntity.ids = [
+        this.selectedSobList[0].id,
+      ];
+    }
     this.bankAccountService.getSobList(this.sobSearchEntity);
   }
 
@@ -268,5 +278,10 @@ export class BankAccountComponent implements OnInit {
   onSearchBankList(event) {
     this.bankSearchEntity.code.startsWith = event;
     this.bankAccountService.getBankList(this.bankSearchEntity);
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.bankAccountService.getSobList(this.sobSearchEntity);
   }
 }

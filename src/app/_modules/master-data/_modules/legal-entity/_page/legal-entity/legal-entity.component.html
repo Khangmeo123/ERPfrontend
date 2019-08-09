@@ -10,10 +10,10 @@
     </span>
     <div class="page-actions">
       <button [disabled]="legalSearchEntity.setOfBookId == undefined" class="btn btn-add" (click)="add()"
-        data-qe-id="button-add"> +
+              data-qe-id="button-add"> +
         {{'general.button.add' | translate}}</button>
       <button class="btn btn-clear" (click)="clearSearch(table)"
-        data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
   </div>
   <hr>
@@ -23,12 +23,12 @@
         {{'general.sob' | translate}}
       </span>
       <app-single-select data-qe-id="form-select-sob" [list]="sobExceptIds" [selectedList]="sobIds" [key]="'name'"
-        (search)="sobSearch($event)" (selectionChange)="selectSob($event)"
-        (listOpen)="openSobList(legalSearchEntity.setOfBookId)"></app-single-select>
+                         (search)="sobSearch($event)" (selectionChange)="selectSob($event)"
+                         (listOpen)="openSobList(legalSearchEntity.setOfBookId)"></app-single-select>
     </div>
     <div class="page-section mt-2">
       <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
-        scrollHeight="500px" [resizableColumns]="true" #table>
+               scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
           <colgroup>
             <col>
@@ -46,24 +46,66 @@
               {{'legalEntity.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
+            <th pResizableColumn [pSortableColumn]="'subLevel1'" data-qe-id="table-thead-subLevel1">
+              {{'legalEntity.subLevel1' | translate}}
+              <p-sortIcon [field]="'subLevel1'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn [pSortableColumn]="'subLevel2'" data-qe-id="table-thead-subLevel2">
+              {{'legalEntity.subLevel2' | translate}}
+              <p-sortIcon [field]="'subLevel2'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn [pSortableColumn]="'subLevel3'" data-qe-id="table-thead-subLevel3">
+              {{'legalEntity.subLevel3' | translate}}
+              <p-sortIcon [field]="'subLevel3'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn [pSortableColumn]="'subLevel4'" data-qe-id="table-thead-subLevel4">
+              {{'legalEntity.subLevel4' | translate}}
+              <p-sortIcon [field]="'subLevel4'" class="float-right"></p-sortIcon>
+            </th>
             <th pResizableColumn></th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="legalSearchEntity.code" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-code"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.code"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="legalSearchEntity.name" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-name"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.name"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-name"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.subLevel1"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-subLevel1"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.subLevel2"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-subLevel2"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.subLevel3"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-subLevel3"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.subLevel4"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-subLevel4"></app-advanced-filters>
             </th>
             <th class="th-filter"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-legalEntity let-index="rowIndex">
-          <tr  [attr.data-qe-id]="'table-tbody-row-' + index">
+          <tr [attr.data-qe-id]="'table-tbody-row-' + index">
             <td class="ui-resizable-column"> {{legalEntity.code}} </td>
             <td class="ui-resizable-column"> {{legalEntity.name}} </td>
+            <td class="ui-resizable-column"> {{legalEntity.subLevel1}} </td>
+            <td class="ui-resizable-column"> {{legalEntity.subLevel2}} </td>
+            <td class="ui-resizable-column"> {{legalEntity.subLevel3}} </td>
+            <td class="ui-resizable-column"> {{legalEntity.subLevel4}} </td>
             <td>
               <div class="edit" (click)="edit(legalEntity.id)">
                 <mat-icon>edit</mat-icon>
@@ -80,7 +122,7 @@
   </div>
 </div>
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
-  [style]="{width: '900px'}">
+          [style]="{width: '900px'}">
   <p-header>
     {{ 'legalEntity.add' | translate}}
   </p-header>
@@ -93,10 +135,10 @@
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-            id="legalEntityCode">
+                 id="legalEntityCode">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.errors?.get('code')?.value"
-            [formGroup]="legalForm" [property]="'code'" [placement]="'top'" class="error-form">
+                     *ngIf="(legalForm.controls.code?.errors && legalForm.controls.code?.touched) || !!legalForm.controls.errors?.get('code')?.value"
+                     [formGroup]="legalForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
 
@@ -108,13 +150,72 @@
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-            id="legalEntityName">
+                 id="legalEntityName">
           <app-error data-qe-id="dialog-error-code"
-            *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.errors?.get('name')?.value"
-            [formGroup]="legalForm" [property]="'name'" [placement]="'top'" class="error-form">
+                     *ngIf="(legalForm.controls.name?.errors && legalForm.controls.name?.touched) || !!legalForm.controls.errors?.get('name')?.value"
+                     [formGroup]="legalForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
-
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label for="subLevel1">
+          {{'legalEntity.subLevel1' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="subLevel1" data-qe-id="dialog-form-subLevel1"
+                 id="subLevel1">
+          <app-error data-qe-id="dialog-error-subLevel1"
+                     *ngIf="(legalForm.controls.subLevel1?.errors && legalForm.controls.subLevel1?.touched) || !!legalForm.controls.errors?.get('subLevel1')?.value"
+                     [formGroup]="legalForm" [property]="'subLevel1'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label for="subLevel2">
+          {{'legalEntity.subLevel2' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="subLevel2" data-qe-id="dialog-form-subLevel2"
+                 id="subLevel2">
+          <app-error data-qe-id="dialog-error-subLevel2"
+                     *ngIf="(legalForm.controls.subLevel2?.errors && legalForm.controls.subLevel2?.touched) || !!legalForm.controls.errors?.get('subLevel2')?.value"
+                     [formGroup]="legalForm" [property]="'subLevel2'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col">
+        <label for="subLevel3">
+          {{'legalEntity.subLevel3' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="subLevel3" data-qe-id="dialog-form-subLevel3"
+                 id="subLevel3">
+          <app-error data-qe-id="dialog-error-subLevel3"
+                     *ngIf="(legalForm.controls.subLevel3?.errors && legalForm.controls.subLevel3?.touched) || !!legalForm.controls.errors?.get('subLevel3')?.value"
+                     [formGroup]="legalForm" [property]="'subLevel3'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+      <div class="form-group col">
+        <label for="subLevel4">
+          {{'legalEntity.subLevel4' | translate}}
+          <span class="text-danger ml-2">*</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" formControlName="subLevel4" data-qe-id="dialog-form-subLevel4"
+                 id="subLevel4">
+          <app-error data-qe-id="dialog-error-subLevel4"
+                     *ngIf="(legalForm.controls.subLevel4?.errors && legalForm.controls.subLevel4?.touched) || !!legalForm.controls.errors?.get('subLevel4')?.value"
+                     [formGroup]="legalForm" [property]="'subLevel4'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
       </div>
     </div>
   </div>
@@ -123,7 +224,7 @@
       <div class="col-sm-12">
         <div class="page-actions">
           <button class="btn btn-cancel" (click)="display = false"
-            data-qe-id="dialog-button-cancel">{{ 'general.button.cancel' | translate}}</button>
+                  data-qe-id="dialog-button-cancel">{{ 'general.button.cancel' | translate}}</button>
           <button class="btn btn-save" (click)="save()" data-qe-id="dialog-button-save">
             {{ 'general.button.save' | translate}}</button>
         </div>

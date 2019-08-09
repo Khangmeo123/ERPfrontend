@@ -240,12 +240,19 @@ export class AccountingPeriodComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.accountingPeriodSearchEntity.setOfBookId = setOfBookId;
-    this.accountingPeriodForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.fiscalYearSearchEntity.setOfBookId = this.setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.accountingPeriodSearchEntity.setOfBookId = setOfBookId;
+      this.accountingPeriodForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.accountingPeriodService.getSobList(this.sobSearchEntity);
   }
 
   getList() {

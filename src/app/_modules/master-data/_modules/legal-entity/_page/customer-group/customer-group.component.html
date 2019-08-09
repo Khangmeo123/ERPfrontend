@@ -56,11 +56,13 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerGroupSearchEntity.code" (changeFilter)="getList()"
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerGroupSearchEntity.code"
+                                        (changeFilter)="getList()"
                                         data-qe-id="table-thead-filter-code-customer-group"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerGroupSearchEntity.name" (changeFilter)="getList()"
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerGroupSearchEntity.name"
+                                        (changeFilter)="getList()"
                                         data-qe-id="table-thead-filter-name-customer-group"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
@@ -133,11 +135,13 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerSearchEntity.code" (changeFilter)="getListDetail()"
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerSearchEntity.code"
+                                        (changeFilter)="getListDetail()"
                                         data-qe-id="table-thead-filter-code-customer"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerSearchEntity.name" (changeFilter)="getListDetail()"
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerSearchEntity.name"
+                                        (changeFilter)="getListDetail()"
                                         data-qe-id="table-thead-filter-name-customer"></app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>

@@ -37,15 +37,15 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getList()"
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
                                         [filter]="projectOrganizationSearchEntity.code"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getList()"
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
                                         [filter]="projectOrganizationSearchEntity.name"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getList()"
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
                                         [filter]="projectOrganizationSearchEntity.managerName"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
@@ -209,11 +209,11 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getEmployeeList()"
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getEmployeeList()"
                                         [filter]="employeeSearchEntity.code"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters (changeFilter)="getEmployeeList()"
+                  <app-advanced-filters defaultType="startsWith" (changeFilter)="getEmployeeList()"
                                         [filter]="employeeSearchEntity.code"></app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>

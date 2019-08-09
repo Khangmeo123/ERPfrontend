@@ -43,11 +43,11 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="sobSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="sobSearchEntity.code"
                                     data-qe-id="sob-filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="sobSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="sobSearchEntity.name"
                                     data-qe-id="sob-filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">

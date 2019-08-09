@@ -23,6 +23,7 @@
         <span class="sob mr-2">{{'general.sob' | translate}}: </span>
         <app-single-select (listOpen)="getSobList()"
                            (selectionChange)="changeSob($event)"
+                           (search)="onSearchSetOfBook($event)"
                            [list]="sobList"
                            [selectedList]="selectedSobList"
                            data-qe-id="sob-list"
@@ -69,7 +70,8 @@
                                     data-qe-id="filter-endPeriod"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters defaultType="startsWith"
+                                    (changeFilter)="getList()"
                                     [filter]="accountingPeriodSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>

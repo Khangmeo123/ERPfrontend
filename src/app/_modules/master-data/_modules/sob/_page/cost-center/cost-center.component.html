@@ -23,6 +23,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -48,11 +49,13 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="costCenterSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="costCenterSearchEntity.code"
                                     data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="costCenterSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="costCenterSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
@@ -75,7 +78,8 @@
                                     data-qe-id="filter-validTo"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="costCenterSearchEntity.description"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="costCenterSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
           </tr>

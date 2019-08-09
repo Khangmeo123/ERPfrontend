@@ -164,11 +164,14 @@ export class ValueAddedTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.valueAddedTaxSearchEntity.setOfBookId = setOfBookId;
-    this.valueAddedTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.valueAddedTaxSearchEntity.setOfBookId = setOfBookId;
+      this.valueAddedTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
   }
 
   getList() {
@@ -301,5 +304,10 @@ export class ValueAddedTaxComponent implements OnInit {
   onSearchUomFilter(event) {
     this.uomFilterSearchEntity.name.startsWith = event;
     this.valueAddedTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.valueAddedTaxService.getSobList(this.sobSearchEntity);
   }
 }

@@ -15,12 +15,12 @@
       <div class="col-sm-6 page-1">
         <div class="page-actions d-flex justify-content-end">
           <button class="btn btn-clear" (click)="clearSearch(table)"
-            data-qe-id="button-clear-customer">{{'general.button.clear' | translate}}</button>
+                  data-qe-id="button-clear-customer">{{'general.button.clear' | translate}}</button>
         </div>
         <div class="page-section table1 mt-2">
           <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortLegalEntiy($event)"
-            selectionMode="single" [(selection)]="selectedList" [scrollable]="true" scrollHeight="500px"
-            [resizableColumns]="true" #table>
+                   selectionMode="single" [(selection)]="selectedList" [scrollable]="true" scrollHeight="500px"
+                   [resizableColumns]="true" #table>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -45,17 +45,20 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code-set-of-book"
-                    [filter]="legalSearchEntity.setOfBookCode" (changeFilter)="getListLegalEntity()">
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code-set-of-book"
+                                        [filter]="legalSearchEntity.setOfBookCode"
+                                        (changeFilter)="getListLegalEntity()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code" [filter]="legalSearchEntity.code"
-                    (changeFilter)="getListLegalEntity()"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code"
+                                        [filter]="legalSearchEntity.code"
+                                        (changeFilter)="getListLegalEntity()"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-name" [filter]="legalSearchEntity.name"
-                    (changeFilter)="getListLegalEntity()"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-name"
+                                        [filter]="legalSearchEntity.name"
+                                        (changeFilter)="getListLegalEntity()"></app-advanced-filters>
                 </th>
               </tr>
             </ng-template>
@@ -79,25 +82,26 @@
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-customer" [list]="customerExceptIds"
                               [disabled]="!legalId"
-              [selectedList]="customerIds" [key]="'name'" (search)="customerSearch($event)"
-              (selectionChange)="selectCustomer($event)" (listOpen)="openCustomerList(customerSearchEntity.ids)">
+                              [selectedList]="customerIds" [key]="'name'" (search)="customerSearch($event)"
+                              (selectionChange)="selectCustomer($event)"
+                              (listOpen)="openCustomerList(customerSearchEntity.ids)">
             </app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
             <button class="btn btn-add" (click)="onClickAddCustomer()" data-qe-id="button-add-customer"
-              [disabled]="listCustomerId.length === 0">
+                    [disabled]="listCustomerId.length === 0">
               {{'general.button.add' | translate}}</button>
 
             <a class="btn btn-export" [href]="exportLink + legalId"
-              data-qe-id="button-export">{{'general.button.export' | translate}}</a>
+               data-qe-id="button-export">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearchCustomer(tableCustomer)"
-              data-qe-id="button-clear-customer">{{'general.button.clear' | translate}}</button>
+                    data-qe-id="button-clear-customer">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
 
           <p-table [value]="customerList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-            [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableCustomer>
+                   [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableCustomer>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -118,12 +122,14 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code-customer"
-                    [filter]="customerSearchEntity.code" (changeFilter)="getListCustomer()"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code-customer"
+                                        [filter]="customerSearchEntity.code"
+                                        (changeFilter)="getListCustomer()"></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code-customer"
-                    [filter]="customerSearchEntity.name" (changeFilter)="getListCustomer()"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code-customer"
+                                        [filter]="customerSearchEntity.name"
+                                        (changeFilter)="getListCustomer()"></app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>
               </tr>
@@ -148,7 +154,7 @@
           </p-table>
           <div class="pagination">
             <app-pagination [pagination]="paginationdetail" (paginationOut)="paginationDetailOut($event)"
-              data-qe-id="pagination">
+                            data-qe-id="pagination">
             </app-pagination>
           </div>
         </div>

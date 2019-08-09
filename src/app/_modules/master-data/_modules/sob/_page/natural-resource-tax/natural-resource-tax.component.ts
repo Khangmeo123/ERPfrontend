@@ -164,11 +164,14 @@ export class NaturalResourceTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.naturalResourceTaxSearchEntity.setOfBookId = setOfBookId;
-    this.naturalResourceTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.naturalResourceTaxSearchEntity.setOfBookId = setOfBookId;
+      this.naturalResourceTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
   }
 
   getList() {
@@ -301,5 +304,10 @@ export class NaturalResourceTaxComponent implements OnInit {
   onSearchUomFilter(event) {
     this.uomFilterSearchEntity.name.startsWith = event;
     this.naturalResourceTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.naturalResourceTaxService.getSobList(this.sobSearchEntity);
   }
 }

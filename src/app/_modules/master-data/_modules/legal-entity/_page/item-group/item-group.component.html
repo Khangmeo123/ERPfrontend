@@ -58,12 +58,14 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemGroupSearchEntity.code" (changeFilter)="getItemGroupList()"
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemGroupSearchEntity.code"
+                                        (changeFilter)="getItemGroupList()"
                                         data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemGroupSearchEntity.name" (changeFilter)="getItemGroupList()"
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemGroupSearchEntity.name"
+                                        (changeFilter)="getItemGroupList()"
                                         data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
                 </th>
@@ -145,13 +147,13 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.code"
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemsFromItemGroupSearchEntity.code"
                                         (changeFilter)="getitemsFromItemGroupList()"
                                         data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.name"
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemsFromItemGroupSearchEntity.name"
                                         (changeFilter)="getitemsFromItemGroupList()"
                                         data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
