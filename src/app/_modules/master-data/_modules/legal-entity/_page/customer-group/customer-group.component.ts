@@ -1,4 +1,4 @@
-import {Component, OnInit, OnDestroy, ViewChild, TemplateRef} from '@angular/core';
+import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
 import {Router} from '@angular/router';
 import {BookmarkService} from 'src/app/_services';
@@ -6,7 +6,7 @@ import {translate} from 'src/app/_helpers/string';
 import {CustomerGroupSearchEntity} from 'src/app/_modules/master-data/_backend/customer-group/customer-group.searchentity';
 import {CustomerGroupEntity} from 'src/app/_modules/master-data/_backend/customer-group/customer-group.entity';
 import {FormGroup} from '@angular/forms';
-import {Subscription, Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {LegalEntity} from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import {CustomerGroupService} from './customer-group.service';
@@ -27,7 +27,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   bookMarkId: string;
   display: boolean = false;
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
 
   public popoverTitle: string = 'Popover title';
   public popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
@@ -99,7 +99,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
 
     const customerDetailCountSub = this.customerGroupService.customerDetailCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
 
@@ -126,8 +126,8 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     this.customerGroupSearchEntity.skip = this.pagination.skip;
     this.customerGroupSearchEntity.take = this.pagination.take;
 
-    this.customerSearchEntity.skip = this.paginationdetail.skip;
-    this.customerSearchEntity.take = this.paginationdetail.take;
+    this.customerSearchEntity.skip = this.paginationDetail.skip;
+    this.customerSearchEntity.take = this.paginationDetail.take;
 
   }
 
@@ -146,6 +146,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   }
 
   legalSearch(event) {
+    this.legalSearchEntity = new LegalSearchEntity();
     this.legalSearchEntity.code.startsWith = event;
     this.legalSearchEntity.name.startsWith = event;
     this.leGalEntityTyping.next(this.legalSearchEntity);
@@ -180,6 +181,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   }
 
   customerSearchApp(event) {
+    this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.code.startsWith = event;
     this.customerSearchEntity.name.startsWith = event;
     this.customerTyping.next(this.customerSearchEntity);
@@ -316,9 +318,9 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
   }
 
   getListDetail() {
-    this.paginationdetail.pageNumber = 1;
+    this.paginationDetail.pageNumber = 1;
     this.customerSearchEntity.skip = 0;
-    this.customerSearchEntity.take = this.paginationdetail.take;
+    this.customerSearchEntity.take = this.paginationDetail.take;
     this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
   }
 

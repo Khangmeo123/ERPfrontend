@@ -28,7 +28,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   bookMarkId: string;
   display: boolean = false;
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
   selectedSupplier: any;
 
   public popoverTitle: string = 'Popover title';
@@ -78,7 +78,7 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     });
     const supplierDetailCountSub = this.supplierGroupService.supplierGroupCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
     const supplierGroupFormSub = this.supplierGroupService.supplierGroupForm.subscribe(res => {
@@ -126,8 +126,8 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
     this.supplierGroupSearchEntity.skip = this.pagination.skip;
     this.supplierGroupSearchEntity.take = this.pagination.take;
 
-    this.supplierSearchEntity.skip = this.paginationdetail.skip;
-    this.supplierSearchEntity.take = this.paginationdetail.take;
+    this.supplierSearchEntity.skip = this.paginationDetail.skip;
+    this.supplierSearchEntity.take = this.paginationDetail.take;
   }
 
   ngOnDestroy() {
@@ -180,8 +180,10 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   supplierSearchApp(event) {
+    this.supplierSearchEntity = new SupplierSearchEntity();
+    this.supplierSearchEntity.ids = this.listSupplierId;
     this.supplierSearchEntity.name.startsWith = event;
-    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
+    if (!this.legalEntityId) {
       this.supplierSearchEntity.legalEntityId = this.legalEntityId;
     }
     this.supplierTyping.next(this.supplierSearchEntity);
@@ -208,9 +210,9 @@ export class SupplierGroupComponent implements OnInit, OnDestroy {
   }
 
   getListDetail() {
-    this.paginationdetail.pageNumber = 1;
+    this.paginationDetail.pageNumber = 1;
     this.supplierSearchEntity.skip = 0;
-    this.supplierSearchEntity.take = this.paginationdetail.take;
+    this.supplierSearchEntity.take = this.paginationDetail.take;
     this.supplierGroupService.getListSupplierDetail(this.supplierSearchEntity);
   }
 

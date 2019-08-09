@@ -28,7 +28,7 @@ export class EmployeePositionComponent implements OnInit {
   bookMarkId: string;
   display: boolean = false;
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
   selectedEmployeePosition: any;
 
   employeePositionSearchEntity: EmployeePositionSearchEntity = new EmployeePositionSearchEntity();
@@ -99,7 +99,7 @@ export class EmployeePositionComponent implements OnInit {
 
     const employeeDetailCountSub = this.employeePositionService.employeeDetailCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
 
@@ -117,8 +117,8 @@ export class EmployeePositionComponent implements OnInit {
     this.employeePositionSearchEntity.skip = this.pagination.skip;
     this.employeePositionSearchEntity.take = this.pagination.take;
 
-    this.employeeSearchEntity.skip = this.paginationdetail.skip;
-    this.employeeSearchEntity.take = this.paginationdetail.take;
+    this.employeeSearchEntity.skip = this.paginationDetail.skip;
+    this.employeeSearchEntity.take = this.paginationDetail.take;
   }
 
   // drop legal entity
@@ -132,6 +132,8 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   legalSearch(event) {
+    this.legalSearchEntity = new LegalSearchEntity();
+    this.legalSearchEntity.ids = this.legalId;
     this.legalSearchEntity.code.startsWith = event;
     this.legalSearchEntity.name.startsWith = event;
     this.leGalEntityTyping.next(this.legalSearchEntity);
@@ -279,9 +281,9 @@ export class EmployeePositionComponent implements OnInit {
   }
 
   getListDetail() {
-    this.paginationdetail.pageNumber = 1;
+    this.paginationDetail.pageNumber = 1;
     this.employeeSearchEntity.skip = 0;
-    this.employeeSearchEntity.take = this.paginationdetail.take;
+    this.employeeSearchEntity.take = this.paginationDetail.take;
     this.employeePositionService.getListEmployeeDetail(this.employeeSearchEntity);
   }
 

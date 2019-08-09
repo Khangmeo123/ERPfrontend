@@ -23,7 +23,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
 
   pageTitle = translate('customerOfLegalEntity.header.title');
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
   display: boolean = false;
   selectedList: any;
   isAddGroup = false;
@@ -72,7 +72,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     });
     const customerListCountSub = this.customerOfLegalEntityService.customerCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
 
@@ -101,8 +101,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.legalSearchEntity.skip = this.pagination.skip;
     this.legalSearchEntity.take = this.pagination.take;
 
-    this.customerSearchEntity.skip = this.paginationdetail.skip;
-    this.customerSearchEntity.take = this.paginationdetail.take;
+    this.customerSearchEntity.skip = this.paginationDetail.skip;
+    this.customerSearchEntity.take = this.paginationDetail.take;
   }
 
 
@@ -116,6 +116,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   }
 
   customerSearch(event) {
+    this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.code.startsWith = event;
     this.customerSearchEntity.name.startsWith = event;
     this.customerTyping.next(this.customerSearchEntity);
@@ -187,9 +188,9 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   }
 
   getListCustomer(customer) {
-    this.paginationdetail.pageNumber = 1;
+    this.paginationDetail.pageNumber = 1;
     this.customerSearchEntity.skip = 0;
-    this.customerSearchEntity.take = this.paginationdetail.take;
+    this.customerSearchEntity.take = this.paginationDetail.take;
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 

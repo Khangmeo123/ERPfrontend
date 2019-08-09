@@ -21,7 +21,7 @@ import { environment } from 'src/environments/environment';
 export class EmployeeOfLegalEntityComponent implements OnInit {
   pageTitle = translate('employeeOfLegalEntity.header.title');
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
   isSaveBookMark = false;
   selectedList: any;
 
@@ -60,7 +60,6 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     });
 
     const employeeOfLegalListSub = this.employeeOfLegalEntityService.employeeListOflegalEntity.subscribe(res => {
-      console.log(res);
       if (res) {
         this.employeeIds = res.ids;
         this.employeeExceptIds = res.exceptIds;
@@ -73,7 +72,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     });
     const employeeListCountSub = this.employeeOfLegalEntityService.employeeCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
 
@@ -91,14 +90,14 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.legalSearchEntity.skip = this.pagination.skip;
     this.legalSearchEntity.take = this.pagination.take;
 
-    this.employeeSearchEntity.skip = this.paginationdetail.skip;
-    this.employeeSearchEntity.take = this.paginationdetail.take;
+    this.employeeSearchEntity.skip = this.paginationDetail.skip;
+    this.employeeSearchEntity.take = this.paginationDetail.take;
   }
 
   // drop employee
   openEmployeeList(id: string[]) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
-    this.employeeSearchEntity.ids = id;
+    this.employeeSearchEntity.ids = this.listEmployeeId;
     if (this.legalId !== '' && this.legalId !== undefined) {
       this.employeeSearchEntity.legalEntityId = this.legalId;
       this.employeeOfLegalEntityService.getListDropEmployee(this.employeeSearchEntity);
@@ -106,6 +105,8 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   }
 
   employeeSearch(event) {
+    this.employeeSearchEntity = new EmployeeSearchEntity();
+    this.employeeSearchEntity.ids = this.listEmployeeId;
     this.employeeSearchEntity.code.startsWith = event;
     this.employeeSearchEntity.name.startsWith = event;
     this.employeeTyping.next(this.employeeSearchEntity);
@@ -170,9 +171,9 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   // table employee detail
 
   getListEmployee(employee) {
-    this.paginationdetail.pageNumber = 1;
+    this.paginationDetail.pageNumber = 1;
     this.employeeSearchEntity.skip = 0;
-    this.employeeSearchEntity.take = this.paginationdetail.take;
+    this.employeeSearchEntity.take = this.paginationDetail.take;
     this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
   }
 
