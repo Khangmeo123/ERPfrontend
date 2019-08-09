@@ -17,6 +17,11 @@ import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picke
 import { DialogModule } from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
+import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
+import {GoodsIssueDetailComponent} from './goods-issue/goods-issue-detail/goods-issue-detail.component';
+import {GoodsIssueListComponent} from './goods-issue/goods-issue-list/goods-issue-list.component';
+import {GoodsReturnDetailComponent} from './goods-return/goods-return-detail/goods-return-detail.component';
+import {GoodsReturnListComponent} from './goods-return/goods-return-list/goods-return-list.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +30,11 @@ import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.
     GoodsReturnComponent,
     GoodsIssueComponent,
     DeliveryOrderListComponent,
-    DeliveryOrderDetailComponent],
+    DeliveryOrderDetailComponent,
+    GoodsIssueDetailComponent,
+    GoodsIssueListComponent,
+    GoodsReturnDetailComponent,
+    GoodsReturnListComponent],
   imports: [
     CommonModule,
     IssueRoutingModule,
@@ -43,6 +52,7 @@ import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.
     MatTabsModule,
     DialogModule,
     InputSwitchModule,
+    DiscussionModule,
   ]
 })
 export class IssueModule { }

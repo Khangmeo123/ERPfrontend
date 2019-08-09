@@ -153,6 +153,98 @@
 		"placeHolder": ""
 	},
 	"deliveryOrder": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"deliveryOrder": {
+				"title": ""
+			},
+			"deliveryOrderRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"title": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"cda": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemName": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"unitPrice": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"form": {
+			"post": {
+				"title": ""
+			}
+		},
 		"list": {
 			"createdDate": "",
 			"creator": "",
@@ -536,6 +628,7 @@
 			"downloadTemplate": "",
 			"downloadTempplate": "",
 			"download_example": "",
+			"edit": "",
 			"export": "",
 			"getData": "",
 			"history": "",
@@ -598,7 +691,25 @@
 			}
 		},
 		"sob": "",
+		"text": {
+			"total": ""
+		},
 		"toDate": ""
+	},
+	"goodsIssue": {
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"receiptedDate": "",
+			"status": ""
+		}
 	},
 	"goodsReceipt": {
 		"createdDate": "",
@@ -739,6 +850,9 @@
 		"description": "",
 		"documentNumber": "",
 		"form": {
+			"post": {
+				"title": ""
+			},
 			"title": ""
 		},
 		"goodsReceipt": {
@@ -779,12 +893,14 @@
 			"cda": "",
 			"discount": "",
 			"discountAmount": "",
+			"itemName": "",
 			"itemNo": "",
 			"purchaseOrderNumber": "",
 			"quantity": "",
 			"title": "",
 			"total": "",
 			"unitOfMeasure": "",
+			"unitPrice": "",
 			"valueAddedTax": ""
 		},
 		"tab2": {

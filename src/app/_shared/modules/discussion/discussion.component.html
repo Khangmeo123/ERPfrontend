@@ -33,7 +33,7 @@
                         {{post.creatorName}}
                         <span class="text-muted">{{post.time | TimeAgo}}</span>
                     </span>
-                    <div class="btn-group align-items-center" dropdown>
+                    <!-- <div class="btn-group align-items-center" dropdown>
                         <span id="button-basic" class="drop-actions" dropdownToggle aria-controls="dropdown-basic">
                             <i class="material-icons">
                                 more_horiz
@@ -63,7 +63,7 @@
                                 </div>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                 </h4>
                 <p *ngIf="!post.IsEdit" [innerHTML]="post.content" style="margin-bottom: 5px; display: block;"></p>
                 <p *ngIf="post.IsEdit == true">
@@ -94,7 +94,7 @@
                                     {{comment.creatorName}}
                                     <span class="text-muted">{{comment.time | TimeAgo}}</span>
                                 </span>
-                                <div class="btn-group align-items-center" dropdown>
+                                <!-- <div class="btn-group align-items-center" dropdown>
                                     <span id="button-basic" class="drop-actions" dropdownToggle
                                         aria-controls="dropdown-basic">
                                         <i class="material-icons">
@@ -127,7 +127,7 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> -->
                             </h4>
                             <p *ngIf="!comment.isEdit" [innerHTML]="comment.content" style="display: block"></p>
                             <div *ngIf="comment.isEdit == true">
