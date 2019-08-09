@@ -143,6 +143,13 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       if (res) {
         this.supplierAddressIds = res.ids;
         this.supplierAddressExceptIds = res.exceptIds;
+        if (res.ids.length === 0 && res.exceptIds.length > 0) {
+          this.goodsReceiptPOForm.controls.supplierAddress.setValue(res.exceptIds[0].supplierAddress);
+          this.goodsReceiptPOForm.controls.supplierContactId.setValue(res.exceptIds[0].supplierContactId);
+        }
+        if (res.ids.length === 0 && res.exceptIds.length === 0) {
+          this.goodsReceiptPOForm.controls.supplierAddress.setValue(null);
+        }
       }
     });
     this.goodsReceiptPOService.typingSearchSupplierAddress(this.supplierAddressTyping);
@@ -362,6 +369,9 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     this.supplierDetailId = event[0].id;
     this.goodsReceiptPOForm.controls.supplierDetailId.setValue(event[0].id);
     this.goodsReceiptPOForm.controls.supplierName.setValue(event[0].name);
+    this.supplierAddressSearchEntity = new GoodsReceiptPOSupplierAddressSearchEntity();
+    this.supplierAddressSearchEntity.supplierDetailId = this.supplierDetailId;
+    this.goodsReceiptPOService.dropListSupplierAddress(this.supplierAddressSearchEntity);
   }
 
   returnSupplier(node) {

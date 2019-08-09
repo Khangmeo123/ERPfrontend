@@ -93,6 +93,11 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       if (!changes.initialValue.currentValue) {
         this.selectedList = null;
         this.selectedText = '';
+      } else {
+        const pattern = new RegExp('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', 'i');
+        if (!pattern.test(changes.initialValue.currentValue)) {
+          this.selectedText = '';
+        }
       }
     }
   }
