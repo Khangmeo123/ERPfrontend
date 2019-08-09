@@ -789,7 +789,9 @@
 <p-dialog [modal]="true" appendTo="body" [(visible)]="displayPurchseOrders" [contentStyle]="{'overflow':'visible'}"
     [style]="{width: '80%'}" [responsive]="true">
     <p-header>
-        <span class="dialog-header">{{'goodsReceiptPODetail.goodsReceipt.supplierName' | translate}}</span>
+        <span class="dialog-header">{{'goodsReceiptPODetail.goodsReceipt.supplierName' | translate}}
+            {{goodsReceiptPOForm.controls.supplierName.value}}
+        </span>
     </p-header>
     <div class="dialog-body">
         <div class="row mt-3">

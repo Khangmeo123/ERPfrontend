@@ -3,35 +3,35 @@ import { FormModel } from 'src/app/_helpers/form-model';
 import { requiredField } from 'src/app/_helpers';
 
 export class GoodsReceiptPOForm extends FormModel {
-    supplierDetailId = new FormControl('', [requiredField]);
-    supplierContactId = new FormControl('');
-    supplierName = new FormControl('');
-    supplierCode = new FormControl('');
-    supplierAddress = new FormControl('');
-    currencyId = new FormControl('');
-    currencyName = new FormControl('');
-    documentNumber = new FormControl('');
-    statusId = new FormControl('');
-    statusName = new FormControl('');
-    postingDate = new FormControl('');
-    dueDate = new FormControl('', [requiredField]);
-    documentDate = new FormControl('');
-    buyerId = new FormControl('');
-    buyerName = new FormControl('');
-    ownerId = new FormControl('', [requiredField]);
-    ownerName = new FormControl('');
-    requesterId = new FormControl('');
-    requesterName = new FormControl('');
-    remarks = new FormControl('');
-    inventoryOrganizationId = new FormControl('', [requiredField]);
-    inventoryOrganizationCode = new FormControl('');
-    inventoryOrganizationName = new FormControl('');
-    inventoryOrganizationStreet = new FormControl('');
-    generalDiscountRate = new FormControl('');
-    generalDiscountCost = new FormControl('');
-    purchaseOrderNames = new FormControl('');
+    supplierDetailId = new FormControl(null, [requiredField]);
+    supplierContactId = new FormControl(null);
+    supplierName = new FormControl(null);
+    supplierCode = new FormControl(null);
+    supplierAddress = new FormControl(null);
+    currencyId = new FormControl(null);
+    currencyName = new FormControl(null);
+    documentNumber = new FormControl(null);
+    statusId = new FormControl(null);
+    statusName = new FormControl(null);
+    postingDate = new FormControl(null);
+    dueDate = new FormControl(null, [requiredField]);
+    documentDate = new FormControl(null);
+    buyerId = new FormControl(null);
+    buyerName = new FormControl(null);
+    ownerId = new FormControl(null, [requiredField]);
+    ownerName = new FormControl(null);
+    requesterId = new FormControl(null);
+    requesterName = new FormControl(null);
+    remarks = new FormControl(null);
+    inventoryOrganizationId = new FormControl(null, [requiredField]);
+    inventoryOrganizationCode = new FormControl(null);
+    inventoryOrganizationName = new FormControl(null);
+    inventoryOrganizationStreet = new FormControl(null);
+    generalDiscountRate = new FormControl(null);
+    generalDiscountCost = new FormControl(null);
+    purchaseOrderNames = new FormControl(null);
     goodsReceiptPOContents = new FormArray([]);
-    totalGoodsReceiptPOContents = new FormControl('');
+    totalGoodsReceiptPOContents = new FormControl(null);
     purchaseOrderIds = new FormArray([]);
     fileAttachments = new FormArray([]);
     errors = new FormGroup({
@@ -48,28 +48,28 @@ export class GoodsReceiptPOForm extends FormModel {
 }
 
 export class GoodsReceiptPOContentForm extends FormModel {
-    goodsReceiptPOId = new FormControl('');
-    goodsReceiptPOName = new FormControl('');
-    itemDetailId = new FormControl('');
-    itemCode = new FormControl('');
-    itemName = new FormControl('');
-    quantity = new FormControl('');
-    unitPrice = new FormControl('');
-    itemDiscountRate = new FormControl('');
-    itemDiscountCost = new FormControl('');
-    generalDiscountRate = new FormControl('');
-    generalDiscountCost = new FormControl('');
-    taxId = new FormControl('');
-    taxName = new FormControl('');
-    taxCost = new FormControl('');
-    unitOfMeasureId = new FormControl('');
-    unitOfMeasureName = new FormControl('');
-    unitOfMeasureCode = new FormControl('');
+    goodsReceiptPOId = new FormControl(null);
+    goodsReceiptPOName = new FormControl(null);
+    itemDetailId = new FormControl(null);
+    itemCode = new FormControl(null);
+    itemName = new FormControl(null);
+    quantity = new FormControl(null);
+    unitPrice = new FormControl(null);
+    itemDiscountRate = new FormControl(null);
+    itemDiscountCost = new FormControl(null);
+    generalDiscountRate = new FormControl(null);
+    generalDiscountCost = new FormControl(null);
+    taxId = new FormControl(null);
+    taxName = new FormControl(null);
+    taxCost = new FormControl(null);
+    unitOfMeasureId = new FormControl(null);
+    unitOfMeasureName = new FormControl(null);
+    unitOfMeasureCode = new FormControl(null);
 }
 
 export class PurchaseOrdersForm extends FormModel {
-    name = new FormControl('');
-    documentNumber = new FormControl('');
+    name = new FormControl(null);
+    documentNumber = new FormControl(null);
 
     constructor() {
         super();
@@ -77,7 +77,7 @@ export class PurchaseOrdersForm extends FormModel {
 }
 
 export class FileAttachmentsForm extends FormModel {
-    filename = new FormControl('');
+    filename = new FormControl(null);
 
     constructor() {
         super();
