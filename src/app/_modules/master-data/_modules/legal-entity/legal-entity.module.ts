@@ -32,7 +32,7 @@ import { ChipsModule } from 'primeng/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
 import { BinLocationComponent } from './_page/bin-location/bin-location.component';
-import { CodeFormulaComponent } from './_page/code-formula/code-formula.component';
+import { CodeFormulaListComponent } from './_page/code-formula/code-formula-list/code-formula-list.component';
 import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-detail/code-formula-detail.component';
 
 @NgModule({
@@ -53,7 +53,7 @@ import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-de
     EmployeeDetailComponent,
     LegalItemDetailComponent,
     BinLocationComponent,
-    CodeFormulaComponent,
+    CodeFormulaListComponent,
     CodeFormulaDetailComponent,
   ],
   imports: [

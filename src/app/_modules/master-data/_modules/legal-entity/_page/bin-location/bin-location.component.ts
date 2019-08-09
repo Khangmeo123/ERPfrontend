@@ -104,7 +104,7 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   get errors() {
-    return this.binLocationForm.get('errors') as FormControl;
+    return this.binLocationForm.get('errors') as FormGroup;
   }
 
   public legalEntitySelector = node => node;
@@ -115,8 +115,8 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
       const legalEntity: LegalEntity = this.legalEntityList[0];
       const binLocationFieldSearchEntity: BinLocationSearchEntity = new BinLocationSearchEntity();
       binLocationFieldSearchEntity.legalEntityId = legalEntity.id;
-      await this.binLocationService.getBinLocationFieldEntity(binLocationFieldSearchEntity);
       this.selectLegalEntity(legalEntity);
+      await this.binLocationService.getBinLocationFieldEntity(binLocationFieldSearchEntity);
     }
   }
 
@@ -198,7 +198,10 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
       this.generalService.validateAllFormFields(this.binLocationForm);
     }
     if (this.binLocationForm.valid) {
-      return this.binLocationService.save(this.binLocationForm.value, this[`level${this.binLocationService.level}SearchEntity`]);
+      return this.binLocationService.save(this.binLocationForm.value, this[`level${this.binLocationService.level}SearchEntity`])
+        .then(() => {
+          this.closeModal();
+        });
     }
   }
 
@@ -207,5 +210,9 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
       .then(() => {
         this.closeModal();
       });
+  }
+
+  onFilterChange(level: number) {
+    this.binLocationService[`getSubLevel${level}List`](this[`level${level}SearchEntity`]);
   }
 }

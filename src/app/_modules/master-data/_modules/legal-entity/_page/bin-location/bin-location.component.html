@@ -53,10 +53,12 @@
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level1SearchEntity.code"></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.code"
+                                      (changeFilter)="onFilterChange(1)"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level1SearchEntity.name"></app-advanced-filters>
+                <app-advanced-filters [filter]="level1SearchEntity.code"
+                                      (changeFilter)="onFilterChange(1)"></app-advanced-filters>
               </th>
               <th class="bin-location-actions">
                 <a role="button" (click)="add(1)">
@@ -100,10 +102,12 @@
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level2SearchEntity.code"></app-advanced-filters>
+                <app-advanced-filters [filter]="level2SearchEntity.code"
+                                      (changeFilter)="onFilterChange(2)"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level2SearchEntity.name"></app-advanced-filters>
+                <app-advanced-filters [filter]="level2SearchEntity.code"
+                                      (changeFilter)="onFilterChange(2)"></app-advanced-filters>
               </th>
               <th class="bin-location-actions">
                 <a role="button" (click)="add(2)">
@@ -147,10 +151,12 @@
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level3SearchEntity.code"></app-advanced-filters>
+                <app-advanced-filters [filter]="level3SearchEntity.code"
+                                      (changeFilter)="onFilterChange(3)"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level3SearchEntity.name"></app-advanced-filters>
+                <app-advanced-filters [filter]="level3SearchEntity.code"
+                                      (changeFilter)="onFilterChange(3)"></app-advanced-filters>
               </th>
               <th class="bin-location-actions">
                 <a role="button" (click)="add(3)">
@@ -194,10 +200,12 @@
             </tr>
             <tr>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level4SearchEntity.code"></app-advanced-filters>
+                <app-advanced-filters [filter]="level4SearchEntity.code"
+                                      (changeFilter)="onFilterChange(4)"></app-advanced-filters>
               </th>
               <th class="th-filter">
-                <app-advanced-filters [filter]="level4SearchEntity.name"></app-advanced-filters>
+                <app-advanced-filters [filter]="level4SearchEntity.code"
+                                      (changeFilter)="onFilterChange(4)"></app-advanced-filters>
               </th>
               <th class="bin-location-actions">
                 <a role="button" (click)="add(4)">

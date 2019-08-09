@@ -78,19 +78,20 @@ body {
 .div-form {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 
   .input-form {
-    width: 90%;
+    flex-grow: 1;
   }
 
   .error-form {
-    width: 10%;
+    flex-shrink: 1;
   }
 }
 
 .full-width {
-  width: 100%;
+  display: inline-table;
 }
 
 *[role="button"] {
