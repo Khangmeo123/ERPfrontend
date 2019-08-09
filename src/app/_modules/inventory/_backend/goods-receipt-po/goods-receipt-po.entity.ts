@@ -29,7 +29,7 @@ export class GoodsReceiptPOEntity extends Entity {
     generalDiscountRate: number;
     generalDiscountCost: number;
     goodsReceiptPOContents: GoodsReceiptPOContent[];
-    purchaseOrders: PurchaseOrdersEntity[];
+    purchaseOrderIds: PurchaseOrdersEntity[];
     purchaseOrderNames: string;
     fileAttachments: FileAttachments[];
     totalGoodsReceiptPOContents: number;

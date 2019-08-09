@@ -66,8 +66,9 @@ export class GoodsReceiptPOSupplierSearchEntity extends SearchEntity {
 }
 
 export class GoodsReceiptPOSupplierAddressSearchEntity extends SearchEntity {
-    address = new TextFilter();
+    supplierAddress = new TextFilter();
     name = new TextFilter();
+    supplierDetailId: string;
     constructor() {
         super();
     }

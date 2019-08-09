@@ -18,7 +18,7 @@ export class JwtInterceptor implements HttpInterceptor {
         'Content-Type': 'application/json',
         'X-BusinessGroup': 'AE0E3884-FB32-4DA1-9A51-BE6E80402A67',
         'X-LegalEntity': '34EFF06F-D1A5-444A-B283-665F716652F6',
-        'X-Language': currentLang ? currentLang.toUpperCase() : 'VI',
+        'X-Language': currentLang ? currentLang : 'vi',
       }),
     });
     return next.handle(request);

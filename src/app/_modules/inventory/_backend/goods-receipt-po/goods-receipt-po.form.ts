@@ -32,7 +32,7 @@ export class GoodsReceiptPOForm extends FormModel {
     purchaseOrderNames = new FormControl('');
     goodsReceiptPOContents = new FormArray([]);
     totalGoodsReceiptPOContents = new FormControl('');
-    purchaseOrders = new FormArray([]);
+    purchaseOrderIds = new FormArray([]);
     fileAttachments = new FormArray([]);
     errors = new FormGroup({
         supplierDetailId: new FormControl(),

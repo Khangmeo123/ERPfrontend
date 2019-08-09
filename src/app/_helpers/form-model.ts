@@ -1,5 +1,6 @@
 import { Entity } from './entity';
 import { FormGroup, FormControl } from '@angular/forms';
+import { element } from 'protractor';
 
 export class FormModel {
     id = new FormControl();
@@ -15,19 +16,23 @@ export class FormModel {
                     if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Array) {
                         // this.recursiveMap(entity[item], this[item]);
                         entity[item].forEach(element => {
-                            const formGroup = new FormGroup({});
-                            Object.keys(element).forEach(result => {
-                                if (result === 'errors') {
-                                    const errorForm = new FormGroup({});
-                                    Object.keys(element[result]).forEach(i => {
-                                        errorForm.addControl(i, new FormControl(element[result][i]));
-                                    });
-                                    formGroup.addControl(result, errorForm);
-                                } else {
-                                    formGroup.addControl(result, new FormControl(element[result]));
-                                }
-                            });
-                            this[item].push(formGroup);
+                            if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Array) {
+                                const formGroup = new FormGroup({});
+                                Object.keys(element).forEach(result => {
+                                    if (result === 'errors') {
+                                        const errorForm = new FormGroup({});
+                                        Object.keys(element[result]).forEach(i => {
+                                            errorForm.addControl(i, new FormControl(element[result][i]));
+                                        });
+                                        formGroup.addControl(result, errorForm);
+                                    } else {
+                                        formGroup.addControl(result, new FormControl(element[result]));
+                                    }
+                                });
+                                this[item].push(formGroup);
+                            } else {
+                                this[item].push(new FormControl(element));
+                            }
                         });
                     } else {
                         this[item].patchValue(entity[item]);
