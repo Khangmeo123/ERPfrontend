@@ -8,6 +8,7 @@ import { DiscussionService } from './backend/discussion.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [DiscussionComponent, InputDiscussionComponent, SafeHtmlPipe, TimeAgoPipe],
@@ -18,6 +19,7 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
+    BsDropdownModule.forRoot(),
   ],
   exports: [
     DiscussionComponent, InputDiscussionComponent,
