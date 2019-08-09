@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
 import * as _ from 'lodash';
-import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
 import { Entities } from 'src/app/_helpers/entity';
 import {
     GoodsReceiptPOItemDetailSearchEntity,
@@ -12,16 +11,16 @@ import {
     PurchaseOrdersSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { resolve } from 'q';
+import { GoodsReceiptPOReceiveRepository } from './goods-receipt-po-receive.repository';
 @Injectable()
-export class GoodsReceiptPOApproveService {
+export class GoodsReceiptPOReceiveService {
     public goodsReceiptPOForm: BehaviorSubject<FormGroup>;
     public itemList: BehaviorSubject<Entities>;
     public unitOfMeasureList: BehaviorSubject<Entities>;
     public documentNumberList: BehaviorSubject<Entities>;
     constructor(
         private fb: FormBuilder,
-        private goodsReceiptPORepository: GoodsReceiptPOApproveRepository,
+        private goodsReceiptPORepository: GoodsReceiptPOReceiveRepository,
         private toastrService: ToastrService,
     ) {
         this.goodsReceiptPOForm = new BehaviorSubject(this.fb.group(new GoodsReceiptPOForm()));
@@ -52,9 +51,9 @@ export class GoodsReceiptPOApproveService {
         return defered;
     }
 
-    approve(goodsReceiptPOId: string): Promise<boolean> {
+    receive(goodsReceiptPOId: string): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            this.goodsReceiptPORepository.approve(goodsReceiptPOId).subscribe(res => {
+            this.goodsReceiptPORepository.receive(goodsReceiptPOId).subscribe(res => {
                 if (res) {
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();
@@ -69,9 +68,9 @@ export class GoodsReceiptPOApproveService {
         return defered;
     }
 
-    reject(goodsReceiptPOId: string): Promise<boolean> {
+    rejectReceive(goodsReceiptPOId: string): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            this.goodsReceiptPORepository.reject(goodsReceiptPOId).subscribe(res => {
+            this.goodsReceiptPORepository.rejectReceive(goodsReceiptPOId).subscribe(res => {
                 if (res) {
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();

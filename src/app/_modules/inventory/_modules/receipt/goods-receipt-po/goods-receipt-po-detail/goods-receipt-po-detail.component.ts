@@ -36,7 +36,7 @@ import {
   providers: [GoodsReceiptPODetailService],
   encapsulation: ViewEncapsulation.None,
 })
-export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
+export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptPODetail.header.title');
   fileNameList: Array<any> = [];
   displayBatches: boolean = false;

@@ -20,10 +20,10 @@ import { Entities } from 'src/app/_helpers/entity';
 @Injectable({
     providedIn: 'root',
 })
-export class GoodsReceiptPOApproveRepository extends Repository {
+export class GoodsReceiptPOReceiveRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-approve';
+        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-receive';
     }
 
     getDetail(goodsReceiptPOId: string): Observable<GoodsReceiptPOEntity> {
@@ -35,14 +35,14 @@ export class GoodsReceiptPOApproveRepository extends Repository {
             );
     }
 
-    approve(goodsReceiptPOId: string): Observable<boolean> {
+    receive(goodsReceiptPOId: string): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/approve', JSON.stringify({ id: goodsReceiptPOId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
-    reject(goodsReceiptPOId: string): Observable<boolean> {
+    rejectReceive(goodsReceiptPOId: string): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/reject', JSON.stringify({ id: goodsReceiptPOId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

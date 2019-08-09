@@ -21,7 +21,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
   styleUrls: ['./goods-receipt-po-list.component.scss'],
   providers: [GoodsReceiptPOListService],
 })
-export class GoodsReceiptPoListComponent implements OnInit, OnDestroy {
+export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptPO.header.title');
   isBookMark: boolean = false;
   pagination: PaginationModel = new PaginationModel();

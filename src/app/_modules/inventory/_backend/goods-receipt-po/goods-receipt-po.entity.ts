@@ -124,3 +124,22 @@ export class GoodsReceiptPOItemDetailEntity extends Entity {
     code: string;
     name: string;
 }
+
+export class GoodsReceiptPOQuantityDetail extends Entity {
+    itemCode: string;
+    itemName: string;
+    unitOfMeasureName: string;
+    quantity: number;
+    goodsReceiptPOQuantities: GoodsReceiptPOQuantity[];
+
+    constructor(goodsReceiptPOQuantityDetail?: any) {
+        super(goodsReceiptPOQuantityDetail);
+    }
+}
+
+export class GoodsReceiptPOQuantity extends Entity {
+    goodsReceiptContentId: string;
+    binLocationId: string;
+    binLocationCode: string;
+    quantity: number;
+}

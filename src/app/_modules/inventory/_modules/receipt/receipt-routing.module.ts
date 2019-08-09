@@ -4,12 +4,14 @@ import { GoodsReceiptPOComponent } from './goods-receipt-po/goods-receipt-po.com
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { ReturnRequestComponent } from './return-request/return-request.component';
 import { ReturnComponent } from './return/return.component';
-import { GoodsReceiptPoListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
-import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
-import { ReturnListComponent} from './return/return-list/return-list.component';
-import { ReturnDetailComponent} from './return/return-detail/return-detail.component';
+import { ReturnListComponent } from './return/return-list/return-list.component';
+import { ReturnDetailComponent } from './return/return-detail/return-detail.component';
 import { GoodsReceiptListComponent } from './goods-receipt/goods-receipt-list/goods-receipt-list.component';
 import { GoodsReceiptDetailComponent } from './goods-receipt/goods-receipt-detail/goods-receipt-detail.component';
+import { GoodsReceiptPOApproveComponent } from './goods-receipt-po/goods-receipt-po-approve/goods-receipt-po-approve.component';
+import { GoodsReceiptPOReceiveComponent } from './goods-receipt-po/good-receipt-po-receive/goods-receipt-po-receive.component';
+import { GoodsReceiptPOListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
+import { GoodsReceiptPODetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
 
 const routes: Routes = [
   {
@@ -20,11 +22,19 @@ const routes: Routes = [
         children: [
           {
             path: 'goods-receipt-po-list',
-            component: GoodsReceiptPoListComponent,
+            component: GoodsReceiptPOListComponent,
           },
           {
             path: 'goods-receipt-po-detail',
-            component: GoodsReceiptPoDetailComponent,
+            component: GoodsReceiptPODetailComponent,
+          },
+          {
+            path: 'goods-receipt-po-approve',
+            component: GoodsReceiptPOApproveComponent,
+          },
+          {
+            path: 'goods-receipt-po-receive',
+            component: GoodsReceiptPOReceiveComponent,
           },
           {
             path: '',

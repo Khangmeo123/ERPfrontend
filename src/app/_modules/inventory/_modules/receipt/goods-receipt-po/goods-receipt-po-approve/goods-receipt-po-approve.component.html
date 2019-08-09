@@ -10,13 +10,13 @@
             <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
         </div>
         <div class="page-actions d-flex">
-            <button class="btn btn-labeled btn-approve" data-qe-id="button-approve">
+            <button class="btn btn-labeled btn-approve" data-qe-id="button-approve" (click)="approve()">
                 <span class="btn-label"><i class="material-icons">check</i></span>
                 <span class="button-label">
                     {{'general.button.approve' | translate}}
                 </span>
             </button>
-            <button class="btn btn-labeled btn-rejected" data-qe-id="button-rejected">
+            <button class="btn btn-labeled btn-rejected" data-qe-id="button-rejected" (click)="reject()">
                 <span class="btn-label"><i class="material-icons">block</i></span>
                 <span class="button-label">
                     {{'general.button.rejected' | translate}}
@@ -69,14 +69,8 @@
                             {{'goodsReceiptPODetail.supplierCode' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-single-select [list]="supplierExceptIds" [selectedList]="supplierIds" [key]="'code'"
-                            [disabled]="true" [initialValue]="goodsReceiptPOForm.controls.supplierCode.value"
-                            [valueSelector]="returnSupplier"
-                            (search)="typingSearchSupplier($event, goodsReceiptPOForm.controls.supplierDetailId.value)"
-                            (selectionChange)="chooseSupplier($event)"
-                            (listOpen)="dropListSupplier(goodsReceiptPOForm.controls.supplierDetailId.value)"
-                            data-qe-id="detail-form-supplier-code" class="w-100">
-                        </app-single-select>
+                        <input type="text" class="form-control disabled" formControlName="supplierCode"
+                            data-qe-id="detail-form-supplierCode">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
@@ -89,14 +83,8 @@
                         <label>
                             {{'goodsReceiptPODetail.supplierAddress' | translate}}
                         </label>
-                        <app-single-select [list]="supplierAddressExceptIds" [selectedList]="supplierAddressIds"
-                            [disabled]="true" [key]="'supplierAddress'"
-                            [initialValue]="goodsReceiptPOForm.controls.supplierAddress.value"
-                            (search)="typingSearchSupplierAddress($event, goodsReceiptPOForm.controls.supplierContactId.value)"
-                            (selectionChange)="goodsReceiptPOForm.controls.supplierContactId.setValue($event[0])"
-                            (listOpen)="dropListSupplierAddress(goodsReceiptPOForm.controls.supplierContactId.value)"
-                            data-qe-id="detail-form-supplier-address" class="w-100">
-                        </app-single-select>
+                        <input type="text" class="form-control disabled" formControlName="supplierAddress"
+                            data-qe-id="detail-form-supplier-name">
                     </div>
                 </div>
             </div>
@@ -108,8 +96,8 @@
                             {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <input type="text" class="form-control disabled" (click)="showPurchaseOrders()"
-                            data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderNames">
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-goods-receipt"
+                            formControlName="purchaseOrderNames">
                     </div>
                 </div>
             </div>
@@ -121,21 +109,16 @@
                             {{'goodsReceiptPODetail.documentNumber' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <input type="text" class="form-control disabled" data-qe-id="detail-form-document-number"
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-documentNumber"
                             formControlName="documentNumber">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsReceiptPODetail.inventoryCode' | translate}}
                         </label>
-                        <app-single-select [list]="inventoryOrganizationExceptIds"
-                            [selectedList]="inventoryOrganizationIds" [disabled]="true" [key]="'code'"
-                            [initialValue]="goodsReceiptPOForm.controls.inventoryOrganizationCode.value"
-                            (search)="typingSearchInvetoryOrganization($event, goodsReceiptPOForm.controls.inventoryOrganizationId.value)"
-                            (selectionChange)="goodsReceiptPOForm.controls.inventoryOrganizationId.setValue($event[0])"
-                            (listOpen)="dropListInventoryOrganization(goodsReceiptPOForm.controls.inventoryOrganizationId.value)"
-                            data-qe-id="detail-form-inventory-address" class="w-100">
-                        </app-single-select>
+                        <input type="text" class="form-control disabled"
+                            data-qe-id="detail-form-inventoryOrganizationCode"
+                            formControlName="inventoryOrganizationCode">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
@@ -151,13 +134,8 @@
                             {{'goodsReceiptPODetail.personInCharge' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-single-select [list]="ownerExceptIds" [selectedList]="ownerIds" [disabled]="disabled"
-                            [key]="'name'" [initialValue]="goodsReceiptPOForm.controls.ownerName.value"
-                            (search)="typingSearchOwner($event, goodsReceiptPOForm.controls.ownerId.value)"
-                            (selectionChange)="goodsReceiptPOForm.controls.ownerId.setValue($event[0])"
-                            (listOpen)="dropListOwner(goodsReceiptPOForm.controls.ownerId.value)"
-                            data-qe-id="detail-form-person-in-charge" class="w-100">
-                        </app-single-select>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-ownerName"
+                            formControlName="ownerName">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
@@ -181,7 +159,7 @@
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <app-date-picker [control]="goodsReceiptPOForm.get('dueDate')" [disabled]="true"
-                            data-qe-id="detail-form-receipted-date">
+                            data-qe-id="detail-form-dueDate">
                         </app-date-picker>
                     </div>
                     <div class="col-sm-4 form-group">
@@ -189,14 +167,14 @@
                             {{'goodsReceiptPODetail.createdDate' | translate}}
                         </label>
                         <app-date-picker [control]="goodsReceiptPOForm.get('documentDate')"
-                            data-qe-id="detail-form-created-date" [disabled]="true">
+                            data-qe-id="detail-form-documentDate" [disabled]="true">
                         </app-date-picker>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 form-group">
                         <label>{{ 'goodsReceiptPODetail.description' | translate}}</label>
-                        <textarea class="form-control" rows="4" data-qe-id="detail-form-remarks"
+                        <textarea class="form-control disabled" rows="4" data-qe-id="detail-form-remarks"
                             formControlName="remarks">
                          </textarea>
                     </div>
@@ -207,21 +185,7 @@
             <div class="tab-header pt-3 pb-3 pl-3 pr-3">
                 <mat-tab-group>
                     <mat-tab label="{{'goodsReceiptPODetail.tab1.title' | translate}}">
-                        <div class="row pt-3 pb-3 pl-3">
-                            <div class="col-sm-12">
-                                <div class="page-actions d-flex justify-content-end">
-                                    <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row"
-                                        [disabled]="true" (confirm)="deleteItem()" mwlConfirmationPopover
-                                        [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage"
-                                        placement="bottom">
-                                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                                        <span class="button-label">
-                                            {{'general.button.delete' | translate}}
-                                        </span></button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="table" formArrayName="goodsReceiptPOContents">
+                        <div class="table pt-3" formArrayName="goodsReceiptPOContents">
                             <p-table #tableGoodsReceiptPOContents [scrollable]="true" scrollHeight="500px"
                                 [resizableColumns]="true" [rowTrackBy]="trackByFn"
                                 [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value">
@@ -237,20 +201,10 @@
                                         <col>
                                         <col>
                                         <col>
-                                        <col>
                                     </colgroup>
                                 </ng-template>
                                 <ng-template pTemplate="header">
                                     <tr>
-                                        <th width="2.5%">
-                                            <div class="pretty p-icon p-curve p-has-indeterminate">
-                                                <input type="checkbox" [disabled]="true" />
-                                                <div class="state">
-                                                    <i class="icon material-icons">done</i>
-                                                    <label></label>
-                                                </div>
-                                            </div>
-                                        </th>
                                         <th pResizableColumn data-qe-id="table-thead-purchase-order-number">
                                             {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}} </th>
                                         <th pResizableColumn data-qe-id="table-thead-item-no">
@@ -280,7 +234,6 @@
                                         </th>
                                     </tr>
                                     <tr>
-                                        <th class="th-filter" width="2.5%"></th>
                                         <th class="th-filter">
                                             <app-single-select [list]="documentNumberExceptIds"
                                                 [selectedList]="documentNumberIds" [key]="'documentNumber'"
@@ -341,15 +294,6 @@
                                 </ng-template>
                                 <ng-template pTemplate="body" let-goodsReceiptPOContent let-index="rowIndex">
                                     <tr [formGroupName]='index'>
-                                        <td width="2.5%">
-                                            <div class="pretty p-icon p-curve p-has-indeterminate">
-                                                <input type="checkbox" [disabled]="true" />
-                                                <div class="state">
-                                                    <i class="icon material-icons">done</i>
-                                                    <label></label>
-                                                </div>
-                                            </div>
-                                        </td>
                                         <td class="ui-resizable-column">{{goodsReceiptPOContent.documentNumber}}</td>
                                         <td class="ui-resizable-column">{{goodsReceiptPOContent.itemCode}}</td>
                                         <td class="ui-resizable-column">{{goodsReceiptPOContent.itemName}}</td>
@@ -376,7 +320,7 @@
                                 </ng-template>
                                 <ng-template pTemplate="footer" let-columns>
                                     <tr>
-                                        <td class="text-right" colspan="10">{{'general.text.total' | translate}}:</td>
+                                        <td class="text-right" colspan="9">{{'general.text.total' | translate}}:</td>
                                         <td class="text-right" width="8%">
                                             {{ goodsReceiptPOForm.controls.totalGoodsReceiptPOContents.value | number}}
                                         </td>

@@ -4,7 +4,7 @@ import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
-import { GoodsReceiptPOApproveService } from './goods-receipt-po-approve.service';
+import { GoodsReceiptPOReceiveService } from './goods-receipt-po-receive.service';
 import {
   PurchaseOrdersEntity,
   GoodsReceiptPOItemDetailEntity,
@@ -15,19 +15,20 @@ import {
   GoodsReceiptPOItemDetailSearchEntity,
   GoodsReceiptPOUnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
+
 @Component({
-  selector: 'app-goods-receipt-po-approve',
-  templateUrl: './goods-receipt-po-approve.component.html',
-  styleUrls: ['./goods-receipt-po-approve.component.scss'],
-  providers: [GoodsReceiptPOApproveService],
+  selector: 'app-goods-receipt-po-receive',
+  templateUrl: './goods-receipt-po-receive.component.html',
+  styleUrls: ['./goods-receipt-po-receive.component.scss'],
+  providers: [GoodsReceiptPOReceiveService],
   encapsulation: ViewEncapsulation.None,
 })
-export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
+export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptPODetail.header.title');
   fileNameList: Array<any> = [];
   displayBatches: boolean = false;
   displayCDA: boolean = false;
-  displayAmount: boolean = false;
+  displayQuantity: boolean = false;
   displayPurchseOrders: boolean = false;
   goodsReceiptPOSubs: Subscription = new Subscription();
   goodsReceiptPOForm: FormGroup;
@@ -53,7 +54,7 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
   unitOfMeasureTyping: Subject<GoodsReceiptPOUnitOfMeasureSearchEntity> = new Subject();
 
   constructor(
-    private goodsReceiptPOService: GoodsReceiptPOApproveService,
+    private goodsReceiptPOService: GoodsReceiptPOReceiveService,
     private generalService: GeneralService,
     private route: ActivatedRoute,
     private router: Router) {
@@ -98,6 +99,7 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
       }
     });
     this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
+
     // add subcription:
     this.goodsReceiptPOSubs
       .add(goodsReceiptFormSub)
@@ -129,14 +131,14 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
     this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
   }
 
-  approve() {
-    this.goodsReceiptPOService.approve(this.goodsReceiptPOForm.controls.id.value).then(res => {
+  rejectReceive() {
+    this.goodsReceiptPOService.rejectReceive(this.goodsReceiptPOId).then(res => {
       this.backToList();
     });
   }
 
-  reject() {
-    this.goodsReceiptPOService.reject(this.goodsReceiptPOForm.controls.id.value).then(res => {
+  receive() {
+    this.goodsReceiptPOService.receive(this.goodsReceiptPOId).then(res => {
       this.backToList();
     });
   }
