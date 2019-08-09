@@ -244,17 +244,17 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Phiếu xuất kho khác',
-        route: '/master-data/department',
+        route: '/inventory/issue/goods-issue',
         exact: false,
       },
       {
         label: 'Yêu cầu xuất kho hàng trả lại NCC',
-        route: '/master-data/department',
+        route: '/inventory/issue/goods-return-request',
         exact: false,
       },
       {
         label: 'Phiếu xuất kho trả NCC',
-        route: '/master-data/department',
+        route: '/inventory/issue/goods-return',
         exact: false,
       },
       {
