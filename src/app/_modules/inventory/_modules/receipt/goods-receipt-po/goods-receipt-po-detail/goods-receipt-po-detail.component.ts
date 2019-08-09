@@ -272,7 +272,9 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     if (!this.goodsReceiptPOForm.valid) {
       this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
     } else {
-      this.goodsReceiptPOService.save(this.goodsReceiptPOForm.value);
+      this.goodsReceiptPOService.save(this.goodsReceiptPOForm.value).then(res => {
+        this.backToList();
+      });
     }
   }
 
@@ -487,6 +489,18 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.recalculateContents(this.goodsReceiptPOForm);
   }
 
+  returnDocumentNumber(node) {
+    return node;
+  }
+
+  clearSearch(tableGoodsReceiptPOContents) {
+    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
+    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+    this.taxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
+    tableGoodsReceiptPOContents.reset();
+  }
+
   // purchase order dialog:
   showPurchaseOrders() {
     this.purchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
@@ -516,5 +530,6 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     });
     goodsReceiptPOValue.purchaseOrderIds = [...arrayIds];
     this.goodsReceiptPOService.combineGoodsReceiptPO(goodsReceiptPOValue);
+    this.displayPurchseOrders = false;
   }
 }

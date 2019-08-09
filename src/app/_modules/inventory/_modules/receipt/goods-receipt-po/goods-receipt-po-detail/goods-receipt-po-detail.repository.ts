@@ -46,7 +46,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
     }
 
     save(goodsReceiptPOEntity: any): Observable<GoodsReceiptPOEntity> {
-        return this.http.post<GoodsReceiptPOEntity>(this.apiUrl + '/create', JSON.stringify(goodsReceiptPOEntity),
+        return this.http.post<GoodsReceiptPOEntity>(this.apiUrl + '/save', JSON.stringify(goodsReceiptPOEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => new GoodsReceiptPOEntity(r.body)),
             );

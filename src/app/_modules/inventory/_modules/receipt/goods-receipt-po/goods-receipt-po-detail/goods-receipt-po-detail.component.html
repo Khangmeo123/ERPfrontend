@@ -149,7 +149,7 @@
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <input type="text" class="form-control" (click)="showPurchaseOrders()"
-                            data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderNames" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null 
+                            data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderName" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null 
                             || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0}">
                     </div>
                 </div>
@@ -254,13 +254,23 @@
                         <div class="row pt-3 pb-3 pl-3">
                             <div class="col-sm-12">
                                 <div class="page-actions d-flex justify-content-end">
+                                    <button class="btn btn-labeled btn-clear mr-2" data-qe-id="button-clear"
+                                        (click)="clearSearch(tableGoodsReceiptPOContents)">
+                                        <span class="btn-label">
+                                            <img src="/assets/img/filter.svg" width="16">
+                                        </span>
+                                        <span class="button-label">
+                                            {{'general.button.clear' | translate}}
+                                        </span>
+                                    </button>
                                     <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row"
                                         (confirm)="deleteItem()" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                                         [popoverMessage]="popoverMessage" placement="bottom">
                                         <span class="btn-label"><i class="material-icons">delete</i></span>
                                         <span class="button-label">
                                             {{'general.button.delete' | translate}}
-                                        </span></button>
+                                        </span>
+                                    </button>
                                 </div>
                             </div>
 
@@ -287,13 +297,13 @@
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th width="2.5%">
-                                            <div class="pretty p-icon p-curve p-has-indeterminate">
+                                            <!-- <div class="pretty p-icon p-curve p-has-indeterminate">
                                                 <input type="checkbox" />
                                                 <div class="state">
                                                     <i class="icon material-icons">done</i>
                                                     <label></label>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-purchase-order-number">
                                             {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}} </th>
@@ -330,8 +340,10 @@
                                         <th class="th-filter">
                                             <app-single-select [list]="documentNumberExceptIds"
                                                 [selectedList]="documentNumberIds" [key]="'documentNumber'"
+                                                [valueSelector]="returnDocumentNumber"
                                                 (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)"
-                                                (selectionChange)="documentNumberSearchEntity.id = $event[0];"
+                                                (selectionChange)="documentNumberSearchEntity.id = $event[0]; 
+                                                tableGoodsReceiptPOContents.filter($event[0].documentNumber, 'documentNumber', 'equals')"
                                                 (listOpen)="dropListDocumentNumber(documentNumberSearchEntity.id)"
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
@@ -340,7 +352,7 @@
                                             <app-single-select [list]="itemDetailExceptIds"
                                                 [selectedList]="itemDetailIds" [key]="'code'"
                                                 (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                                (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemId', 'equals')"
+                                                (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
                                                 (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
@@ -416,7 +428,7 @@
                                             {{goodsReceiptPOContent.generalDiscountCost}}
                                         </td>
                                         <td width="8%" class="text-right">
-                                            {{goodsReceiptPOContent.total}}
+                                            {{goodsReceiptPOContent.total | number}}
                                         </td>
                                         <!-- <td>
                                             <div *ngIf="item.type == 1">

@@ -77,20 +77,26 @@ export class GoodsReceiptPODetailService {
     }
 
     save(goodsReceiptPOEntity: any) {
-        this.goodsReceiptPORepository.save(goodsReceiptPOEntity).subscribe(res => {
-            if (res) {
-                this.toastrService.success('Cập nhật thành công !');
-                this.goodsReceiptPOForm.next(this.fb.group(
-                    new GoodsReceiptPOForm(res),
-                ));
-            }
-        }, err => {
-            if (err) {
-                this.goodsReceiptPOForm.next(this.fb.group(
-                    new GoodsReceiptPOForm(err),
-                ));
-            }
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.goodsReceiptPORepository.save(goodsReceiptPOEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
+                    const goodsReceiptPOForm = this.fb.group(
+                        new GoodsReceiptPOForm(res),
+                    );
+                    this.recalculateContents(goodsReceiptPOForm);
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.goodsReceiptPOForm.next(this.fb.group(
+                        new GoodsReceiptPOForm(err),
+                    ));
+                    reject();
+                }
+            });
         });
+        return defered;
     }
 
     getPurchaseOrdersList(purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity) {

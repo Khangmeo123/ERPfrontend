@@ -15,23 +15,23 @@ export class FormModel {
                 if (entity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
                     if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Array) {
                         // this.recursiveMap(entity[item], this[item]);
-                        entity[item].forEach(element => {
-                            if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Array) {
+                        entity[item].forEach(elm => {
+                            if (typeof elm === 'object' && elm.constructor === Object) {
                                 const formGroup = new FormGroup({});
-                                Object.keys(element).forEach(result => {
+                                Object.keys(elm).forEach(result => {
                                     if (result === 'errors') {
                                         const errorForm = new FormGroup({});
-                                        Object.keys(element[result]).forEach(i => {
-                                            errorForm.addControl(i, new FormControl(element[result][i]));
+                                        Object.keys(elm[result]).forEach(i => {
+                                            errorForm.addControl(i, new FormControl(elm[result][i]));
                                         });
                                         formGroup.addControl(result, errorForm);
                                     } else {
-                                        formGroup.addControl(result, new FormControl(element[result]));
+                                        formGroup.addControl(result, new FormControl(elm[result]));
                                     }
                                 });
                                 this[item].push(formGroup);
                             } else {
-                                this[item].push(new FormControl(element));
+                                this[item].push(new FormControl(elm));
                             }
                         });
                     } else {

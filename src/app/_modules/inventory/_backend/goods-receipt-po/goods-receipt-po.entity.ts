@@ -31,7 +31,7 @@ export class GoodsReceiptPOEntity extends Entity {
     generalDiscountCost: number;
     goodsReceiptPOContents: GoodsReceiptPOContent[];
     purchaseOrderIds: PurchaseOrdersEntity[];
-    purchaseOrderNames: string;
+    purchaseOrderName: string;
     fileAttachments: FileAttachments[];
     totalGoodsReceiptPOContents: number;
     constructor(goodsReceiptPOEntity?: any) {
