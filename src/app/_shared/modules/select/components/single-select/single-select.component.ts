@@ -31,6 +31,15 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   listDirection = 'down';
 
+  /**
+   * down: List always open down
+   *
+   * up: List always open up
+   *
+   * auto: Recalculate the direction before open list
+   */
+  @Input() direction: string = 'down';
+
   isOpened = false;
 
   isLoading = false;
@@ -134,7 +143,11 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   beforeOpenList(event) {
-    this.listDirection = getListDirection(event.target);
+    if (this.direction === 'auto') {
+      this.listDirection = getListDirection(event.target);
+    } else {
+      this.listDirection = this.direction;
+    }
     this.isLoading = true;
     this.listOpen.emit(event);
   }
