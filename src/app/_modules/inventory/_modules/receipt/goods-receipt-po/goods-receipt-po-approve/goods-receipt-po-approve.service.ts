@@ -1,20 +1,32 @@
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
 import * as _ from 'lodash';
 import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
+import { Entities } from 'src/app/_helpers/entity';
+import {
+    GoodsReceiptPOItemDetailSearchEntity,
+    GoodsReceiptPOUnitOfMeasureSearchEntity,
+    PurchaseOrdersSearchEntity,
+} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 @Injectable()
 export class GoodsReceiptPOApproveService {
     public goodsReceiptPOForm: BehaviorSubject<FormGroup>;
-
+    public itemList: BehaviorSubject<Entities>;
+    public unitOfMeasureList: BehaviorSubject<Entities>;
+    public documentNumberList: BehaviorSubject<Entities>;
     constructor(
         private fb: FormBuilder,
         private goodsReceiptPORepository: GoodsReceiptPOApproveRepository,
         private toastrService: ToastrService,
     ) {
         this.goodsReceiptPOForm = new BehaviorSubject(this.fb.group(new GoodsReceiptPOForm()));
+        this.itemList = new BehaviorSubject(new Entities());
+        this.unitOfMeasureList = new BehaviorSubject(new Entities());
+        this.documentNumberList = new BehaviorSubject(new Entities());
     }
 
     getDetail(goodsReceiptPOId?): Promise<boolean> {
@@ -77,5 +89,83 @@ export class GoodsReceiptPOApproveService {
         }
         goodsReceiptPOForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
         this.goodsReceiptPOForm.next(goodsReceiptPOForm);
+    }
+
+    // item:
+    dropListItem(goodsReceiptPOItemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity) {
+        this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity).subscribe(res => {
+            if (res) {
+                this.itemList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchItem(goodsReceiptPOItemDetailSearchEntity:
+        Observable<GoodsReceiptPOItemDetailSearchEntity>) {
+        goodsReceiptPOItemDetailSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListItem(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.itemList.next(res);
+                }
+            });
+    }
+
+    // unitOfMeasure:
+    dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity) {
+        this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity).subscribe(res => {
+            if (res) {
+                this.unitOfMeasureList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity:
+        Observable<GoodsReceiptPOUnitOfMeasureSearchEntity>) {
+        goodsReceiptPOUnitOfMeasureSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListUnitOfMeasure(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.unitOfMeasureList.next(res);
+                }
+            });
+    }
+
+    // documentNumber:
+    dropListDocumentNumber(purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity) {
+        this.goodsReceiptPORepository.dropListDocumentNumber(purchaseOrdersSearchEntity).subscribe(res => {
+            if (res) {
+                this.documentNumberList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
+    }
+
+    typingSearchDocumentNumber(purchaseOrdersSearchEntity:
+        Observable<PurchaseOrdersSearchEntity>) {
+        purchaseOrdersSearchEntity.pipe(debounceTime(400),
+            distinctUntilChanged(),
+            switchMap(searchEntity => {
+                return this.goodsReceiptPORepository.dropListDocumentNumber(searchEntity);
+            })).subscribe(res => {
+                if (res) {
+                    this.documentNumberList.next(res);
+                }
+            });
     }
 }

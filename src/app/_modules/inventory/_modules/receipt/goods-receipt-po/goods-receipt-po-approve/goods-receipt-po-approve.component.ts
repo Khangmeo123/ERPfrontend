@@ -4,8 +4,17 @@ import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, ActivatedRoute } from '@angular/router';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
-import { BookmarkService } from 'src/app/_services';
 import { GoodsReceiptPOApproveService } from './goods-receipt-po-approve.service';
+import {
+  PurchaseOrdersEntity,
+  GoodsReceiptPOItemDetailEntity,
+  GoodsReceiptPOUnitOfMeasureEntity,
+} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
+import {
+  PurchaseOrdersSearchEntity,
+  GoodsReceiptPOItemDetailSearchEntity,
+  GoodsReceiptPOUnitOfMeasureSearchEntity,
+} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 @Component({
   selector: 'app-goods-receipt-po-detail',
   templateUrl: './goods-receipt-po-detail.component.html',
@@ -27,6 +36,21 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   supplierDetailId: string;
   goodsReceiptPOId: string;
+  // documentNumber:
+  documentNumberIds: PurchaseOrdersEntity[];
+  documentNumberExceptIds: PurchaseOrdersEntity[];
+  documentNumberSearchEntity: PurchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
+  documentNumberTyping: Subject<PurchaseOrdersSearchEntity> = new Subject();
+  // itemDetail:
+  itemDetailIds: GoodsReceiptPOItemDetailEntity[];
+  itemDetailExceptIds: GoodsReceiptPOItemDetailEntity[];
+  itemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+  itemDetailTyping: Subject<GoodsReceiptPOItemDetailSearchEntity> = new Subject();
+  // unitOfMeasure:
+  unitOfMeasureIds: GoodsReceiptPOUnitOfMeasureEntity[];
+  unitOfMeasureExceptIds: GoodsReceiptPOUnitOfMeasureEntity[];
+  unitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+  unitOfMeasureTyping: Subject<GoodsReceiptPOUnitOfMeasureSearchEntity> = new Subject();
 
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOApproveService,
@@ -50,8 +74,34 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
       }
     });
 
+    // documentNumber:
+    const documentNumberListSub = this.goodsReceiptPOService.documentNumberList.subscribe(res => {
+      if (res) {
+        this.documentNumberIds = res.ids;
+        this.documentNumberExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchDocumentNumber(this.documentNumberTyping);
+    // itemDetail:
+    const itemListSub = this.goodsReceiptPOService.itemList.subscribe(res => {
+      if (res) {
+        this.itemDetailIds = res.ids;
+        this.itemDetailExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchItem(this.itemDetailTyping);
+    // unitOfMeasure:
+    const unitOfMeasureListSub = this.goodsReceiptPOService.unitOfMeasureList.subscribe(res => {
+      if (res) {
+        this.unitOfMeasureIds = res.ids;
+        this.unitOfMeasureExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
     // add subcription:
-    this.goodsReceiptPOSubs.add(goodsReceiptFormSub);
+    this.goodsReceiptPOSubs
+      .add(goodsReceiptFormSub)
+      .add(documentNumberListSub);
   }
 
   ngOnInit() {
@@ -77,4 +127,56 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
     this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
   }
 
+  // documentNumber:
+  dropListDocumentNumber(id: string) {
+    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.documentNumberSearchEntity.ids.push(id);
+    }
+    this.goodsReceiptPOService.dropListDocumentNumber(this.documentNumberSearchEntity);
+  }
+
+  typingSearchDocumentNumber(event: number, id: string) {
+    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.documentNumberSearchEntity.ids.push(id);
+    }
+    this.documentNumberSearchEntity.documentNumber.equal = event;
+    this.documentNumberTyping.next(this.documentNumberSearchEntity);
+  }
+  // itemDetail:
+  dropListItemDetail(id: string) {
+    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.itemDetailSearchEntity.ids.push(id);
+    }
+    this.goodsReceiptPOService.dropListItem(this.itemDetailSearchEntity);
+  }
+
+  typingSearchItemDetail(event: string, id: string) {
+    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.itemDetailSearchEntity.ids.push(id);
+    }
+    this.itemDetailSearchEntity.name.startsWith = event;
+    this.itemDetailTyping.next(this.itemDetailSearchEntity);
+  }
+
+  // unitOfMeasure:
+  dropListUnitOfMeasure(id: string) {
+    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.unitOfMeasureSearchEntity.ids.push(id);
+    }
+    this.goodsReceiptPOService.dropListUnitOfMeasure(this.unitOfMeasureSearchEntity);
+  }
+
+  typingSearchUnitOfMeasure(event: string, id: string) {
+    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.unitOfMeasureSearchEntity.ids.push(id);
+    }
+    this.unitOfMeasureSearchEntity.name.startsWith = event;
+    this.unitOfMeasureTyping.next(this.unitOfMeasureSearchEntity);
+  }
 }

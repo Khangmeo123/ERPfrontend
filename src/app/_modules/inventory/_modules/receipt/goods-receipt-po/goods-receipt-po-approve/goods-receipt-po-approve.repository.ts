@@ -4,7 +4,18 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { GoodsReceiptPOEntity } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
+import {
+    GoodsReceiptPOEntity,
+    GoodsReceiptPOItemDetailEntity,
+    GoodsReceiptPOUnitOfMeasureEntity,
+    PurchaseOrdersEntity,
+} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
+import {
+    GoodsReceiptPOItemDetailSearchEntity,
+    GoodsReceiptPOUnitOfMeasureSearchEntity,
+    PurchaseOrdersSearchEntity,
+} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import { Entities } from 'src/app/_helpers/entity';
 
 @Injectable({
     providedIn: 'root',
@@ -31,4 +42,51 @@ export class GoodsReceiptPOApproveRepository extends Repository {
             );
     }
 
+    dropListItem(goodsReceiptPOItemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item',
+            JSON.stringify(goodsReceiptPOItemDetailSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new GoodsReceiptPOItemDetailEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new GoodsReceiptPOItemDetailEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure',
+            JSON.stringify(goodsReceiptPOUnitOfMeasureSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new GoodsReceiptPOUnitOfMeasureEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new GoodsReceiptPOUnitOfMeasureEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListDocumentNumber(purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-document-number',
+            JSON.stringify(purchaseOrdersSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new PurchaseOrdersEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new PurchaseOrdersEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
 }

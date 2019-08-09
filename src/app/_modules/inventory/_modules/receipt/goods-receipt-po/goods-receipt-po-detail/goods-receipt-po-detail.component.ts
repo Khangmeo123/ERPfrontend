@@ -434,7 +434,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     this.taxTyping.next(this.taxSearchEntity);
   }
 
-  // unitOfMeasre:
+  // unitOfMeasure:
   dropListUnitOfMeasure(id: string) {
     this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
     if (id !== null && id.length > 0) {

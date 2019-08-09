@@ -26,6 +26,7 @@ export class GoodsReceiptPOEntity extends Entity {
     inventoryOrganizationCode: string;
     inventoryOrganizationName: string;
     inventoryOrganizationStreet: string;
+    step: number;
     generalDiscountRate: number;
     generalDiscountCost: number;
     goodsReceiptPOContents: GoodsReceiptPOContent[];
