@@ -32,6 +32,14 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   @Input() disabled = false;
 
   listDirection = 'down';
+  /**
+   * down: List always open down
+   *
+   * up: List always open up
+   *
+   * auto: Recalculate the direction before open list
+   */
+  @Input() direction: string = 'down';
 
   isLoading = false;
 
@@ -139,7 +147,11 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   beforeOpenList(event) {
-    this.listDirection = getListDirection(event.target);
+    if (this.direction === 'auto') {
+      this.listDirection = getListDirection(event.target);
+    } else {
+      this.listDirection = this.direction;
+    }
     this.isLoading = true;
     this.listOpen.emit(event);
   }

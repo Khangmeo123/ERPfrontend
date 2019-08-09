@@ -70,7 +70,7 @@ export class DiscussionComponent {
         searchUserEntity.skip = 0;
         searchUserEntity.take = 10;
         this.discussionService.getUserLists(searchUserEntity).subscribe(p => {
-            this.userList = p;
+            this.userList = p.exceptIds;
         });
     }
 
@@ -111,9 +111,7 @@ export class DiscussionComponent {
 
 
     sendComment(index: number, event, post: PostEntity) {
-        // event.userId = this.currentUser.id;
         event.postId = post.id;
-
         this.discussionService.createComment(event).subscribe(p => {
             document.getElementById(this.commentInputDiscussionComponent[index].Id).innerHTML = '';
             this.getComments(this.postEntities[index], p.id);
@@ -127,8 +125,8 @@ export class DiscussionComponent {
         // this.PostToSend.Content = document.getElementById(this.PostInputDiscussionComponent.Id).innerHTML;
         // document.getElementById(this.PostInputDiscussionComponent.Id).innerHTML = "";
         this.discussionService.updateComment(event).subscribe(res => {
-            console.log('respone::: ', res)
             this.getComments(postEntity, res.id);
+            this.getPosts();
         });
     }
 
@@ -138,5 +136,10 @@ export class DiscussionComponent {
         this.discussionService.deleteComment(this.postEntities[i].comments[j]).subscribe(p => {
             this.postEntities[i].comments.splice(j, 1);
         });
+    }
+
+    onConfirmDelete(event) {
+        event.preventDefault();
+        event.stopPropagation();
     }
 }

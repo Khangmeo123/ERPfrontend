@@ -135,3 +135,12 @@
 legend.scheduler-border {
     width: 120px;
 }
+
+.drop-actions {
+    color: #C7C7C7;
+    margin-top: 11px;
+
+}
+.drop-actions:hover{
+    cursor: pointer;
+}

@@ -1,26 +1,25 @@
 <div class="col-sm-12 mt-4 n-p-l n-p-r">
     <!-- <p class="text-danger"><b>*</b></p> -->
-        <div class="media-body">
-            <app-input-discussion [DataList]="userList" [Placement]="'down'" [DistantPopUp]="5"
-                [InputClass]="'InputPost'" (onEnter)="sendPost($event)" [DisableWhenEnter]="true"
-                [Id]="postInputDiscussionComponent.Id" (onSearchWhoAt)="searchUserList($event)"
-                [AutoReplaceWhenClick]="true">
-                <dropdown-content>
-                    <li *ngFor="let item of userList" (click)="item.isSelected = true"
-                        [ngClass]="{'list-group-item':true, 'li-selected' : item.isSelected, 'li-active':  item.isActive}"
-                        (mouseenter)="item.isActive = true;" (mouseleave)="item.isActive = false">
-                        {{item.name}}
-                    </li>
-                </dropdown-content>
-            </app-input-discussion>
+    <div class="media-body">
+        <app-input-discussion [DataList]="userList" [Placement]="'down'" [DistantPopUp]="5" [InputClass]="'InputPost'"
+            (onEnter)="sendPost($event)" [DisableWhenEnter]="true" [Id]="postInputDiscussionComponent.Id"
+            (onSearchWhoAt)="searchUserList($event)" [AutoReplaceWhenClick]="true">
+            <dropdown-content>
+                <li *ngFor="let item of userList" (click)="item.isSelected = true"
+                    [ngClass]="{'list-group-item':true, 'li-selected' : item.isSelected, 'li-active':  item.isActive}"
+                    (mouseenter)="item.isActive = true;" (mouseleave)="item.isActive = false">
+                    {{item.name}}
+                </li>
+            </dropdown-content>
+        </app-input-discussion>
+    </div>
+    <div style="width: 100%; text-align: right">
+        <div class="mt-3">
+            <button data-dismiss="modal" data-backdrop="false" (click)="sendPost()" class="btn btn-sm btn-send">
+                {{'general.button.post' | translate}}
+            </button>
         </div>
-        <div style="width: 100%; text-align: right">
-            <div class="mt-3">
-                <button data-dismiss="modal" data-backdrop="false" (click)="sendPost()" class="btn btn-sm btn-send">
-                    {{'general.button.post' | translate}}
-                </button>
-            </div>
-        </div>
+    </div>
     <div class="DiscussionDetail" *ngFor="let post of postEntities; let i = index">
         <div class="media comment-box">
             <div class="media-left">
@@ -34,19 +33,36 @@
                         {{post.creatorName}}
                         <span class="text-muted">{{post.time | TimeAgo}}</span>
                     </span>
-                    <div style="float: right;margin-top: -4px">
-                        <!-- *ngIf="CurrentUser.id == Post.UserEntity.id" -->
-                        <button type="button" class="btn btn-sm btn-comment " tooltip="Chỉnh sửa" (click)="post.IsEdit=true">
-                            <span>
-                                <i class="fa fa-edit" aria-hidden="true"></i>
-                            </span>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-comment" mwlConfirmationPopover [popoverTitle]="'Bạn có muốn xóa?'" [popoverMessage]="'Bạn có muốn xóa?'"
-                            placement="left" (confirm)="deletePost(i)">
-                            <span>
-                                <i class="fa fa-times" aria-hidden="true"></i>
-                            </span>
-                        </button>
+                    <div class="btn-group align-items-center" dropdown>
+                        <span id="button-basic" class="drop-actions" dropdownToggle aria-controls="dropdown-basic">
+                            <i class="material-icons">
+                                more_horiz
+                            </i>
+                        </span>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                            aria-labelledby="button-basic">
+                            <li role="menuitem">
+                                <div class="dropdown-item" (click)="post.IsEdit=true">
+                                    <i class="material-icons edit">
+                                        edit
+                                    </i>
+                                    {{'general.button.edit' | translate}}
+                                </div>
+
+                            </li>
+                            <li class="divider dropdown-divider"></li>
+
+                            <li role="menuitem">
+                                <div class="dropdown-item">
+                                    <span role="button" mwlConfirmationPopover (click)="$event.stopPropagation()"
+                                        [popoverTitle]="'Bạn có muốn xóa?'" [popoverMessage]="'Bạn có muốn xóa?'"
+                                        placement="left" (confirm)="deletePost(i)">
+                                        <i class="material-icons delete">delete</i>
+                                        {{'general.button.delete' | translate}}
+                                    </span>
+                                </div>
+                            </li>
+                        </ul>
                     </div>
                 </h4>
                 <p *ngIf="!post.IsEdit" [innerHTML]="post.content" style="margin-bottom: 5px; display: block;"></p>
@@ -54,7 +70,8 @@
                     <app-input-discussion [DataList]="userList" [Placement]="'down'" [DistantPopUp]="5"
                         [BindingObject]="post" (onEnter)="editPost($event)" [DisableWhenEnter]="true"
                         [DisplayProperty]="'creatorName'" [Id]="commentInputDiscussionComponent[i].Id"
-                        (onSearchWhoAt)="searchUserList($event)" [AutoReplaceWhenClick]="true" [InputClass]="'InputComment'">
+                        (onSearchWhoAt)="searchUserList($event)" [AutoReplaceWhenClick]="true"
+                        [InputClass]="'InputComment'">
                         <dropdown-content>
                             <li *ngFor="let item of userList" (click)="item.isSelected = true"
                                 [ngClass]="{'list-group-item':true,'li-selected' : item.isSelected, 'li-active' :  item.isActive}"
@@ -68,8 +85,7 @@
                     <div class="media" *ngFor="let comment of post.comments; let j = index">
                         <div class="media-left">
                             <a href="#">
-                                <img class="img-responsive user-photo"
-                                    src="./assets/img/default_avatar.png">
+                                <img class="img-responsive user-photo" src="./assets/img/default_avatar.png">
                             </a>
                         </div>
                         <div class="media-body">
@@ -78,36 +94,51 @@
                                     {{comment.creatorName}}
                                     <span class="text-muted">{{comment.time | TimeAgo}}</span>
                                 </span>
-                                <div style="float: right;margin-top:-4px" >
-                                    <!-- *ngIf="CurrentUser.id == Comment.UserEntity.id" -->
-                                    <button type="button" class="btn btn-sm btn-comment" tooltip="Chỉnh sửa" (click)="comment.isEdit=true">
-                                        <span>
-                                            <i class="fa fa-edit" aria-hidden="true"></i>
-                                        </span>
-                                    </button>
-                                    <button type="button" class="btn btn-sm btn-comment" mwlConfirmationPopover [popoverTitle]="'Bạn có muốn xóa?'" [popoverMessage]="'Bạn có muốn xóa?'"
-                                        placement="left" (confirm)="deleteComment(i,j)">
-                                        <span>
-                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                        </span>
-                                    </button>
+                                <div class="btn-group align-items-center" dropdown>
+                                    <span id="button-basic" class="drop-actions" dropdownToggle
+                                        aria-controls="dropdown-basic">
+                                        <i class="material-icons">
+                                            more_horiz
+                                        </i>
+                                    </span>
+                                    <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                                        aria-labelledby="button-basic">
+                                        <li role="menuitem">
+                                            <div class="dropdown-item" (click)="comment.isEdit=true">
+                                                <i class="material-icons edit">
+                                                    edit
+                                                </i>
+                                                {{'general.button.edit' | translate}}
+                                            </div>
+
+                                        </li>
+                                        <li class="divider dropdown-divider"></li>
+
+                                        <li role="menuitem">
+                                            <div class="dropdown-item">
+                                                <span role="button" mwlConfirmationPopover
+                                                    (click)="$event.stopPropagation()"
+                                                    [popoverTitle]="'Bạn có muốn xóa?'"
+                                                    [popoverMessage]="'Bạn có muốn xóa?'" placement="left"
+                                                    (confirm)="deleteComment(i,j)">
+                                                    <i class="material-icons delete">delete</i>
+                                                    {{'general.button.delete' | translate}}
+                                                </span>
+                                            </div>
+                                        </li>
+                                    </ul>
                                 </div>
                             </h4>
                             <p *ngIf="!comment.isEdit" [innerHTML]="comment.content" style="display: block"></p>
                             <div *ngIf="comment.isEdit == true">
-                                <!-- <div class="media-left">
-                                    <a href="#">
-                                        <img class="img-responsive user-photo"
-                                            src="./assets/img/default_avatar.png">
-                                    </a>
-                                </div> -->
                                 <app-input-discussion [DataList]="userList" [Placement]="'down'" [DistantPopUp]="5"
                                     [BindingObject]="comment" [DisplayProperty]="'creatorName'"
                                     (onEnter)="editComment(post,$event)" [DisableWhenEnter]="true"
                                     [Id]="commentInputDiscussionComponent[i].Id" [InputClass]="'InputComment'"
                                     (onSearchWhoAt)="searchUserList($event)" [AutoReplaceWhenClick]="true">
                                     <dropdown-content>
-                                        <li *ngFor="let item of userList" (click)="item.isSelected = true"
+                                        <li *ngFor="let item of userList"
+                                            (click)="item.isSelected = true; userList.ids.push(item)"
                                             [ngClass]="{'list-group-item': true, 'li-selected': item.isSelected, 'li-active': item.isActive}"
                                             (mouseenter)="item.isActive = true;" (mouseleave)="item.isActive = false">
                                             {{item.Name}}
@@ -117,17 +148,16 @@
                             </div>
                         </div>
                     </div>
-                                            <!-- <div class="media-left">-->
-                        <!--<button data-dismiss="modal" data-backdrop="false" (click)="sendComment(i)"-->
-                        <!--class="btn btn-success btn-sm">-->
-                        <!--<i class="fa fa-check" aria-hidden="true"></i> Gửi-->
-                        <!--</button>-->
-                        <!--</div> -->
+                    <!-- <div class="media-left">-->
+                    <!--<button data-dismiss="modal" data-backdrop="false" (click)="sendComment(i)"-->
+                    <!--class="btn btn-success btn-sm">-->
+                    <!--<i class="fa fa-check" aria-hidden="true"></i> Gửi-->
+                    <!--</button>-->
+                    <!--</div> -->
                     <div class="media comment-box">
                         <div class="media-left">
                             <a href="#">
-                                <img class="img-responsive user-photo"
-                                    src="./assets/img/default_avatar.png">
+                                <img class="img-responsive user-photo" src="./assets/img/default_avatar.png">
                             </a>
                         </div>
                         <div class="media-body">
@@ -150,7 +180,8 @@
                     (click)="post.isShowComment = true" class="SeeMore">
                     Xem bình luận
                 </span>
-                <span style="cursor: pointer" *ngIf="!post.isShowComment && post?.comments && post?.comments.length == 0"
+                <span style="cursor: pointer"
+                    *ngIf="!post.isShowComment && post?.comments && post?.comments.length == 0"
                     (click)="post.isShowComment = true" class="SeeMore">
                     Trả lời
                 </span>
