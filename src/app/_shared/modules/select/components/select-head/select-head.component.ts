@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 
 @Component({
   selector: 'app-select-head',
@@ -17,6 +17,8 @@ export class SelectHeadComponent implements OnInit {
   @Output() closeList = new EventEmitter();
 
   @Output() toggleList = new EventEmitter();
+
+  @Output() clear: EventEmitter<void> = new EventEmitter<void>();
 
   @ViewChild('head', {static: false}) head;
 
@@ -46,5 +48,11 @@ export class SelectHeadComponent implements OnInit {
       default:
         break;
     }
+  }
+
+  onClear(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    this.clear.emit();
   }
 }
