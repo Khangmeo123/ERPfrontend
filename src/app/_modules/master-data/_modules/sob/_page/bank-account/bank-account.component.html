@@ -75,8 +75,8 @@
           </th>
           <th class="th-filter">
             <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.no"
-                                  data-qe-id="filter-no"></app-advanced-filters>
+                                  [filter]="bankAccountSearchEntity.number"
+                                  data-qe-id="filter-number"></app-advanced-filters>
           </th>
           <th class="th-filter">
             <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
@@ -102,7 +102,7 @@
             {{bankAccount.bankName}}
           </td>
           <td>
-            {{bankAccount.no}}
+            {{bankAccount.number}}
           </td>
           <td>
             {{bankAccount.name}}
@@ -178,12 +178,12 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="account-number" class="form-control" data-qe-id="dialog-account-number" formControlName="no"
+          <input id="account-number" class="form-control" data-qe-id="dialog-account-number" formControlName="number"
                  type="text">
           <app-error
-            *ngIf="(no?.errors && no?.touched) || !!errors.get('no')?.value"
+            *ngIf="(number?.errors && number?.touched) || !!errors.get('number')?.value"
             [formGroup]="bankAccountForm"
-            [placement]="'top'" [property]="'no'" class="error-form"
+            [placement]="'top'" [property]="'number'" class="error-form"
             data-qe-id="dialog-error-account-number">
           </app-error>
         </div>
@@ -197,7 +197,7 @@
           <input id="account-name" class="form-control" data-qe-id="dialog-account-name" formControlName="name"
                  type="text">
           <app-error
-            *ngIf="(name?.errors && no?.touched) || !!errors.get('name')?.value"
+            *ngIf="(name?.errors && number?.touched) || !!errors.get('name')?.value"
             [formGroup]="bankAccountForm"
             [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-account-number">
           </app-error>

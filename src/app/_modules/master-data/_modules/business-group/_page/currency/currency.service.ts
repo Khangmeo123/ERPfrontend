@@ -90,9 +90,9 @@ export class CurrencyService {
     return defered;
   }
 
-  delete(currencyEntity: any, currencySearchEntity: CurrencySearchEntity): Promise<boolean> {
+  deactivate(currencyEntity: any, currencySearchEntity: CurrencySearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.currencyRepository.delete(currencyEntity).subscribe(res => {
+      this.currencyRepository.deactivate(currencyEntity).subscribe(res => {
         if (res) {
           this.getList(currencySearchEntity);
           this.toastrService.success('Cập nhật thành công !');

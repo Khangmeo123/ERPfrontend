@@ -59,7 +59,7 @@ export class AssetRepository extends Repository {
             );
     }
 
-    delete(assetEntity: any): Observable<boolean> {
+    deactivate(assetEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(assetEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

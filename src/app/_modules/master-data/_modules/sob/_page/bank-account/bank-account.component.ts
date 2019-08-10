@@ -149,8 +149,8 @@ export class BankAccountComponent implements OnInit {
     return this.bankAccountForm.get('bankId') as FormControl;
   }
 
-  get no() {
-    return this.bankAccountForm.get('no') as FormControl;
+  get number() {
+    return this.bankAccountForm.get('number') as FormControl;
   }
 
   get name() {

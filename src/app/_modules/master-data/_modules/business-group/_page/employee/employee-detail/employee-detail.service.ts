@@ -75,9 +75,9 @@ export class EmployeeDetailService {
     return defered;
   }
 
-  delete(employeeEntity: any): Promise<boolean> {
+  deactivate(employeeEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.employeeDetailRepository.delete(employeeEntity).subscribe(res => {
+      this.employeeDetailRepository.deactivate(employeeEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
           resolve();

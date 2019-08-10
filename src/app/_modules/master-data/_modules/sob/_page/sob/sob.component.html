@@ -108,6 +108,7 @@
         </label>
         <div class="div-form">
           <input class="form-control" data-qe-id="dialog-code" formControlName="code" name="code" id="sob-code"
+                 [readOnly]="sobForm?.value?.id"
                  type="text">
           <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
                      [formGroup]="sobForm"

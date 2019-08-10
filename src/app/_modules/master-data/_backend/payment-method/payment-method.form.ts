@@ -7,7 +7,7 @@ export class PaymentMethodForm extends FormModel {
 
   setOfBookId = new FormControl('');
 
-  code = new FormControl('', [requiredField, checkLength(3, 10)]);
+  code = new FormControl('', [requiredField]);
   name = new FormControl('', [requiredField]);
 
   errors: FormGroup = new FormGroup({});

@@ -61,7 +61,7 @@ export class JobLevelRepository extends Repository {
             );
     }
 
-    delete(jobLevelEntity: any): Observable<boolean> {
+    deactivate(jobLevelEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(jobLevelEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

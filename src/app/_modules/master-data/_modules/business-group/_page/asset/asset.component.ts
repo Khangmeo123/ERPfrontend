@@ -96,8 +96,8 @@ export class AssetComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.assetService.delete(this.assetForm.value, this.assetSearchEntity).then(res => {
+  deactivate() {
+    this.assetService.deactivate(this.assetForm.value, this.assetSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;

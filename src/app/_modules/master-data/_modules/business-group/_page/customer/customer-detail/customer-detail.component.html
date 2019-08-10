@@ -99,7 +99,7 @@
   <div class="page-footer">
     <div>
       <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()" (cancel)="cancelClicked = true"
+        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deactivate()" (cancel)="cancelClicked = true"
         data-qe-id="button-delete"
         *ngIf="customerForm.controls.id.value !== null && customerForm.controls.id.value !== undefined">
         {{ 'general.button.delete' | translate}}</button>

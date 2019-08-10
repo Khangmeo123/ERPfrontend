@@ -1,23 +1,19 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
-import { translate } from 'src/app/_helpers/string';
-import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
-import { FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { EnumEntity } from 'src/app/_helpers/entity';
-import { ActivatedRoute, Router } from '@angular/router';
-import { SupplierDetailService } from './supplier-detail.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {PaginationModel} from 'src/app/_shared/modules/pagination/pagination.model';
+import {FormGroup} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {EnumEntity} from 'src/app/_helpers/entity';
+import {ActivatedRoute, Router} from '@angular/router';
+import {SupplierDetailService} from './supplier-detail.service';
+import {GeneralService} from 'src/app/_helpers/general-service.service';
 
 @Component({
   selector: 'app-supplier-detail',
   templateUrl: './supplier-detail.component.html',
   styleUrls: ['./supplier-detail.component.scss'],
-  providers: [SupplierDetailService]
+  providers: [SupplierDetailService],
 })
 export class SupplierDetailComponent implements OnInit, OnDestroy {
-
-  pageTitle: string = translate('supplier.detail.header.title');
   bookMarkId: string;
   isBookMark: boolean = false;
   isShowDialog: boolean = false;
@@ -31,7 +27,7 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
   isOpenTab1: boolean = true;
 
   constructor(private route: ActivatedRoute, private supplierDetailService: SupplierDetailService, private router: Router,
-    private generalService: GeneralService) {
+              private generalService: GeneralService) {
     this.route.queryParams
       .subscribe(params => {
         this.supplierDetailService.getId(params.id);
@@ -60,8 +56,8 @@ export class SupplierDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/master-data/business-group/supplier/supplier-list']);
   }
 
-  delete() {
-    this.supplierDetailService.delete(this.supplierForm.value).then(res => {
+  deactivate() {
+    this.supplierDetailService.deactivate(this.supplierForm.value).then(res => {
       this.router.navigate(['/master-data/business-group/supplier/supplier-list']);
     });
   }

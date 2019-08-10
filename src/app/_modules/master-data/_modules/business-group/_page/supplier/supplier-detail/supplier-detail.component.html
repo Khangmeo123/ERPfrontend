@@ -1,7 +1,7 @@
 <div class="page supplier-detail">
     <div class="page-header">
         <span class="page-title">
-            {{pageTitle}}
+            {{'supplier.detail.header.title' | translate}}
         </span>
         <div class="page-actions">
             <button class="btn btn-cancel" (click)="cancel()"
@@ -101,7 +101,7 @@
         <div>
             <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                 *ngIf="supplierForm.controls.id.value !== null && supplierForm.controls.id.value !== undefined"
-                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deactivate()"
                 (cancel)="cancelClicked = true" data-qe-id="button-delete">
                 {{ 'general.button.delete' | translate}}</button>
         </div>

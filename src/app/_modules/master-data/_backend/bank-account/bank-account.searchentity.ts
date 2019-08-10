@@ -9,7 +9,7 @@ export class BankAccountSearchEntity extends SearchEntity {
   bankName: TextFilter = new TextFilter();
   bankCode: TextFilter = new TextFilter();
   name: TextFilter = new TextFilter();
-  no: TextFilter = new TextFilter();
+  number: TextFilter = new TextFilter();
   description: TextFilter = new TextFilter();
 
   constructor(bankAccountSearchEntity?: any) {

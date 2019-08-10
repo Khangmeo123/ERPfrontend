@@ -90,9 +90,9 @@ export class JobTitleService {
     return defered;
   }
 
-  delete(jobTitleEntity: any, jobTitleSearchEntity: JobTitleSearchEntity): Promise<boolean> {
+  deactivate(jobTitleEntity: any, jobTitleSearchEntity: JobTitleSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.jobTitleRepository.delete(jobTitleEntity).subscribe(res => {
+      this.jobTitleRepository.deactivate(jobTitleEntity).subscribe(res => {
         if (res) {
           this.getList(jobTitleSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

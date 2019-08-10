@@ -80,8 +80,8 @@ export class JobLevelComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.jobLevelService.delete(this.jobLevelForm.value, this.jobLevelSearchEntity).then(res => {
+  deactivate() {
+    this.jobLevelService.deactivate(this.jobLevelForm.value, this.jobLevelSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;

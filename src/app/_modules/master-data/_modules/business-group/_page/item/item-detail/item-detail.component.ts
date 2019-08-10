@@ -81,8 +81,8 @@ export class ItemDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/master-data/business-group/item/item-list']);
   }
 
-  delete() {
-    this.itemDetailService.delete(this.itemForm.value).then(res => {
+  deactivate() {
+    this.itemDetailService.deactivate(this.itemForm.value).then(res => {
       this.router.navigate(['/master-data/business-group/item/item-list']);
     });
   }
