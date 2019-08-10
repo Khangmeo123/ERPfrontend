@@ -15,6 +15,7 @@ import {ToastrService} from 'ngx-toastr';
 import {CoaSearchEntity} from '../../../../_backend/coa/coa.searchentity';
 import {BankEntity} from '../../../../_backend/bank/bank.entity';
 import {BankSearchEntity} from '../../../../_backend/bank/bank.searchentity';
+import {CoaEntity} from '../../../../_backend/coa/coa.entity';
 
 @Component({
   selector: 'app-bank-account',
@@ -65,6 +66,12 @@ export class BankAccountComponent implements OnInit {
 
   public coaSearchEntity: ChartOfAccountSearchEntity = new ChartOfAccountSearchEntity();
 
+  public coaFilterList: CoaEntity[] = [];
+
+  public selectedCoaFilterList: CoaEntity[] = [];
+
+  public coaFilterSearchEntity: ChartOfAccountSearchEntity = new ChartOfAccountSearchEntity();
+
   public setOfBookId: string = null;
 
   public bankList: BankEntity[] = [];
@@ -86,6 +93,11 @@ export class BankAccountComponent implements OnInit {
     const coaListSub = this.bankAccountService.coaList.subscribe((coaList: Entities) => {
       this.coaList = coaList.exceptIds;
       this.selectedCoaList = coaList.ids;
+    });
+
+    const coaFilterListSub: Subscription = this.bankAccountService.coaFilterList.subscribe((coaList: Entities) => {
+      this.coaFilterList = coaList.exceptIds;
+      this.selectedCoaFilterList = coaList.ids;
     });
 
     const bankAccountSub = this.bankAccountService.bankAccountList.subscribe((list) => {
@@ -114,7 +126,8 @@ export class BankAccountComponent implements OnInit {
       .add(bankAccountFormSub)
       .add(coaListSub)
       .add(bankListSub)
-      .add(bankAccountCountSub);
+      .add(bankAccountCountSub)
+      .add(coaFilterListSub);
   }
 
   get currentSob() {
@@ -248,6 +261,8 @@ export class BankAccountComponent implements OnInit {
 
   clearSearch(table: any) {
     this.bankAccountSearchEntity = new BankAccountSearchEntity();
+    this.bankAccountSearchEntity.setOfBookId = this.setOfBookId;
+    this.selectedCoaFilterList = [];
     table.reset();
   }
 
@@ -283,5 +298,27 @@ export class BankAccountComponent implements OnInit {
   onSearchSetOfBook(event) {
     this.sobSearchEntity.name.startsWith = event;
     this.bankAccountService.getSobList(this.sobSearchEntity);
+  }
+
+  onOpenCoaFilter() {
+    const {ids} = this.coaFilterSearchEntity;
+    this.coaFilterSearchEntity = new ChartOfAccountSearchEntity();
+    this.coaFilterSearchEntity.ids = ids;
+    this.coaFilterSearchEntity.setOfBookId = this.setOfBookId;
+    this.bankAccountService.getCoaFilterList(this.coaFilterSearchEntity);
+  }
+
+  onSearchCoaFilter(event) {
+    this.coaFilterSearchEntity.name.startsWith = event;
+    this.bankAccountService.getCoaFilterList(this.coaFilterSearchEntity);
+  }
+
+  onCoaFilter(event) {
+    this.coaFilterSearchEntity = event;
+    if (event.length) {
+      this.bankAccountSearchEntity.chartOfAccountId = event[0];
+    } else {
+      this.bankAccountSearchEntity.chartOfAccountId = null;
+    }
   }
 }

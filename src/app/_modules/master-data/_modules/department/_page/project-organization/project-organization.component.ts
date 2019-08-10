@@ -1,20 +1,20 @@
-import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { DivisionEntity } from '../../../../_backend/division/division.entity';
-import { Subject, Subscription } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
-import { translate } from '../../../../../../_helpers/string';
-import { ProjectOrganizationEntity } from '../../../../_backend/project-organization/project-organization.entity';
-import { ProjectOrganizationSearchEntity } from '../../../../_backend/project-organization/project-organization.search-entity';
-import { ProjectOrganizationService } from './project-organization.service';
-import { DepartmentService } from '../department/department.service';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
-import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
-import { Router } from '@angular/router';
-import { Entities } from '../../../../../../_helpers/entity';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {LegalEntity} from '../../../../_backend/legal/legal.entity';
+import {DivisionEntity} from '../../../../_backend/division/division.entity';
+import {Subject, Subscription} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {translate} from '../../../../../../_helpers/string';
+import {ProjectOrganizationEntity} from '../../../../_backend/project-organization/project-organization.entity';
+import {ProjectOrganizationSearchEntity} from '../../../../_backend/project-organization/project-organization.search-entity';
+import {ProjectOrganizationService} from './project-organization.service';
+import {DepartmentService} from '../department/department.service';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {EmployeeEntity} from '../../../../_backend/employee/employee.entity';
+import {EmployeeSearchEntity} from '../../../../_backend/employee/employee.searchentity';
+import {Router} from '@angular/router';
+import {Entities} from '../../../../../../_helpers/entity';
 
 @Component({
   selector: 'app-project-organization',
@@ -138,6 +138,10 @@ export class ProjectOrganizationComponent implements OnInit, OnDestroy {
       this.selectedEmployeeToAddToDepartmentList = entities.ids;
     });
 
+    const employeeTypingSub: Subscription = this.projectOrganizationService.searchEmployeeByTyping(this.employeeTyping);
+
+    const managerTypingSub: Subscription = this.projectOrganizationService.searchManagerByTyping(this.managerTyping);
+
     this.subscription
       .add(projectOrganizationFormSub)
       .add(employeeNotInDepartmentSub)
@@ -147,7 +151,9 @@ export class ProjectOrganizationComponent implements OnInit, OnDestroy {
       .add(employeeListSub)
       .add(projectOrganizationListSub)
       .add(projectOrganizationCountSub)
-      .add(divisionSub);
+      .add(divisionSub)
+      .add(employeeTypingSub)
+      .add(managerTypingSub);
   }
 
   get code(): FormControl {
@@ -308,20 +314,14 @@ export class ProjectOrganizationComponent implements OnInit, OnDestroy {
     this.employeeNotInDepartmentSearchEntity.ids = event;
   }
 
-  searchEmployeeByTyping() {
-    this.projectOrganizationService.searchEmployeeByTyping(this.employeeTyping);
-  }
-
-  searchManagerByTyping() {
-    this.projectOrganizationService.searchManagerByTyping(this.managerTyping);
-  }
-
   onSearchEmployeeByTyping(event) {
     const employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
-    employeeSearchEntity.ids = this.selectedEmployeeToAddToDepartmentList.map((employee: EmployeeEntity) => employee.id);
+    employeeSearchEntity.ids = this.employeeNotInDepartmentSearchEntity.ids;
     employeeSearchEntity.name.startsWith = event;
+    employeeSearchEntity.divisionId = this.division.id;
+    employeeSearchEntity.legalEntityId = this.legalEntity.id;
+    employeeSearchEntity.projectOrganizationId = this.selectedDepartment.id;
     this.employeeTyping.next(employeeSearchEntity);
-    this.searchEmployeeByTyping();
   }
 
   onSearchManagerByTyping(event) {
@@ -329,7 +329,6 @@ export class ProjectOrganizationComponent implements OnInit, OnDestroy {
     searchEntity.ids = this.selectedManagerList.map((employee: EmployeeEntity) => employee.id);
     searchEntity.name.startsWith = event;
     this.managerTyping.next(searchEntity);
-    this.searchEmployeeByTyping();
   }
 
   onSearchManager() {

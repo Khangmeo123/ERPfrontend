@@ -12,6 +12,7 @@ import {UomEntity} from '../../../../_backend/uom/uom.entity';
 import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
 import {NaturalResourceTaxService} from './natural-resource-tax.service';
 import {NaturalResourceTaxSearchEntity} from '../../../../_backend/natural-resource-tax/natural-resource-tax.search-entity';
+import {EnvironmentTaxSearchEntity} from '../../../../_backend/environment-tax/environment-tax.search-entity';
 
 @Component({
   selector: 'app-natural-resource-tax',
@@ -244,6 +245,8 @@ export class NaturalResourceTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.naturalResourceTaxSearchEntity = new NaturalResourceTaxSearchEntity();
     this.naturalResourceTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.naturalResourceTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 

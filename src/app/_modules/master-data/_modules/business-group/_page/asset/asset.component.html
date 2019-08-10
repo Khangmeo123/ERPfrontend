@@ -61,6 +61,7 @@
               {{ 'asset.content.status' | translate}}
               <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
             </th>
+            <th class="asset-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -89,6 +90,8 @@
                                  (listOpen)="openAssetStatuses($event)">
               </app-simple-select>
             </th>
+            <th class="th-filter asset-actions">
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-asset let-index="rowIndex">
@@ -97,6 +100,11 @@
             <td> {{asset.name}} </td>
             <td> {{asset.typeName}} </td>
             <td> {{asset.statusDisplay}} </td>
+            <td class="asset-actions">
+              <a role="button" (click)="edit(asset.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

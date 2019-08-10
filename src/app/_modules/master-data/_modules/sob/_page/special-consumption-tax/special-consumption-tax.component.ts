@@ -244,6 +244,8 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
     this.specialConsumptionTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.specialConsumptionTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 

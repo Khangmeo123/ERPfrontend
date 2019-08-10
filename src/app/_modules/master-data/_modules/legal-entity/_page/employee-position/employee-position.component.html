@@ -11,19 +11,26 @@
 
   </div>
   <div class="page-body">
-    <div class="row">
-      <div class="col-sm-6 page-1">
-        <div class="mt-2 row">
-          <div class="col-sm-7 d-flex align-items-center">
+    <div class="page-section row">
+      <div class="col-sm-7 d-flex align-items-center">
             <span class="sob-label flex-shrink-1 mr-2">
               {{'general.legal_entity.name' | translate}}:
             </span>
-            <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
-                               [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
-                               (selectionChange)="selectLegal($event)" (listOpen)="openLegalEntityList()">
-            </app-single-select>
-          </div>
-          <div class="col-sm-5 page-actions d-flex justify-content-end">
+        <app-single-select data-qe-id="form-select-sob"
+                           [list]="legalEntityExceptIds"
+                           [selectedList]="legalEntityIds"
+                           [key]="'name'"
+                           (search)="legalSearch($event)"
+                           (selectionChange)="selectLegal($event)"
+                           (listOpen)="openLegalEntityList()"
+        ></app-single-select>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6 page-1">
+        <div class="mt-2 row">
+          <div class="col page-actions d-flex justify-content-end">
             <button class="btn btn-add" (click)="addEmployeePosition()"
                     [disabled]="employeePositionSearchEntity.legalEntityId == undefined"
                     data-qe-id="button-add-employee-position">
@@ -95,15 +102,19 @@
       <div class="col-sm-6">
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
-            <app-multi-select data-qe-id="form-multi-select-employee" [list]="employeeExceptIds"
-                              [selectedList]="employeeIds" [key]="'name'" (search)="employeeSearch($event)"
+            <app-multi-select data-qe-id="form-multi-select-employee"
+                              [list]="employeeExceptIds"
+                              [selectedList]="employeeIds"
+                              [key]="'name'"
+                              [disabled]="!legalEntityId"
+                              (search)="employeeSearch($event)"
                               (selectionChange)="selectEmployee($event)"
-                              (listOpen)="openEmployeeList(employeeSearchEntity.ids)">
+                              (listOpen)="openEmployeeList()">
             </app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
             <button class="btn btn-add" (click)="addEmployee()" data-qe-id="button-add"
-                    [disabled]="listEmployeeId.length === 0">
+                    [disabled]="!employeeSearchEntity?.ids?.length">
               {{'general.button.add' | translate}}</button>
             <a class="btn btn-export" [href]="exportLink + employeePositionId"
                data-qe-id="button-export">{{'general.button.export' | translate}}</a>
@@ -154,10 +165,10 @@
                 <td> {{item.name}} </td>
                 <td>
                   <div class="d-flex">
-                    <div class="edit mr-2" (click)="editEmployeeDetail(item.id)">
+                    <div class="edit mr-2" (click)="editEmployeeDetail(item.id, $event)">
                       <mat-icon>edit</mat-icon>
                     </div>
-                    <div class="delete" (click)="deleteEmployeeFormPosition(item.id)">
+                    <div class="delete" (click)="deleteEmployeeFormPosition(item.id, $event)">
                       <mat-icon>delete</mat-icon>
                     </div>
                   </div>

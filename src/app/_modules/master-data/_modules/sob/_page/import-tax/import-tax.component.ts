@@ -12,6 +12,7 @@ import {UomEntity} from '../../../../_backend/uom/uom.entity';
 import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
 import {ImportTaxService} from './import-tax.service';
 import {ImportTaxSearchEntity} from '../../../../_backend/import-tax/import-tax.search-entity';
+import {SpecialConsumptionTaxSearchEntity} from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 @Component({
   selector: 'app-import-tax',
@@ -249,6 +250,8 @@ export class ImportTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.importTaxSearchEntity = new ImportTaxSearchEntity();
     this.importTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.importTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 

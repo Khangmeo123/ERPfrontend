@@ -65,7 +65,7 @@
               <app-simple-select (listOpen)="getCharacteristicList()"
                                  (selectionChange)="onFilterCharacteristic($event)"
                                  [list]="characteristicList"
-                                 [initialValue]="coaForm?.controls?.characteristicDisplay?.value"
+                                 [initialValue]="coaSearchEntity.characteristicId"
                                  data-qe-id="dialog-account-characteristic"
                                  key="display"
               ></app-simple-select>

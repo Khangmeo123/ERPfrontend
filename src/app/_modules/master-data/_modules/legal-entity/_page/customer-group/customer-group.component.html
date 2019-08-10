@@ -11,20 +11,23 @@
 
   </div>
   <div class="page-body">
-    <div class="row">
-      <div class="col-sm-6 page-1">
-        <div class="mt-2 row">
-          <div class="col-sm-7 d-flex align-items-center">
+    <div class="page-section row">
+      <div class="col-sm-7 d-flex align-items-center">
             <span class="sob-label flex-shrink-1 mr-2">
               {{'general.legal_entity.name' | translate}}:
             </span>
-            <app-single-select data-qe-id="form-select-legal" [list]="legalEntityExceptIds"
-                               [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
-                               (selectionChange)="selectLegal($event)"
-                               (listOpen)="openLegalEntityList(customerGroupSearchEntity.legalEntityId)">
-            </app-single-select>
-          </div>
-          <div class="col-sm-5 page-actions d-flex justify-content-end">
+        <app-single-select data-qe-id="form-select-legal" [list]="legalEntityExceptIds"
+                           [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
+                           (selectionChange)="selectLegal($event)"
+                           (listOpen)="openLegalEntityList(customerGroupSearchEntity.legalEntityId)">
+        </app-single-select>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-sm-6 page-1">
+        <div class="mt-2 row">
+          <div class="col page-actions d-flex justify-content-end">
             <button class="btn btn-add" (click)="addGroup()" data-qe-id="form-select-legal"
                     [disabled]="customerGroupSearchEntity.legalEntityId == undefined">
               <span>{{'general.button.add' | translate}}</span></button>

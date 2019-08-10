@@ -73,6 +73,7 @@
               {{ 'employee.list.content.status' | translate}}
               <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
             </th>
+            <th class="employee-list-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -110,6 +111,7 @@
                                  (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
               </app-simple-select>
             </th>
+            <th class="th-filter employee-list-actions"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-employee let-index="rowIndex">
@@ -120,6 +122,11 @@
             <td> {{employee.dob | date: 'dd/MM/yyyy'}} </td>
             <td> {{employee.identityNumber}} </td>
             <td> {{employee.statusDisplay}} </td>
+            <td class="employee-list-actions">
+              <a role="button" (click)="edit(employee.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

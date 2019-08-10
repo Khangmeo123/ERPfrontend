@@ -62,6 +62,7 @@
               {{ 'supplier.list.content.status' | translate}}
               <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
             </th>
+            <th class="supplier-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -86,6 +87,7 @@
                                  (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
               </app-simple-select>
             </th>
+            <th class="th-filter supplier-actions"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-supplier let-index="rowIndex">
@@ -94,6 +96,11 @@
             <td> {{supplier.name}} </td>
             <td> {{supplier.taxCode}} </td>
             <td> {{supplier.statusDisplay}} </td>
+            <td class="supplier-actions">
+              <a role="button" (click)="toDetail(supplier.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

@@ -24,7 +24,7 @@ export class BankAccountRepository extends Repository {
   }
 
   getCoaList(coaSearchEntity: ChartOfAccountSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account', JSON.stringify(coaSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {

@@ -41,6 +41,7 @@
               {{ 'jobTtitle.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
+            <th class="job-title-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -58,6 +59,9 @@
                                     (changeFilter)="getList()"
                                     data-qe-id="table-thead-filter-description"></app-advanced-filters>
             </th>
+            <th class="th-filter job-title-actions">
+
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-jobTitle let-index="rowIndex">
@@ -65,6 +69,11 @@
             <td> {{jobTitle.code}} </td>
             <td> {{jobTitle.name}} </td>
             <td> {{jobTitle.description}} </td>
+            <td class="job-title-actions">
+              <a role="button" (click)="edit(jobTitle.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

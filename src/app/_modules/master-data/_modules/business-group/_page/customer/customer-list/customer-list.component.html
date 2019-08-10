@@ -61,6 +61,7 @@
               {{ 'customer.list.content.status' | translate}}
               <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
             </th>
+            <th class="customer-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -85,6 +86,8 @@
                                  data-qe-id="table-thead-filter-status">
               </app-simple-select>
             </th>
+            <th class="th-filter customer-actions">
+            </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-customer let-index="rowIndex">
@@ -93,6 +96,11 @@
             <td> {{customer.name}} </td>
             <td> {{customer.taxCode}} </td>
             <td> {{customer.statusDisplay}} </td>
+            <td class="customer-actions">
+              <a role="button" (click)="toDetail(customer.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

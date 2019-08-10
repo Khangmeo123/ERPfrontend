@@ -209,6 +209,8 @@ export class CostCenterComponent implements OnInit {
 
   clearSearch(table: any) {
     this.costCenterSearchEntity = new CostCenterSearchEntity();
+    this.selectedCoaList = [];
+    this.costCenterSearchEntity.setOfBookId = this.setOfBookId;
     table.reset();
   }
 

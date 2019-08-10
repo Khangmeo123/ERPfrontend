@@ -16,6 +16,7 @@ export class BankAccountService {
   public bankAccountForm: BehaviorSubject<FormGroup>;
   public bankAccountCount: BehaviorSubject<number> = new BehaviorSubject(0);
   public coaList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
+  public coaFilterList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
   public bankList: BehaviorSubject<Entities> = new BehaviorSubject(new Entities());
 
   constructor(private fb: FormBuilder, private bankAccountRepository: BankAccountRepository, private toastrService: ToastrService) {
@@ -29,6 +30,13 @@ export class BankAccountService {
     this.bankAccountRepository.getCoaList(coaSearchEntity)
       .subscribe((coaList: Entities) => {
         this.coaList.next(coaList);
+      });
+  }
+
+  getCoaFilterList(coaSearchEntity: ChartOfAccountSearchEntity) {
+    this.bankAccountRepository.getCoaList(coaSearchEntity)
+      .subscribe((coaList: Entities) => {
+        this.coaFilterList.next(coaList);
       });
   }
 

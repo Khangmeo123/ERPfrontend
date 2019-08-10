@@ -41,6 +41,7 @@
               {{ 'uom.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
+            <th class="uom-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -60,6 +61,7 @@
                                     [filter]="uomSearchEntity.description" (changeFilter)="getList()"
                                     data-qe-id="table-thead-filter-description"></app-advanced-filters>
             </th>
+            <th class="uom-actions th-filter"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-uom let-index="rowIndex">
@@ -67,6 +69,11 @@
             <td> {{uom.code}} </td>
             <td> {{uom.name}} </td>
             <td> {{uom.description}} </td>
+            <td class="uom-actions">
+              <a role="button" (click)="edit(uom.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

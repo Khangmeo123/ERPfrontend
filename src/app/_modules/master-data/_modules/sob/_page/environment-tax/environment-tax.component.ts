@@ -12,6 +12,7 @@ import {UomEntity} from '../../../../_backend/uom/uom.entity';
 import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
 import {EnvironmentTaxService} from './environment-tax.service';
 import {EnvironmentTaxSearchEntity} from '../../../../_backend/environment-tax/environment-tax.search-entity';
+import {ExportTaxSearchEntity} from '../../../../_backend/export-tax/export-tax.search-entity';
 
 @Component({
   selector: 'app-environment-tax',
@@ -249,6 +250,8 @@ export class EnvironmentTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.environmentTaxSearchEntity = new EnvironmentTaxSearchEntity();
     this.environmentTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.environmentTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 

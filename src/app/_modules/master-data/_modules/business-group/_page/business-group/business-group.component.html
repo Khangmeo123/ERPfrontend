@@ -51,6 +51,7 @@
               {{ 'businessGroup.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
+            <th class="business-group-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -74,6 +75,7 @@
                                     data-qe-id="table-thead-filter-description">
               </app-advanced-filters>
             </th>
+            <th class="th-filter business-group-actions"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-businessGroup let-index="rowIndex">
@@ -81,6 +83,11 @@
             <td class="ui-resizable-column"> {{businessGroup.code}} </td>
             <td class="ui-resizable-column"> {{businessGroup.name}} </td>
             <td class="ui-resizable-column"> {{businessGroup.description}} </td>
+            <td class="ui-resizable-column business-group-actions">
+              <a role="button" (click)="edit(businessGroup.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

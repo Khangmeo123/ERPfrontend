@@ -55,9 +55,13 @@
         </tr>
         <tr>
           <th class="th-filter">
-            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
-                                  [filter]="bankAccountSearchEntity.accountingCode"
-                                  data-qe-id="filter-accountingCode"></app-advanced-filters>
+            <app-single-select key="code"
+                               [list]="coaFilterList"
+                               [selectedList]="selectedCoaFilterList"
+                               (search)="onSearchCoaFilter($event)"
+                               (listOpen)="onOpenCoaFilter()"
+                               (selectionChange)="onCoaFilter($event)"
+            ></app-single-select>
           </th>
           <th class="th-filter">
             <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"

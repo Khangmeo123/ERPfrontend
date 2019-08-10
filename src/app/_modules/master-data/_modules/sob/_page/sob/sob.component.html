@@ -40,6 +40,7 @@
               {{ 'sob.chart_account' | translate}}
               <p-sortIcon [field]="'chartOfAccountTemplateName'" class="float-right"></p-sortIcon>
             </th>
+            <th class="sob-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -59,6 +60,7 @@
                                     [filter]="sobSearchEntity.chartOfAccountName"
                                     data-qe-id="sob-filter-chartOfAccountName"></app-advanced-filters>
             </th>
+            <th class="th-filter sob-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-row pTemplate="body">
@@ -74,6 +76,11 @@
             </td>
             <td>
               {{row.chartOfAccountTemplateName}}
+            </td>
+            <td class="sob-actions">
+              <a role="button" (click)="edit(row.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
             </td>
           </tr>
         </ng-template>

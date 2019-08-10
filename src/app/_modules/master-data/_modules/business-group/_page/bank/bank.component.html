@@ -61,6 +61,7 @@
               {{ 'bank.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
+            <th class="bank-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -82,6 +83,7 @@
                                     [filter]="bankSearchEntity.description" (changeFilter)="getList()"
                                     data-qe-id="table-thead-filter-description"></app-advanced-filters>
             </th>
+            <th class="th-filter bank-actions"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-bank let-index="rowIndex">
@@ -89,6 +91,11 @@
             <td> {{bank.code}} </td>
             <td> {{bank.name}} </td>
             <td> {{bank.description}} </td>
+            <td class="bank-actions">
+              <a role="button" (click)="edit(bank.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

@@ -12,6 +12,7 @@ import {UomEntity} from '../../../../_backend/uom/uom.entity';
 import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
 import {ExportTaxService} from './export-tax.service';
 import {ExportTaxSearchEntity} from '../../../../_backend/export-tax/export-tax.search-entity';
+import {SpecialConsumptionTaxSearchEntity} from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 @Component({
   selector: 'app-export-tax',
@@ -249,6 +250,8 @@ export class ExportTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.exportTaxSearchEntity = new ExportTaxSearchEntity();
     this.exportTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.exportTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 
