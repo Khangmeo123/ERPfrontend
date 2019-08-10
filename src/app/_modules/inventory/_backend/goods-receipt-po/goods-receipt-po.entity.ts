@@ -57,7 +57,7 @@ export class GoodsReceiptPOContent extends Entity {
     unitOfMeasureId: string;
     unitOfMeasureName: string;
     unitOfMeasureCode: string;
-
+    actualReceive: number;
     constructor(goodsReceiptPOContent?: any) {
         super(goodsReceiptPOContent);
     }
@@ -131,7 +131,6 @@ export class GoodsReceiptPOQuantityDetail extends Entity {
     unitOfMeasureName: string;
     quantity: number;
     goodsReceiptPOQuantities: GoodsReceiptPOQuantity[];
-
     constructor(goodsReceiptPOQuantityDetail?: any) {
         super(goodsReceiptPOQuantityDetail);
     }
@@ -139,6 +138,65 @@ export class GoodsReceiptPOQuantityDetail extends Entity {
 
 export class GoodsReceiptPOQuantity extends Entity {
     goodsReceiptContentId: string;
+    binLocationId: string;
+    binLocationCode: string;
+    quantity: number;
+
+    constructor(goodsReceiptPOQuantity?) {
+        super(goodsReceiptPOQuantity);
+    }
+}
+
+export class GoodsReceiptPOBinlocationEntity extends Entity {
+    code: string;
+}
+
+export class GoodsReceiptPOSerialNumberEntity extends Entity {
+    goodsReceiptPOContentId: string;
+    itemName: string;
+    itemCode: string;
+    mfrSerialNumber: string;
+    serialNumber: string;
+    lotNumber: string;
+    quantity: number;
+    binLocationId: string;
+    binLocationCode: string;
+    expirationDate: string;
+    mfrDate: string;
+    admissionDate: string;
+    mfrWarrantyStart: string;
+    mfrWarrantyEnd: string;
+    location: string;
+    details: string;
+    qrCode: string;
+
+    constructor(goodsReceiptPOSerialNumberEntity?) {
+        super(goodsReceiptPOSerialNumberEntity);
+    }
+}
+
+export class GoodsReceiptPOBatchEntity extends Entity {
+    goodsReceiptPOContentId: string;
+    itemName: string;
+    itemCode: string;
+    batchNumber: number;
+    quantity: number;
+    binLocationId: string;
+    expirationDate: string;
+    mfrDate: string;
+    location: string;
+    details: string;
+    unitCost: number;
+    goodsReceiptPOBatchBinLocations: GoodsReceiptPOBatchBinLocationEntity[];
+
+    constructor(goodsReceiptPOBatchEntity?: any) {
+        super(goodsReceiptPOBatchEntity);
+    }
+}
+
+export class GoodsReceiptPOBatchBinLocationEntity extends Entity {
+    disabled: boolean;
+    goodsReceiptPOBatchId: string;
     binLocationId: string;
     binLocationCode: string;
     quantity: number;

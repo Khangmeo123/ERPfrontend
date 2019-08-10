@@ -1,3 +1,9 @@
+import {
+    GoodsReceiptPOQuantityDetail,
+    GoodsReceiptPOBinlocationEntity,
+    GoodsReceiptPOSerialNumberEntity,
+    GoodsReceiptPOBatchEntity,
+} from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { environment } from 'src/environments/environment';
 import { Repository } from 'src/app/_helpers/repository';
 import { HttpClient } from '@angular/common/http';
@@ -14,6 +20,7 @@ import {
     GoodsReceiptPOItemDetailSearchEntity,
     GoodsReceiptPOUnitOfMeasureSearchEntity,
     PurchaseOrdersSearchEntity,
+    GoodsReceiptPOBinlocationSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Entities } from 'src/app/_helpers/entity';
 
@@ -93,6 +100,100 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
                         return new PurchaseOrdersEntity(item);
                     });
                     return r.body;
+                }),
+            );
+    }
+
+    getQuantityDetailList(goodsReceiptPOContentId: string) {
+        return this.http.post<GoodsReceiptPOQuantityDetail>(this.apiUrl + '/quantity/list',
+            JSON.stringify({ goodsReceiptPOContentId: goodsReceiptPOContentId }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return new GoodsReceiptPOQuantityDetail(r.body);
+                }),
+            );
+    }
+
+    updateQuantityDetail(goodsReceiptPOQuantityDetail: any) {
+        return this.http.post<boolean>(this.apiUrl + '/quantity/bulk-merge',
+            JSON.stringify(goodsReceiptPOQuantityDetail),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    dropListBinLocation(goodsReceiptPOBinlocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/quantity/drop-list-bin-location',
+            JSON.stringify(goodsReceiptPOBinlocationSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new GoodsReceiptPOBinlocationEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new GoodsReceiptPOBinlocationEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    analyzeQRCode(itemDetailId: string, qrCode: string) {
+        return this.http.post<GoodsReceiptPOSerialNumberEntity>(this.apiUrl + '/serial-number/analyze-qr-code',
+            JSON.stringify({ itemDetailId: itemDetailId, qrCode: qrCode }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return new GoodsReceiptPOSerialNumberEntity(r.body);
+                }),
+            );
+    }
+
+    updateSerialNumber(goodsReceiptPOSerialNumberEntities: any[]) {
+        return this.http.post<boolean>(this.apiUrl + '/quantity/bulk-merge',
+            JSON.stringify(goodsReceiptPOSerialNumberEntities),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    getSerialNumberList(goodsReceiptPOContentId: string) {
+        return this.http.post<GoodsReceiptPOSerialNumberEntity[]>(this.apiUrl + '/quantity/list',
+            JSON.stringify({ goodsReceiptPOContentId: goodsReceiptPOContentId }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new GoodsReceiptPOSerialNumberEntity(item);
+                    });
+                }),
+            );
+    }
+
+    analyzeBatchCode(itemDetailId: string, qrCode: string) {
+        return this.http.post<GoodsReceiptPOBatchEntity>(this.apiUrl + '/batch/analyze-qr-code',
+            JSON.stringify({ itemDetailId: itemDetailId, qrCode: qrCode }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return new GoodsReceiptPOBatchEntity(r.body);
+                }),
+            );
+    }
+
+    updateBatch(goodsReceiptPOBatchEntities: any[]) {
+        return this.http.post<boolean>(this.apiUrl + '/batch/bulk-merge',
+            JSON.stringify(goodsReceiptPOBatchEntities),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    getBatchList(goodsReceiptPOContentId: string) {
+        return this.http.post<GoodsReceiptPOBatchEntity[]>(this.apiUrl + '/batch/list',
+            JSON.stringify({ goodsReceiptPOContentId: goodsReceiptPOContentId }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new GoodsReceiptPOBatchEntity(item);
+                    });
                 }),
             );
     }

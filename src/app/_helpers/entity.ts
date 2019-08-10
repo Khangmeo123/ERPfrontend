@@ -2,7 +2,8 @@ export class Entity {
     id: string;
     isDeleted: boolean = true;
     isEdited: boolean = true;
-    error: any;
+    isSelected: boolean = false;
+    errors: any;
     constructor(entity: any) {
         if (entity !== null && entity !== undefined) {
             Object.keys(entity).forEach((item) => {

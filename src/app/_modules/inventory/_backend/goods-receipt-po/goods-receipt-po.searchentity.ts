@@ -90,3 +90,8 @@ export class GoodsReceiptPOItemDetailSearchEntity extends SearchEntity {
     code = new TextFilter();
     name = new TextFilter();
 }
+
+export class GoodsReceiptPOBinlocationSearchEntity extends SearchEntity {
+    GoodsReceiptPOContentId: string;
+    code = new TextFilter();
+}

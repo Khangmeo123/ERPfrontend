@@ -9,11 +9,17 @@ import {
   PurchaseOrdersEntity,
   GoodsReceiptPOItemDetailEntity,
   GoodsReceiptPOUnitOfMeasureEntity,
+  GoodsReceiptPOBinlocationEntity,
+  GoodsReceiptPOQuantityDetail,
+  GoodsReceiptPOQuantity,
+  GoodsReceiptPOSerialNumberEntity,
+  GoodsReceiptPOBatchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
   PurchaseOrdersSearchEntity,
   GoodsReceiptPOItemDetailSearchEntity,
   GoodsReceiptPOUnitOfMeasureSearchEntity,
+  GoodsReceiptPOBinlocationSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 
 @Component({
@@ -26,8 +32,8 @@ import {
 export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptPODetail.header.title');
   fileNameList: Array<any> = [];
-  displayBatches: boolean = false;
-  displayCDA: boolean = false;
+  displayBatch: boolean = false;
+  displaySerial: boolean = false;
   displayQuantity: boolean = false;
   displayPurchseOrders: boolean = false;
   goodsReceiptPOSubs: Subscription = new Subscription();
@@ -37,6 +43,14 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   supplierDetailId: string;
   goodsReceiptPOId: string;
+  quantityDetail: GoodsReceiptPOQuantityDetail;
+  goodsReceiptPOContentId: string;
+  activeScan: boolean;
+  serialNumber: string;
+  actualReceiveNumber: number;
+  serialNumberList: GoodsReceiptPOSerialNumberEntity[];
+  batchList: GoodsReceiptPOBatchEntity[];
+  binLocationId: string;
   // documentNumber:
   documentNumberIds: PurchaseOrdersEntity[];
   documentNumberExceptIds: PurchaseOrdersEntity[];
@@ -52,6 +66,11 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   unitOfMeasureExceptIds: GoodsReceiptPOUnitOfMeasureEntity[];
   unitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
   unitOfMeasureTyping: Subject<GoodsReceiptPOUnitOfMeasureSearchEntity> = new Subject();
+  // binLocation:
+  binLocationIds: GoodsReceiptPOBinlocationEntity[];
+  binLocationExceptIds: GoodsReceiptPOBinlocationEntity[];
+  binLocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity = new GoodsReceiptPOBinlocationSearchEntity();
+  binLocationTyping: Subject<GoodsReceiptPOBinlocationSearchEntity> = new Subject();
 
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOReceiveService,
@@ -72,6 +91,18 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     const goodsReceiptFormSub = this.goodsReceiptPOService.goodsReceiptPOForm.subscribe(res => {
       if (res) {
         this.goodsReceiptPOForm = res;
+      }
+    });
+
+    const quantityDetailSub = this.goodsReceiptPOService.quantityDetail.subscribe(res => {
+      if (res) {
+        this.quantityDetail = res;
+      }
+    });
+
+    const serialNumberListSub = this.goodsReceiptPOService.serialNumberList.subscribe(res => {
+      if (res) {
+        this.serialNumberList = res;
       }
     });
 
@@ -99,13 +130,23 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       }
     });
     this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
-
+    // binLocation:
+    const binLocationListSub = this.goodsReceiptPOService.binLocationList.subscribe(res => {
+      if (res) {
+        this.binLocationIds = res.ids;
+        this.binLocationExceptIds = res.exceptIds;
+      }
+    });
+    this.goodsReceiptPOService.typingSearchBinLocation(this.binLocationTyping);
     // add subcription:
     this.goodsReceiptPOSubs
       .add(goodsReceiptFormSub)
       .add(documentNumberListSub)
       .add(itemListSub)
-      .add(unitOfMeasureListSub);
+      .add(unitOfMeasureListSub)
+      .add(binLocationListSub)
+      .add(quantityDetailSub)
+      .add(serialNumberListSub);
   }
 
   ngOnInit() {
@@ -125,6 +166,10 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     for (const item of event.srcElement.files) {
       this.fileNameList.push(item.name);
     }
+  }
+
+  returnNode(node) {
+    return node;
   }
 
   backToList() {
@@ -194,5 +239,139 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     }
     this.unitOfMeasureSearchEntity.name.startsWith = event;
     this.unitOfMeasureTyping.next(this.unitOfMeasureSearchEntity);
+  }
+
+  // quantity dialog:
+  showQuantity(goodsReceiptPOContentId: string) {
+    this.displayQuantity = true;
+    this.goodsReceiptPOContentId = goodsReceiptPOContentId;
+    this.getQuantityDetailList(goodsReceiptPOContentId);
+  }
+
+  getQuantityDetailList(goodsReceiptPOContentId: string) {
+    this.goodsReceiptPOService.getQuantityDetailList(goodsReceiptPOContentId);
+  }
+
+  dropListBinLocation(id: string) {
+    this.binLocationSearchEntity = new GoodsReceiptPOBinlocationSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.binLocationSearchEntity.ids.push(id);
+    }
+    this.goodsReceiptPOService.dropListBinLocation(this.binLocationSearchEntity);
+  }
+
+  typingSearchBinLocation(event: string, id: string) {
+    this.binLocationSearchEntity = new GoodsReceiptPOBinlocationSearchEntity();
+    if (id !== null && id.length > 0) {
+      this.binLocationSearchEntity.ids.push(id);
+    }
+    this.binLocationSearchEntity.code.startsWith = event;
+    this.binLocationTyping.next(this.binLocationSearchEntity);
+  }
+
+  updateQuantityDetail() {
+    if (this.goodsReceiptPOService.validateSubmit([this.quantityDetail])) {
+      this.goodsReceiptPOService.updateQuantityDetail(this.quantityDetail);
+    };
+  }
+
+  addBinLocation() {
+    const binLocation = new GoodsReceiptPOQuantity();
+    binLocation.goodsReceiptContentId = this.goodsReceiptPOContentId;
+    this.quantityDetail.goodsReceiptPOQuantities.push(binLocation);
+  }
+
+  deleteBinLocation(index: number) {
+    if (index > 0) {
+      this.quantityDetail.goodsReceiptPOQuantities.splice(index, 1);
+    }
+  }
+
+  // serial dialog
+  showSerial(goodsReceiptPOContentId: string) {
+    this.displaySerial = true;
+    this.activeScan = false;
+    this.binLocationId = null;
+    this.goodsReceiptPOContentId = goodsReceiptPOContentId;
+    this.goodsReceiptPOService.getSerialNumberList(goodsReceiptPOContentId);
+  }
+
+  changeLocation(event: GoodsReceiptPOBinlocationEntity) {
+    this.binLocationId = event.id;
+    if (this.serialNumberList) {
+      this.serialNumberList.forEach(item => {
+        if (item.isSelected) {
+          item.binLocationId = event.id;
+          item.binLocationCode = event.code;
+        }
+      });
+    }
+  }
+
+  deleteSerialNumber(index: number) {
+    this.serialNumberList.splice(index, 1);
+  }
+
+  checkAllSerialNumber() {
+    this.serialNumberList.forEach(item => {
+      item.isSelected = true;
+    });
+  }
+
+  deleteMultipleSerialNumber() {
+    const indexArray = [];
+    this.serialNumberList.forEach(item => {
+      if (item.isSelected) {
+        indexArray.push(this.serialNumberList.indexOf(item));
+      }
+    });
+    for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
+      this.serialNumberList.splice(indexArray.reverse()[i], 1);
+    }
+  }
+
+  // batch dialog
+  showBatch(goodsReceiptPOContentId: string) {
+    this.displayBatch = true;
+    this.activeScan = false;
+    this.binLocationId = null;
+    this.goodsReceiptPOContentId = goodsReceiptPOContentId;
+    this.goodsReceiptPOService.getSerialNumberList(goodsReceiptPOContentId);
+  }
+
+  changeLocationInBatch(event: GoodsReceiptPOBinlocationEntity) {
+    this.binLocationId = event.id;
+    if (this.batchList) {
+      this.batchList.forEach(item => {
+        if (item.isSelected) {
+          item.goodsReceiptPOBatchBinLocations.forEach(elm => {
+            elm.binLocationId = event.id;
+            elm.binLocationCode = event.code;
+          })
+        }
+      });
+    }
+  }
+
+  deleteBatch(index: number) {
+    this.batchList.splice(index, 1);
+  }
+
+  checkAllBatch() {
+    this.batchList.forEach(item => {
+      item.isSelected = true;
+    });
+  }
+
+  deleteMultipleBatch() {
+    const indexArray = [];
+    this.batchList.forEach(item => {
+      if (item.isSelected) {
+        indexArray.push(this.batchList.indexOf(item));
+      }
+    });
+    for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
+      this.batchList.splice(indexArray.reverse()[i], 1);
+    }
   }
 }

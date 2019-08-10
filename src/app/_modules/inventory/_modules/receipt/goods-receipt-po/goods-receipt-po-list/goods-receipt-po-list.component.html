@@ -102,7 +102,7 @@
               {{ 'goodsReceiptPO.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn> {{'general.action' | translate }} </th>
+            <th width="5%"> {{'general.action' | translate }} </th>
           </tr>
           <tr>
             <th class="th-filter"></th>
@@ -151,7 +151,7 @@
                 (listOpen)="enumListStatus()">
               </app-simple-select>
             </th>
-            <th></th>
+            <th width="5%"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-goodsReceiptPO let-index="rowIndex">
@@ -165,22 +165,27 @@
             <td class="ui-resizable-column"> {{goodsReceiptPO.requesterName }} </td>
             <td class="text-center ui-resizable-column">
               <div [ngSwitch]="goodsReceiptPO.statusName">
-                <span class="ml-2 open-status" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</span>
-                <span class="ml-2 pending-status"
-                  *ngSwitchCase="'PENDING_APPROVAL'">{{'general.pending'| translate}}</span>
-                <span class="ml-2 pending-receive-status"
-                  *ngSwitchCase="'PENDING_RECEIVE'">{{'general.pendingReceive'| translate}}</span>
-                <span class="ml-2 done-status" *ngSwitchCase="'DONE'">{{'general.done'| translate}}</span>
+                <a class="ml-2 open-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-detail"
+                  [queryParams]="{id: goodsReceiptPO.id}" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</a>
+                <a class="ml-2 pending-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve"
+                  [queryParams]="{id: goodsReceiptPO.id}"
+                  *ngSwitchCase="'PENDING_APPROVAL'">{{'general.pending'| translate}}</a>
+                <a class="ml-2 pending-receive-status"
+                  routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-receive"
+                  [queryParams]="{id: goodsReceiptPO.id}"
+                  *ngSwitchCase="'PENDING_RECEIVE'">{{'general.pendingReceive'| translate}}</a>
+                <a class="ml-2 done-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve"
+                  [queryParams]="{id: goodsReceiptPO.id}" *ngSwitchCase="'DONE'">{{'general.done'| translate}}</a>
               </div>
             </td>
-            <td class="ui-resizable-column">
+            <td width="5%">
               <div class="d-flex justify-content-center">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click)="editGoodsReceiptPO(goodsReceiptPO.id)">
+                <!-- <div class="edit" (click)="editGoodsReceiptPO(goodsReceiptPO.id)">
                   <mat-icon>edit</mat-icon>
-                </div>
+                </div> -->
               </div>
             </td>
           </tr>

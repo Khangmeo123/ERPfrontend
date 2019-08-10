@@ -415,33 +415,38 @@ textarea.disabled{
 }
 
 
-.open-status {
+// button status:
+@mixin button-status {
   padding: 6px;
   border-radius: 5px;
-  color: #3D464D;
+  cursor: pointer;
+  text-decoration:none !important;
+}
+
+.open-status {
+  @include button-status;
+  color: #3D464D !important;
   border: 1px solid #CDCDCD;
 }
 
 .pending-status {
-  padding: 6px;
-  border-radius: 5px;
-  color: #745AEF;
+  @include button-status;
+  color: #745AEF !important;
   border: 1px solid #745AEF;
 }
 
 .pending-receive-status {
-  padding: 6px;
-  border-radius: 5px;
-  color: #07D79B;
+  @include button-status;
+  color: #07D79B !important;
   border: 1px solid #07D79B;
 }
 
 .done-status {
-  padding: 6px;
-  border-radius: 5px;
-  color: #E89922;
+  @include button-status;
+  color: #E89922 !important;
   border: 1px solid #E89922;
 }
+
 .validation-div {
   position: relative;
   width: 100%;
