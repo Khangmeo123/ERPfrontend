@@ -1,22 +1,27 @@
-<app-select [disabled]="disabled" [listDirection]="listDirection" (clickOutside)="closeList($event)"
-            (click)="$event.stopPropagation()">
-  <app-select-head (headClick)="toggleList($event)"
+<app-select (click)="$event.stopPropagation()"
+            (clickOutside)="closeList($event)"
+            [disabled]="disabled"
+            [listDirection]="listDirection">
+  <app-select-head (closeList)="closeList($event)"
+                   (headClick)="toggleList($event)"
                    (openList)="openList($event)"
-                   (closeList)="closeList($event)"
                    (toggleList)="toggleList($event)"
                    [label]="selectedText"></app-select-head>
-  <app-select-body [@toggleMenu]="listState" [scaleX]="scaleX" *ngIf="isOpened">
+  <app-select-body *ngIf="isOpened"
+                   [@toggleMenu]="listState"
+                   [scaleX]="scaleX">
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>
     <ng-template #notLoading>
-      <app-select-list [dataSource]="selectedNodes"
-                       selected="true"
+      <app-select-list (selectionChange)="unselect($event)"
+                       *ngIf="hasSelectedData"
+                       [dataSource]="selectedNodes"
                        [key]="key"
-                       (selectionChange)="unselect($event)"
-                       *ngIf="hasSelectedData"></app-select-list>
-      <p-tree [selectionMode]="mode"
-              [value]="treeData"
-              *ngIf="hasData; else empty"
-              [(selection)]="selection"></p-tree>
+                       selected="true"
+      ></app-select-list>
+      <p-tree *ngIf="hasData; else empty"
+              [(selection)]="selection"
+              [selectionMode]="mode"
+              [value]="treeData"></p-tree>
       <ng-template #empty>
         <app-no-data></app-no-data>
       </ng-template>
