@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SidebarItem } from '../interfaces/SidebarItem';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { toggleMenuSideBar } from '../sidebar.animation';
 
 @Component({
@@ -9,12 +9,12 @@ import { toggleMenuSideBar } from '../sidebar.animation';
   styleUrls: ['./sidebar-list.component.scss'],
   animations: [
     toggleMenuSideBar,
-  ]
+  ],
 })
 export class SidebarListComponent implements OnInit {
   @Input() level = 0;
 
-  @Input() root = { route: '' };
+  @Input() root: SidebarItem = {route: '/'};
 
   @Input() menu: SidebarItem[] = [];
 
@@ -22,7 +22,7 @@ export class SidebarListComponent implements OnInit {
 
   @Input() isOpened = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router) {
   }
 
   get caretClass() {
@@ -43,7 +43,7 @@ export class SidebarListComponent implements OnInit {
           item.isOpened = !item.isOpened;
         }
       } else {
-        if (item.children && item.children.length) {
+        if (item.children && item.children.length && this.root.route !== '/') {
           item.isShowed = !item.isShowed;
         }
       }
