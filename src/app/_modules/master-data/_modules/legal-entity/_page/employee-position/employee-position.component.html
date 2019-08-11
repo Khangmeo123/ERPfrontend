@@ -13,17 +13,12 @@
   <div class="page-body">
     <div class="page-section row">
       <div class="col-sm-7 d-flex align-items-center">
-            <span class="sob-label flex-shrink-1 mr-2">
-              {{'general.legal_entity.name' | translate}}:
-            </span>
-        <app-single-select data-qe-id="form-select-sob"
-                           [list]="legalEntityExceptIds"
-                           [selectedList]="legalEntityIds"
-                           [key]="'name'"
-                           (search)="legalSearch($event)"
-                           (selectionChange)="selectLegal($event)"
-                           (listOpen)="openLegalEntityList()"
-        ></app-single-select>
+        <span class="sob-label flex-shrink-1 mr-2">
+          {{'general.legal_entity.name' | translate}}:
+        </span>
+        <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds" [selectedList]="legalEntityIds"
+          [key]="'name'" (search)="legalSearch($event)" (selectionChange)="selectLegal($event)"
+          (listOpen)="openLegalEntityList()"></app-single-select>
       </div>
     </div>
     <hr>
@@ -32,19 +27,18 @@
         <div class="mt-2 row">
           <div class="col page-actions d-flex justify-content-end">
             <button class="btn btn-add" (click)="addEmployeePosition()"
-                    [disabled]="employeePositionSearchEntity.legalEntityId == undefined"
-                    data-qe-id="button-add-employee-position">
+              [disabled]="employeePositionSearchEntity.legalEntityId == undefined"
+              data-qe-id="button-add-employee-position">
               {{'general.button.add' | translate}}</button>
 
             <button class="btn btn-clear" (click)="clearSearchGroup(tableEmployeePosition)"
-                    data-qe-id="button-clear-employee-position">{{'general.button.clear' | translate}}</button>
+              data-qe-id="button-clear-employee-position">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
           <p-table [value]="employeePositionList" [customSort]="true" [lazy]="true" selectionMode="single"
-                   [(selection)]="selectedEmployeePosition" (onLazyLoad)="sortEmployeePosition($event)"
-                   [scrollable]="true"
-                   scrollHeight="500px" [resizableColumns]="true" #tableEmployeePosition>
+            [(selection)]="selectedEmployeePosition" (onLazyLoad)="sortEmployeePosition($event)" [scrollable]="true"
+            scrollHeight="500px" [resizableColumns]="true" #tableEmployeePosition>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -61,29 +55,29 @@
                   {{'employeeGroup.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action' | translate}}</th>
+                <th pResizableColumn class="employee-position-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" [filter]="employeePositionSearchEntity.code"
-                                        (changeFilter)="getList()"
-                                        data-qe-id="table-thead-filter-code-supplier-group"></app-advanced-filters>
+                    (changeFilter)="getList()" data-qe-id="table-thead-filter-code-supplier-group">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" [filter]="employeePositionSearchEntity.name"
-                                        (changeFilter)="getList()"
-                                        data-qe-id="table-thead-filter-name-supplier-group"></app-advanced-filters>
+                    (changeFilter)="getList()" data-qe-id="table-thead-filter-name-supplier-group">
+                  </app-advanced-filters>
                 </th>
-                <th class="th-filter">
+                <th class="th-filter employee-position-actions">
                 </th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item let-index="rowIndex">
               <tr [pSelectableRow]="item" (click)="onClickDetail(item.id)"
-                  [attr.data-qe-id]="'table-tbody-row-' + index">
+                [attr.data-qe-id]="'table-tbody-row-' + index">
                 <td class="ui-resizable-column"> {{item.code}} </td>
                 <td class="ui-resizable-column"> {{item.name}} </td>
-                <td class="ui-resizable-column">
+                <td class="ui-resizable-column employee-position-actions">
                   <div class="edit" (click)="edit(item.id)">
                     <mat-icon>edit</mat-icon>
                   </div>
@@ -94,7 +88,7 @@
           </p-table>
           <div class="pagination">
             <app-pagination [pagination]="pagination" (paginationOut)="paginationGroupOut($event)"
-                            data-qe-id="pagination">
+              data-qe-id="pagination">
             </app-pagination>
           </div>
         </div>
@@ -102,31 +96,25 @@
       <div class="col-sm-6">
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
-            <app-multi-select data-qe-id="form-multi-select-employee"
-                              [list]="employeeExceptIds"
-                              [selectedList]="employeeIds"
-                              [key]="'name'"
-                              [disabled]="!legalEntityId"
-                              (search)="employeeSearch($event)"
-                              (selectionChange)="selectEmployee($event)"
-                              (listOpen)="openEmployeeList()">
+            <app-multi-select data-qe-id="form-multi-select-employee" [list]="employeeExceptIds"
+              [selectedList]="employeeIds" [key]="'name'" [disabled]="!legalEntityId" (search)="employeeSearch($event)"
+              (selectionChange)="selectEmployee($event)" (listOpen)="openEmployeeList()">
             </app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
             <button class="btn btn-add" (click)="addEmployee()" data-qe-id="button-add"
-                    [disabled]="!employeeSearchEntity?.ids?.length">
+              [disabled]="!employeeSearchEntity?.ids?.length">
               {{'general.button.add' | translate}}</button>
             <a class="btn btn-export" [href]="exportLink + employeePositionId"
-               data-qe-id="button-export">{{'general.button.export' | translate}}</a>
+              data-qe-id="button-export">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearch(tableEmployee)"
-                    data-qe-id="button-clear-employee">{{'general.button.clear' | translate}}</button>
+              data-qe-id="button-clear-employee">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
           <p-table [value]="employeeDetailList" [customSort]="true" [lazy]="true"
-                   (onLazyLoad)="sortEmployeeDetail($event)" [scrollable]="true" scrollHeight="500px"
-                   [resizableColumns]="true"
-                   #tableEmployee>
+            (onLazyLoad)="sortEmployeeDetail($event)" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
+            #tableEmployee>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -143,20 +131,20 @@
                   {{'employeeGroup.employee.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action' | translate}}</th>
+                <th pResizableColumn class="employee-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" [filter]="employeeSearchEntity.code"
-                                        (changeFilter)="getListDetail()"
-                                        data-qe-id="table-thead-filter-code-employee"></app-advanced-filters>
+                    (changeFilter)="getListDetail()" data-qe-id="table-thead-filter-code-employee">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" [filter]="employeeSearchEntity.name"
-                                        (changeFilter)="getListDetail()"
-                                        data-qe-id="table-thead-filter-name-employee"></app-advanced-filters>
+                    (changeFilter)="getListDetail()" data-qe-id="table-thead-filter-name-employee">
+                  </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter employee-actions"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
@@ -164,7 +152,7 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex employee-actions">
                     <div class="edit mr-2" (click)="editEmployeeDetail(item.id, $event)">
                       <mat-icon>edit</mat-icon>
                     </div>
@@ -179,7 +167,7 @@
           </p-table>
           <div class="pagination">
             <app-pagination [pagination]="paginationDetail" (paginationOut)="paginationDetailOut($event)"
-                            data-qe-id="pagination">
+              data-qe-id="pagination">
             </app-pagination>
           </div>
         </div>
@@ -201,10 +189,10 @@
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-                 id="employeePositionCode">
+            id="employeePositionCode">
           <app-error data-qe-id="dialog-error-code"
-                     *ngIf="(employeePositionForm.controls.code?.errors && employeePositionForm.controls.code?.touched) || !!employeePositionForm.controls.errors?.get('code')?.value"
-                     [formGroup]="employeePositionForm" [property]="'code'" [placement]="'top'" class="error-form">
+            *ngIf="(employeePositionForm.controls.code?.errors && employeePositionForm.controls.code?.touched) || !!employeePositionForm.controls.errors?.get('code')?.value"
+            [formGroup]="employeePositionForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
       </div>
@@ -215,10 +203,10 @@
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-                 id="employeePositionName">
+            id="employeePositionName">
           <app-error data-qe-id="dialog-error-name"
-                     *ngIf="(employeePositionForm.controls.name?.errors && employeePositionForm.controls.name?.touched) || !!employeePositionForm.controls.errors?.get('name')?.value"
-                     [formGroup]="employeePositionForm" [property]="'name'" [placement]="'top'" class="error-form">
+            *ngIf="(employeePositionForm.controls.name?.errors && employeePositionForm.controls.name?.touched) || !!employeePositionForm.controls.errors?.get('name')?.value"
+            [formGroup]="employeePositionForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
       </div>

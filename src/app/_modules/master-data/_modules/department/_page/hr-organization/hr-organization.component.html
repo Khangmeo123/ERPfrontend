@@ -16,33 +16,40 @@
       <div class="page-body mt-2">
         <div class="page-section">
           <p-table #table (onLazyLoad)="sort($event)" (selectionChange)="onSelectDepartment($event)"
-                   [(selection)]="selectedDepartment" [customSort]="true" [lazy]="true" [resizableColumns]="true"
-                   [scrollable]="true" [value]="hrOrganizationList" resizableColumns scrollHeight="500px"
-                   selectionMode="single">
+            [(selection)]="selectedDepartment" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+            [scrollable]="true" [value]="hrOrganizationList" resizableColumns scrollHeight="500px"
+            selectionMode="single">
             <ng-template pTemplate="header">
               <tr>
                 <th pResizableColumn> {{'hrOrganization.code' | translate}} </th>
                 <th pResizableColumn> {{'hrOrganization.name' | translate}} </th>
+                <th class="hr-organization-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
-                                        [filter]="hrOrganizationSearchEntity.code">
+                    [filter]="hrOrganizationSearchEntity.code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
-                                        [filter]="hrOrganizationSearchEntity.name">
+                    [filter]="hrOrganizationSearchEntity.name">
                   </app-advanced-filters>
                 </th>
+                <th class="th-filter hr-organization-actions"></th>
               </tr>
             </ng-template>
 
             <ng-template let-hrOrganization let-index let-rowData pTemplate="body">
               <tr (dblclick)="edit(hrOrganization.id)" [attr.data-qe-id]="'table-tbody-row-' + index"
-                  [pSelectableRow]="rowData">
+                [pSelectableRow]="rowData">
                 <td pResizableColumn>{{hrOrganization.code}}</td>
                 <td pResizableColumn>{{hrOrganization.name}}</td>
+                <td class="hr-organization-actions">
+                  <a role="button" (click)="edit(hrOrganization.id)">
+                    <mat-icon>edit</mat-icon>
+                  </a>
+                </td>
               </tr>
             </ng-template>
           </p-table>
@@ -68,9 +75,8 @@
             <div class="div-form">
               <input class="form-control" formControlName="code" id="hrOrganization-code" name="code" type="text">
               <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('name')?.value"
-                         [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form"
-                         data-qe-id="hrOrganization-code"
-                         property="code">
+                [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form" data-qe-id="hrOrganization-code"
+                property="code">
               </app-error>
             </div>
           </div>
@@ -82,9 +88,8 @@
             <div class="div-form">
               <input class="form-control" formControlName="name" id="hrOrganization-name" name="name" type="text">
               <app-error *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
-                         [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form"
-                         data-qe-id="hrOrganization-name"
-                         property="name">
+                [formGroup]="hrOrganizationForm" [placement]="'top'" class="error-form" data-qe-id="hrOrganization-name"
+                property="name">
               </app-error>
             </div>
           </div>
@@ -113,14 +118,12 @@
       <div class="page-header">
         <div class="page-title mr-2">
           <app-multi-select (listOpen)="onSearchEmployee()" (search)="onSearchEmployeeByTyping($event)"
-                            (selectionChange)="onSelectEmployeeToAdd($event)" [disabled]="disabled"
-                            [list]="employeeNotInDepartmentList"
-                            [selectedList]="selectedEmployeeToAddToDepartmentList" key="name"></app-multi-select>
+            (selectionChange)="onSelectEmployeeToAdd($event)" [disabled]="disabled" [list]="employeeNotInDepartmentList"
+            [selectedList]="selectedEmployeeToAddToDepartmentList" key="name"></app-multi-select>
         </div>
         <div class="page-actions">
           <button (click)="onAddToDepartment()"
-                  [disabled]="disabled || !employeeNotInDepartmentSearchEntity?.ids?.length"
-                  class="btn btn-add">
+            [disabled]="disabled || !employeeNotInDepartmentSearchEntity?.ids?.length" class="btn btn-add">
             {{'general.button.add' | translate}}
           </button>
           <button [disabled]="disabled" class="btn btn-import">
@@ -140,20 +143,20 @@
               <tr>
                 <th pResizableColumn> {{'department.employee.code' | translate}} </th>
                 <th pResizableColumn> {{'department.employee.name' | translate}} </th>
-                <th pResizableColumn> {{'general.action' | translate}} </th>
+                <th pResizableColumn class="employee-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" (changeFilter)="getEmployeeList()"
-                                        [filter]="employeeSearchEntity.code">
+                    [filter]="employeeSearchEntity.code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" (changeFilter)="getEmployeeList()"
-                                        [filter]="employeeSearchEntity.code">
+                    [filter]="employeeSearchEntity.code">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter employee-actions"></th>
               </tr>
             </ng-template>
 
@@ -161,11 +164,11 @@
               <tr (dblclick)="toDepartmentEmployeeDetail(employee.id)">
                 <td>{{employee.code}}</td>
                 <td>{{employee.name}}</td>
-                <td>
+                <td class="employee-actions">
                   <a (confirm)="removeEmployee(employee.id)"
-                     [popoverMessage]="'general.department.delete.message' | translate"
-                     [popoverTitle]="'general.department.delete.title' | translate" class="btn btn-default"
-                     confirmButtonType="danger" mwlConfirmationPopover placement="left" role="button">
+                    [popoverMessage]="'general.department.delete.message' | translate"
+                    [popoverTitle]="'general.department.delete.title' | translate" class="btn btn-default"
+                    confirmButtonType="danger" mwlConfirmationPopover placement="left" role="button">
                     {{'general.button.delete' | translate}}
                   </a>
                 </td>

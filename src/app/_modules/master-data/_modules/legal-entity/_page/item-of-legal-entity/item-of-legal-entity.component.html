@@ -15,14 +15,13 @@
         <div class="row d-flex ">
           <div class="col-sm-12 page-actions d-flex justify-content-end">
             <button class="btn btn-clear" (click)="clearSearchLegalList(tableLegal)"
-                    data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
         <div class="page-section mt-2">
           <p-table [value]="legalList" [customSort]="true" [lazy]="true" (onLazyLoad)="sortLegalList($event)"
-                   (onRowSelect)="legalEntityOnRowSelect($event)" selectionMode="single"
-                   [(selection)]="legalEntitySelectedRow"
-                   [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableLegal>
+            (onRowSelect)="legalEntityOnRowSelect($event)" selectionMode="single" [(selection)]="legalEntitySelectedRow"
+            [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #tableLegal>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -48,21 +47,19 @@
               <tr>
                 <th class="th-filter">
                   <app-single-select [list]="sobExceptIds" [selectedList]="sobIds" [key]="'code'"
-                                     [initialValue]="legalSearchEntity.setOfBookId" (search)="sobTypingSearch($event)"
-                                     (selectionChange)="legalSearchEntity.setOfBookId = $event[0]; getLegalList()"
-                                     (listOpen)="sobOpen(legalSearchEntity.setOfBookId)">
+                    [initialValue]="legalSearchEntity.setOfBookId" (search)="sobTypingSearch($event)"
+                    (selectionChange)="legalSearchEntity.setOfBookId = $event[0]; getLegalList()"
+                    (listOpen)="sobOpen(legalSearchEntity.setOfBookId)">
                   </app-single-select>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.code"
-                                        (changeFilter)="getLegalList()"
-                                        data-qe-id="table-thead-filter-code">
+                    (changeFilter)="getLegalList()" data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.name"
-                                        (changeFilter)="getLegalList()"
-                                        data-qe-id="table-thead-filter-name">
+                    (changeFilter)="getLegalList()" data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
                 </th>
               </tr>
@@ -78,7 +75,7 @@
         </div>
         <div class="pagination">
           <app-pagination [pagination]="paginationLegalList" (paginationOut)="paginationOutLegalList($event)"
-                          data-qe-id="pagination-legal">
+            data-qe-id="pagination-legal">
           </app-pagination>
         </div>
       </div>
@@ -87,25 +84,25 @@
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemExceptIds" [selectedList]="itemIds"
-                              [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemIdList = $event"
-                              (listOpen)="itemOpen()" [disabled]="legalEntityId==null||legalEntityId==undefined">
+              [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemIdList = $event"
+              (listOpen)="itemOpen()" [disabled]="legalEntityId==null||legalEntityId==undefined">
             </app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
             <button class="btn btn-add" (click)="addItemsToLegal()" data-qe-id="button-item-add"
-                    [disabled]="legalEntityId==null||legalEntityId==undefined">
+              [disabled]="legalEntityId==null||legalEntityId==undefined">
               {{'general.button.add' | translate}}</button>
             <a class="btn btn-export" data-qe-id="button-export" target="_blank"
-               [href]="exportItemDetailLink">{{'general.button.export' | translate}}</a>
+              [href]="exportItemDetailLink">{{'general.button.export' | translate}}</a>
             <button class="btn btn-clear" (click)="clearSearchItemsFromLegalList(tableItem)"
-                    data-qe-id="button-item-clear">{{'general.button.clear' | translate}}</button>
+              data-qe-id="button-item-clear">{{'general.button.clear' | translate}}</button>
           </div>
         </div>
 
         <div class="page-section mt-2">
           <p-table [value]="itemsFromLegalList" [customSort]="true" [lazy]="true"
-                   (onLazyLoad)="sortItemsFromLegalList($event)" [scrollable]="true" scrollHeight="500px"
-                   [resizableColumns]="true" #tableItem>
+            (onLazyLoad)="sortItemsFromLegalList($event)" [scrollable]="true" scrollHeight="500px"
+            [resizableColumns]="true" #tableItem>
             <ng-template pTemplate="colgroup">
               <colgroup>
                 <col>
@@ -123,24 +120,21 @@
                   {{'itemOfLegalEntity.content.itemDetail.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>
-                  {{'general.action' | translate}}
+                <th pResizableColumn class="item-of-legal-entity">
                 </th>
               </tr>
               <tr>
                 <th class="th-filter">
                   <app-advanced-filters [filter]="itemsFromLegalSearchEntity.code"
-                                        (changeFilter)="getItemsFromLegalList()"
-                                        data-qe-id="table-thead-filter-item-code">
+                    (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
                   <app-advanced-filters [filter]="itemsFromLegalSearchEntity.name"
-                                        (changeFilter)="getItemsFromLegalList()"
-                                        data-qe-id="table-thead-filter-item-name">
+                    (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-name">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter item-of-legal-entity"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-itemsFromLegal let-index="rowIndex">
@@ -148,7 +142,7 @@
                 <td> {{itemsFromLegal.code}} </td>
                 <td> {{itemsFromLegal.name}} </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex item-of-legal-entity">
                     <div class="edit mr-2" (click)="editItemFromLegal(itemsFromLegal.id)">
                       <mat-icon>edit</mat-icon>
                     </div>
@@ -164,7 +158,7 @@
 
         <div class="pagination">
           <app-pagination [pagination]="paginationItemsFromLegal"
-                          (paginationOut)="paginationOutItemsFromLegalList($event)" data-qe-id="pagination-item">
+            (paginationOut)="paginationOutItemsFromLegalList($event)" data-qe-id="pagination-item">
           </app-pagination>
         </div>
       </div>

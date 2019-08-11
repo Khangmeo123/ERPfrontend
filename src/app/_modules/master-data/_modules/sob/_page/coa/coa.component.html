@@ -51,6 +51,7 @@
             <th data-qe-id="table-thead-description">
               {{'coa.account_description' | translate}}
             </th>
+            <th class="coa-actions"></th>
           </tr>
           <tr class="th-filter">
             <th class="th-filter">
@@ -75,6 +76,7 @@
                                     [filter]="coaSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
+            <th class="th-filter coa-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-row pTemplate="body" let-index="index">
@@ -90,6 +92,11 @@
             </td>
             <td>
               {{row.description}}
+            </td>
+            <td class="coa-actions">
+              <a role="button" (click)="edit(row.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
             </td>
           </tr>
         </ng-template>

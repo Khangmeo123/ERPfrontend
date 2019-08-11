@@ -52,6 +52,7 @@
           <th data-qe-id="table-thead-description">
             {{'bankAccount.description' | translate}}
           </th>
+          <th class="bank-account-actions"></th>
         </tr>
         <tr>
           <th class="th-filter">
@@ -88,6 +89,7 @@
                                   [filter]="bankAccountSearchEntity.description"
                                   data-qe-id="filter-description"></app-advanced-filters>
           </th>
+          <th class="th-filter bank-account-actions"></th>
         </tr>
       </ng-template>
       <ng-template let-bankAccount let-index="index" pTemplate="body">
@@ -109,6 +111,11 @@
           </td>
           <td>
             {{bankAccount.description}}
+          </td>
+          <td class="bank-account-actions">
+            <a role="button" (click)="edit(bankAccount.id)">
+              <mat-icon>edit</mat-icon>
+            </a>
           </td>
         </tr>
       </ng-template>

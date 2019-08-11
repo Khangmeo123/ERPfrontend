@@ -1,19 +1,19 @@
-import {Component, OnDestroy, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
-import {Router} from '@angular/router';
-import {BookmarkService} from 'src/app/_services';
-import {translate} from 'src/app/_helpers/string';
-import {CustomerGroupSearchEntity} from 'src/app/_modules/master-data/_backend/customer-group/customer-group.searchentity';
-import {CustomerGroupEntity} from 'src/app/_modules/master-data/_backend/customer-group/customer-group.entity';
-import {FormGroup} from '@angular/forms';
-import {Subject, Subscription} from 'rxjs';
-import {LegalEntity} from 'src/app/_modules/master-data/_backend/legal/legal.entity';
-import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
-import {CustomerGroupService} from './customer-group.service';
-import {GeneralService} from 'src/app/_helpers/general-service.service';
-import {CustomerEntity} from 'src/app/_modules/master-data/_backend/customer/customer.entity';
-import {CustomerSearchEntity} from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
-import {environment} from 'src/environments/environment.prod';
+import { Component, OnDestroy, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
+import { Router } from '@angular/router';
+import { BookmarkService } from 'src/app/_services';
+import { translate } from 'src/app/_helpers/string';
+import { CustomerGroupSearchEntity } from 'src/app/_modules/master-data/_backend/customer-group/customer-group.searchentity';
+import { CustomerGroupEntity } from 'src/app/_modules/master-data/_backend/customer-group/customer-group.entity';
+import { FormGroup } from '@angular/forms';
+import { Subject, Subscription } from 'rxjs';
+import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
+import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import { CustomerGroupService } from './customer-group.service';
+import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
+import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
+import { environment } from 'src/environments/environment.prod';
 
 @Component({
   selector: 'app-customer-group',
@@ -156,15 +156,15 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     this.customerGroupSearchEntity.legalEntityId = event[0];
     this.legalEntityId = event[0];
 
-    this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
-      if (this.customerGroupList && this.customerGroupList.length > 0) {
-        this.customerSearchEntity.legalEntityId = this.legalEntityId;
-        this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
-        this.customerGroupId = this.customerGroupList[0].id;
-        this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
-      }
-
-    });
+    this.customerGroupService.getList(this.customerGroupSearchEntity)
+      .then(() => {
+        if (this.customerGroupList && this.customerGroupList.length > 0) {
+          this.customerSearchEntity.legalEntityId = this.legalEntityId;
+          this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
+          this.customerGroupId = this.customerGroupList[0].id;
+          this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
+        }
+      });
 
   }
 
@@ -199,7 +199,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
       this.customerGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.legalEntityId !== '' && this.legalEntityId !== undefined) {
-      this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
+      this.customerGroupService.getList(this.customerGroupSearchEntity).then(() => {
         if (this.customerGroupList && this.customerGroupList.length > 0) {
           this.customerSearchEntity.legalEntityId = this.legalEntityId;
           this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
@@ -220,8 +220,8 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     this.pagination.pageNumber = 1;
     this.customerGroupSearchEntity.skip = 0;
     this.customerGroupSearchEntity.take = this.pagination.take;
-    this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
-      this.customerGroupService.getList(this.customerGroupSearchEntity).then(res => {
+    this.customerGroupService.getList(this.customerGroupSearchEntity).then(() => {
+      this.customerGroupService.getList(this.customerGroupSearchEntity).then(() => {
         if (this.customerGroupList && this.customerGroupList.length > 0) {
           this.customerSearchEntity.customerGroupingId = this.customerGroupList[0].id;
         } else {
@@ -238,7 +238,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     this.isAddGroup = true;
   }
 
-  paginationGroupOut(pagination: PaginationModel) {
+  paginationGroupOut(pagination) {
     this.customerGroupSearchEntity.skip = pagination.skip;
     this.customerGroupSearchEntity.take = pagination.take;
     this.customerGroupService.getList(this.customerGroupSearchEntity);
@@ -285,13 +285,11 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     }
     this.customerSearchEntity.customerGroupingId = this.customerGroupId;
     this.customerGroupService.saveCustomer(this.customerSearchEntity)
-      .then(res => {
+      .then(() => {
         this.customerIds = [];
         this.customerSearchEntity.legalEntityId = this.legalEntityId;
         this.customerSearchEntity.customerGroupingId = this.customerGroupId;
         this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
-      })
-      .catch(err => {
       });
   }
 
@@ -330,7 +328,7 @@ export class CustomerGroupComponent implements OnInit, OnDestroy {
     tableCustomer.reset();
   }
 
-  paginationDetailOut(pagination: PaginationModel) {
+  paginationDetailOut(pagination) {
     this.customerSearchEntity.skip = pagination.skip;
     this.customerSearchEntity.take = pagination.take;
     this.customerGroupService.getListCustomerDetail(this.customerSearchEntity);
