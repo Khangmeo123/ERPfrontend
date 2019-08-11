@@ -106,7 +106,7 @@ export class BankAccountRepository extends Repository {
 
   getBankList(bankSearchEntity: BankSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/list-bank`,
+      `${this.apiUrl}/drop-list-bank`,
       bankSearchEntity,
       {
         observe: 'response',

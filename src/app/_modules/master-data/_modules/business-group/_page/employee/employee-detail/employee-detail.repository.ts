@@ -44,7 +44,7 @@ export class EmployeeDetailRepository extends Repository {
             );
     }
 
-    delete(employeeEntity: any): Observable<boolean> {
+    deactivate(employeeEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(employeeEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

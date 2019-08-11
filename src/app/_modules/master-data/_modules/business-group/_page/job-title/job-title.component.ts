@@ -80,8 +80,8 @@ export class JobTitleComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.jobTitleService.delete(this.jobTitleForm.value, this.jobTitleSearchEntity).then(res => {
+  deactivate() {
+    this.jobTitleService.deactivate(this.jobTitleForm.value, this.jobTitleSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;

@@ -129,17 +129,17 @@
     </div>
     <p-footer>
       <div class="row">
-        <div class="col-sm-12">
-          <div class="page-actions">
+        <div class="col-sm-12 d-flex">
+          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                  data-qe-id="dialog-button-delete" *ngIf="currencyForm.value?.isDeleted"
+                  [popoverMessage]="popoverMessage"
+                  placement="bottom" (confirm)="deactivate()">
+            {{ 'general.button.delete' | translate}}</button>
+          <div class="page-actions flex-grow-1">
             <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
               {{ 'general.button.save' | translate}}</button>
             <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
                     (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
-            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                    data-qe-id="dialog-button-delete" *ngIf="currencyForm.value?.isDeleted"
-                    [popoverMessage]="popoverMessage"
-                    placement="bottom" (confirm)="delete()">
-              {{ 'general.button.delete' | translate}}</button>
           </div>
         </div>
       </div>

@@ -79,8 +79,8 @@ export class BusinessGroupComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.businessGroupService.delete(this.businessGroupForm.value, this.businessGroupSearchEntity).then(res => {
+  deactivate() {
+    this.businessGroupService.deactivate(this.businessGroupForm.value, this.businessGroupSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;

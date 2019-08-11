@@ -156,7 +156,7 @@
                   (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
           <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
                   data-qe-id="dialog-button-delete" *ngIf="businessGroupForm.value?.isDeleted"
-                  [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
+                  [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deactivate()">
             {{ 'general.button.delete' | translate}}</button>
         </div>
       </div>

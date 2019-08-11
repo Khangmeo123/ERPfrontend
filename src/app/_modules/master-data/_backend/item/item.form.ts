@@ -5,7 +5,7 @@ import { ItemEntity } from './item.entity';
 
 
 export class ItemForm extends FormModel {
-    code = new FormControl('', [requiredField, checkLength(3, 10)]);
+    code = new FormControl('', [requiredField]);
     codeFromSupplier = new FormControl('', [checkLength(0, 500)]);
     codeFromMarket = new FormControl('', [checkLength(0, 500)]);
     name = new FormControl('', [requiredField]);

@@ -86,8 +86,8 @@ export class EmployeeDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/master-data/business-group/employee/employee-list']);
   }
 
-  delete() {
-    this.employeeDetailService.delete(this.employeeForm.value).then(res => {
+  deactivate() {
+    this.employeeDetailService.deactivate(this.employeeForm.value).then(res => {
       this.router.navigate(['/master-data/business-group/employee/employee-list']);
     });
   }

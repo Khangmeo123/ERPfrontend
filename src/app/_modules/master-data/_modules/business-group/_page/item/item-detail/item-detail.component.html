@@ -247,7 +247,7 @@
     <div class="page-footer">
         <div>
             <button class="btn btn-delete" *ngIf="itemForm.value?.isDeleted" mwlConfirmationPopover
-                [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deactivate()"
                 (cancel)="cancelClicked = true" data-qe-id="button-delete">
                 {{ 'general.button.delete' | translate}}</button>
         </div>
