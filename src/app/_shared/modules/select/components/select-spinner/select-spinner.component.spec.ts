@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SelectSpinnerComponent } from './select-spinner.component';
+import {SelectSpinnerComponent} from './select-spinner.component';
 
 describe('SelectSpinnerComponent', () => {
   let component: SelectSpinnerComponent;
@@ -8,9 +8,9 @@ describe('SelectSpinnerComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectSpinnerComponent ]
+      declarations: [SelectSpinnerComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

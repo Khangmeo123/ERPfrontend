@@ -1,8 +1,8 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ISelect, SelectMode } from '../../select.interface';
-import { toggleMenu } from '../../../../animations/toggleMenu';
-import { buildTree, getListDirection, initiateSelectedNodes } from '../../helpers';
-import { addItemToArray, removeItemByIndex } from '../../../../../_helpers/array.helper';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {ISelect, SelectMode} from '../../select.interface';
+import {toggleMenu} from '../../../../animations/toggleMenu';
+import {buildTree, getListDirection, initiateSelectedNodes} from '../../helpers';
+import {addItemToArray, removeItemByIndex} from '../../../../../_helpers/array.helper';
 
 @Component({
   selector: 'app-tree-select',
@@ -18,18 +18,33 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
   @Input() selectedSuffix = 'selected';
 
   @Input() disabled = false;
+
   @Input() mode: SelectMode = 'single';
+
   @Input() dataSource: any[] = [];
+
   @Input() key = 'label';
+
   @Input() selectedIds = [];
+
   @Input() firstLoad = false;
+
   @Output() firstLoadData = new EventEmitter();
+
   @Input() scaleX = '';
+
   @Output() selectionChange = new EventEmitter();
+
   listDirection = 'down';
+
+  @Input() direction: string = 'auto';
+
   treeData: any[] = [];
+
   selectedNodes: any[] = [];
+
   isLoading = false;
+
   isOpened = false;
 
   get hasData() {
@@ -153,7 +168,11 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
         this.firstLoadData.emit();
       }
     }
-    this.listDirection = getListDirection(event.target);
+    if (this.direction === 'auto') {
+      this.listDirection = getListDirection(event.target);
+    } else {
+      this.listDirection = this.direction;
+    }
   }
 
   onSelect(data) {

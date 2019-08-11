@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ISelect } from '../../select.interface';
-import { getListDirection } from '../../helpers';
-import { toggleMenu } from '../../../../animations/toggleMenu';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {ISelect} from '../../select.interface';
+import {getListDirection} from '../../helpers';
+import {toggleMenu} from '../../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-multi-select',
@@ -33,9 +33,14 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
 
   listDirection = 'down';
 
+  @Input() direction: string = 'auto';
+
   isLoading = false;
 
-  constructor() {}
+  @Output() clear: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor() {
+  }
 
   get listState() {
     return this.isOpened ? 'opened' : 'closed';
@@ -62,6 +67,20 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
       this.isLoading = false;
+      if (changes.list) {
+        if (changes.list.currentValue && changes.list.currentValue.length) {
+          this.list = [
+            ...this.list,
+          ];
+        }
+      }
+      if (changes.selectedList) {
+        if (changes.selectedList.currentValue && changes.selectedList.currentValue.length) {
+          this.selectedList = [
+            ...this.selectedList,
+          ];
+        }
+      }
     }
   }
 
@@ -138,8 +157,22 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   beforeOpenList(event) {
-    this.listDirection = getListDirection(event.target);
+    if (this.direction === 'auto') {
+      this.listDirection = getListDirection(event.target);
+    } else {
+      this.listDirection = this.direction;
+    }
     this.isLoading = true;
     this.listOpen.emit(event);
+  }
+
+  onClear() {
+    this.initialValue = null;
+    this.list = [
+      ...this.list,
+      ...this.selectedList,
+    ];
+    this.selectedList = [];
+    this.clear.emit();
   }
 }
