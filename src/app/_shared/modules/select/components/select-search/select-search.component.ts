@@ -7,7 +7,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 })
 export class SelectSearchComponent implements OnInit {
 
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Output() search = new EventEmitter();
 
   constructor() {
   }
@@ -16,6 +16,6 @@ export class SelectSearchComponent implements OnInit {
   }
 
   onChange(event) {
-    this.search.emit(event.target.value);
+    this.search.emit(event);
   }
 }

@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {ISelect} from '../../select.interface';
-import {getListDirection} from '../../helpers';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { ISelect } from '../../select.interface';
+import { getListDirection } from '../../helpers';
 
 @Component({
   selector: 'app-simple-select',
@@ -24,8 +24,6 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
 
   listDirection = 'down';
 
-  @Input() direction: string = 'auto';
-
   isLoading = false;
 
   @Input() key = 'label';
@@ -33,8 +31,6 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
   @Output() selectionChange = new EventEmitter();
 
   @Output() listOpen = new EventEmitter();
-
-  @Output() clear: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {
   }
@@ -47,14 +43,21 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
     return this.list && this.list.length;
   }
 
+  get selectedText() {
+    if (this.selectedItem) {
+      return this.selectedItem[this.key];
+    }
+    return this.initialValue;
+  }
+
+  set selectedText(value) {
+
+  }
+
   @Input() valueSelector = (node) => node.id;
 
   beforeOpenList(event) {
-    if (this.direction === 'auto') {
-      this.listDirection = getListDirection(event.target);
-    } else {
-      this.listDirection = this.direction;
-    }
+    this.listDirection = getListDirection(event.target);
     this.isLoading = true;
     this.listOpen.emit(event);
   }
@@ -105,18 +108,8 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
     if (changes.initialValue) {
       if (!changes.initialValue.currentValue) {
         this.selectedItem = null;
-        this.initialValue = null;
+        this.selectedText = '';
       }
     }
-  }
-
-  onClear() {
-    this.initialValue = null;
-    this.list = [
-      ...this.list,
-      this.selectedItem,
-    ];
-    this.selectedItem = null;
-    this.clear.emit();
   }
 }

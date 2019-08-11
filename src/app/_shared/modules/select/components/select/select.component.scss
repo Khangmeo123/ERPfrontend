@@ -1,39 +1,35 @@
-app-select {
-  .select {
-    background: #ffffff;
-    position: relative;
+.select {
+  background: #ffffff;
+  position: relative;
 
-    * {
-      font-size: 14px;
-      color: #333333;
-    }
-
-    .select-body {
-      position: absolute;
-      width: 100%;
-      top: 34px;
-      bottom: auto;
-      //box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
-      z-index: 1000;
-    }
+  * {
+    font-size: 14px;
+    color: #333333;
   }
 
-  .select.up {
-    .select-body {
-      position: absolute;
-      top: auto;
-      bottom: 34px;
-      //box-shadow: 0 -.125rem -.25rem 0 rgba(0,0,0,.075)!important;
-    }
+  .select-body {
+    position: absolute;
+    width: 100%;
+    top: 34px;
+    bottom: auto;
+    //box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    z-index: 1000;
   }
+}
 
-  .select.disabled {
-    pointer-events: none;
+.select.up {
+  .select-body {
+    position: absolute;
+    top: auto;
+    bottom: 34px;
+    //box-shadow: 0 -.125rem -.25rem 0 rgba(0,0,0,.075)!important;
+  }
+}
 
-    .select-head {
-      input[readonly] {
-        background: #e9ecef !important;
-      }
-    }
+.select.disabled {
+  pointer-events: none;
+
+  .selected-head {
+    background: gray;
   }
 }
