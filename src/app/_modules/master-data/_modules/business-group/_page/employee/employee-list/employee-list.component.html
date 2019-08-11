@@ -52,6 +52,9 @@
               {{ 'employee.list.content.code' | translate}}
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
+            <th pResizableColumn data-qe-id="table-thead-username">
+              {{ 'employee.list.content.username' | translate}}
+            </th>
             <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
               {{ 'employee.list.content.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
@@ -82,6 +85,7 @@
                                     data-qe-id="table-thead-filter-code">
               </app-advanced-filters>
             </th>
+            <th class="th-filter"></th>
             <th class="th-filter">
               <app-advanced-filters defaultType="startsWith" [filter]="employeeSearchEntity.name"
                                     (changeFilter)="getList()"
@@ -117,14 +121,18 @@
         <ng-template pTemplate="body" let-employee let-index="rowIndex">
           <tr (dblclick)="toDetail(employee.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{employee.code}} </td>
+            <td> {{employee.username}} </td>
             <td> {{employee.name}} </td>
             <td> {{(employee.gender | gender) | translate}} </td>
             <td> {{employee.dob | date: 'dd/MM/yyyy'}} </td>
             <td> {{employee.identityNumber}} </td>
             <td> {{employee.statusDisplay}} </td>
             <td class="employee-list-actions">
-              <a role="button" (click)="edit(employee.id)">
+              <a role="button" (click)="toDetail(employee.id)">
                 <mat-icon>edit</mat-icon>
+              </a>
+              <a role="button" (click)="changePassword(employee.id)">
+                <mat-icon>lock</mat-icon>
               </a>
             </td>
           </tr>
@@ -137,3 +145,34 @@
     </div>
   </div>
 </div>
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="passwordModal" [contentStyle]="{width: '900px'}" [style]="{overflow: 'visible'}">
+  <p-header>
+    {{'employee.password.title' | translate}}
+  </p-header>
+
+  <div class="container" [formGroup]="passwordForm">
+    <div class="row">
+      <div class="col form-group">
+        <label for="password">
+          {{'employee.password.field' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" id="password" formControlName="password" name="password">
+          <app-error data-qe-id="dialog-error-code"
+                     *ngIf="(password?.errors && password?.touched) || !!errors?.get('password')?.value"
+                     [formGroup]="passwordForm" [property]="'password'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <button class="btn btn-save" (click)="savePassword()">
+      {{'employee.password.save' | translate}}
+    </button>
+  </p-footer>
+
+</p-dialog>

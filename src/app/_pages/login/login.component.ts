@@ -69,12 +69,14 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.loginForm.valid) {
+      this.loading = true;
       this.authenticationService.login(this.username.value, this.password.value)
         .then(() => {
           this.router.navigate(['/']);
+        })
+        .finally(() => {
+          this.loading = false;
         });
-
-      this.loading = true;
     }
   }
 }

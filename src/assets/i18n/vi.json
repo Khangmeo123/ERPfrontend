@@ -64,25 +64,37 @@
 		}
 	},
 	"binLocation": {
-		"action": "",
-		"code": "",
+		"action": "Thao tác",
+		"code": "Mã",
 		"delete": {
 			"confirm": {
-				"message": "",
-				"title": ""
+				"message": "Bạn chắc chắn muốn xóa?",
+				"title": "Xác nhận xóa?"
 			}
 		},
 		"getFieldEntity": {
-			"error": ""
+			"error": "Lấy danh sách trường thất bại"
+		},
+		"layer1": {
+			"code": "Mã lớp 1"
+		},
+		"layer2": {
+			"code": "Mã lớp 2"
+		},
+		"layer3": {
+			"code": "Mã lớp 3"
+		},
+		"layer4": {
+			"code": "Mã lớp 4"
 		},
 		"modal": {
-			"title": ""
+			"title": "Thêm vị trí kho"
 		},
-		"name": "",
-		"title": "",
+		"name": "Tên",
+		"title": "Vị trí kho",
 		"update": {
-			"error": "",
-			"success": ""
+			"error": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
 		}
 	},
 	"bookmarks": {
@@ -118,35 +130,35 @@
 		"super_account": "Tài khoản tổng hợp"
 	},
 	"codeFormula": {
-		"code": "",
+		"code": "Mã",
 		"general": {
-			"title": ""
+			"title": "Quy tắc tách mã"
 		},
 		"get": {
-			"error": ""
+			"error": "Lấy thông tin thất bại"
 		},
-		"identifierStringEnd": "",
-		"identifierStringStart": "",
-		"identifierStringValues": "",
+		"identifierStringEnd": "Vị trí kết thúc",
+		"identifierStringStart": "Vị trí bắt đầu",
+		"identifierStringValues": "Giá trị nhận dạng",
 		"item": {
-			"code": "",
-			"name": "",
-			"title": ""
+			"code": "Mã sản phẩm",
+			"name": "Tên sản phẩm",
+			"title": "Danh sách sản phẩm áp dụng"
 		},
-		"length": "",
+		"length": "Độ dài",
 		"rule": {
-			"field": "",
-			"identifierStringEnd": "",
-			"identifierStringStart": "",
+			"field": "Trường",
+			"identifierStringEnd": "Vị trí kết thúc",
+			"identifierStringStart": "Vị trí bắt đầu",
 			"modal": {
-				"title": ""
+				"title": "Thêm quy tắc tách mã"
 			},
-			"title": ""
+			"title": "Quy tắc tách mã"
 		},
-		"title": "",
+		"title": "Quy tắc tách mã",
 		"update": {
-			"error": "",
-			"success": ""
+			"error": "Cập nhật thành công",
+			"success": "Cập nhật thất bại"
 		}
 	},
 	"cost-center": {
@@ -499,12 +511,21 @@
 				"gender": "Giới tính",
 				"identityNumber": "Số CMND",
 				"name": "Tên nhân viên",
-				"status": "Trạng thái"
+				"status": "Trạng thái",
+				"username": "Tên người dùng"
 			},
 			"header": {
 				"title": "Danh sách nhân viên"
 			}
-		}
+		},
+		"password": {
+			"error": "Lưu mật khẩu thất bại",
+			"field": "Mật khẩu",
+			"save": "Lưu mật khẩu",
+			"success": "Lưu mật khẩu thành công",
+			"title": "Đổi mật khẩu"
+		},
+		"username": "Tên người dùng"
 	},
 	"employeeDetail": {
 		"delete": {
@@ -652,7 +673,7 @@
 		"detail": "Chi tiết",
 		"division": "Tên chi nhánh",
 		"error": {
-			"direction": "",
+			"direction": "Hướng",
 			"fileImport": "Lỗi nhập file"
 		},
 		"gender": {
@@ -737,7 +758,7 @@
 				"title": "Danh sách sản phẩm"
 			},
 			"tab": {
-				"title1": "",
+				"title1": "Tab 1",
 				"title_2": "Thông tin thuế suất"
 			}
 		},
@@ -875,6 +896,9 @@
 		"tab": {
 			"title_1": "Thông tin chung"
 		}
+	},
+	"login": {
+		"failed": "Đăng nhập thất bại"
 	},
 	"naturalResourceTax": {
 		"header": {

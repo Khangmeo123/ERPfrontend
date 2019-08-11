@@ -1,5 +1,5 @@
 import { EnumEntity } from './../../../../../../../_helpers/entity';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
 import { translate } from 'src/app/_helpers/string';
@@ -9,12 +9,15 @@ import { Subscription } from 'rxjs';
 import { BookmarkService } from 'src/app/_services';
 import { EmployeeListService } from './employee-list.service';
 import { environment } from 'src/environments/environment';
+import { FormControl, FormGroup } from '@angular/forms';
+import { GeneralService } from '../../../../../../../_helpers/general-service.service';
+import { PasswordEntity } from '../../../../../_backend/password/password.entity';
 
 @Component({
   selector: 'app-employee-list',
   templateUrl: './employee-list.component.html',
   styleUrls: ['./employee-list.component.scss'],
-  providers: [EmployeeListService],
+  providers: [EmployeeListService, GeneralService],
 })
 export class EmployeeListComponent implements OnInit, OnDestroy {
   pageTitle: string = translate('employee.list.header.title');
@@ -29,14 +32,22 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   // status:
   statusList: EnumEntity[];
   // gender:
-  genderList: any[] = [{ label: 'Nam', id: true }, { label: 'Nữ', id: false }];
+  genderList: any[] = [{label: 'Nam', id: true}, {label: 'Nữ', id: false}];
   popoverTitle: string = '';
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   testValue = 'test';
   downloadLink = environment.apiUrlApps + 'master-data/business-group/employee/employee-list/download-template';
   exportLink = environment.apiUrlApps + 'master-data/business-group/employee/employee-list/export';
 
-  constructor(private employeeListService: EmployeeListService, private bookmarkService: BookmarkService, private router: Router) {
+  passwordModal: boolean = false;
+  passwordForm: FormGroup;
+
+  constructor(
+    private employeeListService: EmployeeListService,
+    private bookmarkService: BookmarkService,
+    private router: Router,
+    private generalService: GeneralService,
+  ) {
     const employeeListSub = this.employeeListService.employeeList.subscribe(res => {
       if (res) {
         this.employeeList = res;
@@ -55,8 +66,19 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isBookMark = res;
     });
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
-    this.employeeListSubs.add(employeeListSub).add(employeeCountSub).add(statusListSub).add(bookMarkNotify);
+    const passwordFormSub: Subscription = this.employeeListService.passwordForm.subscribe((form: FormGroup) => {
+      this.passwordForm = form;
+    });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
+    this.employeeListSubs.add(employeeListSub).add(employeeCountSub).add(statusListSub).add(bookMarkNotify).add(passwordFormSub);
+  }
+
+  get password() {
+    return this.passwordForm.get('password') as FormControl;
+  }
+
+  get errors() {
+    return this.passwordForm.get('password') as FormGroup;
   }
 
   ngOnInit() {
@@ -69,7 +91,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   }
 
   toDetail(employeeId?: string) {
-    this.router.navigate(['/master-data/business-group/employee/employee-detail'], { queryParams: { id: employeeId } });
+    this.router.navigate(['/master-data/business-group/employee/employee-detail'], {queryParams: {id: employeeId}});
   }
 
   getList() {
@@ -102,9 +124,9 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isBookMark = !this.isBookMark;
     if (this.isBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 
@@ -114,4 +136,22 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     }
   }
 
+  changePassword(id: string) {
+    this.employeeListService.changePassword(id);
+    this.passwordModal = true;
+  }
+
+  savePassword() {
+    if (this.passwordForm.invalid) {
+      this.generalService.validateAllFormFields(this.passwordForm);
+    }
+
+    if (this.passwordForm.valid) {
+      const passwordEntity: PasswordEntity = new PasswordEntity(this.passwordForm.value);
+      this.employeeListService.savePassword(passwordEntity)
+        .then(() => {
+          this.passwordModal = false;
+        });
+    }
+  }
 }

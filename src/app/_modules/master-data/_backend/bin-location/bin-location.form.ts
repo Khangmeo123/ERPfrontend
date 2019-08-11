@@ -6,6 +6,8 @@ import { BinLocationEntity } from './bin-location.entity';
 export class BinLocationForm extends FormModel {
   id: FormControl = new FormControl();
 
+  legalEntityId: FormControl = new FormControl();
+
   code: FormControl = new FormControl(null, [
     requiredField,
   ]);

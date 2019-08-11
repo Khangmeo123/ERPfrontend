@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrlApps: 'http://app.jaja.vn/api/apps/',
+  apiUrlApps: 'http://app.jaja.vn/api/APPS/',
   apiUrlAuthentication: 'http://app.jaja.vn/api/Authentication/',
   emptyGuid: '00000000-0000-0000-0000-000000000000',
 };

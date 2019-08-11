@@ -75,6 +75,18 @@
 		"getFieldEntity": {
 			"error": ""
 		},
+		"layer1": {
+			"code": ""
+		},
+		"layer2": {
+			"code": ""
+		},
+		"layer3": {
+			"code": ""
+		},
+		"layer4": {
+			"code": ""
+		},
 		"modal": {
 			"title": ""
 		},
@@ -499,12 +511,21 @@
 				"gender": "",
 				"identityNumber": "",
 				"name": "",
-				"status": ""
+				"status": "",
+				"username": ""
 			},
 			"header": {
 				"title": ""
 			}
-		}
+		},
+		"password": {
+			"error": "",
+			"field": "",
+			"save": "",
+			"success": "",
+			"title": ""
+		},
+		"username": ""
 	},
 	"employeeDetail": {
 		"delete": {
@@ -875,6 +896,9 @@
 		"tab": {
 			"title_1": ""
 		}
+	},
+	"login": {
+		"failed": ""
 	},
 	"naturalResourceTax": {
 		"header": {

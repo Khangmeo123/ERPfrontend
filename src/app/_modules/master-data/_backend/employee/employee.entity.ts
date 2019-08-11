@@ -14,6 +14,7 @@ export class EmployeeEntity extends Entity {
   taxCode: string;
   numberDependentPerson: number;
   gender: boolean;
+  username: string;
 
   // statusEntity:
   statusId: string;

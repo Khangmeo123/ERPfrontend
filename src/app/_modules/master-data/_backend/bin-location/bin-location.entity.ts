@@ -1,7 +1,9 @@
-import {Entity} from '../../../../_helpers/entity';
+import { Entity } from '../../../../_helpers/entity';
 
 export class BinLocationEntity extends Entity {
   id: string;
+
+  legalEntityId: string;
 
   code: string;
   name: string;

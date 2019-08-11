@@ -1,13 +1,13 @@
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {BinLocationService} from './bin-location.service';
-import {LegalEntity} from '../../../../_backend/legal/legal.entity';
-import {Subscription} from 'rxjs';
-import {BinLocationEntity, BinLocationFieldEntity} from '../../../../_backend/bin-location/bin-location.entity';
-import {Entities} from '../../../../../../_helpers/entity';
-import {LegalSearchEntity} from '../../../../_backend/legal/legal.searchentity';
-import {BinLocationSearchEntity} from '../../../../_backend/bin-location/bin-location.search-entity';
-import {FormControl, FormGroup} from '@angular/forms';
-import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { BinLocationService } from './bin-location.service';
+import { LegalEntity } from '../../../../_backend/legal/legal.entity';
+import { Subscription } from 'rxjs';
+import { BinLocationEntity, BinLocationFieldEntity } from '../../../../_backend/bin-location/bin-location.entity';
+import { Entities } from '../../../../../../_helpers/entity';
+import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
+import { BinLocationSearchEntity } from '../../../../_backend/bin-location/bin-location.search-entity';
+import { FormControl, FormGroup } from '@angular/forms';
+import { GeneralService } from '../../../../../../_helpers/general-service.service';
 
 @Component({
   selector: 'app-bin-location',
@@ -107,6 +107,10 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
     return this.binLocationForm.get('errors') as FormGroup;
   }
 
+  get legalEntityId() {
+    return this.binLocationForm.get('legalEntityId') as FormControl;
+  }
+
   public legalEntitySelector = node => node;
 
   async ngOnInit() {
@@ -180,6 +184,7 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
 
   add(level: number) {
     this.binLocationService.add(level);
+    this.legalEntityId.setValue(this.legalEntity.id);
     this.openModal();
   }
 
