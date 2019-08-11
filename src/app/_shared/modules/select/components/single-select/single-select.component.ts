@@ -1,22 +1,19 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {getListDirection} from '../../helpers';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { getListDirection } from '../../helpers';
 
 @Component({
   selector: 'app-single-select',
   templateUrl: './single-select.component.html',
-  styleUrls: [
-    './single-select.component.scss',
-  ],
+  styleUrls: ['./single-select.component.scss'],
   encapsulation: ViewEncapsulation.None,
   animations: [
     toggleMenu,
   ],
 })
 export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
-
-  @Input() initialValue = null;
+  @Input() initialValue = '';
 
   @Input() list = [];
 
@@ -34,15 +31,9 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   listDirection = 'down';
 
-  @Input() direction: string = 'auto';
-
   isOpened = false;
 
   isLoading = false;
-
-  @Input() clearable: boolean = false;
-
-  @Output() clear: EventEmitter<void> = new EventEmitter<void>();
 
   constructor() {
   }
@@ -57,6 +48,16 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   get hasData() {
     return this.list && this.list.length;
+  }
+
+  get selectedText() {
+    if (this.hasSelected) {
+      return this.selectedList[0][this.key];
+    }
+    return this.initialValue;
+  }
+  set selectedText(value) {
+
   }
 
   @Input() valueSelector = (node) => node.id;
@@ -87,25 +88,11 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
       this.isLoading = false;
-      if (changes.list) {
-        if (changes.list.currentValue && changes.list.currentValue.length) {
-          this.list = [
-            ...this.list,
-          ];
-        }
-      }
-      if (changes.selectedList) {
-        if (changes.selectedList.currentValue && changes.selectedList.currentValue.length) {
-          this.selectedList = [
-            ...this.selectedList,
-          ];
-        }
-      }
     }
     if (changes.initialValue) {
       if (!changes.initialValue.currentValue) {
         this.selectedList = null;
-        this.initialValue = null;
+        this.selectedText = '';
       }
     }
   }
@@ -147,11 +134,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   beforeOpenList(event) {
-    if (this.direction === 'auto') {
-      this.listDirection = getListDirection(event.target);
-    } else {
-      this.listDirection = this.direction;
-    }
+    this.listDirection = getListDirection(event.target);
     this.isLoading = true;
     this.listOpen.emit(event);
   }
@@ -163,15 +146,5 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       this.beforeOpenList(event);
     }
     this.isOpened = !this.isOpened;
-  }
-
-  onClear() {
-    this.initialValue = null;
-    this.list = [
-      ...this.list,
-      ...this.selectedList,
-    ];
-    this.selectedList = [];
-    this.clear.emit();
   }
 }

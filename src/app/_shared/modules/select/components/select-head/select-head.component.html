@@ -1,5 +1,4 @@
-<div #head (click)="onHeadClick($event)" class="select-head d-flex align-items-center" role="button">
-  <input (keydown)="onKeyDown($event)" [value]="label" class="form-control" readonly type="text">
-  <span class="pi pi-times" (click)="onClear($event)"></span>
+<div #head class="select-head d-flex align-items-center" role="button" (click)="onHeadClick($event)">
+  <input type="text" class="form-control" readonly [value]="label" (keydown)="onKeyDown($event)">
   <span class="pi pi-caret-{{caretDirection}}"></span>
 </div>
