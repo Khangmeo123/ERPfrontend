@@ -44,7 +44,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   listCustomerId: Array<any> = [];
 
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/customer-of-legal-entity/export?legalEntityId=';
-  @ViewChild('tableCustomer', {static: false}) public tableCustomer: TemplateRef<any>;
+  @ViewChild('tableCustomer', { static: false }) public tableCustomer: TemplateRef<any>;
 
 
   constructor(
@@ -89,7 +89,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     });
 
     this.customerOfLegalEntityService.getListCustomerOfLegalEntityByTyping(this.customerTyping);
-    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
+    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
     this.legalSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify).add(customerListSub)
       .add(customerListCountSub).add(customerOfLegalListSub);
 
@@ -245,9 +245,9 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
+      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
     } else {
-      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
+      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
   }
 }
