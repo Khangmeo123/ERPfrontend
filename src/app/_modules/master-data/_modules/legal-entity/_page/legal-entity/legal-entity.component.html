@@ -62,7 +62,7 @@
               {{'legalEntity.subLevel4' | translate}}
               <p-sortIcon [field]="'subLevel4'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn></th>
+            <th class="legal-entity-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -95,7 +95,7 @@
                                     (changeFilter)="getList()"
                                     data-qe-id="table-thead-filter-subLevel4"></app-advanced-filters>
             </th>
-            <th class="th-filter"></th>
+            <th class="th-filter legal-entity-actions"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-legalEntity let-index="rowIndex">
@@ -106,10 +106,10 @@
             <td class="ui-resizable-column"> {{legalEntity.subLevel2}} </td>
             <td class="ui-resizable-column"> {{legalEntity.subLevel3}} </td>
             <td class="ui-resizable-column"> {{legalEntity.subLevel4}} </td>
-            <td>
-              <div class="edit" (click)="edit(legalEntity.id)">
+            <td class="legal-entity-actions">
+              <a role="button" (click)="edit(legalEntity.id)">
                 <mat-icon>edit</mat-icon>
-              </div>
+              </a>
             </td>
           </tr>
         </ng-template>

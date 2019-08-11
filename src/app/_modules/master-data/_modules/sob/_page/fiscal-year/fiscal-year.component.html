@@ -42,6 +42,7 @@
                 pResizableColumn> {{ 'fiscal_year.content.valuation_method' | translate}} </th>
             <th [pSortableColumn]="'status'" data-qe-id="table-thead-status"
                 pResizableColumn> {{ 'fiscal_year.content.status' | translate}} </th>
+                <th class="fiscal-year-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -74,6 +75,7 @@
                                  date-qe-id="dialog-status"
                                  key="display"></app-simple-select>
             </th>
+            <th class="th-filter fiscal-year-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-row pTemplate="body">
@@ -83,6 +85,11 @@
             <td>{{row.endDate | date: 'dd/MM/yyyy'}}</td>
             <td>{{row.valuationMethodDisplay}}</td>
             <td> {{row.statusDisplay}} </td>
+            <td class="fiscal-year-actions">
+              <a role="button" (click)="edit(row.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

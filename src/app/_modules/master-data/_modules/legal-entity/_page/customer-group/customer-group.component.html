@@ -55,7 +55,7 @@
                   {{'customerGroup.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action'}}</th>
+                <th pResizableColumn >{{'general.action'| translate}}</th>
               </tr>
               <tr>
                 <th class="th-filter">
@@ -189,13 +189,13 @@
   <form class="container" [formGroup]="customerGroupForm">
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="customer-group-code">
           {{'customerGroup.code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-                 id="customerrGroupCode">
+                 id="customer-group-code">
           <app-error data-qe-id="dialog-error-code"
                      *ngIf="(customerGroupForm.controls.code?.errors && customerGroupForm.controls.code?.touched) || !!customerGroupForm.controls.errors?.get('code')?.value"
                      [formGroup]="customerGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -203,13 +203,13 @@
         </div>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="customer-group-name">
           {{'customerGroup.name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-                 id="customerGroupName">
+                 id="customer-group-name">
           <app-error data-qe-id="dialog-error-code"
                      *ngIf="(customerGroupForm.controls.name?.errors && customerGroupForm.controls.name?.touched) || !!customerGroupForm.controls.errors?.get('name')?.value"
                      [formGroup]="customerGroupForm" [property]="'name'" [placement]="'top'" class="error-form">

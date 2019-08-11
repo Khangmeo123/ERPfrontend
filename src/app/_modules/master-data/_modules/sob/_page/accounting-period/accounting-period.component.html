@@ -57,6 +57,7 @@
                 pResizableColumn>
               {{'accountingPeriod.description' | translate}}
             </th>
+            <th class="accounting-period-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -75,6 +76,7 @@
                                     [filter]="accountingPeriodSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
+            <th class="th-filter accounting-period-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-accountingPeriod let-index="index" pTemplate="body">
@@ -82,6 +84,11 @@
             <td> {{accountingPeriod.startPeriod | date: 'dd/MM/yyyy'}}  </td>
             <td>{{accountingPeriod.endPeriod | date: 'dd/MM/yyyy'}} </td>
             <td>{{accountingPeriod.description}}</td>
+            <td class="accounting-period-actions">
+              <a role="button" (click)="edit(accountingPeriod.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

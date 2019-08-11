@@ -42,6 +42,7 @@
                   {{'customerOfLegalEntity.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
+
               </tr>
               <tr>
                 <th class="th-filter">
@@ -118,7 +119,8 @@
                   {{'customerOfLegalEntity.customer.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action' | translate}}</th>
+                <th class="customer-of-legal-entity-actions"></th>
+
               </tr>
               <tr>
                 <th class="th-filter">
@@ -131,14 +133,15 @@
                                         [filter]="customerSearchEntity.name"
                                         (changeFilter)="getListCustomer()"></app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter customer-of-legal-entity-actions"></th>
+
               </tr>
             </ng-template>
-            <ng-template pTemplate="body" let-item>
+            <ng-template pTemplate="body" let-item let-index="index">
               <tr [attr.data-qe-id]="'table-tbody-row-' + index">
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
-                <td>
+                <td class="customer-of-legal-entity-actions">
                   <div class="d-flex">
                     <div class="edit" (click)="onClickShowDetail(item.id)">
                       <mat-icon>edit</mat-icon>
@@ -147,7 +150,6 @@
                       <mat-icon>delete</mat-icon>
                     </div>
                   </div>
-
                 </td>
               </tr>
             </ng-template>

@@ -55,6 +55,7 @@
                 pResizableColumn> {{ 'payment_term.discount_rate' | translate}}
               <p-sortIcon [field]="'discountRate'" class="float-right"></p-sortIcon>
             </th>
+            <th class="payment-term-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -79,6 +80,7 @@
               <app-advanced-filters (changeFilter)="getList()" [filter]="paymentTermSearchEntity.discountRate"
                                     data-qe-id="filter-discount-rate"></app-advanced-filters>
             </th>
+            <th class="th-filter payment-term-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-paymentTerm pTemplate="body">
@@ -88,6 +90,11 @@
             <td> {{paymentTerm.dueInDays}} </td>
             <td> {{paymentTerm.discountPeriod}} </td>
             <td> {{paymentTerm.discountRate}} </td>
+            <td class="payment-term-actions">
+              <a role="button" (click)="edit(paymentTerm.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

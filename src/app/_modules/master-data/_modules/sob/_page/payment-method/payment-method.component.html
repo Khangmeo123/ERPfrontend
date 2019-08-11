@@ -42,6 +42,7 @@
               {{ 'payment_method.payment_method_name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
+            <th class="payment-method-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -54,12 +55,18 @@
                                     [filter]="paymentMethodSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
+            <th class="th-filter payment-method-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-paymentMethod pTemplate="body">
           <tr (dblclick)="edit(paymentMethod.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{paymentMethod.code}} </td>
             <td> {{paymentMethod.name}} </td>
+            <td class="payment-method-actions">
+              <a role="button" (click)="edit(paymentMethod.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>
