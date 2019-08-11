@@ -3,11 +3,10 @@
     <i class="fa fa-navicon"></i>
   </button> -->
   <!-- header -->
-  <div class="navbar-header pl-2 pr-2 ml-3 text-center">
-    <a class="navbar-brand m-0 w-100" href="#">
+  <div class="navbar-header pl-2 pr-2 ml-3 text-center d-flex align-items-center">
+    <a class="navbar-brand m-0 w-100 align-items-center" href="#">
       <!-- <i class="fa fa-flash mr-1"></i> -->
-      <img src="./assets/img/logo.png" alt="lightning logo" width="35px">
-      <span class="ml-1">Lightning</span>
+      <span class="ml-1 h3 align-items-center mb-0">JAJA</span>
     </a>
   </div>
   <!-- sidebar toggler -->
@@ -17,7 +16,7 @@
   <!-- right menu toggler -->
   <div class="nav-toggler-right mr-4 d-md-none">
     <button class="" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-      aria-controls="collapseBasic">
+            aria-controls="collapseBasic">
       <!-- <span class="navbar-toggler-icon"></span> -->
       <img src="./assets/img/user.jpg" class="img-fluid" alt="">
     </button>
@@ -30,16 +29,17 @@
     </li>
 
     <li class="nav-item flex-fill">
-        <div class="search-input align-items-center" [ngStyle]="{'display': !isCollapsed ? 'none': 'block' }">
-            <div class="has-search">
-              <span class="fa fa-search form-control-feedback"></span>
-              <input type="text" class="form-control">
-            </div>
-          </div>
-      </li>
+      <div class="search-input align-items-center" [ngStyle]="{'display': !isCollapsed ? 'none': 'block' }">
+        <div class="has-search">
+          <span class="fa fa-search form-control-feedback"></span>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </li>
   </ul>
   <!-- right menu -->
-  <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed" style="margin-right: 10px">
+  <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
+       style="margin-right: 10px">
     <ul class="navbar-nav">
       <li class="nav-item">
         <a class="btn nav-link">
@@ -59,13 +59,13 @@
       </li>
       <li (clickOutside)="closeDropdown()" class="nav-item" style="cursor: pointer; margin-top: 7px">
         <div class="nav-link" (click)="onToggleFlag()">
-          <img [src]="languageSelected.image | safeHtml" style="width:24px;vertical-align:middle" />
+          <img [src]="languageSelected.image | safeHtml" style="width:24px;vertical-align:middle"/>
         </div>
         <div class="sub-nav" style="width: 150px; right: 100px; height: 90px" [@toggleMenu]="listState">
           <ul class="flags">
             <li class="content-drop list" *ngFor="let item of language">
               <div class="ui-helper-clearfix" (click)="onClickChangeLanguage(item)">
-                <img [src]="item.image | safeHtml" style="width:24px;vertical-align:middle" />
+                <img [src]="item.image | safeHtml" style="width:24px;vertical-align:middle"/>
                 <div style="font-size:14px;margin-top:4px">{{item.label}}</div>
               </div>
             </li>
@@ -74,7 +74,8 @@
       </li>
       <li (clickOutside)="closeDropMenu()" class="nav-item" style="cursor: pointer">
         <div class="user-profile" (click)="onToggle()">
-          <span class="nav-link">huongnt
+          <span class="nav-link">
+            {{user?.username}}
           </span>
           <i class="fas fa-caret-down"></i>
         </div>
@@ -83,10 +84,10 @@
             <li class="">
               <div class="row">
                 <div class="col-sm-4">
-                  <img alt="user" src="./assets/img/default_avatar.png" style="width: 40px; height: 40px" />
+                  <img alt="user" src="./assets/img/default_avatar.png" style="width: 40px; height: 40px"/>
                 </div>
                 <div class="col-sm-8" style="white-space: nowrap; margin-top: 10px">
-                  <span>Nguyễn Thị Hương</span>
+                  <span>Username goes here</span>
                 </div>
               </div>
             </li>
@@ -94,7 +95,8 @@
               <hr>
             </li>
             <li class="content-drop list">
-              <mat-icon style="margin-left: 20px">vpn_key</mat-icon><span>Đổi mật khẩu</span>
+              <mat-icon style="margin-left: 20px">vpn_key</mat-icon>
+              <span>Đổi mật khẩu</span>
             </li>
             <li class="content-drop" style="margin-bottom: 10px">
               <button class="btn" (click)="onClickLogOut($event)">
