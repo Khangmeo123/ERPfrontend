@@ -7,14 +7,16 @@
 }
 .login{
     margin-top: -60px !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
 }
 #content{
     position: absolute;
     font-size: 14px !important;
 }
 .example-form {
-    min-width: 120px;
-    max-width: 400px;
+    min-width: 200px;
+    max-width: 570px;
     width: 100%;
   }
   
@@ -23,8 +25,8 @@
   }
   #logo{
       margin-top : 200px;
-      margin-left: 700px; 
+      margin-left: 670px; 
   }
   #formInput{
-      margin-left: 710px;
+      margin-left: 680px;
   }
