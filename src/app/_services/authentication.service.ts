@@ -6,6 +6,7 @@ import { AuthenticationRepository } from '../_repositories/authentication.reposi
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../_helpers/string';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +21,7 @@ export class AuthenticationService {
     private authenticationRepository: AuthenticationRepository,
     private toastrService: ToastrService,
     private router: Router,
+    private cookieService: CookieService,
   ) {
     const user: UserEntity = JSON.parse(localStorage.getItem('currentUser')) || null;
     if (user === null) {
@@ -54,7 +56,7 @@ export class AuthenticationService {
   logout() {
     this.currentUserSubject.next(null);
     localStorage.removeItem('currentUser');
-    document.cookie = 'token=; expires=0';
+    this.cookieService.deleteAll('/');
     return this.router.navigate(['login']);
   }
 }
