@@ -21,6 +21,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -41,10 +42,12 @@
                 pResizableColumn> {{ 'fiscal_year.content.valuation_method' | translate}} </th>
             <th [pSortableColumn]="'status'" data-qe-id="table-thead-status"
                 pResizableColumn> {{ 'fiscal_year.content.status' | translate}} </th>
+                <th class="fiscal-year-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="fiscalYearSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="fiscalYearSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
@@ -60,6 +63,7 @@
                                  (selectionChange)="onValuationMethodFilter($event)"
                                  [list]="inventoryValuationMethodList"
                                  class="flex-grow-1"
+                                 [initialValue]="fiscalYearSearchEntity.valuationMethodId"
                                  data-qe-id="dialog-to-valuation-method"
                                  key="display"></app-simple-select>
             </th>
@@ -67,9 +71,11 @@
               <app-simple-select (listOpen)="getStatusList()"
                                  (selectionChange)="onStatusFilter($event)"
                                  [list]="statusList"
+                                 [initialValue]="fiscalYearSearchEntity.statusId"
                                  date-qe-id="dialog-status"
                                  key="display"></app-simple-select>
             </th>
+            <th class="th-filter fiscal-year-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-row pTemplate="body">
@@ -79,6 +85,11 @@
             <td>{{row.endDate | date: 'dd/MM/yyyy'}}</td>
             <td>{{row.valuationMethodDisplay}}</td>
             <td> {{row.statusDisplay}} </td>
+            <td class="fiscal-year-actions">
+              <a role="button" (click)="edit(row.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

@@ -8,7 +8,7 @@ export class CostCenterForm extends FormModel {
   setOfBookId = new FormControl(null, [requiredField]);
 
   name = new FormControl(null, [requiredField]);
-  code = new FormControl(null, [requiredField, checkLength(3, 10)]);
+  code = new FormControl(null, [requiredField]);
 
   validFrom = new FormControl(null);
   validTo = new FormControl(null);

@@ -1,9 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 // $fa-font-path:"~font-awesome/fonts";
-
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
@@ -80,19 +78,20 @@ body {
 .div-form {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 
   .input-form {
-    width: 90%;
+    flex-grow: 1;
   }
 
   .error-form {
-    width: 10%;
+    flex-shrink: 1;
   }
 }
 
 .full-width {
-  width: 100%;
+  display: inline-table;
 }
 
 *[role="button"] {
@@ -127,7 +126,7 @@ body {
 
 .th-filter {
   background-color: #ffffff !important;
-  padding: 0.25rem 0.5rem!important;
+  padding: 0.25rem 0.5rem !important;
 }
 
 .card-header {
@@ -159,7 +158,7 @@ body {
 }
 
 .page {
-  .page-header,.page-footer {
+  .page-header, .page-footer {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -191,9 +190,10 @@ body {
   }
 
   .page-body {
-    margin: 15px 0px 15px 0px;
-    .page-section {
+    margin: 15px 0 15px 0;
 
+    .page-section {
+      margin-top: 1rem;
     }
 
     .page-section.form {
@@ -246,6 +246,7 @@ body {
 .ui-chips > ul.ui-inputtext {
   width: 100% !important;
 }
+
 body .ui-state-disabled, body .ui-widget:disabled {
   background: #e9ecef;
 }
@@ -264,7 +265,7 @@ input[type="text"].disabled {
 .ui-table {
   .ui-table-tbody {
     > tr.ui-state-highlight {
-      background: #1C4E80!important;
+      background: #1C4E80 !important;
       color: #ffffff;
     }
   }

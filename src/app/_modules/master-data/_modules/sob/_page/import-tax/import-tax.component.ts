@@ -12,6 +12,7 @@ import {UomEntity} from '../../../../_backend/uom/uom.entity';
 import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
 import {ImportTaxService} from './import-tax.service';
 import {ImportTaxSearchEntity} from '../../../../_backend/import-tax/import-tax.search-entity';
+import {SpecialConsumptionTaxSearchEntity} from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 @Component({
   selector: 'app-import-tax',
@@ -164,11 +165,19 @@ export class ImportTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.importTaxSearchEntity.setOfBookId = setOfBookId;
-    this.importTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.importTaxSearchEntity.setOfBookId = setOfBookId;
+      this.importTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.importTaxService.getSobList(this.sobSearchEntity);
   }
 
   getList() {
@@ -241,6 +250,8 @@ export class ImportTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.importTaxSearchEntity = new ImportTaxSearchEntity();
     this.importTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.importTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 

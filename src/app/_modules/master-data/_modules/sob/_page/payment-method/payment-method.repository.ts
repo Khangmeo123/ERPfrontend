@@ -31,7 +31,7 @@ export class PaymentMethodRepository extends Repository {
   }
 
   getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {

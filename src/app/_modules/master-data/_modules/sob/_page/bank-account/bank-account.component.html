@@ -22,6 +22,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -51,32 +52,44 @@
           <th data-qe-id="table-thead-description">
             {{'bankAccount.description' | translate}}
           </th>
+          <th class="bank-account-actions"></th>
         </tr>
         <tr>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.accountingCode"
-                                  data-qe-id="filter-accountingCode"></app-advanced-filters>
+            <app-single-select key="code"
+                               [list]="coaFilterList"
+                               [selectedList]="selectedCoaFilterList"
+                               (search)="onSearchCoaFilter($event)"
+                               (listOpen)="onOpenCoaFilter()"
+                               (selectionChange)="onCoaFilter($event)"
+            ></app-single-select>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.bankCode"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.bankCode"
                                   data-qe-id="filter-bankCode"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.bankName"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.bankName"
                                   data-qe-id="filter-bankName"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.no"
-                                  data-qe-id="filter-no"></app-advanced-filters>
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.number"
+                                  data-qe-id="filter-number"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.name"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.name"
                                   data-qe-id="filter-name"></app-advanced-filters>
           </th>
           <th class="th-filter">
-            <app-advanced-filters (changeFilter)="getList()" [filter]="bankAccountSearchEntity.description"
+            <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                  [filter]="bankAccountSearchEntity.description"
                                   data-qe-id="filter-description"></app-advanced-filters>
           </th>
+          <th class="th-filter bank-account-actions"></th>
         </tr>
       </ng-template>
       <ng-template let-bankAccount let-index="index" pTemplate="body">
@@ -91,13 +104,18 @@
             {{bankAccount.bankName}}
           </td>
           <td>
-            {{bankAccount.no}}
+            {{bankAccount.number}}
           </td>
           <td>
             {{bankAccount.name}}
           </td>
           <td>
             {{bankAccount.description}}
+          </td>
+          <td class="bank-account-actions">
+            <a role="button" (click)="edit(bankAccount.id)">
+              <mat-icon>edit</mat-icon>
+            </a>
           </td>
         </tr>
       </ng-template>
@@ -119,7 +137,7 @@
           {{'bankAccount.bankAccounts.accounting_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <div class="div-form d-flex">
+        <div class="div-form d-flex" id="chart-of-account">
           <app-single-select (listOpen)="getCoaList()"
                              id="chart-of-account"
                              (selectionChange)="chartOfAccountId.setValue($event[0])"
@@ -143,7 +161,7 @@
           {{'bankAccount.bankAccounts.bank_code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <div class="div-form">
+        <div class="div-form" id="bank-code">
           <app-single-select [list]="bankList"
                              id="bank-code"
                              class="flex-grow-1"
@@ -167,12 +185,12 @@
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
-          <input id="account-number" class="form-control" data-qe-id="dialog-account-number" formControlName="no"
+          <input id="account-number" class="form-control" data-qe-id="dialog-account-number" formControlName="number"
                  type="text">
           <app-error
-            *ngIf="(no?.errors && no?.touched) || !!errors.get('no')?.value"
+            *ngIf="(number?.errors && number?.touched) || !!errors.get('number')?.value"
             [formGroup]="bankAccountForm"
-            [placement]="'top'" [property]="'no'" class="error-form"
+            [placement]="'top'" [property]="'number'" class="error-form"
             data-qe-id="dialog-error-account-number">
           </app-error>
         </div>
@@ -186,7 +204,7 @@
           <input id="account-name" class="form-control" data-qe-id="dialog-account-name" formControlName="name"
                  type="text">
           <app-error
-            *ngIf="(name?.errors && no?.touched) || !!errors.get('name')?.value"
+            *ngIf="(name?.errors && number?.touched) || !!errors.get('name')?.value"
             [formGroup]="bankAccountForm"
             [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-account-number">
           </app-error>

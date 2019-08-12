@@ -81,8 +81,8 @@ export class CurrencyComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.currencyService.delete(this.currencyForm.value, this.currencySearchEntity).then(res => {
+  deactivate() {
+    this.currencyService.deactivate(this.currencyForm.value, this.currencySearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;

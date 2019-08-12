@@ -75,9 +75,9 @@ export class ItemDetailService {
     return defered;
   }
 
-  delete(itemEntity: any): Promise<boolean> {
+  deactivate(itemEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.itemDetailRepository.delete(itemEntity).subscribe(res => {
+      this.itemDetailRepository.deactivate(itemEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
           resolve();

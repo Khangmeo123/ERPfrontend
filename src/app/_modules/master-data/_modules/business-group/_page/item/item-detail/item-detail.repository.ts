@@ -42,7 +42,7 @@ export class ItemDetailRepository extends Repository {
             );
     }
 
-    delete(itemEntity: any): Observable<boolean> {
+    deactivate(itemEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(itemEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

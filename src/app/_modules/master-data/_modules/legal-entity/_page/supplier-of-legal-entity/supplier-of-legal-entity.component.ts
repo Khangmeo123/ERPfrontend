@@ -22,7 +22,7 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
 
   pageTitle = _('legal_entity.header.title');
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
 
   display: boolean = false;
   isAddGroup = false;
@@ -75,17 +75,18 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     });
     const supplierListCountSub = this.supplierOfLegalEntityService.supplierCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
 
     const supplierOfLegalListSub = this.supplierOfLegalEntityService.supplierListOflegalEntity.subscribe(res => {
-      console.log(res);
       if (res) {
         this.supplierIds = res.ids;
         this.supplierExceptIds = res.exceptIds;
       }
     });
+
+    this.supplierOfLegalEntityService.getListSupplierOfLegalEntityByTyping(this.supplierTyping);
 
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isSaveBookMark = res;
@@ -101,8 +102,8 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
     this.legalSearchEntity.skip = this.pagination.skip;
     this.legalSearchEntity.take = this.pagination.take;
 
-    this.supplierSearchEntity.skip = this.paginationdetail.skip;
-    this.supplierSearchEntity.take = this.paginationdetail.take;
+    this.supplierSearchEntity.skip = this.paginationDetail.skip;
+    this.supplierSearchEntity.take = this.paginationDetail.take;
   }
 
   ngOnDestroy() {
@@ -119,8 +120,9 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   }
 
   supplierSearch(event) {
+    this.supplierSearchEntity = new SupplierSearchEntity();
     this.supplierSearchEntity.ids = this.listSupplierId;
-    if (this.legalId !== null && this.legalId !== undefined) {
+    if (!this.legalId) {
       this.supplierSearchEntity.legalEntityId = this.legalId;
     }
     this.supplierSearchEntity.code.startsWith = event;
@@ -208,9 +210,9 @@ export class SupplierOfLegalEntityComponent implements OnInit, OnDestroy {
   }
 
   getListSupplier(supplier) {
-    this.paginationdetail.pageNumber = 1;
+    this.paginationDetail.pageNumber = 1;
     this.supplierSearchEntity.skip = 0;
-    this.supplierSearchEntity.take = this.paginationdetail.take;
+    this.supplierSearchEntity.take = this.paginationDetail.take;
     this.supplierOfLegalEntityService.getListSupplier(this.supplierSearchEntity);
   }
 

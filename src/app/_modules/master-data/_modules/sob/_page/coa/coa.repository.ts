@@ -35,7 +35,7 @@ export class CoaRepository extends Repository {
 
   getParentChartOfAccountList(parentSearchEntity: CoaSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/list-parent-chart-of-account`,
+      `${this.apiUrl}/drop-list-parent-chart-of-account`,
       parentSearchEntity,
       {
         observe: 'response',

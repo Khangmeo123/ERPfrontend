@@ -7,7 +7,7 @@ export class PaymentTermForm extends FormModel {
 
   setOfBookId = new FormControl(null, [requiredField]);
 
-  code = new FormControl(null, [requiredField, checkLength(3, 10)]);
+  code = new FormControl(null, [requiredField]);
   name = new FormControl(null, [requiredField, checkLength(1, 100)]);
 
   dueInDays = new FormControl(null);

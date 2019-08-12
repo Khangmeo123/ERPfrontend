@@ -122,6 +122,8 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
       this.selectedEmployeeToAddToDepartmentList = entities.ids;
     });
 
+    const employeeTypingSub: Subscription = this.hrOrganizationService.searchEmployeeByTyping(this.employeeTyping);
+
     this.subscription
       .add(hrOrganizationFormSub)
       .add(employeeNotInDepartmentSub)
@@ -130,7 +132,8 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
       .add(employeeListSub)
       .add(hrOrganizationListSub)
       .add(hrOrganizationCountSub)
-      .add(divisionSub);
+      .add(divisionSub)
+      .add(employeeTypingSub);
   }
 
   get code(): FormControl {
@@ -270,15 +273,13 @@ export class HrOrganizationComponent implements OnInit, OnDestroy {
     this.employeeNotInDepartmentSearchEntity.ids = event;
   }
 
-  searchEmployeeByTyping() {
-    this.hrOrganizationService.searchEmployeeByTyping(this.employeeTyping);
-  }
-
   onSearchEmployeeByTyping(event) {
     const employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
-    employeeSearchEntity.ids = this.selectedEmployeeToAddToDepartmentList.map((employee: EmployeeEntity) => employee.id);
+    employeeSearchEntity.hrOrganizationId = this.selectedDepartment.id;
+    employeeSearchEntity.legalEntityId = this.legalEntity.id;
+    employeeSearchEntity.divisionId = this.division.id;
+    employeeSearchEntity.ids = this.employeeNotInDepartmentSearchEntity.ids;
     employeeSearchEntity.name.startsWith = event;
     this.employeeTyping.next(employeeSearchEntity);
-    this.searchEmployeeByTyping();
   }
 }

@@ -90,9 +90,9 @@ export class UomService {
     return defered;
   }
 
-  delete(uomEntity: any, uomSearchEntity: UomSearchEntity): Promise<boolean> {
+  deactivate(uomEntity: any, uomSearchEntity: UomSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.uomRepository.delete(uomEntity).subscribe(res => {
+      this.uomRepository.deactivate(uomEntity).subscribe(res => {
         if (res) {
           this.getList(uomSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

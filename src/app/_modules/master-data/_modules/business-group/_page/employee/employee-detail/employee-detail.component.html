@@ -179,6 +179,14 @@
               </div>
             </div>
           </div>
+
+          <div class="col-sm-4 form-group">
+            <label for="username">
+              {{'employee.username' | translate}}
+              <span class="text-danger ml-1">*</span>
+            </label>
+            <input type="text" class="form-control" formControlName="username" readonly>
+          </div>
         </div>
       </accordion-group>
 
@@ -187,7 +195,7 @@
   <div class="page-footer">
     <div>
       <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-              [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+              [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deactivate()"
               (cancel)="cancelClicked = true" data-qe-id="button-delete"
               *ngIf="employeeForm.controls.id.value !== null && employeeForm.controls.id.value !== undefined">
         {{ 'general.button.delete' | translate}}</button>

@@ -1,0 +1,310 @@
+<div class="page code-formula-detail">
+
+  <div class="page-header">
+    <div class="page-title">
+      {{'codeFormula.title' | translate}}
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="save()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="page-section">
+      <accordion [formGroup]="codeFormulaForm">
+        <accordion-group [isOpen]="true">
+          <button (click)="toggleGeneralTab()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <span class="pull-left float-left">{{'codeFormula.general.title' | translate }}</span>
+            <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="generalTab ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
+          </span>
+          </button>
+          <div class="row">
+            <div class="col form-group">
+              <label for="rule-code">
+                {{'codeFormula.code' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="rule-code" formControlName="code">
+                <app-error data-qe-id="dialog-error-code"
+                           *ngIf="(code?.errors && code?.touched) || !!errors?.get('code')?.value"
+                           [formGroup]="codeFormulaForm" [property]="'code'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+            <div class="col form-group">
+              <label for="rule-length">
+                {{'codeFormula.length' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="rule-length" formControlName="length">
+                <app-error data-qe-id="dialog-error-code"
+                           *ngIf="(length?.errors && length?.touched) || !!errors?.get('length')?.value"
+                           [formGroup]="codeFormulaForm" [property]="'length'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="rule-start">
+                {{'codeFormula.identifierStringStart' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="rule-start" formControlName="identifierStringStart">
+                <app-error data-qe-id="dialog-error-code"
+                           *ngIf="(identifierStringStart?.errors && identifierStringStart?.touched) || !!errors?.get('identifierStringStart')?.value"
+                           [formGroup]="codeFormulaForm" [property]="'identifierStringStart'" [placement]="'top'"
+                           class="error-form">
+                </app-error>
+              </div>
+            </div>
+            <div class="col form-group">
+              <label for="rule-end">
+                {{'codeFormula.identifierStringEnd' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="rule-end" formControlName="identifierStringEnd">
+                <app-error data-qe-id="dialog-error-code"
+                           *ngIf="(identifierStringEnd?.errors && identifierStringEnd?.touched) || !!errors?.get('identifierStringEnd')?.value"
+                           [formGroup]="codeFormulaForm" [property]="'identifierStringEnd'" [placement]="'top'"
+                           class="error-form">
+                </app-error>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col form-group">
+              <label for="rule-value">
+                {{'codeFormula.identifierStringValues' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="rule-value" formControlName="identifierStringValues">
+                <app-error data-qe-id="dialog-error-code"
+                           *ngIf="(identifierStringValues?.errors && identifierStringValues?.touched) || !!errors?.get('identifierStringValues')?.value"
+                           [formGroup]="codeFormulaForm" [property]="'identifierStringValues'" [placement]="'top'"
+                           class="error-form">
+                </app-error>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+        <accordion-group [isOpen]="true">
+          <button (click)="toggleItemTab()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <span class="pull-left float-left">{{'codeFormula.item.title' | translate }}</span>
+            <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="itemTab ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
+          </span>
+          </button>
+          <div class="row">
+            <div class="actions col d-flex justify-content-end">
+              <button class="btn btn-add" (click)="addItem()">
+                + {{'general.button.add' | translate}}
+              </button>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col">
+              <p-table [resizableColumns]="true" [value]="itemList">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th pResizableColumn>
+                      {{'codeFormula.item.code' | translate}}
+                    </th>
+                    <th pResizableColumn>
+                      {{'codeFormula.item.name' | translate}}
+                    </th>
+                    <th pResizableColumn class="item-actions">
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="th-filter">
+                      <app-advanced-filters [filter]="appliedItemSearchEntity.code">
+                      </app-advanced-filters>
+                    </th>
+                    <th class="th-filter">
+                      <app-advanced-filters [filter]="appliedItemSearchEntity.name">
+                      </app-advanced-filters>
+                    </th>
+                    <th class="th-filter item-actions">
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-index="index">
+                  <tr>
+                    <td class="ui-resizable-column">
+                      {{rowData.code}}
+                    </td>
+                    <td class="ui-resizable-column">
+                      {{rowData.name}}
+                    </td>
+                    <td class="ui-resizable-column item-actions">
+                      <a role="button" (click)="editItem(rowData)">
+                        <mat-icon>edit</mat-icon>
+                      </a>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </accordion-group>
+        <accordion-group [isOpen]="true">
+          <button (click)="toggleRuleTab()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <span class="pull-left float-left">{{'codeFormula.rule.title' | translate }}</span>
+            <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="ruleTab ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
+          </span>
+          </button>
+          <div class="row mt-2">
+            <div class="col">
+              <p-table [resizableColumns]="true" [value]="itemList">
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th>
+                      {{'codeFormula.rule.field' | translate}}
+                    </th>
+                    <th>
+                      {{'codeFormula.rule.identifierStringStart' | translate}}
+                    </th>
+                    <th>
+                      {{'codeFormula.rule.identifierStringEnd' | translate}}
+                    </th>
+                    <th class="item-actions">
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="th-filter">
+                      <app-advanced-filters [filter]="splitRuleContentSearchEntity.fieldDisplay">
+                      </app-advanced-filters>
+                    </th>
+                    <th class="th-filter">
+                      <app-advanced-filters [filter]="splitRuleContentSearchEntity.start">
+                      </app-advanced-filters>
+                    </th>
+                    <th class="th-filter">
+                      <app-advanced-filters [filter]="splitRuleContentSearchEntity.end">
+                      </app-advanced-filters>
+                    </th>
+                    <th class="th-filter item-actions">
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-rowData let-index="index">
+                  <tr>
+                    <td class="ui-resizable-column">
+                      {{rowData.field}}
+                    </td>
+                    <td class="ui-resizable-column">
+                      {{rowData.identifierStringStart}}
+                    </td>
+                    <td class="ui-resizable-column">
+                      {{rowData.identifierStringEnd}}
+                    </td>
+                    <td class="ui-resizable-column item-actions">
+                      <a role="button" (click)="editRule(rowData)">
+                        <mat-icon>edit</mat-icon>
+                      </a>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
+  </div>
+
+  <div class="page-footer">
+    <button class="btn btn-cancel" (click)="cancel()">
+      {{'general.button.cancel' | translate}}
+    </button>
+    <button class="btn btn-save" (click)="save()">
+      {{'general.button.save' | translate}}
+    </button>
+  </div>
+</div>
+
+<p-dialog [(visible)]="itemModal" [modal]="true" appendTo="body">
+  <p-header>
+    {{'codeFormula.rule.modal.title' | translate}}
+  </p-header>
+
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <p-table>
+          <ng-template pTemplate="header">
+            <tr>
+              <th>
+                {{'codeFormula.item.code' | translate}}
+              </th>
+              <th>
+                {{'codeFormula.item.name' | translate}}
+              </th>
+              <th class="item-actions"></th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters [filter]="itemSearchEntity.code">
+                </app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters [filter]="itemSearchEntity.name">
+                </app-advanced-filters>
+              </th>
+              <th class="th-filter item-actions"></th>
+            </tr>
+          </ng-template>
+
+          <ng-template pTemplate="body" let-rowData let-index="index">
+            <tr>
+              <td>
+                {{rowData.code}}
+              </td>
+              <td>
+                {{rowData.name}}
+              </td>
+              <td class="item-actions"></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+  <p-footer class="d-flex">
+    <button class="btn btn-delete"
+            (confirm)="deleteItem(codeFormulaItemForm.value)"
+            *ngIf="codeFormulaItemForm?.value?.id"
+            popoverMessage="{{'binLocation.delete.confirm.message' | translate}}"
+            popoverTitle="{{'binLocation.delete.confirm.title' | translate}}"
+            data-qe-id="footer-button-delete"
+            mwlConfirmationPopover
+            placement="bottom">
+      {{'general.button.delete' | translate}}
+    </button>
+
+    <div class="flex-grow-1">
+      <button class="btn btn-cancel" (click)="cancelItem()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="saveItem()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
+

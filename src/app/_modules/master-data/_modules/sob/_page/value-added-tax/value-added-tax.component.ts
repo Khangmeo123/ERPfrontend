@@ -12,6 +12,7 @@ import {UomEntity} from '../../../../_backend/uom/uom.entity';
 import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
 import {ValueAddedTaxService} from './value-added-tax.service';
 import {ValueAddedTaxSearchEntity} from '../../../../_backend/value-added-tax/value-added-tax.search-entity';
+import {SpecialConsumptionTaxSearchEntity} from '../../../../_backend/special-consumption-tax/special-consumption-tax.searchentity';
 
 @Component({
   selector: 'app-value-added-tax',
@@ -164,11 +165,14 @@ export class ValueAddedTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.valueAddedTaxSearchEntity.setOfBookId = setOfBookId;
-    this.valueAddedTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.valueAddedTaxSearchEntity.setOfBookId = setOfBookId;
+      this.valueAddedTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
   }
 
   getList() {
@@ -241,6 +245,8 @@ export class ValueAddedTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.valueAddedTaxSearchEntity = new ValueAddedTaxSearchEntity();
     this.valueAddedTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.valueAddedTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 
@@ -301,5 +307,10 @@ export class ValueAddedTaxComponent implements OnInit {
   onSearchUomFilter(event) {
     this.uomFilterSearchEntity.name.startsWith = event;
     this.valueAddedTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.valueAddedTaxService.getSobList(this.sobSearchEntity);
   }
 }

@@ -1,110 +1,118 @@
 <div class="page job-level">
-    <div class="page-header">
+  <div class="page-header">
         <span class="page-title">
             {{ pageTitle | translate}}
-            <span (click)="bookMark()">
+          <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
-        <div class="page-actions">
-            <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
-                {{'general.button.add' | translate}}</button>
-            <button class="btn btn-clear" (click)="clearSearch(table)"
-                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
-        </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
+        {{'general.button.add' | translate}}</button>
+      <button class="btn btn-clear" (click)="clearSearch(table)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
-    <hr>
-    <div class="page-body">
-        <div class="page-section list">
-            <p-table [value]="jobLevelList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
-                <ng-template pTemplate="colgroup">
-                    <colgroup>
-                        <col>
-                        <col>
-                    </colgroup>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pResizableColumn data-qe-id="table-thead-level" [pSortableColumn]="'level'">
-                            {{ 'jobLevel.content.level' | translate}}
-                            <p-sortIcon [field]="'level'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
-                            {{ 'jobLevel.content.description' | translate}}
-                            <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="jobLevelSearchEntity.level" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-level"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="jobLevelSearchEntity.description" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-description"></app-advanced-filters>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-jobLevel let-index="rowIndex">
-                    <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td> {{jobLevel.level}} </td>
-                        <td> {{jobLevel.description}} </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-        <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
-            </app-pagination>
-        </div>
+  </div>
+  <hr>
+  <div class="page-body">
+    <div class="page-section list">
+      <p-table [value]="jobLevelList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-level" [pSortableColumn]="'level'">
+              {{ 'jobLevel.content.level' | translate}}
+              <p-sortIcon [field]="'level'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-description" [pSortableColumn]="'description'">
+              {{ 'jobLevel.content.description' | translate}}
+              <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
+            </th>
+            <th class="job-level-actions"></th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="jobLevelSearchEntity.level" (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-level"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="jobLevelSearchEntity.description"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-description"></app-advanced-filters>
+            </th>
+            <th class="th-filter job-level-actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-jobLevel let-index="rowIndex">
+          <tr (dblclick)="edit(jobLevel.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{jobLevel.level}} </td>
+            <td> {{jobLevel.description}} </td>
+            <td class="job-level-actions">
+              <a role="button" (click)="edit(jobLevel.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
+    <div class="pagination">
+      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+      </app-pagination>
+    </div>
+  </div>
 </div>
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="isShowDialog" appendTo="body"
-    [style]="{width: '900px'}">
-    <p-header>
-        {{ 'jobLevel.dialog.title' | translate}}
-    </p-header>
-    <div class="container" [formGroup]="jobLevelForm">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="jobLevel">{{ 'jobLevel.content.level' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <input type="text" pKeyFilter="num" formControlName="level" class="form-control">
-                        <app-error data-qe-id="dialog-form-code"
-                            *ngIf="(jobLevelForm.controls.level?.errors && jobLevelForm.controls.level?.touched) || !!jobLevelForm.controls.errors.get('level')?.value"
-                            [formGroup]="jobLevelForm" [property]="'level'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="job_levelid">{{ 'jobLevel.content.description' | translate}}</label>
-                    <textarea class="form-control" rows="4" formControlName="description">
+          [style]="{width: '900px'}">
+  <p-header>
+    {{ 'jobLevel.dialog.title' | translate}}
+  </p-header>
+  <div class="container" [formGroup]="jobLevelForm">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="jobLevel">{{ 'jobLevel.content.level' | translate}}<span
+            class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input type="text" pKeyFilter="num" formControlName="level" class="form-control">
+            <app-error data-qe-id="dialog-form-code"
+                       *ngIf="(jobLevelForm.controls.level?.errors && jobLevelForm.controls.level?.touched) || !!jobLevelForm.controls.errors.get('level')?.value"
+                       [formGroup]="jobLevelForm" [property]="'level'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="job_levelid">{{ 'jobLevel.content.description' | translate}}</label>
+          <textarea class="form-control" rows="4" formControlName="description">
                     </textarea>
-                </div>
-            </div>
         </div>
+      </div>
     </div>
-    <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions">
-                    <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
-                        {{ 'general.button.save' | translate}}</button>
-                    <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
-                        (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
-                    <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                        data-qe-id="dialog-button-delete" *ngIf="jobLevelForm.value?.isDeleted"
-                        [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()">
-                        {{ 'general.button.delete' | translate}}</button>
-                </div>
-            </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12 d-flex">
+        <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                data-qe-id="dialog-button-delete" *ngIf="jobLevelForm.value?.isDeleted"
+                [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deactivate()">
+          {{ 'general.button.delete' | translate}}</button>
+        <div class="page-actions flex-grow-1">
+          <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
+            {{ 'general.button.save' | translate}}</button>
+          <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
+                  (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
         </div>
-    </p-footer>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>

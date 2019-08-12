@@ -22,6 +22,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -50,29 +51,32 @@
             <th data-qe-id="table-thead-description">
               {{'coa.account_description' | translate}}
             </th>
+            <th class="coa-actions"></th>
           </tr>
           <tr class="th-filter">
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="coaSearchEntity.code"
                                     data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="coaSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
               <app-simple-select (listOpen)="getCharacteristicList()"
                                  (selectionChange)="onFilterCharacteristic($event)"
                                  [list]="characteristicList"
-                                 [initialValue]="coaForm?.controls?.characteristicDisplay?.value"
+                                 [initialValue]="coaSearchEntity?.characteristicId"
                                  data-qe-id="dialog-account-characteristic"
                                  key="display"
               ></app-simple-select>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="coaSearchEntity.description"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="coaSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
+            <th class="th-filter coa-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-row pTemplate="body" let-index="index">
@@ -88,6 +92,11 @@
             </td>
             <td>
               {{row.description}}
+            </td>
+            <td class="coa-actions">
+              <a role="button" (click)="edit(row.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
             </td>
           </tr>
         </ng-template>

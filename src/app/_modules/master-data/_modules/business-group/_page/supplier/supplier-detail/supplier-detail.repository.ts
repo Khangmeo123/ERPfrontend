@@ -40,8 +40,8 @@ export class SupplierDetailRepository extends Repository {
             );
     }
 
-    delete(supplierEntity: any): Observable<boolean> {
-        return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(supplierEntity),
+    deactivate(supplierEntity: any): Observable<boolean> {
+        return this.http.post<boolean>(this.apiUrl + '/deactivate', JSON.stringify(supplierEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

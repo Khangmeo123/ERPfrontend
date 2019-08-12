@@ -24,7 +24,7 @@ export class BankAccountRepository extends Repository {
   }
 
   getCoaList(coaSearchEntity: ChartOfAccountSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-chart-of-account', JSON.stringify(coaSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-chart-of-account', JSON.stringify(coaSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {
@@ -51,7 +51,7 @@ export class BankAccountRepository extends Repository {
   }
 
   getSobList(sobSearchEntity: SobSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(this.apiUrl + '/list-set-of-book', JSON.stringify(sobSearchEntity),
+    return this.http.post<Entities>(this.apiUrl + '/drop-list-set-of-book', JSON.stringify(sobSearchEntity),
       {observe: 'response', headers: this.getHeader()}).pipe(
       map(r => {
         const {
@@ -106,7 +106,7 @@ export class BankAccountRepository extends Repository {
 
   getBankList(bankSearchEntity: BankSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/list-bank`,
+      `${this.apiUrl}/drop-list-bank`,
       bankSearchEntity,
       {
         observe: 'response',

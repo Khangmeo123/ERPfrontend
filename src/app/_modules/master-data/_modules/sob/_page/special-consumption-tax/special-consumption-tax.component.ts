@@ -164,11 +164,14 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.specialConsumptionTaxSearchEntity.setOfBookId = setOfBookId;
-    this.specialConsumptionTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.specialConsumptionTaxSearchEntity.setOfBookId = setOfBookId;
+      this.specialConsumptionTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
   }
 
   getList() {
@@ -241,6 +244,8 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.specialConsumptionTaxSearchEntity = new SpecialConsumptionTaxSearchEntity();
     this.specialConsumptionTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.specialConsumptionTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 
@@ -301,5 +306,10 @@ export class SpecialConsumptionTaxComponent implements OnInit {
   onSearchUomFilter(event) {
     this.uomFilterSearchEntity.name.startsWith = event;
     this.specialConsumptionTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.specialConsumptionTaxService.getSobList(this.sobSearchEntity);
   }
 }

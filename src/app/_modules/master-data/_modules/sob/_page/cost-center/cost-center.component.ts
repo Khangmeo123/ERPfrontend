@@ -141,12 +141,19 @@ export class CostCenterComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.costCenterSearchEntity.setOfBookId = setOfBookId;
-    this.coaSearchEntity.setOfBookId = this.setOfBookId;
-    this.costCenterForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.costCenterSearchEntity.setOfBookId = setOfBookId;
+      this.costCenterForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.costCenterService.getSobList(this.sobSearchEntity);
   }
 
   getList() {
@@ -202,6 +209,8 @@ export class CostCenterComponent implements OnInit {
 
   clearSearch(table: any) {
     this.costCenterSearchEntity = new CostCenterSearchEntity();
+    this.selectedCoaList = [];
+    this.costCenterSearchEntity.setOfBookId = this.setOfBookId;
     table.reset();
   }
 

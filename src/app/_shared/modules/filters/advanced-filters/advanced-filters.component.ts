@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation } from '@angular/core';
-import { FilterType } from '../../../models/filters/FilterType';
-import { DateFilter } from '../../../models/filters/DateFilter';
-import { TextFilter } from '../../../models/filters/TextFilter';
-import { NumberFilter } from '../../../models/filters/NumberFilter';
-import { toggleMenu } from '../../../animations/toggleMenu';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
+import {FilterType} from '../../../models/filters/FilterType';
+import {DateFilter} from '../../../models/filters/DateFilter';
+import {TextFilter} from '../../../models/filters/TextFilter';
+import {NumberFilter} from '../../../models/filters/NumberFilter';
+import {toggleMenu} from '../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-advanced-filters',
@@ -18,9 +18,11 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
   @Input() filter;
 
-  @ViewChild('pane', { static: false }) pane;
+  @Input() defaultType: string = 'equal';
 
-  @ViewChild('toggler', { static: false }) toggler;
+  @ViewChild('pane', {static: false}) pane;
+
+  @ViewChild('toggler', {static: false}) toggler;
 
   @Output() changeFilter = new EventEmitter();
 
@@ -79,14 +81,16 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
       this.types = NumberFilter.types;
     }
     if (this.type === null) {
-      this.type = this.types[0];
+      this.type = this.types.find((type: FilterType) => {
+        return type.code === this.defaultType;
+      });
     }
   }
 
   beforeOpenList() {
     const style = window.getComputedStyle(this.pane.nativeElement, null);
     const width = parseInt(style.width, 10);
-    const { left } = this.toggler.nativeElement.getBoundingClientRect();
+    const {left} = this.toggler.nativeElement.getBoundingClientRect();
     if (left + width > window.innerWidth) {
       this.dropdownDirection = 'right';
     } else {
@@ -131,12 +135,12 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
   }
 
   onChange(event) {
-    const { value } = event.target;
+    const {value} = event.target;
     this.onApplyFilter(value);
   }
 
   onKeyUp(event) {
-    const { value } = event.target;
+    const {value} = event.target;
     if (value === '' || value === null) {
       this.onApplyFilter(null);
     }

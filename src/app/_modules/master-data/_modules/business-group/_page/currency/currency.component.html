@@ -12,14 +12,14 @@
       <button class="btn btn-add" (click)="add()" data-qe-id="button-add"> +
         {{'general.button.add' | translate}}</button>
       <button class="btn btn-clear" (click)="clearSearch(table)"
-        data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
   </div>
   <hr>
   <div class="page-body">
     <div class="page-section list">
       <p-table [value]="currencyList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
-        scrollHeight="500px" [resizableColumns]="true" #table>
+               scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
           <colgroup>
             <col>
@@ -42,20 +42,25 @@
               {{'currency.content.description' | translate}}
               <p-sortIcon [field]="'description'" class="float-right"></p-sortIcon>
             </th>
+            <th class="supplier-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="currencySearchEntity.code" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-code"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="currencySearchEntity.code"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="currencySearchEntity.name" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-name"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="currencySearchEntity.name"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="currencySearchEntity.description" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-description"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="currencySearchEntity.description"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-description"></app-advanced-filters>
             </th>
+            <th class="th-filter currency-actions"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-currency let-index="rowIndex">
@@ -63,6 +68,11 @@
             <td> {{currency.code}} </td>
             <td> {{currency.name}} </td>
             <td> {{currency.description}} </td>
+            <td class="supplier-actions">
+              <a role="button" (click)="edit(currency.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>
@@ -81,13 +91,13 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="currencyCode">{{ 'currency.content.code' | translate}} <span
-                class="text-danger ml-2">*</span></label>
+              class="text-danger ml-2">*</span></label>
             <div class="div-form">
               <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-                id="currencyCode" />
+                     id="currencyCode"/>
               <app-error data-qe-id="dialog-error-code"
-                *ngIf="(currencyForm.controls.code?.errors && currencyForm.controls.code?.touched) || !!currencyForm.controls.errors.get('code')?.value"
-                [formGroup]="currencyForm" [property]="'code'" [placement]="'top'" class="error-form">
+                         *ngIf="(currencyForm.controls.code?.errors && currencyForm.controls.code?.touched) || !!currencyForm.controls.errors.get('code')?.value"
+                         [formGroup]="currencyForm" [property]="'code'" [placement]="'top'" class="error-form">
               </app-error>
             </div>
           </div>
@@ -95,13 +105,13 @@
         <div class="col-sm-6">
           <div class="form-group">
             <label for="currencyName">{{ 'currency.content.name' | translate}}<span
-                class="text-danger ml-2">*</span></label>
+              class="text-danger ml-2">*</span></label>
             <div class="div-form">
               <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-                id="currencyName" />
+                     id="currencyName"/>
               <app-error data-qe-id="dialog-error-name"
-                *ngIf="(currencyForm.controls.name?.errors && currencyForm.controls.name?.touched) || !!currencyForm.controls.errors.get('name')?.value"
-                [formGroup]="currencyForm" [property]="'name'" [placement]="'top'" class="error-form">
+                         *ngIf="(currencyForm.controls.name?.errors && currencyForm.controls.name?.touched) || !!currencyForm.controls.errors.get('name')?.value"
+                         [formGroup]="currencyForm" [property]="'name'" [placement]="'top'" class="error-form">
               </app-error>
             </div>
           </div>
@@ -112,23 +122,24 @@
           <div class="form-group">
             <label for="currencyDescription">{{ 'currency.content.description' | translate}}</label>
             <textarea class="form-control" rows="4" id="currencyDescription" formControlName="description"
-              data-qe-id="dialog-form-description"></textarea>
+                      data-qe-id="dialog-form-description"></textarea>
           </div>
         </div>
       </div>
     </div>
     <p-footer>
       <div class="row">
-        <div class="col-sm-12">
-          <div class="page-actions">
+        <div class="col-sm-12 d-flex">
+          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
+                  data-qe-id="dialog-button-delete" *ngIf="currencyForm.value?.isDeleted"
+                  [popoverMessage]="popoverMessage"
+                  placement="bottom" (confirm)="deactivate()">
+            {{ 'general.button.delete' | translate}}</button>
+          <div class="page-actions flex-grow-1">
             <button class="btn btn-save" (click)="save()" appNoDblClick data-qe-id="dialog-button-save">
               {{ 'general.button.save' | translate}}</button>
             <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
-              (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
-            <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-              data-qe-id="dialog-button-delete" *ngIf="currencyForm.value?.isDeleted" [popoverMessage]="popoverMessage"
-              placement="bottom" (confirm)="delete()">
-              {{ 'general.button.delete' | translate}}</button>
+                    (click)="isShowDialog = false">{{ 'general.button.cancel' | translate}}</button>
           </div>
         </div>
       </div>

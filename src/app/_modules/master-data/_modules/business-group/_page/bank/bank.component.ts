@@ -84,8 +84,8 @@ export class BankComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.bankService.delete(this.bankForm.value, this.bankSearchEntity).then(res => {
+  deactivate() {
+    this.bankService.deactivate(this.bankForm.value, this.bankSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;

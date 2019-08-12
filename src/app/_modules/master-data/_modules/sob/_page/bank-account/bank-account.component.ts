@@ -1,20 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Subscription } from 'rxjs';
-import { SobEntity } from '../../../../_backend/sob/sob.entity';
-import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../_helpers/entity';
-import { BankAccountEntity } from '../../../../_backend/bank-account/bank-account.entity';
-import { BankAccountSearchEntity } from '../../../../_backend/bank-account/bank-account.searchentity';
-import { BankAccountService } from './bank-account.service';
-import { ChartOfAccountEntity } from '../../../../_backend/chart-of-account/chart-of-account.entity';
-import { ChartOfAccountSearchEntity } from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
-import { ToastrService } from 'ngx-toastr';
-import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { BankEntity } from '../../../../_backend/bank/bank.entity';
-import { BankSearchEntity } from '../../../../_backend/bank/bank.searchentity';
+import {Component, OnInit} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Subscription} from 'rxjs';
+import {SobEntity} from '../../../../_backend/sob/sob.entity';
+import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../_helpers/entity';
+import {BankAccountEntity} from '../../../../_backend/bank-account/bank-account.entity';
+import {BankAccountSearchEntity} from '../../../../_backend/bank-account/bank-account.searchentity';
+import {BankAccountService} from './bank-account.service';
+import {ChartOfAccountEntity} from '../../../../_backend/chart-of-account/chart-of-account.entity';
+import {ChartOfAccountSearchEntity} from '../../../../_backend/chart-of-account/chart-of-account.search-entity';
+import {ToastrService} from 'ngx-toastr';
+import {CoaSearchEntity} from '../../../../_backend/coa/coa.searchentity';
+import {BankEntity} from '../../../../_backend/bank/bank.entity';
+import {BankSearchEntity} from '../../../../_backend/bank/bank.searchentity';
+import {CoaEntity} from '../../../../_backend/coa/coa.entity';
 
 @Component({
   selector: 'app-bank-account',
@@ -65,6 +66,12 @@ export class BankAccountComponent implements OnInit {
 
   public coaSearchEntity: ChartOfAccountSearchEntity = new ChartOfAccountSearchEntity();
 
+  public coaFilterList: CoaEntity[] = [];
+
+  public selectedCoaFilterList: CoaEntity[] = [];
+
+  public coaFilterSearchEntity: ChartOfAccountSearchEntity = new ChartOfAccountSearchEntity();
+
   public setOfBookId: string = null;
 
   public bankList: BankEntity[] = [];
@@ -86,6 +93,11 @@ export class BankAccountComponent implements OnInit {
     const coaListSub = this.bankAccountService.coaList.subscribe((coaList: Entities) => {
       this.coaList = coaList.exceptIds;
       this.selectedCoaList = coaList.ids;
+    });
+
+    const coaFilterListSub: Subscription = this.bankAccountService.coaFilterList.subscribe((coaList: Entities) => {
+      this.coaFilterList = coaList.exceptIds;
+      this.selectedCoaFilterList = coaList.ids;
     });
 
     const bankAccountSub = this.bankAccountService.bankAccountList.subscribe((list) => {
@@ -114,7 +126,8 @@ export class BankAccountComponent implements OnInit {
       .add(bankAccountFormSub)
       .add(coaListSub)
       .add(bankListSub)
-      .add(bankAccountCountSub);
+      .add(bankAccountCountSub)
+      .add(coaFilterListSub);
   }
 
   get currentSob() {
@@ -136,8 +149,8 @@ export class BankAccountComponent implements OnInit {
     return this.bankAccountForm.get('bankId') as FormControl;
   }
 
-  get no() {
-    return this.bankAccountForm.get('no') as FormControl;
+  get number() {
+    return this.bankAccountForm.get('number') as FormControl;
   }
 
   get name() {
@@ -171,12 +184,16 @@ export class BankAccountComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.bankAccountSearchEntity.setOfBookId = setOfBookId;
-    this.bankAccountForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.coaSearchEntity.setOfBookId = setOfBookId;
-    this.getList();
+    if (event.length) {
+      const [setOfBookId] = event;
+      this.bankAccountSearchEntity.setOfBookId = setOfBookId;
+      this.bankAccountForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.coaSearchEntity.setOfBookId = setOfBookId;
+      this.getList();
+    } else {
+      this.selectedSobList = [];
+    }
   }
 
   getList() {
@@ -184,6 +201,12 @@ export class BankAccountComponent implements OnInit {
   }
 
   getSobList() {
+    this.sobSearchEntity = new SobSearchEntity();
+    if (this.selectedSobList.length) {
+      this.sobSearchEntity.ids = [
+        this.selectedSobList[0].id,
+      ];
+    }
     this.bankAccountService.getSobList(this.sobSearchEntity);
   }
 
@@ -238,6 +261,8 @@ export class BankAccountComponent implements OnInit {
 
   clearSearch(table: any) {
     this.bankAccountSearchEntity = new BankAccountSearchEntity();
+    this.bankAccountSearchEntity.setOfBookId = this.setOfBookId;
+    this.selectedCoaFilterList = [];
     table.reset();
   }
 
@@ -268,5 +293,32 @@ export class BankAccountComponent implements OnInit {
   onSearchBankList(event) {
     this.bankSearchEntity.code.startsWith = event;
     this.bankAccountService.getBankList(this.bankSearchEntity);
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.bankAccountService.getSobList(this.sobSearchEntity);
+  }
+
+  onOpenCoaFilter() {
+    const {ids} = this.coaFilterSearchEntity;
+    this.coaFilterSearchEntity = new ChartOfAccountSearchEntity();
+    this.coaFilterSearchEntity.ids = ids;
+    this.coaFilterSearchEntity.setOfBookId = this.setOfBookId;
+    this.bankAccountService.getCoaFilterList(this.coaFilterSearchEntity);
+  }
+
+  onSearchCoaFilter(event) {
+    this.coaFilterSearchEntity.name.startsWith = event;
+    this.bankAccountService.getCoaFilterList(this.coaFilterSearchEntity);
+  }
+
+  onCoaFilter(event) {
+    this.coaFilterSearchEntity = event;
+    if (event.length) {
+      this.bankAccountSearchEntity.chartOfAccountId = event[0];
+    } else {
+      this.bankAccountSearchEntity.chartOfAccountId = null;
+    }
   }
 }

@@ -23,6 +23,7 @@
         <span class="sob mr-2">{{'general.sob' | translate}}: </span>
         <app-single-select (listOpen)="getSobList()"
                            (selectionChange)="changeSob($event)"
+                           (search)="onSearchSetOfBook($event)"
                            [list]="sobList"
                            [selectedList]="selectedSobList"
                            data-qe-id="sob-list"
@@ -56,6 +57,7 @@
                 pResizableColumn>
               {{'accountingPeriod.description' | translate}}
             </th>
+            <th class="accounting-period-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
@@ -69,10 +71,12 @@
                                     data-qe-id="filter-endPeriod"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
+              <app-advanced-filters defaultType="startsWith"
+                                    (changeFilter)="getList()"
                                     [filter]="accountingPeriodSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
+            <th class="th-filter accounting-period-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-accountingPeriod let-index="index" pTemplate="body">
@@ -80,6 +84,11 @@
             <td> {{accountingPeriod.startPeriod | date: 'dd/MM/yyyy'}}  </td>
             <td>{{accountingPeriod.endPeriod | date: 'dd/MM/yyyy'}} </td>
             <td>{{accountingPeriod.description}}</td>
+            <td class="accounting-period-actions">
+              <a role="button" (click)="edit(accountingPeriod.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

@@ -11,19 +11,22 @@
 
   </div>
   <div class="page-body">
+    <div class="page-section row">
+      <div class="col-sm-7 d-flex align-items-center">
+        <span class="sob-label flex-shrink-1 mr-2">
+          {{'general.legal_entity.name' | translate}}:
+        </span>
+        <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds" [selectedList]="legalEntityIds"
+          [key]="'name'" (search)="legalSearch($event)" (selectionChange)="selectLegal($event)"
+          (listOpen)="openLegalEntityList()">
+        </app-single-select>
+      </div>
+    </div>
+    <hr>
     <div class="row">
       <div class="col-sm-6 page-1">
         <div class="mt-2 row">
-          <div class="col-sm-7 d-flex align-items-center">
-            <span class="sob-label flex-shrink-1 mr-2">
-              {{'general.legal_entity.name' | translate}}:
-            </span>
-            <app-single-select data-qe-id="form-select-sob" [list]="legalEntityExceptIds"
-              [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
-              (selectionChange)="selectLegal($event)" (listOpen)="openLegalEntityList()">
-            </app-single-select>
-          </div>
-          <div class="col-sm-5 d-flex page-actions justify-content-end">
+          <div class="col d-flex page-actions justify-content-end">
             <button class="btn btn-add" [disabled]="supplierGroupSearchEntity.legalEntityId == undefined"
               (click)="onClickAddGroup()" data-qe-id="button-add-supplier-group">
               {{'general.button.add' | translate}}</button>
@@ -51,20 +54,20 @@
                   {{'supplierGroup.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action' | translate}}</th>
+                <th pResizableColumn class="supplier-group-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="supplierGroupSearchEntity.code" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-code-supplier-group">
+                  <app-advanced-filters defaultType="startsWith" [filter]="supplierGroupSearchEntity.code"
+                    (changeFilter)="getList()" data-qe-id="table-thead-filter-code-supplier-group">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="supplierGroupSearchEntity.name" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-name-supplier-group">
+                  <app-advanced-filters defaultType="startsWith" [filter]="supplierGroupSearchEntity.name"
+                    (changeFilter)="getList()" data-qe-id="table-thead-filter-name-supplier-group">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter">
+                <th class="th-filter supplier-group-actions">
                 </th>
               </tr>
             </ng-template>
@@ -74,7 +77,7 @@
                 [attr.data-qe-id]="'table-tbody-row-' + index">
                 <td class="ui-resizable-column"> {{supplierGroup.code}} </td>
                 <td class="ui-resizable-column"> {{supplierGroup.name}} </td>
-                <td class="ui-resizable-column">
+                <td class="ui-resizable-column supplier-group-actions">
                   <div class="edit" (click)="edit(supplierGroup.id, $event)">
                     <mat-icon>edit</mat-icon>
                   </div>
@@ -94,9 +97,8 @@
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-supplier" [list]="supplierExceptIds"
-                              [disabled]="!legalEntityId || !supplierGroupingId"
-              [selectedList]="supplierIds" [key]="'name'" (search)="supplierSearchApp($event)"
-              (selectionChange)="selectSupplierApp($event)"
+              [disabled]="!legalEntityId || !supplierGroupingId" [selectedList]="supplierIds" [key]="'name'"
+              (search)="supplierSearchApp($event)" (selectionChange)="selectSupplierApp($event)"
               (listOpen)="openSupplierList()"></app-multi-select>
           </div>
           <div class="col-sm-8 page-actions  d-flex justify-content-end">
@@ -128,20 +130,20 @@
                   {{'supplierGroup.supplier.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action' | translate}}</th>
+                <th pResizableColumn class="supplier-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code-supplier"
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code-supplier"
                     [filter]="supplierSearchEntity.code" (changeFilter)="getListDetail()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-name-supplier"
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-name-supplier"
                     [filter]="supplierSearchEntity.name" (changeFilter)="getListDetail()">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter supplier-actions"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
@@ -149,7 +151,7 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex supplier-actions">
                     <div class="edit" (click)="onClickShowDetail(item.id)">
                       <mat-icon>edit</mat-icon>
                     </div>
@@ -163,7 +165,7 @@
             </ng-template>
           </p-table>
           <div class="pagination">
-            <app-pagination [pagination]="paginationdetail" (paginationOut)="paginationDetailOut($event)"
+            <app-pagination [pagination]="paginationDetail" (paginationOut)="paginationDetailOut($event)"
               data-qe-id="pagination">
             </app-pagination>
           </div>

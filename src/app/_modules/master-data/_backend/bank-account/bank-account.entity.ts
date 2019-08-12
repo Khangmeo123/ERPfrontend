@@ -16,7 +16,7 @@ export class BankAccountEntity extends Entity {
   bankCode: string;
   bankName: string;
 
-  no: string;
+  number: string;
   name: string;
   description: string;
 

@@ -53,13 +53,13 @@
                   </app-single-select>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="legalSearchEntity.code" (changeFilter)="getLegalList()"
-                    data-qe-id="table-thead-filter-code">
+                  <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.code"
+                    (changeFilter)="getLegalList()" data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="legalSearchEntity.name" (changeFilter)="getLegalList()"
-                    data-qe-id="table-thead-filter-name">
+                  <app-advanced-filters defaultType="startsWith" [filter]="legalSearchEntity.name"
+                    (changeFilter)="getLegalList()" data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
                 </th>
               </tr>
@@ -120,8 +120,7 @@
                   {{'itemOfLegalEntity.content.itemDetail.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>
-                  {{'general.action' | translate}}
+                <th pResizableColumn class="item-of-legal-entity">
                 </th>
               </tr>
               <tr>
@@ -135,7 +134,7 @@
                     (changeFilter)="getItemsFromLegalList()" data-qe-id="table-thead-filter-item-name">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter item-of-legal-entity"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-itemsFromLegal let-index="rowIndex">
@@ -143,7 +142,7 @@
                 <td> {{itemsFromLegal.code}} </td>
                 <td> {{itemsFromLegal.name}} </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex item-of-legal-entity">
                     <div class="edit mr-2" (click)="editItemFromLegal(itemsFromLegal.id)">
                       <mat-icon>edit</mat-icon>
                     </div>

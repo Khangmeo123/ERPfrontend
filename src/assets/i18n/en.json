@@ -14,15 +14,9 @@
 			"fiscal_year": ""
 		}
 	},
-  "advancedFilter": {
-    "placeholder": "Search...",
-    "equal": "Equals",
-    "notEqual": "Not equals",
-    "startsWith": "Starts with",
-    "endsWith": "Ends with",
-    "contains": "Contains",
-    "notContains": "Not contains"
-  },
+	"advancedFilter": {
+		"placeholder": "Search..."
+	},
 	"asset": {
 		"content": {
 			"code": "",
@@ -69,6 +63,40 @@
 			"title": ""
 		}
 	},
+	"binLocation": {
+		"action": "",
+		"code": "",
+		"delete": {
+			"confirm": {
+				"message": "",
+				"title": ""
+			}
+		},
+		"getFieldEntity": {
+			"error": ""
+		},
+		"layer1": {
+			"code": ""
+		},
+		"layer2": {
+			"code": ""
+		},
+		"layer3": {
+			"code": ""
+		},
+		"layer4": {
+			"code": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"title": "",
+		"update": {
+			"error": "",
+			"success": ""
+		}
+	},
 	"bookmarks": {
 		"title": ""
 	},
@@ -100,6 +128,38 @@
 			"title": ""
 		},
 		"super_account": ""
+	},
+	"codeFormula": {
+		"code": "",
+		"general": {
+			"title": ""
+		},
+		"get": {
+			"error": ""
+		},
+		"identifierStringEnd": "",
+		"identifierStringStart": "",
+		"identifierStringValues": "",
+		"item": {
+			"code": "",
+			"name": "",
+			"title": ""
+		},
+		"length": "",
+		"rule": {
+			"field": "",
+			"identifierStringEnd": "",
+			"identifierStringStart": "",
+			"modal": {
+				"title": ""
+			},
+			"title": ""
+		},
+		"title": "",
+		"update": {
+			"error": "",
+			"success": ""
+		}
 	},
 	"cost-center": {
 		"content": {
@@ -451,12 +511,21 @@
 				"gender": "",
 				"identityNumber": "",
 				"name": "",
-				"status": ""
+				"status": "",
+				"username": ""
 			},
 			"header": {
 				"title": ""
 			}
-		}
+		},
+		"password": {
+			"error": "",
+			"field": "",
+			"save": "",
+			"success": "",
+			"title": ""
+		},
+		"username": ""
 	},
 	"employeeDetail": {
 		"delete": {
@@ -774,7 +843,11 @@
 		"header": {
 			"title": ""
 		},
-		"name": ""
+		"name": "",
+		"subLevel1": "",
+		"subLevel2": "",
+		"subLevel3": "",
+		"subLevel4": ""
 	},
 	"legalItemDetail": {
 		"content": {
@@ -823,6 +896,9 @@
 		"tab": {
 			"title_1": ""
 		}
+	},
+	"login": {
+		"failed": ""
 	},
 	"naturalResourceTax": {
 		"header": {

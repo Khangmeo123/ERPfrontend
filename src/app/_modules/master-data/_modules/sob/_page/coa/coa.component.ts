@@ -55,8 +55,6 @@ export class CoaComponent implements OnInit {
 
   public parentSearchEntity: CoaSearchEntity = new CoaSearchEntity();
 
-  public parentAccountSearchEntity: CoaSearchEntity = new CoaSearchEntity();
-
   public coaCount: number = 0;
 
   public coaSearchEntity: CoaSearchEntity = new CoaSearchEntity();
@@ -70,7 +68,6 @@ export class CoaComponent implements OnInit {
   constructor(
     private coaService: CoaService,
     private generalService: GeneralService,
-    private toastrService: ToastrService,
   ) {
     const sobListSub = this.coaService.sobList.subscribe((list: Entities) => {
       this.sobList = list.exceptIds;
@@ -166,11 +163,14 @@ export class CoaComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.coaSearchEntity.setOfBookId = setOfBookId;
-    this.coaForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event.length) {
+      const [setOfBookId] = event;
+      this.coaSearchEntity.setOfBookId = setOfBookId;
+      this.coaForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
   }
 
   getList() {
@@ -178,6 +178,9 @@ export class CoaComponent implements OnInit {
   }
 
   getSobList() {
+    const ids = this.sobSearchEntity.ids;
+    this.sobSearchEntity = new SobSearchEntity();
+    this.sobSearchEntity.ids = ids;
     this.coaService.getSobList(this.sobSearchEntity);
   }
 
@@ -230,6 +233,7 @@ export class CoaComponent implements OnInit {
 
   clearSearch(table: any) {
     this.coaSearchEntity = new CoaSearchEntity();
+    this.coaSearchEntity.setOfBookId = this.setOfBookId;
     table.reset();
   }
 
@@ -246,5 +250,10 @@ export class CoaComponent implements OnInit {
   onFilterCharacteristic(event) {
     this.coaSearchEntity.characteristicId = event;
     this.getList();
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.coaService.getSobList(this.sobSearchEntity);
   }
 }

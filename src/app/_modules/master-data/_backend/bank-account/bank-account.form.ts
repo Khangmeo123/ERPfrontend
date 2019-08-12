@@ -14,7 +14,7 @@ export class BankAccountForm extends FormModel {
   bankCode = new FormControl(null);
   bankName = new FormControl(null);
 
-  no = new FormControl(null, [requiredField]);
+  number = new FormControl(null, [requiredField]);
   name = new FormControl(null, [requiredField]);
 
   description = new FormControl(null);
@@ -22,7 +22,7 @@ export class BankAccountForm extends FormModel {
   errors: FormGroup = new FormGroup({
     chartOfAccountId: new FormControl(),
     bankId: new FormControl(),
-    no: new FormControl(),
+    number: new FormControl(),
     name: new FormControl(),
   });
 

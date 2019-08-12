@@ -23,6 +23,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -41,22 +42,31 @@
               {{ 'payment_method.payment_method_name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
+            <th class="payment-method-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="paymentMethodSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="paymentMethodSearchEntity.code"
                                     data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="paymentMethodSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="paymentMethodSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
+            <th class="th-filter payment-method-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-paymentMethod pTemplate="body">
           <tr (dblclick)="edit(paymentMethod.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{paymentMethod.code}} </td>
             <td> {{paymentMethod.name}} </td>
+            <td class="payment-method-actions">
+              <a role="button" (click)="edit(paymentMethod.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

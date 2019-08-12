@@ -23,6 +23,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -54,14 +55,17 @@
                 pResizableColumn> {{ 'payment_term.discount_rate' | translate}}
               <p-sortIcon [field]="'discountRate'" class="float-right"></p-sortIcon>
             </th>
+            <th class="payment-term-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="paymentTermSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="paymentTermSearchEntity.code"
                                     data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="paymentTermSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="paymentTermSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
@@ -76,6 +80,7 @@
               <app-advanced-filters (changeFilter)="getList()" [filter]="paymentTermSearchEntity.discountRate"
                                     data-qe-id="filter-discount-rate"></app-advanced-filters>
             </th>
+            <th class="th-filter payment-term-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-paymentTerm pTemplate="body">
@@ -85,6 +90,11 @@
             <td> {{paymentTerm.dueInDays}} </td>
             <td> {{paymentTerm.discountPeriod}} </td>
             <td> {{paymentTerm.discountRate}} </td>
+            <td class="payment-term-actions">
+              <a role="button" (click)="edit(paymentTerm.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

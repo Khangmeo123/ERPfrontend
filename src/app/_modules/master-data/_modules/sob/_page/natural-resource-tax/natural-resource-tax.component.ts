@@ -12,6 +12,7 @@ import {UomEntity} from '../../../../_backend/uom/uom.entity';
 import {UomSearchEntity} from '../../../../_backend/uom/uom.searchentity';
 import {NaturalResourceTaxService} from './natural-resource-tax.service';
 import {NaturalResourceTaxSearchEntity} from '../../../../_backend/natural-resource-tax/natural-resource-tax.search-entity';
+import {EnvironmentTaxSearchEntity} from '../../../../_backend/environment-tax/environment-tax.search-entity';
 
 @Component({
   selector: 'app-natural-resource-tax',
@@ -164,11 +165,14 @@ export class NaturalResourceTaxComponent implements OnInit {
   }
 
   changeSob(event) {
-    const [setOfBookId] = event;
-    this.naturalResourceTaxSearchEntity.setOfBookId = setOfBookId;
-    this.naturalResourceTaxForm.controls.setOfBookId.setValue(setOfBookId);
-    this.setOfBookId = setOfBookId;
-    this.getList();
+    this.sobSearchEntity.ids = event;
+    if (event && event.length) {
+      const [setOfBookId] = event;
+      this.naturalResourceTaxSearchEntity.setOfBookId = setOfBookId;
+      this.naturalResourceTaxForm.controls.setOfBookId.setValue(setOfBookId);
+      this.setOfBookId = setOfBookId;
+      this.getList();
+    }
   }
 
   getList() {
@@ -241,6 +245,8 @@ export class NaturalResourceTaxComponent implements OnInit {
   clearSearch(table: any) {
     this.naturalResourceTaxSearchEntity = new NaturalResourceTaxSearchEntity();
     this.naturalResourceTaxSearchEntity.setOfBookId = this.setOfBookId;
+    this.naturalResourceTaxSearchEntity.unitOfMeasureId = null;
+    this.selectedUomFilterList = [];
     table.reset();
   }
 
@@ -301,5 +307,10 @@ export class NaturalResourceTaxComponent implements OnInit {
   onSearchUomFilter(event) {
     this.uomFilterSearchEntity.name.startsWith = event;
     this.naturalResourceTaxService.getUnitOfMeasureFilterList(this.uomFilterSearchEntity);
+  }
+
+  onSearchSetOfBook(event) {
+    this.sobSearchEntity.name.startsWith = event;
+    this.naturalResourceTaxService.getSobList(this.sobSearchEntity);
   }
 }

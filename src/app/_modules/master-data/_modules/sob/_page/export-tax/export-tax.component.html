@@ -23,6 +23,7 @@
       <span class="sob mr-2">{{'general.sob' | translate}}: </span>
       <app-single-select (listOpen)="getSobList()"
                          (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
                          [list]="sobList"
                          [selectedList]="selectedSobList"
                          data-qe-id="sob-list"
@@ -58,15 +59,17 @@
                 pResizableColumn>
               {{'tax.available' | translate}}
             </th>
-
+            <th class="export-tax-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="exportTaxSearchEntity.code"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="exportTaxSearchEntity.code"
                                     data-qe-id="filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="exportTaxSearchEntity.name"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="exportTaxSearchEntity.name"
                                     data-qe-id="filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
@@ -83,10 +86,12 @@
                                     data-qe-id="filter-rate"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="exportTaxSearchEntity.description"
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="exportTaxSearchEntity.description"
                                     data-qe-id="filter-description"></app-advanced-filters>
             </th>
             <th class="th-filter"></th>
+            <th class="th-filter export-tax-actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="index" let-tax pTemplate="body">
@@ -100,6 +105,11 @@
               <p-inputSwitch [ngModel]="!tax.disabled"
                              (onChange)="onDisableChange(tax)">
               </p-inputSwitch>
+            </td>
+            <td class="export-tax-actions">
+              <a role="button" (click)="edit(tax.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
             </td>
           </tr>
         </ng-template>

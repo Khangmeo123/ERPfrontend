@@ -97,9 +97,9 @@ export class JobLevelService {
     return defered;
   }
 
-  delete(jobLevelEntity: any, jobLevelSearchEntity: JobLevelSearchEntity): Promise<boolean> {
+  deactivate(jobLevelEntity: any, jobLevelSearchEntity: JobLevelSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.jobLevelRepository.delete(jobLevelEntity).subscribe(res => {
+      this.jobLevelRepository.deactivate(jobLevelEntity).subscribe(res => {
         if (res) {
           this.getList(jobLevelSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

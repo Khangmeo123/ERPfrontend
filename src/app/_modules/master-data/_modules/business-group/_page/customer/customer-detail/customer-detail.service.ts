@@ -68,9 +68,9 @@ export class CustomerDetailService {
     return defered;
   }
 
-  delete(customerEntity: any): Promise<boolean> {
+  deactivate(customerEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.customerDetailRepository.delete(customerEntity).subscribe(res => {
+      this.customerDetailRepository.deactivate(customerEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
           resolve();

@@ -59,8 +59,8 @@ export class CustomerDetailComponent implements OnInit, OnDestroy {
     this.router.navigate(['/master-data/business-group/customer/customer-list']);
   }
 
-  delete() {
-    this.customerDetailService.delete(this.customerForm.value).then(res => {
+  deactivate() {
+    this.customerDetailService.deactivate(this.customerForm.value).then(res => {
       this.router.navigate(['/master-data/business-group/customer/customer-list']);
     });
   }

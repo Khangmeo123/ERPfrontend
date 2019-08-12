@@ -191,6 +191,17 @@ export const sampleSidebarMenu = [
         isShowed: true,
       },
       {
+        label: 'Khai báo vị trí lưu kho',
+        route: '/master-data/legal-entity/bin-location',
+        isShowed: true,
+      },
+      {
+        label: 'Khai báo quy tắc mã',
+        route: '/master-data/legal-entity/code-formula',
+        isShowed: true,
+        exact: false,
+      },
+      {
         label: 'Giá đặc biệt NCC',
         route: '/master-data/legal-entity/special-price-supplier',
         isShowed: true,
