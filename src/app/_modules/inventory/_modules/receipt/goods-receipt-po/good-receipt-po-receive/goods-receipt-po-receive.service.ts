@@ -17,6 +17,9 @@ import {
     GoodsReceiptPOQuantityDetail,
     GoodsReceiptPOSerialNumberEntity,
     GoodsReceiptPOBatchEntity,
+    GoodsReceiptPOBinlocationEntity,
+    GoodsReceiptPOQuantity,
+    GoodsReceiptPOBatchBinLocationEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 @Injectable()
 export class GoodsReceiptPOReceiveService {
@@ -154,6 +157,23 @@ export class GoodsReceiptPOReceiveService {
             this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
         });
     }
+
+    addBinLocationQuantity(goodsReceiptContentId: string) {
+        const binLocation = new GoodsReceiptPOQuantity();
+        const currentQuantityDetail = this.quantityDetail.getValue();
+        binLocation.goodsReceiptContentId = goodsReceiptContentId;
+        currentQuantityDetail.goodsReceiptPOQuantities.push(binLocation);
+        this.quantityDetail.next(currentQuantityDetail);
+    }
+
+    deleteBinLocationQuantity(index: number) {
+        const currentQuantityDetail = this.quantityDetail.getValue();
+        if (index > 0) {
+            currentQuantityDetail.goodsReceiptPOQuantities.splice(index, 1);
+        }
+        this.quantityDetail.next(currentQuantityDetail);
+    }
+
     // serialNumber:
     getSerialNumberList(goodsReceiptPOContentId: string) {
         this.goodsReceiptPORepository.getSerialNumberList(goodsReceiptPOContentId).subscribe(res => {
@@ -196,6 +216,48 @@ export class GoodsReceiptPOReceiveService {
                 this.toastrService.error('Quét QR xảy ra lỗi!');
             }
         });
+    }
+
+    changeLocationSerialNumber(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
+        const currentSerialNumberList = this.serialNumberList.getValue();
+        if (currentSerialNumberList) {
+            currentSerialNumberList.forEach(item => {
+                if (item.isSelected) {
+                    item.binLocationId = goodsReceiptPOBinlocationEntity.id;
+                    item.binLocationCode = goodsReceiptPOBinlocationEntity.code;
+                }
+            });
+        }
+        this.serialNumberList.next(currentSerialNumberList);
+    }
+
+    deleteSerialNumber(index) {
+        const currentSerialNumberList = this.serialNumberList.getValue();
+        currentSerialNumberList.splice(index, 1);
+        this.serialNumberList.next(currentSerialNumberList);
+    }
+
+    checkAllSerialNumber() {
+        const currentSerialNumberList = this.serialNumberList.getValue();
+        currentSerialNumberList.forEach(item => {
+            item.isSelected = true;
+        });
+        this.serialNumberList.next(currentSerialNumberList);
+    }
+
+    deleteMultipleSerialNumber() {
+        const indexArray = [];
+        const currentSerialNumberList = this.serialNumberList.getValue();
+        currentSerialNumberList.forEach(item => {
+            if (item.isSelected) {
+                indexArray.push(currentSerialNumberList.indexOf(item));
+                item.isSelected = false;
+            }
+        });
+        for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
+            currentSerialNumberList.splice(indexArray.reverse()[i], 1);
+        }
+        this.serialNumberList.next(currentSerialNumberList);
     }
 
     // batch:
@@ -241,6 +303,63 @@ export class GoodsReceiptPOReceiveService {
             }
         });
     }
+
+    changeLocationBatch(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
+        const currentBatchList = this.batchList.getValue();
+        if (currentBatchList) {
+            currentBatchList.forEach(item => {
+                if (item.isSelected && item.goodsReceiptPOBatchBinLocations) {
+                    item.goodsReceiptPOBatchBinLocations.forEach(i => {
+                        i.binLocationId = goodsReceiptPOBinlocationEntity.id;
+                        i.binLocationCode = goodsReceiptPOBinlocationEntity.code;
+                    });
+                }
+            });
+        }
+        this.batchList.next(currentBatchList);
+    }
+
+    addBinLocationBatch(indexRow: number, goodsReceiptPOBatchId: string) {
+        const currentBatchList = this.batchList.getValue();
+        const currentBinLocationArray = currentBatchList[indexRow].goodsReceiptPOBatchBinLocations;
+        const binLocation = new GoodsReceiptPOBatchBinLocationEntity();
+        binLocation.goodsReceiptPOBatchId = goodsReceiptPOBatchId;
+        currentBinLocationArray.push(binLocation);
+        this.batchList.next(currentBatchList);
+    }
+
+    deleteBinLocationBatch(indexRow: number, index: number) {
+        const currentBatchList = this.batchList.getValue();
+        const currentBinLocationArray = currentBatchList[indexRow].goodsReceiptPOBatchBinLocations;
+        if (index > 0) {
+            currentBinLocationArray.splice(index, 1);
+        }
+        this.batchList.next(currentBatchList);
+    }
+
+    checkAllBatch() {
+        const currentBatchList = this.batchList.getValue();
+        currentBatchList.forEach(item => {
+            item.isSelected = true;
+        });
+        this.batchList.next(currentBatchList);
+    }
+
+    deleteMultipleBatch() {
+        const indexArray = [];
+        const currentBatchList = this.batchList.getValue();
+        currentBatchList.forEach(item => {
+            if (item.isSelected) {
+                indexArray.push(currentBatchList.indexOf(item));
+                item.isSelected = false;
+            }
+        });
+        for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
+            currentBatchList.splice(indexArray.reverse()[i], 1);
+        }
+        this.batchList.next(currentBatchList);
+    }
+
     // item:
     dropListItem(goodsReceiptPOItemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity) {
         this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity).subscribe(res => {

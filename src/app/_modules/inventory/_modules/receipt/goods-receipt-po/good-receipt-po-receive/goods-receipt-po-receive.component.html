@@ -331,7 +331,7 @@
 </div>
 
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayBatches" [contentStyle]="{'overflow':'visible'}"
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayBatch" [contentStyle]="{'overflow':'visible'}"
     [style]="{width: '90%'}" [responsive]="true">
     <p-header>
         <div class="row">
@@ -378,8 +378,9 @@
                     <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
                     <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds" [key]="'code'"
                         [valueSelector]="returnNode" (search)="typingSearchBinLocation($event, binLocationId)"
-                        (selectionChange)="changeLocation($event[0])" (listOpen)="dropListBinLocation(binLocationId)"
-                        [disabled]="activeScan" data-qe-id="ialog-input-bin-location" *ngIf="displaySerial">
+                        (selectionChange)="changeLocationInBatch($event[0])"
+                        (listOpen)="dropListBinLocation(binLocationId)" [disabled]="activeScan"
+                        data-qe-id="ialog-input-bin-location" *ngIf="displaySerial">
                     </app-single-select>
                 </div>
             </div>
@@ -424,12 +425,14 @@
                                     </div>
                                 </div>
                             </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-code">
-                                {{'goodsReceiptPODetail.batches.batchCode' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode">
+                                {{'goodsReceiptPODetail.batches.qrCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-item-code">
                                 {{'goodsReceiptPODetail.batches.itemCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-item-name">
                                 {{'goodsReceiptPODetail.batches.itemName' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-code">
+                                {{'goodsReceiptPODetail.batches.batchCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-manufacturing-date">
                                 {{'goodsReceiptPODetail.batches.manufacturingDate' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-expiry-date">
@@ -438,8 +441,8 @@
                                 {{'goodsReceiptPODetail.batches.quantityInEachBatch' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-location-code">
                                 {{'goodsReceiptPODetail.batches.locationCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-location-code">
-                                {{'goodsReceiptPODetail.batches.locationCode' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-quantity">
+                                {{'goodsReceiptPODetail.batches.quantity' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-action">
                                 {{'general.action' | translate}}
                             </th>
@@ -468,12 +471,12 @@
                                     (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" />
                             </th>
                             <th class="th-filter">
-                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDate')"
+                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
                                     data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>
                             <th class="th-filter">
-                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'expirationDate')"
+                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'expirationDate')"
                                     data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>
@@ -483,48 +486,81 @@
                             <th class="th-filter" width="5%"></th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-serialNumber let-index="rowIndex">
+                    <ng-template pTemplate="body" let-batch let-indexRow="rowIndex">
                         <tr>
-                            <td>
+                            <td colspan="batch.goodsReceiptPOBatchBinLocations.length">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" [(ngModel)]="serialNumber.isSelected" />
+                                    <input type="checkbox" [(ngModel)]="batch.isSelected" />
                                     <div class="state">
                                         <i class="icon material-icons">done</i>
                                         <label></label>
                                     </div>
                                 </div>
                             </td>
-                            <td class="ui-resizable-column">
-                                {{serialNumber.qrCode}}
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.qrCode}}
                             </td>
-                            <td class="ui-resizable-column">
-                                {{serialNumber.itemCode}}
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.itemCode}}
                             </td>
-                            <td class="ui-resizable-column">
-                                {{serialNumber.itemName}}
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.itemName}}
                             </td>
-                            <td class="ui-resizable-column">
-                                {{serialNumber.mfrDate}}
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.batchCode}}
                             </td>
-                            <td class="ui-resizable-column">
-                                {{serialNumber.serialNumber}}
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.mfrDate}}
                             </td>
-                            <td class="ui-resizable-column">
-                                {{serialNumber.expirationDate}}
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.expirationDate}}
                             </td>
-                            <td class="ui-resizable-column"></td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                <input type="text" class="form-control" [(ngModel)]="batch.actualReceive" />
+                            </td>
                             <td class="ui-resizable-column">
                                 <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds"
-                                    [key]="'code'" [initialValue]="serialNumber.binLocationCode"
-                                    (search)="typingSearchBinLocation($event, serialNumber.binLocationId)"
-                                    (selectionChange)="serialNumber.binLocationId = $event[0]"
-                                    (listOpen)="dropListBinLocation(serialNumber.binLocationId)" [disabled]="activeScan"
+                                    [key]="'code'"
+                                    [initialValue]="batch.goodsReceiptPOBatchBinLocation[0].binLocationCode"
+                                    (search)="typingSearchBinLocation($event, batch.goodsReceiptPOBatchBinLocation[0].binLocationId)"
+                                    (selectionChange)="batch.goodsReceiptPOBatchBinLocation[0].binLocationId = $event[0]"
+                                    (listOpen)="dropListBinLocation(batch.goodsReceiptPOBatchBinLocation[0].binLocationId)"
+                                    [disabled]="activeScan" data-qe-id="ialog-input-bin-location">
+                                </app-single-select>
+                            </td>
+                            <td class="ui-resizable-column">
+                                <input type="text" class="form-control" [attr.placeholder]="placeholder"
+                                    [(ngModel)]="batch.goodsReceiptPOBatchBinLocation[0].quantity" />
+                            </td>
+                            <td width="5%" class="text-center">
+                                <mat-icon class="text-danger" (click)="deleteBinLocationBatch(indexRow, 0)">delete
+                                </mat-icon>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let binLocation of batch.goodsReceiptPOBatchBinLocations | slice:1; let i = index;">
+                            <td class="ui-resizable-column">
+                                <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds"
+                                    [key]="'code'" [initialValue]="binLocation.binLocationCode"
+                                    (search)="typingSearchBinLocation($event, binLocation.binLocationId)"
+                                    (selectionChange)="binLocation.binLocationId = $event[0]"
+                                    (listOpen)="dropListBinLocation(binLocation.binLocationId)" [disabled]="activeScan"
                                     data-qe-id="ialog-input-bin-location">
                                 </app-single-select>
                             </td>
-                            <td width="5%" class="text-center">
-                                <mat-icon class="text-danger" (click)="deleteSerialNumber()">delete</mat-icon>
+                            <td class="ui-resizable-column">
+                                <input type="text" class="form-control" [attr.placeholder]="placeholder"
+                                    [(ngModel)]="binLocation.quantity" />
                             </td>
+                            <td width="5%" class="text-center">
+                                <mat-icon class="text-danger" (click)="deleteBinLocationBatch(i)">delete</mat-icon>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="ui-resizable-column">
+                                <a href="javascript:;" (click)="addBinLocationBatch()">+ Bấm vào để thêm mới...</a>
+                            </td>
+                            <td class="ui-resizable-column"></td>
+                            <td width="5%" class="text-center"></td>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -540,7 +576,7 @@
                         <span class="button-label">
                             {{'general.button.save' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displayBatches = false">
+                    <button class="btn btn-labeled btn-cancel" (click)="displayBatch = false">
                         <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
                         <span class="button-label">
                             {{'general.button.cancel' | translate}}
@@ -598,8 +634,9 @@
                     <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
                     <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds" [key]="'code'"
                         [valueSelector]="returnNode" (search)="typingSearchBinLocation($event, binLocationId)"
-                        (selectionChange)="changeLocation($event[0])" (listOpen)="dropListBinLocation(binLocationId)"
-                        [disabled]="activeScan" data-qe-id="ialog-input-bin-location" *ngIf="displaySerial">
+                        (selectionChange)="changeLocationSerialNumber($event[0])"
+                        (listOpen)="dropListBinLocation(binLocationId)" [disabled]="activeScan"
+                        data-qe-id="ialog-input-bin-location" *ngIf="displaySerial">
                     </app-single-select>
                 </div>
             </div>
@@ -850,12 +887,12 @@
                                 </div>
                             </td>
                             <td width="5%" class="text-center">
-                                <mat-icon class="text-danger" (click)="deleteBinLocation()">delete</mat-icon>
+                                <mat-icon class="text-danger" (click)="deleteBinLocationQuantity()">delete</mat-icon>
                             </td>
                         </tr>
                         <tr *ngIf="index === (quantityDetail.goodsReceiptPOQuantities.length - 1)">
                             <td>
-                                <a href="javascript:;" (click)="addBinLocation()">+ Bấm vào để thêm mới...</a>
+                                <a href="javascript:;" (click)="addBinLocationQuantity()">+ Bấm vào để thêm mới...</a>
                             </td>
                             <td></td>
                             <td width="5%"></td>

@@ -200,4 +200,8 @@ export class GoodsReceiptPOBatchBinLocationEntity extends Entity {
     binLocationId: string;
     binLocationCode: string;
     quantity: number;
+
+    constructor(goodsReceiptPOBatchBinLocationEntity?: any) {
+        super(goodsReceiptPOBatchBinLocationEntity);
+    }
 }

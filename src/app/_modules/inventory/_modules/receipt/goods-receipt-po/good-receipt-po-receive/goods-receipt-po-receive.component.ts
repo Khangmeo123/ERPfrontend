@@ -272,19 +272,15 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   updateQuantityDetail() {
     if (this.goodsReceiptPOService.validateSubmit([this.quantityDetail])) {
       this.goodsReceiptPOService.updateQuantityDetail(this.quantityDetail);
-    };
-  }
-
-  addBinLocation() {
-    const binLocation = new GoodsReceiptPOQuantity();
-    binLocation.goodsReceiptContentId = this.goodsReceiptPOContentId;
-    this.quantityDetail.goodsReceiptPOQuantities.push(binLocation);
-  }
-
-  deleteBinLocation(index: number) {
-    if (index > 0) {
-      this.quantityDetail.goodsReceiptPOQuantities.splice(index, 1);
     }
+  }
+
+  addBinLocationQuantity() {
+    this.goodsReceiptPOService.addBinLocationQuantity(this.goodsReceiptPOContentId);
+  }
+
+  deleteBinLocationQuantity(index: number) {
+    this.deleteBinLocationQuantity(index);
   }
 
   // serial dialog
@@ -296,38 +292,21 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.getSerialNumberList(goodsReceiptPOContentId);
   }
 
-  changeLocation(event: GoodsReceiptPOBinlocationEntity) {
-    this.binLocationId = event.id;
-    if (this.serialNumberList) {
-      this.serialNumberList.forEach(item => {
-        if (item.isSelected) {
-          item.binLocationId = event.id;
-          item.binLocationCode = event.code;
-        }
-      });
-    }
+  changeLocationSerialNumber(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
+    this.binLocationId = goodsReceiptPOBinlocationEntity.id;
+    this.goodsReceiptPOService.changeLocationSerialNumber(goodsReceiptPOBinlocationEntity);
   }
 
   deleteSerialNumber(index: number) {
-    this.serialNumberList.splice(index, 1);
+    this.goodsReceiptPOService.deleteSerialNumber(index);
   }
 
   checkAllSerialNumber() {
-    this.serialNumberList.forEach(item => {
-      item.isSelected = true;
-    });
+    this.goodsReceiptPOService.checkAllSerialNumber();
   }
 
   deleteMultipleSerialNumber() {
-    const indexArray = [];
-    this.serialNumberList.forEach(item => {
-      if (item.isSelected) {
-        indexArray.push(this.serialNumberList.indexOf(item));
-      }
-    });
-    for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
-      this.serialNumberList.splice(indexArray.reverse()[i], 1);
-    }
+    this.goodsReceiptPOService.deleteMultipleSerialNumber();
   }
 
   // batch dialog
@@ -336,42 +315,27 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.activeScan = false;
     this.binLocationId = null;
     this.goodsReceiptPOContentId = goodsReceiptPOContentId;
-    this.goodsReceiptPOService.getSerialNumberList(goodsReceiptPOContentId);
+    this.goodsReceiptPOService.getBatchList(goodsReceiptPOContentId);
   }
 
-  changeLocationInBatch(event: GoodsReceiptPOBinlocationEntity) {
-    this.binLocationId = event.id;
-    if (this.batchList) {
-      this.batchList.forEach(item => {
-        if (item.isSelected) {
-          item.goodsReceiptPOBatchBinLocations.forEach(elm => {
-            elm.binLocationId = event.id;
-            elm.binLocationCode = event.code;
-          })
-        }
-      });
-    }
+  changeLocationInBatch(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
+    this.binLocationId = goodsReceiptPOBinlocationEntity.id;
+    this.goodsReceiptPOService.changeLocationBatch(goodsReceiptPOBinlocationEntity);
   }
 
-  deleteBatch(index: number) {
-    this.batchList.splice(index, 1);
+  addBinLocationBatch(indexRow: number) {
+    this.goodsReceiptPOService.addBinLocationBatch(indexRow, this.goodsReceiptPOContentId)
+  }
+
+  deleteBinLocationBatch(indexRow: number, index: number) {
+    this.goodsReceiptPOService.deleteBinLocationBatch(indexRow, index);
   }
 
   checkAllBatch() {
-    this.batchList.forEach(item => {
-      item.isSelected = true;
-    });
+    this.goodsReceiptPOService.checkAllBatch();
   }
 
   deleteMultipleBatch() {
-    const indexArray = [];
-    this.batchList.forEach(item => {
-      if (item.isSelected) {
-        indexArray.push(this.batchList.indexOf(item));
-      }
-    });
-    for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
-      this.batchList.splice(indexArray.reverse()[i], 1);
-    }
+    this.goodsReceiptPOService.deleteMultipleBatch();
   }
 }
