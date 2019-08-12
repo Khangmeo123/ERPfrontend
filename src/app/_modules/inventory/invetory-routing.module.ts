@@ -21,8 +21,8 @@ const routes: Routes = [
         loadChildren: () => import('./_modules/transfer/transfer.module').then(m => m.TransferModule),
       },
       {
-        path: 'couting',
-        loadChildren: () => import('./_modules/couting/couting.module').then(m => m.CoutingModule),
+        path: 'counting',
+        loadChildren: () => import('./_modules/counting/counting.module').then(m => m.CountingModule),
       },
     ],
   },

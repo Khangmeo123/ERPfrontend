@@ -280,7 +280,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Phiếu kiểm kê kho',
-        route: '/master-data/department',
+        route: '/inventory/counting/inventory-counting',
         exact: false,
       },
       {
