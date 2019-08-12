@@ -28,8 +28,6 @@ export class InventoryCountingDetailComponent implements OnInit {
 
   displayBatches: boolean = false;
   displayCDA: boolean = false;
-  displayAmount: boolean = false;
-  displayGoodsReceipt: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -49,14 +47,6 @@ export class InventoryCountingDetailComponent implements OnInit {
 
   showCDA() {
     this.displayCDA = true;
-  }
-
-  showAmount() {
-    this.displayAmount = true;
-  }
-
-  showGoodsReceipt() {
-    this.displayGoodsReceipt = true;
   }
 
   backToList() {

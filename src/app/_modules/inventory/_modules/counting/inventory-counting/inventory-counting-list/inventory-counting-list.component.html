@@ -8,12 +8,20 @@
         </mat-icon>
       </span>
     </span>
-    <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add" (click) = "addInventoryCounting()">
+    <div class="page-actions d-flex">
+      <button type="button" class="btn btn-labeled btn-add" (click) = "addInventoryCounting()" data-qe-id="button-add">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
         </span></button>
+        <button class="btn btn-labeled btn-clear" data-qe-id="button-clear" (click)="clearSearch(table)">
+            <span class="btn-label">
+              <img src="/assets/img/filter.svg" width="16">
+            </span>
+            <span class="button-label">
+              {{'general.button.clear' | translate}}
+            </span>
+          </button>
     </div>
 
   </div>
@@ -23,7 +31,7 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1 " matInput [matDatepicker]="picker"
-            placeholder="dd/mm/yyyy">
+            placeholder="dd/mm/yyyy" data-qe-id="input-date-from">
           <mat-datepicker #picker></mat-datepicker>
           <div role="button" (click)="openDatePicker(picker)">
             <mat-icon>calendar_today</mat-icon>
@@ -32,13 +40,13 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
-            placeholder="dd/mm/yyyy">
+            placeholder="dd/mm/yyyy" data-qe-id="button-date-to">
           <mat-datepicker #datepicker></mat-datepicker>
           <div role="button" (click)="openToDatePicker(datepicker)">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
-        <button type="button" class="btn btn-labeled btn-add get-data">
+        <button type="button" class="btn btn-labeled btn-add get-data" data-qe-id="button-fetchData">
           {{'general.button.getData' | translate}}</button>
       </div>
 
@@ -46,6 +54,10 @@
         [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
           <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
             <col>
             <col>
             <col>
@@ -57,16 +69,16 @@
               {{ 'inventoryCounting.list.issueID' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-receipted-date">
-              {{ 'inventoryCounting.list.countingDate' | translate}}
+            <th pResizableColumn data-qe-id="table-thead-count-date">
+              {{ 'inventoryCounting.list.countDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-inventory-code">
               {{ 'inventoryCounting.list.inventoryCode' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-person-in-charge">
-              {{ 'inventoryCounting.list.personInCharge' | translate}}
+            <th pResizableColumn data-qe-id="table-thead-inventory-counting-owner">
+              {{ 'inventoryCounting.list.inventoryCountingOwner' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-counter">
@@ -80,40 +92,50 @@
             <th pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
-            <!-- <th class="th-filter">
-                <app-advanced-filters [filter]="inventoryCounting.listSearchEntity.code" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-code">
+            <th class="th-filter">
+                <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentNumber" (changeFilter)="getList()"
+                    data-qe-id="table-thead-filter-documentNumber">
                 </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-advanced-filters [filter]="inventoryCounting.listSearchEntity.name" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-name">
+                <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentDate" (changeFilter)="getList()"
+                    data-qe-id="table-thead-filter-documentDate">
                 </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="inventoryCounting.listTypes"
-                    [initialValue]="inventoryCounting.listSearchEntity.typeId"
-                    (selectionChange)="inventoryCounting.listSearchEntity.typeId = $event; getList()"
-                    (listOpen)="openinventoryCounting.listTypes($event)">
-                </app-simple-select>
+                <app-single-select  [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
+                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.inventoryOrganizationId"
+                (search)="typingSearchInvetoryOrganization($event, inventoryCountingSearchEntity.inventoryOrganizationId)"
+                (selectionChange)="inventoryCountingSearchEntity.inventoryOrganizationId = $event[0]; getList()"
+                (listOpen)="dropListInventoryOrganization(inventoryCountingSearchEntity.inventoryOrganizationId)">
+                </app-single-select>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="inventoryCounting.listStatuses"
-                    [initialValue]="inventoryCounting.listSearchEntity.typeId"
-                    (selectionChange)="inventoryCounting.listSearchEntity.statusId = $event; getList()"
-                    (listOpen)="openinventoryCounting.listStatuses($event)">
+                <app-single-select>
+                </app-single-select>
+            </th>
+            <th class="th-filter">
+                <app-single-select>
+                </app-single-select>
+            </th>
+            <th class="th-filter">
+                <app-simple-select [key]="'display'" [list]="statusList"
+                [initialValue]="inventoryCountingSearchEntity.statusId"
+                (selectionChange)="inventoryCountingSearchEntity.statusId = $event; getList()"
+                (listOpen)="enumListStatus()">
                 </app-simple-select>
-            </th> -->
+            </th>
+            <th></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-inventoryCounting let-index="rowIndex">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> {{inventoryCounting.createdDate}} </td>
             <td> {{inventoryCounting.documentNumber}} </td>
-            <td> {{inventoryCounting.inventoryAddress}} </td>
+            <td> {{inventoryCounting.documentDate}} </td>
+            <td> {{inventoryCounting.inventoryOrganizationCode}} </td>
             <td> {{inventoryCounting.description }} </td>
-            <td> {{inventoryCounting.creator }} </td>
-            <td> {{inventoryCounting.status }} </td>
+            <td> {{inventoryCounting.ownerName }} </td>
+            <td> {{inventoryCounting.statusName }} </td>
             <td>
               <div class="d-flex">
                 <div class="view-detail mr-2">
@@ -129,7 +151,7 @@
         </ng-template>
       </p-table>
       <div class="pagination">
-        <app-pagination data-qe-id="pagination"></app-pagination>
+        <app-pagination data-qe-id="pagination" [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
       </div>
 
     </div>

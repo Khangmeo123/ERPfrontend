@@ -20,6 +20,8 @@ import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 
 @NgModule({
   declarations: [
@@ -52,6 +54,10 @@ import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
-  ]
+  ],
+  providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+  ],
 })
 export class CountingModule { }

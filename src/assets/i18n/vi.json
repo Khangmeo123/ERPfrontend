@@ -624,6 +624,7 @@
 			"attachFile": "Thêm đính kèm",
 			"cancel": "Hủy",
 			"clear": "Bỏ lọc",
+			"completed": "Hoàn thành",
 			"delete": "Xóa",
 			"downloadTemplate": "",
 			"downloadTempplate": "",
@@ -643,8 +644,10 @@
 			"rejected": "Từ chối duyệt",
 			"reverse": "Hoàn duyệt",
 			"save": "Lưu",
-			"send": "Gửi"
+			"send": "Gửi",
+			"update": "Cập nhật"
 		},
+		"completed": "Hoàn thành",
 		"customer_group": {
 			"name": "Tên nhà cung cấp"
 		},
@@ -674,6 +677,7 @@
 		},
 		"open": "Khởi tạo",
 		"pending": "Chờ duyệt",
+		"pendingCounting": "Chờ kiểm kê",
 		"pendingReceive": "Chờ nhận",
 		"project": {
 			"delete": {
@@ -697,6 +701,91 @@
 		"toDate": "Đến ngày"
 	},
 	"goodsIssue": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"title": ""
+			},
+			"goodsIssueRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"cda": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemName": "",
+				"itemNo": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"unitPrice": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"form": {
+			"post": {
+				"title": ""
+			}
+		},
 		"list": {
 			"createdDate": "Ngày tạo",
 			"creator": "Người tạo",
@@ -708,7 +797,7 @@
 			"inventoryAddress": "Địa chỉ kho",
 			"inventoryCode": "Mã kho",
 			"receiptedDate": "Ngày thực hiện",
-			"status": "Trang thái" 
+			"status": "Trang thái"
 		}
 	},
 	"goodsReceipt": {
@@ -907,11 +996,190 @@
 			"title": "Đính kèm"
 		}
 	},
+	"goodsReturn": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"title": ""
+			},
+			"goodsReturn": {
+				"title": ""
+			},
+			"goodsReturnRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"cda": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemName": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"unitPrice": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"form": {
+			"post": {
+				"title": ""
+			}
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"receip     tedDate": "",
+			"status": ""
+		}
+	},
 	"hrOrganization": {
 		"add": "",
 		"code": "",
 		"name": "",
 		"title": ""
+	},
+	"inventoryCounting": {
+		"detail": {
+			"batches": {
+				"actualCounting": "Số lượng thực đếm",
+				"batchCode": "Mã lô",
+				"expiryDate": "Hạn sử dụng",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantitySaved": "Số lương lưu",
+				"serial": "Serial lô",
+				"startScanBatchesNo": "Bắt đầu quét mã lô",
+				"title ": "Thông tin lô sản phẩm"
+			},
+			"binLocation": "Vị trí lưu kho",
+			"counter": "Người thực hiện",
+			"countingDate": "Ngày thực hiện",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ",
+			"form": {
+				"post": {
+					"title": "Bình luận"
+				},
+				"title": "Thông tin chung"
+			},
+			"header": {
+				"title": "Phiếu kiểm kê kho"
+			},
+			"inventoryCode": "Mã kho",
+			"personInCharge": "Người chịu trách nhiệm",
+			"qrCode": {
+				"code": "QR code",
+				"expiryDate": "Hạn sử dụng",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantity": "Số lương",
+				"scanCode": "Quét code",
+				"scanQRCode": "Bắt đầu quét QR code",
+				"serial": "Serial#",
+				"title ": "Thông tin QR code sản phẩm"
+			},
+			"tab1": {
+				"batches": "Lô",
+				"cda": "CDA",
+				"countAmount": "Số lượng thực đếm",
+				"highestDifference": "Số lượng chênh lệch cao nhất",
+				"inventoryCode": "Mã kho",
+				"itemName": "Tên hàng",
+				"itemNo": "Mã hàng",
+				"no": "STT",
+				"quantityOfInventory": "Số lương tồn kho",
+				"title": "Chi tiết hàng hóa",
+				"unitOfMeasure": "Đơn vị tính"
+			},
+			"tab2": {
+				"title": "Đính kèm"
+			},
+			"totalCount": "Tổng số sản phẩm thực đếm",
+			"totalItem": "Tổng số sản phẩm đã quét"
+		},
+		"list": {
+			"countDate": "Ngày thực hiện",
+			"counter": "Người thực hiện",
+			"header": {
+				"title": "Phiếu kiểm kê kho"
+			},
+			"inventoryCode": "Mã kho",
+			"inventoryCountingOwner": "Người chịu trách nhiệm",
+			"issueID": "Số phiếu",
+			"status": "Trạng thái"
+		}
 	},
 	"item": {
 		"content": {
