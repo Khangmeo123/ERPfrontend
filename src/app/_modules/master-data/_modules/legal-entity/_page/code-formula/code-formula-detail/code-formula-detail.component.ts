@@ -59,9 +59,11 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
     });
 
     const routeSub: Subscription = this.route.queryParams.subscribe((params: Params) => {
-      if (params && params.id) {
-        const splitRuleEntity: SplitRuleEntity = new SplitRuleEntity();
-        splitRuleEntity.id = params.id;
+      const splitRuleEntity: SplitRuleEntity = new SplitRuleEntity();
+      splitRuleEntity.id = params.id || null;
+      splitRuleEntity.legalEntityId = params.legalEntityId || null;
+      this.legalEntityId.setValue(splitRuleEntity.legalEntityId);
+      if (params.id) {
         this.codeFormulaDetailService.get(splitRuleEntity);
       }
     });
@@ -69,6 +71,10 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
     this.subscription
       .add(codeFormulaDetailSub)
       .add(routeSub);
+  }
+
+  get legalEntityId() {
+    return this.codeFormulaForm.get('legalEntityId') as FormControl;
   }
 
   get code() {
@@ -103,8 +109,8 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   ngOnInit() {
-    this.codeFormulaDetailService.getItemList(this.itemSearchEntity);
-    this.codeFormulaDetailService.getAppliedItemList(this.appliedItemSearchEntity);
+    // this.codeFormulaDetailService.getItemList(this.itemSearchEntity);
+    // this.codeFormulaDetailService.getAppliedItemList(this.appliedItemSearchEntity);
   }
 
   toggleGeneralTab() {

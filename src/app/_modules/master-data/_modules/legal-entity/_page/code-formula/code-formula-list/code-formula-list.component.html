@@ -27,7 +27,7 @@
       </div>
 
       <div class="actions">
-        <button class="btn btn-add" (click)="addSplitRule()">
+        <button class="btn btn-add" (click)="addSplitRule()" [disabled]="!legalEntity">
           {{'general.button.add' | translate}}
         </button>
         <button class="btn btn-import">

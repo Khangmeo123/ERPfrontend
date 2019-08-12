@@ -3,6 +3,8 @@ import {Entity} from '../../../../_helpers/entity';
 export class SplitRuleEntity extends Entity {
   id: string;
 
+  legalEntityId: string;
+
   code: string;
 
   length: number;

@@ -1,15 +1,15 @@
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
-import {Subscription} from 'rxjs';
-import {LegalEntity} from '../../../../../_backend/legal/legal.entity';
-import {LegalSearchEntity} from '../../../../../_backend/legal/legal.searchentity';
-import {FormControl, FormGroup} from '@angular/forms';
-import {GeneralService} from '../../../../../../../_helpers/general-service.service';
-import {Entities} from '../../../../../../../_helpers/entity';
-import {SplitRuleEntity} from '../../../../../_backend/code-formula/code-formula.entity';
-import {CodeFormulaSearchEntity} from '../../../../../_backend/code-formula/code-formula.search-entity';
-import {CodeFormulaListService} from './code-formula-list.service';
-import {PaginationModel} from '../../../../../../../_shared/modules/pagination/pagination.model';
-import {Router} from '@angular/router';
+import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { LegalEntity } from '../../../../../_backend/legal/legal.entity';
+import { LegalSearchEntity } from '../../../../../_backend/legal/legal.searchentity';
+import { FormControl, FormGroup } from '@angular/forms';
+import { GeneralService } from '../../../../../../../_helpers/general-service.service';
+import { Entities } from '../../../../../../../_helpers/entity';
+import { SplitRuleEntity } from '../../../../../_backend/code-formula/code-formula.entity';
+import { CodeFormulaSearchEntity } from '../../../../../_backend/code-formula/code-formula.search-entity';
+import { CodeFormulaListService } from './code-formula-list.service';
+import { PaginationModel } from '../../../../../../../_shared/modules/pagination/pagination.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-code-formula',
@@ -154,6 +154,7 @@ export class CodeFormulaListComponent implements OnInit, OnChanges, OnDestroy {
       {
         queryParams: {
           id: splitRuleEntity.id,
+          legalEntityId: this.legalEntity.id,
         },
       },
     );
@@ -187,6 +188,13 @@ export class CodeFormulaListComponent implements OnInit, OnChanges, OnDestroy {
   }
 
   addSplitRule() {
-    return this.router.navigate(['/master-data/legal-entity/code-formula/code-formula-detail']);
+    return this.router.navigate(
+      ['/master-data/legal-entity/code-formula/code-formula-detail'],
+      {
+        queryParams: {
+          legalEntityId: this.legalEntity.id,
+        },
+      },
+    );
   }
 }

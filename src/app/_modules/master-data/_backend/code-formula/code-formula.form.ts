@@ -10,6 +10,10 @@ export class CodeFormulaForm extends FormModel {
     requiredField,
   ]);
 
+  legalEntityId: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
   length: FormControl = new FormControl(null, [
     requiredField,
   ]);
