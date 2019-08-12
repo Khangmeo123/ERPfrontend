@@ -7,6 +7,8 @@ export class SplitRuleEntity extends Entity {
 
   code: string;
 
+  name: string;
+
   length: number;
 
   identifierStringStart: number;
@@ -33,6 +35,20 @@ export class SplitRuleContentEntity extends Entity {
   businessGroupId: string;
 
   constructor(entity?: SplitRuleContentEntity) {
+    super(entity);
+  }
+}
+
+export class ItemFieldEntity extends Entity {
+  id: string;
+
+  code: string;
+
+  name: string;
+
+  display: string;
+
+  constructor(entity?: ItemFieldEntity) {
     super(entity);
   }
 }

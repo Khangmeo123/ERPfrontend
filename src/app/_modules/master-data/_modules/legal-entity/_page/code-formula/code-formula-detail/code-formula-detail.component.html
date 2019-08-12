@@ -40,6 +40,21 @@
               </div>
             </div>
             <div class="col form-group">
+              <label for="rule-name">
+                {{'codeFormula.name' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="rule-name" formControlName="name">
+                <app-error data-qe-id="dialog-error-name"
+                           *ngIf="(name?.errors && name?.touched) || !!errors?.get('name')?.value"
+                           [formGroup]="codeFormulaForm" [property]="'name'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-6 form-group">
               <label for="rule-length">
                 {{'codeFormula.length' | translate}}:
                 <span class="text-danger ml-1">(*)</span>
@@ -108,6 +123,17 @@
           </span>
           </button>
           <div class="row">
+            <div class="col d-flex">
+              <app-multi-select (listOpen)="onOpenItemList(itemSearchEntity.ids)"
+                                (selectionChange)="onSelectItems($event)"
+                                [valueSelector]="itemSelector"
+                                (search)="onSearchItems($event)"
+                                [list]="itemList"
+                                [selectedList]="selectedItemList"
+                                (clear)="onClearSelectedItems()"
+                                key="display"
+              ></app-multi-select>
+            </div>
             <div class="actions col d-flex justify-content-end">
               <button class="btn btn-add" (click)="addItem()">
                 + {{'general.button.add' | translate}}
@@ -116,7 +142,14 @@
           </div>
           <div class="row mt-2">
             <div class="col">
-              <p-table [resizableColumns]="true" [value]="itemList">
+              <p-table [resizableColumns]="true"
+                       [value]="itemDetails.value"
+                       [virtualScroll]="true"
+                       [totalRecords]="itemDetails.length"
+                       [virtualRowHeight]="34"
+                       [lazy]="true"
+                       (onLazyLoad)="onLoadItems($event)"
+                       scrollHeight="200px">
                 <ng-template pTemplate="header">
                   <tr>
                     <th pResizableColumn>
@@ -137,8 +170,7 @@
                       <app-advanced-filters [filter]="appliedItemSearchEntity.name">
                       </app-advanced-filters>
                     </th>
-                    <th class="th-filter item-actions">
-                    </th>
+                    <th class="th-filter item-actions"></th>
                   </tr>
                 </ng-template>
                 <ng-template pTemplate="body" let-rowData let-index="index">
@@ -149,9 +181,9 @@
                     <td class="ui-resizable-column">
                       {{rowData.name}}
                     </td>
-                    <td class="ui-resizable-column item-actions">
-                      <a role="button" (click)="editItem(rowData)">
-                        <mat-icon>edit</mat-icon>
+                    <td class="item-actions">
+                      <a role="button" (click)="removeItemFromList(rowData)">
+                        <mat-icon>delete</mat-icon>
                       </a>
                     </td>
                   </tr>
@@ -167,6 +199,13 @@
             <i [ngClass]="ruleTab ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
           </span>
           </button>
+          <div class="row mt-2">
+            <div class="actions col d-flex justify-content-end">
+              <button class="btn btn-add" (click)="addRule()">
+                + {{'general.button.add' | translate}}
+              </button>
+            </div>
+          </div>
           <div class="row mt-2">
             <div class="col">
               <p-table [resizableColumns]="true" [value]="itemList">
@@ -186,8 +225,10 @@
                   </tr>
                   <tr>
                     <th class="th-filter">
-                      <app-advanced-filters [filter]="splitRuleContentSearchEntity.fieldDisplay">
-                      </app-advanced-filters>
+                      <app-simple-select [list]="itemFields"
+                                         key="display"
+                                         (selectionChange)="onFilterSplitRules($event)"
+                      ></app-simple-select>
                     </th>
                     <th class="th-filter">
                       <app-advanced-filters [filter]="splitRuleContentSearchEntity.start">
@@ -212,9 +253,9 @@
                     <td class="ui-resizable-column">
                       {{rowData.identifierStringEnd}}
                     </td>
-                    <td class="ui-resizable-column item-actions">
-                      <a role="button" (click)="editRule(rowData)">
-                        <mat-icon>edit</mat-icon>
+                    <td class="item-actions">
+                      <a role="button" (click)="removeItemFromList(rowData)">
+                        <mat-icon>delete</mat-icon>
                       </a>
                     </td>
                   </tr>
@@ -227,7 +268,7 @@
     </div>
   </div>
 
-  <div class="page-footer">
+  <div class="page-footer d-flex justify-content-end">
     <button class="btn btn-cancel" (click)="cancel()">
       {{'general.button.cancel' | translate}}
     </button>
@@ -237,74 +278,53 @@
   </div>
 </div>
 
-<p-dialog [(visible)]="itemModal" [modal]="true" appendTo="body">
+<p-dialog [modal]="true"
+          appendTo="body"
+          [(visible)]="ruleModal"
+          [contentStyle]="{overflow: 'visible'}"
+          [style]="{width: '900px'}">
   <p-header>
-    {{'codeFormula.rule.modal.title' | translate}}
+    {{'codeFormula.ruleModal.title' | translate}}
   </p-header>
-
-  <div class="container">
+  <div class="container" [formGroup]="splitRuleContentForm">
     <div class="row">
-      <div class="col">
-        <p-table>
-          <ng-template pTemplate="header">
-            <tr>
-              <th>
-                {{'codeFormula.item.code' | translate}}
-              </th>
-              <th>
-                {{'codeFormula.item.name' | translate}}
-              </th>
-              <th class="item-actions"></th>
-            </tr>
-            <tr>
-              <th class="th-filter">
-                <app-advanced-filters [filter]="itemSearchEntity.code">
-                </app-advanced-filters>
-              </th>
-              <th class="th-filter">
-                <app-advanced-filters [filter]="itemSearchEntity.name">
-                </app-advanced-filters>
-              </th>
-              <th class="th-filter item-actions"></th>
-            </tr>
-          </ng-template>
-
-          <ng-template pTemplate="body" let-rowData let-index="index">
-            <tr>
-              <td>
-                {{rowData.code}}
-              </td>
-              <td>
-                {{rowData.name}}
-              </td>
-              <td class="item-actions"></td>
-            </tr>
-          </ng-template>
-        </p-table>
+      <div class="col form-group">
+        <label for="split-rule-content-field">
+          {{'codeFormula.splitRuleContent.field' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <app-simple-select [list]="itemFields"
+                           key="display"
+                           [valueSelector]="splitRuleContentSelector"
+                           [initialValue]="splitRuleContentForm?.value?.itemFieldDisplay"
+                           id="split-rule-content-field"
+                           (selectionChange)="onSelectSplitRuleContent($event)"
+        ></app-simple-select>
+      </div>
+      <div class="col form-group">
+        <label for="split-rule-content-start">
+          {{'codeFormula.splitRuleContent.start' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" id="split-rule-content-start" pKeyFilter="num" class="form-control" formControlName="start">
+      </div>
+      <div class="col form-group">
+        <label for="split-rule-content-end">
+          {{'codeFormula.splitRuleContent.start' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" id="split-rule-content-end" pKeyFilter="num" class="form-control" formControlName="end">
       </div>
     </div>
   </div>
-
   <p-footer class="d-flex">
-    <button class="btn btn-delete"
-            (confirm)="deleteItem(codeFormulaItemForm.value)"
-            *ngIf="codeFormulaItemForm?.value?.id"
-            popoverMessage="{{'binLocation.delete.confirm.message' | translate}}"
-            popoverTitle="{{'binLocation.delete.confirm.title' | translate}}"
-            data-qe-id="footer-button-delete"
-            mwlConfirmationPopover
-            placement="bottom">
-      {{'general.button.delete' | translate}}
-    </button>
-
     <div class="flex-grow-1">
-      <button class="btn btn-cancel" (click)="cancelItem()">
+      <button class="btn btn-cancel" (click)="cancelRuleModal()">
         {{'general.button.cancel' | translate}}
       </button>
-      <button class="btn btn-save" (click)="saveItem()">
+      <button class="btn btn-save" (click)="addRule()">
         {{'general.button.save' | translate}}
       </button>
     </div>
   </p-footer>
 </p-dialog>
-

@@ -9,6 +9,7 @@
   ></app-select-head>
   <app-select-body *ngIf="isOpened"
                    (clickOutside)="onClickOutside($event)"
+                   (click)="$event.stopPropagation()"
                    [@toggleMenu]="listState">
     <app-select-search (search)="search.emit($event)"></app-select-search>
     <app-select-spinner *ngIf="isLoading; else notLoading"></app-select-spinner>

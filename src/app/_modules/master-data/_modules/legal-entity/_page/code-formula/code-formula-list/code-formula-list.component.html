@@ -46,12 +46,15 @@
               {{'codeFormula.code' | translate}}
             </th>
             <th>
+              {{'codeFormula.name' | translate}}
+            </th>
+            <th class="number-cell">
               {{'codeFormula.length' | translate}}
             </th>
-            <th>
+            <th class="number-cell">
               {{'codeFormula.identifierStringStart' | translate}}
             </th>
-            <th>
+            <th class="number-cell">
               {{'codeFormula.identifierStringEnd' | translate}}
             </th>
             <th>
@@ -66,20 +69,19 @@
                                     (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="codeFormulaSearchEntity.length"
+              <app-advanced-filters [filter]="codeFormulaSearchEntity.name"
                                     (changeFilter)="getList()"></app-advanced-filters>
             </th>
-            <th class="th-filter">
-              <app-advanced-filters [filter]="codeFormulaSearchEntity.identifierStringStart"
-                                    (changeFilter)="getList()"></app-advanced-filters>
+            <th class="th-filter number-cell">
+
+            </th>
+            <th class="th-filter number-cell">
+
+            </th>
+            <th class="th-filter number-cell">
+
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="codeFormulaSearchEntity.identifierStringEnd"
-                                    (changeFilter)="getList()"></app-advanced-filters>
-            </th>
-            <th class="th-filter">
-              <app-advanced-filters defaultType="contains" [filter]="codeFormulaSearchEntity.identifierStringValues"
-                                    (changeFilter)="getList()"></app-advanced-filters>
             </th>
             <th class="th-filter code-formula-actions"></th>
           </tr>
@@ -90,16 +92,19 @@
               {{rowData.code}}
             </td>
             <td>
+              {{rowData.name}}
+            </td>
+            <td class="number-cell">
               {{rowData.length}}
             </td>
-            <td>
+            <td class="number-cell">
               {{rowData.identifierStringStart}}
             </td>
-            <td>
+            <td class="number-cell">
               {{rowData.identifierStringEnd}}
             </td>
             <td>
-              {{rowData.value}}
+              {{rowData.identifierStringValues}}
             </td>
             <td>
               <a role="button" (click)="edit(rowData)">

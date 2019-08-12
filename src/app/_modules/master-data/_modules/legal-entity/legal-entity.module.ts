@@ -34,6 +34,7 @@ import { EmployeePositionComponent } from './_page/employee-position/employee-po
 import { BinLocationComponent } from './_page/bin-location/bin-location.component';
 import { CodeFormulaListComponent } from './_page/code-formula/code-formula-list/code-formula-list.component';
 import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-detail/code-formula-detail.component';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-de
     SelectModule,
     ChipsModule,
     FormsModule,
+    KeyFilterModule,
   ],
 })
 export class LegalEntityModule {

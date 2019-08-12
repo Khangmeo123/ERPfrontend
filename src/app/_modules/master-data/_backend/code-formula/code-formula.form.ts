@@ -1,5 +1,5 @@
 import {FormModel} from '../../../../_helpers/form-model';
-import {SplitRuleEntity} from './code-formula.entity';
+import {SplitRuleContentEntity, SplitRuleEntity} from './code-formula.entity';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {requiredField} from '../../../../_helpers';
 
@@ -7,6 +7,10 @@ export class CodeFormulaForm extends FormModel {
   id: FormControl = new FormControl();
 
   code: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  name: FormControl = new FormControl(null, [
     requiredField,
   ]);
 
@@ -43,6 +47,29 @@ export class CodeFormulaForm extends FormModel {
   });
 
   constructor(entity?: SplitRuleEntity) {
+    super();
+    this.mapData(entity);
+  }
+}
+
+export class SplitRuleContentForm extends FormModel {
+  itemFieldId: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  itemFieldDisplay: FormControl = new FormControl(null);
+
+  start: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  end: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  businessGroupId: string;
+
+  constructor(entity?: SplitRuleContentEntity) {
     super();
     this.mapData(entity);
   }

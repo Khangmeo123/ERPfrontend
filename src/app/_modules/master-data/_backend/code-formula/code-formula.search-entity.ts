@@ -10,6 +10,8 @@ export class CodeFormulaSearchEntity extends SearchEntity {
 
   code: TextFilter = new TextFilter();
 
+  name: TextFilter = new TextFilter();
+
   length: NumberFilter = new NumberFilter();
 
   identifierStringStart: NumberFilter = new NumberFilter();
