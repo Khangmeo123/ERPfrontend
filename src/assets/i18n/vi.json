@@ -15,7 +15,15 @@
 		}
 	},
 	"advancedFilter": {
-		"placeholder": "Tìm kiếm..."
+		"placeholder": "Tìm kiếm...",
+    "equal": "Bằng",
+    "notEqual": "Khác",
+    "contains": "Chứa",
+    "notContains": "Không chứa",
+    "lessEqual": "Nhỏ hơn hoặc bằng",
+    "greatEqual": "Lớn hơn hoặc bằng",
+    "endsWith": "Kết thúc với",
+    "startsWith": "Bắt đầu với"
 	},
 	"asset": {
 		"content": {

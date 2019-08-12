@@ -14,9 +14,17 @@
 			"fiscal_year": ""
 		}
 	},
-	"advancedFilter": {
-		"placeholder": "Search..."
-	},
+  "advancedFilter": {
+    "placeholder": "Tìm kiếm...",
+    "equal": "Equal to",
+    "notEqual": "Not equal to",
+    "contains": "Contains",
+    "notContains": "Not contain",
+    "lessEqual": "Less than or equal to",
+    "greatEqual": "Greater than or equal to",
+    "endsWith": "Ends with",
+    "startsWith": "Starts with"
+  },
 	"asset": {
 		"content": {
 			"code": "",
