@@ -24,10 +24,12 @@
   }
 
   input[readonly] {
-    background: #ffffff;
+    background: none;
   }
 
   span.pi {
+    display: flex;
+    align-items: center;
     margin-right: 0.25rem;
   }
 }

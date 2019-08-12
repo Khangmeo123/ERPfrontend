@@ -1,35 +1,45 @@
-.select {
-  background: #ffffff;
-  position: relative;
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
 
-  * {
-    font-size: 14px;
-    color: #333333;
+app-select {
+  .select {
+    background: #ffffff;
+    position: relative;
+
+    * {
+      font-size: 14px;
+      color: #333333;
+    }
+
+    .select-body {
+      position: absolute;
+      width: 100%;
+      top: 34px;
+      bottom: auto;
+      //box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+      z-index: 1000;
+    }
   }
 
-  .select-body {
-    position: absolute;
-    width: 100%;
-    top: 34px;
-    bottom: auto;
-    //box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
-    z-index: 1000;
+  .select.up {
+    .select-body {
+      position: absolute;
+      top: auto;
+      bottom: 34px;
+      //box-shadow: 0 -.125rem -.25rem 0 rgba(0,0,0,.075)!important;
+    }
   }
-}
 
-.select.up {
-  .select-body {
-    position: absolute;
-    top: auto;
-    bottom: 34px;
-    //box-shadow: 0 -.125rem -.25rem 0 rgba(0,0,0,.075)!important;
-  }
-}
+  .select.disabled {
+    pointer-events: none;
+    background: #e9ecef;
+    border-radius: $border-radius;
 
-.select.disabled {
-  pointer-events: none;
-
-  .selected-head {
-    background: gray;
+    .select-head {
+      input[readonly] {
+        background: #e9ecef !important;
+      }
+    }
   }
 }
