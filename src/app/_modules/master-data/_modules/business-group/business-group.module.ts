@@ -44,6 +44,7 @@ import { SupplierDetailComponent } from './_page/supplier/supplier-detail/suppli
 import { CustomerListComponent } from './_page/customer/customer-list/customer-list.component';
 import { InputNumberModule } from 'src/app/_shared/modules/input-number/input-number.module';
 import { PipeModule } from 'src/app/_shared/pipe/pipe.module';
+import { ProvinceComponent } from './_page/province/province.component';
 
 @NgModule({
   declarations: [
@@ -68,6 +69,7 @@ import { PipeModule } from 'src/app/_shared/pipe/pipe.module';
     CurrencyComponent,
     JobLevelComponent,
     JobTitleComponent,
+    ProvinceComponent,
   ],
   imports: [
     CommonModule,

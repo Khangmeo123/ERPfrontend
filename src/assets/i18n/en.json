@@ -974,6 +974,29 @@
 		"startDate": "",
 		"title": ""
 	},
+	"province": {
+		"code": "",
+		"create": {
+			"error": ""
+		},
+		"delete": {
+			"message": "",
+			"success": "",
+			"title": ""
+		},
+		"get": {
+			"error": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"title": "",
+		"update": {
+			"error": "",
+			"sucess": ""
+		}
+	},
 	"select": {
 		"availableList": "",
 		"selectedItems": "",

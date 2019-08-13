@@ -65,6 +65,11 @@ export const sampleSidebarMenu = [
         isShowed: true,
       },
       {
+        label: 'Tỉnh thành',
+        route: '/master-data/business-group/province',
+        isShowed: true,
+      },
+      {
         divider: true,
         isShowed: true,
       },

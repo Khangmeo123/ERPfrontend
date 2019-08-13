@@ -982,6 +982,29 @@
 		"startDate": "Ngày bắt đầu",
 		"title": "Thông tin dự án"
 	},
+	"province": {
+		"code": "Mã tỉnh thành",
+		"create": {
+			"error": "Tạo tỉnh thành bị lỗi"
+		},
+		"delete": {
+			"message": "Bạn chắc chắn muốn xóa?",
+			"success": "Xóa tỉnh thành thành công",
+			"title": "Xác nhận xóa"
+		},
+		"get": {
+			"error": "Lấy thông tin tỉnh thành không được"
+		},
+		"modal": {
+			"title": "Thông tin tỉnh thành"
+		},
+		"name": "Tên tỉnh thành",
+		"title": "Quản lý tỉnh thành",
+		"update": {
+			"error": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
+		}
+	},
 	"select": {
 		"availableList": "Có thể chọn",
 		"selectedItems": "Đã chọn",
