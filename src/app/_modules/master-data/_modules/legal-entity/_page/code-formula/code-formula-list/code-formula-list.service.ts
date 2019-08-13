@@ -40,6 +40,7 @@ export class CodeFormulaListService {
             resolve();
           },
           (error: Error) => {
+            this.toastrService.error(translate('codeFormula.legalEntityList.error'));
             reject(error);
           },
         );

@@ -1,7 +1,13 @@
 import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {DatePipe} from '@angular/common';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {ItemEntity} from '../../../../../_backend/item/item.entity';
-import {ItemFieldEntity, SplitRuleEntity} from '../../../../../_backend/code-formula/code-formula.entity';
+import {
+  ItemFieldEntity,
+  SplitRuleContentEntity,
+  SplitRuleEntity,
+  SplitRuleTestEntity,
+} from '../../../../../_backend/code-formula/code-formula.entity';
 import {CodeFormulaDetailService} from './code-formula-detail.service';
 import {Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
@@ -11,7 +17,6 @@ import {SplitRuleContentSearchEntity} from '../../../../../_backend/code-formula
 import {translate} from '../../../../../../../_helpers/string';
 import {ToastrService} from 'ngx-toastr';
 import {Entities} from '../../../../../../../_helpers/entity';
-import {SplitRuleContentForm} from '../../../../../_backend/code-formula/code-formula.form';
 
 @Component({
   selector: 'app-code-formula-detail',
@@ -20,6 +25,7 @@ import {SplitRuleContentForm} from '../../../../../_backend/code-formula/code-fo
   providers: [
     CodeFormulaDetailService,
     GeneralService,
+    DatePipe,
   ],
 })
 export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy {
@@ -28,10 +34,6 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
   public codeFormulaForm: FormGroup;
 
   public generalTab: boolean = true;
-
-  public ruleTab: boolean = true;
-
-  public itemTab: boolean = true;
 
   public subscription: Subscription = new Subscription();
 
@@ -51,6 +53,8 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
 
   public splitRuleContentForm: FormGroup;
 
+  public splitRuleTestForm: FormGroup;
+
   constructor(
     private codeFormulaDetailService: CodeFormulaDetailService,
     private route: ActivatedRoute,
@@ -58,10 +62,26 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
     private router: Router,
     private toastrService: ToastrService,
     private fb: FormBuilder,
+    private datePipe: DatePipe,
   ) {
-    const codeFormulaDetailSub: Subscription = this.codeFormulaDetailService.codeFormulaForm.subscribe((form: FormGroup) => {
-      this.codeFormulaForm = form;
-    });
+    const codeFormulaDetailSub: Subscription = this.codeFormulaDetailService.codeFormulaForm
+      .subscribe((form: FormGroup) => {
+        this.codeFormulaForm = form;
+      });
+
+    const splitRuleContentFormSub: Subscription = this.codeFormulaDetailService.splitRuleContentForm
+      .subscribe((form: FormGroup) => {
+        this.splitRuleContentForm = form;
+      });
+
+    const splitRuleTestFormSub: Subscription = this.codeFormulaDetailService.splitRuleTestForm
+      .subscribe((form: FormGroup) => {
+        this.splitRuleTestForm = form;
+        this.splitRuleTestForm.patchValue({
+          mfrDate: form.value.mfrDate ? this.datePipe.transform(form.value.mfrDate, 'dd/MM/yyyy') : null,
+          expirationDate: form.value.expirationDate ? this.datePipe.transform(form.value.expirationDate, 'dd/MM/yyyy') : null,
+        });
+      });
 
     const itemListSub: Subscription = this.codeFormulaDetailService.itemList.subscribe((entities: Entities) => {
       this.itemList = entities.exceptIds;
@@ -86,7 +106,9 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
       this.legalEntityId.setValue(splitRuleEntity.legalEntityId);
 
       if (params.id) {
-        this.codeFormulaDetailService.get(splitRuleEntity);
+        this.codeFormulaDetailService.get(splitRuleEntity)
+          .then(() => {
+          });
       }
     });
 
@@ -97,7 +119,9 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
       .add(routeSub)
       .add(itemTypingSub)
       .add(itemListSub)
-      .add(itemFieldSub);
+      .add(itemFieldSub)
+      .add(splitRuleContentFormSub)
+      .add(splitRuleTestFormSub);
 
     this.codeFormulaDetailService.getItemFieldList()
       .catch(() => {
@@ -159,14 +183,6 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
     this.generalTab = !this.generalTab;
   }
 
-  toggleRuleTab() {
-    this.ruleTab = !this.ruleTab;
-  }
-
-  toggleItemTab() {
-    this.itemTab = !this.itemTab;
-  }
-
   async addItem() {
     this.codeFormulaForm.setControl('itemDetails', this.fb.array([
       ...this.itemDetails.value,
@@ -177,10 +193,6 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
   }
 
   itemSelector = (node) => node;
-
-  editItem(item: ItemEntity) {
-
-  }
 
   save() {
     if (this.codeFormulaForm.invalid) {
@@ -194,12 +206,8 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
     }
   }
 
-  editRule(rule: SplitRuleEntity) {
-
-  }
-
   cancel() {
-    this.codeFormulaDetailService.cancel();
+    this.codeFormulaDetailService.resetForm();
     return this.router.navigate([
       '/master-data/legal-entity/code-formula/code-formula-list',
     ]);
@@ -252,17 +260,40 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
     this.ruleModal = !this.ruleModal;
   }
 
-  delete(rule) {
-
+  deleteRule(index: number) {
+    this.splitRuleContents.removeAt(index);
   }
 
   addRule() {
-    const group: FormGroup = this.fb.group(
-      new SplitRuleContentForm(),
-    );
-    this.splitRuleContents.push(group);
-    this.splitRuleContentForm = group;
+    this.codeFormulaDetailService.resetSplitRuleContentForm();
     this.toggleRuleModal();
+  }
+
+  saveRule() {
+    if (this.splitRuleContentForm.invalid) {
+      this.generalService.validateAllFormFields(this.splitRuleContentForm);
+    }
+
+    if (this.splitRuleContentForm.valid) {
+      let data: SplitRuleContentEntity[] = [];
+      const splitRuleContentEntity: SplitRuleContentEntity = new SplitRuleContentEntity(this.splitRuleContentForm.value);
+      if (splitRuleContentEntity.id) {
+        const index: number = this.splitRuleContents.value.find((r: SplitRuleContentEntity) => r.id === splitRuleContentEntity.id);
+        this.splitRuleContents.setControl(index, this.fb.group(splitRuleContentEntity));
+      } else {
+        data = [
+          ...this.splitRuleContents.value,
+          this.splitRuleContentForm.value,
+        ];
+        this.codeFormulaForm.setControl(
+          'splitRuleContents',
+          this.fb.array(
+            data.map((splitRule: SplitRuleContentEntity) => this.fb.group(splitRule)),
+          ),
+        );
+      }
+      this.ruleModal = false;
+    }
   }
 
   splitRuleContentSelector = node => node;
@@ -272,8 +303,31 @@ export class CodeFormulaDetailComponent implements OnInit, OnChanges, OnDestroy 
     this.splitRuleContentForm.controls.itemFieldDisplay.setValue(splitRuleContentEntity.display);
   }
 
-  cancelRuleModal() {
+  cancelRule() {
+    this.codeFormulaDetailService.resetSplitRuleContentForm();
     this.toggleRuleModal();
-    // this.splitRuleContents.removeAt(this.splitRuleContents);
+  }
+
+  editRule(splitRule: SplitRuleContentEntity) {
+    this.codeFormulaDetailService.editRule(splitRule);
+    this.ruleModal = true;
+  }
+
+  onTestRule(event) {
+    const {value} = event.target;
+
+    if (value) {
+      this.codeFormulaDetailService.analyzeSplitRule(
+        new SplitRuleTestEntity(this.splitRuleTestForm.value),
+      );
+    }
+  }
+
+  onChangeTab(event) {
+    if (event.index === 2) {
+      this.codeFormulaDetailService.save(this.codeFormulaForm.value)
+        .then(() => {
+        });
+    }
   }
 }

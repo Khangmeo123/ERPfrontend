@@ -52,3 +52,23 @@ export class ItemFieldEntity extends Entity {
     super(entity);
   }
 }
+
+export class SplitRuleTestEntity extends Entity {
+  qrCode: string;
+
+  itemCode: string;
+
+  splitRuleId: string;
+
+  splitRuleDisplay: string;
+
+  mfrDate: string;
+
+  expirationDate: string;
+
+  serial: string;
+
+  constructor(entity?: SplitRuleTestEntity) {
+    super(entity);
+  }
+}

@@ -1,20 +1,24 @@
-import { Component, OnChanges, OnDestroy, OnInit, SimpleChanges } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { LegalEntity } from '../../../../../_backend/legal/legal.entity';
-import { LegalSearchEntity } from '../../../../../_backend/legal/legal.searchentity';
-import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../../_helpers/general-service.service';
-import { Entities } from '../../../../../../../_helpers/entity';
-import { SplitRuleEntity } from '../../../../../_backend/code-formula/code-formula.entity';
-import { CodeFormulaSearchEntity } from '../../../../../_backend/code-formula/code-formula.search-entity';
-import { CodeFormulaListService } from './code-formula-list.service';
-import { PaginationModel } from '../../../../../../../_shared/modules/pagination/pagination.model';
-import { Router } from '@angular/router';
+import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {LegalEntity} from '../../../../../_backend/legal/legal.entity';
+import {LegalSearchEntity} from '../../../../../_backend/legal/legal.searchentity';
+import {FormControl, FormGroup} from '@angular/forms';
+import {GeneralService} from '../../../../../../../_helpers/general-service.service';
+import {Entities} from '../../../../../../../_helpers/entity';
+import {SplitRuleEntity} from '../../../../../_backend/code-formula/code-formula.entity';
+import {CodeFormulaSearchEntity} from '../../../../../_backend/code-formula/code-formula.search-entity';
+import {CodeFormulaListService} from './code-formula-list.service';
+import {PaginationModel} from '../../../../../../../_shared/modules/pagination/pagination.model';
+import {Router} from '@angular/router';
+import {ToastrService} from 'ngx-toastr';
 
 @Component({
   selector: 'app-code-formula',
   templateUrl: './code-formula-list.component.html',
   styleUrls: ['./code-formula-list.component.scss'],
+  providers: [
+    ToastrService,
+  ],
 })
 export class CodeFormulaListComponent implements OnInit, OnChanges, OnDestroy {
 
@@ -42,11 +46,19 @@ export class CodeFormulaListComponent implements OnInit, OnChanges, OnDestroy {
     private codeFormulaService: CodeFormulaListService,
     private generalService: GeneralService,
     private router: Router,
+    private toastrService: ToastrService,
   ) {
 
     const legalEntitySub: Subscription = this.codeFormulaService.legalEntityList.subscribe((entities: Entities) => {
       this.legalEntityList = entities.exceptIds;
       this.selectedLegalEntityList = entities.ids;
+
+      if (this.legalEntityList.length) {
+        const legalEntity: LegalEntity = this.legalEntityList[0];
+        this.codeFormulaSearchEntity.legalEntityId = legalEntity.id;
+        this.selectLegalEntity(legalEntity);
+        this.getList();
+      }
     });
 
     const codeFormulaFormSub: Subscription = this.codeFormulaService.codeFormulaForm.subscribe((form: FormGroup) => {
@@ -83,13 +95,7 @@ export class CodeFormulaListComponent implements OnInit, OnChanges, OnDestroy {
   public legalEntitySelector = node => node;
 
   async ngOnInit() {
-    await this.getLegalEntityList();
-    if (this.legalEntityList.length) {
-      const legalEntity: LegalEntity = this.legalEntityList[0];
-      this.codeFormulaSearchEntity.legalEntityId = legalEntity.id;
-      this.selectLegalEntity(legalEntity);
-      this.getList();
-    }
+    this.getLegalEntityList();
   }
 
   ngOnChanges(changes: SimpleChanges): void {

@@ -1,5 +1,5 @@
 import {FormModel} from '../../../../_helpers/form-model';
-import {SplitRuleContentEntity, SplitRuleEntity} from './code-formula.entity';
+import {SplitRuleContentEntity, SplitRuleEntity, SplitRuleTestEntity} from './code-formula.entity';
 import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {requiredField} from '../../../../_helpers';
 
@@ -22,17 +22,11 @@ export class CodeFormulaForm extends FormModel {
     requiredField,
   ]);
 
-  identifierStringStart: FormControl = new FormControl(null, [
-    requiredField,
-  ]);
+  identifierStringStart: FormControl = new FormControl(null);
 
-  identifierStringEnd: FormControl = new FormControl(null, [
-    requiredField,
-  ]);
+  identifierStringEnd: FormControl = new FormControl(null);
 
-  identifierStringValues: FormControl = new FormControl(null, [
-    requiredField,
-  ]);
+  identifierStringValues: FormControl = new FormControl(null);
 
   itemDetails: FormArray = new FormArray([]);
 
@@ -70,6 +64,37 @@ export class SplitRuleContentForm extends FormModel {
   businessGroupId: string;
 
   constructor(entity?: SplitRuleContentEntity) {
+    super();
+    this.mapData(entity);
+  }
+}
+
+export class SplitRuleTestForm extends FormModel {
+  qrCode: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  splitRuleId: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  splitRuleDisplay: FormControl = new FormControl(null);
+
+  itemCode: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  serial: FormControl = new FormControl();
+
+  mfrDate: FormControl = new FormControl();
+
+  expirationDate: FormControl = new FormControl();
+
+  errors: FormGroup = new FormGroup({
+    qrCode: new FormControl(),
+  });
+
+  constructor(entity?: SplitRuleTestEntity) {
     super();
     this.mapData(entity);
   }

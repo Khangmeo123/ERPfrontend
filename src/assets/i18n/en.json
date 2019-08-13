@@ -14,17 +14,9 @@
 			"fiscal_year": ""
 		}
 	},
-  "advancedFilter": {
-    "placeholder": "Tìm kiếm...",
-    "equal": "Equal to",
-    "notEqual": "Not equal to",
-    "contains": "Contains",
-    "notContains": "Not contain",
-    "lessEqual": "Less than or equal to",
-    "greatEqual": "Greater than or equal to",
-    "endsWith": "Ends with",
-    "startsWith": "Starts with"
-  },
+	"advancedFilter": {
+		"placeholder": "Tìm kiếm..."
+	},
 	"asset": {
 		"content": {
 			"code": "",
@@ -139,6 +131,9 @@
 	},
 	"codeFormula": {
 		"code": "",
+		"field": {
+			"error": ""
+		},
 		"general": {
 			"title": ""
 		},
@@ -153,14 +148,33 @@
 			"name": "",
 			"title": ""
 		},
+		"legalEntity": {
+			"missingLegalEntityId": ""
+		},
+		"legalEntityList": {
+			"error": ""
+		},
 		"length": "",
+		"name": "",
 		"rule": {
+			"end": "",
+			"itemFieldDisplay": "",
+			"start": "",
+			"title": ""
+		},
+		"ruleModal": {
+			"title": ""
+		},
+		"splitRuleContent": {
 			"field": "",
-			"identifierStringEnd": "",
-			"identifierStringStart": "",
-			"modal": {
-				"title": ""
-			},
+			"start": ""
+		},
+		"test": {
+			"expirationDate": "",
+			"itemCode": "",
+			"mfrDate": "",
+			"qrCode": "",
+			"serial": "",
 			"title": ""
 		},
 		"title": "",

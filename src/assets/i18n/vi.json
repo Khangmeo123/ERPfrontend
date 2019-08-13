@@ -139,6 +139,9 @@
 	},
 	"codeFormula": {
 		"code": "Mã",
+		"field": {
+			"error": "Lấy danh sách trường thất bại"
+		},
 		"general": {
 			"title": "Quy tắc tách mã"
 		},
@@ -153,15 +156,34 @@
 			"name": "Tên sản phẩm",
 			"title": "Danh sách sản phẩm áp dụng"
 		},
+		"legalEntity": {
+			"missingLegalEntityId": "Thiếu id của pháp nhân"
+		},
+		"legalEntityList": {
+			"error": "Không thể lấy danh sách pháp nhân"
+		},
 		"length": "Độ dài",
+		"name": "Tên",
 		"rule": {
-			"field": "Trường",
-			"identifierStringEnd": "Vị trí kết thúc",
-			"identifierStringStart": "Vị trí bắt đầu",
-			"modal": {
-				"title": "Thêm quy tắc tách mã"
-			},
+			"end": "Kết thúc với",
+			"itemFieldDisplay": "Trường",
+			"start": "Bắt đầu với",
 			"title": "Quy tắc tách mã"
+		},
+		"ruleModal": {
+			"title": "Quy tắc tách mã"
+		},
+		"splitRuleContent": {
+			"field": "Trường",
+			"start": "Bắt đầu với"
+		},
+		"test": {
+			"expirationDate": "Ngày hết hạn",
+			"itemCode": "Mã sản phẩm",
+			"mfrDate": "Ngày sản xuất",
+			"qrCode": "Mã QR",
+			"serial": "Serial",
+			"title": "Test mã"
 		},
 		"title": "Quy tắc tách mã",
 		"update": {

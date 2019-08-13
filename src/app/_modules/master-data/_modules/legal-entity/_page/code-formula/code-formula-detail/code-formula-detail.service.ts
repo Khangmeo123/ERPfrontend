@@ -1,8 +1,13 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, Subscription} from 'rxjs';
 import {FormBuilder, FormGroup} from '@angular/forms';
-import {CodeFormulaForm} from '../../../../../_backend/code-formula/code-formula.form';
-import {ItemFieldEntity, SplitRuleContentEntity, SplitRuleEntity} from '../../../../../_backend/code-formula/code-formula.entity';
+import {CodeFormulaForm, SplitRuleContentForm, SplitRuleTestForm} from '../../../../../_backend/code-formula/code-formula.form';
+import {
+  ItemFieldEntity,
+  SplitRuleContentEntity,
+  SplitRuleEntity,
+  SplitRuleTestEntity,
+} from '../../../../../_backend/code-formula/code-formula.entity';
 import {CodeFormulaDetailRepository} from './code-formula-detail.repository';
 import {ToastrService} from 'ngx-toastr';
 import {translate} from '../../../../../../../_helpers/string';
@@ -17,9 +22,13 @@ export class CodeFormulaDetailService {
 
   public codeFormulaForm: BehaviorSubject<FormGroup>;
 
+  public splitRuleContentForm: BehaviorSubject<FormGroup>;
+
   public itemList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   public itemFieldList: BehaviorSubject<ItemFieldEntity[]> = new BehaviorSubject<ItemFieldEntity[]>([]);
+
+  public splitRuleTestForm: BehaviorSubject<FormGroup>;
 
   constructor(
     private fb: FormBuilder,
@@ -31,12 +40,32 @@ export class CodeFormulaDetailService {
         new CodeFormulaForm(),
       ),
     );
+
+    this.splitRuleContentForm = new BehaviorSubject<FormGroup>(
+      this.fb.group(
+        new SplitRuleContentForm(),
+      ),
+    );
+
+    this.splitRuleTestForm = new BehaviorSubject<FormGroup>(
+      this.fb.group(
+        new SplitRuleTestForm(),
+      ),
+    );
   }
 
   resetForm() {
     this.codeFormulaForm.next(
       this.fb.group(
         new CodeFormulaForm(),
+      ),
+    );
+  }
+
+  resetSplitRuleContentForm() {
+    this.splitRuleContentForm.next(
+      this.fb.group(
+        new SplitRuleContentForm(),
       ),
     );
   }
@@ -52,6 +81,9 @@ export class CodeFormulaDetailService {
             this.codeFormulaForm.next(
               form,
             );
+            this.splitRuleTestForm.value.patchValue({
+              splitRuleId: form.value.id,
+            });
             resolve(entity);
           },
           (error: Error) => {
@@ -114,10 +146,6 @@ export class CodeFormulaDetailService {
       );
   }
 
-  cancel() {
-    this.resetForm();
-  }
-
   getItemFieldList(): Promise<ItemFieldEntity[]> {
     return new Promise<ItemFieldEntity[]>((resolve, reject) => {
       this.codeFormulaDetailRepository.getItemFieldList()
@@ -133,11 +161,35 @@ export class CodeFormulaDetailService {
     });
   }
 
-  applyItems(splitRuleEntity: SplitRuleEntity) {
-    this.codeFormulaForm.next(
+  deleteRule(splitRule: SplitRuleContentEntity) {
+
+  }
+
+  editRule(splitRule: SplitRuleContentEntity) {
+    this.splitRuleContentForm.next(
       this.fb.group(
-        new SplitRuleEntity(splitRuleEntity),
+        new SplitRuleContentForm(splitRule),
       ),
     );
+  }
+
+  analyzeSplitRule(splitRuleTestEntity: SplitRuleTestEntity): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.codeFormulaDetailRepository.analyzeSplitRule(splitRuleTestEntity)
+        .subscribe(
+          (entity: SplitRuleTestEntity) => {
+            this.splitRuleTestForm.next(
+              this.fb.group(
+                entity,
+              ),
+            );
+            resolve();
+          },
+          (error: Error) => {
+            this.toastrService.error('codeFormula.test.error');
+            reject(error);
+          },
+        );
+    });
   }
 }

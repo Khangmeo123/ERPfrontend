@@ -4,7 +4,7 @@ import {environment} from '../../../../../../../../environments/environment';
 import {LegalSearchEntity} from '../../../../../_backend/legal/legal.searchentity';
 import {Observable} from 'rxjs';
 import {Entities} from '../../../../../../../_helpers/entity';
-import {ItemFieldEntity, SplitRuleContentEntity, SplitRuleEntity} from '../../../../../_backend/code-formula/code-formula.entity';
+import {ItemFieldEntity, SplitRuleEntity, SplitRuleTestEntity} from '../../../../../_backend/code-formula/code-formula.entity';
 import {CodeFormulaSearchEntity} from '../../../../../_backend/code-formula/code-formula.search-entity';
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -159,6 +159,20 @@ export class CodeFormulaDetailRepository extends Repository {
             return entities;
           },
         ),
+      );
+  }
+
+  analyzeSplitRule(splitRuleTestEntity: SplitRuleTestEntity): Observable<SplitRuleTestEntity> {
+    return this.http.post<SplitRuleTestEntity>(
+      this.getUrl('analyze-split-rule'),
+      splitRuleTestEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<SplitRuleTestEntity>) => response.body),
       );
   }
 }

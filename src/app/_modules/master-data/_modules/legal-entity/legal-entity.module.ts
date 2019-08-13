@@ -11,7 +11,7 @@ import { CustomerDetailComponent } from './_page/customer-detail/customer-detail
 import { LegalSupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
 import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatIconModule } from '@angular/material';
+import {MatIconModule, MatTabsModule} from '@angular/material';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { TableModule } from 'primeng/table';
 import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
@@ -81,6 +81,7 @@ import {KeyFilterModule} from 'primeng/keyfilter';
     ChipsModule,
     FormsModule,
     KeyFilterModule,
+    MatTabsModule,
   ],
 })
 export class LegalEntityModule {
