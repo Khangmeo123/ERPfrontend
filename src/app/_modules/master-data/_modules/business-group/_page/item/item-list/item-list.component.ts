@@ -142,4 +142,10 @@ export class ItemListComponent implements OnInit, OnDestroy {
     this.uomTyping.next(this.uomSearchEntity);
   }
 
+  importTemplate(file: File) {
+    this.itemListService.importFile(file)
+      .then(() => {
+        this.getList();
+      });
+  }
 }

@@ -154,4 +154,11 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
         });
     }
   }
+
+  importTemplate(file: File) {
+    this.employeeListService.importFile(file)
+      .then(() => {
+        this.getList();
+      });
+  }
 }

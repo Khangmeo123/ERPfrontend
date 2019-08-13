@@ -112,4 +112,20 @@ export class ProvinceRepository extends Repository {
         ),
       );
   }
+
+  importFile(files: FileList) {
+    const formData = new FormData();
+    formData.append('file', files[0]);
+    return this.http.post(
+      this.apiUrl + '/import',
+      formData,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(r => r.body),
+      );
+  }
 }

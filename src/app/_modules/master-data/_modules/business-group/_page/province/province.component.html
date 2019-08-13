@@ -7,20 +7,24 @@
     <div class="page-actions">
       <button class="btn btn-add" (click)="toggleModal()" data-qe-id="button-add">
         + {{'general.button.add' | translate}}</button>
+
       <div class="btn-group" dropdown data-qe-id="button-import">
         <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
                 aria-controls="dropdown-basic">
           {{'general.button.import' | translate}}<span class="caret"></span>
         </button>
-
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-          <li role="menuitem"><a class="dropdown-item"
-                                 href="#">{{'general.button.importFile' | translate}}</a></li>
+          <li role="menuitem">
+            <button class="dropdown-item"
+                    (click)="file.click()">{{'general.button.importFile' | translate}}</button>
+          </li>
           <li class="divider dropdown-divider"></li>
           <li role="menuitem"><a class="dropdown-item" target="_blank"
                                  [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
           </li>
         </ul>
+        <input type="file" accept=".xlsx" (click)="file.value = null" (change)="importTemplate(file.files)"
+               #file hidden>
       </div>
 
       <a class="btn btn-export" data-qe-id="button-export" target="_blank"

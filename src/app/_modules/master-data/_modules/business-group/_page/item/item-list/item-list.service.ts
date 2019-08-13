@@ -9,6 +9,7 @@ import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/ite
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder } from '@angular/forms';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {translate} from '../../../../../../../_helpers/string';
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +71,22 @@ export class ItemListService {
       if (err) {
         console.log(err);
       }
+    });
+  }
+
+  importFile(file: File) {
+    return new Promise((resolve, reject) => {
+      this.itemListRepository.importFile(file).subscribe(res => {
+        if (res) {
+          this.toastrService.success(translate('general.import.success'));
+          resolve();
+        }
+      }, err => {
+        if (err) {
+          this.toastrService.error(translate('general.import.error'));
+          reject(err);
+        }
+      });
     });
   }
 }

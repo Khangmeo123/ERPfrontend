@@ -30,9 +30,9 @@ export class ProvinceComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription = new Subscription();
 
-  public exportLink: string = '';
+  public exportLink: string = '/master-data/business-group/province/export';
 
-  public downloadLink: string = '';
+  public downloadLink: string = '/master-data/business-group/province/download-template';
 
   public provinceForm: FormGroup;
 
@@ -132,6 +132,13 @@ export class ProvinceComponent implements OnInit, OnDestroy {
       .then(() => {
         this.getList();
         this.toggleModal();
+      });
+  }
+
+  importTemplate(files: FileList) {
+    this.provinceService.importFile(files)
+      .then(() => {
+        this.getList();
       });
   }
 }

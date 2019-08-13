@@ -116,4 +116,20 @@ export class ProvinceService {
       ),
     );
   }
+
+  importFile(files: FileList) {
+    return new Promise((resolve, reject) => {
+      this.provinceRepository.importFile(files).subscribe(res => {
+        if (res) {
+          this.toastrService.success(translate('general.import.success'));
+          resolve();
+        }
+      }, err => {
+        if (err) {
+          this.toastrService.error(translate('general.import.error'));
+          reject(err);
+        }
+      });
+    });
+  }
 }
