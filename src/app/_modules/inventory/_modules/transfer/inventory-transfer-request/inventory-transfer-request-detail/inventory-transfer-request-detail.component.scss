@@ -2,10 +2,16 @@
   display: none !important;
 }
 
-.inventory-transfer-detail {
+.goods-receipt-po {
   a {
     text-decoration: underline !important;
     color: #007ee5 !important;
+  }
+
+  p-table {
+    th {
+      white-space: nowrap !important;
+    }
   }
 
   .back-to-list {

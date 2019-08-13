@@ -635,7 +635,7 @@
 			"import": "Nhập hàng loạt",
 			"importFile": "",
 			"import_file": "Nhập hàng loạt",
-			"issue": "",
+			"issue": "Xuất",
 			"ok": "",
 			"post": "Bình luận",
 			"print": "In",
@@ -1118,7 +1118,7 @@
 				"title ": "Vị trí hàng hóa trong kho",
 				"unitOfMeasure": "Đơn vị tính"
 			},
-			"amountScan": "",
+			"amountScan": "Số lượng quét",
 			"batches": {
 				"batchCode": "Mã lô",
 				"expiryDate": "Hạn sử dụng",
@@ -1139,7 +1139,7 @@
 			},
 			"createdDate": "Ngày tạo",
 			"creator": "Người tạo",
-			"description": "",
+			"description": "Mô tả",
 			"documentNumber": "Số chứng từ ",
 			"exporter": "Người xuất hàng",
 			"form": {
@@ -1186,7 +1186,7 @@
 				"itemNo": "Mã hàng",
 				"quantity": "Số lương",
 				"title": "Chi tiết hàng hóa theo hoạch toán",
-				"unitOfMeasure": ""
+				"unitOfMeasure": "Đơn vị tính"
 			},
 			"tab2": {
 				"title": "Đính kèm"

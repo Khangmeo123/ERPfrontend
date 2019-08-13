@@ -16,13 +16,17 @@ import {DatePickerModule} from '../../../../_shared/modules/date-picker/date-pic
 import {DialogModule} from 'primeng/dialog';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import {DiscussionModule} from '../../../../_shared/modules/discussion/discussion.module';
+import {InventoryTransferRequestDetailComponent} from './inventory-transfer-request/inventory-transfer-request-detail/inventory-transfer-request-detail.component';
+import {InventoryTransferRequestListComponent} from './inventory-transfer-request/inventory-transfer-request-list/inventory-transfer-request-list.component';
 
 @NgModule({
   declarations: [
     InventoryTransferRequestComponent,
     InventoryTransferComponent,
     InventoryTransferListComponent,
-    InventoryTransferDetailComponent],
+    InventoryTransferDetailComponent,
+    InventoryTransferRequestDetailComponent,
+    InventoryTransferRequestListComponent],
   imports: [
     CommonModule,
     TransferRoutingModule,
@@ -40,7 +44,7 @@ import {DiscussionModule} from '../../../../_shared/modules/discussion/discussio
     MatTabsModule,
     DialogModule,
     InputSwitchModule,
-    DiscussionModule
+    DiscussionModule,
   ]
 })
 export class TransferModule { }
