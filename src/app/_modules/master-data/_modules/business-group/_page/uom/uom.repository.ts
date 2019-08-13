@@ -58,7 +58,7 @@ export class UomRepository extends Repository {
             );
     }
 
-    delete(uomEntity: any): Observable<boolean> {
+    deactivate(uomEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(uomEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

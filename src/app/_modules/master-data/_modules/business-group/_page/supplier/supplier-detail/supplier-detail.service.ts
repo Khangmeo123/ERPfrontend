@@ -37,7 +37,7 @@ export class SupplierDetailService {
 
   save(supplierEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (supplierEntity.id === null || supplierEntity.id === undefined || supplierEntity.id === environment.emtyGuid) {
+      if (supplierEntity.id === null || supplierEntity.id === undefined || supplierEntity.id === environment.emptyGuid) {
         this.supplierDetailRepository.add(supplierEntity).subscribe(res => {
           if (res) {
             this.toastrService.success('Cập nhật thành công !');
@@ -68,9 +68,9 @@ export class SupplierDetailService {
     return defered;
   }
 
-  delete(supplierEntity: any): Promise<boolean> {
+  deactivate(supplierEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.supplierDetailRepository.delete(supplierEntity).subscribe(res => {
+      this.supplierDetailRepository.deactivate(supplierEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
           resolve();

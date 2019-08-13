@@ -45,18 +45,18 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code-set-of-book"
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code-set-of-book"
                     [filter]="legalSearchEntity.setOfBookCode" (changeFilter)="getListLegalEntity()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code" [filter]="legalSearchEntity.code"
-                    (changeFilter)="getListLegalEntity()">
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code"
+                    [filter]="legalSearchEntity.code" (changeFilter)="getListLegalEntity()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-name" [filter]="legalSearchEntity.name"
-                    (changeFilter)="getListLegalEntity()">
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-name"
+                    [filter]="legalSearchEntity.name" (changeFilter)="getListLegalEntity()">
                   </app-advanced-filters>
                 </th>
               </tr>
@@ -79,7 +79,7 @@
       <div class="col-sm-6">
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center">
-            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="supplierExceptIds"
+            <app-multi-select data-qe-id="form-multi-select-supplier" [list]="supplierExceptIds" [disabled]="!legalId"
               [selectedList]="supplierIds" [key]="'name'" (search)="supplierSearch($event)"
               (selectionChange)="selectSupplier($event)" (listOpen)="openSupplierList()">
             </app-multi-select>
@@ -113,20 +113,20 @@
                   {{'supplierOfLegalEntity.supplier.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action' | translate}}</th>
+                <th pResizableColumn class="suplier-of-legal-entity-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-code-supplier"
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-code-supplier"
                     [filter]="supplierSearchEntity.code" (changeFilter)="getListSupplier()">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters data-qe-id="table-thead-filter-name-supplier"
+                  <app-advanced-filters defaultType="startsWith" data-qe-id="table-thead-filter-name-supplier"
                     [filter]="supplierSearchEntity.name" (changeFilter)="getListSupplier()">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter suplier-of-legal-entity-actions"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
@@ -134,7 +134,7 @@
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
                 <td>
-                  <div class="d-flex">
+                  <div class="d-flex suplier-of-legal-entity-actions">
                     <div class="edit mr-2" (click)="onClickShowDetail(item.id)">
                       <mat-icon>edit</mat-icon>
                     </div>
@@ -148,7 +148,7 @@
             </ng-template>
           </p-table>
           <div class="pagination">
-            <app-pagination [pagination]="paginationdetail" (paginationOut)="paginationDetailOut($event)"
+            <app-pagination [pagination]="paginationDetail" (paginationOut)="paginationDetailOut($event)"
               data-qe-id="pagination">
             </app-pagination>
           </div>

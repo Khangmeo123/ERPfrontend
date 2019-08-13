@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { BookmarkService } from '../../../../../../_services';
-import { DepartmentService } from './department.service';
-import { LegalEntity } from '../../../../_backend/legal/legal.entity';
-import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
-import { DivisionEntity } from '../../../../_backend/division/division.entity';
-import { DivisionSearchEntity } from '../../../../_backend/division/division.searchentity';
-import { Subject, Subscription } from 'rxjs';
-import { Entities } from '../../../../../../_helpers/entity';
+import {Component, OnInit} from '@angular/core';
+import {BookmarkService} from '../../../../../../_services';
+import {DepartmentService} from './department.service';
+import {LegalEntity} from '../../../../_backend/legal/legal.entity';
+import {LegalSearchEntity} from '../../../../_backend/legal/legal.searchentity';
+import {DivisionEntity} from '../../../../_backend/division/division.entity';
+import {DivisionSearchEntity} from '../../../../_backend/division/division.searchentity';
+import {Subject, Subscription} from 'rxjs';
+import {Entities} from '../../../../../../_helpers/entity';
 
 @Component({
   selector: 'app-department',
@@ -24,7 +24,7 @@ export class DepartmentComponent implements OnInit {
     },
     {
       key: 'Tài sản',
-      route: '/master-data/department/asset',
+      route: '/master-data/department/asset-organization',
     },
     {
       key: 'Kho bãi',
@@ -32,13 +32,15 @@ export class DepartmentComponent implements OnInit {
     },
     {
       key: 'Dự án',
-      route: '/master-data/department/project',
+      route: '/master-data/department/project-organization',
     },
   ];
 
   /**
    * Legal Entity
    */
+  public legalEntity: LegalEntity = null;
+
   public legalEntityList: LegalEntity[] = [];
 
   public selectedLegalEntityList: LegalEntity[] = [];
@@ -50,6 +52,8 @@ export class DepartmentComponent implements OnInit {
   /**
    * Division
    */
+  public division: DivisionEntity = null;
+
   public divisionList: DivisionEntity[] = [];
 
   public selectedDivisionList: DivisionEntity[] = [];
@@ -74,8 +78,23 @@ export class DepartmentComponent implements OnInit {
       this.selectedDivisionList = list.ids;
     });
 
-    this.subscription.add(legalEntityListSub)
-      .add(divisionListSub);
+    const legalEntitySub: Subscription = this.departmentService.selectedLegalEntity.subscribe((legalEntity: LegalEntity) => {
+      if (legalEntity) {
+        this.legalEntity = legalEntity;
+      }
+    });
+
+    const divisionSub: Subscription = this.departmentService.selectedDivision.subscribe((division: DivisionEntity) => {
+      if (division) {
+        this.division = division;
+      }
+    });
+
+    this.subscription
+      .add(legalEntityListSub)
+      .add(legalEntitySub)
+      .add(divisionListSub)
+      .add(divisionSub);
   }
 
   ngOnInit() {

@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DepartmentComponent } from './_page/department/department.component';
 import { HrOrganizationComponent } from './_page/hr-organization/hr-organization.component';
-import { AssetComponent } from './_page/asset/asset.component';
+import { AssetOrganizationComponent } from './_page/asset-organization/asset-organization.component';
 import { WarehouseComponent } from './_page/warehouse/warehouse.component';
 import { ProjectOrganizationComponent } from './_page/project-organization/project-organization.component';
 import { DepartmentEmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
@@ -29,8 +29,8 @@ const routes: Routes = [
             component: HrOrganizationComponent,
           },
           {
-            path: 'asset',
-            component: AssetComponent,
+            path: 'asset-organization',
+            component: AssetOrganizationComponent,
           },
           {
             path: 'warehouse',
@@ -52,7 +52,7 @@ const routes: Routes = [
             ],
           },
           {
-            path: 'project',
+            path: 'project-organization',
             component: ProjectOrganizationComponent,
           },
           {

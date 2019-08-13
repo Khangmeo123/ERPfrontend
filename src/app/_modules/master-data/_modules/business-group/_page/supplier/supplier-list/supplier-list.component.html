@@ -1,107 +1,116 @@
 <div class="page supplier-list">
-    <div class="page-header">
+  <div class="page-header">
         <span class="page-title">
             {{pageTitle | translate}}
-            <span (click)="bookMark()">
+          <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
-        <div class="page-actions">
-            <button class="btn btn-add" (click)="toDetail()" data-qe-id="button-add"> +
-                {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-import">
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                    aria-controls="dropdown-basic">
-                    {{'general.button.import' | translate}}<span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.importFile' | translate}}</a></li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item" target="_blank"
-                            [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
-                    </li>
-                </ul>
-            </div>
-            <a class="btn btn-export" data-qe-id="button-export" target="_blank"
-                [href]="exportLink">{{'general.button.export' | translate}}</a>
-            <button class="btn btn-clear" (click)="clearSearch(table)"
-                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
-        </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="toDetail()" data-qe-id="button-add"> +
+        {{'general.button.add' | translate}}</button>
+      <div class="btn-group" dropdown data-qe-id="button-import">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                aria-controls="dropdown-basic">
+          {{'general.button.import' | translate}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item"
+                                 href="#">{{'general.button.importFile' | translate}}</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank"
+                                 [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+      <a class="btn btn-export" data-qe-id="button-export" target="_blank"
+         [href]="exportLink">{{'general.button.export' | translate}}</a>
+      <button class="btn btn-clear" (click)="clearSearch(table)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
-    <hr>
-    <div class="page-body">
-        <div class="page-selection list">
-            <p-table [value]="supplierList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
-                <ng-template pTemplate="colgroup">
-                    <colgroup>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                    </colgroup>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'supplier.list.content.code' | translate}}
-                            <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'supplier.list.content.name' | translate}}
-                            <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-taxCode" [pSortableColumn]="'taxCode'">
-                            {{ 'supplier.list.content.taxCode' | translate}}
-                            <p-sortIcon [field]="'taxCode'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
-                            {{ 'supplier.list.content.status' | translate}}
-                            <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="supplierSearchEntity.code" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-code"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="supplierSearchEntity.name" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-name"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="supplierSearchEntity.taxCode" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-taxCode"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-simple-select [key]="'name'" [list]="statusList"
-                                [initialValue]="supplierSearchEntity.statusId"
-                                (selectionChange)="supplierSearchEntity.statusId = $event; getList()"
-                                (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
-                            </app-simple-select>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-supplier let-index="rowIndex">
-                    <tr (dblclick)="toDetail(supplier.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td> {{supplier.code}} </td>
-                        <td> {{supplier.name}} </td>
-                        <td> {{supplier.taxCode}} </td>
-                        <td> {{supplier.statusName}} </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-            <div class="pagination">
-                <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"
-                    data-qe-id="pagination">
-                </app-pagination>
-            </div>
-        </div>
+  </div>
+  <hr>
+  <div class="page-body">
+    <div class="page-selection list">
+      <p-table [value]="supplierList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
+              {{ 'supplier.list.content.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
+              {{ 'supplier.list.content.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-taxCode" [pSortableColumn]="'taxCode'">
+              {{ 'supplier.list.content.taxCode' | translate}}
+              <p-sortIcon [field]="'taxCode'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
+              {{ 'supplier.list.content.status' | translate}}
+              <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
+            </th>
+            <th class="supplier-actions"></th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="supplierSearchEntity.code"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-code"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="supplierSearchEntity.name"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-name"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="supplierSearchEntity.taxCode"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-taxCode"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-simple-select [key]="'display'" [list]="statusList"
+                                 [initialValue]="supplierSearchEntity.statusId"
+                                 (selectionChange)="supplierSearchEntity.statusId = $event; getList()"
+                                 (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
+              </app-simple-select>
+            </th>
+            <th class="th-filter supplier-actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-supplier let-index="rowIndex">
+          <tr (dblclick)="toDetail(supplier.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{supplier.code}} </td>
+            <td> {{supplier.name}} </td>
+            <td> {{supplier.taxCode}} </td>
+            <td> {{supplier.statusDisplay}} </td>
+            <td class="supplier-actions">
+              <a role="button" (click)="toDetail(supplier.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="pagination">
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"
+                        data-qe-id="pagination">
+        </app-pagination>
+      </div>
     </div>
-
+  </div>
 
 
 </div>

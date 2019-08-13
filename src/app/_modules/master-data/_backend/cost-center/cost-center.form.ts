@@ -1,29 +1,34 @@
-import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
+import { FormModel } from '../../../../_helpers/form-model';
+import { FormControl, FormGroup } from '@angular/forms';
 import { CostCenterEntity } from 'src/app/_modules/master-data/_backend/cost-center/cost-center.entity';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import { checkLength, requiredField } from 'src/app/_helpers';
 
 export class CostCenterForm extends FormModel {
 
-    name = new FormControl('', [requiredField]);
-    code = new FormControl('', [requiredField]);
+  setOfBookId = new FormControl(null, [requiredField]);
 
-    formValid = new FormControl('');
-    toValid = new FormControl('');
+  name = new FormControl(null, [requiredField]);
+  code = new FormControl(null, [requiredField]);
 
-    coaId = new FormControl('');
-    coaAccountNumber = new FormControl('');
+  validFrom = new FormControl(null);
+  validTo = new FormControl(null);
 
-    description = new FormControl('');
+  chartOfAccountName = new FormControl(null);
 
-    constructor(costCenterEntity?: CostCenterEntity) {
-        super();
-        if (costCenterEntity !== null && costCenterEntity !== undefined) {
-            Object.keys(costCenterEntity).forEach((item) => {
-                if (costCenterEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(costCenterEntity[item]);
-                }
-            });
+  chartOfAccountId = new FormControl(null);
+
+  description = new FormControl(null);
+
+  errors: FormGroup = new FormGroup({});
+
+  constructor(costCenterEntity?: CostCenterEntity) {
+    super();
+    if (costCenterEntity !== null && costCenterEntity !== undefined) {
+      Object.keys(costCenterEntity).forEach((item) => {
+        if (costCenterEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(costCenterEntity[item]);
         }
+      });
     }
+  }
 }

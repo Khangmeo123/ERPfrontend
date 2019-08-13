@@ -1,51 +1,42 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class SobEntity extends Entity {
-    code: string;
-    name: string;
+  code: string;
+  name: string;
 
-    //he thong tai khoan ke toan
-    coaId: string;
-    coaName: string;
-    coacode: string;
+  chartOfAccountTemplateId: string;
+  chartOfAccountTemplateName: string;
+  chartOfAccountTemplateCode: string;
 
-    // currencyEntity:
-    currencyId: string;
-    currencyCode: string;
-    currencyName: string;
+  currencyId: string;
+  currencyCode: string;
+  currencyName: string;
 
-    //bieu thue tieu thu dac biêt
-    sctId : string;
-    sctCode: string;
-    sctName: string;
+  specialConsumptionTaxTemplateId: string;
+  specialConsumptionTaxTemplateCode: string;
+  specialConsumptionTaxTemplateName: string;
 
-    //bieu thue GTGT
-    vatId : string;
-    vatCode: string;
-    vatName: string;
+  valueAddedTaxTemplateId: string;
+  valueAddedTaxTemplateCode: string;
+  valueAddedTaxTemplateName: string;
 
-    //bieu thue tai nguyen
-    nrtId : string;
-    nrtCode: string;
-    nrtName: string;
+  naturalResourceTaxTemplateId: string;
+  naturalResourceTaxTemplateCode: string;
+  naturalResourceTaxTemplateName: string;
 
-    //bieu thue moi truong
-    entId : string;
-    entCode: string;
-    entName: string;
+  environmentTaxTemplateId: string;
+  environmentTaxTemplateCode: string;
+  environmentTaxTemplateName: string;
 
-    //bieu thue xuat khau
-    extId : string;
-    extCode: string;
-    extName: string;
+  exportTaxTemplateId: string;
+  exportTaxTemplateCode: string;
+  exportTaxTemplateName: string;
 
-    //bieu thue nhap khau
-    imtId : string;
-    imtCode: string;
-    imtName: string;
+  importTaxTemplateId: string;
+  importTaxTemplateCode: string;
+  importTaxTemplateName: string;
 
-
-    constructor(sobEntity?: any) {
-        super(sobEntity);
-    }
+  constructor(sobEntity?: any) {
+    super(sobEntity);
+  }
 }

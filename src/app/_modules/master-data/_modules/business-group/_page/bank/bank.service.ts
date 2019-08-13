@@ -55,7 +55,7 @@ export class BankService {
 
   save(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (bankEntity.id === null || bankEntity.id === undefined || bankEntity.id === environment.emtyGuid) {
+      if (bankEntity.id === null || bankEntity.id === undefined || bankEntity.id === environment.emptyGuid) {
         this.bankRepository.add(bankEntity).subscribe(res => {
           if (res) {
             this.getList(bankSearchEntity);
@@ -90,9 +90,9 @@ export class BankService {
     return defered;
   }
 
-  delete(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
+  deactivate(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.bankRepository.delete(bankEntity).subscribe(res => {
+      this.bankRepository.deactivate(bankEntity).subscribe(res => {
         if (res) {
           this.getList(bankSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

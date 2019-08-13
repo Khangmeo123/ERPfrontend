@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NoDataComponent } from './no-data.component';
+import {NoDataComponent} from './no-data.component';
 
 describe('NoDataComponent', () => {
   let component: NoDataComponent;
@@ -8,9 +8,9 @@ describe('NoDataComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NoDataComponent ]
+      declarations: [NoDataComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

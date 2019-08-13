@@ -58,7 +58,7 @@ export class JobTitleRepository extends Repository {
             );
     }
 
-    delete(jobTitleEntity: any): Observable<boolean> {
+    deactivate(jobTitleEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(jobTitleEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

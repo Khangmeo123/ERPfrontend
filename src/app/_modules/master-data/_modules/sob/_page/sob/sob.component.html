@@ -2,168 +2,279 @@
   <div class="page-header">
     <div class="page-title">
       {{'sob.title' | translate}}
-      <span (click)="onClickSaveBookMark()">
+      <span (click)="bookMark()">
         <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
             star
         </mat-icon>
     </span>
     </div>
     <div class="page-actions">
-      <button class="btn btn-add" (click)="toggleModal()">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add">
         {{'general.button.add' | translate}}
+      </button>
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
+        {{'general.button.clear' | translate}}
       </button>
     </div>
   </div>
   <div class="page-body mt-2">
     <div class="page-section">
-      <p-table [value]="[]">
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true"
+               [resizableColumns]="true" [scrollable]="true" [value]="sobList" scrollHeight="500px">
         <ng-template pTemplate="header">
           <tr>
-            <th>
-              {{'sob.code' | translate}}
+            <th [pSortableColumn]="'code'" data-qe-id="table-thead-code" pResizableColumn>
+              {{ 'sob.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
-            <th>
-              {{'sob.name' | translate}}
+            <th [pSortableColumn]="'name'" data-qe-id="table-thead-name" pResizableColumn>
+              {{ 'sob.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
-            <th>
-              {{'sob.currency' | translate}}
+            <th [pSortableColumn]="'currencyCode'" data-qe-id="table-thead-currency-name" pResizableColumn>
+              {{ 'sob.currency' | translate}}
+              <p-sortIcon [field]="'currencyCode'" class="float-right"></p-sortIcon>
             </th>
-            <th>
-              {{'sob.chart_account' | translate}}
+            <th [pSortableColumn]="'chartOfAccountTemplateName'" data-qe-id="table-thead-chart-of-account-template-name"
+                pResizableColumn>
+              {{ 'sob.chart_account' | translate}}
+              <p-sortIcon [field]="'chartOfAccountTemplateName'" class="float-right"></p-sortIcon>
             </th>
+            <th class="sob-actions"></th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="sobSearchEntity.code"
+                                    data-qe-id="sob-filter-code"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()" [filter]="sobSearchEntity.name"
+                                    data-qe-id="sob-filter-name"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="sobSearchEntity.currencyCode"
+                                    data-qe-id="sob-filter-currencyCode"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="sobSearchEntity.chartOfAccountName"
+                                    data-qe-id="sob-filter-chartOfAccountName"></app-advanced-filters>
+            </th>
+            <th class="th-filter sob-actions"></th>
           </tr>
         </ng-template>
-        <!-- <ng-template pTemplate="body" let-row>
-          <tr>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input type="text" class="form-control" [(ngModel)]="row.code" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{row.code}}
-              </ng-template>
-            </p-cellEditor>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input type="text" class="form-control" [(ngModel)]="row.name" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{row.name}}
-              </ng-template>
-            </p-cellEditor>
-            <p-cellEditor>
-              <ng-template pTemplate="input">
-                <input type="text" class="form-control" [(ngModel)]="row.currency" required>
-              </ng-template>
-              <ng-template pTemplate="output">
-                {{row.currency}}
-              </ng-template>
-            </p-cellEditor>
+        <ng-template let-index="index" let-row pTemplate="body">
+          <tr (dblclick)="edit(row.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td>
+              {{row.code}}
+            </td>
+            <td>
+              {{row.name}}
+            </td>
+            <td>
+              {{row.currencyCode}}
+            </td>
+            <td>
+              {{row.chartOfAccountTemplateName}}
+            </td>
+            <td class="sob-actions">
+              <a role="button" (click)="edit(row.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
-        </ng-template> -->
+        </ng-template>
       </p-table>
+      <div class="pagination">
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+      </div>
     </div>
   </div>
 </div>
 
-<p-dialog modal = "true" [(visible)]="visible" [style]="{width: '900px'}">
+<p-dialog [(visible)]="isShowDialog"
+          *ngIf="isShowDialog"
+          [contentStyle]="{'overflow':'visible'}" [style]="{width: '900px'}" appendTo="body"
+          modal="true">
   <p-header>
     {{'sob.add' | translate}}
   </p-header>
-  <form class="container">
+  <div [formGroup]="sobForm" class="container">
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="sob-code">
           {{'sob.code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <div class="div-form">
+          <input class="form-control" data-qe-id="dialog-code" formControlName="code" name="code" id="sob-code"
+                 [readOnly]="sobForm?.value?.id"
+                 type="text">
+          <app-error *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
+                     [formGroup]="sobForm"
+                     [placement]="'top'" [property]="'code'" class="error-form" data-qe-id="dialog-error-code">
+          </app-error>
+        </div>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="sob-name">
           {{'sob.name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <input type="text" class="form-control">
+        <div class="div-form">
+          <input class="form-control" data-qe-id="dialog-name" formControlName="name" id="sob-name" type="text">
+          <app-error *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+                     [formGroup]="sobForm"
+                     [placement]="'top'" [property]="'name'" class="error-form" data-qe-id="dialog-error-code">
+          </app-error>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="sob-chart-of-account-template">
           {{'sob.chart_account' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select (listOpen)="getCoaList()"
+                           [disabled]="sobForm?.value?.id"
+                           (selectionChange)="onSelectId($event, 'chartOfAccountTemplateId')"
+                           [initialValue]="sobForm.controls.chartOfAccountTemplateName?.value"
+                           [list]="coaList"
+                           (search)="onSearchChartOfAccount($event)"
+                           [selectedList]="selectedCoaList"
+                           data-qe-id="dialog-chart-of-account-template"
+                           id="sob-chart-of-account-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="sob-currency">
           {{'sob.currency' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
-        <app-single-select></app-single-select>
+        <div class="div-form">
+          <app-single-select (listOpen)="getCurrencyList()"
+                             [disabled]="sobForm?.value?.id"
+                             (selectionChange)="onSelectId($event, 'currencyId')"
+                             (search)="onSearchCurrency($event)"
+                             [initialValue]="sobForm.controls.currencyCode?.value"
+                             [list]="currencyList"
+                             [selectedList]="selectedCurrencyList"
+                             data-qe-id="dialog-currency"
+                             id="sob-currency"
+                             key="code"></app-single-select>
+          <app-error
+            *ngIf="(currencyId?.errors && currencyId?.touched) || !!errors.get('currencyId')?.value"
+            [formGroup]="sobForm"
+            [placement]="'top'" [property]="'currencyId'" class="error-form" data-qe-id="dialog-error-currency-id">
+          </app-error>
+        </div>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="special-consumption-tax-template">
           {{'sob.special_consumption_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select (listOpen)="getSpecialConsumptionTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
+                           (selectionChange)="onSelectId($event, 'specialConsumptionTaxTemplateId')"
+                           [initialValue]="sobForm.controls.specialConsumptionTaxTemplateName?.value"
+                           [list]="specialConsumptionTaxTemplateList"
+                           (search)="onSearchSpecialConsumptionTaxTemplate($event)"
+                           [selectedList]="selectedSpecialConsumptionTaxTemplateList"
+                           data-qe-id="dialog-special-consumption-tax-template"
+                           id="special-consumption-tax-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="value-added-tax-template">
           {{'sob.value_added_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select (listOpen)="getValueAddedTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
+                           (selectionChange)="onSelectId($event, 'valueAddedTaxTemplateId')"
+                           [initialValue]="sobForm.controls.valueAddedTaxTemplateName?.value"
+                           [list]="valueAddedTaxTemplateList"
+                           (search)="onSearchValueAddedTaxTemplate($event)"
+                           [selectedList]="selectedValueAddedTaxTemplateList"
+                           data-qe-id="dialog-value-added-tax-template"
+                           id="value-added-tax-template"
+                           key="name"></app-single-select>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="natural-resource-tax-template">
           {{'sob.resource_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select (listOpen)="getNaturalResourceTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
+                           (selectionChange)="onSelectId($event, 'naturalResourceTaxTemplateId')"
+                           [initialValue]="sobForm.controls.naturalResourceTaxTemplate?.value"
+                           [list]="naturalResourceTaxTemplateList"
+                           [selectedList]="selectedNaturalResourceTaxTemplateList"
+                           (search)="onSearchNaturalResourceTemplate($event)"
+                           data-qe-id="dialog-natural-resource-tax-template"
+                           id="natural-resource-tax-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="environment-tax-template">
           {{'sob.enviroment_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select (listOpen)="getEnvironmentTemplateList()"
+                           [disabled]="sobForm?.value?.id"
+                           (selectionChange)="onSelectId($event, 'environmentTaxTemplateId')"
+                           [initialValue]="sobForm.controls.environmentTaxTemplateName?.value"
+                           [list]="environmentTaxTemplateList"
+                           (search)="onSearchEnvironmentTaxTemplate($event)"
+                           [selectedList]="selectedEnvironmentTaxTemplateList"
+                           data-qe-id="dialog-environment-tax-template"
+                           id="environment-tax-template"
+                           key="name"></app-single-select>
       </div>
     </div>
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="export-tax-template">
           {{'sob.export_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select (listOpen)="getExportTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
+                           (selectionChange)="onSelectId($event, 'exportTaxTemplateId')"
+                           [initialValue]="sobForm.controls.exportTaxTemplateName?.value"
+                           [list]="exportTaxTemplateList"
+                           (search)="onSearchExportTaxTemplate($event)"
+                           [selectedList]="selectedExportTaxTemplateList"
+                           data-qe-id="dialog-export-tax-template"
+                           id="export-tax-template"
+                           key="name"></app-single-select>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="import-tax-template">
           {{'sob.import_tax' | translate}}
         </label>
-        <app-single-select></app-single-select>
+        <app-single-select (listOpen)="getImportTaxTemplateList()"
+                           [disabled]="sobForm?.value?.id"
+                           (selectionChange)="onSelectId($event, 'importTaxTemplateId')"
+                           [initialValue]="sobForm.controls.importTaxTemplateName?.value"
+                           [list]="importTaxTemplateList"
+                           [selectedList]="selectedImportTaxTemplateList"
+                           data-qe-id="dialog-import-tax-template"
+                           (search)="onSearchImportTaxTemplate($event)"
+                           id="import-tax-template"
+                           key="name"></app-single-select>
       </div>
     </div>
-  </form>
-  <p-footer *ngIf="isAdd; else notAdd">
-    <button class="btn btn-add mr-2">
-      {{'general.button.add' | translate}}
-    </button>
-    <button class="btn btn-cancel">
-      {{'general.button.cancel' | translate}}
-    </button>
-  </p-footer>
-  <ng-template #notAdd>
-    <p-footer>
-      <button class="btn btn-add mr-2">
-        {{'general.button.add' | translate}}
-      </button>
-      <button class="btn btn-cancel mr-2">
+  </div>
+  <p-footer>
+    <div class="flex-grow-1 d-flex justify-content-end">
+      <button (click)="cancelModal()" class="btn btn-cancel" data-qe-id="footer-button-cancel">
         {{'general.button.cancel' | translate}}
       </button>
-      <button class="btn btn-delete">
-        {{'general.button.delete' | translate}}
+      <button (click)="save()" class="btn btn-add ml-2" data-qe-id="footer-button-save">
+        {{'general.button.save' | translate}}
       </button>
-    </p-footer>
-  </ng-template>
+    </div>
+  </p-footer>
 </p-dialog>

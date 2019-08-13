@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { SidebarItem } from '../interfaces/SidebarItem';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { toggleMenuSideBar } from '../sidebar.animation';
 
 @Component({
@@ -9,12 +9,12 @@ import { toggleMenuSideBar } from '../sidebar.animation';
   styleUrls: ['./sidebar-list.component.scss'],
   animations: [
     toggleMenuSideBar,
-  ]
+  ],
 })
 export class SidebarListComponent implements OnInit {
   @Input() level = 0;
 
-  @Input() root = { route: '' };
+  @Input() root: SidebarItem = {route: '/'};
 
   @Input() menu: SidebarItem[] = [];
 
@@ -22,7 +22,7 @@ export class SidebarListComponent implements OnInit {
 
   @Input() isOpened = false;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+  constructor(private router: Router) {
   }
 
   get caretClass() {
@@ -37,14 +37,27 @@ export class SidebarListComponent implements OnInit {
     const {
       routeUrl,
     } = this;
-    if ((!this.root && routeUrl !== '/') || (this.root.route < routeUrl)) {
-      this.isOpened = true;
-    }
+    this.menu.forEach(item => {
+      if (routeUrl.includes(item.route)) {
+        if (item.children && item.children.length) {
+          item.isOpened = !item.isOpened;
+        }
+      } else {
+        if (item.children && item.children.length && this.root.route !== '/') {
+          item.isShowed = !item.isShowed;
+        }
+      }
+    });
   }
 
   toggleChildren(item: SidebarItem) {
+    this.menu.forEach(i => {
+      if (i.route !== item.route) {
+        i.isShowed = !i.isShowed;
+      }
+    });
     if (item.children && item.children.length) {
-      this.isOpened = !this.isOpened;
+      item.isOpened = !item.isOpened;
     }
   }
 }

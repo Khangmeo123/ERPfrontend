@@ -1,14 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { TextFilter } from '../../../../../../_shared/models/filters/TextFilter';
-import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { LegalEntityService } from './legal-entity.service';
 import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { FormGroup } from '@angular/forms';
-import { Subscription, Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.searchentity';
 import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
@@ -19,7 +18,7 @@ import { translate } from 'src/app/_helpers/string';
   selector: 'app-legal-entity',
   templateUrl: './legal-entity.component.html',
   styleUrls: ['./legal-entity.component.scss'],
-  providers: [LegalEntityService]
+  providers: [LegalEntityService],
 })
 export class LegalEntityComponent implements OnInit, OnDestroy {
   pageTitle = translate('legalEntity.header.title');
@@ -29,7 +28,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     id: new TextFilter(),
     name: new TextFilter(),
     des: new TextFilter(),
-  }
+  };
 
   display: boolean = false;
   pagination = new PaginationModel();
@@ -68,7 +67,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
         this.sobIds = res.ids;
         this.sobExceptIds = res.exceptIds;
       }
-    })
+    });
 
     const legalListCountSub = this.legalService.legalpCount.subscribe(res => {
       if (res) {
@@ -79,7 +78,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
       this.isSaveBookMark = res;
     });
     this.legalService.getListSobOfLegalByTyping(this.sobTyping);
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
     this.legalSubs.add(legalListSub).add(legalFormSub).add(legalListCountSub).add(bookMarkNotify).add(sobOfLegalListSub);
   }
 
@@ -109,6 +108,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     this.sobSearchEntity.name.startsWith = event;
     this.sobTyping.next(this.sobSearchEntity);
   }
+
   selectSob(event) {
     this.legalSearchEntity.setOfBookId = event[0];
     this.setOfBookId = event[0];
@@ -155,7 +155,7 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
     this.legalService.getList(this.legalSearchEntity);
   }
 
-  paginationOut(pagination: PaginationModel) {
+  paginationOut(pagination) {
     this.legalSearchEntity.skip = pagination.skip;
     this.legalSearchEntity.take = pagination.take;
     this.legalService.getList(this.legalSearchEntity);
@@ -179,9 +179,9 @@ export class LegalEntityComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 }

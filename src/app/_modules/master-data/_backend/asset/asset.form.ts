@@ -6,13 +6,13 @@ import { AssetEntity } from './asset.entity';
 
 export class AssetForm extends FormModel {
     name = new FormControl('', [requiredField, checkLength(1, 500)]);
-    code = new FormControl('', [requiredField, checkLength(3, 10)]);
+    code = new FormControl('', [requiredField]);
     // typeEntity:
     typeId = new FormControl('', [requiredField]);
     typeName = new FormControl('');
     // statusEntity:
     statusId = new FormControl('', [requiredField]);
-    statusName = new FormControl('');
+    statusDisplay = new FormControl('');
     errors = new FormGroup({
         name: new FormControl(''),
         code: new FormControl(''),

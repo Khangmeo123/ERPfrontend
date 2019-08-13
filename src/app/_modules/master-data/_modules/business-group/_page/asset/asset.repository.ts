@@ -59,7 +59,7 @@ export class AssetRepository extends Repository {
             );
     }
 
-    delete(assetEntity: any): Observable<boolean> {
+    deactivate(assetEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(assetEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
@@ -67,14 +67,14 @@ export class AssetRepository extends Repository {
     }
 
     getTypeList(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-type', JSON.stringify({}),
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-list-type', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
     getStatusList(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-status', JSON.stringify({}),
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-list-status', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

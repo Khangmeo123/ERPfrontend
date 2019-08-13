@@ -1,6 +1,6 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { SelectListComponent } from './select-list.component';
+import {SelectListComponent} from './select-list.component';
 
 describe('SelectListComponent', () => {
   let component: SelectListComponent;
@@ -8,9 +8,9 @@ describe('SelectListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectListComponent ]
+      declarations: [SelectListComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

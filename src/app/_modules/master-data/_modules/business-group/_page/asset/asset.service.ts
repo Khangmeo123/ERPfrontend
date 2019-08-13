@@ -60,7 +60,7 @@ export class AssetService {
 
   save(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (assetEntity.id === null || assetEntity.id === undefined || assetEntity.id === environment.emtyGuid) {
+      if (assetEntity.id === null || assetEntity.id === undefined || assetEntity.id === environment.emptyGuid) {
         this.assetRepository.add(assetEntity).subscribe(res => {
           if (res) {
             this.getList(assetSearchEntity);
@@ -95,9 +95,9 @@ export class AssetService {
     return defered;
   }
 
-  delete(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
+  deactivate(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.assetRepository.delete(assetEntity).subscribe(res => {
+      this.assetRepository.deactivate(assetEntity).subscribe(res => {
         if (res) {
           this.getList(assetSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

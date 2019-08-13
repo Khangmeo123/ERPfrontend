@@ -1,13 +1,12 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { GeneralService } from '../../../../../../_helpers/general-service.service';
 import { BookmarkService } from '../../../../../../_services';
 import { Router } from '@angular/router';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { _ } from '@biesbjerg/ngx-translate-extract/dist/utils/utils';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { CustomerOfLegalEntityService } from './customer-list-of-legal-entity.service';
-import { Subscription, Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
 import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
 import { translate } from 'src/app/_helpers/string';
@@ -17,13 +16,13 @@ import { environment } from 'src/environments/environment';
   selector: 'app-customer-list-of-legal-entity',
   templateUrl: './customer-list-of-legal-entity.component.html',
   styleUrls: ['./customer-list-of-legal-entity.component.scss'],
-  providers: [CustomerOfLegalEntityService]
+  providers: [CustomerOfLegalEntityService],
 })
 export class CustomerListOfLegalEntityComponent implements OnInit {
 
   pageTitle = translate('customerOfLegalEntity.header.title');
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
   display: boolean = false;
   selectedList: any;
   isAddGroup = false;
@@ -38,7 +37,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   customerList: CustomerEntity[];
 
   legalSubs: Subscription = new Subscription();
-  legalId: string;
+  legalId: string = null;
   customerIds: CustomerEntity[];
   customerExceptIds: CustomerEntity[];
   customerTyping: Subject<CustomerSearchEntity> = new Subject();
@@ -72,7 +71,7 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     });
     const customerListCountSub = this.customerOfLegalEntityService.customerCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
 
@@ -101,8 +100,8 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.legalSearchEntity.skip = this.pagination.skip;
     this.legalSearchEntity.take = this.pagination.take;
 
-    this.customerSearchEntity.skip = this.paginationdetail.skip;
-    this.customerSearchEntity.take = this.paginationdetail.take;
+    this.customerSearchEntity.skip = this.paginationDetail.skip;
+    this.customerSearchEntity.take = this.paginationDetail.take;
   }
 
 
@@ -116,10 +115,12 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   }
 
   customerSearch(event) {
+    this.customerSearchEntity = new CustomerSearchEntity();
     this.customerSearchEntity.code.startsWith = event;
     this.customerSearchEntity.name.startsWith = event;
     this.customerTyping.next(this.customerSearchEntity);
   }
+
   selectCustomer(event) {
     this.listCustomerId = event;
   }
@@ -129,21 +130,21 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     this.pagination.pageNumber = 1;
     this.legalSearchEntity.skip = 0;
     this.legalSearchEntity.take = this.pagination.take;
-    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
-      if (this.legalList && this.legalList.length > 0) {
-        this.customerSearchEntity.legalEntityId = this.legalList[0].id;
-      } else {
-        this.customerSearchEntity.legalEntityId = '';
-      }
-
-      this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
-    })
+    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity)
+      .then(() => {
+        if (this.legalList && this.legalList.length > 0) {
+          this.customerSearchEntity.legalEntityId = this.legalList[0].id;
+        } else {
+          this.customerSearchEntity.legalEntityId = '';
+        }
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+      });
   }
 
   toDetail(legalId) {
     this.legalId = legalId;
     this.customerSearchEntity.legalEntityId = legalId;
-    this.getListCustomer(this.customerSearchEntity);
+    this.getListCustomer();
   }
 
   sortLegalEntiy(event) {
@@ -151,19 +152,20 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       this.legalSearchEntity.orderBy = event.sortField;
       this.legalSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
-    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity).then(res => {
-      if (this.legalList && this.legalList.length > 0) {
-        this.customerSearchEntity.legalEntityId = this.legalList[0].id;
-        this.legalId = this.customerSearchEntity.legalEntityId;
-        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
-      }
-    });
+    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity)
+      .then(() => {
+        if (this.legalList && this.legalList.length > 0) {
+          this.customerSearchEntity.legalEntityId = this.legalList[0].id;
+          this.legalId = this.customerSearchEntity.legalEntityId;
+          this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+        }
+      });
   }
 
-  paginationOut(pagination: PaginationModel) {
+  paginationOut(pagination) {
     this.legalSearchEntity.skip = pagination.skip;
     this.legalSearchEntity.take = pagination.take;
-    this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity);
+    return this.customerOfLegalEntityService.getListLegal(this.legalSearchEntity);
   }
 
   clearSearch(table: any) {
@@ -176,30 +178,39 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
   onClickAddCustomer() {
     this.customerSearchEntity.customerDetailIds = this.listCustomerId;
     this.customerSearchEntity.legalEntityId = this.legalId;
-    this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity).then(res => {
-      this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
-    }).catch(err => {
-    });
+    this.customerOfLegalEntityService.saveCustomer(this.customerSearchEntity)
+      .then(() => {
+        this.customerIds = [];
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
+      })
+      .catch(() => {
+      });
   }
 
-  getListCustomer(customer) {
-    this.paginationdetail.pageNumber = 1;
+  getListCustomer() {
+    this.paginationDetail.pageNumber = 1;
     this.customerSearchEntity.skip = 0;
-    this.customerSearchEntity.take = this.paginationdetail.take;
+    this.customerSearchEntity.take = this.paginationDetail.take;
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 
   onClickShowDetail(customerId: string) {
-    this.router.navigate(['/master-data/legal-entity/customer-of-legal-entity/customer-detail'],
-      { queryParams: { id: customerId, legalEntityId: this.legalId } });
+    this.router.navigate(
+      ['/master-data/legal-entity/customer-of-legal-entity/customer-detail'],
+      {
+        queryParams: {
+          id: customerId,
+          legalEntityId: this.legalId,
+        },
+      },
+    );
   }
 
   deleteCustomerFormLegal(customer: any) {
     this.customerOfLegalEntityService.delete(customer).then(res => {
       if (res) {
         this.clearSearchCustomer(this.tableCustomer);
-        this.customerSearchEntity.legalEntityId = this.legalId;
-        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity)
+        this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
       }
     });
   }
@@ -215,19 +226,20 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
     }
 
     if (this.customerSearchEntity.legalEntityId !== '') {
-      this.getListCustomer(this.customerSearchEntity);
+      this.getListCustomer();
     }
   }
 
-  paginationDetailOut(pagination: PaginationModel) {
+  paginationDetailOut(pagination) {
     this.customerSearchEntity.skip = pagination.skip;
     this.customerSearchEntity.take = pagination.take;
     this.customerOfLegalEntityService.getListCustomer(this.customerSearchEntity);
   }
 
-  clearSearchCustomer(tablecustomer: any) {
+  clearSearchCustomer(tableCustomer: any) {
     this.customerSearchEntity = new CustomerSearchEntity();
-    tablecustomer.reset();
+    this.customerSearchEntity.legalEntityId = this.legalId;
+    tableCustomer.reset();
   }
 
   bookMark() {
@@ -238,5 +250,4 @@ export class CustomerListOfLegalEntityComponent implements OnInit {
       this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
     }
   }
-
 }

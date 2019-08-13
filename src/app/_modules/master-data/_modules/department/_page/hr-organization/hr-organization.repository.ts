@@ -1,14 +1,14 @@
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Repository } from '../../../../../../_helpers/repository';
-import { environment } from '../../../../../../../environments/environment';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { HrOrganizationSearchEntity } from '../../../../_backend/hr-organization/hr-organization.search-entity';
-import { HrOrganizationEntity } from '../../../../_backend/hr-organization/hr-organization.entity';
-import { EmployeeSearchEntity } from '../../../../_backend/employee/employee.searchentity';
-import { EmployeeEntity } from '../../../../_backend/employee/employee.entity';
-import { Entities } from '../../../../../../_helpers/entity';
-import { Injectable } from '@angular/core';
+import {HttpClient, HttpResponse} from '@angular/common/http';
+import {Repository} from '../../../../../../_helpers/repository';
+import {environment} from '../../../../../../../environments/environment';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {HrOrganizationSearchEntity} from '../../../../_backend/hr-organization/hr-organization.search-entity';
+import {HrOrganizationEntity} from '../../../../_backend/hr-organization/hr-organization.entity';
+import {EmployeeSearchEntity} from '../../../../_backend/employee/employee.searchentity';
+import {EmployeeEntity} from '../../../../_backend/employee/employee.entity';
+import {Entities} from '../../../../../../_helpers/entity';
+import {Injectable} from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
@@ -100,7 +100,7 @@ export class HrOrganizationRepository extends Repository {
 
   getEmployeeList(employeeSearchEntity: EmployeeSearchEntity): Observable<EmployeeEntity[]> {
     return this.http.post<EmployeeEntity[]>(
-      `${this.apiUrl}/list-employee`,
+      `${this.apiUrl}/list-employee-detail`,
       employeeSearchEntity,
       {
         observe: 'response',
@@ -116,7 +116,7 @@ export class HrOrganizationRepository extends Repository {
 
   searchEmployee(employeeSearchEntity: EmployeeSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/search-employee`,
+      `${this.apiUrl}/drop-list-employee-detail`,
       employeeSearchEntity,
       {
         observe: 'response',
@@ -135,7 +135,7 @@ export class HrOrganizationRepository extends Repository {
 
   countEmployee(employeeSearchEntity: EmployeeSearchEntity): Observable<number> {
     return this.http.post<number>(
-      `${this.apiUrl}/count-employee`,
+      `${this.apiUrl}/count-employee-detail`,
       employeeSearchEntity,
       {
         observe: 'response',
@@ -149,12 +149,12 @@ export class HrOrganizationRepository extends Repository {
       );
   }
 
-  removeEmployeeFromOrganization(employeeId: string, hrOrganizationId: string): Promise<EmployeeEntity> {
+  removeEmployeeFromOrganization(employeeDetailId: string, hrOrganizationId: string): Promise<EmployeeEntity> {
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
-        `${this.apiUrl}/delete-employee`,
+        `${this.apiUrl}/delete-employee-detail`,
         {
-          employeeId,
+          employeeDetailId,
           hrOrganizationId,
         },
         {
@@ -169,14 +169,18 @@ export class HrOrganizationRepository extends Repository {
     });
   }
 
-  addEmployeeToDepartment(employeeIds: string[], hrOrganizationId: string, employeeSearchEntity: EmployeeSearchEntity): Promise<void> {
-    const payload = employeeIds.map((id: string) => ({
-      employeeId: id,
+  addEmployeeToDepartment(
+    employeeDetailIds: string[],
+    hrOrganizationId: string,
+    employeeSearchEntity: EmployeeSearchEntity,
+  ): Promise<void> {
+    const payload = employeeDetailIds.map((employeeDetailId: string) => ({
+      employeeDetailId,
       hrOrganizationId,
     }));
     return new Promise((resolve, reject) => {
       return this.http.post<EmployeeEntity>(
-        `${this.apiUrl}/create-employee`,
+        `${this.apiUrl}/add-employee-detail`,
         payload,
         {
           observe: 'response',

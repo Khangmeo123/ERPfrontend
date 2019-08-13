@@ -10,7 +10,7 @@ export class LegalItemDetailForm extends FormModel {
     name = new FormControl({ value: '', disabled: true });
 
     // characteristicEntity:
-    characteristicName = new FormControl({ value: '', disabled: true });
+    characteristicDisplay = new FormControl({ value: '', disabled: true });
     characteristicId = new FormControl('');
 
     // unitEntity:
@@ -21,7 +21,7 @@ export class LegalItemDetailForm extends FormModel {
     weight = new FormControl({ value: '', disabled: true });
 
     // statusEntity:
-    statusName = new FormControl({ value: '', disabled: true });
+    statusDisplay = new FormControl({ value: '', disabled: true });
     statusId = new FormControl('');
 
     height = new FormControl({ value: '', disabled: true });

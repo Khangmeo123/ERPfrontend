@@ -11,20 +11,22 @@
 
   </div>
   <div class="page-body">
+    <div class="page-section row">
+      <div class="col-sm-7 d-flex align-items-center">
+        <span class="sob-label flex-shrink-1 mr-2">
+          {{'general.legal_entity.name' | translate}}:
+        </span>
+        <app-single-select data-qe-id="form-select-legal" [list]="legalEntityExceptIds" [selectedList]="legalEntityIds"
+          [key]="'name'" (search)="legalSearch($event)" (selectionChange)="selectLegal($event)"
+          (listOpen)="openLegalEntityList(customerGroupSearchEntity.legalEntityId)">
+        </app-single-select>
+      </div>
+    </div>
+    <hr>
     <div class="row">
       <div class="col-sm-6 page-1">
         <div class="mt-2 row">
-          <div class="col-sm-7 d-flex align-items-center">
-            <span class="sob-label flex-shrink-1">
-              {{'general.legal_entity.name' | translate}} :
-            </span>
-            <app-single-select data-qe-id="form-select-legal" [list]="legalEntityExceptIds"
-              [selectedList]="legalEntityIds" [key]="'name'" (search)="legalSearch($event)"
-              (selectionChange)="selectLegal($event)"
-              (listOpen)="openLegalEntityList(customerGroupSearchEntity.legalEntityId)">
-            </app-single-select>
-          </div>
-          <div class="col-sm-5 page-actions d-flex justify-content-end">
+          <div class="col page-actions d-flex justify-content-end">
             <button class="btn btn-add" (click)="addGroup()" data-qe-id="form-select-legal"
               [disabled]="customerGroupSearchEntity.legalEntityId == undefined">
               <span>{{'general.button.add' | translate}}</span></button>
@@ -52,18 +54,20 @@
                   {{'customerGroup.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action'}}</th>
+                <th pResizableColumn class="customer-group-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerGroupSearchEntity.code" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-code-customer-group"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerGroupSearchEntity.code"
+                    (changeFilter)="getList()" data-qe-id="table-thead-filter-code-customer-group">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerGroupSearchEntity.name" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-name-customer-group"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerGroupSearchEntity.name"
+                    (changeFilter)="getList()" data-qe-id="table-thead-filter-name-customer-group">
+                  </app-advanced-filters>
                 </th>
-                <th class="th-filter">
+                <th class="th-filter customer-group-actions">
                 </th>
               </tr>
             </ng-template>
@@ -72,7 +76,7 @@
                 [attr.data-qe-id]="'table-tbody-row-' + index">
                 <td class="ui-resizable-column"> {{customerGroup.code}} </td>
                 <td class="ui-resizable-column"> {{customerGroup.name}} </td>
-                <td class="ui-resizable-column">
+                <td class="ui-resizable-column customer-group-actions">
                   <div class="edit" (click)="edit(customerGroup.id)">
                     <mat-icon>edit</mat-icon>
                   </div>
@@ -91,8 +95,9 @@
         <div class="row d-flex ">
           <div class="col-sm-4 align-items-center mt-2">
             <app-multi-select data-qe-id="form-multi-select-customer" [list]="customerExceptIds"
-              [selectedList]="customerIds" [key]="'name'" (search)="customerSearchApp($event)"
-              (selectionChange)="selectCustomerApp($event)" (listOpen)="openCustomerList(customerSearchEntity.ids)">
+              [disabled]="!legalEntityId" [selectedList]="customerIds" [key]="'name'"
+              (search)="customerSearchApp($event)" (selectionChange)="selectCustomerApp($event)"
+              (listOpen)="openCustomerList()">
             </app-multi-select>
           </div>
           <div class="col-sm-8 page-actions d-flex justify-content-end mt-2">
@@ -126,25 +131,27 @@
                   {{'customerGroup.customer.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>{{'general.action' | translate}}</th>
+                <th pResizableColumn class="customer-actions"></th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerSearchEntity.code" (changeFilter)="getListDetail()"
-                    data-qe-id="table-thead-filter-code-customer"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerSearchEntity.code"
+                    (changeFilter)="getListDetail()" data-qe-id="table-thead-filter-code-customer">
+                  </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="customerSearchEntity.name" (changeFilter)="getListDetail()"
-                    data-qe-id="table-thead-filter-name-customer"></app-advanced-filters>
+                  <app-advanced-filters defaultType="startsWith" [filter]="customerSearchEntity.name"
+                    (changeFilter)="getListDetail()" data-qe-id="table-thead-filter-name-customer">
+                  </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter customer-actions"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-item>
               <tr>
                 <td> {{item.code}} </td>
                 <td> {{item.name}} </td>
-                <td>
+                <td class="customer-actions">
                   <div class="d-flex">
                     <div class="edit" (click)="onClickShowDetail(item.id)">
                       <mat-icon>edit</mat-icon>
@@ -159,7 +166,7 @@
             </ng-template>
           </p-table>
           <div class="pagination">
-            <app-pagination [pagination]="paginationdetail" (paginationOut)="paginationDetailOut($event)"
+            <app-pagination [pagination]="paginationDetail" (paginationOut)="paginationDetailOut($event)"
               data-qe-id="pagination">
             </app-pagination>
           </div>
@@ -179,13 +186,13 @@
   <form class="container" [formGroup]="customerGroupForm">
     <div class="row">
       <div class="form-group col-6">
-        <label>
+        <label for="customer-group-code">
           {{'customerGroup.code' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-            id="customerrGroupCode">
+            id="customer-group-code">
           <app-error data-qe-id="dialog-error-code"
             *ngIf="(customerGroupForm.controls.code?.errors && customerGroupForm.controls.code?.touched) || !!customerGroupForm.controls.errors?.get('code')?.value"
             [formGroup]="customerGroupForm" [property]="'code'" [placement]="'top'" class="error-form">
@@ -193,13 +200,13 @@
         </div>
       </div>
       <div class="form-group col-6">
-        <label>
+        <label for="customer-group-name">
           {{'customerGroup.name' | translate}}
           <span class="text-danger mr-2">*</span>
         </label>
         <div class="div-form">
           <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-            id="customerGroupName">
+            id="customer-group-name">
           <app-error data-qe-id="dialog-error-code"
             *ngIf="(customerGroupForm.controls.name?.errors && customerGroupForm.controls.name?.touched) || !!customerGroupForm.controls.errors?.get('name')?.value"
             [formGroup]="customerGroupForm" [property]="'name'" [placement]="'top'" class="error-form">

@@ -10,7 +10,7 @@ export class CustomerEntity extends Entity {
 
     // statusEntity
     statusId: string;
-    statusName: string;
+    statusDisplay: string;
     statusCode: string;
     customerGroupingId: string;
 

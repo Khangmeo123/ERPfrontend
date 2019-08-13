@@ -13,28 +13,28 @@
         {{'general.button.add' | translate}}</button>
       <div class="btn-group" dropdown data-qe-id="button-import">
         <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-          aria-controls="dropdown-basic">
+                aria-controls="dropdown-basic">
           {{'general.button.import' | translate}}<span class="caret"></span>
         </button>
         <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
           <li role="menuitem"><a class="dropdown-item" href="#">{{'general.button.importFile' | translate}}</a></li>
           <li class="divider dropdown-divider"></li>
           <li role="menuitem"><a class="dropdown-item" target="_blank"
-              [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
+                                 [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
           </li>
         </ul>
       </div>
       <a class="btn btn-export" data-qe-id="button-export" target="_blank"
-        [href]="exportLink">{{'general.button.export' | translate}}</a>
+         [href]="exportLink">{{'general.button.export' | translate}}</a>
       <button class="btn btn-clear" (click)="clearSearch(table)"
-        data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
   </div>
   <hr>
   <div class="page-body">
     <div class="page-section">
       <p-table [value]="customerList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)" [scrollable]="true"
-        scrollHeight="500px" [resizableColumns]="true" #table>
+               scrollHeight="500px" [resizableColumns]="true" #table>
         <ng-template pTemplate="colgroup">
           <colgroup>
             <col>
@@ -61,25 +61,32 @@
               {{ 'customer.list.content.status' | translate}}
               <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
             </th>
+            <th class="customer-actions"></th>
           </tr>
           <tr>
             <th class="th-filter">
-              <app-advanced-filters [filter]="customerSearchEntity.code" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-code"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="customerSearchEntity.code"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-code"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="customerSearchEntity.name" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-name"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="customerSearchEntity.name"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-name"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="customerSearchEntity.taxCode" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-taxCode"></app-advanced-filters>
+              <app-advanced-filters defaultType="startsWith" [filter]="customerSearchEntity.taxCode"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-taxCode"></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-simple-select [key]="'name'" [list]="statusList" [initialValue]="customerSearchEntity.statusId"
-                (selectionChange)="customerSearchEntity.statusId = $event; getList()" (listOpen)="openStatusList()"
-                data-qe-id="table-thead-filter-status">
+              <app-simple-select [key]="'display'" [list]="statusList" [initialValue]="customerSearchEntity.statusId"
+                                 (selectionChange)="customerSearchEntity.statusId = $event; getList()"
+                                 (listOpen)="openStatusList()"
+                                 data-qe-id="table-thead-filter-status">
               </app-simple-select>
+            </th>
+            <th class="th-filter customer-actions">
             </th>
           </tr>
         </ng-template>
@@ -88,7 +95,12 @@
             <td> {{customer.code}} </td>
             <td> {{customer.name}} </td>
             <td> {{customer.taxCode}} </td>
-            <td> {{customer.statusName}} </td>
+            <td> {{customer.statusDisplay}} </td>
+            <td class="customer-actions">
+              <a role="button" (click)="toDetail(customer.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
           </tr>
         </ng-template>
       </p-table>

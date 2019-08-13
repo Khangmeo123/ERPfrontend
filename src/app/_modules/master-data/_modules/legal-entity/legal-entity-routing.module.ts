@@ -15,41 +15,113 @@ import { LegalSupplierDetailComponent } from './_page/supplier-detail/supplier-d
 import { LegalItemDetailComponent } from './_page/item-detail/item-detail.component';
 import { EmployeeDetailComponent } from './_page/employee-detail/employee-detail.component';
 import { ItemOfLegalEntityComponent } from './_page/item-of-legal-entity/item-of-legal-entity.component';
+import { BinLocationComponent } from './_page/bin-location/bin-location.component';
+import { CodeFormulaListComponent } from './_page/code-formula/code-formula-list/code-formula-list.component';
+import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-detail/code-formula-detail.component';
 
 const routes: Routes = [
   {
     path: '', children: [
-      { path: '', component: LegalEntityComponent },
-
-      { path: 'customer-group', component: CustomerGroupComponent },
-      { path: 'customer-group/customer-detail', component: CustomerDetailComponent },
-      { path: 'customer-of-legal-entity/customer-detail', component: CustomerDetailComponent },
-
-      { path: 'supplier-group', component: SupplierGroupComponent },
-      { path: 'supplier-group/supplier-detail', component: LegalSupplierDetailComponent },
-      { path: 'supplier-of-legal-entity/supplier-detail', component: LegalSupplierDetailComponent },
-
-      { path: 'employee-position', component: EmployeePositionComponent },
-      { path: 'employee-position/employee-detail', component: EmployeeDetailComponent },
-      { path: 'employee-of-legal-entity/employee-detail', component: EmployeeDetailComponent },
-
-      { path: 'item-group', component: ItemGroupComponent },
       {
-        path: 'item-of-legal-entity', component: ItemOfLegalEntityComponent,
+        path: '',
+        component: LegalEntityComponent,
       },
-      { path: 'item-group/item-detail', component: LegalItemDetailComponent },
-      { path: 'item-of-legal-entity/item-detail', component: LegalItemDetailComponent },
 
-      { path: 'special-price-supplier', component: SpecialPriceSupplierComponent },
-      { path: 'special-price-customer', component: SpecialPriceCustomerComponent },
       {
-        path: 'customer-of-legal-entity', component: CustomerListOfLegalEntityComponent
+        path: 'customer-group',
+        component: CustomerGroupComponent,
       },
       {
-        path: 'supplier-of-legal-entity', component: SupplierOfLegalEntityComponent,
+        path: 'customer-group/customer-detail',
+        component: CustomerDetailComponent,
       },
       {
-        path: 'employee-of-legal-entity', component: EmployeeOfLegalEntityComponent,
+        path: 'customer-of-legal-entity/customer-detail',
+        component: CustomerDetailComponent,
+      },
+
+      {
+        path: 'supplier-group',
+        component: SupplierGroupComponent,
+      },
+      {
+        path: 'supplier-group/supplier-detail',
+        component: LegalSupplierDetailComponent,
+      },
+      {
+        path: 'supplier-of-legal-entity/supplier-detail',
+        component: LegalSupplierDetailComponent,
+      },
+      {
+        path: 'employee-position',
+        component: EmployeePositionComponent,
+      },
+      {
+        path: 'employee-position/employee-detail',
+        component: EmployeeDetailComponent,
+      },
+      {
+        path: 'employee-of-legal-entity/employee-detail',
+        component: EmployeeDetailComponent,
+      },
+
+      {
+        path: 'item-group',
+        component: ItemGroupComponent,
+      },
+      {
+        path: 'item-of-legal-entity',
+        component: ItemOfLegalEntityComponent,
+      },
+      {
+        path: 'item-group/item-detail',
+        component: LegalItemDetailComponent,
+      },
+      {
+        path: 'item-of-legal-entity/item-detail',
+        component: LegalItemDetailComponent,
+      },
+
+      {
+        path: 'special-price-supplier',
+        component: SpecialPriceSupplierComponent,
+      },
+      {
+        path: 'special-price-customer',
+        component: SpecialPriceCustomerComponent,
+      },
+      {
+        path: 'customer-of-legal-entity',
+        component: CustomerListOfLegalEntityComponent,
+      },
+      {
+        path: 'supplier-of-legal-entity',
+        component: SupplierOfLegalEntityComponent,
+      },
+      {
+        path: 'employee-of-legal-entity',
+        component: EmployeeOfLegalEntityComponent,
+      },
+      {
+        path: 'bin-location',
+        component: BinLocationComponent,
+      },
+      {
+        path: 'code-formula',
+        children: [
+          {
+            path: 'code-formula-list',
+            component: CodeFormulaListComponent,
+          },
+          {
+            path: 'code-formula-detail',
+            component: CodeFormulaDetailComponent,
+          },
+          {
+            path: '**',
+            redirectTo: 'code-formula-list',
+          },
+        ],
       },
     ],
   },

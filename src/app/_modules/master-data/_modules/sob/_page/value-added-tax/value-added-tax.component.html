@@ -1,0 +1,239 @@
+<div class="page value-added-tax">
+  <div class="page-header">
+        <span class="page-title">
+            {{'valueAddedTax.header.title' | translate}}
+          <span (click)="onClickSaveBookMark($event)">
+                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+                    star
+                </mat-icon>
+            </span>
+        </span>
+
+    <div class="page-actions">
+      <button (click)="add()" class="btn btn-add" data-qe-id="button-add" [disabled]="!setOfBookId">
+        + {{'general.button.add' | translate}}</button>
+      <button (click)="clearSearch(table)" class="btn btn-add" data-qe-id="button-clear">
+        {{'general.button.clear' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div class="page-body mt-4 ">
+    <div class="page-section form d-flex align-items-center">
+      <span class="sob mr-2">{{'general.sob' | translate}}: </span>
+      <app-single-select (listOpen)="getSobList()"
+                         (selectionChange)="changeSob($event)"
+                         (search)="onSearchSetOfBook($event)"
+                         [list]="sobList"
+                         [selectedList]="selectedSobList"
+                         data-qe-id="sob-list"
+                         key="name"></app-single-select>
+    </div>
+
+    <div class="page-section list">
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+               [scrollable]="true" [value]="valueAddedTaxList" scrollHeight="500px">
+        <ng-template pTemplate="header">
+          <tr>
+            <th [pSortableColumn]="'code'" data-qe-id="table-thead-code"
+                pResizableColumn>
+              {{'tax.code' | translate}}
+            </th>
+            <th [pSortableColumn]="'name'" data-qe-id="table-thead-name"
+                pResizableColumn>
+              {{'tax.name' | translate}}
+            </th>
+            <th [pSortableColumn]="'unit'" data-qe-id="table-thead-unit"
+                pResizableColumn>
+              {{'tax.unit' | translate}}
+            </th>
+            <th [pSortableColumn]="'discount'" data-qe-id="table-thead-discount"
+                pResizableColumn>
+              {{'tax.discount' | translate}}
+            </th>
+            <th [pSortableColumn]="'description'" data-qe-id="table-thead-description"
+                pResizableColumn>
+              {{'tax.description' | translate}}
+            </th>
+            <th [pSortableColumn]="'disable'" data-qe-id="table-thead-disable"
+                pResizableColumn>
+              {{'tax.available' | translate}}
+            </th>
+            <th class="value-added-tax-actions"></th>
+
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="valueAddedTaxSearchEntity.code"
+                                    data-qe-id="filter-code"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="valueAddedTaxSearchEntity.name"
+                                    data-qe-id="filter-name"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-single-select [list]="uomFilterList"
+                                 [selectedList]="selectedUomFilterList"
+                                 (listOpen)="onOpenUomFilter()"
+                                 key="name"
+                                 (selectionChange)="onSelectUomFilter($event)"
+                                 (search)="onSearchUomFilter($event)"
+              ></app-single-select>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="valueAddedTaxSearchEntity.rate"
+                                    data-qe-id="filter-rate"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" (changeFilter)="getList()"
+                                    [filter]="valueAddedTaxSearchEntity.description"
+                                    data-qe-id="filter-description"></app-advanced-filters>
+            </th>
+            <th class="th-filter"></th>
+            <th class="th-filter value-added-tax-actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template let-index="index" let-tax pTemplate="body">
+          <tr (dblclick)="edit(tax.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{tax.code}} </td>
+            <td> {{tax.name}} </td>
+            <td> {{tax.unitOfMeasureName}} </td>
+            <td> {{tax.rate}} </td>
+            <td> {{tax.description}} </td>
+            <td>
+              <p-inputSwitch [ngModel]="!tax.disabled"
+                             (onChange)="onDisableChange(tax)">
+              </p-inputSwitch>
+            </td>
+            <td class="value-added-tax-actions">
+              <a role="button" (click)="edit(tax.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+    <div class="pagination">
+      <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination"></app-pagination>
+    </div>
+  </div>
+</div>
+
+<p-dialog [(visible)]="isShowDialog"
+          *ngIf="isShowDialog"
+          [contentStyle]="{'overflow':'visible'}"
+          [style]="{width: '700px'}"
+          appendTo="body"
+          modal="true">
+  <p-header>
+    {{'valueAddedTax.modal.title' | translate}}
+  </p-header>
+  <div [formGroup]="valueAddedTaxForm" class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="mt-4 mb-4">
+          <label for="tax-code">
+            {{'tax.code' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <div class="div-form">
+            <input class="form-control" data-qe-id="dialog-code" formControlName="code" name="code"
+                   id="tax-code"
+                   type="text">
+            <app-error
+              *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
+              [formGroup]="valueAddedTaxForm"
+              [placement]="'top'" [property]="'code'" class="error-form"
+              data-qe-id="dialog-error-code">
+            </app-error>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="unit-of-measure">
+            {{'tax.unit' | translate}}
+          </label>
+          <div class="div-form d-flex">
+            <app-single-select (listOpen)="getUomList()"
+                               id="unit-of-measure"
+                               (selectionChange)="unitOfMeasureId.setValue($event[0])"
+                               [list]="uomList"
+                               [selectedList]="selectedUomList"
+                               [initialValue]="valueAddedTaxForm?.controls?.unitOfMeasureName?.value"
+                               class="flex-grow-1"
+                               data-qe-id="dialog-unit-of-measure"
+                               key="name"></app-single-select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="discount">
+            {{'tax.discount' | translate}}
+          </label>
+          <input class="form-control" id="discount" data-qe-id="dialog-discount" formControlName="rate" name="rate"
+                 type="text">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="mt-4 mb-4">
+          <label for="tax-name">
+            {{'tax.name' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <div class="div-form">
+            <input class="form-control" id="tax-name" data-qe-id="dialog-name" formControlName="name" name="name"
+                   type="text">
+            <app-error
+              *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
+              [formGroup]="valueAddedTaxForm"
+              [placement]="'top'" [property]="'name'" class="error-form"
+              data-qe-id="dialog-error-name">
+            </app-error>
+          </div>
+        </div>
+
+        <div class=" mb-4">
+          <label for="parent-id">
+            {{'tax.parent_account' | translate}}
+          </label>
+          <div class="div-form d-flex">
+            <app-single-select (listOpen)="onGetParentTaxList()"
+                               id="parent-id"
+                               [disabled]="valueAddedTaxForm?.value?.id"
+                               (search)="onSearchParentTaxList($event)"
+                               (selectionChange)="parentId.setValue($event[0])"
+                               [list]="parentTaxList"
+                               [selectedList]="selectedParentTaxList"
+                               [initialValue]="valueAddedTaxForm?.controls?.parentName?.value"
+                               key="name"
+                               class="flex-grow-1"
+                               data-qe-id="dialog-parent-id"></app-single-select>
+          </div>
+        </div>
+
+        <div class=" mb-4">
+          <label for="description">
+            {{'tax.description' | translate}}
+          </label>
+          <div class="div-form">
+            <input class="form-control" id="description" data-qe-id="dialog-description" formControlName="description"
+                   type="text-area">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p-footer class="d-flex justify-content-end">
+    <button (click)="onClickCancel()" class="btn btn-cancel" data-qe-id="footer-button-cancel">
+      {{ 'general.button.cancel' | translate}}
+    </button>
+    <button (click)="onClickSave()" class="btn btn-save" data-qe-id="footer-button-save">
+      {{ 'general.button.save' | translate}}
+    </button>
+  </p-footer>
+</p-dialog>

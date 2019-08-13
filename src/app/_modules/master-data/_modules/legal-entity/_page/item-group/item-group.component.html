@@ -10,18 +10,21 @@
     </span>
   </div>
   <div class="page-body">
+    <div class="row page-section">
+      <div class="col-sm-7 d-flex align-items-center">
+        <span class="sob-label flex-shrink-1 mr-1">
+          {{'general.legal_entity.name' | translate}}:
+        </span>
+        <app-single-select [list]="legalExceptIds" [selectedList]="legalIds" [key]="'name'"
+          (search)="legalEntityTypingSearch($event)" (selectionChange)="legalEntitySelection($event)"
+          (listOpen)="legalEntityOpen()"></app-single-select>
+      </div>
+    </div>
+    <hr>
     <div class="row">
       <div class="col-sm-6 page-1">
         <div class="row mt-2">
-          <div class="col-sm-7 d-flex align-items-center">
-            <span class="sob-label flex-shrink-1 mr-1">
-              {{'general.legal_entity.name' | translate}}:
-            </span>
-            <app-single-select [list]="legalExceptIds" [selectedList]="legalIds" [key]="'name'"
-              (search)="legalEntityTypingSearch($event)" (selectionChange)="legalEntitySelection($event)"
-              (listOpen)="legalEntityOpen()"></app-single-select>
-          </div>
-          <div class="col-sm-5 d-flex page-actions justify-content-end">
+          <div class="col d-flex page-actions justify-content-end">
             <button class="btn btn-add" (click)="addItemGroup()" data-qe-id="button-itemGroup-add"
               [disabled]="legalEntityId==null||legalEntityId==undefined">
               {{'general.button.add' | translate}}</button>
@@ -50,22 +53,21 @@
                   {{'itemGroup.content.item.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>
-                  {{'general.action' | translate}}
+                <th pResizableColumn class="item-group-actions">
                 </th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemGroupSearchEntity.code" (changeFilter)="getItemGroupList()"
-                    data-qe-id="table-thead-filter-code">
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemGroupSearchEntity.code"
+                    (changeFilter)="getItemGroupList()" data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemGroupSearchEntity.name" (changeFilter)="getItemGroupList()"
-                    data-qe-id="table-thead-filter-name">
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemGroupSearchEntity.name"
+                    (changeFilter)="getItemGroupList()" data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter item-group-actions"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-itemGroup let-index="rowIndex">
@@ -73,12 +75,12 @@
                 <td class="ui-resizable-column"> {{itemGroup.code}} </td>
                 <td class="ui-resizable-column"> {{itemGroup.name}} </td>
                 <td class="ui-resizable-column">
-                  <div class="d-flex">
-                    <div class="edit mr-2" (click)="editItemGroup(itemGroup.id)">
+                  <div class="d-flex item-group-actions">
+                    <div class="edit mr-2" (click)="editItemGroup(itemGroup.id, $event)">
                       <mat-icon>edit</mat-icon>
                     </div>
-                    <div class="delete" (click)="viewItemGroup(itemGroup.id)">
-                      <mat-icon>remove_red_eye</mat-icon>
+                    <div class="delete" (click)="deleteItemGroup(itemGroup, $event)">
+                      <mat-icon>delete</mat-icon>
                     </div>
                   </div>
                 </td>
@@ -98,7 +100,7 @@
           <div class="col-sm-4 align-items-center">
             <app-multi-select data-qe-id="form-multi-select-supplier" [list]="itemExceptIds" [selectedList]="itemIds"
               [key]="'name'" (search)="itemTypingSearch($event)" (selectionChange)="itemsFromItemGroupIds = $event"
-              (listOpen)="itemOpen()">
+              [disabled]="!itemGroupId || !legalEntityId" (listOpen)="itemOpen()">
             </app-multi-select>
           </div>
 
@@ -135,22 +137,21 @@
                   {{'itemGroup.content.itemDetail.name' | translate}}
                   <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
                 </th>
-                <th pResizableColumn>
-                  {{'general.action' | translate}}
+                <th pResizableColumn class="item-actions">
                 </th>
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.code"
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemsFromItemGroupSearchEntity.code"
                     (changeFilter)="getitemsFromItemGroupList()" data-qe-id="table-thead-filter-code">
                   </app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemsFromItemGroupSearchEntity.name"
+                  <app-advanced-filters defaultType="startsWith" [filter]="itemsFromItemGroupSearchEntity.name"
                     (changeFilter)="getitemsFromItemGroupList()" data-qe-id="table-thead-filter-name">
                   </app-advanced-filters>
                 </th>
-                <th class="th-filter"></th>
+                <th class="th-filter item-actions"></th>
               </tr>
             </ng-template>
             <ng-template pTemplate="body" let-items let-index="rowIndex">
@@ -158,8 +159,8 @@
                 <td class="ui-resizable-column"> {{items.code}} </td>
                 <td class="ui-resizable-column"> {{items.name}} </td>
                 <td class="ui-resizable-column">
-                  <div class="d-flex">
-                    <div class="delete" (click)="deleteItemFromItemGroup(items.id)">
+                  <div class="d-flex item-actions">
+                    <div class="delete mr-2" (click)="deleteItemFromItemGroup(items.id)">
                       <mat-icon>delete</mat-icon>
                     </div>
                     <div class="edit mr-2" (click)="editItemFromItemGroup(items.id)">
@@ -229,10 +230,6 @@
             {{ 'general.button.save' | translate}}</button>
           <button class="btn btn-cancel" data-qe-id="dialog-button-cancel"
             (click)="isShowItemGroupDialog = false">{{ 'general.button.cancel' | translate}}</button>
-          <button class="btn btn-delete" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-            data-qe-id="dialog-button-cancel" *ngIf="itemGroupForm.value?.isDeleted" [popoverMessage]="popoverMessage"
-            placement="bottom" (confirm)="deactiveItemGroup()">
-            {{ 'general.button.delete' | translate}}</button>
         </div>
       </div>
     </div>

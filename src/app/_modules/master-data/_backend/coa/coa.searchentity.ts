@@ -1,14 +1,16 @@
-import { TextFilter } from './../../../../_shared/models/filters/TextFilter';
 import { SearchEntity } from 'src/app/_helpers/search-entity';
+import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 
 export class CoaSearchEntity extends SearchEntity {
-    sobId: string;
-    accountCode: TextFilter = new TextFilter();
-    accountName: TextFilter = new TextFilter();
-    propertyId: string;
-    description: TextFilter = new TextFilter();
+  setOfBookId: string;
+  accountName: TextFilter = new TextFilter();
+  code: TextFilter = new TextFilter();
+  name: TextFilter = new TextFilter();
+  description: TextFilter = new TextFilter();
+  characteristicId: string = null;
+  parentCode: TextFilter = new TextFilter();
 
-    constructor(coaSearchEntity?: any) {
-        super(coaSearchEntity);
-    }
+  constructor(coaSearchEntity?: any) {
+    super(coaSearchEntity);
+  }
 }

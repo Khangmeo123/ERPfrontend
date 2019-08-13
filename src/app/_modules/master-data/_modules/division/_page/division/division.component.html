@@ -1,164 +1,155 @@
 <div class="page division">
-    <div class="page-header">
-        <span class="page-title">
-            {{pageTitle | translate}}
-            <span (click)="bookMark()">
-                <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
-                    star
-                </mat-icon>
-            </span>
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngStyle]="{'color': !isSaveBookMark ? '#3D464D' : '#FCE205'}">
+          star
+        </mat-icon>
+      </span>
 
+    </span>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="add()" data-qe-id="button-add" [disabled]="legalEntityId == ''">
+        {{'general.button.add' | translate}}</button>
+      <button class="btn btn-clear" data-qe-id="button-clear"
+        (click)="clearSearch(table)">{{'general.button.clear' | translate}}</button>
+    </div>
+  </div>
+  <hr>
+
+  <div class="page-body">
+    <div class="row mt-2 col-sm-6">
+      <div class="page-section d-flex align-items-center">
+        <span class="sob-label flex-shrink-1 mr-2">
+          {{'general.legalEntity.name' | translate}} :
         </span>
-        <div class="page-actions">
-            <button class="btn btn-add" (click)="add()" data-qe-id="button-add" [disabled]="legalEntityId == ''">
-                {{'general.button.add' | translate}}</button>
-            <button class="btn btn-clear" data-qe-id="button-clear"
-                (click)="clearSearch(table)">{{'general.button.clear' | translate}}</button>
-        </div>
+        <app-single-select data-qe-id="form-select-legal-entiy" [list]="legalExceptIds" [selectedList]="legalIds"
+          [key]="'name'" (search)="legalSearch($event)" (selectionChange)="selectedLegal($event)"
+          (listOpen)="openlegalList()">
+        </app-single-select>
+      </div>
     </div>
-    <hr>
 
-    <div class="page-body">
-        <div class="row mt-2 col-sm-6">
-            <div class="page-section d-flex align-items-center">
-                <span class="sob-label flex-shrink-1 mr-2">
-                    {{'general.legalEntity.name' | translate}} :
-                </span>
-                <app-single-select data-qe-id="form-select-legal-entiy" [list]="legalExceptIds"
-                    [selectedList]="legalIds" [key]="'name'" (search)="legalSearch($event)"
-                    (selectionChange)="selectedLegal($event)" (listOpen)="openlegalList()">
-                </app-single-select>
-            </div>
-        </div>
+    <div class="page-selection list mt-2">
+      <p-table [value]="divisionGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+        [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-division">
+              {{ 'division.content.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name-division">
+              {{ 'division.content.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn [pSortableColumn]="'address'" data-qe-id="table-thead-address-division">
+              {{ 'division.content.address' | translate}}
+              <p-sortIcon [field]="'address'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn class="division-actions">
+            </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="divisionSearchEntity.code"
+                (changeFilter)="getList()" data-qe-id="table-thead-filter-code-division"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="divisionSearchEntity.name"
+                (changeFilter)="getList()" data-qe-id="table-thead-filter-name-division"></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="contains" [filter]="divisionSearchEntity.address"
+                (changeFilter)="getList()" data-qe-id="table-thead-filter-address-division"></app-advanced-filters>
+            </th>
+            <th class="th-filter division-actions"></th>
 
-        <div class="page-selection list mt-2">
-            <p-table [value]="divisionGroupList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
-                <ng-template pTemplate="colgroup">
-                    <colgroup>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                    </colgroup>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code-division">
-                            {{ 'division.content.code' | translate}}
-                            <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name-division">
-                            {{ 'division.content.name' | translate}}
-                            <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn [pSortableColumn]="'address'" data-qe-id="table-thead-address-division">
-                            {{ 'division.content.address' | translate}}
-                            <p-sortIcon [field]="'address'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn>
-                            {{ 'division.content.action' | translate}}
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="divisionSearchEntity.code" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-code-division"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="divisionSearchEntity.name" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-name-division"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="divisionSearchEntity.address" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-address-division"></app-advanced-filters>
-                        </th>
-                        <th class="th-filter"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-division let-index="rowIndex">
+          <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td class="ui-resizable-column"> {{division.code}} </td>
+            <td class="ui-resizable-column"> {{division.name}} </td>
+            <td class="ui-resizable-column"> {{division.address}} </td>
+            <td class="ui-resizable-column division-actions">
+              <div class="edit" (click)="edit(division.id)">
+                <mat-icon>edit</mat-icon>
+              </div>
 
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-division let-index="rowIndex">
-                    <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td class="ui-resizable-column"> {{division.code}} </td>
-                        <td class="ui-resizable-column"> {{division.name}} </td>
-                        <td class="ui-resizable-column"> {{division.address}} </td>
-                        <td class="ui-resizable-column">
-                            <div class="edit" (click)="edit(division.id)">
-                                <mat-icon>edit</mat-icon>
-                            </div>
-
-                        </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-            <div class="pagination">
-                <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)"
-                    data-qe-id="pagination"></app-pagination>
-            </div>
-        </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="pagination">
+        <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+        </app-pagination>
+      </div>
     </div>
+  </div>
 </div>
 
 
-
-
 <p-dialog modal="true" [contentStyle]="{'overflow':'visible'}" [(visible)]="display" appendTo="body"
-    [style]="{width: '700px'}">
-    <p-header>
-        {{ 'division.dialog.title' | translate}}
-    </p-header>
-    <form class="container" [formGroup]="divisionForm">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="bankid">{{ 'division.content.code' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code"
-                            id="code">
-                        <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(divisionForm.controls.code?.errors && divisionForm.controls.code?.touched) || !!divisionForm.controls.errors?.get('code')?.value"
-                            [formGroup]="divisionForm" [property]="'code'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="form-group">
-                    <label for="bankid">{{ 'division.content.name' | translate}}<span
-                            class="text-danger ml-2">*</span></label>
-                    <div class="div-form">
-                        <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name"
-                            id="name">
-                        <app-error data-qe-id="dialog-error-code"
-                            *ngIf="(divisionForm.controls.name?.errors && divisionForm.controls.name?.touched) || !!divisionForm.controls.errors?.get('name')?.value"
-                            [formGroup]="divisionForm" [property]="'name'" [placement]="'top'" class="error-form">
-                        </app-error>
-                    </div>
-                </div>
-            </div>
+  [style]="{width: '700px'}">
+  <p-header>
+    {{ 'division.dialog.title' | translate}}
+  </p-header>
+  <form class="container" [formGroup]="divisionForm">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bankid">{{ 'division.content.code' | translate}}<span class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="code" data-qe-id="dialog-form-code" id="code">
+            <app-error data-qe-id="dialog-error-code"
+              *ngIf="(divisionForm.controls.code?.errors && divisionForm.controls.code?.touched) || !!divisionForm.controls.errors?.get('code')?.value"
+              [formGroup]="divisionForm" [property]="'code'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="form-group">
-                    <label for="bankname">{{ 'division.content.address' | translate}}</label>
-                    <input type="text" class="form-control" data-qe-id="dialog-form-address"
-                        formControlName="address" />
-                </div>
-            </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="form-group">
+          <label for="bankid">{{ 'division.content.name' | translate}}<span class="text-danger ml-2">*</span></label>
+          <div class="div-form">
+            <input type="text" class="form-control" formControlName="name" data-qe-id="dialog-form-name" id="name">
+            <app-error data-qe-id="dialog-error-code"
+              *ngIf="(divisionForm.controls.name?.errors && divisionForm.controls.name?.touched) || !!divisionForm.controls.errors?.get('name')?.value"
+              [formGroup]="divisionForm" [property]="'name'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="form-group">
+          <label for="bankname">{{ 'division.content.address' | translate}}</label>
+          <input type="text" class="form-control" data-qe-id="dialog-form-address" formControlName="address" />
+        </div>
+      </div>
+    </div>
 
-    </form>
-    <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions">
-                    <button class="btn btn-cancel"
-                        (click)="display = false">{{ 'general.button.cancel' | translate}}</button>
-                    <button class="btn btn-save" (click)="save()">
-                        {{ 'general.button.save' | translate}}</button>
-                </div>
-            </div>
+  </form>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions">
+          <button class="btn btn-cancel" (click)="display = false">{{ 'general.button.cancel' | translate}}</button>
+          <button class="btn btn-save" (click)="save()">
+            {{ 'general.button.save' | translate}}</button>
         </div>
-    </p-footer>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>

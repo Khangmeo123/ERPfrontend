@@ -1,130 +1,178 @@
 <div class="page employee-list">
-    <div class="page-header">
+  <div class="page-header">
         <span class="page-title">
             {{pageTitle | translate}}
-            <span (click)="bookMark()">
+          <span (click)="bookMark()">
                 <mat-icon [ngStyle]="{'color': !isBookMark ? '#3D464D' : '#FCE205'}">
                     star
                 </mat-icon>
             </span>
         </span>
-        <div class="page-actions">
-            <button class="btn btn-add" (click)="toDetail()" data-qe-id="button-add"> +
-                {{'general.button.add' | translate}}</button>
-            <div class="btn-group" dropdown data-qe-id="button-import">
-                <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
-                    aria-controls="dropdown-basic">
-                    {{'general.button.import' | translate}}<span class="caret"></span>
-                </button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
-                    <li role="menuitem"><a class="dropdown-item"
-                            href="#">{{'general.button.importFile' | translate}}</a></li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem"><a class="dropdown-item" target="_blank"
-                            [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
-                    </li>
-                </ul>
-            </div>
-            <a class="btn btn-export" data-qe-id="button-export" target="_blank"
-                [href]="exportLink">{{'general.button.export' | translate}}</a>
-            <button class="btn btn-clear" (click)="clearSearch(table)"
-                data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
-        </div>
+    <div class="page-actions">
+      <button class="btn btn-add" (click)="toDetail()" data-qe-id="button-add"> +
+        {{'general.button.add' | translate}}</button>
+      <div class="btn-group" dropdown data-qe-id="button-import">
+        <button id="button-basic" dropdownToggle type="button" class="btn btn-import dropdown-toggle"
+                aria-controls="dropdown-basic">
+          {{'general.button.import' | translate}}<span class="caret"></span>
+        </button>
+        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu" aria-labelledby="button-basic">
+          <li role="menuitem"><a class="dropdown-item"
+                                 href="#">{{'general.button.importFile' | translate}}</a></li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem"><a class="dropdown-item" target="_blank"
+                                 [href]="downloadLink">{{'general.button.downloadTemplate' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+      <a class="btn btn-export" data-qe-id="button-export" target="_blank"
+         [href]="exportLink">{{'general.button.export' | translate}}</a>
+      <button class="btn btn-clear" (click)="clearSearch(table)"
+              data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
     </div>
-    <hr>
-    <div class="page-body">
-        <div class="page-selection list" style="margin-top: 15px">
-            <p-table [value]="employeeList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-                [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
-                <ng-template pTemplate="colgroup">
-                    <colgroup>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                        <col>
-                    </colgroup>
-                </ng-template>
-                <ng-template pTemplate="header">
-                    <tr>
-                        <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
-                            {{ 'employee.list.content.code' | translate}}
-                            <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
-                            {{ 'employee.list.content.name' | translate}}
-                            <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-gender" [pSortableColumn]="'gender'">
-                            {{ 'employee.list.content.gender' | translate}}
-                            <p-sortIcon [field]="'gender'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-dob" [pSortableColumn]="'dob'">
-                            {{ 'employee.list.content.dob' | translate}}
-                            <p-sortIcon [field]="'dob'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-identityNumber"
-                            [pSortableColumn]="'identityNumber'">
-                            {{ 'employee.list.content.identityNumber' | translate}}
-                            <p-sortIcon [field]="'identityNumber'" class="float-right"></p-sortIcon>
-                        </th>
-                        <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
-                            {{ 'employee.list.content.status' | translate}}
-                            <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
-                        </th>
-                    </tr>
-                    <tr>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="employeeSearchEntity.code" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-code">
-                            </app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="employeeSearchEntity.name" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-name">
-                            </app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-simple-select [list]="genderList" [initialValue]="employeeSearchEntity.gender"
-                                (selectionChange)="employeeSearchEntity.gender = $event; getList()"
-                                data-qe-id="table-thead-filter-status">
-                            </app-simple-select>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="employeeSearchEntity.dob" (changeFilter)="getList()"
-                                data-qe-id="table-thead-filter-dob">
-                            </app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-advanced-filters [filter]="employeeSearchEntity.identityNumber"
-                                (changeFilter)="getList()" data-qe-id="table-thead-filter-identityNumber">
-                            </app-advanced-filters>
-                        </th>
-                        <th class="th-filter">
-                            <app-simple-select [key]="'name'" [list]="statusList"
-                                [initialValue]="employeeSearchEntity.statusId"
-                                (selectionChange)="employeeSearchEntity.statusId = $event; getList()"
-                                (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
-                            </app-simple-select>
-                        </th>
-                    </tr>
-                </ng-template>
-                <ng-template pTemplate="body" let-employee let-index="rowIndex">
-                    <tr (dblclick)="toDetail(employee.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
-                        <td> {{employee.code}} </td>
-                        <td> {{employee.name}} </td>
-                        <td> {{(employee.gender | gender) | translate}} </td>
-                        <td> {{employee.dob | date: 'dd/MM/yyyy'}} </td>
-                        <td> {{employee.identityNumber}} </td>
-                        <td> {{employee.statusName}} </td>
-                    </tr>
-                </ng-template>
-            </p-table>
-        </div>
-        <div class="pagination">
-            <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
-            </app-pagination>
-        </div>
+  </div>
+  <hr>
+  <div class="page-body">
+    <div class="page-selection list" style="margin-top: 15px">
+      <p-table [value]="employeeList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-code" [pSortableColumn]="'code'">
+              {{ 'employee.list.content.code' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-username">
+              {{ 'employee.list.content.username' | translate}}
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-name" [pSortableColumn]="'name'">
+              {{ 'employee.list.content.name' | translate}}
+              <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-gender" [pSortableColumn]="'gender'">
+              {{ 'employee.list.content.gender' | translate}}
+              <p-sortIcon [field]="'gender'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-dob" [pSortableColumn]="'dob'">
+              {{ 'employee.list.content.dob' | translate}}
+              <p-sortIcon [field]="'dob'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-identityNumber"
+                [pSortableColumn]="'identityNumber'">
+              {{ 'employee.list.content.identityNumber' | translate}}
+              <p-sortIcon [field]="'identityNumber'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'status'">
+              {{ 'employee.list.content.status' | translate}}
+              <p-sortIcon [field]="'status'" class="float-right"></p-sortIcon>
+            </th>
+            <th class="employee-list-actions"></th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="employeeSearchEntity.code"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-code">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter"></th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="employeeSearchEntity.name"
+                                    (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-name">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-simple-select [list]="genderList" [initialValue]="employeeSearchEntity.gender"
+                                 (selectionChange)="employeeSearchEntity.gender = $event; getList()"
+                                 data-qe-id="table-thead-filter-status">
+              </app-simple-select>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="employeeSearchEntity.dob" (changeFilter)="getList()"
+                                    data-qe-id="table-thead-filter-dob">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters defaultType="startsWith" [filter]="employeeSearchEntity.identityNumber"
+                                    (changeFilter)="getList()" data-qe-id="table-thead-filter-identityNumber">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-simple-select [key]="'name'" [list]="statusList"
+                                 [initialValue]="employeeSearchEntity.statusId"
+                                 (selectionChange)="employeeSearchEntity.statusId = $event; getList()"
+                                 (listOpen)="openStatusList()" data-qe-id="table-thead-filter-status">
+              </app-simple-select>
+            </th>
+            <th class="th-filter employee-list-actions"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-employee let-index="rowIndex">
+          <tr (dblclick)="toDetail(employee.id)" [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{employee.code}} </td>
+            <td> {{employee.username}} </td>
+            <td> {{employee.name}} </td>
+            <td> {{(employee.gender | gender) | translate}} </td>
+            <td> {{employee.dob | date: 'dd/MM/yyyy'}} </td>
+            <td> {{employee.identityNumber}} </td>
+            <td> {{employee.statusDisplay}} </td>
+            <td class="employee-list-actions">
+              <a role="button" (click)="toDetail(employee.id)">
+                <mat-icon>edit</mat-icon>
+              </a>
+              <a role="button" (click)="changePassword(employee.id)">
+                <mat-icon>lock</mat-icon>
+              </a>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
     </div>
+    <div class="pagination">
+      <app-pagination [pagination]="pagination" (paginationOut)="paginationOut($event)" data-qe-id="pagination">
+      </app-pagination>
+    </div>
+  </div>
 </div>
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="passwordModal" [contentStyle]="{width: '900px'}" [style]="{overflow: 'visible'}">
+  <p-header>
+    {{'employee.password.title' | translate}}
+  </p-header>
+
+  <div class="container" [formGroup]="passwordForm">
+    <div class="row">
+      <div class="col form-group">
+        <label for="password">
+          {{'employee.password.field' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" id="password" formControlName="password" name="password">
+          <app-error data-qe-id="dialog-error-code"
+                     *ngIf="(password?.errors && password?.touched) || !!errors?.get('password')?.value"
+                     [formGroup]="passwordForm" [property]="'password'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer>
+    <button class="btn btn-save" (click)="savePassword()">
+      {{'employee.password.save' | translate}}
+    </button>
+  </p-footer>
+
+</p-dialog>
