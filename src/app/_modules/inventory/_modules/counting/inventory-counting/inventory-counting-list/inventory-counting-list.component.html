@@ -104,7 +104,7 @@
             </th>
             <th class="th-filter">
                 <app-single-select  [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
-                [key]="'code'"
+                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.inventoryOrganizationId"
                 (search)="typingSearchInvetoryOrganization($event, inventoryCountingSearchEntity.inventoryOrganizationId)"
                 (selectionChange)="inventoryCountingSearchEntity.inventoryOrganizationId = $event[0]; getList()"
                 (listOpen)="dropListInventoryOrganization(inventoryCountingSearchEntity.inventoryOrganizationId)">
@@ -112,7 +112,7 @@
             </th>
             <th class="th-filter">
                 <app-single-select [list]="inventoryCountingOwnerExceptIds" [selectedList]="inventoryCountingOwnerIds"
-                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerCode"
+                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerId"
                 (search)="typingSearchInventoryOwner($event, inventoryCountingSearchEntity.ownerId)"
                 (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
                 (listOpen)="dropListInventoryCoutingOwner(inventoryCountingSearchEntity.ownerId)">
@@ -120,7 +120,7 @@
             </th>
             <th class="th-filter">
                 <app-single-select [list]="inventoryCounterExceptIds" [selectedList]="inventoryCounterIds"
-                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerCode"
+                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerId"
                 (search)="typingSearchInventoryCounter($event, inventoryCountingSearchEntity.ownerId)"
                 (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
                 (listOpen)="dropListInventoryCouter(inventoryCountingSearchEntity.ownerId)">
