@@ -4,6 +4,7 @@ import { LoginComponent } from './_pages/login/login.component';
 import { PageComponent } from './_pages/page/page.component';
 import { AuthGuard } from './_helpers';
 import { SignUpComponent } from './_pages/sign-up/sign-up.component';
+import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 
 const routes: Routes = [
   {
@@ -13,6 +14,10 @@ const routes: Routes = [
   {
     path: 'sign-up',
     component: SignUpComponent,
+  },
+  {
+    path: 'reset-password',
+    component: ResetPasswordComponent,
   },
   {
     path: '',
