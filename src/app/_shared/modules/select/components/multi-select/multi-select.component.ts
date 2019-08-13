@@ -42,7 +42,6 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
    */
   @Input() direction: string = 'down';
 
-  @Input() direction: string = 'auto';
 
   isLoading = false;
 

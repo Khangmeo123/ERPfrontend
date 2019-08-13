@@ -19,10 +19,10 @@ import { InputSwitchModule } from 'primeng/inputswitch';
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.module';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 import { FormsModule } from '@angular/forms';
+import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
 
 @NgModule({
   declarations: [

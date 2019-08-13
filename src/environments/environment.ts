@@ -7,7 +7,7 @@ export const environment = {
   apiUrlApps: 'http://app.jaja.vn/api/apps/',
   apiUrlInv: 'http://app.jaja.vn/api/inv/',
   apiUrlAuthentication: 'http://app.jaja.vn/api/Authentication/',
-  emtyGuid: '00000000-0000-0000-0000-000000000000',
+  emptyGuid: '00000000-0000-0000-0000-000000000000',
 };
 
 /*

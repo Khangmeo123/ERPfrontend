@@ -23,11 +23,11 @@ import { ReturnListComponent } from './return/return-list/return-list.component'
 import { ReturnDetailComponent } from './return/return-detail/return-detail.component';
 import { GoodsReceiptDetailComponent } from './goods-receipt/goods-receipt-detail/goods-receipt-detail.component';
 import { GoodsReceiptListComponent } from './goods-receipt/goods-receipt-list/goods-receipt-list.component';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { GoodsReceiptPOApproveComponent } from './goods-receipt-po/goods-receipt-po-approve/goods-receipt-po-approve.component';
 import { GoodsReceiptPOReceiveComponent } from './goods-receipt-po/good-receipt-po-receive/goods-receipt-po-receive.component';
 import { GoodsReceiptPODetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
 import { GoodsReceiptPOListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
+import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
 @NgModule({
   declarations: [
     GoodsReceiptPOComponent,

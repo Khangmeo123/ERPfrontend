@@ -256,47 +256,58 @@ export const sampleSidebarMenu = [
     icon: 'playlist_add_check',
     route: '/inventory',
     exact: true,
+    isOpened: false,
+    isShowed: true,
     children: [
       {
         label: 'Bảng tổng quan',
         route: '/master-data/department',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Thông tin tồn kho	',
         route: '/master-data/department',
         exact: false,
+        isShowed: true,
       },
       {
         divider: true,
+        isShowed: true,
       },
       {
         label: 'Phiếu nhập kho hàng mua',
         route: '/inventory/receipt/goods-receipt-po',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Phiếu nhập kho khác',
         route: '/inventory/receipt/goods-receipt',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Yêu cầu nhập kho hàng trả lại từ KH',
         route: '/master-data/department',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Phiếu nhập kho hàng trả lại từ KH',
         route: '/inventory/receipt/return',
         exact: false,
+        isShowed: true,
       },
       {
         divider: true,
+        isShowed: true,
       },
       {
         label: 'Phiếu xuất kho hàng bán',
         route: '/inventory/issue/delivery-order',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Phiếu xuất kho khác',
@@ -307,42 +318,51 @@ export const sampleSidebarMenu = [
         label: 'Yêu cầu xuất kho hàng trả lại NCC',
         route: '/inventory/issue/goods-return-request',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Phiếu xuất kho trả NCC',
         route: '/inventory/issue/goods-return',
         exact: false,
+        isShowed: true,
       },
       {
         divider: true,
+        isShowed: true,
       },
       {
         label: 'Yêu cầu điều chuyển kho',
         route: '/master-data/department',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Phiếu điều chuyển kho',
         route: '/master-data/department',
         exact: false,
+        isShowed: true,
       },
       {
         divider: true,
+        isShowed: true,
       },
       {
         label: 'Lịch kiểm kê kho',
         route: '/master-data/department',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Phiếu kiểm kê kho',
         route: '/inventory/counting/inventory-counting',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Phiếu điều chỉnh tồn kho',
         route: '/master-data/department',
         exact: false,
+        isShowed: true,
       },
     ]
   }
