@@ -230,7 +230,7 @@
 				"itemNo": "Mã hàng",
 				"purchaseOrderNumber": "Mã đơn hàng",
 				"quantity": "Số lương",
-				"title": "Chi tiết hàng hóa theo kế hoạch",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
 				"total": "Thành tiền",
 				"unitOfMeasure": "Đơn vị tính",
 				"unitPrice": "Đơn giá",
@@ -884,7 +884,7 @@
 			"itemNo": "Mã hàng",
 			"purchaseOrderNumber": "Mã đơn hàng",
 			"quantity": "Số lượng",
-			"title": "Chi tiết hàng hóa theo kế hoạch",
+			"title": "Chi tiết hàng hóa theo hoạch toán",
 			"total": "Thành tiền",
 			"unitOfMeasure": "Đơn vị",
 			"valueAddedTax": "Thuế VAT"
@@ -987,7 +987,7 @@
 			"itemNo": "Mã hàng",
 			"purchaseOrderNumber": "Mã đơn hàng",
 			"quantity": "Số lượng",
-			"title": "Chi tiết hàng hóa theo kế hoạch",
+			"title": "Chi tiết hàng hóa theo hoạch toán",
 			"total": "Thành tiền",
 			"unitOfMeasure": "Đơn vị",
 			"unitPrice": "",
@@ -1115,7 +1115,7 @@
 				"locationCode": "Mã vị trí",
 				"quantity": "Số lượng",
 				"quantitySaved": "Số lượng lưu",
-				"title ": "",
+				"title ": "Vị trí hàng hóa trong kho",
 				"unitOfMeasure": "Đơn vị tính"
 			},
 			"amountScan": "",
@@ -1135,7 +1135,7 @@
 			},
 			"binLocation": "Vị trí lưu kho",
 			"button": {
-				"add": ""
+				"add": "Nhập phiếu"
 			},
 			"createdDate": "Ngày tạo",
 			"creator": "Người tạo",
@@ -1159,21 +1159,21 @@
 			"issuedDate": "Ngày thực hiện xuất",
 			"personInCharge": "Nhân viên phụ trách",
 			"qrCode": {
-				"code": "",
-				"expiryDate": "",
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"manufacturingDate": "",
-				"quantity": "",
-				"scanCode": "",
-				"scanQRCode": "",
-				"serial": "",
-				"title ": ""
+				"code": "QR code",
+				"expiryDate": "Ngày hết hạn",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantity": "Số lượng",
+				"scanCode": "Quét code",
+				"scanQRCode": "Bắt đầu quét QR code",
+				"serial": "Serial#",
+				"title ": "Chi tiết QR code"
 			},
-			"receiver": "",
+			"receiver": "Người nhận hàng",
 			"request": {
-				"customerName": ""
+				"customerName": "Tên khách hàng"
 			},
 			"tab1": {
 				"actualQuantity": "Số lượng thực nhận",
@@ -1183,9 +1183,9 @@
 				"dueDate": "Ngày dự kiến hoàn thành",
 				"issueIdRequest": "Số phiếu yêu cầu điều chuyển",
 				"itemName": "Tên hàng",
-				"itemNo": "",
-				"quantity": "",
-				"title": "",
+				"itemNo": "Mã hàng",
+				"quantity": "Số lương",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
 				"unitOfMeasure": ""
 			},
 			"tab2": {
@@ -1476,7 +1476,7 @@
 				"itemNo": "Mã hàng",
 				"purchaseOrderNumber": "Mã đơn hàng",
 				"quantity": "Số lượng",
-				"title": "Chi tiết hàng hóa theo kế hoạch",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
 				"total": "Thành tiền",
 				"unitOfMeasure": "Đơn vị",
 				"valueAddedTax": "Thuế VAT"
