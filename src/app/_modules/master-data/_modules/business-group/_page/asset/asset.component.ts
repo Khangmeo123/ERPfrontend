@@ -155,4 +155,11 @@ export class AssetComponent implements OnInit, OnDestroy {
       this.assetService.getTypeList();
     }
   }
+
+  importTemplate(file: File) {
+    this.assetService.importFile(file)
+      .then(() => {
+        this.getList();
+      });
+  }
 }

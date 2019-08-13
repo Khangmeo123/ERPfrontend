@@ -11,7 +11,7 @@ import { CustomerDetailComponent } from './_page/customer-detail/customer-detail
 import { LegalSupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
 import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatIconModule } from '@angular/material';
+import {MatIconModule, MatTabsModule} from '@angular/material';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { TableModule } from 'primeng/table';
 import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
@@ -34,6 +34,7 @@ import { EmployeePositionComponent } from './_page/employee-position/employee-po
 import { BinLocationComponent } from './_page/bin-location/bin-location.component';
 import { CodeFormulaListComponent } from './_page/code-formula/code-formula-list/code-formula-list.component';
 import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-detail/code-formula-detail.component';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,8 @@ import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-de
     SelectModule,
     ChipsModule,
     FormsModule,
+    KeyFilterModule,
+    MatTabsModule,
   ],
 })
 export class LegalEntityModule {

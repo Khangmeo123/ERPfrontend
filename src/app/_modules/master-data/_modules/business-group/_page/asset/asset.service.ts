@@ -8,6 +8,7 @@ import { AssetEntity } from 'src/app/_modules/master-data/_backend/asset/asset.e
 import { AssetSearchEntity } from 'src/app/_modules/master-data/_backend/asset/asset.searchentity';
 import { EnumEntity } from 'src/app/_helpers/entity';
 import { environment } from 'src/environments/environment';
+import {translate} from '../../../../../../_helpers/string';
 
 @Injectable()
 export class AssetService {
@@ -137,5 +138,21 @@ export class AssetService {
         console.log(err);
       }
     })
+  }
+
+  importFile(file: File) {
+    return new Promise((resolve, reject) => {
+      this.assetRepository.importFile(file).subscribe(res => {
+        if (res) {
+          this.toastrService.success(translate('general.import.success'));
+          resolve();
+        }
+      }, err => {
+        if (err) {
+          this.toastrService.error(translate('general.import.error'));
+          reject(err);
+        }
+      });
+    });
   }
 }

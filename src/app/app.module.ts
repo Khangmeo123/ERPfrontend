@@ -53,7 +53,7 @@ import { CookieService } from 'ngx-cookie-service';
     CollapseModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 2500,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
     TranslateModule.forRoot({

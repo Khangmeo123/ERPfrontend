@@ -78,4 +78,20 @@ export class EmployeeListService {
         );
     });
   }
+
+  importFile(file: File) {
+    return new Promise((resolve, reject) => {
+      this.employeeRepository.importFile(file).subscribe(res => {
+        if (res) {
+          this.toastrService.success(translate('general.import.success'));
+          resolve();
+        }
+      }, err => {
+        if (err) {
+          this.toastrService.error(translate('general.import.error'));
+          reject(err);
+        }
+      });
+    });
+  }
 }

@@ -4,7 +4,7 @@ import {environment} from '../../../../../../../../environments/environment';
 import {LegalSearchEntity} from '../../../../../_backend/legal/legal.searchentity';
 import {Observable} from 'rxjs';
 import {Entities} from '../../../../../../../_helpers/entity';
-import {SplitRuleEntity} from '../../../../../_backend/code-formula/code-formula.entity';
+import {ItemFieldEntity, SplitRuleEntity, SplitRuleTestEntity} from '../../../../../_backend/code-formula/code-formula.entity';
 import {CodeFormulaSearchEntity} from '../../../../../_backend/code-formula/code-formula.search-entity';
 import {map} from 'rxjs/operators';
 import {Injectable} from '@angular/core';
@@ -53,6 +53,20 @@ export class CodeFormulaDetailRepository extends Repository {
       );
   }
 
+  getItemFieldList(): Observable<ItemFieldEntity[]> {
+    return this.http.post<ItemFieldEntity[]>(
+      this.getUrl('enum-list-item-field'),
+      {},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<ItemFieldEntity[]>) => response.body),
+      );
+  }
+
   count(codeFormulaSearchEntity: CodeFormulaSearchEntity): Observable<number> {
     return this.http.post<number>(
       this.getUrl('list'),
@@ -77,7 +91,7 @@ export class CodeFormulaDetailRepository extends Repository {
       },
     )
       .pipe(
-        map((response: HttpResponse<SplitRuleEntity>) => response.body),
+        map((response: HttpResponse<SplitRuleEntity>) => new SplitRuleEntity(response.body)),
       );
   }
 
@@ -123,9 +137,9 @@ export class CodeFormulaDetailRepository extends Repository {
       );
   }
 
-  getItemList(itemSearchEntity: ItemSearchEntity): Observable<ItemEntity[]> {
-    return this.http.post<ItemEntity[]>(
-      this.getUrl('list-item'),
+  getItemList(itemSearchEntity: ItemSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
+      this.getUrl('drop-list-item-detail'),
       itemSearchEntity,
       {
         observe: 'response',
@@ -134,24 +148,31 @@ export class CodeFormulaDetailRepository extends Repository {
     )
       .pipe(
         map(
-          (response: HttpResponse<ItemEntity[]>) => response.body,
+          (response: HttpResponse<Entities>) => {
+            const {
+              ids,
+              exceptIds,
+            } = response.body;
+            const entities: Entities = new Entities();
+            entities.ids = ids.map((item: ItemEntity) => item);
+            entities.exceptIds = exceptIds.map((item: ItemEntity) => new ItemEntity(item));
+            return entities;
+          },
         ),
       );
   }
 
-  countItemList(itemSearchEntity: ItemSearchEntity): Observable<number> {
-    return this.http.post<number>(
-      this.getUrl('count-item'),
-      itemSearchEntity,
+  analyzeSplitRule(splitRuleTestEntity: SplitRuleTestEntity): Observable<SplitRuleTestEntity> {
+    return this.http.post<SplitRuleTestEntity>(
+      this.getUrl('analyze-split-rule'),
+      splitRuleTestEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     )
       .pipe(
-        map(
-          (response: HttpResponse<number>) => response.body,
-        ),
+        map((response: HttpResponse<SplitRuleTestEntity>) => response.body),
       );
   }
 }

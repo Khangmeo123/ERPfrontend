@@ -53,4 +53,20 @@ export class EmployeeListRepository extends Repository {
         map(r => r.body),
       );
   }
+
+  importFile(file: File) {
+    const formData = new FormData();
+    formData.append('file', file[0]);
+    return this.http.post(
+      this.apiUrl + '/import',
+      formData,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(r => r.body),
+      );
+  }
 }

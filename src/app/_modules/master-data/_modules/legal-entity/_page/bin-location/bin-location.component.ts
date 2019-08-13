@@ -55,9 +55,17 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
 
   constructor(private binLocationService: BinLocationService, private generalService: GeneralService) {
 
-    const legalEntitySub: Subscription = this.binLocationService.legalEntityList.subscribe((entities: Entities) => {
+    const legalEntitySub: Subscription = this.binLocationService.legalEntityList.subscribe(async (entities: Entities) => {
       this.legalEntityList = entities.exceptIds;
       this.selectedLegalEntityList = entities.ids;
+
+      if (this.legalEntityList.length) {
+        const legalEntity: LegalEntity = this.legalEntityList[0];
+        const binLocationFieldSearchEntity: BinLocationSearchEntity = new BinLocationSearchEntity();
+        binLocationFieldSearchEntity.legalEntityId = legalEntity.id;
+        this.selectLegalEntity(legalEntity);
+        await this.binLocationService.getBinLocationFieldEntity(binLocationFieldSearchEntity);
+      }
     });
 
     const level1Sub: Subscription = this.binLocationService.subLevel1List.subscribe((list: BinLocationEntity[]) => {
@@ -115,13 +123,6 @@ export class BinLocationComponent implements OnInit, OnDestroy, OnChanges {
 
   async ngOnInit() {
     await this.getLegalEntityList();
-    if (this.legalEntityList.length) {
-      const legalEntity: LegalEntity = this.legalEntityList[0];
-      const binLocationFieldSearchEntity: BinLocationSearchEntity = new BinLocationSearchEntity();
-      binLocationFieldSearchEntity.legalEntityId = legalEntity.id;
-      this.selectLegalEntity(legalEntity);
-      await this.binLocationService.getBinLocationFieldEntity(binLocationFieldSearchEntity);
-    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {

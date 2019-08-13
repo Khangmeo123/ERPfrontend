@@ -1,16 +1,16 @@
-import { environment } from './../../../../../../../environments/environment.prod';
+import {environment} from './../../../../../../../environments/environment.prod';
 
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, Routes } from '@angular/router';
-import { BookmarkService } from 'src/app/_services';
-import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
-import { FormGroup } from '@angular/forms';
-import { Subscription } from 'rxjs';
-import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
-import { BankService } from './bank.service';
-import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
-import { translate } from 'src/app/_helpers/string';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {BookmarkService} from 'src/app/_services';
+import {PaginationModel} from 'src/app/_shared/modules/pagination/pagination.model';
+import {FormGroup} from '@angular/forms';
+import {Subscription} from 'rxjs';
+import {BankSearchEntity} from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
+import {GeneralService} from 'src/app/_helpers/general-service.service';
+import {BankService} from './bank.service';
+import {BankEntity} from 'src/app/_modules/master-data/_backend/bank/bank.entity';
+import {translate} from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-bank',
@@ -35,7 +35,7 @@ export class BankComponent implements OnInit, OnDestroy {
   exportLink = environment.apiUrlApps + 'master-data/business-group/bank/export';
 
   constructor(private bankService: BankService, private genaralService: GeneralService, private bookmarkService: BookmarkService,
-    private router: Router) {
+              private router: Router) {
     const bankListSub = this.bankService.bankList.subscribe(res => {
       if (res) {
         this.bankList = res;
@@ -54,7 +54,7 @@ export class BankComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isBookMark = res;
     });
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
     this.bankSubs.add(bankListSub).add(bankFormSub).add(bankCountSub).add(bookMarkNotify);
   }
 
@@ -126,13 +126,16 @@ export class BankComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isBookMark = !this.isBookMark;
     if (this.isBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 
   importTemplate(file: File) {
-    this.bankService.importFile(file);
+    this.bankService.importFile(file)
+      .then(() => {
+        this.getList();
+      });
   }
 }

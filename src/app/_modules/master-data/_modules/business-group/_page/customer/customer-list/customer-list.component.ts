@@ -111,4 +111,11 @@ export class CustomerListComponent implements OnInit, OnDestroy {
       this.customerListService.getStatusList();
     }
   }
+
+  importTemplate(file: File) {
+    this.customerListService.importFile(file)
+      .then(() => {
+        this.getList();
+      });
+  }
 }
