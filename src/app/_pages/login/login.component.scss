@@ -1,16 +1,18 @@
 
 #background {
     width: 100%;
-    background-size: cover;
+    
     background-repeat: no-repeat;
-    position: relative !important;
-    margin-top: -60px !important;
-    margin-left: 0 !important;
+    background-size: cover;
+    position: absolute !important;
+    margin-top: -90px !important;
+    margin-left: -15px !important;
     margin-right: 0 !important;
+    z-index: -1;
 }
 
 .example-form {
-    min-width: 300px;
+    min-width: 200px;
     max-width: 570px;
     width: 100%;
   }
@@ -19,16 +21,10 @@
     width: 100%;
   }
 
-// .container-fluid {
-//   position: absolute !important;
-//   font-size: 14px !important;
-// }
-
-.login {
+.container-fluid{
   position: relative;
-
-  .login-form {
-    position: absolute;
-    flex-wrap: unset !important;
-  }
+  
+}
+.inputForm{
+  margin-top: 200px;
 }
