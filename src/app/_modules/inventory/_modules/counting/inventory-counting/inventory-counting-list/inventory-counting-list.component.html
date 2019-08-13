@@ -104,7 +104,7 @@
             </th>
             <th class="th-filter">
                 <app-single-select  [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
-                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.inventoryOrganizationId"
+                [key]="'code'"
                 (search)="typingSearchInvetoryOrganization($event, inventoryCountingSearchEntity.inventoryOrganizationId)"
                 (selectionChange)="inventoryCountingSearchEntity.inventoryOrganizationId = $event[0]; getList()"
                 (listOpen)="dropListInventoryOrganization(inventoryCountingSearchEntity.inventoryOrganizationId)">
@@ -112,7 +112,7 @@
             </th>
             <th class="th-filter">
                 <app-single-select [list]="inventoryCountingOwnerExceptIds" [selectedList]="inventoryCountingOwnerIds"
-                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.ownerId"
+                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerCode"
                 (search)="typingSearchInventoryOwner($event, inventoryCountingSearchEntity.ownerId)"
                 (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
                 (listOpen)="dropListInventoryCoutingOwner(inventoryCountingSearchEntity.ownerId)">
@@ -120,7 +120,7 @@
             </th>
             <th class="th-filter">
                 <app-single-select [list]="inventoryCounterExceptIds" [selectedList]="inventoryCounterIds"
-                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.ownerId"
+                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerCode"
                 (search)="typingSearchInventoryCounter($event, inventoryCountingSearchEntity.ownerId)"
                 (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
                 (listOpen)="dropListInventoryCouter(inventoryCountingSearchEntity.ownerId)">
@@ -128,9 +128,9 @@
             </th>
             <th class="th-filter">
                 <app-simple-select [key]="'display'" [list]="statusList"
-                [initialValue]="inventoryCountingSearchEntity.statusId"
                 (selectionChange)="inventoryCountingSearchEntity.statusId = $event; getList()"
-                (listOpen)="enumListStatus()">
+                (listOpen)="enumListStatus()"
+                [initialValue]="inventoryCountingSearchEntity.statusName">
                 </app-simple-select>
             </th>
             <th></th>
@@ -141,13 +141,21 @@
             <td> {{inventoryCounting.documentNumber}} </td>
             <td> {{inventoryCounting.documentDate}} </td>
             <td> {{inventoryCounting.inventoryOrganizationCode}} </td>
-            <td *ngIf="inventoryCounting.inventoryCounters && inventoryCounting.inventoryCounters.length >0">
-              <div *ngFor="let item of inventoryCounting.inventoryCounters">
-                  {{item.name }}
+            <td>
+              <div  *ngIf="inventoryCounting.inventoryCounters && inventoryCounting.inventoryCounters.length >0">
+                  <div *ngFor="let item of inventoryCounting.inventoryCounters">
+                      {{item.name }}
+                  </div>
               </div>
+              
             </td>
             <td> {{inventoryCounting.ownerName }} </td>
-            <td> {{inventoryCounting.statusName }} </td>
+            <td>
+              <div [ngSwitch]="inventoryCounting.statusName">
+                <span class="ml-2 open-status" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</span>
+                <span class="ml-2 pending-counting-status" *ngSwitchCase="'COUNTING'">{{'general.pendingCounting'| translate}}</span>
+                <span class="ml-2 completed-status" *ngSwitchCase="'DONE'">{{'general.completed'| translate}}</span>
+              </div>
             <td>
               <div class="d-flex">
                 <div class="view-detail mr-2">

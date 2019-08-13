@@ -62,3 +62,8 @@ export class InventoryCountingContents extends Entity {
     binLocationCode: string;
     quantityOnDocumentDate: 0
 }
+
+export class ItemDetailOfCountingEntity extends Entity {
+    code: string;
+    name: string;
+}

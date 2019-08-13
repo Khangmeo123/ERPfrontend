@@ -4,12 +4,14 @@ import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {
     InventoryOrganizationOfCountingSearchEntity
-    , EmployeeDetailOfCountingSearchEntity
+    , EmployeeDetailOfCountingSearchEntity,
+    ItemDetailOfCountingSearchEntity
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import {
     InventoryOrganizationOfCountingEntity
     , EmployeeDetailOfCountingEntity,
-    InventoryCountingEntity
+    InventoryCountingEntity,
+    ItemDetailOfCountingEntity
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { Entities } from 'src/app/_helpers/entity';
 import { map } from 'rxjs/operators';
@@ -61,6 +63,22 @@ export class InventoryCountingDetailRepository extends Repository {
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
                         return new EmployeeDetailOfCountingEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListItemDetail(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-employee-detail',
+            JSON.stringify(itemDetailOfCountingSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new ItemDetailOfCountingEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new ItemDetailOfCountingEntity(item);
                     });
                     return r.body;
                 }),
