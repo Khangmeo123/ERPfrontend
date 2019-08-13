@@ -35,6 +35,7 @@
     "guid-typescript": "^1.0.9",
     "hamburgers": "^1.1.3",
     "hammerjs": "^2.0.8",
+    "howler": "^2.1.2",
     "idb": "^4.0.3",
     "jquery": "^3.4.1",
     "lodash": "^4.17.13",

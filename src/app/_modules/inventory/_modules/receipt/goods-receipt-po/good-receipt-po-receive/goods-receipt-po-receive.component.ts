@@ -14,12 +14,14 @@ import {
   GoodsReceiptPOQuantity,
   GoodsReceiptPOSerialNumberEntity,
   GoodsReceiptPOBatchEntity,
+  GoodsReceiptPOContent,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
   PurchaseOrdersSearchEntity,
   GoodsReceiptPOItemDetailSearchEntity,
   GoodsReceiptPOUnitOfMeasureSearchEntity,
   GoodsReceiptPOBinlocationSearchEntity,
+  GoodsReceiptPOContentDetailSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 
 @Component({
@@ -43,14 +45,18 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   supplierDetailId: string;
   goodsReceiptPOId: string;
-  quantityDetailList: GoodsReceiptPOQuantityDetail[];
+  enableBinLocation: boolean;
+  quantityDetail: GoodsReceiptPOContent;
   goodsReceiptPOContentId: string;
   activeScan: boolean;
   serialNumber: string;
   actualReceiveNumber: number;
-  serialNumberList: GoodsReceiptPOSerialNumberEntity[];
-  batchList: GoodsReceiptPOBatchEntity[];
+  serialNumberDetail: GoodsReceiptPOContent;
+  batch: GoodsReceiptPOContent;
   binLocationId: string;
+  itemQuantities: number;
+  itemDetailId: string;
+  goodsReceiptPOContentDetailSearchEntity: GoodsReceiptPOContentDetailSearchEntity = new GoodsReceiptPOContentDetailSearchEntity();
   // documentNumber:
   documentNumberIds: PurchaseOrdersEntity[];
   documentNumberExceptIds: PurchaseOrdersEntity[];
@@ -77,7 +83,6 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     private generalService: GeneralService,
     private route: ActivatedRoute,
     private router: Router) {
-
     this.route.queryParams
       .subscribe(params => {
         if (params.id) {
@@ -85,6 +90,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
         }
         this.goodsReceiptPOService.getDetail(params.id).then(res => {
           this.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
+          this.enableBinLocation = this.goodsReceiptPOForm.controls.enableBinLocation.value;
         });
       });
 
@@ -94,15 +100,21 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       }
     });
 
-    const quantityDetailSub = this.goodsReceiptPOService.quantityDetailList.subscribe(res => {
+    const quantityDetailSub = this.goodsReceiptPOService.quantityDetail.subscribe(res => {
       if (res) {
-        this.quantityDetailList = res;
+        this.quantityDetail = res;
       }
     });
 
-    const serialNumberListSub = this.goodsReceiptPOService.serialNumberList.subscribe(res => {
+    const serialNumberDetailSub = this.goodsReceiptPOService.serialNumber.subscribe(res => {
       if (res) {
-        this.serialNumberList = res;
+        this.serialNumberDetail = res;
+      }
+    });
+
+    const batchSub = this.goodsReceiptPOService.batch.subscribe(res => {
+      if (res) {
+        this.batch = res;
       }
     });
 
@@ -146,7 +158,8 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       .add(unitOfMeasureListSub)
       .add(binLocationListSub)
       .add(quantityDetailSub)
-      .add(serialNumberListSub);
+      .add(serialNumberDetailSub)
+      .add(batchSub);
   }
 
   ngOnInit() {
@@ -186,6 +199,11 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.receive(this.goodsReceiptPOId).then(res => {
       this.backToList();
     });
+  }
+
+  sortDate(event: string, table: any, field: string) {
+    const date = event.replace(/\//g, '-') + 'T00:00:00';
+    table.filter(date, field, 'equals');
   }
 
   // documentNumber:
@@ -242,14 +260,12 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   // quantity dialog:
-  showQuantity(goodsReceiptPOContentId: string) {
+  showQuantity(goodsReceiptPOContent: GoodsReceiptPOContent) {
     this.displayQuantity = true;
-    this.goodsReceiptPOContentId = goodsReceiptPOContentId;
-    this.getQuantityDetailList(goodsReceiptPOContentId);
-  }
-
-  getQuantityDetailList(goodsReceiptPOContentId: string) {
-    this.goodsReceiptPOService.getQuantityDetailList(goodsReceiptPOContentId);
+    this.itemQuantities = goodsReceiptPOContent.quantity;
+    this.goodsReceiptPOContentId = goodsReceiptPOContent.id;
+    this.goodsReceiptPOContentDetailSearchEntity = new GoodsReceiptPOContentDetailSearchEntity();
+    this.goodsReceiptPOService.getQuantityDetail(this.goodsReceiptPOContentId, this.enableBinLocation);
   }
 
   dropListBinLocation(id: string) {
@@ -271,11 +287,9 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   updateQuantityDetail() {
-    if (this.goodsReceiptPOService.validateSubmitQuantity(this.quantityDetailList)) {
-      this.goodsReceiptPOService.updateQuantityDetail(this.quantityDetailList).then(res => {
-        this.displayQuantity = false;
-      });
-    }
+    this.goodsReceiptPOService.updateQuantityDetail(this.quantityDetail).then(res => {
+      this.displayQuantity = false;
+    });
   }
 
   addBinLocationQuantity() {
@@ -283,21 +297,33 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   deleteBinLocationQuantity(index: number) {
-    this.deleteBinLocationQuantity(index);
+    this.goodsReceiptPOService.deleteBinLocationQuantity(index);
+  }
+
+  recalculateQuantityDetail() {
+    this.goodsReceiptPOService.recalculateQuantityDetail(this.quantityDetail);
   }
 
   // serial dialog
-  showSerial(goodsReceiptPOContentId: string) {
+  showSerial(goodsReceiptPOContent: GoodsReceiptPOContent) {
     this.displaySerial = true;
     this.activeScan = false;
     this.binLocationId = null;
-    this.goodsReceiptPOContentId = goodsReceiptPOContentId;
-    this.goodsReceiptPOService.getSerialNumberList(goodsReceiptPOContentId);
+    this.goodsReceiptPOContentId = goodsReceiptPOContent.id;
+    this.itemQuantities = goodsReceiptPOContent.quantity;
+    this.itemDetailId = goodsReceiptPOContent.itemDetailId;
+    this.goodsReceiptPOService.getSerialNumber(goodsReceiptPOContent.id);
   }
 
   changeLocationSerialNumber(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
     this.binLocationId = goodsReceiptPOBinlocationEntity.id;
     this.goodsReceiptPOService.changeLocationSerialNumber(goodsReceiptPOBinlocationEntity);
+  }
+
+  updateSerialNumber() {
+    this.goodsReceiptPOService.updateSerialNumber(this.serialNumberDetail).then(res => {
+      this.displaySerial = false;
+    });
   }
 
   deleteSerialNumber(index: number) {
@@ -312,13 +338,23 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.deleteMultipleSerialNumber();
   }
 
+  inputSerialNumber(event) {
+    this.goodsReceiptPOService.analyzeQRCode(this.itemDetailId, event);
+    this.serialNumber = null;
+  }
+
+  clearSerialNumberTable(table) {
+    this.goodsReceiptPOContentDetailSearchEntity = new GoodsReceiptPOContentDetailSearchEntity();
+    table.reset();
+  }
+
   // batch dialog
   showBatch(goodsReceiptPOContentId: string) {
     this.displayBatch = true;
     this.activeScan = false;
     this.binLocationId = null;
     this.goodsReceiptPOContentId = goodsReceiptPOContentId;
-    this.goodsReceiptPOService.getBatchList(goodsReceiptPOContentId);
+    this.goodsReceiptPOService.getBatch(goodsReceiptPOContentId);
   }
 
   changeLocationInBatch(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
@@ -327,7 +363,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   addBinLocationBatch(indexRow: number) {
-    this.goodsReceiptPOService.addBinLocationBatch(indexRow, this.goodsReceiptPOContentId)
+    this.goodsReceiptPOService.addBinLocationBatch(indexRow, this.goodsReceiptPOContentId);
   }
 
   deleteBinLocationBatch(indexRow: number, index: number) {
@@ -343,10 +379,8 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   updateBatch() {
-    if (this.goodsReceiptPOService.validateSubmitBatch(this.batchList)) {
-      this.goodsReceiptPOService.updateBatch(this.quantityDetailList).then(res => {
-        this.displayBatch = false;
-      });
-    }
+    this.goodsReceiptPOService.updateBatch(this.batch).then(res => {
+      this.displayBatch = false;
+    });
   }
 }

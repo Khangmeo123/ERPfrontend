@@ -95,3 +95,12 @@ export class GoodsReceiptPOBinlocationSearchEntity extends SearchEntity {
     goodsReceiptPOContentId: string;
     code = new TextFilter();
 }
+
+export class GoodsReceiptPOContentDetailSearchEntity extends SearchEntity {
+    qrCode: string = null;
+    itemDetailId: string = null;
+    itemName: string = null;
+    serialNumber: string = null;
+    mfrDate: string = null;
+    expirationDate: string = null;
+}

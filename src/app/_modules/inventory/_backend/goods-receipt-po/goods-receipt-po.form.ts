@@ -24,6 +24,7 @@ export class GoodsReceiptPOForm extends FormModel {
     requesterName = new FormControl(null);
     remarks = new FormControl(null);
     step = new FormControl(null);
+    enableBinLocation = new FormControl(null);
     inventoryOrganizationId = new FormControl(null, [requiredField]);
     inventoryOrganizationCode = new FormControl(null);
     inventoryOrganizationName = new FormControl(null);

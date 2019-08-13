@@ -1,3 +1,4 @@
+import { GoodsReceiptPOContent } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
@@ -21,6 +22,7 @@ import {
     GoodsReceiptPOQuantity,
     GoodsReceiptPOBatchBinLocationEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
+import { GeneralService } from 'src/app/_helpers/general-service.service';
 @Injectable()
 export class GoodsReceiptPOReceiveService {
     public goodsReceiptPOForm: BehaviorSubject<FormGroup>;
@@ -28,22 +30,23 @@ export class GoodsReceiptPOReceiveService {
     public unitOfMeasureList: BehaviorSubject<Entities>;
     public documentNumberList: BehaviorSubject<Entities>;
     public binLocationList: BehaviorSubject<Entities>;
-    public quantityDetailList: BehaviorSubject<GoodsReceiptPOQuantityDetail[]>;
-    public serialNumberList: BehaviorSubject<GoodsReceiptPOSerialNumberEntity[]>;
-    public batchList: BehaviorSubject<GoodsReceiptPOBatchEntity[]>;
+    public quantityDetail: BehaviorSubject<GoodsReceiptPOContent>;
+    public serialNumber: BehaviorSubject<GoodsReceiptPOContent>;
+    public batch: BehaviorSubject<GoodsReceiptPOContent>;
     constructor(
         private fb: FormBuilder,
         private goodsReceiptPORepository: GoodsReceiptPOReceiveRepository,
         private toastrService: ToastrService,
+        private generalService: GeneralService,
     ) {
         this.goodsReceiptPOForm = new BehaviorSubject(this.fb.group(new GoodsReceiptPOForm()));
         this.itemList = new BehaviorSubject(new Entities());
         this.unitOfMeasureList = new BehaviorSubject(new Entities());
         this.documentNumberList = new BehaviorSubject(new Entities());
         this.binLocationList = new BehaviorSubject(new Entities());
-        this.quantityDetailList = new BehaviorSubject([]);
-        this.serialNumberList = new BehaviorSubject([]);
-        this.batchList = new BehaviorSubject([]);
+        this.quantityDetail = new BehaviorSubject(new GoodsReceiptPOContent());
+        this.serialNumber = new BehaviorSubject(new GoodsReceiptPOContent());
+        this.batch = new BehaviorSubject(new GoodsReceiptPOContent());
     }
 
     // general:
@@ -126,10 +129,14 @@ export class GoodsReceiptPOReceiveService {
         this.goodsReceiptPOForm.next(goodsReceiptPOForm);
     }
     // quantityDetail:
-    getQuantityDetailList(goodsReceiptPOContentId: string) {
-        this.goodsReceiptPORepository.getQuantityDetailList(goodsReceiptPOContentId).subscribe(res => {
+    getQuantityDetail(goodsReceiptPOContentId: string, enableBinLocation: boolean) {
+        this.goodsReceiptPORepository.getQuantityDetail(goodsReceiptPOContentId).subscribe(res => {
             if (res) {
-                this.quantityDetailList.next(res);
+                if (res.goodsReceiptPOQuantityDetails[0].goodsReceiptPOQuantities.length === 0 && enableBinLocation) {
+                    const goodsReceiptPOQuantity = new GoodsReceiptPOQuantity();
+                    res.goodsReceiptPOQuantityDetails[0].goodsReceiptPOQuantities.push(goodsReceiptPOQuantity);
+                }
+                this.quantityDetail.next(res);
             }
         }, err => {
             if (err) {
@@ -138,17 +145,17 @@ export class GoodsReceiptPOReceiveService {
         });
     }
 
-    updateQuantityDetail(goodsReceiptPOQuantityDetail: any): Promise<boolean> {
+    updateQuantityDetail(quantityDetail: any): Promise<boolean> {
         const defered = new Promise<boolean>((resolve, reject) => {
-            this.goodsReceiptPORepository.updateQuantityDetail(goodsReceiptPOQuantityDetail).subscribe(res => {
+            this.goodsReceiptPORepository.updateQuantityDetail(quantityDetail).subscribe(res => {
                 if (res) {
                     this.toastrService.success('Hệ thống cập nhật thành công!');
                     const currentForm = this.goodsReceiptPOForm.getValue();
                     const currentArray = currentForm.get('goodsReceiptPOContents') as FormArray;
                     for (const control of currentArray.controls) {
                         if (control instanceof FormGroup) {
-                            if (control.get('id').value === goodsReceiptPOQuantityDetail.goodsReceiptPOQuantities[0].goodsReceiptContentId) {
-                                control.get('actualReceive').setValue(goodsReceiptPOQuantityDetail.quantity);
+                            if (control.get('id').value === quantityDetail.id) {
+                                control.get('actualReceive').setValue(quantityDetail.GoodsReceiptPOQuantityDetails[0].actualReceive);
                             }
                         }
                     }
@@ -156,54 +163,51 @@ export class GoodsReceiptPOReceiveService {
                     this.goodsReceiptPOForm.next(currentForm);
                 }
             }, err => {
-                reject();
+                if (err) {
+                    this.quantityDetail.next(err);
+                }
                 this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
             });
-        })
-        return defered;
-    }
-
-    validateSubmitQuantity(goodsReceiptPODetailQuantities: GoodsReceiptPOQuantityDetail[]) {
-        let returnValue = true;
-        goodsReceiptPODetailQuantities.forEach(item => {
-            if (item.goodsReceiptPOQuantities.length > 0) {
-                const sumQuantity = _.sumBy(item.goodsReceiptPOQuantities, elm => Number(elm.quantity));
-                if (sumQuantity !== Number(item.actualReceive)) {
-                    item.errors = { message: 'Tổng số lượng lưu phải bằng số lượng!' };
-                    returnValue = false;
-                }
-            } else {
-                item.errors = { message: 'Phải có mã vị trí!' };
-                returnValue = false;
-            }
         });
-        return returnValue;
+        return defered;
     }
 
     addBinLocationQuantity(goodsReceiptContentId: string) {
         const binLocation = new GoodsReceiptPOQuantity();
-        const currentQuantityDetail = this.quantityDetailList.getValue();
-        const currentBinLocationArray = currentQuantityDetail[0].goodsReceiptPOQuantities;
+        const currentQuantityDetail = this.quantityDetail.getValue();
+        const currentBinLocationArray = currentQuantityDetail.goodsReceiptPOQuantityDetails[0].goodsReceiptPOQuantities;
         binLocation.goodsReceiptContentId = goodsReceiptContentId;
         binLocation.binLocationCode = null;
         currentBinLocationArray.push(binLocation);
-        this.quantityDetailList.next(currentQuantityDetail);
+        this.quantityDetail.next(currentQuantityDetail);
     }
 
     deleteBinLocationQuantity(index: number) {
-        const currentQuantityDetail = this.quantityDetailList.getValue();
-        const currentBinLocationArray = currentQuantityDetail[0].goodsReceiptPOQuantities;
+        const currentQuantityDetail = this.quantityDetail.getValue();
+        const currentBinLocationArray = currentQuantityDetail.goodsReceiptPOQuantityDetails[0].goodsReceiptPOQuantities;
         if (index > 0) {
             currentBinLocationArray.splice(index, 1);
         }
-        this.quantityDetailList.next(currentQuantityDetail);
+        this.recalculateQuantityDetail(currentQuantityDetail);
+    }
+
+    recalculateQuantityDetail(goodsReceiptPOContent: GoodsReceiptPOContent) {
+        goodsReceiptPOContent.goodsReceiptPOQuantityDetails.forEach(item => {
+            item.actualReceive = 0;
+            if (item.goodsReceiptPOQuantities.length > 0) {
+                item.goodsReceiptPOQuantities.forEach(elm => {
+                    item.actualReceive += elm.quantity;
+                });
+            }
+        });
+        this.quantityDetail.next(goodsReceiptPOContent);
     }
 
     // serialNumber:
-    getSerialNumberList(goodsReceiptPOContentId: string) {
-        this.goodsReceiptPORepository.getSerialNumberList(goodsReceiptPOContentId).subscribe(res => {
+    getSerialNumber(goodsReceiptPOContentId: string) {
+        this.goodsReceiptPORepository.getSerialNumber(goodsReceiptPOContentId).subscribe(res => {
             if (res) {
-                this.serialNumberList.next(res);
+                this.serialNumber.next(res);
             }
         }, err => {
             if (err) {
@@ -212,67 +216,86 @@ export class GoodsReceiptPOReceiveService {
         });
     }
 
-    updateSerialNumber(goodsReceiptPOSerialNumberEntity: any[]) {
-        this.goodsReceiptPORepository.updateQuantityDetail(goodsReceiptPOSerialNumberEntity).subscribe(res => {
-            if (res) {
-                this.toastrService.success('Hệ thống cập nhật thành công!');
-                const currentForm = this.goodsReceiptPOForm.getValue();
-                const currentArray = currentForm.get('goodsReceiptPOContents') as FormArray;
-                for (const control of currentArray.controls) {
-                    if (control instanceof FormGroup) {
-                    }
+    updateSerialNumber(goodsReceiptPOSerialNumberEntity: any) {
+        const defered = new Promise((resolve, reject) => {
+            this.goodsReceiptPORepository.updateSerialNumber(goodsReceiptPOSerialNumberEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Hệ thống cập nhật thành công!');
+                    resolve();
                 }
-                this.goodsReceiptPOForm.next(currentForm);
-            }
-        }, err => {
-            this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
+            }, err => {
+                if (err) {
+                    this.serialNumber.next(err);
+                    this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
+                    reject();
+                }
+            });
         });
+        return defered;
     }
 
     analyzeQRCode(itemDetailId: string, qrCode: string) {
         this.goodsReceiptPORepository.analyzeQRCode(itemDetailId, qrCode).subscribe(res => {
             if (res) {
-                const currentList = this.serialNumberList.getValue();
-                currentList.push(res);
-                this.serialNumberList.next(currentList);
+                const currentSerialNumber = this.serialNumber.getValue();
+                const currentList = currentSerialNumber.goodsReceiptPOSerialNumbers;
+                const filterItem = currentList.filter(item => {
+                    return item.serialNumber === res.serialNumber;
+                });
+                if (filterItem.length > 0) {
+                    this.toastrService.error('Quét QR xảy ra lỗi, mã sản phẩm đã tồn tại!');
+                    this.generalService.alertSound();
+                } else {
+                    this.toastrService.success('Hệ thống cập nhật thành công !');
+                    res.binLocationId = null;
+                    res.binLocationCode = null;
+                    currentList.push(res);
+                    this.serialNumber.next(currentSerialNumber);
+                }
             }
         }, err => {
             if (err) {
                 this.toastrService.error('Quét QR xảy ra lỗi!');
+                this.generalService.alertSound();
             }
         });
     }
 
     changeLocationSerialNumber(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
-        const currentSerialNumberList = this.serialNumberList.getValue();
+        const currentSerialNumber = this.serialNumber.getValue();
+        const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
         if (currentSerialNumberList) {
             currentSerialNumberList.forEach(item => {
                 if (item.isSelected) {
                     item.binLocationId = goodsReceiptPOBinlocationEntity.id;
                     item.binLocationCode = goodsReceiptPOBinlocationEntity.code;
+                    item.isSelected = false;
                 }
             });
         }
-        this.serialNumberList.next(currentSerialNumberList);
+        this.serialNumber.next(currentSerialNumber);
     }
 
     deleteSerialNumber(index) {
-        const currentSerialNumberList = this.serialNumberList.getValue();
+        const currentSerialNumber = this.serialNumber.getValue();
+        const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
         currentSerialNumberList.splice(index, 1);
-        this.serialNumberList.next(currentSerialNumberList);
+        this.serialNumber.next(currentSerialNumber);
     }
 
     checkAllSerialNumber() {
-        const currentSerialNumberList = this.serialNumberList.getValue();
+        const currentSerialNumber = this.serialNumber.getValue();
+        const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
         currentSerialNumberList.forEach(item => {
             item.isSelected = true;
         });
-        this.serialNumberList.next(currentSerialNumberList);
+        this.serialNumber.next(currentSerialNumber);
     }
 
     deleteMultipleSerialNumber() {
         const indexArray = [];
-        const currentSerialNumberList = this.serialNumberList.getValue();
+        const currentSerialNumber = this.serialNumber.getValue();
+        const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
         currentSerialNumberList.forEach(item => {
             if (item.isSelected) {
                 indexArray.push(currentSerialNumberList.indexOf(item));
@@ -282,14 +305,14 @@ export class GoodsReceiptPOReceiveService {
         for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
             currentSerialNumberList.splice(indexArray.reverse()[i], 1);
         }
-        this.serialNumberList.next(currentSerialNumberList);
+        this.serialNumber.next(currentSerialNumber);
     }
 
     // batch:
-    getBatchList(goodsReceiptPOContentId: string) {
-        this.goodsReceiptPORepository.getBatchList(goodsReceiptPOContentId).subscribe(res => {
+    getBatch(goodsReceiptPOContentId: string) {
+        this.goodsReceiptPORepository.getBatch(goodsReceiptPOContentId).subscribe(res => {
             if (res) {
-                this.batchList.next(res);
+                this.batch.next(res);
             }
         }, err => {
             if (err) {
@@ -298,7 +321,7 @@ export class GoodsReceiptPOReceiveService {
         });
     }
 
-    updateBatch(goodsReceiptPOBatchEntity: any[]) {
+    updateBatch(goodsReceiptPOBatchEntity: any) {
         const defered = new Promise((resolve, reject) => {
             this.goodsReceiptPORepository.updateBatch(goodsReceiptPOBatchEntity).subscribe(res => {
                 if (res) {
@@ -323,9 +346,10 @@ export class GoodsReceiptPOReceiveService {
     analyzeBatchCode(itemDetailId: string, qrCode: string) {
         this.goodsReceiptPORepository.analyzeBatchCode(itemDetailId, qrCode).subscribe(res => {
             if (res) {
-                const currentList = this.batchList.getValue();
-                currentList.push(res);
-                this.batchList.next(currentList);
+                const currentBatch = this.batch.getValue();
+                const currentBatchList = currentBatch.goodsReceiptPOBatches;
+                currentBatchList.push(res);
+                this.batch.next(currentBatch);
             }
         }, err => {
             if (err) {
@@ -335,7 +359,8 @@ export class GoodsReceiptPOReceiveService {
     }
 
     changeLocationBatch(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
-        const currentBatchList = this.batchList.getValue();
+        const currentBatch = this.batch.getValue();
+        const currentBatchList = currentBatch.goodsReceiptPOBatches;
         if (currentBatchList) {
             currentBatchList.forEach(item => {
                 if (item.isSelected && item.goodsReceiptPOBatchBinLocations) {
@@ -346,38 +371,42 @@ export class GoodsReceiptPOReceiveService {
                 }
             });
         }
-        this.batchList.next(currentBatchList);
+        this.batch.next(currentBatch);
     }
 
     addBinLocationBatch(indexRow: number, goodsReceiptPOBatchId: string) {
-        const currentBatchList = this.batchList.getValue();
+        const currentBatch = this.batch.getValue();
+        const currentBatchList = currentBatch.goodsReceiptPOBatches;
         const currentBinLocationArray = currentBatchList[indexRow].goodsReceiptPOBatchBinLocations;
         const binLocation = new GoodsReceiptPOBatchBinLocationEntity();
         binLocation.goodsReceiptPOBatchId = goodsReceiptPOBatchId;
         currentBinLocationArray.push(binLocation);
-        this.batchList.next(currentBatchList);
+        this.batch.next(currentBatch);
     }
 
     deleteBinLocationBatch(indexRow: number, index: number) {
-        const currentBatchList = this.batchList.getValue();
+        const currentBatch = this.batch.getValue();
+        const currentBatchList = currentBatch.goodsReceiptPOBatches;
         const currentBinLocationArray = currentBatchList[indexRow].goodsReceiptPOBatchBinLocations;
         if (index > 0) {
             currentBinLocationArray.splice(index, 1);
         }
-        this.batchList.next(currentBatchList);
+        this.batch.next(currentBatch);
     }
 
     checkAllBatch() {
-        const currentBatchList = this.batchList.getValue();
+        const currentBatch = this.batch.getValue();
+        const currentBatchList = currentBatch.goodsReceiptPOBatches;
         currentBatchList.forEach(item => {
             item.isSelected = true;
         });
-        this.batchList.next(currentBatchList);
+        this.batch.next(currentBatch);
     }
 
     deleteMultipleBatch() {
         const indexArray = [];
-        const currentBatchList = this.batchList.getValue();
+        const currentBatch = this.batch.getValue();
+        const currentBatchList = currentBatch.goodsReceiptPOBatches;
         currentBatchList.forEach(item => {
             if (item.isSelected) {
                 indexArray.push(currentBatchList.indexOf(item));
@@ -387,24 +416,7 @@ export class GoodsReceiptPOReceiveService {
         for (let i = indexArray.reverse().length - 1; i >= 0; i--) {
             currentBatchList.splice(indexArray.reverse()[i], 1);
         }
-        this.batchList.next(currentBatchList);
-    }
-
-    validateSubmitBatch(goodsReceiptPOBatches: GoodsReceiptPOBatchEntity[]) {
-        let returnValue = true;
-        goodsReceiptPOBatches.forEach(item => {
-            if (item.goodsReceiptPOBatchBinLocations.length > 0) {
-                const sumQuantity = _.sumBy(item.goodsReceiptPOBatchBinLocations, elm => Number(elm.quantity));
-                if (sumQuantity !== Number(item.actualReceive)) {
-                    item.errors = { message: 'Tổng số lượng lưu phải bằng số lượng!' };
-                    returnValue = false;
-                }
-            } else {
-                item.errors = { message: 'Phải có mã vị trí!' };
-                returnValue = false;
-            }
-        });
-        return returnValue;
+        this.batch.next(currentBatch);
     }
 
     // item:

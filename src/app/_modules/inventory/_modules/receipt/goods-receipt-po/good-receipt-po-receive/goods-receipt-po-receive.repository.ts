@@ -3,6 +3,7 @@ import {
     GoodsReceiptPOBinlocationEntity,
     GoodsReceiptPOSerialNumberEntity,
     GoodsReceiptPOBatchEntity,
+    GoodsReceiptPOContent,
 } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { environment } from 'src/environments/environment';
 import { Repository } from 'src/app/_helpers/repository';
@@ -104,15 +105,11 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
             );
     }
 
-    getQuantityDetailList(goodsReceiptPOContentId: string) {
-        return this.http.post<GoodsReceiptPOQuantityDetail[]>(this.apiUrl + '/quantity/list',
+    getQuantityDetail(goodsReceiptPOContentId: string) {
+        return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/quantity/goods-receipt-po-content-detail',
             JSON.stringify({ goodsReceiptPOContentId: goodsReceiptPOContentId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    return r.body.map((item) => {
-                        return new GoodsReceiptPOQuantityDetail(item);
-                    });
-                })
+                map(r => new GoodsReceiptPOContent(r.body)),
             );
     }
 
@@ -151,22 +148,18 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
     }
 
     updateSerialNumber(goodsReceiptPOSerialNumberEntities: any[]) {
-        return this.http.post<boolean>(this.apiUrl + '/quantity/bulk-merge',
+        return this.http.post<boolean>(this.apiUrl + '/serial-number/bulk-merge',
             JSON.stringify(goodsReceiptPOSerialNumberEntities),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
-    getSerialNumberList(goodsReceiptPOContentId: string) {
-        return this.http.post<GoodsReceiptPOSerialNumberEntity[]>(this.apiUrl + '/quantity/list',
+    getSerialNumber(goodsReceiptPOContentId: string) {
+        return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/serial-number/goods-receipt-po-content-detail',
             JSON.stringify({ goodsReceiptPOContentId: goodsReceiptPOContentId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    return r.body.map((item) => {
-                        return new GoodsReceiptPOSerialNumberEntity(item);
-                    });
-                }),
+                map(r => new GoodsReceiptPOContent(r.body)),
             );
     }
 
@@ -188,15 +181,11 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
             );
     }
 
-    getBatchList(goodsReceiptPOContentId: string) {
-        return this.http.post<GoodsReceiptPOBatchEntity[]>(this.apiUrl + '/batch/list',
+    getBatch(goodsReceiptPOContentId: string) {
+        return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/batch/goods-receipt-po-content-detail',
             JSON.stringify({ goodsReceiptPOContentId: goodsReceiptPOContentId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    return r.body.map((item) => {
-                        return new GoodsReceiptPOBatchEntity(item);
-                    });
-                }),
+                map(r => new GoodsReceiptPOContent(r.body)),
             );
     }
 }

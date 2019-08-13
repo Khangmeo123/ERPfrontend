@@ -33,6 +33,7 @@ export class GoodsReceiptPOEntity extends Entity {
     purchaseOrderIds: PurchaseOrdersEntity[];
     purchaseOrderName: string;
     fileAttachments: FileAttachments[];
+    enableBinLocation: boolean;
     totalGoodsReceiptPOContents: number;
     constructor(goodsReceiptPOEntity?: any) {
         super(goodsReceiptPOEntity);
@@ -58,6 +59,9 @@ export class GoodsReceiptPOContent extends Entity {
     unitOfMeasureName: string;
     unitOfMeasureCode: string;
     actualReceive: number;
+    goodsReceiptPOQuantityDetails: GoodsReceiptPOQuantityDetail[];
+    goodsReceiptPOSerialNumbers: GoodsReceiptPOSerialNumberEntity[];
+    goodsReceiptPOBatches: GoodsReceiptPOBatchEntity[];
     constructor(goodsReceiptPOContent?: any) {
         super(goodsReceiptPOContent);
     }
@@ -138,10 +142,10 @@ export class GoodsReceiptPOQuantityDetail extends Entity {
 }
 
 export class GoodsReceiptPOQuantity extends Entity {
-    goodsReceiptContentId: string;
-    binLocationId: string;
-    binLocationCode: string;
-    quantity: number;
+    goodsReceiptContentId: string = null;
+    binLocationId: string = null;
+    binLocationCode: string = null;
+    quantity: number = null;
 
     constructor(goodsReceiptPOQuantity?) {
         super(goodsReceiptPOQuantity);

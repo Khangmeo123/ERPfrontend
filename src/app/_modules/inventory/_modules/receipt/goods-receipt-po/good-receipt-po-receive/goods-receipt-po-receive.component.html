@@ -32,15 +32,16 @@
                 <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
                     aria-labelledby="button-basic">
                     <li role="menuitem">
-                        <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
+                        <a class="dropdown-item" href="javascript:;">{{'general.button.history' | translate}}</a>
                     </li>
                     <li class="divider dropdown-divider"></li>
                     <li role="menuitem">
-                        <a class="dropdown-item" href="#">{{'general.button.print' | translate}}</a>
+                        <a class="dropdown-item" href="javascript:;">{{'general.button.print' | translate}}</a>
                     </li>
                     <li class="divider dropdown-divider"></li>
                     <li role="menuitem">
-                        <a class="dropdown-item" href="#">{{'general.button.referenceDocument' | translate}}</a>
+                        <a class="dropdown-item"
+                            href="javascript:;">{{'general.button.referenceDocument' | translate}}</a>
                     </li>
                 </ul>
             </div>
@@ -279,13 +280,13 @@
                                                     {{'goodsReceiptPODetail.tab1.amount' | translate}}
                                                 </a>
                                             </div> -->
-                                            <a (click)="showBatches(goodsReceiptPOContent.id)" href="javascript:;">
+                                            <a (click)="showBatches(goodsReceiptPOContent)" href="javascript:;">
                                                 {{'goodsReceiptPODetail.tab1.batches' | translate}}
                                             </a>
-                                            <a (click)="showSerial(goodsReceiptPOContent.id)" href="javascript:;">
+                                            <a (click)="showSerial(goodsReceiptPOContent)" href="javascript:;">
                                                 {{'goodsReceiptPODetail.tab1.cda' | translate}}
                                             </a>
-                                            <a (click)="showQuantity(goodsReceiptPOContent.id)" href="javascript:;">
+                                            <a (click)="showQuantity(goodsReceiptPOContent)" href="javascript:;">
                                                 {{'goodsReceiptPODetail.tab1.amount' | translate}}
                                             </a>
                                         </td>
@@ -368,7 +369,7 @@
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="d-flex align-items-center justify-content-end">
+                <div class="d-flex align-items-center justify-content-end" *ngIf="enableBinLocation">
                     <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
                     <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds" [key]="'code'"
                         [valueSelector]="returnNode" (search)="typingSearchBinLocation($event, binLocationId)"
@@ -384,15 +385,15 @@
                     <span class="ml-2">{{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}: </span>
                     <div class="ml-2">
                         <input type="text" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
-                            [value]="serialNumberList.length" pKeyFilter="int">
+                            [value]="batch.goodsReceiptPOBatches?.length" pKeyFilter="int">
                     </div>
                 </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-sm-12">
-                <p-table resizableColumns [value]="batchList" resizableColumns [scrollable]="true" scrollHeight="300px"
-                    [resizableColumns]="true" #tableBatch>
+                <p-table resizableColumns [value]="batch.goodsReceiptPOBatches" resizableColumns [scrollable]="true"
+                    *ngIf="enableBinLocation" scrollHeight="300px" [resizableColumns]="true" #tableBatch>
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -558,6 +559,124 @@
                         </tr>
                     </ng-template>
                 </p-table>
+                <p-table resizableColumns [value]="batch.goodsReceiptPOBatches" resizableColumns [scrollable]="true"
+                    *ngIf="!enableBinLocation" scrollHeight="300px" [resizableColumns]="true" #tableBatch>
+                    <ng-template pTemplate="colgroup">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-batches-check-box">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode">
+                                {{'goodsReceiptPODetail.batches.qrCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-item-code">
+                                {{'goodsReceiptPODetail.batches.itemCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-item-name">
+                                {{'goodsReceiptPODetail.batches.itemName' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-code">
+                                {{'goodsReceiptPODetail.batches.batchCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-manufacturing-date">
+                                {{'goodsReceiptPODetail.batches.manufacturingDate' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-expiry-date">
+                                {{'goodsReceiptPODetail.batches.expiryDate' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-quantity-in-each-batch">
+                                {{'goodsReceiptPODetail.batches.quantityInEachBatch' | translate}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th width="2.5%">
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')" />
+                            </th>
+                            <th class="th-filter">
+                                <app-single-select [list]="itemDetailExceptIds" [selectedList]="itemDetailIds"
+                                    [key]="'code'" (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                    (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
+                                    (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
+                                    data-qe-id="table-thead-filter-uom">
+                                </app-single-select>
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" />
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" />
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'expirationDate')"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-batch let-indexRow="rowIndex">
+                        <tr>
+                            <td colspan="batch.goodsReceiptPOBatchBinLocations.length">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" [(ngModel)]="batch.isSelected" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.qrCode}}
+                            </td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.itemCode}}
+                            </td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.itemName}}
+                            </td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.batchCode}}
+                            </td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.mfrDate}}
+                            </td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                {{batch.expirationDate}}
+                            </td>
+                            <td class="ui-resizable-column" colspan="batch.goodsReceiptPOBatchBinLocations.length + 1">
+                                <input type="text" class="form-control" [(ngModel)]="batch.actualReceive" />
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
             </div>
         </div>
     </div>
@@ -590,6 +709,15 @@
             </div>
             <div class="col-sm-9">
                 <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-clear mr-2" data-qe-id="button-clear"
+                        (click)="clearSerialNumberTable(tableSerialNumber)">
+                        <span class="btn-label">
+                            <img src="/assets/img/filter.svg" width="16">
+                        </span>
+                        <span class="button-label">
+                            {{'general.button.clear' | translate}}
+                        </span>
+                    </button>
                     <button class="btn btn-labeled btn-import mr-2">
                         <span class="btn-label">
                             <img src="/assets/img/import.svg" width="24">
@@ -617,41 +745,51 @@
                 <div class="d-flex align-items-center">
                     <p-inputSwitch [(ngModel)]="activeScan"></p-inputSwitch>
                     <span class="ml-2">{{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}</span>
-                    <div class="ml-2">
+                    <div class="ml-2 col-sm-9">
                         <input type="text" class="form-control" data-qe-id="dialog-input-start-scan-batches-no"
-                            [(ngModel)]="serialNumber" (input)="inputSerialNumber()" [disabled]="activeScan">
+                            [(ngModel)]="serialNumber" (change)="inputSerialNumber($event.target.value)"
+                            [disabled]="!activeScan">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="d-flex align-items-center justify-content-end">
+                <div class="d-flex align-items-center justify-content-end" *ngIf="enableBinLocation">
                     <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
                     <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds" [key]="'code'"
                         [valueSelector]="returnNode" (search)="typingSearchBinLocation($event, binLocationId)"
                         (selectionChange)="changeLocationSerialNumber($event[0])"
-                        (listOpen)="dropListBinLocation(binLocationId)" [disabled]="activeScan"
-                        data-qe-id="ialog-input-bin-location" *ngIf="displaySerial">
+                        (listOpen)="dropListBinLocation(binLocationId)" [disabled]="!activeScan"
+                        data-qe-id="ialog-input-bin-location" *ngIf="displaySerial ">
                     </app-single-select>
                 </div>
             </div>
             <div class="col-sm-6 mt-2"></div>
             <div class="col-sm-6 mt-2">
                 <div class="d-flex align-items-center justify-content-end">
-                    <span class="ml-2">{{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}: </span>
+                    <span class="ml-2">{{'goodsReceiptPODetail.qrCode.quantity' | translate}}: </span>
                     <div class="ml-2">
                         <input type="text" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
-                            [value]="serialNumberList.length" pKeyFilter="int">
+                            [value]="itemQuantities">
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 mt-2"></div>
+            <div class="col-sm-6 mt-2">
+                <div class="d-flex align-items-center justify-content-end">
+                    <span class="ml-2">{{'goodsReceiptPODetail.qrCode.rows' | translate}}: </span>
+                    <div class="ml-2">
+                        <input type="text" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
+                            [value]="serialNumberDetail.goodsReceiptPOSerialNumbers?.length" pKeyFilter="int">
                     </div>
                 </div>
             </div>
         </div>
         <div class="row mt-3">
             <div class="col-sm-12">
-                <p-table resizableColumns [value]="serialNumberList" [scrollable]="true" scrollHeight="300px"
-                    [resizableColumns]="true" #tableSerialNumber>
+                <p-table resizableColumns [value]="serialNumberDetail.goodsReceiptPOSerialNumbers" [scrollable]="true"
+                    scrollHeight="300px" *ngIf="enableBinLocation" [resizableColumns]="true" #tableSerialNumber>
                     <ng-template pTemplate="colgroup">
                         <colgroup>
-                            <col>
                             <col>
                             <col>
                             <col>
@@ -665,7 +803,7 @@
                     </ng-template>
                     <ng-template pTemplate="header">
                         <tr>
-                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-qrCode-check-box">
+                            <th width="2.5%" data-qe-id="table-thead-qrCode-check-box">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
                                     <input type="checkbox" />
                                     <div class="state">
@@ -688,9 +826,132 @@
                                 {{'goodsReceiptPODetail.qrCode.expiryDate' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-location-code">
                                 {{'goodsReceiptPODetail.qrCode.locationCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-scan-code">
-                                {{'goodsReceiptPODetail.qrCode.scanCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-action">
+                            <th data-qe-id="table-thead-qrCode-action" width="5%">
+                                {{'general.action' | translate}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th width="2.5%">
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.qrCode"
+                                    (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')" />
+                            </th>
+                            <th class="th-filter">
+                                <app-single-select [list]="itemDetailExceptIds" [selectedList]="itemDetailIds"
+                                    [key]="'code'" (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                    (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
+                                    (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
+                                    data-qe-id="table-thead-filter-uom">
+                                </app-single-select>
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.itemName"
+                                    (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" />
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.serialNumber"
+                                    (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" />
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDate')"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'expirationDate')"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter"></th>
+                            <th class="th-filter" width="5%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-serialNumber let-index="rowIndex">
+                        <tr>
+                            <td width="2.5%">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" [(ngModel)]="serialNumber.isSelected" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.qrCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.itemCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.itemName}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.serialNumber}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.mfrDate | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.expirationDate}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds"
+                                    [key]="'code'" [initialValue]="serialNumber.binLocationCode"
+                                    (search)="typingSearchBinLocation($event, serialNumber.binLocationId)"
+                                    (selectionChange)="serialNumber.binLocationId = $event[0]"
+                                    (listOpen)="dropListBinLocation(serialNumber.binLocationId)"
+                                    [disabled]="!activeScan" data-qe-id="dialog-input-bin-location">
+                                </app-single-select>
+                            </td>
+                            <td width="5%" class="text-center">
+                                <mat-icon class="text-danger" (click)="deleteSerialNumber()">delete</mat-icon>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table resizableColumns [value]="serialNumberDetail.goodsReceiptPOSerialNumbers" [scrollable]="true"
+                    scrollHeight="300px" *ngIf="!enableBinLocation" [resizableColumns]="true" #tableSerialNumber>
+                    <ng-template pTemplate="colgroup">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="2.5%" data-qe-id="table-thead-qrCode-check-box">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-code">
+                                {{'goodsReceiptPODetail.qrCode.code' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-item-code">
+                                {{'goodsReceiptPODetail.qrCode.itemCode' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-item-name">
+                                {{'goodsReceiptPODetail.qrCode.itemName' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-serial">
+                                {{'goodsReceiptPODetail.qrCode.serial' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-manufacturing-date">
+                                {{'goodsReceiptPODetail.qrCode.manufacturingDate' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-expiry-date">
+                                {{'goodsReceiptPODetail.qrCode.expiryDate' | translate}} </th>
+                            <th data-qe-id="table-thead-qrCode-action" width="5%">
                                 {{'general.action' | translate}}
                             </th>
                         </tr>
@@ -727,14 +988,12 @@
                                     data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>
-                            <th class="th-filter"></th>
-                            <th class="th-filter"></th>
                             <th class="th-filter" width="5%"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-serialNumber let-index="rowIndex">
                         <tr>
-                            <td>
+                            <td width="2.5%">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
                                     <input type="checkbox" [(ngModel)]="serialNumber.isSelected" />
                                     <div class="state">
@@ -761,15 +1020,6 @@
                             <td class="ui-resizable-column">
                                 {{serialNumber.expirationDate}}
                             </td>
-                            <td class="ui-resizable-column">
-                                <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds"
-                                    [key]="'code'" [initialValue]="serialNumber.binLocationCode"
-                                    (search)="typingSearchBinLocation($event, serialNumber.binLocationId)"
-                                    (selectionChange)="serialNumber.binLocationId = $event[0]"
-                                    (listOpen)="dropListBinLocation(serialNumber.binLocationId)" [disabled]="activeScan"
-                                    data-qe-id="ialog-input-bin-location">
-                                </app-single-select>
-                            </td>
                             <td width="5%" class="text-center">
                                 <mat-icon class="text-danger" (click)="deleteSerialNumber()">delete</mat-icon>
                             </td>
@@ -783,12 +1033,12 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-save-dialog">
+                    <button class="btn btn-labeled btn-save-dialog" (click)="updateSerialNumber()">
                         <span class="btn-label"><i class="material-icons">save</i></span>
                         <span class="button-label">
                             {{'general.button.save' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displayCDA = false">
+                    <button class="btn btn-labeled btn-cancel" (click)="displaySerial = false">
                         <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
                         <span class="button-label">
                             {{'general.button.cancel' | translate}}
@@ -809,10 +1059,22 @@
         </div>
     </p-header>
     <div class="dialog-body">
+        <div class="row">
+            <div class="col-sm-6 mt-2"></div>
+            <div class="col-sm-6 mt-2">
+                <div class="d-flex align-items-center justify-content-end">
+                    <span class="ml-2">{{'goodsReceiptPODetail.amount.quantity' | translate}}: </span>
+                    <div class="ml-2">
+                        <input type="text" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
+                            [value]="itemQuantities">
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="row mt-3">
             <div class="col-sm-12">
-                <p-table resizableColumns [value]="quantityDetailList" [scrollable]="true" scrollHeight="300px"
-                    [resizableColumns]="true">
+                <p-table resizableColumns [value]="quantityDetail.goodsReceiptPOQuantityDetails" [scrollable]="true"
+                    scrollHeight="300px" *ngIf="enableBinLocation" [resizableColumns]="true">
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -834,11 +1096,15 @@
                                 {{'goodsReceiptPODetail.amount.unitOfMeasure' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-quantity">
                                 {{'goodsReceiptPODetail.amount.quantity' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-location-code">
-                                {{'goodsReceiptPODetail.amount.locationCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-quantity-saved">
-                                {{'goodsReceiptPODetail.amount.quantitySaved' | translate}} </th>
-                            <th width="5%">
+                            <th pResizableColumn data-qe-id="table-thead-amount-location-code"
+                                *ngIf="enableBinLocation">
+                                {{'goodsReceiptPODetail.amount.locationCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-amount-quantity-saved"
+                                *ngIf="enableBinLocation">
+                                {{'goodsReceiptPODetail.amount.quantitySaved' | translate}}
+                            </th>
+                            <th width="5%" *ngIf="enableBinLocation">
                                 {{'general.action' | translate}}
                             </th>
                         </tr>
@@ -859,40 +1125,123 @@
                             </td>
                             <td class="ui-resizable-column" *ngIf="index === 0"
                                 [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1">
-                                <input type="number" class="form-control" [ngModel]="quantityDetail.actualReceive"
-                                    (ngModelChange)="quantityDetail.actualReceive = Number($event)" />
+                                <input type="text" class="form-control" [ngModel]="quantityDetail.actualReceive"
+                                    (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event)" />
                             </td>
-                            <td>
+                            <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
                                 <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds"
                                     [key]="'code'"
-                                    [initialValue]="quantityDetail.goodsReceiptPOQuantities[0].binLocationCode"
+                                    [initialValue]="quantityDetail.goodsReceiptPOQuantities[0]?.binLocationCode"
                                     (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
                                     (selectionChange)="quantityDetail.goodsReceiptPOQuantities[0].binLocationId = $event[0];"
                                     (listOpen)="dropListBinLocation(quantityDetail.goodsReceiptPOQuantities[0].binLocationId)"
                                     data-qe-id="dialog-input-bin-location"></app-single-select>
                             </td>
-                            <td>
+                            <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
                                 <div class="validation-div">
-                                    <input type="number" class="form-control"
+                                    <input type="text" class="form-control"
                                         [ngClass]="{'error-border-color': quantityDetail.errors}"
                                         [attr.placeholder]="placeholder"
-                                        [ngModel]="quantityDetail.goodsReceiptPOQuantities[0].quantity"
-                                        (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = Number($event)" />
-                                    <div class="invalid-validation" *ngIf="quantityDetail.errors">
-                                        <span>{{quantityDetail.errors.message}}</span>
+                                        [ngModel]="quantityDetail.goodsReceiptPOQuantities[0]?.quantity"
+                                        (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = generalService.toNumber($event); recalculateQuantityDetail()" />
+                                    <div class="invalid-validation"
+                                        *ngIf="quantityDetail.goodsReceiptPOQuantities[0].errors">
+                                        <span>{{quantityDetail.goodsReceiptPOQuantities[0].errors.message}}</span>
                                     </div>
                                 </div>
                             </td>
-                            <td width="5%" class="text-center">
-                                <mat-icon class="text-danger" (click)="deleteBinLocationQuantity()">delete</mat-icon>
+                            <td width="5%" class="text-center"
+                                *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+                                <mat-icon class="text-danger" (click)="deleteBinLocationQuantity(0)">delete</mat-icon>
                             </td>
                         </tr>
+                        <ng-container *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+                            <tr
+                                *ngFor="let quantityModel of quantityDetail.goodsReceiptPOQuantities | slice:1; let i = index">
+                                <td>
+                                    <div class="validation-div">
+                                        <div class="w-100 error-border-color"
+                                            [ngClass]="{'error-border-color': quantityModel.errors}">
+                                            <app-single-select [list]="binLocationExceptIds"
+                                                [selectedList]="binLocationIds" [key]="'code'"
+                                                [initialValue]="quantityModel.binLocationCode"
+                                                (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
+                                                (selectionChange)="quantityModel.binLocationId = $event[0];"
+                                                (listOpen)="dropListBinLocation(quantityModel.binLocationId)"
+                                                data-qe-id="dialog-input-bin-location"></app-single-select>
+                                        </div>
+                                        <div class="invalid-validation" *ngIf="quantityModel.errors">
+                                            <span>{{quantityModel.errors.quantity}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="validation-div">
+                                        <input type="text" class="form-control"
+                                            [ngClass]="{'error-border-color': quantityModel.errors}"
+                                            [attr.placeholder]="placeholder" [ngModel]="quantityModel.quantity"
+                                            (ngModelChange)="quantityModel.quantity = generalService.toNumber($event); recalculateQuantityDetail()" />
+                                        <div class="invalid-validation" *ngIf="quantityModel.errors">
+                                            <span>{{quantityModel.errors.quantity}}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td width="5%" class="text-center">
+                                    <mat-icon class="text-danger" (click)="deleteBinLocationQuantity(i + 1)">delete
+                                    </mat-icon>
+                                </td>
+                            </tr>
+                        </ng-container>
                         <tr>
                             <td>
                                 <a href="javascript:;" (click)="addBinLocationQuantity()">+ Bấm vào để thêm mới...</a>
                             </td>
                             <td></td>
-                            <td width="5%"></td>
+                            <td></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+                <p-table resizableColumns [value]="quantityDetailList" [scrollable]="true" scrollHeight="300px"
+                    *ngIf="!enableBinLocation" [resizableColumns]="true">
+                    <ng-template pTemplate="colgroup">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pResizableColumn data-qe-id="table-thead-amount-item-code">
+                                {{'goodsReceiptPODetail.amount.itemCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-amount-item-name">
+                                {{'goodsReceiptPODetail.amount.itemName' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-amount-unit">
+                                {{'goodsReceiptPODetail.amount.unitOfMeasure' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-amount-quantity">
+                                {{'goodsReceiptPODetail.amount.quantity' | translate}}
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-quantityDetail let-index="rowIndex">
+                        <tr>
+                            <td class="ui-resizable-column">
+                                {{quantityDetail.itemCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{quantityDetail.itemName}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{quantityDetail.unitOfMeasureName}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                <input type="text" class="form-control" [ngModel]="quantityDetail.actualReceive"
+                                    (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event);" />
+                            </td>
                         </tr>
                     </ng-template>
                 </p-table>

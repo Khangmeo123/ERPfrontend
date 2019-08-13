@@ -19,7 +19,7 @@ export class FormModel {
                             if (typeof elm === 'object' && elm.constructor === Object) {
                                 const formGroup = new FormGroup({});
                                 Object.keys(elm).forEach(result => {
-                                    if (result === 'errors') {
+                                    if (result === 'errors' && elm[result] !== null) {
                                         const errorForm = new FormGroup({});
                                         Object.keys(elm[result]).forEach(i => {
                                             errorForm.addControl(i, new FormControl(elm[result][i]));
