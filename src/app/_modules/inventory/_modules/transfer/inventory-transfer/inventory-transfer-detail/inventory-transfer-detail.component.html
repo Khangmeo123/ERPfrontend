@@ -8,9 +8,8 @@
                 {{pageTitle | translate}}
             </span>
             <span class="ml-2 open-status">{{'general.open'| translate}}</span>
-            <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
-            <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
-            <span class="ml-2 done-status">{{'general.done'| translate}}</span>
+            <span class="ml-2 pending-status">{{'general.pendingReceive'| translate}}</span>
+            <span class="ml-2 completed-status">{{'general.completed'| translate}}</span>
         </div>
         <div class="page-actions d-flex">
             <button class="btn btn-labeled btn-clear">
@@ -20,35 +19,20 @@
                 <span class="button-label">
                     {{'general.button.clear' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-reverse">
-                <span class="btn-label"><i class="material-icons">replay</i></span>
-                <span class="button-label">
-                    {{'general.button.reverse' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-approve">
-                <span class="btn-label"><i class="material-icons">check</i></span>
-                <span class="button-label">
-                    {{'general.button.approve' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-rejected">
-                <span class="btn-label"><i class="material-icons">block</i></span>
-                <span class="button-label">
-                    {{'general.button.rejected' | translate}}
-                </span></button>
             <button class="btn btn-labeled btn-receive">
-                <span class="btn-label"><i class="material-icons">assignment_goodsIssueed</i></span>
+                <span class="btn-label"><i class="material-icons">assignment_inventoryTransfered</i></span>
                 <span class="button-label">
                     {{'general.button.receive' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-send">
-                <span class="btn-label"><i class="material-icons">send</i></span>
-                <span class="button-label">
-                    {{'general.button.send' | translate}}
                 </span></button>
             <button class="btn btn-labeled btn-save">
                 <span class="btn-label"><i class="material-icons">save</i></span>
                 <span class="button-label">
                     {{'general.button.save' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-issue">
+                <span class="btn-label"><i class="material-icons">publish</i></span>
+                <span class="button-label">
+                    {{'general.button.issue' | translate}}
                 </span></button>
             <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
                 <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle
@@ -78,7 +62,7 @@
         <div class="page-section">
             <div class="page-section-form-header">
                 <span class="form-title">
-                    {{'goodsIssue.detail.form.title' | translate}}
+                    {{'inventoryTransfer.detail.form.title' | translate}}
                 </span>
                 <div class="page-actions justify-content-end">
                     <button class="btn btn-labeled btn-delete">
@@ -91,68 +75,89 @@
             <div class="line"></div>
             <div class="page-section-form-body">
                 <div class="row">
+                    <div class="col-sm-8 form-group">
+                        <label>
+                            {{'inventoryTransfer.detail.inventoryRequest' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <input type="text" class="form-control" (click)="showInventoryTransfer()"
+                            data-qe-id="detail-form-goods-receipt">
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="page-section-form-body">
+                <div class="row">
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'goodsIssue.detail.documentNumber' | translate}}
-                            <span class="text-danger mr-2">*</span>
+                            {{'inventoryTransfer.detail.documentNumber' | translate}}
+
                         </label>
                         <input type="text" class="form-control" data-qe-id="detail-form-document-number" disabled>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'goodsIssue.detail.inventoryCode' | translate}}
+                            {{'inventoryTransfer.detail.inventoryCodeFrom' | translate}}
+                            <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-single-select data-qe-id="detail-form-inventory-address"></app-single-select>
+                        <app-single-select data-qe-id="detail-form-inventoryCodeFrom"></app-single-select>
 
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'goodsIssue.detail.inventoryAddress' | translate}}
+                            {{'inventoryTransfer.detail.inventoryCodeTo' | translate}}
+                            <span class="text-danger mr-2">*</span>
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-inventory-code" disabled>
+                        <app-single-select data-qe-id="detail-form-inventoryCodeTo"></app-single-select>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'goodsIssue.detail.personInCharge' | translate}}
+                            {{'inventoryTransfer.detail.personInCharge' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
 
-                     </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'goodsIssue.detail.exporter' | translate}}
-                        </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-receiver" disabled>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'goodsIssue.detail.creator' | translate}}
+                            {{'inventoryTransfer.detail.exporter' | translate}}
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-creator" disabled>
+                        <input type="text" class="form-control" data-qe-id="detail-form-exporter" disabled>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'inventoryTransfer.detail.receiver' | translate}}
+                        </label>
+                        <input type="text" class="form-control" data-qe-id="detail-form-receiver" disabled>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'goodsIssue.detail.receiptedDate' | translate}}
+                            {{'inventoryTransfer.detail.issuedDate' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-date-picker data-qe-id="detail-form-receipted-date">
+                        <app-date-picker data-qe-id="detail-form-issuedDate">
                         </app-date-picker>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'goodsIssue.detail.createdDate' | translate}}
+                            {{'inventoryTransfer.detail.createdDate' | translate}}
                         </label>
                         <app-date-picker data-qe-id="detail-form-created-date" [disabled]="true"></app-date-picker>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'inventoryTransfer.detail.creator' | translate}}
+                        </label>
+                        <input type="text" class="form-control" data-qe-id="detail-form-creator">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 form-group">
-                        <label>{{ 'goodsIssue.detail.description' | translate}}</label>
+                        <label>{{ 'inventoryTransfer.detail.description' | translate}}</label>
                         <textarea class="form-control" rows="4" data-qe-id="detail-form-description">
                          </textarea>
                     </div>
@@ -162,7 +167,7 @@
         <div class="page-section">
             <div class="tab-header pt-3 pb-3 pl-3 pr-3">
                 <mat-tab-group>
-                    <mat-tab label="{{'goodsIssue.detail.tab1.title' | translate}}">
+                    <mat-tab label="{{'inventoryTransfer.detail.tab1.title' | translate}}">
                         <div class="row pt-3 pb-3 pl-3">
                             <div class="col-sm-12">
                                 <div class="page-actions d-flex justify-content-end">
@@ -189,28 +194,22 @@
                                             </div>
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-item-no">
-                                            {{'goodsIssue.detail.tab1.itemNo' | translate}} </th>
+                                            {{'inventoryTransfer.detail.tab1.itemNo' | translate}} </th>
                                         <th pResizableColumn data-qe-id="table-thead-item-name">
-                                                {{'goodsIssue.detail.tab1.itemName' | translate}} </th>
+                                            {{'inventoryTransfer.detail.tab1.itemName' | translate}} </th>
+
+                                        <th pResizableColumn data-qe-id="table-thead-issueIdRequest">
+                                            {{'inventoryTransfer.detail.tab1.issueIdRequest' | translate}}
+                                        </th>
                                         <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
-                                            {{'goodsIssue.detail.tab1.unitOfMeasure' | translate}}
+                                            {{'inventoryTransfer.detail.tab1.unitOfMeasure' | translate}}
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-quantity">
-                                            {{'goodsIssue.detail.tab1.quantity' | translate}} </th>
-                                        <th pResizableColumn data-qe-id="table-thead-unit-price">
-                                                {{'goodsIssue.detail.tab1.unitPrice' | translate}}
-                                            </th>
-                                        <th pResizableColumn data-qe-id="table-thead-value-added-tax">
-                                            {{'goodsIssue.detail.tab1.valueAddedTax' | translate}}
-                                            (%)</th>
-                                        <th pResizableColumn data-qe-id="table-thead-discount">
-                                            {{'goodsIssue.detail.tab1.discount' | translate}} (%)
-                                        </th>
-                                        <th pResizableColumn data-qe-id="table-thead-discount-amount">
-                                            {{'goodsIssue.detail.tab1.discountAmount' | translate}}
-                                        </th>
-                                        <th pResizableColumn data-qe-id="table-thead-total">
-                                            {{'goodsIssue.detail.tab1.total' | translate}}</th>
+                                            {{'inventoryTransfer.detail.tab1.quantity' | translate}} </th>
+                                        <th pResizableColumn data-qe-id="table-thead-actualQuantity">
+                                            {{'inventoryTransfer.detail.tab1.actualQuantity' | translate}} </th>
+                                        <th pResizableColumn data-qe-id="table-thead-dueDate">
+                                            {{'inventoryTransfer.detail.tab1.dueDate' | translate}}</th>
                                         <th pResizableColumn data-qe-id="table-thead-view-detail">
                                             {{'general.detail' | translate}}
                                         </th>
@@ -233,20 +232,19 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
-                                        <td></td>
-                                        <td></td>
                                         <td>{{item.total}}</td>
                                         <td>
                                             <div *ngIf="item.type == 1">
                                                 <a
-                                                    (click)="showBatches()">{{'goodsIssue.detail.tab1.batches' | translate}}</a>
+                                                    (click)="showBatches()">{{'inventoryTransfer.detail.tab1.batches' | translate}}</a>
                                             </div>
                                             <div *ngIf="item.type == 2">
-                                                <a (click)="showSerial()">{{'goodsIssue.detail.tab1.Serial' | translate}}</a>
+                                                <a
+                                                    (click)="showSerial()">{{'inventoryTransfer.detail.tab1.Serial' | translate}}</a>
                                             </div>
                                             <div *ngIf="item.type == 3">
                                                 <a
-                                                    (click)="showAmount()">{{'goodsIssue.detail.tab1.amount' | translate}}</a>
+                                                    (click)="showAmount()">{{'inventoryTransfer.detail.tab1.amount' | translate}}</a>
                                             </div>
                                         </td>
                                     </tr>
@@ -254,7 +252,7 @@
                             </p-table>
                         </div>
                     </mat-tab>
-                    <mat-tab label="{{'goodsIssue.detail.tab2.title' | translate}}">
+                    <mat-tab label="{{'inventoryTransfer.detail.tab2.title' | translate}}">
                         <div class="tab-upload">
                             <div class="form-upload-file d-flex">
                                 <div class="pt-3 upload-btn-wrapper">
@@ -284,7 +282,7 @@
         <div class="page-section">
             <div class="page-section-form-header">
                 <span class="form-title">
-                    {{'goodsIssue.form.post.title' | translate}}
+                    {{'inventoryTransfer.detail.form.post.title' | translate}}
                 </span>
             </div>
             <div class="line"></div>
@@ -301,7 +299,7 @@
     <p-header>
         <div class="row">
             <div class="col-sm-3">
-                <span class="dialog-header">{{'goodsIssue.detail.batches.title ' | translate}}</span>
+                <span class="dialog-header">{{'inventoryTransfer.detail.batches.title ' | translate}}</span>
             </div>
             <div class="col-sm-9">
                 <div class="page-actions d-flex justify-content-end">
@@ -331,16 +329,20 @@
             <div class="col-sm-6">
                 <div class="d-flex align-items-center">
                     <p-inputSwitch></p-inputSwitch>
-                    <span class="ml-2">{{'goodsIssue.detail.batches.startScanBatchesNo' | translate}}</span>
+                    <span class="ml-2">{{'inventoryTransfer.detail.batches.startScanBatchesNo' | translate}}</span>
                     <div class="ml-2">
                         <input type="text" class="form-control" data-qe-id="dialog-input-start-scan-batches-no">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="d-flex align-items-center justify-content-end">
-                    <span class="mr-2">{{'goodsIssue.detail.binLocation' | translate}}</span>
+                <div class="d-flex align-items-center justify-content-end mb-2">
+                    <span class="mr-2">{{'inventoryTransfer.detail.binLocation' | translate}}</span>
                     <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                        <span class="mr-2">{{'inventoryTransfer.detail.amountScan' | translate}}</span>
+                        <input type="text" class="form-control input-scan" data-qe-id="dialog-input-amountScan" disabled>
                 </div>
             </div>
         </div>
@@ -359,21 +361,21 @@
                                 </div>
                             </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-code">
-                                {{'goodsIssue.detail.batches.batchCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.batchCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-item-code">
-                                {{'goodsIssue.detail.batches.itemCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.itemCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-item-name">
-                                {{'goodsIssue.detail.batches.itemName' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.itemName' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-manufacturing-date">
-                                {{'goodsIssue.detail.batches.manufacturingDate' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.manufacturingDate' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-expiry-date">
-                                {{'goodsIssue.detail.batches.expiryDate' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.expiryDate' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-quantity-in-each-batch">
-                                {{'goodsIssue.detail.batches.quantityInEachBatch' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.quantityInEachBatch' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-location-code">
-                                {{'goodsIssue.detail.batches.locationCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.locationCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-quantity-saved">
-                                {{'goodsIssue.detail.batches.quantitySaved' | translate}} </th>
+                                {{'inventoryTransfer.detail.batches.quantitySaved' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-batches-action">
                                 {{'general.action' | translate}}
                             </th>
@@ -408,7 +410,7 @@
     <p-header>
         <div class="row">
             <div class="col-sm-3">
-                <span class="dialog-header">{{'goodsIssue.detail.qrCode.title ' | translate}}</span>
+                <span class="dialog-header">{{'inventoryTransfer.detail.qrCode.title ' | translate}}</span>
             </div>
             <div class="col-sm-9">
                 <div class="page-actions d-flex justify-content-end">
@@ -438,16 +440,20 @@
             <div class="col-sm-6">
                 <div class="d-flex align-items-center">
                     <p-inputSwitch></p-inputSwitch>
-                    <span class="ml-2">{{'goodsIssue.detail.qrCode.scanQRCode' | translate}}</span>
+                    <span class="ml-2">{{'inventoryTransfer.detail.qrCode.scanQRCode' | translate}}</span>
                     <div class="ml-2">
                         <input type="text" class="form-control" data-qe-id="dialog-input-start-scan-batches-no">
                     </div>
                 </div>
             </div>
             <div class="col-sm-6">
-                <div class="d-flex align-items-center justify-content-end">
-                    <span class="mr-2">{{'goodsIssue.detail.binLocation' | translate}}</span>
+                <div class="d-flex align-items-center justify-content-end mb-2">
+                    <span class="mr-2">{{'inventoryTransfer.detail.binLocation' | translate}}</span>
                     <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
+                </div>
+                <div class="d-flex align-items-center justify-content-end">
+                        <span class="mr-2">{{'inventoryTransfer.detail.amountScan' | translate}}</span>
+                        <input type="text" class="form-control input-scan" data-qe-id="dialog-input-amountScan" disabled>
                 </div>
             </div>
         </div>
@@ -466,23 +472,23 @@
                                 </div>
                             </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-code">
-                                {{'goodsIssue.detail.qrCode.code' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.code' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-item-code">
-                                {{'goodsIssue.detail.qrCode.itemCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.itemCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-item-name">
-                                {{'goodsIssue.detail.qrCode.itemName' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.itemName' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-serial">
-                                {{'goodsIssue.detail.qrCode.serial' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.serial' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-manufacturing-date">
-                                {{'goodsIssue.detail.qrCode.manufacturingDate' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.manufacturingDate' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-expiry-date">
-                                {{'goodsIssue.detail.qrCode.expiryDate' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.expiryDate' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-quantity">
-                                {{'goodsIssue.detail.qrCode.quantity' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.quantity' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-location-code">
-                                {{'goodsIssue.detail.qrCode.locationCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.locationCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-scan-code">
-                                {{'goodsIssue.detail.qrCode.scanCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.qrCode.scanCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-qrCode-action">
                                 {{'general.action' | translate}}
                             </th>
@@ -518,7 +524,7 @@
     <p-header>
         <div class="row">
             <div class="col-sm-3">
-                <span class="dialog-header">{{'goodsIssue.detail.amount.title ' | translate}}</span>
+                <span class="dialog-header">{{'inventoryTransfer.detail.amount.title ' | translate}}</span>
             </div>
             <div class="col-sm-9">
                 <div class="page-actions d-flex justify-content-end">
@@ -547,7 +553,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="d-flex align-items-center justify-content-end">
-                    <span class="mr-2">{{'goodsIssue.detail.binLocation' | translate}}</span>
+                    <span class="mr-2">{{'inventoryTransfer.detail.binLocation' | translate}}</span>
                     <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
                 </div>
             </div>
@@ -567,17 +573,17 @@
                                 </div>
                             </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-item-code">
-                                {{'goodsIssue.detail.amount.itemCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.amount.itemCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-item-name">
-                                {{'goodsIssue.detail.amount.itemName' | translate}} </th>
+                                {{'inventoryTransfer.detail.amount.itemName' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-unit">
-                                {{'goodsIssue.detail.amount.unitOfMeasure' | translate}} </th>
+                                {{'inventoryTransfer.detail.amount.unitOfMeasure' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-quantity">
-                                {{'goodsIssue.detail.amount.quantity' | translate}} </th>
+                                {{'inventoryTransfer.detail.amount.quantity' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-location-code">
-                                {{'goodsIssue.detail.amount.locationCode' | translate}} </th>
+                                {{'inventoryTransfer.detail.amount.locationCode' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-quantity-saved">
-                                {{'goodsIssue.detail.amount.quantitySaved' | translate}} </th>
+                                {{'inventoryTransfer.detail.amount.quantitySaved' | translate}} </th>
                             <th pResizableColumn data-qe-id="table-thead-amount-action">
                                 {{'general.action' | translate}}
                             </th>
@@ -607,10 +613,10 @@
     </p-footer>
 </p-dialog>
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displaygoodsIssue" [contentStyle]="{'overflow':'visible'}"
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayInventoryTransfer" [contentStyle]="{'overflow':'visible'}"
     [style]="{width: '80%'}" [responsive]="true">
     <p-header>
-        <span class="dialog-header">{{'goodsIssue.detail.goodsIssueRequest.customerName' | translate}}</span>
+        <span class="dialog-header">{{'inventoryTransfer.detail.request.customerName' | translate}}</span>
     </p-header>
     <div class="dialog-body">
         <div class="row mt-3">
@@ -618,7 +624,8 @@
                 <p-table resizableColumns [value]="">
                     <ng-template pTemplate="header">
                         <tr>
-                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-goodsIssue-request-check-box">
+                            <th width="2.5%" pResizableColumn
+                                data-qe-id="table-thead-inventoryTransfer-request-check-box">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
                                     <input type="checkbox" />
                                     <div class="state">
@@ -627,14 +634,12 @@
                                     </div>
                                 </div>
                             </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsIssue-request-created-date">
-                                {{'goodsIssue.detail.goodsIssueRequest.createdDate' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsIssue-request-document-no">
-                                {{'goodsIssue.detail.goodsIssueRequest.documentNo' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsIssue-request-buyer">
-                                {{'goodsIssue.detail.goodsIssueRequest.buyer' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-goodsIssue-request-creator">
-                                {{'goodsIssue.detail.goodsIssueRequest.creator' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-inventoryTransfer-request-created-date">
+                                {{'inventoryTransfer.detail.inventoryTransferRequest.createdDate' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-inventoryTransfer-request-document-no">
+                                {{'inventoryTransfer.detail.inventoryTransferRequest.documentNo' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-inventoryTransfer-request-creator">
+                                {{'inventoryTransfer.detail.inventoryTransferRequest.creator' | translate}} </th>
                         </tr>
                     </ng-template>
                 </p-table>
@@ -648,9 +653,9 @@
                     <button class="btn btn-labeled btn-save-dialog">
                         <span class="btn-label"><i class="material-icons">save</i></span>
                         <span class="button-label">
-                            {{'goodsIssue.detail.button.add' | translate}}
+                            {{'inventoryTransfer.detail.button.add' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displaygoodsIssue = false">
+                    <button class="btn btn-labeled btn-cancel" (click)="displayInventoryTransfer = false">
                         <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
                         <span class="button-label">
                             {{'general.button.cancel' | translate}}

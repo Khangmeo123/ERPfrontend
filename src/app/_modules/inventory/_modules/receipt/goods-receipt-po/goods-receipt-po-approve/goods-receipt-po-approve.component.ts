@@ -26,7 +26,7 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptPODetail.header.title');
   fileNameList: Array<any> = [];
   displayBatches: boolean = false;
-  displayCDA: boolean = false;
+  displaySerial: boolean = false;
   displayAmount: boolean = false;
   displayPurchseOrders: boolean = false;
   goodsReceiptPOSubs: Subscription = new Subscription();

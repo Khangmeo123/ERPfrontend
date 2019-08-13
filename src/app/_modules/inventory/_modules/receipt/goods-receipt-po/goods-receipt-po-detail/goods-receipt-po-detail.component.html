@@ -432,7 +432,7 @@
                                             </div>
                                             <div *ngIf="item.type == 2">
                                                 <a
-                                                    (click)="showCDA()">{{'goodsReceiptPODetail.tab1.cda' | translate}}</a>
+                                                    (click)="showSerial()">{{'goodsReceiptPODetail.tab1.Serial' | translate}}</a>
                                             </div>
                                             <div *ngIf="item.type == 3">
                                                 <a
@@ -590,7 +590,7 @@
     </p-footer>
 </p-dialog>
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayCDA" [contentStyle]="{'overflow':'visible'}"
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displaySerial" [contentStyle]="{'overflow':'visible'}"
     [style]="{width: '90%'}" [responsive]="true">
     <p-header>
         <div class="row">
@@ -688,7 +688,7 @@
                         <span class="button-label">
                             {{'general.button.save' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displayCDA = false">
+                    <button class="btn btn-labeled btn-cancel" (click)="displaySerial = false">
                         <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
                         <span class="button-label">
                             {{'general.button.cancel' | translate}}

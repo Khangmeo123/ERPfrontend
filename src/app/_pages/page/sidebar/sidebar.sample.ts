@@ -267,7 +267,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Phiếu điều chuyển kho',
-        route: '/master-data/department',
+        route: '/inventory/transfer/inventory-transfer',
         exact: false,
       },
       {
