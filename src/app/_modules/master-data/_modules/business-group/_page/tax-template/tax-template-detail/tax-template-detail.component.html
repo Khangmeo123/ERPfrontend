@@ -1,0 +1,151 @@
+<div class="page tax-template-detail">
+
+  <div class="page-header">
+    <div class="page-title">
+      {{'taxTemplate.title' | translate}}
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="save()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="page-section">
+      <accordion [formGroup]="taxTemplateForm">
+        <accordion-group [isOpen]="true">
+          <button (click)="toggleGeneralTab()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <span class="pull-left float-left">{{'taxTemplate.general.title' | translate }}</span>
+            <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="generalTab ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
+          </span>
+          </button>
+          <div class="row">
+            <div class="col form-group">
+              <label for="tax-template-code">
+                {{'taxTemplate.code' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="tax-template-code" formControlName="code">
+                <app-error data-qe-id="dialog-error-code"
+                           *ngIf="(code?.errors && code?.touched) || !!errors?.get('code')?.value"
+                           [formGroup]="taxTemplateForm" [property]="'code'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+            <div class="col form-group">
+              <label for="tax-template-name">
+                {{'taxTemplate.name' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="tax-template-name" formControlName="name">
+                <app-error data-qe-id="dialog-error-name"
+                           *ngIf="(name?.errors && name?.touched) || !!errors?.get('name')?.value"
+                           [formGroup]="taxTemplateForm" [property]="'name'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+            <div class="col form-group">
+              <label for="tax-template-type">
+                {{'taxTemplate.type' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form d-flex">
+                <app-simple-select [list]="typeList"
+                                   (listOpen)="taxTemplateDetailService.getTypeList()"
+                                   class="flex-grow-1"
+                                   (selectionChange)="onSelectTaxTemplateType($event)"
+                                   [valueSelector]="taxTemplateTypeSelector"
+                                   key="display"
+                ></app-simple-select>
+                <app-error data-qe-id="dialog-error-type"
+                           *ngIf="(type?.errors && type?.touched) || !!errors?.get('type')?.value"
+                           [formGroup]="taxTemplateForm" [property]="'type'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
+
+  </div>
+
+  <div class="page-footer d-flex justify-content-end">
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="save()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<p-dialog [modal]="true"
+          appendTo="body"
+          [(visible)]="ruleModal"
+          [contentStyle]="{overflow: 'visible'}"
+          [style]="{width: '900px'}">
+  <p-header>
+    {{'taxTemplate.ruleModal.title' | translate}}
+  </p-header>
+  <div class="container" [formGroup]="taxTemplateContentForm">
+    <div class="row">
+
+      <div class="col form-group">
+        <label for="split-tax-template-content-field">
+          {{'taxTemplate.taxTemplateContent.field' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+
+        <app-simple-select [list]="itemFields"
+                           key="display"
+                           [valueSelector]="taxTemplateContentSelector"
+                           [initialValue]="taxTemplateContentForm?.value?.itemFieldDisplay"
+                           id="split-tax-template-content-field"
+                           (selectionChange)="onSelectSplitRuleContent($event)"
+        ></app-simple-select>
+
+      </div>
+
+      <div class="col form-group">
+        <label for="split-tax-template-content-start">
+          {{'taxTemplate.taxTemplateContent.start' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" id="split-tax-template-content-start" pKeyFilter="num" class="form-control"
+               formControlName="start">
+      </div>
+
+      <div class="col form-group">
+        <label for="split-tax-template-content-end">
+          {{'taxTemplate.taxTemplateContent.start' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" id="split-tax-template-content-end" pKeyFilter="num" class="form-control"
+               formControlName="end">
+      </div>
+
+    </div>
+  </div>
+
+  <p-footer class="d-flex row">
+    <div class="col">
+      <button class="btn btn-cancel" (click)="cancelRule()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="saveRule()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>

@@ -1,7 +1,7 @@
-<div class="page province">
+<div class="page tax-template">
   <div class="page-header">
     <div class="page-title">
-      {{'province.title' | translate}}
+      {{'tax-template.title' | translate}}
     </div>
 
     <div class="page-actions">
@@ -36,7 +36,7 @@
 
   <div class="page-body">
     <div class="page-section">
-      <p-table [value]="provinceList"
+      <p-table [value]="taxTemplateList"
                [customSort]="true"
                [lazy]="true"
                (onLazyLoad)="sort($event)"
@@ -47,11 +47,15 @@
         <ng-template pTemplate="header">
           <tr>
             <th class="code" pResizableColumn [pSortableColumn]="'code'" data-qe-id="table-thead-code">
-              {{ 'province.code' | translate}}
+              {{ 'tax-template.code' | translate}}
               <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
+            <th class="type" pResizableColumn [pSortableColumn]="'type'" data-qe-id="table-thead-type">
+              {{ 'tax-template.type' | translate}}
+              <p-sortIcon [field]="'type'" class="float-right"></p-sortIcon>
+            </th>
             <th class="name" pResizableColumn [pSortableColumn]="'name'" data-qe-id="table-thead-name">
-              {{ 'province.name' | translate}}
+              {{ 'tax-template.name' | translate}}
               <p-sortIcon [field]="'name'" class="float-right"></p-sortIcon>
             </th>
             <th class="actions">
@@ -59,12 +63,21 @@
           </tr>
           <tr>
             <th class="th-filter code">
-              <app-advanced-filters [filter]="provinceSearchEntity.code"
+              <app-advanced-filters [filter]="taxTemplateSearchEntity.code"
                                     (changeFilter)="getList()"
               ></app-advanced-filters>
             </th>
+            <th class="th-filter type">
+              <app-simple-select [list]="typeList"
+                                 [initialValue]="taxTemplateSearchEntity?.typeDisplay"
+                                 (selectionChange)="onFilterTaxTemplateType($event)"
+                                 [valueSelector]="taxTemplateTypeSelector"
+                                 (listOpen)="taxTemplateService.getTypeList()"
+                                 key="display"
+              ></app-simple-select>
+            </th>
             <th class="th-filter name">
-              <app-advanced-filters [filter]="provinceSearchEntity.name"
+              <app-advanced-filters [filter]="taxTemplateSearchEntity.name"
                                     (changeFilter)="getList()"
               ></app-advanced-filters>
             </th>
@@ -79,10 +92,17 @@
               {{rowData.code}}
             </td>
             <td class="name">
+              {{rowData.type}}
+            </td>
+            <td class="name">
               {{rowData.name}}
             </td>
             <td class="actions">
               <a role="button" (click)="edit(rowData)">
+                <mat-icon>edit</mat-icon>
+              </a>
+
+              <a role="button" (click)="delete(rowData)">
                 <mat-icon>edit</mat-icon>
               </a>
             </td>
@@ -100,35 +120,35 @@
           appendTo="body"
           [(visible)]="modal">
   <p-header>
-    {{'province.modal.title' | translate}}
+    {{'tax-template.modal.title' | translate}}
   </p-header>
 
-  <div class="container" [formGroup]="provinceForm">
+  <div class="container" [formGroup]="taxTemplateForm">
     <div class="row">
       <div class="col">
-        <label for="province-code">
-          {{'province.code' | translate}}
+        <label for="tax-template-code">
+          {{'tax-template.code' | translate}}
           <span class="text-danger ml-1">(*)</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" id="province-code" formControlName="code">
+          <input type="text" class="form-control" id="tax-template-code" formControlName="code">
           <app-error data-qe-id="dialog-error-name"
                      *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
-                     [formGroup]="provinceForm" [property]="'code'" [placement]="'top'" class="error-form">
+                     [formGroup]="taxTemplateForm" [property]="'code'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
       </div>
 
       <div class="col">
-        <label for="province-name">
-          {{'province.name' | translate}}
+        <label for="tax-template-name">
+          {{'tax-template.name' | translate}}
           <span class="text-danger ml-1">(*)</span>
         </label>
         <div class="div-form">
-          <input type="text" class="form-control" id="province-name" formControlName="name">
+          <input type="text" class="form-control" id="tax-template-name" formControlName="name">
           <app-error data-qe-id="dialog-error-name"
                      *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
-                     [formGroup]="provinceForm" [property]="'name'" [placement]="'top'" class="error-form">
+                     [formGroup]="taxTemplateForm" [property]="'name'" [placement]="'top'" class="error-form">
           </app-error>
         </div>
       </div>
@@ -140,12 +160,12 @@
       <div class="col d-flex">
         <button class="btn btn-delete"
                 mwlConfirmationPopover
-                popoverTitle="{{'province.delete.title' | translate}}"
+                popoverTitle="{{'tax-template.delete.title' | translate}}"
                 data-qe-id="dialog-button-delete"
-                *ngIf="provinceForm.value?.id"
-                popoverMessage="{{'province.delete.message' | translate}}"
+                *ngIf="taxTemplateForm.value?.id"
+                popoverMessage="{{'tax-template.delete.message' | translate}}"
                 placement="bottom"
-                (confirm)="delete(provinceForm.value)">
+                (confirm)="delete(taxTemplateForm.value)">
           {{ 'general.button.delete' | translate}}</button>
         <div class="page-actions flex-grow-1">
           <button class="btn btn-cancel" (click)="cancel()">

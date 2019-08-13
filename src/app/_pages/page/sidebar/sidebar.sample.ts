@@ -70,6 +70,16 @@ export const sampleSidebarMenu = [
         isShowed: true,
       },
       {
+        label: 'Mẫu biểu thuế',
+        route: '/master-data/business-group/tax-template/tax-template-list',
+        isShowed: true,
+      },
+      {
+        label: 'Mẫu hệ thống tài khoản',
+        route: '/master-data/business-group/chart-of-account-template/chart-of-account-template-list',
+        isShowed: true,
+      },
+      {
         divider: true,
         isShowed: true,
       },
