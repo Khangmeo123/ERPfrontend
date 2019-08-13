@@ -9,11 +9,12 @@ export class InventoryCountingSearchEntity extends SearchEntity {
     inventoryOrganizationId: string = null;
     inventoryOrganizationCode: string;
     inventoryOrganizationName: string;
-    ownerId: string;
+    ownerId: string = null;
     ownerCode: string;
     ownerName: string;
     statusId: string = null;
     statusName: string;
+    postingDate: DateFilter = new DateFilter();
     // inventoryCounters: InventoryCountersEntity[];
     constructor(inventoryCountingSearchEntity?: any) {
         super(inventoryCountingSearchEntity);
@@ -36,3 +37,4 @@ export class EmployeeDetailOfCountingSearchEntity extends SearchEntity {
         super();
     }
 }
+

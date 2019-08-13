@@ -22,6 +22,7 @@ import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
     ConfirmationPopoverModule.forRoot({
       confirmButtonType: 'danger',
     }),
+    FormsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

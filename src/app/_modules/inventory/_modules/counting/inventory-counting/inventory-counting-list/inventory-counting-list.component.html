@@ -31,7 +31,7 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1 " matInput [matDatepicker]="picker"
-            placeholder="dd/mm/yyyy" data-qe-id="input-date-from">
+            placeholder="dd/mm/yyyy" data-qe-id="input-date-from" [(ngModel)] = "inventoryCountingSearchEntity.postingDate.greaterEqual">
           <mat-datepicker #picker></mat-datepicker>
           <div role="button" (click)="openDatePicker(picker)">
             <mat-icon>calendar_today</mat-icon>
@@ -40,13 +40,13 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
-            placeholder="dd/mm/yyyy" data-qe-id="button-date-to">
+            placeholder="dd/mm/yyyy" data-qe-id="button-date-to" [(ngModel)] = "inventoryCountingSearchEntity.postingDate.lessEqual">
           <mat-datepicker #datepicker></mat-datepicker>
           <div role="button" (click)="openToDatePicker(datepicker)">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
-        <button type="button" class="btn btn-labeled btn-add get-data" data-qe-id="button-fetchData">
+        <button type="button" class="btn btn-labeled btn-add get-data" data-qe-id="button-get-data" (click)="getList()">
           {{'general.button.getData' | translate}}</button>
       </div>
 
@@ -65,29 +65,29 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn data-qe-id="table-thead-issue-ID">
+            <th pResizableColumn data-qe-id="table-thead-issue-ID" [pSortableColumn]="'documentNumber'">
               {{ 'inventoryCounting.list.issueID' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'documentNumber'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-count-date">
+            <th pResizableColumn data-qe-id="table-thead-count-date" [pSortableColumn]="'documentDate'">
               {{ 'inventoryCounting.list.countDate' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'documentDate'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-inventory-code">
+            <th pResizableColumn data-qe-id="table-thead-inventory-code" [pSortableColumn]="'inventoryOrganizationName'">
               {{ 'inventoryCounting.list.inventoryCode' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'inventoryOrganizationName'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-inventory-counting-owner">
+            <th pResizableColumn data-qe-id="table-thead-inventory-counting-owner" [pSortableColumn]="'ownerName'">
               {{ 'inventoryCounting.list.inventoryCountingOwner' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'ownerName'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-counter">
+            <th pResizableColumn data-qe-id="table-thead-counter" [pSortableColumn]="'counter'">
               {{ 'inventoryCounting.list.counter' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-status">
+            <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'statusName'">
               {{ 'inventoryCounting.list.status' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'statusName'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
@@ -111,11 +111,19 @@
                 </app-single-select>
             </th>
             <th class="th-filter">
-                <app-single-select>
+                <app-single-select [list]="inventoryCountingOwnerExceptIds" [selectedList]="inventoryCountingOwnerIds"
+                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.ownerId"
+                (search)="typingSearchInventoryOwner($event, inventoryCountingSearchEntity.ownerId)"
+                (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
+                (listOpen)="dropListInventoryCoutingOwner(inventoryCountingSearchEntity.ownerId)">
                 </app-single-select>
             </th>
             <th class="th-filter">
-                <app-single-select>
+                <app-single-select [list]="inventoryCounterExceptIds" [selectedList]="inventoryCounterIds"
+                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.ownerId"
+                (search)="typingSearchInventoryCounter($event, inventoryCountingSearchEntity.ownerId)"
+                (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
+                (listOpen)="dropListInventoryCouter(inventoryCountingSearchEntity.ownerId)">
                 </app-single-select>
             </th>
             <th class="th-filter">
@@ -133,7 +141,11 @@
             <td> {{inventoryCounting.documentNumber}} </td>
             <td> {{inventoryCounting.documentDate}} </td>
             <td> {{inventoryCounting.inventoryOrganizationCode}} </td>
-            <td> {{inventoryCounting.description }} </td>
+            <td *ngIf="inventoryCounting.inventoryCounters && inventoryCounting.inventoryCounters.length >0">
+              <div *ngFor="let item of inventoryCounting.inventoryCounters">
+                  {{item.name }}
+              </div>
+            </td>
             <td> {{inventoryCounting.ownerName }} </td>
             <td> {{inventoryCounting.statusName }} </td>
             <td>
@@ -141,7 +153,7 @@
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click) = "editInventoryCounting()">
+                <div class="edit" (click) = "editInventoryCounting(inventoryCounting.id)">
                   <mat-icon>edit</mat-icon>
                 </div>
 
