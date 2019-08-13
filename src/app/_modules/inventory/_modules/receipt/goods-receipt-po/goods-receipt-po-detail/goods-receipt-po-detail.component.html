@@ -37,7 +37,7 @@
                     {{'general.button.receive' | translate}}
                 </span>
             </button> -->
-            <button class="btn btn-labeled btn-send" data-qe-id="button-send">
+            <button class="btn btn-labeled btn-send" data-qe-id="button-send" (click)="send()">
                 <span class="btn-label"><i class="material-icons">send</i></span>
                 <span class="button-label">
                     {{'general.button.send' | translate}}
@@ -162,9 +162,8 @@
                             {{'goodsReceiptPODetail.documentNumber' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-document-number"
-                            formControlName="documentNumber" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null 
-                            || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0}">
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-document-number"
+                            formControlName="documentNumber">
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
@@ -224,9 +223,17 @@
                             {{'goodsReceiptPODetail.receiptedDate' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-date-picker [control]="goodsReceiptPOForm.get('dueDate')"
-                            data-qe-id="detail-form-receipted-date">
-                        </app-date-picker>
+                        <div class="div-form">
+                            <app-date-picker [control]="goodsReceiptPOForm.get('dueDate')"
+                                data-qe-id="detail-form-receipted-date" class="w-100">
+                            </app-date-picker>
+                            <app-error data-qe-id="form-error-supplierAddress"
+                                *ngIf="(goodsReceiptPOForm.controls.dueDate?.errors && goodsReceiptPOForm.controls.dueDate?.touched) || !!goodsReceiptPOForm.controls.errors.get('dueDate')?.value"
+                                [formGroup]="goodsReceiptPOForm" [property]="'supplierContactId'" [placement]="'top'"
+                                class="error-form">
+                            </app-error>
+                        </div>
+
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
@@ -370,14 +377,8 @@
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
-                                        <th class="th-filter">
-                                            <input type="text" class="form-control w-100" pKeyFilter="int"
-                                                (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'quantity', 'equals')" />
-                                        </th>
-                                        <th class="th-filter">
-                                            <input type="text" class="form-control w-100" pKeyFilter="int"
-                                                (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'taxRate', 'equals')" />
-                                        </th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter"></th>
                                         <th class="th-filter">
                                             <app-single-select [list]="taxExceptIds" [selectedList]="taxIds"
                                                 [key]="'code'" (search)="typingSearchTax($event, taxSearchEntity.id)"
@@ -386,14 +387,8 @@
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
-                                        <th class="th-filter">
-                                            <input type="text" class="form-control w-100" pKeyFilter="int"
-                                                (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'generalDiscountRate', 'equals')" />
-                                        </th>
-                                        <th class="th-filter">
-                                            <input type="text" class="form-control w-100" pKeyFilter="int"
-                                                (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'generalDiscountCost', 'equals')" />
-                                        </th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter"></th>
                                         <th class="th-filter" width="8%"></th>
                                     </tr>
                                 </ng-template>

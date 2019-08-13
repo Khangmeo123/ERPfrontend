@@ -105,12 +105,14 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
     }
 
     getQuantityDetailList(goodsReceiptPOContentId: string) {
-        return this.http.post<GoodsReceiptPOQuantityDetail>(this.apiUrl + '/quantity/list',
+        return this.http.post<GoodsReceiptPOQuantityDetail[]>(this.apiUrl + '/quantity/list',
             JSON.stringify({ goodsReceiptPOContentId: goodsReceiptPOContentId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    return new GoodsReceiptPOQuantityDetail(r.body);
-                }),
+                    return r.body.map((item) => {
+                        return new GoodsReceiptPOQuantityDetail(item);
+                    });
+                })
             );
     }
 

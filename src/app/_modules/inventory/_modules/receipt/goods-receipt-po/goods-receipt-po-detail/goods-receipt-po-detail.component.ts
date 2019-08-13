@@ -6,7 +6,7 @@ import {
   GoodsReceiptPOUnitOfMeasureEntity,
 } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { Subscription, Subject } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -145,10 +145,11 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
         this.supplierAddressExceptIds = res.exceptIds;
         if (res.ids.length === 0 && res.exceptIds.length > 0) {
           this.goodsReceiptPOForm.controls.supplierAddress.setValue(res.exceptIds[0].supplierAddress);
-          this.goodsReceiptPOForm.controls.supplierContactId.setValue(res.exceptIds[0].supplierContactId);
+          this.goodsReceiptPOForm.controls.supplierContactId.setValue(res.exceptIds[0].id);
         }
         if (res.ids.length === 0 && res.exceptIds.length === 0) {
           this.goodsReceiptPOForm.controls.supplierAddress.setValue(null);
+          this.goodsReceiptPOForm.controls.supplierContactId.setValue(null);
         }
       }
     });
@@ -278,6 +279,16 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  send() {
+    if (!this.goodsReceiptPOForm.valid) {
+      this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
+    } else {
+      this.goodsReceiptPOService.send(this.goodsReceiptPOForm.value).then(res => {
+        this.backToList();
+      });
+    }
+  }
+
   // buyer:
   dropListBuyer(id: string) {
     this.buyerSearchEntity = new GoodsReceiptPORequesterSearchEntity();
@@ -369,8 +380,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
 
   chooseSupplier(event: any[]) {
     this.supplierDetailId = event[0].id;
-    this.goodsReceiptPOForm.controls.supplierDetailId.setValue(event[0].id);
-    this.goodsReceiptPOForm.controls.supplierName.setValue(event[0].name);
+    this.goodsReceiptPOService.chooseSupplier(event);
     this.supplierAddressSearchEntity = new GoodsReceiptPOSupplierAddressSearchEntity();
     this.supplierAddressSearchEntity.supplierDetailId = this.supplierDetailId;
     this.goodsReceiptPOService.dropListSupplierAddress(this.supplierAddressSearchEntity);

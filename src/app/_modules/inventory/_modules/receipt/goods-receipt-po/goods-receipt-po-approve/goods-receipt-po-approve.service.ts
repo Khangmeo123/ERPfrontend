@@ -61,8 +61,8 @@ export class GoodsReceiptPOApproveService {
                 }
             }, err => {
                 if (err) {
+                    this.toastrService.error('Có lỗi xảy ra trong quá trình phê duyệt !');
                     reject();
-                    console.log(err);
                 }
             });
         });
@@ -78,8 +78,8 @@ export class GoodsReceiptPOApproveService {
                 }
             }, err => {
                 if (err) {
+                    this.toastrService.error('Có lỗi xảy ra trong quá trình từ chối phê duyệt !');
                     reject();
-                    console.log(err);
                 }
             });
         });

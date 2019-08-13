@@ -130,6 +130,7 @@ export class GoodsReceiptPOQuantityDetail extends Entity {
     itemName: string;
     unitOfMeasureName: string;
     quantity: number;
+    actualReceive: number;
     goodsReceiptPOQuantities: GoodsReceiptPOQuantity[];
     constructor(goodsReceiptPOQuantityDetail?: any) {
         super(goodsReceiptPOQuantityDetail);
@@ -188,7 +189,7 @@ export class GoodsReceiptPOBatchEntity extends Entity {
     details: string;
     unitCost: number;
     goodsReceiptPOBatchBinLocations: GoodsReceiptPOBatchBinLocationEntity[];
-
+    actualReceive: number;
     constructor(goodsReceiptPOBatchEntity?: any) {
         super(goodsReceiptPOBatchEntity);
     }

@@ -30,7 +30,7 @@ export class GoodsReceiptPOForm extends FormModel {
     inventoryOrganizationStreet = new FormControl(null);
     generalDiscountRate = new FormControl(null);
     generalDiscountCost = new FormControl(null);
-    purchaseOrderName = new FormControl(null);
+    purchaseOrderName = new FormControl(null, [requiredField]);
     goodsReceiptPOContents = new FormArray([]);
     totalGoodsReceiptPOContents = new FormControl(null);
     purchaseOrderIds = new FormArray([]);

@@ -92,6 +92,6 @@ export class GoodsReceiptPOItemDetailSearchEntity extends SearchEntity {
 }
 
 export class GoodsReceiptPOBinlocationSearchEntity extends SearchEntity {
-    GoodsReceiptPOContentId: string;
+    goodsReceiptPOContentId: string;
     code = new TextFilter();
 }

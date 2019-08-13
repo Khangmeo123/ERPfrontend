@@ -7,16 +7,21 @@
             <span class="page-title">
                 {{pageTitle | translate}}
             </span>
-            <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
+            <span class="ml-2 pending-status"
+                *ngIf="goodsReceiptPOForm.controls.statusName.value === 'PENDING_APPROVAL'">{{'general.pending'| translate}}</span>
+            <span class="ml-2 done-status"
+                *ngIf="goodsReceiptPOForm.controls.statusName.value === 'DONE'">{{'general.done'| translate}}</span>
         </div>
         <div class="page-actions d-flex">
-            <button class="btn btn-labeled btn-approve" data-qe-id="button-approve" (click)="approve()">
+            <button class="btn btn-labeled btn-approve" data-qe-id="button-approve" (click)="approve()"
+                *ngIf="goodsReceiptPOForm.controls.statusName.value === 'PENDING_APPROVAL'">
                 <span class="btn-label"><i class="material-icons">check</i></span>
                 <span class="button-label">
                     {{'general.button.approve' | translate}}
                 </span>
             </button>
-            <button class="btn btn-labeled btn-rejected" data-qe-id="button-rejected" (click)="reject()">
+            <button class="btn btn-labeled btn-rejected" data-qe-id="button-rejected" (click)="reject()"
+                *ngIf="goodsReceiptPOForm.controls.statusName.value === 'PENDING_APPROVAL'">
                 <span class="btn-label"><i class="material-icons">block</i></span>
                 <span class="button-label">
                     {{'general.button.rejected' | translate}}
@@ -52,14 +57,6 @@
                 <span class="form-title">
                     {{'goodsReceiptPODetail.form.title' | translate}}
                 </span>
-                <div class="page-actions justify-content-end">
-                    <button class="btn btn-labeled btn-delete" (click)="deactivate()"
-                        *ngIf="goodsReceiptPOId!==null&&goodsReceiptPOId!==undefined">
-                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                        <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span></button>
-                </div>
             </div>
             <div class="line"></div>
             <div class="page-section-form-body">
@@ -97,7 +94,7 @@
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <input type="text" class="form-control disabled" data-qe-id="detail-form-goods-receipt"
-                            formControlName="purchaseOrderNames">
+                            formControlName="purchaseOrderName">
                     </div>
                 </div>
             </div>
@@ -185,9 +182,9 @@
             <div class="tab-header pt-3 pb-3 pl-3 pr-3">
                 <mat-tab-group>
                     <mat-tab label="{{'goodsReceiptPODetail.tab1.title' | translate}}">
-                        <div class="table pt-3" formArrayName="goodsReceiptPOContents">
+                        <div class="table pt-3">
                             <p-table #tableGoodsReceiptPOContents [scrollable]="true" scrollHeight="500px"
-                                [resizableColumns]="true" [rowTrackBy]="trackByFn"
+                                [resizableColumns]="true"
                                 [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value">
                                 <ng-template pTemplate="colgroup">
                                     <colgroup>
@@ -293,15 +290,13 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-goodsReceiptPOContent let-index="rowIndex">
-                                    <tr [formGroupName]='index'>
+                                    <tr>
                                         <td class="ui-resizable-column">{{goodsReceiptPOContent.documentNumber}}</td>
                                         <td class="ui-resizable-column">{{goodsReceiptPOContent.itemCode}}</td>
                                         <td class="ui-resizable-column">{{goodsReceiptPOContent.itemName}}</td>
                                         <td class="ui-resizable-column">{{goodsReceiptPOContent.unitOfMeasureName}}</td>
                                         <td class="ui-resizable-column">
-                                            <input type="text" class="form-control w-100 text-right"
-                                                formControlName="quantity" (input)="recalculateContents()"
-                                                pKeyFilter="int">
+                                            {{goodsReceiptPOContent.quantity}}
                                         </td>
                                         <td class="ui-resizable-column text-right">{{goodsReceiptPOContent.unitPrice}}
                                         </td>
@@ -357,7 +352,7 @@
             </div>
         </div>
 
-        <div class="page-section">
+        <div class="page-section" *ngIf="goodsReceiptPOId !== null && goodsReceiptPOId !== undefined">
             <div class="page-section-form-header">
                 <span class="form-title">
                     {{'goodsReceiptPODetail.form.post.title' | translate}}
@@ -365,7 +360,7 @@
             </div>
             <div class="line"></div>
             <div class="page-section-form-body">
-                <app-discussion [discussionId]="'2b155311-ab49-4cff-af4e-7156bfaa97c2'"></app-discussion>
+                <app-discussion [discussionId]="goodsReceiptPOId"></app-discussion>
             </div>
         </div>
     </div>

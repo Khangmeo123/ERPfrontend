@@ -121,7 +121,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   select(event) {
     const { data, index } = event;
     if (this.hasSelected) {
-      if (this.selectedList[0].id === data.id) {
+      if (this.selectedList[0].id && this.selectedList[0].id === data.id) {
         return this.unselect(event);
       }
     }
@@ -131,6 +131,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       ...this.selectedList,
     ];
     this.selectedList[0] = data;
+    this.initialValue = event.data[this.key];
     return this.onChange();
   }
 

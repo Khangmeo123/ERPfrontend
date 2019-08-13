@@ -43,7 +43,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
   supplierDetailId: string;
   goodsReceiptPOId: string;
-  quantityDetail: GoodsReceiptPOQuantityDetail;
+  quantityDetailList: GoodsReceiptPOQuantityDetail[];
   goodsReceiptPOContentId: string;
   activeScan: boolean;
   serialNumber: string;
@@ -94,9 +94,9 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       }
     });
 
-    const quantityDetailSub = this.goodsReceiptPOService.quantityDetail.subscribe(res => {
+    const quantityDetailSub = this.goodsReceiptPOService.quantityDetailList.subscribe(res => {
       if (res) {
-        this.quantityDetail = res;
+        this.quantityDetailList = res;
       }
     });
 
@@ -257,6 +257,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     if (id !== null && id.length > 0) {
       this.binLocationSearchEntity.ids.push(id);
     }
+    this.binLocationSearchEntity.goodsReceiptPOContentId = this.goodsReceiptPOContentId;
     this.goodsReceiptPOService.dropListBinLocation(this.binLocationSearchEntity);
   }
 
@@ -270,8 +271,10 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   updateQuantityDetail() {
-    if (this.goodsReceiptPOService.validateSubmit([this.quantityDetail])) {
-      this.goodsReceiptPOService.updateQuantityDetail(this.quantityDetail);
+    if (this.goodsReceiptPOService.validateSubmitQuantity(this.quantityDetailList)) {
+      this.goodsReceiptPOService.updateQuantityDetail(this.quantityDetailList).then(res => {
+        this.displayQuantity = false;
+      });
     }
   }
 
@@ -337,5 +340,13 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
 
   deleteMultipleBatch() {
     this.goodsReceiptPOService.deleteMultipleBatch();
+  }
+
+  updateBatch() {
+    if (this.goodsReceiptPOService.validateSubmitBatch(this.batchList)) {
+      this.goodsReceiptPOService.updateBatch(this.quantityDetailList).then(res => {
+        this.displayBatch = false;
+      });
+    }
   }
 }

@@ -250,14 +250,8 @@
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
-                                        <th class="th-filter">
-                                            <input type="text" class="form-control w-100" pKeyFilter="int"
-                                                (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'quantity', 'equals')" />
-                                        </th>
-                                        <th class="th-filter">
-                                            <input type="text" class="form-control w-100" pKeyFilter="int"
-                                                (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'actualReceive', 'equals')" />
-                                        </th>
+                                        <th class="th-filter"> </th>
+                                        <th class="th-filter"></th>
                                         <th class="th-filter"></th>
                                     </tr>
                                 </ng-template>
@@ -817,8 +811,8 @@
     <div class="dialog-body">
         <div class="row mt-3">
             <div class="col-sm-12">
-                <p-table resizableColumns [value]="quantityDetail.goodsReceiptPOQuantities" [scrollable]="true"
-                    scrollHeight="300px" [resizableColumns]="true">
+                <p-table resizableColumns [value]="quantityDetailList" [scrollable]="true" scrollHeight="300px"
+                    [resizableColumns]="true">
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -849,7 +843,7 @@
                             </th>
                         </tr>
                     </ng-template>
-                    <ng-template pTemplate="body" let-goodsReceiptPOQuantity let-index="rowIndex">
+                    <ng-template pTemplate="body" let-quantityDetail let-index="rowIndex">
                         <tr>
                             <td class="ui-resizable-column" *ngIf="index === 0"
                                 [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1">
@@ -865,22 +859,25 @@
                             </td>
                             <td class="ui-resizable-column" *ngIf="index === 0"
                                 [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1">
-                                <input type="text" class="form-control" [(ngModel)]="quantityDetail.actualReceive" />
+                                <input type="number" class="form-control" [ngModel]="quantityDetail.actualReceive"
+                                    (ngModelChange)="quantityDetail.actualReceive = Number($event)" />
                             </td>
                             <td>
                                 <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds"
-                                    [key]="'code'" [initialValue]="goodsReceiptPOQuantity.binLocationCode"
+                                    [key]="'code'"
+                                    [initialValue]="quantityDetail.goodsReceiptPOQuantities[0].binLocationCode"
                                     (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
-                                    (selectionChange)="binLocationSearchEntity.id = $event[0];"
-                                    (listOpen)="dropListBinLocation(unitOfMeasureSearchEntity.id)"
+                                    (selectionChange)="quantityDetail.goodsReceiptPOQuantities[0].binLocationId = $event[0];"
+                                    (listOpen)="dropListBinLocation(quantityDetail.goodsReceiptPOQuantities[0].binLocationId)"
                                     data-qe-id="dialog-input-bin-location"></app-single-select>
                             </td>
                             <td>
                                 <div class="validation-div">
-                                    <input type="text" class="form-control"
+                                    <input type="number" class="form-control"
                                         [ngClass]="{'error-border-color': quantityDetail.errors}"
                                         [attr.placeholder]="placeholder"
-                                        [(ngModel)]="goodsReceiptPOQuantity.quantity" />
+                                        [ngModel]="quantityDetail.goodsReceiptPOQuantities[0].quantity"
+                                        (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = Number($event)" />
                                     <div class="invalid-validation" *ngIf="quantityDetail.errors">
                                         <span>{{quantityDetail.errors.message}}</span>
                                     </div>
@@ -890,7 +887,7 @@
                                 <mat-icon class="text-danger" (click)="deleteBinLocationQuantity()">delete</mat-icon>
                             </td>
                         </tr>
-                        <tr *ngIf="index === (quantityDetail.goodsReceiptPOQuantities.length - 1)">
+                        <tr>
                             <td>
                                 <a href="javascript:;" (click)="addBinLocationQuantity()">+ Bấm vào để thêm mới...</a>
                             </td>

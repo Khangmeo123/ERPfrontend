@@ -81,10 +81,25 @@ export class GoodsReceiptPODetailService {
             this.goodsReceiptPORepository.save(goodsReceiptPOEntity).subscribe(res => {
                 if (res) {
                     this.toastrService.success('Cập nhật thành công !');
-                    const goodsReceiptPOForm = this.fb.group(
-                        new GoodsReceiptPOForm(res),
-                    );
-                    this.recalculateContents(goodsReceiptPOForm);
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.goodsReceiptPOForm.next(this.fb.group(
+                        new GoodsReceiptPOForm(err),
+                    ));
+                    reject();
+                }
+            });
+        });
+        return defered;
+    }
+
+    send(goodsReceiptPOEntity: any) {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.goodsReceiptPORepository.send(goodsReceiptPOEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
                     resolve();
                 }
             }, err => {
@@ -134,6 +149,18 @@ export class GoodsReceiptPODetailService {
                     this.supplierList.next(res);
                 }
             });
+    }
+
+    chooseSupplier(event: any[]) {
+        const currentForm = this.goodsReceiptPOForm.getValue();
+        currentForm.controls.supplierDetailId.setValue(event[0].id);
+        currentForm.controls.supplierName.setValue(event[0].name);
+        currentForm.controls.purchaseOrderName.setValue(null);
+        const goodsReceiptPOContents = currentForm.controls.goodsReceiptPOContents as FormArray;
+        goodsReceiptPOContents.clear();
+        const purchaseOrderIds = currentForm.controls.purchaseOrderIds as FormArray;
+        purchaseOrderIds.clear();
+        this.recalculateContents(currentForm);
     }
 
     // supplierAddress:
@@ -385,7 +412,7 @@ export class GoodsReceiptPODetailService {
                 const unitPrice = control.get('unitPrice').value;
                 const taxRate = control.get('taxRate').value;
                 const generalDiscountCost = control.get('generalDiscountCost').value;
-                const quantity = control.get('quantity').value;
+                const quantity = Number(control.get('quantity').value);
                 const taxNumber = unitPrice * (taxRate / 100);
                 const totalValue = Math.round((unitPrice + taxNumber - generalDiscountCost) * quantity);
                 if (control.get('total')) {
