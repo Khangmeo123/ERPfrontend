@@ -4,6 +4,7 @@ export class Entity {
     isEdited: boolean = true;
     isSelected: boolean = false;
     errors: any;
+
     constructor(entity: any) {
         if (entity !== null && entity !== undefined) {
             Object.keys(entity).forEach((item) => {
@@ -26,6 +27,7 @@ export class Entity {
 export class Entities {
     ids: any[] = [];
     exceptIds: any[] = [];
+
     constructor() {
 
     }
@@ -35,7 +37,18 @@ export class EnumEntity {
     id: string;
     name: string;
     display: string;
+
     constructor() {
 
+    }
+}
+
+export class UserEntity extends Entity {
+    username: string;
+
+    password: string;
+
+    constructor(userEntity?: UserEntity) {
+        super(userEntity);
     }
 }
