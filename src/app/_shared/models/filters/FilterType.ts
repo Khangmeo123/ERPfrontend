@@ -1,10 +1,7 @@
 export class FilterType {
   sign: string;
   code: string;
-  languages: {
-    en: string;
-    vi: string;
-  };
+  translate: string;
 
   constructor(filterType?: FilterType) {
     this.sign = filterType !== null && filterType !== undefined ? filterType.sign : null;
