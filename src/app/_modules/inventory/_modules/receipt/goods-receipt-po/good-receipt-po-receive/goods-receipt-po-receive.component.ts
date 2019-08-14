@@ -83,6 +83,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     private generalService: GeneralService,
     private route: ActivatedRoute,
     private router: Router) {
+    this.displayBatch = true;
     this.route.queryParams
       .subscribe(params => {
         if (params.id) {
@@ -330,8 +331,8 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.deleteSerialNumber(index);
   }
 
-  checkAllSerialNumber() {
-    this.goodsReceiptPOService.checkAllSerialNumber();
+  checkAllSerialNumber(target: any) {
+    this.goodsReceiptPOService.checkAllSerialNumber(target.checked);
   }
 
   deleteMultipleSerialNumber() {
@@ -370,8 +371,8 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.deleteBinLocationBatch(indexRow, index);
   }
 
-  checkAllBatch() {
-    this.goodsReceiptPOService.checkAllBatch();
+  checkAllBatch(target: any) {
+    this.goodsReceiptPOService.checkAllBatch(target.checked);
   }
 
   deleteMultipleBatch() {

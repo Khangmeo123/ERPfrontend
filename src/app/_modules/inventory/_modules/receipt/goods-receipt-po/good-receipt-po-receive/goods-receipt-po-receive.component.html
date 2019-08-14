@@ -280,10 +280,10 @@
                                                     {{'goodsReceiptPODetail.tab1.amount' | translate}}
                                                 </a>
                                             </div> -->
-                                            <a (click)="showBatches(goodsReceiptPOContent)" href="javascript:;">
+                                            <a (click)="showBatch(goodsReceiptPOContent)" href="javascript:;">
                                                 {{'goodsReceiptPODetail.tab1.batches' | translate}}
                                             </a>
-                                            <a (click)="showSerial(goodsReceiptPOContent.id)" href="javascript:;">
+                                            <a (click)="showSerial(goodsReceiptPOContent)" href="javascript:;">
                                                 {{'goodsReceiptPODetail.tab1.Serial' | translate}}
                                             </a>
                                             <a (click)="showQuantity(goodsReceiptPOContent)" href="javascript:;">
@@ -335,6 +335,15 @@
             </div>
             <div class="col-sm-9">
                 <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-clear mr-2" data-qe-id="button-clear"
+                        (click)="clearSerialNumberTable(tableBatch)">
+                        <span class="btn-label">
+                            <img src="/assets/img/filter.svg" width="16">
+                        </span>
+                        <span class="button-label">
+                            {{'general.button.clear' | translate}}
+                        </span>
+                    </button>
                     <button class="btn btn-labeled btn-import mr-2">
                         <span class="btn-label">
                             <img src="/assets/img/import.svg" width="24">
@@ -347,7 +356,7 @@
                         <span class="button-label">
                             {{'general.button.export' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-delete">
+                    <button class="btn btn-labeled btn-delete" (click)="deleteMultipleBatch()">
                         <span class="btn-label"><i class="material-icons">delete</i></span>
                         <span class="button-label">
                             {{'general.button.delete' | translate}}
@@ -413,7 +422,7 @@
                         <tr>
                             <th width="2.5%" pResizableColumn data-qe-id="table-thead-batches-check-box">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
+                                    <input type="checkbox" (change)="checkAllBatch($event.target)" />
                                     <div class="state">
                                         <i class="icon material-icons">done</i>
                                         <label></label>
@@ -577,7 +586,7 @@
                         <tr>
                             <th width="2.5%" pResizableColumn data-qe-id="table-thead-batches-check-box">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
+                                    <input type="checkbox" (change)="checkAllBatch($event)" />
                                     <div class="state">
                                         <i class="icon material-icons">done</i>
                                         <label></label>
@@ -684,7 +693,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-save-dialog">
+                    <button class="btn btn-labeled btn-save-dialog" (click)="updateBatch()">
                         <span class="btn-label"><i class="material-icons">save</i></span>
                         <span class="button-label">
                             {{'general.button.save' | translate}}
@@ -730,7 +739,7 @@
                         <span class="button-label">
                             {{'general.button.export' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-delete">
+                    <button class="btn btn-labeled btn-delete" (click)="deleteMultipleSerialNumber()">
                         <span class="btn-label"><i class="material-icons">delete</i></span>
                         <span class="button-label">
                             {{'general.button.delete' | translate}}
@@ -805,7 +814,7 @@
                         <tr>
                             <th width="2.5%" data-qe-id="table-thead-qrCode-check-box">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
+                                    <input type="checkbox" (change)="checkAllSerialNumber($event.target)" />
                                     <div class="state">
                                         <i class="icon material-icons">done</i>
                                         <label></label>
@@ -932,7 +941,7 @@
                         <tr>
                             <th width="2.5%" data-qe-id="table-thead-qrCode-check-box">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
+                                    <input type="checkbox" (change)="checkAllSerialNumber($event.target)" />
                                     <div class="state">
                                         <i class="icon material-icons">done</i>
                                         <label></label>
