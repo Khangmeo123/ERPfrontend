@@ -40,7 +40,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptPODetail.header.title');
   fileNameList: Array<any> = [];
   displayBatches: boolean = false;
-  displayCDA: boolean = false;
+  displaySerial: boolean = false;
   displayAmount: boolean = false;
   displayPurchseOrders: boolean = false;
   goodsReceiptPOSubs: Subscription = new Subscription();
@@ -257,8 +257,8 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     this.displayBatches = true;
   }
 
-  showCDA() {
-    this.displayCDA = true;
+  showSerial() {
+    this.displaySerial = true;
   }
 
   showAmount() {

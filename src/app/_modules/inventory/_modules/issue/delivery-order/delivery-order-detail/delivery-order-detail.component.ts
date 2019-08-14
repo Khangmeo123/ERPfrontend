@@ -27,7 +27,7 @@ export class DeliveryOrderDetailComponent implements OnInit {
   ]
 
   displayBatches: boolean = false;
-  displayCDA: boolean = false;
+  displaySerial: boolean = false;
   displayAmount: boolean = false;
   displaydeliveryOrder: boolean = false;
 
@@ -47,8 +47,8 @@ export class DeliveryOrderDetailComponent implements OnInit {
     this.displayBatches = true;
   }
 
-  showCDA() {
-    this.displayCDA = true;
+  showSerial() {
+    this.displaySerial = true;
   }
 
   showAmount() {

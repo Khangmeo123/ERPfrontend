@@ -1,0 +1,24 @@
+.ui-dialog .ui-dialog-titlebar-icon span {
+  display: none !important;
+}
+
+.inventory-transfer-detail {
+  a {
+    text-decoration: underline !important;
+    color: #007ee5 !important;
+  }
+
+  .back-to-list {
+      .material-icons {
+        font-size: 15px !important;
+      }
+    
+  }
+  .tab-upload {
+      height: 200px;
+  }
+}
+
+.input-scan {
+  width: 24.5%;
+}

@@ -3,13 +3,13 @@ import { translate } from 'src/app/_helpers/string';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-return-detail',
-  templateUrl: './return-detail.component.html',
-  styleUrls: ['./return-detail.component.scss'],
+  selector: 'app-goods-receipt-po-detail',
+  templateUrl: './inventory-transfer-detail.component.html',
+  styleUrls: ['./inventory-transfer-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class ReturnDetailComponent implements OnInit {
-  pageTitle = translate('return.detail.header.title');
+export class InventoryTransferDetailComponent implements OnInit {
+  pageTitle = translate('inventoryTransfer.header.title');
   fileNameList: Array<any> = []
   tableTemp = [
     {
@@ -18,7 +18,7 @@ export class ReturnDetailComponent implements OnInit {
     },
     {
       total: 2000000,
-      type: 2,
+      type: 2, 
     },
     {
       total: 2000000,
@@ -29,7 +29,7 @@ export class ReturnDetailComponent implements OnInit {
   displayBatches: boolean = false;
   displaySerial: boolean = false;
   displayAmount: boolean = false;
-  displayReturn: boolean = false;
+  displayInventoryTransfer: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -55,11 +55,11 @@ export class ReturnDetailComponent implements OnInit {
     this.displayAmount = true;
   }
 
-  showReturn() {
-    this.displayReturn = true;
+  showInventoryTransfer() {
+    this.displayInventoryTransfer = true;
   }
 
   backToList() {
-    this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
+    this.router.navigate(['/inventory/receipt/goods-receipt/goods-receipt-list']);
   }
 }
