@@ -91,8 +91,12 @@ export class TaxTemplateDetailComponent implements OnInit, OnChanges, OnDestroy 
     return this.taxTemplateForm.get('name') as FormControl;
   }
 
-  get type() {
-    return this.taxTemplateForm.get('type') as FormControl;
+  get typeId() {
+    return this.taxTemplateForm.get('typeId') as FormControl;
+  }
+
+  get typeDisplay() {
+    return this.taxTemplateForm.get('typeDisplay') as FormControl;
   }
 
   get errors() {
@@ -141,7 +145,8 @@ export class TaxTemplateDetailComponent implements OnInit, OnChanges, OnDestroy 
 
   onSelectTaxTemplateType(event) {
     if (event) {
-
+      this.typeId.setValue(event.id);
+      this.typeDisplay.setValue(event.display);
     }
   }
 }

@@ -59,6 +59,7 @@
               </label>
               <div class="div-form d-flex">
                 <app-simple-select [list]="typeList"
+                                   id="tax-template-type"
                                    (listOpen)="taxTemplateDetailService.getTypeList()"
                                    class="flex-grow-1"
                                    (selectionChange)="onSelectTaxTemplateType($event)"
@@ -66,8 +67,8 @@
                                    key="display"
                 ></app-simple-select>
                 <app-error data-qe-id="dialog-error-type"
-                           *ngIf="(type?.errors && type?.touched) || !!errors?.get('type')?.value"
-                           [formGroup]="taxTemplateForm" [property]="'type'" [placement]="'top'" class="error-form">
+                           *ngIf="(typeId?.errors && typeId?.touched) || !!errors?.get('typeId')?.value"
+                           [formGroup]="taxTemplateForm" [property]="'typeId'" [placement]="'top'" class="error-form">
                 </app-error>
               </div>
             </div>
@@ -100,50 +101,44 @@
   </p-header>
   <div class="container" [formGroup]="taxTemplateContentForm">
     <div class="row">
+      <div class="col form-group">
+        <label for="template-code">
+          {{'taxTemplate.code' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" class="form-control" id="template-code" formControlName="code">
+      </div>
 
       <div class="col form-group">
-        <label for="split-tax-template-content-field">
+        <label for="template-name">
+          {{'taxTemplate.name' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <input type="text" class="form-control" id="template-name" formControlName="name">
+      </div>
+
+      <div class="col form-group">
+        <label for="template-type">
           {{'taxTemplate.taxTemplateContent.field' | translate}}
           <span class="text-danger ml-1">(*)</span>
         </label>
-
-        <app-simple-select [list]="itemFields"
+        <app-simple-select id="template-type"
+                           [list]="typeList"
+                           (selectionChange)="onSelectTaxTemplateType($event)"
+                           (listOpen)="taxTemplateDetailService.getTypeList()"
                            key="display"
-                           [valueSelector]="taxTemplateContentSelector"
-                           [initialValue]="taxTemplateContentForm?.value?.itemFieldDisplay"
-                           id="split-tax-template-content-field"
-                           (selectionChange)="onSelectSplitRuleContent($event)"
+                           [initialValue]="typeDisplay?.value"
         ></app-simple-select>
-
       </div>
-
-      <div class="col form-group">
-        <label for="split-tax-template-content-start">
-          {{'taxTemplate.taxTemplateContent.start' | translate}}
-          <span class="text-danger ml-1">(*)</span>
-        </label>
-        <input type="text" id="split-tax-template-content-start" pKeyFilter="num" class="form-control"
-               formControlName="start">
-      </div>
-
-      <div class="col form-group">
-        <label for="split-tax-template-content-end">
-          {{'taxTemplate.taxTemplateContent.start' | translate}}
-          <span class="text-danger ml-1">(*)</span>
-        </label>
-        <input type="text" id="split-tax-template-content-end" pKeyFilter="num" class="form-control"
-               formControlName="end">
-      </div>
-
     </div>
   </div>
 
   <p-footer class="d-flex row">
     <div class="col">
-      <button class="btn btn-cancel" (click)="cancelRule()">
+      <button class="btn btn-cancel" (click)="cancel()">
         {{'general.button.cancel' | translate}}
       </button>
-      <button class="btn btn-save" (click)="saveRule()">
+      <button class="btn btn-save" (click)="save()">
         {{'general.button.save' | translate}}
       </button>
     </div>
