@@ -3,15 +3,17 @@ import { Repository } from 'src/app/_helpers/repository';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {
-    InventoryOrganizationOfCountingSearchEntity
-    , EmployeeDetailOfCountingSearchEntity,
-    ItemDetailOfCountingSearchEntity
+    InventoryOrganizationOfCountingSearchEntity,
+    EmployeeDetailOfCountingSearchEntity,
+    ItemDetailOfCountingSearchEntity,
+    UnitOfMeasureOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import {
-    InventoryOrganizationOfCountingEntity
-    , EmployeeDetailOfCountingEntity,
+    InventoryOrganizationOfCountingEntity,
+    EmployeeDetailOfCountingEntity,
     InventoryCountingEntity,
-    ItemDetailOfCountingEntity
+    ItemDetailOfCountingEntity,
+    UnitOfMeasureOfCountingEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { Entities } from 'src/app/_helpers/entity';
 import { map } from 'rxjs/operators';
@@ -34,6 +36,13 @@ export class InventoryCountingDetailRepository extends Repository {
                 map(r => {
                     return new InventoryCountingEntity(r.body);
                 }),
+            );
+    }
+
+    save(inventoryCountingEntity: any): Observable<InventoryCountingEntity> {
+        return this.http.post<InventoryCountingEntity>(this.apiUrl + '/save', JSON.stringify(inventoryCountingEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => new InventoryCountingEntity(r.body)),
             );
     }
 
@@ -70,7 +79,7 @@ export class InventoryCountingDetailRepository extends Repository {
     }
 
     dropListItemDetail(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-employee-detail',
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail',
             JSON.stringify(itemDetailOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
@@ -79,6 +88,22 @@ export class InventoryCountingDetailRepository extends Repository {
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
                         return new ItemDetailOfCountingEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
+    dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail',
+            JSON.stringify(unitOfMeasureOfCountingSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new UnitOfMeasureOfCountingEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new UnitOfMeasureOfCountingEntity(item);
                     });
                     return r.body;
                 }),

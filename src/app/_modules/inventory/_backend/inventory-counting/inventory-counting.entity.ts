@@ -60,10 +60,18 @@ export class InventoryCountingContents extends Entity {
     itemDetailUnitOfMeasureName: string;
     binLocationId: string;
     binLocationCode: string;
-    quantityOnDocumentDate: 0
+    quantityOnDocumentDate: 0;
 }
 
 export class ItemDetailOfCountingEntity extends Entity {
     code: string;
     name: string;
+}
+
+export class UnitOfMeasureOfCountingEntity extends Entity {
+    code: string;
+    name: string;
+    constructor(unitOfMeasureOfCountingEntity?: any) {
+        super(unitOfMeasureOfCountingEntity);
+    }
 }

@@ -9,9 +9,8 @@ export class InventoryCountingSearchEntity extends SearchEntity {
     inventoryOrganizationId: string = null;
     inventoryOrganizationCode: string;
     inventoryOrganizationName: string;
+    inventoryCounterId: string = null;
     ownerId: string = null;
-    ownerCode: string;
-    ownerName: string;
     statusId: string = null;
     statusName: string;
     postingDate: DateFilter = new DateFilter();
@@ -44,6 +43,14 @@ export class ItemDetailOfCountingSearchEntity extends SearchEntity {
     name: TextFilter = new TextFilter();
     constructor() {
         super();
-    } 
+    }
+}
+
+export class UnitOfMeasureOfCountingSearchEntity extends SearchEntity {
+    code: TextFilter = new TextFilter();
+    name: TextFilter = new TextFilter();
+    constructor() {
+        super();
+    }
 }
 

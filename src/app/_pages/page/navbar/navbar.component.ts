@@ -1,6 +1,6 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { AppService } from '../../../_services';
+import { AppService, AuthenticationService } from '../../../_services';
 import { toggleMenu } from 'src/app/_shared/animations/toggleMenu';
 
 interface LanguageEntity {
@@ -23,7 +23,10 @@ export class NavbarComponent implements OnInit {
   ];
   @Output() changeToggle = new EventEmitter();
 
-  constructor(private appService: AppService, public translateService: TranslateService) {
+  constructor(
+    private appService: AppService,
+    public translateService: TranslateService,
+    public authenticationService: AuthenticationService) {
     this.translateService.setDefaultLang('vi');
     this.translateService.use('vi');
     this.languageSelected = this.language[0];
@@ -55,6 +58,7 @@ export class NavbarComponent implements OnInit {
 
   onClickLogOut(event) {
     this.isLogout = !this.isLogout;
+    this.authenticationService.logout();
   }
 
   closeDropdown() {

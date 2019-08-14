@@ -5,7 +5,8 @@ import { element } from 'protractor';
 export class FormModel {
     id = new FormControl();
     isDeleted = new FormControl(false);
-    isEdited = new FormControl();
+    isEdited = new FormControl(false);
+    isSelected = new FormControl(false);
     constructor() {
     }
 

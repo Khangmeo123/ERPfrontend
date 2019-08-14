@@ -218,7 +218,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
     if (id !== null && id.length > 0) {
       this.inventoryCountingOwnerSearchEntity.ids.push(id);
     }
-    this.inventoryCountingOwnerSearchEntity.code.startsWith = event;
+    this.inventoryCountingOwnerSearchEntity.name.startsWith = event;
     this.inventoryCountingOwnerTyping.next(this.inventoryCountingOwnerSearchEntity);
   }
 
@@ -236,7 +236,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
     if (id !== null && id.length > 0) {
       this.inventoryCounterSearchEntity.ids.push(id);
     }
-    this.inventoryCounterSearchEntity.code.startsWith = event;
+    this.inventoryCounterSearchEntity.name.startsWith = event;
     this.inventoryCounterTyping.next(this.inventoryCounterSearchEntity);
   }
 }

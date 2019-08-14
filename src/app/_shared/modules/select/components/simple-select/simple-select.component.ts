@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {ISelect} from '../../select.interface';
-import {getListDirection} from '../../helpers';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { ISelect } from '../../select.interface';
+import { getListDirection } from '../../helpers';
 import { Guid } from 'guid-typescript';
 
 @Component({
@@ -85,7 +85,7 @@ export class SimpleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   onSelect(event) {
-    const {data} = event;
+    const { data } = event;
     this.selectedItem = data;
     this.selectionChange.emit(this.valueSelector(data));
     this.isOpened = false;
