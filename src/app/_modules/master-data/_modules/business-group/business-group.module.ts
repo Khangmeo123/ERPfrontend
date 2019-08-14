@@ -45,6 +45,9 @@ import { CustomerListComponent } from './_page/customer/customer-list/customer-l
 import { InputNumberModule } from 'src/app/_shared/modules/input-number/input-number.module';
 import { PipeModule } from 'src/app/_shared/pipe/pipe.module';
 import { ProvinceComponent } from './_page/province/province.component';
+import { TaxTemplateComponent } from './_page/tax-template/tax-template.component';
+import { TaxTemplateDetailComponent } from './_page/tax-template/tax-template-detail/tax-template-detail.component';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -70,6 +73,8 @@ import { ProvinceComponent } from './_page/province/province.component';
     JobLevelComponent,
     JobTitleComponent,
     ProvinceComponent,
+    TaxTemplateComponent,
+    TaxTemplateDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -99,6 +104,7 @@ import { ProvinceComponent } from './_page/province/province.component';
     InputNumberModule,
     PipeModule,
     CropperModule,
+    InputSwitchModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

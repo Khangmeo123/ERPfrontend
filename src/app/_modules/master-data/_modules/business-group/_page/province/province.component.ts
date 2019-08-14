@@ -141,4 +141,9 @@ export class ProvinceComponent implements OnInit, OnDestroy {
         this.getList();
       });
   }
+
+  add() {
+    this.provinceService.resetForm();
+    this.toggleModal();
+  }
 }

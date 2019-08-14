@@ -1,0 +1,277 @@
+<div class="page tax-template-detail">
+
+  <div class="page-header">
+    <div class="page-title">
+      {{'taxTemplate.title' | translate}}
+    </div>
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="save()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div class="page-body">
+
+    <div class="page-section">
+      <accordion [formGroup]="taxTemplateForm">
+        <accordion-group [isOpen]="true">
+          <button (click)="toggleGeneralTab()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <span class="pull-left float-left">{{'taxTemplate.general.title' | translate }}</span>
+            <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="generalTab ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
+          </span>
+          </button>
+          <div class="row">
+            <div class="col form-group">
+              <label for="tax-template-code">
+                {{'taxTemplate.code' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="tax-template-code" formControlName="code">
+                <app-error data-qe-id="dialog-error-code"
+                           *ngIf="(code?.errors && code?.touched) || !!errors?.get('code')?.value"
+                           [formGroup]="taxTemplateForm" [property]="'code'" [placement]="'top'"
+                           class="error-form">
+                </app-error>
+              </div>
+            </div>
+            <div class="col form-group">
+              <label for="tax-template-name">
+                {{'taxTemplate.name' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form">
+                <input type="text" class="form-control" id="tax-template-name" formControlName="name">
+                <app-error data-qe-id="dialog-error-name"
+                           *ngIf="(name?.errors && name?.touched) || !!errors?.get('name')?.value"
+                           [formGroup]="taxTemplateForm" [property]="'name'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+            <div class="col form-group">
+              <label for="tax-template-type">
+                {{'taxTemplate.type' | translate}}:
+                <span class="text-danger ml-1">(*)</span>
+              </label>
+              <div class="div-form d-flex">
+                <app-simple-select [list]="typeList"
+                                   id="tax-template-type"
+                                   (listOpen)="taxTemplateDetailService.getTypeList()"
+                                   class="flex-grow-1"
+                                   (selectionChange)="onSelectTaxTemplateType($event)"
+                                   [valueSelector]="taxTemplateTypeSelector"
+                                   [initialValue]="typeDisplay?.value"
+                                   key="display"
+                ></app-simple-select>
+                <app-error data-qe-id="dialog-error-type"
+                           *ngIf="(typeId?.errors && typeId?.touched) || !!errors?.get('typeId')?.value"
+                           [formGroup]="taxTemplateForm" [property]="'typeId'" [placement]="'top'" class="error-form">
+                </app-error>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+
+        <accordion-group [isOpen]="true">
+          <button (click)="toggleGeneralTab()" class="btn btn-link btn-block clearfix" accordion-heading>
+            <span class="pull-left float-left">{{'taxTemplate.general.title' | translate }}</span>
+            <span accordion-heading class="float-right pull-right">
+            <i [ngClass]="generalTab ? 'fa-caret-down' : 'fa-caret-up'" class="fas "></i>
+          </span>
+          </button>
+          <div class="page">
+            <div class="page-actions d-flex justify-content-end">
+              <button class="btn btn-add mr-2" (click)="add()" data-qe-id="button-add"> +
+                {{'general.button.add' | translate}}</button>
+              <button class="btn btn-clear" (click)="clearSearch(table)"
+                      data-qe-id="button-clear">{{'general.button.clear' | translate}}</button>
+            </div>
+            <div class="page-body">
+              <div class="page-section">
+                <p-table #table
+                         resizableColumns
+                         (onSort)="sort($event)"
+                         [lazy]="true"
+                         [value]="taxTemplateContents.value">
+                  <ng-template pTemplate="header">
+                    <tr>
+                      <th>
+                        {{'taxTemplate.detail.code' | translate}}
+                      </th>
+                      <th>
+                        {{'taxTemplate.detail.name' | translate}}
+                      </th>
+                      <th>
+                        {{'taxTemplate.detail.unitOfMeasure' | translate}}
+                      </th>
+                      <th>
+                        {{'taxTemplate.detail.rate' | translate}}
+                      </th>
+                      <th>
+                        {{'taxTemplate.detail.available' | translate}}
+                      </th>
+                      <th class="actions">
+                        {{'taxTemplate.detail.actions' | translate}}
+                      </th>
+                    </tr>
+                  </ng-template>
+                  <ng-template pTemplate="body" let-rowData let-index="index">
+                    <tr>
+                      <td> {{rowData.code}} </td>
+                      <td> {{rowData.name}} </td>
+                      <td> {{rowData.unitOfMeasureName}} </td>
+                      <td> {{rowData.rate}} </td>
+                      <td> {{rowData.disabled}} </td>
+                      <td class="actions">
+                        <a role="button" (click)="editTaxTemplate(rowData)">
+                          <mat-icon>edit</mat-icon>
+                        </a>
+
+                        <a role="button" (click)="deleteTaxTemplate(index)">
+                          <mat-icon>delete</mat-icon>
+                        </a>
+                      </td>
+                    </tr>
+                  </ng-template>
+                </p-table>
+              </div>
+            </div>
+          </div>
+        </accordion-group>
+      </accordion>
+    </div>
+
+  </div>
+
+  <div class="page-footer d-flex justify-content-end">
+    <div class="page-actions">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="save()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </div>
+</div>
+
+<p-dialog [modal]="true"
+          appendTo="body"
+          [(visible)]="taxModal"
+          [contentStyle]="{overflow: 'visible'}"
+          [style]="{width: '900px'}">
+  <p-header>
+    {{'taxTemplate.modal.title' | translate}}
+  </p-header>
+
+  <div [formGroup]="taxTemplateContentForm" class="container">
+    <div class="row">
+      <div class="col-6">
+        <div class="mt-4 mb-4">
+          <label for="tax-code">
+            {{'tax.code' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <div class="div-form">
+            <input class="form-control"
+                   data-qe-id="dialog-code"
+                   formControlName="code"
+                   [readonly]="taxTemplateContentForm?.value?.id"
+                   name="code"
+                   id="tax-code"
+                   type="text">
+            <app-error
+              *ngIf="(specificCode?.errors && specificCode?.touched) || !!specificErrors.get('code')?.value"
+              [formGroup]="taxTemplateContentForm"
+              [placement]="'top'" [property]="'code'" class="error-form"
+              data-qe-id="dialog-error-code">
+            </app-error>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="unit-of-measure">
+            {{'tax.unit' | translate}}
+          </label>
+          <div class="div-form d-flex">
+            <app-single-select (listOpen)="getUnitOfMeasureList()"
+                               id="unit-of-measure"
+                               (selectionChange)="onSelectUnitOfMeasure($event)"
+                               [list]="uomList"
+                               [selectedList]="selectedUomList"
+                               [initialValue]="unitOfMeasureName?.value"
+                               class="flex-grow-1"
+                               data-qe-id="dialog-unit-of-measure"
+                               key="name"></app-single-select>
+          </div>
+        </div>
+
+        <div class="mb-4">
+          <label for="discount">
+            {{'tax.discount' | translate}}
+          </label>
+          <input class="form-control" id="discount" data-qe-id="dialog-discount" formControlName="rate" name="rate"
+                 type="text">
+        </div>
+      </div>
+
+      <div class="col-6">
+        <div class="mt-4 mb-4">
+          <label for="tax-name">
+            {{'tax.name' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <div class="div-form">
+            <input class="form-control" id="tax-name" data-qe-id="dialog-name" formControlName="name" name="name"
+                   type="text">
+            <app-error
+              *ngIf="(specificName?.errors && specificName?.touched) || !!specificErrors.get('name')?.value"
+              [formGroup]="taxTemplateContentForm"
+              [placement]="'top'" [property]="'name'" class="error-form"
+              data-qe-id="dialog-error-name">
+            </app-error>
+          </div>
+        </div>
+
+        <div class=" mb-4">
+          <label for="parent-code">
+            {{'tax.parent_account' | translate}}
+          </label>
+          <div class="div-form d-flex">
+            <input type="text"
+                   class="form-control"
+                   id="parent-code"
+                   formControlName="parentCode"
+                   [readOnly]="taxTemplateContentForm?.value?.id">
+          </div>
+        </div>
+
+        <div class=" mb-4">
+          <label for="description">
+            {{'tax.description' | translate}}
+          </label>
+          <div class="div-form">
+            <input class="form-control" id="description" data-qe-id="dialog-description" formControlName="description"
+                   type="text-area">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer class="d-flex row">
+    <div class="col">
+      <button class="btn btn-cancel" (click)="cancelTaxTemplate()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="saveTaxTemplate()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>
