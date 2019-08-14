@@ -44,8 +44,6 @@ export class NavbarComponent implements OnInit {
 
     isPinned = false;
 
-    isLogout = false;
-
     isToggleFlags = false;
 
     isOpened = false;
@@ -113,5 +111,4 @@ export class NavbarComponent implements OnInit {
     toggleSidebar() {
         this.appService.toggleSidebar();
     }
-
 }

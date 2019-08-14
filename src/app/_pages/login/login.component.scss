@@ -1,7 +1,7 @@
 
 #background {
     width: 89%;
-    
+
     background-repeat: no-repeat;
     background-size: cover;
     position: absolute !important;
@@ -15,21 +15,32 @@
     min-width: 200px;
     max-width: 570px;
     width: 100%;
-  }
-  
-  .example-full-width {
-    width: 100%;
-  }
+}
 
-.container-fluid{
-  position: relative;
-  
-  
+.example-full-width {
+    width: 100%;
 }
-.inputForm{
-  margin-top: 200px;
-  
+
+.container-fluid {
+    position: relative;
+
+
 }
-mat-form-field{
-  font-size: 14px;
+
+.inputForm {
+    margin-top: 200px;
+
+}
+
+mat-form-field {
+    font-size: 14px;
+}
+
+.login-button {
+    border-radius: 50px;
+    color: antiquewhite;
+}
+
+a {
+    color: #17A4EB;
 }
