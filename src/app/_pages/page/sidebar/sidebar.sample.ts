@@ -337,13 +337,13 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Yêu cầu điều chuyển kho',
-        route: '/inventory/transfer/inventory-transfer-request',
+        route: '/master-data/department',
         exact: false,
         isShowed: true,
       },
       {
         label: 'Phiếu điều chuyển kho',
-        route: '/inventory/transfer/inventory-transfer',
+        route: '/master-data/department',
         exact: false,
         isShowed: true,
       },
@@ -366,6 +366,16 @@ export const sampleSidebarMenu = [
       {
         label: 'Phiếu điều chỉnh tồn kho',
         route: '/master-data/department',
+        exact: false,
+        isShowed: true,
+      },
+      {
+        divider: true,
+        isShowed: true,
+      },
+      {
+        label: 'Phân quyền',
+        route: '/inventory/permission',
         exact: false,
         isShowed: true,
       },

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PermissionComponent } from './permission/permission.component';
+import { PermissionComponent } from './permission.component';
 import {PermissionRoutingModule} from './permission-routing.module';
 import {MatFormFieldModule, MatIconModule} from '@angular/material';
 import {TranslateModule} from '@ngx-translate/core';

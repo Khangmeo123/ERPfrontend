@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {translate} from '../../../../../_helpers/string';
+import {translate} from '../../../../_helpers/string';
 
 @Component({
   selector: 'app-permission',
