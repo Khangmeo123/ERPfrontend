@@ -29,6 +29,9 @@ import { CookieService } from 'ngx-cookie-service';
 
 import {MatInputModule} from '@angular/material/input';
 import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SignUpComponent } from './_pages/sign-up/sign-up.component';
+import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
+
 
 
 @NgModule({
@@ -41,6 +44,8 @@ import {MatCheckboxModule} from '@angular/material/checkbox';
     FooterComponent,
     SpinnerComponent,
     SidebarListComponent,
+    SignUpComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
