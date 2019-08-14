@@ -283,11 +283,11 @@ export class GoodsReceiptPOReceiveService {
         this.serialNumber.next(currentSerialNumber);
     }
 
-    checkAllSerialNumber() {
+    checkAllSerialNumber(checked: boolean) {
         const currentSerialNumber = this.serialNumber.getValue();
         const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
         currentSerialNumberList.forEach(item => {
-            item.isSelected = true;
+            item.isSelected = checked;
         });
         this.serialNumber.next(currentSerialNumber);
     }
@@ -394,11 +394,11 @@ export class GoodsReceiptPOReceiveService {
         this.batch.next(currentBatch);
     }
 
-    checkAllBatch() {
+    checkAllBatch(checked: boolean) {
         const currentBatch = this.batch.getValue();
         const currentBatchList = currentBatch.goodsReceiptPOBatches;
         currentBatchList.forEach(item => {
-            item.isSelected = true;
+            item.isSelected = checked;
         });
         this.batch.next(currentBatch);
     }
