@@ -1,21 +1,6 @@
 {
-	"accountingPeriod": {
-		"description": "",
-		"endPeriod": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"label": "",
-			"title": ""
-		},
-		"startPeriod": "",
-		"status": {
-			"fiscal_year": ""
-		}
-	},
 	"advancedFilter": {
-		"placeholder": "Tìm kiếm..."
+		"placeholder": ""
 	},
 	"asset": {
 		"content": {
@@ -44,14 +29,14 @@
 			"title": ""
 		}
 	},
-	"bankAccount": {
-		"account_name": "",
+	"bank_account": {
 		"account_number": "",
-		"accounting_code": "",
-		"bankAccounts": {
-			"account_name": "",
+		"account_owner": "",
+		"accountant_code": "",
+		"bank_accounts": {
 			"account_number": "",
-			"accounting_code": "",
+			"account_owner": "",
+			"accountant_code": "",
 			"add": "",
 			"bank_code": "",
 			"description": ""
@@ -61,40 +46,6 @@
 		"description": "",
 		"details": {
 			"title": ""
-		}
-	},
-	"binLocation": {
-		"action": "",
-		"code": "",
-		"delete": {
-			"confirm": {
-				"message": "",
-				"title": ""
-			}
-		},
-		"getFieldEntity": {
-			"error": ""
-		},
-		"layer1": {
-			"code": ""
-		},
-		"layer2": {
-			"code": ""
-		},
-		"layer3": {
-			"code": ""
-		},
-		"layer4": {
-			"code": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": "",
-		"title": "",
-		"update": {
-			"error": "",
-			"success": ""
 		}
 	},
 	"bookmarks": {
@@ -128,76 +79,6 @@
 			"title": ""
 		},
 		"super_account": ""
-	},
-	"codeFormula": {
-		"code": "",
-		"field": {
-			"error": ""
-		},
-		"general": {
-			"title": ""
-		},
-		"get": {
-			"error": ""
-		},
-		"identifierStringEnd": "",
-		"identifierStringStart": "",
-		"identifierStringValues": "",
-		"item": {
-			"code": "",
-			"name": "",
-			"title": ""
-		},
-		"legalEntity": {
-			"missingLegalEntityId": ""
-		},
-		"legalEntityList": {
-			"error": ""
-		},
-		"length": "",
-		"name": "",
-		"rule": {
-			"end": "",
-			"itemFieldDisplay": "",
-			"start": "",
-			"title": ""
-		},
-		"ruleModal": {
-			"title": ""
-		},
-		"splitRuleContent": {
-			"field": "",
-			"start": ""
-		},
-		"test": {
-			"expirationDate": "",
-			"itemCode": "",
-			"mfrDate": "",
-			"qrCode": "",
-			"serial": "",
-			"title": ""
-		},
-		"title": "",
-		"update": {
-			"error": "",
-			"success": ""
-		}
-	},
-	"cost-center": {
-		"content": {
-			"account": "",
-			"description": "",
-			"from_date": "",
-			"id": "",
-			"modal": {
-				"title": ""
-			},
-			"name": "",
-			"to_date": ""
-		},
-		"header": {
-			"title": ""
-		}
 	},
 	"cropper": {
 		"browseImage": "",
@@ -270,6 +151,113 @@
 	},
 	"datePicker": {
 		"placeHolder": ""
+	},
+	"deliveryOrder": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"deliveryOrder": {
+				"title": ""
+			},
+			"deliveryOrderRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"title": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"Serial": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemName": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"unitPrice": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"form": {
+			"post": {
+				"title": ""
+			}
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"receiptedDate": "",
+			"status": ""
+		}
 	},
 	"department": {
 		"addToDepartment": {
@@ -481,6 +469,7 @@
 	},
 	"division": {
 		"content": {
+			"action": "",
 			"address": "",
 			"code": "",
 			"name": ""
@@ -533,21 +522,12 @@
 				"gender": "",
 				"identityNumber": "",
 				"name": "",
-				"status": "",
-				"username": ""
+				"status": ""
 			},
 			"header": {
 				"title": ""
 			}
-		},
-		"password": {
-			"error": "",
-			"field": "",
-			"save": "",
-			"success": "",
-			"title": ""
-		},
-		"username": ""
+		}
 	},
 	"employeeDetail": {
 		"delete": {
@@ -633,56 +613,40 @@
 			"title": ""
 		}
 	},
-	"environmentTax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
-	},
-	"environment_tax": {
-		"description": ""
-	},
-	"exportTax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
-	},
-	"fiscal_year": {
-		"content": {
-			"from_date": "",
-			"modal": {
-				"title": ""
-			},
-			"name": "",
-			"status": "",
-			"to_date": "",
-			"valuation_method": ""
-		},
-		"header": {
-			"title": ""
-		}
-	},
 	"general": {
 		"action": "",
+		"actions": {
+			"title": ""
+		},
 		"button": {
 			"add": "",
+			"approve": "",
+			"attachFile": "",
 			"cancel": "",
 			"clear": "",
 			"delete": "",
 			"downloadTemplate": "",
+			"downloadTempplate": "",
 			"download_example": "",
+			"edit": "",
 			"export": "",
+			"getData": "",
+			"history": "",
 			"import": "",
 			"importFile": "",
 			"import_file": "",
+			"issue": "",
 			"ok": "",
-			"save": ""
+			"post": "",
+			"print": "",
+			"receive": "",
+			"referenceDocument": "",
+			"rejected": "",
+			"reverse": "",
+			"save": "",
+			"send": ""
 		},
+		"completed": "",
 		"customer_group": {
 			"name": ""
 		},
@@ -694,10 +658,12 @@
 		},
 		"detail": "",
 		"division": "",
+		"done": "",
 		"error": {
 			"direction": "",
 			"fileImport": ""
 		},
+		"fromDate": "",
 		"gender": {
 			"female": "",
 			"male": ""
@@ -708,6 +674,9 @@
 		"legal_entity": {
 			"name": ""
 		},
+		"open": "",
+		"pending": "",
+		"pendingReceive": "",
 		"project": {
 			"delete": {
 				"message": "",
@@ -724,9 +693,412 @@
 			}
 		},
 		"sob": "",
-		"update": {
-			"failure": "",
-			"success": ""
+		"text": {
+			"total": ""
+		},
+		"toDate": ""
+	},
+	"goodsIssue": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"title": ""
+			},
+			"goodsIssueRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"Serial": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemName": "",
+				"itemNo": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"unitPrice": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"form": {
+			"post": {
+				"title": ""
+			}
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"receiptedDate": "",
+			"status": ""
+		}
+	},
+	"goodsReceipt": {
+		"createdDate": "",
+		"creator": "",
+		"description": "",
+		"documentNumber": "",
+		"header": {
+			"title": ""
+		},
+		"inventoryAddress": "",
+		"inventoryCode": "",
+		"receiptedDate": "",
+		"status": ""
+	},
+	"goodsReceiptDetail": {
+		"amount": {
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"quantity": "",
+			"quantitySaved": "",
+			"title ": "",
+			"unitOfMeasure": ""
+		},
+		"batches": {
+			"batchCode": "",
+			"expiryDate": "",
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"manufacturingDate": "",
+			"quantityInEachBatch": "",
+			"quantitySaved": "",
+			"startScanBatchesNo": "",
+			"title ": ""
+		},
+		"binLocation": "",
+		"button": {
+			"add": ""
+		},
+		"createdDate": "",
+		"creator": "",
+		"description": "",
+		"documentNumber": "",
+		"form": {
+			"post": {
+				"title": ""
+			},
+			"title": ""
+		},
+		"goodsReceipt": {
+			"buyer": "",
+			"createdDate": "",
+			"creator": "",
+			"documentNo": "",
+			"supplierName": ""
+		},
+		"header": {
+			"title": ""
+		},
+		"inventoryAddress": "",
+		"inventoryCode": "",
+		"personInCharge": "",
+		"qrCode": {
+			"code": "",
+			"expiryDate": "",
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"manufacturingDate": "",
+			"quantity": "",
+			"scanCode": "",
+			"scanQRCode": "",
+			"serial": "",
+			"title ": ""
+		},
+		"receiptedDate": "",
+		"receiver": "",
+		"tab1": {
+			"amount": "",
+			"batches": "",
+			"Serial": "",
+			"discount": "",
+			"discountAmount": "",
+			"itemNo": "",
+			"purchaseOrderNumber": "",
+			"quantity": "",
+			"title": "",
+			"total": "",
+			"unitOfMeasure": "",
+			"valueAddedTax": ""
+		},
+		"tab2": {
+			"title": ""
+		}
+	},
+	"goodsReceiptPO": {
+		"createdDate": "",
+		"creator": "",
+		"description": "",
+		"documentNumber": "",
+		"header": {
+			"title": ""
+		},
+		"inventoryAddress": "",
+		"inventoryCode": "",
+		"receiptedDate": "",
+		"status": ""
+	},
+	"goodsReceiptPODetail": {
+		"amount": {
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"quantity": "",
+			"quantitySaved": "",
+			"title ": "",
+			"unitOfMeasure": ""
+		},
+		"batches": {
+			"batchCode": "",
+			"expiryDate": "",
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"manufacturingDate": "",
+			"qrCode": "",
+			"quantity": "",
+			"quantityInEachBatch": "",
+			"quantitySaved": "",
+			"startScanBatchesNo": "",
+			"title ": ""
+		},
+		"binLocation": "",
+		"button": {
+			"add": ""
+		},
+		"createdDate": "",
+		"creator": "",
+		"description": "",
+		"documentNumber": "",
+		"form": {
+			"post": {
+				"title": ""
+			},
+			"title": ""
+		},
+		"goodsReceipt": {
+			"buyer": "",
+			"createdDate": "",
+			"creator": "",
+			"documentNo": "",
+			"supplierName": "",
+			"title": ""
+		},
+		"header": {
+			"title": ""
+		},
+		"inventoryAddress": "",
+		"inventoryCode": "",
+		"personInCharge": "",
+		"qrCode": {
+			"code": "",
+			"expiryDate": "",
+			"itemCode": "",
+			"itemName": "",
+			"locationCode": "",
+			"manufacturingDate": "",
+			"quantity": "",
+			"scanCode": "",
+			"scanQRCode": "",
+			"serial": "",
+			"title ": ""
+		},
+		"receiptedDate": "",
+		"receiver": "",
+		"supplierAddress": "",
+		"supplierCode": "",
+		"supplierName": "",
+		"tab1": {
+			"actualReceive": "",
+			"amount": "",
+			"batches": "",
+			"Serial": "",
+			"discount": "",
+			"discountAmount": "",
+			"itemName": "",
+			"itemNo": "",
+			"purchaseOrderNumber": "",
+			"quantity": "",
+			"title": "",
+			"total": "",
+			"unitOfMeasure": "",
+			"unitPrice": "",
+			"valueAddedTax": ""
+		},
+		"tab2": {
+			"title": ""
+		}
+	},
+	"goodsReturn": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"title": ""
+			},
+			"goodsReturn": {
+				"title": ""
+			},
+			"goodsReturnRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"Serial": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemName": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"unitPrice": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"form": {
+			"post": {
+				"title": ""
+			}
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"receip     tedDate": "",
+			"status": ""
 		}
 	},
 	"hrOrganization": {
@@ -735,12 +1107,101 @@
 		"name": "",
 		"title": ""
 	},
-	"importTax": {
+	"inventoryTransfer": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"amountScan": "",
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"post": {
+					"title": ""
+				},
+				"title": ""
+			},
+			"inventoryCodeFrom": "",
+			"inventoryCodeTo": "",
+			"inventoryRequest": "",
+			"inventoryTransferRequest": {
+				"createdDate": "",
+				"creator": "",
+				"documentNo": ""
+			},
+			"issuedDate": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiver": "",
+			"request": {
+				"customerName": ""
+			},
+			"tab1": {
+				"actualQuantity": "",
+				"amount": "",
+				"batches": "",
+				"Serial": "",
+				"dueDate": "",
+				"issueIdRequest": "",
+				"itemName": "",
+				"itemNo": "",
+				"quantity": "",
+				"title": "",
+				"unitOfMeasure": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
 		"header": {
 			"title": ""
 		},
-		"modal": {
-			"title": ""
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"status": "",
+			"transferDate": ""
 		}
 	},
 	"item": {
@@ -865,11 +1326,7 @@
 		"header": {
 			"title": ""
 		},
-		"name": "",
-		"subLevel1": "",
-		"subLevel2": "",
-		"subLevel3": "",
-		"subLevel4": ""
+		"name": ""
 	},
 	"legalItemDetail": {
 		"content": {
@@ -919,46 +1376,12 @@
 			"title_1": ""
 		}
 	},
-	"login": {
-		"failed": ""
-	},
-	"naturalResourceTax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
-	},
 	"noData": {
 		"helper": ""
 	},
 	"pagination": {
 		"entries": "",
 		"show": ""
-	},
-	"payment_method": {
-		"code": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"payment_method_name": ""
-	},
-	"payment_term": {
-		"code": "",
-		"discount_period": "",
-		"discount_rate": "",
-		"due_in_date": "",
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": ""
 	},
 	"project": {
 		"employee": {
@@ -974,27 +1397,104 @@
 		"startDate": "",
 		"title": ""
 	},
-	"province": {
-		"code": "",
-		"create": {
-			"error": ""
+	"return": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"description": "",
+			"documentNumber": "",
+			"form": {
+				"title": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"receiver": "",
+			"return": {
+				"title": ""
+			},
+			"returnRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"tab1": {
+				"amount": "",
+				"batches": "",
+				"Serial": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
 		},
-		"delete": {
-			"message": "",
-			"success": "",
-			"title": ""
-		},
-		"get": {
-			"error": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": "",
-		"title": "",
-		"update": {
-			"error": "",
-			"sucess": ""
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"header": {
+				"title": ""
+			},
+			"inventory": "",
+			"receiptRequirementID": "",
+			"receiptedDate": "",
+			"status": ""
 		}
 	},
 	"select": {
@@ -1015,14 +1515,6 @@
 		"special_consumption_tax": "",
 		"title": "",
 		"value_added_tax": ""
-	},
-	"specialConsumptionTax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
-			"title": ""
-		}
 	},
 	"special_price_customer": {
 		"code": "",
@@ -1100,15 +1592,6 @@
 			"name": ""
 		}
 	},
-	"tax": {
-		"available": "",
-		"code": "",
-		"description": "",
-		"discount": "",
-		"name": "",
-		"parent_account": "",
-		"unit": ""
-	},
 	"uom": {
 		"content": {
 			"code": "",
@@ -1120,14 +1603,6 @@
 			"name": ""
 		},
 		"header": {
-			"title": ""
-		}
-	},
-	"valueAddedTax": {
-		"header": {
-			"title": ""
-		},
-		"modal": {
 			"title": ""
 		}
 	}

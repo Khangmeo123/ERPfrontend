@@ -5,8 +5,10 @@
 @import "./partials/themes";
 
 @import "./partials/dashboard";
+@import "./partials/custommaterial";
+@import "./partials/customprimeng";
 
-
+$bg-color: #EEF1F5;
 .icon-style {
   width: 35px;
   height: 35px;
@@ -21,17 +23,22 @@ body {
   height: 100vh;
   margin: 0;
   padding-top: 60px;
+  
 }
 
 .wrapper {
   height: 100%;
 
   main {
+    background-color: $bg-color !important;
     display: flex;
     height: 100%;
-
+    .page-sidebar {
+      margin-top: 15px;
+    }
     .pages {
       overflow: auto;
+      
     }
 
     .overlay {

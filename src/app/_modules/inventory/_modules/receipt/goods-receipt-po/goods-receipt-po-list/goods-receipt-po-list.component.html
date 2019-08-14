@@ -1,0 +1,201 @@
+<div class="page goods-receipt-po">
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngClass]="!isBookMark ? 'save-book-mark': 'not-save-book-mark'">
+          star
+        </mat-icon>
+      </span>
+    </span>
+    <div class="page-actions d-flex">
+      <button type="button" class="btn btn-labeled btn-add" (click)="addGoodsReceipt()" data-qe-id="button-add">
+        <span class="btn-label"><i class="material-icons">add</i></span>
+        <span class="button-label">
+          {{'general.button.add' | translate}}
+        </span></button>
+      <button class="btn btn-labeled btn-clear" data-qe-id="button-clear" (click)="clearSearch(table)">
+        <span class="btn-label">
+          <img src="/assets/img/filter.svg" width="16">
+        </span>
+        <span class="button-label">
+          {{'general.button.clear' | translate}}
+        </span>
+      </button>
+    </div>
+
+  </div>
+  <div class="page-body">
+    <div class="page-section">
+      <div class="row d-flex pb-3">
+        <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
+          <label class="">{{'general.fromDate' | translate}}</label>
+          <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="picker"
+            data-qe-id="input-date-from" placeholder="dd/mm/yyyy"
+            [(ngModel)]="goodsReceiptPOSearchEntity.documentDate.greaterEqual">
+          <mat-datepicker #picker></mat-datepicker>
+          <div role="button" (click)="picker.open()" data-qe-id="button-date-from">
+            <mat-icon>calendar_today</mat-icon>
+          </div>
+        </div>
+        <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
+          <label>{{'general.toDate' | translate}}</label>
+          <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
+            data-qe-id="input-date-to" placeholder="dd/mm/yyyy"
+            [(ngModel)]="goodsReceiptPOSearchEntity.documentDate.lessEqual">
+          <mat-datepicker #datepicker></mat-datepicker>
+          <div role="button" data-qe-id="button-date-from" (click)="datepicker.open()">
+            <mat-icon>calendar_today</mat-icon>
+          </div>
+        </div>
+        <button type="button" class="btn btn-labeled btn-add get-data" data-qe-id="button-fetchData"
+          (click)="getList()">
+          {{'general.button.getData' | translate}}</button>
+      </div>
+
+      <p-table [value]="goodsReceiptPOList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+        [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-documentDate">
+              {{ 'goodsReceiptPO.createdDate' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-documentNumber">
+              {{ 'goodsReceiptPO.documentNumber' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-dueDate">
+              {{ 'goodsReceiptPO.receiptedDate' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-inventoryOrganizationCode">
+              {{ 'goodsReceiptPO.inventoryCode' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-inventoryOrganizationAddress">
+              {{ 'goodsReceiptPO.inventoryAddress' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-remarks">
+              {{ 'goodsReceiptPO.description' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-requester">
+              {{ 'goodsReceiptPO.creator' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-status">
+              {{ 'goodsReceiptPO.status' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th width="5%"> {{'general.action' | translate }} </th>
+          </tr>
+          <tr>
+            <th class="th-filter"></th>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="goodsReceiptPOSearchEntity.documentNumber" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-documentNumber">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="goodsReceiptPOSearchEntity.dueDate" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-dueDate">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-single-select [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
+                [key]="'code'" [initialValue]="goodsReceiptPOSearchEntity.inventoryOrganizationId"
+                (search)="typingSearchInvetoryOrganization($event, goodsReceiptPOSearchEntity.inventoryOrganizationId)"
+                (selectionChange)="goodsReceiptPOSearchEntity.inventoryOrganizationId = $event[0]; getList()"
+                (listOpen)="dropListInventoryOrganization(goodsReceiptPOSearchEntity.inventoryOrganizationId)"
+                data-qe-id="table-thead-filter-uom">
+              </app-single-select>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="goodsReceiptPOSearchEntity.inventoryOrganizationStreet"
+                (changeFilter)="getList()" data-qe-id="table-thead-filter-inventoryOrganizationStreet">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters [filter]="goodsReceiptPOSearchEntity.remarks" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-remarks">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-single-select [list]="requesterExceptIds" [selectedList]="requesterIds" [key]="'name'"
+                [initialValue]="goodsReceiptPOSearchEntity.requesterId"
+                (search)="typingSearchRequester($event, goodsReceiptPOSearchEntity.requesterId)"
+                (selectionChange)="goodsReceiptPOSearchEntity.requesterId = $event[0]; getList()"
+                (listOpen)="dropListRequester(goodsReceiptPOSearchEntity.requesterId)"
+                data-qe-id="table-thead-filter-uom">
+              </app-single-select>
+            </th>
+            <th class="th-filter">
+              <app-simple-select [key]="'display'" [list]="statusList"
+                [initialValue]="goodsReceiptPOSearchEntity.statusId"
+                (selectionChange)="goodsReceiptPOSearchEntity.statusId = $event; getList()"
+                (listOpen)="enumListStatus()">
+              </app-simple-select>
+            </th>
+            <th width="5%"></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-goodsReceiptPO let-index="rowIndex">
+          <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td class="ui-resizable-column"> {{goodsReceiptPO.documentDate | date: 'dd/MM/yyyy'}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.documentNumber}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.dueDate | date: 'dd/MM/yyyy'}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.inventoryOrganizationCode}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.inventoryOrganizationStreet}} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.remarks }} </td>
+            <td class="ui-resizable-column"> {{goodsReceiptPO.requesterName }} </td>
+            <td class="text-center ui-resizable-column">
+              <div [ngSwitch]="goodsReceiptPO.statusName">
+                <a class="ml-2 open-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-detail"
+                  [queryParams]="{id: goodsReceiptPO.id}" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</a>
+                <a class="ml-2 pending-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve"
+                  [queryParams]="{id: goodsReceiptPO.id}"
+                  *ngSwitchCase="'PENDING_APPROVAL'">{{'general.pending'| translate}}</a>
+                <a class="ml-2 pending-receive-status"
+                  routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-receive"
+                  [queryParams]="{id: goodsReceiptPO.id}"
+                  *ngSwitchCase="'PENDING_RECEIVE'">{{'general.pendingReceive'| translate}}</a>
+                <a class="ml-2 done-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve"
+                  [queryParams]="{id: goodsReceiptPO.id}" *ngSwitchCase="'DONE'">{{'general.done'| translate}}</a>
+              </div>
+            </td>
+            <td width="5%">
+              <div class="d-flex justify-content-center">
+                <div class="view-detail mr-2">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </div>
+                <!-- <div class="edit" (click)="editGoodsReceiptPO(goodsReceiptPO.id)">
+                  <mat-icon>edit</mat-icon>
+                </div> -->
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="pagination">
+        <app-pagination data-qe-id="pagination" [pagination]="pagination" (paginationOut)="paginationOut($event)"
+          data-qe-id="pagination">
+        </app-pagination>
+      </div>
+    </div>
+  </div>
+</div>

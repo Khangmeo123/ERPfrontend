@@ -33,6 +33,14 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   @Input() disabled = false;
 
   listDirection = 'down';
+  /**
+   * down: List always open down
+   *
+   * up: List always open up
+   *
+   * auto: Recalculate the direction before open list
+   */
+  @Input() direction: string = 'down';
 
   @Input() direction: string = 'auto';
 
