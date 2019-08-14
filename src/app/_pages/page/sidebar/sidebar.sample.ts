@@ -294,7 +294,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Yêu cầu nhập kho hàng trả lại từ KH',
-        route: '/master-data/department',
+        route: '/inventory/receipt/return-request',
         exact: false,
         isShowed: true,
       },
@@ -318,6 +318,7 @@ export const sampleSidebarMenu = [
         label: 'Phiếu xuất kho khác',
         route: '/inventory/issue/goods-issue',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Yêu cầu xuất kho hàng trả lại NCC',
@@ -337,13 +338,13 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Yêu cầu điều chuyển kho',
-        route: '/master-data/department',
+        route: '/inventory/transfer/inventory-transfer-request',
         exact: false,
         isShowed: true,
       },
       {
         label: 'Phiếu điều chuyển kho',
-        route: '/master-data/department',
+        route: '/inventory/transfer/inventory-transfer',
         exact: false,
         isShowed: true,
       },

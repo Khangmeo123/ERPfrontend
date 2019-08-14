@@ -28,6 +28,8 @@ import { GoodsReceiptPOReceiveComponent } from './goods-receipt-po/good-receipt-
 import { GoodsReceiptPODetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
 import { GoodsReceiptPOListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
 import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
+import {ReturnRequestDetailComponent} from './return-request/return-request-detail/return-request-detail.component';
+import {ReturnRequestListComponent} from './return-request/return-request-list/return-request-list.component';
 @NgModule({
   declarations: [
     GoodsReceiptPOComponent,
@@ -42,6 +44,8 @@ import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover'
     ReturnDetailComponent,
     GoodsReceiptDetailComponent,
     GoodsReceiptListComponent,
+    ReturnRequestDetailComponent,
+    ReturnRequestListComponent,
   ],
   imports: [
     CommonModule,
