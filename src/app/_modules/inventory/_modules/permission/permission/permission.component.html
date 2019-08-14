@@ -1,0 +1,80 @@
+<div class="page permission">
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngClass]="!isBookMark ? 'save-book-mark': 'not-save-book-mark'">
+          star
+        </mat-icon>
+      </span>
+    </span>
+  </div>
+  <div class="page-body">
+    <div class="page-section">
+      <div class="row d-flex pb-3">
+        <div class="col-sm-4 form-group">
+          <label>
+            {{'permission.inventoryCode' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <app-single-select data-qe-id="form-select-inventoryCode"></app-single-select>
+        </div>
+        <div class="col-sm-4 form-group">
+          <label>
+            {{'permission.documentType' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <app-single-select data-qe-id="form-select-documentType"></app-single-select>
+        </div>
+      </div>
+      <p-table [value]="" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+               [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-positionCode">
+              {{ 'permission.positionCode' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-positionName">
+              {{ 'permission.positionName' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-step">
+              {{ 'permission.currentstep' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+
+            <th pResizableColumn data-qe-id="table-thead-currentStatus">
+              {{ 'permission.currentStatus' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-inventory-address">
+              {{ 'permission.nextStep ' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-nextStaus">
+              {{ 'permission.nextStaus' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-status">
+              {{ 'permission.active' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+             </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+  </div>
+</div>

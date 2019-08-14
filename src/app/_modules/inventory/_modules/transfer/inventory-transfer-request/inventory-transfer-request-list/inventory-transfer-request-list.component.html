@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add" (click) = "addInventoryTransfer()">
+      <button type="button" class="btn btn-labeled btn-add" (click) = "addInventoryTransferRequest()">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
@@ -54,56 +54,56 @@
         <ng-template pTemplate="header">
           <tr>
             <th pResizableColumn data-qe-id="table-thead-created-date">
-              {{ 'inventoryTransfer.list.createdDate' | translate}}
+              {{ 'inventoryTransferRequest.list.createdDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-document-number">
-              {{ 'inventoryTransfer.list.documentNumber' | translate}}
+              {{ 'inventoryTransferRequest.list.documentNumber' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-receipted-date">
-              {{ 'inventoryTransfer.list.transferDate' | translate}}
+              {{ 'inventoryTransferRequest.list.transferDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-inventory-code">
-              {{ 'inventoryTransfer.list.inventoryCode' | translate}}
+              {{ 'inventoryTransferRequest.list.inventoryCode' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-inventory-address">
-              {{ 'inventoryTransfer.list.inventoryAddress' | translate}}
+              {{ 'inventoryTransferRequest.list.inventoryAddress' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-description">
-              {{ 'inventoryTransfer.list.description' | translate}}
+              {{ 'inventoryTransferRequest.list.description' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-creator">
-              {{ 'inventoryTransfer.list.creator' | translate}}
+              {{ 'inventoryTransferRequest.list.creator' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-status">
-              {{ 'inventoryTransfer.list.status' | translate}}
+              {{ 'inventoryTransferRequest.list.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-inventoryTransfer let-index="rowIndex">
+        <ng-template pTemplate="body" let-inventoryTransferRequest let-index="rowIndex">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> {{inventoryTransfer.createdDate}} </td>
-            <td> {{inventoryTransfer.documentNumber}} </td>
-            <td> {{inventoryTransfer.receiptedDate}} </td>
-            <td> {{inventoryTransfer.inventoryCode}} </td>
-            <td> {{inventoryTransfer.inventoryAddress}} </td>
-            <td> {{inventoryTransfer.description }} </td>
-            <td> {{inventoryTransfer.creator }} </td>
-            <td> {{inventoryTransfer.status }} </td>
+            <td> {{inventoryTransferRequest.createdDate}} </td>
+            <td> {{inventoryTransferRequest.documentNumber}} </td>
+            <td> {{inventoryTransferRequest.receiptedDate}} </td>
+            <td> {{inventoryTransferRequest.inventoryCode}} </td>
+            <td> {{inventoryTransferRequest.inventoryAddress}} </td>
+            <td> {{inventoryTransferRequest.description }} </td>
+            <td> {{inventoryTransferRequest.creator }} </td>
+            <td> {{inventoryTransferRequest.status }} </td>
             <td>
               <div class="d-flex">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click) = "editInventoryTransfer()">
+                <div class="edit" (click) = "editInventoryTransferRequest()">
                   <mat-icon>edit</mat-icon>
                 </div>
 
@@ -115,7 +115,6 @@
       <div class="pagination">
         <app-pagination data-qe-id="pagination"></app-pagination>
       </div>
-
     </div>
   </div>
 </div>

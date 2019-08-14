@@ -24,6 +24,10 @@ const routes: Routes = [
         path: 'couting',
         loadChildren: () => import('./_modules/couting/couting.module').then(m => m.CoutingModule),
       },
+      {
+        path: 'permission',
+        loadChildren: () => import('./_modules/permission/permission.module').then(m => m.PermissionModule),
+      },
     ],
   },
 ];
