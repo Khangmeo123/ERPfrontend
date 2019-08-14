@@ -57,7 +57,6 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
         localStorage.removeItem('currentUser');
         this.cookieService.deleteAll('/');
-        debugger
         return this.router.navigate(['/login']);
     }
 }
