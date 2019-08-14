@@ -37,7 +37,7 @@ export class CustomerDetailService {
 
   save(customerEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (customerEntity.id === null || customerEntity.id === undefined || customerEntity.id === environment.emtyGuid) {
+      if (customerEntity.id === null || customerEntity.id === undefined || customerEntity.id === environment.emptyGuid) {
         this.customerDetailRepository.add(customerEntity).subscribe(res => {
           if (res) {
             this.toastrService.success('Cập nhật thành công !');
@@ -68,9 +68,9 @@ export class CustomerDetailService {
     return defered;
   }
 
-  delete(customerEntity: any): Promise<boolean> {
+  deactivate(customerEntity: any): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.customerDetailRepository.delete(customerEntity).subscribe(res => {
+      this.customerDetailRepository.deactivate(customerEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
           resolve();

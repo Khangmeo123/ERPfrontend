@@ -8,6 +8,7 @@ import { AssetEntity } from 'src/app/_modules/master-data/_backend/asset/asset.e
 import { AssetSearchEntity } from 'src/app/_modules/master-data/_backend/asset/asset.searchentity';
 import { EnumEntity } from 'src/app/_helpers/entity';
 import { environment } from 'src/environments/environment';
+import { translate } from '../../../../../../_helpers/string';
 
 @Injectable()
 export class AssetService {
@@ -60,7 +61,7 @@ export class AssetService {
 
   save(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (assetEntity.id === null || assetEntity.id === undefined || assetEntity.id === environment.emtyGuid) {
+      if (assetEntity.id === null || assetEntity.id === undefined || assetEntity.id === environment.emptyGuid) {
         this.assetRepository.add(assetEntity).subscribe(res => {
           if (res) {
             this.getList(assetSearchEntity);
@@ -95,9 +96,9 @@ export class AssetService {
     return defered;
   }
 
-  delete(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
+  deactivate(assetEntity: any, assetSearchEntity: AssetSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.assetRepository.delete(assetEntity).subscribe(res => {
+      this.assetRepository.deactivate(assetEntity).subscribe(res => {
         if (res) {
           this.getList(assetSearchEntity);
           this.toastrService.success('Cập nhật thành công !');
@@ -137,5 +138,21 @@ export class AssetService {
         console.log(err);
       }
     })
+  }
+
+  importFile(file: File) {
+    return new Promise((resolve, reject) => {
+      this.assetRepository.importFile(file).subscribe(res => {
+        if (res) {
+          this.toastrService.success(translate('general.import.success'));
+          resolve();
+        }
+      }, err => {
+        if (err) {
+          this.toastrService.error(translate('general.import.error'));
+          reject(err);
+        }
+      });
+    });
   }
 }

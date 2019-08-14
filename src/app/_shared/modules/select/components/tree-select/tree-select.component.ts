@@ -3,6 +3,7 @@ import { ISelect, SelectMode } from '../../select.interface';
 import { toggleMenu } from '../../../../animations/toggleMenu';
 import { buildTree, getListDirection, initiateSelectedNodes } from '../../helpers';
 import { addItemToArray, removeItemByIndex } from '../../../../../_helpers/array.helper';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-tree-select',
@@ -18,19 +19,40 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
   @Input() selectedSuffix = 'selected';
 
   @Input() disabled = false;
+
   @Input() mode: SelectMode = 'single';
+
   @Input() dataSource: any[] = [];
+
   @Input() key = 'label';
+
   @Input() selectedIds = [];
+
   @Input() firstLoad = false;
+
   @Output() firstLoadData = new EventEmitter();
+
   @Input() scaleX = '';
+
   @Output() selectionChange = new EventEmitter();
+
   listDirection = 'down';
+
+  @Input() direction: string = 'auto';
+
   treeData: any[] = [];
+
   selectedNodes: any[] = [];
+
   isLoading = false;
+
   isOpened = false;
+
+  public id: string;
+
+  constructor() {
+    this.id = Guid.create().toString();
+  }
 
   get hasData() {
     return this.treeData && this.treeData.length;
@@ -113,11 +135,10 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
 
   toggleList(event) {
     if (this.isOpened) {
-      this.beforeCloseList(event);
+      this.closeList(event);
     } else {
-      this.beforeOpenList(event);
+      this.openList(event);
     }
-    this.isOpened = !this.isOpened;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -153,7 +174,11 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
         this.firstLoadData.emit();
       }
     }
-    this.listDirection = getListDirection(event.target);
+    if (this.direction === 'auto') {
+      this.listDirection = getListDirection(event.target);
+    } else {
+      this.listDirection = this.direction;
+    }
   }
 
   onSelect(data) {
@@ -176,5 +201,17 @@ export class TreeSelectComponent implements OnInit, OnChanges, ISelect {
     this.selectionChange.emit(
       this.selectedNodes.map(this.valueSelector),
     );
+  }
+
+  onClickOutside(event) {
+    if (event.id === this.id) {
+      return;
+    }
+    this.closeList(event);
+  }
+
+  onHeadClick(event) {
+    event.id = this.id;
+    this.toggleList(event);
   }
 }

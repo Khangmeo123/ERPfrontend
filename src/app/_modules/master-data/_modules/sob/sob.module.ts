@@ -5,11 +5,10 @@ import { PaymentMethodComponent } from './_page/payment-method/payment-method.co
 import { PaymentTermComponent } from './_page/payment-term/payment-term.component';
 import { BankAccountComponent } from './_page/bank-account/bank-account.component';
 import { CoaComponent } from './_page/coa/coa.component';
-import { AccountantPeriodComponent } from './_page/accountant-period/accountant-period.component';
+import { AccountingPeriodComponent } from './_page/accounting-period/accounting-period.component';
 import { CostCenterComponent } from './_page/cost-center/cost-center.component';
 import { FiscalYearComponent } from './_page/fiscal-year/fiscal-year.component';
-import { ResourceTaxComponent } from './_page/resource-tax/resource-tax.component';
-import { VoucherComponent } from './_page/voucher/voucher.component';
+import { NaturalResourceTaxComponent } from './_page/natural-resource-tax/natural-resource-tax.component';
 import { TranslateModule } from '@ngx-translate/core';
 import { TableModule } from 'primeng/table';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +16,7 @@ import { DialogModule } from 'primeng/dialog';
 import { DatePickerModule } from 'src/app/_shared/modules/date-picker/date-picker.module';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { MatIconModule } from '@angular/material';
 
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
@@ -32,19 +31,21 @@ import { ImportTaxComponent } from './_page/import-tax/import-tax.component';
 import { ExportTaxComponent } from './_page/export-tax/export-tax.component';
 import { SpecialConsumptionTaxComponent } from './_page/special-consumption-tax/special-consumption-tax.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { ErrorModule } from '../../../../_shared/components/error/error.module';
+import { TreeTableModule } from 'primeng/treetable';
+import { InputSwitchModule } from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
     SobComponent,
     BankAccountComponent,
     CoaComponent,
-    AccountantPeriodComponent,
+    AccountingPeriodComponent,
     CostCenterComponent,
     FiscalYearComponent,
     PaymentMethodComponent,
     PaymentTermComponent,
-    ResourceTaxComponent,
-    VoucherComponent,
+    NaturalResourceTaxComponent,
     ValueAddedTaxComponent,
     EnvironmentTaxComponent,
     ImportTaxComponent,
@@ -73,7 +74,11 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     CheckboxModule,
     SelectModule,
     RadioButtonModule,
-    BsDropdownModule.forRoot()
-  ]
+    BsDropdownModule.forRoot(),
+    ErrorModule,
+    TreeTableModule,
+    InputSwitchModule,
+  ],
 })
-export class SobModule { }
+export class SobModule {
+}

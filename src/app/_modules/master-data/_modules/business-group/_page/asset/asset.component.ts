@@ -96,8 +96,8 @@ export class AssetComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.assetService.delete(this.assetForm.value, this.assetSearchEntity).then(res => {
+  deactivate() {
+    this.assetService.deactivate(this.assetForm.value, this.assetSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;
@@ -154,5 +154,12 @@ export class AssetComponent implements OnInit, OnDestroy {
     if (this.assetStatuses.length === 0) {
       this.assetService.getTypeList();
     }
+  }
+
+  importTemplate(file: File) {
+    this.assetService.importFile(file)
+      .then(() => {
+        this.getList();
+      });
   }
 }

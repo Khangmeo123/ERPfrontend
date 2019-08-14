@@ -75,7 +75,7 @@
                                     <label for="bankid">{{ 'legalItemDetail.content.characteristic' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <input type="text" class="form-control" formControlName="characteristicName"
+                                        <input type="text" class="form-control" formControlName="characteristicDisplay"
                                             data-qe-id="form-name" id="itemName" />
                                     </div>
                                 </div>
@@ -118,7 +118,7 @@
                                     <label for="itemStatus">{{ 'legalItemDetail.content.status' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <input type="text" class="form-control" formControlName="statusName"
+                                        <input type="text" class="form-control" formControlName="statusDisplay"
                                             data-qe-id="form-weight" id="itemWeight" />
                                     </div>
                                 </div>
@@ -740,7 +740,7 @@
                     <app-single-select class="w-100" [list]="uomExceptIds" [selectedList]="uomIds" [key]="'code'"
                         *ngIf="isOpenModalItemMaterial" (search)="typingSearchUomList($event[0])"
                         [initialValue]="itemMaterialForm.controls.unitOfMeasureCode.value"
-                        [valueSelector]="returnUomValue" (selectionChange)="itemMaterialForm.controls.unitOfMeasureId.setValue($event[0].id); 
+                        [valueSelector]="returnUomValue" (selectionChange)="itemMaterialForm.controls.unitOfMeasureId.setValue($event[0].id);
                         itemMaterialForm.controls.unitOfMeasureCode.setValue($event[0].code)"
                         (listOpen)="openUomList()">
                     </app-single-select>

@@ -1,0 +1,37 @@
+.code-formula-detail {
+  accordion-group {
+    margin-top: 0.5rem;
+  }
+}
+
+.item-actions {
+  background-color: #ffffff !important;
+  width: 48px;
+  justify-content: center;
+}
+
+.page-footer {
+  display: flex;
+  justify-content: flex-end;
+  justify-items: flex-end;
+
+  button {
+    margin-right: 0.5rem;
+  }
+
+  button:last-of-type {
+    margin-right: unset;
+  }
+}
+
+th.th-filter {
+  overflow: visible;
+}
+
+.ui-dialog-content {
+  overflow: visible;
+}
+
+.rule-actions {
+  width: 80px;
+}

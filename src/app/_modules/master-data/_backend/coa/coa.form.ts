@@ -1,31 +1,36 @@
-import { FormModel } from './../../../../_helpers/form-model';
-import { FormControl, Validators, FormGroup, AbstractControl, RequiredValidator, FormArray } from '@angular/forms';
-import { CoaEntity } from 'src/app/_modules/master-data/_backend/coa/coa.entity';
-import { requiredField, checkLength } from 'src/app/_helpers';
+import {FormModel} from '../../../../_helpers/form-model';
+import {FormControl, FormGroup} from '@angular/forms';
+import {CoaEntity} from 'src/app/_modules/master-data/_backend/coa/coa.entity';
+import {requiredField} from 'src/app/_helpers';
 
 export class CoaForm extends FormModel {
+  setOfBookId = new FormControl(null);
 
-    accountNumber = new FormControl('', [requiredField]);
-    accountName = new FormControl('', [requiredField]);
+  code = new FormControl(null, [requiredField]);
+  name = new FormControl(null, [requiredField]);
+  description = new FormControl(null);
 
+  characteristicId = new FormControl(null);
+  characteristicDisplay = new FormControl(null);
 
-    propertyId = new FormControl('');
-    propertyName = new FormControl('');
+  parentId = new FormControl(null);
+  parentCode = new FormControl(null);
 
+  disabled = new FormControl(null);
 
-    coaParentId = new FormControl('');
-    coaParentAccountNumber = new FormControl('');
+  errors: FormGroup = new FormGroup({
+    code: new FormControl(),
+    name: new FormControl(),
+  });
 
-    description = new FormControl('');
-
-    constructor(coaEntity?: CoaEntity) {
-        super();
-        if (coaEntity !== null && coaEntity !== undefined) {
-            Object.keys(coaEntity).forEach((item) => {
-                if (coaEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
-                    this[item].setValue(coaEntity[item]);
-                }
-            });
+  constructor(coaEntity?: CoaEntity) {
+    super();
+    if (coaEntity !== null && coaEntity !== undefined) {
+      Object.keys(coaEntity).forEach((item) => {
+        if (coaEntity.hasOwnProperty(item) && this.hasOwnProperty(item)) {
+          this[item].setValue(coaEntity[item]);
         }
+      });
     }
+  }
 }

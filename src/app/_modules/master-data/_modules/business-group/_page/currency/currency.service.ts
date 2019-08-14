@@ -55,7 +55,7 @@ export class CurrencyService {
 
   save(currencyEntity: any, currencySearchEntity: CurrencySearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (currencyEntity.id === null || currencyEntity.id === undefined || currencyEntity.id === environment.emtyGuid) {
+      if (currencyEntity.id === null || currencyEntity.id === undefined || currencyEntity.id === environment.emptyGuid) {
         this.currencyRepository.add(currencyEntity).subscribe(res => {
           if (res) {
             this.getList(currencySearchEntity);
@@ -90,9 +90,9 @@ export class CurrencyService {
     return defered;
   }
 
-  delete(currencyEntity: any, currencySearchEntity: CurrencySearchEntity): Promise<boolean> {
+  deactivate(currencyEntity: any, currencySearchEntity: CurrencySearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.currencyRepository.delete(currencyEntity).subscribe(res => {
+      this.currencyRepository.deactivate(currencyEntity).subscribe(res => {
         if (res) {
           this.getList(currencySearchEntity);
           this.toastrService.success('Cập nhật thành công !');

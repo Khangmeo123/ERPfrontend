@@ -9,9 +9,9 @@ import { FiltersModule } from '../../../../_shared/modules/filters/filters.modul
 import { TableModule } from 'primeng/table';
 import { PaginationModule } from 'src/app/_shared/modules/pagination/pagination.module';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
 @NgModule({
   declarations: [DivisionComponent],
   imports: [
@@ -28,6 +28,6 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ErrorModule,
     ReactiveFormsModule,
     FormsModule,
-  ]
+  ],
 })
 export class DivisionModule { }

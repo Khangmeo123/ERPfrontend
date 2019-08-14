@@ -1,0 +1,52 @@
+.page {
+  .page-body {
+    .page-section.code-formula {
+      display: flex;
+      align-items: center;
+
+      .legal-entity-select-box {
+        flex-grow: 1;
+        margin-right: 0.5rem;
+        display: flex;
+
+        span {
+          display: flex;
+          align-items: center;
+          margin-right: 0.5rem;
+        }
+      }
+
+      .actions {
+        button {
+          margin-right: 0.5rem;
+        }
+
+        button:last-of-type {
+          margin-right: unset;
+        }
+      }
+    }
+  }
+}
+
+.code-formula-actions {
+  background-color: #ffffff!important;
+  width: 48px;
+  justify-content: center;
+}
+
+.ui-dialog {
+  width: 900px!important;
+
+  .ui-dialog-content {
+    overflow: visible!important;
+  }
+}
+
+.number-cell {
+  width: 120px;
+}
+
+.number-cell {
+  width: 120px;
+}

@@ -11,13 +11,13 @@ import { CustomerDetailComponent } from './_page/customer-detail/customer-detail
 import { LegalSupplierDetailComponent } from './_page/supplier-detail/supplier-detail.component';
 import { LegalEntityComponent } from './_page/legal-entity/legal-entity.component';
 import { TranslateModule } from '@ngx-translate/core';
-import { MatIconModule } from '@angular/material';
+import {MatIconModule, MatTabsModule} from '@angular/material';
 import { SelectModule } from '../../../../_shared/modules/select/select.module';
 import { TableModule } from 'primeng/table';
 import { FiltersModule } from '../../../../_shared/modules/filters/filters.module';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { DialogModule } from 'primeng/dialog';
-import { ConfirmationPopoverModule } from 'angular-confirmation-popover';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { AccordionModule, BsDropdownModule } from 'ngx-bootstrap';
 import { CustomerListOfLegalEntityComponent } from './_page/customer-list-of-legal-entity/customer-list-of-legal-entity.component';
 import { SupplierOfLegalEntityComponent } from './_page/supplier-of-legal-entity/supplier-of-legal-entity.component';
@@ -31,6 +31,10 @@ import { RadioButtonModule } from 'primeng/radiobutton';
 import { ChipsModule } from 'primeng/chips';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EmployeePositionComponent } from './_page/employee-position/employee-position.component';
+import { BinLocationComponent } from './_page/bin-location/bin-location.component';
+import { CodeFormulaListComponent } from './_page/code-formula/code-formula-list/code-formula-list.component';
+import { CodeFormulaDetailComponent } from './_page/code-formula/code-formula-detail/code-formula-detail.component';
+import {KeyFilterModule} from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,11 @@ import { EmployeePositionComponent } from './_page/employee-position/employee-po
     EmployeeOfLegalEntityComponent,
     ItemOfLegalEntityComponent,
     EmployeeDetailComponent,
-    LegalItemDetailComponent],
+    LegalItemDetailComponent,
+    BinLocationComponent,
+    CodeFormulaListComponent,
+    CodeFormulaDetailComponent,
+  ],
   imports: [
     CommonModule,
     LegalEntityRoutingModule,
@@ -72,6 +80,8 @@ import { EmployeePositionComponent } from './_page/employee-position/employee-po
     SelectModule,
     ChipsModule,
     FormsModule,
+    KeyFilterModule,
+    MatTabsModule,
   ],
 })
 export class LegalEntityModule {

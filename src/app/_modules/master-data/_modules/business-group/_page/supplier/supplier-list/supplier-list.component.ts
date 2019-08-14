@@ -111,4 +111,10 @@ export class SupplierListComponent implements OnInit, OnDestroy {
     }
   }
 
+  importTemplate(file: File) {
+    this.supplierListService.importFile(file)
+      .then(() => {
+        this.getList();
+      });
+  }
 }

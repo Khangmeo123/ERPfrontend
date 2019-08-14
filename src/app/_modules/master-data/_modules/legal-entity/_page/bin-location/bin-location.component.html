@@ -1,0 +1,299 @@
+<div class="page bin-location">
+
+  <div class="page-header">
+    <div class="page-title">
+      {{'binLocation.title' | translate}}
+    </div>
+  </div>
+
+  <div class="page-body container-fluid">
+
+    <div class="page-section legal-entity">
+
+      <div class="legal-entity-select-box">
+        <span>
+          {{'general.legal_entity.name' | translate}}:
+        </span>
+        <app-single-select id="legal-entity-select-box"
+                           key="name"
+                           [initialValue]="legalEntity?.name"
+                           [valueSelector]="legalEntitySelector"
+                           [list]="legalEntityList"
+                           [selectedList]="selectedLegalEntityList"
+                           (listOpen)="onOpenLegalEntityList()"
+                           (search)="onSearchLegalEntity($event)"
+                           (selectionChange)="onSelectLegalEntity($event)"
+        ></app-single-select>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-import">
+          {{'general.button.import' | translate}}
+        </button>
+        <button class="btn btn-export">
+          {{'general.button.export' | translate}}
+        </button>
+      </div>
+    </div>
+
+    <div class="page-section row">
+      <div class="col">
+        <p-table [resizableColumns]="true" [value]="level1List" *ngIf="binLocationFieldEntity">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pResizableColumn class="ui-resizable-column">
+                {{'binLocation.layer1.code' | translate}}
+              </th>
+              <th pResizableColumn class="ui-resizable-column">
+                {{binLocationFieldEntity.subLevel1}}
+              </th>
+              <th class="bin-location-actions">
+                {{'binLocation.action' | translate}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level1SearchEntity.code"
+                                      (changeFilter)="onFilterChange(1)"></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level1SearchEntity.code"
+                                      (changeFilter)="onFilterChange(1)"></app-advanced-filters>
+              </th>
+              <th class="bin-location-actions">
+                <a role="button" (click)="add(1)">
+                  <mat-icon>add_circle</mat-icon>
+                </a>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-index="index">
+            <tr>
+              <td class="ui-resizable-column">
+                {{rowData.code}}
+              </td>
+              <td class="ui-resizable-column">
+                {{rowData.name}}
+              </td>
+              <td class="bin-location-actions">
+                <a role="button" (click)="edit(rowData, 1)">
+                  <mat-icon>edit</mat-icon>
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+
+      <div class="col">
+        <p-table [resizableColumns]="true" [value]="level2List" *ngIf="binLocationFieldEntity">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pResizableColumn class="ui-resizable-column">
+                {{'binLocation.layer2.code' | translate}}
+              </th>
+              <th pResizableColumn class="ui-resizable-column">
+                {{binLocationFieldEntity.subLevel2}}
+              </th>
+              <th class="bin-location-actions">
+                {{'binLocation.action' | translate}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level2SearchEntity.code"
+                                      (changeFilter)="onFilterChange(2)"></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level2SearchEntity.code"
+                                      (changeFilter)="onFilterChange(2)"></app-advanced-filters>
+              </th>
+              <th class="bin-location-actions">
+                <a role="button" (click)="add(2)">
+                  <mat-icon>add_circle</mat-icon>
+                </a>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-index="index">
+            <tr>
+              <td class="ui-resizable-column">
+                {{rowData.code}}
+              </td>
+              <td class="ui-resizable-column">
+                {{rowData.name}}
+              </td>
+              <td class="bin-location-actions">
+                <a role="button" (click)="edit(rowData, 2)">
+                  <mat-icon>edit</mat-icon>
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+
+      <div class="col">
+        <p-table [resizableColumns]="true" [value]="level3List" *ngIf="binLocationFieldEntity">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pResizableColumn class="ui-resizable-column">
+                {{'binLocation.layer3.code' | translate}}
+              </th>
+              <th pResizableColumn class="ui-resizable-column">
+                {{binLocationFieldEntity.subLevel3}}
+              </th>
+              <th class="bin-location-actions">
+                {{'binLocation.action' | translate}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level3SearchEntity.code"
+                                      (changeFilter)="onFilterChange(3)"></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level3SearchEntity.code"
+                                      (changeFilter)="onFilterChange(3)"></app-advanced-filters>
+              </th>
+              <th class="bin-location-actions">
+                <a role="button" (click)="add(3)">
+                  <mat-icon>add_circle</mat-icon>
+                </a>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-index="index">
+            <tr>
+              <td class="ui-resizable-column">
+                {{rowData.code}}
+              </td>
+              <td class="ui-resizable-column">
+                {{rowData.name}}
+              </td>
+              <td class="bin-location-actions">
+                <a role="button" (click)="edit(rowData, 3)">
+                  <mat-icon>edit</mat-icon>
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+
+      <div class="col">
+        <p-table [resizableColumns]="true" [value]="level4List" *ngIf="binLocationFieldEntity">
+          <ng-template pTemplate="header">
+            <tr>
+              <th pResizableColumn class="ui-resizable-column">
+                {{'binLocation.layer4.code' | translate}}
+              </th>
+              <th pResizableColumn class="ui-resizable-column">
+                {{binLocationFieldEntity.subLevel4}}
+              </th>
+              <th class="bin-location-actions">
+                {{'binLocation.action' | translate}}
+              </th>
+            </tr>
+            <tr>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level4SearchEntity.code"
+                                      (changeFilter)="onFilterChange(4)"></app-advanced-filters>
+              </th>
+              <th class="th-filter">
+                <app-advanced-filters defaultType="startsWith" [filter]="level4SearchEntity.code"
+                                      (changeFilter)="onFilterChange(4)"></app-advanced-filters>
+              </th>
+              <th class="bin-location-actions">
+                <a role="button" (click)="add(4)">
+                  <mat-icon>add_circle</mat-icon>
+                </a>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-rowData let-index="index">
+            <tr>
+              <td class="ui-resizable-column">
+                {{rowData.code}}
+              </td>
+              <td class="ui-resizable-column">
+                {{rowData.name}}
+              </td>
+              <td class="bin-location-actions">
+                <a role="button" (click)="edit(rowData, 4)">
+                  <mat-icon>edit</mat-icon>
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+
+        </p-table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<p-dialog modal="true"
+          [(visible)]="modal"
+          appendTo="body">
+  <p-header>
+    {{'binLocation.modal.title' | translate}}
+  </p-header>
+
+  <div class="container" [formGroup]="binLocationForm">
+    <div class="row">
+      <div class="col">
+        <label for="bin-location-code">
+          {{'binLocation.code' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" name="code" formControlName="code" id="bin-location-code">
+          <app-error data-qe-id="dialog-error-code"
+                     *ngIf="(code?.errors && code?.touched) || !!errors?.get('code')?.value"
+                     [formGroup]="binLocationForm" [property]="'code'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+      <div class="col">
+        <label for="bin-location-name">
+          {{'binLocation.name' | translate}}
+          <span class="text-danger ml-1">(*)</span>
+        </label>
+        <div class="div-form">
+          <input type="text" class="form-control" name="name" formControlName="name" id="bin-location-name">
+          <app-error data-qe-id="dialog-error-name"
+                     *ngIf="(name?.errors && name?.touched) || !!errors?.get('name')?.value"
+                     [formGroup]="binLocationForm" [property]="'name'" [placement]="'top'" class="error-form">
+          </app-error>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p-footer class="d-flex">
+    <button class="btn btn-delete"
+            (confirm)="delete(binLocationForm.value)"
+            *ngIf="binLocationForm.value?.id"
+            popoverMessage="{{'binLocation.delete.confirm.message' | translate}}"
+            popoverTitle="{{'binLocation.delete.confirm.title' | translate}}"
+            data-qe-id="footer-button-delete"
+            mwlConfirmationPopover
+            placement="bottom">
+      {{'general.button.delete' | translate}}
+    </button>
+
+    <div class="flex-grow-1">
+      <button class="btn btn-cancel" (click)="cancel()">
+        {{'general.button.cancel' | translate}}
+      </button>
+      <button class="btn btn-save" (click)="save()">
+        {{'general.button.save' | translate}}
+      </button>
+    </div>
+  </p-footer>
+</p-dialog>

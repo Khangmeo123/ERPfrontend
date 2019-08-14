@@ -62,7 +62,7 @@ export class JobLevelService {
 
   save(jobLevelEntity: any, jobLevelSearchEntity: JobLevelSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (jobLevelEntity.id === null || jobLevelEntity.id === undefined || jobLevelEntity.id === environment.emtyGuid) {
+      if (jobLevelEntity.id === null || jobLevelEntity.id === undefined || jobLevelEntity.id === environment.emptyGuid) {
         this.jobLevelRepository.add(jobLevelEntity).subscribe(res => {
           if (res) {
             this.getList(jobLevelSearchEntity);
@@ -97,9 +97,9 @@ export class JobLevelService {
     return defered;
   }
 
-  delete(jobLevelEntity: any, jobLevelSearchEntity: JobLevelSearchEntity): Promise<boolean> {
+  deactivate(jobLevelEntity: any, jobLevelSearchEntity: JobLevelSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.jobLevelRepository.delete(jobLevelEntity).subscribe(res => {
+      this.jobLevelRepository.deactivate(jobLevelEntity).subscribe(res => {
         if (res) {
           this.getList(jobLevelSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

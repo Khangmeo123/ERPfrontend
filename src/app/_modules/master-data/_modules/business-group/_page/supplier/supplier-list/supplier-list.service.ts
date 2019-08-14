@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
 import { SupplierListRepository } from './supplier-list.repository';
 import { SupplierEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.entity';
 import { SupplierSearchEntity } from 'src/app/_modules/master-data/_backend/supplier/supplier.searchentity';
+import {translate} from '../../../../../../../_helpers/string';
 
 @Injectable()
 export class SupplierListService {
@@ -38,6 +39,22 @@ export class SupplierListService {
       if (err) {
         console.log(err);
       }
+    });
+  }
+
+  importFile(file: File) {
+    return new Promise((resolve, reject) => {
+      this.supplierRepository.importFile(file).subscribe(res => {
+        if (res) {
+          this.toastrService.success(translate('general.import.success'));
+          resolve();
+        }
+      }, err => {
+        if (err) {
+          this.toastrService.error(translate('general.import.error'));
+          reject(err);
+        }
+      });
     });
   }
 }

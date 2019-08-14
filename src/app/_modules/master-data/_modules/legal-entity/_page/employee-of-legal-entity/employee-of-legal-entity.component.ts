@@ -1,38 +1,42 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Router } from '@angular/router';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
-import { BookmarkService } from 'src/app/_services';
-import { translate } from 'src/app/_helpers/string';
-import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
-import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
-import { EmployeeSearchEntity } from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
-import { EmployeeEntity } from 'src/app/_modules/master-data/_backend/employee/employee.entity';
-import { EmployeeOfLegalEntityService } from './employee-of-legal-entity.service';
-import { Subscription, Subject } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Router} from '@angular/router';
+import {GeneralService} from 'src/app/_helpers/general-service.service';
+import {BookmarkService} from 'src/app/_services';
+import {translate} from 'src/app/_helpers/string';
+import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import {LegalEntity} from 'src/app/_modules/master-data/_backend/legal/legal.entity';
+import {EmployeeSearchEntity} from 'src/app/_modules/master-data/_backend/employee/employee.searchentity';
+import {EmployeeEntity} from 'src/app/_modules/master-data/_backend/employee/employee.entity';
+import {EmployeeOfLegalEntityService} from './employee-of-legal-entity.service';
+import {Subject, Subscription} from 'rxjs';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-employee-of-legal-entity',
   templateUrl: './employee-of-legal-entity.component.html',
   styleUrls: ['./employee-of-legal-entity.component.scss'],
-  providers: [EmployeeOfLegalEntityService]
+  providers: [EmployeeOfLegalEntityService],
 })
 export class EmployeeOfLegalEntityComponent implements OnInit {
   pageTitle = translate('employeeOfLegalEntity.header.title');
   pagination = new PaginationModel();
-  paginationdetail = new PaginationModel();
+  paginationDetail = new PaginationModel();
   isSaveBookMark = false;
   selectedList: any;
 
   legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
+
   legalList: LegalEntity[];
+
   employeeSearchEntity: EmployeeSearchEntity = new EmployeeSearchEntity();
   employeeList: EmployeeEntity[];
 
   employeeSubs: Subscription = new Subscription();
+
   exportLink = environment.apiUrlApps + 'master-data/legal-entity/employee-of-legal-entity/export?legalEntityId=';
-  @ViewChild('tableEmployee', { static: false }) public tableEmployee: TemplateRef<any>;
+
+  @ViewChild('tableEmployee', {static: false}) public tableEmployee: TemplateRef<any>;
 
   // Drop employee
   employeeIds: EmployeeEntity[];
@@ -41,11 +45,12 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   listEmployeeId: Array<any> = [];
 
   legalId: string;
+
   constructor(
     private employeeOfLegalEntityService: EmployeeOfLegalEntityService,
     protected router: Router,
     private genaralService: GeneralService,
-    private bookmarkService: BookmarkService, ) {
+    private bookmarkService: BookmarkService) {
     const legalListSub = this.employeeOfLegalEntityService.legalEntityList.subscribe(res => {
       if (res) {
         this.legalList = res;
@@ -60,7 +65,6 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     });
 
     const employeeOfLegalListSub = this.employeeOfLegalEntityService.employeeListOflegalEntity.subscribe(res => {
-      console.log(res);
       if (res) {
         this.employeeIds = res.ids;
         this.employeeExceptIds = res.exceptIds;
@@ -73,7 +77,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     });
     const employeeListCountSub = this.employeeOfLegalEntityService.employeeCount.subscribe(res => {
       if (res) {
-        this.paginationdetail.totalItems = res;
+        this.paginationDetail.totalItems = res;
       }
     });
 
@@ -81,7 +85,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
       this.isSaveBookMark = res;
     });
     this.employeeOfLegalEntityService.getListDropEmployeeByTyping(this.employeeTyping);
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
     this.employeeSubs.add(legalListSub).add(legalListCountSub).add(bookMarkNotify)
       .add(employeeOfLegalListSub).add(employeeListSub).add(employeeListCountSub);
   }
@@ -91,14 +95,14 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.legalSearchEntity.skip = this.pagination.skip;
     this.legalSearchEntity.take = this.pagination.take;
 
-    this.employeeSearchEntity.skip = this.paginationdetail.skip;
-    this.employeeSearchEntity.take = this.paginationdetail.take;
+    this.employeeSearchEntity.skip = this.paginationDetail.skip;
+    this.employeeSearchEntity.take = this.paginationDetail.take;
   }
 
   // drop employee
   openEmployeeList(id: string[]) {
     this.employeeSearchEntity = new EmployeeSearchEntity();
-    this.employeeSearchEntity.ids = id;
+    this.employeeSearchEntity.ids = this.listEmployeeId;
     if (this.legalId !== '' && this.legalId !== undefined) {
       this.employeeSearchEntity.legalEntityId = this.legalId;
       this.employeeOfLegalEntityService.getListDropEmployee(this.employeeSearchEntity);
@@ -106,10 +110,13 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   }
 
   employeeSearch(event) {
+    this.employeeSearchEntity = new EmployeeSearchEntity();
+    this.employeeSearchEntity.ids = this.listEmployeeId;
     this.employeeSearchEntity.code.startsWith = event;
     this.employeeSearchEntity.name.startsWith = event;
     this.employeeTyping.next(this.employeeSearchEntity);
   }
+
   selectEmployee(event) {
     this.listEmployeeId = event;
   }
@@ -128,7 +135,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
         this.employeeSearchEntity.legalEntityId = null;
         this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
       }
-    })
+    });
   }
 
   toDetail(legalId) {
@@ -170,9 +177,9 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   // table employee detail
 
   getListEmployee(employee) {
-    this.paginationdetail.pageNumber = 1;
+    this.paginationDetail.pageNumber = 1;
     this.employeeSearchEntity.skip = 0;
-    this.employeeSearchEntity.take = this.paginationdetail.take;
+    this.employeeSearchEntity.take = this.paginationDetail.take;
     this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
   }
 
@@ -203,13 +210,14 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
     this.employeeSearchEntity.employeeIds = this.listEmployeeId;
     this.employeeSearchEntity.legalEntityId = this.legalId;
     this.employeeOfLegalEntityService.saveEmployee(this.employeeSearchEntity).then(res => {
+      this.employeeIds = [];
       this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
     }).catch(err => {
     });
   }
 
   editSupplierDetail(employeeId) {
-    this.router.navigate(['/master-data/legal-entity/employee-of-legal-entity/employee-detail'], { queryParams: { id: employeeId } });
+    this.router.navigate(['/master-data/legal-entity/employee-of-legal-entity/employee-detail'], {queryParams: {id: employeeId}});
   }
 
   deleteSupplierFormLegal(employee) {
@@ -217,7 +225,7 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
       if (res) {
         this.clearSearchEmployee(this.tableEmployee);
         this.employeeSearchEntity.legalEntityId = this.legalId;
-        this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity)
+        this.employeeOfLegalEntityService.getListEmployeeDetail(this.employeeSearchEntity);
       }
     });
   }
@@ -225,9 +233,9 @@ export class EmployeeOfLegalEntityComponent implements OnInit {
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 

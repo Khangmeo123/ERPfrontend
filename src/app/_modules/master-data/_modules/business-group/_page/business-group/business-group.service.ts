@@ -53,7 +53,7 @@ export class BusinessGroupService {
 
   save(businessGroupEntity: any, businessGroupSearchEntity: BusinessGroupSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (businessGroupEntity.id === null || businessGroupEntity.id === undefined || businessGroupEntity.id === environment.emtyGuid) {
+      if (businessGroupEntity.id === null || businessGroupEntity.id === undefined || businessGroupEntity.id === environment.emptyGuid) {
         this.businessGroupRepository.add(businessGroupEntity).subscribe(res => {
           if (res) {
             this.getList(businessGroupSearchEntity);
@@ -88,9 +88,9 @@ export class BusinessGroupService {
     return defered;
   }
 
-  delete(businessGroupEntity: any, businessGroupSearchEntity: BusinessGroupSearchEntity): Promise<boolean> {
+  deactivate(businessGroupEntity: any, businessGroupSearchEntity: BusinessGroupSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.businessGroupRepository.delete(businessGroupEntity).subscribe(res => {
+      this.businessGroupRepository.deactivate(businessGroupEntity).subscribe(res => {
         if (res) {
           this.getList(businessGroupSearchEntity);
           this.toastrService.success('Cập nhật thành công !');

@@ -10,7 +10,7 @@ export class SupplierEntity extends Entity {
 
     // status
     statusId: string;
-    statusName: string;
+    statusDisplay: string;
 
     constructor(supplierEntity?: any) {
         super(supplierEntity);

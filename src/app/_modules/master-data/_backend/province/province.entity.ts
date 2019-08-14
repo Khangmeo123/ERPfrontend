@@ -1,10 +1,10 @@
-import { Entity } from 'src/app/_helpers/entity';
+import {Entity} from 'src/app/_helpers/entity';
 
 export class ProvinceEntity extends Entity {
-    code: string;
-    name: string;
+  code: string;
+  name: string;
 
-    constructor(provinceEntity?: any) {
-        super(provinceEntity);
-    }
+  constructor(provinceEntity?: ProvinceEntity) {
+    super(provinceEntity);
+  }
 }

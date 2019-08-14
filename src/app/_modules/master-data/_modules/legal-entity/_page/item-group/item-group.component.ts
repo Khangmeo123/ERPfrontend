@@ -1,19 +1,19 @@
-import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/item.searchentity';
-import { FormGroup } from '@angular/forms';
-import { ItemGroupSearchEntity } from './../../../../_backend/item-group/item-group.searchentity';
-import { ItemGroupEntity } from 'src/app/_modules/master-data/_backend/item-group/item-group.entity';
-import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
-import { LegalEntity } from './../../../../_backend/legal/legal.entity';
-import { Component, OnInit, OnDestroy, ViewChild, TemplateRef } from '@angular/core';
-import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
-import { Router } from '@angular/router';
-import { translate } from 'src/app/_helpers/string';
-import { Subject, Subscription } from 'rxjs';
-import { ItemGroupService } from './item-group.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
-import { BookmarkService } from 'src/app/_services';
-import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.entity';
-import { environment } from 'src/environments/environment';
+import {ItemSearchEntity} from 'src/app/_modules/master-data/_backend/item/item.searchentity';
+import {FormGroup} from '@angular/forms';
+import {ItemGroupSearchEntity} from './../../../../_backend/item-group/item-group.searchentity';
+import {ItemGroupEntity} from 'src/app/_modules/master-data/_backend/item-group/item-group.entity';
+import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
+import {LegalEntity} from './../../../../_backend/legal/legal.entity';
+import {Component, OnInit, OnDestroy, ViewChild, TemplateRef} from '@angular/core';
+import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
+import {Router} from '@angular/router';
+import {translate} from 'src/app/_helpers/string';
+import {Subject, Subscription} from 'rxjs';
+import {ItemGroupService} from './item-group.service';
+import {GeneralService} from 'src/app/_helpers/general-service.service';
+import {BookmarkService} from 'src/app/_services';
+import {ItemEntity} from 'src/app/_modules/master-data/_backend/item/item.entity';
+import {environment} from 'src/environments/environment';
 
 @Component({
   selector: 'app-item-group',
@@ -35,8 +35,8 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   itemsFromItemGroupIds: string[] = [];
   itemGroupSubs: Subscription = new Subscription();
   itemGroupSelectedRow: any;
-  @ViewChild('tableItemGroup', { static: false }) public tableItemGroup: TemplateRef<any>;
-  @ViewChild('tableItems', { static: false }) public tableItems: TemplateRef<any>;
+  @ViewChild('tableItemGroup', {static: false}) public tableItemGroup: TemplateRef<any>;
+  @ViewChild('tableItems', {static: false}) public tableItems: TemplateRef<any>;
   // legal:
   legalIds: LegalEntity[];
   legalExceptIds: LegalEntity[];
@@ -58,7 +58,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   exportItemDetailLink: string;
 
   constructor(private itemGroupService: ItemGroupService, private genaralService: GeneralService,
-    private bookmarkService: BookmarkService, private router: Router) {
+              private bookmarkService: BookmarkService, private router: Router) {
     // legalEntity:
     const legalListSub = this.itemGroupService.legalEntityList.subscribe(res => {
       if (res) {
@@ -105,7 +105,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isSaveBookMark = res;
     });
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
 
     this.itemGroupSubs.add(legalListSub).add(itemGroupListSub).add(itemGroupCountSub).add(itemGroupFormSub).add(itemListSub)
       .add(itemsFromItemGroupListSub).add(itemsFromItemGroupCountSub).add(bookMarkNotify);
@@ -123,9 +123,9 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isSaveBookMark = !this.isSaveBookMark;
     if (this.isSaveBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 
@@ -174,7 +174,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   sortItemGroupList(event: any) {
     if (event.sortField && event.sortOrder) {
       this.itemGroupSearchEntity.orderBy = event.sortField;
-      this.itemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.itemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
       this.getItemGroupList();
@@ -197,17 +197,15 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
     this.isShowItemGroupDialog = true;
   }
 
-  editItemGroup(itemGroupId: string) {
+  editItemGroup(itemGroupId: string, event) {
     this.itemGroupService.editItemGroupFromLegal(itemGroupId);
     this.isShowItemGroupDialog = true;
+    event.stopPropagation();
   }
 
-  viewItemGroup(itemGroupId: string) {
-    console.log(itemGroupId);
-  }
-
-  deactiveItemGroup() {
-
+  async deleteItemGroup(itemGroupEntity: ItemGroupEntity, event) {
+    event.stopPropagation();
+    await this.itemGroupService.deleteItemGroup(itemGroupEntity, this.itemGroupSearchEntity);
   }
 
   saveItemGroup() {
@@ -226,6 +224,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
     if (event.data) {
       this.itemGroupId = event.data.id;
       this.exportItemDetailLink = this.exportLink + this.itemGroupId;
+      this.itemSearchEntity.itemGroupingId = this.itemGroupId;
       this.clearSearchItemsFromItemGroup(this.tableItems);
     }
   }
@@ -247,7 +246,7 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   sortItemsFromItemGroup(event: any) {
     if (event.sortField && event.sortOrder) {
       this.itemsFromItemGroupSearchEntity.orderBy = event.sortField;
-      this.itemsFromItemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'dsc';
+      this.itemsFromItemGroupSearchEntity.orderType = event.sortOrder > 0 ? 'asc' : 'desc';
     }
     this.getitemsFromItemGroupList();
   }
@@ -266,12 +265,11 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
   // item:
   itemOpen() {
     this.itemSearchEntity = new ItemSearchEntity();
+    this.itemSearchEntity.itemGroupingId = this.itemGroupId;
     if (this.itemsFromItemGroupIds.length > 0) {
       this.itemSearchEntity.ids = [...this.itemsFromItemGroupIds];
     }
-    if (this.legalEntityId !== null && this.legalEntityId !== undefined) {
-      this.itemSearchEntity.legalEntityId = this.legalEntityId;
-    }
+    this.itemSearchEntity.legalEntityId = this.legalEntityId;
     this.itemGroupService.dropDownItemList(this.itemSearchEntity);
   }
 
@@ -307,13 +305,13 @@ export class ItemGroupComponent implements OnInit, OnDestroy {
 
   editItemFromItemGroup(itemId: string) {
     if (itemId) {
-      this.router.navigate(['/master-data/legal-entity/item-group/item-detail'], { queryParams: { id: itemId } });
+      this.router.navigate(['/master-data/legal-entity/item-group/item-detail'], {queryParams: {id: itemId}});
     }
   }
 
   viewItemFromItemGroup(itemId: string) {
     if (itemId) {
-      this.router.navigate(['/master-data/legal-entity/item-group/item-view'], { queryParams: { id: itemId } });
+      this.router.navigate(['/master-data/legal-entity/item-group/item-view'], {queryParams: {id: itemId}});
     }
   }
 }

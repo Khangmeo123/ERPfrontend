@@ -40,7 +40,7 @@ export class CustomerDetailRepository extends Repository {
             );
     }
 
-    delete(customerEntity: any): Observable<boolean> {
+    deactivate(customerEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(customerEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
@@ -48,7 +48,7 @@ export class CustomerDetailRepository extends Repository {
     }
 
     getStatusList(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-status', JSON.stringify({}),
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-list-status', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

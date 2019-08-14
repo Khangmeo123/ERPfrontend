@@ -1,7 +1,11 @@
 .select-form {
-    display: flex;
-    label {
-        white-space: nowrap;
-        padding: 5px;
-    }
+  display: flex;
+
+  label {
+    white-space: nowrap;
+    padding: 5px;
+  }
+}
+.cost-center-actions {
+  width: 48px;
 }

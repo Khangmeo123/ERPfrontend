@@ -1,24 +1,31 @@
 import { Entity } from 'src/app/_helpers/entity';
 
 export class FiscalYearEntity extends Entity {
-    // sobEntity:
-    name: string;
-    sobId: string;
+  id: string;
 
-    fromValid: string;
-    toValid : string;
+  setOfBookId: string;
+  setOfBookCode: string;
+  setOfBookName: string;
 
-    //phuong phap dinh gia ngam dinh
-    valuationMethodId: string;
-    valuationMethodCode: string;
-    valuationMethodName: string;
+  name: string;
 
-    //trang thai
-    statusId: string;
-    statusCode: string;
-    statusName: string;
+  valuationMethodId: string;
+  valuationMethodDisplay: string;
 
-    constructor(fiscalYearEntity?: any) {
-        super(fiscalYearEntity);
-    }
+  disabled: boolean;
+  isValidated: boolean;
+
+  startDate: string;
+  endDate: string;
+
+  statusId: string;
+  statusDisplay: string;
+
+  errors: {
+    [key: string]: any;
+  };
+
+  constructor(fiscalYearEntity?: any) {
+    super(fiscalYearEntity);
+  }
 }

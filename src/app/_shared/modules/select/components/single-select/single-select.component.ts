@@ -2,18 +2,22 @@ import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChange
 import { ISelect } from '../../select.interface';
 import { toggleMenu } from '../../../../animations/toggleMenu';
 import { getListDirection } from '../../helpers';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-single-select',
   templateUrl: './single-select.component.html',
-  styleUrls: ['./single-select.component.scss'],
+  styleUrls: [
+    './single-select.component.scss',
+  ],
   encapsulation: ViewEncapsulation.None,
   animations: [
     toggleMenu,
   ],
 })
 export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
-  @Input() initialValue = '';
+
+  @Input() initialValue = null;
 
   @Input() list = [];
 
@@ -31,20 +35,22 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   listDirection = 'down';
 
-  /**
-   * down: List always open down
-   *
-   * up: List always open up
-   *
-   * auto: Recalculate the direction before open list
-   */
-  @Input() direction: string = 'down';
+  @Input() direction: string = 'auto';
 
   isOpened = false;
 
   isLoading = false;
 
+  currentValue: string;
+
+  @Input() clearable: boolean = false;
+
+  @Output() clear: EventEmitter<void> = new EventEmitter<void>();
+
+  public id: string;
+
   constructor() {
+    this.id = Guid.create().toString();
   }
 
   get listState() {
@@ -57,16 +63,6 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   get hasData() {
     return this.list && this.list.length;
-  }
-
-  get selectedText() {
-    // if (this.hasSelected) {
-    //   return this.selectedList[0][this.key];
-    // }
-    return this.initialValue;
-  }
-  set selectedText(value) {
-
   }
 
   @Input() valueSelector = (node) => node.id;
@@ -97,15 +93,29 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
       this.isLoading = false;
+      if (changes.list) {
+        if (changes.list.currentValue && changes.list.currentValue.length) {
+          this.list = [
+            ...this.list,
+          ];
+        }
+      }
+      if (changes.selectedList) {
+        if (changes.selectedList.currentValue && changes.selectedList.currentValue.length) {
+          this.selectedList = [
+            ...this.selectedList,
+          ];
+        }
+      }
     }
     if (changes.initialValue) {
       if (!changes.initialValue.currentValue) {
         this.selectedList = null;
-        this.selectedText = '';
+        this.initialValue = null;
       } else {
-        const pattern = new RegExp('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', 'i');
-        if (!pattern.test(changes.initialValue.currentValue)) {
-          this.selectedText = '';
+        const pattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+        if (pattern.test(changes.initialValue.currentValue)) {
+          this.initialValue = this.currentValue;
         }
       }
     }
@@ -121,7 +131,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   select(event) {
     const { data, index } = event;
     if (this.hasSelected) {
-      if (this.selectedList[0].id && this.selectedList[0].id === data.id) {
+      if (this.selectedList[0].id === data.id) {
         return this.unselect(event);
       }
     }
@@ -131,7 +141,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       ...this.selectedList,
     ];
     this.selectedList[0] = data;
-    this.initialValue = event.data[this.key];
+    this.currentValue = data[this.key];
+    this.initialValue = data[this.key];
     return this.onChange();
   }
 
@@ -160,10 +171,31 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   toggleList(event) {
     if (this.isOpened) {
-      this.beforeCloseList(event);
+      this.closeList(event);
     } else {
-      this.beforeOpenList(event);
+      this.openList(event);
     }
-    this.isOpened = !this.isOpened;
+  }
+
+  onClear() {
+    this.initialValue = null;
+    this.list = [
+      ...this.list,
+      ...this.selectedList,
+    ];
+    this.selectedList = [];
+    this.clear.emit();
+  }
+
+  onClickOutside(event) {
+    if (event.id === this.id) {
+      return;
+    }
+    this.closeList(event);
+  }
+
+  onHeadClick(event) {
+    event.id = this.id;
+    this.toggleList(event);
   }
 }

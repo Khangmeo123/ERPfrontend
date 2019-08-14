@@ -79,8 +79,8 @@ export class UomComponent implements OnInit, OnDestroy {
     this.isShowDialog = true;
   }
 
-  delete() {
-    this.uomService.delete(this.uomForm.value, this.uomSearchEntity).then(res => {
+  deactivate() {
+    this.uomService.deactivate(this.uomForm.value, this.uomSearchEntity).then(res => {
       this.isShowDialog = res;
     }).catch(err => {
       this.isShowDialog = err;

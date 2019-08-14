@@ -1,7 +1,7 @@
 <div class="page item-detail">
     <div class="page-header">
         <span class="page-title">
-            {{pageTitle}}
+            {{'item.detail.header.title' | translate}}
         </span>
         <div class="page-actions">
             <button class="btn btn-cancel" (click)="cancel()"
@@ -95,8 +95,8 @@
                                     <label for="bankid">{{ 'item.detail.content.characteristic' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <app-simple-select [key]="'name'" [list]="characteristicList"
-                                            [initialValue]="itemForm.controls.characteristicName.value"
+                                        <app-simple-select [key]="'display'" [list]="characteristicList"
+                                            [initialValue]="itemForm.controls.characteristicDisplay.value"
                                             (selectionChange)="itemForm.controls.characteristicId.setValue($event)"
                                             (listOpen)="openCharacteristicList()" data-qe-id="form-characteristic"
                                             class="w-100">
@@ -154,7 +154,7 @@
                                     <label for="itemWeight">{{ 'item.detail.content.weight' | translate}} (kg)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="weight"
-                                            data-qe-id="form-weight" id="itemWeight" pKeyFilter="int" />
+                                            data-qe-id="form-weight" id="itemWeight" pKeyFilter="pnum" />
                                         <app-error data-qe-id="form-error-weight"
                                             *ngIf="(itemForm.controls.weight?.errors && itemForm.controls.weight?.touched) || !!itemForm.controls.errors.get('weight')?.value"
                                             [formGroup]="itemForm" [property]="'weight'" [placement]="'top'"
@@ -168,8 +168,8 @@
                                     <label for="itemStatus">{{ 'item.detail.content.status' | translate}}<span
                                             class="text-danger ml-2">*</span></label>
                                     <div class="div-form">
-                                        <app-simple-select [key]="'name'" [list]="statusList"
-                                            [initialValue]="itemForm.controls.statusName.value"
+                                        <app-simple-select [key]="'display'" [list]="statusList"
+                                            [initialValue]="itemForm.controls.statusDisplay.value"
                                             (selectionChange)="itemForm.controls.statusId.setValue($event)"
                                             (listOpen)="openStatusList()" data-qe-id="form-characteristic"
                                             class="w-100">
@@ -189,7 +189,7 @@
                                     <label for="bankid">{{ 'item.detail.content.height' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="height"
-                                            data-qe-id="form-height" id="itemHeight" pKeyFilter="int" />
+                                            data-qe-id="form-height" id="itemHeight" pKeyFilter="pnum" />
                                         <app-error data-qe-id="form-error-height"
                                             *ngIf="(itemForm.controls.height?.errors && itemForm.controls.height?.touched) || !!itemForm.controls.errors.get('height')?.value"
                                             [formGroup]="itemForm" [property]="'height'" [placement]="'top'"
@@ -203,7 +203,7 @@
                                     <label for="itemlength">{{ 'item.detail.content.length' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="length"
-                                            data-qe-id="form-length" id="itemlength" pKeyFilter="int" />
+                                            data-qe-id="form-length" id="itemlength" pKeyFilter="pnum" />
                                         <app-error data-qe-id="form-error-length"
                                             *ngIf="(itemForm.controls.length?.errors && itemForm.controls.length?.touched) || !!itemForm.controls.errors.get('length')?.value"
                                             [formGroup]="itemForm" [property]="'length'" [placement]="'top'"
@@ -217,7 +217,7 @@
                                     <label for="itemWidth">{{ 'item.detail.content.width' | translate}} (cm)</label>
                                     <div class="div-form">
                                         <input type="text" class="form-control" formControlName="width"
-                                            data-qe-id="form-width" id="itemWidth" pKeyFilter="int" />
+                                            data-qe-id="form-width" id="itemWidth" pKeyFilter="pnum" />
                                         <app-error data-qe-id="form-error-width"
                                             *ngIf="(itemForm.controls.width?.errors && itemForm.controls.width?.touched) || !!itemForm.controls.errors.get('width')?.value"
                                             [formGroup]="itemForm" [property]="'width'" [placement]="'top'"
@@ -247,7 +247,7 @@
     <div class="page-footer">
         <div>
             <button class="btn btn-delete" *ngIf="itemForm.value?.isDeleted" mwlConfirmationPopover
-                [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom" (confirm)="delete()"
+                [popoverTitle]="popoverTitle" [popoverMessage]="popoverMessage" placement="bottom" (confirm)="deactivate()"
                 (cancel)="cancelClicked = true" data-qe-id="button-delete">
                 {{ 'general.button.delete' | translate}}</button>
         </div>

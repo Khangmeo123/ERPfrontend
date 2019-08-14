@@ -8,9 +8,9 @@ describe('ImportTaxComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ImportTaxComponent ]
+      declarations: [ImportTaxComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

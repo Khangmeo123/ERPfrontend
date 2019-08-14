@@ -25,6 +25,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar-list.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar
     CollapseModule.forRoot(),
     ToastrModule.forRoot({
       timeOut: 2500,
-      positionClass: 'toast-bottom-right',
+      positionClass: 'toast-top-right',
       preventDuplicates: true,
     }),
     TranslateModule.forRoot({
@@ -67,6 +68,7 @@ import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+    CookieService,
   ],
   bootstrap: [AppComponent],
 })

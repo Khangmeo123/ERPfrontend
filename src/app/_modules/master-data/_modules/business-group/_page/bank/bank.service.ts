@@ -1,18 +1,20 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
-import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import { BankRepository } from './bank.repository';
-import { BankForm } from 'src/app/_modules/master-data/_backend/bank/bank.form';
-import { ToastrService } from 'ngx-toastr';
-import { BankEntity } from 'src/app/_modules/master-data/_backend/bank/bank.entity';
-import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
-import { environment } from 'src/environments/environment';
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, forkJoin} from 'rxjs';
+import {FormBuilder, FormGroup} from '@angular/forms';
+import {BankRepository} from './bank.repository';
+import {BankForm} from 'src/app/_modules/master-data/_backend/bank/bank.form';
+import {ToastrService} from 'ngx-toastr';
+import {BankEntity} from 'src/app/_modules/master-data/_backend/bank/bank.entity';
+import {BankSearchEntity} from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
+import {environment} from 'src/environments/environment';
+import {translate} from '../../../../../../_helpers/string';
 
 @Injectable()
 export class BankService {
   public bankList: BehaviorSubject<BankEntity[]>;
   public bankForm: BehaviorSubject<FormGroup>;
   public bankCount: BehaviorSubject<number>;
+
   constructor(private fb: FormBuilder, private bankRepository: BankRepository, private toastrService: ToastrService) {
     this.bankCount = new BehaviorSubject(0);
     this.bankList = new BehaviorSubject([]);
@@ -24,13 +26,13 @@ export class BankService {
   getList(bankSearchEntity: BankSearchEntity) {
     forkJoin(this.bankRepository.getList(bankSearchEntity),
       this.bankRepository.count(bankSearchEntity)).subscribe(([list, count]) => {
-        if (list) {
-          this.bankList.next(list);
-        }
-        if (count) {
-          this.bankCount.next(count);
-        }
-      });
+      if (list) {
+        this.bankList.next(list);
+      }
+      if (count) {
+        this.bankCount.next(count);
+      }
+    });
   }
 
   add() {
@@ -55,7 +57,7 @@ export class BankService {
 
   save(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      if (bankEntity.id === null || bankEntity.id === undefined || bankEntity.id === environment.emtyGuid) {
+      if (bankEntity.id === null || bankEntity.id === undefined || bankEntity.id === environment.emptyGuid) {
         this.bankRepository.add(bankEntity).subscribe(res => {
           if (res) {
             this.getList(bankSearchEntity);
@@ -90,9 +92,9 @@ export class BankService {
     return defered;
   }
 
-  delete(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
+  deactivate(bankEntity: any, bankSearchEntity: BankSearchEntity): Promise<boolean> {
     const defered = new Promise<boolean>((resolve, reject) => {
-      this.bankRepository.delete(bankEntity).subscribe(res => {
+      this.bankRepository.deactivate(bankEntity).subscribe(res => {
         if (res) {
           this.getList(bankSearchEntity);
           this.toastrService.success('Cập nhật thành công !');
@@ -111,14 +113,18 @@ export class BankService {
   }
 
   importFile(file: File) {
-    this.bankRepository.importFile(file).subscribe(res => {
-      if (res) {
-        console.log(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
+    return new Promise((resolve, reject) => {
+      this.bankRepository.importFile(file).subscribe(res => {
+        if (res) {
+          this.toastrService.success(translate('general.import.success'));
+          resolve();
+        }
+      }, err => {
+        if (err) {
+          this.toastrService.error(translate('general.import.error'));
+          reject(err);
+        }
+      });
     });
   }
 }

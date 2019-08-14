@@ -8,9 +8,9 @@ describe('CostCenterComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CostCenterComponent ]
+      declarations: [CostCenterComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

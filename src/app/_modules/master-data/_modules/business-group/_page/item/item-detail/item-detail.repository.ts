@@ -42,7 +42,7 @@ export class ItemDetailRepository extends Repository {
             );
     }
 
-    delete(itemEntity: any): Observable<boolean> {
+    deactivate(itemEntity: any): Observable<boolean> {
         return this.http.post<boolean>(this.apiUrl + '/delete', JSON.stringify(itemEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
@@ -50,7 +50,7 @@ export class ItemDetailRepository extends Repository {
     }
 
     getUomList(uomSearchEntity: UomSearchEntity): Observable<Entities> {
-        return this.http.post<Entities>(this.apiUrl + '/list-uom', JSON.stringify(uomSearchEntity),
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure', JSON.stringify(uomSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     r.body.ids = r.body.ids.map(item => {
@@ -65,14 +65,14 @@ export class ItemDetailRepository extends Repository {
     }
 
     getStatusList(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-status', JSON.stringify({}),
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-list-status', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
     getCharacteristicList(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/list-characteristic', JSON.stringify({}),
+        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-list-characteristic', JSON.stringify({}),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );

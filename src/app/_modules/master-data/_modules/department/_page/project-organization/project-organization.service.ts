@@ -1,5 +1,5 @@
 import { ToastrService } from 'ngx-toastr';
-import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
+import {BehaviorSubject, forkJoin, Observable, Subscription} from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { DivisionEntity } from '../../../../_backend/division/division.entity';
@@ -241,8 +241,8 @@ export class ProjectOrganizationService {
       });
   }
 
-  searchEmployeeByTyping(employeeSearchEntity: Observable<EmployeeSearchEntity>): void {
-    employeeSearchEntity.pipe(
+  searchEmployeeByTyping(employeeSearchEntity: Observable<EmployeeSearchEntity>): Subscription {
+    return employeeSearchEntity.pipe(
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((searchEntity: EmployeeSearchEntity) => {
@@ -256,8 +256,8 @@ export class ProjectOrganizationService {
       );
   }
 
-  searchManagerByTyping(managerSearchEntity: Observable<EmployeeSearchEntity>): void {
-    managerSearchEntity.pipe(
+  searchManagerByTyping(managerSearchEntity: Observable<EmployeeSearchEntity>): Subscription {
+    return managerSearchEntity.pipe(
       debounceTime(400),
       distinctUntilChanged(),
       switchMap((searchEntity: EmployeeSearchEntity) => {

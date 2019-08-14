@@ -223,7 +223,7 @@
 			"tab1": {
 				"amount": "",
 				"batches": "",
-				"Serial": "",
+				"cda": "",
 				"discount": "",
 				"discountAmount": "",
 				"itemName": "",
@@ -624,6 +624,7 @@
 			"attachFile": "",
 			"cancel": "",
 			"clear": "",
+			"completed": "",
 			"delete": "",
 			"downloadTemplate": "",
 			"downloadTempplate": "",
@@ -635,7 +636,6 @@
 			"import": "",
 			"importFile": "",
 			"import_file": "",
-			"issue": "",
 			"ok": "",
 			"post": "",
 			"print": "",
@@ -644,7 +644,8 @@
 			"rejected": "",
 			"reverse": "",
 			"save": "",
-			"send": ""
+			"send": "",
+			"update": ""
 		},
 		"completed": "",
 		"customer_group": {
@@ -676,6 +677,7 @@
 		},
 		"open": "",
 		"pending": "",
+		"pendingCounting": "",
 		"pendingReceive": "",
 		"project": {
 			"delete": {
@@ -763,7 +765,7 @@
 			"tab1": {
 				"amount": "",
 				"batches": "",
-				"Serial": "",
+				"cda": "",
 				"discount": "",
 				"discountAmount": "",
 				"itemName": "",
@@ -878,7 +880,7 @@
 		"tab1": {
 			"amount": "",
 			"batches": "",
-			"Serial": "",
+			"cda": "",
 			"discount": "",
 			"discountAmount": "",
 			"itemNo": "",
@@ -923,8 +925,6 @@
 			"itemName": "",
 			"locationCode": "",
 			"manufacturingDate": "",
-			"qrCode": "",
-			"quantity": "",
 			"quantityInEachBatch": "",
 			"quantitySaved": "",
 			"startScanBatchesNo": "",
@@ -977,10 +977,9 @@
 		"supplierCode": "",
 		"supplierName": "",
 		"tab1": {
-			"actualReceive": "",
 			"amount": "",
 			"batches": "",
-			"Serial": "",
+			"cda": "",
 			"discount": "",
 			"discountAmount": "",
 			"itemName": "",
@@ -1068,7 +1067,7 @@
 			"tab1": {
 				"amount": "",
 				"batches": "",
-				"Serial": "",
+				"cda": "",
 				"discount": "",
 				"discountAmount": "",
 				"itemName": "",
@@ -1107,54 +1106,36 @@
 		"name": "",
 		"title": ""
 	},
-	"inventoryTransfer": {
+	"inventoryCounting": {
 		"detail": {
-			"amount": {
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"quantity": "",
-				"quantitySaved": "",
-				"title ": "",
-				"unitOfMeasure": ""
-			},
-			"amountScan": "",
 			"batches": {
+				"actualCounting": "",
 				"batchCode": "",
 				"expiryDate": "",
 				"itemCode": "",
 				"itemName": "",
 				"locationCode": "",
 				"manufacturingDate": "",
-				"quantityInEachBatch": "",
 				"quantitySaved": "",
+				"serial": "",
 				"startScanBatchesNo": "",
 				"title ": ""
 			},
 			"binLocation": "",
-			"button": {
-				"add": ""
-			},
-			"createdDate": "",
-			"creator": "",
+			"counter": "",
+			"countingDate": "",
 			"description": "",
 			"documentNumber": "",
-			"exporter": "",
 			"form": {
 				"post": {
 					"title": ""
 				},
 				"title": ""
 			},
-			"inventoryCodeFrom": "",
-			"inventoryCodeTo": "",
-			"inventoryRequest": "",
-			"inventoryTransferRequest": {
-				"createdDate": "",
-				"creator": "",
-				"documentNo": ""
+			"header": {
+				"title": ""
 			},
-			"issuedDate": "",
+			"inventoryCode": "",
 			"personInCharge": "",
 			"qrCode": {
 				"code": "",
@@ -1169,39 +1150,35 @@
 				"serial": "",
 				"title ": ""
 			},
-			"receiver": "",
-			"request": {
-				"customerName": ""
-			},
 			"tab1": {
-				"actualQuantity": "",
-				"amount": "",
 				"batches": "",
-				"Serial": "",
-				"dueDate": "",
-				"issueIdRequest": "",
+				"cda": "",
+				"countAmount": "",
+				"highestDifference": "",
+				"inventoryCode": "",
 				"itemName": "",
 				"itemNo": "",
-				"quantity": "",
+				"no": "",
+				"quantityOfInventory": "",
 				"title": "",
 				"unitOfMeasure": ""
 			},
 			"tab2": {
 				"title": ""
-			}
-		},
-		"header": {
-			"title": ""
+			},
+			"totalCount": "",
+			"totalItem": ""
 		},
 		"list": {
-			"createdDate": "",
-			"creator": "",
-			"description": "",
-			"documentNumber": "",
-			"inventoryAddress": "",
+			"countDate": "",
+			"counter": "",
+			"header": {
+				"title": ""
+			},
 			"inventoryCode": "",
-			"status": "",
-			"transferDate": ""
+			"inventoryCountingOwner": "",
+			"issueID": "",
+			"status": ""
 		}
 	},
 	"item": {
@@ -1468,7 +1445,7 @@
 			"tab1": {
 				"amount": "",
 				"batches": "",
-				"Serial": "",
+				"cda": "",
 				"discount": "",
 				"discountAmount": "",
 				"itemNo": "",
