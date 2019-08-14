@@ -41,6 +41,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   isLoading = false;
 
+  currentValue: string;
+
   @Input() clearable: boolean = false;
 
   @Output() clear: EventEmitter<void> = new EventEmitter<void>();
@@ -79,7 +81,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   unselect(event) {
-    const {data} = event;
+    const { data } = event;
     this.selectedList = [];
     this.list = [
       ...this.list,
@@ -111,9 +113,9 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
         this.selectedList = null;
         this.initialValue = null;
       } else {
-        const pattern = new RegExp('^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$', 'i');
-        if (!pattern.test(changes.initialValue.currentValue)) {
-          this.initialValue = null;
+        const pattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+        if (pattern.test(changes.initialValue.currentValue)) {
+          this.initialValue = this.currentValue;
         }
       }
     }
@@ -127,7 +129,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   select(event) {
-    const {data, index} = event;
+    const { data, index } = event;
     if (this.hasSelected) {
       if (this.selectedList[0].id === data.id) {
         return this.unselect(event);
@@ -139,6 +141,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       ...this.selectedList,
     ];
     this.selectedList[0] = data;
+    this.currentValue = data[this.key];
     this.initialValue = data[this.key];
     return this.onChange();
   }

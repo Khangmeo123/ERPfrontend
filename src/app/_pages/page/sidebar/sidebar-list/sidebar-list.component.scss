@@ -11,6 +11,10 @@ li.menu-item {
   text-overflow: ellipsis;
   white-space: nowrap;
 
+  mat-icon {
+    color: #007EE5;
+  }
+
   .pi {
     color: #3d464d;
   }
@@ -33,11 +37,8 @@ li.divider {
   padding-right: 40px;
   margin-top: 0.25rem;
   margin-bottom: 0.25rem;
-
-  .divider-content {
-    border: 1px dashed #3d464d;
-    flex-grow: 1;
-  }
+  border: 0.5px solid #707070;
+  opacity: 0.2;
 }
 
 li:active,

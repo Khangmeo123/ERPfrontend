@@ -3,7 +3,7 @@
 @import "../../../../../../../node_modules/bootstrap/scss/variables";
 
 .select-body {
-  width: 100% !important;
+  min-width: 200px !important;
   border: 1px solid $border-color;
   -webkit-border-radius: $border-radius;
   -moz-border-radius: $border-radius;

@@ -5,33 +5,18 @@ import { PageComponent } from './_pages/page/page.component';
 import { AuthGuard } from './_helpers';
 
 const routes: Routes = [
+  { path: 'login', component: LoginComponent },
   {
-    path: 'login',
-    component: LoginComponent,
+    path: '', component: PageComponent, children: [
+      { path: 'master-data', loadChildren: () => import('./_modules/master-data/master-data.module').then(m => m.MasterDataModule) },
+      { path: 'inventory', loadChildren: () => import('./_modules/inventory/inventory.module').then(m => m.InventoryModule) },
+    ], /*canActivate: [AuthGuard]*/
   },
-  {
-    path: '',
-    component: PageComponent,
-    children: [
-      {
-        path: 'master-data',
-        loadChildren: () => import('./_modules/master-data/master-data.module').then(m => m.MasterDataModule),
-      },
-    ],
-    canActivate: [
-      AuthGuard,
-    ],
-  },
-  {
-    path: '**',
-    redirectTo: 'home',
-    pathMatch: 'full',
-  },
+  { path: '**', redirectTo: 'home', pathMatch: 'full' },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

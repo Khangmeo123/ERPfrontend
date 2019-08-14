@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { WarehouseGroupComponent } from './warehouse-group.component';
+import { ReturnRequestComponent } from './return-request.component';
 
-describe('WarehouseGroupComponent', () => {
-  let component: WarehouseGroupComponent;
-  let fixture: ComponentFixture<WarehouseGroupComponent>;
+describe('ReturnRequestComponent', () => {
+  let component: ReturnRequestComponent;
+  let fixture: ComponentFixture<ReturnRequestComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ WarehouseGroupComponent ]
+      declarations: [ ReturnRequestComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(WarehouseGroupComponent);
+    fixture = TestBed.createComponent(ReturnRequestComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

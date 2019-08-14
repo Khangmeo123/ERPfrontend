@@ -1,0 +1,34 @@
+.ui-dialog .ui-dialog-titlebar-icon span {
+  display: none !important;
+}
+
+.goods-receipt-po {
+  // a {
+  //   text-decoration: underline !important;
+  //   color: #007ee5 !important;
+  // }
+
+  p-table {
+    th {
+      white-space: nowrap !important;
+    }
+  }
+
+  .back-to-list {
+      .material-icons {
+        font-size: 15px !important;
+      }
+    
+  }
+  .tab-upload {
+      height: 200px;
+  }
+}
+
+// custom primeng
+.ui-table-resizable .ui-table-thead>tr>th, .ui-table-resizable .ui-table-tfoot>tr>td, .ui-table-resizable .ui-table-tbody>tr>td{
+  overflow: visible !important;
+}
+.ui-table-scrollable-body{
+  min-height: 25vh !important;
+}

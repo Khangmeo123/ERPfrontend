@@ -1,9 +1,13 @@
 .wrapper {
 
+  
+  
   nav.navbar {
     height: $navbar-height;
     padding: 0;
-    border-bottom: 1px solid;
+    .navbar-nav {
+      padding-left: 0px;
+    }
 
     .navbar-header {
 
@@ -155,8 +159,8 @@
       }
 
       .navbar-header {
-        width: $sidebar-width;
-        margin-left: 0!important;
+        width: 185px;
+        margin-left: 37px!important;
         .navbar-brand span {
           display: inline-block;
         }
@@ -209,5 +213,12 @@
       }
     }
 
+  }
+}
+.pinned-sidebar {
+  .navbar{
+    .navbar-nav {
+      padding-left: 36px !important;
+    }
   }
 }

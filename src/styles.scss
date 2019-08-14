@@ -6,7 +6,7 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
-$color-button: #1C4E80;
+$color-button: #007ee5;
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
 $hamburger-padding-x: 0px !default;
@@ -17,56 +17,59 @@ $hamburger-layer-spacing: 5px !default;
 $hamburger-layer-color: #9b9ea2 !default;
 $hamburger-layer-border-radius: 4px !default;
 $hamburger-hover-opacity: 0.7 !default;
-$color-title: #1C4E80;
+$color-title: #007ee5;
+$background-color: #ffffff;
+$color-danger: #E64C4F;
 
-@import '~bootstrap/scss/bootstrap';
+@import "~bootstrap/scss/bootstrap";
 // @import '~font-awesome/scss/font-awesome';
 // @import '~hamburgers/_sass/hamburgers/hamburgers';
-@import '~ngx-toastr/toastr-bs4-alert';
+@import "~ngx-toastr/toastr-bs4-alert";
 
-@import '~@fortawesome/fontawesome-free/scss/fontawesome';
-@import '~@fortawesome/fontawesome-free/scss/solid';
-@import '~@fortawesome/fontawesome-free/scss/regular';
-@import '~@fortawesome/fontawesome-free/scss/brands';
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/regular";
+@import "~@fortawesome/fontawesome-free/scss/brands";
 
-@import './assets/lightning-admin';
+@import "./assets/lightning-admin";
 
 @import "./scss/scrollbars";
 
 /* REQUIRED */
-@import '~pretty-checkbox/src/scss/variables';
-@import '~pretty-checkbox/src/scss/core';
+@import "~pretty-checkbox/src/scss/variables";
+@import "~pretty-checkbox/src/scss/core";
 
 /* OPTIONALS */
-@import '~pretty-checkbox/src/scss/elements/default/fill';
-@import '~pretty-checkbox/src/scss/elements/default/outline';
-@import '~pretty-checkbox/src/scss/elements/default/thick';
+@import "~pretty-checkbox/src/scss/elements/default/fill";
+@import "~pretty-checkbox/src/scss/elements/default/outline";
+@import "~pretty-checkbox/src/scss/elements/default/thick";
 
-@import '~pretty-checkbox/src/scss/elements/font-icon/general';
+@import "~pretty-checkbox/src/scss/elements/font-icon/general";
 
-@import '~pretty-checkbox/src/scss/elements/svg/general';
+@import "~pretty-checkbox/src/scss/elements/svg/general";
 
-@import '~pretty-checkbox/src/scss/elements/image/general';
+@import "~pretty-checkbox/src/scss/elements/image/general";
 
-@import '~pretty-checkbox/src/scss/elements/switch/general';
-@import '~pretty-checkbox/src/scss/elements/switch/fill';
-@import '~pretty-checkbox/src/scss/elements/switch/slim';
+@import "~pretty-checkbox/src/scss/elements/switch/general";
+@import "~pretty-checkbox/src/scss/elements/switch/fill";
+@import "~pretty-checkbox/src/scss/elements/switch/slim";
 
-@import '~pretty-checkbox/src/scss/extras/toggle';
-@import '~pretty-checkbox/src/scss/extras/plain';
-@import '~pretty-checkbox/src/scss/extras/round';
-@import '~pretty-checkbox/src/scss/extras/curve';
-@import '~pretty-checkbox/src/scss/extras/animation';
-@import '~pretty-checkbox/src/scss/extras/disabled';
-@import '~pretty-checkbox/src/scss/extras/locked';
-@import '~pretty-checkbox/src/scss/extras/colors';
-@import '~pretty-checkbox/src/scss/extras/print';
+@import "~pretty-checkbox/src/scss/extras/toggle";
+@import "~pretty-checkbox/src/scss/extras/plain";
+@import "~pretty-checkbox/src/scss/extras/round";
+@import "~pretty-checkbox/src/scss/extras/curve";
+@import "~pretty-checkbox/src/scss/extras/animation";
+@import "~pretty-checkbox/src/scss/extras/disabled";
+@import "~pretty-checkbox/src/scss/extras/locked";
+@import "~pretty-checkbox/src/scss/extras/colors";
+@import "~pretty-checkbox/src/scss/extras/print";
 
-@import '~pretty-checkbox/src/scss/states/hover';
-@import '~pretty-checkbox/src/scss/states/focus';
-@import '~pretty-checkbox/src/scss/states/indeterminate';
+@import "~pretty-checkbox/src/scss/states/hover";
+@import "~pretty-checkbox/src/scss/states/focus";
+@import "~pretty-checkbox/src/scss/states/indeterminate";
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
@@ -106,7 +109,6 @@ body {
   box-shadow: none;
 }
 
-
 .title-page {
   display: flex;
 
@@ -125,7 +127,7 @@ body {
 }
 
 .th-filter {
-  background-color: #ffffff !important;
+  background-color: $background-color !important;
   padding: 0.25rem 0.5rem !important;
 }
 
@@ -133,14 +135,16 @@ body {
   padding: 2px 3px !important;
 }
 
-
-.btn.btn-add,
 .btn.btn-clear,
 .btn.btn-import,
 .btn.btn-export,
-.btn.btn-save {
-  background: $color-button;
-  color: $white;
+.btn.btn-save,
+.btn.btn-history,
+.btn.btn-print,
+.btn.btn-cancel {
+  background: $background-color;
+  color: $black;
+  border: 1px solid #c5c5c5;
 }
 
 .btn.btn-update {
@@ -148,24 +152,55 @@ body {
   color: $white;
 }
 
-.btn.btn-delete {
-  background: $danger;
+.btn.btn-reverse {
+  background: $color-danger;
   color: $white;
 }
 
-.btn.btn-cancel {
-  border: 1px solid $secondary;
+.btn.btn-delete
+ {
+  border: 1px solid $color-danger;
+  color: $color-danger;
 }
 
 .page {
-  .page-header, .page-footer {
+  .page-header {
+    background-color: $background-color !important;
+    height: 60px;
+    padding: 15px;
+  }
+
+  .line {
+    border-bottom: 1px solid #707070;
+    opacity: 0.2;
+  }
+
+  .page-section-form-header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin-bottom: 20px;
+    .form-title {
+      color: $color-title;
+    }
+    padding-bottom: 15px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+
+  .page-section-form-body {
+    padding-top: 15px;
+    padding-left: 3px;
+    padding-right: 3px;
+  }
+  .page-header,
+  .page-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    // margin-bottom: 20px;
 
     .page-title {
-      font-size: 21px;
+      font-size: 20px;
       color: $color-title;
       text-transform: uppercase;
       font-weight: bold;
@@ -184,24 +219,23 @@ body {
       }
 
       .btn-import {
-        margin-right: 0.5rem !important
+        margin-right: 0.5rem !important;
       }
     }
   }
 
   .page-body {
-    margin: 15px 0 15px 0;
 
     .page-section {
-      margin-top: 1rem;
+      background-color: $background-color;
+      margin: 15px 0px 15px 0px;
+      padding: 15px;
     }
 
     .page-section.form {
-
     }
 
     .page-section.list {
-
     }
   }
 
@@ -216,40 +250,13 @@ body {
     display: flex;
     justify-content: flex-end;
   }
-
-
 }
 
-.ui-table-scrollable-header, .ui-table-scrollable-footer {
-  overflow: unset !important;
-}
-
-.ui-table-resizable {
-  .ui-table-thead {
-    tr {
-      th {
-        overflow: visible;
-      }
-    }
-  }
-}
-
-.cdk-overlay-container {
-  position: fixed !important;
-  z-index: 1010 !important; /* set value you need */
-}
 
 .page-actions-delete {
   float: left;
 }
 
-.ui-chips > ul.ui-inputtext {
-  width: 100% !important;
-}
-
-body .ui-state-disabled, body .ui-widget:disabled {
-  background: #e9ecef;
-}
 
 a.disabled {
   pointer-events: none;
@@ -257,7 +264,13 @@ a.disabled {
 }
 
 input[type="text"].disabled {
-  background: #dddddd;
+  background: #f1f1f1;
+  pointer-events: none;
+  cursor: default;
+}
+
+textarea.disabled{
+  background: #f1f1f1;
   pointer-events: none;
   cursor: default;
 }
@@ -265,8 +278,206 @@ input[type="text"].disabled {
 .ui-table {
   .ui-table-tbody {
     > tr.ui-state-highlight {
-      background: #1C4E80 !important;
+      background: #1c4e80 !important;
       color: #ffffff;
     }
   }
+}
+
+.btn.btn-update,
+.btn.btn-add,
+.btn.btn-send,
+.btn.btn-save-dialog {
+  border: $color-button solid 1px;
+  background-color: $color-button;
+  color: #ffffff;
+}
+
+.btn.btn-rejected {
+  background: #FDB32B;
+  color: #ffffff;
+}
+
+.btn.btn-approve, .btn.btn-receive, .btn.btn-issue, .btn.btn-completed {
+  background: #07D79B;
+  color: #ffffff;
+}
+
+.btn-label {
+  position: relative;
+  display: inline-block;
+  left: -12px;
+  padding: 5px 12px;
+  background: rgba(0, 0, 0, 0.08);
+  border-radius: 0px 0 0 5px;
+  width: 28px;
+  height: 28px;
+  i {
+    font-size: 15px;
+    margin-left: -5px;
+    line-height: 1;
+  }
+
+  img {
+    margin-left: -9px;
+    margin-top: -9px;
+  }
+}
+.btn-labeled {
+  padding-top: 0;
+  padding-bottom: 0;
+  display: flex;
+}
+// .btn {
+//   margin-bottom: 10px;
+// }
+
+.button-label {
+  margin-top: 3px;
+  margin-left: -3px;
+}
+
+.save-book-mark {
+  color: #3d464d;
+}
+
+.not-save-book-mark {
+  color: #fce205;
+}
+
+.view-detail {
+  color: #007ee5;
+}
+
+.edit {
+  color: #fdb32b;
+}
+
+.delete {
+  color: #EE534D;
+}
+
+.n-p-r {
+  padding-right: 0 !important;
+}
+
+.n-p-l {
+  padding-left: 0 !important;
+}
+
+.n-p-t {
+  padding-top: 0 !important;
+}
+
+.n-p-b {
+  padding-bottom: 0 !important;
+}
+
+
+.form-upload-file {
+  .upload-btn-wrapper input[type="file"] {
+    font-size: 20px;
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+  }
+
+  .results {
+    padding: 16px;
+    .results-item {
+      .results-item-name {
+        padding: 6px;
+        background-color: #EAEAEA;
+        font-size: 12px;
+        border-radius: 5px;
+      }
+      .material-icons {
+        font-size: 12px;
+      }
+      .icon-upload {
+        .material-icons {
+          -ms-transform: rotate(-20deg); /* IE 9 */
+          -webkit-transform: rotate(-20deg); /* Safari 3-8 */
+          transform: rotate(-20deg);
+        }
+      }
+      .close-attach {
+        color: #ee534d;
+        cursor: pointer;
+        margin-top: 6px;
+      }
+    }
+  }
+}
+
+
+.dialog-header {
+  color: $color-button;
+}
+
+
+// button status:
+@mixin button-status {
+  padding: 6px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration:none !important;
+}
+
+.open-status {
+  @include button-status;
+  color: #3D464D !important;
+  border: 1px solid #CDCDCD;
+}
+
+.pending-status {
+  @include button-status;
+  color: #745AEF !important;
+  border: 1px solid #745AEF;
+}
+
+.pending-receive-status, .completed-status {
+  @include button-status;
+  color: #07D79B !important;
+  border: 1px solid #07D79B;
+}
+
+.done-status, .pending-counting-status {
+  @include button-status;
+  color: #E89922 !important;
+  border: 1px solid #E89922;
+}
+
+.validation-div {
+  position: relative;
+  width: 100%;
+}
+
+// style tooltip error
+.invalid-validation {
+  display: none !important;
+  position: absolute;
+  text-align: left;
+  top: 100%;
+  z-index: 5;
+  display: block;
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.1rem;
+  font-size: 0.875rem;
+  line-height: 1;
+  color: #fff;
+  background-color: rgba(220, 53, 69, 0.8);
+  border-radius: 0.2rem;
+  white-space: normal;
+}
+
+// style input error
+.error-border-color:hover + .invalid-validation  {
+  display: block !important;
+
+}
+.error-border-color {
+    border: 1px solid rgba(220, 53, 69, 0.8);
 }

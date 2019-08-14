@@ -1,0 +1,179 @@
+<div class="page inventory-couting-list">
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngClass]="!isBookMark ? 'save-book-mark': 'not-save-book-mark'">
+          star
+        </mat-icon>
+      </span>
+    </span>
+    <div class="page-actions d-flex">
+      <button type="button" class="btn btn-labeled btn-add" (click) = "addInventoryCounting()" data-qe-id="button-add">
+        <span class="btn-label"><i class="material-icons">add</i></span>
+        <span class="button-label">
+          {{'general.button.add' | translate}}
+        </span></button>
+        <button class="btn btn-labeled btn-clear" data-qe-id="button-clear" (click)="clearSearch(table)">
+            <span class="btn-label">
+              <img src="/assets/img/filter.svg" width="16">
+            </span>
+            <span class="button-label">
+              {{'general.button.clear' | translate}}
+            </span>
+          </button>
+    </div>
+
+  </div>
+  <div class="page-body">
+    <div class="page-section">
+      <div class="row d-flex pb-3">
+        <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
+          <label class="">{{'general.fromDate' | translate}}</label>
+          <input class="form-control input-datepicker ml-1 mr-1 " matInput [matDatepicker]="picker"
+            placeholder="dd/mm/yyyy" data-qe-id="input-date-from" [(ngModel)] = "inventoryCountingSearchEntity.postingDate.greaterEqual">
+          <mat-datepicker #picker></mat-datepicker>
+          <div role="button" (click)="openDatePicker(picker)">
+            <mat-icon>calendar_today</mat-icon>
+          </div>
+        </div>
+        <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
+          <label>{{'general.toDate' | translate}}</label>
+          <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
+            placeholder="dd/mm/yyyy" data-qe-id="button-date-to" [(ngModel)] = "inventoryCountingSearchEntity.postingDate.lessEqual">
+          <mat-datepicker #datepicker></mat-datepicker>
+          <div role="button" (click)="openToDatePicker(datepicker)">
+            <mat-icon>calendar_today</mat-icon>
+          </div>
+        </div>
+        <button type="button" class="btn btn-labeled btn-add get-data" data-qe-id="button-get-data" (click)="getList()">
+          {{'general.button.getData' | translate}}</button>
+      </div>
+
+      <p-table [value]="inventoryCountingList" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
+        [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-issue-ID" [pSortableColumn]="'documentNumber'">
+              {{ 'inventoryCounting.list.issueID' | translate}}
+              <p-sortIcon [field]="'documentNumber'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-count-date" [pSortableColumn]="'documentDate'">
+              {{ 'inventoryCounting.list.countDate' | translate}}
+              <p-sortIcon [field]="'documentDate'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-inventory-code" [pSortableColumn]="'inventoryOrganizationName'">
+              {{ 'inventoryCounting.list.inventoryCode' | translate}}
+              <p-sortIcon [field]="'inventoryOrganizationName'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-inventory-counting-owner" [pSortableColumn]="'ownerName'">
+              {{ 'inventoryCounting.list.inventoryCountingOwner' | translate}}
+              <p-sortIcon [field]="'ownerName'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-counter" [pSortableColumn]="'counter'">
+              {{ 'inventoryCounting.list.counter' | translate}}
+              <p-sortIcon [field]="'code'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-status" [pSortableColumn]="'statusName'">
+              {{ 'inventoryCounting.list.status' | translate}}
+              <p-sortIcon [field]="'statusName'" class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn> {{'general.action' | translate }} </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+                <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentNumber" (changeFilter)="getList()"
+                    data-qe-id="table-thead-filter-documentNumber">
+                </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+                <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentDate" (changeFilter)="getList()"
+                    data-qe-id="table-thead-filter-documentDate">
+                </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+                <app-single-select  [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
+                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.inventoryOrganizationId"
+                (search)="typingSearchInvetoryOrganization($event, inventoryCountingSearchEntity.inventoryOrganizationId)"
+                (selectionChange)="inventoryCountingSearchEntity.inventoryOrganizationId = $event[0]; getList()"
+                (listOpen)="dropListInventoryOrganization(inventoryCountingSearchEntity.inventoryOrganizationId)">
+                </app-single-select>
+            </th>
+            <th class="th-filter">
+                <app-single-select [list]="inventoryCountingOwnerExceptIds" [selectedList]="inventoryCountingOwnerIds"
+                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerId"
+                (search)="typingSearchInventoryOwner($event, inventoryCountingSearchEntity.ownerId)"
+                (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
+                (listOpen)="dropListInventoryCoutingOwner(inventoryCountingSearchEntity.ownerId)">
+                </app-single-select>
+            </th>
+            <th class="th-filter">
+                <app-single-select [list]="inventoryCounterExceptIds" [selectedList]="inventoryCounterIds"
+                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerId"
+                (search)="typingSearchInventoryCounter($event, inventoryCountingSearchEntity.ownerId)"
+                (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
+                (listOpen)="dropListInventoryCouter(inventoryCountingSearchEntity.ownerId)">
+                </app-single-select>
+            </th>
+            <th class="th-filter">
+                <app-simple-select [key]="'display'" [list]="statusList"
+                (selectionChange)="inventoryCountingSearchEntity.statusId = $event; getList()"
+                (listOpen)="enumListStatus()"
+                [initialValue]="inventoryCountingSearchEntity.statusId">
+                </app-simple-select>
+            </th>
+            <th></th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-inventoryCounting let-index="rowIndex">
+          <tr [attr.data-qe-id]="'table-tbody-row-' + index">
+            <td> {{inventoryCounting.documentNumber}} </td>
+            <td> {{inventoryCounting.documentDate}} </td>
+            <td> {{inventoryCounting.inventoryOrganizationCode}} </td>
+            <td>
+              <div  *ngIf="inventoryCounting.inventoryCounters && inventoryCounting.inventoryCounters.length >0">
+                  <div *ngFor="let item of inventoryCounting.inventoryCounters">
+                      {{item.name }}
+                  </div>
+              </div>
+              
+            </td>
+            <td> {{inventoryCounting.ownerName }} </td>
+            <td>
+              <div [ngSwitch]="inventoryCounting.statusName">
+                <span class="ml-2 open-status" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</span>
+                <span class="ml-2 pending-counting-status" *ngSwitchCase="'COUNTING'">{{'general.pendingCounting'| translate}}</span>
+                <span class="ml-2 completed-status" *ngSwitchCase="'DONE'">{{'general.completed'| translate}}</span>
+              </div>
+            <td>
+              <div class="d-flex">
+                <div class="view-detail mr-2">
+                  <mat-icon>remove_red_eye</mat-icon>
+                </div>
+                <div class="edit" (click) = "editInventoryCounting(inventoryCounting.id)">
+                  <mat-icon>edit</mat-icon>
+                </div>
+
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+      <div class="pagination">
+        <app-pagination data-qe-id="pagination" [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+      </div>
+
+    </div>
+  </div>
+</div>
