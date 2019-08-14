@@ -710,6 +710,10 @@
 			"female": "Nữ",
 			"male": "Nam"
 		},
+		"import": {
+			"error": "Nhập thất bại",
+			"success": "Nhập thành công"
+		},
 		"legalEntity": {
 			"name": "Tên pháp nhân"
 		},
@@ -1108,6 +1112,12 @@
 			"name": "Tên nhà cung cấp"
 		}
 	},
+	"tax-template": {
+		"code": "",
+		"name": "",
+		"title": "",
+		"type": ""
+	},
 	"tax": {
 		"available": "Hiệu lực",
 		"code": "Mã",
@@ -1116,6 +1126,37 @@
 		"name": "Tên",
 		"parent_account": "Tài khoản tổng hợp",
 		"unit": "Đơn vị tính"
+	},
+	"taxTemplate": {
+		"code": "Mã mẫu biểu thuế",
+		"delete": {
+			"error": "Xóa thất bại",
+			"success": "Xóa thành công"
+		},
+		"detail": {
+			"actions": "Thao tác",
+			"available": "Hiệu lực",
+			"code": "Mã biểu thuế",
+			"name": "Tên biểu thuế",
+			"rate": "Chiết khấu",
+			"unitOfMeasure": "Đơn vị tính"
+		},
+		"general": {
+			"title": "Mẫu biểu thuế"
+		},
+		"get": {
+			"error": "Không thể lấy thông tin mẫu biếu thuế"
+		},
+		"name": "Tên",
+		"modal": {
+			"title": "Biểu thuế"
+		},
+		"title": "Mẫu biểu thuế",
+		"type": "Loại biểu thuế",
+		"update": {
+			"error": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
+		}
 	},
 	"uom": {
 		"content": {

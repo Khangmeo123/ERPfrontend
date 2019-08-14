@@ -92,18 +92,18 @@
               {{rowData.code}}
             </td>
             <td class="name">
-              {{rowData.type}}
+              {{rowData.typeDisplay}}
             </td>
             <td class="name">
               {{rowData.name}}
             </td>
             <td class="actions">
-              <a role="button" (click)="edit(rowData)">
+              <a role="button" (click)="edit(rowData.id)">
                 <mat-icon>edit</mat-icon>
               </a>
 
               <a role="button" (click)="delete(rowData)">
-                <mat-icon>edit</mat-icon>
+                <mat-icon>delete</mat-icon>
               </a>
             </td>
           </tr>
@@ -115,67 +115,3 @@
     </div>
   </div>
 </div>
-
-<p-dialog [modal]="true"
-          appendTo="body"
-          [(visible)]="modal">
-  <p-header>
-    {{'tax-template.modal.title' | translate}}
-  </p-header>
-
-  <div class="container" [formGroup]="taxTemplateForm">
-    <div class="row">
-      <div class="col">
-        <label for="tax-template-code">
-          {{'tax-template.code' | translate}}
-          <span class="text-danger ml-1">(*)</span>
-        </label>
-        <div class="div-form">
-          <input type="text" class="form-control" id="tax-template-code" formControlName="code">
-          <app-error data-qe-id="dialog-error-name"
-                     *ngIf="(code?.errors && code?.touched) || !!errors.get('code')?.value"
-                     [formGroup]="taxTemplateForm" [property]="'code'" [placement]="'top'" class="error-form">
-          </app-error>
-        </div>
-      </div>
-
-      <div class="col">
-        <label for="tax-template-name">
-          {{'tax-template.name' | translate}}
-          <span class="text-danger ml-1">(*)</span>
-        </label>
-        <div class="div-form">
-          <input type="text" class="form-control" id="tax-template-name" formControlName="name">
-          <app-error data-qe-id="dialog-error-name"
-                     *ngIf="(name?.errors && name?.touched) || !!errors.get('name')?.value"
-                     [formGroup]="taxTemplateForm" [property]="'name'" [placement]="'top'" class="error-form">
-          </app-error>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <p-footer>
-    <div class="row">
-      <div class="col d-flex">
-        <button class="btn btn-delete"
-                mwlConfirmationPopover
-                popoverTitle="{{'tax-template.delete.title' | translate}}"
-                data-qe-id="dialog-button-delete"
-                *ngIf="taxTemplateForm.value?.id"
-                popoverMessage="{{'tax-template.delete.message' | translate}}"
-                placement="bottom"
-                (confirm)="delete(taxTemplateForm.value)">
-          {{ 'general.button.delete' | translate}}</button>
-        <div class="page-actions flex-grow-1">
-          <button class="btn btn-cancel" (click)="cancel()">
-            {{'general.button.cancel' | translate}}
-          </button>
-          <button class="btn btn-save" (click)="save()">
-            {{'general.button.save' | translate}}
-          </button>
-        </div>
-      </div>
-    </div>
-  </p-footer>
-</p-dialog>

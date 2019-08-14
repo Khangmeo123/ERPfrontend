@@ -9,6 +9,8 @@ import {Injectable} from '@angular/core';
 import {TaxTemplateSearchEntity} from '../../../../../_backend/tax-template/tax-template.search-entity';
 import {TaxTemplateEntity, TaxTemplateTypeEntity} from '../../../../../_backend/tax-template/tax-template.entity';
 import {UomSearchEntity} from '../../../../../_backend/uom/uom.searchentity';
+import {TaxTemplateContentSearchEntity} from '../../../../../_backend/tax-template-content/tax-template-content.search-entity';
+import {TaxTemplateContentEntity} from '../../../../../_backend/tax-template-content/tax-template-content.entity';
 
 
 @Injectable({
@@ -40,7 +42,7 @@ export class TaxTemplateDetailRepository extends Repository {
 
   public getUnitOfMeasureList(uomSearchEntity: UomSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      `${this.apiUrl}/enum-list-type`,
+      `${this.apiUrl}/drop-list-unit-of-measure`,
       uomSearchEntity,
       {
         observe: 'response',
@@ -98,10 +100,10 @@ export class TaxTemplateDetailRepository extends Repository {
       );
   }
 
-  get(taxTemplateEntity: TaxTemplateEntity): Observable<TaxTemplateEntity> {
+  get(taxTemplateDetailEntity: TaxTemplateEntity): Observable<TaxTemplateEntity> {
     return this.http.post<TaxTemplateEntity>(
-      this.getUrl('get-split-rule'),
-      taxTemplateEntity,
+      this.getUrl('get'),
+      taxTemplateDetailEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -114,7 +116,7 @@ export class TaxTemplateDetailRepository extends Repository {
 
   create(taxTemplateEntity: TaxTemplateEntity): Observable<TaxTemplateEntity> {
     return this.http.post<TaxTemplateEntity>(
-      this.getUrl('create-split-rule'),
+      this.getUrl('create'),
       taxTemplateEntity,
       {
         observe: 'response',
@@ -128,7 +130,7 @@ export class TaxTemplateDetailRepository extends Repository {
 
   update(taxTemplateEntity: TaxTemplateEntity): Observable<TaxTemplateEntity> {
     return this.http.post<TaxTemplateEntity>(
-      this.getUrl('update-split-rule'),
+      this.getUrl('update'),
       taxTemplateEntity,
       {
         observe: 'response',
@@ -142,7 +144,7 @@ export class TaxTemplateDetailRepository extends Repository {
 
   delete(taxTemplateEntity: TaxTemplateEntity): Observable<TaxTemplateEntity> {
     return this.http.post<TaxTemplateEntity>(
-      this.getUrl('delete-split-rule'),
+      this.getUrl('delete'),
       taxTemplateEntity,
       {
         observe: 'response',
@@ -151,6 +153,25 @@ export class TaxTemplateDetailRepository extends Repository {
     )
       .pipe(
         map((response: HttpResponse<TaxTemplateEntity>) => response.body),
+      );
+  }
+
+  public getParentTaxList(parentTaxSearchEntity: TaxTemplateContentSearchEntity): Observable<Entities> {
+    return this.http.post<Entities>(
+      `${this.apiUrl}/drop-list-parent-tax`,
+      parentTaxSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map((response: HttpResponse<Entities>) => {
+          const entities: Entities = new Entities();
+          entities.ids = response.body.ids.map((item) => new TaxTemplateContentEntity(item));
+          entities.exceptIds = response.body.exceptIds.map((item) => new TaxTemplateContentEntity(item));
+          return entities;
+        }),
       );
   }
 }

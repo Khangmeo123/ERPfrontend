@@ -2,7 +2,9 @@ import {FormControl, FormGroup} from '@angular/forms';
 
 export class FormModel {
   id = new FormControl();
+
   isDeleted = new FormControl(false);
+
   isEdited = new FormControl();
 
   constructor() {

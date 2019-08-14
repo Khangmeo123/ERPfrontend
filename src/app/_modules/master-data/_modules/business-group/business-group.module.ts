@@ -47,6 +47,7 @@ import { PipeModule } from 'src/app/_shared/pipe/pipe.module';
 import { ProvinceComponent } from './_page/province/province.component';
 import { TaxTemplateComponent } from './_page/tax-template/tax-template.component';
 import { TaxTemplateDetailComponent } from './_page/tax-template/tax-template-detail/tax-template-detail.component';
+import {InputSwitchModule} from 'primeng/inputswitch';
 
 @NgModule({
   declarations: [
@@ -103,6 +104,7 @@ import { TaxTemplateDetailComponent } from './_page/tax-template/tax-template-de
     InputNumberModule,
     PipeModule,
     CropperModule,
+    InputSwitchModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

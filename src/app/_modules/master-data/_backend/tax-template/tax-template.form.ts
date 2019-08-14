@@ -1,5 +1,5 @@
 import {FormModel} from '../../../../_helpers/form-model';
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormArray, FormControl, FormGroup} from '@angular/forms';
 import {requiredField} from '../../../../_helpers';
 import {TaxTemplateEntity} from './tax-template.entity';
 
@@ -19,6 +19,8 @@ export class TaxTemplateForm extends FormModel {
   name: FormControl = new FormControl(null, [
     requiredField,
   ]);
+
+  taxTemplateContents: FormArray = new FormArray([]);
 
   errors: FormGroup = new FormGroup({
     code: new FormControl(null),

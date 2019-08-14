@@ -1,4 +1,5 @@
 import {Entity} from '../../../../_helpers/entity';
+import {TaxTemplateContentEntity} from '../tax-template-content/tax-template-content.entity';
 
 export class TaxTemplateEntity extends Entity {
   id: string;
@@ -10,6 +11,8 @@ export class TaxTemplateEntity extends Entity {
   code: string;
 
   name: string;
+
+  taxTemplateContents: TaxTemplateContentEntity[];
 
   constructor(entity?: TaxTemplateEntity) {
     super(entity);

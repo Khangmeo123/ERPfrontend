@@ -131,7 +131,7 @@ export class TaxTemplateService {
             resolve(taxTemplate);
           },
           (error: Error) => {
-            this.toastrService.error(translate('taxTemplate.create.error'));
+            this.toastrService.error(translate('taxTemplate.delete.error'));
             reject(error);
           },
         );
@@ -142,14 +142,6 @@ export class TaxTemplateService {
     this.taxTemplateForm.next(
       this.fb.group(
         new TaxTemplateForm(),
-      ),
-    );
-  }
-
-  edit(taxTemplateEntity: TaxTemplateEntity) {
-    this.taxTemplateForm.next(
-      this.fb.group(
-        new TaxTemplateForm(taxTemplateEntity),
       ),
     );
   }

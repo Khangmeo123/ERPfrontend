@@ -9,6 +9,9 @@ import {TaxTemplateForm} from '../../../../../_backend/tax-template/tax-template
 import {TaxTemplateEntity, TaxTemplateTypeEntity} from '../../../../../_backend/tax-template/tax-template.entity';
 import {UomSearchEntity} from '../../../../../_backend/uom/uom.searchentity';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {TaxTemplateContentEntity} from '../../../../../_backend/tax-template-content/tax-template-content.entity';
+import {TaxTemplateContentSearchEntity} from '../../../../../_backend/tax-template-content/tax-template-content.search-entity';
+import {TaxTemplateContentForm} from '../../../../../_backend/tax-template-content/tax-template-content.form';
 
 @Injectable({
   providedIn: 'root',
@@ -21,6 +24,10 @@ export class TaxTemplateDetailService {
 
   public uomList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
+  public taxTemplateContentForm: BehaviorSubject<FormGroup>;
+
+  public parentTaxList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+
   constructor(
     private fb: FormBuilder,
     private taxTemplateDetailRepository: TaxTemplateDetailRepository,
@@ -31,12 +38,26 @@ export class TaxTemplateDetailService {
         new TaxTemplateForm(),
       ),
     );
+
+    this.taxTemplateContentForm = new BehaviorSubject<FormGroup>(
+      this.fb.group(
+        new TaxTemplateContentForm(),
+      ),
+    );
   }
 
   resetForm() {
     this.taxTemplateForm.next(
       this.fb.group(
         new TaxTemplateForm(),
+      ),
+    );
+  }
+
+  resetTaxTemplateContentForm() {
+    this.taxTemplateContentForm.next(
+      this.fb.group(
+        new TaxTemplateContentForm(),
       ),
     );
   }
@@ -56,6 +77,14 @@ export class TaxTemplateDetailService {
     });
   }
 
+  editTaxTemplate(taxTemplateDetailEntity: TaxTemplateContentEntity) {
+    this.taxTemplateContentForm.next(
+      this.fb.group(
+        new TaxTemplateContentForm(taxTemplateDetailEntity),
+      ),
+    );
+  }
+
   public getUnitOfMeasureList(uomSearchEntity: UomSearchEntity): Promise<Entities> {
     return new Promise<Entities>((resolve, reject) => {
       return this.taxTemplateDetailRepository.getUnitOfMeasureList(uomSearchEntity)
@@ -71,9 +100,9 @@ export class TaxTemplateDetailService {
     });
   }
 
-  get(taxTemplateEntity: TaxTemplateEntity): Promise<TaxTemplateEntity> {
+  get(taxTemplateDetailEntity: TaxTemplateEntity): Promise<TaxTemplateEntity> {
     return new Promise<TaxTemplateEntity>((resolve, reject) => {
-      this.taxTemplateDetailRepository.get(taxTemplateEntity)
+      this.taxTemplateDetailRepository.get(taxTemplateDetailEntity)
         .subscribe(
           (entity: TaxTemplateEntity) => {
             const form = this.fb.group(
@@ -94,11 +123,9 @@ export class TaxTemplateDetailService {
 
   save(taxTemplateEntity: TaxTemplateEntity): Promise<TaxTemplateEntity> {
     return new Promise<TaxTemplateEntity>((resolve, reject) => {
-      return (
-        taxTemplateEntity.id
-          ? this.taxTemplateDetailRepository.update(taxTemplateEntity)
-          : this.taxTemplateDetailRepository.create(taxTemplateEntity)
-      )
+      return (taxTemplateEntity.id
+        ? this.taxTemplateDetailRepository.update(taxTemplateEntity)
+        : this.taxTemplateDetailRepository.create(taxTemplateEntity))
         .subscribe(
           (entity: TaxTemplateEntity) => {
             this.toastrService.success(translate('taxTemplate.update.success'));
@@ -124,6 +151,13 @@ export class TaxTemplateDetailService {
     )
       .subscribe((entities: Entities) => {
         this.uomList.next(entities);
+      });
+  }
+
+  getParentTaxList(parentTaxSearchEntity: TaxTemplateContentSearchEntity): void {
+    this.taxTemplateDetailRepository.getParentTaxList(parentTaxSearchEntity)
+      .subscribe((entities: Entities) => {
+        this.parentTaxList.next(entities);
       });
   }
 }

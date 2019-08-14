@@ -702,6 +702,10 @@
 			"female": "",
 			"male": ""
 		},
+		"import": {
+			"error": "",
+			"success": ""
+		},
 		"legalEntity": {
 			"name": ""
 		},
@@ -994,7 +998,7 @@
 		"title": "",
 		"update": {
 			"error": "",
-			"sucess": ""
+			"success": ""
 		}
 	},
 	"select": {
@@ -1100,6 +1104,12 @@
 			"name": ""
 		}
 	},
+	"tax-template": {
+		"code": "",
+		"name": "",
+		"title": "",
+		"type": ""
+	},
 	"tax": {
 		"available": "",
 		"code": "",
@@ -1108,6 +1118,37 @@
 		"name": "",
 		"parent_account": "",
 		"unit": ""
+	},
+	"taxTemplate": {
+		"code": "",
+		"delete": {
+			"error": "",
+			"success": ""
+		},
+		"detail": {
+			"actions": "",
+			"available": "",
+			"code": "",
+			"name": "",
+			"rate": "",
+			"unitOfMeasure": ""
+		},
+		"general": {
+			"title": ""
+		},
+		"get": {
+			"error": ""
+		},
+		"name": "",
+		"modal": {
+			"title": ""
+		},
+		"title": "",
+		"type": "",
+		"update": {
+			"error": "",
+			"success": ""
+		}
 	},
 	"uom": {
 		"content": {

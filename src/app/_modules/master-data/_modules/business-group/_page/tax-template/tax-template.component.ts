@@ -159,9 +159,15 @@ export class TaxTemplateComponent implements OnInit, OnDestroy {
     this.toggleModal();
   }
 
-  edit(taxTemplateEntity: TaxTemplateEntity) {
-    this.taxTemplateService.edit(taxTemplateEntity);
-    this.toggleModal();
+  edit(id: string) {
+    this.router.navigate(
+      ['/master-data/business-group/tax-template/tax-template-detail'],
+      {
+        queryParams: {
+          id,
+        },
+      },
+    );
   }
 
   delete(taxTemplateEntity: TaxTemplateEntity) {
