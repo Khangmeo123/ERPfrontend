@@ -81,19 +81,20 @@ body {
 .div-form {
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
 
   .input-form {
-    width: 90%;
+    flex-grow: 1;
   }
 
   .error-form {
-    width: 10%;
+    flex-shrink: 1;
   }
 }
 
 .full-width {
-  width: 100%;
+  display: inline-table;
 }
 
 *[role="button"] {
@@ -224,7 +225,7 @@ body {
   }
 
   .page-body {
-    
+
     .page-section {
       background-color: $background-color;
       margin: 15px 0px 15px 0px;
@@ -283,6 +284,7 @@ textarea.disabled{
   }
 }
 
+.btn.btn-update,
 .btn.btn-add,
 .btn.btn-send,
 .btn.btn-save-dialog {
@@ -296,7 +298,7 @@ textarea.disabled{
   color: #ffffff;
 }
 
-.btn.btn-approve, .btn.btn-receive, .btn.btn-issue {
+.btn.btn-approve, .btn.btn-receive, .btn.btn-issue, .btn.btn-completed {
   background: #07D79B;
   color: #ffffff;
 }
@@ -441,7 +443,7 @@ textarea.disabled{
   border: 1px solid #07D79B;
 }
 
-.done-status {
+.done-status, .pending-counting-status {
   @include button-status;
   color: #E89922 !important;
   border: 1px solid #E89922;
@@ -452,7 +454,7 @@ textarea.disabled{
   width: 100%;
 }
 
-// style tooltip error 
+// style tooltip error
 .invalid-validation {
   display: none !important;
   position: absolute;
@@ -474,7 +476,7 @@ textarea.disabled{
 // style input error
 .error-border-color:hover + .invalid-validation  {
   display: block !important;
-  
+
 }
 .error-border-color {
     border: 1px solid rgba(220, 53, 69, 0.8);

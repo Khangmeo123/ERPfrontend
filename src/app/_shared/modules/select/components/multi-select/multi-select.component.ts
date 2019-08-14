@@ -1,7 +1,7 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { ISelect } from '../../select.interface';
-import { getListDirection } from '../../helpers';
-import { toggleMenu } from '../../../../animations/toggleMenu';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {ISelect} from '../../select.interface';
+import {getListDirection} from '../../helpers';
+import {toggleMenu} from '../../../../animations/toggleMenu';
 import { Guid } from 'guid-typescript';
 
 @Component({
@@ -40,7 +40,8 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
    *
    * auto: Recalculate the direction before open list
    */
-  @Input() direction: string = 'auto';
+  @Input() direction: string = 'down';
+
 
   isLoading = false;
 
@@ -153,7 +154,7 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   unselect(event) {
-    const { index, data } = event;
+    const {index, data} = event;
     this.selectedList = [
       ...this.selectedList.slice(0, index),
       ...this.selectedList.slice(index + 1),

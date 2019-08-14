@@ -8,6 +8,7 @@ import { DiscussionService } from './backend/discussion.service';
 import { TranslateModule } from '@ngx-translate/core';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
 
 @NgModule({
   declarations: [DiscussionComponent, InputDiscussionComponent, SafeHtmlPipe, TimeAgoPipe],
