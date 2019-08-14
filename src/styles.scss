@@ -431,19 +431,19 @@ textarea.disabled{
   border: 1px solid #CDCDCD;
 }
 
-.pending-status {
+.pending-receive-status {
   @include button-status;
   color: #745AEF !important;
   border: 1px solid #745AEF;
 }
 
-.pending-receive-status, .completed-status {
+.done-status, .completed-status {
   @include button-status;
   color: #07D79B !important;
   border: 1px solid #07D79B;
 }
 
-.done-status, .pending-counting-status {
+.pending-status, .pending-counting-status {
   @include button-status;
   color: #E89922 !important;
   border: 1px solid #E89922;

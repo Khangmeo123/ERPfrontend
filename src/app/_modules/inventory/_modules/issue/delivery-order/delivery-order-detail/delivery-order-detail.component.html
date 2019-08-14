@@ -157,7 +157,7 @@
                         </label>
                         <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
 
-                     </div>
+                    </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'deliveryOrder.detail.exporter' | translate}}
@@ -172,6 +172,14 @@
                     </div>
                 </div>
                 <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'deliveryOrder.detail.shipper' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <app-single-select data-qe-id="detail-form-shipper"></app-single-select>
+
+                    </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'deliveryOrder.detail.receiptedDate' | translate}}
@@ -200,13 +208,24 @@
             <div class="tab-header pt-3 pb-3 pl-3 pr-3">
                 <mat-tab-group>
                     <mat-tab label="{{'deliveryOrder.detail.tab1.title' | translate}}">
-                        <div class="row pt-3 pb-3 pl-3">
-                            <div class="col-sm-12">
+                        <div class="row pt-3 pb-3">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <p-inputSwitch></p-inputSwitch>
+                                    <span
+                                        class="ml-2">{{'deliveryOrder.detail.batches.startScanBatchesNo' | translate}}</span>
+                                    <div class="ml-2">
+                                        <input type="text" class="form-control"
+                                            data-qe-id="dialog-input-start-scan-batches-no">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
                                 <div class="page-actions d-flex justify-content-end">
-                                    <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row">
-                                        <span class="btn-label"><i class="material-icons">delete</i></span>
+                                    <button class="btn btn-labeled btn-reverse">
+                                        <span class="btn-label"><i class="material-icons">replay</i></span>
                                         <span class="button-label">
-                                            {{'general.button.delete' | translate}}
+                                            {{'general.button.reset' | translate}}
                                         </span></button>
                                 </div>
                             </div>
@@ -230,15 +249,18 @@
                                         <th pResizableColumn data-qe-id="table-thead-item-no">
                                             {{'deliveryOrder.detail.tab1.itemNo' | translate}} </th>
                                         <th pResizableColumn data-qe-id="table-thead-item-name">
-                                                {{'deliveryOrder.detail.tab1.itemName' | translate}} </th>
+                                            {{'deliveryOrder.detail.tab1.itemName' | translate}} </th>
                                         <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
                                             {{'deliveryOrder.detail.tab1.unitOfMeasure' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-weight">
+                                            {{'deliveryOrder.detail.tab1.weight' | translate}}
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-quantity">
                                             {{'deliveryOrder.detail.tab1.quantity' | translate}} </th>
                                         <th pResizableColumn data-qe-id="table-thead-unit-price">
-                                                {{'deliveryOrder.detail.tab1.unitPrice' | translate}}
-                                            </th>
+                                            {{'deliveryOrder.detail.tab1.unitPrice' | translate}}
+                                        </th>
                                         <th pResizableColumn data-qe-id="table-thead-value-added-tax">
                                             {{'deliveryOrder.detail.tab1.valueAddedTax' | translate}}
                                             (%)</th>
@@ -275,6 +297,7 @@
                                         <td></td>
                                         <td></td>
                                         <td></td>
+                                        <td></td>
                                         <td>{{item.total}}</td>
                                         <td>
                                             <div *ngIf="item.type == 1">
@@ -282,7 +305,8 @@
                                                     (click)="showBatches()">{{'deliveryOrder.detail.tab1.batches' | translate}}</a>
                                             </div>
                                             <div *ngIf="item.type == 2">
-                                                <a (click)="showSerial()">{{'deliveryOrder.detail.tab1.Serial' | translate}}</a>
+                                                <a
+                                                    (click)="showSerial()">{{'deliveryOrder.detail.tab1.Serial' | translate}}</a>
                                             </div>
                                             <div *ngIf="item.type == 3">
                                                 <a

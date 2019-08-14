@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add" (click) = "addgoodsReturn()">
+      <button type="button" class="btn btn-labeled btn-add" (click) = "addGoodsReturn()">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
@@ -67,7 +67,7 @@
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-receipted-date">
-              {{ 'goodsReturn.list.receip     tedDate' | translate}}
+              {{ 'goodsReturn.list.receiptedDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
            
@@ -135,7 +135,7 @@
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click) = "editgoodsReturn()">
+                <div class="edit" (click) = "editGoodsReturn()">
                   <mat-icon>edit</mat-icon>
                 </div>
 
