@@ -27,6 +27,13 @@ import { ClickOutsideModule } from 'ng-click-outside';
 import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar-list.component';
 import { CookieService } from 'ngx-cookie-service';
 
+import {MatInputModule} from '@angular/material/input';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { SignUpComponent } from './_pages/sign-up/sign-up.component';
+import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,6 +44,8 @@ import { CookieService } from 'ngx-cookie-service';
     FooterComponent,
     SpinnerComponent,
     SidebarListComponent,
+    SignUpComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,
@@ -64,6 +73,8 @@ import { CookieService } from 'ngx-cookie-service';
       },
     }),
     ClickOutsideModule,
+    MatInputModule,
+    MatCheckboxModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
