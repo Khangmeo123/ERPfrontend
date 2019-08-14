@@ -5,7 +5,10 @@ import {PageComponent} from './_pages/page/page.component';
 import {AuthGuard} from './_helpers';
 
 const routes: Routes = [
-    {path: 'login', component: LoginComponent},
+    {
+        path: 'login',
+        component: LoginComponent,
+    },
     {
         path: '', component: PageComponent, children: [
             {
