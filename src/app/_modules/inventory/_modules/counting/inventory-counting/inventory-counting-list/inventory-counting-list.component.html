@@ -130,7 +130,7 @@
                 <app-simple-select [key]="'display'" [list]="statusList"
                 (selectionChange)="inventoryCountingSearchEntity.statusId = $event; getList()"
                 (listOpen)="enumListStatus()"
-                [initialValue]="inventoryCountingSearchEntity.statusName">
+                [initialValue]="inventoryCountingSearchEntity.statusId">
                 </app-simple-select>
             </th>
             <th></th>
