@@ -15,15 +15,7 @@
 		}
 	},
 	"advancedFilter": {
-		"placeholder": "Tìm kiếm...",
-    "equal": "Bằng",
-    "notEqual": "Khác",
-    "contains": "Chứa",
-    "notContains": "Không chứa",
-    "lessEqual": "Nhỏ hơn hoặc bằng",
-    "greatEqual": "Lớn hơn hoặc bằng",
-    "endsWith": "Kết thúc với",
-    "startsWith": "Bắt đầu với"
+		"placeholder": "Tìm kiếm..."
 	},
 	"asset": {
 		"content": {
@@ -52,23 +44,23 @@
 			"title": "Danh sách ngân hàng"
 		}
 	},
-	"bank_account": {
-		"account_number": "Số tài khoản",
-		"account_owner": "Chủ tài khoản",
-		"accountant_code": "Mã tài khoản kế toán",
-		"bank_accounts": {
-			"account_number": "Số tài khoản",
-			"account_owner": "Chủ tài khoản",
-			"accountant_code": "Mã tài khoản kế toán",
-			"add": "Thêm tài khoản ngân hàng",
-			"bank_code": "Mã ngân hàng",
-			"description": "Mô tả"
+	"bankAccount": {
+		"account_name": "",
+		"account_number": "",
+		"accounting_code": "",
+		"bankAccounts": {
+			"account_name": "",
+			"account_number": "",
+			"accounting_code": "",
+			"add": "",
+			"bank_code": "",
+			"description": ""
 		},
-		"bank_code": "Mã ngân hàng",
-		"bank_name": "Tên ngân hàng",
-		"description": "Mô tả",
+		"bank_code": "",
+		"bank_name": "",
+		"description": "",
 		"details": {
-			"title": "Tài khoản ngân hàng"
+			"title": ""
 		}
 	},
 	"binLocation": {
@@ -869,14 +861,14 @@
 			}
 		},
 		"sob": "Số bộ sổ",
-        "update": {
-            "failure": "Cập nhật thất bại",
-            "success": "Cập nhật thành công"
-        },
 		"text": {
 			"total": "Tổng tiền "
 		},
 		"toDate": "Đến ngày",
+		"update": {
+			"failure": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
+		}
 	},
 	"goodsIssue": {
 		"detail": {
@@ -1233,16 +1225,16 @@
 			"personInCharge": "Người phụ trách",
 			"qrCode": {
 				"code": "QR code",
-			"expiryDate": "Ngày hết hạn",
-			"itemCode": "Mã hàng",
-			"itemName": "Tên hàng hóa",
-			"locationCode": "Mã vị trí",
-			"manufacturingDate": "Ngày sản xuất",
-			"quantity": "Số lượng",
-			"rows": "",
-			"scanQRCode": "Bắt đầu quét QR code",
-			"serial": "Serial#",
-			"title ": "Chi tiết QR code"
+				"expiryDate": "Ngày hết hạn",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantity": "Số lượng",
+				"scanCode": "",
+				"scanQRCode": "Bắt đầu quét QR code",
+				"serial": "Serial#",
+				"title ": "Chi tiết QR code"
 			},
 			"receiptedDate": "Ngày thực hiện",
 			"shipper": "Người giao hàng",
@@ -1362,14 +1354,14 @@
 		"name": "Tên phòng ban",
 		"title": "Thông tin phòng ban"
 	},
-    "importTax": {
-        "header": {
-            "title": "Biểu thuế nhập khẩu"
-        },
-        "modal": {
-            "title": "Thêm biểu thuế nhập khẩu"
-        }
-    },
+	"importTax": {
+		"header": {
+			"title": "Biểu thuế nhập khẩu"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế nhập khẩu"
+		}
+	},
 	"inventoryCounting": {
 		"detail": {
 			"batches": {
@@ -1767,6 +1759,15 @@
 	"login": {
 		"failed": "Đăng nhập thất bại"
 	},
+	"loginForm": {
+		"doesNotHaveAccount": "",
+		"forgotPassword": "",
+		"login": "",
+		"password": "",
+		"rememberPassword": "",
+		"signUp": "",
+		"username": ""
+	},
 	"naturalResourceTax": {
 		"header": {
 			"title": "Biểu thuế tài nguyên"
@@ -1805,6 +1806,20 @@
 		},
 		"name": "Tên điều khoản"
 	},
+	"permission": {
+		"active": "",
+		"currentStatus": "",
+		"currentstep": "",
+		"documentType": "",
+		"header": {
+			"title": ""
+		},
+		"inventoryCode": "",
+		"nextStaus": "",
+		"nextStep ": "",
+		"positionCode": "",
+		"positionName": ""
+	},
 	"project": {
 		"employee": {
 			"code": "Mã nhân viên",
@@ -1840,6 +1855,105 @@
 		"update": {
 			"error": "Cập nhật thất bại",
 			"success": "Cập nhật thành công"
+		}
+	},
+	"return": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"description": "",
+			"documentNumber": "",
+			"form": {
+				"title": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"receiver": "",
+			"return": {
+				"title": ""
+			},
+			"returnRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"tab1": {
+				"Serial": "",
+				"amount": "",
+				"batches": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"header": {
+				"title": ""
+			},
+			"inventory": "",
+			"receiptRequirementID": "",
+			"receiptedDate": "",
+			"status": ""
 		}
 	},
 	"returnRequest": {
@@ -2038,10 +2152,10 @@
 		"get": {
 			"error": "Không thể lấy thông tin mẫu biếu thuế"
 		},
-		"name": "Tên",
 		"modal": {
 			"title": "Biểu thuế"
 		},
+		"name": "Tên",
 		"title": "Mẫu biểu thuế",
 		"type": "Loại biểu thuế",
 		"update": {
