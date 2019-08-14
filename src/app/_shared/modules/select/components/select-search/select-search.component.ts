@@ -1,21 +1,24 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output, ViewChild} from '@angular/core';
 
 @Component({
-  selector: 'app-select-search',
-  templateUrl: './select-search.component.html',
-  styleUrls: ['./select-search.component.scss'],
+    selector: 'app-select-search',
+    templateUrl: './select-search.component.html',
+    styleUrls: ['./select-search.component.scss'],
 })
 export class SelectSearchComponent implements OnInit {
 
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+    @Output() search: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor() {
-  }
+    @ViewChild('inputElement', {static: true}) inputElement;
 
-  ngOnInit() {
-  }
+    constructor() {
+    }
 
-  onChange(event) {
-    this.search.emit(event.target.value);
-  }
+    ngOnInit() {
+        this.inputElement.nativeElement.focus();
+    }
+
+    onChange(event) {
+        this.search.emit(event.target.value);
+    }
 }
