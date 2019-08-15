@@ -1,96 +1,96 @@
 {
     "general": {
-        "action": "",
+        "action": "thao tác",
         "button": {
-            "add": "",
-            "approve": "",
-            "attachFile": "",
-            "cancel": "",
-            "clear": "",
-            "completed": "",
-            "delete": "",
-            "downloadTemplate": "",
-            "download_example": "",
+            "add": "Thêm",
+            "approve": "Phê duyệt",
+            "attachFile": "Thêm đính kèm",
+            "cancel": "Hủy",
+            "clear": "Bỏ lọc",
+            "completed": "Hoàn thành",
+            "delete": "Xóa",
+            "downloadTemplate": "Tải file mẫu",
+            "download_example": "Tải file mẫu",
             "edit": "",
-            "export": "",
-            "getData": "",
-            "history": "",
-            "import": "",
+            "export": "Xuất Excel",
+            "getData": "Lấy dữ liệu",
+            "history": "Lịch sử",
+            "import": "Nhập hàng loạt",
             "importFile": "",
-            "import_file": "",
+            "import_file": "Nhập hàng loạt",
             "issue": "",
             "ok": "",
-            "post": "",
-            "print": "",
-            "receive": "",
-            "referenceDocument": "",
-            "rejected": "",
-            "reset": "",
-            "reverse": "",
-            "save": "",
-            "send": "",
-            "update": ""
+            "post": "Bình luận",
+            "print": "In",
+            "receive": "Nhận",
+            "referenceDocument": "Chứng từ tham chiếu",
+            "rejected": "Từ chối duyệt",
+            "reset": "Làm lại",
+            "reverse": "Hoàn duyệt",
+            "save": "Lưu",
+            "send": "Gửi",
+            "update": "Cập nhật"
         },
-        "completed": "",
+        "completed": "Hoàn thành",
         "customer_group": {
-            "name": ""
+            "name": "Tên nhóm khách hàng"
         },
         "department": {
             "delete": {
-                "message": "",
-                "title": ""
+                "message": "Bạn chắc chắn muốn xóa?",
+                "title": "Xác nhận xóa"
             }
         },
-        "detail": "",
-        "division": "",
-        "done": "",
+        "detail": "Chi tiết",
+        "division": "Tên chi nhánh",
+        "done": "Đã nhận",
         "error": {
-            "direction": "",
-            "fileImport": ""
+            "direction": "Hướng",
+            "fileImport": "Lỗi nhập file"
         },
-        "fromDate": "",
+        "fromDate": "Từ ngày",
         "gender": {
-            "female": "",
-            "male": ""
+            "female": "Nữ",
+            "male": "Nam"
         },
         "import": {
-            "error": "",
-            "success": ""
+            "error": "Nhập thất bại",
+            "success": "Nhập thành công"
         },
         "legalEntity": {
-            "name": ""
+            "name": "Tên pháp nhân"
         },
         "legal_entity": {
-            "name": ""
+            "name": "Tên pháp nhân"
         },
-        "open": "",
-        "pending": "",
-        "pendingCounting": "",
-        "pendingReceive": "",
+        "open": "Khởi tạo",
+        "pending": "Chờ duyệt",
+        "pendingCounting": "Chờ kiểm kê",
+        "pendingReceive": "Chờ nhận",
         "pendingTransfer": "",
         "project": {
             "delete": {
-                "message": "",
-                "title": ""
+                "message": "Bạn chắc chắn muốn xóa?",
+                "title": "Xác nhận xóa"
             }
         },
         "service": {
             "save": {
-                "success": ""
+                "success": "Thành công"
             },
             "update": {
-                "getFailed": "",
-                "success": ""
+                "getFailed": "Cập nhật thất bại",
+                "success": "Cập nhật thành công"
             }
         },
-        "sob": "",
+        "sob": "Số bộ sổ",
         "text": {
-            "total": ""
+            "total": "Tổng tiền "
         },
-        "toDate": "",
+        "toDate": "Đến ngày",
         "update": {
-            "failure": "",
-            "success": ""
+            "failure": "Cập nhật thất bại",
+            "success": "Cập nhật thành công"
         }
     }
 }

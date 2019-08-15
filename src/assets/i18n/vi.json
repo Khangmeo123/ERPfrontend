@@ -17,6 +17,7 @@
     "advancedFilter": {
         "placeholder": "Tìm kiếm..."
     },
+    
     "asset": {
         "content": {
             "code": "Mã tài sản",
@@ -349,7 +350,7 @@
                 "itemName": "Tên hàng hóa",
                 "itemNo": "Mã hàng",
                 "purchaseOrderNumber": "Mã đơn hàng",
-                "quantity": "Số lương",
+                "quantity": "Số lượng",
                 "title": "Chi tiết hàng hóa theo hoạch toán",
                 "total": "Thành tiền",
                 "unitOfMeasure": "Đơn vị tính",
@@ -810,7 +811,7 @@
         },
         "completed": "Hoàn thành",
         "customer_group": {
-            "name": "Tên nhà cung cấp"
+            "name": "Tên nhóm khách hàng"
         },
         "department": {
             "delete": {
@@ -1760,13 +1761,13 @@
         "failed": "Đăng nhập thất bại"
     },
     "loginForm": {
-        "doesNotHaveAccount": "",
-        "forgotPassword": "",
-        "login": "",
-        "password": "",
-        "rememberPassword": "",
-        "signUp": "",
-        "username": ""
+        "doesNotHaveAccount": "Chưa có tài khoản",
+        "forgotPassword": "Quên mật khẩu",
+        "login": "Đăng nhập",
+        "password": "Mật khẩu",
+        "rememberPassword": "Nhớ mật khẩu",
+        "signUp": "Đăng ký",
+        "username": "Tên đăng nhập"
     },
     "naturalResourceTax": {
         "header": {
@@ -1780,7 +1781,7 @@
         "helper": "Không có dữ liệu"
     },
     "pagination": {
-        "entries": "bản ghi",
+        "entries": "Bản ghi",
         "show": "Hiện thị"
     },
     "payment_method": {
