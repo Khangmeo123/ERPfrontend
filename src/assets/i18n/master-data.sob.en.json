@@ -1,0 +1,175 @@
+{
+    "accountingPeriod": {
+        "description": "",
+        "endPeriod": "",
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "label": "",
+            "title": ""
+        },
+        "startPeriod": "",
+        "status": {
+            "fiscal_year": ""
+        }
+    },
+    "bankAccount": {
+        "account_name": "",
+        "account_number": "",
+        "accounting_code": "",
+        "bankAccounts": {
+            "account_name": "",
+            "account_number": "",
+            "accounting_code": "",
+            "add": "",
+            "bank_code": "",
+            "description": ""
+        },
+        "bank_code": "",
+        "bank_name": "",
+        "description": "",
+        "details": {
+            "title": ""
+        }
+    },
+    "coa": {
+        "account_description": "",
+        "account_name": "",
+        "account_number": "",
+        "account_status": "",
+        "description": "",
+        "list": {
+            "title": ""
+        },
+        "super_account": ""
+    },
+    "cost-center": {
+        "content": {
+            "account": "",
+            "description": "",
+            "from_date": "",
+            "id": "",
+            "modal": {
+                "title": ""
+            },
+            "name": "",
+            "to_date": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "environmentTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "environment_tax": {
+        "description": ""
+    },
+    "exportTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "fiscal_year": {
+        "content": {
+            "from_date": "",
+            "modal": {
+                "title": ""
+            },
+            "name": "",
+            "status": "",
+            "to_date": "",
+            "valuation_method": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "importTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "naturalResourceTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "payment_method": {
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "payment_method_name": ""
+    },
+    "payment_term": {
+        "code": "",
+        "discount_period": "",
+        "discount_rate": "",
+        "due_in_date": "",
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": ""
+    },
+    "sob": {
+        "add": "",
+        "chart_account": "",
+        "code": "",
+        "currency": "",
+        "enviroment_tax": "",
+        "export_tax": "",
+        "import_tax": "",
+        "name": "",
+        "resource_tax": "",
+        "special_consumption_tax": "",
+        "title": "",
+        "value_added_tax": ""
+    },
+    "specialConsumptionTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "tax": {
+        "available": "",
+        "code": "",
+        "description": "",
+        "discount": "",
+        "name": "",
+        "parent_account": "",
+        "unit": ""
+    },
+    "valueAddedTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    }
+}

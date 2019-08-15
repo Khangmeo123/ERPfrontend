@@ -1,0 +1,320 @@
+{
+    "asset": {
+        "content": {
+            "code": "",
+            "modal": {
+                "title": ""
+            },
+            "name": "",
+            "status": "",
+            "type": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "bank": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "businessGroup": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "error": {
+                "title": ""
+            },
+            "title": ""
+        }
+    },
+    "business_group": {
+        "header": {
+            "title": ""
+        }
+    },
+    "currency": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "customer": {
+        "detail": {
+            "content": {
+                "code": "",
+                "name": "",
+                "note": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "name": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            }
+        }
+    },
+    "employee": {
+        "content": {
+            "table": {
+                "gender": {
+                    "men": "",
+                    "women": ""
+                },
+                "insuranceSalary": ""
+            }
+        },
+        "detail": {
+            "content": {
+                "code": "",
+                "dob": "",
+                "gender": "",
+                "identityNumber": "",
+                "issueDate": "",
+                "issuePlace": "",
+                "jobLevel": "",
+                "jobTitle": "",
+                "name": "",
+                "numberDependentPerson": "",
+                "salary": "",
+                "salaryRatio": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "dob": "",
+                "gender": "",
+                "identityNumber": "",
+                "name": "",
+                "status": "",
+                "username": ""
+            },
+            "header": {
+                "title": ""
+            }
+        },
+        "password": {
+            "error": "",
+            "field": "",
+            "save": "",
+            "success": "",
+            "title": ""
+        },
+        "username": ""
+    },
+    "item": {
+        "detail": {
+            "content": {
+                "characteristic": "",
+                "code": "",
+                "codeFromMarket": "",
+                "codeFromSupplier": "",
+                "description": "",
+                "height": "",
+                "length": "",
+                "name": "",
+                "primaryPrice": "",
+                "status": "",
+                "uom": "",
+                "weight": "",
+                "width": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "description": "",
+                "name": "",
+                "primaryPrice": "",
+                "status": "",
+                "unitOfMeasure": ""
+            },
+            "header": {
+                "title": ""
+            }
+        }
+    },
+    "jobLevel": {
+        "content": {
+            "description": "",
+            "level": ""
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "jobTitle": {
+        "header": {
+            "title": ""
+        }
+    },
+    "jobTtitle": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "title": ""
+        }
+    },
+    "province": {
+        "code": "",
+        "create": {
+            "error": ""
+        },
+        "delete": {
+            "message": "",
+            "success": "",
+            "title": ""
+        },
+        "get": {
+            "error": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": "",
+        "title": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "supplier": {
+        "detail": {
+            "content": {
+                "code": "",
+                "name": "",
+                "note": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "name": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            }
+        }
+    },
+    "tax-template": {
+        "code": "",
+        "name": "",
+        "title": "",
+        "type": ""
+    },
+    "tax": {
+        "code": "",
+        "description": "",
+        "discount": "",
+        "name": "",
+        "parent_account": "",
+        "unit": ""
+    },
+    "taxTemplate": {
+        "code": "",
+        "delete": {
+            "error": "",
+            "success": ""
+        },
+        "detail": {
+            "actions": "",
+            "available": "",
+            "code": "",
+            "name": "",
+            "rate": "",
+            "unitOfMeasure": ""
+        },
+        "general": {
+            "title": ""
+        },
+        "get": {
+            "error": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": "",
+        "title": "",
+        "type": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "uom": {
+        "content": {
+            "code": "",
+            "description": "",
+            "modal": {
+                "title": "",
+                "uom_description": ""
+            },
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        }
+    }
+}

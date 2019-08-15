@@ -1,0 +1,313 @@
+{
+    "deliveryOrder": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "customerCode": "",
+            "customerInfo": "",
+            "customerName": "",
+            "deliveryOrder": {
+                "title": ""
+            },
+            "deliveryOrderRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "customerName": "",
+                "documentNo": ""
+            },
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "title": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiptedDate": "",
+            "tab1": {
+                "Serial": "",
+                "amount": "",
+                "batches": "",
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "purchaseOrderNumber": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "unitPrice": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "form": {
+            "post": {
+                "title": ""
+            }
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "receiptedDate": "",
+            "status": ""
+        }
+    },
+    "goodsIssue": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "title": ""
+            },
+            "goodsIssueRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "customerName": "",
+                "documentNo": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiptedDate": "",
+            "tab1": {
+                "Serial": "",
+                "amount": "",
+                "batches": "",
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "unitPrice": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "form": {
+            "post": {
+                "title": ""
+            }
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "receiptedDate": "",
+            "status": ""
+        }
+    },
+    "goodsReturn": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "customerCode": "",
+            "customerInfo": "",
+            "customerName": "",
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "title": ""
+            },
+            "goodsReturn": {
+                "title": ""
+            },
+            "goodsReturnRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "customerName": "",
+                "documentNo": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiptedDate": "",
+            "tab1": {
+                "Serial": "",
+                "amount": "",
+                "batches": "",
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "purchaseOrderNumber": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "unitPrice": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "form": {
+            "post": {
+                "title": ""
+            }
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "receip     tedDate": "",
+            "status": ""
+        }
+    }
+}

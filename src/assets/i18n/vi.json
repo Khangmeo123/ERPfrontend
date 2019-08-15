@@ -1,1183 +1,2000 @@
 {
-	"accountingPeriod": {
-		"description": "Mô tả",
-		"endPeriod": "Ngày kết thúc",
-		"header": {
-			"title": "Kỳ kế toán"
-		},
-		"modal": {
-			"label": "Thêm kỳ kế toán",
-			"title": "Kỳ kế toán"
-		},
-		"startPeriod": "Ngày bắt đầu",
-		"status": {
-			"fiscal_year": "Năm tài chính"
-		}
-	},
-	"advancedFilter": {
-		"placeholder": "Tìm kiếm...",
-    "equal": "Bằng",
-    "notEqual": "Khác",
-    "contains": "Chứa",
-    "notContains": "Không chứa",
-    "lessEqual": "Nhỏ hơn hoặc bằng",
-    "greatEqual": "Lớn hơn hoặc bằng",
-    "endsWith": "Kết thúc với",
-    "startsWith": "Bắt đầu với"
-	},
-	"asset": {
-		"content": {
-			"code": "Mã tài sản",
-			"modal": {
-				"title": "Thêm tài sản"
-			},
-			"name": "Tên tài sản",
-			"status": "Trạng thái",
-			"type": "Loại tài sản"
-		},
-		"header": {
-			"title": "Danh sách tài sản"
-		}
-	},
-	"bank": {
-		"content": {
-			"code": "Mã ngân hàng",
-			"description": "Mô tả",
-			"name": "Tên ngân hàng"
-		},
-		"dialog": {
-			"title": "Thêm ngân hàng"
-		},
-		"header": {
-			"title": "Danh sách ngân hàng"
-		}
-	},
-	"bankAccount": {
-		"account_name": "Tên tài khoản",
-		"account_number": "Số tài khoản",
-		"accounting_code": "Mã tài khoản kế toán",
-		"bankAccounts": {
-			"account_name": "Tên tài khoản",
-			"account_number": "Số tài khoản",
-			"accounting_code": "Mã tài khoản kế toán",
-			"add": "Thêm tài khoản ngân hàng",
-			"bank_code": "Mã ngân hàng",
-			"description": "Mô tả"
-		},
-		"bank_code": "Mã ngân hàng",
-		"bank_name": "Tên ngân hàng",
-		"description": "Mô tả",
-		"details": {
-			"title": "Tài khoản ngân hàng"
-		}
-	},
-	"binLocation": {
-		"action": "Thao tác",
-		"code": "Mã",
-		"delete": {
-			"confirm": {
-				"message": "Bạn chắc chắn muốn xóa?",
-				"title": "Xác nhận xóa?"
-			}
-		},
-		"getFieldEntity": {
-			"error": "Lấy danh sách trường thất bại"
-		},
-		"layer1": {
-			"code": "Mã lớp 1"
-		},
-		"layer2": {
-			"code": "Mã lớp 2"
-		},
-		"layer3": {
-			"code": "Mã lớp 3"
-		},
-		"layer4": {
-			"code": "Mã lớp 4"
-		},
-		"modal": {
-			"title": "Thêm vị trí kho"
-		},
-		"name": "Tên",
-		"title": "Vị trí kho",
-		"update": {
-			"error": "Cập nhật thất bại",
-			"success": "Cập nhật thành công"
-		}
-	},
-	"bookmarks": {
-		"title": "Dấu trang"
-	},
-	"businessGroup": {
-		"content": {
-			"code": "Mã nhóm kinh doanh",
-			"description": "Mô tả",
-			"name": "Tên nhóm kinh doanh"
-		},
-		"dialog": {
-			"error": {
-				"title": "Danh sách lỗi"
-			},
-			"title": "Thêm nhóm kinh doanh"
-		}
-	},
-	"business_group": {
-		"header": {
-			"title": "Quản lý nhóm kinh doanh"
-		}
-	},
-	"coa": {
-		"account_description": "Mô tả",
-		"account_name": "Tên tài khoản",
-		"account_number": "Số tài khoản",
-		"account_status": "Tính chất",
-		"description": "Mô tả",
-		"list": {
-			"title": "Hệ thống tài khoản"
-		},
-		"super_account": "Tài khoản tổng hợp"
-	},
-	"codeFormula": {
-		"code": "Mã",
-		"field": {
-			"error": "Lấy danh sách trường thất bại"
-		},
-		"general": {
-			"title": "Quy tắc tách mã"
-		},
-		"get": {
-			"error": "Lấy thông tin thất bại"
-		},
-		"identifierStringEnd": "Vị trí kết thúc",
-		"identifierStringStart": "Vị trí bắt đầu",
-		"identifierStringValues": "Giá trị nhận dạng",
-		"item": {
-			"code": "Mã sản phẩm",
-			"name": "Tên sản phẩm",
-			"title": "Danh sách sản phẩm áp dụng"
-		},
-		"legalEntity": {
-			"missingLegalEntityId": "Thiếu id của pháp nhân"
-		},
-		"legalEntityList": {
-			"error": "Không thể lấy danh sách pháp nhân"
-		},
-		"length": "Độ dài",
-		"name": "Tên",
-		"rule": {
-			"end": "Kết thúc với",
-			"itemFieldDisplay": "Trường",
-			"start": "Bắt đầu với",
-			"title": "Quy tắc tách mã"
-		},
-		"ruleModal": {
-			"title": "Quy tắc tách mã"
-		},
-		"splitRuleContent": {
-			"field": "Trường",
-			"start": "Bắt đầu với"
-		},
-		"test": {
-			"expirationDate": "Ngày hết hạn",
-			"itemCode": "Mã sản phẩm",
-			"mfrDate": "Ngày sản xuất",
-			"qrCode": "Mã QR",
-			"serial": "Serial",
-			"title": "Test mã"
-		},
-		"title": "Quy tắc tách mã",
-		"update": {
-			"error": "Cập nhật thành công",
-			"success": "Cập nhật thất bại"
-		}
-	},
-	"cost-center": {
-		"content": {
-			"account": "Tài khoản",
-			"description": "Mô tả",
-			"from_date": "Ngày bắt đầu",
-			"id": "Mã trung tâm",
-			"modal": {
-				"title": "Thêm trung tâm chi phí"
-			},
-			"name": "Tên trung tâm",
-			"to_date": "Ngày kết thúc"
-		},
-		"header": {
-			"title": "Trung tâm chi phí"
-		}
-	},
-	"cropper": {
-		"browseImage": "Chọn ảnh",
-		"crop": "Cắt ảnh"
-	},
-	"currency": {
-		"content": {
-			"code": "Mã tiền tệ",
-			"description": "Mô tả",
-			"name": "Tên loại tiền tệ"
-		},
-		"dialog": {
-			"title": "Thêm loại tiền tệ"
-		},
-		"header": {
-			"title": "Đơn vị tiền tệ"
-		}
-	},
-	"customer": {
-		"detail": {
-			"content": {
-				"code": "Mã khách hàng",
-				"name": "Tên khách hàng",
-				"note": "Lưu ý khác",
-				"status": "Trạng thái",
-				"taxCode": "Mã số thuế"
-			},
-			"header": {
-				"title": "Chỉnh sửa thông tin khách hàng"
-			},
-			"tab": {
-				"title1": "Thông tin chung"
-			}
-		},
-		"list": {
-			"content": {
-				"code": "Mã khách hàng",
-				"name": "Tên khách hàng",
-				"status": "Trạng thái",
-				"taxCode": "Mã số thuế"
-			},
-			"header": {
-				"title": "Danh sách khách hàng"
-			}
-		}
-	},
-	"customerGroup": {
-		"add": "Thêm nhóm khách hàng",
-		"code": "Mã nhóm",
-		"customer": {
-			"code": "Mã khách hàng",
-			"name": "Tên khách hàng"
-		},
-		"header": {
-			"title": "Nhóm khách hàng"
-		},
-		"name": "Tên nhóm"
-	},
-	"customerOfLegalEntity": {
-		"code": "Mã pháp nhân",
-		"customer": {
-			"code": "Mã khách hàng",
-			"name": "Tên khách hàng"
-		},
-		"header": {
-			"title": "Khách hàng của pháp nhân"
-		},
-		"name": "Tên pháp nhân",
-		"sob": "Mã bộ sổ"
-	},
-	"datePicker": {
-		"placeHolder": "ngày/tháng/năm"
-	},
-	"department": {
-		"addToDepartment": {
-			"error": "Thêm phòng ban không thành công",
-			"success": "Thêm phòng ban thành công"
-		},
-		"asset": {
-			"actions": "Thao tác",
-			"add": "Thông tin tài sản",
-			"code": "Mã tài sản",
-			"fromDate": "Quản lý từ ngày",
-			"manager": "Người quản lý",
-			"name": "Tên tài sản",
-			"toDate": "Đến ngày",
-			"type": "Loại tài sản"
-		},
-		"employee": {
-			"code": "Mã nhân viên",
-			"name": "Tên nhân viên"
-		},
-		"project": {
-			"add": "Thêm dự án",
-			"code": "Mã dự án",
-			"description": "Mô tả",
-			"endDate": "Ngày kết thúc",
-			"manager": "Người quản lý",
-			"name": "Tên dự án",
-			"startDate": "Ngày bắt đầu"
-		},
-		"warehouse": {
-			"add": "Thêm kho",
-			"address": "Địa chỉ",
-			"code": "Mã kho",
-			"name": "Tên kho",
-			"title": "Thông tin của kho bãi"
-		},
-		"warehouse_group": {
-			"code": "Mã phòng ban",
-			"details": {
-				"title": "Thông tin phòng kho"
-			},
-			"modal": {
-				"title": "Thêm nhóm kho"
-			},
-			"name": "Tên phòng ban"
-		}
-	},
-	"departments": {
-		"title": "Quản lý phòng ban"
-	},
-	"detailCustomerOfLegal": {
-		"bankAccount": {
-			"accountNumber": "Số tài khoản",
-			"accountOwner": "Tên chủ tài khoản",
-			"add": "Thêm tài khoản ngân hàng",
-			"bankAddress": "Địa chỉ ngân hàng",
-			"bankDivision": "Chi nhánh ngân hàng",
-			"bankName": "Tên ngân hàng",
-			"code": "STT",
-			"province": "Tỉnh/Thành phố",
-			"title": "Tài khoản ngân hàng"
-		},
-		"bankAccounts": {
-			"add": "Thông tin tài khoản ngân hàng"
-		},
-		"code": "Mã nhà cung cấp",
-		"contacts": {
-			"add": "Thêm thông tin liên hệ",
-			"address": "Địa chỉ",
-			"city": "Tỉnh thành",
-			"code": "STT",
-			"email": "Email",
-			"phoneNumber": "Số điện thoại",
-			"province": "Tỉnh/Thành phố",
-			"recipient": "Tên người liên hệ",
-			"title": "Thông tin liên hệ"
-		},
-		"customerGroup": "Nhóm khách hàng",
-		"debtLoad": "Số nợ tối đa",
-		"detail": {
-			"title": "Sửa thông tin khách hàng"
-		},
-		"dueInDays": "Số ngày được nợ",
-		"general": {
-			"title": "Thông tin chung"
-		},
-		"name": "Tên nhà cung cấp",
-		"note": "Lưu ý khác",
-		"paymentTerms": "Điều khoản thanh toán",
-		"pic": "Nhân viên phụ trách",
-		"status": "Trạng thái",
-		"taxCode": "Mã số thuế"
-	},
-	"detailEmployeeGroup": {
-		"bankAccount": {
-			"bankAccountName": "Tên chủ tài khoản",
-			"bankAccountNumber": "Số tài khoản",
-			"bankBranch": "Chi nhánh",
-			"bankName": "Tên ngân hàng",
-			"divisionAddress": "Địa chỉ chi nhánh",
-			"province": "Tỉnh/Thành phố",
-			"title": "Tài khoản ngân hàng"
-		},
-		"contacts": {
-			"action": "Thao tác",
-			"add": "Thêm thông tin liên hệ",
-			"address": "Địa chỉ",
-			"code": "STT",
-			"email": "Email",
-			"phone": "Số điện thoại",
-			"phone_number": "Số điện thoại",
-			"province": "Tỉnh thành",
-			"recipient": "Tên người liên hệ",
-			"title": "Thông tin liên hệ"
-		},
-		"gender": {
-			"men": "Nam",
-			"women": "Nữ"
-		},
-		"general": {
-			"code": "Mã nhân viên",
-			"dob": "Ngày sinh",
-			"employeePositions": "Nhóm nhân viên",
-			"gender": "Giới tính",
-			"identityNumber": "Số CMND",
-			"insuranceSalary": "Lương bảo hiểm",
-			"issueDate": "Ngày cấp",
-			"issuePlace": "Nơi cấp",
-			"jobLevel": "Cấp bậc chức vụ",
-			"jobTitle": "Chức vụ",
-			"name": "Tên nhân viên",
-			"numberDependentPerson": "Số người phụ thuộc",
-			"salary": "Lương thỏa thuân",
-			"salaryRatio": "Hệ số lương",
-			"status": "Trạng thái",
-			"taxCode": "Mã số thuế",
-			"title": "Thông tin chung"
-		},
-		"header": {
-			"title": "Chỉnh sửa thông tin nhân viên"
-		},
-		"own_asset": {
-			"code": "Mã tài sản",
-			"from_date": "Hiệu lực từ ngày",
-			"name": "Tên tài sản",
-			"title": "Tài sản đang quản lý",
-			"to_date": "Đến ngày",
-			"type": "Loại tài sản"
-		}
-	},
-	"detailSupplierGroup": {
-		"bankAccount": {
-			"accountNumber": "Số tài khoản",
-			"accountOwner": "Tên chủ tài khoản",
-			"add": "Thêm tài khoản ngân hàng",
-			"bankAddress": "Địa chỉ ngân hàng",
-			"bankDivision": "Chi nhánh ngân hàng",
-			"bankName": "Tên ngân hàng",
-			"code": "STT",
-			"province": "Tỉnh/ Thành phố",
-			"title": "Tài khoản ngân hàng"
-		},
-		"bankAccounts": {
-			"add": "Thêm tài khoản ngân hàng"
-		},
-		"code": "Mã nhà cung cấp",
-		"contacts": {
-			"add": "Thêm thông tin liên hệ",
-			"address": "Địa chỉ",
-			"city": "Tỉnh thành",
-			"code": "STT",
-			"email": "Email",
-			"phoneNumber": "Số điện thoại",
-			"province": "Tỉnh/Thành phố",
-			"recipient": "Tên người liên hệ",
-			"title": "Thông tin liên hệ"
-		},
-		"debtLoad": "Số nợ tối đa",
-		"detail": {
-			"title": "Sửa thông tin nhà cung cấp"
-		},
-		"dueInDays": "Số ngày được nợ",
-		"general": {
-			"title": "Thông tin chung"
-		},
-		"name": "Tên nhà cung cấp",
-		"note": "Lưu ý khác",
-		"paymentTerms": "Điều khoản thanh toán",
-		"pic": "Nhân viên phụ trách",
-		"status": "Trạng thái",
-		"supplierGroup": "Nhóm khách hàng",
-		"taxCode": "Mã số thuế"
-	},
-	"detail_item_of_legal_entity": {
-		"discounts": {
-			"modal_title": "Thêm chiết khấu"
-		},
-		"transformation_unit": {
-			"amount": "Số lương",
-			"description": "Mô tả",
-			"modal_title": "Thêm đơn vị chuyển đổi",
-			"price_of_primary_unit": "Đơn giá của đơn vị cơ bản",
-			"primary_unit": "Đơn vị cơ bản",
-			"sale_price": "Đơn giá bán",
-			"title": "Đơn vị chuyển đổi",
-			"transformation_rate_to_main_unit": "Tỉ lệ chuyển đổi về đơn vị cơ bản",
-			"unit": "Đơn vị tính"
-		}
-	},
-	"division": {
-		"content": {
-			"address": "Địa chỉ",
-			"code": "Mã chi nhánh",
-			"name": "Tên chi nhánh"
-		},
-		"dialog": {
-			"title": "Thêm chi nhánh"
-		},
-		"header": {
-			"title": "Danh sách chi nhánh"
-		}
-	},
-	"employee": {
-		"content": {
-			"table": {
-				"gender": {
-					"men": "Nam",
-					"women": "Nữ"
-				},
-				"insuranceSalary": "Lương đóng bảo hiểm"
-			}
-		},
-		"detail": {
-			"content": {
-				"code": "Mã nhân viên",
-				"dob": "Ngày sinh",
-				"gender": "Giới tính",
-				"identityNumber": "Số CMND",
-				"issueDate": "Ngày cấp",
-				"issuePlace": "Nơi cấp",
-				"jobLevel": "Cấp bậc chức vụ",
-				"jobTitle": "Chức vụ",
-				"name": "Tên nhân viên",
-				"numberDependentPerson": "Số người phụ thuộc",
-				"salary": "Lương cơ bản",
-				"salaryRatio": "Hệ số lương",
-				"status": "Trạng thái",
-				"taxCode": "Mã số thuế"
-			},
-			"header": {
-				"title": "Thêm mới nhân viên"
-			},
-			"tab": {
-				"title1": "Thông tin nhân viên"
-			}
-		},
-		"list": {
-			"content": {
-				"code": "Mã nhân viên",
-				"dob": "Ngày sinh",
-				"gender": "Giới tính",
-				"identityNumber": "Số CMND",
-				"name": "Tên nhân viên",
-				"status": "Trạng thái",
-				"username": "Tên người dùng"
-			},
-			"header": {
-				"title": "Danh sách nhân viên"
-			}
-		},
-		"password": {
-			"error": "Lưu mật khẩu thất bại",
-			"field": "Mật khẩu",
-			"save": "Lưu mật khẩu",
-			"success": "Lưu mật khẩu thành công",
-			"title": "Đổi mật khẩu"
-		},
-		"username": "Tên người dùng"
-	},
-	"employeeDetail": {
-		"delete": {
-			"confirm": {
-				"message": "Bạn chắc chắn muốn xóa?",
-				"title": "Xác nhận xóa"
-			}
-		}
-	},
-	"employeeDetailOfLegal": {
-		"bankAccount": {
-			"accountName": "Tên chủ tài khoản",
-			"accountNumber": "Số tài khoản",
-			"city": "Tỉnh/Thành phố",
-			"division": "Chi nhánh",
-			"divisionAddress": "Địa chỉ chi nhánh",
-			"name": "Tên ngân hàng",
-			"title": "Tài khoản ngân hàng"
-		},
-		"bassicSalary": "Lương đóng bảo hiểm",
-		"birthday": "Ngày sinh",
-		"code": "Mã nhân viên",
-		"contact": {
-			"add": "Thêm thông tin liên hệ",
-			"address": "Địa chỉ",
-			"city": "Tỉnh thành",
-			"email": "Email",
-			"index": "STT",
-			"name": "Tên người liên hệ",
-			"phone": "Số điện thoại",
-			"title": "Thông tin liên hệ"
-		},
-		"employeeGroup": "Nhóm nhân viên",
-		"gender": {
-			"men": "Nam",
-			"title": "Giới tính",
-			"women": "Nữ"
-		},
-		"general": {
-			"title": "Thông tin chung"
-		},
-		"header": {
-			"title": "Chỉnh sửa thông tin nhân viên"
-		},
-		"identityNumber": "Số CMND",
-		"issueDate": "Ngày cấp",
-		"issuePlace": "Nơi cấp",
-		"jobLevel": "Cấp bậc chức vụ",
-		"jobTitle": "Chức vụ",
-		"name": "Tên nhân viên",
-		"numberDependentPerson": "Số người phụ thuộc",
-		"salaryAgreement": "Lương thỏa thuận",
-		"salaryRatio": "Hệ số lương",
-		"status": "Trạng thái",
-		"taxCode": "Mã số thuế"
-	},
-	"employeeGroup": {
-		"add": "Thêm",
-		"code": "Mã nhóm",
-		"employee": {
-			"code": "Mã nhân viên",
-			"name": "Tên nhân viên"
-		},
-		"header": {
-			"title": "Nhóm nhân viên"
-		},
-		"name": "Tên nhóm"
-	},
-	"employeeOfLegalEntity": {
-		"code": "Mã pháp nhân",
-		"employee": {
-			"code": "Mã nhân viên",
-			"name": "Tên nhân viên"
-		},
-		"header": {
-			"title": "Danh sách nhân viên của pháp nhân"
-		},
-		"name": "Tên pháp nhân",
-		"sob": "Mã bộ sổ"
-	},
-	"employeePosition": {
-		"header": {
-			"title": "Quản lý nhóm nhân viên"
-		}
-	},
-	"environmentTax": {
-		"header": {
-			"title": "Biểu thuế môi trường"
-		},
-		"modal": {
-			"title": "Thêm biểu thuế môi trường"
-		}
-	},
-	"environment_tax": {
-		"description": "Mô tả"
-	},
-	"exportTax": {
-		"header": {
-			"title": "Biểu thuế xuất khẩu"
-		},
-		"modal": {
-			"title": "Thêm biểu thuế xuất khẩu"
-		}
-	},
-	"fiscal_year": {
-		"content": {
-			"from_date": "Ngày bắt đầu",
-			"modal": {
-				"title": "Thêm năm tài chính"
-			},
-			"name": "Tên",
-			"status": "Trạng thái",
-			"to_date": "Ngày kết thúc",
-			"valuation_method": "Phương pháp định giá ngầm định"
-		},
-		"header": {
-			"title": "Năm tài chính"
-		}
-	},
-	"general": {
-		"action": "Thao tác",
-		"button": {
-			"add": "Thêm",
-			"cancel": "Hủy",
-			"clear": "Bỏ lọc",
-			"delete": "Xóa",
-			"downloadTemplate": "Tải file mẫu",
-			"download_example": "Tải file mẫu",
-			"export": "Xuất Excel",
-			"import": "Nhập hàng loạt",
-			"importFile": "Nhập hàng loạt",
-			"import_file": "Nhập hàng loạt",
-			"ok": "OK",
-			"save": "Lưu"
-		},
-		"customer_group": {
-			"name": "Tên nhà cung cấp"
-		},
-		"department": {
-			"delete": {
-				"message": "Bạn chắc chắn muốn xóa?",
-				"title": "Xác nhận xóa"
-			}
-		},
-		"detail": "Chi tiết",
-		"division": "Tên chi nhánh",
-		"error": {
-			"direction": "Hướng",
-			"fileImport": "Lỗi nhập file"
-		},
-		"gender": {
-			"female": "Nữ",
-			"male": "Nam"
-		},
-		"import": {
-			"error": "Nhập thất bại",
-			"success": "Nhập thành công"
-		},
-		"legalEntity": {
-			"name": "Tên pháp nhân"
-		},
-		"legal_entity": {
-			"name": "Tên pháp nhân"
-		},
-		"project": {
-			"delete": {
-				"message": "Bạn chắc chắn muốn xóa?",
-				"title": "Xác nhận xóa"
-			}
-		},
-		"service": {
-			"save": {
-				"success": "Thành công"
-			},
-			"update": {
-				"getFailed": "Cập nhật thất bại",
-				"success": "Cập nhật thành công"
-			}
-		},
-		"sob": "Số bộ sổ",
-		"update": {
-			"failure": "Cập nhật thất bại",
-			"success": "Cập nhật thành công"
-		}
-	},
-	"hrOrganization": {
-		"add": "Thêm phòng",
-		"code": "Mã phòng ban",
-		"name": "Tên phòng ban",
-		"title": "Thông tin phòng ban"
-	},
-	"importTax": {
-		"header": {
-			"title": "Biểu thuế nhập khẩu"
-		},
-		"modal": {
-			"title": "Thêm biểu thuế nhập khẩu"
-		}
-	},
-	"item": {
-		"content": {
-			"tab": {
-				"enviroment_tax": "Thuế môi trường (%)",
-				"enviroment_tax_id": "Mã thuế môi trường",
-				"export_tax": "Thuế xuất khẩu (%)",
-				"export_tax_id": "Mã thuế suất khẩu",
-				"import_tax": "Thuế nhập khẩu (%)",
-				"import_tax_id": "Mã thuế nhập khẩu",
-				"resource_tax": "Thuế tài nguyên (%)",
-				"resource_tax_id": "Mã thuế tài nguyên",
-				"special_consumption_tax": "Thuế TTĐB (% )",
-				"special_consumption_tax_id": "Mã thuế TTĐB",
-				"value_add_tax": "Thuế GTGT (%)",
-				"value_add_tax_id": "Mã thuế GTGT"
-			}
-		},
-		"detail": {
-			"content": {
-				"characteristic": "Tính chất hàng",
-				"code": "Mã sản phẩm",
-				"codeFromMarket": "Mã SP trên thị trường ",
-				"codeFromSupplier": "Mã SP từ NCC",
-				"description": "Mô tả",
-				"height": "Chiều cao",
-				"length": "Chiều dài",
-				"name": "Tên sản phẩm",
-				"primaryPrice": "Đơn giá cơ bản",
-				"status": "Trạng thái",
-				"uom": "Đơn vị cơ bản",
-				"weight": "Cân nặng",
-				"width": "Chiều rộng"
-			},
-			"header": {
-				"title": "Danh sách sản phẩm"
-			},
-			"tab": {
-				"title1": "Tab 1",
-				"title_2": "Thông tin thuế suất"
-			}
-		},
-		"list": {
-			"content": {
-				"code": "Mã sản phẩm",
-				"description": "Mô tả",
-				"name": "Tên sản phẩm",
-				"primaryPrice": "Đơn giá cơ bản",
-				"status": "Trang thái",
-				"unitOfMeasure": "Đơn vị cơ bản"
-			},
-			"header": {
-				"title": "Danh sách sản phẩm"
-			}
-		}
-	},
-	"itemGroup": {
-		"content": {
-			"item": {
-				"code": "Mã nhóm",
-				"name": "Tên nhóm"
-			},
-			"itemDetail": {
-				"code": "Mã sản phẩm",
-				"name": "Tên sản phẩm"
-			}
-		},
-		"dialog": {
-			"title": "Thêm nhóm sản phẩm"
-		},
-		"header": {
-			"title": "Nhóm sản phẩm"
-		}
-	},
-	"itemOfLegalEntity": {
-		"content": {
-			"itemDetail": {
-				"code": "Mã sản phẩm",
-				"name": "Tên sản phẩm"
-			},
-			"legal": {
-				"code": "Mã pháp nhân",
-				"name": "Tên pháp nhân",
-				"setOfBookCode": "Mã bộ sổ"
-			}
-		},
-		"header": {
-			"title": "Danh sách sản phẩm của pháp nhân"
-		}
-	},
-	"jobLevel": {
-		"content": {
-			"description": "Mô tả",
-			"level": "Cấp bậc"
-		},
-		"dialog": {
-			"title": "Thêm cấp bậc công việc"
-		},
-		"header": {
-			"title": "Cấp bậc công việc"
-		}
-	},
-	"jobTitle": {
-		"header": {
-			"title": "Chức vụ công việc"
-		}
-	},
-	"jobTtitle": {
-		"content": {
-			"code": "Mã chức vụ",
-			"description": "Mô tả",
-			"name": "Tên chức vụ"
-		},
-		"dialog": {
-			"title": "Thêm chức vụ"
-		}
-	},
-	"legalEntity": {
-		"add": "Thêm pháp nhân",
-		"code": "Mã pháp nhân",
-		"header": {
-			"title": "Danh sách pháp nhân"
-		},
-		"name": "Tên pháp nhân",
-		"subLevel1": "Mã lớp 1",
-		"subLevel2": "Mã lớp 2",
-		"subLevel3": "Mã lớp 3",
-		"subLevel4": "Mã lớp 4"
-	},
-	"legalItemDetail": {
-		"content": {
-			"characteristic": "Tính chất hàng",
-			"code": "Mã sản phẩm",
-			"codeFromMarket": "Mã SP từ thị trường",
-			"codeFromSupplier": "Mã SP từ NCC",
-			"description": "Mô tả",
-			"height": "Chiều cao",
-			"itemGroup": "Nhóm sản phẩm",
-			"length": "Chiều dài",
-			"name": "Tên sản phẩm",
-			"primaryPrice": "Đơn giá cơ bản ",
-			"status": "Trạng thái",
-			"unitOfMeasure": "Đơn vị cơ bản",
-			"weight": "Cân nặng",
-			"width": "Chiều rộng"
-		},
-		"defaultValue": {
-			"discountAccount": "TK chiết khấu",
-			"expenseAccount": "TK chi phí",
-			"inventoryAccount": "TK kho",
-			"returnAccount": "TK trả lại",
-			"revenueAccount": "TK doanh thu",
-			"salesAllowancesAccount": "TK giảm giá",
-			"title": "Giá trị ngầm định"
-		},
-		"header": {
-			"title": "Chỉnh sửa sản phẩm"
-		},
-		"itemDiscounts": {
-			"discounType": "Loại chiết khấu",
-			"quantityFrom": "Số lượng từ",
-			"quantityTo": "Số lượng đến",
-			"rate": "Chiết khâu",
-			"title": "Chiết khấu"
-		},
-		"itemMaterials": {
-			"modal_title": "Thêm vật liệu",
-			"quantity": "Số lương",
-			"sourceItemCode": "Mã nguyên vật liệu",
-			"sourceItemName": "Tên nguyên vật liệu",
-			"title": "Định mức nguyên vật liệu",
-			"unitOfMeasureCode": "Đơn vị tính"
-		},
-		"tab": {
-			"title_1": "Thông tin chung"
-		}
-	},
-	"login": {
-		"failed": "Đăng nhập thất bại"
-	},
-	"naturalResourceTax": {
-		"header": {
-			"title": "Biểu thuế tài nguyên"
-		},
-		"modal": {
-			"title": "Thêm biểu thuế tài nguyên"
-		}
-	},
-	"noData": {
-		"helper": "Không có dữ liệu"
-	},
-	"pagination": {
-		"entries": "bản ghi",
-		"show": "Hiện thị"
-	},
-	"payment_method": {
-		"code": "Mã phương thức",
-		"header": {
-			"title": "Phương thức thanh toán"
-		},
-		"modal": {
-			"title": "Thêm phương thức thanh toán"
-		},
-		"payment_method_name": "Tên phương thức thanh toán"
-	},
-	"payment_term": {
-		"code": "Mã điều khoản",
-		"discount_period": "Thời hạn chiết khấu",
-		"discount_rate": "Tỉ lệ chiết khấu",
-		"due_in_date": "Ngày được nợ",
-		"header": {
-			"title": "Điều khoản thanh toán"
-		},
-		"modal": {
-			"title": "Điều khoản thanh toán"
-		},
-		"name": "Tên điều khoản"
-	},
-	"project": {
-		"employee": {
-			"code": "Mã nhân viên",
-			"name": "Tên nhân viên"
-		}
-	},
-	"projectOrganization": {
-		"code": "Mã dự án",
-		"endDate": "Ngày kết thúc",
-		"manager": "Người quản lý",
-		"name": "Tên dự án",
-		"startDate": "Ngày bắt đầu",
-		"title": "Thông tin dự án"
-	},
-	"province": {
-		"code": "Mã tỉnh thành",
-		"create": {
-			"error": "Tạo tỉnh thành bị lỗi"
-		},
-		"delete": {
-			"message": "Bạn chắc chắn muốn xóa?",
-			"success": "Xóa tỉnh thành thành công",
-			"title": "Xác nhận xóa"
-		},
-		"get": {
-			"error": "Lấy thông tin tỉnh thành không được"
-		},
-		"modal": {
-			"title": "Thông tin tỉnh thành"
-		},
-		"name": "Tên tỉnh thành",
-		"title": "Quản lý tỉnh thành",
-		"update": {
-			"error": "Cập nhật thất bại",
-			"success": "Cập nhật thành công"
-		}
-	},
-	"select": {
-		"availableList": "Có thể chọn",
-		"selectedItems": "Đã chọn",
-		"selectedList": "Danh sách đã chọn"
-	},
-	"sob": {
-		"add": "Thêm bộ sổ",
-		"chart_account": "Hệ thống TKKT",
-		"code": "Mã bộ sổ",
-		"currency": "Đơn vị tiền tệ",
-		"enviroment_tax": "Biểu thuế môi trường",
-		"export_tax": "Biểu thuế xuất khẩu",
-		"import_tax": "Biểu thuế nhập khẩu",
-		"name": "Tên bộ sổ",
-		"resource_tax": "Biểu thuế tài nguyên",
-		"special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
-		"title": "Danh sách bộ sổ",
-		"value_added_tax": "Biểu thuế GTGT"
-	},
-	"specialConsumptionTax": {
-		"header": {
-			"title": "Biểu thuế tiêu thụ đặc biệt"
-		},
-		"modal": {
-			"title": "Thêm biểu thuế tiêu thụ đặc biệt"
-		}
-	},
-	"special_price_customer": {
-		"code": "Mã sản phẩm",
-		"description": "Mô tả",
-		"discount": "Chiết khấu",
-		"from_date": "Từ ngày",
-		"item_group": "Nhóm sản phẩm",
-		"modal": {
-			"title": "Thêm giá đặc biệt"
-		},
-		"title": "Giá đặc biệt cho khách hàng",
-		"to_date": "Đến ngày"
-	},
-	"special_price_supplier": {
-		"code": "Mã sản phẩm",
-		"description": "Mô tả",
-		"discount": "Chiết khấu",
-		"from_date": "Từ ngày",
-		"item_group": "Nhóm sản phẩm",
-		"modal": {
-			"title": "Thêm giá đặc biệt"
-		},
-		"title": "Giá đặc biệt cho nhà cung cấp",
-		"to_date": "Đến ngày"
-	},
-	"supplier": {
-		"detail": {
-			"content": {
-				"code": "Mã nhà cung cấp",
-				"name": "Tên nhà cung cấp",
-				"note": "Lưu ý khác",
-				"status": "Trạng thái",
-				"taxCode": "Mã số thuế"
-			},
-			"header": {
-				"title": "Thông tin nhà cung cấp"
-			},
-			"tab": {
-				"title1": "Thông tin chung"
-			}
-		},
-		"list": {
-			"content": {
-				"code": "Mã nhà cung cấp",
-				"name": "Tên nhà cung cấp",
-				"status": "Trạng thái",
-				"taxCode": "Mã số thuế"
-			},
-			"header": {
-				"title": "Danh sách nhà cung cấp"
-			}
-		}
-	},
-	"supplierGroup": {
-		"add": "Thêm nhóm nhà cung cấp",
-		"code": "Mã nhóm",
-		"header": {
-			"title": "Nhóm nhà cung cấp"
-		},
-		"name": "Tên nhóm",
-		"supplier": {
-			"code": "Mã nhà cung cấp",
-			"name": "Tên nhà cung cấp"
-		}
-	},
-	"supplierOfLegalEntity": {
-		"code": "Mã pháp nhân",
-		"header": {
-			"title": "Danh sách nhà cung cấp của pháp nhân"
-		},
-		"name": "Tên pháp nhân",
-		"sob": "Mã bộ sổ",
-		"supplier": {
-			"code": "Mã nhà cung cấp",
-			"name": "Tên nhà cung cấp"
-		}
-	},
-	"tax-template": {
-		"code": "",
-		"name": "",
-		"title": "",
-		"type": ""
-	},
-	"tax": {
-		"available": "Hiệu lực",
-		"code": "Mã",
-		"description": "Mô tả",
-		"discount": "Chiết khấu",
-		"name": "Tên",
-		"parent_account": "Tài khoản tổng hợp",
-		"unit": "Đơn vị tính"
-	},
-	"taxTemplate": {
-		"code": "Mã mẫu biểu thuế",
-		"delete": {
-			"error": "Xóa thất bại",
-			"success": "Xóa thành công"
-		},
-		"detail": {
-			"actions": "Thao tác",
-			"available": "Hiệu lực",
-			"code": "Mã biểu thuế",
-			"name": "Tên biểu thuế",
-			"rate": "Chiết khấu",
-			"unitOfMeasure": "Đơn vị tính"
-		},
-		"general": {
-			"title": "Mẫu biểu thuế"
-		},
-		"get": {
-			"error": "Không thể lấy thông tin mẫu biếu thuế"
-		},
-		"name": "Tên",
-		"modal": {
-			"title": "Biểu thuế"
-		},
-		"title": "Mẫu biểu thuế",
-		"type": "Loại biểu thuế",
-		"update": {
-			"error": "Cập nhật thất bại",
-			"success": "Cập nhật thành công"
-		}
-	},
-	"uom": {
-		"content": {
-			"code": "Mã đơn vị",
-			"description": "Mô tả",
-			"modal": {
-				"title": "Thêm đơn vị tính sản phẩm",
-				"uom_description": "Mô tả"
-			},
-			"name": "Tên đơn vị"
-		},
-		"header": {
-			"title": "Đơn vị tính sản phẩm"
-		}
-	},
-	"valueAddedTax": {
-		"header": {
-			"title": "Thuế giá trị gia tăng"
-		},
-		"modal": {
-			"title": "Thêm thuế giá trị gia tăng"
-		}
-	}
+    "accountingPeriod": {
+        "description": "",
+        "endPeriod": "",
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "label": "",
+            "title": ""
+        },
+        "startPeriod": "",
+        "status": {
+            "fiscal_year": ""
+        }
+    },
+    "advancedFilter": {
+        "contains": "",
+        "endsWith": "",
+        "equal": "",
+        "greater": "",
+        "greaterEqual": "",
+        "less": "",
+        "lessEqual": "",
+        "notContains": "",
+        "notEqual": "",
+        "placeholder": "",
+        "startsWith": ""
+    },
+    "asset": {
+        "content": {
+            "code": "",
+            "modal": {
+                "title": ""
+            },
+            "name": "",
+            "status": "",
+            "type": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "bank": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "bankAccount": {
+        "account_name": "",
+        "account_number": "",
+        "accounting_code": "",
+        "bankAccounts": {
+            "account_name": "",
+            "account_number": "",
+            "accounting_code": "",
+            "add": "",
+            "bank_code": "",
+            "description": ""
+        },
+        "bank_code": "",
+        "bank_name": "",
+        "description": "",
+        "details": {
+            "title": ""
+        }
+    },
+    "binLocation": {
+        "action": "",
+        "code": "",
+        "delete": {
+            "confirm": {
+                "message": "",
+                "title": ""
+            }
+        },
+        "getFieldEntity": {
+            "error": ""
+        },
+        "layer1": {
+            "code": ""
+        },
+        "layer2": {
+            "code": ""
+        },
+        "layer3": {
+            "code": ""
+        },
+        "layer4": {
+            "code": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": "",
+        "title": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "bookmarks": {
+        "title": ""
+    },
+    "businessGroup": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "error": {
+                "title": ""
+            },
+            "title": ""
+        }
+    },
+    "business_group": {
+        "header": {
+            "title": ""
+        }
+    },
+    "coa": {
+        "account_description": "",
+        "account_name": "",
+        "account_number": "",
+        "account_status": "",
+        "description": "",
+        "list": {
+            "title": ""
+        },
+        "super_account": ""
+    },
+    "codeFormula": {
+        "code": "",
+        "field": {
+            "error": ""
+        },
+        "general": {
+            "title": ""
+        },
+        "get": {
+            "error": ""
+        },
+        "identifierStringEnd": "",
+        "identifierStringStart": "",
+        "identifierStringValues": "",
+        "item": {
+            "code": "",
+            "name": "",
+            "title": ""
+        },
+        "legalEntity": {
+            "missingLegalEntityId": ""
+        },
+        "legalEntityList": {
+            "error": ""
+        },
+        "length": "",
+        "name": "",
+        "rule": {
+            "end": "",
+            "itemFieldDisplay": "",
+            "start": "",
+            "title": ""
+        },
+        "ruleModal": {
+            "title": ""
+        },
+        "splitRuleContent": {
+            "field": "",
+            "start": ""
+        },
+        "test": {
+            "expirationDate": "",
+            "itemCode": "",
+            "mfrDate": "",
+            "qrCode": "",
+            "serial": "",
+            "title": ""
+        },
+        "title": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "cost-center": {
+        "content": {
+            "account": "",
+            "description": "",
+            "from_date": "",
+            "id": "",
+            "modal": {
+                "title": ""
+            },
+            "name": "",
+            "to_date": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "cropper": {
+        "browseImage": "",
+        "crop": ""
+    },
+    "currency": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "customer": {
+        "detail": {
+            "content": {
+                "code": "",
+                "name": "",
+                "note": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "name": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            }
+        }
+    },
+    "customerGroup": {
+        "add": "",
+        "code": "",
+        "customer": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": ""
+    },
+    "customerOfLegalEntity": {
+        "code": "",
+        "customer": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "sob": ""
+    },
+    "datePicker": {
+        "placeHolder": ""
+    },
+    "deliveryOrder": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "customerCode": "",
+            "customerInfo": "",
+            "customerName": "",
+            "deliveryOrder": {
+                "title": ""
+            },
+            "deliveryOrderRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "customerName": "",
+                "documentNo": ""
+            },
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "title": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiptedDate": "",
+            "tab1": {
+                "Serial": "",
+                "amount": "",
+                "batches": "",
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "purchaseOrderNumber": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "unitPrice": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "form": {
+            "post": {
+                "title": ""
+            }
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "receiptedDate": "",
+            "status": ""
+        }
+    },
+    "department": {
+        "addToDepartment": {
+            "error": "",
+            "success": ""
+        },
+        "asset": {
+            "actions": "",
+            "add": "",
+            "code": "",
+            "fromDate": "",
+            "manager": "",
+            "name": "",
+            "toDate": "",
+            "type": ""
+        },
+        "employee": {
+            "code": "",
+            "name": ""
+        },
+        "project": {
+            "add": "",
+            "code": "",
+            "description": "",
+            "endDate": "",
+            "manager": "",
+            "name": "",
+            "startDate": ""
+        },
+        "warehouse": {
+            "add": "",
+            "address": "",
+            "code": "",
+            "name": "",
+            "title": ""
+        },
+        "warehouse_group": {
+            "code": "",
+            "details": {
+                "title": ""
+            },
+            "modal": {
+                "title": ""
+            },
+            "name": ""
+        }
+    },
+    "departments": {
+        "title": ""
+    },
+    "detailCustomerOfLegal": {
+        "bankAccount": {
+            "accountNumber": "",
+            "accountOwner": "",
+            "add": "",
+            "bankAddress": "",
+            "bankDivision": "",
+            "bankName": "",
+            "code": "",
+            "province": "",
+            "title": ""
+        },
+        "bankAccounts": {
+            "add": ""
+        },
+        "code": "",
+        "contacts": {
+            "add": "",
+            "address": "",
+            "city": "",
+            "code": "",
+            "email": "",
+            "phoneNumber": "",
+            "province": "",
+            "recipient": "",
+            "title": ""
+        },
+        "customerGroup": "",
+        "debtLoad": "",
+        "detail": {
+            "title": ""
+        },
+        "dueInDays": "",
+        "general": {
+            "title": ""
+        },
+        "name": "",
+        "note": "",
+        "paymentTerms": "",
+        "pic": "",
+        "status": "",
+        "taxCode": ""
+    },
+    "detailEmployeeGroup": {
+        "bankAccount": {
+            "bankAccountName": "",
+            "bankAccountNumber": "",
+            "bankBranch": "",
+            "bankName": "",
+            "divisionAddress": "",
+            "province": "",
+            "title": ""
+        },
+        "contacts": {
+            "action": "",
+            "add": "",
+            "address": "",
+            "code": "",
+            "email": "",
+            "phone": "",
+            "phone_number": "",
+            "province": "",
+            "recipient": "",
+            "title": ""
+        },
+        "gender": {
+            "men": "",
+            "women": ""
+        },
+        "general": {
+            "code": "",
+            "dob": "",
+            "employeePositions": "",
+            "gender": "",
+            "identityNumber": "",
+            "insuranceSalary": "",
+            "issueDate": "",
+            "issuePlace": "",
+            "jobLevel": "",
+            "jobTitle": "",
+            "name": "",
+            "numberDependentPerson": "",
+            "salary": "",
+            "salaryRatio": "",
+            "status": "",
+            "taxCode": "",
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "own_asset": {
+            "code": "",
+            "from_date": "",
+            "name": "",
+            "title": "",
+            "to_date": "",
+            "type": ""
+        }
+    },
+    "detailSupplierGroup": {
+        "bankAccount": {
+            "accountNumber": "",
+            "accountOwner": "",
+            "add": "",
+            "bankAddress": "",
+            "bankDivision": "",
+            "bankName": "",
+            "code": "",
+            "province": "",
+            "title": ""
+        },
+        "bankAccounts": {
+            "add": ""
+        },
+        "code": "",
+        "contacts": {
+            "add": "",
+            "address": "",
+            "city": "",
+            "code": "",
+            "email": "",
+            "phoneNumber": "",
+            "province": "",
+            "recipient": "",
+            "title": ""
+        },
+        "debtLoad": "",
+        "detail": {
+            "title": ""
+        },
+        "dueInDays": "",
+        "general": {
+            "title": ""
+        },
+        "name": "",
+        "note": "",
+        "paymentTerms": "",
+        "pic": "",
+        "status": "",
+        "supplierGroup": "",
+        "taxCode": ""
+    },
+    "detail_item_of_legal_entity": {
+        "discounts": {
+            "modal_title": ""
+        },
+        "transformation_unit": {
+            "amount": "",
+            "description": "",
+            "modal_title": "",
+            "price_of_primary_unit": "",
+            "primary_unit": "",
+            "sale_price": "",
+            "title": "",
+            "transformation_rate_to_main_unit": "",
+            "unit": ""
+        }
+    },
+    "division": {
+        "content": {
+            "address": "",
+            "code": "",
+            "name": ""
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "employee": {
+        "content": {
+            "table": {
+                "gender": {
+                    "men": "",
+                    "women": ""
+                },
+                "insuranceSalary": ""
+            }
+        },
+        "detail": {
+            "content": {
+                "code": "",
+                "dob": "",
+                "gender": "",
+                "identityNumber": "",
+                "issueDate": "",
+                "issuePlace": "",
+                "jobLevel": "",
+                "jobTitle": "",
+                "name": "",
+                "numberDependentPerson": "",
+                "salary": "",
+                "salaryRatio": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "dob": "",
+                "gender": "",
+                "identityNumber": "",
+                "name": "",
+                "status": "",
+                "username": ""
+            },
+            "header": {
+                "title": ""
+            }
+        },
+        "password": {
+            "error": "",
+            "field": "",
+            "save": "",
+            "success": "",
+            "title": ""
+        },
+        "username": ""
+    },
+    "employeeDetail": {
+        "delete": {
+            "confirm": {
+                "message": "",
+                "title": ""
+            }
+        }
+    },
+    "employeeDetailOfLegal": {
+        "bankAccount": {
+            "accountName": "",
+            "accountNumber": "",
+            "city": "",
+            "division": "",
+            "divisionAddress": "",
+            "name": "",
+            "title": ""
+        },
+        "bassicSalary": "",
+        "birthday": "",
+        "code": "",
+        "contact": {
+            "add": "",
+            "address": "",
+            "city": "",
+            "email": "",
+            "index": "",
+            "name": "",
+            "phone": "",
+            "title": ""
+        },
+        "employeeGroup": "",
+        "gender": {
+            "men": "",
+            "title": "",
+            "women": ""
+        },
+        "general": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "identityNumber": "",
+        "issueDate": "",
+        "issuePlace": "",
+        "jobLevel": "",
+        "jobTitle": "",
+        "name": "",
+        "numberDependentPerson": "",
+        "salaryAgreement": "",
+        "salaryRatio": "",
+        "status": "",
+        "taxCode": ""
+    },
+    "employeeGroup": {
+        "add": "",
+        "code": "",
+        "employee": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": ""
+    },
+    "employeeOfLegalEntity": {
+        "code": "",
+        "employee": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "sob": ""
+    },
+    "employeePosition": {
+        "header": {
+            "title": ""
+        }
+    },
+    "environmentTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "environment_tax": {
+        "description": ""
+    },
+    "exportTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "fiscal_year": {
+        "content": {
+            "from_date": "",
+            "modal": {
+                "title": ""
+            },
+            "name": "",
+            "status": "",
+            "to_date": "",
+            "valuation_method": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "general": {
+        "action": "",
+        "button": {
+            "add": "",
+            "approve": "",
+            "attachFile": "",
+            "cancel": "",
+            "clear": "",
+            "completed": "",
+            "delete": "",
+            "downloadTemplate": "",
+            "download_example": "",
+            "edit": "",
+            "export": "",
+            "getData": "",
+            "history": "",
+            "import": "",
+            "importFile": "",
+            "import_file": "",
+            "issue": "",
+            "ok": "",
+            "post": "",
+            "print": "",
+            "receive": "",
+            "referenceDocument": "",
+            "rejected": "",
+            "reverse": "",
+            "save": "",
+            "send": "",
+            "update": ""
+        },
+        "completed": "",
+        "customer_group": {
+            "name": ""
+        },
+        "department": {
+            "delete": {
+                "message": "",
+                "title": ""
+            }
+        },
+        "detail": "",
+        "division": "",
+        "done": "",
+        "error": {
+            "direction": "",
+            "fileImport": ""
+        },
+        "fromDate": "",
+        "gender": {
+            "female": "",
+            "male": ""
+        },
+        "import": {
+            "error": "",
+            "success": ""
+        },
+        "legalEntity": {
+            "name": ""
+        },
+        "legal_entity": {
+            "name": ""
+        },
+        "open": "",
+        "pending": "",
+        "pendingCounting": "",
+        "pendingReceive": "",
+        "project": {
+            "delete": {
+                "message": "",
+                "title": ""
+            }
+        },
+        "service": {
+            "save": {
+                "success": ""
+            },
+            "update": {
+                "getFailed": "",
+                "success": ""
+            }
+        },
+        "sob": "",
+        "text": {
+            "total": ""
+        },
+        "toDate": "",
+        "update": {
+            "failure": "",
+            "success": ""
+        }
+    },
+    "goodsIssue": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "title": ""
+            },
+            "goodsIssueRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "customerName": "",
+                "documentNo": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiptedDate": "",
+            "tab1": {
+                "Serial": "",
+                "amount": "",
+                "batches": "",
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "unitPrice": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "form": {
+            "post": {
+                "title": ""
+            }
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "receiptedDate": "",
+            "status": ""
+        }
+    },
+    "goodsReceipt": {
+        "createdDate": "",
+        "creator": "",
+        "description": "",
+        "documentNumber": "",
+        "header": {
+            "title": ""
+        },
+        "inventoryAddress": "",
+        "inventoryCode": "",
+        "receiptedDate": "",
+        "status": ""
+    },
+    "goodsReceiptDetail": {
+        "amount": {
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "quantity": "",
+            "quantitySaved": "",
+            "title ": "",
+            "unitOfMeasure": ""
+        },
+        "batches": {
+            "batchCode": "",
+            "expiryDate": "",
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "manufacturingDate": "",
+            "quantityInEachBatch": "",
+            "quantitySaved": "",
+            "startScanBatchesNo": "",
+            "title ": ""
+        },
+        "binLocation": "",
+        "button": {
+            "add": ""
+        },
+        "createdDate": "",
+        "creator": "",
+        "description": "",
+        "documentNumber": "",
+        "form": {
+            "post": {
+                "title": ""
+            },
+            "title": ""
+        },
+        "goodsReceipt": {
+            "buyer": "",
+            "createdDate": "",
+            "creator": "",
+            "documentNo": "",
+            "supplierName": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "inventoryAddress": "",
+        "inventoryCode": "",
+        "personInCharge": "",
+        "qrCode": {
+            "code": "",
+            "expiryDate": "",
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "manufacturingDate": "",
+            "quantity": "",
+            "scanCode": "",
+            "scanQRCode": "",
+            "serial": "",
+            "title ": ""
+        },
+        "receiptedDate": "",
+        "receiver": "",
+        "tab1": {
+            "Serial": "",
+            "amount": "",
+            "batches": "",
+            "discount": "",
+            "discountAmount": "",
+            "itemNo": "",
+            "purchaseOrderNumber": "",
+            "quantity": "",
+            "title": "",
+            "total": "",
+            "unitOfMeasure": "",
+            "valueAddedTax": ""
+        },
+        "tab2": {
+            "title": ""
+        }
+    },
+    "goodsReceiptPO": {
+        "createdDate": "",
+        "creator": "",
+        "description": "",
+        "documentNumber": "",
+        "header": {
+            "title": ""
+        },
+        "inventoryAddress": "",
+        "inventoryCode": "",
+        "receiptedDate": "",
+        "status": ""
+    },
+    "goodsReceiptPODetail": {
+        "amount": {
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "quantity": "",
+            "quantitySaved": "",
+            "title ": "",
+            "unitOfMeasure": ""
+        },
+        "batches": {
+            "batchCode": "",
+            "expiryDate": "",
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "manufacturingDate": "",
+            "qrCode": "",
+            "quantity": "",
+            "quantityInEachBatch": "",
+            "title ": ""
+        },
+        "binLocation": "",
+        "button": {
+            "add": ""
+        },
+        "createdDate": "",
+        "creator": "",
+        "description": "",
+        "documentNumber": "",
+        "form": {
+            "post": {
+                "title": ""
+            },
+            "title": ""
+        },
+        "goodsReceipt": {
+            "buyer": "",
+            "createdDate": "",
+            "creator": "",
+            "documentNo": "",
+            "supplierName": "",
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "inventoryAddress": "",
+        "inventoryCode": "",
+        "personInCharge": "",
+        "qrCode": {
+            "code": "",
+            "expiryDate": "",
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "manufacturingDate": "",
+            "quantity": "",
+            "rows": "",
+            "scanQRCode": "",
+            "serial": "",
+            "title ": ""
+        },
+        "receiptedDate": "",
+        "receiver": "",
+        "supplierAddress": "",
+        "supplierCode": "",
+        "supplierName": "",
+        "tab1": {
+            "Serial": "",
+            "actualReceive": "",
+            "amount": "",
+            "batches": "",
+            "discount": "",
+            "discountAmount": "",
+            "itemName": "",
+            "itemNo": "",
+            "purchaseOrderNumber": "",
+            "quantity": "",
+            "title": "",
+            "total": "",
+            "unitOfMeasure": "",
+            "unitPrice": "",
+            "valueAddedTax": ""
+        },
+        "tab2": {
+            "title": ""
+        }
+    },
+    "goodsReturn": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "customerCode": "",
+            "customerInfo": "",
+            "customerName": "",
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "title": ""
+            },
+            "goodsReturn": {
+                "title": ""
+            },
+            "goodsReturnRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "customerName": "",
+                "documentNo": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiptedDate": "",
+            "tab1": {
+                "Serial": "",
+                "amount": "",
+                "batches": "",
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "purchaseOrderNumber": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "unitPrice": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "form": {
+            "post": {
+                "title": ""
+            }
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "receip     tedDate": "",
+            "status": ""
+        }
+    },
+    "hrOrganization": {
+        "add": "",
+        "code": "",
+        "name": "",
+        "title": ""
+    },
+    "importTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "inventoryCounting": {
+        "detail": {
+            "batches": {
+                "actualCounting": "",
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantitySaved": "",
+                "serial": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "counter": "",
+            "countingDate": "",
+            "description": "",
+            "documentNumber": "",
+            "form": {
+                "post": {
+                    "title": ""
+                },
+                "title": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "tab1": {
+                "batches": "",
+                "cda": "",
+                "countAmount": "",
+                "highestDifference": "",
+                "inventoryCode": "",
+                "itemName": "",
+                "itemNo": "",
+                "no": "",
+                "quantityOfInventory": "",
+                "title": "",
+                "unitOfMeasure": ""
+            },
+            "tab2": {
+                "title": ""
+            },
+            "totalCount": "",
+            "totalItem": ""
+        },
+        "list": {
+            "countDate": "",
+            "counter": "",
+            "header": {
+                "title": ""
+            },
+            "inventoryCode": "",
+            "inventoryCountingOwner": "",
+            "issueID": "",
+            "status": ""
+        }
+    },
+    "inventoryTransfer": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "amountScan": "",
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "post": {
+                    "title": ""
+                },
+                "title": ""
+            },
+            "inventoryCodeFrom": "",
+            "inventoryCodeTo": "",
+            "inventoryRequest": "",
+            "inventoryTransferRequest": {
+                "createdDate": "",
+                "creator": "",
+                "documentNo": ""
+            },
+            "issuedDate": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiver": "",
+            "request": {
+                "customerName": ""
+            },
+            "tab1": {
+                "Serial": "",
+                "actualQuantity": "",
+                "amount": "",
+                "batches": "",
+                "dueDate": "",
+                "issueIdRequest": "",
+                "itemName": "",
+                "itemNo": "",
+                "quantity": "",
+                "title": "",
+                "unitOfMeasure": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "header": {
+            "title": ""
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "status": "",
+            "transferDate": ""
+        }
+    },
+    "item": {
+        "content": {
+            "tab": {
+                "enviroment_tax": "",
+                "enviroment_tax_id": "",
+                "export_tax": "",
+                "export_tax_id": "",
+                "import_tax": "",
+                "import_tax_id": "",
+                "resource_tax": "",
+                "resource_tax_id": "",
+                "special_consumption_tax": "",
+                "special_consumption_tax_id": "",
+                "value_add_tax": "",
+                "value_add_tax_id": ""
+            }
+        },
+        "detail": {
+            "content": {
+                "characteristic": "",
+                "code": "",
+                "codeFromMarket": "",
+                "codeFromSupplier": "",
+                "description": "",
+                "height": "",
+                "length": "",
+                "name": "",
+                "primaryPrice": "",
+                "status": "",
+                "uom": "",
+                "weight": "",
+                "width": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": "",
+                "title_2": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "description": "",
+                "name": "",
+                "primaryPrice": "",
+                "status": "",
+                "unitOfMeasure": ""
+            },
+            "header": {
+                "title": ""
+            }
+        }
+    },
+    "itemGroup": {
+        "content": {
+            "item": {
+                "code": "",
+                "name": ""
+            },
+            "itemDetail": {
+                "code": "",
+                "name": ""
+            }
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "itemOfLegalEntity": {
+        "content": {
+            "itemDetail": {
+                "code": "",
+                "name": ""
+            },
+            "legal": {
+                "code": "",
+                "name": "",
+                "setOfBookCode": ""
+            }
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "jobLevel": {
+        "content": {
+            "description": "",
+            "level": ""
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "jobTitle": {
+        "header": {
+            "title": ""
+        }
+    },
+    "jobTtitle": {
+        "content": {
+            "code": "",
+            "description": "",
+            "name": ""
+        },
+        "dialog": {
+            "title": ""
+        }
+    },
+    "legalEntity": {
+        "add": "",
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "subLevel1": "",
+        "subLevel2": "",
+        "subLevel3": "",
+        "subLevel4": ""
+    },
+    "legalItemDetail": {
+        "content": {
+            "characteristic": "",
+            "code": "",
+            "codeFromMarket": "",
+            "codeFromSupplier": "",
+            "description": "",
+            "height": "",
+            "itemGroup": "",
+            "length": "",
+            "name": "",
+            "primaryPrice": "",
+            "status": "",
+            "unitOfMeasure": "",
+            "weight": "",
+            "width": ""
+        },
+        "defaultValue": {
+            "discountAccount": "",
+            "expenseAccount": "",
+            "inventoryAccount": "",
+            "returnAccount": "",
+            "revenueAccount": "",
+            "salesAllowancesAccount": "",
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "itemDiscounts": {
+            "discounType": "",
+            "quantityFrom": "",
+            "quantityTo": "",
+            "rate": "",
+            "title": ""
+        },
+        "itemMaterials": {
+            "modal_title": "",
+            "quantity": "",
+            "sourceItemCode": "",
+            "sourceItemName": "",
+            "title": "",
+            "unitOfMeasureCode": ""
+        },
+        "tab": {
+            "title_1": ""
+        }
+    },
+    "login": {
+        "failed": ""
+    },
+    "loginForm": {
+        "doesNotHaveAccount": "",
+        "forgotPassword": "",
+        "login": "",
+        "password": "",
+        "rememberPassword": "",
+        "signUp": "",
+        "username": ""
+    },
+    "naturalResourceTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "noData": {
+        "helper": ""
+    },
+    "pagination": {
+        "entries": "",
+        "show": ""
+    },
+    "payment_method": {
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "payment_method_name": ""
+    },
+    "payment_term": {
+        "code": "",
+        "discount_period": "",
+        "discount_rate": "",
+        "due_in_date": "",
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": ""
+    },
+    "project": {
+        "employee": {
+            "code": "",
+            "name": ""
+        }
+    },
+    "projectOrganization": {
+        "code": "",
+        "endDate": "",
+        "manager": "",
+        "name": "",
+        "startDate": "",
+        "title": ""
+    },
+    "province": {
+        "code": "",
+        "create": {
+            "error": ""
+        },
+        "delete": {
+            "message": "",
+            "success": "",
+            "title": ""
+        },
+        "get": {
+            "error": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": "",
+        "title": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "return": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "customerCode": "",
+            "customerInfo": "",
+            "customerName": "",
+            "description": "",
+            "documentNumber": "",
+            "form": {
+                "title": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiptedDate": "",
+            "receiver": "",
+            "return": {
+                "title": ""
+            },
+            "returnRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "customerName": "",
+                "documentNo": ""
+            },
+            "tab1": {
+                "Serial": "",
+                "amount": "",
+                "batches": "",
+                "discount": "",
+                "discountAmount": "",
+                "itemNo": "",
+                "purchaseOrderNumber": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "header": {
+                "title": ""
+            },
+            "inventory": "",
+            "receiptRequirementID": "",
+            "receiptedDate": "",
+            "status": ""
+        }
+    },
+    "select": {
+        "availableList": "",
+        "selectedItems": "",
+        "selectedList": ""
+    },
+    "sob": {
+        "add": "",
+        "chart_account": "",
+        "code": "",
+        "currency": "",
+        "enviroment_tax": "",
+        "export_tax": "",
+        "import_tax": "",
+        "name": "",
+        "resource_tax": "",
+        "special_consumption_tax": "",
+        "title": "",
+        "value_added_tax": ""
+    },
+    "specialConsumptionTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    },
+    "special_price_customer": {
+        "code": "",
+        "description": "",
+        "discount": "",
+        "from_date": "",
+        "item_group": "",
+        "modal": {
+            "title": ""
+        },
+        "title": "",
+        "to_date": ""
+    },
+    "special_price_supplier": {
+        "code": "",
+        "description": "",
+        "discount": "",
+        "from_date": "",
+        "item_group": "",
+        "modal": {
+            "title": ""
+        },
+        "title": "",
+        "to_date": ""
+    },
+    "supplier": {
+        "detail": {
+            "content": {
+                "code": "",
+                "name": "",
+                "note": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "tab": {
+                "title1": ""
+            }
+        },
+        "list": {
+            "content": {
+                "code": "",
+                "name": "",
+                "status": "",
+                "taxCode": ""
+            },
+            "header": {
+                "title": ""
+            }
+        }
+    },
+    "supplierGroup": {
+        "add": "",
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "supplier": {
+            "code": "",
+            "name": ""
+        }
+    },
+    "supplierOfLegalEntity": {
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "sob": "",
+        "supplier": {
+            "code": "",
+            "name": ""
+        }
+    },
+    "tax-template": {
+        "code": "",
+        "name": "",
+        "title": "",
+        "type": ""
+    },
+    "tax": {
+        "available": "",
+        "code": "",
+        "description": "",
+        "discount": "",
+        "name": "",
+        "parent_account": "",
+        "unit": ""
+    },
+    "taxTemplate": {
+        "code": "",
+        "delete": {
+            "error": "",
+            "success": ""
+        },
+        "detail": {
+            "actions": "",
+            "available": "",
+            "code": "",
+            "name": "",
+            "rate": "",
+            "unitOfMeasure": ""
+        },
+        "general": {
+            "title": ""
+        },
+        "get": {
+            "error": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": "",
+        "title": "",
+        "type": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "uom": {
+        "content": {
+            "code": "",
+            "description": "",
+            "modal": {
+                "title": "",
+                "uom_description": ""
+            },
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "valueAddedTax": {
+        "header": {
+            "title": ""
+        },
+        "modal": {
+            "title": ""
+        }
+    }
 }

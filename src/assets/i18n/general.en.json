@@ -1,0 +1,94 @@
+{
+    "general": {
+        "action": "",
+        "button": {
+            "add": "",
+            "approve": "",
+            "attachFile": "",
+            "cancel": "",
+            "clear": "",
+            "completed": "",
+            "delete": "",
+            "downloadTemplate": "",
+            "download_example": "",
+            "edit": "",
+            "export": "",
+            "getData": "",
+            "history": "",
+            "import": "",
+            "importFile": "",
+            "import_file": "",
+            "issue": "",
+            "ok": "",
+            "post": "",
+            "print": "",
+            "receive": "",
+            "referenceDocument": "",
+            "rejected": "",
+            "reverse": "",
+            "save": "",
+            "send": "",
+            "update": ""
+        },
+        "completed": "",
+        "customer_group": {
+            "name": ""
+        },
+        "department": {
+            "delete": {
+                "message": "",
+                "title": ""
+            }
+        },
+        "detail": "",
+        "division": "",
+        "done": "",
+        "error": {
+            "direction": "",
+            "fileImport": ""
+        },
+        "fromDate": "",
+        "gender": {
+            "female": "",
+            "male": ""
+        },
+        "import": {
+            "error": "",
+            "success": ""
+        },
+        "legalEntity": {
+            "name": ""
+        },
+        "legal_entity": {
+            "name": ""
+        },
+        "open": "",
+        "pending": "",
+        "pendingCounting": "",
+        "pendingReceive": "",
+        "project": {
+            "delete": {
+                "message": "",
+                "title": ""
+            }
+        },
+        "service": {
+            "save": {
+                "success": ""
+            },
+            "update": {
+                "getFailed": "",
+                "success": ""
+            }
+        },
+        "sob": "",
+        "text": {
+            "total": ""
+        },
+        "toDate": "",
+        "update": {
+            "failure": "",
+            "success": ""
+        }
+    }
+}

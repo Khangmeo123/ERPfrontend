@@ -1,0 +1,141 @@
+{
+    "department": {
+        "addToDepartment": {
+            "error": "",
+            "success": ""
+        },
+        "asset": {
+            "actions": "",
+            "add": "",
+            "code": "",
+            "fromDate": "",
+            "manager": "",
+            "name": "",
+            "toDate": "",
+            "type": ""
+        },
+        "employee": {
+            "code": "",
+            "name": ""
+        },
+        "project": {
+            "add": "",
+            "code": "",
+            "description": "",
+            "endDate": "",
+            "manager": "",
+            "name": "",
+            "startDate": ""
+        },
+        "warehouse": {
+            "add": "",
+            "address": "",
+            "code": "",
+            "name": "",
+            "title": ""
+        },
+        "warehouse_group": {
+            "code": "",
+            "details": {
+                "title": ""
+            },
+            "modal": {
+                "title": ""
+            },
+            "name": ""
+        }
+    },
+    "departments": {
+        "title": ""
+    },
+    "detailEmployeeGroup": {
+        "bankAccount": {
+            "bankAccountName": "",
+            "bankAccountNumber": "",
+            "bankBranch": "",
+            "bankName": "",
+            "divisionAddress": "",
+            "province": "",
+            "title": ""
+        },
+        "contacts": {
+            "action": "",
+            "add": "",
+            "address": "",
+            "code": "",
+            "email": "",
+            "phone": "",
+            "phone_number": "",
+            "province": "",
+            "recipient": "",
+            "title": ""
+        },
+        "gender": {
+            "men": "",
+            "women": ""
+        },
+        "general": {
+            "code": "",
+            "dob": "",
+            "employeePositions": "",
+            "gender": "",
+            "identityNumber": "",
+            "insuranceSalary": "",
+            "issueDate": "",
+            "issuePlace": "",
+            "jobLevel": "",
+            "jobTitle": "",
+            "name": "",
+            "numberDependentPerson": "",
+            "salary": "",
+            "salaryRatio": "",
+            "status": "",
+            "taxCode": "",
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "own_asset": {
+            "code": "",
+            "from_date": "",
+            "name": "",
+            "title": "",
+            "to_date": "",
+            "type": ""
+        }
+    },
+    "employeeDetail": {
+        "delete": {
+            "confirm": {
+                "message": "",
+                "title": ""
+            }
+        }
+    },
+    "employeeDetailOfLegal": {
+        "contact": {
+            "address": ""
+        }
+    },
+    "hrOrganization": {
+        "add": "",
+        "code": "",
+        "name": "",
+        "title": ""
+    },
+    "project": {
+        "employee": {
+            "code": "",
+            "name": ""
+        }
+    },
+    "projectOrganization": {
+        "code": "",
+        "endDate": "",
+        "manager": "",
+        "name": "",
+        "startDate": "",
+        "title": ""
+    }
+}

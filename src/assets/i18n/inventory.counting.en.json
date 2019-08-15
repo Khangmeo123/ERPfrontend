@@ -1,0 +1,82 @@
+{
+    "goodsReceiptDetail": {
+        "header": {
+            "title": ""
+        }
+    },
+    "inventoryCounting": {
+        "detail": {
+            "batches": {
+                "actualCounting": "",
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantitySaved": "",
+                "serial": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "counter": "",
+            "countingDate": "",
+            "description": "",
+            "documentNumber": "",
+            "form": {
+                "post": {
+                    "title": ""
+                },
+                "title": ""
+            },
+            "header": {
+                "title": ""
+            },
+            "inventoryCode": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "tab1": {
+                "batches": "",
+                "cda": "",
+                "countAmount": "",
+                "highestDifference": "",
+                "inventoryCode": "",
+                "itemName": "",
+                "itemNo": "",
+                "no": "",
+                "quantityOfInventory": "",
+                "title": "",
+                "unitOfMeasure": ""
+            },
+            "tab2": {
+                "title": ""
+            },
+            "totalCount": "",
+            "totalItem": ""
+        },
+        "list": {
+            "countDate": "",
+            "counter": "",
+            "header": {
+                "title": ""
+            },
+            "inventoryCode": "",
+            "inventoryCountingOwner": "",
+            "issueID": "",
+            "status": ""
+        }
+    }
+}

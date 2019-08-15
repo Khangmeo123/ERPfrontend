@@ -1,0 +1,457 @@
+{
+    "binLocation": {
+        "action": "",
+        "code": "",
+        "delete": {
+            "confirm": {
+                "message": "",
+                "title": ""
+            }
+        },
+        "getFieldEntity": {
+            "error": ""
+        },
+        "layer1": {
+            "code": ""
+        },
+        "layer2": {
+            "code": ""
+        },
+        "layer3": {
+            "code": ""
+        },
+        "layer4": {
+            "code": ""
+        },
+        "modal": {
+            "title": ""
+        },
+        "name": "",
+        "title": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "codeFormula": {
+        "code": "",
+        "field": {
+            "error": ""
+        },
+        "general": {
+            "title": ""
+        },
+        "get": {
+            "error": ""
+        },
+        "identifierStringEnd": "",
+        "identifierStringStart": "",
+        "identifierStringValues": "",
+        "item": {
+            "code": "",
+            "name": "",
+            "title": ""
+        },
+        "legalEntity": {
+            "missingLegalEntityId": ""
+        },
+        "legalEntityList": {
+            "error": ""
+        },
+        "length": "",
+        "name": "",
+        "rule": {
+            "end": "",
+            "itemFieldDisplay": "",
+            "start": "",
+            "title": ""
+        },
+        "ruleModal": {
+            "title": ""
+        },
+        "splitRuleContent": {
+            "field": "",
+            "start": ""
+        },
+        "test": {
+            "expirationDate": "",
+            "itemCode": "",
+            "mfrDate": "",
+            "qrCode": "",
+            "serial": "",
+            "title": ""
+        },
+        "title": "",
+        "update": {
+            "error": "",
+            "success": ""
+        }
+    },
+    "customerGroup": {
+        "add": "",
+        "code": "",
+        "customer": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": ""
+    },
+    "customerOfLegalEntity": {
+        "code": "",
+        "customer": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "sob": ""
+    },
+    "detailCustomerOfLegal": {
+        "bankAccount": {
+            "accountNumber": "",
+            "accountOwner": "",
+            "add": "",
+            "bankAddress": "",
+            "bankDivision": "",
+            "bankName": "",
+            "code": "",
+            "province": "",
+            "title": ""
+        },
+        "bankAccounts": {
+            "add": ""
+        },
+        "code": "",
+        "contacts": {
+            "add": "",
+            "address": "",
+            "city": "",
+            "code": "",
+            "email": "",
+            "phoneNumber": "",
+            "province": "",
+            "recipient": "",
+            "title": ""
+        },
+        "customerGroup": "",
+        "debtLoad": "",
+        "detail": {
+            "title": ""
+        },
+        "dueInDays": "",
+        "general": {
+            "title": ""
+        },
+        "name": "",
+        "note": "",
+        "paymentTerms": "",
+        "pic": "",
+        "status": "",
+        "taxCode": ""
+    },
+    "detailSupplierGroup": {
+        "bankAccount": {
+            "accountNumber": "",
+            "accountOwner": "",
+            "add": "",
+            "bankAddress": "",
+            "bankDivision": "",
+            "bankName": "",
+            "code": "",
+            "province": "",
+            "title": ""
+        },
+        "bankAccounts": {
+            "add": ""
+        },
+        "code": "",
+        "contacts": {
+            "add": "",
+            "address": "",
+            "city": "",
+            "code": "",
+            "email": "",
+            "phoneNumber": "",
+            "province": "",
+            "recipient": "",
+            "title": ""
+        },
+        "debtLoad": "",
+        "detail": {
+            "title": ""
+        },
+        "dueInDays": "",
+        "general": {
+            "title": ""
+        },
+        "name": "",
+        "note": "",
+        "paymentTerms": "",
+        "pic": "",
+        "status": "",
+        "supplierGroup": "",
+        "taxCode": ""
+    },
+    "detail_item_of_legal_entity": {
+        "discounts": {
+            "modal_title": ""
+        },
+        "transformation_unit": {
+            "amount": "",
+            "description": "",
+            "modal_title": "",
+            "price_of_primary_unit": "",
+            "primary_unit": "",
+            "sale_price": "",
+            "title": "",
+            "transformation_rate_to_main_unit": "",
+            "unit": ""
+        }
+    },
+    "employeeDetailOfLegal": {
+        "bankAccount": {
+            "accountName": "",
+            "accountNumber": "",
+            "city": "",
+            "division": "",
+            "divisionAddress": "",
+            "name": "",
+            "title": ""
+        },
+        "bassicSalary": "",
+        "birthday": "",
+        "code": "",
+        "contact": {
+            "add": "",
+            "address": "",
+            "city": "",
+            "email": "",
+            "index": "",
+            "name": "",
+            "phone": "",
+            "title": ""
+        },
+        "employeeGroup": "",
+        "gender": {
+            "men": "",
+            "title": "",
+            "women": ""
+        },
+        "general": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "identityNumber": "",
+        "issueDate": "",
+        "issuePlace": "",
+        "jobLevel": "",
+        "jobTitle": "",
+        "name": "",
+        "numberDependentPerson": "",
+        "salaryAgreement": "",
+        "salaryRatio": "",
+        "status": "",
+        "taxCode": ""
+    },
+    "employeeGroup": {
+        "add": "",
+        "code": "",
+        "employee": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": ""
+    },
+    "employeeOfLegalEntity": {
+        "code": "",
+        "employee": {
+            "code": "",
+            "name": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "sob": ""
+    },
+    "employeePosition": {
+        "header": {
+            "title": ""
+        }
+    },
+    "item": {
+        "content": {
+            "tab": {
+                "enviroment_tax": "",
+                "enviroment_tax_id": "",
+                "export_tax": "",
+                "export_tax_id": "",
+                "import_tax": "",
+                "import_tax_id": "",
+                "resource_tax": "",
+                "resource_tax_id": "",
+                "special_consumption_tax": "",
+                "special_consumption_tax_id": "",
+                "value_add_tax": "",
+                "value_add_tax_id": ""
+            }
+        },
+        "detail": {
+            "tab": {
+                "title_2": ""
+            }
+        }
+    },
+    "itemGroup": {
+        "content": {
+            "item": {
+                "code": "",
+                "name": ""
+            },
+            "itemDetail": {
+                "code": "",
+                "name": ""
+            }
+        },
+        "dialog": {
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "itemOfLegalEntity": {
+        "content": {
+            "itemDetail": {
+                "code": "",
+                "name": ""
+            },
+            "legal": {
+                "code": "",
+                "name": "",
+                "setOfBookCode": ""
+            }
+        },
+        "header": {
+            "title": ""
+        }
+    },
+    "legalEntity": {
+        "add": "",
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "subLevel1": "",
+        "subLevel2": "",
+        "subLevel3": "",
+        "subLevel4": ""
+    },
+    "legalItemDetail": {
+        "content": {
+            "characteristic": "",
+            "code": "",
+            "codeFromMarket": "",
+            "codeFromSupplier": "",
+            "description": "",
+            "height": "",
+            "itemGroup": "",
+            "length": "",
+            "name": "",
+            "primaryPrice": "",
+            "status": "",
+            "unitOfMeasure": "",
+            "weight": "",
+            "width": ""
+        },
+        "defaultValue": {
+            "discountAccount": "",
+            "expenseAccount": "",
+            "inventoryAccount": "",
+            "returnAccount": "",
+            "revenueAccount": "",
+            "salesAllowancesAccount": "",
+            "title": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "itemDiscounts": {
+            "discounType": "",
+            "quantityFrom": "",
+            "quantityTo": "",
+            "rate": "",
+            "title": ""
+        },
+        "itemMaterials": {
+            "modal_title": "",
+            "quantity": "",
+            "sourceItemCode": "",
+            "sourceItemName": "",
+            "title": "",
+            "unitOfMeasureCode": ""
+        },
+        "tab": {
+            "title_1": ""
+        }
+    },
+    "special_price_customer": {
+        "code": "",
+        "description": "",
+        "discount": "",
+        "from_date": "",
+        "item_group": "",
+        "modal": {
+            "title": ""
+        },
+        "title": "",
+        "to_date": ""
+    },
+    "special_price_supplier": {
+        "code": "",
+        "description": "",
+        "discount": "",
+        "from_date": "",
+        "item_group": "",
+        "modal": {
+            "title": ""
+        },
+        "title": "",
+        "to_date": ""
+    },
+    "supplierGroup": {
+        "add": "",
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "supplier": {
+            "code": "",
+            "name": ""
+        }
+    },
+    "supplierOfLegalEntity": {
+        "code": "",
+        "header": {
+            "title": ""
+        },
+        "name": "",
+        "sob": "",
+        "supplier": {
+            "code": "",
+            "name": ""
+        }
+    }
+}
