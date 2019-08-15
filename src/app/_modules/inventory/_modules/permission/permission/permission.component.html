@@ -1,0 +1,167 @@
+<div class="page permission">
+  <div class="page-header">
+    <span class="page-title">
+      {{pageTitle | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngClass]="!isBookMark ? 'save-book-mark': 'not-save-book-mark'">
+          star
+        </mat-icon>
+      </span>
+    </span>
+  </div>
+  <div class="page-body">
+    <div class="page-section">
+      <div class="row d-flex pb-3">
+        <div class="col-sm-4 form-group">
+          <label>
+            {{'permission.legalEntity' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <app-single-select data-qe-id="form-select-legalEntity"
+                             [list]="legalEntities.exceptIds"
+                             [selectedList]="legalEntities.ids"
+                             [initialValue]="legalEntity?.name"
+                             (selectionChange)="onSelectLegalEntity($event)"
+                             (listOpen)="getLegalEntityList()"
+                             key="name"
+                             [valueSelector]="nodeSelector"
+                             (search)="onSearchLegalEntity($event)"
+          ></app-single-select>
+        </div>
+        <div class="col-sm-4 form-group">
+          <label>
+            {{'permission.inventoryCode' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <app-single-select data-qe-id="form-select-inventoryCode"
+                             [list]="inventoryOrganizationEntities.exceptIds"
+                             [selectedList]="inventoryOrganizationEntities.ids"
+                             [initialValue]="inventoryOrganization?.name"
+                             (selectionChange)="onSelectInventoryOrganization($event)"
+                             (listOpen)="getInventoryOrganizationList()"
+                             key="name"
+                             [valueSelector]="nodeSelector"
+                             [disabled]="!legalEntity"
+                             (search)="onSearchInventoryOrganization($event)"
+          ></app-single-select>
+        </div>
+        <div class="col-sm-4 form-group">
+          <label>
+            {{'permission.documentType' | translate}}
+            <span class="text-danger mr-2">*</span>
+          </label>
+          <app-single-select data-qe-id="form-select-documentType"
+                             [list]="documentEntities.exceptIds"
+                             [selectedList]="documentEntities.ids"
+                             [initialValue]="document?.name"
+                             (selectionChange)="onSelectDocumentType($event)"
+                             (listOpen)="getDocumentList()"
+                             key="name"
+                             [valueSelector]="nodeSelector"
+                             (search)="onSearchDocument($event)"
+          ></app-single-select>
+        </div>
+      </div>
+    </div>
+    <div class="page-section">
+      <div class="actions">
+        <button class="btn btn-add"
+                [disabled]="!(legalEntity && document && inventoryOrganization)"
+                (click)="add()"> {{'general.button.add' | translate}} </button>
+        <button class="btn btn-primary" (click)="onClearSearch(table)">
+          {{'general.button.clear' | translate}}
+        </button>
+      </div>
+      <p-table [value]=""
+               [customSort]="true"
+               [lazy]="true"
+               (onLazyLoad)="sort($event)"
+               [scrollable]="true"
+               scrollHeight="500px"
+               [resizableColumns]="true"
+               #table>
+        <ng-template pTemplate="colgroup">
+          <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
+          </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header">
+          <tr>
+            <th pResizableColumn data-qe-id="table-thead-positionCode">
+              {{ 'permission.positionCode' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-positionName">
+              {{ 'permission.positionName' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-step">
+              {{ 'permission.currentStep' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+
+            <th pResizableColumn data-qe-id="table-thead-currentStatus">
+              {{ 'permission.currentStatus' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-inventory-address">
+              {{ 'permission.nextStep ' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-nextStatus">
+              {{ 'permission.nextStatus' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th pResizableColumn data-qe-id="table-thead-status">
+              {{ 'permission.active' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+          </tr>
+          <tr>
+            <th class="th-filter">
+              <app-single-select key="code"
+              ></app-single-select>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters
+              ></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters
+              ></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-simple-select></app-simple-select>
+            </th>
+            <th class="th-filter">
+              <app-advanced-filters
+              ></app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <app-simple-select></app-simple-select>
+            </th>
+            <th class="th-filter">
+              <app-simple-select></app-simple-select>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowData let-index="index">
+          <tr>
+            <td>
+              {{rowData.positionCode}}
+            </td>
+            <td>
+              {{rowData.positionName}}
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>
