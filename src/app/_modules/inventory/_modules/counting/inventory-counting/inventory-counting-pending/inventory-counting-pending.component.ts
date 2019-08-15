@@ -1,11 +1,16 @@
-import { UnitOfMeasureOfCountingSearchEntity } from './../../../../_backend/inventory-counting/inventory-counting.searchentity';
-import { UnitOfMeasureOfCountingEntity, BinLocationOfInventoryCountingEntity } from './../../../../_backend/inventory-counting/inventory-counting.entity';
+import {
+  UnitOfMeasureOfCountingSearchEntity,
+  InventoryCounterDetailSearchEntity,
+} from './../../../../_backend/inventory-counting/inventory-counting.searchentity';
+import {
+  UnitOfMeasureOfCountingEntity,
+  BinLocationOfInventoryCountingEntity,
+} from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Subscription, Subject } from 'rxjs';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, ActivatedRoute } from '@angular/router';
-import { InventoryCountingDetailService } from './inventory-counting-detail.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import {
   InventoryOrganizationOfCountingEntity,
@@ -17,15 +22,16 @@ import {
   EmployeeDetailOfCountingSearchEntity,
   ItemDetailOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
+import { InventoryCountingPendingService } from './inventory-counting-pending.service';
 
 @Component({
-  selector: 'app-goods-receipt-po-detail',
-  templateUrl: './inventory-counting-detail.component.html',
-  styleUrls: ['./inventory-counting-detail.component.scss'],
+  selector: 'app-inventory-counting-pending',
+  templateUrl: './inventory-counting-pending.component.html',
+  styleUrls: ['./inventory-counting-pending.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [InventoryCountingDetailService],
+  providers: [InventoryCountingPendingService],
 })
-export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
+export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptDetail.header.title');
   fileNameList: Array<any> = [];
   inventoryCountingSubs: Subscription = new Subscription();
@@ -33,25 +39,12 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   displaySerial: boolean = false;
   displayBinLocation: boolean = false;
   displayDetailDifference: boolean = false;
-  displayItemDetail: boolean = false;
   employeeListIds: string[] = [];
   inventoryCountingId: string;
   inventoryCountingForm: FormGroup;
   inventoryOrganizationId: string;
   binLocationList: BinLocationOfInventoryCountingEntity[];
-  itemDetailList: ItemDetailOfCountingEntity[];
-  // colFrozen: string[] = [
-  //   'inventoryCounting.detail.tab1.no',
-
-  // ];
-  // cols: string[] = [
-  //   'inventoryCounting.detail.tab1.itemNo',
-  //   'inventoryCounting.detail.tab1.itemName',
-  //   'inventoryCounting.detail.tab1.unitOfMeasure',
-  //   'inventoryCounting.detail.tab1.inventoryCode',
-  //   'inventoryCounting.detail.tab1.quantityOfInventory',
-  //   'inventoryCounting.detail.tab1.highestDifference',
-  // ]
+  inventoryCounterDetailSearchEntity: InventoryCounterDetailSearchEntity = new InventoryCounterDetailSearchEntity();
   // inventoryOrganization:
   inventoryOrganizationIds: InventoryOrganizationOfCountingEntity[];
   inventoryOrganizationExceptIds: InventoryOrganizationOfCountingEntity[];
@@ -85,7 +78,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private inventoryCountingService: InventoryCountingDetailService,
+    private inventoryCountingService: InventoryCountingPendingService,
     private generalService: GeneralService,
     private route: ActivatedRoute) {
 
@@ -100,28 +93,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     const inventoryCountingFormSub = this.inventoryCountingService.inventoryCountingForm.subscribe(res => {
       if (res) {
         this.inventoryCountingForm = res;
-        const inventoryCounters = this.inventoryCountingForm.get('inventoryCounters').value;
-        const inventoryCountingContents = this.inventoryCountingForm.get('inventoryCountingContents').value;
-        if (inventoryCounters.length > 0) {
-          this.inventoryOrganizationSearchEntity.ids = [...inventoryCounters];
-        }
-        if (inventoryCountingContents.length === 0) {
-          this.inventoryCountingService.addInventoryCountingContent(this.inventoryCountingForm);
-        }
-      }
-    });
-    // employeeDetail:
-    const employeeDetailListSub = this.inventoryCountingService.employeeDetailList.subscribe(res => {
-      if (res) {
-        this.employeeDetailIds = res.ids;
-        this.employeeDetailExceptIds = res.exceptIds;
-      }
-    });
-    this.inventoryCountingService.typingSearchEmployeeDetail(this.employeeDetailTyping);
-    // itemDetailExtendList:
-    const itemDetailExtendListSub = this.inventoryCountingService.itemDetailExtendList.subscribe(res => {
-      if (res) {
-        this.itemDetailList = res;
+        this.inventoryOrganizationId = this.inventoryCountingForm.get('inventoryOrganizationId').value;
       }
     });
     // itemDetail:
@@ -163,13 +135,11 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
       }
     });
     this.inventoryCountingSubs.add(inventoryCountingFormSub)
-      .add(employeeDetailListSub)
       .add(itemDetailListSub)
       .add(unitOfMeasureListSub)
       .add(inventoryOrganizationListSub)
       .add(itemDetailCodeListSub)
-      .add(binLocationListSub)
-      .add(itemDetailExtendListSub);
+      .add(binLocationListSub);
   }
 
   ngOnInit() {
@@ -181,6 +151,11 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   // general:
+  sortDate(event: string, table: any, field: string) {
+    const date = event.replace(/\//g, '-') + 'T00:00:00';
+    table.filter(date, field, 'equals');
+  }
+
   readURL(event: any) {
     for (const item of event.srcElement.files) {
       this.fileNameList.push(item.name);
@@ -212,7 +187,6 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    debugger;
     if (!this.inventoryCountingForm.valid) {
       this.generalService.validateAllFormFields(this.inventoryCountingForm);
     } else {
@@ -223,38 +197,9 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   // inventoryCoutingContents:
-  addInventoryCountingContent() {
-    this.inventoryCountingService.addInventoryCountingContent(this.inventoryCountingForm);
-  }
-
-  selectItemDetail(index: number, itemDetail: any) {
-    this.inventoryCountingService.selectItemDetail(this.inventoryCountingForm, index, itemDetail);
-  }
-
-  checkAllContents(target: any) {
-    this.inventoryCountingService.checkAllContents(this.inventoryCountingForm, target.checked);
-  }
-
-  deleteMultiple() {
-    this.inventoryCountingService.deleteMultiple(this.inventoryCountingForm);
-  }
-
   openBinLocation(inventoryCountingContent: string) {
     this.displayBinLocation = true;
     this.inventoryCountingService.getListBinLocation(this.inventoryOrganizationId, inventoryCountingContent);
-  }
-
-  openItemDetail() {
-    const data = this.inventoryCountingForm.get('inventoryCountingContents').value;
-    this.inventoryCountingService.getItemDetailList(data);
-  }
-
-  checkAllItemDetail(target: any) {
-    this.inventoryCountingService.checkAllItemDetail(target.checked, this.itemDetailList);
-  }
-
-  saveItemDetail() {
-    this.inventoryCountingService.saveItemDetail(this.inventoryCountingForm, this.itemDetailList);
   }
 
   // inventoryOrganization:
@@ -278,29 +223,6 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   selectInventoryOrganization(inventoryOrganizationId: string) {
     this.inventoryCountingForm.get('inventoryOrganizationId').setValue(inventoryOrganizationId);
     this.inventoryOrganizationId = inventoryOrganizationId;
-  }
-
-  // employeeDetail
-  dropListEmployeeDetail() {
-    this.employeeDetailSearchEntity = new EmployeeDetailOfCountingSearchEntity();
-    if (this.employeeListIds !== null && this.employeeListIds.length > 0) {
-      this.employeeDetailSearchEntity.ids = [...this.employeeListIds];
-    }
-    this.inventoryCountingService.dropListEmployeeDetail(this.employeeDetailSearchEntity);
-  }
-
-  typingSearchEmployeeDetail(event: string) {
-    this.employeeDetailSearchEntity = new EmployeeDetailOfCountingSearchEntity();
-    if (this.employeeListIds !== null && this.employeeListIds.length > 0) {
-      this.employeeDetailSearchEntity.ids = [...this.employeeListIds];
-    }
-    this.employeeDetailSearchEntity.name.startsWith = event;
-    this.employeeDetailTyping.next(this.employeeDetailSearchEntity);
-  }
-
-  selectEmployee(event) {
-    this.employeeListIds = [...event];
-    this.inventoryCountingService.selectEmployee(this.inventoryCountingForm, this.employeeListIds);
   }
 
   // unitOfMeasure:

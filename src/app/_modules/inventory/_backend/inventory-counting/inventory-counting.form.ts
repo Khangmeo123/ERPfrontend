@@ -16,6 +16,7 @@ export class InventoryCountingForm extends FormModel {
     postingDate = new FormControl(null);
     remarks = new FormControl(null);
     inventoryCounters = new FormArray([]);
+    inventoryCountersName = new FormControl(null);
     inventoryCountingContents = new FormArray([], [requiredField]);
 
     errors = new FormGroup({
@@ -44,5 +45,22 @@ export class InventoryCountingContentForm extends FormModel {
     constructor(inventoryCountingContentEntity?: any) {
         super();
         this.mapData(inventoryCountingContentEntity);
+    }
+}
+
+export class InventoryCounterContentForm extends FormModel {
+    itemDetailId = new FormControl(null);
+    itemDetailCode = new FormControl(null);
+    itemDetailName = new FormControl(null);
+    itemDetailUnitOfMeasureCode = new FormControl(null);
+    itemDetailUnitOfMeasureName = new FormControl(null);
+    itemDetailUnitOfMeasureId = new FormControl(null);
+    binLocationId = new FormControl(null);
+    binLocationCode = new FormControl(null);
+    quantityOnDocumentDate = new FormControl(null);
+
+    constructor(inventoryCounterContentForm?: any) {
+        super();
+        this.mapData(inventoryCounterContentForm);
     }
 }

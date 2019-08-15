@@ -15,10 +15,25 @@ export class InventoryCountingEntity extends Entity {
     postingDate: string;
     remarks: string;
     inventoryCounters: InventoryCountersEntity[];
+    inventoryCountersName: string;
     inventoryCountingContents: InventoryCountingContents[];
+    inventoryCounterContents: InventoryCounterContents[];
     constructor(inventoryCountingEntity?: any) {
         super(inventoryCountingEntity);
     }
+}
+
+export class InventoryCounterContents extends Entity {
+    itemDetailId: string;
+    itemDetailCode: string;
+    itemDetailName: string;
+    itemDetailUnitOfMeasureId: string;
+    itemDetailUnitOfMeasureCode: string;
+    itemDetailUnitOfMeasureName: string;
+    managementType: string;
+    binLocationId: string;
+    binLocationCode: string;
+    quantityOnDocumentDate: 0;
 }
 
 export class BinLocationOfInventoryCountingEntity extends Entity {
@@ -58,7 +73,6 @@ export class EmployeeDetailOfCountingEntity extends Entity {
 
 
 export class InventoryCountingContents extends Entity {
-    id: string;
     itemDetailId: string;
     itemDetailCode: string;
     itemDetailName: string;

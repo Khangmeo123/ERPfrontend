@@ -1,5 +1,4 @@
 import { BinLocationEntity } from './../../../../../master-data/_backend/bin-location/bin-location.entity';
-import { InventoryCountingDetailRepository } from './inventory-counting-detail.repository';
 import { Entities } from 'src/app/_helpers/entity';
 import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -20,13 +19,12 @@ import {
     BinLocationOfInventoryCountingEntity,
     ItemDetailOfCountingEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
+import { InventoryCountingPendingRepository } from './inventory-counting-pending.repository';
 
 @Injectable()
-export class InventoryCountingDetailService {
+export class InventoryCountingPendingService {
     public inventoryCountingForm: BehaviorSubject<FormGroup>;
-    public employeeDetailList: BehaviorSubject<Entities>;
     public itemDetailList: BehaviorSubject<Entities>;
-    public itemDetailExtendList: BehaviorSubject<ItemDetailOfCountingEntity[]>;
     public itemDetailCodeList: BehaviorSubject<Entities>;
     public inventoryOrganizationList: BehaviorSubject<Entities>;
     public unitOfMeasureList: BehaviorSubject<Entities>;
@@ -34,10 +32,8 @@ export class InventoryCountingDetailService {
     constructor(
         private fb: FormBuilder,
         private toastrService: ToastrService,
-        private inventoryCountingRepository: InventoryCountingDetailRepository) {
+        private inventoryCountingRepository: InventoryCountingPendingRepository) {
         this.inventoryCountingForm = new BehaviorSubject(this.fb.group(new InventoryCountingForm()));
-        this.employeeDetailList = new BehaviorSubject(new Entities());
-        this.itemDetailExtendList = new BehaviorSubject([]);
         this.itemDetailList = new BehaviorSubject(new Entities());
         this.itemDetailCodeList = new BehaviorSubject(new Entities());
         this.unitOfMeasureList = new BehaviorSubject(new Entities());
@@ -86,46 +82,8 @@ export class InventoryCountingDetailService {
         return defered;
     }
 
-    selectEmployee(inventoryCountingForm: FormGroup, employeeListIds: string[]) {
-        const inventoryCounters = inventoryCountingForm.get('inventoryCounters') as FormArray;
-        inventoryCounters.clear();
-        employeeListIds.forEach(item => {
-            inventoryCounters.push(new FormControl(item));
-        });
-        this.inventoryCountingForm.next(inventoryCountingForm);
-    }
-
 
     // inventoryCountingContents:
-    addInventoryCountingContent(inventoryCountingForm: FormGroup) {
-        const currentArray = inventoryCountingForm.get('inventoryCountingContents') as FormArray;
-        currentArray.push(this.fb.group(new InventoryCountingContentForm()));
-        this.inventoryCountingForm.next(inventoryCountingForm);
-    }
-
-    deleteMultiple(inventoryCountingForm: FormGroup) {
-        const inventoryCountingContents = inventoryCountingForm.get('inventoryCountingContents') as FormArray;
-        const deletedList = [];
-        for (const control of inventoryCountingContents.controls) {
-            if (control.get('isSelected').value) {
-                deletedList.push(inventoryCountingContents.controls.indexOf(control));
-                control.get('isSelected').setValue(false);
-            }
-        }
-        for (let i = deletedList.length; i >= 0; i--) {
-            inventoryCountingContents.removeAt(deletedList[i]);
-        }
-        this.inventoryCountingForm.next(inventoryCountingForm);
-    }
-
-    checkAllContents(inventoryCountingForm: FormGroup, checked: boolean) {
-        const inventoryCountingContents = inventoryCountingForm.get('inventoryCountingContents') as FormArray;
-        for (const control of inventoryCountingContents.controls) {
-            control.get('isSelected').setValue(checked);
-        }
-        this.inventoryCountingForm.next(inventoryCountingForm);
-    }
-
     getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
         this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, inventoryCountingContentId).subscribe(res => {
             if (res) {
@@ -136,68 +94,6 @@ export class InventoryCountingDetailService {
                 console.log(err);
             }
         });
-    }
-
-    selectItemDetail(inventoryCountingForm: FormGroup, index: number, itemDetail: any) {
-        const currentFormArray = inventoryCountingForm.get('inventoryCountingContents') as FormArray;
-        const currentFormGroup = currentFormArray.controls[index] as FormGroup;
-        currentFormGroup.controls.itemDetailId.setValue(itemDetail.id);
-        currentFormGroup.controls.itemDetailCode.setValue(itemDetail.code);
-        currentFormGroup.controls.itemDetailName.setValue(itemDetail.name);
-        currentFormGroup.controls.itemDetailUnitOfMeasureId.setValue(itemDetail.unitOfMeasureId);
-        currentFormGroup.controls.itemDetailUnitOfMeasureCode.setValue(itemDetail.unitOfMeasureCode);
-        currentFormGroup.controls.itemDetailUnitOfMeasureName.setValue(itemDetail.unitOfMeasureName);
-        this.inventoryCountingForm.next(inventoryCountingForm);
-    }
-
-    checkAllItemDetail(checked: boolean, itemDetailList: ItemDetailOfCountingEntity[]) {
-        itemDetailList.forEach(element => {
-            element.isSelected = checked;
-        });
-        this.itemDetailExtendList.next(itemDetailList);
-    }
-
-    getItemDetailList(data: any) {
-        this.inventoryCountingRepository.getListItemDetail(data).subscribe(res => {
-            if (res) {
-                this.itemDetailExtendList.next(res);
-            }
-        });
-    }
-
-    saveItemDetail(inventoryCountingForm: FormGroup, itemDetailList: any[]) {
-        const currentArray = inventoryCountingForm.get('inventoryCountingContents') as FormArray;
-        if (itemDetailList.length > 0) {
-            itemDetailList.forEach(item => {
-                currentArray.push(this.fb.group(new InventoryCountingForm(item)));
-            });
-        }
-        this.inventoryCountingForm.next(inventoryCountingForm);
-    }
-
-    // employeeDetail:
-    dropListEmployeeDetail(employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListEmployeeDetail(employeeDetailOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.employeeDetailList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchEmployeeDetail(employeeDetailOfCountingSearchEntity: Observable<EmployeeDetailOfCountingSearchEntity>) {
-        employeeDetailOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListEmployeeDetail(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.employeeDetailList.next(res);
-                }
-            });
     }
 
     // inventoryOrganization:

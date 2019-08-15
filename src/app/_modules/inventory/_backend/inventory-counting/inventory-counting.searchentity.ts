@@ -55,3 +55,12 @@ export class UnitOfMeasureOfCountingSearchEntity extends SearchEntity {
     }
 }
 
+export class InventoryCounterDetailSearchEntity extends SearchEntity {
+    qrCode: string = null;
+    itemDetailId: string = null;
+    itemName: string = null;
+    serialNumber: string = null;
+    mfrDate: string = null;
+    expirationDate: string = null;
+}
+

@@ -844,7 +844,7 @@
                             </th>
                             <th class="th-filter">
                                 <input type="text" class="form-control w-100" pKeyFilter="int"
-                                    [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.qrCode"
+                                    [(ngModel)]="inventoryCounterDetailSearchEntity.qrCode"
                                     (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')" />
                             </th>
                             <th class="th-filter">
@@ -857,12 +857,12 @@
                             </th>
                             <th class="th-filter">
                                 <input type="text" class="form-control w-100" pKeyFilter="int"
-                                    [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.itemName"
+                                    [(ngModel)]="inventoryCounterDetailSearchEntity.itemName"
                                     (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" />
                             </th>
                             <th class="th-filter">
                                 <input type="text" class="form-control w-100" pKeyFilter="int"
-                                    [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.serialNumber"
+                                    [(ngModel)]="inventoryCounterDetailSearchEntity.serialNumber"
                                     (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" />
                             </th>
                             <th class="th-filter">
@@ -906,7 +906,7 @@
                                 {{serialNumber.mfrDate | date: 'dd/MM/yyyy'}}
                             </td>
                             <td class="ui-resizable-column">
-                                {{serialNumber.expirationDate}}
+                                {{serialNumber.expirationDate | date: 'dd/MM/yyyy'}}
                             </td>
                             <td class="ui-resizable-column">
                                 <app-single-select [list]="binLocationExceptIds" [selectedList]="binLocationIds"

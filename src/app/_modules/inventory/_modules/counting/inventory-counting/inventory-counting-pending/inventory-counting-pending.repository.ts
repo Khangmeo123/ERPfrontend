@@ -25,10 +25,10 @@ import { Observable } from 'rxjs';
 })
 
 
-export class InventoryCountingDetailRepository extends Repository {
+export class InventoryCountingPendingRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/counting/inventory-counting/inventory-counting-detail';
+        this.apiUrl = environment.apiUrlInv + 'inventory/counting/inventory-counting/inventory-counting-pending';
     }
 
     getDetail(inventoryCountingId: string): Observable<InventoryCountingEntity> {
@@ -61,17 +61,6 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
-    getListItemDetail(data: any) {
-        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list', JSON.stringify(data),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    return r.body.map((item) => {
-                        return new ItemDetailOfCountingEntity(item);
-                    });
-                }),
-            );
-    }
-
     dropListInventoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory-organizaion',
             JSON.stringify(inventoryOrganizationOfCountingSearchEntity),
@@ -82,22 +71,6 @@ export class InventoryCountingDetailRepository extends Repository {
                     });
                     r.body.exceptIds = r.body.exceptIds.map(item => {
                         return new InventoryOrganizationOfCountingEntity(item);
-                    });
-                    return r.body;
-                }),
-            );
-    }
-
-    dropListEmployeeDetail(employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-employee-detail',
-            JSON.stringify(employeeDetailOfCountingSearchEntity),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    r.body.ids = r.body.ids.map(item => {
-                        return new EmployeeDetailOfCountingEntity(item);
-                    });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new EmployeeDetailOfCountingEntity(item);
                     });
                     return r.body;
                 }),
