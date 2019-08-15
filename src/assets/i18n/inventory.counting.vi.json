@@ -1,82 +1,82 @@
 {
     "goodsReceiptDetail": {
         "header": {
-            "title": ""
+            "title": "Vị trí hàng hóa trong kho"
         }
     },
     "inventoryCounting": {
         "detail": {
             "batches": {
-                "actualCounting": "",
-                "batchCode": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantitySaved": "",
-                "serial": "",
-                "startScanBatchesNo": "",
-                "title ": ""
+                "actualCounting": "Số lượng thực đếm",
+                "batchCode": "Mã lô",
+                "expiryDate": "Hạn sử dụng",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantitySaved": "Số lượng lưu",
+                "serial": "Serial lô",
+                "startScanBatchesNo": "Bắt đầu quét mã lô",
+                "title ": "Thông tin lô sản phẩm"
             },
-            "binLocation": "",
-            "counter": "",
-            "countingDate": "",
-            "description": "",
-            "documentNumber": "",
+            "binLocation": "Vị trí lưu kho",
+            "counter": "Người thực hiện",
+            "countingDate": "Ngày thực hiện",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ",
             "form": {
                 "post": {
-                    "title": ""
+                    "title": "Bình luận"
                 },
-                "title": ""
+                "title": "Thông tin chung"
             },
             "header": {
-                "title": ""
+                "title": "Phiếu kiểm kê kho"
             },
-            "inventoryCode": "",
-            "personInCharge": "",
+            "inventoryCode": "Mã kho",
+            "personInCharge": "Người chịu trách nhiệm",
             "qrCode": {
-                "code": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantity": "",
-                "scanCode": "",
-                "scanQRCode": "",
-                "serial": "",
-                "title ": ""
+                "code": "QR code",
+                "expiryDate": "Hạn sử dụng",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantity": "Số lượng",
+                "scanCode": "Quét code",
+                "scanQRCode": "Bắt đầu quét QR code",
+                "serial": "Serial#",
+                "title ": "Thông tin QR code sản phẩm"
             },
             "tab1": {
-                "batches": "",
-                "countAmount": "",
-                "highestDifference": "",
-                "inventoryCode": "",
-                "itemName": "",
-                "itemNo": "",
-                "no": "",
-                "quantityOfInventory": "",
+                "batches": "Lô",
+                "countAmount": "Số lượng thực đếm",
+                "highestDifference": "Số lượng chênh lệch cao nhất",
+                "inventoryCode": "Mã kho",
+                "itemName": "Tên hàng",
+                "itemNo": "Mã hàng",
+                "no": "STT",
+                "quantityOfInventory": "Số lượng tồn kho",
                 "serial": "",
-                "title": "",
-                "unitOfMeasure": ""
+                "title": "Chi tiết hàng hóa",
+                "unitOfMeasure": "Đơn vị tính"
             },
             "tab2": {
-                "title": ""
+                "title": "Đính kèm"
             },
-            "totalCount": "",
-            "totalItem": ""
+            "totalCount": "Tổng số sản phẩm thực đếm",
+            "totalItem": "Tổng số sản phẩm đã quét"
         },
         "list": {
-            "countDate": "",
-            "counter": "",
+            "countDate": "Ngày thực hiện",
+            "counter": "Người thực hiện",
             "header": {
-                "title": ""
+                "title": "Phiếu kiểm kê kho"
             },
-            "inventoryCode": "",
-            "inventoryCountingOwner": "",
-            "issueID": "",
-            "status": ""
+            "inventoryCode": "Mã kho",
+            "inventoryCountingOwner": "Người chịu trách nhiệm",
+            "issueID": "Số phiếu",
+            "status": "Trạng thái"
         }
     }
 }

@@ -2,391 +2,391 @@
     "deliveryOrder": {
         "detail": {
             "amount": {
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "quantity": "",
-                "quantitySaved": "",
-                "title ": "",
-                "unitOfMeasure": ""
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng",
+                "locationCode": "Mã vị trí",
+                "quantity": "Số lượng",
+                "quantitySaved": "Số lượng lưu",
+                "title ": "Vị trí hàng hóa trong kho",
+                "unitOfMeasure": "Đơn vị tính"
             },
             "batches": {
-                "batchCode": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantityInEachBatch": "",
-                "quantitySaved": "",
-                "startScanBatchesNo": "",
-                "title ": ""
+                "batchCode": "Mã lô",
+                "expiryDate": "Hạn sử dụng",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantityInEachBatch": "Sô lượng hàng trong lô",
+                "quantitySaved": "Số lượng lưu",
+                "startScanBatchesNo": "Bắt đầu quét mã lô",
+                "title ": "Thông tin lô"
             },
-            "binLocation": "",
+            "binLocation": "Vị trí lưu kho",
             "button": {
-                "add": ""
+                "add": "Nhập phiếu"
             },
-            "createdDate": "",
-            "creator": "",
-            "customerCode": "",
-            "customerInfo": "",
-            "customerName": "",
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "customerCode": "Mã khách hàng",
+            "customerInfo": "Thông tin liên hệ khách hàng",
+            "customerName": "Tên khách hàng",
             "deliveryOrder": {
-                "title": ""
+                "title": "Nhập phiếu từ đơn bán hàng"
             },
             "deliveryOrderRequest": {
-                "buyer": "",
-                "createdDate": "",
-                "creator": "",
-                "customerName": "",
-                "documentNo": ""
+                "buyer": "Người mua",
+                "createdDate": "Ngày tạo",
+                "creator": "Người tạo",
+                "customerName": "Tên khách hàng",
+                "documentNo": "Số chứng từ"
             },
-            "description": "",
-            "documentNumber": "",
-            "exporter": "",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ ",
+            "exporter": "Người xuất hàng",
             "form": {
-                "title": ""
+                "title": "Thông tin chung"
             },
             "header": {
-                "title": ""
+                "title": "Phiếu xuất kho hàng bán"
             },
-            "inventoryAddress": "",
-            "inventoryCode": "",
-            "personInCharge": "",
+            "inventoryAddress": "Địa chỉ kho",
+            "inventoryCode": "Mã kho",
+            "personInCharge": "Nhân viên phụ trách",
             "qrCode": {
-                "code": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantity": "",
-                "scanCode": "",
-                "scanQRCode": "",
-                "serial": "",
-                "title ": ""
+                "code": "QR code",
+                "expiryDate": "Ngày hết hạn",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantity": "Số lượng",
+                "scanCode": "Quét code",
+                "scanQRCode": "Bắt đầu quét QR code",
+                "serial": "Serial#",
+                "title ": "Chi tiết QR code"
             },
-            "receiptedDate": "",
-            "shipper": "",
+            "receiptedDate": "Ngày thực hiện",
+            "shipper": "Người giao hàng",
             "tab1": {
-                "Serial": "",
-                "amount": "",
-                "batches": "",
-                "discount": "",
-                "discountAmount": "",
-                "itemName": "",
-                "itemNo": "",
-                "purchaseOrderNumber": "",
-                "quantity": "",
-                "title": "",
-                "total": "",
-                "unitOfMeasure": "",
-                "unitPrice": "",
-                "valueAddedTax": "",
-                "weight": ""
+                "Serial": "Serial",
+                "amount": "Số lương",
+                "batches": "Lô",
+                "discount": "Chiết khấu",
+                "discountAmount": "Số tiền chiết khấu",
+                "itemName": "Tên hàng hóa",
+                "itemNo": "Mã hàng",
+                "purchaseOrderNumber": "Mã đơn hàng",
+                "quantity": "Số lượng",
+                "title": "Chi tiết hàng hóa theo hoạch toán",
+                "total": "Thành tiền",
+                "unitOfMeasure": "Đơn vị tính",
+                "unitPrice": "Đơn giá",
+                "valueAddedTax": "Thuế VAT",
+                "weight": "Khối lượng hàng"
             },
             "tab2": {
-                "title": ""
+                "title": "Đính kèm"
             }
         },
         "form": {
             "post": {
-                "title": ""
+                "title": "Bình luận"
             }
         },
         "list": {
-            "createdDate": "",
-            "creator": "",
-            "description": "",
-            "documentNumber": "",
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ",
             "header": {
-                "title": ""
+                "title": "Phiếu xuất kho hàng bán"
             },
-            "inventoryAddress": "",
-            "inventoryCode": "",
-            "receiptedDate": "",
-            "status": ""
+            "inventoryAddress": "Địa chỉ kho",
+            "inventoryCode": "Mã kho",
+            "receiptedDate": "Ngày thực hiện",
+            "status": "Trạng thái"
         }
     },
     "goodsIssue": {
         "detail": {
             "amount": {
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "quantity": "",
-                "quantitySaved": "",
-                "title ": "",
-                "unitOfMeasure": ""
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng",
+                "locationCode": "Mã vị trí",
+                "quantity": "Số lượng",
+                "quantitySaved": "Số lượng lưu",
+                "title ": "Vị trí hàng hóa trong kho",
+                "unitOfMeasure": "Đơn vị tính"
             },
             "batches": {
-                "batchCode": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantityInEachBatch": "",
-                "quantitySaved": "",
-                "startScanBatchesNo": "",
-                "title ": ""
+                "batchCode": "Mã lô",
+                "expiryDate": "Hạn sử dụng",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantityInEachBatch": "Sô lượng hàng trong lô",
+                "quantitySaved": "Số lượng lưu",
+                "startScanBatchesNo": "Bắt đầu quét mã lô",
+                "title ": "Thông tin lô"
             },
-            "binLocation": "",
+            "binLocation": "Vị trí lưu kho",
             "button": {
-                "add": ""
+                "add": "Nhập phiếu"
             },
-            "createdDate": "",
-            "creator": "",
-            "description": "",
-            "documentNumber": "",
-            "exporter": "",
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ ",
+            "exporter": "Người xuất hàng",
             "form": {
-                "title": ""
+                "title": "Thông tin chung"
             },
             "goodsIssueRequest": {
-                "buyer": "",
-                "createdDate": "",
-                "creator": "",
-                "customerName": "",
-                "documentNo": ""
+                "buyer": "Người mua",
+                "createdDate": "Ngày tạo",
+                "creator": "Người tạo",
+                "customerName": "Tên khách hàng",
+                "documentNo": "Số chứng từ"
             },
             "header": {
-                "title": ""
+                "title": "Phiếu xuất kho khác"
             },
-            "inventoryAddress": "",
-            "inventoryCode": "",
-            "personInCharge": "",
+            "inventoryAddress": "Địa chỉ kho",
+            "inventoryCode": "Mã kho",
+            "personInCharge": "Nhân viên phụ trách",
             "qrCode": {
-                "code": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantity": "",
-                "scanCode": "",
-                "scanQRCode": "",
-                "serial": "",
-                "title ": ""
+                "code": "QR code",
+                "expiryDate": "Ngày hết hạn",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantity": "Số lượng",
+                "scanCode": "Quét code",
+                "scanQRCode": "Bắt đầu quét QR code",
+                "serial": "Serial#",
+                "title ": "Chi tiết QR code"
             },
-            "receiptedDate": "",
-            "shipper": "",
+            "receiptedDate": "Ngày thực hiện",
+            "shipper": "Người giao hàng",
             "tab1": {
-                "Serial": "",
-                "amount": "",
-                "batches": "",
-                "discount": "",
-                "discountAmount": "",
-                "itemName": "",
-                "itemNo": "",
-                "quantity": "",
-                "title": "",
-                "total": "",
-                "unitOfMeasure": "",
-                "unitPrice": "",
-                "valueAddedTax": "",
-                "weight": ""
+                "Serial": "Serial",
+                "amount": "Số lương",
+                "batches": "Lô",
+                "discount": "Chiết khấu",
+                "discountAmount": "Số tiền chiết khấu",
+                "itemName": "Tên hàng hóa",
+                "itemNo": "Mã hàng",
+                "quantity": "Số lượng",
+                "title": "Chi tiết hàng hóa theo hoạch toán",
+                "total": "Thành tiền",
+                "unitOfMeasure": "Đơn vị tính",
+                "unitPrice": "Đơn giá",
+                "valueAddedTax": "Thuế VAT",
+                "weight": "Khối lượng hàng"
             },
             "tab2": {
-                "title": ""
+                "title": "Đính kèm"
             }
         },
         "form": {
             "post": {
-                "title": ""
+                "title": "Bình luận"
             }
         },
         "list": {
-            "createdDate": "",
-            "creator": "",
-            "description": "",
-            "documentNumber": "",
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ ",
             "header": {
-                "title": ""
+                "title": "Phiếu xuất kho khác"
             },
-            "inventoryAddress": "",
-            "inventoryCode": "",
-            "receiptedDate": "",
-            "status": ""
+            "inventoryAddress": "Địa chỉ kho",
+            "inventoryCode": "Mã kho",
+            "receiptedDate": "Ngày thực hiện",
+            "status": "Trang thái"
         }
     },
     "goodsReturn": {
         "detail": {
             "amount": {
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "quantity": "",
-                "quantitySaved": "",
-                "title ": "",
-                "unitOfMeasure": ""
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "quantity": "Số lượng",
+                "quantitySaved": "Số lượng lưu",
+                "title ": "Vị trí hàng hóa trong kho",
+                "unitOfMeasure": "Đơn vị tính"
             },
             "batches": {
-                "batchCode": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantityInEachBatch": "",
-                "quantitySaved": "",
-                "startScanBatchesNo": "",
-                "title ": ""
+                "batchCode": "Mã lô",
+                "expiryDate": "Hạn sử dụng",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantityInEachBatch": "Số lượng hàng trong lô",
+                "quantitySaved": "Số lượng lưu",
+                "startScanBatchesNo": "Bắt đầu quét mã lô",
+                "title ": "Thông tin lô"
             },
-            "binLocation": "",
+            "binLocation": "Vị trí lưu kho",
             "button": {
-                "add": ""
+                "add": "Nhập phiếu"
             },
-            "createdDate": "",
-            "creator": "",
-            "customerCode": "",
-            "customerInfo": "",
-            "customerName": "",
-            "description": "",
-            "documentNumber": "",
-            "exporter": "",
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "customerCode": "Mã khách hàng",
+            "customerInfo": "Thông tin liên hệ khách hàng",
+            "customerName": "Tên khách hàng",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ ",
+            "exporter": "Người xuất hàng",
             "form": {
-                "title": ""
+                "title": "Thông tin chung"
             },
             "goodsReturn": {
-                "title": ""
+                "title": "Nhập phiếu từ yêu cầu"
             },
             "goodsReturnRequest": {
-                "buyer": "",
-                "createdDate": "",
-                "creator": "",
-                "customerName": "",
-                "documentNo": ""
+                "buyer": "Người mua",
+                "createdDate": "Ngày tạo",
+                "creator": "Người tạo",
+                "customerName": "Tên khách hàng",
+                "documentNo": "Số chứng từ"
             },
             "header": {
-                "title": ""
+                "title": "Phiếu xuất kho hàng trả lại nhà cung cấp"
             },
-            "inventoryAddress": "",
-            "inventoryCode": "",
-            "personInCharge": "",
+            "inventoryAddress": "Địa chỉ kho",
+            "inventoryCode": "Mã kho",
+            "personInCharge": "Người phụ trách",
             "qrCode": {
-                "code": "",
-                "expiryDate": "",
-                "itemCode": "",
-                "itemName": "",
-                "locationCode": "",
-                "manufacturingDate": "",
-                "quantity": "",
+                "code": "QR code",
+                "expiryDate": "Ngày hết hạn",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng hóa",
+                "locationCode": "Mã vị trí",
+                "manufacturingDate": "Ngày sản xuất",
+                "quantity": "Số lượng",
                 "scanCode": "",
-                "scanQRCode": "",
-                "serial": "",
-                "title ": ""
+                "scanQRCode": "Bắt đầu quét QR code",
+                "serial": "Serial#",
+                "title ": "Chi tiết QR code"
             },
-            "receiptedDate": "",
-            "shipper": "",
+            "receiptedDate": "Ngày thực hiện",
+            "shipper": "Người giao hàng",
             "tab1": {
-                "Serial": "",
-                "amount": "",
-                "batches": "",
-                "discount": "",
-                "discountAmount": "",
-                "itemName": "",
-                "itemNo": "",
-                "purchaseOrderNumber": "",
-                "quantity": "",
-                "title": "",
-                "total": "",
-                "unitOfMeasure": "",
-                "unitPrice": "",
-                "valueAddedTax": "",
-                "weight": ""
+                "Serial": "Serial",
+                "amount": "Số lương",
+                "batches": "Lô",
+                "discount": "Chiết khấu",
+                "discountAmount": "Số tiền chiết khấu",
+                "itemName": "Tên hàng hóa",
+                "itemNo": "Mã hàng",
+                "purchaseOrderNumber": "Mã đơn hàng",
+                "quantity": "Số lượng",
+                "title": "Chi tiết hàng hóa theo hoạch toán",
+                "total": "Thành tiền",
+                "unitOfMeasure": "Đơn vị tính",
+                "unitPrice": "Đơn giá",
+                "valueAddedTax": "Thuế VAT",
+                "weight": "Khối lượng hàng"
             },
             "tab2": {
-                "title": ""
+                "title": "Đính kèm"
             }
         },
         "form": {
             "post": {
-                "title": ""
+                "title": "Bình luận"
             }
         },
         "list": {
-            "createdDate": "",
-            "creator": "",
-            "description": "",
-            "documentNumber": "",
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ ",
             "header": {
-                "title": ""
+                "title": "Phiếu xuất kho hàng trả lại nhà cung cấp"
             },
-            "inventoryAddress": "",
-            "inventoryCode": "",
-            "receiptedDate": "",
-            "status": ""
+            "inventoryAddress": "Địa chỉ kho",
+            "inventoryCode": "Mã kho",
+            "receiptedDate": "Ngày thực hiện",
+            "status": "Trạng thái"
         }
     },
     "goodsReturnRequest": {
         "detail": {
             "batches": {
-                "startScanBatchesNo": ""
+                "startScanBatchesNo": "Bắt đầu quét mã lô"
             },
             "button": {
-                "add": ""
+                "add": "Nhập phiếu"
             },
-            "createdDate": "",
-            "creator": "",
-            "description": "",
-            "documentNumber": "",
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ ",
             "form": {
-                "title": ""
+                "title": "Thông tin chung"
             },
             "goodsReturnRequest": {
-                "supplierCode": "",
-                "title": ""
+                "supplierCode": "Mã nhà cung cấp",
+                "title": "Nhập phiếu từ đơn nhập mua"
             },
             "goodsReturnRequestRequest": {
-                "buyer": "",
-                "createdDate": "",
-                "creator": "",
-                "documentNo": ""
+                "buyer": "Người mua",
+                "createdDate": "Ngày tạo",
+                "creator": "Người tạo",
+                "documentNo": "Số chứng từ"
             },
-            "inventoryAddress": "",
-            "inventoryCode": "",
-            "personInCharge": "",
-            "receiptedDate": "",
-            "receiver": "",
+            "inventoryAddress": "Địa chỉ kho",
+            "inventoryCode": "Mã kho",
+            "personInCharge": "Nhân viên phụ trách",
+            "receiptedDate": "Ngày thực hiện",
+            "receiver": "Người nhận hàng",
             "shipper": "",
-            "supplierCode": "",
-            "supplierInfo": "",
-            "supplierName": "",
+            "supplierCode": "Mã nhà cung cấp",
+            "supplierInfo": "Thông tin liên hệ của hàng cung cấp",
+            "supplierName": "Tên nhà cung cấp",
             "tab1": {
-                "discount": "",
-                "discountAmount": "",
-                "itemName": "",
-                "itemNo": "",
-                "purchaseOrderNumber": "",
-                "quantity": "",
-                "title": "",
-                "total": "",
-                "unitOfMeasure": "",
-                "unitPrice": "",
-                "valueAddedTax": "",
-                "weight": ""
+                "discount": "Chiết khấu",
+                "discountAmount": "Số tiền chiết khấu",
+                "itemName": "Tên hàng hóa",
+                "itemNo": "Mã hàng",
+                "purchaseOrderNumber": "Mã đơn hàng",
+                "quantity": "Số lượng",
+                "title": "Chi tiết hàng hóa theo hoạch toán",
+                "total": "Thành tiền",
+                "unitOfMeasure": "Đơn vị tính",
+                "unitPrice": "Đơn giá",
+                "valueAddedTax": "Thuế VAT",
+                "weight": "Khối lượng hàng"
             },
             "tab2": {
-                "title": ""
+                "title": "Đính kèm"
             }
         },
         "form": {
             "post": {
-                "title": ""
+                "title": "Bình luận"
             }
         },
         "header": {
-            "title": ""
+            "title": "Yêu cầu xuất kho hàng trả lại nhà cung cấp"
         },
         "list": {
-            "createdDate": "",
-            "creator": "",
-            "description": "",
-            "documentNumber": "",
-            "inventoryCode": "",
-            "receiptedDate": "",
-            "status": ""
+            "createdDate": "Ngày tạo",
+            "creator": "Người tạo",
+            "description": "Mô tả",
+            "documentNumber": "Số chứng từ ",
+            "inventoryCode": "Mã kho",
+            "receiptedDate": "Ngày thực hiện",
+            "status": "Trang thái"
         }
     }
 }
