@@ -50,7 +50,6 @@
             },
             "tab1": {
                 "batches": "",
-                "cda": "",
                 "countAmount": "",
                 "highestDifference": "",
                 "inventoryCode": "",
@@ -58,6 +57,7 @@
                 "itemNo": "",
                 "no": "",
                 "quantityOfInventory": "",
+                "serial": "",
                 "title": "",
                 "unitOfMeasure": ""
             },

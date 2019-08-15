@@ -95,5 +95,51 @@
             "status": "",
             "transferDate": ""
         }
+    },
+    "inventoryTransferRequest": {
+        "detail": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "form": {
+                "post": {
+                    "title": ""
+                },
+                "title": ""
+            },
+            "inventoryCodeFrom": "",
+            "inventoryCodeTo": "",
+            "personInCharge": "",
+            "receiver": "",
+            "tab1": {
+                "actualQuantity": "",
+                "dueDate": "",
+                "issueWarehouse": "",
+                "itemName": "",
+                "itemNo": "",
+                "quantity": "",
+                "receiptWarehouse": "",
+                "title": "",
+                "unitOfMeasure": ""
+            },
+            "tab2": {
+                "title": ""
+            },
+            "transferDate": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "status": "",
+            "transferDate": ""
+        }
     }
 }

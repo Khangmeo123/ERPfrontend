@@ -67,6 +67,7 @@
                 "title ": ""
             },
             "receiptedDate": "",
+            "shipper": "",
             "tab1": {
                 "Serial": "",
                 "amount": "",
@@ -81,7 +82,8 @@
                 "total": "",
                 "unitOfMeasure": "",
                 "unitPrice": "",
-                "valueAddedTax": ""
+                "valueAddedTax": "",
+                "weight": ""
             },
             "tab2": {
                 "title": ""
@@ -168,6 +170,7 @@
                 "title ": ""
             },
             "receiptedDate": "",
+            "shipper": "",
             "tab1": {
                 "Serial": "",
                 "amount": "",
@@ -181,7 +184,8 @@
                 "total": "",
                 "unitOfMeasure": "",
                 "unitPrice": "",
-                "valueAddedTax": ""
+                "valueAddedTax": "",
+                "weight": ""
             },
             "tab2": {
                 "title": ""
@@ -274,6 +278,7 @@
                 "title ": ""
             },
             "receiptedDate": "",
+            "shipper": "",
             "tab1": {
                 "Serial": "",
                 "amount": "",
@@ -288,7 +293,8 @@
                 "total": "",
                 "unitOfMeasure": "",
                 "unitPrice": "",
-                "valueAddedTax": ""
+                "valueAddedTax": "",
+                "weight": ""
             },
             "tab2": {
                 "title": ""
@@ -304,9 +310,82 @@
             "creator": "",
             "description": "",
             "documentNumber": "",
+            "header": {
+                "title": ""
+            },
             "inventoryAddress": "",
             "inventoryCode": "",
-            "receip     tedDate": "",
+            "receiptedDate": "",
+            "status": ""
+        }
+    },
+    "goodsReturnRequest": {
+        "detail": {
+            "batches": {
+                "startScanBatchesNo": ""
+            },
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "form": {
+                "title": ""
+            },
+            "goodsReturnRequest": {
+                "supplierCode": "",
+                "title": ""
+            },
+            "goodsReturnRequestRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "documentNo": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "receiptedDate": "",
+            "receiver": "",
+            "shipper": "",
+            "supplierCode": "",
+            "supplierInfo": "",
+            "supplierName": "",
+            "tab1": {
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "purchaseOrderNumber": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "unitPrice": "",
+                "valueAddedTax": "",
+                "weight": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "form": {
+            "post": {
+                "title": ""
+            }
+        },
+        "header": {
+            "title": ""
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "inventoryCode": "",
+            "receiptedDate": "",
             "status": ""
         }
     }

@@ -196,6 +196,15 @@
             "title": ""
         }
     },
+    "inventoryCounting": {
+        "detail": {
+            "form": {
+                "post": {
+                    "title": ""
+                }
+            }
+        }
+    },
     "return": {
         "detail": {
             "amount": {
@@ -286,11 +295,68 @@
             "createdDate": "",
             "creator": "",
             "description": "",
-            "documentNumber": "",
             "header": {
                 "title": ""
             },
             "inventory": "",
+            "receiptRequirementID": "",
+            "receiptedDate": "",
+            "status": ""
+        }
+    },
+    "returnRequest": {
+        "detail": {
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "customerCode": "",
+            "customerInfo": "",
+            "customerName": "",
+            "description": "",
+            "documentNumber": "",
+            "form": {
+                "title": ""
+            },
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "personInCharge": "",
+            "receiptedDate": "",
+            "receiver": "",
+            "returnRequest": {
+                "customerName": "",
+                "title": ""
+            },
+            "returnRequestRequest": {
+                "buyer": "",
+                "createdDate": "",
+                "creator": "",
+                "documentNo": ""
+            },
+            "tab1": {
+                "discount": "",
+                "discountAmount": "",
+                "itemName": "",
+                "itemNo": "",
+                "quantity": "",
+                "title": "",
+                "total": "",
+                "unitOfMeasure": "",
+                "valueAddedTax": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "header": {
+            "title": ""
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "inventoryCode": "",
             "receiptRequirementID": "",
             "receiptedDate": "",
             "status": ""
