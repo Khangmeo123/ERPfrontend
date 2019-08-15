@@ -1,0 +1,16 @@
+{
+    "permission": {
+        "active": "Hoạt động",
+        "currentStatus": "Trạng thái hiện tại",
+        "currentStep": "Bước hiện tại",
+        "documentType": "Loại tài liệu",
+        "header": {
+            "title": "Phân quyền"
+        },
+        "inventoryCode": "Mã kho",
+        "nextStatus": "Trạng thái tiếp theo",
+        "nextStep ": "Bước tiếp theo",
+        "positionCode": "Mã vị trí",
+        "positionName": "Tên vị trí"
+    }
+}
