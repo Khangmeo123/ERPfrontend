@@ -34,6 +34,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   employeeListIds: string[] = [];
   inventoryCountingId: string;
   inventoryCountingForm: FormGroup;
+  inventoryOrganizationId: string;
   // colFrozen: string[] = [
   //   'inventoryCounting.detail.tab1.no',
 
@@ -206,6 +207,11 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     }
     this.inventoryOrganizationSearchEntity.code.startsWith = event;
     this.inventoryOrganizationTyping.next(this.inventoryOrganizationSearchEntity);
+  }
+
+  selectInventoryOrganization(inventoryOrganizationId: string) {
+    this.inventoryCountingForm.get('inventoryOrganizationId').setValue(inventoryOrganizationId);
+    this.inventoryOrganizationId = inventoryOrganizationId;
   }
 
   // employeeDetail

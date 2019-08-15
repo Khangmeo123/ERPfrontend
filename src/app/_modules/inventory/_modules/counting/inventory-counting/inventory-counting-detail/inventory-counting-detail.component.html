@@ -138,7 +138,7 @@
                             [selectedList]="inventoryOrganizationIds" [key]="'code'"
                             [initialValue]="inventoryCountingForm.controls.inventoryOrganizationCode.value"
                             (search)="typingSearchInvetoryOrganization($event, inventoryCountingForm.controls.inventoryOrganizationId.value)"
-                            (selectionChange)="inventoryCountingForm.controls.inventoryOrganizationId.setValue($event[0])"
+                            (selectionChange)="selectInventoryOrganization($event[0])"
                             (listOpen)="dropListInventoryOrganization(inventoryCountingForm.controls.inventoryOrganizationId.value)"
                             data-qe-id="detail-form-inventory-address" class="w-100">
                         </app-single-select>
