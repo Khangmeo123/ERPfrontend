@@ -1381,6 +1381,20 @@
 			"counter": "",
 			"countingDate": "",
 			"description": "",
+			"detailBinLocation": {
+				"itemCode": "",
+				"locationCode": "",
+				"no": "",
+				"title ": ""
+			},
+			"detailDifference": {
+				"excess": "",
+				"itemCode": "",
+				"itemName": "",
+				"lack": "",
+				"no": "",
+				"title ": ""
+			},
 			"documentNumber": "",
 			"form": {
 				"post": {
@@ -1407,7 +1421,6 @@
 				"title ": ""
 			},
 			"tab1": {
-				"batches": "",
 				"countAmount": "",
 				"highestDifference": "",
 				"inventoryCode": "",
@@ -1519,52 +1532,6 @@
 			"tab2": {
 				"title": ""
 			}
-		},
-		"header": {
-			"title": ""
-		},
-		"list": {
-			"createdDate": "",
-			"creator": "",
-			"description": "",
-			"documentNumber": "",
-			"inventoryAddress": "",
-			"inventoryCode": "",
-			"status": "",
-			"transferDate": ""
-		}
-	},
-	"inventoryTransferRequest": {
-		"detail": {
-			"createdDate": "",
-			"creator": "",
-			"description": "",
-			"documentNumber": "",
-			"form": {
-				"post": {
-					"title": ""
-				},
-				"title": ""
-			},
-			"inventoryCodeFrom": "",
-			"inventoryCodeTo": "",
-			"personInCharge": "",
-			"receiver": "",
-			"tab1": {
-				"actualQuantity": "",
-				"dueDate": "",
-				"issueWarehouse": "",
-				"itemName": "",
-				"itemNo": "",
-				"quantity": "",
-				"receiptWarehouse": "",
-				"title": "",
-				"unitOfMeasure": ""
-			},
-			"tab2": {
-				"title": ""
-			},
-			"transferDate": ""
 		},
 		"header": {
 			"title": ""
@@ -1759,15 +1726,6 @@
 	"login": {
 		"failed": ""
 	},
-	"loginForm": {
-		"doesNotHaveAccount": "",
-		"forgotPassword": "",
-		"login": "",
-		"password": "",
-		"rememberPassword": "",
-		"signUp": "",
-		"username": ""
-	},
 	"naturalResourceTax": {
 		"header": {
 			"title": ""
@@ -1805,20 +1763,6 @@
 			"title": ""
 		},
 		"name": ""
-	},
-	"permission": {
-		"active": "",
-		"currentStatus": "",
-		"currentstep": "",
-		"documentType": "",
-		"header": {
-			"title": ""
-		},
-		"inventoryCode": "",
-		"nextStaus": "",
-		"nextStep ": "",
-		"positionCode": "",
-		"positionName": ""
 	},
 	"project": {
 		"employee": {
@@ -2117,12 +2061,6 @@
 			"name": ""
 		}
 	},
-	"tax-template": {
-		"code": "",
-		"name": "",
-		"title": "",
-		"type": ""
-	},
 	"tax": {
 		"available": "",
 		"code": "",
@@ -2131,37 +2069,6 @@
 		"name": "",
 		"parent_account": "",
 		"unit": ""
-	},
-	"taxTemplate": {
-		"code": "",
-		"delete": {
-			"error": "",
-			"success": ""
-		},
-		"detail": {
-			"actions": "",
-			"available": "",
-			"code": "",
-			"name": "",
-			"rate": "",
-			"unitOfMeasure": ""
-		},
-		"general": {
-			"title": ""
-		},
-		"get": {
-			"error": ""
-		},
-		"modal": {
-			"title": ""
-		},
-		"name": "",
-		"title": "",
-		"type": "",
-		"update": {
-			"error": "",
-			"success": ""
-		}
 	},
 	"uom": {
 		"content": {
