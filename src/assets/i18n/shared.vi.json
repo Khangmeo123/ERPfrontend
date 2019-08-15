@@ -1,34 +1,34 @@
 {
     "advancedFilter": {
-        "contains": "",
-        "endsWith": "",
-        "equal": "",
-        "greater": "",
-        "greaterEqual": "",
-        "less": "",
-        "lessEqual": "",
-        "notContains": "",
-        "notEqual": "",
-        "placeholder": "",
-        "startsWith": ""
+        "contains": "Chứa",
+        "endsWith": "Kết thúc với",
+        "equal": "Bằng",
+        "greater": "Lớn hơn",
+        "greaterEqual": "Lớn hơn hoặc bằng",
+        "less": "Nhỏ hơn",
+        "lessEqual": "Nhỏ hơn hoặc bằng",
+        "notContains": "Không chứa",
+        "notEqual": "Không bằng",
+        "placeholder": "Tìm kiếm",
+        "startsWith": "Bắt đầu với"
     },
     "cropper": {
-        "browseImage": "",
-        "crop": ""
+        "browseImage": "Chọn ảnh",
+        "crop": "Cắt ảnh"
     },
     "datePicker": {
-        "placeHolder": ""
+        "placeHolder": "ngày/tháng/năm"
     },
     "noData": {
-        "helper": ""
+        "helper": "Không có dữ liệu"
     },
     "pagination": {
-        "entries": "",
-        "show": ""
+        "entries": "Bản ghi",
+        "show": "Hiện thị"
     },
     "select": {
-        "availableList": "",
-        "selectedItems": "",
-        "selectedList": ""
+        "availableList": "Có thể chọn",
+        "selectedItems": "Đã chọn",
+        "selectedList": "Danh sách đã chọn"
     }
 }

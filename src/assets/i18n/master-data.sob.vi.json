@@ -1,17 +1,17 @@
 {
     "accountingPeriod": {
-        "description": "",
-        "endPeriod": "",
+        "description": "Mô tả",
+        "endPeriod": "Ngày kết thúc",
         "header": {
-            "title": ""
+            "title": "Kỳ kế toán"
         },
         "modal": {
-            "label": "",
-            "title": ""
+            "label": "Thêm kỳ kế toán",
+            "title": "Kỳ kế toán"
         },
-        "startPeriod": "",
+        "startPeriod": "Ngày bắt đầu",
         "status": {
-            "fiscal_year": ""
+            "fiscal_year": "Năm tài chính"
         }
     },
     "bankAccount": {
@@ -34,142 +34,142 @@
         }
     },
     "coa": {
-        "account_description": "",
-        "account_name": "",
-        "account_number": "",
-        "account_status": "",
-        "description": "",
+        "account_description": "Mô tả",
+        "account_name": "Tên tài khoản",
+        "account_number": "Số tài khoản",
+        "account_status": "Tính chất",
+        "description": "Mô tả",
         "list": {
-            "title": ""
+            "title": "Hệ thống tài khoản"
         },
-        "super_account": ""
+        "super_account": "Tài khoản tổng hợp"
     },
     "cost-center": {
         "content": {
-            "account": "",
-            "description": "",
-            "from_date": "",
-            "id": "",
+            "account": "Tài khoản",
+            "description": "Mô tả",
+            "from_date": "Ngày bắt đầu",
+            "id": "Mã trung tâm",
             "modal": {
-                "title": ""
+                "title": "Thêm trung tâm chi phí"
             },
-            "name": "",
-            "to_date": ""
+            "name": "Tên trung tâm",
+            "to_date": "Ngày kết thúc"
         },
         "header": {
-            "title": ""
+            "title": "Trung tâm chi phí"
         }
     },
     "environmentTax": {
         "header": {
-            "title": ""
+            "title": "Biểu thuế môi trường"
         },
         "modal": {
-            "title": ""
+            "title": "Thêm biểu thuế môi trường"
         }
     },
     "environment_tax": {
-        "description": ""
+        "description": "Mô tả"
     },
     "exportTax": {
         "header": {
-            "title": ""
+            "title": "Biểu thuế xuất khẩu"
         },
         "modal": {
-            "title": ""
+            "title": "Thêm biểu thuế xuất khẩu"
         }
     },
     "fiscal_year": {
         "content": {
-            "from_date": "",
+            "from_date": "Ngày bắt đầu",
             "modal": {
-                "title": ""
+                "title": "Thêm năm tài chính"
             },
-            "name": "",
-            "status": "",
-            "to_date": "",
-            "valuation_method": ""
+            "name": "Tên",
+            "status": "Trạng thái",
+            "to_date": "Ngày kết thúc",
+            "valuation_method": "Phương pháp định giá ngầm định"
         },
         "header": {
-            "title": ""
+            "title": "Năm tài chính"
         }
     },
     "importTax": {
         "header": {
-            "title": ""
+            "title": "Biểu thuế nhập khẩu"
         },
         "modal": {
-            "title": ""
+            "title": "Thêm biểu thuế nhập khẩu"
         }
     },
     "naturalResourceTax": {
         "header": {
-            "title": ""
+            "title": "Biểu thuế tài nguyên"
         },
         "modal": {
-            "title": ""
+            "title": "Thêm biểu thuế tài nguyên"
         }
     },
     "payment_method": {
-        "code": "",
+        "code": "Mã phương thức",
         "header": {
-            "title": ""
+            "title": "Phương thức thanh toán"
         },
         "modal": {
-            "title": ""
+            "title": "Thêm phương thức thanh toán"
         },
-        "payment_method_name": ""
+        "payment_method_name": "Tên phương thức thanh toán"
     },
     "payment_term": {
-        "code": "",
-        "discount_period": "",
-        "discount_rate": "",
-        "due_in_date": "",
+        "code": "Mã điều khoản",
+        "discount_period": "Thời hạn chiết khấu",
+        "discount_rate": "Tỉ lệ chiết khấu",
+        "due_in_date": "Ngày được nợ",
         "header": {
-            "title": ""
+            "title": "Điều khoản thanh toán"
         },
         "modal": {
-            "title": ""
+            "title": "Điều khoản thanh toán"
         },
-        "name": ""
+        "name": "Tên điều khoản"
     },
     "sob": {
-        "add": "",
-        "chart_account": "",
-        "code": "",
-        "currency": "",
-        "enviroment_tax": "",
-        "export_tax": "",
-        "import_tax": "",
-        "name": "",
-        "resource_tax": "",
-        "special_consumption_tax": "",
-        "title": "",
-        "value_added_tax": ""
+        "add": "Thêm bộ sổ",
+        "chart_account": "Hệ thống TKKT",
+        "code": "Mã bộ sổ",
+        "currency": "Đơn vị tiền tệ",
+        "enviroment_tax": "Biểu thuế môi trường",
+        "export_tax": "Biểu thuế xuất khẩu",
+        "import_tax": "Biểu thuế nhập khẩu",
+        "name": "Tên bộ sổ",
+        "resource_tax": "Biểu thuế tài nguyên",
+        "special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
+        "title": "Danh sách bộ sổ",
+        "value_added_tax": "Biểu thuế GTGT"
     },
     "specialConsumptionTax": {
         "header": {
-            "title": ""
+            "title": "Biểu thuế tiêu thụ đặc biệt"
         },
         "modal": {
-            "title": ""
+            "title": "Thêm biểu thuế tiêu thụ đặc biệt"
         }
     },
     "tax": {
-        "available": "",
-        "code": "",
-        "description": "",
-        "discount": "",
-        "name": "",
-        "parent_account": "",
-        "unit": ""
+        "available": "Hiệu lực",
+        "code": "Mã",
+        "description": "Mô tả",
+        "discount": "Chiết khấu",
+        "name": "Tên",
+        "parent_account": "Tài khoản tổng hợp",
+        "unit": "Đơn vị tính"
     },
     "valueAddedTax": {
         "header": {
-            "title": ""
+            "title": "Thuế giá trị gia tăng"
         },
         "modal": {
-            "title": ""
+            "title": "Thêm thuế giá trị gia tăng"
         }
     }
 }

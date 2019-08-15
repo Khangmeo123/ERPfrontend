@@ -1760,13 +1760,13 @@
         "failed": "Đăng nhập thất bại"
     },
     "loginForm": {
-        "doesNotHaveAccount": "",
-        "forgotPassword": "",
-        "login": "",
-        "password": "",
-        "rememberPassword": "",
-        "signUp": "",
-        "username": ""
+        "doesNotHaveAccount": "Chưa có tài khoản",
+        "forgotPassword": "Quên mật khẩu",
+        "login": "Đăng nhập",
+        "password": "Mật khẩu",
+        "rememberPassword": "Nhớ mật khẩu",
+        "signUp": "Đăng ký",
+        "username": "Tên đăng nhập"
     },
     "naturalResourceTax": {
         "header": {
@@ -1780,7 +1780,7 @@
         "helper": "Không có dữ liệu"
     },
     "pagination": {
-        "entries": "bản ghi",
+        "entries": "Bản ghi",
         "show": "Hiện thị"
     },
     "payment_method": {

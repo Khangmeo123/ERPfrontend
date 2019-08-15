@@ -1,14 +1,14 @@
 {
     "bookmarks": {
-        "title": ""
+        "title": "Dấu trang"
     },
     "loginForm": {
-        "doesNotHaveAccount": "",
-        "forgotPassword": "",
-        "login": "",
-        "password": "",
-        "rememberPassword": "",
-        "signUp": "",
-        "username": ""
+        "doesNotHaveAccount": "Chưa có tài khoản",
+        "forgotPassword": "Quên mật khẩu",
+        "login": "Đăng nhập",
+        "password": "Mật khẩu",
+        "rememberPassword": "Nhớ mật khẩu",
+        "signUp": "Đăng ký",
+        "username": "Tên đăng nhập"
     }
 }
