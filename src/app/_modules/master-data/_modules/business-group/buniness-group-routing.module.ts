@@ -21,6 +21,8 @@ import {SupplierDetailComponent} from './_page/supplier/supplier-detail/supplier
 import {CustomerDetailComponent} from './_page/customer/customer-detail/customer-detail.component';
 import {CustomerListComponent} from './_page/customer/customer-list/customer-list.component';
 import {ProvinceComponent} from './_page/province/province.component';
+import {TaxTemplateComponent} from './_page/tax-template/tax-template.component';
+import {TaxTemplateDetailComponent} from './_page/tax-template/tax-template-detail/tax-template-detail.component';
 
 const routes: Routes = [
   {
@@ -64,6 +66,23 @@ const routes: Routes = [
         path: 'province',
         component: ProvinceComponent,
       },
+      {
+        path: 'tax-template',
+        children: [
+          {
+            path: 'tax-template-list',
+            component: TaxTemplateComponent,
+          },
+          {
+            path: 'tax-template-detail',
+            component: TaxTemplateDetailComponent,
+          },
+        ],
+      },
+      // {
+      //   path: 'chart-of-account-template',
+      //   component: ChartOfAcc,
+      // },
     ],
   },
 ];

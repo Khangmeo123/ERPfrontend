@@ -10,6 +10,8 @@ import {GoodsIssueListComponent} from './goods-issue/goods-issue-list/goods-issu
 import {GoodsIssueDetailComponent} from './goods-issue/goods-issue-detail/goods-issue-detail.component';
 import {GoodsReturnListComponent} from './goods-return/goods-return-list/goods-return-list.component';
 import {GoodsReturnDetailComponent} from './goods-return/goods-return-detail/goods-return-detail.component';
+import {GoodsReturnRequestListComponent} from './goods-return-request/goods-return-request-list/goods-return-request-list.component';
+import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-return-request-detail/goods-return-request-detail.component';
 
 const routes: Routes = [
   {
@@ -36,6 +38,21 @@ const routes: Routes = [
       {
         path: 'goods-return-request',
         component: GoodsReturnRequestComponent,
+        children: [
+          {
+            path: 'goods-return-request-list',
+            component: GoodsReturnRequestListComponent,
+          },
+          {
+            path: 'goods-return-request-detail',
+            component: GoodsReturnRequestDetailComponent,
+          },
+          {
+            path: '',
+            redirectTo: 'goods-return-request-list',
+            pathMatch: 'full',
+          },
+        ],
       },
       {
         path: 'goods-return',

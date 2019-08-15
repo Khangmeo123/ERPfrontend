@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   encapsulation: ViewEncapsulation.None,
 })
 export class InventoryTransferRequestDetailComponent implements OnInit {
-  pageTitle = translate('inventoryTransfer.header.title');
+  pageTitle = translate('inventoryTransferRequest.header.title');
   fileNameList: Array<any> = []
   tableTemp = [
     {
@@ -29,7 +29,6 @@ export class InventoryTransferRequestDetailComponent implements OnInit {
   displayBatches: boolean = false;
   displaySerial: boolean = false;
   displayAmount: boolean = false;
-  displayInventoryTransfer: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -43,23 +42,8 @@ export class InventoryTransferRequestDetailComponent implements OnInit {
     }
   }
 
-  showBatches() {
-    this.displayBatches = true;
-  }
-
-  showSerial() {
-    this.displaySerial = true;
-  }
-
-  showAmount() {
-    this.displayAmount = true;
-  }
-
-  showInventoryTransfer() {
-    this.displayInventoryTransfer = true;
-  }
 
   backToList() {
-    this.router.navigate(['/inventory/receipt/goods-receipt/goods-receipt-list']);
+    this.router.navigate(['/inventory/transfer/inventory-transfer-request/inventory-transfer-request-list']);
   }
 }

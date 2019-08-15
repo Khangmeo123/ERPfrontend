@@ -24,6 +24,10 @@ const routes: Routes = [
         path: 'counting',
         loadChildren: () => import('./_modules/counting/counting.module').then(m => m.CountingModule),
       },
+      {
+        path: 'permission',
+        loadChildren: () => import('./_modules/permission/permission.module').then(m => m.PermissionModule),
+      },
     ],
   },
 ];

@@ -54,7 +54,6 @@
             <col>
             <col>
             <col>
-            <col>
           </colgroup>
         </ng-template>
         <ng-template pTemplate="header">
@@ -69,10 +68,6 @@
             </th>
             <th pResizableColumn data-qe-id="table-thead-receipted-date">
               {{ 'return.list.receiptedDate' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
-            </th>
-            <th pResizableColumn data-qe-id="table-thead-document-number">
-              {{ 'return.list.documentNumber' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-inventory">
@@ -124,7 +119,6 @@
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
             <td>  </td>
             <td>  </td>
-            <td> </td>
             <td> </td>
             <td> </td>
             <td> {{return.description }} </td>

@@ -1,6 +1,21 @@
 {
+	"accountingPeriod": {
+		"description": "Mô tả",
+		"endPeriod": "Ngày kết thúc",
+		"header": {
+			"title": "Kỳ kế toán"
+		},
+		"modal": {
+			"label": "Thêm kỳ kế toán",
+			"title": "Kỳ kế toán"
+		},
+		"startPeriod": "Ngày bắt đầu",
+		"status": {
+			"fiscal_year": "Năm tài chính"
+		}
+	},
 	"advancedFilter": {
-		"placeholder": ""
+		"placeholder": "Tìm kiếm..."
 	},
 	"asset": {
 		"content": {
@@ -19,8 +34,8 @@
 	"bank": {
 		"content": {
 			"code": "Mã ngân hàng",
-			"description": "Tên ngân hàng",
-			"name": "Mô tả"
+			"description": "Mô tả",
+			"name": "Tên ngân hàng"
 		},
 		"dialog": {
 			"title": "Thêm ngân hàng"
@@ -29,23 +44,57 @@
 			"title": "Danh sách ngân hàng"
 		}
 	},
-	"bank_account": {
-		"account_number": "Số tài khoản",
-		"account_owner": "Chủ tài khoản",
-		"accountant_code": "Mã tài khoản kế toán",
-		"bank_accounts": {
-			"account_number": "Số tài khoản",
-			"account_owner": "Chủ tài khoản",
-			"accountant_code": "Mã tài khoản kế toán",
-			"add": "Thêm tài khoản ngân hàng",
-			"bank_code": "Mã ngân hàng",
-			"description": "Mô tả"
+	"bankAccount": {
+		"account_name": "",
+		"account_number": "",
+		"accounting_code": "",
+		"bankAccounts": {
+			"account_name": "",
+			"account_number": "",
+			"accounting_code": "",
+			"add": "",
+			"bank_code": "",
+			"description": ""
 		},
-		"bank_code": "Mã ngân hàng",
-		"bank_name": "Tên ngân hàng",
-		"description": "Mô tả",
+		"bank_code": "",
+		"bank_name": "",
+		"description": "",
 		"details": {
-			"title": "Tài khoản ngân hàng"
+			"title": ""
+		}
+	},
+	"binLocation": {
+		"action": "Thao tác",
+		"code": "Mã",
+		"delete": {
+			"confirm": {
+				"message": "Bạn chắc chắn muốn xóa?",
+				"title": "Xác nhận xóa?"
+			}
+		},
+		"getFieldEntity": {
+			"error": "Lấy danh sách trường thất bại"
+		},
+		"layer1": {
+			"code": "Mã lớp 1"
+		},
+		"layer2": {
+			"code": "Mã lớp 2"
+		},
+		"layer3": {
+			"code": "Mã lớp 3"
+		},
+		"layer4": {
+			"code": "Mã lớp 4"
+		},
+		"modal": {
+			"title": "Thêm vị trí kho"
+		},
+		"name": "Tên",
+		"title": "Vị trí kho",
+		"update": {
+			"error": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
 		}
 	},
 	"bookmarks": {
@@ -79,6 +128,76 @@
 			"title": "Hệ thống tài khoản"
 		},
 		"super_account": "Tài khoản tổng hợp"
+	},
+	"codeFormula": {
+		"code": "Mã",
+		"field": {
+			"error": "Lấy danh sách trường thất bại"
+		},
+		"general": {
+			"title": "Quy tắc tách mã"
+		},
+		"get": {
+			"error": "Lấy thông tin thất bại"
+		},
+		"identifierStringEnd": "Vị trí kết thúc",
+		"identifierStringStart": "Vị trí bắt đầu",
+		"identifierStringValues": "Giá trị nhận dạng",
+		"item": {
+			"code": "Mã sản phẩm",
+			"name": "Tên sản phẩm",
+			"title": "Danh sách sản phẩm áp dụng"
+		},
+		"legalEntity": {
+			"missingLegalEntityId": "Thiếu id của pháp nhân"
+		},
+		"legalEntityList": {
+			"error": "Không thể lấy danh sách pháp nhân"
+		},
+		"length": "Độ dài",
+		"name": "Tên",
+		"rule": {
+			"end": "Kết thúc với",
+			"itemFieldDisplay": "Trường",
+			"start": "Bắt đầu với",
+			"title": "Quy tắc tách mã"
+		},
+		"ruleModal": {
+			"title": "Quy tắc tách mã"
+		},
+		"splitRuleContent": {
+			"field": "Trường",
+			"start": "Bắt đầu với"
+		},
+		"test": {
+			"expirationDate": "Ngày hết hạn",
+			"itemCode": "Mã sản phẩm",
+			"mfrDate": "Ngày sản xuất",
+			"qrCode": "Mã QR",
+			"serial": "Serial",
+			"title": "Test mã"
+		},
+		"title": "Quy tắc tách mã",
+		"update": {
+			"error": "Cập nhật thành công",
+			"success": "Cập nhật thất bại"
+		}
+	},
+	"cost-center": {
+		"content": {
+			"account": "Tài khoản",
+			"description": "Mô tả",
+			"from_date": "Ngày bắt đầu",
+			"id": "Mã trung tâm",
+			"modal": {
+				"title": "Thêm trung tâm chi phí"
+			},
+			"name": "Tên trung tâm",
+			"to_date": "Ngày kết thúc"
+		},
+		"header": {
+			"title": "Trung tâm chi phí"
+		}
 	},
 	"cropper": {
 		"browseImage": "Chọn ảnh",
@@ -185,7 +304,7 @@
 			"customerInfo": "Thông tin liên hệ khách hàng",
 			"customerName": "Tên khách hàng",
 			"deliveryOrder": {
-				"title": ""
+				"title": "Nhập phiếu từ đơn bán hàng"
 			},
 			"deliveryOrderRequest": {
 				"buyer": "Người mua",
@@ -220,21 +339,23 @@
 				"title ": "Chi tiết QR code"
 			},
 			"receiptedDate": "Ngày thực hiện",
+			"shipper": "Người giao hàng",
 			"tab1": {
+				"Serial": "Serial",
 				"amount": "Số lương",
 				"batches": "Lô",
-				"cda": "CDA",
 				"discount": "Chiết khấu",
 				"discountAmount": "Số tiền chiết khấu",
 				"itemName": "Tên hàng hóa",
 				"itemNo": "Mã hàng",
 				"purchaseOrderNumber": "Mã đơn hàng",
 				"quantity": "Số lương",
-				"title": "Chi tiết hàng hóa theo kế hoạch",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
 				"total": "Thành tiền",
 				"unitOfMeasure": "Đơn vị tính",
 				"unitPrice": "Đơn giá",
-				"valueAddedTax": "Thuế VAT"
+				"valueAddedTax": "Thuế VAT",
+				"weight": "Khối lượng hàng"
 			},
 			"tab2": {
 				"title": "Đính kèm"
@@ -261,11 +382,11 @@
 	},
 	"department": {
 		"addToDepartment": {
-			"error": "",
-			"success": ""
+			"error": "Thêm phòng ban không thành công",
+			"success": "Thêm phòng ban thành công"
 		},
 		"asset": {
-			"actions": "",
+			"actions": "Thao tác",
 			"add": "Thông tin tài sản",
 			"code": "Mã tài sản",
 			"fromDate": "Quản lý từ ngày",
@@ -353,23 +474,23 @@
 	},
 	"detailEmployeeGroup": {
 		"bankAccount": {
-			"bankAccountName": "",
-			"bankAccountNumber": "",
-			"bankBranch": "",
-			"bankName": "",
-			"divisionAddress": "",
-			"province": "",
-			"title": ""
+			"bankAccountName": "Tên chủ tài khoản",
+			"bankAccountNumber": "Số tài khoản",
+			"bankBranch": "Chi nhánh",
+			"bankName": "Tên ngân hàng",
+			"divisionAddress": "Địa chỉ chi nhánh",
+			"province": "Tỉnh/Thành phố",
+			"title": "Tài khoản ngân hàng"
 		},
 		"contacts": {
-			"action": "",
+			"action": "Thao tác",
 			"add": "Thêm thông tin liên hệ",
 			"address": "Địa chỉ",
 			"code": "STT",
 			"email": "Email",
-			"phone": "",
+			"phone": "Số điện thoại",
 			"phone_number": "Số điện thoại",
-			"province": "",
+			"province": "Tỉnh thành",
 			"recipient": "Tên người liên hệ",
 			"title": "Thông tin liên hệ"
 		},
@@ -378,22 +499,22 @@
 			"women": "Nữ"
 		},
 		"general": {
-			"code": "",
-			"dob": "",
-			"employeePositions": "",
-			"gender": "",
-			"identityNumber": "",
-			"insuranceSalary": "",
-			"issueDate": "",
-			"issuePlace": "",
-			"jobLevel": "",
-			"jobTitle": "",
-			"name": "",
-			"numberDependentPerson": "",
-			"salary": "",
-			"salaryRatio": "",
-			"status": "",
-			"taxCode": "",
+			"code": "Mã nhân viên",
+			"dob": "Ngày sinh",
+			"employeePositions": "Nhóm nhân viên",
+			"gender": "Giới tính",
+			"identityNumber": "Số CMND",
+			"insuranceSalary": "Lương bảo hiểm",
+			"issueDate": "Ngày cấp",
+			"issuePlace": "Nơi cấp",
+			"jobLevel": "Cấp bậc chức vụ",
+			"jobTitle": "Chức vụ",
+			"name": "Tên nhân viên",
+			"numberDependentPerson": "Số người phụ thuộc",
+			"salary": "Lương thỏa thuân",
+			"salaryRatio": "Hệ số lương",
+			"status": "Trạng thái",
+			"taxCode": "Mã số thuế",
 			"title": "Thông tin chung"
 		},
 		"header": {
@@ -469,13 +590,12 @@
 	},
 	"division": {
 		"content": {
-			"action": "",
-			"address": "",
-			"code": "",
-			"name": ""
+			"address": "Địa chỉ",
+			"code": "Mã chi nhánh",
+			"name": "Tên chi nhánh"
 		},
 		"dialog": {
-			"title": ""
+			"title": "Thêm chi nhánh"
 		},
 		"header": {
 			"title": "Danh sách chi nhánh"
@@ -522,18 +642,27 @@
 				"gender": "Giới tính",
 				"identityNumber": "Số CMND",
 				"name": "Tên nhân viên",
-				"status": "Trạng thái"
+				"status": "Trạng thái",
+				"username": "Tên người dùng"
 			},
 			"header": {
 				"title": "Danh sách nhân viên"
 			}
-		}
+		},
+		"password": {
+			"error": "Lưu mật khẩu thất bại",
+			"field": "Mật khẩu",
+			"save": "Lưu mật khẩu",
+			"success": "Lưu mật khẩu thành công",
+			"title": "Đổi mật khẩu"
+		},
+		"username": "Tên người dùng"
 	},
 	"employeeDetail": {
 		"delete": {
 			"confirm": {
-				"message": "",
-				"title": ""
+				"message": "Bạn chắc chắn muốn xóa?",
+				"title": "Xác nhận xóa"
 			}
 		}
 	},
@@ -585,7 +714,7 @@
 		"taxCode": "Mã số thuế"
 	},
 	"employeeGroup": {
-		"add": "",
+		"add": "Thêm",
 		"code": "Mã nhóm",
 		"employee": {
 			"code": "Mã nhân viên",
@@ -610,14 +739,45 @@
 	},
 	"employeePosition": {
 		"header": {
-			"title": ""
+			"title": "Quản lý nhóm nhân viên"
+		}
+	},
+	"environmentTax": {
+		"header": {
+			"title": "Biểu thuế môi trường"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế môi trường"
+		}
+	},
+	"environment_tax": {
+		"description": "Mô tả"
+	},
+	"exportTax": {
+		"header": {
+			"title": "Biểu thuế xuất khẩu"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế xuất khẩu"
+		}
+	},
+	"fiscal_year": {
+		"content": {
+			"from_date": "Ngày bắt đầu",
+			"modal": {
+				"title": "Thêm năm tài chính"
+			},
+			"name": "Tên",
+			"status": "Trạng thái",
+			"to_date": "Ngày kết thúc",
+			"valuation_method": "Phương pháp định giá ngầm định"
+		},
+		"header": {
+			"title": "Năm tài chính"
 		}
 	},
 	"general": {
 		"action": "Tác vụ",
-		"actions": {
-			"title": ""
-		},
 		"button": {
 			"add": "Thêm",
 			"approve": "Phê duyệt",
@@ -626,8 +786,7 @@
 			"clear": "Bỏ lọc",
 			"completed": "Hoàn thành",
 			"delete": "Xóa",
-			"downloadTemplate": "",
-			"downloadTempplate": "",
+			"downloadTemplate": "Tải file mẫu",
 			"download_example": "Tải file mẫu",
 			"edit": "",
 			"export": "Xuất Excel",
@@ -636,12 +795,14 @@
 			"import": "Nhập hàng loạt",
 			"importFile": "",
 			"import_file": "Nhập hàng loạt",
+			"issue": "",
 			"ok": "",
 			"post": "Bình luận",
 			"print": "In",
 			"receive": "Nhận",
 			"referenceDocument": "Chứng từ tham chiếu",
 			"rejected": "Từ chối duyệt",
+			"reset": "Làm lại",
 			"reverse": "Hoàn duyệt",
 			"save": "Lưu",
 			"send": "Gửi",
@@ -653,24 +814,28 @@
 		},
 		"department": {
 			"delete": {
-				"message": "",
-				"title": ""
+				"message": "Bạn chắc chắn muốn xóa?",
+				"title": "Xác nhận xóa"
 			}
 		},
 		"detail": "Chi tiết",
 		"division": "Tên chi nhánh",
 		"done": "Đã nhận",
 		"error": {
-			"direction": "",
-			"fileImport": ""
+			"direction": "Hướng",
+			"fileImport": "Lỗi nhập file"
 		},
 		"fromDate": "Từ ngày",
 		"gender": {
 			"female": "Nữ",
 			"male": "Nam"
 		},
+		"import": {
+			"error": "Nhập thất bại",
+			"success": "Nhập thành công"
+		},
 		"legalEntity": {
-			"name": ""
+			"name": "Tên pháp nhân"
 		},
 		"legal_entity": {
 			"name": "Tên pháp nhân"
@@ -679,111 +844,118 @@
 		"pending": "Chờ duyệt",
 		"pendingCounting": "Chờ kiểm kê",
 		"pendingReceive": "Chờ nhận",
+		"pendingTransfer": "",
 		"project": {
 			"delete": {
-				"message": "",
-				"title": ""
+				"message": "Bạn chắc chắn muốn xóa?",
+				"title": "Xác nhận xóa"
 			}
 		},
 		"service": {
 			"save": {
-				"success": ""
+				"success": "Thành công"
 			},
 			"update": {
-				"getFailed": "",
-				"success": ""
+				"getFailed": "Cập nhật thất bại",
+				"success": "Cập nhật thành công"
 			}
 		},
 		"sob": "Số bộ sổ",
 		"text": {
 			"total": "Tổng tiền "
 		},
-		"toDate": "Đến ngày"
+		"toDate": "Đến ngày",
+		"update": {
+			"failure": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
+		}
 	},
 	"goodsIssue": {
 		"detail": {
 			"amount": {
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"quantity": "",
-				"quantitySaved": "",
-				"title ": "",
-				"unitOfMeasure": ""
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng",
+				"locationCode": "Mã vị trí",
+				"quantity": "Số lượng",
+				"quantitySaved": "Số lượng lưu",
+				"title ": "Vị trí hàng hóa trong kho",
+				"unitOfMeasure": "Đơn vị tính"
 			},
 			"batches": {
-				"batchCode": "",
-				"expiryDate": "",
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"manufacturingDate": "",
-				"quantityInEachBatch": "",
-				"quantitySaved": "",
-				"startScanBatchesNo": "",
-				"title ": ""
+				"batchCode": "Mã lô",
+				"expiryDate": "Hạn sử dụng",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantityInEachBatch": "Sô lượng hàng trong lô",
+				"quantitySaved": "số lương lưu",
+				"startScanBatchesNo": "Bắt đầu quét mã lô",
+				"title ": "Thông tin lô"
 			},
-			"binLocation": "",
+			"binLocation": "Vị trí lưu kho",
 			"button": {
-				"add": ""
+				"add": "Nhập phiếu"
 			},
-			"createdDate": "",
-			"creator": "",
-			"description": "",
-			"documentNumber": "",
-			"exporter": "",
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"exporter": "Người xuất hàng",
 			"form": {
-				"title": ""
+				"title": "Thông tin chung"
 			},
 			"goodsIssueRequest": {
-				"buyer": "",
-				"createdDate": "",
-				"creator": "",
-				"customerName": "",
-				"documentNo": ""
+				"buyer": "Người mua",
+				"createdDate": "Ngày tạo",
+				"creator": "Người tạo",
+				"customerName": "Tên khách hàng",
+				"documentNo": "Số chứng từ"
 			},
 			"header": {
-				"title": ""
+				"title": "Phiếu xuất kho khác"
 			},
-			"inventoryAddress": "",
-			"inventoryCode": "",
-			"personInCharge": "",
+			"inventoryAddress": "Địa chỉ kho",
+			"inventoryCode": "Mã kho",
+			"personInCharge": "Nhân viên phụ trách",
 			"qrCode": {
-				"code": "",
-				"expiryDate": "",
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"manufacturingDate": "",
-				"quantity": "",
-				"scanCode": "",
-				"scanQRCode": "",
-				"serial": "",
-				"title ": ""
+				"code": "QR code",
+				"expiryDate": "Ngày hết hạn",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantity": "Số lượng",
+				"scanCode": "Quét code",
+				"scanQRCode": "Bắt đầu quét QR code",
+				"serial": "Serial#",
+				"title ": "Chi tiết QR code"
 			},
-			"receiptedDate": "",
+			"receiptedDate": "Ngày thực hiện",
+			"shipper": "Người giao hàng",
 			"tab1": {
-				"amount": "",
-				"batches": "",
-				"cda": "",
-				"discount": "",
-				"discountAmount": "",
-				"itemName": "",
-				"itemNo": "",
-				"quantity": "",
-				"title": "",
-				"total": "",
-				"unitOfMeasure": "",
-				"unitPrice": "",
-				"valueAddedTax": ""
+				"Serial": "Serial",
+				"amount": "Số lương",
+				"batches": "Lô",
+				"discount": "Chiết khấu",
+				"discountAmount": "Số tiền chiết khấu",
+				"itemName": "Tên hàng hóa",
+				"itemNo": "Mã hàng",
+				"quantity": "Số lương",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
+				"total": "Thành tiền",
+				"unitOfMeasure": "Đơn vị tính",
+				"unitPrice": "Đơn giá",
+				"valueAddedTax": "Thuế VAT",
+				"weight": "Khối lượng hàng"
 			},
 			"tab2": {
-				"title": ""
+				"title": "Đính kèm"
 			}
 		},
 		"form": {
 			"post": {
-				"title": ""
+				"title": "Bình luận"
 			}
 		},
 		"list": {
@@ -878,15 +1050,15 @@
 		"receiptedDate": "Ngày thực hiện",
 		"receiver": "Người nhận hàng",
 		"tab1": {
+			"Serial": "Serial",
 			"amount": "Số lượng",
 			"batches": "Lô",
-			"cda": "CDA",
 			"discount": "Chiết khấu",
 			"discountAmount": "Số tiền chiết khấu",
 			"itemNo": "Mã hàng",
 			"purchaseOrderNumber": "Mã đơn hàng",
 			"quantity": "Số lượng",
-			"title": "Chi tiết hàng hóa theo kế hoạch",
+			"title": "Chi tiết hàng hóa theo hoạch toán",
 			"total": "Thành tiền",
 			"unitOfMeasure": "Đơn vị",
 			"valueAddedTax": "Thuế VAT"
@@ -925,9 +1097,9 @@
 			"itemName": "Tên hàng hóa",
 			"locationCode": "Mã vị trí",
 			"manufacturingDate": "Ngày sản xuất",
+			"qrCode": "",
+			"quantity": "Số lương",
 			"quantityInEachBatch": "Sô lượng hàng trong lô",
-			"quantitySaved": "số lương lưu",
-			"startScanBatchesNo": "Bắt đầu quét mã lô",
 			"title ": "Thông tin lô"
 		},
 		"binLocation": "Vị trí lưu kho",
@@ -966,7 +1138,7 @@
 			"locationCode": "Mã vị trí",
 			"manufacturingDate": "Ngày sản xuất",
 			"quantity": "Số lượng",
-			"scanCode": "Quét code",
+			"rows": "",
 			"scanQRCode": "Bắt đầu quét QR code",
 			"serial": "Serial#",
 			"title ": "Chi tiết QR code"
@@ -977,16 +1149,17 @@
 		"supplierCode": "Mã nhà cung cấp",
 		"supplierName": "Tên nhà cung cấp",
 		"tab1": {
+			"Serial": "",
+			"actualReceive": "",
 			"amount": "Số lượng",
 			"batches": "Lô",
-			"cda": "CDA",
 			"discount": "Chiết khấu",
 			"discountAmount": "Số tiền chiết khấu",
 			"itemName": "",
 			"itemNo": "Mã hàng",
 			"purchaseOrderNumber": "Mã đơn hàng",
 			"quantity": "Số lượng",
-			"title": "Chi tiết hàng hóa theo kế hoạch",
+			"title": "Chi tiết hàng hóa theo hoạch toán",
 			"total": "Thành tiền",
 			"unitOfMeasure": "Đơn vị",
 			"unitPrice": "",
@@ -999,112 +1172,195 @@
 	"goodsReturn": {
 		"detail": {
 			"amount": {
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"quantity": "",
-				"quantitySaved": "",
-				"title ": "",
-				"unitOfMeasure": ""
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"quantity": "Số lượng",
+				"quantitySaved": "Số lượng lưu",
+				"title ": "Vị trí hàng hóa trong kho",
+				"unitOfMeasure": "Đơn vị tính"
 			},
 			"batches": {
-				"batchCode": "",
-				"expiryDate": "",
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"manufacturingDate": "",
-				"quantityInEachBatch": "",
-				"quantitySaved": "",
-				"startScanBatchesNo": "",
-				"title ": ""
+				"batchCode": "Mã lô",
+				"expiryDate": "Hạn sử dụng",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantityInEachBatch": "Số lượng hàng trong lô",
+				"quantitySaved": "Số lượng lưu",
+				"startScanBatchesNo": "Bắt đầu quét mã lô",
+				"title ": "Thông tin lô"
 			},
-			"binLocation": "",
+			"binLocation": "Vị trí lưu kho",
 			"button": {
-				"add": ""
+				"add": "Nhập phiếu"
 			},
-			"createdDate": "",
-			"creator": "",
-			"customerCode": "",
-			"customerInfo": "",
-			"customerName": "",
-			"description": "",
-			"documentNumber": "",
-			"exporter": "",
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"customerCode": "Mã khách hàng",
+			"customerInfo": "Thông tin liên hệ khách hàng",
+			"customerName": "Tên khách hàng",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"exporter": "Người xuất hàng",
 			"form": {
-				"title": ""
+				"title": "Thông tin chung"
 			},
 			"goodsReturn": {
-				"title": ""
+				"title": "Nhập phiếu từ yêu cầu"
 			},
 			"goodsReturnRequest": {
-				"buyer": "",
-				"createdDate": "",
-				"creator": "",
-				"customerName": "",
-				"documentNo": ""
+				"buyer": "Người mua",
+				"createdDate": "Ngày tạo",
+				"creator": "Người tạo",
+				"customerName": "Tên khách hàng",
+				"documentNo": "Số chứng từ"
 			},
 			"header": {
-				"title": ""
+				"title": "Phiếu xuất kho hàng trả lại nhà cung cấp"
 			},
-			"inventoryAddress": "",
-			"inventoryCode": "",
-			"personInCharge": "",
+			"inventoryAddress": "Địa chỉ kho",
+			"inventoryCode": "Mã kho",
+			"personInCharge": "Người phụ trách",
 			"qrCode": {
-				"code": "",
-				"expiryDate": "",
-				"itemCode": "",
-				"itemName": "",
-				"locationCode": "",
-				"manufacturingDate": "",
-				"quantity": "",
+				"code": "QR code",
+				"expiryDate": "Ngày hết hạn",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantity": "Số lượng",
 				"scanCode": "",
-				"scanQRCode": "",
-				"serial": "",
-				"title ": ""
+				"scanQRCode": "Bắt đầu quét QR code",
+				"serial": "Serial#",
+				"title ": "Chi tiết QR code"
 			},
-			"receiptedDate": "",
+			"receiptedDate": "Ngày thực hiện",
+			"shipper": "Người giao hàng",
 			"tab1": {
-				"amount": "",
-				"batches": "",
-				"cda": "",
-				"discount": "",
-				"discountAmount": "",
-				"itemName": "",
-				"itemNo": "",
-				"purchaseOrderNumber": "",
-				"quantity": "",
-				"title": "",
-				"total": "",
-				"unitOfMeasure": "",
-				"unitPrice": "",
-				"valueAddedTax": ""
+				"Serial": "Serial",
+				"amount": "Số lương",
+				"batches": "Lô",
+				"discount": "Chiết khấu",
+				"discountAmount": "Số tiền chiết khấu",
+				"itemName": "Tên hàng hóa",
+				"itemNo": "Mã hàng",
+				"purchaseOrderNumber": "Mã đơn hàng",
+				"quantity": "Số lương",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
+				"total": "Thành tiền",
+				"unitOfMeasure": "Đơn vị tính",
+				"unitPrice": "Đơn giá",
+				"valueAddedTax": "Thuế VAT",
+				"weight": "Khối lượng hàng"
 			},
 			"tab2": {
-				"title": ""
+				"title": "Đính kèm"
 			}
 		},
 		"form": {
 			"post": {
-				"title": ""
+				"title": "Bình luận"
 			}
 		},
 		"list": {
-			"createdDate": "",
-			"creator": "",
-			"description": "",
-			"documentNumber": "",
-			"inventoryAddress": "",
-			"inventoryCode": "",
-			"receip     tedDate": "",
-			"status": ""
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"header": {
+				"title": "Phiếu xuất kho hàng trả lại nhà cung cấp"
+			},
+			"inventoryAddress": "Địa chỉ kho",
+			"inventoryCode": "Mã kho",
+			"receiptedDate": "Ngày thực hiện",
+			"status": "Trạng thái"
+		}
+	},
+	"goodsReturnRequest": {
+		"detail": {
+			"batches": {
+				"startScanBatchesNo": "Bắt đầu quét mã lô"
+			},
+			"button": {
+				"add": "Nhập phiếu"
+			},
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"form": {
+				"title": "Thông tin chung"
+			},
+			"goodsReturnRequest": {
+				"supplierCode": "Mã nhà cung cấp",
+				"title": "Nhập phiếu từ đơn nhập mua"
+			},
+			"goodsReturnRequestRequest": {
+				"buyer": "Người mua",
+				"createdDate": "Ngày tạo",
+				"creator": "Người tạo",
+				"documentNo": "Số chứng từ"
+			},
+			"inventoryAddress": "Địa chỉ kho",
+			"inventoryCode": "Mã kho",
+			"personInCharge": "Nhân viên phụ trách",
+			"receiptedDate": "Ngày thực hiện",
+			"receiver": "Người nhận hàng",
+			"shipper": "",
+			"supplierCode": "Mã nhà cung cấp",
+			"supplierInfo": "Thông tin liên hệ của hàng cung cấp",
+			"supplierName": "Tên nhà cung cấp",
+			"tab1": {
+				"discount": "Chiết khấu",
+				"discountAmount": "Số tiền chiết khấu",
+				"itemName": "Tên hàng hóa",
+				"itemNo": "Mã hàng",
+				"purchaseOrderNumber": "Mã đơn hàng",
+				"quantity": "Số lương",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
+				"total": "Thành tiền",
+				"unitOfMeasure": "Đơn vị tính",
+				"unitPrice": "Đơn giá",
+				"valueAddedTax": "Thuế VAT",
+				"weight": "Khối lượng hàng"
+			},
+			"tab2": {
+				"title": "Đính kèm"
+			}
+		},
+		"form": {
+			"post": {
+				"title": "Bình luận"
+			}
+		},
+		"header": {
+			"title": "Yêu cầu xuất kho hàng trả lại nhà cung cấp"
+		},
+		"list": {
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"inventoryCode": "Mã kho",
+			"receiptedDate": "Ngày thực hiện",
+			"status": "Trang thái"
 		}
 	},
 	"hrOrganization": {
-		"add": "",
-		"code": "",
-		"name": "",
-		"title": ""
+		"add": "Thêm phòng",
+		"code": "Mã phòng ban",
+		"name": "Tên phòng ban",
+		"title": "Thông tin phòng ban"
+	},
+	"importTax": {
+		"header": {
+			"title": "Biểu thuế nhập khẩu"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế nhập khẩu"
+		}
 	},
 	"inventoryCounting": {
 		"detail": {
@@ -1152,7 +1408,6 @@
 			},
 			"tab1": {
 				"batches": "Lô",
-				"cda": "CDA",
 				"countAmount": "Số lượng thực đếm",
 				"highestDifference": "Số lượng chênh lệch cao nhất",
 				"inventoryCode": "Mã kho",
@@ -1160,6 +1415,7 @@
 				"itemNo": "Mã hàng",
 				"no": "STT",
 				"quantityOfInventory": "Số lương tồn kho",
+				"serial": "",
 				"title": "Chi tiết hàng hóa",
 				"unitOfMeasure": "Đơn vị tính"
 			},
@@ -1179,6 +1435,149 @@
 			"inventoryCountingOwner": "Người chịu trách nhiệm",
 			"issueID": "Số phiếu",
 			"status": "Trạng thái"
+		}
+	},
+	"inventoryTransfer": {
+		"detail": {
+			"amount": {
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"quantity": "Số lượng",
+				"quantitySaved": "Số lượng lưu",
+				"title ": "Vị trí hàng hóa trong kho",
+				"unitOfMeasure": "Đơn vị tính"
+			},
+			"amountScan": "Số lượng quét",
+			"batches": {
+				"batchCode": "Mã lô",
+				"expiryDate": "Hạn sử dụng",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantityInEachBatch": "Sô lượng hàng trong lô",
+				"quantitySaved": "số lương lưu",
+				"startScanBatchesNo": "Bắt đầu quét mã lô",
+				"title ": "Thông tin lô"
+			},
+			"binLocation": "Vị trí lưu kho",
+			"button": {
+				"add": "Nhập phiếu"
+			},
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"exporter": "Người xuất hàng",
+			"form": {
+				"post": {
+					"title": "Bình luận"
+				},
+				"title": "Thông tin chung"
+			},
+			"inventoryCodeFrom": "Từ kho",
+			"inventoryCodeTo": "Đến kho",
+			"inventoryRequest": "Nhập phiếu từ yêu cầu",
+			"inventoryTransferRequest": {
+				"createdDate": "Ngày tạo",
+				"creator": "Người tạo",
+				"documentNo": "Số chứng từ"
+			},
+			"issuedDate": "Ngày thực hiện xuất",
+			"personInCharge": "Nhân viên phụ trách",
+			"qrCode": {
+				"code": "QR code",
+				"expiryDate": "Hạn sử dụng",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"locationCode": "Mã vị trí",
+				"manufacturingDate": "Ngày sản xuất",
+				"quantity": "Số lương",
+				"scanCode": "Quét code",
+				"scanQRCode": "Bắt đầu quét QR code",
+				"serial": "Serial#",
+				"title ": "Thông tin QR code sản phẩm"
+			},
+			"receiver": "Người nhận hàng",
+			"request": {
+				"customerName": "Tên khách hàng"
+			},
+			"tab1": {
+				"Serial": "Serial",
+				"actualQuantity": "Số lượng thực nhận",
+				"amount": "Số lương",
+				"batches": "Lô",
+				"dueDate": "Ngày dự kiến hoàn thành",
+				"issueIdRequest": "Số phiếu yêu cầu điều chuyển",
+				"itemName": "Tên hàng hóa",
+				"itemNo": "Mã hàng",
+				"quantity": "Số lương",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
+				"unitOfMeasure": "Đơn vị tính"
+			},
+			"tab2": {
+				"title": "Đính kèm"
+			}
+		},
+		"header": {
+			"title": "Phiếu điều chuyển kho"
+		},
+		"list": {
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"inventoryAddress": "Địa chỉ kho",
+			"inventoryCode": "Mã kho",
+			"status": "Trang thái",
+			"transferDate": "Ngày thực hiện"
+		}
+	},
+	"inventoryTransferRequest": {
+		"detail": {
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ ",
+			"form": {
+				"post": {
+					"title": "Bình luận"
+				},
+				"title": "Thông tin chung"
+			},
+			"inventoryCodeFrom": "Từ kho",
+			"inventoryCodeTo": "Đến kho",
+			"personInCharge": "Nhân viên phụ trách",
+			"receiver": "Người nhận hàng",
+			"tab1": {
+				"actualQuantity": "Số lượng thực nhận",
+				"dueDate": "Ngày dự kiến hoàn thành",
+				"issueWarehouse": "Kho xuất",
+				"itemName": "Tên hàng hóa",
+				"itemNo": "Mã hàng",
+				"quantity": "Số lượng",
+				"receiptWarehouse": "Kho nhập",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
+				"unitOfMeasure": "Đơn vị tính"
+			},
+			"tab2": {
+				"title": "Đính kèm"
+			},
+			"transferDate": "Ngày thực hiện"
+		},
+		"header": {
+			"title": "Yêu cầu chuyển kho"
+		},
+		"list": {
+			"createdDate": "Ngày tạo",
+			"creator": "Người tạo",
+			"description": "Mô tả",
+			"documentNumber": "Số chứng từ",
+			"inventoryAddress": "Địa chỉ kho",
+			"inventoryCode": "Mã kho",
+			"status": "Trang thái",
+			"transferDate": "Ngày thực hiện"
 		}
 	},
 	"item": {
@@ -1218,7 +1617,7 @@
 				"title": "Danh sách sản phẩm"
 			},
 			"tab": {
-				"title1": "",
+				"title1": "Tab 1",
 				"title_2": "Thông tin thuế suất"
 			}
 		},
@@ -1303,7 +1702,11 @@
 		"header": {
 			"title": "Danh sách pháp nhân"
 		},
-		"name": "Tên pháp nhân"
+		"name": "Tên pháp nhân",
+		"subLevel1": "Mã lớp 1",
+		"subLevel2": "Mã lớp 2",
+		"subLevel3": "Mã lớp 3",
+		"subLevel4": "Mã lớp 4"
 	},
 	"legalItemDetail": {
 		"content": {
@@ -1353,51 +1756,208 @@
 			"title_1": "Thông tin chung"
 		}
 	},
+	"login": {
+		"failed": "Đăng nhập thất bại"
+	},
+	"loginForm": {
+		"doesNotHaveAccount": "",
+		"forgotPassword": "",
+		"login": "",
+		"password": "",
+		"rememberPassword": "",
+		"signUp": "",
+		"username": ""
+	},
+	"naturalResourceTax": {
+		"header": {
+			"title": "Biểu thuế tài nguyên"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế tài nguyên"
+		}
+	},
 	"noData": {
-		"helper": ""
+		"helper": "Không có dữ liệu"
 	},
 	"pagination": {
 		"entries": "bản ghi",
 		"show": "Hiện thị"
 	},
+	"payment_method": {
+		"code": "Mã phương thức",
+		"header": {
+			"title": "Phương thức thanh toán"
+		},
+		"modal": {
+			"title": "Thêm phương thức thanh toán"
+		},
+		"payment_method_name": "Tên phương thức thanh toán"
+	},
+	"payment_term": {
+		"code": "Mã điều khoản",
+		"discount_period": "Thời hạn chiết khấu",
+		"discount_rate": "Tỉ lệ chiết khấu",
+		"due_in_date": "Ngày được nợ",
+		"header": {
+			"title": "Điều khoản thanh toán"
+		},
+		"modal": {
+			"title": "Điều khoản thanh toán"
+		},
+		"name": "Tên điều khoản"
+	},
+	"permission": {
+		"active": "",
+		"currentStatus": "",
+		"currentstep": "",
+		"documentType": "",
+		"header": {
+			"title": ""
+		},
+		"inventoryCode": "",
+		"nextStaus": "",
+		"nextStep ": "",
+		"positionCode": "",
+		"positionName": ""
+	},
 	"project": {
 		"employee": {
-			"code": "",
-			"name": ""
+			"code": "Mã nhân viên",
+			"name": "Tên nhân viên"
 		}
 	},
 	"projectOrganization": {
-		"code": "",
-		"endDate": "",
-		"manager": "",
-		"name": "",
-		"startDate": "",
-		"title": ""
+		"code": "Mã dự án",
+		"endDate": "Ngày kết thúc",
+		"manager": "Người quản lý",
+		"name": "Tên dự án",
+		"startDate": "Ngày bắt đầu",
+		"title": "Thông tin dự án"
+	},
+	"province": {
+		"code": "Mã tỉnh thành",
+		"create": {
+			"error": "Tạo tỉnh thành bị lỗi"
+		},
+		"delete": {
+			"message": "Bạn chắc chắn muốn xóa?",
+			"success": "Xóa tỉnh thành thành công",
+			"title": "Xác nhận xóa"
+		},
+		"get": {
+			"error": "Lấy thông tin tỉnh thành không được"
+		},
+		"modal": {
+			"title": "Thông tin tỉnh thành"
+		},
+		"name": "Tên tỉnh thành",
+		"title": "Quản lý tỉnh thành",
+		"update": {
+			"error": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
+		}
 	},
 	"return": {
 		"detail": {
 			"amount": {
-				"itemCode": "Mã hàng",
-				"itemName": "Tên hàng hóa",
-				"locationCode": "Mã vị trí",
-				"quantity": "Số lượng",
-				"quantitySaved": "Số lượng lưu",
-				"title ": "Vị trí hàng hóa trong kho",
-				"unitOfMeasure": "Đơn vị tính"
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
 			},
 			"batches": {
-				"batchCode": "Mã lô",
-				"expiryDate": "Hạn sử dụng",
-				"itemCode": "Mã hàng",
-				"itemName": "Tên hàng hóa",
-				"locationCode": "Mã vị trí",
-				"manufacturingDate": "Ngày sản xuất",
-				"quantityInEachBatch": "Sô lượng hàng trong lô",
-				"quantitySaved": "số lương lưu",
-				"startScanBatchesNo": "Bắt đầu quét mã lô",
-				"title ": "Thông tin lô"
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
 			},
-			"binLocation": "Vị trí lưu kho",
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"customerCode": "",
+			"customerInfo": "",
+			"customerName": "",
+			"description": "",
+			"documentNumber": "",
+			"form": {
+				"title": ""
+			},
+			"header": {
+				"title": ""
+			},
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiptedDate": "",
+			"receiver": "",
+			"return": {
+				"title": ""
+			},
+			"returnRequest": {
+				"buyer": "",
+				"createdDate": "",
+				"creator": "",
+				"customerName": "",
+				"documentNo": ""
+			},
+			"tab1": {
+				"Serial": "",
+				"amount": "",
+				"batches": "",
+				"discount": "",
+				"discountAmount": "",
+				"itemNo": "",
+				"purchaseOrderNumber": "",
+				"quantity": "",
+				"title": "",
+				"total": "",
+				"unitOfMeasure": "",
+				"valueAddedTax": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"header": {
+				"title": ""
+			},
+			"inventory": "",
+			"receiptRequirementID": "",
+			"receiptedDate": "",
+			"status": ""
+		}
+	},
+	"returnRequest": {
+		"detail": {
 			"button": {
 				"add": "Nhập phiếu"
 			},
@@ -1407,71 +1967,51 @@
 			"customerInfo": "Thông tin liên hệ khách hàng",
 			"customerName": "Tên khách hàng",
 			"description": "Mô tả",
-			"documentNumber": "Số chứng từ",
+			"documentNumber": "Số chứng từ ",
 			"form": {
 				"title": "Thông tin chung"
-			},
-			"header": {
-				"title": "Phiếu nhập kho hàng trả lại từ khách hàng"
 			},
 			"inventoryAddress": "Địa chỉ kho",
 			"inventoryCode": "Mã kho",
 			"personInCharge": "Người phụ trách",
-			"qrCode": {
-				"code": "QR code",
-				"expiryDate": "Ngày hết hạn",
-				"itemCode": "Mã hàng",
-				"itemName": "Tên hàng hóa",
-				"locationCode": "Mã vị trí",
-				"manufacturingDate": "Ngày sản xuất",
-				"quantity": "Số lượng",
-				"scanCode": "Quét code",
-				"scanQRCode": "Bắt đầu quét QR code",
-				"serial": "Serial#",
-				"title ": "Chi tiết QR code"
-			},
 			"receiptedDate": "Ngày thực hiện",
-			"receiver": "Người nhận",
-			"return": {
-				"title": "Nhận phiếu yêu cầu trả hàng"
-			},
+			"receiver": "Người nhận hàng",
 			"returnRequest": {
+				"customerName": "Tên khách hàng",
+				"title": "Nhập phiếu từ đơn xuất bán"
+			},
+			"returnRequestRequest": {
 				"buyer": "Người mua",
 				"createdDate": "Ngày tạo",
 				"creator": "Người tạo",
-				"customerName": "",
 				"documentNo": "Số chứng từ"
 			},
 			"tab1": {
-				"amount": "Số lượng",
-				"batches": "Lô",
-				"cda": "CDA",
 				"discount": "Chiết khấu",
 				"discountAmount": "Số tiền chiết khấu",
+				"itemName": "Tên hàng hóa",
 				"itemNo": "Mã hàng",
-				"purchaseOrderNumber": "Mã đơn hàng",
-				"quantity": "Số lượng",
-				"title": "Chi tiết hàng hóa theo kế hoạch",
+				"quantity": "Số lương",
+				"title": "Chi tiết hàng hóa theo hoạch toán",
 				"total": "Thành tiền",
-				"unitOfMeasure": "Đơn vị",
+				"unitOfMeasure": "Đơn vị tính",
 				"valueAddedTax": "Thuế VAT"
 			},
 			"tab2": {
 				"title": "Đính kèm"
 			}
 		},
+		"header": {
+			"title": "Yêu cầu nhập kho hàng trả lại khách hàng"
+		},
 		"list": {
 			"createdDate": "Ngày tạo",
 			"creator": "Người tạo",
 			"description": "Mô tả",
-			"documentNumber": "Số chứng từ",
-			"header": {
-				"title": "Phiếu nhập kho hàng trả lại từ khách hàng"
-			},
-			"inventory": "Kho",
+			"inventoryCode": "Mã kho",
 			"receiptRequirementID": "Số phiếu",
 			"receiptedDate": "Ngày thực hiện",
-			"status": "Trạng thái"
+			"status": "Trang thái"
 		}
 	},
 	"select": {
@@ -1492,6 +2032,14 @@
 		"special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
 		"title": "Danh sách bộ sổ",
 		"value_added_tax": "Biểu thuế GTGT"
+	},
+	"specialConsumptionTax": {
+		"header": {
+			"title": "Biểu thuế tiêu thụ đặc biệt"
+		},
+		"modal": {
+			"title": "Thêm biểu thuế tiêu thụ đặc biệt"
+		}
 	},
 	"special_price_customer": {
 		"code": "Mã sản phẩm",
@@ -1527,7 +2075,7 @@
 				"taxCode": "Mã số thuế"
 			},
 			"header": {
-				"title": "Thêm mới nhà cung cấp"
+				"title": "Thông tin nhà cung cấp"
 			},
 			"tab": {
 				"title1": "Thông tin chung"
@@ -1569,6 +2117,52 @@
 			"name": "Tên nhà cung cấp"
 		}
 	},
+	"tax-template": {
+		"code": "",
+		"name": "",
+		"title": "",
+		"type": ""
+	},
+	"tax": {
+		"available": "Hiệu lực",
+		"code": "Mã",
+		"description": "Mô tả",
+		"discount": "Chiết khấu",
+		"name": "Tên",
+		"parent_account": "Tài khoản tổng hợp",
+		"unit": "Đơn vị tính"
+	},
+	"taxTemplate": {
+		"code": "Mã mẫu biểu thuế",
+		"delete": {
+			"error": "Xóa thất bại",
+			"success": "Xóa thành công"
+		},
+		"detail": {
+			"actions": "Thao tác",
+			"available": "Hiệu lực",
+			"code": "Mã biểu thuế",
+			"name": "Tên biểu thuế",
+			"rate": "Chiết khấu",
+			"unitOfMeasure": "Đơn vị tính"
+		},
+		"general": {
+			"title": "Mẫu biểu thuế"
+		},
+		"get": {
+			"error": "Không thể lấy thông tin mẫu biếu thuế"
+		},
+		"modal": {
+			"title": "Biểu thuế"
+		},
+		"name": "Tên",
+		"title": "Mẫu biểu thuế",
+		"type": "Loại biểu thuế",
+		"update": {
+			"error": "Cập nhật thất bại",
+			"success": "Cập nhật thành công"
+		}
+	},
 	"uom": {
 		"content": {
 			"code": "Mã đơn vị",
@@ -1581,6 +2175,14 @@
 		},
 		"header": {
 			"title": "Đơn vị tính sản phẩm"
+		}
+	},
+	"valueAddedTax": {
+		"header": {
+			"title": "Thuế giá trị gia tăng"
+		},
+		"modal": {
+			"title": "Thêm thuế giá trị gia tăng"
 		}
 	}
 }

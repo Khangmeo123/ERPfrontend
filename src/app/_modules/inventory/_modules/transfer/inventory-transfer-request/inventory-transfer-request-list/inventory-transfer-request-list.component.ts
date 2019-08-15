@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./inventory-transfer-request-list.component.scss']
 })
 export class InventoryTransferRequestListComponent implements OnInit {
-  pageTitle = translate('inventoryTransfer.header.title');
+  pageTitle = translate('inventoryTransferRequest.header.title');
   tmp = [
     {
       name: 'Nguyen Van A',
@@ -39,16 +39,16 @@ export class InventoryTransferRequestListComponent implements OnInit {
     matDatePicker.open();
   }
 
-  sort() {
+  sort(event) {
 
   }
 
-  editInventoryTransfer() {
-    this.router.navigate(['inventory/transfer/inventory-transfer/inventory-transfer-detail'])
+  editInventoryTransferRequest() {
+    this.router.navigate(['inventory/transfer/inventory-transfer-request/inventory-transfer-request-detail'])
   }
 
-  addInventoryTransfer() {
-    this.router.navigate(['inventory/transfer/inventory-transfer/inventory-transfer-detail'])
+  addInventoryTransferRequest() {
+    this.router.navigate(['inventory/transfer/inventory-transfer-request/inventory-transfer-request-detail'])
   }
 
 }

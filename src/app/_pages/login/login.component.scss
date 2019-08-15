@@ -1,0 +1,46 @@
+
+#background {
+    width: 89%;
+
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: absolute !important;
+    margin-top: -85px !important;
+    margin-left: -15px !important;
+    margin-right: 0 !important;
+    z-index: -1;
+}
+
+.example-form {
+    min-width: 200px;
+    max-width: 570px;
+    width: 100%;
+}
+
+.example-full-width {
+    width: 100%;
+}
+
+.container-fluid {
+    position: relative;
+
+
+}
+
+.inputForm {
+    margin-top: 200px;
+
+}
+
+mat-form-field {
+    font-size: 14px;
+}
+
+.login-button {
+    border-radius: 50px;
+    color: antiquewhite;
+}
+
+a {
+    color: #17A4EB;
+}

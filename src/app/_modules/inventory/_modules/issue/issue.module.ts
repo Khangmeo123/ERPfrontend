@@ -22,6 +22,8 @@ import {GoodsIssueDetailComponent} from './goods-issue/goods-issue-detail/goods-
 import {GoodsIssueListComponent} from './goods-issue/goods-issue-list/goods-issue-list.component';
 import {GoodsReturnDetailComponent} from './goods-return/goods-return-detail/goods-return-detail.component';
 import {GoodsReturnListComponent} from './goods-return/goods-return-list/goods-return-list.component';
+import {GoodsReturnRequestListComponent} from './goods-return-request/goods-return-request-list/goods-return-request-list.component';
+import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-return-request-detail/goods-return-request-detail.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,9 @@ import {GoodsReturnListComponent} from './goods-return/goods-return-list/goods-r
     GoodsIssueDetailComponent,
     GoodsIssueListComponent,
     GoodsReturnDetailComponent,
-    GoodsReturnListComponent],
+    GoodsReturnListComponent,
+    GoodsReturnRequestListComponent,
+    GoodsReturnRequestDetailComponent],
   imports: [
     CommonModule,
     IssueRoutingModule,

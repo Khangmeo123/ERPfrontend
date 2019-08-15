@@ -70,6 +70,16 @@ export const sampleSidebarMenu = [
         isShowed: true,
       },
       {
+        label: 'Mẫu biểu thuế',
+        route: '/master-data/business-group/tax-template/tax-template-list',
+        isShowed: true,
+      },
+      {
+        label: 'Mẫu hệ thống tài khoản',
+        route: '/master-data/business-group/chart-of-account-template/chart-of-account-template-list',
+        isShowed: true,
+      },
+      {
         divider: true,
         isShowed: true,
       },
@@ -294,7 +304,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Yêu cầu nhập kho hàng trả lại từ KH',
-        route: '/master-data/department',
+        route: '/inventory/receipt/return-request',
         exact: false,
         isShowed: true,
       },
@@ -318,6 +328,7 @@ export const sampleSidebarMenu = [
         label: 'Phiếu xuất kho khác',
         route: '/inventory/issue/goods-issue',
         exact: false,
+        isShowed: true,
       },
       {
         label: 'Yêu cầu xuất kho hàng trả lại NCC',
@@ -366,6 +377,16 @@ export const sampleSidebarMenu = [
       {
         label: 'Phiếu điều chỉnh tồn kho',
         route: '/master-data/department',
+        exact: false,
+        isShowed: true,
+      },
+      {
+        divider: true,
+        isShowed: true,
+      },
+      {
+        label: 'Phân quyền',
+        route: '/inventory/permission',
         exact: false,
         isShowed: true,
       },

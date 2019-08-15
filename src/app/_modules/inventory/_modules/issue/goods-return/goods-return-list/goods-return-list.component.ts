@@ -8,8 +8,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./goods-return-list.component.scss']
 })
 export class GoodsReturnListComponent implements OnInit {
-  pageTitle = translate('deliveryOrder.list.header.title')
-  deliveryOrderList = [
+  pageTitle = translate('goodsReturn.list.header.title');
+  isBookMark: boolean = false;
+  goodsReturnList = [
     {
       name: 'Nguyen Van A',
       createDate: '20/11/2019',
@@ -39,16 +40,20 @@ export class GoodsReturnListComponent implements OnInit {
     matDatePicker.open();
   }
 
-  sort() {
+  sort(event) {
 
   }
 
-  editdeliveryOrder() {
-    this.router.navigate(['inventory/issue/delivery-order/delivery-order-detail']);
+  editGoodsReturn() {
+    this.router.navigate(['inventory/issue/goods-return/goods-return-detail']);
   }
 
-  adddeliveryOrder() {
-    this.router.navigate(['inventory/issue/deliveryOrder/delivery-order-detail']);
+  addGoodsReturn() {
+    this.router.navigate(['inventory/issue/goods-return/goods-return-detail']);
+  }
+
+  bookMark() {
+
   }
 
 }
