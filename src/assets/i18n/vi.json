@@ -1807,18 +1807,18 @@
         "name": "Tên điều khoản"
     },
     "permission": {
-        "active": "",
-        "currentStatus": "",
-        "currentstep": "",
-        "documentType": "",
+        "active": "Hoạt động",
+        "currentStatus": "Trạng thái hiện tại",
+        "currentStep": "Bước hiện tại",
+        "documentType": "Loại tài liệu",
         "header": {
-            "title": ""
+            "title": "Phân quyền"
         },
-        "inventoryCode": "",
-        "nextStaus": "",
-        "nextStep ": "",
-        "positionCode": "",
-        "positionName": ""
+        "inventoryCode": "Mã kho",
+        "nextStatus": "Trạng thái tiếp theo",
+        "nextStep ": "Bước tiếp theo",
+        "positionCode": "Mã vị trí",
+        "positionName": "Tên vị trí"
     },
     "project": {
         "employee": {
