@@ -126,7 +126,8 @@
                             {{'inventoryCounting.detail.countingDate' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-date-picker data-qe-id="detail-form-counting-date" [control]="documentDate">
+                        <app-date-picker data-qe-id="detail-form-counting-date"
+                            [control]="inventoryCountingForm.get('documentDate')">
                         </app-date-picker>
                     </div>
                     <div class="col-sm-4 form-group">
