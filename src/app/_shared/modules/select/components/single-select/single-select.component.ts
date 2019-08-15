@@ -35,7 +35,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   listDirection = 'down';
 
-  @Input() direction: string = 'auto';
+  @Input() direction: string = 'down';
 
   isOpened = false;
 

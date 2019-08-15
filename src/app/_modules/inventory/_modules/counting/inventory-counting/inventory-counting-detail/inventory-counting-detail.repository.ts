@@ -93,6 +93,22 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
+    dropListItemDetailCode(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail-code',
+            JSON.stringify(itemDetailOfCountingSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    r.body.ids = r.body.ids.map(item => {
+                        return new ItemDetailOfCountingEntity(item);
+                    });
+                    r.body.exceptIds = r.body.exceptIds.map(item => {
+                        return new ItemDetailOfCountingEntity(item);
+                    });
+                    return r.body;
+                }),
+            );
+    }
+
     dropListItemDetail(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail',
             JSON.stringify(itemDetailOfCountingSearchEntity),

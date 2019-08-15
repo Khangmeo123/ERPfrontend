@@ -16,11 +16,11 @@ export class InventoryCountingForm extends FormModel {
     postingDate = new FormControl(null);
     remarks = new FormControl(null);
     inventoryCounters = new FormArray([]);
-    inventoryCountingContents = new FormArray([]);
+    inventoryCountingContents = new FormArray([], [requiredField]);
 
     errors = new FormGroup({
-        documentDate: new FormControl(),
-        ownerId: new FormControl(),
+        inventoryOrganizationId: new FormControl(),
+        inventoryCounters: new FormControl(),
     });
 
     constructor(inventoryCountingEntity?: any) {
@@ -36,6 +36,7 @@ export class InventoryCountingContentForm extends FormModel {
     itemDetailName = new FormControl(null);
     itemDetailUnitOfMeasureCode = new FormControl(null);
     itemDetailUnitOfMeasureName = new FormControl(null);
+    itemDetailUnitOfMeasureId = new FormControl(null);
     binLocationId = new FormControl(null);
     binLocationCode = new FormControl(null);
     quantityOnDocumentDate = new FormControl(null);

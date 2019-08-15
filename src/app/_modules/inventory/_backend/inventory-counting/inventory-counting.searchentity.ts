@@ -41,6 +41,7 @@ export class EmployeeDetailOfCountingSearchEntity extends SearchEntity {
 export class ItemDetailOfCountingSearchEntity extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
+    inventoryOrganizationId: string;
     constructor() {
         super();
     }

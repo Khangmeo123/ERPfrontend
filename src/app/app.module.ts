@@ -26,9 +26,9 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar-list.component';
 import { CookieService } from 'ngx-cookie-service';
-
-import {MatInputModule} from '@angular/material/input';
-import {MatCheckboxModule} from '@angular/material/checkbox';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SignUpComponent } from './_pages/sign-up/sign-up.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 
@@ -74,7 +74,8 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
     }),
     ClickOutsideModule,
     MatInputModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    BsDropdownModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

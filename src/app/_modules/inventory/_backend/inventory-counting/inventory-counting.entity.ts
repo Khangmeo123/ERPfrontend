@@ -62,6 +62,7 @@ export class InventoryCountingContents extends Entity {
     itemDetailId: string;
     itemDetailCode: string;
     itemDetailName: string;
+    itemDetailUnitOfMeasureId: string;
     itemDetailUnitOfMeasureCode: string;
     itemDetailUnitOfMeasureName: string;
     binLocationId: string;
