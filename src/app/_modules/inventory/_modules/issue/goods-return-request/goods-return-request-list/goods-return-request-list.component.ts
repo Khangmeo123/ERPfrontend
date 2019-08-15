@@ -4,29 +4,29 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-delivery-order-list',
-  templateUrl: './goods-return-list.component.html',
-  styleUrls: ['./goods-return-list.component.scss']
+  templateUrl: './goods-return-request-list.component.html',
+  styleUrls: ['./goods-return-request-list.component.scss'],
 })
-export class GoodsReturnListComponent implements OnInit {
-  pageTitle = translate('goodsReturn.list.header.title');
+export class GoodsReturnRequestListComponent implements OnInit {
+  pageTitle = translate('goodsReturnRequest.header.title');
   isBookMark: boolean = false;
-  goodsReturnList = [
+  goodsReturnRequestList = [
     {
       name: 'Nguyen Van A',
       createDate: '20/11/2019',
-      status: 1
+      status: 1,
     },
     {
       name: 'Nguyen Van A',
       createDate: '20/11/2019',
-      status: 1
+      status: 1,
     },
     {
       name: 'Nguyen Van A',
       createDate: '20/11/2019',
-      status: 1
-    }
-  ]
+      status: 1,
+    },
+  ];
   constructor(private router: Router) { }
 
   ngOnInit() {
@@ -44,12 +44,12 @@ export class GoodsReturnListComponent implements OnInit {
 
   }
 
-  editGoodsReturn() {
-    this.router.navigate(['inventory/issue/goods-return/goods-return-detail']);
+  editGoodsReturnRequest() {
+    this.router.navigate(['inventory/issue/goods-return-request/goods-return-request-detail']);
   }
 
-  addGoodsReturn() {
-    this.router.navigate(['inventory/issue/goods-return/goods-return-detail']);
+  addGoodsReturnRequest() {
+    this.router.navigate(['inventory/issue/goods-return/goods-return-request-detail']);
   }
 
   bookMark() {

@@ -1,0 +1,400 @@
+<div class="page goods-receipt-po">
+    <div class="page-header justify-content-between">
+        <div class="justify-content-start align-items-center">
+            <span class="back-to-list" (click)="backToList()">
+                <i class="material-icons">arrow_back_ios</i>
+            </span>
+            <span class="page-title">
+                {{pageTitle | translate}}
+            </span>
+            <span class="ml-2 open-status">{{'general.open'| translate}}</span>
+            <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
+            <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
+            <span class="ml-2 done-status">{{'general.done'| translate}}</span>
+        </div>
+        <div class="page-actions d-flex">
+            <button class="btn btn-labeled btn-clear">
+                <span class="btn-label">
+                    <img src="/assets/img/filter.svg" width="16">
+                </span>
+                <span class="button-label">
+                    {{'general.button.clear' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-reverse">
+                <span class="btn-label"><i class="material-icons">replay</i></span>
+                <span class="button-label">
+                    {{'general.button.reverse' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-approve">
+                <span class="btn-label"><i class="material-icons">check</i></span>
+                <span class="button-label">
+                    {{'general.button.approve' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-rejected">
+                <span class="btn-label"><i class="material-icons">block</i></span>
+                <span class="button-label">
+                    {{'general.button.rejected' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-receive">
+                <span class="btn-label"><i class="material-icons">assignment_goodsReturnRequested</i></span>
+                <span class="button-label">
+                    {{'general.button.receive' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-send">
+                <span class="btn-label"><i class="material-icons">send</i></span>
+                <span class="button-label">
+                    {{'general.button.send' | translate}}
+                </span></button>
+            <button class="btn btn-labeled btn-save">
+                <span class="btn-label"><i class="material-icons">save</i></span>
+                <span class="button-label">
+                    {{'general.button.save' | translate}}
+                </span></button>
+            <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
+                <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle
+                    aria-controls="dropdown-basic">
+                    <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
+                    <span class="button-label">
+                        {{'general.action' | translate}}
+                    </span></button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                    aria-labelledby="button-basic">
+                    <li role="menuitem">
+                        <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
+                    </li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem">
+                        <a class="dropdown-item" href="#">{{'general.button.print' | translate}}</a>
+                    </li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem">
+                        <a class="dropdown-item" href="#">{{'general.button.referenceDocument' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="page-section">
+            <div class="page-section-form-header">
+                <span class="form-title">
+                    {{'goodsReturnRequest.detail.form.title' | translate}}
+                </span>
+                <div class="page-actions justify-content-end">
+                    <button class="btn btn-labeled btn-delete">
+                        <span class="btn-label"><i class="material-icons">delete</i></span>
+                        <span class="button-label">
+                            {{'general.button.delete' | translate}}
+                        </span></button>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="page-section-form-body">
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.supplierCode' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <app-single-select data-qe-id="detail-form-supplier-code"></app-single-select>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.supplierName' | translate}}
+                        </label>
+                        <input type="text" class="form-control" data-qe-id="detail-form-supplier-name" disabled>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.supplierInfo' | translate}}
+                        </label>
+                        <app-single-select data-qe-id="detail-form-supplier-info"></app-single-select>
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="page-section-form-body">
+                <div class="row">
+                    <div class="col-sm-8 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.goodsReturnRequest.title' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <input type="text" class="form-control" (click)="showGoodsReturnRequest()"
+                            data-qe-id="detail-form-goods-receipt">
+                    </div>
+                </div>
+            </div>
+            <div class="line"></div>
+            <div class="page-section-form-body">
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.documentNumber' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <input type="text" class="form-control" data-qe-id="detail-form-document-number" disabled>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.inventoryCode' | translate}}
+                        </label>
+                        <app-single-select data-qe-id="detail-form-inventory-address"></app-single-select>
+
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.inventoryAddress' | translate}}
+                        </label>
+                        <input type="text" class="form-control" data-qe-id="detail-form-inventory-code" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.personInCharge' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
+
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.receiver' | translate}}
+                        </label>
+                        <input type="text" class="form-control" data-qe-id="detail-form-receiver" disabled>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.creator' | translate}}
+                        </label>
+                        <input type="text" class="form-control" data-qe-id="detail-form-creator" disabled>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.shipper' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <app-single-select data-qe-id="detail-form-shipper"></app-single-select>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.receiptedDate' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <app-date-picker data-qe-id="detail-form-receipted-date">
+                        </app-date-picker>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsReturnRequest.detail.createdDate' | translate}}
+                        </label>
+                        <app-date-picker data-qe-id="detail-form-created-date" [disabled]="true"></app-date-picker>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <label>{{ 'goodsReturnRequest.detail.description' | translate}}</label>
+                        <textarea class="form-control" rows="4" data-qe-id="detail-form-description">
+                         </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-section">
+            <div class="tab-header pt-3 pb-3 pl-3 pr-3">
+                <mat-tab-group>
+                    <mat-tab label="{{'goodsReturnRequest.detail.tab1.title' | translate}}">
+                        <div class="row pt-3 pb-3">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <p-inputSwitch></p-inputSwitch>
+                                    <span
+                                        class="ml-2">{{'goodsReturnRequest.detail.batches.startScanBatchesNo' | translate}}</span>
+                                    <div class="ml-2">
+                                        <input type="text" class="form-control"
+                                            data-qe-id="dialog-input-start-scan-batches-no">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="page-actions d-flex justify-content-end">
+                                        <button class="btn btn-labeled btn-reverse">
+                                            <span class="btn-label"><i class="material-icons">replay</i></span>
+                                            <span class="button-label">
+                                                {{'general.button.reset' | translate}}
+                                        </span></button>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="table">
+                            <p-table resizableColumns [value]="tableTemp">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th width="2.5%">
+                                            <div class="pretty p-icon p-curve p-has-indeterminate">
+                                                <input type="checkbox" />
+                                                <div class="state">
+                                                    <i class="icon material-icons">done</i>
+                                                    <label></label>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-purchase-order-number">
+                                            {{'goodsReturnRequest.detail.tab1.purchaseOrderNumber' | translate}} </th>
+                                        <th pResizableColumn data-qe-id="table-thead-item-no">
+                                            {{'goodsReturnRequest.detail.tab1.itemNo' | translate}} </th>
+                                        <th pResizableColumn data-qe-id="table-thead-item-name">
+                                            {{'goodsReturnRequest.detail.tab1.itemName' | translate}} </th>
+                                        <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
+                                            {{'goodsReturnRequest.detail.tab1.unitOfMeasure' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-weight">
+                                            {{'goodsReturnRequest.detail.tab1.weight' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-quantity">
+                                            {{'goodsReturnRequest.detail.tab1.quantity' | translate}} </th>
+                                        <th pResizableColumn data-qe-id="table-thead-unit-price">
+                                            {{'goodsReturnRequest.detail.tab1.unitPrice' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-value-added-tax">
+                                            {{'goodsReturnRequest.detail.tab1.valueAddedTax' | translate}}
+                                            (%)</th>
+                                        <th pResizableColumn data-qe-id="table-thead-discount">
+                                            {{'goodsReturnRequest.detail.tab1.discount' | translate}} (%)
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-discount-amount">
+                                            {{'goodsReturnRequest.detail.tab1.discountAmount' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-total">
+                                            {{'goodsReturnRequest.detail.tab1.total' | translate}}</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item>
+                                    <tr>
+                                        <td>
+                                            <div class="pretty p-icon p-curve p-has-indeterminate">
+                                                <input type="checkbox" />
+                                                <div class="state">
+                                                    <i class="icon material-icons">done</i>
+                                                    <label></label>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td>{{item.total}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="{{'goodsReturnRequest.detail.tab2.title' | translate}}">
+                        <div class="tab-upload">
+                            <div class="form-upload-file d-flex">
+                                <div class="pt-3 upload-btn-wrapper">
+                                    <button class="btn btn-labeled btn-import">
+                                        <span class="btn-label"><i class="material-icons">attach_file</i></span>
+                                        <span class="button-label">
+                                            {{'general.button.attachFile' | translate}}
+                                        </span></button>
+                                    <input type="file" (change)="readURL($event)" multiple />
+                                </div>
+                                <div class="results d-flex align-items-center">
+                                    <div class="results-item d-flex mr-3" *ngFor="let name of fileNameList">
+                                        <div class="results-item-name">
+                                            <span class="icon-upload"><i class="material-icons">attach_file</i></span>
+                                            <span>{{name}}</span>
+                                        </div>
+                                        <span class="close-attach align-items-center"><i
+                                                class="material-icons">close</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+        <div class="page-section">
+            <div class="page-section-form-header">
+                <span class="form-title">
+                    {{'goodsReturnRequest.form.post.title' | translate}}
+                </span>
+            </div>
+            <div class="line"></div>
+            <div class="page-section-form-body">
+                <app-discussion [discussionId]="'2b155311-ab49-4cff-af4e-7156bfaa97c2'"></app-discussion>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayGoodsReturnRequest" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '80%'}" [responsive]="true">
+    <p-header>
+        <span
+            class="dialog-header">{{'goodsReturnRequest.detail.goodsReturnRequest.supplierCode' | translate}}</span>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table resizableColumns [value]="">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="2.5%" pResizableColumn
+                                data-qe-id="table-thead-goodsReturnRequest-request-check-box">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReturnRequest-request-created-date">
+                                {{'goodsReturnRequest.detail.goodsReturnRequestRequest.createdDate' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReturnRequest-request-document-no">
+                                {{'goodsReturnRequest.detail.goodsReturnRequestRequest.documentNo' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReturnRequest-request-buyer">
+                                {{'goodsReturnRequest.detail.goodsReturnRequestRequest.buyer' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-goodsReturnRequest-request-creator">
+                                {{'goodsReturnRequest.detail.goodsReturnRequestRequest.creator' | translate}} </th>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-save-dialog">
+                        <span class="btn-label"><i class="material-icons">save</i></span>
+                        <span class="button-label">
+                            {{'goodsReturnRequest.detail.button.add' | translate}}
+                        </span></button>
+                    <button class="btn btn-labeled btn-cancel" (click)="displayGoodsReturnRequest = false">
+                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+                        <span class="button-label">
+                            {{'general.button.cancel' | translate}}
+                        </span></button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

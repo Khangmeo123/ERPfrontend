@@ -3,14 +3,14 @@ import { translate } from 'src/app/_helpers/string';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-goods-receipt-po-detail',
-  templateUrl: './inventory-transfer-request-detail.component.html',
-  styleUrls: ['./inventory-transfer-request-detail.component.scss'],
+  selector: 'app-return-detail',
+  templateUrl: './return-request-detail.component.html',
+  styleUrls: ['./return-request-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class InventoryTransferRequestDetailComponent implements OnInit {
-  pageTitle = translate('inventoryTransferRequest.header.title');
-  fileNameList: Array<any> = []
+export class ReturnRequestDetailComponent implements OnInit {
+  pageTitle = translate('returnRequest.header.title');
+  fileNameList: Array<any> = [];
   tableTemp = [
     {
       total: 100000,
@@ -18,7 +18,7 @@ export class InventoryTransferRequestDetailComponent implements OnInit {
     },
     {
       total: 2000000,
-      type: 2, 
+      type: 2,
     },
     {
       total: 2000000,
@@ -26,9 +26,7 @@ export class InventoryTransferRequestDetailComponent implements OnInit {
     }
   ]
 
-  displayBatches: boolean = false;
-  displaySerial: boolean = false;
-  displayAmount: boolean = false;
+  displayReturnRequest: boolean = false;
 
   constructor(private router: Router) { }
 
@@ -41,9 +39,11 @@ export class InventoryTransferRequestDetailComponent implements OnInit {
       this.fileNameList.push(item.name);
     }
   }
-
+  showReturnRequest() {
+    this.displayReturnRequest = true;
+  }
 
   backToList() {
-    this.router.navigate(['/inventory/transfer/inventory-transfer-request/inventory-transfer-request-list']);
+    this.router.navigate(['/inventory/receipt/return-request/return-request-detail']);
   }
 }
