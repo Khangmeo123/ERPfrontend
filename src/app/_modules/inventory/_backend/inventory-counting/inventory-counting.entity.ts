@@ -21,6 +21,12 @@ export class InventoryCountingEntity extends Entity {
     }
 }
 
+export class BinLocationOfInventoryCountingEntity extends Entity {
+    name: string;
+    code: string;
+    itemDetailName: string;
+    itemDetailCode: string;
+}
 
 export class InventoryCountersEntity extends Entity {
     id: string;

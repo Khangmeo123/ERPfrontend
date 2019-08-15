@@ -4,7 +4,10 @@ import { FormGroup, FormBuilder, FormControl, FormArray } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { InventoryCountingForm, InventoryCountingContentForm } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.form';
+import {
+    InventoryCountingForm,
+    InventoryCountingContentForm,
+} from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.form';
 import {
     EmployeeDetailOfCountingSearchEntity,
     InventoryOrganizationOfCountingSearchEntity,
@@ -12,6 +15,7 @@ import {
     UnitOfMeasureOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { BinLocationOfInventoryCountingEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 
 @Injectable()
 export class InventoryCountingDetailService {
@@ -20,7 +24,7 @@ export class InventoryCountingDetailService {
     public itemDetailList: BehaviorSubject<Entities>;
     public inventoryOrganizationList: BehaviorSubject<Entities>;
     public unitOfMeasureList: BehaviorSubject<Entities>;
-
+    public binLocationList: BehaviorSubject<BinLocationOfInventoryCountingEntity[]>;
     constructor(
         private fb: FormBuilder,
         private toastrService: ToastrService,
@@ -82,6 +86,7 @@ export class InventoryCountingDetailService {
         this.inventoryCountingForm.next(inventoryCountingForm);
     }
 
+
     // inventoryCountingContents:
     addInventoryCountingContent() {
         const currentForm = this.inventoryCountingForm.getValue();
@@ -103,6 +108,18 @@ export class InventoryCountingDetailService {
             inventoryCounters.removeAt(sortedArray[i]);
         }
         this.inventoryCountingForm.next(inventoryCountingForm);
+    }
+
+    getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
+        this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, inventoryCountingContentId).subscribe(res => {
+            if (res) {
+                this.binLocationList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        });
     }
 
     // employeeDetail:

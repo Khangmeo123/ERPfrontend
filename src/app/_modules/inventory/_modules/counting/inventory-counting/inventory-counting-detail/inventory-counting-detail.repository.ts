@@ -14,6 +14,7 @@ import {
     InventoryCountingEntity,
     ItemDetailOfCountingEntity,
     UnitOfMeasureOfCountingEntity,
+    BinLocationOfInventoryCountingEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { Entities } from 'src/app/_helpers/entity';
 import { map } from 'rxjs/operators';
@@ -43,6 +44,20 @@ export class InventoryCountingDetailRepository extends Repository {
         return this.http.post<InventoryCountingEntity>(this.apiUrl + '/save', JSON.stringify(inventoryCountingEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => new InventoryCountingEntity(r.body)),
+            );
+    }
+
+    getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
+        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list', JSON.stringify({
+            inventoryOrganizationId: inventoryOrganizationId,
+            inventoryCountingContentId: inventoryCountingContentId
+        }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new BinLocationOfInventoryCountingEntity(item);
+                    });
+                }),
             );
     }
 

@@ -2,8 +2,16 @@ import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { InventoryCountingSearchEntity, InventoryOrganizationOfCountingSearchEntity, EmployeeDetailOfCountingSearchEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
-import { InventoryCountingEntity, InventoryOrganizationOfCountingEntity, EmployeeDetailOfCountingEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
+import {
+    InventoryCountingSearchEntity,
+    InventoryOrganizationOfCountingSearchEntity,
+    EmployeeDetailOfCountingSearchEntity,
+} from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
+import {
+    InventoryCountingEntity,
+    InventoryOrganizationOfCountingEntity,
+    EmployeeDetailOfCountingEntity,
+} from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Entities, EnumEntity } from 'src/app/_helpers/entity';
