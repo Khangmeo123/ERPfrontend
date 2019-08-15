@@ -449,6 +449,12 @@ textarea.disabled{
   border: 1px solid #E89922;
 }
 
+.text-highlight {
+  @include button-status;
+  background-color: #C7C7C7;
+  color: #EE534D;
+}
+
 .validation-div {
   position: relative;
   width: 100%;

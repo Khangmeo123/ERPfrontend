@@ -31,6 +31,9 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   inventoryCountingSubs: Subscription = new Subscription();
   displayBatch: boolean = false;
   displaySerial: boolean = false;
+  displayDetail: boolean = false;
+  displayDetailDifference: boolean = false;
+
   employeeListIds: string[] = [];
   inventoryCountingId: string;
   inventoryCountingForm: FormGroup;
@@ -265,6 +268,15 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     }
     this.itemDetailSearchEntity.name.startsWith = event;
     this.itemDetailTyping.next(this.itemDetailSearchEntity);
+  }
+
+  openBinLocation(locationId) {
+    this.displayDetail = true;
+  }
+
+
+  openDetailDifference() {
+    this.displayDetailDifference = true;
   }
 
 }

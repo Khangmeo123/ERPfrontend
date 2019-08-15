@@ -615,3 +615,117 @@
         </div>
     </p-footer>
 </p-dialog>
+
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayDetail" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '90%'}" [responsive]="true">
+    <p-header>
+        <div class="row">
+            <div class="col-sm-3">
+                <span class="dialog-header">{{'inventoryCounting.detail.detailBinLocation.title ' | translate}}</span>
+            </div>
+        </div>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table resizableColumns [value]="">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pResizableColumn>
+                                {{'inventoryCounting.detail.detailBinLocation.no' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-detail-bin-location-item-code">
+                                {{'inventoryCounting.detail.detailBinLocation.itemCode' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detail-bin-location-location-code">
+                                {{'inventoryCounting.detail.detailBinLocation.locationCode' | translate}} </th>
+                        </tr>
+                    </ng-template>
+               
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-cancel" (click)="displayDetail = false">
+                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+                        <span class="button-label">
+                            {{'general.button.cancel' | translate}}
+                        </span></button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayDetailDifference" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '90%'}" [responsive]="true">
+    <p-header>
+        <div class="row">
+            <div class="col-sm-3">
+                <span class="dialog-header">{{'inventoryCounting.detail.detailDifference.title ' | translate}}</span>
+            </div>
+        </div>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table resizableColumns [value]="">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-detailDifference-check-box">
+                                    <div class="pretty p-icon p-curve p-has-indeterminate">
+                                        <input type="checkbox" />
+                                        <div class="state">
+                                            <i class="icon material-icons">done</i>
+                                            <label></label>
+                                        </div>
+                                    </div>
+                                </th>
+                            <th pResizableColumn>
+                                    {{'inventoryCounting.detail.detailDifference.no' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-item-code">
+                                {{'inventoryCounting.detail.detailDifference.itemCode' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-item-name">
+                                {{'inventoryCounting.detail.detailDifference.itemName' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-excess">
+                                {{'inventoryCounting.detail.detailDifference.excess' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-lack">
+                                {{'inventoryCounting.detail.detailDifference.lack' | translate}} </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-inventoryCountingContent let-index="rowIndex">
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                <span class="ml-2 text-highlight">Thừa serial number</span>
+                            </td>
+                            <td></td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-cancel" (click)="displayDetailDifference = false">
+                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+                        <span class="button-label">
+                            {{'general.button.cancel' | translate}}
+                        </span></button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>

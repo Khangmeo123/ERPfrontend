@@ -1,4 +1,19 @@
 {
+	"accountingPeriod": {
+		"description": "",
+		"endPeriod": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"label": "",
+			"title": ""
+		},
+		"startPeriod": "",
+		"status": {
+			"fiscal_year": ""
+		}
+	},
 	"advancedFilter": {
 		"placeholder": ""
 	},
@@ -29,23 +44,57 @@
 			"title": "Danh sách ngân hàng"
 		}
 	},
-	"bank_account": {
-		"account_number": "Số tài khoản",
-		"account_owner": "Chủ tài khoản",
-		"accountant_code": "Mã tài khoản kế toán",
-		"bank_accounts": {
-			"account_number": "Số tài khoản",
-			"account_owner": "Chủ tài khoản",
-			"accountant_code": "Mã tài khoản kế toán",
-			"add": "Thêm tài khoản ngân hàng",
-			"bank_code": "Mã ngân hàng",
-			"description": "Mô tả"
+	"bankAccount": {
+		"account_name": "",
+		"account_number": "",
+		"accounting_code": "",
+		"bankAccounts": {
+			"account_name": "",
+			"account_number": "",
+			"accounting_code": "",
+			"add": "",
+			"bank_code": "",
+			"description": ""
 		},
-		"bank_code": "Mã ngân hàng",
-		"bank_name": "Tên ngân hàng",
-		"description": "Mô tả",
+		"bank_code": "",
+		"bank_name": "",
+		"description": "",
 		"details": {
-			"title": "Tài khoản ngân hàng"
+			"title": ""
+		}
+	},
+	"binLocation": {
+		"action": "",
+		"code": "",
+		"delete": {
+			"confirm": {
+				"message": "",
+				"title": ""
+			}
+		},
+		"getFieldEntity": {
+			"error": ""
+		},
+		"layer1": {
+			"code": ""
+		},
+		"layer2": {
+			"code": ""
+		},
+		"layer3": {
+			"code": ""
+		},
+		"layer4": {
+			"code": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"title": "",
+		"update": {
+			"error": "",
+			"success": ""
 		}
 	},
 	"bookmarks": {
@@ -79,6 +128,76 @@
 			"title": "Hệ thống tài khoản"
 		},
 		"super_account": "Tài khoản tổng hợp"
+	},
+	"codeFormula": {
+		"code": "",
+		"field": {
+			"error": ""
+		},
+		"general": {
+			"title": ""
+		},
+		"get": {
+			"error": ""
+		},
+		"identifierStringEnd": "",
+		"identifierStringStart": "",
+		"identifierStringValues": "",
+		"item": {
+			"code": "",
+			"name": "",
+			"title": ""
+		},
+		"legalEntity": {
+			"missingLegalEntityId": ""
+		},
+		"legalEntityList": {
+			"error": ""
+		},
+		"length": "",
+		"name": "",
+		"rule": {
+			"end": "",
+			"itemFieldDisplay": "",
+			"start": "",
+			"title": ""
+		},
+		"ruleModal": {
+			"title": ""
+		},
+		"splitRuleContent": {
+			"field": "",
+			"start": ""
+		},
+		"test": {
+			"expirationDate": "",
+			"itemCode": "",
+			"mfrDate": "",
+			"qrCode": "",
+			"serial": "",
+			"title": ""
+		},
+		"title": "",
+		"update": {
+			"error": "",
+			"success": ""
+		}
+	},
+	"cost-center": {
+		"content": {
+			"account": "",
+			"description": "",
+			"from_date": "",
+			"id": "",
+			"modal": {
+				"title": ""
+			},
+			"name": "",
+			"to_date": ""
+		},
+		"header": {
+			"title": ""
+		}
 	},
 	"cropper": {
 		"browseImage": "Chọn ảnh",
@@ -221,9 +340,9 @@
 			},
 			"receiptedDate": "Ngày thực hiện",
 			"tab1": {
+				"Serial": "",
 				"amount": "Số lương",
 				"batches": "Lô",
-				"cda": "CDA",
 				"discount": "Chiết khấu",
 				"discountAmount": "Số tiền chiết khấu",
 				"itemName": "Tên hàng hóa",
@@ -469,7 +588,6 @@
 	},
 	"division": {
 		"content": {
-			"action": "",
 			"address": "",
 			"code": "",
 			"name": ""
@@ -522,12 +640,21 @@
 				"gender": "Giới tính",
 				"identityNumber": "Số CMND",
 				"name": "Tên nhân viên",
-				"status": "Trạng thái"
+				"status": "Trạng thái",
+				"username": ""
 			},
 			"header": {
 				"title": "Danh sách nhân viên"
 			}
-		}
+		},
+		"password": {
+			"error": "",
+			"field": "",
+			"save": "",
+			"success": "",
+			"title": ""
+		},
+		"username": ""
 	},
 	"employeeDetail": {
 		"delete": {
@@ -613,11 +740,42 @@
 			"title": ""
 		}
 	},
-	"general": {
-		"action": "Tác vụ",
-		"actions": {
+	"environmentTax": {
+		"header": {
 			"title": ""
 		},
+		"modal": {
+			"title": ""
+		}
+	},
+	"environment_tax": {
+		"description": ""
+	},
+	"exportTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
+	"fiscal_year": {
+		"content": {
+			"from_date": "",
+			"modal": {
+				"title": ""
+			},
+			"name": "",
+			"status": "",
+			"to_date": "",
+			"valuation_method": ""
+		},
+		"header": {
+			"title": ""
+		}
+	},
+	"general": {
+		"action": "Tác vụ",
 		"button": {
 			"add": "Thêm",
 			"approve": "Phê duyệt",
@@ -627,7 +785,6 @@
 			"completed": "Hoàn thành",
 			"delete": "Xóa",
 			"downloadTemplate": "",
-			"downloadTempplate": "",
 			"download_example": "Tải file mẫu",
 			"edit": "",
 			"export": "Xuất Excel",
@@ -636,6 +793,7 @@
 			"import": "Nhập hàng loạt",
 			"importFile": "",
 			"import_file": "Nhập hàng loạt",
+			"issue": "",
 			"ok": "",
 			"post": "Bình luận",
 			"print": "In",
@@ -669,6 +827,10 @@
 			"female": "Nữ",
 			"male": "Nam"
 		},
+		"import": {
+			"error": "",
+			"success": ""
+		},
 		"legalEntity": {
 			"name": ""
 		},
@@ -698,7 +860,11 @@
 		"text": {
 			"total": "Tổng tiền "
 		},
-		"toDate": "Đến ngày"
+		"toDate": "Đến ngày",
+		"update": {
+			"failure": "",
+			"success": ""
+		}
 	},
 	"goodsIssue": {
 		"detail": {
@@ -763,9 +929,9 @@
 			},
 			"receiptedDate": "",
 			"tab1": {
+				"Serial": "",
 				"amount": "",
 				"batches": "",
-				"cda": "",
 				"discount": "",
 				"discountAmount": "",
 				"itemName": "",
@@ -878,9 +1044,9 @@
 		"receiptedDate": "Ngày thực hiện",
 		"receiver": "Người nhận hàng",
 		"tab1": {
+			"Serial": "",
 			"amount": "Số lượng",
 			"batches": "Lô",
-			"cda": "CDA",
 			"discount": "Chiết khấu",
 			"discountAmount": "Số tiền chiết khấu",
 			"itemNo": "Mã hàng",
@@ -925,9 +1091,9 @@
 			"itemName": "Tên hàng hóa",
 			"locationCode": "Mã vị trí",
 			"manufacturingDate": "Ngày sản xuất",
+			"qrCode": "",
+			"quantity": "",
 			"quantityInEachBatch": "Sô lượng hàng trong lô",
-			"quantitySaved": "số lương lưu",
-			"startScanBatchesNo": "Bắt đầu quét mã lô",
 			"title ": "Thông tin lô"
 		},
 		"binLocation": "Vị trí lưu kho",
@@ -966,7 +1132,7 @@
 			"locationCode": "Mã vị trí",
 			"manufacturingDate": "Ngày sản xuất",
 			"quantity": "Số lượng",
-			"scanCode": "Quét code",
+			"rows": "",
 			"scanQRCode": "Bắt đầu quét QR code",
 			"serial": "Serial#",
 			"title ": "Chi tiết QR code"
@@ -977,9 +1143,10 @@
 		"supplierCode": "Mã nhà cung cấp",
 		"supplierName": "Tên nhà cung cấp",
 		"tab1": {
+			"Serial": "",
+			"actualReceive": "",
 			"amount": "Số lượng",
 			"batches": "Lô",
-			"cda": "CDA",
 			"discount": "Chiết khấu",
 			"discountAmount": "Số tiền chiết khấu",
 			"itemName": "",
@@ -1065,9 +1232,9 @@
 			},
 			"receiptedDate": "",
 			"tab1": {
+				"Serial": "",
 				"amount": "",
 				"batches": "",
-				"cda": "",
 				"discount": "",
 				"discountAmount": "",
 				"itemName": "",
@@ -1106,6 +1273,14 @@
 		"name": "",
 		"title": ""
 	},
+	"importTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
 	"inventoryCounting": {
 		"detail": {
 			"batches": {
@@ -1125,6 +1300,20 @@
 			"counter": "Người thực hiện",
 			"countingDate": "Ngày thực hiện",
 			"description": "Mô tả",
+			"detailBinLocation": {
+				"itemCode": "Mã hàng",
+				"locationCode": "Mã vị trí lưu kho",
+				"no": "STT",
+				"title ": "Chi tiết lưu kho"
+			},
+			"detailDifference": {
+				"excess": "Thừa",
+				"itemCode": "Mã hàng",
+				"itemName": "Tên hàng hóa",
+				"lack": "Thiếu",
+				"no": "STT",
+				"title ": "Thông tin chi tiết sai lệch"
+			},
 			"documentNumber": "Số chứng từ",
 			"form": {
 				"post": {
@@ -1151,8 +1340,6 @@
 				"title ": "Thông tin QR code sản phẩm"
 			},
 			"tab1": {
-				"batches": "Lô",
-				"cda": "CDA",
 				"countAmount": "Số lượng thực đếm",
 				"highestDifference": "Số lượng chênh lệch cao nhất",
 				"inventoryCode": "Mã kho",
@@ -1179,6 +1366,103 @@
 			"inventoryCountingOwner": "Người chịu trách nhiệm",
 			"issueID": "Số phiếu",
 			"status": "Trạng thái"
+		}
+	},
+	"inventoryTransfer": {
+		"detail": {
+			"amount": {
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"quantity": "",
+				"quantitySaved": "",
+				"title ": "",
+				"unitOfMeasure": ""
+			},
+			"amountScan": "",
+			"batches": {
+				"batchCode": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantityInEachBatch": "",
+				"quantitySaved": "",
+				"startScanBatchesNo": "",
+				"title ": ""
+			},
+			"binLocation": "",
+			"button": {
+				"add": ""
+			},
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"exporter": "",
+			"form": {
+				"post": {
+					"title": ""
+				},
+				"title": ""
+			},
+			"inventoryCodeFrom": "",
+			"inventoryCodeTo": "",
+			"inventoryRequest": "",
+			"inventoryTransferRequest": {
+				"createdDate": "",
+				"creator": "",
+				"documentNo": ""
+			},
+			"issuedDate": "",
+			"personInCharge": "",
+			"qrCode": {
+				"code": "",
+				"expiryDate": "",
+				"itemCode": "",
+				"itemName": "",
+				"locationCode": "",
+				"manufacturingDate": "",
+				"quantity": "",
+				"scanCode": "",
+				"scanQRCode": "",
+				"serial": "",
+				"title ": ""
+			},
+			"receiver": "",
+			"request": {
+				"customerName": ""
+			},
+			"tab1": {
+				"Serial": "",
+				"actualQuantity": "",
+				"amount": "",
+				"batches": "",
+				"dueDate": "",
+				"issueIdRequest": "",
+				"itemName": "",
+				"itemNo": "",
+				"quantity": "",
+				"title": "",
+				"unitOfMeasure": ""
+			},
+			"tab2": {
+				"title": ""
+			}
+		},
+		"header": {
+			"title": ""
+		},
+		"list": {
+			"createdDate": "",
+			"creator": "",
+			"description": "",
+			"documentNumber": "",
+			"inventoryAddress": "",
+			"inventoryCode": "",
+			"status": "",
+			"transferDate": ""
 		}
 	},
 	"item": {
@@ -1303,7 +1587,11 @@
 		"header": {
 			"title": "Danh sách pháp nhân"
 		},
-		"name": "Tên pháp nhân"
+		"name": "Tên pháp nhân",
+		"subLevel1": "",
+		"subLevel2": "",
+		"subLevel3": "",
+		"subLevel4": ""
 	},
 	"legalItemDetail": {
 		"content": {
@@ -1353,12 +1641,46 @@
 			"title_1": "Thông tin chung"
 		}
 	},
+	"login": {
+		"failed": ""
+	},
+	"naturalResourceTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
+	},
 	"noData": {
 		"helper": ""
 	},
 	"pagination": {
 		"entries": "bản ghi",
 		"show": "Hiện thị"
+	},
+	"payment_method": {
+		"code": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"payment_method_name": ""
+	},
+	"payment_term": {
+		"code": "",
+		"discount_period": "",
+		"discount_rate": "",
+		"due_in_date": "",
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": ""
 	},
 	"project": {
 		"employee": {
@@ -1373,6 +1695,29 @@
 		"name": "",
 		"startDate": "",
 		"title": ""
+	},
+	"province": {
+		"code": "",
+		"create": {
+			"error": ""
+		},
+		"delete": {
+			"message": "",
+			"success": "",
+			"title": ""
+		},
+		"get": {
+			"error": ""
+		},
+		"modal": {
+			"title": ""
+		},
+		"name": "",
+		"title": "",
+		"update": {
+			"error": "",
+			"success": ""
+		}
 	},
 	"return": {
 		"detail": {
@@ -1443,9 +1788,9 @@
 				"documentNo": "Số chứng từ"
 			},
 			"tab1": {
+				"Serial": "",
 				"amount": "Số lượng",
 				"batches": "Lô",
-				"cda": "CDA",
 				"discount": "Chiết khấu",
 				"discountAmount": "Số tiền chiết khấu",
 				"itemNo": "Mã hàng",
@@ -1492,6 +1837,14 @@
 		"special_consumption_tax": "Biểu thuế tiêu thụ đặc biệt",
 		"title": "Danh sách bộ sổ",
 		"value_added_tax": "Biểu thuế GTGT"
+	},
+	"specialConsumptionTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
+		}
 	},
 	"special_price_customer": {
 		"code": "Mã sản phẩm",
@@ -1569,6 +1922,15 @@
 			"name": "Tên nhà cung cấp"
 		}
 	},
+	"tax": {
+		"available": "",
+		"code": "",
+		"description": "",
+		"discount": "",
+		"name": "",
+		"parent_account": "",
+		"unit": ""
+	},
 	"uom": {
 		"content": {
 			"code": "Mã đơn vị",
@@ -1581,6 +1943,14 @@
 		},
 		"header": {
 			"title": "Đơn vị tính sản phẩm"
+		}
+	},
+	"valueAddedTax": {
+		"header": {
+			"title": ""
+		},
+		"modal": {
+			"title": ""
 		}
 	}
 }
