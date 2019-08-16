@@ -15,10 +15,12 @@ export class InventoryCountingForm extends FormModel {
     statusName = new FormControl(null);
     postingDate = new FormControl(null);
     remarks = new FormControl(null);
+    isOwner = new FormControl(null);
     inventoryCounters = new FormArray([]);
+    enableBinLocation = new FormControl(null);
     inventoryCountersName = new FormControl(null);
     inventoryCountingContents = new FormArray([], [requiredField]);
-
+    inventoryCounterContents = new FormArray([]);
     errors = new FormGroup({
         inventoryOrganizationId: new FormControl(),
         inventoryCounters: new FormControl(),
@@ -28,7 +30,6 @@ export class InventoryCountingForm extends FormModel {
         super();
         this.mapData(inventoryCountingEntity);
     }
-
 }
 
 export class InventoryCountingContentForm extends FormModel {

@@ -23,12 +23,14 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
+import { InventoryCountingPendingComponent } from './inventory-counting/inventory-counting-pending/inventory-counting-pending.component';
 
 @NgModule({
   declarations: [
     InventoryCountingCycleComponent,
     InventoryCountingListComponent,
     InventoryCountingDetailComponent,
+    InventoryCountingPendingComponent,
     InventoryCountingComponent,
     InventoryPostingComponent,
     InventoryCountingCycleComponent],

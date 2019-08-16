@@ -18,8 +18,13 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import {
     BinLocationOfInventoryCountingEntity,
     ItemDetailOfCountingEntity,
+    SerialNumberOfInventoryCountingEntity,
+    BatchOfInventoryCountingEntity,
+    InventoryCountingEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { InventoryCountingPendingRepository } from './inventory-counting-pending.repository';
+import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { translate } from 'src/app/_helpers/string';
 
 @Injectable()
 export class InventoryCountingPendingService {
@@ -29,9 +34,13 @@ export class InventoryCountingPendingService {
     public inventoryOrganizationList: BehaviorSubject<Entities>;
     public unitOfMeasureList: BehaviorSubject<Entities>;
     public binLocationList: BehaviorSubject<BinLocationOfInventoryCountingEntity[]>;
+    public serialNumberList: BehaviorSubject<SerialNumberOfInventoryCountingEntity[]>;
+    public batchList: BehaviorSubject<SerialNumberOfInventoryCountingEntity[]>;
+    public inventoryCounterList: BehaviorSubject<any[]>;
     constructor(
         private fb: FormBuilder,
         private toastrService: ToastrService,
+        private generalService: GeneralService,
         private inventoryCountingRepository: InventoryCountingPendingRepository) {
         this.inventoryCountingForm = new BehaviorSubject(this.fb.group(new InventoryCountingForm()));
         this.itemDetailList = new BehaviorSubject(new Entities());
@@ -39,18 +48,21 @@ export class InventoryCountingPendingService {
         this.unitOfMeasureList = new BehaviorSubject(new Entities());
         this.inventoryOrganizationList = new BehaviorSubject(new Entities());
         this.binLocationList = new BehaviorSubject([]);
+        this.serialNumberList = new BehaviorSubject([]);
+        this.batchList = new BehaviorSubject([]);
+        this.inventoryCounterList = new BehaviorSubject([]);
     }
 
     // general:
-    getDetail(inventoryCountingId?): Promise<boolean> {
-        const defered = new Promise<boolean>((resolve, reject) => {
+    getDetail(inventoryCountingId?): Promise<InventoryCountingEntity> {
+        const defered = new Promise<InventoryCountingEntity>((resolve, reject) => {
             if (inventoryCountingId !== null && inventoryCountingId !== undefined) {
                 this.inventoryCountingRepository.getDetail(inventoryCountingId).subscribe(res => {
                     if (res) {
                         const inventoryCountingForm = this.fb.group(
                             new InventoryCountingForm(res),
                         );
-                        resolve();
+                        resolve(res);
                     }
                 }, err => {
                     if (err) {
@@ -83,7 +95,7 @@ export class InventoryCountingPendingService {
     }
 
 
-    // inventoryCountingContents:
+    // inventoryCounterContents:
     getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
         this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, inventoryCountingContentId).subscribe(res => {
             if (res) {
@@ -95,6 +107,137 @@ export class InventoryCountingPendingService {
             }
         });
     }
+
+    getListInventoryCounter(inventoryCounterId: string) {
+        this.inventoryCountingRepository.getListInventoryCounter(inventoryCounterId).subscribe(res => {
+            if (res) {
+                this.inventoryCounterList.next(res);
+            }
+        }, err => {
+            if (err) {
+                console.log(err);
+            }
+        })
+    }
+
+    // SerialNumber:
+    getListSerialNumber(itemDetailId: string, inventoryCountingId: string) {
+        this.inventoryCountingRepository.getListSerialNumber(itemDetailId, inventoryCountingId).subscribe(res => {
+            if (res) {
+                this.serialNumberList.next(res);
+            }
+        });
+    }
+
+    analyzeSerialCode(itemDetailId: string, event: any) {
+        this.inventoryCountingRepository.analyzeSerialCode(itemDetailId, event).subscribe(res => {
+            if (res) {
+                const currentList = this.serialNumberList.getValue();
+                const filterItem = currentList.filter(item => {
+                    return item.serialNumber === res.serialNumber;
+                });
+                if (filterItem.length > 0) {
+                    this.toastrService.error('Quét QR xảy ra lỗi, mã sản phẩm đã tồn tại!');
+                    this.generalService.alertSound();
+                } else {
+                    this.toastrService.success('Hệ thống cập nhật thành công !');
+                    currentList.push(res);
+                    this.serialNumberList.next(currentList);
+                }
+            }
+        }, err => {
+            this.toastrService.error('Quét QR xảy ra lỗi!');
+            this.generalService.alertSound();
+        });
+    }
+
+    deleteSerialNumber(serialNumberId: string, itemDetailId: string, inventoryCountingId: string) {
+        this.inventoryCountingRepository.deleteSerialNumber(serialNumberId).subscribe(res => {
+            if (res) {
+                this.getListSerialNumber(itemDetailId, inventoryCountingId);
+            }
+        });
+    }
+
+    checkAllSerialNumber(checked: boolean, serialNumbeList: SerialNumberOfInventoryCountingEntity[]) {
+        serialNumbeList.forEach(item => {
+            item.isSelected = checked;
+        });
+        this.serialNumberList.next(serialNumbeList);
+    }
+
+    deleteMultipleSerialNumber(serialNumbeList: any[], itemDetailId: string, inventoryCountingId: string) {
+        this.inventoryCountingRepository.deleteMultipleSerialNumber(serialNumbeList).subscribe(res => {
+            if (res) {
+                this.getListSerialNumber(itemDetailId, inventoryCountingId);
+            }
+        });
+    }
+
+    importSerialNumber(file: File, itemDetailId: string, inventoryCountingId: string) {
+        this.inventoryCountingRepository.importSerialNumber(file).subscribe(res => {
+            if (res) {
+                this.toastrService.success(translate('general.import.success'));
+                this.getListSerialNumber(itemDetailId, inventoryCountingId);
+            }
+        }, err => {
+            if (err) {
+                this.toastrService.error(translate('general.import.error'));
+            }
+        });
+    }
+
+    // batch:
+
+    getListBatch(itemDetailId: string, inventoryCountingId: string) {
+        this.inventoryCountingRepository.getBatchList(itemDetailId, inventoryCountingId).subscribe(res => {
+            if (res) {
+                this.batchList.next(res);
+            }
+        });
+    }
+
+    analyzeBatchCode(itemDetailId: string, event: any) {
+        this.inventoryCountingRepository.analyzeBatchCode(itemDetailId, event).subscribe(res => {
+            if (res) {
+                const currentList = this.batchList.getValue();
+                const filterItem = currentList.filter(item => {
+                    return item.id === res.id;
+                });
+                const indexOf = currentList.indexOf(filterItem[0]);
+                this.toastrService.success('Hệ thống cập nhật thành công !');
+                currentList[indexOf] = res;
+                this.batchList.next(currentList);
+            }
+        }, err => {
+            this.toastrService.error('Quét QR xảy ra lỗi!');
+            this.generalService.alertSound();
+        });
+    }
+
+    deleteBatch(batchId: string, itemDetailId: string, inventoryCountingId: string) {
+        this.inventoryCountingRepository.deleteBatch(batchId).subscribe(res => {
+            if (res) {
+                this.getListBatch(itemDetailId, inventoryCountingId);
+            }
+        });
+    }
+
+    updateBatch(batch: BatchOfInventoryCountingEntity) {
+        this.inventoryCountingRepository.updateBatch(batch).subscribe(res => {
+            if (res) {
+                const currentList = this.batchList.getValue();
+                const filterItem = currentList.filter(item => {
+                    return item.id === res.id;
+                });
+                const indexOf = currentList.indexOf(filterItem[0]);
+                this.toastrService.success('Hệ thống cập nhật thành công !');
+                currentList[indexOf] = res;
+                this.batchList.next(currentList);
+            }
+        });
+    }
+
 
     // inventoryOrganization:
     dropListInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {

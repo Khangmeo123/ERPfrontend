@@ -1,3 +1,4 @@
+import { BatchOfInventoryCountingEntity } from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { environment } from 'src/environments/environment';
@@ -15,6 +16,7 @@ import {
     ItemDetailOfCountingEntity,
     UnitOfMeasureOfCountingEntity,
     BinLocationOfInventoryCountingEntity,
+    SerialNumberOfInventoryCountingEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { Entities } from 'src/app/_helpers/entity';
 import { map } from 'rxjs/operators';
@@ -47,10 +49,114 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
-    getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
+    getListInventoryCounter(id: string) {
+        return this.http.post<SerialNumberOfInventoryCountingEntity[]>(this.apiUrl + '/serial-number/inventory-counting-pending',
+            JSON.stringify({ inventoryCounterId: id }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new SerialNumberOfInventoryCountingEntity(item);
+                    });
+                }),
+            );
+    }
+
+    // serialNumber:
+    getListSerialNumber(id: string, icId: string) {
+        return this.http.post<SerialNumberOfInventoryCountingEntity[]>(this.apiUrl + '/serial-number/inventory-counting-pending',
+            JSON.stringify({ itemDetailId: id, inventoryCountingId: icId }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new SerialNumberOfInventoryCountingEntity(item);
+                    });
+                }),
+            );
+    }
+
+    analyzeSerialCode(id: string, code: string) {
+        return this.http.post<SerialNumberOfInventoryCountingEntity>(this.apiUrl + '/serial-number/analyze-qr-code',
+            JSON.stringify({ itemDetailId: id, qrCode: code }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return new SerialNumberOfInventoryCountingEntity(r.body);
+                }),
+            );
+    }
+
+    deleteSerialNumber(id: string) {
+        return this.http.post<any>(this.apiUrl + '/serial-number/analyze-qr-code',
+            JSON.stringify({ serialNumberId: id }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    deleteMultipleSerialNumber(serialNumberList: any[]) {
+        return this.http.post<any>(this.apiUrl + '/serial-number/analyze-qr-code',
+            JSON.stringify(serialNumberList),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    importSerialNumber(file: any) {
+        const formData = new FormData();
+        formData.append('file', file[0]);
+        return this.http.post(this.apiUrl + '/import', formData,
+            {
+                observe: 'response',
+                headers: this.getHeader(),
+            },
+        ).pipe(
+            map(r => r.body),
+        );
+    }
+
+    // batch:
+    getBatchList(id: string, icId: string) {
+        return this.http.post<BatchOfInventoryCountingEntity[]>(this.apiUrl + '/batch/inventory-counting-pending',
+            JSON.stringify({ itemDetailId: id, inventoryCountingId: icId }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map((item) => {
+                        return new BatchOfInventoryCountingEntity(item);
+                    });
+                }),
+            );
+    }
+
+    analyzeBatchCode(id: string, code: string) {
+        return this.http.post<BatchOfInventoryCountingEntity>(this.apiUrl + '/batch/analyze-qr-code',
+            JSON.stringify({ itemDetailId: id, qrCode: code }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return new BatchOfInventoryCountingEntity(r.body);
+                }),
+            );
+    }
+
+    deleteBatch(id: string) {
+        return this.http.post<any>(this.apiUrl + '/batch/delete',
+            JSON.stringify({ batchId: id }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    updateBatch(batch: any) {
+        return this.http.post<BatchOfInventoryCountingEntity>(this.apiUrl + '/batch/update',
+            JSON.stringify(batch),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => new BatchOfInventoryCountingEntity(r.body)),
+            );
+    }
+
+    // binlocation:
+    getListBinLocation(ioId: string, iccId: string) {
         return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list/bin-location', JSON.stringify({
-            inventoryOrganizationId: inventoryOrganizationId,
-            inventoryCountingContentId: inventoryCountingContentId
+            inventoryOrganizationId: ioId,
+            inventoryCountingContentId: iccId,
         }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

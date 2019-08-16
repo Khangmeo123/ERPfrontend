@@ -12,33 +12,13 @@
             <span class="ml-2 completed-status">{{'general.completed'| translate}}</span> -->
         </div>
         <div class="page-actions d-flex">
-            <!-- <button class="btn btn-labeled btn-clear">
-                <span class="btn-label">
-                    <img src="/assets/img/filter.svg" width="16">
-                </span>
-                <span class="button-label">
-                    {{'general.button.clear' | translate}}
-                </span>
-            </button>
-            <button class="btn btn-labeled btn-update">
-                <span class="btn-label"><i class="material-icons">update</i></span>
-                <span class="button-label">
-                    {{'general.button.update' | translate}}
-                </span>
-            </button>
-            <button class="btn btn-labeled btn-completed">
-                <span class="btn-label"><i class="material-icons">check</i></span>
-                <span class="button-label">
-                    {{'general.button.completed' | translate}}
-                </span>
-            </button> -->
-            <button class="btn btn-labeled btn-send">
+            <button class="btn btn-labeled btn-send" (click)="send()">
                 <span class="btn-label"><i class="material-icons">send</i></span>
                 <span class="button-label">
                     {{'general.button.send' | translate}}
                 </span>
             </button>
-            <button class="btn btn-labeled btn-save">
+            <button class="btn btn-labeled btn-save" (click)="save()">
                 <span class="btn-label"><i class="material-icons">save</i></span>
                 <span class="button-label">
                     {{'general.button.save' | translate}}
@@ -75,7 +55,7 @@
                 </span>
                 <div class="page-actions justify-content-end">
                     <button class="btn btn-labeled btn-delete" data-qe-id="detail-form-button-delete"
-                        (click)="deleteInventoryForm()">
+                        (click)="delete()">
                         <span class="btn-label"><i class="material-icons">delete</i></span>
                         <span class="button-label">
                             {{'general.button.delete' | translate}}
@@ -136,11 +116,11 @@
                             <span class="text-danger mr-2">*</span>
                         </label>
                         <div class="div-form">
-                            <app-single-select [list]="inventoryOrganizationExceptIds"
+                            <app-single-select [list]="inventoryOrganizationExceptIds" [valueSelector]="returnNode"
                                 [selectedList]="inventoryOrganizationIds" [key]="'code'"
                                 [initialValue]="inventoryCountingForm.controls.inventoryOrganizationCode.value"
                                 (search)="typingSearchInvetoryOrganization($event, inventoryCountingForm.controls.inventoryOrganizationId.value)"
-                                (selectionChange)="selectInventoryOrganization($event[0])"
+                                (selectionChange)="selectInventoryOrganization($event)"
                                 (listOpen)="dropListInventoryOrganization(inventoryCountingForm.controls.inventoryOrganizationId.value)"
                                 data-qe-id="detail-form-inventory-address" class="w-100">
                             </app-single-select>
@@ -197,7 +177,7 @@
                                         <col>
                                         <col>
                                         <col>
-                                        <col *ngIf="inventoryOrganizationId">
+                                        <col *ngIf="inventoryCountingForm.get('enableBinLocation').value">
                                         <col>
                                         <col>
                                     </colgroup>
@@ -226,7 +206,7 @@
                                             {{'inventoryCounting.detail.tab1.unitOfMeasure' | translate}}
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-inventory-code"
-                                            *ngIf="inventoryOrganizationId">
+                                            *ngIf="inventoryCountingForm.get('enableBinLocation').value">
                                             {{'inventoryCounting.detail.tab1.inventoryCode' | translate}}
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-quantity-of-inventory">
@@ -263,7 +243,8 @@
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
-                                        <th class="th-filter" *ngIf="inventoryOrganizationId"></th>
+                                        <th class="th-filter"
+                                            *ngIf="inventoryCountingForm.get('enableBinLocation').value"></th>
                                         <th class="th-filter"></th>
                                         <th class="th-filter"></th>
                                     </tr>
@@ -299,7 +280,7 @@
                                         <td>
                                             <span>{{inventoryCountingContent.itemDetailUnitOfMeasureName}}</span>
                                         </td>
-                                        <td *ngIf="inventoryOrganizationId">
+                                        <td *ngIf="inventoryCountingForm.get('enableBinLocation').value">
                                             <div class="d-flex justify-content-center"
                                                 *ngIf="inventoryCountingContent.itemDetailId !== null && inventoryCountingContent.itemDetailId !== undefined"
                                                 (click)="openBinLocation(inventoryCountingContent.id)">

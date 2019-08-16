@@ -40,6 +40,13 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
+    send(inventoryCountingEntity: any) {
+        return this.http.post<InventoryCountingEntity>(this.apiUrl + '/send', JSON.stringify(inventoryCountingEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => new InventoryCountingEntity(r.body)),
+            );
+    }
+
     save(inventoryCountingEntity: any): Observable<InventoryCountingEntity> {
         return this.http.post<InventoryCountingEntity>(this.apiUrl + '/save', JSON.stringify(inventoryCountingEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
@@ -47,10 +54,17 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
-    getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
+    delete(inventoryCountingId: string) {
+        return this.http.post<InventoryCountingEntity>(this.apiUrl + '/delete', JSON.stringify({ id: inventoryCountingId }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
+    getListBinLocation(ioId: string, iccId: string) {
         return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list/bin-location', JSON.stringify({
-            inventoryOrganizationId: inventoryOrganizationId,
-            inventoryCountingContentId: inventoryCountingContentId
+            inventoryOrganizationId: ioId,
+            inventoryCountingContentId: iccId,
         }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

@@ -67,9 +67,47 @@ export class InventoryCountingDetailService {
         return defered;
     }
 
+    send(inventoryCountingEntity: any) {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.inventoryCountingRepository.send(inventoryCountingEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.inventoryCountingForm.next(this.fb.group(
+                        new InventoryCountingForm(err),
+                    ));
+                    reject();
+                }
+            });
+        });
+        return defered;
+    }
+
     save(inventoryCountingEntity: any) {
         const defered = new Promise<boolean>((resolve, reject) => {
             this.inventoryCountingRepository.save(inventoryCountingEntity).subscribe(res => {
+                if (res) {
+                    this.toastrService.success('Cập nhật thành công !');
+                    resolve();
+                }
+            }, err => {
+                if (err) {
+                    this.inventoryCountingForm.next(this.fb.group(
+                        new InventoryCountingForm(err),
+                    ));
+                    reject();
+                }
+            });
+        });
+        return defered;
+    }
+
+    delete(inventoryCountingId: string) {
+        const defered = new Promise<boolean>((resolve, reject) => {
+            this.inventoryCountingRepository.delete(inventoryCountingId).subscribe(res => {
                 if (res) {
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();

@@ -14,6 +14,8 @@ export class InventoryCountingEntity extends Entity {
     statusName: string;
     postingDate: string;
     remarks: string;
+    isOwner: boolean;
+    enableBinLocation: boolean;
     inventoryCounters: InventoryCountersEntity[];
     inventoryCountersName: string;
     inventoryCountingContents: InventoryCountingContents[];
@@ -56,7 +58,7 @@ export class InventoryCountersEntity extends Entity {
 export class InventoryOrganizationOfCountingEntity extends Entity {
     code: string;
     name: string;
-
+    enableBinLocation: boolean;
     constructor(inventoryOrganizationOfCounting?: any) {
         super(inventoryOrganizationOfCounting);
     }
@@ -94,5 +96,49 @@ export class UnitOfMeasureOfCountingEntity extends Entity {
     name: string;
     constructor(unitOfMeasureOfCountingEntity?: any) {
         super(unitOfMeasureOfCountingEntity);
+    }
+}
+
+export class SerialNumberOfInventoryCountingEntity extends Entity {
+    inventoryCounterId: string;
+    itemDetailId: string;
+    itemDetailName: string;
+    itemDetailCode: string;
+    mfrSerialNumber: string;
+    serialNumber: string;
+    lotNumber: string;
+    quantity: number;
+    expirationDate: string;
+    mfrDate: string;
+    admissionDate: string;
+    mfrWarrantyStart: string;
+    mfrWarrantyEnd: string;
+    details: string;
+    qrCode: string;
+
+    constructor(serialNumberOfInventoryCountingEntity?) {
+        super(serialNumberOfInventoryCountingEntity);
+    }
+}
+
+export class BatchOfInventoryCountingEntity extends Entity {
+    inventoryCounterId: string;
+    itemDetailId: string;
+    itemDetailName: string;
+    itemDetailCode: string;
+    mfrSerialNumber: string;
+    serialNumber: string;
+    lotNumber: string;
+    quantity: number;
+    expirationDate: string;
+    mfrDate: string;
+    admissionDate: string;
+    mfrWarrantyStart: string;
+    mfrWarrantyEnd: string;
+    details: string;
+    qrCode: string;
+
+    constructor(batchOfInventoryCountingEntity?) {
+        super(batchOfInventoryCountingEntity);
     }
 }

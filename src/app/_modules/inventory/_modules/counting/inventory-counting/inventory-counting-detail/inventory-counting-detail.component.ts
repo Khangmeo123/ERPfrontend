@@ -208,7 +208,9 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-
+    this.inventoryCountingService.delete(this.inventoryCountingId).then(res => {
+      this.backToList();
+    });
   }
 
   save() {
@@ -217,6 +219,17 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
       this.generalService.validateAllFormFields(this.inventoryCountingForm);
     } else {
       this.inventoryCountingService.save(this.inventoryCountingForm.value).then(res => {
+        this.backToList();
+      });
+    }
+  }
+
+  send() {
+    debugger;
+    if (!this.inventoryCountingForm.valid) {
+      this.generalService.validateAllFormFields(this.inventoryCountingForm);
+    } else {
+      this.inventoryCountingService.send(this.inventoryCountingForm.value).then(res => {
         this.backToList();
       });
     }
@@ -275,9 +288,10 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     this.inventoryOrganizationTyping.next(this.inventoryOrganizationSearchEntity);
   }
 
-  selectInventoryOrganization(inventoryOrganizationId: string) {
-    this.inventoryCountingForm.get('inventoryOrganizationId').setValue(inventoryOrganizationId);
-    this.inventoryOrganizationId = inventoryOrganizationId;
+  selectInventoryOrganization(node: any) {
+    this.inventoryCountingForm.get('inventoryOrganizationId').setValue(node.id);
+    this.inventoryCountingForm.get('enableBinLocation').setValue(node.enableBinLocation)
+    this.inventoryOrganizationId = node.id;
   }
 
   // employeeDetail

@@ -1,10 +1,14 @@
 import {
   UnitOfMeasureOfCountingSearchEntity,
   InventoryCounterDetailSearchEntity,
+  SerialNumberSearchEntity,
+  BatchSearchEntity,
 } from './../../../../_backend/inventory-counting/inventory-counting.searchentity';
 import {
   UnitOfMeasureOfCountingEntity,
   BinLocationOfInventoryCountingEntity,
+  SerialNumberOfInventoryCountingEntity,
+  BatchOfInventoryCountingEntity,
 } from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Subscription, Subject } from 'rxjs';
@@ -23,6 +27,7 @@ import {
   ItemDetailOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { InventoryCountingPendingService } from './inventory-counting-pending.service';
+import { ColumnEntity } from 'src/app/_helpers/entity';
 
 @Component({
   selector: 'app-inventory-counting-pending',
@@ -38,13 +43,32 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   displayBatch: boolean = false;
   displaySerial: boolean = false;
   displayBinLocation: boolean = false;
-  displayDetailDifference: boolean = false;
+  displayInventoryCounter: boolean = false;
   employeeListIds: string[] = [];
   inventoryCountingId: string;
   inventoryCountingForm: FormGroup;
   inventoryOrganizationId: string;
+  itemDetailId: string;
+  inventoryCounterContentId: string;
   binLocationList: BinLocationOfInventoryCountingEntity[];
   inventoryCounterDetailSearchEntity: InventoryCounterDetailSearchEntity = new InventoryCounterDetailSearchEntity();
+  activeScan: boolean = false;
+  inventoryCounters: any[] = [];
+  inventoryCounterList: any[];
+  // serialNumber:
+  serialNumber: string;
+  serialNumberSearchEntity: SerialNumberSearchEntity = new SerialNumberSearchEntity();
+  serialNumberList: SerialNumberOfInventoryCountingEntity[];
+  linkSerialNumberTemplate: string = null;
+  linkSerialNumberExport: string = null;
+
+  // batch:
+  batchCode: string;
+  batchSearchEntity: BatchSearchEntity = new BatchSearchEntity();
+  batchList: BatchOfInventoryCountingEntity[];
+  linkBatchTemplate: string;
+  linkBatchExport: string;
+
   // inventoryOrganization:
   inventoryOrganizationIds: InventoryOrganizationOfCountingEntity[];
   inventoryOrganizationExceptIds: InventoryOrganizationOfCountingEntity[];
@@ -88,12 +112,16 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
           this.inventoryCountingId = params.id;
         }
         this.inventoryCountingService.getDetail(params.id).then(res => {
+          if (res) {
+            this.inventoryCounters = [...res.inventoryCounters];
+          }
         });
       });
     const inventoryCountingFormSub = this.inventoryCountingService.inventoryCountingForm.subscribe(res => {
       if (res) {
         this.inventoryCountingForm = res;
         this.inventoryOrganizationId = this.inventoryCountingForm.get('inventoryOrganizationId').value;
+
       }
     });
     // itemDetail:
@@ -134,12 +162,27 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
         this.binLocationList = res;
       }
     });
+    // serialNumber:
+    const serialNumberListSub = this.inventoryCountingService.serialNumberList.subscribe(res => {
+      if (res) {
+        this.serialNumberList = res;
+      }
+    });
+    // batch:
+    const batchListSub = this.inventoryCountingService.batchList.subscribe(res => {
+      if (res) {
+        this.batchList = res;
+      }
+    });
+
     this.inventoryCountingSubs.add(inventoryCountingFormSub)
       .add(itemDetailListSub)
       .add(unitOfMeasureListSub)
       .add(inventoryOrganizationListSub)
       .add(itemDetailCodeListSub)
-      .add(binLocationListSub);
+      .add(binLocationListSub)
+      .add(serialNumberListSub)
+      .add(batchListSub);
   }
 
   ngOnInit() {
@@ -174,14 +217,6 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     this.router.navigate(['/inventory/receipt/goods-receipt/goods-receipt-list']);
   }
 
-  showBatches() {
-    this.displayBatch = true;
-  }
-
-  showSerial() {
-    this.displaySerial = true;
-  }
-
   delete() {
 
   }
@@ -196,10 +231,71 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     }
   }
 
-  // inventoryCoutingContents:
+  // inventoryCouterContents:
   openBinLocation(inventoryCountingContent: string) {
     this.displayBinLocation = true;
     this.inventoryCountingService.getListBinLocation(this.inventoryOrganizationId, inventoryCountingContent);
+  }
+
+  // serialNumber:
+  showSerial(itemDetailId: string) {
+    this.displaySerial = true;
+    this.activeScan = false;
+    this.itemDetailId = itemDetailId;
+    this.inventoryCountingService.getListSerialNumber(this.itemDetailId, this.inventoryCountingId);
+  }
+
+  deleteSerialNumber(serialNumberId: string) {
+    this.inventoryCountingService.deleteSerialNumber(serialNumberId, this.itemDetailId, this.inventoryCountingId);
+  }
+
+  checkAllSerialNumber(target: any) {
+    this.inventoryCountingService.checkAllSerialNumber(target.checked, this.serialNumberList);
+  }
+
+  deleteMultipleSerialNumber() {
+    this.inventoryCountingService.deleteMultipleSerialNumber(this.serialNumberList, this.itemDetailId, this.inventoryCountingId);
+  }
+
+  inputSerialNumber(event) {
+    this.inventoryCountingService.analyzeSerialCode(this.itemDetailId, event);
+    this.serialNumber = null;
+  }
+
+  importSerialNumber(file: File) {
+    this.inventoryCountingService.importSerialNumber(file, this.itemDetailId, this.inventoryCountingId);
+  }
+
+  clearSerialNumberTable(table) {
+    this.serialNumberSearchEntity = new SerialNumberSearchEntity();
+    table.reset();
+  }
+
+  // batch:
+  showBatch(itemDetailId: string) {
+    this.displayBatch = true;
+    this.activeScan = false;
+    this.itemDetailId = itemDetailId;
+    this.inventoryCountingService.getListBatch(itemDetailId, this.inventoryCountingId);
+  }
+
+  deleteBatch(batchId: string) {
+    this.inventoryCountingService.deleteBatch(batchId, this.itemDetailId, this.inventoryCountingId);
+  }
+
+  inputBatchCode(event: string) {
+    this.inventoryCountingService.analyzeBatchCode(this.itemDetailId, event);
+    this.batchCode = null;
+  }
+
+  updateBatch(batch: BatchOfInventoryCountingEntity) {
+    this.inventoryCountingService.updateBatch(batch);
+  }
+
+  // invetoryCounterDetail:
+  showInventoryCounterDetail(item: any) {
+    this.displayInventoryCounter = true;
+    this.inventoryCountingService.getListInventoryCounter(item.id);
   }
 
   // inventoryOrganization:
@@ -280,9 +376,4 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     this.itemDetailCodeSearchEntity.name.startsWith = event;
     this.itemDetailCodeTyping.next(this.itemDetailCodeSearchEntity);
   }
-
-  openDetailDifference() {
-    this.displayDetailDifference = true;
-  }
-
 }
