@@ -6,6 +6,9 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
 $color-button: #007ee5;
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 

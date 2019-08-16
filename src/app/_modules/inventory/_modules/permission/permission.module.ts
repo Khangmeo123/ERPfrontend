@@ -9,6 +9,10 @@ import {PaginationModule} from '../../../../_shared/modules/pagination/paginatio
 import {SelectModule} from '../../../../_shared/modules/select/select.module';
 import {FiltersModule} from '../../../../_shared/modules/filters/filters.module';
 import { PermissionDetailComponent } from './permission-detail/permission-detail.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {KeyFilterModule} from 'primeng/keyfilter';
+import {EditorModule} from 'primeng/editor';
+import {ErrorModule} from '../../../../_shared/components/error/error.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +29,11 @@ import { PermissionDetailComponent } from './permission-detail/permission-detail
     PaginationModule,
     SelectModule,
     FiltersModule,
+    ReactiveFormsModule,
+    KeyFilterModule,
+    EditorModule,
+    FormsModule,
+    ErrorModule,
   ],
 })
 export class PermissionModule {

@@ -4,9 +4,12 @@ import {FormControl} from '@angular/forms';
 import {requiredField} from '../../../../_helpers';
 import {SearchEntity} from '../../../../_helpers/search-entity';
 import {TextFilter} from '../../../../_shared/models/filters/TextFilter';
+import {NumberFilter} from '../../../../_shared/models/filters/NumberFilter';
 
 export class PermissionEntity extends Entity {
   id: string;
+
+  positionId: string;
 
   positionCode: string;
 
@@ -30,19 +33,27 @@ export class PermissionEntity extends Entity {
 export class PermissionForm extends FormModel {
   id: FormControl = new FormControl(null);
 
-  positionCode: FormControl = new FormControl(null, [
+  legalEntityId: FormControl = new FormControl(null, [
     requiredField,
   ]);
 
-  positionName: FormControl = new FormControl(null, [
+  inventoryOrganizationId: FormControl = new FormControl(null, [
     requiredField,
   ]);
+
+  inventoryDocumentTypeId: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+
+  inventoryDocumentTypeDisplay: FormControl = new FormControl(null);
+
+  positionId: FormControl = new FormControl(null);
+
+  positionCode: FormControl = new FormControl(null);
+
+  positionName: FormControl = new FormControl(null);
 
   currentStep: FormControl = new FormControl(null, [
-    requiredField,
-  ]);
-
-  currentStatus: FormControl = new FormControl(null, [
     requiredField,
   ]);
 
@@ -50,11 +61,21 @@ export class PermissionForm extends FormModel {
     requiredField,
   ]);
 
-  nextStatus: FormControl = new FormControl(null, [
+  currentStatusId: FormControl = new FormControl(null, [
     requiredField,
   ]);
+  currentStatusDisplay: FormControl = new FormControl(null);
+
+  nextStatusId: FormControl = new FormControl(null, [
+    requiredField,
+  ]);
+  nextStatusDisplay: FormControl = new FormControl(null);
 
   disabled: FormControl = new FormControl(null);
+
+  mailToSender: FormControl = new FormControl(null);
+
+  mailToApprover: FormControl = new FormControl(null);
 
   constructor(permissionEntity?: PermissionEntity) {
     super();
@@ -63,18 +84,29 @@ export class PermissionForm extends FormModel {
 }
 
 export class PermissionSearchEntity extends SearchEntity {
+  legalEntityId: string;
+
+  inventoryOrganizationId: string;
+
+  inventoryDocumentTypeId: string;
+
+  positionId: string;
 
   positionCode: string;
 
   positionName: TextFilter = new TextFilter();
 
-  currentStep: TextFilter = new TextFilter();
+  currentStep: NumberFilter = new NumberFilter();
 
-  currentStatus: string;
+  currentStatusId: string;
 
-  nextStep: TextFilter = new TextFilter();
+  currentStatusDisplay: string;
 
-  nextStatus: string;
+  nextStep: NumberFilter = new NumberFilter();
+
+  nextStatusId: string;
+
+  nextStatusDisplay: string;
 
   disabled: boolean;
 }

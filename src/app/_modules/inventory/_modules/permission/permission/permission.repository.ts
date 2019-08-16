@@ -4,14 +4,14 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../../../../environments/environment';
 import {LegalSearchEntity} from '../../../_backend/legal-entity/legal.search-entity';
 import {Observable} from 'rxjs';
-import {Entities} from '../../../../../_helpers/entity';
+import {Entities, EnumEntity} from '../../../../../_helpers/entity';
 import {map} from 'rxjs/operators';
 import {LegalEntity} from '../../../_backend/legal-entity/legal.entity';
-import {DocumentSearchEntity} from '../../../_backend/document/document.search-entity';
-import {DocumentEntity} from '../../../_backend/document/document.entity';
 import {InventoryOrganizationSearchEntity} from '../../../_backend/inventory-organization/inventory-organization.search-entity';
 import {InventoryOrganizationEntity} from '../../../_backend/inventory-organization/inventory-organization.entity';
 import {PermissionEntity, PermissionSearchEntity} from '../permission.entities';
+import {PositionSearchEntity} from '../../../_backend/position/position.search-entity';
+import {PositionEntity} from '../../../_backend/position/position.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -80,10 +80,42 @@ export class PermissionRepository extends Repository {
       );
   }
 
-  getDocumentList(documentSearchEntity: DocumentSearchEntity): Observable<Entities> {
+  getInventoryDocumentTypes(): Observable<EnumEntity[]> {
+    return this.http.post<EnumEntity[]>(
+      this.getUrl('enum-list-inventory-document-type'),
+      {},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<EnumEntity[]>) => response.body,
+        ),
+      );
+  }
+
+  getDocumentStatus(id: string): Observable<EnumEntity[]> {
+    return this.http.post<EnumEntity[]>(
+      this.getUrl('enum-list-document-status'),
+      {id},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<EnumEntity[]>) => response.body,
+        ),
+      );
+  }
+
+  getPositionList(positionSearchEntity: PositionSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      this.getUrl('drop-list-legal-entity'),
-      documentSearchEntity,
+      this.getUrl('drop-list-position'),
+      positionSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -93,8 +125,8 @@ export class PermissionRepository extends Repository {
         map(
           (response: HttpResponse<Entities>) => {
             const entities: Entities = new Entities();
-            entities.ids = response.body.ids.map((item) => new DocumentEntity(item));
-            entities.exceptIds = response.body.exceptIds.map((item) => new DocumentEntity(item));
+            entities.ids = response.body.ids.map((item) => new PositionEntity(item));
+            entities.exceptIds = response.body.exceptIds.map((item) => new PositionEntity(item));
             return entities;
           },
         ),
@@ -103,7 +135,7 @@ export class PermissionRepository extends Repository {
 
   getInventoryOrganizationList(inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity): Observable<Entities> {
     return this.http.post<Entities>(
-      this.getUrl('drop-list-legal-entity'),
+      this.getUrl('drop-list-inventory-organization'),
       inventoryOrganizationSearchEntity,
       {
         observe: 'response',

@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {PermissionRepository} from './permission.repository';
 import {BehaviorSubject, forkJoin, Observable, Subscription} from 'rxjs';
-import {Entities} from '../../../../../_helpers/entity';
+import {Entities, EnumEntity} from '../../../../../_helpers/entity';
 import {LegalSearchEntity} from '../../../_backend/legal-entity/legal.search-entity';
 import {ToastrService} from 'ngx-toastr';
 import {translate} from '../../../../../_helpers/string';
-import {DocumentSearchEntity} from '../../../_backend/document/document.search-entity';
 import {InventoryOrganizationSearchEntity} from '../../../_backend/inventory-organization/inventory-organization.search-entity';
 import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {PermissionEntity, PermissionSearchEntity} from '../permission.entities';
+import {PositionSearchEntity} from '../../../_backend/position/position.search-entity';
 
 @Injectable({
   providedIn: 'root',
@@ -16,13 +16,17 @@ import {PermissionEntity, PermissionSearchEntity} from '../permission.entities';
 export class PermissionService {
   legalEntityList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
-  documentList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+  inventoryDocumentTypes: BehaviorSubject<EnumEntity[]> = new BehaviorSubject<EnumEntity[]>([]);
+
+  documentStatus: BehaviorSubject<EnumEntity[]> = new BehaviorSubject<EnumEntity[]>([]);
 
   inventoryOrganizationList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   permissionList: BehaviorSubject<PermissionEntity[]> = new BehaviorSubject<PermissionEntity[]>([]);
 
   permissionCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
+  positionList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
 
   constructor(private permissionRepository: PermissionRepository, private toastrService: ToastrService) {
   }
@@ -43,16 +47,48 @@ export class PermissionService {
     });
   }
 
-  getDocumentList(documentSearchEntity: DocumentSearchEntity): Promise<Entities> {
+  getInventoryDocumentTypes(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.permissionRepository.getInventoryDocumentTypes()
+        .subscribe(
+          (documentTypes: EnumEntity[]) => {
+            this.inventoryDocumentTypes.next(documentTypes);
+            resolve();
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('inventoryDocumentTypes.get.error'));
+            reject(error);
+          },
+        );
+    });
+  }
+
+  getDocumentStatus(id: string): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.permissionRepository.getDocumentStatus(id)
+        .subscribe(
+          (documentTypes: EnumEntity[]) => {
+            this.documentStatus.next(documentTypes);
+            resolve();
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('documentStatus.get.error'));
+            reject(error);
+          },
+        );
+    });
+  }
+
+  getPositionList(positionSearchEntity: PositionSearchEntity): Promise<Entities> {
     return new Promise<Entities>((resolve, reject) => {
-      this.permissionRepository.getDocumentList(documentSearchEntity)
+      this.permissionRepository.getPositionList(positionSearchEntity)
         .subscribe(
           (entities: Entities) => {
-            this.documentList.next(entities);
+            this.positionList.next(entities);
             resolve(entities);
           },
           (error: Error) => {
-            this.toastrService.error(translate('documentEntity.get.error'));
+            this.toastrService.error(translate('positionEntity.get.error'));
             reject(error);
           },
         );
@@ -90,18 +126,18 @@ export class PermissionService {
       });
   }
 
-  searchDocumentByTyping(documentSearchEntityTyping: Observable<DocumentSearchEntity>): Subscription {
-    return documentSearchEntityTyping.pipe(
+  searchPositionByTyping(positionSearchEntityTyping: Observable<PositionSearchEntity>): Subscription {
+    return positionSearchEntityTyping.pipe(
       debounceTime(400),
       distinctUntilChanged(),
       switchMap(
-        (documentSearchEntity: DocumentSearchEntity) => {
-          return this.permissionRepository.getDocumentList(documentSearchEntity);
+        (positionSearchEntity: PositionSearchEntity) => {
+          return this.permissionRepository.getPositionList(positionSearchEntity);
         },
       ),
     )
       .subscribe((entities: Entities) => {
-        this.documentList.next(entities);
+        this.positionList.next(entities);
       });
   }
 
