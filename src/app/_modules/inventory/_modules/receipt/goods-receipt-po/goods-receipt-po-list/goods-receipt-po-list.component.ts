@@ -1,10 +1,10 @@
 import {
-  GoodsReceiptPORequesterSearchEntity,
   GoodsReceiptPOInventoryOrganizationSearchEntity,
+  GoodsReceiptPORequesterSearchEntity,
 } from './../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { GoodsReceiptPORequesterEntity } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { Subscription, Subject } from 'rxjs';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subject, Subscription } from 'rxjs';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { translate } from '../../../../../../_helpers/string';
 import { Router } from '@angular/router';
 import { GoodsReceiptPOListService } from './goods-receipt-po-list.service';
@@ -85,7 +85,7 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
       this.isBookMark = res;
     });
-    this.bookmarkService.checkBookMarks({ name: this.pageTitle, route: this.router.url });
+    this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
 
     // add subcription:
     this.goodsReceiptPOSubs.add(goodReceiptPOListSub)
@@ -134,14 +134,14 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
   bookMark() {
     this.isBookMark = !this.isBookMark;
     if (this.isBookMark) {
-      this.bookmarkService.addBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.addBookMarks({name: this.pageTitle, route: this.router.url});
     } else {
-      this.bookmarkService.deleteBookMarks({ name: this.pageTitle, route: this.router.url });
+      this.bookmarkService.deleteBookMarks({name: this.pageTitle, route: this.router.url});
     }
   }
 
   editGoodsReceiptPO(goodsReceiptId: string) {
-    this.router.navigate(['inventory/receipt/goods-receipt-po/goods-receipt-po-detail'], { queryParams: { id: goodsReceiptId } });
+    this.router.navigate(['inventory/receipt/goods-receipt-po/goods-receipt-po-detail'], {queryParams: {id: goodsReceiptId}});
   }
 
   addGoodsReceipt() {
@@ -175,7 +175,7 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.dropListInvetoryOrganization(this.inventoryOrganizationSearchEntity);
   }
 
-  typingSearchInvetoryOrganization(event: string, id: string) {
+  typingSearchInventoryOrganization(event: string, id: string) {
     this.inventoryOrganizationSearchEntity = new GoodsReceiptPOInventoryOrganizationSearchEntity();
     if (id !== null && id.length > 0) {
       this.inventoryOrganizationSearchEntity.ids.push(id);
@@ -189,5 +189,20 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     if (this.statusList.length === 0) {
       this.goodsReceiptPOService.enumListStatus();
     }
+  }
+
+  onClearInventoryOrganizationFilter() {
+    this.goodsReceiptPOSearchEntity.inventoryOrganizationId = null;
+    this.getList();
+  }
+
+  onClearRequester() {
+    this.goodsReceiptPOSearchEntity.requesterId = null;
+    this.getList();
+  }
+
+  onClearStatus() {
+    this.goodsReceiptPOSearchEntity.statusId = null;
+    this.getList();
   }
 }
