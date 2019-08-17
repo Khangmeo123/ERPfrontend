@@ -85,7 +85,7 @@
             "itemNo": "Mã hàng",
             "purchaseOrderNumber": "Mã đơn hàng",
             "quantity": "Số lượng",
-            "title": "Chi tiết hàng hóa theo hoạch toán",
+            "title": "Chi tiết hàng hóa theo hạch toán",
             "total": "Thành tiền",
             "unitOfMeasure": "Đơn vị",
             "valueAddedTax": "Thuế VAT"
@@ -139,7 +139,7 @@
         "documentNumber": "Số chứng từ",
         "form": {
             "post": {
-                "title": ""
+                "title": "Thông tin chi tiết đơn hàng nhận"
             },
             "title": "Thông tin chung"
         },
@@ -148,7 +148,7 @@
             "createdDate": "Ngày tạo",
             "creator": "Người tạo",
             "documentNo": "Số chứng từ",
-            "supplierName": "",
+            "supplierName": "Tên nhà cung cấp",
             "title": "Nhập phiếu từ đơn mua hàng"
         },
         "header": {
@@ -176,17 +176,17 @@
         "supplierCode": "Mã nhà cung cấp",
         "supplierName": "Tên nhà cung cấp",
         "tab1": {
-            "Serial": "",
-            "actualReceive": "",
+            "Serial": "Số seri",
+            "actualReceive": "Thực nhận",
             "amount": "Số lương",
             "batches": "Lô",
             "discount": "Chiết khấu",
             "discountAmount": "Số tiền chiết khấu",
-            "itemName": "",
+            "itemName": "Tên hàng",
             "itemNo": "Mã hàng",
             "purchaseOrderNumber": "Mã đơn hàng",
             "quantity": "Số lượng",
-            "title": "Chi tiết hàng hóa theo hoạch toán",
+            "title": "Chi tiết hàng hóa theo hạch toán",
             "total": "Thành tiền",
             "unitOfMeasure": "Đơn vị",
             "unitPrice": "Đơn giá",
@@ -200,7 +200,7 @@
         "detail": {
             "form": {
                 "post": {
-                    "title": ""
+                    "title": "Số lượng hàng tồn kho"
                 }
             }
         }
@@ -243,7 +243,7 @@
                 "title": "Thông tin chung"
             },
             "header": {
-                "title": ""
+                "title": "Phiếu nhập kho hàng mua"
             },
             "inventoryAddress": "Địa chỉ kho",
             "inventoryCode": "Mã kho",
@@ -264,7 +264,7 @@
             "receiptedDate": "Ngày thực hiện",
             "receiver": "Người nhận hàng",
             "return": {
-                "title": ""
+                "title": "Thông tin chi tiết đơn hàng nhận"
             },
             "returnRequest": {
                 "buyer": "Người mua",
@@ -282,13 +282,13 @@
                 "itemNo": "Mã hàng",
                 "purchaseOrderNumber": "Mã đơn hàng",
                 "quantity": "Số lượng",
-                "title": "",
+                "title": "Chi tiết hàng hóa theo hạch toán",
                 "total": "Thành tiền",
                 "unitOfMeasure": "Đơn vị tính",
                 "valueAddedTax": "Thuế VAT"
             },
             "tab2": {
-                "title": ""
+                "title": "Đính kèm"
             }
         },
         "list": {
@@ -296,12 +296,12 @@
             "creator": "Người tạo",
             "description": "Mô tả",
             "header": {
-                "title": ""
+                "title": "Phiếu nhập kho khác"
             },
-            "inventory": "",
-            "receiptRequirementID": "",
-            "receiptedDate": "",
-            "status": ""
+            "inventory": "Mã kho",
+            "receiptRequirementID": "Số phiếu",
+            "receiptedDate": "Ngày nhận",
+            "status": "Trạng thái"
         }
     },
     "returnRequest": {
@@ -340,7 +340,7 @@
                 "itemName": "Tên hàng hóa",
                 "itemNo": "Mã hàng",
                 "quantity": "Số lượng",
-                "title": "Chi tiết hàng hóa theo hoạch toán",
+                "title": "Chi tiết hàng hóa theo hạch toán",
                 "total": "Thành tiền",
                 "unitOfMeasure": "Đơn vị tính",
                 "valueAddedTax": "Thuế VAT"
