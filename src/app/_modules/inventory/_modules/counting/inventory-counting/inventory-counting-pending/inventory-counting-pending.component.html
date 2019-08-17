@@ -52,15 +52,7 @@
                 <span class="form-title">
                     {{'inventoryCounting.detail.form.title' | translate}}
                 </span>
-                <div class="page-actions justify-content-end">
-                    <button class="btn btn-labeled btn-delete" data-qe-id="detail-form-button-delete"
-                        (click)="deleteInventoryForm()">
-                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                        <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span>
-                    </button>
-                </div>
+                <div class="page-actions justify-content-end"></div>
             </div>
             <div class="line"></div>
             <div class="page-section-form-body">
@@ -125,11 +117,14 @@
                         <div class="row pt-3 pb-3 pl-3">
                             <div class="col-sm-6">
                                 <div class="d-flex align-items-center">
-                                    <p-inputSwitch></p-inputSwitch>
+                                    <p-inputSwitch [(ngModel)]="activeScanOutSide"
+                                        [ngModelOptions]="{standalone: true}"></p-inputSwitch>
                                     <span
                                         class="ml-2">{{'inventoryCounting.detail.batches.startScanBatchesNo' | translate}}</span>
                                     <div class="ml-2">
                                         <input type="text" class="form-control"
+                                            (change)="inputCodeOutside($event.target.value)"
+                                            [disabled]="activeScanOutSide"
                                             data-qe-id="dialog-input-start-scan-batches-no">
                                     </div>
                                 </div>
@@ -148,7 +143,7 @@
                         </div>
                         <div class="table" formArrayName="inventoryCounterContents">
                             <p-table #tableInventoryCounterContents [scrollable]="true" scrollHeight="500px"
-                                [resizableColumns]="true" [rowTrackBy]="trackByFn"
+                                [resizableColumns]="true" [rowTrackBy]="trackByFn" [paginator]="true" [rows]="10"
                                 [value]="inventoryCountingForm.controls.inventoryCounterContents.value">
                                 <ng-template pTemplate="colgroup">
                                     <colgroup>
@@ -194,7 +189,7 @@
                                                 (search)="typingSearchItemDetailCode($event, itemDetailCodeSearchEntity.id)"
                                                 (selectionChange)="itemDetailCodeSearchEntity.id = $event[0]; tableInventoryCounterContents.filter($event[0], 'itemDetailId', 'equals')"
                                                 (listOpen)="dropListItemDetailCode(itemDetailCodeSearchEntity.id)"
-                                                (clear)="tableInventoryCounterContents.reset()"
+                                                (clear)="clearItemDetailId(tableInventoryCounterContents)"
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
@@ -208,7 +203,7 @@
                                                 (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
                                                 (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableInventoryCounterContents.filter($event[0], 'unitOfMeasureId', 'equals')"
                                                 (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                                (clear)="tableInventoryCounterContents.reset()"
+                                                (clear)="clearUnitOfMeasure(tableInventoryCounterContents)"
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
@@ -241,17 +236,27 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <span>{{inventoryCounterContent.quantityOnDocumentDate}}</span>
+                                            <ng-container [ngSwitch]="inventoryCounterContent.managementType">
+                                                <span *ngSwitchCase="'SERIAL'">
+                                                    {{inventoryCounterContent.quantity | number}}
+                                                </span>
+                                                <span *ngSwitchCase="'BATCH'">
+                                                    {{inventoryCounterContent.quantity | number}}
+                                                </span>
+                                                <input type="text" formControlName="quantity" class="form-control" />
+                                            </ng-container>
                                         </td>
                                         <td>
-                                            <a (click)="showBatch(inventoryCounterContent.itemDetailId)"
-                                                href="javascript:;">
-                                                {{'goodsReceiptPODetail.tab1.batches' | translate}}
-                                            </a>
-                                            <a (click)="showSerial(inventoryCounterContent.itemDetailId)"
-                                                href="javascript:;">
-                                                {{'goodsReceiptPODetail.tab1.Serial' | translate}}
-                                            </a>
+                                            <ng-container [ngSwitch]="inventoryCounterContent.managementType">
+                                                <a (click)="showBatch(inventoryCounterContent.itemDetailId)"
+                                                    href="javascript:;" *ngSwitchCase="'SERIAL'">
+                                                    {{'goodsReceiptPODetail.tab1.batches' | translate}}
+                                                </a>
+                                                <a (click)="showSerial(inventoryCounterContent.itemDetailId)"
+                                                    href="javascript:;" *ngSwitchCase="'BATCH'">
+                                                    {{'goodsReceiptPODetail.tab1.Serial' | translate}}
+                                                </a>
+                                            </ng-container>
                                         </td>
                                     </tr>
                                 </ng-template>
@@ -276,7 +281,6 @@
                                         <col>
                                         <col>
                                         <col *ngIf="inventoryCountingForm.get('enableBinLocation').value">
-                                        <col>
                                         <col *ngFor="let item of inventoryCounters;">
                                     </colgroup>
                                 </ng-template>
@@ -301,9 +305,6 @@
                                         <th pResizableColumn data-qe-id="table-thead-quantity-of-inventory">
                                             {{'inventoryCounting.detail.tab1.quantityOfInventory' | translate}}
                                         </th>
-                                        <th pResizableColumn data-qe-id="table-thead-highest-difference">
-                                            {{'inventoryCounting.detail.tab1.highestDifference' | translate}}
-                                        </th>
                                         <th pResizableColumn *ngFor="let item of inventoryCounters;">
                                             {{item.name}}
                                         </th>
@@ -316,7 +317,7 @@
                                                 (search)="typingSearchItemDetailCode($event, itemDetailCodeSearchEntity.id)"
                                                 (selectionChange)="itemDetailCodeSearchEntity.id = $event[0]; tableInventoryCountingContents.filter($event[0], 'itemDetailId', 'equals')"
                                                 (listOpen)="dropListItemDetailCode(itemDetailCodeSearchEntity.id)"
-                                                (clear)="tableInventoryCountingContents.reset()"
+                                                (clear)="clearItemDetailId(tableInventoryCountingContents)"
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
@@ -330,13 +331,12 @@
                                                 (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
                                                 (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableInventoryCountingContents.filter($event[0], 'unitOfMeasureId', 'equals')"
                                                 (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                                (clear)="tableInventoryCountingContents.reset()"
+                                                (clear)="clearUnitOfMeasure(tableInventoryCountingContents)"
                                                 data-qe-id="table-thead-filter-uom">
                                             </app-single-select>
                                         </th>
                                         <th class="th-filter"
                                             *ngIf="inventoryCountingForm.get('enableBinLocation').value"></th>
-                                        <th class="th-filter"></th>
                                         <th class="th-filter"></th>
                                         <th class="th-filter" *ngFor="let item of inventoryCounters;"
                                             (click)="showInventoryCounterDetail(item)"></th>
@@ -355,19 +355,17 @@
                                             {{inventoryCounterContent.itemDetailName}}
                                         </td>
                                         <td>
-                                            {{inventoryCounterContent.itemDetailUnitOfMeasure}}
+                                            {{inventoryCounterContent.itemDetailUnitOfMeasureName}}
                                         </td>
                                         <td *ngIf="inventoryCountingForm.get('enableBinLocation').value">
                                             {{inventoryCounterContent.binLocationCode}}
                                         </td>
                                         <td class="text-right">
-                                            {{inventoryCounterContent.quantityOfDocumentDate}}
-                                        </td>
-                                        <td class="text-right text-danger">
-                                            {{inventoryCounterContent.highestDifference}}
+                                            {{inventoryCounterContent.quantity}}
                                         </td>
                                         <td *ngFor="let item of inventoryCounters;">
-                                            <a href="javacript:;">{{item.name}}</a>
+                                            <a href="javacript:;"
+                                                (click)="showInventoryCounterDetail()">{{item.name}}</a>
                                         </td>
                                     </tr>
                                 </ng-template>

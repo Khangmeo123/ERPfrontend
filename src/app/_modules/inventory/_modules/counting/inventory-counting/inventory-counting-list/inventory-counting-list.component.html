@@ -155,10 +155,16 @@
             <td> {{inventoryCounting.ownerName }} </td>
             <td class="text-center">
               <div [ngSwitch]="inventoryCounting.statusName">
-                <span class="ml-2 open-status" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</span>
-                <span class="ml-2 pending-counting-status"
-                  *ngSwitchCase="'COUNTING'">{{'general.pendingCounting'| translate}}</span>
-                <span class="ml-2 completed-status" *ngSwitchCase="'DONE'">{{'general.completed'| translate}}</span>
+                <a class="ml-2 open-status"
+                  routerLink="/inventory/counting/inventory-counting/inventory-counting-detail"
+                  [queryParams]="{id: inventoryCounting.id}" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</a>
+                <a class="ml-2 pending-counting-status"
+                  routerLink="/inventory/counting/inventory-counting/inventory-counting-pending"
+                  [queryParams]="{id: inventoryCounting.id}"
+                  *ngSwitchCase="'COUNTING'">{{'general.pending'| translate}}</a>
+                <a class="ml-2 completed-status"
+                  routerLink="/inventory/counting/inventory-counting/inventory-counting-done"
+                  [queryParams]="{id: inventoryCounting.id}" *ngSwitchCase="'DONE'">{{'general.done'| translate}}</a>
               </div>
             <td width="8%">
               <div class="d-flex justify-content-center">
@@ -174,7 +180,6 @@
         <app-pagination data-qe-id="pagination" [pagination]="pagination" (paginationOut)="paginationOut($event)">
         </app-pagination>
       </div>
-
     </div>
   </div>
 </div>

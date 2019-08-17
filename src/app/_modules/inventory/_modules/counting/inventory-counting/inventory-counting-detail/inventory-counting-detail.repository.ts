@@ -61,10 +61,10 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
-    getListBinLocation(ioId: string, iccId: string) {
-        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list/bin-location', JSON.stringify({
+    getListBinLocation(ioId: string, idId: string) {
+        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list-bin-location', JSON.stringify({
             inventoryOrganizationId: ioId,
-            inventoryCountingContentId: iccId,
+            itemDetailId: idId,
         }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
@@ -76,7 +76,7 @@ export class InventoryCountingDetailRepository extends Repository {
     }
 
     getListItemDetail(data: any) {
-        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list', JSON.stringify(data),
+        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list-item-detail', JSON.stringify({ selected: data }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return r.body.map((item) => {
@@ -151,7 +151,7 @@ export class InventoryCountingDetailRepository extends Repository {
     }
 
     dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail',
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure',
             JSON.stringify(unitOfMeasureOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

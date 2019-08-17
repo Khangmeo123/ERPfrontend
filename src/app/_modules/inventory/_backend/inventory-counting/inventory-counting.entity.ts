@@ -35,7 +35,11 @@ export class InventoryCounterContents extends Entity {
     managementType: string;
     binLocationId: string;
     binLocationCode: string;
-    quantityOnDocumentDate: 0;
+    quantity: number;
+
+    constructor(inventoryCounterContent?: any) {
+        super(inventoryCounterContent);
+    }
 }
 
 export class BinLocationOfInventoryCountingEntity extends Entity {

@@ -52,6 +52,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   inventoryCounterContentId: string;
   binLocationList: BinLocationOfInventoryCountingEntity[];
   inventoryCounterDetailSearchEntity: InventoryCounterDetailSearchEntity = new InventoryCounterDetailSearchEntity();
+  activeScanOutSide: boolean = false;
   activeScan: boolean = false;
   inventoryCounters: any[] = [];
   inventoryCounterList: any[];
@@ -174,6 +175,12 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
         this.batchList = res;
       }
     });
+    // inventoryCounterList:
+    const inventoryCounterListSub = this.inventoryCountingService.inventoryCounterList.subscribe(res => {
+      if (res) {
+        this.inventoryCounterList = res;
+      }
+    });
 
     this.inventoryCountingSubs.add(inventoryCountingFormSub)
       .add(itemDetailListSub)
@@ -182,7 +189,8 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
       .add(itemDetailCodeListSub)
       .add(binLocationListSub)
       .add(serialNumberListSub)
-      .add(batchListSub);
+      .add(batchListSub)
+      .add(inventoryCounterListSub);
   }
 
   ngOnInit() {
@@ -235,6 +243,18 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   openBinLocation(inventoryCountingContent: string) {
     this.displayBinLocation = true;
     this.inventoryCountingService.getListBinLocation(this.inventoryOrganizationId, inventoryCountingContent);
+  }
+
+  inputCodeOutside(event) {
+    this.inventoryCountingService.analyzeCodeOutSide(this.inventoryCountingId, event);
+  }
+
+  clearUnitOfMeasure(table: any) {
+    table.filter('', 'unitOfMeasureId', 'contains');
+  }
+
+  clearItemDetailId(table: any) {
+    table.filter('', 'itemDetailId', 'contains');
   }
 
   // serialNumber:

@@ -1,4 +1,4 @@
-import { BatchOfInventoryCountingEntity } from './../../../../_backend/inventory-counting/inventory-counting.entity';
+import { BatchOfInventoryCountingEntity, InventoryCounterContents } from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { environment } from 'src/environments/environment';
@@ -57,6 +57,16 @@ export class InventoryCountingPendingRepository extends Repository {
                     return r.body.map((item) => {
                         return new SerialNumberOfInventoryCountingEntity(item);
                     });
+                }),
+            );
+    }
+
+    analyzeCodeOutSide(id: string, code: string) {
+        return this.http.post<InventoryCounterContents>(this.apiUrl + '/serial-number/analyze-qr-code',
+            JSON.stringify({ inventoryCountingId: id, qrCode: code }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return new InventoryCounterContents(r.body);
                 }),
             );
     }

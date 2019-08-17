@@ -19,6 +19,7 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import {
     BinLocationOfInventoryCountingEntity,
     ItemDetailOfCountingEntity,
+    InventoryCounterContents,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 
 @Injectable()
@@ -46,15 +47,16 @@ export class InventoryCountingDetailService {
     }
 
     // general:
-    getDetail(inventoryCountingId?): Promise<boolean> {
-        const defered = new Promise<boolean>((resolve, reject) => {
+    getDetail(inventoryCountingId?): Promise<any> {
+        const defered = new Promise<any>((resolve, reject) => {
             if (inventoryCountingId !== null && inventoryCountingId !== undefined) {
                 this.inventoryCountingRepository.getDetail(inventoryCountingId).subscribe(res => {
                     if (res) {
                         const inventoryCountingForm = this.fb.group(
                             new InventoryCountingForm(res),
                         );
-                        resolve();
+                        this.inventoryCountingForm.next(inventoryCountingForm);
+                        resolve(res);
                     }
                 }, err => {
                     if (err) {
@@ -124,11 +126,11 @@ export class InventoryCountingDetailService {
         return defered;
     }
 
-    selectEmployee(inventoryCountingForm: FormGroup, employeeListIds: string[]) {
+    selectEmployee(inventoryCountingForm: FormGroup, employeeList: any[]) {
         const inventoryCounters = inventoryCountingForm.get('inventoryCounters') as FormArray;
         inventoryCounters.clear();
-        employeeListIds.forEach(item => {
-            inventoryCounters.push(new FormControl(item));
+        employeeList.forEach(item => {
+            inventoryCounters.push(this.fb.group(new InventoryCounterContents(item)));
         });
         this.inventoryCountingForm.next(inventoryCountingForm);
     }
@@ -150,7 +152,7 @@ export class InventoryCountingDetailService {
                 control.get('isSelected').setValue(false);
             }
         }
-        for (let i = deletedList.length; i >= 0; i--) {
+        for (let i = deletedList.length - 1; i >= 0; i--) {
             inventoryCountingContents.removeAt(deletedList[i]);
         }
         this.inventoryCountingForm.next(inventoryCountingForm);
@@ -164,8 +166,8 @@ export class InventoryCountingDetailService {
         this.inventoryCountingForm.next(inventoryCountingForm);
     }
 
-    getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
-        this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, inventoryCountingContentId).subscribe(res => {
+    getListBinLocation(inventoryOrganizationId: string, itemDetailId: string) {
+        this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, itemDetailId).subscribe(res => {
             if (res) {
                 this.binLocationList.next(res);
             }
@@ -207,7 +209,19 @@ export class InventoryCountingDetailService {
         const currentArray = inventoryCountingForm.get('inventoryCountingContents') as FormArray;
         if (itemDetailList.length > 0) {
             itemDetailList.forEach(item => {
-                currentArray.push(this.fb.group(new InventoryCountingForm(item)));
+                if (item.isSelected) {
+                    const filterItem = currentArray.value.filter(elm => elm.itemDetailId === item.id)[0];
+                    if (!filterItem) {
+                        const formGroup = this.fb.group(new InventoryCountingContentForm());
+                        formGroup.get('itemDetailId').setValue(item.id);
+                        formGroup.get('itemDetailCode').setValue(item.code);
+                        formGroup.get('itemDetailName').setValue(item.name);
+                        formGroup.get('itemDetailUnitOfMeasureId').setValue(item.unitOfMeasureId);
+                        formGroup.get('itemDetailUnitOfMeasureName').setValue(item.unitOfMeasureName);
+                        formGroup.get('itemDetailUnitOfMeasureCode').setValue(item.unitOfMeasureCode);
+                        currentArray.push(formGroup);
+                    }
+                }
             });
         }
         this.inventoryCountingForm.next(inventoryCountingForm);

@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import {
     InventoryCountingForm,
     InventoryCountingContentForm,
+    InventoryCounterContentForm,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.form';
 import {
     EmployeeDetailOfCountingSearchEntity,
@@ -62,6 +63,7 @@ export class InventoryCountingPendingService {
                         const inventoryCountingForm = this.fb.group(
                             new InventoryCountingForm(res),
                         );
+                        this.inventoryCountingForm.next(inventoryCountingForm);
                         resolve(res);
                     }
                 }, err => {
@@ -117,7 +119,19 @@ export class InventoryCountingPendingService {
             if (err) {
                 console.log(err);
             }
-        })
+        });
+    }
+
+    analyzeCodeOutSide(inventoryCountingId: string, code: string) {
+        this.inventoryCountingRepository.analyzeCodeOutSide(inventoryCountingId, code).subscribe(res => {
+            if (res) {
+                const currentForm = this.inventoryCountingForm.getValue();
+                const currentArray = currentForm.get('inventoryCounterContents') as FormArray;
+                const inventoryCounterContent = this.fb.group(new InventoryCounterContentForm(res));
+                currentArray.push(inventoryCounterContent);
+                this.inventoryCountingForm.next(currentForm);
+            }
+        });
     }
 
     // SerialNumber:
