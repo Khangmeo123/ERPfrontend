@@ -1,15 +1,16 @@
-import { InvetoryRoutingModule } from './invetory-routing.module';
+import { InventoryRoutingModule } from './inventory-routing.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { InvetoryComponent } from './invetory.component';
+import { InventoryComponent } from './inventory.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [InvetoryComponent],
+  declarations: [InventoryComponent],
   imports: [
     CommonModule,
-    InvetoryRoutingModule,
+    InventoryRoutingModule,
     TranslateModule.forChild(),
-  ]
+  ],
 })
-export class InventoryModule { }
+export class InventoryModule {
+}

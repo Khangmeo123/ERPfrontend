@@ -31,6 +31,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SignUpComponent } from './_pages/sign-up/sign-up.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SelectModule } from './_shared/modules/select/select.module';
 
 
 @NgModule({
@@ -74,6 +75,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
     ClickOutsideModule,
     MatInputModule,
     MatCheckboxModule,
+    SelectModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

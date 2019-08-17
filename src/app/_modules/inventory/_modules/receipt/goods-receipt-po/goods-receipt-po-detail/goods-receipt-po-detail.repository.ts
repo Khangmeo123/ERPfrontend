@@ -132,7 +132,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
     }
 
     dropListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory',
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory-organization',
             JSON.stringify(goodsReceiptPOInventoryOrganizationSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

@@ -6,7 +6,17 @@ import { TranslateService } from '@ngx-translate/core';
 
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
-  constructor(private authenticationService: AuthenticationService, private translateService: TranslateService) {
+  public legalEntityId: string = null;
+
+  constructor(
+    private authenticationService: AuthenticationService,
+    private translateService: TranslateService,
+  ) {
+  }
+
+  getLegalEntityId() {
+    const legalEntity = JSON.parse(localStorage.getItem('legalEntity'));
+    return legalEntity.id || null;
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -16,8 +26,7 @@ export class JwtInterceptor implements HttpInterceptor {
       withCredentials: true,
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'X-BusinessGroup': 'AE0E3884-FB32-4DA1-9A51-BE6E80402A67',
-        'X-LegalEntity': '34EFF06F-D1A5-444A-B283-665F716652F6',
+        'X-LegalEntity': this.getLegalEntityId(),
         'X-Language': currentLang ? currentLang : 'vi',
       }),
     });

@@ -1,114 +1,125 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-dark flex-fill">
-    <!-- <button class="sidebar-toggler ml-4" type="button">
-      <i class="fa fa-navicon"></i>
-    </button> -->
-    <!-- header -->
-    <div class="navbar-header pl-2 pr-2 ml-3 text-center">
-        <a class="navbar-brand m-0 w-100 logo" href="#">
-            <!-- <i class="fa fa-flash mr-1"></i> -->
-            <img src="./assets/img/logo.png" alt="lightning logo">
-            <!-- <span class="ml-1">Lightning</span> -->
+  <!-- <button class="sidebar-toggler ml-4" type="button">
+    <i class="fa fa-navicon"></i>
+  </button> -->
+  <!-- header -->
+  <div class="navbar-header pl-2 pr-2 ml-3 text-center">
+    <a class="navbar-brand m-0 w-100 logo" href="#">
+      <!-- <i class="fa fa-flash mr-1"></i> -->
+      <img src="./assets/img/logo.png" alt="lightning logo">
+      <!-- <span class="ml-1">Lightning</span> -->
+    </a>
+  </div>
+  <!-- sidebar toggler -->
+  <div class="sidebar-toggler ml-auto mr-3">
+    <a class="btn nav-link" (click)="toggleSidebar()"><i class="fa fa-bars"></i></a>
+  </div>
+  <!-- right menu toggler -->
+  <div class="nav-toggler-right mr-4 d-md-none">
+    <button class="" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+            aria-controls="collapseBasic">
+      <!-- <span class="navbar-toggler-icon"></span> -->
+      <img src="./assets/img/user.jpg" class="img-fluid" alt="">
+    </button>
+    <span class="user-profile nav-alert bg-danger"></span>
+  </div>
+  <!-- left box -->
+  <ul class="navbar-nav flex-fill mt-1 align-items-center left-nav">
+    <li class="nav-item navicon">
+      <a class="btn nav-link" (click)="toggleSidebarPin()"><i class="fa fa-bars"></i></a>
+    </li>
+
+    <li class="nav-item flex-fill">
+      <div class="search-input align-items-center" [ngStyle]="{'display': !isCollapsed ? 'none': 'block' }">
+        <div class="has-search">
+          <span class="fa fa-search form-control-feedback"></span>
+          <input type="text" class="form-control">
+        </div>
+      </div>
+    </li>
+  </ul>
+  <!-- right menu -->
+  <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
+       style="margin-right: 10px">
+    <ul class="navbar-nav d-flex align-items-center">
+      <app-single-select key="name"
+                         (listOpen)="onOpenLegalEntityList()"
+                         [list]="legalEntities.exceptIds"
+                         [selectedList]="legalEntities.ids"
+                         (search)="onSearchLegalEntity($event)"
+                         [clearable]="false"
+                         [initialValue]="legalEntity?.name"
+                         [valueSelector]="nodeSelector"
+                         direction="down"
+                         (selectionChange)="onSelectLegalEntity($event)"
+      ></app-single-select>
+      <li class="nav-item">
+        <a class="btn nav-link">
+          <mat-icon>notifications_none</mat-icon>
+          <span class="link-text">Alerts</span>
+          <!-- <span class="badge badge-pill ba dge-danger">3</span> -->
+          <!-- <span class="nav-alert notifications"></span> -->
         </a>
-    </div>
-    <!-- sidebar toggler -->
-    <div class="sidebar-toggler ml-auto mr-3">
-        <a class="btn nav-link" (click)="toggleSidebar()"><i class="fa fa-bars"></i></a>
-    </div>
-    <!-- right menu toggler -->
-    <div class="nav-toggler-right mr-4 d-md-none">
-        <button class="" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
-                aria-controls="collapseBasic">
-            <!-- <span class="navbar-toggler-icon"></span> -->
-            <img src="./assets/img/user.jpg" class="img-fluid" alt="">
-        </button>
-        <span class="user-profile nav-alert bg-danger"></span>
-    </div>
-    <!-- left box -->
-    <ul class="navbar-nav flex-fill mt-1 align-items-center left-nav">
-        <li class="nav-item navicon">
-            <a class="btn nav-link" (click)="toggleSidebarPin()"><i class="fa fa-bars"></i></a>
-        </li>
-
-        <li class="nav-item flex-fill">
-            <div class="search-input align-items-center" [ngStyle]="{'display': !isCollapsed ? 'none': 'block' }">
-                <div class="has-search">
-                    <span class="fa fa-search form-control-feedback"></span>
-                    <input type="text" class="form-control">
+      </li>
+      <li class="nav-item">
+        <a class="btn nav-link">
+          <mat-icon>
+            help_outline
+          </mat-icon>
+          <span class="link-text">Help</span>
+        </a>
+      </li>
+      <li (clickOutside)="closeDropdown()" class="nav-item icon-flags">
+        <div class="nav-link" (click)="onToggleFlag()">
+          <img [src]="languageSelected.image | safeHtml" style="vertical-align:middle"/>
+        </div>
+        <div class="sub-nav drop-flags" [@toggleMenu]="listState">
+          <ul class="flags">
+            <li class="content-drop list" *ngFor="let item of languages">
+              <div class="ui-helper-clearfix" (click)="onClickChangeLanguage(item)">
+                <img [src]="item.image | safeHtml" style="width:24px;vertical-align:middle"/>
+                <div style="font-size:14px;margin-top:4px">{{item.label}}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </li>
+      <li (clickOutside)="closeDropMenu()" class="nav-item" style="cursor: pointer">
+        <div class="user-profile" (click)="onToggle()">
+          <div class="nav-link icon-avatar">
+            <img alt="user" src="./assets/img/default_avatar.png"/>
+          </div>
+          <i class="fas fa-caret-down"></i>
+        </div>
+        <div class="sub-nav" [@toggleMenu]="listStateMenu">
+          <ul class="dropdown">
+            <li class="">
+              <div class="row">
+                <div class="col-sm-4 default-avatar">
+                  <img alt="user" src="./assets/img/default_avatar.png"/>
                 </div>
-            </div>
-        </li>
+                <div class="col-sm-8" style="white-space: nowrap; margin-top: 10px">
+                  <span>Nguyễn Thị Hương</span>
+                </div>
+              </div>
+            </li>
+            <li class="content-drop">
+              <hr>
+            </li>
+            <li class="content-drop list">
+              <mat-icon style="margin-left: 20px">vpn_key</mat-icon>
+              <span>Đổi mật khẩu</span>
+            </li>
+            <li class="content-drop" style="margin-bottom: 10px">
+              <button class="btn" (click)="onClickLogOut()">
+                <span><i class="fas fa-sign-out-alt"></i></span>
+                <span style="padding-left: 10px">Đăng xuất </span>
+              </button>
+
+            </li>
+          </ul>
+        </div>
+      </li>
     </ul>
-    <!-- right menu -->
-    <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
-         style="margin-right: 10px">
-        <ul class="navbar-nav">
-            <li class="nav-item">
-                <a class="btn nav-link">
-                    <mat-icon>notifications_none</mat-icon>
-                    <span class="link-text">Alerts</span>
-                    <!-- <span class="badge badge-pill ba dge-danger">3</span> -->
-                    <!-- <span class="nav-alert notifications"></span> -->
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="btn nav-link">
-                    <mat-icon>
-                        help_outline
-                    </mat-icon>
-                    <span class="link-text">Help</span>
-                </a>
-            </li>
-            <li (clickOutside)="closeDropdown()" class="nav-item icon-flags">
-                <div class="nav-link" (click)="onToggleFlag()">
-                    <img [src]="languageSelected.image | safeHtml" style="vertical-align:middle"/>
-                </div>
-                <div class="sub-nav drop-flags" [@toggleMenu]="listState">
-                    <ul class="flags">
-                        <li class="content-drop list" *ngFor="let item of language">
-                            <div class="ui-helper-clearfix" (click)="onClickChangeLanguage(item)">
-                                <img [src]="item.image | safeHtml" style="width:24px;vertical-align:middle"/>
-                                <div style="font-size:14px;margin-top:4px">{{item.label}}</div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </li>
-            <li (clickOutside)="closeDropMenu()" class="nav-item" style="cursor: pointer">
-                <div class="user-profile" (click)="onToggle()">
-                    <div class="nav-link icon-avatar">
-                        <img alt="user" src="./assets/img/default_avatar.png"/>
-                    </div>
-                    <i class="fas fa-caret-down"></i>
-                </div>
-                <div class="sub-nav" [@toggleMenu]="listStateMenu">
-                    <ul class="dropdown">
-                        <li class="">
-                            <div class="row">
-                                <div class="col-sm-4 default-avatar">
-                                    <img alt="user" src="./assets/img/default_avatar.png"/>
-                                </div>
-                                <div class="col-sm-8" style="white-space: nowrap; margin-top: 10px">
-                                    <span>Nguyễn Thị Hương</span>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="content-drop">
-                            <hr>
-                        </li>
-                        <li class="content-drop list">
-                            <mat-icon style="margin-left: 20px">vpn_key</mat-icon>
-                            <span>Đổi mật khẩu</span>
-                        </li>
-                        <li class="content-drop" style="margin-bottom: 10px">
-                            <button class="btn" (click)="onClickLogOut()">
-                                <span><i class="fas fa-sign-out-alt"></i></span>
-                                <span style="padding-left: 10px">Đăng xuất </span>
-                            </button>
-
-                        </li>
-                    </ul>
-                </div>
-            </li>
-        </ul>
-    </div>
+  </div>
 </nav>

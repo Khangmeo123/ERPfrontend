@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { InventoryComponent } from './inventory.component';
+import { InventoryRoutingCanActivate } from './inventory-routing.canActivate';
 
 const routes: Routes = [
   {
-    path: '', children: [
+    path: '',
+    component: InventoryComponent,
+    canActivate: [
+      InventoryRoutingCanActivate,
+    ],
+    children: [
       {
         path: 'general',
         loadChildren: () => import('./_modules/general/general.module').then(m => m.GeneralModule),
@@ -36,4 +43,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class InvetoryRoutingModule { }
+export class InventoryRoutingModule {
+}
