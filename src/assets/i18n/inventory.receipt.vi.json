@@ -124,7 +124,7 @@
             "itemName": "Tên hàng hóa",
             "locationCode": "Mã vị trí",
             "manufacturingDate": "Ngày sản xuất",
-            "qrCode": "",
+            "qrCode": "Mã QR",
             "quantity": "Số lượng",
             "quantityInEachBatch": "Sô lượng hàng trong lô",
             "title ": "Thông tin lô"
@@ -165,7 +165,7 @@
             "locationCode": "Mã vị trí",
             "manufacturingDate": "Ngày sản xuất",
             "quantity": "Số lượng",
-            "rows": "",
+            "rows": "bản ghi",
             "scanQRCode": "Bắt đầu quét QR code",
             "serial": "Serial#",
             "title ": "Chi tiết QR code"
@@ -189,7 +189,7 @@
             "title": "Chi tiết hàng hóa theo hoạch toán",
             "total": "Thành tiền",
             "unitOfMeasure": "Đơn vị",
-            "unitPrice": "",
+            "unitPrice": "Đơn giá",
             "valueAddedTax": "Thuế VAT"
         },
         "tab2": {
@@ -274,7 +274,7 @@
                 "documentNo": "Số chứng từ"
             },
             "tab1": {
-                "Serial": "",
+                "Serial": "Serial",
                 "amount": "Số lương",
                 "batches": "Lô",
                 "discount": "Chiết khấu",

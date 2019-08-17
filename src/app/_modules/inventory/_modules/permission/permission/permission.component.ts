@@ -1,18 +1,18 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {translate} from '../../../../../_helpers/string';
-import {LegalEntity} from '../../../_backend/legal-entity/legal.entity';
-import {PermissionService} from './permission.service';
-import {GeneralService} from '../../../../../_helpers/general-service.service';
-import {Entities, EnumEntity} from '../../../../../_helpers/entity';
-import {Subject, Subscription} from 'rxjs';
-import {LegalSearchEntity} from '../../../../master-data/_backend/legal/legal.searchentity';
-import {InventoryOrganizationEntity} from '../../../_backend/inventory-organization/inventory-organization.entity';
-import {InventoryOrganizationSearchEntity} from '../../../_backend/inventory-organization/inventory-organization.search-entity';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {PermissionEntity, PermissionSearchEntity} from '../permission.entities';
-import {PaginationModel} from '../../../../../_shared/modules/pagination/pagination.model';
-import {PositionEntity} from '../../../_backend/position/position.entity';
-import {PositionSearchEntity} from '../../../_backend/position/position.search-entity';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { translate } from '../../../../../_helpers/string';
+import { LegalEntity } from '../../../_backend/legal-entity/legal.entity';
+import { PermissionService } from './permission.service';
+import { GeneralService } from '../../../../../_helpers/general-service.service';
+import { Entities, EnumEntity } from '../../../../../_helpers/entity';
+import { Subject, Subscription } from 'rxjs';
+import { LegalSearchEntity } from '../../../../master-data/_backend/legal/legal.searchentity';
+import { InventoryOrganizationEntity } from '../../../_backend/inventory-organization/inventory-organization.entity';
+import { InventoryOrganizationSearchEntity } from '../../../_backend/inventory-organization/inventory-organization.search-entity';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { PermissionEntity, PermissionSearchEntity } from '../permission.entities';
+import { PaginationModel } from '../../../../../_shared/modules/pagination/pagination.model';
+import { PositionEntity } from '../../../_backend/position/position.entity';
+import { PositionSearchEntity } from '../../../_backend/position/position.search-entity';
 
 @Component({
   selector: 'app-permission',
@@ -225,8 +225,7 @@ export class PermissionComponent implements OnInit, OnDestroy {
   onSelectPosition(event) {
     if (event && event.length) {
       const positionEntity: PositionEntity = event[0];
-      this.permissionSearchEntity.positionId = positionEntity.id;
-      this.permissionSearchEntity.positionCode = positionEntity.code;
+      this.permissionSearchEntity.positionCode.startsWith = positionEntity.code;
       this.positionSearchEntity.ids = [
         positionEntity.id,
       ];
@@ -348,5 +347,17 @@ export class PermissionComponent implements OnInit, OnDestroy {
         },
       },
     );
+  }
+
+  onClearCurrentStatus() {
+    this.permissionSearchEntity.currentStatusId = null;
+    this.permissionSearchEntity.currentStatusDisplay = null;
+    return this.getList();
+  }
+
+  onClearNextStatus() {
+    this.permissionSearchEntity.nextStatusId = null;
+    this.permissionSearchEntity.nextStatusDisplay = null;
+    return this.getList();
   }
 }

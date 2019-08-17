@@ -8,6 +8,25 @@
         </mat-icon>
       </span>
     </span>
+    <div class="page-actions d-flex">
+      <button type="button"
+              class="btn btn-labeled btn-add"
+              (click)="add()"
+              data-qe-id="button-add"
+              [disabled]="!allSelected">
+        <span class="btn-label"><i class="material-icons">add</i></span>
+        <span class="button-label">
+          {{'general.button.add' | translate}}
+        </span></button>
+      <button class="btn btn-labeled btn-clear" data-qe-id="button-clear" (click)="onClearSearch(table)">
+        <span class="btn-label">
+          <img src="/assets/img/filter.svg" width="16">
+        </span>
+        <span class="button-label">
+          {{'general.button.clear' | translate}}
+        </span>
+      </button>
+    </div>
   </div>
   <div class="page-body">
     <div class="page-section">
@@ -62,14 +81,6 @@
       </div>
     </div>
     <div class="page-section">
-      <div class="d-flex justify-content-end mb-2">
-        <button class="btn btn-add mr-2"
-                [disabled]="!(legalEntity && inventoryDocumentType && inventoryOrganization)"
-                (click)="add()"> {{'general.button.add' | translate}} </button>
-        <button class="btn btn-primary" (click)="onClearSearch(table)">
-          {{'general.button.clear' | translate}}
-        </button>
-      </div>
       <p-table [value]="permissionList"
                [customSort]="true"
                [scrollable]="true"
@@ -119,16 +130,20 @@
           </tr>
           <tr>
             <th class="th-filter">
-              <app-single-select key="code"
-                                 [disabled]="!legalEntity"
-                                 [valueSelector]="nodeSelector"
-                                 (listOpen)="getPositionList()"
-                                 (search)="onSearchPosition($event)"
-                                 (selectionChange)="onSelectPosition($event)"
-                                 [initialValue]="permissionSearchEntity.positionCode"
-                                 [list]="positionEntities.exceptIds"
-                                 [selectedList]="positionEntities.ids"
-              ></app-single-select>
+<!--              <app-single-select key="code"-->
+<!--                                 [disabled]="!legalEntity"-->
+<!--                                 [valueSelector]="nodeSelector"-->
+<!--                                 (listOpen)="getPositionList()"-->
+<!--                                 (search)="onSearchPosition($event)"-->
+<!--                                 (selectionChange)="onSelectPosition($event)"-->
+<!--                                 [initialValue]="permissionSearchEntity.positionCode"-->
+<!--                                 [list]="positionEntities.exceptIds"-->
+<!--                                 [selectedList]="positionEntities.ids"-->
+<!--              ></app-single-select>-->
+              <app-advanced-filters [filter]="permissionSearchEntity.positionCode"
+                                    (changeFilter)="getList()"
+                                    defaultType="startsWith"
+              ></app-advanced-filters>
             </th>
             <th class="th-filter">
               <app-advanced-filters [filter]="permissionSearchEntity.positionName"
@@ -145,7 +160,9 @@
                                  (selectionChange)="onSelectCurrentDocumentStatus($event)"
                                  (listOpen)="getDocumentStatus(inventoryDocumentTypeId)"
                                  key="display"
+                                 [disabled]="!documentStatus?.length"
                                  [valueSelector]="nodeSelector"
+                                 (clear)="onClearCurrentStatus()"
                                  [initialValue]="currentDocumentStatus?.display"
               ></app-simple-select>
             </th>
@@ -158,6 +175,8 @@
                                  (selectionChange)="onSelectNextDocumentStatus($event)"
                                  (listOpen)="getDocumentStatus(inventoryDocumentTypeId)"
                                  key="display"
+                                 [disabled]="!documentStatus?.length"
+                                 (clear)="onClearNextStatus()"
                                  [valueSelector]="nodeSelector"
                                  [initialValue]="nextDocumentStatus?.display"
               ></app-simple-select>

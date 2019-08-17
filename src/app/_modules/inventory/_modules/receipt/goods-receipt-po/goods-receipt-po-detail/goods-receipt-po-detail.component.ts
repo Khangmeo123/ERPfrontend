@@ -1,32 +1,32 @@
 import {
   GoodsReceiptPOInventoryOrganizationEntity,
-  PurchaseOrdersEntity,
-  GoodsReceiptPOTaxEntity,
   GoodsReceiptPOItemDetailEntity,
+  GoodsReceiptPOTaxEntity,
   GoodsReceiptPOUnitOfMeasureEntity,
-} from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { Subscription, Subject } from 'rxjs';
-import { FormGroup, FormArray } from '@angular/forms';
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+  PurchaseOrdersEntity,
+} from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
+import { Subject, Subscription } from 'rxjs';
+import { FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { GoodsReceiptPODetailService } from './goods-receipt-po-detail.service';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import {
   GoodsReceiptPORequesterEntity,
-  GoodsReceiptPOSupplierEntity,
   GoodsReceiptPOSupplierAddressEntity,
+  GoodsReceiptPOSupplierEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
-  GoodsReceiptPORequesterSearchEntity,
   GoodsReceiptPOInventoryOrganizationSearchEntity,
-  GoodsReceiptPOSupplierSearchEntity,
-  GoodsReceiptPOSupplierAddressSearchEntity,
-  PurchaseOrdersSearchEntity,
-  GoodsReceiptPOTaxSearchEntity,
   GoodsReceiptPOItemDetailSearchEntity,
+  GoodsReceiptPORequesterSearchEntity,
+  GoodsReceiptPOSupplierAddressSearchEntity,
+  GoodsReceiptPOSupplierSearchEntity,
+  GoodsReceiptPOTaxSearchEntity,
   GoodsReceiptPOUnitOfMeasureSearchEntity,
+  PurchaseOrdersSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 
 @Component({
@@ -111,27 +111,27 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     private router: Router) {
 
-    this.route.queryParams
-      .subscribe(params => {
-        if (params.id) {
-          this.goodsReceiptPOId = params.id;
-        }
-        this.goodsReceiptPOService.getDetail(params.id).then(res => {
+    this.route.queryParams.subscribe(params => {
+      if (params.id) {
+        this.goodsReceiptPOId = params.id;
+      }
+      this.goodsReceiptPOService.getDetail(params.id)
+        .then(() => {
           this.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
         });
-      });
-    const goodsReceiptFormSub = this.goodsReceiptPOService.goodsReceiptPOForm.subscribe(res => {
+    });
+    const goodsReceiptFormSub = this.goodsReceiptPOService.goodsReceiptPOForm.subscribe((res) => {
       if (res) {
         this.goodsReceiptPOForm = res;
       }
     });
-    const purchaseOrdersListSub = this.goodsReceiptPOService.purchaseOrdersList.subscribe(res => {
+    const purchaseOrdersListSub = this.goodsReceiptPOService.purchaseOrdersList.subscribe((res) => {
       if (res) {
         this.purchaseOrdersList = res;
       }
     });
     // supplier:
-    const supplierListSub = this.goodsReceiptPOService.supplierList.subscribe(res => {
+    const supplierListSub = this.goodsReceiptPOService.supplierList.subscribe((res) => {
       if (res) {
         this.supplierIds = res.ids;
         this.supplierExceptIds = res.exceptIds;
@@ -139,7 +139,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchSupplier(this.supplierTyping);
     // supplierAddress:
-    const supplierAddressSub = this.goodsReceiptPOService.supplierAddressList.subscribe(res => {
+    const supplierAddressSub = this.goodsReceiptPOService.supplierAddressList.subscribe((res) => {
       if (res) {
         this.supplierAddressIds = res.ids;
         this.supplierAddressExceptIds = res.exceptIds;
@@ -155,7 +155,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchSupplierAddress(this.supplierAddressTyping);
     // owner:
-    const ownerSub = this.goodsReceiptPOService.ownerList.subscribe(res => {
+    const ownerSub = this.goodsReceiptPOService.ownerList.subscribe((res) => {
       if (res) {
         this.ownerIds = res.ids;
         this.ownerExceptIds = res.exceptIds;
@@ -163,7 +163,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchOwner(this.ownerTyping);
     // ownerPO:
-    const ownerPOSub = this.goodsReceiptPOService.ownerPOList.subscribe(res => {
+    const ownerPOSub = this.goodsReceiptPOService.ownerPOList.subscribe((res) => {
       if (res) {
         this.ownerPOIds = res.ids;
         this.ownerPOExceptIds = res.exceptIds;
@@ -171,7 +171,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchOwnerPO(this.ownerPOTyping);
     // buyer:
-    const buyerListSub = this.goodsReceiptPOService.buyerList.subscribe(res => {
+    const buyerListSub = this.goodsReceiptPOService.buyerList.subscribe((res) => {
       if (res) {
         this.buyerIds = res.ids;
         this.buyerExceptIds = res.exceptIds;
@@ -179,7 +179,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchBuyer(this.buyerTyping);
     // invetoryOrganization:
-    const inventoryOrganizationSub = this.goodsReceiptPOService.invetoryOrganizationList.subscribe(res => {
+    const inventoryOrganizationSub = this.goodsReceiptPOService.invetoryOrganizationList.subscribe((res) => {
       if (res) {
         this.inventoryOrganizationIds = res.ids;
         this.inventoryOrganizationExceptIds = res.exceptIds;
@@ -187,7 +187,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchInvetoryOrganization(this.inventoryOrganizationTyping);
     // tax:
-    const taxListSub = this.goodsReceiptPOService.taxList.subscribe(res => {
+    const taxListSub = this.goodsReceiptPOService.taxList.subscribe((res) => {
       if (res) {
         this.taxIds = res.ids;
         this.taxExceptIds = res.exceptIds;
@@ -195,7 +195,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchTax(this.taxTyping);
     // itemDetail:
-    const itemListSub = this.goodsReceiptPOService.itemList.subscribe(res => {
+    const itemListSub = this.goodsReceiptPOService.itemList.subscribe((res) => {
       if (res) {
         this.itemDetailIds = res.ids;
         this.itemDetailExceptIds = res.exceptIds;
@@ -203,7 +203,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchItem(this.itemDetailTyping);
     // unitOfMeasure:
-    const unitOfMeasureListSub = this.goodsReceiptPOService.unitOfMeasureList.subscribe(res => {
+    const unitOfMeasureListSub = this.goodsReceiptPOService.unitOfMeasureList.subscribe((res) => {
       if (res) {
         this.unitOfMeasureIds = res.ids;
         this.unitOfMeasureExceptIds = res.exceptIds;
@@ -211,7 +211,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     });
     this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
     // documentNumber:
-    const documentNumberListSub = this.goodsReceiptPOService.documentNumberList.subscribe(res => {
+    const documentNumberListSub = this.goodsReceiptPOService.documentNumberList.subscribe((res) => {
       if (res) {
         this.documentNumberIds = res.ids;
         this.documentNumberExceptIds = res.exceptIds;
@@ -235,7 +235,6 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
   }
 
   ngOnDestroy() {
@@ -243,7 +242,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
   }
 
   // general:
-  trackByFn(index, row) {
+  trackByFn(index) {
     return index;
   }
 
@@ -266,15 +265,15 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
   }
 
   backToList() {
-    this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
+    return this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
   }
 
   save() {
     if (!this.goodsReceiptPOForm.valid) {
       this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
     } else {
-      this.goodsReceiptPOService.save(this.goodsReceiptPOForm.value).then(res => {
-        this.backToList();
+      this.goodsReceiptPOService.save(this.goodsReceiptPOForm.value).then((res) => {
+        return this.backToList();
       });
     }
   }
@@ -283,8 +282,8 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     if (!this.goodsReceiptPOForm.valid) {
       this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
     } else {
-      this.goodsReceiptPOService.send(this.goodsReceiptPOForm.value).then(res => {
-        this.backToList();
+      this.goodsReceiptPOService.send(this.goodsReceiptPOForm.value).then((res) => {
+        return this.backToList();
       });
     }
   }
@@ -324,6 +323,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     this.ownerSearchEntity.name.startsWith = event;
     this.ownerTyping.next(this.ownerSearchEntity);
   }
+
   // ownerPO:
   dropListOwnerPO(id: string) {
     this.ownerPOSearchEntity = new GoodsReceiptPORequesterSearchEntity();
@@ -526,7 +526,7 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
 
   selectedAllPurchaseOrders(event: any) {
     this.purchaseOrdersList.forEach(item => {
-      item.isSelected = true;
+      item.isSelected = event.target.checked;
     });
   }
 

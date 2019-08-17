@@ -3721,11 +3721,6 @@ deepmerge@*, deepmerge@^4.0.0:
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-4.0.0.tgz#3e3110ca29205f120d7cb064960a39c3d2087c09"
   integrity sha512-YZ1rOP5+kHor4hMAH+HRQnBQHg+wvS1un1hAOuIcxcBy0hzcUf6Jg2a1w65kpoOUnurOfZbERwjI1TfZxNjcww==
 
-deepmerge@2.1.1:
-  version "2.1.1"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.1.1.tgz#e862b4e45ea0555072bf51e7fd0d9845170ae768"
-  integrity sha512-urQxA1smbLZ2cBbXbaYObM1dJ82aJ2H57A1C/Kklfh/ZN1bgH4G/n5KWhdNfOK11W98gqZfyYj7W4frJJRwA2w==
-
 deepmerge@^2.0.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
@@ -7075,14 +7070,6 @@ ngx-toastr@^10.0.4:
   resolved "https://registry.yarnpkg.com/ngx-toastr/-/ngx-toastr-10.0.4.tgz#cbc61b8d67d748194ea7a28542b01e39bf1fc6c2"
   integrity sha512-iN+zr2Msae5wV334c1dytRhSYNdUz467jwv1NE91lMmllsMkpUzZlu8VdFCeTFt+/R4TWzz19xBRqhpp+OAuVA==
   dependencies:
-    tslib "^1.9.0"
-
-ngx-translate-multi-http-loader@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/ngx-translate-multi-http-loader/-/ngx-translate-multi-http-loader-3.0.0.tgz#dcec774fe5ad8d180845a571a8f6d15b0b5bd946"
-  integrity sha512-tN9a97sdXkqGZIeQhnl14l+7+xFwqpYMTkbrW7K/1f16q3+OFC++1uPfrKs7rACQ7ZBmTJ86JB729PTUIVi3xA==
-  dependencies:
-    deepmerge "2.1.1"
     tslib "^1.9.0"
 
 nice-try@^1.0.4:

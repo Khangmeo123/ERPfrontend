@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GoodsReceiptPoDetailComponent } from './goods-receipt-po-detail.component';
+import { GoodsReceiptPODetailComponent } from './goods-receipt-po-detail.component';
 
 describe('GoodsIssueDetailComponent', () => {
-  let component: GoodsReceiptPoDetailComponent;
-  let fixture: ComponentFixture<GoodsReceiptPoDetailComponent>;
+  let component: GoodsReceiptPODetailComponent;
+  let fixture: ComponentFixture<GoodsReceiptPODetailComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GoodsReceiptPoDetailComponent ]
+      declarations: [GoodsReceiptPODetailComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GoodsReceiptPoDetailComponent);
+    fixture = TestBed.createComponent(GoodsReceiptPODetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

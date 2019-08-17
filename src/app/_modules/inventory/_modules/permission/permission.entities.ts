@@ -90,9 +90,7 @@ export class PermissionSearchEntity extends SearchEntity {
 
   inventoryDocumentTypeId: string;
 
-  positionId: string;
-
-  positionCode: string;
+  positionCode: TextFilter = new TextFilter();
 
   positionName: TextFilter = new TextFilter();
 
