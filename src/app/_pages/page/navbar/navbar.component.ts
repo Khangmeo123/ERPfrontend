@@ -7,7 +7,7 @@ import { LegalSearchEntity } from '../../../_modules/master-data/_backend/legal/
 import { Entities } from '../../../_helpers/entity';
 import { LegalEntity } from '../../../_modules/master-data/_backend/legal/legal.entity';
 import { LanguageEntity, languages } from '../../../_constants/languages';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
@@ -47,6 +47,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private authenticationService: AuthenticationService,
     private appService: AppService,
     private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) {
     this.translateService.setDefaultLang('vi');
     this.translateService.use('vi');
@@ -144,20 +145,30 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   onOpenLegalEntityList() {
     this.legalSearchEntity = new LegalSearchEntity();
+    if (this.legalEntity) {
+      this.legalSearchEntity.ids = [
+        this.legalEntity.id,
+      ];
+    }
     return this.appService.getLegalEntityList(this.legalSearchEntity);
   }
 
   onSearchLegalEntity(event) {
-    const {ids} = this.legalSearchEntity;
-    this.legalSearchEntity = new LegalSearchEntity();
-    this.legalSearchEntity.ids = ids;
-    this.legalSearchEntity.name.startsWith = event;
+    this.legalSearchEntity.code.startsWith = event;
     this.appService.legalSearchEntityTyping.next(this.legalSearchEntity);
   }
 
   onSelectLegalEntity(event) {
     if (event && event.length) {
       this.appService.legalEntity.next(event[0]);
+      this.router.navigate([this.router.url], {
+        queryParams: {
+          legalEntityId: event[0].id,
+        },
+      })
+        .then(() => {
+          window.location.reload();
+        });
     }
   }
 }
