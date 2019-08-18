@@ -16,7 +16,10 @@ export class JwtInterceptor implements HttpInterceptor {
 
   getLegalEntityId() {
     const legalEntity = JSON.parse(localStorage.getItem('legalEntity'));
-    return legalEntity.id || null;
+    if (legalEntity) {
+      return legalEntity.id;
+    }
+    return null;
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

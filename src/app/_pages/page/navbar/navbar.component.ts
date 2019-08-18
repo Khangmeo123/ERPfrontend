@@ -4,7 +4,7 @@ import { AppService, AuthenticationService } from '../../../_services';
 import { toggleMenu } from 'src/app/_shared/animations/toggleMenu';
 import { Subscription } from 'rxjs';
 import { LegalSearchEntity } from '../../../_modules/master-data/_backend/legal/legal.searchentity';
-import { Entities } from '../../../_helpers/entity';
+import { Entities, UserEntity } from '../../../_helpers/entity';
 import { LegalEntity } from '../../../_modules/master-data/_backend/legal/legal.entity';
 import { LanguageEntity, languages } from '../../../_constants/languages';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -36,6 +36,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   isOpened = false;
 
+  public user: UserEntity = null;
+
   public subscription: Subscription = new Subscription();
 
   public legalEntities: Entities = new Entities();
@@ -49,12 +51,14 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private router: Router,
   ) {
-    this.translateService.setDefaultLang('vi');
-    this.translateService.use('vi');
     this.languageSelected = languages[0];
 
     const legalEntitySub: Subscription = this.appService.legalEntity.subscribe((legalEntity: LegalEntity) => {
       this.legalEntity = legalEntity;
+    });
+
+    const userSub: Subscription = this.authenticationService.currentUser.subscribe((user) => {
+      this.user = user;
     });
 
     const routeSub: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
@@ -65,6 +69,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     this.subscription
       .add(routeSub)
+      .add(userSub)
       .add(legalEntitySub)
       .add(this.appService.legalEntities.subscribe((entities: Entities) => {
         this.legalEntities = entities;
@@ -94,7 +99,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
   }
 
   onToggle() {
