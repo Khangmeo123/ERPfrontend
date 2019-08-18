@@ -1,0 +1,41 @@
+<div dropdown
+     #dropdown="bs-dropdown"
+     [container]="appendTo"
+     [(isOpen)]="isOpened"
+     class="select enum-list-select"
+     [ngClass]="{disabled: disabled}">
+  <input role="button"
+         class="form-control"
+         [value]="selectedItem ? selectedItem[display] : null"
+         readonly
+         [placeholder]="placeholder"
+         (click)="toggle()"
+  >
+  <i class="pi pi-times" (click)="onClear($event)" *ngIf="clearable"></i>
+  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu" [ngClass]="contentClass">
+    <li *ngIf="searchable"
+        class="menuitem search"
+        (click)="$event.stopPropagation()">
+      <span class="dropdown-item">
+        <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
+      </span>
+    </li>
+    <li role="menuitem"
+        class="loading"
+        *ngIf="loading">
+      <nz-spin nzSimple></nz-spin>
+    </li>
+    <li role="menuitem"
+        class="empty"
+        *ngIf="list.length === 0">
+      <nz-empty nzNotFoundContent="{{'jaja.selects.empty' | translate}}"></nz-empty>
+    </li>
+    <li role="menuitem"
+        class="dropdown-item"
+        *ngFor="let item of list"
+        (click)="onSelect(item, $event)"
+        [ngClass]="{active: selectedItem === item}">
+      {{item[display]}}
+    </li>
+  </ul>
+</div>

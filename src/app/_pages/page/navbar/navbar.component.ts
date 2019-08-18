@@ -3,8 +3,7 @@ import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/cor
 import { AppService, AuthenticationService } from '../../../_services';
 import { toggleMenu } from 'src/app/_shared/animations/toggleMenu';
 import { Subscription } from 'rxjs';
-import { LegalSearchEntity } from '../../../_modules/master-data/_backend/legal/legal.searchentity';
-import { Entities, UserEntity } from '../../../_helpers/entity';
+import { UserEntity } from '../../../_helpers/entity';
 import { LegalEntity } from '../../../_modules/master-data/_backend/legal/legal.entity';
 import { LanguageEntity, languages } from '../../../_constants/languages';
 import { ActivatedRoute, Params, Router } from '@angular/router';
@@ -15,8 +14,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   styleUrls: ['./navbar.component.scss'],
   animations: [toggleMenu],
   providers: [
-    AuthenticationService,
     AppService,
+    AuthenticationService,
   ],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
@@ -40,9 +39,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription = new Subscription();
 
-  public legalEntities: Entities = new Entities();
+  public legalEntityId: string = null;
 
-  public legalSearchEntity: LegalSearchEntity = new LegalSearchEntity();
+  public legalEntities: LegalEntity[] = [];
 
   constructor(
     public translateService: TranslateService,
@@ -53,8 +52,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {
     this.languageSelected = languages[0];
 
-    const legalEntitySub: Subscription = this.appService.legalEntity.subscribe((legalEntity: LegalEntity) => {
-      this.legalEntity = legalEntity;
+    const legalEntitySub: Subscription = this.appService.legalEntityId.subscribe((legalEntityId: string) => {
+      this.legalEntityId = legalEntityId;
+    });
+
+    const legalEntitiesSub: Subscription = this.appService.legalEntities.subscribe((legalEntities: LegalEntity[]) => {
+      this.legalEntities = legalEntities;
     });
 
     const userSub: Subscription = this.authenticationService.currentUser.subscribe((user) => {
@@ -71,9 +74,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .add(routeSub)
       .add(userSub)
       .add(legalEntitySub)
-      .add(this.appService.legalEntities.subscribe((entities: Entities) => {
-        this.legalEntities = entities;
-      }));
+      .add(legalEntitiesSub);
   }
 
   get listState() {
@@ -84,21 +85,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     return this.isPinned ? 'opened' : 'closed';
   }
 
-  get legalEntity(): LegalEntity {
-    return JSON.parse(localStorage.getItem('legalEntity')) || null;
-  }
-
-  set legalEntity(legalEntity: LegalEntity) {
-    localStorage.setItem('legalEntity', JSON.stringify(legalEntity));
-  }
-
-  nodeSelector = node => node;
-
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
 
   ngOnInit() {
+    this.getLegalEntityList();
   }
 
   onToggle() {
@@ -143,36 +135,19 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.appService.toggleSidebar();
   }
 
-  getList() {
-    return this.appService.getLegalEntityList(this.legalSearchEntity);
+  onChangeLegalEntity(legalEntityId) {
+    this.appService.legalEntityId.next(legalEntityId);
+    this.router.navigate([this.router.url], {
+      queryParams: {
+        legalEntityId,
+      },
+    })
+      .then(() => {
+        window.location.reload();
+      });
   }
 
-  onOpenLegalEntityList() {
-    this.legalSearchEntity = new LegalSearchEntity();
-    if (this.legalEntity) {
-      this.legalSearchEntity.ids = [
-        this.legalEntity.id,
-      ];
-    }
-    return this.appService.getLegalEntityList(this.legalSearchEntity);
-  }
-
-  onSearchLegalEntity(event) {
-    this.legalSearchEntity.code.startsWith = event;
-    this.appService.legalSearchEntityTyping.next(this.legalSearchEntity);
-  }
-
-  onSelectLegalEntity(event) {
-    if (event && event.length) {
-      this.appService.legalEntity.next(event[0]);
-      this.router.navigate([this.router.url], {
-        queryParams: {
-          legalEntityId: event[0].id,
-        },
-      })
-        .then(() => {
-          window.location.reload();
-        });
-    }
+  getLegalEntityList() {
+    this.appService.getLegalEntityList();
   }
 }

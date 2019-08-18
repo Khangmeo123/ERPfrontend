@@ -42,17 +42,11 @@
   <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
        style="margin-right: 10px">
     <ul class="navbar-nav d-flex align-items-center">
-      <app-single-select key="code"
-                         (listOpen)="onOpenLegalEntityList()"
-                         [list]="legalEntities.exceptIds"
-                         [selectedList]="legalEntities.ids"
-                         (search)="onSearchLegalEntity($event)"
-                         [clearable]="false"
-                         [initialValue]="legalEntity?.code"
-                         [valueSelector]="nodeSelector"
-                         direction="down"
-                         (selectionChange)="onSelectLegalEntity($event)"
-      ></app-single-select>
+      <jaja-enum-list-select [list]="legalEntities"
+                             key="id"
+                             display="name"
+                             placeholder="{{'general.legalEntity.placeholder' | translate}}"
+      ></jaja-enum-list-select>
       <li class="nav-item">
         <a class="btn nav-link">
           <mat-icon>notifications_none</mat-icon>

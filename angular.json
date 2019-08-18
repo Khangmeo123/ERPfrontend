@@ -126,6 +126,119 @@
           }
         }
       }
+    },
+    "jaja-libraries": {
+      "projectType": "application",
+      "schematics": {},
+      "root": "projects/jaja-libraries",
+      "sourceRoot": "projects/jaja-libraries/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/jaja-libraries",
+            "index": "projects/jaja-libraries/src/index.html",
+            "main": "projects/jaja-libraries/src/main.ts",
+            "polyfills": "projects/jaja-libraries/src/polyfills.ts",
+            "tsConfig": "projects/jaja-libraries/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/jaja-libraries/src/favicon.ico",
+              "projects/jaja-libraries/src/assets"
+            ],
+            "styles": [
+              "projects/jaja-libraries/src/styles.css"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/jaja-libraries/src/environments/environment.ts",
+                  "with": "projects/jaja-libraries/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "jaja-libraries:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "jaja-libraries:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "jaja-libraries:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/jaja-libraries/src/test.ts",
+            "polyfills": "projects/jaja-libraries/src/polyfills.ts",
+            "tsConfig": "projects/jaja-libraries/tsconfig.spec.json",
+            "karmaConfig": "projects/jaja-libraries/karma.conf.js",
+            "assets": [
+              "projects/jaja-libraries/src/favicon.ico",
+              "projects/jaja-libraries/src/assets"
+            ],
+            "styles": [
+              "projects/jaja-libraries/src/styles.css"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/jaja-libraries/tsconfig.app.json",
+              "projects/jaja-libraries/tsconfig.spec.json",
+              "projects/jaja-libraries/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/jaja-libraries/e2e/protractor.conf.js",
+            "devServerTarget": "jaja-libraries:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "jaja-libraries:serve:production"
+            }
+          }
+        }
+      }
     }
   },
   "defaultProject": "CodeBase"

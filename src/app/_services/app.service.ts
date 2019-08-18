@@ -1,12 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Entities } from '../_helpers/entity';
-import { BehaviorSubject, Subject } from 'rxjs';
-import { LegalSearchEntity } from '../_modules/master-data/_backend/legal/legal.searchentity';
+import { BehaviorSubject, Subject, Subscription } from 'rxjs';
 import { AppRepository } from '../_repositories/app.repository';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { LegalEntity } from '../_modules/master-data/_backend/legal/legal.entity';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../_helpers/string';
+import { JwtInterceptor } from '../_helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -15,32 +13,18 @@ export class AppService {
 
   isSidebarPinned = false; // default true
 
-  isSidebarToggeled = false;
+  isToggled = false;
 
-  public legalEntity: Subject<LegalEntity> = new Subject<LegalEntity>();
+  public legalEntityId: Subject<string> = new Subject<string>();
 
-  public legalEntities: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
+  public legalEntities: BehaviorSubject<LegalEntity[]> = new BehaviorSubject<LegalEntity[]>([]);
 
-  public legalSearchEntityTyping: Subject<LegalSearchEntity> = new BehaviorSubject(new LegalSearchEntity());
-
-  constructor(private appRepository: AppRepository, private toastrService: ToastrService) {
-    this.legalEntity.next(JSON.parse(localStorage.getItem('legalEntity')) || null);
-    this.legalSearchEntityTyping.pipe(
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap((searchEntity: LegalSearchEntity) => {
-        return this.appRepository.getLegalEntityList(searchEntity);
-      }),
-    )
-      .subscribe(
-        (entities: Entities) => {
-          this.legalEntities.next(entities);
-        },
-      );
+  constructor(private appRepository: AppRepository, private toastrService: ToastrService, private jwtInterceptor: JwtInterceptor) {
+    this.legalEntityId.next(JSON.parse(localStorage.getItem('legalEntityId')) || null);
   }
 
   toggleSidebar() {
-    this.isSidebarToggeled = !this.isSidebarToggeled;
+    this.isToggled = !this.isToggled;
   }
 
   toggleSidebarPin() {
@@ -50,38 +34,32 @@ export class AppService {
   getSidebarStat() {
     return {
       isSidebarPinned: this.isSidebarPinned,
-      isSidebarToggeled: this.isSidebarToggeled,
+      isToggled: this.isToggled,
     };
   }
 
-  getLegalEntityList(legalSearchEntity: LegalSearchEntity): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.appRepository.getLegalEntityList(legalSearchEntity)
-        .subscribe(
-          (entities: Entities) => {
-            this.legalEntities.next(entities);
-            resolve();
-          },
-          (error: Error) => {
-            reject(error);
-          },
-        );
-    });
+  getLegalEntityList(): Subscription {
+    return this.appRepository.getLegalEntityList()
+      .subscribe(
+        (legalEntities: LegalEntity[]) => {
+          this.legalEntities.next(legalEntities);
+        },
+        (error: Error) => {
+          this.toastrService.error(translate('general.legalEntityList.get.error'));
+          throw error;
+        },
+      );
   }
 
-  getLegalEntity(id: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.appRepository.getLegalEntity(id)
-        .subscribe(
-          (legalEntity: LegalEntity) => {
-            this.legalEntity.next(legalEntity);
-            resolve();
-          },
-          (error: Error) => {
-            this.toastrService.error(translate('general.legalEntity.get.error'));
-            reject(error);
-          },
-        );
-    });
+  getLegalEntity(id: string): void {
+    this.appRepository.getLegalEntity(id)
+      .subscribe(
+        (legalEntity: LegalEntity) => {
+          this.jwtInterceptor.legalEntityId.next(legalEntity.id);
+        },
+        () => {
+          this.toastrService.error(translate('general.legalEntity.get.error'));
+        },
+      );
   }
 }

@@ -1,0 +1,15 @@
+{
+  "name": "jaja-libraries",
+  "version": "0.1.0",
+  "description": "JAJA Libraries",
+  "main": "dist/index.js",
+  "repository": "https://github.com/thanhtunguet/jaja-libraries",
+  "author": "thanhtunguet <ht@thanhtunguet.info>",
+  "license": "MIT",
+  "private": false,
+  "ngPackage": {
+    "lib": {
+      "entryFile": "src/public_api.ts"
+    }
+  }
+}

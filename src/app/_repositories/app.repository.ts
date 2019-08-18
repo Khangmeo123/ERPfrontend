@@ -2,9 +2,7 @@ import { Repository } from '../_helpers/repository';
 import { environment } from '../../environments/environment';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { LegalSearchEntity } from '../_modules/master-data/_backend/legal/legal.searchentity';
 import { Observable } from 'rxjs';
-import { Entities } from '../_helpers/entity';
 import { map } from 'rxjs/operators';
 import { LegalEntity } from '../_modules/master-data/_backend/legal/legal.entity';
 
@@ -16,10 +14,10 @@ export class AppRepository extends Repository {
     super(http);
   }
 
-  getLegalEntityList(legalSearchEntity: LegalSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(
-      `${environment.apiUrlApps}drop-list-legal-entity`,
-      legalSearchEntity,
+  getLegalEntityList(): Observable<LegalEntity[]> {
+    return this.http.post<LegalEntity[]>(
+      `${environment.apiUrlApps}list-legal-entity`,
+      {},
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -27,11 +25,8 @@ export class AppRepository extends Repository {
     )
       .pipe(
         map(
-          (response: HttpResponse<Entities>) => {
-            const entities: Entities = new Entities();
-            entities.ids = response.body.ids.map((item) => new LegalEntity(item));
-            entities.exceptIds = response.body.exceptIds.map((item) => new LegalEntity(item));
-            return entities;
+          (response: HttpResponse<LegalEntity[]>) => {
+            return response.body.map((item) => new LegalEntity(item));
           },
         ),
       );

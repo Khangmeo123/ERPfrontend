@@ -1,0 +1,71 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+
+.select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+
+  position: relative;
+
+  button {
+    box-shadow: none;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    text-align: left;
+    border-color: $border-color;
+  }
+
+  input[readonly] {
+    background: #ffffff;
+    cursor: pointer;
+    padding-right: 34px;
+  }
+
+  .pi.pi-times {
+    position: absolute;
+    right: 0.5rem;
+  }
+}
+
+.select.disabled {
+  pointer-events: none;
+
+  input {
+    background: #e9ecef;
+  }
+}
+
+ul.dropdown-menu.select-dropdown {
+  min-width: 320px;
+  max-height: 242px;
+  overflow-y: auto;
+
+  li.menuitem.search {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+
+    :active, :focus, :hover {
+      background: inherit;
+    }
+  }
+
+  li.empty {
+    pointer-events: none;
+  }
+
+  li.loading {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+}

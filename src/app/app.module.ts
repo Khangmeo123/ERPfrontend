@@ -32,7 +32,8 @@ import { SignUpComponent } from './_pages/sign-up/sign-up.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SelectModule } from './_shared/modules/select/select.module';
-
+import { SelectsModule } from '../../projects/jaja-libraries/src/selects/selects.module';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,8 @@ import { SelectModule } from './_shared/modules/select/select.module';
     MatInputModule,
     MatCheckboxModule,
     SelectModule,
+    BsDropdownModule.forRoot(),
+    SelectsModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
