@@ -1,4 +1,9 @@
 {
+    "app": {
+        "changePassword": "",
+        "help": "",
+        "logout": ""
+    },
     "bookmarks": {
         "title": ""
     },

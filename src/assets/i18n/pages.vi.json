@@ -1,4 +1,9 @@
 {
+    "app": {
+        "changePassword": "Đổi mật khẩu",
+        "help": "Trợ giúp",
+        "logout": "Đăng xuất"
+    },
     "bookmarks": {
         "title": "Dấu trang"
     },

@@ -63,10 +63,8 @@
       </li>
       <li class="nav-item">
         <a class="btn nav-link">
-          <mat-icon>
-            help_outline
-          </mat-icon>
-          <span class="link-text">Help</span>
+          <mat-icon>help_outline</mat-icon>
+          <span class="link-text">{{'app.help' | translate}}</span>
         </a>
       </li>
       <li (clickOutside)="closeDropdown()" class="nav-item icon-flags">
@@ -110,12 +108,12 @@
             </li>
             <li class="content-drop list">
               <mat-icon style="margin-left: 20px">vpn_key</mat-icon>
-              <span>Đổi mật khẩu</span>
+              <span>{{'app.changePassword' | translate}}</span>
             </li>
             <li class="content-drop" style="margin-bottom: 10px">
               <button class="btn" (click)="onClickLogOut()">
                 <span><i class="fas fa-sign-out-alt"></i></span>
-                <span style="padding-left: 10px">Đăng xuất </span>
+                <span style="padding-left: 10px"> {{'app.logout' | translate}} </span>
               </button>
             </li>
           </ul>
