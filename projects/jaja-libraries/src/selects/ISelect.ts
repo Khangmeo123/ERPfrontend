@@ -4,16 +4,6 @@ import { Subject } from 'rxjs';
 
 export interface ISelect extends ControlValueAccessor {
   /**
-   * Is this select box clearable?
-   */
-  clearable: boolean;
-
-  /**
-   * Clear event
-   */
-  clear: EventEmitter<void>;
-
-  /**
    * Data source
    */
   list: any[];
@@ -37,11 +27,6 @@ export interface ISelect extends ControlValueAccessor {
    * Searchable select
    */
   searchable: boolean;
-
-  /**
-   * Search event emitter for searchable select
-   */
-  search?: EventEmitter<string>;
 
   /**
    *

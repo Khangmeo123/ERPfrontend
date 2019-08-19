@@ -17,6 +17,8 @@ import { ISelect } from '../ISelect';
 import { Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { SearchEntity } from '../../../../../src/app/_helpers/search-entity';
+import { ISearchEntity } from '../../entities/ISearchEntity';
 
 @Component({
   selector: 'jaja-select-list',
@@ -39,20 +41,18 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() placeholder: string = 'Enum List Select';
 
-  @Input() clearable: boolean = true;
-
-  @Output() clear: EventEmitter<void> = new EventEmitter<void>();
-
   @Input() searchable: boolean = false;
 
-  @Output() search: EventEmitter<string> = new EventEmitter<string>();
+  @Input() display: string = 'name';
 
   // tslint:disable-next-line:no-output-native
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
-  @Output() openList: EventEmitter<any> = new EventEmitter<any>();
+  @Input() searchField: string = 'name';
 
-  @Output() closeList: EventEmitter<any> = new EventEmitter<any>();
+  @Input() searchType: string = null;
+
+  @Input() searchEntity: any = new SearchEntity();
 
   @Input() disabled: boolean = false;
 
@@ -60,15 +60,13 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @ContentChild('option', {static: false}) option: TemplateRef<ElementRef>;
 
-  isOpened: boolean = false;
+  public searchSubject: Subject<string> = new Subject<string>();
 
-  searchSubject: Subject<string> = new Subject<string>();
+  public subscription: Subscription = new Subscription();
 
-  subscription: Subscription = new Subscription();
+  public selectedItem: any = null;
 
-  selectedItem: any = null;
-
-  loading: boolean = false;
+  public loading: boolean = false;
 
   constructor() {
   }
@@ -86,6 +84,10 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
     this.onChange(value);
   }
 
+  @Input()
+  getList(searchEntity?: ISearchEntity): any {
+  }
+
   onChange(event) {
     this.change.emit(event);
   }
@@ -97,6 +99,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
     if (this.value) {
       this.selectedItem = this.list.find((item) => item[this.key] === this.value);
     }
+
     if (this.searchable) {
       const searchSubscription: Subscription = this.searchSubject.pipe(
         debounceTime(400),
@@ -104,7 +107,8 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
       )
         .subscribe(
           (event) => {
-            this.search.emit(event);
+            this.searchEntity[this.searchField][this.searchType] = event;
+            this.getList(this.searchEntity);
             this.loading = true;
           },
         );
@@ -130,10 +134,11 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   onSelect(item, event) {
-    this.selectedItem = item;
-    this.onChange(item[this.key]);
+    if (item[this.key] !== this.value) {
+      this.selectedItem = item;
+      this.onChange(item[this.key]);
+    }
     this.onTouch(event);
-    this.isOpened = false;
   }
 
   onClear(event) {
@@ -156,12 +161,11 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
     this.onTouch = fn;
   }
 
-  toggle() {
-    this.isOpened = !this.isOpened;
-    if (this.isOpened) {
-      this.openList.emit();
-    } else {
-      this.closeList.emit();
+  onToggle(isOpened) {
+    if (isOpened) {
+      this.searchEntity = new this.searchEntity.constructor();
+      this.getList(this.searchEntity);
+      this.loading = true;
     }
   }
 }

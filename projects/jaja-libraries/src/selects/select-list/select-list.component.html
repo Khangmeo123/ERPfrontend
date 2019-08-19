@@ -1,28 +1,24 @@
 <div dropdown
+     (isOpenChange)="onToggle($event)"
      [container]="appendTo"
-     [(isOpen)]="isOpened"
      class="select enum-list-select"
      [ngClass]="{disabled: disabled}">
-  <ng-container *ngTemplateOutlet="label; context: selectedItem"></ng-container>
-  <ng-template #label>
-    <input role="button"
-           class="form-control"
-           readonly
-           [placeholder]="placeholder"
-           (click)="toggle()"
-           [value]="selectedItem?.name">
-  </ng-template>
-  <i class="pi pi-times" (click)="onClear($event)" *ngIf="clearable"></i>
+  <div role="button" class="form-control jaja-select-list-toggle" dropdownToggle>
+    {{selectedItem ? null : placeholder}}
+    <ng-template *ngTemplateOutlet="label; context: selectedItem"></ng-template>
+  </div>
+  <span class="icons">
+    <i class="pi pi-times" (click)="onClear($event)" *ngIf="selectedItem"></i>
+    <i class="pi pi-caret-down"></i>
+  </span>
   <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu">
     <li *ngIf="searchable"
-        class="menuitem search"
+        class="dropdown-item search"
         (click)="$event.stopPropagation()">
-      <span class="dropdown-item">
-        <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
-      </span>
+      <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
     </li>
     <li role="menuitem"
-        class="loading"
+        class="dropdown-item loading"
         *ngIf="loading; else notLoading">
       <nz-spin nzSimple></nz-spin>
     </li>
@@ -38,9 +34,6 @@
           (click)="onSelect(item, $event)"
           [ngClass]="{active: selectedItem === item}">
         <ng-container *ngTemplateOutlet="option; context: item"></ng-container>
-        <ng-template #option>
-          {{item?.name}}
-        </ng-template>
       </li>
     </ng-template>
   </ul>

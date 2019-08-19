@@ -2,7 +2,7 @@
   "name": "jaja-libraries",
   "version": "0.1.0",
   "description": "JAJA Libraries",
-  "main": "dist/index.js",
+  "main": "src/public.ts",
   "repository": "https://github.com/thanhtunguet/jaja-libraries",
   "author": "thanhtunguet <ht@thanhtunguet.info>",
   "license": "MIT",

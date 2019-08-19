@@ -11,6 +11,14 @@
 
   position: relative;
 
+  .jaja-select-list-toggle {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
   button {
     box-shadow: none;
   }
@@ -24,12 +32,14 @@
   input[readonly] {
     background: #ffffff;
     cursor: pointer;
-    padding-right: 34px;
+    padding-right: 59px;
   }
 
-  .pi.pi-times {
+  .icons {
     position: absolute;
     right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
   }
 }
 
@@ -45,24 +55,33 @@ ul.dropdown-menu.select-dropdown {
   min-width: 320px;
   max-height: 242px;
   overflow-y: auto;
+  padding-top: 0;
 
-  li.menuitem.search {
+  li.dropdown-item {
+    padding: 0.25rem 0.75rem;
+  }
+
+  li.dropdown-item:first-of-type {
+    margin-top: 0.5rem;
+  }
+
+  li.dropdown-item.search {
     position: sticky;
     top: 0;
     background: #ffffff;
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
+    padding: 0 0.75rem 0.5rem;
+    border-bottom: 1px solid $border-color;
 
     :active, :focus, :hover {
       background: inherit;
     }
   }
 
-  li.empty {
+  li.dropdown-item.empty {
     pointer-events: none;
   }
 
-  li.loading {
+  li.dropdown-item.loading {
     padding-top: 20px;
     padding-bottom: 20px;
     display: flex;
