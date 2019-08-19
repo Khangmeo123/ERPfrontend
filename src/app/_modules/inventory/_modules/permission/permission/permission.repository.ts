@@ -1,4 +1,4 @@
-import {Repository} from '../../../../../_helpers/repository';
+import {Repository} from '../../../../../_repositories/repository';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {environment} from '../../../../../../environments/environment';

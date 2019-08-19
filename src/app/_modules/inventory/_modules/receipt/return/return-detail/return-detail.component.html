@@ -1,684 +1,685 @@
 <div class="page goods-receipt-po">
-    <div class="page-header justify-content-between">
-        <div class="justify-content-start align-items-center">
-            <span class="back-to-list" (click)="backToList()">
+  <div class="page-header justify-content-between">
+    <div class="justify-content-start align-items-center">
+            <span (click)="backToList()" class="back-to-list">
                 <i class="material-icons">arrow_back_ios</i>
             </span>
-            <span class="page-title">
+      <span class="page-title">
                 {{pageTitle | translate}}
             </span>
-            <span class="ml-2 open-status">{{'general.open'| translate}}</span>
-            <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
-            <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
-            <span class="ml-2 done-status">{{'general.done'| translate}}</span>
-        </div>
-        <div class="page-actions d-flex">
-            <button class="btn btn-labeled btn-clear">
+      <span class="ml-2 open-status">{{'general.open'| translate}}</span>
+      <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
+      <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
+      <span class="ml-2 done-status">{{'general.done'| translate}}</span>
+    </div>
+    <div class="page-actions d-flex">
+      <button class="btn btn-labeled btn-clear">
                 <span class="btn-label">
                     <img src="/assets/img/filter.svg" width="16">
                 </span>
-                <span class="button-label">
+        <span class="button-label">
                     {{'general.button.clear' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-reverse">
-                <span class="btn-label"><i class="material-icons">replay</i></span>
-                <span class="button-label">
+      <button class="btn btn-labeled btn-reverse">
+        <span class="btn-label"><i class="material-icons">replay</i></span>
+        <span class="button-label">
                     {{'general.button.reverse' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-approve">
-                <span class="btn-label"><i class="material-icons">check</i></span>
-                <span class="button-label">
+      <button class="btn btn-labeled btn-approve">
+        <span class="btn-label"><i class="material-icons">check</i></span>
+        <span class="button-label">
                     {{'general.button.approve' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-rejected">
-                <span class="btn-label"><i class="material-icons">block</i></span>
-                <span class="button-label">
+      <button class="btn btn-labeled btn-rejected">
+        <span class="btn-label"><i class="material-icons">block</i></span>
+        <span class="button-label">
                     {{'general.button.rejected' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-receive">
-                <span class="btn-label"><i class="material-icons">assignment_returned</i></span>
-                <span class="button-label">
+      <button class="btn btn-labeled btn-receive">
+        <span class="btn-label"><i class="material-icons">assignment_returned</i></span>
+        <span class="button-label">
                     {{'general.button.receive' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-send">
-                <span class="btn-label"><i class="material-icons">send</i></span>
-                <span class="button-label">
+      <button class="btn btn-labeled btn-send">
+        <span class="btn-label"><i class="material-icons">send</i></span>
+        <span class="button-label">
                     {{'general.button.send' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-save">
-                <span class="btn-label"><i class="material-icons">save</i></span>
-                <span class="button-label">
+      <button class="btn btn-labeled btn-save">
+        <span class="btn-label"><i class="material-icons">save</i></span>
+        <span class="button-label">
                     {{'general.button.save' | translate}}
                 </span></button>
-            <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
-                <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle
-                    aria-controls="dropdown-basic">
-                    <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
-                    <span class="button-label">
+      <div class="btn-group btn-labeled" data-qe-id="button-import" dropdown>
+        <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle
+                id="button-basic">
+          <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
+          <span class="button-label">
                         {{'general.action' | translate}}
                     </span></button>
-                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
-                    aria-labelledby="button-basic">
-                    <li role="menuitem">
-                        <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
-                    </li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem">
-                        <a class="dropdown-item" href="#">{{'general.button.print' | translate}}</a>
-                    </li>
-                    <li class="divider dropdown-divider"></li>
-                    <li role="menuitem">
-                        <a class="dropdown-item" href="#">{{'general.button.referenceDocument' | translate}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
+        <ul *dropdownMenu aria-labelledby="button-basic" class="dropdown-menu dropdown-menu-right" id="dropdown-basic"
+            role="menu">
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">{{'general.button.print' | translate}}</a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">{{'general.button.referenceDocument' | translate}}</a>
+          </li>
+        </ul>
+      </div>
     </div>
-    <div class="page-body">
-        <div class="page-section">
-            <div class="page-section-form-header">
+  </div>
+  <div class="page-body">
+    <div class="page-section">
+      <div class="page-section-form-header">
                 <span class="form-title">
                     {{'return.detail.form.title' | translate}}
                 </span>
-                <div class="page-actions justify-content-end">
-                    <button class="btn btn-labeled btn-delete">
-                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                        <span class="button-label">
+        <div class="page-actions justify-content-end">
+          <button class="btn btn-labeled btn-delete">
+            <span class="btn-label"><i class="material-icons">delete</i></span>
+            <span class="button-label">
                             {{'general.button.delete' | translate}}
                         </span></button>
-                </div>
-            </div>
-            <div class="line"></div>
-            <div class="page-section-form-body">
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.customerCode' | translate}}
-                            <span class="text-danger mr-2">*</span>
-                        </label>
-                        <app-single-select data-qe-id="detail-form-customer-code"></app-single-select>
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.customerName' | translate}}
-                        </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-customer-name" disabled>
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.customerInfo' | translate}}
-                        </label>
-                        <app-single-select data-qe-id="detail-form-customer-info"></app-single-select>
-                    </div>
-                </div>
-            </div>
-            <div class="line"></div>
-            <div class="page-section-form-body">
-                <div class="row">
-                    <div class="col-sm-8 form-group">
-                        <label>
-                            {{'return.detail.return.title' | translate}}
-                            <span class="text-danger mr-2">*</span>
-                        </label>
-                        <input type="text" class="form-control" (click)="showReturn()"
-                            data-qe-id="detail-form-goods-receipt">
-                    </div>
-                </div>
-            </div>
-            <div class="line"></div>
-            <div class="page-section-form-body">
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.documentNumber' | translate}}
-                            <span class="text-danger mr-2">*</span>
-                        </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-document-number">
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.inventoryCode' | translate}}
-                        </label>
-                        <app-single-select data-qe-id="detail-form-inventory-address"></app-single-select>
-
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.inventoryAddress' | translate}}
-                        </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-inventory-code" disabled>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.personInCharge' | translate}}
-                            <span class="text-danger mr-2">*</span>
-                        </label>
-                        <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
-
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.receiver' | translate}}
-                        </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-receiver" disabled>
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.creator' | translate}}
-                        </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-creator" disabled>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.receiptedDate' | translate}}
-                            <span class="text-danger mr-2">*</span>
-                        </label>
-                        <app-date-picker data-qe-id="detail-form-receipted-date">
-                        </app-date-picker>
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'return.detail.createdDate' | translate}}
-                        </label>
-                        <app-date-picker data-qe-id="detail-form-created-date" [disabled]="true"></app-date-picker>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 form-group">
-                        <label>{{ 'return.detail.description' | translate}}</label>
-                        <textarea class="form-control" rows="4" data-qe-id="detail-form-description">
-                         </textarea>
-                    </div>
-                </div>
-            </div>
         </div>
-        <div class="page-section">
-            <div class="tab-header pt-3 pb-3 pl-3 pr-3">
-                <mat-tab-group>
-                    <mat-tab label="{{'return.detail.tab1.title' | translate}}">
-                        <div class="row pt-3 pb-3 pl-3">
-                            <div class="col-sm-12">
-                                <div class="page-actions d-flex justify-content-end">
-                                    <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row">
-                                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                                        <span class="button-label">
+      </div>
+      <div class="line"></div>
+      <div class="page-section-form-body">
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.customerCode' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <app-single-select data-qe-id="detail-form-customer-code"></app-single-select>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.customerName' | translate}}
+            </label>
+            <input class="form-control" data-qe-id="detail-form-customer-name" disabled type="text">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.customerInfo' | translate}}
+            </label>
+            <app-single-select data-qe-id="detail-form-customer-info"></app-single-select>
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="page-section-form-body">
+        <div class="row">
+          <div class="col-sm-8 form-group">
+            <label>
+              {{'return.detail.return.title' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <input (click)="showReturn()" class="form-control" data-qe-id="detail-form-goods-receipt"
+                   type="text">
+          </div>
+        </div>
+      </div>
+      <div class="line"></div>
+      <div class="page-section-form-body">
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.documentNumber' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <input class="form-control" data-qe-id="detail-form-document-number" type="text">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.inventoryCode' | translate}}
+            </label>
+            <app-single-select data-qe-id="detail-form-inventory-address"></app-single-select>
+
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.inventoryAddress' | translate}}
+            </label>
+            <input class="form-control" data-qe-id="detail-form-inventory-code" disabled type="text">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.personInCharge' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
+
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.receiver' | translate}}
+            </label>
+            <input class="form-control" data-qe-id="detail-form-receiver" disabled type="text">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.creator' | translate}}
+            </label>
+            <input class="form-control" data-qe-id="detail-form-creator" disabled type="text">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.receiptedDate' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <app-date-picker data-qe-id="detail-form-receipted-date">
+            </app-date-picker>
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'return.detail.createdDate' | translate}}
+            </label>
+            <app-date-picker [disabled]="true" data-qe-id="detail-form-created-date"></app-date-picker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label>{{ 'return.detail.description' | translate}}</label>
+            <textarea class="form-control" data-qe-id="detail-form-description" rows="4">
+                         </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-section">
+      <div class="tab-header pt-3 pb-3 pl-3 pr-3">
+        <mat-tab-group>
+          <mat-tab label="{{'return.detail.tab1.title' | translate}}">
+            <div class="row pt-3 pb-3 pl-3">
+              <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                  <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row">
+                    <span class="btn-label"><i class="material-icons">delete</i></span>
+                    <span class="button-label">
                                             {{'general.button.delete' | translate}}
                                         </span></button>
-                                </div>
-                            </div>
+                </div>
+              </div>
 
+            </div>
+            <div class="table">
+              <p-table [value]="tableTemp" resizableColumns>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th width="2.5%">
+                      <div class="pretty p-icon p-curve p-has-indeterminate">
+                        <input type="checkbox"/>
+                        <div class="state">
+                          <i class="icon material-icons">done</i>
+                          <label></label>
                         </div>
-                        <div class="table">
-                            <p-table resizableColumns [value]="tableTemp">
-                                <ng-template pTemplate="header">
-                                    <tr>
-                                        <th width="2.5%">
-                                            <div class="pretty p-icon p-curve p-has-indeterminate">
-                                                <input type="checkbox" />
-                                                <div class="state">
-                                                    <i class="icon material-icons">done</i>
-                                                    <label></label>
-                                                </div>
-                                            </div>
-                                        </th>
-                                        <th pResizableColumn data-qe-id="table-thead-purchase-order-number">
-                                            {{'return.detail.tab1.purchaseOrderNumber' | translate}} </th>
-                                        <th pResizableColumn data-qe-id="table-thead-item-no">
-                                            {{'return.detail.tab1.itemNo' | translate}} </th>
-                                        <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
-                                            {{'return.detail.tab1.unitOfMeasure' | translate}}
-                                        </th>
-                                        <th pResizableColumn data-qe-id="table-thead-quantity">
-                                            {{'return.detail.tab1.quantity' | translate}} </th>
-                                        <th pResizableColumn data-qe-id="table-thead-value-added-tax">
-                                            {{'return.detail.tab1.valueAddedTax' | translate}}
-                                            (%)</th>
-                                        <th pResizableColumn data-qe-id="table-thead-discount">
-                                            {{'return.detail.tab1.discount' | translate}} (%)
-                                        </th>
-                                        <th pResizableColumn data-qe-id="table-thead-discount-amount">
-                                            {{'return.detail.tab1.discountAmount' | translate}}
-                                        </th>
-                                        <th pResizableColumn data-qe-id="table-thead-total">
-                                            {{'return.detail.tab1.total' | translate}}</th>
-                                        <th pResizableColumn data-qe-id="table-thead-view-detail">
-                                            {{'general.detail' | translate}}
-                                        </th>
-                                    </tr>
-                                </ng-template>
-                                <ng-template pTemplate="body" let-item>
-                                    <tr>
-                                        <td>
-                                            <div class="pretty p-icon p-curve p-has-indeterminate">
-                                                <input type="checkbox" />
-                                                <div class="state">
-                                                    <i class="icon material-icons">done</i>
-                                                    <label></label>
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td>{{item.total}}</td>
-                                        <td>
-                                            <div *ngIf="item.type == 1">
-                                                <a
-                                                    (click)="showBatches()">{{'return.detail.tab1.batches' | translate}}</a>
-                                            </div>
-                                            <div *ngIf="item.type == 2">
-                                                <a (click)="showSerial()">{{'return.detail.tab1.Serial' | translate}}</a>
-                                            </div>
-                                            <div *ngIf="item.type == 3">
-                                                <a
-                                                    (click)="showAmount()">{{'return.detail.tab1.amount' | translate}}</a>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                </ng-template>
-                            </p-table>
+                      </div>
+                    </th>
+                    <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
+                      {{'return.detail.tab1.purchaseOrderNumber' | translate}} </th>
+                    <th data-qe-id="table-thead-item-no" pResizableColumn>
+                      {{'return.detail.tab1.itemNo' | translate}} </th>
+                    <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
+                      {{'return.detail.tab1.unitOfMeasure' | translate}}
+                    </th>
+                    <th data-qe-id="table-thead-quantity" pResizableColumn>
+                      {{'return.detail.tab1.quantity' | translate}} </th>
+                    <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
+                      {{'return.detail.tab1.valueAddedTax' | translate}}
+                      (%)
+                    </th>
+                    <th data-qe-id="table-thead-discount" pResizableColumn>
+                      {{'return.detail.tab1.discount' | translate}} (%)
+                    </th>
+                    <th data-qe-id="table-thead-discount-amount" pResizableColumn>
+                      {{'return.detail.tab1.discountAmount' | translate}}
+                    </th>
+                    <th data-qe-id="table-thead-total" pResizableColumn>
+                      {{'return.detail.tab1.total' | translate}}</th>
+                    <th data-qe-id="table-thead-view-detail" pResizableColumn>
+                      {{'general.detail' | translate}}
+                    </th>
+                  </tr>
+                </ng-template>
+                <ng-template let-item pTemplate="body">
+                  <tr>
+                    <td>
+                      <div class="pretty p-icon p-curve p-has-indeterminate">
+                        <input type="checkbox"/>
+                        <div class="state">
+                          <i class="icon material-icons">done</i>
+                          <label></label>
                         </div>
-                    </mat-tab>
-                    <mat-tab label="{{'return.detail.tab2.title' | translate}}">
-                        <div class="tab-upload">
-                            <div class="form-upload-file d-flex">
-                                <div class="pt-3 upload-btn-wrapper">
-                                    <button class="btn btn-labeled btn-import">
-                                        <span class="btn-label"><i class="material-icons">attach_file</i></span>
-                                        <span class="button-label">
+                      </div>
+                    </td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>{{item.total}}</td>
+                    <td>
+                      <div *ngIf="item.type == 1">
+                        <a
+                          (click)="showBatches()">{{'return.detail.tab1.batches' | translate}}</a>
+                      </div>
+                      <div *ngIf="item.type == 2">
+                        <a (click)="showSerial()">{{'return.detail.tab1.Serial' | translate}}</a>
+                      </div>
+                      <div *ngIf="item.type == 3">
+                        <a
+                          (click)="showAmount()">{{'return.detail.tab1.amount' | translate}}</a>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </mat-tab>
+          <mat-tab label="{{'return.detail.tab2.title' | translate}}">
+            <div class="tab-upload">
+              <div class="form-upload-file d-flex">
+                <div class="pt-3 upload-btn-wrapper">
+                  <button class="btn btn-labeled btn-import">
+                    <span class="btn-label"><i class="material-icons">attach_file</i></span>
+                    <span class="button-label">
                                             {{'general.button.attachFile' | translate}}
                                         </span></button>
-                                    <input type="file" (change)="readURL($event)" multiple />
-                                </div>
-                                <div class="results d-flex align-items-center">
-                                    <div class="results-item d-flex mr-3" *ngFor="let name of fileNameList">
-                                        <div class="results-item-name">
-                                            <span class="icon-upload"><i class="material-icons">attach_file</i></span>
-                                            <span>{{name}}</span>
-                                        </div>
-                                        <span class="close-attach align-items-center"><i
-                                                class="material-icons">close</i></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </mat-tab>
-                </mat-tab-group>
+                  <input (change)="readURL($event)" multiple type="file"/>
+                </div>
+                <div class="results d-flex align-items-center">
+                  <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
+                    <div class="results-item-name">
+                      <span class="icon-upload"><i class="material-icons">attach_file</i></span>
+                      <span>{{name}}</span>
+                    </div>
+                    <span class="close-attach align-items-center"><i
+                      class="material-icons">close</i></span>
+                  </div>
+                </div>
+              </div>
             </div>
-        </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
     </div>
+  </div>
 </div>
 
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayBatches" [contentStyle]="{'overflow':'visible'}"
-    [style]="{width: '90%'}" [responsive]="true">
-    <p-header>
-        <div class="row">
-            <div class="col-sm-3">
-                <span class="dialog-header">{{'return.detail.batches.title ' | translate}}</span>
-            </div>
-            <div class="col-sm-9">
-                <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-import mr-2">
+<p-dialog [(visible)]="displayBatches" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+          [style]="{width: '90%'}" appendTo="body">
+  <p-header>
+    <div class="row">
+      <div class="col-sm-3">
+        <span class="dialog-header">{{'return.detail.batches.title ' | translate}}</span>
+      </div>
+      <div class="col-sm-9">
+        <div class="page-actions d-flex justify-content-end">
+          <button class="btn btn-labeled btn-import mr-2">
                         <span class="btn-label">
                             <img src="/assets/img/import.svg" width="24">
                         </span>
-                        <span class="button-label">
+            <span class="button-label">
                             {{'general.button.import' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-export mr-2">
-                        <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
-                        <span class="button-label">
+          <button class="btn btn-labeled btn-export mr-2">
+            <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
+            <span class="button-label">
                             {{'general.button.export' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-delete">
-                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                        <span class="button-label">
+          <button class="btn btn-labeled btn-delete">
+            <span class="btn-label"><i class="material-icons">delete</i></span>
+            <span class="button-label">
                             {{'general.button.delete' | translate}}
                         </span></button>
-                </div>
-            </div>
         </div>
-    </p-header>
-    <div class="dialog-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="d-flex align-items-center">
-                    <p-inputSwitch></p-inputSwitch>
-                    <span class="ml-2">{{'return.detail.batches.startScanBatchesNo' | translate}}</span>
-                    <div class="ml-2">
-                        <input type="text" class="form-control" data-qe-id="dialog-input-start-scan-batches-no">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="d-flex align-items-center justify-content-end">
-                    <span class="mr-2">{{'return.detail.binLocation' | translate}}</span>
-                    <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-sm-12">
-                <p-table resizableColumns [value]="">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-batches-check-box">
-                                <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
-                                    <div class="state">
-                                        <i class="icon material-icons">done</i>
-                                        <label></label>
-                                    </div>
-                                </div>
-                            </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-code">
-                                {{'return.detail.batches.batchCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-item-code">
-                                {{'return.detail.batches.itemCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-item-name">
-                                {{'return.detail.batches.itemName' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-manufacturing-date">
-                                {{'return.detail.batches.manufacturingDate' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-expiry-date">
-                                {{'return.detail.batches.expiryDate' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-quantity-in-each-batch">
-                                {{'return.detail.batches.quantityInEachBatch' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-location-code">
-                                {{'return.detail.batches.locationCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-quantity-saved">
-                                {{'return.detail.batches.quantitySaved' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-batches-action">
-                                {{'general.action' | translate}}
-                            </th>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
+      </div>
     </div>
-    <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-save-dialog">
-                        <span class="btn-label"><i class="material-icons">save</i></span>
-                        <span class="button-label">
+  </p-header>
+  <div class="dialog-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="d-flex align-items-center">
+          <p-inputSwitch></p-inputSwitch>
+          <span class="ml-2">{{'return.detail.batches.startScanBatchesNo' | translate}}</span>
+          <div class="ml-2">
+            <input class="form-control" data-qe-id="dialog-input-start-scan-batches-no" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="d-flex align-items-center justify-content-end">
+          <span class="mr-2">{{'return.detail.binLocation' | translate}}</span>
+          <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <p-table [value]="" resizableColumns>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-batches-check-box" pResizableColumn width="2.5%">
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input type="checkbox"/>
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </th>
+              <th data-qe-id="table-thead-batches-code" pResizableColumn>
+                {{'return.detail.batches.batchCode' | translate}} </th>
+              <th data-qe-id="table-thead-batches-item-code" pResizableColumn>
+                {{'return.detail.batches.itemCode' | translate}} </th>
+              <th data-qe-id="table-thead-batches-item-name" pResizableColumn>
+                {{'return.detail.batches.itemName' | translate}} </th>
+              <th data-qe-id="table-thead-batches-manufacturing-date" pResizableColumn>
+                {{'return.detail.batches.manufacturingDate' | translate}} </th>
+              <th data-qe-id="table-thead-batches-expiry-date" pResizableColumn>
+                {{'return.detail.batches.expiryDate' | translate}} </th>
+              <th data-qe-id="table-thead-batches-quantity-in-each-batch" pResizableColumn>
+                {{'return.detail.batches.quantityInEachBatch' | translate}} </th>
+              <th data-qe-id="table-thead-batches-location-code" pResizableColumn>
+                {{'return.detail.batches.locationCode' | translate}} </th>
+              <th data-qe-id="table-thead-batches-quantity-saved" pResizableColumn>
+                {{'return.detail.batches.quantitySaved' | translate}} </th>
+              <th data-qe-id="table-thead-batches-action" pResizableColumn>
+                {{'general.action' | translate}}
+              </th>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions d-flex justify-content-end">
+          <button class="btn btn-labeled btn-save-dialog">
+            <span class="btn-label"><i class="material-icons">save</i></span>
+            <span class="button-label">
                             {{'general.button.save' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displayBatches = false">
-                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
-                        <span class="button-label">
+          <button (click)="displayBatches = false" class="btn btn-labeled btn-cancel">
+            <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+            <span class="button-label">
                             {{'general.button.cancel' | translate}}
                         </span></button>
-                </div>
-            </div>
         </div>
-    </p-footer>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displaySerial" [contentStyle]="{'overflow':'visible'}"
-    [style]="{width: '90%'}" [responsive]="true">
-    <p-header>
-        <div class="row">
-            <div class="col-sm-3">
-                <span class="dialog-header">{{'return.detail.qrCode.title ' | translate}}</span>
-            </div>
-            <div class="col-sm-9">
-                <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-import mr-2">
+<p-dialog [(visible)]="displaySerial" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+          [style]="{width: '90%'}" appendTo="body">
+  <p-header>
+    <div class="row">
+      <div class="col-sm-3">
+        <span class="dialog-header">{{'return.detail.qrCode.title ' | translate}}</span>
+      </div>
+      <div class="col-sm-9">
+        <div class="page-actions d-flex justify-content-end">
+          <button class="btn btn-labeled btn-import mr-2">
                         <span class="btn-label">
                             <img src="/assets/img/import.svg" width="24">
                         </span>
-                        <span class="button-label">
+            <span class="button-label">
                             {{'general.button.import' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-export mr-2">
-                        <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
-                        <span class="button-label">
+          <button class="btn btn-labeled btn-export mr-2">
+            <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
+            <span class="button-label">
                             {{'general.button.export' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-delete">
-                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                        <span class="button-label">
+          <button class="btn btn-labeled btn-delete">
+            <span class="btn-label"><i class="material-icons">delete</i></span>
+            <span class="button-label">
                             {{'general.button.delete' | translate}}
                         </span></button>
-                </div>
-            </div>
         </div>
-    </p-header>
-    <div class="dialog-body">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="d-flex align-items-center">
-                    <p-inputSwitch></p-inputSwitch>
-                    <span class="ml-2">{{'return.detail.qrCode.scanQRCode' | translate}}</span>
-                    <div class="ml-2">
-                        <input type="text" class="form-control" data-qe-id="dialog-input-start-scan-batches-no">
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="d-flex align-items-center justify-content-end">
-                    <span class="mr-2">{{'return.detail.binLocation' | translate}}</span>
-                    <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-sm-12">
-                <p-table resizableColumns [value]="">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-qrCode-check-box">
-                                <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
-                                    <div class="state">
-                                        <i class="icon material-icons">done</i>
-                                        <label></label>
-                                    </div>
-                                </div>
-                            </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-code">
-                                {{'return.detail.qrCode.code' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-item-code">
-                                {{'return.detail.qrCode.itemCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-item-name">
-                                {{'return.detail.qrCode.itemName' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-serial">
-                                {{'return.detail.qrCode.serial' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-manufacturing-date">
-                                {{'return.detail.qrCode.manufacturingDate' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-expiry-date">
-                                {{'return.detail.qrCode.expiryDate' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-quantity">
-                                {{'return.detail.qrCode.quantity' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-location-code">
-                                {{'return.detail.qrCode.locationCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-scan-code">
-                                {{'return.detail.qrCode.scanCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-action">
-                                {{'general.action' | translate}}
-                            </th>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
+      </div>
     </div>
-    <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-save-dialog">
-                        <span class="btn-label"><i class="material-icons">save</i></span>
-                        <span class="button-label">
+  </p-header>
+  <div class="dialog-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="d-flex align-items-center">
+          <p-inputSwitch></p-inputSwitch>
+          <span class="ml-2">{{'return.detail.qrCode.scanQRCode' | translate}}</span>
+          <div class="ml-2">
+            <input class="form-control" data-qe-id="dialog-input-start-scan-batches-no" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div class="d-flex align-items-center justify-content-end">
+          <span class="mr-2">{{'return.detail.binLocation' | translate}}</span>
+          <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <p-table [value]="" resizableColumns>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-qrCode-check-box" pResizableColumn width="2.5%">
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input type="checkbox"/>
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </th>
+              <th data-qe-id="table-thead-qrCode-code" pResizableColumn>
+                {{'return.detail.qrCode.code' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-item-code" pResizableColumn>
+                {{'return.detail.qrCode.itemCode' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-item-name" pResizableColumn>
+                {{'return.detail.qrCode.itemName' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-serial" pResizableColumn>
+                {{'return.detail.qrCode.serial' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-manufacturing-date" pResizableColumn>
+                {{'return.detail.qrCode.manufacturingDate' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-expiry-date" pResizableColumn>
+                {{'return.detail.qrCode.expiryDate' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-quantity" pResizableColumn>
+                {{'return.detail.qrCode.quantity' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-location-code" pResizableColumn>
+                {{'return.detail.qrCode.locationCode' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-scan-code" pResizableColumn>
+                {{'return.detail.qrCode.scanCode' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-action" pResizableColumn>
+                {{'general.action' | translate}}
+              </th>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions d-flex justify-content-end">
+          <button class="btn btn-labeled btn-save-dialog">
+            <span class="btn-label"><i class="material-icons">save</i></span>
+            <span class="button-label">
                             {{'general.button.save' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displaySerial = false">
-                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
-                        <span class="button-label">
+          <button (click)="displaySerial = false" class="btn btn-labeled btn-cancel">
+            <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+            <span class="button-label">
                             {{'general.button.cancel' | translate}}
                         </span></button>
-                </div>
-            </div>
         </div>
-    </p-footer>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>
 
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayAmount" [contentStyle]="{'overflow':'visible'}"
-    [style]="{width: '80%'}" [responsive]="true">
-    <p-header>
-        <div class="row">
-            <div class="col-sm-3">
-                <span class="dialog-header">{{'return.detail.amount.title ' | translate}}</span>
-            </div>
-            <div class="col-sm-9">
-                <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-import mr-2">
+<p-dialog [(visible)]="displayAmount" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+          [style]="{width: '80%'}" appendTo="body">
+  <p-header>
+    <div class="row">
+      <div class="col-sm-3">
+        <span class="dialog-header">{{'return.detail.amount.title ' | translate}}</span>
+      </div>
+      <div class="col-sm-9">
+        <div class="page-actions d-flex justify-content-end">
+          <button class="btn btn-labeled btn-import mr-2">
                         <span class="btn-label">
                             <img src="/assets/img/import.svg" width="24">
                         </span>
-                        <span class="button-label">
+            <span class="button-label">
                             {{'general.button.import' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-export mr-2">
-                        <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
-                        <span class="button-label">
+          <button class="btn btn-labeled btn-export mr-2">
+            <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
+            <span class="button-label">
                             {{'general.button.export' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-delete">
-                        <span class="btn-label"><i class="material-icons">delete</i></span>
-                        <span class="button-label">
+          <button class="btn btn-labeled btn-delete">
+            <span class="btn-label"><i class="material-icons">delete</i></span>
+            <span class="button-label">
                             {{'general.button.delete' | translate}}
                         </span></button>
-                </div>
-            </div>
         </div>
-    </p-header>
-    <div class="dialog-body">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="d-flex align-items-center justify-content-end">
-                    <span class="mr-2">{{'return.detail.binLocation' | translate}}</span>
-                    <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
-                </div>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-sm-12">
-                <p-table resizableColumns [value]="">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-qrCode-check-box">
-                                <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
-                                    <div class="state">
-                                        <i class="icon material-icons">done</i>
-                                        <label></label>
-                                    </div>
-                                </div>
-                            </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-item-code">
-                                {{'return.detail.amount.itemCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-item-name">
-                                {{'return.detail.amount.itemName' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-unit">
-                                {{'return.detail.amount.unitOfMeasure' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-quantity">
-                                {{'return.detail.amount.quantity' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-location-code">
-                                {{'return.detail.amount.locationCode' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-quantity-saved">
-                                {{'return.detail.amount.quantitySaved' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-amount-action">
-                                {{'general.action' | translate}}
-                            </th>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
+      </div>
     </div>
-    <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-save-dialog">
-                        <span class="btn-label"><i class="material-icons">save</i></span>
-                        <span class="button-label">
+  </p-header>
+  <div class="dialog-body">
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="d-flex align-items-center justify-content-end">
+          <span class="mr-2">{{'return.detail.binLocation' | translate}}</span>
+          <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <p-table [value]="" resizableColumns>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-qrCode-check-box" pResizableColumn width="2.5%">
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input type="checkbox"/>
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </th>
+              <th data-qe-id="table-thead-amount-item-code" pResizableColumn>
+                {{'return.detail.amount.itemCode' | translate}} </th>
+              <th data-qe-id="table-thead-amount-item-name" pResizableColumn>
+                {{'return.detail.amount.itemName' | translate}} </th>
+              <th data-qe-id="table-thead-amount-unit" pResizableColumn>
+                {{'return.detail.amount.unitOfMeasure' | translate}} </th>
+              <th data-qe-id="table-thead-amount-quantity" pResizableColumn>
+                {{'return.detail.amount.quantity' | translate}} </th>
+              <th data-qe-id="table-thead-amount-location-code" pResizableColumn>
+                {{'return.detail.amount.locationCode' | translate}} </th>
+              <th data-qe-id="table-thead-amount-quantity-saved" pResizableColumn>
+                {{'return.detail.amount.quantitySaved' | translate}} </th>
+              <th data-qe-id="table-thead-amount-action" pResizableColumn>
+                {{'general.action' | translate}}
+              </th>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions d-flex justify-content-end">
+          <button class="btn btn-labeled btn-save-dialog">
+            <span class="btn-label"><i class="material-icons">save</i></span>
+            <span class="button-label">
                             {{'general.button.save' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displayAmount = false">
-                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
-                        <span class="button-label">
+          <button (click)="displayAmount = false" class="btn btn-labeled btn-cancel">
+            <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+            <span class="button-label">
                             {{'general.button.cancel' | translate}}
                         </span></button>
-                </div>
-            </div>
         </div>
-    </p-footer>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayReturn" [contentStyle]="{'overflow':'visible'}"
-    [style]="{width: '80%'}" [responsive]="true">
-    <p-header>
-        <span class="dialog-header">{{'return.detail.returnRequest.customerName' | translate}}</span>
-    </p-header>
-    <div class="dialog-body">
-        <div class="row mt-3">
-            <div class="col-sm-12">
-                <p-table resizableColumns [value]="">
-                    <ng-template pTemplate="header">
-                        <tr>
-                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-return-request-check-box">
-                                <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
-                                    <div class="state">
-                                        <i class="icon material-icons">done</i>
-                                        <label></label>
-                                    </div>
-                                </div>
-                            </th>
-                            <th pResizableColumn data-qe-id="table-thead-return-request-created-date">
-                                {{'return.detail.returnRequest.createdDate' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-return-request-document-no">
-                                {{'return.detail.returnRequest.documentNo' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-return-request-buyer">
-                                {{'return.detail.returnRequest.buyer' | translate}} </th>
-                            <th pResizableColumn data-qe-id="table-thead-return-request-creator">
-                                {{'return.detail.returnRequest.creator' | translate}} </th>
-                        </tr>
-                    </ng-template>
-                </p-table>
-            </div>
-        </div>
+<p-dialog [(visible)]="displayReturn" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+          [style]="{width: '80%'}" appendTo="body">
+  <p-header>
+    <span class="dialog-header">{{'return.detail.returnRequest.customerName' | translate}}</span>
+  </p-header>
+  <div class="dialog-body">
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <p-table [value]="" resizableColumns>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-return-request-check-box" pResizableColumn width="2.5%">
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input type="checkbox"/>
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </th>
+              <th data-qe-id="table-thead-return-request-created-date" pResizableColumn>
+                {{'return.detail.returnRequest.createdDate' | translate}} </th>
+              <th data-qe-id="table-thead-return-request-document-no" pResizableColumn>
+                {{'return.detail.returnRequest.documentNo' | translate}} </th>
+              <th data-qe-id="table-thead-return-request-buyer" pResizableColumn>
+                {{'return.detail.returnRequest.buyer' | translate}} </th>
+              <th data-qe-id="table-thead-return-request-creator" pResizableColumn>
+                {{'return.detail.returnRequest.creator' | translate}} </th>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
-    <p-footer>
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="page-actions d-flex justify-content-end">
-                    <button class="btn btn-labeled btn-save-dialog">
-                        <span class="btn-label"><i class="material-icons">save</i></span>
-                        <span class="button-label">
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions d-flex justify-content-end">
+          <button class="btn btn-labeled btn-save-dialog">
+            <span class="btn-label"><i class="material-icons">save</i></span>
+            <span class="button-label">
                             {{'return.detail.button.add' | translate}}
                         </span></button>
-                    <button class="btn btn-labeled btn-cancel" (click)="displayReturn = false">
-                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
-                        <span class="button-label">
+          <button (click)="displayReturn = false" class="btn btn-labeled btn-cancel">
+            <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+            <span class="button-label">
                             {{'general.button.cancel' | translate}}
                         </span></button>
-                </div>
-            </div>
         </div>
-    </p-footer>
+      </div>
+    </div>
+  </p-footer>
 </p-dialog>

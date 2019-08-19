@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Repository } from 'src/app/_helpers/repository';
+import { Repository } from 'src/app/_repositories/repository';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { InventoryCountingSearchEntity, InventoryOrganizationOfCountingSearchEntity, EmployeeDetailOfCountingSearchEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';

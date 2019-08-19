@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { translate } from '../../../../../_helpers/string';
 import { LegalEntity } from '../../../_backend/legal-entity/legal.entity';
 import { PermissionService } from './permission.service';
-import { GeneralService } from '../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../_services/general-service.service';
 import { Entities, EnumEntity } from '../../../../../_helpers/entity';
 import { Subject, Subscription } from 'rxjs';
 import { LegalSearchEntity } from '../../../../master-data/_backend/legal/legal.searchentity';

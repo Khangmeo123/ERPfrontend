@@ -1,441 +1,160 @@
-import {
-    PurchaseOrdersSearchEntity,
-    GoodsReceiptPOItemDetailSearchEntity,
-    GoodsReceiptPOTaxSearchEntity,
-    GoodsReceiptPOUnitOfMeasureSearchEntity,
-} from './../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { PurchaseOrdersEntity } from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { FormGroup, FormBuilder, FormArray, FormControl } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
-import { Entities } from 'src/app/_helpers/entity';
-import {
-    GoodsReceiptPORequesterSearchEntity,
-    GoodsReceiptPOInventoryOrganizationSearchEntity,
-    GoodsReceiptPOSupplierSearchEntity,
-    GoodsReceiptPOSupplierAddressSearchEntity,
-} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import { GoodsReceiptPODetailRepository } from './goods-receipt-po-detail.repository';
-import * as _ from 'lodash';
-@Injectable()
-export class GoodsReceiptPODetailService {
-    public goodsReceiptPOForm: BehaviorSubject<FormGroup>;
-    public supplierList: BehaviorSubject<Entities>;
-    public supplierAddressList: BehaviorSubject<Entities>;
-    public invetoryOrganizationList: BehaviorSubject<Entities>;
-    public buyerList: BehaviorSubject<Entities>;
-    public ownerList: BehaviorSubject<Entities>;
-    public ownerPOList: BehaviorSubject<Entities>;
-    public purchaseOrdersList: BehaviorSubject<PurchaseOrdersEntity[]>;
-    public itemList: BehaviorSubject<Entities>;
-    public taxList: BehaviorSubject<Entities>;
-    public unitOfMeasureList: BehaviorSubject<Entities>;
-    public documentNumberList: BehaviorSubject<Entities>;
+import { BehaviorSubject, Subscription } from 'rxjs';
+import {
+  PurchaseOrderEntity,
+  RequesterEntity,
+  SupplierAddressEntity,
+  SupplierEntity,
+  TaxEntity, UnitOfMeasureEntity,
+} from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
+import {
+  InventoryOrganizationSearchEntity,
+  PurchaseOrderSearchEntity,
+  RequesterSearchEntity,
+  SupplierAddressSearchEntity, UnitOfMeasureSearchEntity,
+} from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
+import { GoodsReceiptPOForm } from '../../../../_backend/goods-receipt-po/goods-receipt-po.form';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
 
-    constructor(
-        private fb: FormBuilder,
-        private goodsReceiptPORepository: GoodsReceiptPODetailRepository,
-        private toastrService: ToastrService,
-    ) {
-        this.goodsReceiptPOForm = new BehaviorSubject(this.fb.group(new GoodsReceiptPOForm()));
-        this.supplierList = new BehaviorSubject(new Entities());
-        this.supplierAddressList = new BehaviorSubject(new Entities());
-        this.invetoryOrganizationList = new BehaviorSubject(new Entities());
-        this.ownerList = new BehaviorSubject(new Entities());
-        this.ownerPOList = new BehaviorSubject(new Entities());
-        this.buyerList = new BehaviorSubject(new Entities());
-        this.purchaseOrdersList = new BehaviorSubject([]);
-        this.itemList = new BehaviorSubject(new Entities());
-        this.taxList = new BehaviorSubject(new Entities());
-        this.unitOfMeasureList = new BehaviorSubject(new Entities());
-        this.documentNumberList = new BehaviorSubject(new Entities());
-    }
+@Injectable({
+  providedIn: 'root',
+})
+export class GoodsReceiptPoDetailService {
 
-    getDetail(goodsReceiptPOId?): Promise<boolean> {
-        const defered = new Promise<boolean>((resolve, reject) => {
-            if (goodsReceiptPOId !== null && goodsReceiptPOId !== undefined) {
-                this.goodsReceiptPORepository.getDetail(goodsReceiptPOId).subscribe(res => {
-                    if (res) {
-                        const goodsReceiptPOForm = this.fb.group(
-                            new GoodsReceiptPOForm(res),
-                        );
-                        this.recalculateContents(goodsReceiptPOForm);
-                        resolve();
-                    }
-                }, err => {
-                    if (err) {
-                        console.log(err);
-                        reject();
-                    }
-                });
-            }
-        });
-        return defered;
-    }
+  goodsReceiptPOForm: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
 
-    save(goodsReceiptPOEntity: any) {
-        const defered = new Promise<boolean>((resolve, reject) => {
-            this.goodsReceiptPORepository.save(goodsReceiptPOEntity).subscribe(res => {
-                if (res) {
-                    this.toastrService.success('Cập nhật thành công !');
-                    resolve();
-                }
-            }, err => {
-                if (err) {
-                    this.goodsReceiptPOForm.next(this.fb.group(
-                        new GoodsReceiptPOForm(err),
-                    ));
-                    reject();
-                }
-            });
-        });
-        return defered;
-    }
+  purchaseOrderList: BehaviorSubject<PurchaseOrderEntity[]> = new BehaviorSubject<PurchaseOrderEntity[]>([]);
 
-    send(goodsReceiptPOEntity: any) {
-        const defered = new Promise<boolean>((resolve, reject) => {
-            this.goodsReceiptPORepository.send(goodsReceiptPOEntity).subscribe(res => {
-                if (res) {
-                    this.toastrService.success('Cập nhật thành công !');
-                    resolve();
-                }
-            }, err => {
-                if (err) {
-                    this.goodsReceiptPOForm.next(this.fb.group(
-                        new GoodsReceiptPOForm(err),
-                    ));
-                    reject();
-                }
-            });
-        });
-        return defered;
-    }
+  taxList: BehaviorSubject<TaxEntity[]> = new BehaviorSubject<TaxEntity[]>([]);
 
-    getPurchaseOrdersList(purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity) {
-        this.goodsReceiptPORepository.getPurchaseOrdersList(purchaseOrdersSearchEntity).subscribe(res => {
-            if (res) {
-                this.purchaseOrdersList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  supplierList: BehaviorSubject<SupplierEntity[]> = new BehaviorSubject<SupplierEntity[]>([]);
 
-    // supplier:
-    dropListSupplier(goodsReceiptPOSupplierSearchEntity: GoodsReceiptPOSupplierSearchEntity) {
-        this.goodsReceiptPORepository.dropListSupplier(goodsReceiptPOSupplierSearchEntity).subscribe(res => {
-            if (res) {
-                this.supplierList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  supplierAddressList: BehaviorSubject<SupplierAddressEntity[]> = new BehaviorSubject<SupplierAddressEntity[]>([]);
 
-    typingSearchSupplier(goodsReceiptPOSupplierSearchEntity: Observable<GoodsReceiptPOSupplierSearchEntity>) {
-        goodsReceiptPOSupplierSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListSupplier(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.supplierList.next(res);
-                }
-            });
-    }
+  buyerList: BehaviorSubject<RequesterEntity[]> = new BehaviorSubject<RequesterEntity[]>([]);
 
-    chooseSupplier(event: any[]) {
-        const currentForm = this.goodsReceiptPOForm.getValue();
-        currentForm.controls.supplierDetailId.setValue(event[0].id);
-        currentForm.controls.supplierName.setValue(event[0].name);
-        currentForm.controls.purchaseOrderName.setValue(null);
-        const goodsReceiptPOContents = currentForm.controls.goodsReceiptPOContents as FormArray;
-        goodsReceiptPOContents.clear();
-        const purchaseOrderIds = currentForm.controls.purchaseOrderIds as FormArray;
-        purchaseOrderIds.clear();
-        this.recalculateContents(currentForm);
-    }
+  ownerList: BehaviorSubject<RequesterEntity[]> = new BehaviorSubject<RequesterEntity[]>([]);
 
-    // supplierAddress:
-    dropListSupplierAddress(goodsReceiptPOSupplierAddressSearchEntity: GoodsReceiptPOSupplierAddressSearchEntity) {
-        this.goodsReceiptPORepository.dropListSupplierAddress(goodsReceiptPOSupplierAddressSearchEntity).subscribe(res => {
-            if (res) {
-                this.supplierAddressList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  unitOfMeasureList: BehaviorSubject<UnitOfMeasureEntity[]> = new BehaviorSubject<UnitOfMeasureEntity[]>([]);
 
-    typingSearchSupplierAddress(goodsReceiptPOSupplierAddressSearchEntity: Observable<GoodsReceiptPOSupplierAddressSearchEntity>) {
-        goodsReceiptPOSupplierAddressSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListSupplierAddress(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.supplierAddressList.next(res);
-                }
-            });
-    }
+  inventoryOrganizationList: BehaviorSubject<InventoryOrganizationEntity[]> = new BehaviorSubject<InventoryOrganizationEntity[]>([]);
 
-    // buyer:
-    dropListBuyer(goodsReceiptPOListOwnerSearchEntity: GoodsReceiptPORequesterSearchEntity) {
-        this.goodsReceiptPORepository.dropListBuyer(goodsReceiptPOListOwnerSearchEntity).subscribe(res => {
-            if (res) {
-                this.buyerList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
 
-    typingSearchBuyer(goodsReceiptPOListOwnerSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
-        goodsReceiptPOListOwnerSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListBuyer(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.buyerList.next(res);
-                }
-            });
-    }
+  constructor(private goodsReceiptPODetailRepository: GoodsReceiptPODetailRepository, private fb: FormBuilder) {
+    this.goodsReceiptPOForm.next(
+      this.fb.group(
+        new GoodsReceiptPOForm(),
+      ),
+    );
+  }
 
-    // owner:
-    dropListOwner(goodsReceiptPOListOwnerSearchEntity: GoodsReceiptPORequesterSearchEntity) {
-        this.goodsReceiptPORepository.dropListOwner(goodsReceiptPOListOwnerSearchEntity).subscribe(res => {
-            if (res) {
-                this.ownerList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  public getBuyerList(requesterSearchEntity: RequesterSearchEntity): Subscription {
+    return this.goodsReceiptPODetailRepository
+      .getBuyerList(requesterSearchEntity)
+      .subscribe(
+        (list: RequesterEntity[]) => {
+          this.buyerList.next(list);
+        },
+      );
+  }
 
-    typingSearchOwner(goodsReceiptPOListOwnerSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
-        goodsReceiptPOListOwnerSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListOwner(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.ownerList.next(res);
-                }
-            });
-    }
+  public getOwnerList(requesterSearchEntity: RequesterSearchEntity): Subscription {
+    return this.goodsReceiptPODetailRepository
+      .getOwnerList(requesterSearchEntity)
+      .subscribe(
+        (list: RequesterEntity[]) => {
+          this.ownerList.next(list);
+        },
+      );
+  }
 
-    // ownerPO:
-    dropListOwnerPO(goodsReceiptPOListOwnerSearchEntity: GoodsReceiptPORequesterSearchEntity) {
-        this.goodsReceiptPORepository.dropListOwner(goodsReceiptPOListOwnerSearchEntity).subscribe(res => {
-            if (res) {
-                this.ownerPOList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  public getSupplierList = (supplierSearchEntity: SupplierSearchEntity): Subscription => {
+    debugger
+    return this.goodsReceiptPODetailRepository
+      .getSupplierList(supplierSearchEntity)
+      .subscribe(
+        (list: SupplierEntity[]) => {
+          this.supplierList.next(list);
+        },
+      );
+  };
 
-    typingSearchOwnerPO(goodsReceiptPOListOwnerSearchEntity: Observable<GoodsReceiptPORequesterSearchEntity>) {
-        goodsReceiptPOListOwnerSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListOwner(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.ownerPOList.next(res);
-                }
-            });
-    }
+  public getSupplierAddressList(supplierAddressSearchEntity: SupplierAddressSearchEntity): Subscription {
+    return this.goodsReceiptPODetailRepository
+      .getSupplierAddressList(supplierAddressSearchEntity)
+      .subscribe(
+        (list: SupplierAddressEntity[]) => {
+          this.supplierAddressList.next(list);
+        },
+      );
+  }
 
-    // inventoryOrganization:
-    dropListInvetoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity) {
-        this.goodsReceiptPORepository.dropListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
-            if (res) {
-                this.invetoryOrganizationList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  public getInventoryOrganizationList(inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity): Subscription {
+    return this.goodsReceiptPODetailRepository
+      .getInventoryOrganizationList(inventoryOrganizationSearchEntity)
+      .subscribe(
+        (list: InventoryOrganizationEntity[]) => {
+          this.inventoryOrganizationList.next(list);
+        },
+      );
+  }
 
-    typingSearchInvetoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity:
-        Observable<GoodsReceiptPOInventoryOrganizationSearchEntity>) {
-        goodsReceiptPOInventoryOrganizationSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListInventoryOrganization(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.invetoryOrganizationList.next(res);
-                }
-            });
-    }
+  public getPurchaseOrderList(purchaseOrderSearchEntity: PurchaseOrderSearchEntity): Subscription {
+    return this.goodsReceiptPODetailRepository
+      .getPurchaseOrderList(purchaseOrderSearchEntity)
+      .subscribe(
+        (list: PurchaseOrderEntity[]) => {
+          this.purchaseOrderList.next(list);
+        },
+      );
+  }
 
-    // item:
-    dropListItem(goodsReceiptPOItemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity) {
-        this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity).subscribe(res => {
-            if (res) {
-                this.itemList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
+  public getUnitOfMeasureList(unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Subscription {
+    return this.goodsReceiptPODetailRepository
+      .getUnitOfMeasureList(unitOfMeasureSearchEntity)
+      .subscribe(
+        (list: UnitOfMeasureEntity[]) => {
+          this.unitOfMeasureList.next(list);
+        },
+      );
+  }
 
-    typingSearchItem(goodsReceiptPOItemDetailSearchEntity:
-        Observable<GoodsReceiptPOItemDetailSearchEntity>) {
-        goodsReceiptPOItemDetailSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListItem(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.itemList.next(res);
-                }
-            });
-    }
-
-    // tax:
-    dropListTax(goodsReceiptPOTaxSearchEntity: GoodsReceiptPOTaxSearchEntity) {
-        this.goodsReceiptPORepository.dropListTax(goodsReceiptPOTaxSearchEntity).subscribe(res => {
-            if (res) {
-                this.taxList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchTax(goodsReceiptPOTaxSearchEntity:
-        Observable<GoodsReceiptPOTaxSearchEntity>) {
-        goodsReceiptPOTaxSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListTax(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.taxList.next(res);
-                }
-            });
-    }
-
-    // unitOfMeasure:
-    dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity) {
-        this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity).subscribe(res => {
-            if (res) {
-                this.unitOfMeasureList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity:
-        Observable<GoodsReceiptPOUnitOfMeasureSearchEntity>) {
-        goodsReceiptPOUnitOfMeasureSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListUnitOfMeasure(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.unitOfMeasureList.next(res);
-                }
-            });
-    }
-
-    // documentNumber:
-    dropListDocumentNumber(purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity) {
-        this.goodsReceiptPORepository.dropListDocumentNumber(purchaseOrdersSearchEntity).subscribe(res => {
-            if (res) {
-                this.documentNumberList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchDocumentNumber(purchaseOrdersSearchEntity:
-        Observable<PurchaseOrdersSearchEntity>) {
-        purchaseOrdersSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.goodsReceiptPORepository.dropListDocumentNumber(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.documentNumberList.next(res);
-                }
-            });
-    }
-
-    // goodsReceiptPOContents:
-    deleteItemFromContent(deletedList: number[]) {
-        const sortedArray = deletedList.reverse();
-        const currentForm = this.goodsReceiptPOForm.getValue();
-        const currentArray = currentForm.get('goodsReceiptPOContents') as FormArray;
-        for (let i = sortedArray.length - 1; i >= 0; i--) {
-            currentArray.removeAt(sortedArray[i]);
+  public combineGoodsReceiptPO(data: any) {
+    this.goodsReceiptPODetailRepository.combineGoodsReceiptPO(data)
+      .subscribe((res) => {
+        if (res) {
+          const goodsReceiptPOForm = this.fb.group(
+            new GoodsReceiptPOForm(res),
+          );
+          this.recalculateContents(goodsReceiptPOForm);
         }
-        this.goodsReceiptPOForm.next(currentForm);
-    }
+      });
+  }
 
-    recalculateContents(goodsReceiptPOForm: FormGroup) {
-        const currentArray = goodsReceiptPOForm.get('goodsReceiptPOContents') as FormArray;
-        let totalGoodsReceiptPOContents = 0;
-        for (const control of currentArray.controls) {
-            if (control instanceof FormGroup) {
-                const unitPrice = control.get('unitPrice').value;
-                const taxRate = control.get('taxRate').value;
-                const generalDiscountCost = control.get('generalDiscountCost').value;
-                const quantity = Number(control.get('quantity').value);
-                const taxNumber = unitPrice * (taxRate / 100);
-                const totalValue = Math.round((unitPrice + taxNumber - generalDiscountCost) * quantity);
-                if (control.get('total')) {
-                    control.get('total').setValue(totalValue);
-                } else {
-                    control.addControl('total', new FormControl(totalValue));
-                }
-                totalGoodsReceiptPOContents += totalValue;
-            }
+  public recalculateContents(goodsReceiptPOForm: FormGroup) {
+    const currentArray: FormArray = goodsReceiptPOForm.get('goodsReceiptPOContents') as FormArray;
+    let totalGoodsReceiptPOContents: number = 0;
+    for (const control of currentArray.controls) {
+      if (control instanceof FormGroup) {
+        const unitPrice = control.get('unitPrice').value;
+        const taxRate = control.get('taxRate').value;
+        const generalDiscountCost = control.get('generalDiscountCost').value;
+        const quantity = Number(control.get('quantity').value);
+        const taxNumber = unitPrice * (taxRate / 100);
+        const totalValue = Math.round((unitPrice + taxNumber - generalDiscountCost) * quantity);
+        if (control.get('total')) {
+          control.get('total').setValue(totalValue);
+        } else {
+          control.addControl('total', new FormControl(totalValue));
         }
-        goodsReceiptPOForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
-        this.goodsReceiptPOForm.next(goodsReceiptPOForm);
+        totalGoodsReceiptPOContents += totalValue;
+      }
     }
-
-    // purchase orders dialog:
-    combineGoodsReceiptPO(data: any) {
-        this.goodsReceiptPORepository.combineGoodsReceiptPO(data).subscribe(res => {
-            if (res) {
-                const goodsReceiptPOForm = this.fb.group(
-                    new GoodsReceiptPOForm(res),
-                );
-                this.recalculateContents(goodsReceiptPOForm);
-            }
-        });
-    }
+    goodsReceiptPOForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
+    this.goodsReceiptPOForm.next(goodsReceiptPOForm);
+  }
 }

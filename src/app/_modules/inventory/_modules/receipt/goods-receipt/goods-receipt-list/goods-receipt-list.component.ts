@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {translate} from '../../../../../../_helpers/string';
+import { translate } from '../../../../../../_helpers/string';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./goods-receipt-list.component.scss']
 })
 export class GoodsReceiptListComponent implements OnInit {
-  pageTitle = translate('goodsReceipt.header.title')
+  pageTitle = translate('goodsReceipt.header.title');
   goodsReceiptList = [
     {
       name: 'Nguyen Van A',
@@ -25,8 +25,10 @@ export class GoodsReceiptListComponent implements OnInit {
       createDate: '20/11/2019',
       status: 1
     }
-  ]
-  constructor(private router: Router) { }
+  ];
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
@@ -44,11 +46,11 @@ export class GoodsReceiptListComponent implements OnInit {
   }
 
   editGoodsReceipt() {
-    this.router.navigate(['inventory/receipt/goods-receipt/goods-receipt-detail'])
+    this.router.navigate(['inventory/receipt/goods-receipt/goods-receipt-detail']);
   }
 
   addGoodsReceipt() {
-    this.router.navigate(['inventory/receipt/goods-receipt/goods-receipt-detail'])
+    this.router.navigate(['inventory/receipt/goods-receipt/goods-receipt-detail']);
   }
 
 }

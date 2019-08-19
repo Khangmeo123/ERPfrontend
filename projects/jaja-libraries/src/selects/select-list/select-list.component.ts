@@ -162,6 +162,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   onToggle(isOpened) {
+    debugger
     if (isOpened) {
       this.searchEntity = new this.searchEntity.constructor();
       this.getList(this.searchEntity);

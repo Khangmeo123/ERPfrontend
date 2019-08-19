@@ -8,7 +8,7 @@ import {PositionSearchEntity} from '../../../_backend/position/position.search-e
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 import {translate} from '../../../../../_helpers/string';
-import {GeneralService} from '../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../_services/general-service.service';
 
 @Component({
   selector: 'app-permission-detail',

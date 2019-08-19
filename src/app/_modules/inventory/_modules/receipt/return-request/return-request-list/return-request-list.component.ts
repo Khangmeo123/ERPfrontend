@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {translate} from '../../../../../../_helpers/string';
+import { translate } from '../../../../../../_helpers/string';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./return-request-list.component.scss']
 })
 export class ReturnRequestListComponent implements OnInit {
-  pageTitle = translate('returnRequest.header.title')
+  pageTitle = translate('returnRequest.header.title');
   tmp = [
     {
       name: 'Nguyen Van A',
@@ -26,7 +26,9 @@ export class ReturnRequestListComponent implements OnInit {
       status: 1,
     },
   ];
-  constructor(private router: Router) { }
+
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }

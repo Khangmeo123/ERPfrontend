@@ -73,6 +73,8 @@ $color-danger: #E64C4F;
 @import "~pretty-checkbox/src/scss/states/focus";
 @import "~pretty-checkbox/src/scss/states/indeterminate";
 
+@import "./scss/jaja-select-list";
+
 html,
 body {
   height: 100%;

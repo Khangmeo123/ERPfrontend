@@ -1,61 +1,40 @@
 <div class="page goods-receipt-po">
+
   <div class="page-header justify-content-between">
     <div class="justify-content-start align-items-center">
-            <span class="back-to-list" (click)="backToList()">
+            <span (click)="backToList()" class="back-to-list">
                 <i class="material-icons">arrow_back_ios</i>
             </span>
       <span class="page-title">
-                {{pageTitle | translate}}
+                {{'goodsReceiptPODetail.header.title' | translate}}
             </span>
       <span class="ml-2 open-status">{{'general.open'| translate}}</span>
-      <!-- <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
-      <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
-      <span class="ml-2 done-status">{{'general.done'| translate}}</span> -->
     </div>
+
     <div class="page-actions d-flex">
-      <!-- <button class="btn btn-labeled btn-reverse" data-qe-id="button-reverse">
-          <span class="btn-label"><i class="material-icons">replay</i></span>
-          <span class="button-label">
-              {{'general.button.reverse' | translate}}
-          </span>
-      </button>
-      <button class="btn btn-labeled btn-approve" data-qe-id="button-approve">
-          <span class="btn-label"><i class="material-icons">check</i></span>
-          <span class="button-label">
-              {{'general.button.approve' | translate}}
-          </span>
-      </button>
-      <button class="btn btn-labeled btn-rejected" data-qe-id="button-rejected">
-          <span class="btn-label"><i class="material-icons">block</i></span>
-          <span class="button-label">
-              {{'general.button.rejected' | translate}}
-          </span>
-      </button>
-      <button class="btn btn-labeled btn-receive" data-qe-id="button-receive">
-          <span class="btn-label"><i class="material-icons">assignment_returned</i></span>
-          <span class="button-label">
-              {{'general.button.receive' | translate}}
-          </span>
-      </button> -->
-      <button class="btn btn-labeled btn-send" data-qe-id="button-send" (click)="send()">
+      <button (click)="send()" class="btn btn-labeled btn-send" data-qe-id="button-send">
         <span class="btn-label"><i class="material-icons">send</i></span>
         <span class="button-label">
                     {{'general.button.send' | translate}}
                 </span></button>
-      <button class="btn btn-labeled btn-save" data-qe-id="button-save" (click)="save()">
+      <button (click)="save()" class="btn btn-labeled btn-save" data-qe-id="button-save">
         <span class="btn-label"><i class="material-icons">save</i></span>
         <span class="button-label">
                     {{'general.button.save' | translate}}
                 </span></button>
-      <div class="btn-group btn-labeled" dropdown data-qe-id="button-action">
-        <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle
-                aria-controls="dropdown-basic">
-          <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
+      <div class="btn-group btn-labeled" data-qe-id="button-action" dropdown>
+        <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle id="button-basic">
+          <span class="btn-label">
+            <i class="material-icons">arrow_drop_down</i>
+          </span>
           <span class="button-label">
                         {{'general.action' | translate}}
                     </span></button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
-            aria-labelledby="button-basic">
+        <ul *dropdownMenu
+            aria-labelledby="button-basic"
+            class="dropdown-menu dropdown-menu-right"
+            id="dropdown-basic"
+            role="menu">
           <li role="menuitem">
             <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
           </li>
@@ -71,15 +50,16 @@
       </div>
     </div>
   </div>
-  <div class="page-body" [formGroup]="goodsReceiptPOForm">
+
+  <div [formGroup]="goodsReceiptPOForm" class="page-body">
     <div class="page-section">
       <div class="page-section-form-header">
                 <span class="form-title">
                     {{'goodsReceiptPODetail.form.title' | translate}}
                 </span>
         <div class="page-actions justify-content-end">
-          <button class="btn btn-labeled btn-delete" (click)="deactivate()"
-                  *ngIf="goodsReceiptPOId!==null&&goodsReceiptPOId!==undefined">
+          <button (click)="deactivate()" *ngIf="goodsReceiptPOId!==null && goodsReceiptPOId!==undefined"
+                  class="btn btn-labeled btn-delete">
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
                             {{'general.button.delete' | translate}}
@@ -95,18 +75,20 @@
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form">
-              <app-single-select [list]="supplierExceptIds" [selectedList]="supplierIds" [key]="'code'"
-                                 [initialValue]="goodsReceiptPOForm.controls.supplierCode.value"
-                                 [valueSelector]="returnSupplier"
-                                 (search)="typingSearchSupplier($event, goodsReceiptPOForm.controls.supplierDetailId.value)"
-                                 (selectionChange)="chooseSupplier($event)"
-                                 (listOpen)="dropListSupplier(goodsReceiptPOForm.controls.supplierDetailId.value)"
-                                 data-qe-id="detail-form-supplier-code" class="w-100">
-              </app-single-select>
-              <app-error data-qe-id="form-error-supplierCode"
-                         *ngIf="(goodsReceiptPOForm.controls.supplierDetailId?.errors && goodsReceiptPOForm.controls.supplierDetailId?.touched) || !!goodsReceiptPOForm.controls.errors.get('supplierDetailId')?.value"
-                         [formGroup]="goodsReceiptPOForm" [property]="'supplierDetailId'" [placement]="'top'"
-                         class="error-form">
+              <jaja-select-list class="flex-grow-1"
+                                [list]="supplierList"
+                                [getList]="goodsReceiptPoDetailService.getSupplierList"
+                                key="code"
+                                [searchable]="true">
+                <ng-template #label #option let-code="code">
+                  {{code}}
+                </ng-template>
+              </jaja-select-list>
+              <app-error [formGroup]="goodsReceiptPOForm"
+                         [placement]="'top'"
+                         [property]="'supplierDetailId'"
+                         class="error-form"
+                         data-qe-id="form-error-supplierCode">
               </app-error>
             </div>
           </div>
@@ -114,28 +96,27 @@
             <label>
               {{'goodsReceiptPODetail.supplierName' | translate}}
             </label>
-            <input type="text" class="form-control disabled" formControlName="supplierName"
-                   data-qe-id="detail-form-supplier-name">
+            <input class="form-control disabled" data-qe-id="detail-form-supplier-name" formControlName="supplierName"
+                   type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptPODetail.supplierAddress' | translate}}
             </label>
             <div class="div-form">
-              <app-single-select [list]="supplierAddressExceptIds" [selectedList]="supplierAddressIds"
-                                 [disabled]="goodsReceiptPOForm.controls.supplierDetailId.value === null || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0"
-                                 [key]="'supplierAddress'"
-                                 [initialValue]="goodsReceiptPOForm.controls.supplierAddress.value"
-                                 (search)="typingSearchSupplierAddress($event, goodsReceiptPOForm.controls.supplierContactId.value)"
-                                 (selectionChange)="goodsReceiptPOForm.controls.supplierContactId.setValue($event[0])"
-                                 (listOpen)="dropListSupplierAddress(goodsReceiptPOForm.controls.supplierContactId.value)"
-                                 data-qe-id="detail-form-supplier-address" class="w-100">
-              </app-single-select>
-              <app-error data-qe-id="form-error-supplierAddress"
-                         *ngIf="(goodsReceiptPOForm.controls.supplierContactId?.errors && goodsReceiptPOForm.controls.supplierContactId?.touched) || !!goodsReceiptPOForm.controls.errors.get('supplierContactId')?.value"
-                         [formGroup]="goodsReceiptPOForm" [property]="'supplierContactId'" [placement]="'top'"
-                         class="error-form">
-              </app-error>
+              <jaja-select-list class="flex-grow-1"
+                                [list]="supplierAddressList"
+                                [getList]="goodsReceiptPoDetailService.getSupplierAddressList.bind(goodsReceiptPoDetailService)"
+                                formControlName="supplierContactId"
+                                key="code"
+                                [searchable]="true">
+                <ng-template #option let-code="code">
+                  {{code}}
+                </ng-template>
+              </jaja-select-list>
+              <app-error [formGroup]="goodsReceiptPOForm"
+                         [placement]="'top'" [property]="'supplierContactId'" class="error-form"
+                         data-qe-id="form-error-supplierAddress"></app-error>
             </div>
           </div>
         </div>
@@ -148,9 +129,9 @@
               {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input type="text" class="form-control" (click)="showPurchaseOrders()"
-                   data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderName" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null
-                            || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0}">
+            <input (click)="showPurchaseOrders()" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null
+                            || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0}" class="form-control"
+                   data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderName" type="text">
           </div>
         </div>
       </div>
@@ -162,30 +143,33 @@
               {{'goodsReceiptPODetail.documentNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input type="text" class="form-control disabled" data-qe-id="detail-form-document-number"
-                   formControlName="documentNumber">
+            <input class="form-control disabled" data-qe-id="detail-form-document-number"
+                   formControlName="documentNumber"
+                   type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptPODetail.inventoryCode' | translate}}
             </label>
-            <app-single-select [list]="inventoryOrganizationExceptIds"
-                               [selectedList]="inventoryOrganizationIds"
-                               [disabled]="goodsReceiptPOForm.controls.supplierDetailId.value === null || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0"
-                               [key]="'code'"
-                               [initialValue]="goodsReceiptPOForm.controls.inventoryOrganizationCode.value"
-                               (search)="typingSearchInvetoryOrganization($event, goodsReceiptPOForm.controls.inventoryOrganizationId.value)"
-                               (selectionChange)="goodsReceiptPOForm.controls.inventoryOrganizationId.setValue($event[0])"
-                               (listOpen)="dropListInventoryOrganization(goodsReceiptPOForm.controls.inventoryOrganizationId.value)"
-                               data-qe-id="detail-form-inventory-address" class="w-100">
-            </app-single-select>
+            <jaja-select-list [list]="inventoryOrganizationList"
+                              [getList]="goodsReceiptPoDetailService.getInventoryOrganizationList.bind(goodsReceiptPoDetailService)"
+                              [searchable]="true"
+                              [searchEntity]="inventoryOrganizationSearchEntity"
+                              searchField="code"
+                              searchType="startsWith"
+                              key="code">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptPODetail.inventoryAddress' | translate}}
             </label>
-            <input type="text" class="form-control disabled" data-qe-id="detail-form-inventory-code"
-                   formControlName="inventoryOrganizationStreet">
+            <input class="form-control disabled" data-qe-id="detail-form-inventory-code"
+                   formControlName="inventoryOrganizationStreet"
+                   type="text">
           </div>
         </div>
         <div class="row">
@@ -194,28 +178,31 @@
               {{'goodsReceiptPODetail.personInCharge' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <app-single-select [list]="ownerExceptIds" [selectedList]="ownerIds"
-                               [disabled]="goodsReceiptPOForm.controls.supplierDetailId.value === null || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0"
-                               [key]="'name'" [initialValue]="goodsReceiptPOForm.controls.ownerName.value"
-                               (search)="typingSearchOwner($event, goodsReceiptPOForm.controls.ownerId.value)"
-                               (selectionChange)="goodsReceiptPOForm.controls.ownerId.setValue($event[0])"
-                               (listOpen)="dropListOwner(goodsReceiptPOForm.controls.ownerId.value)"
-                               data-qe-id="detail-form-person-in-charge" class="w-100">
-            </app-single-select>
+            <jaja-select-list [list]="ownerList"
+                              [getList]="goodsReceiptPoDetailService.getOwnerList.bind(goodsReceiptPoDetailService)"
+                              [searchable]="true"
+                              [searchEntity]="ownerSearchEntity"
+                              searchField="name"
+                              searchType="startsWith"
+                              key="code">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptPODetail.receiver' | translate}}
             </label>
-            <input type="text" class="form-control disabled" data-qe-id="detail-form-buyerName"
-                   formControlName="buyerName">
+            <input class="form-control disabled" data-qe-id="detail-form-buyerName" formControlName="buyerName"
+                   type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptPODetail.creator' | translate}}
             </label>
-            <input type="text" class="form-control disabled" data-qe-id="detail-form-creator"
-                   formControlName="requesterName">
+            <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="requesterName"
+                   type="text">
           </div>
         </div>
         <div class="row">
@@ -226,12 +213,12 @@
             </label>
             <div class="div-form">
               <app-date-picker [control]="goodsReceiptPOForm.get('dueDate')"
-                               data-qe-id="detail-form-receipted-date" class="w-100">
+                               class="w-100" data-qe-id="detail-form-receipted-date">
               </app-date-picker>
-              <app-error data-qe-id="form-error-supplierAddress"
-                         *ngIf="(goodsReceiptPOForm.controls.dueDate?.errors && goodsReceiptPOForm.controls.dueDate?.touched) || !!goodsReceiptPOForm.controls.errors.get('dueDate')?.value"
-                         [formGroup]="goodsReceiptPOForm" [property]="'supplierContactId'" [placement]="'top'"
-                         class="error-form">
+              <app-error
+                [formGroup]="goodsReceiptPOForm"
+                [placement]="'top'" [property]="'supplierContactId'" class="error-form"
+                data-qe-id="form-error-supplierAddress">
               </app-error>
             </div>
 
@@ -241,15 +228,15 @@
               {{'goodsReceiptPODetail.createdDate' | translate}}
             </label>
             <app-date-picker [control]="goodsReceiptPOForm.get('documentDate')"
-                             data-qe-id="detail-form-created-date" [disabled]="true">
+                             [disabled]="true" data-qe-id="detail-form-created-date">
             </app-date-picker>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 form-group">
             <label>{{ 'goodsReceiptPODetail.description' | translate}}</label>
-            <textarea class="form-control" rows="4" data-qe-id="detail-form-remarks"
-                      formControlName="remarks">
+            <textarea class="form-control" data-qe-id="detail-form-remarks" formControlName="remarks"
+                      rows="4">
                          </textarea>
           </div>
         </div>
@@ -262,8 +249,8 @@
             <div class="row pt-3 pb-3 pl-3">
               <div class="col-sm-12">
                 <div class="page-actions d-flex justify-content-end">
-                  <button class="btn btn-labeled btn-clear mr-2" data-qe-id="button-clear"
-                          (click)="clearSearch(tableGoodsReceiptPOContents)">
+                  <button (click)="onClearSearch(tableGoodsReceiptPOContents)" class="btn btn-labeled btn-clear mr-2"
+                          data-qe-id="button-clear">
                                         <span class="btn-label">
                                             <img src="/assets/img/filter.svg" width="16">
                                         </span>
@@ -271,9 +258,12 @@
                                             {{'general.button.clear' | translate}}
                                         </span>
                   </button>
-                  <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row"
-                          (confirm)="deleteItem()" mwlConfirmationPopover [popoverTitle]="popoverTitle"
-                          [popoverMessage]="popoverMessage" placement="bottom">
+                  <button (confirm)="deleteItem()"
+                          popoverMessage="{{'goodsReceiptPODetail.delete.confirm.message' | translate}}"
+                          popoverTitle="{{'goodsReceiptPODetail.delete.confirm.title' | translate}}"
+                          class="btn btn-labeled btn-delete"
+                          data-qe-id="button-delete-row"
+                          mwlConfirmationPopover placement="bottom">
                     <span class="btn-label"><i class="material-icons">delete</i></span>
                     <span class="button-label">
                                             {{'general.button.delete' | translate}}
@@ -284,9 +274,12 @@
 
             </div>
             <div class="table" formArrayName="goodsReceiptPOContents">
-              <p-table #tableGoodsReceiptPOContents [scrollable]="true" scrollHeight="500px"
-                       [resizableColumns]="true" [rowTrackBy]="trackByFn"
-                       [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value">
+              <p-table #tableGoodsReceiptPOContents
+                       [resizableColumns]="true"
+                       [rowTrackBy]="trackByFn"
+                       [scrollable]="true"
+                       [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value"
+                       scrollHeight="500px">
                 <ng-template pTemplate="colgroup">
                   <colgroup>
                     <col>
@@ -305,36 +298,29 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th width="2.5%">
-                      <!-- <div class="pretty p-icon p-curve p-has-indeterminate">
-                          <input type="checkbox" />
-                          <div class="state">
-                              <i class="icon material-icons">done</i>
-                              <label></label>
-                          </div>
-                      </div> -->
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-purchase-order-number">
+                    <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}} </th>
-                    <th pResizableColumn data-qe-id="table-thead-item-no">
+                    <th data-qe-id="table-thead-item-no" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.itemNo' | translate}} </th>
-                    <th pResizableColumn data-qe-id="table-thead-purchase-item-name">
+                    <th data-qe-id="table-thead-purchase-item-name" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.itemName' | translate}} </th>
-                    <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
+                    <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.unitOfMeasure' | translate}}
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-quantity">
+                    <th data-qe-id="table-thead-quantity" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.quantity' | translate}} </th>
-                    <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
+                    <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.unitPrice' | translate}}
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-value-added-tax">
+                    <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.valueAddedTax' | translate}}
                       (%)
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-discount">
+                    <th data-qe-id="table-thead-discount" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.discount' | translate}} (%)
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-discount-amount">
+                    <th data-qe-id="table-thead-discount-amount" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.discountAmount' | translate}}
                     </th>
                     <th width="8%">
@@ -346,58 +332,70 @@
                   <tr>
                     <th class="th-filter" width="2.5%"></th>
                     <th class="th-filter">
-                      <app-single-select [list]="documentNumberExceptIds"
-                                         [selectedList]="documentNumberIds" [key]="'documentNumber'"
-                                         [valueSelector]="returnDocumentNumber"
-                                         (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)"
-                                         (selectionChange)="documentNumberSearchEntity.id = $event[0];
-                                                tableGoodsReceiptPOContents.filter($event[0].documentNumber, 'documentNumber', 'equals')"
-                                         (listOpen)="dropListDocumentNumber(documentNumberSearchEntity.id)"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list class="flex-grow-1"
+                                        appendTo="body"
+                                        [list]="supplierList"
+                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        key="code"
+                                        [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
                     </th>
                     <th class="th-filter">
-                      <app-single-select [list]="itemDetailExceptIds"
-                                         [selectedList]="itemDetailIds" [key]="'code'"
-                                         (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                         (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
-                                         (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list class="flex-grow-1"
+                                        appendTo="body"
+                                        [list]="supplierList"
+                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        key="code"
+                                        [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
                     </th>
                     <th class="th-filter">
-                      <input type="text" class="form-control w-100"
-                             (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"/>
+                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
+                             class="form-control w-100"
+                             type="text"/>
                     </th>
                     <th class="th-filter">
-                      <app-single-select [list]="unitOfMeasureExceptIds"
-                                         [selectedList]="unitOfMeasureIds" [key]="'name'"
-                                         (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
-                                         (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'unitOfMeasureId', 'equals')"
-                                         (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list class="flex-grow-1"
+                                        appendTo="body"
+                                        [list]="supplierList"
+                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        key="code"
+                                        [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
                     </th>
                     <th class="th-filter"></th>
                     <th class="th-filter"></th>
                     <th class="th-filter">
-                      <app-single-select [list]="taxExceptIds" [selectedList]="taxIds"
-                                         [key]="'code'" (search)="typingSearchTax($event, taxSearchEntity.id)"
-                                         (selectionChange)="taxSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'taxId', 'equals')"
-                                         (listOpen)="dropListTax(taxSearchEntity.id)"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list class="flex-grow-1"
+                                        appendTo="body"
+                                        [list]="supplierList"
+                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        key="code"
+                                        [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
                     </th>
                     <th class="th-filter"></th>
                     <th class="th-filter"></th>
                     <th class="th-filter" width="8%"></th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-goodsReceiptPOContent let-index="rowIndex">
+                <ng-template let-goodsReceiptPOContent let-index="rowIndex" pTemplate="body">
                   <tr [formGroupName]='index'>
                     <td width="2.5%">
                       <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox" (change)="addDeletedList(index)"/>
+                        <input (change)="addDeletedList(index)" type="checkbox"/>
                         <div class="state">
                           <i class="icon material-icons">done</i>
                           <label></label>
@@ -409,9 +407,9 @@
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.itemName}}</td>
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.unitOfMeasureName}}</td>
                     <td class="ui-resizable-column">
-                      <input type="text" class="form-control w-100 text-right"
-                             formControlName="quantity" (input)="recalculateContents()"
-                             pKeyFilter="int">
+                      <input (input)="recalculateContents()" class="form-control w-100 text-right"
+                             formControlName="quantity" pKeyFilter="int"
+                             type="text">
                     </td>
                     <td class="ui-resizable-column text-right">{{goodsReceiptPOContent.unitPrice}}
                     </td>
@@ -423,26 +421,13 @@
                     <td class="ui-resizable-column text-right">
                       {{goodsReceiptPOContent.generalDiscountCost}}
                     </td>
-                    <td width="8%" class="text-right">
+                    <td class="text-right" width="8%">
                       {{goodsReceiptPOContent.total | number}}
                     </td>
-                    <!-- <td>
-                        <div *ngIf="item.type == 1">
-                            <a
-                                (click)="showBatches()">{{'goodsReceiptPODetail.tab1.batches' | translate}}</a>
-                        </div>
-                        <div *ngIf="item.type == 2">
-                            <a
-                                (click)="showSerial()">{{'goodsReceiptPODetail.tab1.Serial' | translate}}</a>
-                        </div>
-                        <div *ngIf="item.type == 3">
-                            <a
-                                (click)="showAmount()">{{'goodsReceiptPODetail.tab1.amount' | translate}}</a>
-                        </div>
-                    </td> -->
+
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="footer" let-columns>
+                <ng-template let-columns pTemplate="footer">
                   <tr>
                     <td class="text-right" colspan="10">{{'general.text.total' | translate}}:</td>
                     <td class="text-right" width="8%">
@@ -462,10 +447,10 @@
                     <span class="button-label">
                                             {{'general.button.attachFile' | translate}}
                                         </span></button>
-                  <input type="file" (change)="readURL($event)" multiple/>
+                  <input (change)="readURL($event)" multiple type="file"/>
                 </div>
                 <div class="results d-flex align-items-center">
-                  <div class="results-item d-flex mr-3" *ngFor="let name of fileNameList">
+                  <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
                     <div class="results-item-name">
                       <span class="icon-upload"><i class="material-icons">attach_file</i></span>
                       <span>{{name}}</span>
@@ -484,8 +469,8 @@
 </div>
 
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayPurchseOrders" [contentStyle]="{'overflow':'visible'}"
-          [style]="{width: '80%'}" [responsive]="true">
+<p-dialog [(visible)]="displayPurchaseOrders" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+          [style]="{width: '80%'}" appendTo="body">
   <p-header>
         <span class="dialog-header">{{'goodsReceiptPODetail.goodsReceipt.supplierName' | translate}}
           {{goodsReceiptPOForm.controls.supplierName.value}}
@@ -494,8 +479,8 @@
   <div class="dialog-body">
     <div class="row mt-3">
       <div class="col-sm-12">
-        <p-table [value]="purchaseOrdersList" [scrollable]="true" scrollHeight="500px" [resizableColumns]="true"
-                 #tablePurchaseOrders>
+        <p-table #tablePurchaseOrder [resizableColumns]="true" [scrollable]="true" [value]="purchaseOrdersList"
+                 scrollHeight="500px">
           <ng-template pTemplate="colgroup">
             <colgroup>
               <col>
@@ -505,62 +490,59 @@
           </ng-template>
           <ng-template pTemplate="header">
             <tr>
-              <th width="2.5%" pResizableColumn data-qe-id="table-thead-goodsReceipt-check-box">
+              <th data-qe-id="table-thead-goodsReceipt-check-box" pResizableColumn width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox" (change)="selectedAllPurchaseOrders($event)"/>
+                  <input (change)="selectAllPurchaseOrders($event)" type="checkbox"/>
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>
                   </div>
                 </div>
               </th>
-              <th pResizableColumn data-qe-id="table-thead-goodsReceipt-createdDate">
+              <th data-qe-id="table-thead-goodsReceipt-createdDate" pResizableColumn>
                 {{'goodsReceiptPODetail.goodsReceipt.createdDate' | translate}} </th>
-              <th pResizableColumn data-qe-id="table-thead-goodsReceipt-documentNo">
+              <th data-qe-id="table-thead-goodsReceipt-documentNo" pResizableColumn>
                 {{'goodsReceiptPODetail.goodsReceipt.documentNo' | translate}} </th>
-              <th pResizableColumn data-qe-id="table-thead-goodsReceipt-buyer">
+              <th data-qe-id="table-thead-goodsReceipt-buyer" pResizableColumn>
                 {{'goodsReceiptPODetail.goodsReceipt.buyer' | translate}} </th>
-              <th pResizableColumn data-qe-id="table-thead-goodsReceipt-creator">
+              <th data-qe-id="table-thead-goodsReceipt-creator" pResizableColumn>
                 {{'goodsReceiptPODetail.goodsReceipt.creator' | translate}} </th>
             </tr>
             <tr>
               <th class="th-filter" width="2.5%"></th>
               <th class="th-filter">
-                <app-date-picker (valueChange)="sortDatePurchaseOrders($event, tablePurchaseOrders)"
+                <app-date-picker (valueChange)="sortDatePurchaseOrders($event, tablePurchaseOrder)"
                                  data-qe-id="detail-form-receipted-date">
                 </app-date-picker>
                 <!-- <input type="text" class="form-control"
-                    (input)="tablePurchaseOrders.filter($event.target.value, 'documentDate', 'equals')" /> -->
+                    (input)="tablePurchaseOrder.filter($event.target.value, 'documentDate', 'equals')" /> -->
               </th>
               <th class="th-filter">
-                <input type="text" class="form-control"
-                       (input)="tablePurchaseOrders.filter($event.target.value, 'documentNumber', 'equals')"/>
+                <input (input)="tablePurchaseOrder.filter($event.target.value, 'documentNumber', 'equals')"
+                       class="form-control"
+                       type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select [list]="buyerExceptIds" [selectedList]="buyerIds" [key]="'name'"
-                                   [initialValue]="purchaseOrdersSearchEntity.buyerId"
-                                   (search)="typingSearchBuyer($event, purchaseOrdersSearchEntity.buyerId)"
-                                   (selectionChange)="purchaseOrdersSearchEntity.buyerId = $event[0]; tablePurchaseOrders.filter($event[0], 'buyerId', 'equals')"
-                                   (listOpen)="dropListBuyer(purchaseOrdersSearchEntity.buyerId)"
-                                   data-qe-id="table-thead-filter-buyer">
-                </app-single-select>
+
               </th>
               <th class="th-filter">
-                <app-single-select [list]="ownerExceptIds" [selectedList]="ownerIds" [key]="'name'"
-                                   [initialValue]="purchaseOrdersSearchEntity.ownerId"
-                                   (search)="typingSearchOwner($event, purchaseOrdersSearchEntity.ownerId)"
-                                   (selectionChange)="purchaseOrdersSearchEntity.ownerId = $event[0]; tablePurchaseOrders.filter($event[0], 'ownerId', 'equals')"
-                                   (listOpen)="dropListOwner(purchaseOrdersSearchEntity.ownerId)"
-                                   data-qe-id="table-thead-filter-owner">
-                </app-single-select>
+                <jaja-select-list class="flex-grow-1"
+                                  [list]="supplierList"
+                                  [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                  key="code"
+                                  [searchable]="true">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
               </th>
             </tr>
           </ng-template>
-          <ng-template pTemplate="body" let-purchaseOrder let-index="rowIndex">
+          <ng-template let-index="rowIndex" let-purchaseOrder pTemplate="body">
             <tr [attr.data-qe-id]="'table-tbody-row-' + index">
               <td width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox" [(ngModel)]="purchaseOrder.isSelected"/>
+                  <input [(ngModel)]="purchaseOrder.isSelected" type="checkbox"/>
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>
@@ -581,12 +563,12 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="page-actions d-flex justify-content-end">
-          <button class="btn btn-labeled btn-save-dialog" (click)="combineGoodsReceiptPO()">
+          <button (click)="combineGoodsReceiptPO()" class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
                             {{'goodsReceiptPODetail.button.add' | translate}}
                         </span></button>
-          <button class="btn btn-labeled btn-cancel" (click)="displayPurchseOrders = false">
+          <button (click)="displayPurchaseOrders = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
                             {{'general.button.cancel' | translate}}

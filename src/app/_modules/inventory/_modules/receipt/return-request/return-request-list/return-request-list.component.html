@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add" (click) = "addReturnRequest()">
+      <button (click)="addReturnRequest()" class="btn btn-labeled btn-add" type="button">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
@@ -22,28 +22,28 @@
       <div class="row d-flex pb-3">
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
-          <input class="form-control input-datepicker ml-1 mr-1 " matInput [matDatepicker]="picker"
-            placeholder="dd/mm/yyyy">
+          <input [matDatepicker]="picker" class="form-control input-datepicker ml-1 mr-1 " matInput
+                 placeholder="dd/mm/yyyy">
           <mat-datepicker #picker></mat-datepicker>
-          <div role="button" (click)="openDatePicker(picker)">
+          <div (click)="openDatePicker(picker)" role="button">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
-          <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
-            placeholder="dd/mm/yyyy">
+          <input [matDatepicker]="datepicker" class="form-control input-datepicker ml-1 mr-1" matInput
+                 placeholder="dd/mm/yyyy">
           <mat-datepicker #datepicker></mat-datepicker>
-          <div role="button" (click)="openToDatePicker(datepicker)">
+          <div (click)="openToDatePicker(datepicker)" role="button">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
-        <button type="button" class="btn btn-labeled btn-add get-data">
+        <button class="btn btn-labeled btn-add get-data" type="button">
           {{'general.button.getData' | translate}}</button>
       </div>
 
-      <p-table [value]="tmp" [customSort]="true" [lazy]="true" (onLazyLoad)="sort($event)"
-        [scrollable]="true" scrollHeight="500px" [resizableColumns]="true" #table>
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true"
+               [resizableColumns]="true" [scrollable]="true" [value]="tmp" scrollHeight="500px">
         <ng-template pTemplate="colgroup">
           <colgroup>
             <col>
@@ -58,31 +58,31 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn data-qe-id="table-thead-created-date">
+            <th data-qe-id="table-thead-created-date" pResizableColumn>
               {{ 'returnRequest.list.createdDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-receipt-requirement-id">
+            <th data-qe-id="table-thead-receipt-requirement-id" pResizableColumn>
               {{ 'returnRequest.list.receiptRequirementID' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-receipted-date">
+            <th data-qe-id="table-thead-receipted-date" pResizableColumn>
               {{ 'returnRequest.list.receiptedDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-inventoryCode">
+            <th data-qe-id="table-thead-inventoryCode" pResizableColumn>
               {{ 'returnRequest.list.inventoryCode' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-description">
+            <th data-qe-id="table-thead-description" pResizableColumn>
               {{ 'returnRequest.list.description' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-creator">
+            <th data-qe-id="table-thead-creator" pResizableColumn>
               {{ 'returnRequest.list.creator' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-status">
+            <th data-qe-id="table-thead-status" pResizableColumn>
               {{ 'returnRequest.list.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
@@ -91,21 +91,21 @@
           <tr>
           </tr>
         </ng-template>
-        <ng-template pTemplate="body" let-returnRequest let-index="rowIndex">
+        <ng-template let-index="rowIndex" let-returnRequest pTemplate="body">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> </td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
             <td> {{returnRequest.description }} </td>
-            <td> </td>
+            <td></td>
             <td> {{returnRequest.status }} </td>
             <td>
               <div class="d-flex">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click) = "editReturnRequest()">
+                <div (click)="editReturnRequest()" class="edit">
                   <mat-icon>edit</mat-icon>
                 </div>
 

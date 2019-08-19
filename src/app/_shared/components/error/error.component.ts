@@ -33,6 +33,10 @@ export class ErrorComponent implements OnInit {
     return this.form.controls[this.property];
   }
 
+  get formErrors() {
+    return this.form.get('errors') as FormGroup;
+  }
+
   get errors() {
     if (this.control.errors) {
       return Object.entries(this.control.errors);

@@ -11,7 +11,7 @@ import {
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { EnumEntity } from 'src/app/_helpers/entity';
 import { InventoryCountingListService } from './inventory-counting-list.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 
 @Component({

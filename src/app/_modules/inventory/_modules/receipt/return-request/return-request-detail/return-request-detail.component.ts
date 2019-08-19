@@ -24,21 +24,23 @@ export class ReturnRequestDetailComponent implements OnInit {
       total: 2000000,
       type: 3,
     }
-  ]
+  ];
 
   displayReturnRequest: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
 
 
   readURL(event: any) {
-    for(const item of event.srcElement.files) {
+    for (const item of event.srcElement.files) {
       this.fileNameList.push(item.name);
     }
   }
+
   showReturnRequest() {
     this.displayReturnRequest = true;
   }

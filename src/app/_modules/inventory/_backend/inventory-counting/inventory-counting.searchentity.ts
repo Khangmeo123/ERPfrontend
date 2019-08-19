@@ -44,6 +44,6 @@ export class ItemDetailOfCountingSearchEntity extends SearchEntity {
     name: TextFilter = new TextFilter();
     constructor() {
         super();
-    } 
+    }
 }
 
