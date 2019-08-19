@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Entities } from 'src/app/_helpers/entity';
-import { Repository } from 'src/app/_helpers/repository';
+import { Repository } from 'src/app/_repositories/repository';
 import { PostEntity } from './post.entity';
 import { environment } from 'src/environments/environment';
 import { CommentEntity } from './comment.entity';

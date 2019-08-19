@@ -9,11 +9,13 @@ import { Component, Input, OnInit } from '@angular/core';
   ],
 })
 export class ErrorComponent implements OnInit {
-  @Input() property: string;
 
-  form: FormGroup;
+  @Input()
+  public property: string;
 
-  placementValue: string;
+  public form: FormGroup;
+
+  public placementValue: string;
 
   constructor() {
   }
@@ -63,4 +65,3 @@ export class ErrorComponent implements OnInit {
   ngOnInit() {
   }
 }
-
