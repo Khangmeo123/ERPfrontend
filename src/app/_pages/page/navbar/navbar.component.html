@@ -47,7 +47,6 @@
                         display="code"
                         placeholder="{{'general.legalEntity.placeholder' | translate}}"
                         (change)="onChangeLegalEntity($event)"
-                        [clearable]="false"
                         [value]="legalEntityId">
         <ng-template #option let-item="item">
           {{item.name}}

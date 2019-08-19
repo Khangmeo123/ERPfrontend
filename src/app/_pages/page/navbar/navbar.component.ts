@@ -64,7 +64,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     const routeSub: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.legalEntityId) {
         this.legalEntityId = params.legalEntityId;
-        return this.appService.getLegalEntity(params.legalEntityId);
       }
     });
 
@@ -135,14 +134,9 @@ export class NavbarComponent implements OnInit, OnDestroy {
   onChangeLegalEntity(legalEntityId) {
     this.legalEntityId = legalEntityId;
     localStorage.setItem('legalEntityId', legalEntityId);
-    this.router.navigate([window.location.pathname], {
-      queryParams: {
-        legalEntityId,
-      },
-    })
-      .then(() => {
-        // window.location.reload();
-      });
+    if (legalEntityId && this.router.url.indexOf(legalEntityId) < 0) {
+      window.location.href = `${window.location.pathname}?legalEntityId=${legalEntityId}`;
+    }
   }
 
   getLegalEntityList() {
