@@ -135,7 +135,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   onChangeLegalEntity(legalEntityId) {
     this.legalEntityId = legalEntityId;
     localStorage.setItem('legalEntityId', legalEntityId);
-    this.router.navigate([this.router.url], {
+    this.router.navigate([window.location.pathname], {
       queryParams: {
         legalEntityId,
       },

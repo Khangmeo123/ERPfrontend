@@ -1,6 +1,8 @@
 import {
   AfterViewInit,
   Component,
+  ContentChild,
+  ElementRef,
   EventEmitter,
   forwardRef,
   Input,
@@ -9,6 +11,7 @@ import {
   OnInit,
   Output,
   SimpleChanges,
+  TemplateRef,
 } from '@angular/core';
 import { ISelect } from '../ISelect';
 import { Subject, Subscription } from 'rxjs';
@@ -34,9 +37,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() key: string = 'id';
 
-  @Input() display: string = 'name';
-
-  @Input() placeholder = 'Enum List Select';
+  @Input() placeholder: string = 'Enum List Select';
 
   @Input() clearable: boolean = true;
 
@@ -55,6 +56,10 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() disabled: boolean = false;
 
+  @ContentChild('label', {static: false}) label: TemplateRef<ElementRef>;
+
+  @ContentChild('option', {static: false}) option: TemplateRef<ElementRef>;
+
   isOpened: boolean = false;
 
   searchSubject: Subject<string> = new Subject<string>();
@@ -65,24 +70,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   loading: boolean = false;
 
-  @Input() ngModel: any = null;
-
-  @Output() ngModelChange: EventEmitter<any> = new EventEmitter<any>();
-
   constructor() {
-    if (this.searchable) {
-      const searchSubscription: Subscription = this.searchSubject.pipe(
-        debounceTime(400),
-        distinctUntilChanged(),
-      )
-        .subscribe(
-          (event) => {
-            this.search.emit(event);
-            this.loading = true;
-          },
-        );
-      this.subscription.add(searchSubscription);
-    }
   }
 
   @Input()
@@ -98,13 +86,6 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
     this.onChange(value);
   }
 
-  get displayValue() {
-    if (this.selectedItem) {
-      return this.selectedItem[this.display];
-    }
-    return null;
-  }
-
   onChange(event) {
     this.change.emit(event);
   }
@@ -115,6 +96,20 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   ngOnInit() {
     if (this.value) {
       this.selectedItem = this.list.find((item) => item[this.key] === this.value);
+    }
+    if (this.searchable) {
+      const searchSubscription: Subscription = this.searchSubject.pipe(
+        debounceTime(400),
+        distinctUntilChanged(),
+      )
+        .subscribe(
+          (event) => {
+            this.search.emit(event);
+            this.loading = true;
+          },
+        );
+
+      this.subscription.add(searchSubscription);
     }
   }
 
@@ -136,8 +131,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   onSelect(item, event) {
     this.selectedItem = item;
-    this.ngModel = item[this.key];
-    this.onChange(this.ngModel);
+    this.onChange(item[this.key]);
     this.onTouch(event);
     this.isOpened = false;
   }

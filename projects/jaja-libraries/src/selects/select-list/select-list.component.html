@@ -1,16 +1,17 @@
 <div dropdown
-     #dropdown="bs-dropdown"
      [container]="appendTo"
      [(isOpen)]="isOpened"
      class="select enum-list-select"
      [ngClass]="{disabled: disabled}">
-  <input role="button"
-         class="form-control"
-         readonly
-         [placeholder]="placeholder"
-         (click)="toggle()"
-         [value]="displayValue"
-  >
+  <ng-container *ngTemplateOutlet="label; context: selectedItem"></ng-container>
+  <ng-template #label>
+    <input role="button"
+           class="form-control"
+           readonly
+           [placeholder]="placeholder"
+           (click)="toggle()"
+           [value]="selectedItem?.name">
+  </ng-template>
   <i class="pi pi-times" (click)="onClear($event)" *ngIf="clearable"></i>
   <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu">
     <li *ngIf="searchable"
@@ -22,20 +23,25 @@
     </li>
     <li role="menuitem"
         class="loading"
-        *ngIf="loading">
+        *ngIf="loading; else notLoading">
       <nz-spin nzSimple></nz-spin>
     </li>
-    <li role="menuitem"
-        class="empty"
-        *ngIf="list.length === 0">
-      <nz-empty nzNotFoundContent="{{'jaja.selects.empty' | translate}}"></nz-empty>
-    </li>
-    <li role="menuitem"
-        class="dropdown-item"
-        *ngFor="let item of list"
-        (click)="onSelect(item, $event)"
-        [ngClass]="{active: selectedItem === item}">
-      {{item[display]}}
-    </li>
+    <ng-template #notLoading>
+      <li role="menuitem"
+          class="empty"
+          *ngIf="list.length === 0">
+        <nz-empty nzNotFoundContent="{{'jaja.selects.empty' | translate}}"></nz-empty>
+      </li>
+      <li role="menuitem"
+          class="dropdown-item"
+          *ngFor="let item of list"
+          (click)="onSelect(item, $event)"
+          [ngClass]="{active: selectedItem === item}">
+        <ng-container *ngTemplateOutlet="option; context: item"></ng-container>
+        <ng-template #option>
+          {{item?.name}}
+        </ng-template>
+      </li>
+    </ng-template>
   </ul>
 </div>

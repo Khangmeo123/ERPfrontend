@@ -29,11 +29,6 @@ export interface ISelect extends ControlValueAccessor {
   key: string;
 
   /**
-   * Customize data display
-   */
-  display: string;
-
-  /**
    * Select
    */
   placeholder: string;
