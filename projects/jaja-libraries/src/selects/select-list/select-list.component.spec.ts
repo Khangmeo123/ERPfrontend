@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { DropListSelectComponent } from './drop-list-select.component';
+import { SelectListComponent } from './select-list.component';
 
-describe('DropListSelectComponent', () => {
-  let component: DropListSelectComponent;
-  let fixture: ComponentFixture<DropListSelectComponent>;
+describe('EnumListSelectComponent', () => {
+  let component: SelectListComponent;
+  let fixture: ComponentFixture<SelectListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DropListSelectComponent ]
+      declarations: [ SelectListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(DropListSelectComponent);
+    fixture = TestBed.createComponent(SelectListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

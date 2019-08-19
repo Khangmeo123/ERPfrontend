@@ -16,18 +16,18 @@ import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 
 @Component({
-  selector: 'jaja-enum-list-select',
-  templateUrl: './enum-list-select.component.html',
-  styleUrls: ['./enum-list-select.component.scss'],
+  selector: 'jaja-select-list',
+  templateUrl: './select-list.component.html',
+  styleUrls: ['./select-list.component.scss'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => EnumListSelectComponent),
+      useExisting: forwardRef(() => SelectListComponent),
       multi: true,
     },
   ],
 })
-export class EnumListSelectComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ISelect {
+export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ISelect {
   @Input() appendTo: string = null;
 
   @Input() list: any[];
@@ -55,8 +55,6 @@ export class EnumListSelectComponent implements OnInit, AfterViewInit, OnChanges
 
   @Input() disabled: boolean = false;
 
-  @Input() contentClass: any = null;
-
   isOpened: boolean = false;
 
   searchSubject: Subject<string> = new Subject<string>();
@@ -66,6 +64,10 @@ export class EnumListSelectComponent implements OnInit, AfterViewInit, OnChanges
   selectedItem: any = null;
 
   loading: boolean = false;
+
+  @Input() ngModel: any = null;
+
+  @Output() ngModelChange: EventEmitter<any> = new EventEmitter<any>();
 
   constructor() {
     if (this.searchable) {
@@ -83,6 +85,7 @@ export class EnumListSelectComponent implements OnInit, AfterViewInit, OnChanges
     }
   }
 
+  @Input()
   get value() {
     if (this.selectedItem) {
       return this.selectedItem[this.key];
@@ -95,20 +98,32 @@ export class EnumListSelectComponent implements OnInit, AfterViewInit, OnChanges
     this.onChange(value);
   }
 
+  get displayValue() {
+    if (this.selectedItem) {
+      return this.selectedItem[this.display];
+    }
+    return null;
+  }
+
   onChange(event) {
     this.change.emit(event);
   }
-
 
   onTouch(event) {
   }
 
   ngOnInit() {
+    if (this.value) {
+      this.selectedItem = this.list.find((item) => item[this.key] === this.value);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.list) {
       this.loading = false;
+    }
+    if (changes.value || changes.list) {
+      this.selectedItem = this.list.find((item) => item[this.key] === this.value);
     }
   }
 
@@ -121,7 +136,8 @@ export class EnumListSelectComponent implements OnInit, AfterViewInit, OnChanges
 
   onSelect(item, event) {
     this.selectedItem = item;
-    this.onChange(item[this.key]);
+    this.ngModel = item[this.key];
+    this.onChange(this.ngModel);
     this.onTouch(event);
     this.isOpened = false;
   }

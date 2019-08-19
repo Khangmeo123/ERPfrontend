@@ -16,16 +16,19 @@ export class JwtInterceptor implements HttpInterceptor {
   ) {
   }
 
+  static get legalEntityId() {
+    return localStorage.getItem('legalEntityId');
+  }
+
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const currentLang = this.translateService.currentLang;
-
     // add authorization header with jwt token if available
     request = request.clone({
       withCredentials: true,
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Language': currentLang ? currentLang : 'vi',
-        'X-LegalEntity': this.legalEntityId.value,
+        'X-LegalEntity': JwtInterceptor.legalEntityId,
       }),
     });
     return next.handle(request);

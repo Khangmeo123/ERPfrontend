@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subject, Subscription } from 'rxjs';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { AppRepository } from '../_repositories/app.repository';
 import { LegalEntity } from '../_modules/master-data/_backend/legal/legal.entity';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../_helpers/string';
-import { JwtInterceptor } from '../_helpers';
 
 @Injectable({
   providedIn: 'root',
@@ -15,12 +14,9 @@ export class AppService {
 
   isToggled = false;
 
-  public legalEntityId: Subject<string> = new Subject<string>();
-
   public legalEntities: BehaviorSubject<LegalEntity[]> = new BehaviorSubject<LegalEntity[]>([]);
 
-  constructor(private appRepository: AppRepository, private toastrService: ToastrService, private jwtInterceptor: JwtInterceptor) {
-    this.legalEntityId.next(JSON.parse(localStorage.getItem('legalEntityId')) || null);
+  constructor(private appRepository: AppRepository, private toastrService: ToastrService) {
   }
 
   toggleSidebar() {
@@ -51,15 +47,7 @@ export class AppService {
       );
   }
 
-  getLegalEntity(id: string): void {
-    this.appRepository.getLegalEntity(id)
-      .subscribe(
-        (legalEntity: LegalEntity) => {
-          this.jwtInterceptor.legalEntityId.next(legalEntity.id);
-        },
-        () => {
-          this.toastrService.error(translate('general.legalEntity.get.error'));
-        },
-      );
+  getLegalEntity(id: string): Observable<LegalEntity> {
+    return this.appRepository.getLegalEntity(id);
   }
 }

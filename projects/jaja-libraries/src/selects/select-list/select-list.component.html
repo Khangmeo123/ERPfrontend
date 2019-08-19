@@ -6,13 +6,13 @@
      [ngClass]="{disabled: disabled}">
   <input role="button"
          class="form-control"
-         [value]="selectedItem ? selectedItem[display] : null"
          readonly
          [placeholder]="placeholder"
          (click)="toggle()"
+         [value]="displayValue"
   >
   <i class="pi pi-times" (click)="onClear($event)" *ngIf="clearable"></i>
-  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu" [ngClass]="contentClass">
+  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu">
     <li *ngIf="searchable"
         class="menuitem search"
         (click)="$event.stopPropagation()">

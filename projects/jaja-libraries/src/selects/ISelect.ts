@@ -1,5 +1,6 @@
 import { EventEmitter } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
+import { Subject } from 'rxjs';
 
 export interface ISelect extends ControlValueAccessor {
   /**
@@ -16,6 +17,11 @@ export interface ISelect extends ControlValueAccessor {
    * Data source
    */
   list: any[];
+
+  /**
+   * Loading state
+   */
+  loading: boolean;
 
   /**
    * Customize data value
@@ -41,6 +47,11 @@ export interface ISelect extends ControlValueAccessor {
    * Search event emitter for searchable select
    */
   search?: EventEmitter<string>;
+
+  /**
+   *
+   */
+  searchSubject: Subject<string>;
 
   /**
    * Dropdown container append to body or not

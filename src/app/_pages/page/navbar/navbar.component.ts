@@ -19,21 +19,22 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
   ],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
-  languageSelected: LanguageEntity;
+  public languageSelected: LanguageEntity;
 
-  isToggleMenu = false;
+  public isToggleMenu = false;
 
-  languages: LanguageEntity[] = languages;
+  public languages: LanguageEntity[] = languages;
 
-  @Output() changeToggle = new EventEmitter();
+  @Output()
+  public changeToggle = new EventEmitter();
 
-  isCollapsed = true;
+  public isCollapsed = true;
 
-  isPinned = false;
+  public isPinned = false;
 
-  isToggleFlags = false;
+  public isToggleFlags = false;
 
-  isOpened = false;
+  public isOpened = false;
 
   public user: UserEntity = null;
 
@@ -52,10 +53,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   ) {
     this.languageSelected = languages[0];
 
-    const legalEntitySub: Subscription = this.appService.legalEntityId.subscribe((legalEntityId: string) => {
-      this.legalEntityId = legalEntityId;
-    });
-
     const legalEntitiesSub: Subscription = this.appService.legalEntities.subscribe((legalEntities: LegalEntity[]) => {
       this.legalEntities = legalEntities;
     });
@@ -66,6 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
     const routeSub: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.legalEntityId) {
+        this.legalEntityId = params.legalEntityId;
         return this.appService.getLegalEntity(params.legalEntityId);
       }
     });
@@ -73,7 +71,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.subscription
       .add(routeSub)
       .add(userSub)
-      .add(legalEntitySub)
       .add(legalEntitiesSub);
   }
 
@@ -136,14 +133,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   onChangeLegalEntity(legalEntityId) {
-    this.appService.legalEntityId.next(legalEntityId);
+    this.legalEntityId = legalEntityId;
+    localStorage.setItem('legalEntityId', legalEntityId);
     this.router.navigate([this.router.url], {
       queryParams: {
         legalEntityId,
       },
     })
       .then(() => {
-        window.location.reload();
+        // window.location.reload();
       });
   }
 

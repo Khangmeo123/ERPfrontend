@@ -42,11 +42,15 @@
   <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
        style="margin-right: 10px">
     <ul class="navbar-nav d-flex align-items-center">
-      <jaja-enum-list-select [list]="legalEntities"
-                             key="id"
-                             display="name"
-                             placeholder="{{'general.legalEntity.placeholder' | translate}}"
-      ></jaja-enum-list-select>
+      <jaja-select-list *ngIf="legalEntities?.length"
+                        [list]="legalEntities"
+                        key="id"
+                        display="name"
+                        placeholder="{{'general.legalEntity.placeholder' | translate}}"
+                        (change)="onChangeLegalEntity($event)"
+                        [clearable]="false"
+                        [value]="legalEntityId"
+      ></jaja-select-list>
       <li class="nav-item">
         <a class="btn nav-link">
           <mat-icon>notifications_none</mat-icon>
