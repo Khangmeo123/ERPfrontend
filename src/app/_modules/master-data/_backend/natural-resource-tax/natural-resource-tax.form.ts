@@ -1,4 +1,4 @@
-import { FormModel } from './../../../../_helpers/form-model';
+import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { checkLength, requiredField } from 'src/app/_helpers';
 import { SpecialConsumptionTaxEntity } from '../special-consumption-tax/special-consumption-tax.entity';

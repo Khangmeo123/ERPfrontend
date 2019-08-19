@@ -11,7 +11,7 @@ import {
 import {CodeFormulaDetailService} from './code-formula-detail.service';
 import {Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {GeneralService} from '../../../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../../../_services/general-service.service';
 import {ItemSearchEntity} from '../../../../../_backend/item/item.searchentity';
 import {SplitRuleContentSearchEntity} from '../../../../../_backend/code-formula/code-formula.search-entity';
 import {translate} from '../../../../../../../_helpers/string';

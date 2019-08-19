@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { SobEntity } from '../../../../_backend/sob/sob.entity';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 import { PaymentMethodService } from './payment-method.service';
 import { Subscription } from 'rxjs';
 import { Entities } from '../../../../../../_helpers/entity';

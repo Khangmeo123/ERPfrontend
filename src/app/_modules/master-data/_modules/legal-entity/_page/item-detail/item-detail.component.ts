@@ -7,7 +7,7 @@ import { FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { LegalItemDetailService } from './item-detail.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Subject, Subscription } from 'rxjs';
 import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.entity';

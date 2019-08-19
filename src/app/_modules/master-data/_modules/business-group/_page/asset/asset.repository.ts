@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Repository} from 'src/app/_helpers/repository';
+import {Repository} from 'src/app/_repositories/repository';
 import {Observable} from 'rxjs';
 import {AssetEntity} from 'src/app/_modules/master-data/_backend/asset/asset.entity';
 import {AssetSearchEntity} from 'src/app/_modules/master-data/_backend/asset/asset.searchentity';

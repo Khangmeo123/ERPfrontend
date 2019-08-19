@@ -1,4 +1,4 @@
-import { FormModel } from './../../../../_helpers/form-model';
+import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, Validators, FormGroup, AbstractControl, FormArray } from '@angular/forms';
 import { requiredField, checkLength } from 'src/app/_helpers';
 import { BusinessGroupEntity } from './business-group.entity';

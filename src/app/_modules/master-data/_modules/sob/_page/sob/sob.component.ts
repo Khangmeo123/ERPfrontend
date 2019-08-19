@@ -3,7 +3,7 @@ import { SobService } from './sob.service';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 import { BookmarkService } from '../../../../../../_services';
 import { Router } from '@angular/router';
 import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';

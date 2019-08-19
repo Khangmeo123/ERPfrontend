@@ -8,7 +8,7 @@ import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity
 import { LegalEntity } from '../../../../_backend/legal/legal.entity';
 import { FormGroup } from '@angular/forms';
 import { Subject, Subscription } from 'rxjs';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { SobSearchEntity } from 'src/app/_modules/master-data/_backend/sob/sob.searchentity';
 import { SobEntity } from 'src/app/_modules/master-data/_backend/sob/sob.entity';
 import { translate } from 'src/app/_helpers/string';

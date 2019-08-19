@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Repository} from 'src/app/_helpers/repository';
+import {Repository} from 'src/app/_repositories/repository';
 import {Observable} from 'rxjs';
 import {BankEntity} from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 import {BankSearchEntity} from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';

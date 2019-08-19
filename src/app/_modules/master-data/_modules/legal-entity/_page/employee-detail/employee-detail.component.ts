@@ -4,7 +4,7 @@ import { FormGroup } from '@angular/forms';
 import { EmployeeDetailOfLegalEntity } from 'src/app/_modules/master-data/_backend/legal-employee-detail/legal-employee-detail.entity';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmployeeDetailService } from './employee-detail.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { ProvinceEntity } from 'src/app/_modules/master-data/_backend/province/province.entity';
 import { ProvinceSearchEntity } from 'src/app/_modules/master-data/_backend/province/province.searchentity';
 import { BankSearchEntity } from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';

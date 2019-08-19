@@ -5,7 +5,7 @@ import { CurrencySearchEntity } from 'src/app/_modules/master-data/_backend/curr
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { CurrencyService } from './currency.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { translate } from 'src/app/_helpers/string';

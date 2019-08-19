@@ -5,7 +5,7 @@ import { UomEntity } from 'src/app/_modules/master-data/_backend/uom/uom.entity'
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { UomService } from './uom.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { translate } from 'src/app/_helpers/string';

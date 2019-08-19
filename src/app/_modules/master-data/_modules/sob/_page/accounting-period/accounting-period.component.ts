@@ -6,7 +6,7 @@ import { SobSearchEntity } from '../../../../_backend/sob/sob.searchentity';
 import { FormControl, FormGroup } from '@angular/forms';
 import { CoaEntity } from '../../../../_backend/coa/coa.entity';
 import { CoaSearchEntity } from '../../../../_backend/coa/coa.searchentity';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 import { Entities } from '../../../../../../_helpers/entity';
 import { AccountingPeriodEntity } from '../../../../_backend/accounting-period/accounting-period.entity';
 import { AccountingPeriodSearchEntity } from '../../../../_backend/accounting-period/accounting-period.searchentity';

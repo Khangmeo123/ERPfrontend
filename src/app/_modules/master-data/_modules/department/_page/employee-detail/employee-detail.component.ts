@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 import { Subscription, Subject } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { DepartmentEmployeeDetailEntity } from 'src/app/_modules/master-data/_backend/department-employee-detail/department-employee-detail.entity';

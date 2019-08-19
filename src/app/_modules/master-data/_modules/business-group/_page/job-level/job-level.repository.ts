@@ -1,7 +1,7 @@
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Repository } from 'src/app/_helpers/repository';
+import { Repository } from 'src/app/_repositories/repository';
 import { Observable } from 'rxjs';
 import { JobLevelEntity } from 'src/app/_modules/master-data/_backend/job-level/job-level.entity';
 import { JobLevelSearchEntity } from 'src/app/_modules/master-data/_backend/job-level/job-level.searchentity';

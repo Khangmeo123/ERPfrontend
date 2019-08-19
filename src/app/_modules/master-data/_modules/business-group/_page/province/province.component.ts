@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
 import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
 import {ProvinceEntity} from '../../../../_backend/province/province.entity';
 import {ProvinceSearchEntity} from '../../../../_backend/province/province.searchentity';
-import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../../_services/general-service.service';
 import {ToastrService} from 'ngx-toastr';
 import {Subscription} from 'rxjs';
 import {ProvinceService} from './province.service';

@@ -7,7 +7,7 @@ import { Entities } from '../../../../../../_helpers/entity';
 import { LegalSearchEntity } from '../../../../_backend/legal/legal.searchentity';
 import { BinLocationSearchEntity } from '../../../../_backend/bin-location/bin-location.search-entity';
 import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 
 @Component({
   selector: 'app-bin-location',

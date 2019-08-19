@@ -1,4 +1,4 @@
-import { Repository } from 'src/app/_helpers/repository';
+import { Repository } from 'src/app/_repositories/repository';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { Injectable } from '@angular/core';
@@ -119,4 +119,4 @@ export class LegalSupplierDetailRepository extends Repository{
                 }),
             );
     }
-} 
+}

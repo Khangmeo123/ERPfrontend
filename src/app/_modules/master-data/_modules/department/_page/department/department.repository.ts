@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
-import { Repository } from '../../../../../../_helpers/repository';
+import { Repository } from '../../../../../../_repositories/repository';
 import { environment } from '../../../../../../../environments/environment';
 import { DepartmentSearchEntity } from '../../../../_backend/department/department.search-entity';
 import { DepartmentEntity } from '../../../../_backend/department/department.entity';

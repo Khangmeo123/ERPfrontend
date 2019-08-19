@@ -1,4 +1,4 @@
-import { TextFilter } from './../../../../_shared/models/filters/TextFilter';
+import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 
 export class AssetSearchEntity extends SearchEntity {

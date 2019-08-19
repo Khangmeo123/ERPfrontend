@@ -10,7 +10,7 @@ import {ProjectOrganizationEntity} from '../../../../_backend/project-organizati
 import {ProjectOrganizationSearchEntity} from '../../../../_backend/project-organization/project-organization.search-entity';
 import {ProjectOrganizationService} from './project-organization.service';
 import {DepartmentService} from '../department/department.service';
-import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../../_services/general-service.service';
 import {EmployeeEntity} from '../../../../_backend/employee/employee.entity';
 import {EmployeeSearchEntity} from '../../../../_backend/employee/employee.searchentity';
 import {Router} from '@angular/router';

@@ -6,7 +6,7 @@ import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.enti
 import { EnumEntity } from 'src/app/_helpers/entity';
 import { Subscription, Subject } from 'rxjs';
 import { ItemListService } from './item-list.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { UomSearchEntity } from 'src/app/_modules/master-data/_backend/uom/uom.searchentity';
 import { UomEntity } from './../../../../../_backend/uom/uom.entity';

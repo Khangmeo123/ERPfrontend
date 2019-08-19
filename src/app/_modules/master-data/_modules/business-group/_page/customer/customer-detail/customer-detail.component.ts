@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs';
 import { EnumEntity } from 'src/app/_helpers/entity';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CustomerDetailService } from './customer-detail.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 
 @Component({
   selector: 'app-customer-detail',

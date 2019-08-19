@@ -7,7 +7,7 @@ import {PaginationModel} from 'src/app/_shared/modules/pagination/pagination.mod
 import {FormGroup} from '@angular/forms';
 import {Subscription} from 'rxjs';
 import {BankSearchEntity} from 'src/app/_modules/master-data/_backend/bank/bank.searchentity';
-import {GeneralService} from 'src/app/_helpers/general-service.service';
+import {GeneralService} from 'src/app/_services/general-service.service';
 import {BankService} from './bank.service';
 import {BankEntity} from 'src/app/_modules/master-data/_backend/bank/bank.entity';
 import {translate} from 'src/app/_helpers/string';

@@ -6,7 +6,7 @@ export class SupplierGroupSearchEntity extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
 
-    
+
     constructor(supplierGroupSearchEntity?: any) {
         super(supplierGroupSearchEntity);
     }

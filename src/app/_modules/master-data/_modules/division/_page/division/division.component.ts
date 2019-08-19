@@ -8,7 +8,7 @@ import { DivisionService } from './division.service';
 import { DivisionSearchEntity } from 'src/app/_modules/master-data/_backend/division/division.searchentity';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { BookmarkService } from 'src/app/_services';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { translate } from 'src/app/_helpers/string';
 import { DivisionEntity } from 'src/app/_modules/master-data/_backend/division/division.entity';
 

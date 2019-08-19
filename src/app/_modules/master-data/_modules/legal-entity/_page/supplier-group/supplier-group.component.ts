@@ -9,7 +9,7 @@ import {SupplierSearchEntity} from '../../../../_backend/supplier/supplier.searc
 import {BookmarkService} from '../../../../../../_services';
 import {Router} from '@angular/router';
 import {SupplierGroupService} from './supplier-group.service';
-import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../../_services/general-service.service';
 import {LegalEntity} from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import {translate} from 'src/app/_helpers/string';

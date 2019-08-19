@@ -1,4 +1,4 @@
-import { EnumEntity } from './../../../../../../../_helpers/entity';
+import { EnumEntity } from '../../../../../../../_helpers/entity';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { Router } from '@angular/router';
@@ -10,7 +10,7 @@ import { BookmarkService } from 'src/app/_services';
 import { EmployeeListService } from './employee-list.service';
 import { environment } from 'src/environments/environment';
 import { FormControl, FormGroup } from '@angular/forms';
-import { GeneralService } from '../../../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../../../_services/general-service.service';
 import { PasswordEntity } from '../../../../../_backend/password/password.entity';
 
 @Component({

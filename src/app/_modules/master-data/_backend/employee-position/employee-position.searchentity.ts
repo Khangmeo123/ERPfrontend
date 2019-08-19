@@ -8,7 +8,7 @@ export class EmployeePositionSearchEntity extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
 
-    
+
     constructor(employeePositionSearchEntity?: any) {
         super(employeePositionSearchEntity);
     }

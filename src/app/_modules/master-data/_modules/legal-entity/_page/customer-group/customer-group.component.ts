@@ -10,7 +10,7 @@ import { Subject, Subscription } from 'rxjs';
 import { LegalEntity } from 'src/app/_modules/master-data/_backend/legal/legal.entity';
 import { LegalSearchEntity } from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';
 import { CustomerGroupService } from './customer-group.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { CustomerEntity } from 'src/app/_modules/master-data/_backend/customer/customer.entity';
 import { CustomerSearchEntity } from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
 import { environment } from 'src/environments/environment.prod';

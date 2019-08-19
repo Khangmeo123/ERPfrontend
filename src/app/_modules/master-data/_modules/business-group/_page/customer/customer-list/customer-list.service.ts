@@ -1,4 +1,4 @@
-import { EnumEntity } from './../../../../../../../_helpers/entity';
+import { EnumEntity } from '../../../../../../../_helpers/entity';
 import { ToastrService } from 'ngx-toastr';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, forkJoin } from 'rxjs';
