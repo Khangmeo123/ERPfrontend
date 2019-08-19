@@ -19,9 +19,8 @@ import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import {
     BinLocationOfInventoryCountingEntity,
     ItemDetailOfCountingEntity,
-    SerialNumberOfInventoryCountingEntity,
-    BatchOfInventoryCountingEntity,
     InventoryCountingEntity,
+    CounterContentByItemDetailEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { InventoryCountingPendingRepository } from './inventory-counting-pending.repository';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
@@ -35,8 +34,8 @@ export class InventoryCountingPendingService {
     public inventoryOrganizationList: BehaviorSubject<Entities>;
     public unitOfMeasureList: BehaviorSubject<Entities>;
     public binLocationList: BehaviorSubject<BinLocationOfInventoryCountingEntity[]>;
-    public serialNumberList: BehaviorSubject<SerialNumberOfInventoryCountingEntity[]>;
-    public batchList: BehaviorSubject<SerialNumberOfInventoryCountingEntity[]>;
+    public serialNumberList: BehaviorSubject<CounterContentByItemDetailEntity[]>;
+    public batchList: BehaviorSubject<CounterContentByItemDetailEntity[]>;
     public inventoryCounterList: BehaviorSubject<any[]>;
     constructor(
         private fb: FormBuilder,
@@ -98,8 +97,8 @@ export class InventoryCountingPendingService {
 
 
     // inventoryCounterContents:
-    getListBinLocation(inventoryOrganizationId: string, inventoryCountingContentId: string) {
-        this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, inventoryCountingContentId).subscribe(res => {
+    getListBinLocation(inventoryOrganizationId: string, itemDetailId: string) {
+        this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, itemDetailId).subscribe(res => {
             if (res) {
                 this.binLocationList.next(res);
             }
@@ -127,9 +126,29 @@ export class InventoryCountingPendingService {
             if (res) {
                 const currentForm = this.inventoryCountingForm.getValue();
                 const currentArray = currentForm.get('inventoryCounterContents') as FormArray;
-                const inventoryCounterContent = this.fb.group(new InventoryCounterContentForm(res));
-                currentArray.push(inventoryCounterContent);
+                for (const control of currentArray.controls) {
+                    if (control instanceof FormGroup) {
+                        if (control.value.itemDetailId === res.itemDetailId) {
+                            control.patchValue(res);
+                        }
+                    }
+                }
+                this.toastrService.error('Hệ thống cập nhật thành công!');
                 this.inventoryCountingForm.next(currentForm);
+            }
+        }, err => {
+            if (err) {
+                this.toastrService.error('Quét QR xảy ra lỗi!');
+                this.generalService.alertSound();
+            }
+        });
+    }
+
+    resetInventoryCounterContent(inventoryCountingId: string, inventoryCountingForm: FormGroup) {
+        const listInventoryCounterIds = inventoryCountingForm.value.inventoryCounterContents.map(item => item.id);
+        this.inventoryCountingRepository.resetInventoryCounterContent(inventoryCountingId, listInventoryCounterIds).subscribe(res => {
+            if (res) {
+                this.getDetail(inventoryCountingId);
             }
         });
     }
@@ -173,7 +192,7 @@ export class InventoryCountingPendingService {
         });
     }
 
-    checkAllSerialNumber(checked: boolean, serialNumbeList: SerialNumberOfInventoryCountingEntity[]) {
+    checkAllSerialNumber(checked: boolean, serialNumbeList: CounterContentByItemDetailEntity[]) {
         serialNumbeList.forEach(item => {
             item.isSelected = checked;
         });
@@ -237,7 +256,7 @@ export class InventoryCountingPendingService {
         });
     }
 
-    updateBatch(batch: BatchOfInventoryCountingEntity) {
+    updateBatch(batch: CounterContentByItemDetailEntity) {
         this.inventoryCountingRepository.updateBatch(batch).subscribe(res => {
             if (res) {
                 const currentList = this.batchList.getValue();

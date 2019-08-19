@@ -7,8 +7,7 @@ import {
 import {
   UnitOfMeasureOfCountingEntity,
   BinLocationOfInventoryCountingEntity,
-  SerialNumberOfInventoryCountingEntity,
-  BatchOfInventoryCountingEntity,
+  CounterContentByItemDetailEntity,
 } from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Subscription, Subject } from 'rxjs';
@@ -28,6 +27,7 @@ import {
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { InventoryCountingPendingService } from './inventory-counting-pending.service';
 import { ColumnEntity } from 'src/app/_helpers/entity';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-inventory-counting-pending',
@@ -56,19 +56,20 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   activeScan: boolean = false;
   inventoryCounters: any[] = [];
   inventoryCounterList: any[];
+  qrCodeOutSide: string;
   // serialNumber:
   serialNumber: string;
   serialNumberSearchEntity: SerialNumberSearchEntity = new SerialNumberSearchEntity();
-  serialNumberList: SerialNumberOfInventoryCountingEntity[];
-  linkSerialNumberTemplate: string = null;
-  linkSerialNumberExport: string = null;
+  serialNumberList: CounterContentByItemDetailEntity[];
+  linkSerialNumberTemplate: string = environment.apiUrlInv +
+    'inventory/counting/inventory-counting/inventory-counting-pending/serial-number/download-template';
+  linkSerialNumberExport: string = environment.apiUrlInv +
+    'inventory/counting/inventory-counting/inventory-counting-pending/serial-number/export';
 
   // batch:
   batchCode: string;
   batchSearchEntity: BatchSearchEntity = new BatchSearchEntity();
-  batchList: BatchOfInventoryCountingEntity[];
-  linkBatchTemplate: string;
-  linkBatchExport: string;
+  batchList: CounterContentByItemDetailEntity[];
 
   // inventoryOrganization:
   inventoryOrganizationIds: InventoryOrganizationOfCountingEntity[];
@@ -225,10 +226,6 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     this.router.navigate(['/inventory/receipt/goods-receipt/goods-receipt-list']);
   }
 
-  delete() {
-
-  }
-
   save() {
     if (!this.inventoryCountingForm.valid) {
       this.generalService.validateAllFormFields(this.inventoryCountingForm);
@@ -240,13 +237,14 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   }
 
   // inventoryCouterContents:
-  openBinLocation(inventoryCountingContent: string) {
+  openBinLocation(itemDetailId: string) {
     this.displayBinLocation = true;
-    this.inventoryCountingService.getListBinLocation(this.inventoryOrganizationId, inventoryCountingContent);
+    this.inventoryCountingService.getListBinLocation(this.inventoryOrganizationId, itemDetailId);
   }
 
   inputCodeOutside(event) {
     this.inventoryCountingService.analyzeCodeOutSide(this.inventoryCountingId, event);
+    this.qrCodeOutSide = null;
   }
 
   clearUnitOfMeasure(table: any) {
@@ -308,7 +306,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     this.batchCode = null;
   }
 
-  updateBatch(batch: BatchOfInventoryCountingEntity) {
+  updateBatch(batch: CounterContentByItemDetailEntity) {
     this.inventoryCountingService.updateBatch(batch);
   }
 
@@ -316,6 +314,10 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   showInventoryCounterDetail(item: any) {
     this.displayInventoryCounter = true;
     this.inventoryCountingService.getListInventoryCounter(item.id);
+  }
+
+  resetInventoryCounterContent() {
+    this.inventoryCountingService.resetInventoryCounterContent(this.inventoryCountingId, this.inventoryCountingForm);
   }
 
   // inventoryOrganization:

@@ -174,7 +174,7 @@
 			"itemCode": "",
 			"mfrDate": "",
 			"qrCode": "",
-			"serial": "",
+			"serial": "Serial",
 			"title": ""
 		},
 		"title": "",
@@ -341,7 +341,7 @@
 			"receiptedDate": "Ngày thực hiện",
 			"shipper": "Người giao hàng",
 			"tab1": {
-				"Serial": "",
+				"serial": "Serial",
 				"amount": "Số lương",
 				"batches": "Lô",
 				"discount": "Chiết khấu",
@@ -968,7 +968,7 @@
 			"receiptedDate": "Ngày thực hiện",
 			"shipper": "Người giao hàng",
 			"tab1": {
-				"Serial": "",
+				"serial": "Serial",
 				"amount": "",
 				"batches": "",
 				"discount": "",
@@ -1083,7 +1083,7 @@
 		"receiptedDate": "Ngày thực hiện",
 		"receiver": "Người nhận hàng",
 		"tab1": {
-			"Serial": "",
+			"serial": "Serial",
 			"amount": "Số lượng",
 			"batches": "Lô",
 			"discount": "Chiết khấu",
@@ -1182,7 +1182,7 @@
 		"supplierCode": "Mã nhà cung cấp",
 		"supplierName": "Tên nhà cung cấp",
 		"tab1": {
-			"Serial": "",
+			"serial": "Serial",
 			"actualReceive": "",
 			"amount": "Số lượng",
 			"batches": "Lô",
@@ -1272,7 +1272,7 @@
 			"receiptedDate": "Ngày thực hiện",
 			"shipper": "Người giao hàng",
 			"tab1": {
-				"Serial": "",
+				"serial": "Serial",
 				"amount": "",
 				"batches": "",
 				"discount": "",
@@ -1557,7 +1557,7 @@
 				"customerName": ""
 			},
 			"tab1": {
-				"Serial": "",
+				"serial": "Serial",
 				"actualQuantity": "",
 				"amount": "",
 				"batches": "",
@@ -1933,7 +1933,7 @@
 				"documentNo": ""
 			},
 			"tab1": {
-				"Serial": "",
+				"serial": "Serial",
 				"amount": "",
 				"batches": "",
 				"discount": "",
@@ -1994,7 +1994,7 @@
 				"documentNo": "Số chứng từ"
 			},
 			"tab1": {
-				"Serial": "",
+				"serial": "Serial",
 				"amount": "Số lượng",
 				"batches": "Lô",
 				"discount": "Chiết khấu",

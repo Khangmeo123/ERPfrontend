@@ -1,4 +1,7 @@
-import { BatchOfInventoryCountingEntity, InventoryCounterContents } from './../../../../_backend/inventory-counting/inventory-counting.entity';
+import {
+    InventoryCounterContents,
+    CounterContentByItemDetailEntity,
+} from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_helpers/repository';
 import { environment } from 'src/environments/environment';
@@ -16,7 +19,6 @@ import {
     ItemDetailOfCountingEntity,
     UnitOfMeasureOfCountingEntity,
     BinLocationOfInventoryCountingEntity,
-    SerialNumberOfInventoryCountingEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { Entities } from 'src/app/_helpers/entity';
 import { map } from 'rxjs/operators';
@@ -50,19 +52,19 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     getListInventoryCounter(id: string) {
-        return this.http.post<SerialNumberOfInventoryCountingEntity[]>(this.apiUrl + '/serial-number/inventory-counting-pending',
+        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/serial-number/inventory-counting-pending',
             JSON.stringify({ inventoryCounterId: id }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return r.body.map((item) => {
-                        return new SerialNumberOfInventoryCountingEntity(item);
+                        return new CounterContentByItemDetailEntity(item);
                     });
                 }),
             );
     }
 
     analyzeCodeOutSide(id: string, code: string) {
-        return this.http.post<InventoryCounterContents>(this.apiUrl + '/serial-number/analyze-qr-code',
+        return this.http.post<InventoryCounterContents>(this.apiUrl + '/scan-qr-code',
             JSON.stringify({ inventoryCountingId: id, qrCode: code }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
@@ -71,25 +73,33 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
+    resetInventoryCounterContent(id: string, ids: string[]) {
+        return this.http.post<any>(this.apiUrl + '/reset-result',
+            JSON.stringify({ inventoryCountingId: id, inventoryCountingContentIds: ids }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => r.body),
+            );
+    }
+
     // serialNumber:
     getListSerialNumber(id: string, icId: string) {
-        return this.http.post<SerialNumberOfInventoryCountingEntity[]>(this.apiUrl + '/serial-number/inventory-counting-pending',
+        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/serial-number/list-counter-content-by-item-detail',
             JSON.stringify({ itemDetailId: id, inventoryCountingId: icId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return r.body.map((item) => {
-                        return new SerialNumberOfInventoryCountingEntity(item);
+                        return new CounterContentByItemDetailEntity(item);
                     });
                 }),
             );
     }
 
     analyzeSerialCode(id: string, code: string) {
-        return this.http.post<SerialNumberOfInventoryCountingEntity>(this.apiUrl + '/serial-number/analyze-qr-code',
+        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/scan-qr-code-serial-number',
             JSON.stringify({ itemDetailId: id, qrCode: code }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    return new SerialNumberOfInventoryCountingEntity(r.body);
+                    return new CounterContentByItemDetailEntity(r.body);
                 }),
             );
     }
@@ -103,7 +113,7 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     deleteMultipleSerialNumber(serialNumberList: any[]) {
-        return this.http.post<any>(this.apiUrl + '/serial-number/analyze-qr-code',
+        return this.http.post<any>(this.apiUrl + '/serial-number/import',
             JSON.stringify(serialNumberList),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
@@ -125,23 +135,23 @@ export class InventoryCountingPendingRepository extends Repository {
 
     // batch:
     getBatchList(id: string, icId: string) {
-        return this.http.post<BatchOfInventoryCountingEntity[]>(this.apiUrl + '/batch/inventory-counting-pending',
+        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/batch/list-counter-content-by-item-detail',
             JSON.stringify({ itemDetailId: id, inventoryCountingId: icId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return r.body.map((item) => {
-                        return new BatchOfInventoryCountingEntity(item);
+                        return new CounterContentByItemDetailEntity(item);
                     });
                 }),
             );
     }
 
     analyzeBatchCode(id: string, code: string) {
-        return this.http.post<BatchOfInventoryCountingEntity>(this.apiUrl + '/batch/analyze-qr-code',
+        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/scan-qr-code-batch',
             JSON.stringify({ itemDetailId: id, qrCode: code }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    return new BatchOfInventoryCountingEntity(r.body);
+                    return new CounterContentByItemDetailEntity(r.body);
                 }),
             );
     }
@@ -155,18 +165,18 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     updateBatch(batch: any) {
-        return this.http.post<BatchOfInventoryCountingEntity>(this.apiUrl + '/batch/update',
+        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/batch/update',
             JSON.stringify(batch),
             { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => new BatchOfInventoryCountingEntity(r.body)),
+                map(r => new CounterContentByItemDetailEntity(r.body)),
             );
     }
 
     // binlocation:
-    getListBinLocation(ioId: string, iccId: string) {
-        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list/bin-location', JSON.stringify({
+    getListBinLocation(ioId: string, idId: string) {
+        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list-bin-location', JSON.stringify({
             inventoryOrganizationId: ioId,
-            inventoryCountingContentId: iccId,
+            itemDetailId: idId,
         }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
@@ -226,7 +236,7 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail',
+        return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure',
             JSON.stringify(unitOfMeasureOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {

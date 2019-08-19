@@ -1,4 +1,5 @@
 import { Entity } from 'src/app/_helpers/entity';
+import { extend } from 'webdriver-js-extender';
 
 export class InventoryCountingEntity extends Entity {
     id: string;
@@ -103,46 +104,20 @@ export class UnitOfMeasureOfCountingEntity extends Entity {
     }
 }
 
-export class SerialNumberOfInventoryCountingEntity extends Entity {
+export class CounterContentByItemDetailEntity extends Entity {
     inventoryCounterId: string;
     itemDetailId: string;
-    itemDetailName: string;
     itemDetailCode: string;
-    mfrSerialNumber: string;
+    itemDetailName: string;
+    itemCode: string;
     serialNumber: string;
-    lotNumber: string;
-    quantity: number;
-    expirationDate: string;
-    mfrDate: string;
-    admissionDate: string;
-    mfrWarrantyStart: string;
-    mfrWarrantyEnd: string;
-    details: string;
     qrCode: string;
+    quantity: number;
+    mfrDate: string;
+    mfrExpiryDate: string;
 
-    constructor(serialNumberOfInventoryCountingEntity?) {
-        super(serialNumberOfInventoryCountingEntity);
+    constructor(counterContentByItemDetailEntity?) {
+        super(counterContentByItemDetailEntity);
     }
 }
 
-export class BatchOfInventoryCountingEntity extends Entity {
-    inventoryCounterId: string;
-    itemDetailId: string;
-    itemDetailName: string;
-    itemDetailCode: string;
-    mfrSerialNumber: string;
-    serialNumber: string;
-    lotNumber: string;
-    quantity: number;
-    expirationDate: string;
-    mfrDate: string;
-    admissionDate: string;
-    mfrWarrantyStart: string;
-    mfrWarrantyEnd: string;
-    details: string;
-    qrCode: string;
-
-    constructor(batchOfInventoryCountingEntity?) {
-        super(batchOfInventoryCountingEntity);
-    }
-}

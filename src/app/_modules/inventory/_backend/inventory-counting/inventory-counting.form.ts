@@ -58,8 +58,8 @@ export class InventoryCounterContentForm extends FormModel {
     itemDetailUnitOfMeasureId = new FormControl(null);
     binLocationId = new FormControl(null);
     binLocationCode = new FormControl(null);
-    quantityOnDocumentDate = new FormControl(null);
-
+    quantity = new FormControl(null);
+    managementType = new FormControl(null);
     constructor(inventoryCounterContentForm?: any) {
         super();
         this.mapData(inventoryCounterContentForm);
