@@ -6398,6 +6398,10 @@ istanbul-reports@^2.2.4:
   dependencies:
     handlebars "^4.1.2"
 
+"jaja-libraries@link:projects/jaja-libraries":
+  version "0.0.0"
+  uid ""
+
 jaja.vn-angular-confirmation-popover@^4.2.3:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/jaja.vn-angular-confirmation-popover/-/jaja.vn-angular-confirmation-popover-4.2.3.tgz#45f8c067a6d47846181791573f9d4e3e4a254859"

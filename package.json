@@ -13,7 +13,7 @@
     "extract": "ngx-translate-extract --input ./src --output ./src/assets/i18n/en.json ./src/assets/i18n/vi.json --clean --sort --format namespaced-json --marker translate-cli.ts",
     "translate": "ts-node ./translate-cli.ts translate",
     "translate-general": "ts-node ./translate-cli.ts translate general",
-    "build-lib": "ng-packagr -p projects/jaja/package.json"
+    "build-lib": "ng-packagr -p projects/jaja-libraries/package.json"
   },
   "private": true,
   "dependencies": {
@@ -55,7 +55,8 @@
     "quill": "^1.3.6",
     "rxjs": "~6.4.0",
     "tslib": "^1.9.0",
-    "zone.js": "~0.9.1"
+    "zone.js": "~0.9.1",
+    "jaja-libraries": "link:projects/jaja-libraries"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.800.0",
