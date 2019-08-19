@@ -1,4 +1,4 @@
-import { Repository } from '../_helpers/repository';
+import { Repository } from './repository';
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { UserEntity } from '../_helpers/entity';
