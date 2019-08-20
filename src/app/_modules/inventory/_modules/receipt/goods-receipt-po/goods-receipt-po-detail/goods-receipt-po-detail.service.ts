@@ -26,6 +26,8 @@ import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';
+import { UploadFile } from 'ng-zorro-antd';
+import { FileAttachmentEntity } from '../../../../_backend/file-attachment/file-attachment.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -296,4 +298,22 @@ export class GoodsReceiptPoDetailService {
     currentFormGroup.setControl('goodsReceiptPOContents', newFormArray);
     this.goodsReceiptPOForm.next(currentFormGroup);
   }
+
+  uploadFiles = (files: UploadFile[]) => {
+    return new Promise<FileAttachmentEntity[]>((resolve, reject) => {
+      return this.goodsReceiptPODetailRepository.uploadFiles(files)
+        .subscribe(
+          (fileAttachments: FileAttachmentEntity[]) => {
+            debugger
+            const currentForm: FormGroup = this.goodsReceiptPOForm.getValue();
+            currentForm.setControl('fileAttachments', new FormArray(
+              fileAttachments.map((fileAttachment: FileAttachmentEntity) => {
+                return this.fb.group(fileAttachment);
+              }),
+            ));
+            this.goodsReceiptPOForm.next(currentForm);
+          },
+        );
+    });
+  };
 }

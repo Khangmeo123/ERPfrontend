@@ -486,31 +486,28 @@
             </div>
           </mat-tab>
           <mat-tab label="{{'goodsReceiptPODetail.tab2.title' | translate}}">
-            <div class="tab-upload">
-              <div class="form-upload-file d-flex">
-                <div class="pt-3 upload-btn-wrapper">
-                  <button class="btn btn-labeled btn-import" (click)="files.click()">
-                    <span class="btn-label">
-                      <i class="material-icons">attach_file</i>
-                    </span>
-                    <span class="button-label">
-                      {{'general.button.attachFile' | translate}}
-                    </span>
-                  </button>
-                  <input #files (change)="readURL($event)" multiple type="file"/>
-                </div>
-                <div class="results d-flex align-items-center">
-                  <div *ngFor="let name of filenameList" class="results-item d-flex align-items-center mr-3">
-                    <div class="results-item-name">
-                      <span class="icon-upload d-flex align-items-center mr-1">
-                        <i class="material-icons">attach_file</i>
-                      </span>
-                      <span>{{name}}</span>
-                    </div>
-                    <span class="close-attach align-items-center"><i class="material-icons">close</i></span>
-                  </div>
-                </div>
-              </div>
+            <div class="tab-upload mt-4">
+              <nz-upload
+                nzType="drag"
+                [nzMultiple]="true"
+                [nzLimit]="0"
+                [(nzFileList)]="fileList"
+                [nzBeforeUpload]="beforeUpload">
+                <p class="ant-upload-drag-icon">
+                  <i nz-icon nzType="inbox"></i>
+                </p>
+                <p class="ant-upload-text">
+                  {{'goodsReceiptPODetail.attachments.title' | translate}}
+                </p>
+                <p class="ant-upload-hint">
+                  {{'goodsReceiptPODetail.attachments.description' | translate}}
+                </p>
+              </nz-upload>
+
+              <button class="ant-btn ant-btn-primary mt-2" (click)="onUpload()">
+                {{'general.button.upload' | translate}}
+              </button>
+
             </div>
           </mat-tab>
         </mat-tab-group>
@@ -624,7 +621,7 @@
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
                             {{'general.button.cancel' | translate}}
-                        </span></button>
+            </span></button>
         </div>
       </div>
     </div>

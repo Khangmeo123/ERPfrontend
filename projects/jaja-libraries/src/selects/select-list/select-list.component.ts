@@ -122,7 +122,11 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value) {
-      this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
+      if (!changes.value.firstChange) {
+        if (this.selectedItem && this.getValue(this.selectedItem) !== changes.value.currentValue) {
+          this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
+        }
+      }
     }
   }
 

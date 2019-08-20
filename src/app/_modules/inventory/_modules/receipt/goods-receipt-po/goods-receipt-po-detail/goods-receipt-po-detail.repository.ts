@@ -25,6 +25,8 @@ import {
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
+import { UploadFile } from 'ng-zorro-antd';
+import { FileAttachmentEntity } from '../../../../_backend/file-attachment/file-attachment.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -239,4 +241,25 @@ export class GoodsReceiptPODetailRepository extends Repository {
         ),
       );
   };
+
+  uploadFiles(files: UploadFile[]): Observable<FileAttachmentEntity[]> {
+    const formData: FormData = new FormData();
+    files.forEach((file: any) => {
+      formData.append('files', file);
+    });
+    return this.http.post(
+      GoodsReceiptPODetailRepository.getURL('/upload-file'),
+      formData,
+      {
+        observe: 'response',
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<FileAttachmentEntity[]>) => {
+            return response.body;
+          },
+        ),
+      );
+  }
 }

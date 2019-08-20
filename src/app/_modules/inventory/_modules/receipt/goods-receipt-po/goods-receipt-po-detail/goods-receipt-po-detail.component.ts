@@ -6,7 +6,7 @@ import {
   PurchaseOrderEntity,
   SupplierContactEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
   EmpoloyeeDetailSearchEntity,
@@ -19,8 +19,9 @@ import {
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { GeneralService } from '../../../../../../_services/general-service.service';
-import { GoodsReceiptPOListRepository } from '../goods-receipt-po-list/goods-receipt-po-list.repository';
 import { GoodsReceiptPODetailRepository } from './goods-receipt-po-detail.repository';
+import { ToastrService } from 'ngx-toastr';
+import { UploadFile } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-goods-receipt-po-detail',
@@ -39,7 +40,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   displayPurchaseOrders: boolean = false;
 
-  filenameList: string[] = [];
+  fileList: UploadFile[] = [];
 
   deletedList: number[] = [];
 
@@ -75,6 +76,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private generalService: GeneralService,
     private goodsReceiptPoDetailRepository: GoodsReceiptPODetailRepository,
+    private toastrService: ToastrService,
   ) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.goodsReceiptPOId) {
@@ -122,6 +124,10 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   get dueDate() {
     return this.goodsReceiptPOForm.get('dueDate') as FormControl;
+  }
+
+  get fileAttachments() {
+    return this.goodsReceiptPOForm.get('fileAttachments') as FormArray;
   }
 
   ngOnInit() {
@@ -205,10 +211,6 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  readURL(event) {
-    this.filenameList = Object.values(event.target.files).map((file: File) => file.name);
-  }
-
   trackByFn(index) {
     return index;
   }
@@ -273,4 +275,13 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       buyerName: event.name,
     });
   }
+
+  onUpload() {
+    return this.goodsReceiptPoDetailService.uploadFiles(this.fileList);
+  }
+
+  beforeUpload = (file: UploadFile) => {
+    this.fileList = this.fileList.concat(file);
+    return false;
+  };
 }

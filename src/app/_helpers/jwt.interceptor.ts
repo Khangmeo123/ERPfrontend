@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { AuthenticationService } from '../_services';
 import { TranslateService } from '@ngx-translate/core';
@@ -25,11 +25,9 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     request = request.clone({
       withCredentials: true,
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'X-Language': currentLang ? currentLang : 'vi',
-        'X-LegalEntity': JwtInterceptor.legalEntityId,
-      }),
+      headers: request.headers
+        .set('X-LegalEntity', JwtInterceptor.legalEntityId)
+        .set('X-Language', currentLang || 'vi'),
     });
     return next.handle(request);
   }

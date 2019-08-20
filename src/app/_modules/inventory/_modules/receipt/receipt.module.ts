@@ -31,6 +31,7 @@ import { ReturnRequestDetailComponent } from './return-request/return-request-de
 import { ReturnRequestListComponent } from './return-request/return-request-list/return-request-list.component';
 import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
 import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
+import { NzUploadModule, NzIconModule } from 'ng-zorro-antd';
 
 @NgModule({
   declarations: [
@@ -75,6 +76,8 @@ import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-
       confirmButtonType: 'danger',
     }),
     SelectsModule,
+    NzUploadModule,
+    NzIconModule,
   ],
 })
 export class ReceiptModule {
