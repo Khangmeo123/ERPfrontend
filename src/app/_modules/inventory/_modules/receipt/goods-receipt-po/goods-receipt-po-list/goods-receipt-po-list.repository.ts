@@ -23,9 +23,14 @@ export class GoodsReceiptPOListRepository extends Repository {
     this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-list';
   }
 
-  getList(goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity): Observable<GoodsReceiptPOEntity[]> {
-    return this.http.post<GoodsReceiptPOEntity[]>(this.apiUrl + '/list', JSON.stringify(goodsReceiptPOSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+  getList = (goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity): Observable<GoodsReceiptPOEntity[]> => {
+    return this.http.post<GoodsReceiptPOEntity[]>(this.apiUrl + '/list',
+      goodsReceiptPOSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+      ).pipe(
       map(r => {
         return r.body.map((item) => {
           return new GoodsReceiptPOEntity(item);
@@ -34,34 +39,48 @@ export class GoodsReceiptPOListRepository extends Repository {
     );
   }
 
-  count(goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity): Observable<number> {
-    return this.http.post<number>(this.apiUrl + '/count', JSON.stringify(goodsReceiptPOSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+  count = (goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity): Observable<number> => {
+    return this.http.post<number>(this.apiUrl + '/count',
+      goodsReceiptPOSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      })
+      .pipe(
       map(r => r.body),
     );
   }
 
-  singleListRequester(goodsReceiptPORequesterSearchEntity: EmpoloyeeDetailSearchEntity) {
+  singleListRequester = (goodsReceiptPORequesterSearchEntity: EmpoloyeeDetailSearchEntity) => {
     return this.http.post<EmployeeEntity[]>(
       this.apiUrl + '/single-list-requester',
       goodsReceiptPORequesterSearchEntity,
-      {observe: 'response', headers: this.getHeader()},
+      {
+        observe: 'response',
+        headers: this.getHeader()},
     ).pipe(
       map(r => r.body.map((item) => new EmployeeEntity(item))),
     );
   }
 
-  singleListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity) {
+  singleListInventoryOrganization = (goodsReceiptPOInventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity) => {
     return this.http.post<InventoryOrganizationEntity[]>(this.apiUrl + '/single-list-inventory-organization',
-      JSON.stringify(goodsReceiptPOInventoryOrganizationSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+      goodsReceiptPOInventoryOrganizationSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader()},
+      ).pipe(
       map(r => r.body.map(item => new InventoryOrganizationEntity(item))),
     );
   }
 
-  enumListStatus(): Observable<EnumEntity[]> {
-    return this.http.post<EnumEntity[]>(this.apiUrl + '/single-list-status', JSON.stringify({}),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+  enumListStatus = (): Observable<EnumEntity[]> => {
+    return this.http.post<EnumEntity[]>(this.apiUrl + '/single-list-status',
+      {},
+      {
+        observe: 'response',
+        headers: this.getHeader()},
+      ).pipe(
       map(r => r.body),
     );
   }

@@ -35,9 +35,10 @@ export class GoodsReceiptPOListService {
     this.statusList = new BehaviorSubject([]);
   }
 
-  getList(goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity) {
+  getList = (goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity) => {
     forkJoin(this.goodsReceiptPORepository.getList(goodsReceiptPOSearchEntity),
-      this.goodsReceiptPORepository.count(goodsReceiptPOSearchEntity)).subscribe(([list, count]) => {
+      this.goodsReceiptPORepository.count(goodsReceiptPOSearchEntity))
+      .subscribe(([list, count]) => {
       if (list) {
         this.goodsReceiptPOList.next(list);
       }
@@ -47,8 +48,10 @@ export class GoodsReceiptPOListService {
     });
   }
 
-  singleListRequester(goodsReceiptPORequesterSearchEntity: EmpoloyeeDetailSearchEntity) {
-    this.goodsReceiptPORepository.singleListRequester(goodsReceiptPORequesterSearchEntity).subscribe(res => {
+  singleListRequester = (goodsReceiptPORequesterSearchEntity: EmpoloyeeDetailSearchEntity) => {
+    this.goodsReceiptPORepository
+      .singleListRequester(goodsReceiptPORequesterSearchEntity)
+      .subscribe(res => {
       if (res) {
         this.requesterList.next(res);
       }
@@ -59,8 +62,10 @@ export class GoodsReceiptPOListService {
     });
   }
 
-  singleListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity) {
-    this.goodsReceiptPORepository.singleListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity).subscribe(res => {
+  singleListInventoryOrganization = (goodsReceiptPOInventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity) => {
+    this.goodsReceiptPORepository
+      .singleListInventoryOrganization(goodsReceiptPOInventoryOrganizationSearchEntity)
+      .subscribe(res => {
       if (res) {
         this.inventoryOrganizationList.next(res);
       }
@@ -72,8 +77,10 @@ export class GoodsReceiptPOListService {
   }
 
 
-  enumListStatus() {
-    this.goodsReceiptPORepository.enumListStatus().subscribe(res => {
+  enumListStatus = () => {
+    this.goodsReceiptPORepository
+      .enumListStatus()
+      .subscribe(res => {
       if (res) {
         this.statusList.next(res);
       }
