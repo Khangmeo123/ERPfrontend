@@ -76,8 +76,7 @@
             </label>
             <div class="div-form">
               <jaja-select-list class="flex-grow-1"
-                                [list]="supplierList"
-                                [getList]="goodsReceiptPoDetailService.getSupplierList"
+                                [getList]="goodsReceiptPoDetailRepository.getSupplierList"
                                 (change)="onSelectSupplierDetail($event)"
                                 [searchable]="true"
                                 [searchEntity]="supplierSearchEntity"
@@ -111,7 +110,6 @@
             </label>
             <div class="div-form">
               <jaja-select-list class="flex-grow-1"
-                                [list]="supplierContactList"
                                 [getList]="getSupplierContactList"
                                 formControlName="supplierContactId"
                                 key="id"
@@ -172,8 +170,7 @@
             <label>
               {{'goodsReceiptPODetail.inventoryCode' | translate}}
             </label>
-            <jaja-select-list [list]="inventoryOrganizationList"
-                              [getList]="goodsReceiptPoDetailService.getInventoryOrganizationList"
+            <jaja-select-list [getList]="goodsReceiptPoDetailRepository.getInventoryOrganizationList"
                               [searchable]="true"
                               [searchEntity]="inventoryOrganizationSearchEntity"
                               searchField="code"
@@ -199,9 +196,8 @@
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form d-flex">
-              <jaja-select-list [list]="ownerList"
-                                class="flex-grow-1"
-                                [getList]="goodsReceiptPoDetailService.getOwnerList"
+              <jaja-select-list class="flex-grow-1"
+                                [getList]="goodsReceiptPoDetailRepository.getEmployeeDetailList"
                                 [searchable]="true"
                                 [searchEntity]="ownerSearchEntity"
                                 searchField="name"
@@ -223,8 +219,7 @@
             <label>
               {{'goodsReceiptPODetail.receiver' | translate}}
             </label>
-            <jaja-select-list [list]="buyerList"
-                              [getList]="goodsReceiptPoDetailService.getBuyerList"
+            <jaja-select-list [getList]="goodsReceiptPoDetailRepository.getEmployeeDetailList"
                               [searchable]="true"
                               [searchEntity]="buyerSearchEntity"
                               searchField="name"
@@ -239,8 +234,7 @@
             <label>
               {{'goodsReceiptPODetail.creator' | translate}}
             </label>
-            <jaja-select-list [list]="requesterList"
-                              [getList]="goodsReceiptPoDetailService.getRequesterList"
+            <jaja-select-list [getList]="goodsReceiptPoDetailRepository.getEmployeeDetailList"
                               [searchable]="true"
                               [searchEntity]="requesterSearchEntity"
                               searchField="name"
@@ -380,8 +374,7 @@
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
-                                        [list]="purchaseOrdersList"
-                                        [getList]="goodsReceiptPoDetailService.getPurchaseOrderList"
+                                        [getList]="goodsReceiptPoDetailRepository.getPurchaseOrderList"
                                         [searchEntity]="purchaseOrderSearchEntity"
                                         searchField="code"
                                         searchType="startsWith"
@@ -395,8 +388,7 @@
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
-                                        [list]="itemDetailList"
-                                        [getList]="goodsReceiptPoDetailService.getItemDetailList"
+                                        [getList]="goodsReceiptPoDetailRepository.getItemDetailList"
                                         [searchEntity]="itemDetailSearchEntity"
                                         searchField="code"
                                         searchType="startsWith"
@@ -415,8 +407,7 @@
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
-                                        [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getUnitOfMeasureList"
+                                        [getList]="goodsReceiptPoDetailRepository.getUnitOfMeasureList"
                                         [searchEntity]="unitOfMeasureSearchEntity"
                                         searchField="code"
                                         searchType="startsWith"
@@ -432,8 +423,9 @@
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
-                                        [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getSupplierList"
+                                        [getList]="goodsReceiptPoDetailRepository.getTaxList"
+                                        [searchEntity]="taxSearchEntity"
+                                        searchField="code"
                                         key="code"
                                         [searchable]="true">
                         <ng-template #label #option let-code="code">
@@ -588,8 +580,7 @@
               </th>
               <th class="th-filter">
                 <jaja-select-list class="flex-grow-1"
-                                  [list]="supplierList"
-                                  [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                  [getList]="goodsReceiptPoDetailRepository.getSupplierList.bind(goodsReceiptPoDetailRepository)"
                                   key="code"
                                   [searchable]="true">
                   <ng-template #label #option let-code="code">

@@ -13,8 +13,7 @@ import { GoodsReceiptPOEntity } from 'src/app/_modules/inventory/_backend/goods-
 import { GoodsReceiptPOSearchEntity } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { EnumEntity } from 'src/app/_helpers/entity';
-import { EmployeeEntity } from '../../../../../master-data/_backend/employee/employee.entity';
-import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
+import { GoodsReceiptPOListRepository } from './goods-receipt-po-list.repository';
 
 @Component({
   selector: 'app-goods-receipt-po-list',
@@ -24,20 +23,21 @@ import { InventoryOrganizationEntity } from '../../../../_backend/inventory-orga
 })
 export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptPO.header.title');
+
   isBookMark: boolean = false;
+
   pagination: PaginationModel = new PaginationModel();
+
+  goodsReceiptPOSubs: Subscription = new Subscription();
 
   // goodReceiptPO
   goodsReceiptPOList: GoodsReceiptPOEntity[];
   goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity = new GoodsReceiptPOSearchEntity();
-  goodsReceiptPOSubs: Subscription = new Subscription();
 
   // requester:
-  requesterList: EmployeeEntity[] = [];
   requesterSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
 
   // inventoryOrganization:
-  inventoryOrganizationList: InventoryOrganizationEntity[] = [];
   inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity =
     new InventoryOrganizationSearchEntity();
 
@@ -49,6 +49,7 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     private genaralService: GeneralService,
     private bookmarkService: BookmarkService,
     private router: Router,
+    private goodsReceiptPOListRepository: GoodsReceiptPOListRepository,
   ) {
     // goodReceiptPO
     const goodReceiptPOListSub = this.goodsReceiptPOService.goodsReceiptPOList.subscribe(res => {
@@ -61,18 +62,7 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
         this.pagination.totalItems = res;
       }
     });
-    // requester:
-    const requesterSub = this.goodsReceiptPOService.requesterList.subscribe(res => {
-      if (res) {
-        this.requesterList = res;
-      }
-    });
-    // inventoryOrganization:
-    const inventoryOrganizationSub = this.goodsReceiptPOService.inventoryOrganizationList.subscribe(res => {
-      if (res) {
-        this.inventoryOrganizationList = res;
-      }
-    });
+
     // status:
     const statusListSub = this.goodsReceiptPOService.statusList.subscribe(res => {
       if (res) {
@@ -88,8 +78,6 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     // add subscription:
     this.goodsReceiptPOSubs.add(goodReceiptPOListSub)
       .add(goodReceiptPOCountSub)
-      .add(requesterSub)
-      .add(inventoryOrganizationSub)
       .add(statusListSub)
       .add(bookMarkNotify);
   }

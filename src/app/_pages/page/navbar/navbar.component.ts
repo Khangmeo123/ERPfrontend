@@ -7,6 +7,7 @@ import { UserEntity } from '../../../_helpers/entity';
 import { LegalEntity } from '../../../_modules/master-data/_backend/legal/legal.entity';
 import { LanguageEntity, languages } from '../../../_constants/languages';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AppRepository } from '../../../_repositories/app.repository';
 
 @Component({
   selector: 'app-navbar',
@@ -50,6 +51,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private appService: AppService,
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private appRepository: AppRepository,
   ) {
     this.languageSelected = languages[0];
 

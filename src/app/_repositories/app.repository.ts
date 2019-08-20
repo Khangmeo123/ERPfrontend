@@ -14,7 +14,7 @@ export class AppRepository extends Repository {
     super(http);
   }
 
-  getLegalEntityList(): Observable<LegalEntity[]> {
+  getLegalEntityList = (): Observable<LegalEntity[]> => {
     return this.http.post<LegalEntity[]>(
       `${environment.apiUrlApps}list-legal-entity`,
       {},
@@ -30,23 +30,5 @@ export class AppRepository extends Repository {
           },
         ),
       );
-  }
-
-  getLegalEntity(id: string): Observable<LegalEntity> {
-    return this.http.post<LegalEntity>(
-      `${environment.apiUrlApps}get-legal-entity`,
-      {
-        id,
-      },
-      {
-        observe: 'response',
-        headers: this.getHeader(),
-      },
-    )
-      .pipe(
-        map(
-          (response: HttpResponse<LegalEntity>) => response.body,
-        ),
-      );
-  }
+  };
 }

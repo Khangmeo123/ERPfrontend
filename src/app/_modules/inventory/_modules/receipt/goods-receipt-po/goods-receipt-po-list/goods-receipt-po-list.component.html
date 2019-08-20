@@ -41,7 +41,8 @@
         </div>
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
-          <input [(ngModel)]="goodsReceiptPOSearchEntity.documentDate.lessEqual" [matDatepicker]="datepicker" class="form-control input-datepicker ml-1 mr-1"
+          <input [(ngModel)]="goodsReceiptPOSearchEntity.documentDate.lessEqual" [matDatepicker]="datepicker"
+                 class="form-control input-datepicker ml-1 mr-1"
                  data-qe-id="input-date-to" matInput
                  placeholder="dd/mm/yyyy">
           <mat-datepicker #datepicker></mat-datepicker>
@@ -120,8 +121,7 @@
             <th class="th-filter">
               <jaja-select-list
                 (change)="onFilterInventoryOrganization($event)"
-                [getList]="goodsReceiptPOService.singleListInventoryOrganization.bind(goodsReceiptPOService)"
-                [list]="inventoryOrganizationList"
+                [getList]="goodsReceiptPOListRepository.singleListInventoryOrganization"
                 [searchEntity]="inventoryOrganizationSearchEntity"
                 [searchable]="true"
                 placeholder="{{'goodsReceiptPOList.filters.inventoryOrganizationCode' | translate}}"
@@ -147,8 +147,7 @@
             <th class="th-filter">
               <jaja-select-list
                 (change)="onFilterRequester($event)"
-                [getList]="goodsReceiptPOService.singleListRequester.bind(goodsReceiptPOService)"
-                [list]="requesterList"
+                [getList]="goodsReceiptPOListRepository.singleListRequester"
                 [searchEntity]="requesterSearchEntity"
                 [searchable]="true"
                 placeholder="{{'goodsReceiptPOList.filters.requester' | translate}}"
@@ -163,8 +162,7 @@
             <th class="th-filter">
               <jaja-select-list
                 (change)="onFilterStatus($event)"
-                [getList]="goodsReceiptPOService.enumListStatus.bind(goodsReceiptPOService)"
-                [list]="statusList"
+                [getList]="goodsReceiptPOListRepository.enumListStatus"
                 display="display"
                 placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">
@@ -187,7 +185,8 @@
             <td class="text-center ui-resizable-column">
               <div [ngSwitch]="goodsReceiptPO.statusName">
                 <a *ngSwitchCase="'OPEN'" [queryParams]="{id: goodsReceiptPO.id}"
-                   class="ml-2 open-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-detail">{{'general.open'| translate}}</a>
+                   class="ml-2 open-status"
+                   routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-detail">{{'general.open'| translate}}</a>
                 <a *ngSwitchCase="'PENDING_APPROVAL'" [queryParams]="{id: goodsReceiptPO.id}"
                    class="ml-2 pending-status"
                    routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve">{{'general.pending'| translate}}</a>
@@ -196,7 +195,8 @@
                    class="ml-2 pending-receive-status"
                    routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-receive">{{'general.pendingReceive'| translate}}</a>
                 <a *ngSwitchCase="'DONE'" [queryParams]="{id: goodsReceiptPO.id}"
-                   class="ml-2 done-status" routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve">{{'general.done'| translate}}</a>
+                   class="ml-2 done-status"
+                   routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve">{{'general.done'| translate}}</a>
               </div>
             </td>
             <td width="5%">
