@@ -13,12 +13,11 @@ import {
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
-import { ISelect } from '../ISelect';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SearchEntity } from '../../../../../src/app/_helpers/search-entity';
-import { ISearchEntity } from '../../entities/ISearchEntity';
+import {ISelect} from '../ISelect';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ISearchEntity} from '../../entities/ISearchEntity';
 
 @Component({
   selector: 'jaja-select-list',
@@ -33,7 +32,6 @@ import { ISearchEntity } from '../../entities/ISearchEntity';
   ],
 })
 export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ISelect {
-
 
   @Input() appendTo: string = null;
 
@@ -54,7 +52,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() searchType: string = 'startsWith';
 
-  @Input() searchEntity: any = new SearchEntity();
+  @Input() searchEntity: any;
 
   @Input() disabled: boolean = false;
 
@@ -83,7 +81,6 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   set value(value) {
     this.selectedItem = this.list.find((item) => this.getValue(item) === value);
-    this.onChange(value);
   }
 
   @Input()
@@ -111,7 +108,13 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
         .subscribe(
           (event) => {
             this.searchEntity[this.searchField][this.searchType] = event;
-            this.getList(this.searchEntity);
+            this.getList(this.searchEntity)
+              .subscribe(
+                (list: any[]) => {
+                  this.list = list;
+                  this.loading = false;
+                },
+              );
             this.loading = true;
           },
         );
@@ -122,7 +125,9 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value) {
-      this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
+      if (!changes.value.firstChange) {
+        this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
+      }
     }
   }
 
@@ -150,7 +155,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   onClear(event) {
     event.stopPropagation();
-    this.value = undefined;
+    this.onChange(null);
   }
 
   onSearch(event): void {
@@ -170,7 +175,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   onToggle(isOpened) {
     if (isOpened) {
-      this.searchEntity = new this.searchEntity.constructor();
+      this.searchEntity[this.searchField][this.searchType] = null;
       this.loading = true;
       this.getList(this.searchEntity)
         .subscribe(
