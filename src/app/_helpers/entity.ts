@@ -1,56 +1,56 @@
 export class Entity {
-    id: string;
-    isDeleted: boolean = true;
-    isEdited: boolean = true;
-    isSelected: boolean = false;
-    errors: any;
+  id: string;
+  isDeleted: boolean = true;
+  isEdited: boolean = true;
+  isSelected: boolean = false;
+  errors: any;
 
-    constructor(entity: any) {
-        if (entity !== null && entity !== undefined) {
-            Object.keys(entity).forEach((item) => {
-                if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Object) {
-                    this[item] = {};
-                    Object.assign(this[item], entity[item]);
-                }
-                if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Array) {
-                    this[item] = [...entity[item]];
-                }
-                if (typeof entity[item] === 'boolean' || typeof entity[item] === 'string' || typeof entity[item] === 'number') {
-                    this[item] = entity[item];
-                }
-            });
+  constructor(entity?: any) {
+    if (entity !== null && entity !== undefined) {
+      Object.keys(entity).forEach((item) => {
+        if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Object) {
+          this[item] = {};
+          Object.assign(this[item], entity[item]);
         }
+        if (entity[item] && typeof entity[item] === 'object' && entity[item].constructor === Array) {
+          this[item] = [...entity[item]];
+        }
+        if (typeof entity[item] === 'boolean' || typeof entity[item] === 'string' || typeof entity[item] === 'number') {
+          this[item] = entity[item];
+        }
+      });
     }
+  }
 
 }
 
 export class Entities {
-    ids: any[] = [];
-    exceptIds: any[] = [];
+  ids: any[] = [];
+  exceptIds: any[] = [];
 
-    constructor() {
+  constructor() {
 
-    }
+  }
 }
 
 export class EnumEntity {
-    id: string;
-    name: string;
-    display: string;
+  id: string;
+  name: string;
+  display: string;
 
-    constructor() {
+  constructor() {
 
-    }
+  }
 }
 
 export class UserEntity extends Entity {
-    username: string;
+  username: string;
 
-    password: string;
+  password: string;
 
-    constructor(userEntity?: UserEntity) {
-        super(userEntity);
-    }
+  constructor(userEntity?: UserEntity) {
+    super(userEntity);
+  }
 }
 
 export class ColumnEntity {

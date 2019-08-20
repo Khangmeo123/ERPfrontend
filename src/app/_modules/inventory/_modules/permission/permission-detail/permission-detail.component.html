@@ -1,0 +1,165 @@
+<div class="page permission-detail">
+  <div class="page-header">
+    <div class="page-title">
+      {{'permission.detail.title' | translate}}
+      <span (click)="bookMark()">
+        <mat-icon [ngClass]="!isBookMark ? 'save-book-mark': 'not-save-book-mark'"> star </mat-icon>
+      </span>
+    </div>
+  </div>
+  <div class="page-body" [formGroup]="permissionForm">
+    <div class="page-section">
+      <div class="d-flex justify-content-end">
+        <button class="btn btn-labeled btn-cancel mr-2" (click)="cancel()">
+          <span class="btn-label">
+            <i class="material-icons">cancel</i>
+          </span>
+          <span class="button-label">
+            {{'general.button.cancel' | translate}}
+          </span>
+        </button>
+        <button class="btn btn-labeled btn-save" (click)="save()">
+          <span class="btn-label">
+            <i class="material-icons">save</i>
+          </span>
+          <span class="button-label">
+            {{'general.button.save' | translate}}
+          </span>
+        </button>
+      </div>
+      <div class="row">
+        <div class="col-4 form-group">
+          <label for="position-code">
+            {{'permission.positionCode' | translate}}
+            <span class="text-danger ml-1">(*)</span>
+          </label>
+          <div class="div-form d-flex">
+            <app-single-select key="code"
+                               class="flex-grow-1"
+                               id="position-code"
+                               [disabled]="!(legalEntityId && inventoryOrganizationId && inventoryDocumentTypeId)"
+                               [valueSelector]="nodeSelector"
+                               (listOpen)="getPositionList()"
+                               (search)="onSearchPosition($event)"
+                               (selectionChange)="onSelectPosition($event)"
+                               [initialValue]="positionCode?.value"
+                               [list]="positionEntities.exceptIds"
+                               [selectedList]="positionEntities.ids"
+            ></app-single-select>
+            <app-error data-qe-id="dialog-error-code"
+                       *ngIf="(positionCode?.errors && positionCode?.touched) || !!errors?.get('positionCode')?.value"
+                       [formGroup]="permissionForm" [property]="'positionCode'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+
+        <div class="col-4 form-group">
+          <label for="current-status">
+            {{'permission.currentStatus' | translate}}
+            <span class="text-danger ml-1">(*)</span>
+          </label>
+          <div class="div-form d-flex">
+            <app-simple-select id="current-status"
+                               class="flex-grow-1"
+                               [list]="documentStatus"
+                               [initialValue]="currentStatusDisplay?.value"
+                               (selectionChange)="onSelectCurrentStatus($event)"
+                               key="display"
+                               [valueSelector]="nodeSelector"
+            ></app-simple-select>
+            <app-error data-qe-id="dialog-error-current-status"
+                       *ngIf="(currentStatusId?.errors && currentStatusId?.touched) || !!errors?.get('currentStatusId')?.value"
+                       [formGroup]="permissionForm" [property]="'currentStatusId'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+
+        <div class="col-4 form-group">
+          <label for="next-status">
+            {{'permission.nextStatus' | translate}}
+            <span class="text-danger ml-1">(*)</span>
+          </label>
+          <div class="div-form d-flex">
+            <app-simple-select id="next-status"
+                               class="flex-grow-1"
+                               [list]="documentStatus"
+                               [initialValue]="nextStatusDisplay?.value"
+                               (selectionChange)="onSelectNextStatus($event)"
+                               [valueSelector]="nodeSelector"
+                               key="display"
+            ></app-simple-select>
+            <app-error data-qe-id="dialog-error-next-status"
+                       *ngIf="(nextStatusId?.errors && nextStatusId?.touched) || !!errors?.get('nextStatusId')?.value"
+                       [formGroup]="permissionForm" [property]="'nextStatusId'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-4 form-group">
+          <label for="position-name">
+            {{'permission.positionName' | translate}}
+            <span class="text-danger ml-1">(*)</span>
+          </label>
+          <div class="div-form">
+            <input type="text" class="form-control" id="position-name" formControlName="positionName" readonly>
+            <app-error data-qe-id="dialog-error-name"
+                       *ngIf="(positionName?.errors && positionName?.touched) || !!errors?.get('positionName')?.value"
+                       [formGroup]="permissionForm" [property]="'positionName'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+
+        <div class="col-4 form-group">
+          <label for="current-step">
+            {{'permission.currentStep' | translate}}
+            <span class="text-danger ml-1">(*)</span>
+          </label>
+          <div class="div-form">
+            <input type="text" pKeyFilter="pnum" class="form-control" id="current-step" formControlName="currentStep">
+            <app-error data-qe-id="dialog-error-current-step"
+                       *ngIf="(currentStep?.errors && currentStep?.touched) || !!errors?.get('currentStep')?.value"
+                       [formGroup]="permissionForm" [property]="'currentStep'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+
+        <div class="col-4 form-group">
+          <label for="next-step">
+            {{'permission.nextStep' | translate}}
+            <span class="text-danger ml-1">(*)</span>
+          </label>
+          <div class="div-form">
+            <input type="text" pKeyFilter="pnum" class="form-control" id="next-step" formControlName="nextStep">
+            <app-error data-qe-id="dialog-error-next-step"
+                       *ngIf="(nextStep?.errors && nextStep?.touched) || !!errors?.get('nextStep')?.value"
+                       [formGroup]="permissionForm" [property]="'nextStep'" [placement]="'top'" class="error-form">
+            </app-error>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <div class="row">
+        <div class="col">
+          <label for="mail-to-sender">
+            {{'permission.mailToSender' | translate}}
+          </label>
+          <p-editor id="mail-to-sender" [style]="{'height':'320px'}" formControlName="mailToSender"></p-editor>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-section">
+      <div class="row">
+        <div class="col">
+          <label for="mail-to-approver">
+            {{'permission.mailToApprover' | translate}}
+          </label>
+          <p-editor id="mail-to-approver" [style]="{'height':'320px'}" formControlName="mailToApprover"></p-editor>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

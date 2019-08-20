@@ -1,0 +1,34 @@
+{
+    "advancedFilter": {
+        "contains": "",
+        "endsWith": "",
+        "equal": "",
+        "greater": "",
+        "greaterEqual": "",
+        "less": "",
+        "lessEqual": "",
+        "notContains": "",
+        "notEqual": "",
+        "placeholder": "",
+        "startsWith": ""
+    },
+    "cropper": {
+        "browseImage": "",
+        "crop": ""
+    },
+    "datePicker": {
+        "placeHolder": ""
+    },
+    "noData": {
+        "helper": ""
+    },
+    "pagination": {
+        "entries": "",
+        "show": ""
+    },
+    "select": {
+        "availableList": "",
+        "selectedItems": "",
+        "selectedList": ""
+    }
+}

@@ -1,5 +1,5 @@
 import { UomSearchEntity } from './../../../../../_backend/uom/uom.searchentity';
-import { EnumEntity, Entities } from './../../../../../../../_helpers/entity';
+import { EnumEntity, Entities } from '../../../../../../../_helpers/entity';
 import { ItemListRepository } from './item-list.repository';
 import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';

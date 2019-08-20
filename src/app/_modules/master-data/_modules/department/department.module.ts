@@ -26,7 +26,7 @@ import { DepartmentService } from './_page/department/department.service';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HrOrganizationRepository } from './_page/hr-organization/hr-organization.repository';
-import { GeneralService } from '../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../_services/general-service.service';
 import { ChipsModule } from 'primeng/chips';
 import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
 

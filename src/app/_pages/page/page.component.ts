@@ -20,7 +20,7 @@ export class PageComponent implements OnInit {
   getClasses() {
     const classes = {
       'pinned-sidebar': this.appService.getSidebarStat().isSidebarPinned,
-      'toggeled-sidebar': this.appService.getSidebarStat().isSidebarToggeled,
+      'toggeled-sidebar': this.appService.getSidebarStat().isToggled,
     };
     return classes;
   }

@@ -7,9 +7,9 @@ export class EmployeePositionEntity extends Entity {
 
     code: string;
     name:string;
-    
+
     description:string;
-    
+
     constructor(employeePositionEntity?: any) {
         super(employeePositionEntity);
     }

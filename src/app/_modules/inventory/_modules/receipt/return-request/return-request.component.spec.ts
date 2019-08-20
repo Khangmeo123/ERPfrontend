@@ -8,9 +8,9 @@ describe('ReturnRequestComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReturnRequestComponent ]
+      declarations: [ReturnRequestComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

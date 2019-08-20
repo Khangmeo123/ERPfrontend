@@ -1,0 +1,19 @@
+{
+    "app": {
+        "changePassword": "",
+        "help": "",
+        "logout": ""
+    },
+    "bookmarks": {
+        "title": ""
+    },
+    "loginForm": {
+        "doesNotHaveAccount": "",
+        "forgotPassword": "",
+        "login": "",
+        "password": "",
+        "rememberPassword": "",
+        "signUp": "",
+        "username": ""
+    }
+}

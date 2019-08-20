@@ -12,8 +12,9 @@
   }
 
   .navbar-nav {
-    padding-left: none !important;
+    padding-left: 0 !important;
   }
+
   .sub-nav {
     .material-icons {
       font-size: 18px;
@@ -21,6 +22,7 @@
 
     ul.flags {
       margin-bottom: -10px;
+
       li:hover {
         background-color: #f4f4f4 !important;
         margin-right: 5px;
@@ -69,6 +71,7 @@
           display: flex;
           position: relative;
           height: 25px;
+
           img {
             width: 24px;
             position: absolute;
@@ -99,14 +102,20 @@
       }
     }
   }
+
   .icon-flags {
     cursor: pointer;
-    margin-top: 10px;
   }
 
   .drop-flags {
     width: 150px;
     right: 55px;
     height: 90px;
+  }
+}
+
+.dropdown-menu.select-dropdown {
+  .dropdown-item {
+    padding: 0.25rem 1.5rem !important;
   }
 }

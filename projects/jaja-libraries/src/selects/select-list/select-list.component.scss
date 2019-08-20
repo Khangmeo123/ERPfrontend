@@ -1,0 +1,91 @@
+@import "../../../../../node_modules/bootstrap/scss/functions";
+@import "../../../../../node_modules/bootstrap/scss/mixins";
+@import "../../../../../node_modules/bootstrap/scss/variables";
+
+.select {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 80px;
+
+  cursor: pointer;
+
+  position: relative;
+
+  .jaja-select-list-toggle {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+
+  button {
+    box-shadow: none;
+  }
+
+  .form-control:focus {
+    box-shadow: none;
+    text-align: left;
+    border-color: $border-color;
+  }
+
+  input[readonly] {
+    background: #ffffff;
+    cursor: pointer;
+    padding-right: 59px;
+  }
+
+  .icons {
+    position: absolute;
+    right: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+.select.disabled {
+  pointer-events: none;
+
+  input {
+    background: #e9ecef;
+  }
+}
+
+ul.dropdown-menu.select-dropdown {
+  min-width: 320px;
+  max-height: 242px;
+  overflow-y: auto;
+  padding-top: 0;
+
+  li.dropdown-item {
+    padding: 0.25rem 0.75rem;
+  }
+
+  li.dropdown-item:first-of-type {
+    margin-top: 0.5rem;
+  }
+
+  li.dropdown-item.search {
+    position: sticky;
+    top: 0;
+    background: #ffffff;
+    padding: 0 0.75rem 0.5rem;
+    border-bottom: 1px solid $border-color;
+
+    :active, :focus, :hover {
+      background: inherit;
+    }
+  }
+
+  li.dropdown-item.empty {
+    pointer-events: none;
+  }
+
+  li.dropdown-item.loading {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    display: flex;
+    justify-content: center;
+  }
+}

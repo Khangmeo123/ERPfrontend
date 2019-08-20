@@ -6,7 +6,7 @@ import { PaginationModel } from '../../../../../../_shared/modules/pagination/pa
 import { Router } from '@angular/router';
 import { ItemOfLegalEntityService } from './item-of-legal-entity.service';
 import { translate } from 'src/app/_helpers/string';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { ItemEntity } from 'src/app/_modules/master-data/_backend/item/item.entity';
 import { Subject, Subscription } from 'rxjs';

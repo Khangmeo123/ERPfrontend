@@ -1,5 +1,5 @@
 import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Repository} from '../../../../../../../_helpers/repository';
+import {Repository} from '../../../../../../../_repositories/repository';
 import {environment} from '../../../../../../../../environments/environment';
 import {LegalSearchEntity} from '../../../../../_backend/legal/legal.searchentity';
 import {Observable} from 'rxjs';

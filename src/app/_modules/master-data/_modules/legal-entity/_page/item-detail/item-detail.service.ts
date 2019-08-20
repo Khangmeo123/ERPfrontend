@@ -3,7 +3,7 @@ import { ItemDiscount } from './../../../../_backend/legal-item-detail/legal-ite
 import { UomSearchEntity } from './../../../../_backend/uom/uom.searchentity';
 import { ItemSearchEntity } from 'src/app/_modules/master-data/_backend/item/item.searchentity';
 import { CoaSearchEntity } from './../../../../_backend/coa/coa.searchentity';
-import { Entities, EnumEntity } from './../../../../../../_helpers/entity';
+import { Entities, EnumEntity } from '../../../../../../_helpers/entity';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { LegalItemDetailForm, ItemDiscountForm, ItemMaterialForm } from './../../../../_backend/legal-item-detail/legal-item-detail.form';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';

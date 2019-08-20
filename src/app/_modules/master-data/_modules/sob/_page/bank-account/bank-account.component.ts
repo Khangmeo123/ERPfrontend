@@ -4,7 +4,7 @@ import {Subscription} from 'rxjs';
 import {SobEntity} from '../../../../_backend/sob/sob.entity';
 import {SobSearchEntity} from '../../../../_backend/sob/sob.searchentity';
 import {FormControl, FormGroup} from '@angular/forms';
-import {GeneralService} from '../../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../../_services/general-service.service';
 import {Entities} from '../../../../../../_helpers/entity';
 import {BankAccountEntity} from '../../../../_backend/bank-account/bank-account.entity';
 import {BankAccountSearchEntity} from '../../../../_backend/bank-account/bank-account.searchentity';

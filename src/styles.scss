@@ -6,6 +6,11 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
+@import "~quill/dist/quill.core.css";
+@import "~quill/dist/quill.snow.css";
+
+@import "~ng-zorro-antd/ng-zorro-antd.min.css";
+
 $color-button: #007ee5;
 $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 
@@ -67,6 +72,8 @@ $color-danger: #E64C4F;
 @import "~pretty-checkbox/src/scss/states/hover";
 @import "~pretty-checkbox/src/scss/states/focus";
 @import "~pretty-checkbox/src/scss/states/indeterminate";
+
+@import "./scss/jaja-select-list";
 
 html,
 body {
@@ -391,6 +398,8 @@ textarea.disabled{
         background-color: #EAEAEA;
         font-size: 12px;
         border-radius: 5px;
+        display: flex;
+        align-items: center;
       }
       .material-icons {
         font-size: 12px;

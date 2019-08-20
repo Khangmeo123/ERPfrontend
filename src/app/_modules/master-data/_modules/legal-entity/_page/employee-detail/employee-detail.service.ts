@@ -34,7 +34,7 @@ export class EmployeeDetailService {
         this.contactForm = new BehaviorSubject(this.fb.group(
             new InfoContactForm(),
         ));
-        
+
     }
 
     getId(employeeId?) {

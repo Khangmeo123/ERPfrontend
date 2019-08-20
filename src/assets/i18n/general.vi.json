@@ -1,0 +1,96 @@
+{
+    "general": {
+        "action": "thao tác",
+        "button": {
+            "add": "Thêm",
+            "approve": "Phê duyệt",
+            "attachFile": "Thêm đính kèm",
+            "cancel": "Hủy",
+            "clear": "Bỏ lọc",
+            "completed": "Hoàn thành",
+            "delete": "Xóa",
+            "downloadTemplate": "Tải file mẫu",
+            "download_example": "Tải file mẫu",
+            "edit": "",
+            "export": "Xuất Excel",
+            "getData": "Lấy dữ liệu",
+            "history": "Lịch sử",
+            "import": "Nhập hàng loạt",
+            "importFile": "",
+            "import_file": "Nhập hàng loạt",
+            "issue": "",
+            "ok": "",
+            "post": "Bình luận",
+            "print": "In",
+            "receive": "Nhận",
+            "referenceDocument": "Chứng từ tham chiếu",
+            "rejected": "Từ chối duyệt",
+            "reset": "Làm lại",
+            "reverse": "Hoàn duyệt",
+            "save": "Lưu",
+            "send": "Gửi",
+            "update": "Cập nhật"
+        },
+        "completed": "Hoàn thành",
+        "customer_group": {
+            "name": "Tên nhóm khách hàng"
+        },
+        "department": {
+            "delete": {
+                "message": "Bạn chắc chắn muốn xóa?",
+                "title": "Xác nhận xóa"
+            }
+        },
+        "detail": "Chi tiết",
+        "division": "Tên chi nhánh",
+        "done": "Đã nhận",
+        "error": {
+            "direction": "Hướng",
+            "fileImport": "Lỗi nhập file"
+        },
+        "fromDate": "Từ ngày",
+        "gender": {
+            "female": "Nữ",
+            "male": "Nam"
+        },
+        "import": {
+            "error": "Nhập thất bại",
+            "success": "Nhập thành công"
+        },
+        "legalEntity": {
+            "name": "Tên pháp nhân"
+        },
+        "legal_entity": {
+            "name": "Tên pháp nhân"
+        },
+        "open": "Khởi tạo",
+        "pending": "Chờ duyệt",
+        "pendingCounting": "Chờ kiểm kê",
+        "pendingReceive": "Chờ nhận",
+        "pendingTransfer": "",
+        "project": {
+            "delete": {
+                "message": "Bạn chắc chắn muốn xóa?",
+                "title": "Xác nhận xóa"
+            }
+        },
+        "service": {
+            "save": {
+                "success": "Thành công"
+            },
+            "update": {
+                "getFailed": "Cập nhật thất bại",
+                "success": "Cập nhật thành công"
+            }
+        },
+        "sob": "Số bộ sổ",
+        "text": {
+            "total": "Tổng tiền "
+        },
+        "toDate": "Đến ngày",
+        "update": {
+            "failure": "Cập nhật thất bại",
+            "success": "Cập nhật thành công"
+        }
+    }
+}

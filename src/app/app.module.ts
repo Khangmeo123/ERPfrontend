@@ -13,7 +13,7 @@ import { PageComponent } from './_pages/page/page.component';
 import { LoginComponent } from './_pages/login/login.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 
-import { JwtInterceptor, ErrorInterceptor } from './_helpers';
+import { ErrorInterceptor, JwtInterceptor } from './_helpers';
 import { SidebarComponent } from './_pages/page/sidebar/sidebar.component';
 import { NavbarComponent } from './_pages/page/navbar/navbar.component';
 import { FooterComponent } from './_pages/page/footer/footer.component';
@@ -22,17 +22,17 @@ import { MatIconModule } from '@angular/material';
 import { DropdownModule } from 'primeng/dropdown';
 import { PipeModule } from './_shared/pipe/pipe.module';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar-list.component';
 import { CookieService } from 'ngx-cookie-service';
-import { BsDropdownModule } from 'ngx-bootstrap';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SignUpComponent } from './_pages/sign-up/sign-up.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
-
-
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { SelectModule } from './_shared/modules/select/select.module';
+import { SelectsModule } from '../../projects/jaja-libraries/src/selects/selects.module';
+import { BsDropdownModule } from 'ngx-bootstrap';
 
 @NgModule({
   declarations: [
@@ -75,7 +75,9 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
     ClickOutsideModule,
     MatInputModule,
     MatCheckboxModule,
+    SelectModule,
     BsDropdownModule.forRoot(),
+    SelectsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
@@ -86,6 +88,7 @@ import { ResetPasswordComponent } from './_pages/reset-password/reset-password.c
 })
 export class AppModule {
 }
+
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }

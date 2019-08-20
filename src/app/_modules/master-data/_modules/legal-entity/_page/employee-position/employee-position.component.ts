@@ -3,7 +3,7 @@ import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagi
 import {Router} from '@angular/router';
 import {translate} from 'src/app/_helpers/string';
 import {BookmarkService} from 'src/app/_services';
-import {GeneralService} from 'src/app/_helpers/general-service.service';
+import {GeneralService} from 'src/app/_services/general-service.service';
 import {EmployeePositionService} from './employee-position.service';
 import {EmployeePositionSearchEntity} from 'src/app/_modules/master-data/_backend/employee-position/employee-position.searchentity';
 import {EmployeePositionEntity} from 'src/app/_modules/master-data/_backend/employee-position/employee-position.entity';

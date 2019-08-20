@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class GoodsReceiptDetailComponent implements OnInit {
   pageTitle = translate('goodsReceiptDetail.header.title');
-  fileNameList: Array<any> = []
+  fileNameList: Array<any> = [];
   tableTemp = [
     {
       total: 100000,
@@ -18,27 +18,28 @@ export class GoodsReceiptDetailComponent implements OnInit {
     },
     {
       total: 2000000,
-      type: 2, 
+      type: 2,
     },
     {
       total: 2000000,
       type: 3,
     }
-  ]
+  ];
 
   displayBatches: boolean = false;
   displaySerial: boolean = false;
   displayAmount: boolean = false;
   displayGoodsReceipt: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
 
 
   readURL(event: any) {
-    for(const item of event.srcElement.files) {
+    for (const item of event.srcElement.files) {
       this.fileNameList.push(item.name);
     }
   }

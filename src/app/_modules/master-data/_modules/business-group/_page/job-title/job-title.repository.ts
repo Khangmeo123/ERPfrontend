@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Repository } from 'src/app/_helpers/repository';
+import { Repository } from 'src/app/_repositories/repository';
 import { Observable } from 'rxjs';
 import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.entity';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';

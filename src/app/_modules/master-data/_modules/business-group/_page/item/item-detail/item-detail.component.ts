@@ -1,5 +1,5 @@
 import { UomSearchEntity } from './../../../../../_backend/uom/uom.searchentity';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';

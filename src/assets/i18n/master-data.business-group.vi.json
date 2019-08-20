@@ -1,0 +1,321 @@
+{
+    "asset": {
+        "content": {
+            "code": "Mã tài sản",
+            "modal": {
+                "title": "Thêm tài sản"
+            },
+            "name": "Tên tài sản",
+            "status": "Trạng thái",
+            "type": "Loại tài sản"
+        },
+        "header": {
+            "title": "Danh sách tài sản"
+        }
+    },
+    "bank": {
+        "content": {
+            "code": "Mã ngân hàng",
+            "description": "Mô tả",
+            "name": "Tên ngân hàng"
+        },
+        "dialog": {
+            "title": "Thêm ngân hàng"
+        },
+        "header": {
+            "title": "Danh sách ngân hàng"
+        }
+    },
+    "businessGroup": {
+        "content": {
+            "code": "Mã nhóm kinh doanh",
+            "description": "Mô tả",
+            "name": "Tên nhóm kinh doanh"
+        },
+        "dialog": {
+            "error": {
+                "title": "Danh sách lỗi"
+            },
+            "title": "Thêm nhóm kinh doanh"
+        }
+    },
+    "business_group": {
+        "header": {
+            "title": "Quản lý nhóm kinh doanh"
+        }
+    },
+    "currency": {
+        "content": {
+            "code": "Mã tiền tệ",
+            "description": "Mô tả",
+            "name": "Tên loại tiền tệ"
+        },
+        "dialog": {
+            "title": "Thêm loại tiền tệ"
+        },
+        "header": {
+            "title": "Đơn vị tiền tệ"
+        }
+    },
+    "customer": {
+        "detail": {
+            "content": {
+                "code": "Mã khách hàng",
+                "name": "Tên khách hàng",
+                "note": "Lưu ý khác",
+                "status": "Trạng thái",
+                "taxCode": "Mã số thuế"
+            },
+            "header": {
+                "title": "Chỉnh sửa thông tin khách hàng"
+            },
+            "tab": {
+                "title1": "Thông tin chung"
+            }
+        },
+        "list": {
+            "content": {
+                "code": "Mã khách hàng",
+                "name": "Tên khách hàng",
+                "status": "Trạng thái",
+                "taxCode": "Mã số thuế"
+            },
+            "header": {
+                "title": "Danh sách khách hàng"
+            }
+        }
+    },
+    "employee": {
+        "content": {
+            "table": {
+                "gender": {
+                    "men": "Nam",
+                    "women": "Nữ"
+                },
+                "insuranceSalary": "Lương đóng bảo hiểm"
+            }
+        },
+        "detail": {
+            "content": {
+                "code": "Mã nhân viên",
+                "dob": "Ngày sinh",
+                "gender": "Giới tính",
+                "identityNumber": "Số CMND",
+                "issueDate": "Ngày cấp",
+                "issuePlace": "Nơi cấp",
+                "jobLevel": "Cấp bậc chức vụ",
+                "jobTitle": "Chức vụ",
+                "name": "Tên nhân viên",
+                "numberDependentPerson": "Số người phụ thuộc",
+                "salary": "Lương cơ bản",
+                "salaryRatio": "Hệ số lương",
+                "status": "Trạng thái",
+                "taxCode": "Mã số thuế"
+            },
+            "header": {
+                "title": "Thêm mới nhân viên"
+            },
+            "tab": {
+                "title1": "Thông tin nhân viên"
+            }
+        },
+        "list": {
+            "content": {
+                "code": "Mã nhân viên",
+                "dob": "Ngày sinh",
+                "gender": "Giới tính",
+                "identityNumber": "Số CMND",
+                "name": "Tên nhân viên",
+                "status": "Trạng thái",
+                "username": "Tên người dùng"
+            },
+            "header": {
+                "title": "Danh sách nhân viên"
+            }
+        },
+        "password": {
+            "error": "Lưu mật khẩu thất bại",
+            "field": "Mật khẩu",
+            "save": "Lưu mật khẩu",
+            "success": "Lưu mật khẩu thành công",
+            "title": "Đổi mật khẩu"
+        },
+        "username": "Tên người dùng"
+    },
+    "item": {
+        "detail": {
+            "content": {
+                "characteristic": "Tính chất hàng",
+                "code": "Mã sản phẩm",
+                "codeFromMarket": "Mã SP trên thị trường ",
+                "codeFromSupplier": "Mã SP từ NCC",
+                "description": "Mô tả",
+                "height": "Chiều cao",
+                "length": "Chiều dài",
+                "name": "Tên sản phẩm",
+                "primaryPrice": "Đơn giá cơ bản",
+                "status": "Trạng thái",
+                "uom": "Đơn vị cơ bản",
+                "weight": "Cân nặng",
+                "width": "Chiều rộng"
+            },
+            "header": {
+                "title": "Danh sách sản phẩm"
+            },
+            "tab": {
+                "title1": "Tab 1",
+                "title_2": "Thông tin thuế suất"
+            }
+        },
+        "list": {
+            "content": {
+                "code": "Mã sản phẩm",
+                "description": "Mô tả",
+                "name": "Tên sản phẩm",
+                "primaryPrice": "Đơn giá cơ bản",
+                "status": "Trang thái",
+                "unitOfMeasure": "Đơn vị cơ bản"
+            },
+            "header": {
+                "title": "Danh sách sản phẩm"
+            }
+        }
+    },
+    "jobLevel": {
+        "content": {
+            "description": "Mô tả",
+            "level": "Cấp bậc"
+        },
+        "dialog": {
+            "title": "Thêm cấp bậc công việc"
+        },
+        "header": {
+            "title": "Cấp bậc công việc"
+        }
+    },
+    "jobTitle": {
+        "header": {
+            "title": "Chức vụ công việc"
+        }
+    },
+    "jobTtitle": {
+        "content": {
+            "code": "Mã chức vụ",
+            "description": "Mô tả",
+            "name": "Tên chức vụ"
+        },
+        "dialog": {
+            "title": "Thêm chức vụ"
+        }
+    },
+    "province": {
+        "code": "Mã tỉnh thành",
+        "create": {
+            "error": "Tạo tỉnh thành bị lỗi"
+        },
+        "delete": {
+            "message": "Bạn chắc chắn muốn xóa?",
+            "success": "Xóa tỉnh thành thành công",
+            "title": "Xác nhận xóa"
+        },
+        "get": {
+            "error": "Lấy thông tin tỉnh thành không được"
+        },
+        "modal": {
+            "title": "Thông tin tỉnh thành"
+        },
+        "name": "Tên tỉnh thành",
+        "title": "Quản lý tỉnh thành",
+        "update": {
+            "error": "Cập nhật thất bại",
+            "success": "Cập nhật thành công"
+        }
+    },
+    "supplier": {
+        "detail": {
+            "content": {
+                "code": "Mã nhà cung cấp",
+                "name": "Tên nhà cung cấp",
+                "note": "Lưu ý khác",
+                "status": "Trạng thái",
+                "taxCode": "Mã số thuế"
+            },
+            "header": {
+                "title": "Thông tin nhà cung cấp"
+            },
+            "tab": {
+                "title1": "Thông tin chung"
+            }
+        },
+        "list": {
+            "content": {
+                "code": "Mã nhà cung cấp",
+                "name": "Tên nhà cung cấp",
+                "status": "Trạng thái",
+                "taxCode": "Mã số thuế"
+            },
+            "header": {
+                "title": "Danh sách nhà cung cấp"
+            }
+        }
+    },
+    "tax-template": {
+        "code": "",
+        "name": "",
+        "title": "",
+        "type": ""
+    },
+    "tax": {
+        "code": "Mã",
+        "description": "Mô tả",
+        "discount": "Chiết khấu",
+        "name": "Tên",
+        "parent_account": "Tài khoản tổng hợp",
+        "unit": "Đơn vị tính"
+    },
+    "taxTemplate": {
+        "code": "Mã mẫu biểu thuế",
+        "delete": {
+            "error": "Xóa thất bại",
+            "success": "Xóa thành công"
+        },
+        "detail": {
+            "actions": "Thao tác",
+            "available": "Hiệu lực",
+            "code": "Mã biểu thuế",
+            "name": "Tên biểu thuế",
+            "rate": "Chiết khấu",
+            "unitOfMeasure": "Đơn vị tính"
+        },
+        "general": {
+            "title": "Mẫu biểu thuế"
+        },
+        "get": {
+            "error": "Không thể lấy thông tin mẫu biếu thuế"
+        },
+        "modal": {
+            "title": "Biểu thuế"
+        },
+        "name": "Tên",
+        "title": "Mẫu biểu thuế",
+        "type": "Loại biểu thuế",
+        "update": {
+            "error": "Cập nhật thất bại",
+            "success": "Cập nhật thành công"
+        }
+    },
+    "uom": {
+        "content": {
+            "code": "Mã đơn vị",
+            "description": "Mô tả",
+            "modal": {
+                "title": "Thêm đơn vị tính sản phẩm",
+                "uom_description": "Mô tả"
+            },
+            "name": "Tên đơn vị"
+        },
+        "header": {
+            "title": "Đơn vị tính sản phẩm"
+        }
+    }
+}

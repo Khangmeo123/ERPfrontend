@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 import {translate} from 'src/app/_helpers/string';
 import {Subject, Subscription} from 'rxjs';
 import {ItemGroupService} from './item-group.service';
-import {GeneralService} from 'src/app/_helpers/general-service.service';
+import {GeneralService} from 'src/app/_services/general-service.service';
 import {BookmarkService} from 'src/app/_services';
 import {ItemEntity} from 'src/app/_modules/master-data/_backend/item/item.entity';
 import {environment} from 'src/environments/environment';

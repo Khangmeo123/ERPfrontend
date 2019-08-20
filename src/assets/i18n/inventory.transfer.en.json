@@ -1,0 +1,145 @@
+{
+    "inventoryTransfer": {
+        "detail": {
+            "amount": {
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "quantity": "",
+                "quantitySaved": "",
+                "title ": "",
+                "unitOfMeasure": ""
+            },
+            "amountScan": "",
+            "batches": {
+                "batchCode": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantityInEachBatch": "",
+                "quantitySaved": "",
+                "startScanBatchesNo": "",
+                "title ": ""
+            },
+            "binLocation": "",
+            "button": {
+                "add": ""
+            },
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "exporter": "",
+            "form": {
+                "post": {
+                    "title": ""
+                },
+                "title": ""
+            },
+            "inventoryCodeFrom": "",
+            "inventoryCodeTo": "",
+            "inventoryRequest": "",
+            "inventoryTransferRequest": {
+                "createdDate": "",
+                "creator": "",
+                "documentNo": ""
+            },
+            "issuedDate": "",
+            "personInCharge": "",
+            "qrCode": {
+                "code": "",
+                "expiryDate": "",
+                "itemCode": "",
+                "itemName": "",
+                "locationCode": "",
+                "manufacturingDate": "",
+                "quantity": "",
+                "scanCode": "",
+                "scanQRCode": "",
+                "serial": "",
+                "title ": ""
+            },
+            "receiver": "",
+            "request": {
+                "customerName": ""
+            },
+            "tab1": {
+                "Serial": "",
+                "actualQuantity": "",
+                "amount": "",
+                "batches": "",
+                "dueDate": "",
+                "issueIdRequest": "",
+                "itemName": "",
+                "itemNo": "",
+                "quantity": "",
+                "title": "",
+                "unitOfMeasure": ""
+            },
+            "tab2": {
+                "title": ""
+            }
+        },
+        "header": {
+            "title": ""
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "status": "",
+            "transferDate": ""
+        }
+    },
+    "inventoryTransferRequest": {
+        "detail": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "form": {
+                "post": {
+                    "title": ""
+                },
+                "title": ""
+            },
+            "inventoryCodeFrom": "",
+            "inventoryCodeTo": "",
+            "personInCharge": "",
+            "receiver": "",
+            "tab1": {
+                "actualQuantity": "",
+                "dueDate": "",
+                "issueWarehouse": "",
+                "itemName": "",
+                "itemNo": "",
+                "quantity": "",
+                "receiptWarehouse": "",
+                "title": "",
+                "unitOfMeasure": ""
+            },
+            "tab2": {
+                "title": ""
+            },
+            "transferDate": ""
+        },
+        "header": {
+            "title": ""
+        },
+        "list": {
+            "createdDate": "",
+            "creator": "",
+            "description": "",
+            "documentNumber": "",
+            "inventoryAddress": "",
+            "inventoryCode": "",
+            "status": "",
+            "transferDate": ""
+        }
+    }
+}

@@ -9,7 +9,7 @@ export class CustomerGroupEntity extends Entity {
 
     description:string;
     legalEntityId: string;
-    
+
 
     constructor(customerGroupEntity?: any) {
         super(customerGroupEntity);

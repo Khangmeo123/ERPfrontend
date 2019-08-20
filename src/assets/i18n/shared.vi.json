@@ -1,0 +1,34 @@
+{
+    "advancedFilter": {
+        "contains": "Chứa",
+        "endsWith": "Kết thúc với",
+        "equal": "Bằng",
+        "greater": "Lớn hơn",
+        "greaterEqual": "Lớn hơn hoặc bằng",
+        "less": "Nhỏ hơn",
+        "lessEqual": "Nhỏ hơn hoặc bằng",
+        "notContains": "Không chứa",
+        "notEqual": "Không bằng",
+        "placeholder": "Tìm kiếm",
+        "startsWith": "Bắt đầu với"
+    },
+    "cropper": {
+        "browseImage": "Chọn ảnh",
+        "crop": "Cắt ảnh"
+    },
+    "datePicker": {
+        "placeHolder": "ngày/tháng/năm"
+    },
+    "noData": {
+        "helper": "Không có dữ liệu"
+    },
+    "pagination": {
+        "entries": "Bản ghi",
+        "show": "Hiện thị"
+    },
+    "select": {
+        "availableList": "Có thể chọn",
+        "selectedItems": "Đã chọn",
+        "selectedList": "Danh sách đã chọn"
+    }
+}

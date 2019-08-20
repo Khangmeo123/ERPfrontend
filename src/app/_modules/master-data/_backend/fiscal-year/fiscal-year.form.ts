@@ -1,4 +1,4 @@
-import { FormModel } from './../../../../_helpers/form-model';
+import { FormModel } from '../../../../_helpers/form-model';
 import { FormControl, FormGroup } from '@angular/forms';
 import { requiredField } from 'src/app/_helpers';
 import { FiscalYearEntity } from './fiscal-year.entity';

@@ -3,7 +3,7 @@ import {DatePipe} from '@angular/common';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
 import {Subject, Subscription} from 'rxjs';
 import {ActivatedRoute, Params, Router} from '@angular/router';
-import {GeneralService} from '../../../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../../../_services/general-service.service';
 import {ToastrService} from 'ngx-toastr';
 import {TaxTemplateDetailService} from './tax-template-detail.service';
 import {TaxTemplateEntity, TaxTemplateTypeEntity} from '../../../../../_backend/tax-template/tax-template.entity';

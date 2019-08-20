@@ -1,0 +1,457 @@
+{
+    "binLocation": {
+        "action": "Thao tác",
+        "code": "Mã",
+        "delete": {
+            "confirm": {
+                "message": "Bạn chắc chắn muốn xóa?",
+                "title": "Xác nhận xóa?"
+            }
+        },
+        "getFieldEntity": {
+            "error": "Lấy danh sách trường thất bại"
+        },
+        "layer1": {
+            "code": "Mã lớp 1"
+        },
+        "layer2": {
+            "code": "Mã lớp 2"
+        },
+        "layer3": {
+            "code": "Mã lớp 3"
+        },
+        "layer4": {
+            "code": "Mã lớp 4"
+        },
+        "modal": {
+            "title": "Thêm vị trí kho"
+        },
+        "name": "Tên",
+        "title": "Vị trí kho",
+        "update": {
+            "error": "Cập nhật thất bại",
+            "success": "Cập nhật thành công"
+        }
+    },
+    "codeFormula": {
+        "code": "Mã",
+        "field": {
+            "error": "Lấy danh sách trường thất bại"
+        },
+        "general": {
+            "title": "Quy tắc tách mã"
+        },
+        "get": {
+            "error": "Lấy thông tin thất bại"
+        },
+        "identifierStringEnd": "Vị trí kết thúc",
+        "identifierStringStart": "Vị trí bắt đầu",
+        "identifierStringValues": "Giá trị nhận dạng",
+        "item": {
+            "code": "Mã sản phẩm",
+            "name": "Tên sản phẩm",
+            "title": "Danh sách sản phẩm áp dụng"
+        },
+        "legalEntity": {
+            "missingLegalEntityId": "Thiếu id của pháp nhân"
+        },
+        "legalEntityList": {
+            "error": "Không thể lấy danh sách pháp nhân"
+        },
+        "length": "Độ dài",
+        "name": "Tên",
+        "rule": {
+            "end": "Kết thúc với",
+            "itemFieldDisplay": "Trường",
+            "start": "Bắt đầu với",
+            "title": "Quy tắc tách mã"
+        },
+        "ruleModal": {
+            "title": "Quy tắc tách mã"
+        },
+        "splitRuleContent": {
+            "field": "Trường",
+            "start": "Bắt đầu với"
+        },
+        "test": {
+            "expirationDate": "Ngày hết hạn",
+            "itemCode": "Mã sản phẩm",
+            "mfrDate": "Ngày sản xuất",
+            "qrCode": "Mã QR",
+            "serial": "Serial",
+            "title": "Test mã"
+        },
+        "title": "Quy tắc tách mã",
+        "update": {
+            "error": "Cập nhật thành công",
+            "success": "Cập nhật thất bại"
+        }
+    },
+    "customerGroup": {
+        "add": "Thêm nhóm khách hàng",
+        "code": "Mã nhóm",
+        "customer": {
+            "code": "Mã khách hàng",
+            "name": "Tên khách hàng"
+        },
+        "header": {
+            "title": "Nhóm khách hàng"
+        },
+        "name": "Tên nhóm"
+    },
+    "customerOfLegalEntity": {
+        "code": "Mã pháp nhân",
+        "customer": {
+            "code": "Mã khách hàng",
+            "name": "Tên khách hàng"
+        },
+        "header": {
+            "title": "Khách hàng của pháp nhân"
+        },
+        "name": "Tên pháp nhân",
+        "sob": "Mã bộ sổ"
+    },
+    "detailCustomerOfLegal": {
+        "bankAccount": {
+            "accountNumber": "Số tài khoản",
+            "accountOwner": "Tên chủ tài khoản",
+            "add": "Thêm tài khoản ngân hàng",
+            "bankAddress": "Địa chỉ ngân hàng",
+            "bankDivision": "Chi nhánh ngân hàng",
+            "bankName": "Tên ngân hàng",
+            "code": "STT",
+            "province": "Tỉnh/Thành phố",
+            "title": "Tài khoản ngân hàng"
+        },
+        "bankAccounts": {
+            "add": "Thông tin tài khoản ngân hàng"
+        },
+        "code": "Mã nhà cung cấp",
+        "contacts": {
+            "add": "Thêm thông tin liên hệ",
+            "address": "Địa chỉ",
+            "city": "Tỉnh thành",
+            "code": "STT",
+            "email": "Email",
+            "phoneNumber": "Số điện thoại",
+            "province": "Tỉnh/Thành phố",
+            "recipient": "Tên người liên hệ",
+            "title": "Thông tin liên hệ"
+        },
+        "customerGroup": "Nhóm khách hàng",
+        "debtLoad": "Số nợ tối đa",
+        "detail": {
+            "title": "Sửa thông tin khách hàng"
+        },
+        "dueInDays": "Số ngày được nợ",
+        "general": {
+            "title": "Thông tin chung"
+        },
+        "name": "Tên nhà cung cấp",
+        "note": "Lưu ý khác",
+        "paymentTerms": "Điều khoản thanh toán",
+        "pic": "Nhân viên phụ trách",
+        "status": "Trạng thái",
+        "taxCode": "Mã số thuế"
+    },
+    "detailSupplierGroup": {
+        "bankAccount": {
+            "accountNumber": "Số tài khoản",
+            "accountOwner": "Tên chủ tài khoản",
+            "add": "Thêm tài khoản ngân hàng",
+            "bankAddress": "Địa chỉ ngân hàng",
+            "bankDivision": "Chi nhánh ngân hàng",
+            "bankName": "Tên ngân hàng",
+            "code": "STT",
+            "province": "Tỉnh/ Thành phố",
+            "title": "Tài khoản ngân hàng"
+        },
+        "bankAccounts": {
+            "add": "Thêm tài khoản ngân hàng"
+        },
+        "code": "Mã nhà cung cấp",
+        "contacts": {
+            "add": "Thêm thông tin liên hệ",
+            "address": "Địa chỉ",
+            "city": "Tỉnh thành",
+            "code": "STT",
+            "email": "Email",
+            "phoneNumber": "Số điện thoại",
+            "province": "Tỉnh/Thành phố",
+            "recipient": "Tên người liên hệ",
+            "title": "Thông tin liên hệ"
+        },
+        "debtLoad": "Số nợ tối đa",
+        "detail": {
+            "title": "Sửa thông tin nhà cung cấp"
+        },
+        "dueInDays": "Số ngày được nợ",
+        "general": {
+            "title": "Thông tin chung"
+        },
+        "name": "Tên nhà cung cấp",
+        "note": "Lưu ý khác",
+        "paymentTerms": "Điều khoản thanh toán",
+        "pic": "Nhân viên phụ trách",
+        "status": "Trạng thái",
+        "supplierGroup": "Nhóm khách hàng",
+        "taxCode": "Mã số thuế"
+    },
+    "detail_item_of_legal_entity": {
+        "discounts": {
+            "modal_title": "Thêm chiết khấu"
+        },
+        "transformation_unit": {
+            "amount": "Số lương",
+            "description": "Mô tả",
+            "modal_title": "Thêm đơn vị chuyển đổi",
+            "price_of_primary_unit": "Đơn giá của đơn vị cơ bản",
+            "primary_unit": "Đơn vị cơ bản",
+            "sale_price": "Đơn giá bán",
+            "title": "Đơn vị chuyển đổi",
+            "transformation_rate_to_main_unit": "Tỉ lệ chuyển đổi về đơn vị cơ bản",
+            "unit": "Đơn vị tính"
+        }
+    },
+    "employeeDetailOfLegal": {
+        "bankAccount": {
+            "accountName": "Tên chủ tài khoản",
+            "accountNumber": "Số tài khoản",
+            "city": "Tỉnh/Thành phố",
+            "division": "Chi nhánh",
+            "divisionAddress": "Địa chỉ chi nhánh",
+            "name": "Tên ngân hàng",
+            "title": "Tài khoản ngân hàng"
+        },
+        "bassicSalary": "Lương đóng bảo hiểm",
+        "birthday": "Ngày sinh",
+        "code": "Mã nhân viên",
+        "contact": {
+            "add": "Thêm thông tin liên hệ",
+            "address": "Địa chỉ",
+            "city": "Tỉnh thành",
+            "email": "Email",
+            "index": "STT",
+            "name": "Tên người liên hệ",
+            "phone": "Số điện thoại",
+            "title": "Thông tin liên hệ"
+        },
+        "employeeGroup": "Nhóm nhân viên",
+        "gender": {
+            "men": "Nam",
+            "title": "Giới tính",
+            "women": "Nữ"
+        },
+        "general": {
+            "title": "Thông tin chung"
+        },
+        "header": {
+            "title": "Chỉnh sửa thông tin nhân viên"
+        },
+        "identityNumber": "Số CMND",
+        "issueDate": "Ngày cấp",
+        "issuePlace": "Nơi cấp",
+        "jobLevel": "Cấp bậc chức vụ",
+        "jobTitle": "Chức vụ",
+        "name": "Tên nhân viên",
+        "numberDependentPerson": "Số người phụ thuộc",
+        "salaryAgreement": "Lương thỏa thuận",
+        "salaryRatio": "Hệ số lương",
+        "status": "Trạng thái",
+        "taxCode": "Mã số thuế"
+    },
+    "employeeGroup": {
+        "add": "Thêm",
+        "code": "Mã nhóm",
+        "employee": {
+            "code": "Mã nhân viên",
+            "name": "Tên nhân viên"
+        },
+        "header": {
+            "title": "Nhóm nhân viên"
+        },
+        "name": "Tên nhóm"
+    },
+    "employeeOfLegalEntity": {
+        "code": "Mã pháp nhân",
+        "employee": {
+            "code": "Mã nhân viên",
+            "name": "Tên nhân viên"
+        },
+        "header": {
+            "title": "Danh sách nhân viên của pháp nhân"
+        },
+        "name": "Tên pháp nhân",
+        "sob": "Mã bộ sổ"
+    },
+    "employeePosition": {
+        "header": {
+            "title": "Quản lý nhóm nhân viên"
+        }
+    },
+    "item": {
+        "content": {
+            "tab": {
+                "enviroment_tax": "Thuế môi trường (%)",
+                "enviroment_tax_id": "Mã thuế môi trường",
+                "export_tax": "Thuế xuất khẩu (%)",
+                "export_tax_id": "Mã thuế suất khẩu",
+                "import_tax": "Thuế nhập khẩu (%)",
+                "import_tax_id": "Mã thuế nhập khẩu",
+                "resource_tax": "Thuế tài nguyên (%)",
+                "resource_tax_id": "Mã thuế tài nguyên",
+                "special_consumption_tax": "Thuế TTĐB (% )",
+                "special_consumption_tax_id": "Mã thuế TTĐB",
+                "value_add_tax": "Thuế GTGT (%)",
+                "value_add_tax_id": "Mã thuế GTGT"
+            }
+        },
+        "detail": {
+            "tab": {
+                "title_2": "Thông tin thuế suất"
+            }
+        }
+    },
+    "itemGroup": {
+        "content": {
+            "item": {
+                "code": "Mã nhóm",
+                "name": "Tên nhóm"
+            },
+            "itemDetail": {
+                "code": "Mã sản phẩm",
+                "name": "Tên sản phẩm"
+            }
+        },
+        "dialog": {
+            "title": "Thêm nhóm sản phẩm"
+        },
+        "header": {
+            "title": "Nhóm sản phẩm"
+        }
+    },
+    "itemOfLegalEntity": {
+        "content": {
+            "itemDetail": {
+                "code": "Mã sản phẩm",
+                "name": "Tên sản phẩm"
+            },
+            "legal": {
+                "code": "Mã pháp nhân",
+                "name": "Tên pháp nhân",
+                "setOfBookCode": "Mã bộ sổ"
+            }
+        },
+        "header": {
+            "title": "Danh sách sản phẩm của pháp nhân"
+        }
+    },
+    "legalEntity": {
+        "add": "Thêm pháp nhân",
+        "code": "Mã pháp nhân",
+        "header": {
+            "title": "Danh sách pháp nhân"
+        },
+        "name": "Tên pháp nhân",
+        "subLevel1": "Mã lớp 1",
+        "subLevel2": "Mã lớp 2",
+        "subLevel3": "Mã lớp 3",
+        "subLevel4": "Mã lớp 4"
+    },
+    "legalItemDetail": {
+        "content": {
+            "characteristic": "Tính chất hàng",
+            "code": "Mã sản phẩm",
+            "codeFromMarket": "Mã SP từ thị trường",
+            "codeFromSupplier": "Mã SP từ NCC",
+            "description": "Mô tả",
+            "height": "Chiều cao",
+            "itemGroup": "Nhóm sản phẩm",
+            "length": "Chiều dài",
+            "name": "Tên sản phẩm",
+            "primaryPrice": "Đơn giá cơ bản ",
+            "status": "Trạng thái",
+            "unitOfMeasure": "Đơn vị cơ bản",
+            "weight": "Cân nặng",
+            "width": "Chiều rộng"
+        },
+        "defaultValue": {
+            "discountAccount": "TK chiết khấu",
+            "expenseAccount": "TK chi phí",
+            "inventoryAccount": "TK kho",
+            "returnAccount": "TK trả lại",
+            "revenueAccount": "TK doanh thu",
+            "salesAllowancesAccount": "TK giảm giá",
+            "title": "Giá trị ngầm định"
+        },
+        "header": {
+            "title": "Chỉnh sửa sản phẩm"
+        },
+        "itemDiscounts": {
+            "discounType": "Loại chiết khấu",
+            "quantityFrom": "Số lượng từ",
+            "quantityTo": "Số lượng đến",
+            "rate": "Chiết khâu",
+            "title": "Chiết khấu"
+        },
+        "itemMaterials": {
+            "modal_title": "Thêm vật liệu",
+            "quantity": "Số lương",
+            "sourceItemCode": "Mã nguyên vật liệu",
+            "sourceItemName": "Tên nguyên vật liệu",
+            "title": "Định mức nguyên vật liệu",
+            "unitOfMeasureCode": "Đơn vị tính"
+        },
+        "tab": {
+            "title_1": "Thông tin chung"
+        }
+    },
+    "special_price_customer": {
+        "code": "Mã sản phẩm",
+        "description": "Mô tả",
+        "discount": "Chiết khấu",
+        "from_date": "Từ ngày",
+        "item_group": "Nhóm sản phẩm",
+        "modal": {
+            "title": "Thêm giá đặc biệt"
+        },
+        "title": "Giá đặc biệt cho khách hàng",
+        "to_date": "Đến ngày"
+    },
+    "special_price_supplier": {
+        "code": "Mã sản phẩm",
+        "description": "Mô tả",
+        "discount": "Chiết khấu",
+        "from_date": "Từ ngày",
+        "item_group": "Nhóm sản phẩm",
+        "modal": {
+            "title": "Thêm giá đặc biệt"
+        },
+        "title": "Giá đặc biệt cho nhà cung cấp",
+        "to_date": "Đến ngày"
+    },
+    "supplierGroup": {
+        "add": "Thêm nhóm nhà cung cấp",
+        "code": "Mã nhóm",
+        "header": {
+            "title": "Nhóm nhà cung cấp"
+        },
+        "name": "Tên nhóm",
+        "supplier": {
+            "code": "Mã nhà cung cấp",
+            "name": "Tên nhà cung cấp"
+        }
+    },
+    "supplierOfLegalEntity": {
+        "code": "Mã pháp nhân",
+        "header": {
+            "title": "Danh sách nhà cung cấp của pháp nhân"
+        },
+        "name": "Tên pháp nhân",
+        "sob": "Mã bộ sổ",
+        "supplier": {
+            "code": "Mã nhà cung cấp",
+            "name": "Tên nhà cung cấp"
+        }
+    }
+}

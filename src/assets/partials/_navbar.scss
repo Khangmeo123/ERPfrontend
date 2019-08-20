@@ -1,10 +1,10 @@
 .wrapper {
 
-  
-  
+
   nav.navbar {
     height: $navbar-height;
     padding: 0;
+
     .navbar-nav {
       padding-left: 0px;
     }
@@ -31,7 +31,6 @@
         width: 35px;
         height: 35px;
         padding: 0;
-        border: none;
         overflow: hidden;
         border-radius: 50%;
         border: 1px solid #fff;
@@ -47,7 +46,7 @@
       }
 
       .nav-alert {
-        right: 0px;
+        right: 0;
         border-width: 1px;
         width: 9px;
         height: 9px;
@@ -95,13 +94,12 @@
       padding-bottom: 1rem;
       height: calc(100vh - #{$navbar-height} + 1px) !important;
 
-      ul {
-        //display: flex;
+      > ul {
         flex-direction: row;
         justify-content: space-between;
         flex-wrap: wrap;
 
-        li {
+        > li {
           flex: 1 1 0;
           max-width: 110px;
           padding: 1rem;
@@ -114,7 +112,6 @@
             justify-content: center;
 
             .link-text {
-              margin-top: 10px;
               font-size: .9rem;
               text-transform: uppercase;
             }
@@ -126,14 +123,12 @@
 
     .nav-link {
       padding: 0;
-      mat-icon {
-        padding-top: 7px;
-      }
+
       i {
         font-size: 1.1rem;
         width: 40px;
         height: 40px;
-        line-height: 40px;    
+        line-height: 40px;
         border-radius: 0;
       }
     }
@@ -160,7 +155,8 @@
 
       .navbar-header {
         width: 185px;
-        margin-left: 37px!important;
+        margin-left: 37px !important;
+
         .navbar-brand span {
           display: inline-block;
         }
@@ -185,22 +181,23 @@
         border-top: none;
         background: none !important;
 
-        ul {
+        > ul {
 
           margin-left: auto;
           flex-wrap: nowrap;
 
-          li {
+          > li {
             padding: 0;
 
             .user-profile {
-              margin-top: 10px;
-              display: flex; 
+              display: flex;
               color: #ffffff;
+
               i {
                 margin-top: 4px;
               }
             }
+
             .nav-link {
 
               .link-text {
@@ -215,8 +212,9 @@
 
   }
 }
+
 .pinned-sidebar {
-  .navbar{
+  .navbar {
     .navbar-nav {
       padding-left: 36px !important;
     }

@@ -1,485 +1,272 @@
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { GoodsReceiptPoDetailService } from './goods-receipt-po-detail.service';
 import {
-  GoodsReceiptPOInventoryOrganizationEntity,
-  PurchaseOrdersEntity,
-  GoodsReceiptPOTaxEntity,
-  GoodsReceiptPOItemDetailEntity,
-  GoodsReceiptPOUnitOfMeasureEntity,
-} from './../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { Subscription, Subject } from 'rxjs';
-import { FormGroup, FormArray } from '@angular/forms';
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
-import { translate } from 'src/app/_helpers/string';
-import { Router, ActivatedRoute } from '@angular/router';
-import { GoodsReceiptPODetailService } from './goods-receipt-po-detail.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
-import { BookmarkService } from 'src/app/_services';
+  EmployeeDetailEntity,
+  ItemDetailEntity,
+  PurchaseOrderEntity,
+  SupplierContactEntity,
+  SupplierEntity,
+  TaxEntity,
+  UnitOfMeasureEntity,
+} from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import {
-  GoodsReceiptPORequesterEntity,
-  GoodsReceiptPOSupplierEntity,
-  GoodsReceiptPOSupplierAddressEntity,
-} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import {
-  GoodsReceiptPORequesterSearchEntity,
-  GoodsReceiptPOInventoryOrganizationSearchEntity,
-  GoodsReceiptPOSupplierSearchEntity,
-  GoodsReceiptPOSupplierAddressSearchEntity,
-  PurchaseOrdersSearchEntity,
-  GoodsReceiptPOTaxSearchEntity,
-  GoodsReceiptPOItemDetailSearchEntity,
-  GoodsReceiptPOUnitOfMeasureSearchEntity,
-} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
+  EmpoloyeeDetailSearchEntity,
+  InventoryOrganizationSearchEntity,
+  ItemDetailSearchEntity,
+  PurchaseOrderSearchEntity,
+  SupplierContactSearchEntity,
+  TaxSearchEntity,
+  UnitOfMeasureSearchEntity,
+} from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
+import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 
 @Component({
   selector: 'app-goods-receipt-po-detail',
   templateUrl: './goods-receipt-po-detail.component.html',
   styleUrls: ['./goods-receipt-po-detail.component.scss'],
-  providers: [GoodsReceiptPODetailService],
-  encapsulation: ViewEncapsulation.None,
+  providers: [
+    GoodsReceiptPoDetailService,
+    GeneralService,
+  ],
 })
-export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
-  pageTitle = translate('goodsReceiptPODetail.header.title');
-  fileNameList: Array<any> = [];
-  displayBatches: boolean = false;
-  displaySerial: boolean = false;
-  displayAmount: boolean = false;
-  displayPurchseOrders: boolean = false;
-  goodsReceiptPOSubs: Subscription = new Subscription();
+export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
+
   goodsReceiptPOForm: FormGroup;
-  purchaseOrdersList: PurchaseOrdersEntity[];
-  purchaseOrdersSearchEntity: PurchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
+
+  goodsReceiptPOId: string = null;
+
+  displayPurchaseOrders: boolean = false;
+
+  filenameList: string[] = [];
+
   deletedList: number[] = [];
-  popoverTitle: string = '';
-  popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
-  supplierDetailId: string;
-  goodsReceiptPOId: string;
-  // supplier:
-  supplierIds: GoodsReceiptPOSupplierEntity[];
-  supplierExceptIds: GoodsReceiptPOSupplierEntity[];
-  supplierSearchEntity: GoodsReceiptPOSupplierSearchEntity = new GoodsReceiptPOSupplierSearchEntity();
-  supplierTyping: Subject<GoodsReceiptPOSupplierSearchEntity> = new Subject();
-  // supplierAddress:
-  supplierAddressIds: GoodsReceiptPOSupplierAddressEntity[];
-  supplierAddressExceptIds: GoodsReceiptPOSupplierAddressEntity[];
-  supplierAddressSearchEntity: GoodsReceiptPOSupplierAddressSearchEntity = new GoodsReceiptPOSupplierAddressSearchEntity();
-  supplierAddressTyping: Subject<GoodsReceiptPOSupplierAddressSearchEntity> = new Subject();
-  // buyer:
-  buyerIds: GoodsReceiptPORequesterEntity[];
-  buyerExceptIds: GoodsReceiptPORequesterEntity[];
-  buyerSearchEntity: GoodsReceiptPORequesterSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-  buyerTyping: Subject<GoodsReceiptPORequesterSearchEntity> = new Subject();
-  // owner:
-  ownerIds: GoodsReceiptPORequesterEntity[];
-  ownerExceptIds: GoodsReceiptPORequesterEntity[];
-  ownerSearchEntity: GoodsReceiptPORequesterSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-  ownerTyping: Subject<GoodsReceiptPORequesterSearchEntity> = new Subject();
-  // ownerPO:
-  ownerPOIds: GoodsReceiptPORequesterEntity[];
-  ownerPOExceptIds: GoodsReceiptPORequesterEntity[];
-  ownerPOSearchEntity: GoodsReceiptPORequesterSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-  ownerPOTyping: Subject<GoodsReceiptPORequesterSearchEntity> = new Subject();
-  // inventoryOrganization:
-  inventoryOrganizationIds: GoodsReceiptPOInventoryOrganizationEntity[];
-  inventoryOrganizationExceptIds: GoodsReceiptPOInventoryOrganizationEntity[];
-  inventoryOrganizationSearchEntity: GoodsReceiptPOInventoryOrganizationSearchEntity =
-    new GoodsReceiptPOInventoryOrganizationSearchEntity();
-  inventoryOrganizationTyping: Subject<GoodsReceiptPOInventoryOrganizationSearchEntity> = new Subject();
-  // tax:
-  taxIds: GoodsReceiptPOTaxEntity[];
-  taxExceptIds: GoodsReceiptPOTaxEntity[];
-  taxSearchEntity: GoodsReceiptPOTaxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
-  taxTyping: Subject<GoodsReceiptPOTaxSearchEntity> = new Subject();
-  // itemDetail:
-  itemDetailIds: GoodsReceiptPOItemDetailEntity[];
-  itemDetailExceptIds: GoodsReceiptPOItemDetailEntity[];
-  itemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
-  itemDetailTyping: Subject<GoodsReceiptPOItemDetailSearchEntity> = new Subject();
-  // unitOfMeasure:
-  unitOfMeasureIds: GoodsReceiptPOUnitOfMeasureEntity[];
-  unitOfMeasureExceptIds: GoodsReceiptPOUnitOfMeasureEntity[];
-  unitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
-  unitOfMeasureTyping: Subject<GoodsReceiptPOUnitOfMeasureSearchEntity> = new Subject();
-  // documentNumber:
-  documentNumberIds: PurchaseOrdersEntity[];
-  documentNumberExceptIds: PurchaseOrdersEntity[];
-  documentNumberSearchEntity: PurchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
-  documentNumberTyping: Subject<PurchaseOrdersSearchEntity> = new Subject();
+
+  purchaseOrdersList: PurchaseOrderEntity[] = [];
+
+  purchaseOrderSearchEntity: PurchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
+
+  taxList: TaxEntity[] = [];
+
+  taxSearchEntity: TaxSearchEntity = new TaxSearchEntity();
+
+  requesterList: EmployeeDetailEntity[] = [];
+
+  requesterSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+
+  buyerList: EmployeeDetailEntity[] = [];
+
+  buyerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+
+  ownerList: EmployeeDetailEntity[] = [];
+
+  ownerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+
+  supplierList: SupplierEntity[] = [];
+
+  supplierSearchEntity: SupplierSearchEntity = new SupplierSearchEntity();
+
+  supplierContactList: SupplierContactEntity[] = [];
+
+  supplierContactSearchEntity: SupplierContactSearchEntity = new SupplierContactSearchEntity();
+
+  inventoryOrganizationList: InventoryOrganizationEntity[] = [];
+
+  inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
+
+  unitOfMeasureList: UnitOfMeasureEntity[] = [];
+
+  unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
+
+  itemDetailList: ItemDetailEntity[] = [];
+
+  itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
+
+  public subscription: Subscription = new Subscription();
 
   constructor(
-    private goodsReceiptPOService: GoodsReceiptPODetailService,
+    private router: Router,
+    private goodsReceiptPoDetailService: GoodsReceiptPoDetailService,
+    private activatedRoute: ActivatedRoute,
     private generalService: GeneralService,
-    private bookmarkService: BookmarkService,
-    private route: ActivatedRoute,
-    private router: Router) {
+  ) {
+    const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
+      if (params.goodsReceiptPOId) {
+        this.goodsReceiptPOId = params.goodsReceiptPOId;
+        this.goodsReceiptPoDetailService.getDetail(params.goodsReceiptPOId);
+      }
+    });
 
-    this.route.queryParams
-      .subscribe(params => {
-        if (params.id) {
-          this.goodsReceiptPOId = params.id;
-        }
-        this.goodsReceiptPOService.getDetail(params.id).then(res => {
-          this.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
-        });
+    const formSubscription: Subscription = this.goodsReceiptPoDetailService.goodsReceiptPOForm.subscribe((form: FormGroup) => {
+      this.goodsReceiptPOForm = form;
+    });
+
+    const taxSubscription: Subscription = this.goodsReceiptPoDetailService.taxList.subscribe((list: TaxEntity[]) => {
+      this.taxList = list;
+    });
+
+    const ownerListSubscription: Subscription = this.goodsReceiptPoDetailService.ownerList.subscribe((list: EmployeeDetailEntity[]) => {
+      this.ownerList = list;
+    });
+
+    const taxListSubscription: Subscription = this.goodsReceiptPoDetailService.ownerList.subscribe((list: TaxEntity[]) => {
+      this.taxList = list;
+    });
+
+    const requesterListSubscription: Subscription = this.goodsReceiptPoDetailService.requesterList
+      .subscribe((list: EmployeeDetailEntity[]) => {
+        this.requesterList = list;
       });
-    const goodsReceiptFormSub = this.goodsReceiptPOService.goodsReceiptPOForm.subscribe(res => {
-      if (res) {
-        this.goodsReceiptPOForm = res;
-      }
-    });
-    const purchaseOrdersListSub = this.goodsReceiptPOService.purchaseOrdersList.subscribe(res => {
-      if (res) {
-        this.purchaseOrdersList = res;
-      }
-    });
-    // supplier:
-    const supplierListSub = this.goodsReceiptPOService.supplierList.subscribe(res => {
-      if (res) {
-        this.supplierIds = res.ids;
-        this.supplierExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchSupplier(this.supplierTyping);
-    // supplierAddress:
-    const supplierAddressSub = this.goodsReceiptPOService.supplierAddressList.subscribe(res => {
-      if (res) {
-        this.supplierAddressIds = res.ids;
-        this.supplierAddressExceptIds = res.exceptIds;
-        if (res.ids.length === 0 && res.exceptIds.length > 0) {
-          this.goodsReceiptPOForm.controls.supplierAddress.setValue(res.exceptIds[0].supplierAddress);
-          this.goodsReceiptPOForm.controls.supplierContactId.setValue(res.exceptIds[0].id);
-        }
-        if (res.ids.length === 0 && res.exceptIds.length === 0) {
-          this.goodsReceiptPOForm.controls.supplierAddress.setValue(null);
-          this.goodsReceiptPOForm.controls.supplierContactId.setValue(null);
-        }
-      }
-    });
-    this.goodsReceiptPOService.typingSearchSupplierAddress(this.supplierAddressTyping);
-    // owner:
-    const ownerSub = this.goodsReceiptPOService.ownerList.subscribe(res => {
-      if (res) {
-        this.ownerIds = res.ids;
-        this.ownerExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchOwner(this.ownerTyping);
-    // ownerPO:
-    const ownerPOSub = this.goodsReceiptPOService.ownerPOList.subscribe(res => {
-      if (res) {
-        this.ownerPOIds = res.ids;
-        this.ownerPOExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchOwnerPO(this.ownerPOTyping);
-    // buyer:
-    const buyerListSub = this.goodsReceiptPOService.buyerList.subscribe(res => {
-      if (res) {
-        this.buyerIds = res.ids;
-        this.buyerExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchBuyer(this.buyerTyping);
-    // invetoryOrganization:
-    const inventoryOrganizationSub = this.goodsReceiptPOService.invetoryOrganizationList.subscribe(res => {
-      if (res) {
-        this.inventoryOrganizationIds = res.ids;
-        this.inventoryOrganizationExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchInvetoryOrganization(this.inventoryOrganizationTyping);
-    // tax:
-    const taxListSub = this.goodsReceiptPOService.taxList.subscribe(res => {
-      if (res) {
-        this.taxIds = res.ids;
-        this.taxExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchTax(this.taxTyping);
-    // itemDetail:
-    const itemListSub = this.goodsReceiptPOService.itemList.subscribe(res => {
-      if (res) {
-        this.itemDetailIds = res.ids;
-        this.itemDetailExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchItem(this.itemDetailTyping);
-    // unitOfMeasure:
-    const unitOfMeasureListSub = this.goodsReceiptPOService.unitOfMeasureList.subscribe(res => {
-      if (res) {
-        this.unitOfMeasureIds = res.ids;
-        this.unitOfMeasureExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
-    // documentNumber:
-    const documentNumberListSub = this.goodsReceiptPOService.documentNumberList.subscribe(res => {
-      if (res) {
-        this.documentNumberIds = res.ids;
-        this.documentNumberExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchDocumentNumber(this.documentNumberTyping);
 
-    // add subcription:
-    this.goodsReceiptPOSubs.add(goodsReceiptFormSub)
-      .add(supplierListSub)
-      .add(supplierAddressSub)
-      .add(ownerSub)
-      .add(inventoryOrganizationSub)
-      .add(purchaseOrdersListSub)
-      .add(ownerPOSub)
-      .add(taxListSub)
-      .add(unitOfMeasureListSub)
-      .add(itemListSub)
-      .add(buyerListSub)
-      .add(documentNumberListSub);
+    const buyerSubscription: Subscription = this.goodsReceiptPoDetailService.buyerList.subscribe((list: EmployeeDetailEntity[]) => {
+      this.buyerList = list;
+    });
+
+    const supplierSubscription: Subscription = this.goodsReceiptPoDetailService.supplierList.subscribe((list: SupplierEntity[]) => {
+      this.supplierList = list;
+    });
+
+    const purchaseOrdersSubscription: Subscription = this.goodsReceiptPoDetailService.purchaseOrderList
+      .subscribe((list: PurchaseOrderEntity[]) => {
+        this.purchaseOrdersList = list;
+      });
+
+    const inventoryOrganizationSubscription: Subscription = this.goodsReceiptPoDetailService.inventoryOrganizationList
+      .subscribe((list: InventoryOrganizationEntity[]) => {
+        this.inventoryOrganizationList = list;
+      });
+
+    const supplierContactSubscription: Subscription = this.goodsReceiptPoDetailService.supplierContactList
+      .subscribe((list: SupplierContactEntity[]) => {
+        this.supplierContactList = list;
+      });
+
+    this.subscription
+      .add(activatedRouteSubscription)
+      .add(taxSubscription)
+      .add(supplierSubscription)
+      .add(supplierContactSubscription)
+      .add(formSubscription)
+      .add(ownerListSubscription)
+      .add(buyerSubscription)
+      .add(purchaseOrdersSubscription)
+      .add(inventoryOrganizationSubscription)
+      .add(requesterListSubscription)
+      .add(taxListSubscription);
+  }
+
+  get errors(): FormGroup {
+    return this.goodsReceiptPOForm.get('errors') as FormGroup;
+  }
+
+  get supplierDetailId() {
+    return this.goodsReceiptPOForm.get('supplierDetailId') as FormControl;
+  }
+
+  get supplierCode() {
+    return this.goodsReceiptPOForm.get('supplierCode') as FormControl;
+  }
+
+  get supplierName() {
+    return this.goodsReceiptPOForm.get('supplierName') as FormControl;
+  }
+
+  get dueDate() {
+    return this.goodsReceiptPOForm.get('dueDate') as FormControl;
   }
 
   ngOnInit() {
-
   }
 
-  ngOnDestroy() {
-    this.goodsReceiptPOSubs.unsubscribe();
-  }
-
-  // general:
-  trackByFn(index, row) {
-    return index;
-  }
-
-  readURL(event: any) {
-    for (const item of event.srcElement.files) {
-      this.fileNameList.push(item.name);
-    }
-  }
-
-  showBatches() {
-    this.displayBatches = true;
-  }
-
-  showSerial() {
-    this.displaySerial = true;
-  }
-
-  showAmount() {
-    this.displayAmount = true;
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
   backToList() {
-    this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
-  }
-
-  save() {
-    if (!this.goodsReceiptPOForm.valid) {
-      this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
-    } else {
-      this.goodsReceiptPOService.save(this.goodsReceiptPOForm.value).then(res => {
-        this.backToList();
-      });
-    }
+    return this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
   }
 
   send() {
-    if (!this.goodsReceiptPOForm.valid) {
+    if (this.goodsReceiptPOForm.invalid) {
       this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
     } else {
-      this.goodsReceiptPOService.send(this.goodsReceiptPOForm.value).then(res => {
-        this.backToList();
+      this.goodsReceiptPoDetailService.send(this.goodsReceiptPOForm.value)
+        .then(() => {
+          return this.backToList();
+        });
+    }
+  }
+
+  save() {
+    if (this.goodsReceiptPOForm.invalid) {
+      this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
+    } else {
+      this.goodsReceiptPoDetailService.save(this.goodsReceiptPOForm.value)
+        .then(() => {
+          return this.backToList();
+        });
+    }
+  }
+
+  public combineGoodsReceiptPO() {
+    const goodsReceiptPOValue = this.goodsReceiptPOForm.value;
+    const arrayIds = [];
+    this.purchaseOrdersList.forEach(item => {
+      if (item.isSelected) {
+        arrayIds.push(item.id);
+      }
+    });
+    goodsReceiptPOValue.purchaseOrderIds = [...arrayIds];
+    this.goodsReceiptPoDetailService.combineGoodsReceiptPO(goodsReceiptPOValue);
+    this.displayPurchaseOrders = false;
+  }
+
+  onClearSearch(event) {
+
+  }
+
+  deactivate() {
+
+  }
+
+  deleteItem() {
+    this.goodsReceiptPoDetailService.deleteItemFromContents(this.deletedList);
+  }
+
+  showPurchaseOrders() {
+    this.purchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
+    this.purchaseOrderSearchEntity.supplierDetailId = this.supplierDetailId.value;
+    this.goodsReceiptPoDetailService.getPurchaseOrderList(this.purchaseOrderSearchEntity)
+      .then(() => {
       });
-    }
+    this.displayPurchaseOrders = true;
   }
 
-  // buyer:
-  dropListBuyer(id: string) {
-    this.buyerSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.buyerSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListBuyer(this.ownerSearchEntity);
+  recalculateContents() {
+    this.goodsReceiptPoDetailService.recalculateContents(this.goodsReceiptPOForm);
   }
 
-  typingSearchBuyer(event, id) {
-    this.buyerSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.buyerSearchEntity.ids.push(id);
-    }
-    this.buyerSearchEntity.name.startsWith = event;
-    this.buyerTyping.next(this.buyerSearchEntity);
+  sortDatePurchaseOrders(event, tablePurchaseOrders: any) {
+    const date = event.replace(/\//g, '-') + 'T00:00:00';
+    tablePurchaseOrders.filter(date, 'documentDate', 'equals');
   }
 
-  // owner:
-  dropListOwner(id: string) {
-    this.ownerSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.ownerSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListOwner(this.ownerSearchEntity);
+  selectAllPurchaseOrders(event) {
+    this.purchaseOrdersList.forEach(item => {
+      item.isSelected = event.target.checked;
+    });
   }
 
-  typingSearchOwner(event, id) {
-    this.ownerSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.ownerSearchEntity.ids.push(id);
-    }
-    this.ownerSearchEntity.name.startsWith = event;
-    this.ownerTyping.next(this.ownerSearchEntity);
-  }
-  // ownerPO:
-  dropListOwnerPO(id: string) {
-    this.ownerPOSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.ownerPOSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListOwnerPO(this.ownerPOSearchEntity);
+  readURL(event) {
+    this.filenameList = Object.values(event.target.files).map((file: File) => file.name);
   }
 
-  typingSearchOwnerPO(event, id) {
-    this.ownerPOSearchEntity = new GoodsReceiptPORequesterSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.ownerPOSearchEntity.ids.push(id);
-    }
-    this.ownerPOSearchEntity.name.startsWith = event;
-    this.ownerPOTyping.next(this.ownerPOSearchEntity);
-  }
-
-  // inventoryOrganization:
-  dropListInventoryOrganization(id: string) {
-    this.inventoryOrganizationSearchEntity = new GoodsReceiptPOInventoryOrganizationSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.inventoryOrganizationSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListInvetoryOrganization(this.inventoryOrganizationSearchEntity);
-  }
-
-  typingSearchInvetoryOrganization(event: string, id: string) {
-    this.inventoryOrganizationSearchEntity = new GoodsReceiptPOInventoryOrganizationSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.inventoryOrganizationSearchEntity.ids.push(id);
-    }
-    this.inventoryOrganizationSearchEntity.code.startsWith = event;
-    this.inventoryOrganizationTyping.next(this.inventoryOrganizationSearchEntity);
-  }
-
-  // supplier:
-  dropListSupplier(id: string) {
-    this.supplierSearchEntity = new GoodsReceiptPOSupplierSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.supplierSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListSupplier(this.supplierSearchEntity);
-  }
-
-  typingSearchSupplier(event: string, id: string) {
-    this.supplierSearchEntity = new GoodsReceiptPOInventoryOrganizationSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.supplierSearchEntity.ids.push(id);
-    }
-    this.supplierSearchEntity.code.startsWith = event;
-    this.supplierTyping.next(this.supplierSearchEntity);
-  }
-
-  chooseSupplier(event: any[]) {
-    this.supplierDetailId = event[0].id;
-    this.goodsReceiptPOService.chooseSupplier(event);
-    this.supplierAddressSearchEntity = new GoodsReceiptPOSupplierAddressSearchEntity();
-    this.supplierAddressSearchEntity.supplierDetailId = this.supplierDetailId;
-    this.goodsReceiptPOService.dropListSupplierAddress(this.supplierAddressSearchEntity);
-  }
-
-  returnSupplier(node) {
-    return node;
-  }
-
-  // supplierAddress:
-  dropListSupplierAddress(id: string) {
-    this.supplierAddressSearchEntity = new GoodsReceiptPOSupplierAddressSearchEntity();
-    this.supplierAddressSearchEntity.supplierDetailId = this.supplierDetailId;
-    if (id !== null && id.length > 0) {
-      this.supplierAddressSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListSupplierAddress(this.supplierAddressSearchEntity);
-  }
-
-  typingSearchSupplierAddress(event: string, id: string) {
-    this.supplierAddressSearchEntity = new GoodsReceiptPOSupplierAddressSearchEntity();
-    this.supplierAddressSearchEntity.supplierDetailId = this.supplierDetailId;
-    if (id !== null && id.length > 0) {
-      this.supplierAddressSearchEntity.ids.push(id);
-    }
-    this.supplierAddressSearchEntity.supplierAddress.startsWith = event;
-    this.supplierAddressTyping.next(this.supplierAddressSearchEntity);
-  }
-
-  // item:
-  dropListItemDetail(id: string) {
-    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListItem(this.itemDetailSearchEntity);
-  }
-
-  typingSearchItemDetail(event: string, id: string) {
-    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.itemDetailSearchEntity.name.startsWith = event;
-    this.itemDetailTyping.next(this.itemDetailSearchEntity);
-  }
-
-  // tax:
-  dropListTax(id: string) {
-    this.taxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.taxSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListTax(this.taxSearchEntity);
-  }
-
-  typingSearchTax(event: string, id: string) {
-    this.taxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.taxSearchEntity.ids.push(id);
-    }
-    this.taxSearchEntity.name.startsWith = event;
-    this.taxTyping.next(this.taxSearchEntity);
-  }
-
-  // unitOfMeasure:
-  dropListUnitOfMeasure(id: string) {
-    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListUnitOfMeasure(this.unitOfMeasureSearchEntity);
-  }
-
-  typingSearchUnitOfMeasure(event: string, id: string) {
-    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.unitOfMeasureSearchEntity.name.startsWith = event;
-    this.unitOfMeasureTyping.next(this.unitOfMeasureSearchEntity);
-  }
-
-  // documentNumber:
-  dropListDocumentNumber(id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.documentNumberSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListDocumentNumber(this.documentNumberSearchEntity);
-  }
-
-  typingSearchDocumentNumber(event: number, id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.documentNumberSearchEntity.ids.push(id);
-    }
-    this.documentNumberSearchEntity.documentNumber.equal = event;
-    this.documentNumberTyping.next(this.documentNumberSearchEntity);
+  trackByFn(index) {
+    return index;
   }
 
   // goodsReceiptPO content:
@@ -491,55 +278,55 @@ export class GoodsReceiptPODetailComponent implements OnInit, OnDestroy {
     }
   }
 
-  deleteItem() {
-    this.goodsReceiptPOService.deleteItemFromContent(this.deletedList);
+  onSelectSupplierDetail(event) {
+    this.goodsReceiptPOForm.patchValue({
+      supplierDetailId: event.id,
+      supplierCode: event.code,
+      supplierName: event.name,
+    });
+
+    this.supplierContactSearchEntity.supplierDetailId = event.id;
+    this.goodsReceiptPoDetailService.getSupplierContactList(this.supplierContactSearchEntity)
+      .then(() => {
+        if (this.supplierContactList.length > 0) {
+          this.goodsReceiptPOForm.patchValue({
+            supplierContactId: this.supplierContactList[0].id,
+          });
+        }
+      });
   }
 
-  recalculateContents() {
-    this.goodsReceiptPOService.recalculateContents(this.goodsReceiptPOForm);
-  }
+  getSupplierContactList = () => {
+    this.supplierContactSearchEntity = new SupplierContactSearchEntity();
+    this.supplierContactSearchEntity.supplierDetailId = this.supplierDetailId.value;
+    this.goodsReceiptPoDetailService.getSupplierContactList(this.supplierContactSearchEntity);
+  };
 
-  returnDocumentNumber(node) {
-    return node;
-  }
-
-  clearSearch(tableGoodsReceiptPOContents) {
-    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
-    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
-    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
-    this.taxSearchEntity = new GoodsReceiptPOTaxSearchEntity();
-    tableGoodsReceiptPOContents.reset();
-  }
-
-  // purchase order dialog:
-  showPurchaseOrders() {
-    this.purchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
-    this.purchaseOrdersSearchEntity.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
-    this.goodsReceiptPOService.getPurchaseOrdersList(this.purchaseOrdersSearchEntity);
-    this.displayPurchseOrders = true;
-  }
-
-  sortDatePurchaseOrders(event: string, tablePurchaseOrders: any) {
-    const date = event.replace(/\//g, '-') + 'T00:00:00';
-    tablePurchaseOrders.filter(date, 'documentDate', 'equals');
-  }
-
-  selectedAllPurchaseOrders(event: any) {
-    this.purchaseOrdersList.forEach(item => {
-      item.isSelected = true;
+  onSelectInventoryOrganization(event) {
+    this.goodsReceiptPOForm.patchValue({
+      inventoryOrganizationId: event.id,
+      inventoryOrganizationStreet: event.address,
     });
   }
 
-  combineGoodsReceiptPO() {
-    const goodsReceiptPOValue = this.goodsReceiptPOForm.value;
-    const arrayIds = [];
-    this.purchaseOrdersList.forEach(item => {
-      if (item.isSelected) {
-        arrayIds.push(item.id);
-      }
+  onSelectRequester(event) {
+    this.goodsReceiptPOForm.patchValue({
+      requesterId: event.id,
+      requesterName: event.name,
     });
-    goodsReceiptPOValue.purchaseOrderIds = [...arrayIds];
-    this.goodsReceiptPOService.combineGoodsReceiptPO(goodsReceiptPOValue);
-    this.displayPurchseOrders = false;
+  }
+
+  onSelectOwner(event) {
+    this.goodsReceiptPOForm.patchValue({
+      ownerId: event.id,
+      ownerName: event.name,
+    });
+  }
+
+  onSelectBuyer(event) {
+    this.goodsReceiptPOForm.patchValue({
+      buyerId: event.id,
+      buyerName: event.name,
+    });
   }
 }

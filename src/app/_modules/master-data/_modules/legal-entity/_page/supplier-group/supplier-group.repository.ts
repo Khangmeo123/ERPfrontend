@@ -1,4 +1,4 @@
-import { Repository } from 'src/app/_helpers/repository';
+import { Repository } from 'src/app/_repositories/repository';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';

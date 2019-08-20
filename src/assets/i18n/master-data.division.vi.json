@@ -1,0 +1,15 @@
+{
+    "division": {
+        "content": {
+            "address": "Địa chỉ",
+            "code": "Mã chi nhánh",
+            "name": "Tên chi nhánh"
+        },
+        "dialog": {
+            "title": "Thêm chi nhánh"
+        },
+        "header": {
+            "title": "Danh sách chi nhánh"
+        }
+    }
+}

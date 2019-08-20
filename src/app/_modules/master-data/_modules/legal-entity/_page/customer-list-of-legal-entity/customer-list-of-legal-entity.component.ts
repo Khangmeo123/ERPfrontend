@@ -1,5 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { GeneralService } from '../../../../../../_helpers/general-service.service';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 import { BookmarkService } from '../../../../../../_services';
 import { Router } from '@angular/router';
 import { PaginationModel } from '../../../../../../_shared/modules/pagination/pagination.model';

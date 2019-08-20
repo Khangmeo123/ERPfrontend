@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { AppRepository } from '../_repositories/app.repository';
+import { LegalEntity } from '../_modules/master-data/_backend/legal/legal.entity';
+import { ToastrService } from 'ngx-toastr';
+import { translate } from '../_helpers/string';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AppService {
 
   isSidebarPinned = false; // default true
-  isSidebarToggeled = false;
 
-  constructor() { }
+  isToggled = false;
+
+  public legalEntities: BehaviorSubject<LegalEntity[]> = new BehaviorSubject<LegalEntity[]>([]);
+
+  constructor(private appRepository: AppRepository, private toastrService: ToastrService) {
+  }
 
   toggleSidebar() {
-    this.isSidebarToggeled = !this.isSidebarToggeled;
+    this.isToggled = !this.isToggled;
   }
 
   toggleSidebarPin() {
@@ -21,8 +30,20 @@ export class AppService {
   getSidebarStat() {
     return {
       isSidebarPinned: this.isSidebarPinned,
-      isSidebarToggeled: this.isSidebarToggeled
-    }
+      isToggled: this.isToggled,
+    };
   }
 
+  getLegalEntityList = (): Subscription => {
+    return this.appRepository.getLegalEntityList()
+      .subscribe(
+        (legalEntities: LegalEntity[]) => {
+          this.legalEntities.next(legalEntities);
+        },
+        (error: Error) => {
+          this.toastrService.error(translate('general.legalEntityList.get.error'));
+          throw error;
+        },
+      );
+  };
 }

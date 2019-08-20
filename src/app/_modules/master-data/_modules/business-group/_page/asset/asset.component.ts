@@ -6,7 +6,7 @@ import { AssetEntity } from 'src/app/_modules/master-data/_backend/asset/asset.e
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { AssetService } from './asset.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { EnumEntity } from 'src/app/_helpers/entity';

@@ -1,0 +1,51 @@
+{
+    "documentStatus": {
+        "get": {
+            "error": "Không thể lấy danh sách trạng thái chứng từ"
+        }
+    },
+    "inventoryDocumentTypes": {
+        "get": {
+            "error": "Loại chứng từ"
+        }
+    },
+    "inventoryOrganizationEntity": {
+        "get": {
+            "error": "Không thể lấy danh sách kho"
+        }
+    },
+    "legalEntity": {
+        "get": {
+            "error": "Không thể lấy danh sách pháp nhân"
+        }
+    },
+    "permission": {
+        "currentStatus": "Trạng thái hiện tại",
+        "currentStep": "Thứ tự thực hiện",
+        "detail": {
+            "params": {
+                "get": {
+                    "error": "Không thể lấy thông tin phân quyền"
+                }
+            },
+            "title": "Thông tin phân quyền"
+        },
+        "documentType": "Loại chứng từ",
+        "header": {
+            "title": "Phân quyền"
+        },
+        "inventoryCode": "Mã kho",
+        "legalEntity": "Pháp nhân",
+        "mailToApprover": "",
+        "mailToSender": "",
+        "nextStatus": "Trạng thái chuyển đến",
+        "nextStep": "Thứ tự chuyển đến",
+        "positionCode": "Mã chức vụ",
+        "positionName": "Tên chức vụ"
+    },
+    "positionEntity": {
+        "get": {
+            "error": "Không thể lấy danh sách chức vụ"
+        }
+    }
+}

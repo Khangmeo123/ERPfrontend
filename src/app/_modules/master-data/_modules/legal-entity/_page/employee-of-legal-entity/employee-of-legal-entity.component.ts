@@ -1,7 +1,7 @@
 import {Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
 import {PaginationModel} from '../../../../../../_shared/modules/pagination/pagination.model';
 import {Router} from '@angular/router';
-import {GeneralService} from 'src/app/_helpers/general-service.service';
+import {GeneralService} from 'src/app/_services/general-service.service';
 import {BookmarkService} from 'src/app/_services';
 import {translate} from 'src/app/_helpers/string';
 import {LegalSearchEntity} from 'src/app/_modules/master-data/_backend/legal/legal.searchentity';

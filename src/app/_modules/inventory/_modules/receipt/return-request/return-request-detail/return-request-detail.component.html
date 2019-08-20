@@ -1,7 +1,7 @@
 <div class="page goods-receipt-po">
   <div class="page-header justify-content-between">
     <div class="justify-content-start align-items-center">
-      <span class="back-to-list" (click)="backToList()">
+      <span (click)="backToList()" class="back-to-list">
         <i class="material-icons">arrow_back_ios</i>
       </span>
       <span class="page-title">
@@ -50,14 +50,14 @@
         <span class="button-label">
           {{'general.button.save' | translate}}
         </span></button>
-      <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
-        <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle aria-controls="dropdown-basic">
+      <div class="btn-group btn-labeled" data-qe-id="button-import" dropdown>
+        <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle id="button-basic">
           <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
           <span class="button-label">
             {{'general.action' | translate}}
           </span></button>
-        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
-          aria-labelledby="button-basic">
+        <ul *dropdownMenu aria-labelledby="button-basic" class="dropdown-menu dropdown-menu-right" id="dropdown-basic"
+            role="menu">
           <li role="menuitem">
             <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
           </li>
@@ -101,7 +101,7 @@
             <label>
               {{'returnRequest.detail.customerName' | translate}}
             </label>
-            <input type="text" class="form-control" data-qe-id="detail-form-customer-name" disabled>
+            <input class="form-control" data-qe-id="detail-form-customer-name" disabled type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -119,8 +119,8 @@
               {{'returnRequest.detail.returnRequest.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input type="text" class="form-control" (click)="showReturnRequest()"
-              data-qe-id="detail-form-goods-receipt">
+            <input (click)="showReturnRequest()" class="form-control" data-qe-id="detail-form-goods-receipt"
+                   type="text">
           </div>
         </div>
       </div>
@@ -132,7 +132,7 @@
               {{'returnRequest.detail.documentNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input type="text" class="form-control" data-qe-id="detail-form-document-number">
+            <input class="form-control" data-qe-id="detail-form-document-number" type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -145,7 +145,7 @@
             <label>
               {{'returnRequest.detail.inventoryAddress' | translate}}
             </label>
-            <input type="text" class="form-control" data-qe-id="detail-form-inventory-code" disabled>
+            <input class="form-control" data-qe-id="detail-form-inventory-code" disabled type="text">
           </div>
         </div>
         <div class="row">
@@ -161,13 +161,13 @@
             <label>
               {{'returnRequest.detail.receiver' | translate}}
             </label>
-            <input type="text" class="form-control" data-qe-id="detail-form-receiver" disabled>
+            <input class="form-control" data-qe-id="detail-form-receiver" disabled type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'returnRequest.detail.creator' | translate}}
             </label>
-            <input type="text" class="form-control" data-qe-id="detail-form-creator" disabled>
+            <input class="form-control" data-qe-id="detail-form-creator" disabled type="text">
           </div>
         </div>
         <div class="row">
@@ -183,13 +183,13 @@
             <label>
               {{'returnRequest.detail.createdDate' | translate}}
             </label>
-            <app-date-picker data-qe-id="detail-form-created-date" [disabled]="true"></app-date-picker>
+            <app-date-picker [disabled]="true" data-qe-id="detail-form-created-date"></app-date-picker>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 form-group">
             <label>{{ 'returnRequest.detail.description' | translate}}</label>
-            <textarea class="form-control" rows="4" data-qe-id="detail-form-description">
+            <textarea class="form-control" data-qe-id="detail-form-description" rows="4">
                          </textarea>
           </div>
         </div>
@@ -212,45 +212,46 @@
 
             </div>
             <div class="table">
-              <p-table resizableColumns [value]="tableTemp">
+              <p-table [value]="tableTemp" resizableColumns>
                 <ng-template pTemplate="header">
                   <tr>
                     <th width="2.5%">
                       <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox" />
+                        <input type="checkbox"/>
                         <div class="state">
                           <i class="icon material-icons">done</i>
                           <label></label>
                         </div>
                       </div>
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-item-no">
+                    <th data-qe-id="table-thead-item-no" pResizableColumn>
                       {{'returnRequest.detail.tab1.itemNo' | translate}} </th>
-                    <th pResizableColumn data-qe-id="table-thead-item-name">
+                    <th data-qe-id="table-thead-item-name" pResizableColumn>
                       {{'returnRequest.detail.tab1.itemName' | translate}} </th>
-                    <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
+                    <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
                       {{'returnRequest.detail.tab1.unitOfMeasure' | translate}}
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-quantity">
+                    <th data-qe-id="table-thead-quantity" pResizableColumn>
                       {{'returnRequest.detail.tab1.quantity' | translate}} </th>
-                    <th pResizableColumn data-qe-id="table-thead-value-added-tax">
+                    <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
                       {{'returnRequest.detail.tab1.valueAddedTax' | translate}}
-                      (%)</th>
-                    <th pResizableColumn data-qe-id="table-thead-discount">
+                      (%)
+                    </th>
+                    <th data-qe-id="table-thead-discount" pResizableColumn>
                       {{'returnRequest.detail.tab1.discount' | translate}} (%)
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-discount-amount">
+                    <th data-qe-id="table-thead-discount-amount" pResizableColumn>
                       {{'returnRequest.detail.tab1.discountAmount' | translate}}
                     </th>
-                    <th pResizableColumn data-qe-id="table-thead-total">
+                    <th data-qe-id="table-thead-total" pResizableColumn>
                       {{'returnRequest.detail.tab1.total' | translate}}</th>
                   </tr>
                 </ng-template>
-                <ng-template pTemplate="body" let-item>
+                <ng-template let-item pTemplate="body">
                   <tr>
                     <td>
                       <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox" />
+                        <input type="checkbox"/>
                         <div class="state">
                           <i class="icon material-icons">done</i>
                           <label></label>
@@ -279,10 +280,10 @@
                     <span class="button-label">
                       {{'general.button.attachFile' | translate}}
                     </span></button>
-                  <input type="file" (change)="readURL($event)" multiple />
+                  <input (change)="readURL($event)" multiple type="file"/>
                 </div>
                 <div class="results d-flex align-items-center">
-                  <div class="results-item d-flex mr-3" *ngFor="let name of fileNameList">
+                  <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
                     <div class="results-item-name">
                       <span class="icon-upload"><i class="material-icons">attach_file</i></span>
                       <span>{{name}}</span>
@@ -310,33 +311,33 @@
   </div>
 </div>
 
-<p-dialog [modal]="true" appendTo="body" [(visible)]="displayReturnRequest" [contentStyle]="{'overflow':'visible'}"
-  [style]="{width: '80%'}" [responsive]="true">
+<p-dialog [(visible)]="displayReturnRequest" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+          [style]="{width: '80%'}" appendTo="body">
   <p-header>
     <span class="dialog-header">{{'returnRequest.detail.returnRequest.customerName' | translate}}</span>
   </p-header>
   <div class="dialog-body">
     <div class="row mt-3">
       <div class="col-sm-12">
-        <p-table resizableColumns [value]="">
+        <p-table [value]="" resizableColumns>
           <ng-template pTemplate="header">
             <tr>
-              <th width="2.5%" pResizableColumn data-qe-id="table-thead-returnRequest-request-check-box">
+              <th data-qe-id="table-thead-returnRequest-request-check-box" pResizableColumn width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox" />
+                  <input type="checkbox"/>
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>
                   </div>
                 </div>
               </th>
-              <th pResizableColumn data-qe-id="table-thead-returnRequest-request-created-date">
+              <th data-qe-id="table-thead-returnRequest-request-created-date" pResizableColumn>
                 {{'returnRequest.detail.returnRequestRequest.createdDate' | translate}} </th>
-              <th pResizableColumn data-qe-id="table-thead-returnRequest-request-document-no">
+              <th data-qe-id="table-thead-returnRequest-request-document-no" pResizableColumn>
                 {{'returnRequest.detail.returnRequestRequest.documentNo' | translate}} </th>
-              <th pResizableColumn data-qe-id="table-thead-returnRequest-request-buyer">
+              <th data-qe-id="table-thead-returnRequest-request-buyer" pResizableColumn>
                 {{'returnRequest.detail.returnRequestRequest.buyer' | translate}} </th>
-              <th pResizableColumn data-qe-id="table-thead-returnRequest-request-creator">
+              <th data-qe-id="table-thead-returnRequest-request-creator" pResizableColumn>
                 {{'returnRequest.detail.returnRequestRequest.creator' | translate}} </th>
             </tr>
           </ng-template>
@@ -353,7 +354,7 @@
             <span class="button-label">
               {{'returnRequest.detail.button.add' | translate}}
             </span></button>
-          <button class="btn btn-labeled btn-cancel" (click)="displayReturnRequest = false">
+          <button (click)="displayReturnRequest = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
               {{'general.button.cancel' | translate}}

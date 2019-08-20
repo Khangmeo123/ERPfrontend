@@ -82,6 +82,8 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   unselect(event) {
     const { data } = event;
+    this.initialValue = null;
+    this.currentValue = null;
     this.selectedList = [];
     this.list = [
       ...this.list,
@@ -93,25 +95,15 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   ngOnChanges(changes: SimpleChanges): void {
     if (changes.list || changes.selectedList) {
       this.isLoading = false;
-      if (changes.list) {
-        if (changes.list.currentValue && changes.list.currentValue.length) {
-          this.list = [
-            ...this.list,
-          ];
-        }
-      }
-      if (changes.selectedList) {
-        if (changes.selectedList.currentValue && changes.selectedList.currentValue.length) {
-          this.selectedList = [
-            ...this.selectedList,
-          ];
-        }
-      }
     }
     if (changes.initialValue) {
-      if (!changes.initialValue.currentValue) {
-        this.selectedList = null;
+      const {
+        currentValue,
+      } = changes.initialValue;
+      if (!currentValue) {
+        this.selectedList = [];
         this.initialValue = null;
+        this.currentValue = null;
       } else {
         const pattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
         if (pattern.test(changes.initialValue.currentValue)) {
@@ -140,7 +132,9 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
       ...this.list.slice(index + 1),
       ...this.selectedList,
     ];
-    this.selectedList[0] = data;
+    this.selectedList = [
+      data,
+    ];
     this.currentValue = data[this.key];
     this.initialValue = data[this.key];
     return this.onChange();

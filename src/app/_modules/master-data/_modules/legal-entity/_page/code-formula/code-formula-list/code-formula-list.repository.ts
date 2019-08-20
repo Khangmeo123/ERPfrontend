@@ -1,4 +1,4 @@
-import {Repository} from '../../../../../../../_helpers/repository';
+import {Repository} from '../../../../../../../_repositories/repository';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpResponse} from '@angular/common/http';
 import {LegalSearchEntity} from '../../../../../_backend/legal/legal.searchentity';

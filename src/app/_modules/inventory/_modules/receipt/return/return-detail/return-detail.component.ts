@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 })
 export class ReturnDetailComponent implements OnInit {
   pageTitle = translate('return.detail.header.title');
-  fileNameList: Array<any> = []
+  fileNameList: Array<any> = [];
   tableTemp = [
     {
       total: 100000,
@@ -24,21 +24,22 @@ export class ReturnDetailComponent implements OnInit {
       total: 2000000,
       type: 3,
     }
-  ]
+  ];
 
   displayBatches: boolean = false;
   displaySerial: boolean = false;
   displayAmount: boolean = false;
   displayReturn: boolean = false;
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) {
+  }
 
   ngOnInit() {
   }
 
 
   readURL(event: any) {
-    for(const item of event.srcElement.files) {
+    for (const item of event.srcElement.files) {
       this.fileNameList.push(item.name);
     }
   }

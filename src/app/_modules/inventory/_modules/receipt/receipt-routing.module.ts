@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
 import { GoodsReceiptPOComponent } from './goods-receipt-po/goods-receipt-po.component';
 import { GoodsReceiptComponent } from './goods-receipt/goods-receipt.component';
 import { ReturnRequestComponent } from './return-request/return-request.component';
@@ -11,9 +11,9 @@ import { GoodsReceiptDetailComponent } from './goods-receipt/goods-receipt-detai
 import { GoodsReceiptPOApproveComponent } from './goods-receipt-po/goods-receipt-po-approve/goods-receipt-po-approve.component';
 import { GoodsReceiptPOReceiveComponent } from './goods-receipt-po/good-receipt-po-receive/goods-receipt-po-receive.component';
 import { GoodsReceiptPOListComponent } from './goods-receipt-po/goods-receipt-po-list/goods-receipt-po-list.component';
-import { GoodsReceiptPODetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
-import {ReturnRequestListComponent} from './return-request/return-request-list/return-request-list.component';
-import {ReturnRequestDetailComponent} from './return-request/return-request-detail/return-request-detail.component';
+import { ReturnRequestListComponent } from './return-request/return-request-list/return-request-list.component';
+import { ReturnRequestDetailComponent } from './return-request/return-request-detail/return-request-detail.component';
+import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
 
 const routes: Routes = [
   {
@@ -28,7 +28,7 @@ const routes: Routes = [
           },
           {
             path: 'goods-receipt-po-detail',
-            component: GoodsReceiptPODetailComponent,
+            component: GoodsReceiptPoDetailComponent,
           },
           {
             path: 'goods-receipt-po-approve',
@@ -110,4 +110,5 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class ReceiptRoutingModule { }
+export class ReceiptRoutingModule {
+}

@@ -87,6 +87,11 @@
         "multiline": "always",
         "singleline": "never"
       }
+    ],
+    "semicolon": [
+      true,
+      "always",
+      "ignore-bound-class-methods"
     ]
   },
   "rulesDirectory": [

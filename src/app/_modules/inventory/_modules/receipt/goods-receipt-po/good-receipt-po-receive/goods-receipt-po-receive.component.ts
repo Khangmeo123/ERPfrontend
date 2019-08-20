@@ -1,27 +1,23 @@
-import { Subscription, Subject } from 'rxjs';
+import { Subject, Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
-import { Router, ActivatedRoute } from '@angular/router';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { GoodsReceiptPOReceiveService } from './goods-receipt-po-receive.service';
 import {
-  PurchaseOrdersEntity,
-  GoodsReceiptPOItemDetailEntity,
-  GoodsReceiptPOUnitOfMeasureEntity,
-  GoodsReceiptPOBinlocationEntity,
-  GoodsReceiptPOQuantityDetail,
-  GoodsReceiptPOQuantity,
-  GoodsReceiptPOSerialNumberEntity,
-  GoodsReceiptPOBatchEntity,
+  BinLocationEntity,
   GoodsReceiptPOContent,
+  ItemDetailEntity,
+  PurchaseOrderEntity,
+  UnitOfMeasureEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
-  PurchaseOrdersSearchEntity,
-  GoodsReceiptPOItemDetailSearchEntity,
-  GoodsReceiptPOUnitOfMeasureSearchEntity,
   GoodsReceiptPOBinlocationSearchEntity,
   GoodsReceiptPOContentDetailSearchEntity,
+  ItemDetailSearchEntity,
+  UnitOfMeasureSearchEntity,
+  PurchaseOrderSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 
 @Component({
@@ -58,23 +54,23 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   itemDetailId: string;
   goodsReceiptPOContentDetailSearchEntity: GoodsReceiptPOContentDetailSearchEntity = new GoodsReceiptPOContentDetailSearchEntity();
   // documentNumber:
-  documentNumberIds: PurchaseOrdersEntity[];
-  documentNumberExceptIds: PurchaseOrdersEntity[];
-  documentNumberSearchEntity: PurchaseOrdersSearchEntity = new PurchaseOrdersSearchEntity();
-  documentNumberTyping: Subject<PurchaseOrdersSearchEntity> = new Subject();
+  documentNumberIds: PurchaseOrderEntity[];
+  documentNumberExceptIds: PurchaseOrderEntity[];
+  documentNumberSearchEntity: PurchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
+  documentNumberTyping: Subject<PurchaseOrderSearchEntity> = new Subject();
   // itemDetail:
-  itemDetailIds: GoodsReceiptPOItemDetailEntity[];
-  itemDetailExceptIds: GoodsReceiptPOItemDetailEntity[];
-  itemDetailSearchEntity: GoodsReceiptPOItemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
-  itemDetailTyping: Subject<GoodsReceiptPOItemDetailSearchEntity> = new Subject();
+  itemDetailIds: ItemDetailEntity[];
+  itemDetailExceptIds: ItemDetailEntity[];
+  itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
+  itemDetailTyping: Subject<ItemDetailSearchEntity> = new Subject();
   // unitOfMeasure:
-  unitOfMeasureIds: GoodsReceiptPOUnitOfMeasureEntity[];
-  unitOfMeasureExceptIds: GoodsReceiptPOUnitOfMeasureEntity[];
-  unitOfMeasureSearchEntity: GoodsReceiptPOUnitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
-  unitOfMeasureTyping: Subject<GoodsReceiptPOUnitOfMeasureSearchEntity> = new Subject();
+  unitOfMeasureIds: UnitOfMeasureEntity[];
+  unitOfMeasureExceptIds: UnitOfMeasureEntity[];
+  unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
+  unitOfMeasureTyping: Subject<UnitOfMeasureSearchEntity> = new Subject();
   // binLocation:
-  binLocationIds: GoodsReceiptPOBinlocationEntity[];
-  binLocationExceptIds: GoodsReceiptPOBinlocationEntity[];
+  binLocationIds: BinLocationEntity[];
+  binLocationExceptIds: BinLocationEntity[];
   binLocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity = new GoodsReceiptPOBinlocationSearchEntity();
   binLocationTyping: Subject<GoodsReceiptPOBinlocationSearchEntity> = new Subject();
 
@@ -209,7 +205,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
 
   // documentNumber:
   dropListDocumentNumber(id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
+    this.documentNumberSearchEntity = new PurchaseOrderSearchEntity();
     if (id !== null && id.length > 0) {
       this.documentNumberSearchEntity.ids.push(id);
     }
@@ -217,16 +213,17 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   typingSearchDocumentNumber(event: number, id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrdersSearchEntity();
+    this.documentNumberSearchEntity = new PurchaseOrderSearchEntity();
     if (id !== null && id.length > 0) {
       this.documentNumberSearchEntity.ids.push(id);
     }
     this.documentNumberSearchEntity.documentNumber.equal = event;
     this.documentNumberTyping.next(this.documentNumberSearchEntity);
   }
+
   // itemDetail:
   dropListItemDetail(id: string) {
-    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+    this.itemDetailSearchEntity = new ItemDetailSearchEntity();
     if (id !== null && id.length > 0) {
       this.itemDetailSearchEntity.ids.push(id);
     }
@@ -234,7 +231,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   typingSearchItemDetail(event: string, id: string) {
-    this.itemDetailSearchEntity = new GoodsReceiptPOItemDetailSearchEntity();
+    this.itemDetailSearchEntity = new ItemDetailSearchEntity();
     if (id !== null && id.length > 0) {
       this.itemDetailSearchEntity.ids.push(id);
     }
@@ -244,7 +241,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
 
   // unitOfMeasure:
   dropListUnitOfMeasure(id: string) {
-    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+    this.unitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
     if (id !== null && id.length > 0) {
       this.unitOfMeasureSearchEntity.ids.push(id);
     }
@@ -252,7 +249,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   }
 
   typingSearchUnitOfMeasure(event: string, id: string) {
-    this.unitOfMeasureSearchEntity = new GoodsReceiptPOUnitOfMeasureSearchEntity();
+    this.unitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
     if (id !== null && id.length > 0) {
       this.unitOfMeasureSearchEntity.ids.push(id);
     }
@@ -316,7 +313,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.getSerialNumber(goodsReceiptPOContent.id);
   }
 
-  changeLocationSerialNumber(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
+  changeLocationSerialNumber(goodsReceiptPOBinlocationEntity: BinLocationEntity) {
     this.binLocationId = goodsReceiptPOBinlocationEntity.id;
     this.goodsReceiptPOService.changeLocationSerialNumber(goodsReceiptPOBinlocationEntity);
   }
@@ -358,7 +355,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOService.getBatch(goodsReceiptPOContentId);
   }
 
-  changeLocationInBatch(goodsReceiptPOBinlocationEntity: GoodsReceiptPOBinlocationEntity) {
+  changeLocationInBatch(goodsReceiptPOBinlocationEntity: BinLocationEntity) {
     this.binLocationId = goodsReceiptPOBinlocationEntity.id;
     this.goodsReceiptPOService.changeLocationBatch(goodsReceiptPOBinlocationEntity);
   }

@@ -8,9 +8,9 @@ describe('GoodsIssueDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ReturnRequestDetailComponent ]
+      declarations: [ReturnRequestDetailComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

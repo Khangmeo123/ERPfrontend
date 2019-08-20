@@ -6,7 +6,7 @@ import { BusinessGroupSearchEntity } from 'src/app/_modules/master-data/_backend
 import { BusinessGroupService } from './business-group.service';
 import { Subscription } from 'rxjs';
 import { BusinessGroupEntity } from 'src/app/_modules/master-data/_backend/business-group/business-group.entity';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { translate } from 'src/app/_helpers/string';
 

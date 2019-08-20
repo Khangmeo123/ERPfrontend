@@ -1,16 +1,16 @@
-import {Component} from '@angular/core';
-import {CookieService} from 'ngx-cookie-service';
+import { Component } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-root',
-    templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
-    providers: [CookieService],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-    title = 'JAJA';
+  title = 'JAJA';
 
-    constructor() {
-
-    }
+  constructor(private translateService: TranslateService) {
+    this.translateService.setDefaultLang('vi');
+    this.translateService.use('vi');
+  }
 }

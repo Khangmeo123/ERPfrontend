@@ -8,7 +8,7 @@ import { JobTitleEntity } from 'src/app/_modules/master-data/_backend/job-title/
 import { JobLevelSearchEntity } from 'src/app/_modules/master-data/_backend/job-level/job-level.searchentity';
 import { JobLevelEntity } from 'src/app/_modules/master-data/_backend/job-level/job-level.entity';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { EmployeeDetailService } from './employee-detail.service';
 import { EnumEntity } from 'src/app/_helpers/entity';
 

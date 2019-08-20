@@ -1,6 +1,6 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
-import {Repository} from 'src/app/_helpers/repository';
+import {Repository} from 'src/app/_repositories/repository';
 import {environment} from 'src/environments/environment';
 import {CustomerSearchEntity} from 'src/app/_modules/master-data/_backend/customer/customer.searchentity';
 import {Observable} from 'rxjs';

@@ -1,4 +1,4 @@
-<div class="full-width">
+<div class="full-width" *ngIf="control?.errors && control?.touched || formErrors?.get(property)?.value">
   <i class="fa fa-15 fa-exclamation-circle text-danger pull-right" [ngClass]="placement">
     <span class="tooltipText">
       <ng-container *ngFor="let error of errors">

@@ -15,20 +15,22 @@
   }
 
   .back-to-list {
-      .material-icons {
-        font-size: 15px !important;
-      }
-    
+    .material-icons {
+      font-size: 15px !important;
+    }
+
   }
+
   .tab-upload {
-      height: 200px;
+    height: 200px;
   }
 }
 
 // custom primeng
-.ui-table-resizable .ui-table-thead>tr>th, .ui-table-resizable .ui-table-tfoot>tr>td, .ui-table-resizable .ui-table-tbody>tr>td{
+.ui-table-resizable .ui-table-thead > tr > th, .ui-table-resizable .ui-table-tfoot > tr > td, .ui-table-resizable .ui-table-tbody > tr > td {
   overflow: visible !important;
 }
-.ui-table-scrollable-body{
+
+.ui-table-scrollable-body {
   min-height: 25vh !important;
 }

@@ -1,0 +1,141 @@
+{
+    "department": {
+        "addToDepartment": {
+            "error": "Thêm phòng ban không thành công",
+            "success": "Thêm phòng ban thành công"
+        },
+        "asset": {
+            "actions": "Thao tác",
+            "add": "Thông tin tài sản",
+            "code": "Mã tài sản",
+            "fromDate": "Quản lý từ ngày",
+            "manager": "Người quản lý",
+            "name": "Tên tài sản",
+            "toDate": "Đến ngày",
+            "type": "Loại tài sản"
+        },
+        "employee": {
+            "code": "Mã nhân viên",
+            "name": "Tên nhân viên"
+        },
+        "project": {
+            "add": "Thêm dự án",
+            "code": "Mã dự án",
+            "description": "Mô tả",
+            "endDate": "Ngày kết thúc",
+            "manager": "Người quản lý",
+            "name": "Tên dự án",
+            "startDate": "Ngày bắt đầu"
+        },
+        "warehouse": {
+            "add": "Thêm kho",
+            "address": "Địa chỉ",
+            "code": "Mã kho",
+            "name": "Tên kho",
+            "title": "Thông tin của kho bãi"
+        },
+        "warehouse_group": {
+            "code": "Mã phòng ban",
+            "details": {
+                "title": "Thông tin phòng kho"
+            },
+            "modal": {
+                "title": "Thêm nhóm kho"
+            },
+            "name": "Tên phòng ban"
+        }
+    },
+    "departments": {
+        "title": "Quản lý phòng ban"
+    },
+    "detailEmployeeGroup": {
+        "bankAccount": {
+            "bankAccountName": "Tên chủ tài khoản",
+            "bankAccountNumber": "Số tài khoản",
+            "bankBranch": "Chi nhánh",
+            "bankName": "Tên ngân hàng",
+            "divisionAddress": "Địa chỉ chi nhánh",
+            "province": "Tỉnh/Thành phố",
+            "title": "Tài khoản ngân hàng"
+        },
+        "contacts": {
+            "action": "Thao tác",
+            "add": "Thêm thông tin liên hệ",
+            "address": "Địa chỉ",
+            "code": "STT",
+            "email": "Email",
+            "phone": "Số điện thoại",
+            "phone_number": "Số điện thoại",
+            "province": "Tỉnh thành",
+            "recipient": "Tên người liên hệ",
+            "title": "Thông tin liên hệ"
+        },
+        "gender": {
+            "men": "Nam",
+            "women": "Nữ"
+        },
+        "general": {
+            "code": "Mã nhân viên",
+            "dob": "Ngày sinh",
+            "employeePositions": "Nhóm nhân viên",
+            "gender": "Giới tính",
+            "identityNumber": "Số CMND",
+            "insuranceSalary": "Lương bảo hiểm",
+            "issueDate": "Ngày cấp",
+            "issuePlace": "Nơi cấp",
+            "jobLevel": "Cấp bậc chức vụ",
+            "jobTitle": "Chức vụ",
+            "name": "Tên nhân viên",
+            "numberDependentPerson": "Số người phụ thuộc",
+            "salary": "Lương thỏa thuân",
+            "salaryRatio": "Hệ số lương",
+            "status": "Trạng thái",
+            "taxCode": "Mã số thuế",
+            "title": "Thông tin chung"
+        },
+        "header": {
+            "title": "Chỉnh sửa thông tin nhân viên"
+        },
+        "own_asset": {
+            "code": "Mã tài sản",
+            "from_date": "Hiệu lực từ ngày",
+            "name": "Tên tài sản",
+            "title": "Tài sản đang quản lý",
+            "to_date": "Đến ngày",
+            "type": "Loại tài sản"
+        }
+    },
+    "employeeDetail": {
+        "delete": {
+            "confirm": {
+                "message": "Bạn chắc chắn muốn xóa?",
+                "title": "Xác nhận xóa"
+            }
+        }
+    },
+    "employeeDetailOfLegal": {
+        "contact": {
+            "address": "Địa chỉ"
+        }
+    },
+    "hrOrganization": {
+        "add": "Thêm phòng",
+        "code": "Mã phòng ban",
+        "name": "Tên phòng ban",
+        "title": "Thông tin phòng ban"
+    },
+    "project": {
+        "employee": {
+            "code": "Mã nhân viên",
+            "name": "Tên nhân viên"
+        }
+    },
+    "projectOrganization": {
+        "code": "Mã dự án",
+        "endDate": "Ngày kết thúc",
+        "manager": "Người quản lý",
+        "name": "Tên dự án",
+        "startDate": "Ngày bắt đầu",
+        "title": "Thông tin dự án"
+    }
+}

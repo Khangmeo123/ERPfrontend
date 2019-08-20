@@ -3,7 +3,7 @@ import {Subscription} from 'rxjs';
 import {LegalEntity} from '../../../../../_backend/legal/legal.entity';
 import {LegalSearchEntity} from '../../../../../_backend/legal/legal.searchentity';
 import {FormControl, FormGroup} from '@angular/forms';
-import {GeneralService} from '../../../../../../../_helpers/general-service.service';
+import {GeneralService} from '../../../../../../../_services/general-service.service';
 import {Entities} from '../../../../../../../_helpers/entity';
 import {SplitRuleEntity} from '../../../../../_backend/code-formula/code-formula.entity';
 import {CodeFormulaSearchEntity} from '../../../../../_backend/code-formula/code-formula.search-entity';

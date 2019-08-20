@@ -1,6 +1,6 @@
 import { ItemForm } from './../../../../../_backend/item/item.form';
 import { UomSearchEntity } from './../../../../../_backend/uom/uom.searchentity';
-import { EnumEntity, Entities } from './../../../../../../../_helpers/entity';
+import { EnumEntity, Entities } from '../../../../../../../_helpers/entity';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';

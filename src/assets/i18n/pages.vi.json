@@ -1,0 +1,19 @@
+{
+    "app": {
+        "changePassword": "Đổi mật khẩu",
+        "help": "Trợ giúp",
+        "logout": "Đăng xuất"
+    },
+    "bookmarks": {
+        "title": "Dấu trang"
+    },
+    "loginForm": {
+        "doesNotHaveAccount": "Chưa có tài khoản",
+        "forgotPassword": "Quên mật khẩu",
+        "login": "Đăng nhập",
+        "password": "Mật khẩu",
+        "rememberPassword": "Nhớ mật khẩu",
+        "signUp": "Đăng ký",
+        "username": "Tên đăng nhập"
+    }
+}

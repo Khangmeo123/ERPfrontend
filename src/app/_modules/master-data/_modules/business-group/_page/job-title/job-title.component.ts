@@ -3,7 +3,7 @@ import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.m
 import { FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { JobTitleService } from './job-title.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { Router } from '@angular/router';
 import { JobTitleSearchEntity } from 'src/app/_modules/master-data/_backend/job-title/job-title.searchentity';

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { translate } from 'src/app/_helpers/string';
 
 @Component({
   selector: 'app-goods-receipt-po',
@@ -8,11 +7,11 @@ import { translate } from 'src/app/_helpers/string';
 })
 export class GoodsReceiptPOComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
-
 
 
 }

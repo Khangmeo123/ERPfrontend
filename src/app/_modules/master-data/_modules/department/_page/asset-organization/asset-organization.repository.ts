@@ -1,4 +1,4 @@
-import { Repository } from '../../../../../../_helpers/repository';
+import { Repository } from '../../../../../../_repositories/repository';
 
 export class AssetOrganizationRepository extends Repository {
 
