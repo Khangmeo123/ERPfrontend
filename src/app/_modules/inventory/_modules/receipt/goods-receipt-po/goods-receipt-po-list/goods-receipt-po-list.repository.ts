@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GoodsReceiptPOEntity } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
-  RequesterSearchEntity,
+  EmpoloyeeDetailSearchEntity,
   GoodsReceiptPOSearchEntity,
   InventoryOrganizationSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
@@ -41,7 +41,7 @@ export class GoodsReceiptPOListRepository extends Repository {
     );
   }
 
-  singleListRequester(goodsReceiptPORequesterSearchEntity: RequesterSearchEntity) {
+  singleListRequester(goodsReceiptPORequesterSearchEntity: EmpoloyeeDetailSearchEntity) {
     return this.http.post<EmployeeEntity[]>(
       this.apiUrl + '/single-list-requester',
       goodsReceiptPORequesterSearchEntity,

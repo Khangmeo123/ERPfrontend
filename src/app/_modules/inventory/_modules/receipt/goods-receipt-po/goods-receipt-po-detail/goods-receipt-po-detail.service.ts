@@ -2,22 +2,27 @@ import { Injectable } from '@angular/core';
 import { GoodsReceiptPODetailRepository } from './goods-receipt-po-detail.repository';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import {
+  EmployeeDetailEntity, GoodsReceiptPOEntity,
   PurchaseOrderEntity,
-  RequesterEntity,
-  SupplierAddressEntity,
+  SupplierContactEntity,
   SupplierEntity,
-  TaxEntity, UnitOfMeasureEntity,
+  TaxEntity,
+  UnitOfMeasureEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
+  EmpoloyeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
   PurchaseOrderSearchEntity,
-  RequesterSearchEntity,
-  SupplierAddressSearchEntity, UnitOfMeasureSearchEntity,
+  SupplierContactSearchEntity,
+  TaxSearchEntity,
+  UnitOfMeasureSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { GoodsReceiptPOForm } from '../../../../_backend/goods-receipt-po/goods-receipt-po.form';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
+import { ToastrService } from 'ngx-toastr';
+import { translate } from '../../../../../../_helpers/string';
 
 @Injectable({
   providedIn: 'root',
@@ -32,11 +37,13 @@ export class GoodsReceiptPoDetailService {
 
   supplierList: BehaviorSubject<SupplierEntity[]> = new BehaviorSubject<SupplierEntity[]>([]);
 
-  supplierAddressList: BehaviorSubject<SupplierAddressEntity[]> = new BehaviorSubject<SupplierAddressEntity[]>([]);
+  supplierContactList: BehaviorSubject<SupplierContactEntity[]> = new BehaviorSubject<SupplierContactEntity[]>([]);
 
-  buyerList: BehaviorSubject<RequesterEntity[]> = new BehaviorSubject<RequesterEntity[]>([]);
+  buyerList: BehaviorSubject<EmployeeDetailEntity[]> = new BehaviorSubject<EmployeeDetailEntity[]>([]);
 
-  ownerList: BehaviorSubject<RequesterEntity[]> = new BehaviorSubject<RequesterEntity[]>([]);
+  ownerList: BehaviorSubject<EmployeeDetailEntity[]> = new BehaviorSubject<EmployeeDetailEntity[]>([]);
+
+  requesterList: BehaviorSubject<EmployeeDetailEntity[]> = new BehaviorSubject<EmployeeDetailEntity[]>([]);
 
   unitOfMeasureList: BehaviorSubject<UnitOfMeasureEntity[]> = new BehaviorSubject<UnitOfMeasureEntity[]>([]);
 
@@ -44,7 +51,11 @@ export class GoodsReceiptPoDetailService {
 
   inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
 
-  constructor(private goodsReceiptPODetailRepository: GoodsReceiptPODetailRepository, private fb: FormBuilder) {
+  constructor(
+    private goodsReceiptPODetailRepository: GoodsReceiptPODetailRepository,
+    private fb: FormBuilder,
+    private toastrService: ToastrService,
+  ) {
     this.goodsReceiptPOForm.next(
       this.fb.group(
         new GoodsReceiptPOForm(),
@@ -52,28 +63,37 @@ export class GoodsReceiptPoDetailService {
     );
   }
 
-  public getBuyerList(requesterSearchEntity: RequesterSearchEntity): Subscription {
+  public getBuyerList = (requesterSearchEntity: EmpoloyeeDetailSearchEntity): Subscription => {
     return this.goodsReceiptPODetailRepository
-      .getBuyerList(requesterSearchEntity)
+      .getEmployeeDetailList(requesterSearchEntity)
       .subscribe(
-        (list: RequesterEntity[]) => {
+        (list: EmployeeDetailEntity[]) => {
           this.buyerList.next(list);
         },
       );
-  }
+  };
 
-  public getOwnerList(requesterSearchEntity: RequesterSearchEntity): Subscription {
+  public getRequesterList = (requesterSearchEntity: EmpoloyeeDetailSearchEntity): Subscription => {
     return this.goodsReceiptPODetailRepository
-      .getOwnerList(requesterSearchEntity)
+      .getEmployeeDetailList(requesterSearchEntity)
       .subscribe(
-        (list: RequesterEntity[]) => {
+        (list: EmployeeDetailEntity[]) => {
+          this.requesterList.next(list);
+        },
+      );
+  };
+
+  public getOwnerList = (requesterSearchEntity: EmpoloyeeDetailSearchEntity): Subscription => {
+    return this.goodsReceiptPODetailRepository
+      .getEmployeeDetailList(requesterSearchEntity)
+      .subscribe(
+        (list: EmployeeDetailEntity[]) => {
           this.ownerList.next(list);
         },
       );
-  }
+  };
 
   public getSupplierList = (supplierSearchEntity: SupplierSearchEntity): Subscription => {
-    debugger
     return this.goodsReceiptPODetailRepository
       .getSupplierList(supplierSearchEntity)
       .subscribe(
@@ -83,17 +103,23 @@ export class GoodsReceiptPoDetailService {
       );
   };
 
-  public getSupplierAddressList(supplierAddressSearchEntity: SupplierAddressSearchEntity): Subscription {
-    return this.goodsReceiptPODetailRepository
-      .getSupplierAddressList(supplierAddressSearchEntity)
-      .subscribe(
-        (list: SupplierAddressEntity[]) => {
-          this.supplierAddressList.next(list);
-        },
-      );
-  }
+  public getSupplierContactList = (supplierContactSearchEntity: SupplierContactSearchEntity): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      this.goodsReceiptPODetailRepository
+        .getSupplierContactList(supplierContactSearchEntity)
+        .subscribe(
+          (list: SupplierContactEntity[]) => {
+            this.supplierContactList.next(list);
+            resolve();
+          },
+          (error: Error) => {
+            reject(error);
+          },
+        );
+    });
+  };
 
-  public getInventoryOrganizationList(inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity): Subscription {
+  public getInventoryOrganizationList = (inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity): Subscription => {
     return this.goodsReceiptPODetailRepository
       .getInventoryOrganizationList(inventoryOrganizationSearchEntity)
       .subscribe(
@@ -101,19 +127,25 @@ export class GoodsReceiptPoDetailService {
           this.inventoryOrganizationList.next(list);
         },
       );
-  }
+  };
 
-  public getPurchaseOrderList(purchaseOrderSearchEntity: PurchaseOrderSearchEntity): Subscription {
-    return this.goodsReceiptPODetailRepository
-      .getPurchaseOrderList(purchaseOrderSearchEntity)
-      .subscribe(
-        (list: PurchaseOrderEntity[]) => {
-          this.purchaseOrderList.next(list);
-        },
-      );
-  }
+  public getPurchaseOrderList = (purchaseOrderSearchEntity: PurchaseOrderSearchEntity): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      return this.goodsReceiptPODetailRepository
+        .getPurchaseOrderList(purchaseOrderSearchEntity)
+        .subscribe(
+          (list: PurchaseOrderEntity[]) => {
+            this.purchaseOrderList.next(list);
+            resolve();
+          },
+          (error: Error) => {
+            reject(error);
+          },
+        );
+    });
+  };
 
-  public getUnitOfMeasureList(unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Subscription {
+  public getUnitOfMeasureList = (unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Subscription => {
     return this.goodsReceiptPODetailRepository
       .getUnitOfMeasureList(unitOfMeasureSearchEntity)
       .subscribe(
@@ -121,9 +153,19 @@ export class GoodsReceiptPoDetailService {
           this.unitOfMeasureList.next(list);
         },
       );
-  }
+  };
 
-  public combineGoodsReceiptPO(data: any) {
+  public getTaxList = (taxSearchEntity: TaxSearchEntity): Subscription => {
+    return this.goodsReceiptPODetailRepository
+      .getTaxList(taxSearchEntity)
+      .subscribe(
+        (list: TaxEntity[]) => {
+          this.taxList.next(list);
+        },
+      );
+  };
+
+  public combineGoodsReceiptPO = (data: any) => {
     this.goodsReceiptPODetailRepository.combineGoodsReceiptPO(data)
       .subscribe((res) => {
         if (res) {
@@ -133,9 +175,9 @@ export class GoodsReceiptPoDetailService {
           this.recalculateContents(goodsReceiptPOForm);
         }
       });
-  }
+  };
 
-  public recalculateContents(goodsReceiptPOForm: FormGroup) {
+  public recalculateContents = (goodsReceiptPOForm: FormGroup) => {
     const currentArray: FormArray = goodsReceiptPOForm.get('goodsReceiptPOContents') as FormArray;
     let totalGoodsReceiptPOContents: number = 0;
     for (const control of currentArray.controls) {
@@ -156,5 +198,30 @@ export class GoodsReceiptPoDetailService {
     }
     goodsReceiptPOForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
     this.goodsReceiptPOForm.next(goodsReceiptPOForm);
-  }
+  };
+
+  send = (goodsReceiptPOEntity: GoodsReceiptPOEntity): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      this.goodsReceiptPODetailRepository
+        .send(goodsReceiptPOEntity)
+        .subscribe(
+          (responseEntity: GoodsReceiptPOEntity) => {
+            if (responseEntity) {
+              this.toastrService.success(translate('general.update.success'));
+              resolve();
+            }
+          },
+          (error: Error) => {
+            if (error) {
+              this.toastrService.error(translate('general.update.error'));
+              this.goodsReceiptPOForm.next(
+                this.fb.group(
+                  new GoodsReceiptPOForm(error),
+                ),
+              );
+              reject();
+            }
+          });
+    });
+  };
 }

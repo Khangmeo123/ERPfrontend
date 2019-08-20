@@ -46,10 +46,11 @@
                         key="id"
                         display="code"
                         placeholder="{{'general.legalEntity.placeholder' | translate}}"
+                        [getList]="appService.getLegalEntityList"
                         (change)="onChangeLegalEntity($event)"
                         [value]="legalEntityId">
-        <ng-template #option let-item="item">
-          {{item.name}}
+        <ng-template #label #option let-code="code">
+          {{code}}
         </ng-template>
       </jaja-select-list>
       <li class="nav-item">

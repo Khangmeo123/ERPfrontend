@@ -39,7 +39,7 @@ export class PurchaseOrderSearchEntity extends SearchEntity {
   }
 }
 
-export class RequesterSearchEntity extends SearchEntity {
+export class EmpoloyeeDetailSearchEntity extends SearchEntity {
   code: TextFilter = new TextFilter();
   name: TextFilter = new TextFilter();
 
@@ -71,12 +71,12 @@ export class GoodsReceiptPOSupplierSearchEntity extends SearchEntity {
   }
 }
 
-export class SupplierAddressSearchEntity extends SearchEntity {
+export class SupplierContactSearchEntity extends SearchEntity {
   supplierAddress = new TextFilter();
   name = new TextFilter();
   supplierDetailId: string;
 
-  constructor(supplierAddressSearchEntity?: SupplierAddressSearchEntity) {
+  constructor(supplierAddressSearchEntity?: SupplierContactSearchEntity) {
     super(supplierAddressSearchEntity);
   }
 }

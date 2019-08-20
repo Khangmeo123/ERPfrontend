@@ -91,7 +91,7 @@ export class FileAttachments extends Entity {
   }
 }
 
-export class RequesterEntity extends Entity {
+export class EmployeeDetailEntity extends Entity {
   code: string;
   name: string;
 }
@@ -110,7 +110,7 @@ export class SupplierEntity extends Entity {
   note: string;
 }
 
-export class SupplierAddressEntity extends Entity {
+export class SupplierContactEntity extends Entity {
   name: string;
   address: string;
 }

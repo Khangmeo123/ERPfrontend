@@ -78,10 +78,13 @@
               <jaja-select-list class="flex-grow-1"
                                 [list]="supplierList"
                                 [getList]="goodsReceiptPoDetailService.getSupplierList"
-                                key="code"
-                                [searchable]="true">
-                <ng-template #label #option let-code="code">
-                  {{code}}
+                                (change)="onSelectSupplierDetail($event)"
+                                [searchable]="true"
+                                [searchEntity]="supplierSearchEntity"
+                                searchField="code"
+              >
+                <ng-template #label #option let-code="code" let-name="name">
+                  {{code}} - {{name}}
                 </ng-template>
               </jaja-select-list>
               <app-error [formGroup]="goodsReceiptPOForm"
@@ -101,22 +104,26 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.supplierAddress' | translate}}
+              {{'goodsReceiptPODetail.supplierContact' | translate}}
             </label>
             <div class="div-form">
               <jaja-select-list class="flex-grow-1"
-                                [list]="supplierAddressList"
-                                [getList]="goodsReceiptPoDetailService.getSupplierAddressList.bind(goodsReceiptPoDetailService)"
+                                [list]="supplierContactList"
+                                [getList]="getSupplierContactList"
                                 formControlName="supplierContactId"
-                                key="code"
-                                [searchable]="true">
-                <ng-template #option let-code="code">
-                  {{code}}
+                                key="id"
+                                [disabled]="!supplierDetailId.value"
+                                [searchable]="true"
+                                [searchEntity]="supplierContactSearchEntity"
+                                searchField="supplierAddress"
+                                searchType="contains">
+                <ng-template #label #option let-supplierAddress="supplierAddress">
+                  {{supplierAddress}}
                 </ng-template>
               </jaja-select-list>
               <app-error [formGroup]="goodsReceiptPOForm"
                          [placement]="'top'" [property]="'supplierContactId'" class="error-form"
-                         data-qe-id="form-error-supplierAddress"></app-error>
+                         data-qe-id="form-error-supplierContact"></app-error>
             </div>
           </div>
         </div>
@@ -125,13 +132,17 @@
       <div class="page-section-form-body">
         <div class="row">
           <div class="col-sm-8 form-group">
-            <label>
+            <label for="purchase-orders">
               {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input (click)="showPurchaseOrders()" [ngClass]="{'disabled': goodsReceiptPOForm.controls.supplierDetailId.value === null
-                            || goodsReceiptPOForm.controls.supplierDetailId.value.length === 0}" class="form-control"
-                   data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderName" type="text">
+            <input (focus)="showPurchaseOrders()"
+                   id="purchase-orders"
+                   [ngClass]="{disabled: !supplierDetailId?.value?.length}"
+                   class="form-control"
+                   data-qe-id="detail-form-goods-receipt"
+                   formControlName="purchaseOrderName"
+                   type="text">
           </div>
         </div>
       </div>
@@ -152,24 +163,23 @@
               {{'goodsReceiptPODetail.inventoryCode' | translate}}
             </label>
             <jaja-select-list [list]="inventoryOrganizationList"
-                              [getList]="goodsReceiptPoDetailService.getInventoryOrganizationList.bind(goodsReceiptPoDetailService)"
+                              [getList]="goodsReceiptPoDetailService.getInventoryOrganizationList"
                               [searchable]="true"
                               [searchEntity]="inventoryOrganizationSearchEntity"
                               searchField="code"
-                              searchType="startsWith"
-                              key="code">
+                              (change)="onSelectInventoryOrganization($event)"
+                              searchType="startsWith">
               <ng-template #label #option let-code="code" let-name="name">
                 {{code}} - {{name}}
               </ng-template>
             </jaja-select-list>
           </div>
           <div class="col-sm-4 form-group">
-            <label>
+            <label for="inventory-organization-street">
               {{'goodsReceiptPODetail.inventoryAddress' | translate}}
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-inventory-code"
-                   formControlName="inventoryOrganizationStreet"
-                   type="text">
+            <input type="text" class="form-control disabled" formControlName="inventoryOrganizationStreet"
+                   id="inventory-organization-street">
           </div>
         </div>
         <div class="row">
@@ -179,12 +189,13 @@
               <span class="text-danger mr-2">*</span>
             </label>
             <jaja-select-list [list]="ownerList"
-                              [getList]="goodsReceiptPoDetailService.getOwnerList.bind(goodsReceiptPoDetailService)"
+                              [getList]="goodsReceiptPoDetailService.getOwnerList"
                               [searchable]="true"
                               [searchEntity]="ownerSearchEntity"
                               searchField="name"
                               searchType="startsWith"
-                              key="code">
+                              (change)="onSelectOwner($event)"
+            >
               <ng-template #label #option let-code="code" let-name="name">
                 {{code}} - {{name}}
               </ng-template>
@@ -194,15 +205,33 @@
             <label>
               {{'goodsReceiptPODetail.receiver' | translate}}
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-buyerName" formControlName="buyerName"
-                   type="text">
+            <jaja-select-list [list]="buyerList"
+                              [getList]="goodsReceiptPoDetailService.getBuyerList"
+                              [searchable]="true"
+                              [searchEntity]="buyerSearchEntity"
+                              searchField="name"
+                              searchType="startsWith"
+                              (change)="onSelectBuyer($event)">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptPODetail.creator' | translate}}
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="requesterName"
-                   type="text">
+            <jaja-select-list [list]="requesterList"
+                              [getList]="goodsReceiptPoDetailService.getRequesterList"
+                              [searchable]="true"
+                              [searchEntity]="requesterSearchEntity"
+                              searchField="name"
+                              searchType="startsWith"
+                              (change)="onSelectRequester($event)">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
           </div>
         </div>
         <div class="row">
@@ -212,13 +241,12 @@
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form">
-              <app-date-picker [control]="goodsReceiptPOForm.get('dueDate')"
-                               class="w-100" data-qe-id="detail-form-receipted-date">
+              <app-date-picker [control]="dueDate" class="w-100" data-qe-id="detail-form-receipted-date">
               </app-date-picker>
               <app-error
                 [formGroup]="goodsReceiptPOForm"
                 [placement]="'top'" [property]="'supplierContactId'" class="error-form"
-                data-qe-id="form-error-supplierAddress">
+                data-qe-id="form-error-supplierContact">
               </app-error>
             </div>
 
@@ -334,12 +362,15 @@
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
-                                        [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        [list]="taxList"
+                                        [getList]="goodsReceiptPoDetailService.getTaxList"
+                                        [searchEntity]="taxSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith"
                                         key="code"
                                         [searchable]="true">
-                        <ng-template #label #option let-code="code">
-                          {{code}}
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{code}} - {{name}}
                         </ng-template>
                       </jaja-select-list>
                     </th>
@@ -347,7 +378,7 @@
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
                                         [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        [getList]="goodsReceiptPoDetailService.getSupplierList"
                                         key="code"
                                         [searchable]="true">
                         <ng-template #label #option let-code="code">
@@ -364,7 +395,7 @@
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
                                         [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        [getList]="goodsReceiptPoDetailService.getSupplierList"
                                         key="code"
                                         [searchable]="true">
                         <ng-template #label #option let-code="code">
@@ -378,7 +409,7 @@
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
                                         [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getSupplierList.bind(goodsReceiptPoDetailService)"
+                                        [getList]="goodsReceiptPoDetailService.getSupplierList"
                                         key="code"
                                         [searchable]="true">
                         <ng-template #label #option let-code="code">
@@ -469,8 +500,12 @@
 </div>
 
 
-<p-dialog [(visible)]="displayPurchaseOrders" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
-          [style]="{width: '80%'}" appendTo="body">
+<p-dialog [(visible)]="displayPurchaseOrders"
+          [contentStyle]="{'overflow':'visible'}"
+          [modal]="true"
+          [responsive]="true"
+          [style]="{width: '80%'}"
+          appendTo="body">
   <p-header>
         <span class="dialog-header">{{'goodsReceiptPODetail.goodsReceipt.supplierName' | translate}}
           {{goodsReceiptPOForm.controls.supplierName.value}}

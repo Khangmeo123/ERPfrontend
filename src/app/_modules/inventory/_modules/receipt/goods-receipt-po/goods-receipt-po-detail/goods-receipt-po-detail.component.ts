@@ -2,23 +2,24 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GoodsReceiptPoDetailService } from './goods-receipt-po-detail.service';
 import {
+  EmployeeDetailEntity,
   PurchaseOrderEntity,
-  RequesterEntity,
-  SupplierAddressEntity,
+  SupplierContactEntity,
   SupplierEntity,
   TaxEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
+  EmpoloyeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
   PurchaseOrderSearchEntity,
-  RequesterSearchEntity,
-  SupplierAddressSearchEntity,
+  SupplierContactSearchEntity,
   TaxSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
+import { GeneralService } from '../../../../../../_services/general-service.service';
 
 @Component({
   selector: 'app-goods-receipt-po-detail',
@@ -26,6 +27,7 @@ import { InventoryOrganizationEntity } from '../../../../_backend/inventory-orga
   styleUrls: ['./goods-receipt-po-detail.component.scss'],
   providers: [
     GoodsReceiptPoDetailService,
+    GeneralService,
   ],
 })
 export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
@@ -48,21 +50,25 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   taxSearchEntity: TaxSearchEntity = new TaxSearchEntity();
 
-  buyerList: RequesterEntity[] = [];
+  requesterList: EmployeeDetailEntity[] = [];
 
-  buyerSearchEntity: RequesterSearchEntity = new RequesterSearchEntity();
+  requesterSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
 
-  ownerList: RequesterEntity[] = [];
+  buyerList: EmployeeDetailEntity[] = [];
 
-  ownerSearchEntity: RequesterSearchEntity = new RequesterSearchEntity();
+  buyerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+
+  ownerList: EmployeeDetailEntity[] = [];
+
+  ownerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
 
   supplierList: SupplierEntity[] = [];
 
   supplierSearchEntity: SupplierSearchEntity = new SupplierSearchEntity();
 
-  supplierAddressList: SupplierAddressEntity[] = [];
+  supplierContactList: SupplierContactEntity[] = [];
 
-  supplierAddressSearchEntity: SupplierAddressSearchEntity = new SupplierAddressSearchEntity();
+  supplierContactSearchEntity: SupplierContactSearchEntity = new SupplierContactSearchEntity();
 
   inventoryOrganizationList: InventoryOrganizationEntity[] = [];
 
@@ -74,6 +80,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     private router: Router,
     private goodsReceiptPoDetailService: GoodsReceiptPoDetailService,
     private activatedRoute: ActivatedRoute,
+    private generalService: GeneralService,
   ) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.goodsReceiptPOId) {
@@ -89,11 +96,20 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       this.taxList = list;
     });
 
-    const ownerListSubscription: Subscription = this.goodsReceiptPoDetailService.ownerList.subscribe((list: RequesterEntity[]) => {
+    const ownerListSubscription: Subscription = this.goodsReceiptPoDetailService.ownerList.subscribe((list: EmployeeDetailEntity[]) => {
       this.ownerList = list;
     });
 
-    const buyerSubscription: Subscription = this.goodsReceiptPoDetailService.buyerList.subscribe((list: RequesterEntity[]) => {
+    const taxListSubscription: Subscription = this.goodsReceiptPoDetailService.ownerList.subscribe((list: TaxEntity[]) => {
+      this.taxList = list;
+    });
+
+    const requesterListSubscription: Subscription = this.goodsReceiptPoDetailService.requesterList
+      .subscribe((list: EmployeeDetailEntity[]) => {
+        this.requesterList = list;
+      });
+
+    const buyerSubscription: Subscription = this.goodsReceiptPoDetailService.buyerList.subscribe((list: EmployeeDetailEntity[]) => {
       this.buyerList = list;
     });
 
@@ -101,23 +117,53 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       this.supplierList = list;
     });
 
-    const supplierAddressSubscription: Subscription = this.goodsReceiptPoDetailService.supplierAddressList
-      .subscribe((list: SupplierAddressEntity[]) => {
-        this.supplierAddressList = list;
+    const purchaseOrdersSubscription: Subscription = this.goodsReceiptPoDetailService.purchaseOrderList
+      .subscribe((list: PurchaseOrderEntity[]) => {
+        this.purchaseOrdersList = list;
+      });
+
+    const inventoryOrganizationSubscription: Subscription = this.goodsReceiptPoDetailService.inventoryOrganizationList
+      .subscribe((list: InventoryOrganizationEntity[]) => {
+        this.inventoryOrganizationList = list;
+      });
+
+    const supplierContactSubscription: Subscription = this.goodsReceiptPoDetailService.supplierContactList
+      .subscribe((list: SupplierContactEntity[]) => {
+        this.supplierContactList = list;
       });
 
     this.subscription
       .add(activatedRouteSubscription)
       .add(taxSubscription)
       .add(supplierSubscription)
-      .add(supplierAddressSubscription)
+      .add(supplierContactSubscription)
       .add(formSubscription)
       .add(ownerListSubscription)
-      .add(buyerSubscription);
+      .add(buyerSubscription)
+      .add(purchaseOrdersSubscription)
+      .add(inventoryOrganizationSubscription)
+      .add(requesterListSubscription)
+      .add(taxListSubscription);
   }
 
   get errors(): FormGroup {
     return this.goodsReceiptPOForm.get('errors') as FormGroup;
+  }
+
+  get supplierDetailId() {
+    return this.goodsReceiptPOForm.get('supplierDetailId') as FormControl;
+  }
+
+  get supplierCode() {
+    return this.goodsReceiptPOForm.get('supplierCode') as FormControl;
+  }
+
+  get supplierName() {
+    return this.goodsReceiptPOForm.get('supplierName') as FormControl;
+  }
+
+  get dueDate() {
+    return this.goodsReceiptPOForm.get('dueDate') as FormControl;
   }
 
   ngOnInit() {
@@ -132,6 +178,14 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   }
 
   send() {
+    if (this.goodsReceiptPOForm.invalid) {
+      this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
+    } else {
+      this.goodsReceiptPoDetailService.send(this.goodsReceiptPOForm.value)
+        .then(() => {
+          return this.backToList();
+        });
+    }
   }
 
   save() {
@@ -163,7 +217,12 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   }
 
   showPurchaseOrders() {
-
+    this.purchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
+    this.purchaseOrderSearchEntity.supplierDetailId = this.supplierDetailId.value;
+    this.goodsReceiptPoDetailService.getPurchaseOrderList(this.purchaseOrderSearchEntity)
+      .then(() => {
+      });
+    this.displayPurchaseOrders = true;
   }
 
   recalculateContents() {
@@ -196,5 +255,57 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     } else {
       this.deletedList.push(indexNumber);
     }
+  }
+
+  onSelectSupplierDetail(event) {
+    this.goodsReceiptPOForm.patchValue({
+      supplierDetailId: event.id,
+      supplierCode: event.code,
+      supplierName: event.name,
+    });
+
+    this.supplierContactSearchEntity.supplierDetailId = event.id;
+    this.goodsReceiptPoDetailService.getSupplierContactList(this.supplierContactSearchEntity)
+      .then(() => {
+        if (this.supplierContactList.length > 0) {
+          this.goodsReceiptPOForm.patchValue({
+            supplierContactId: this.supplierContactList[0].id,
+          });
+        }
+      });
+  }
+
+  getSupplierContactList = () => {
+    this.supplierContactSearchEntity = new SupplierContactSearchEntity();
+    this.supplierContactSearchEntity.supplierDetailId = this.supplierDetailId.value;
+    this.goodsReceiptPoDetailService.getSupplierContactList(this.supplierContactSearchEntity);
+  };
+
+  onSelectInventoryOrganization(event) {
+    this.goodsReceiptPOForm.patchValue({
+      inventoryOrganizationId: event.id,
+      inventoryOrganizationStreet: event.address,
+    });
+  }
+
+  onSelectRequester(event) {
+    this.goodsReceiptPOForm.patchValue({
+      requesterId: event.id,
+      requesterName: event.name,
+    });
+  }
+
+  onSelectOwner(event) {
+    this.goodsReceiptPOForm.patchValue({
+      ownerId: event.id,
+      ownerName: event.name,
+    });
+  }
+
+  onSelectBuyer(event) {
+    this.goodsReceiptPOForm.patchValue({
+      buyerId: event.id,
+      buyerName: event.name,
+    });
   }
 }

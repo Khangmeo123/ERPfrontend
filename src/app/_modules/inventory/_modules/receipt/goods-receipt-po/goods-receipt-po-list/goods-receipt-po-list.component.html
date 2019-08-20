@@ -30,7 +30,8 @@
       <div class="row d-flex pb-3">
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
-          <input [(ngModel)]="goodsReceiptPOSearchEntity.documentDate.greaterEqual" [matDatepicker]="picker" class="form-control input-datepicker ml-1 mr-1"
+          <input [(ngModel)]="goodsReceiptPOSearchEntity.documentDate.greaterEqual"
+                 [matDatepicker]="picker" class="form-control input-datepicker ml-1 mr-1"
                  data-qe-id="input-date-from" matInput
                  placeholder="dd/mm/yyyy">
           <mat-datepicker #picker></mat-datepicker>

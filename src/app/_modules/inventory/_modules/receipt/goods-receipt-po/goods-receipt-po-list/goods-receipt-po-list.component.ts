@@ -1,5 +1,5 @@
 import {
-  RequesterSearchEntity,
+  EmpoloyeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Subscription } from 'rxjs';
@@ -34,7 +34,7 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
 
   // requester:
   requesterList: EmployeeEntity[] = [];
-  requesterSearchEntity: RequesterSearchEntity = new RequesterSearchEntity();
+  requesterSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
 
   // inventoryOrganization:
   inventoryOrganizationList: InventoryOrganizationEntity[] = [];

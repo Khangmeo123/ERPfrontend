@@ -40,7 +40,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public subscription: Subscription = new Subscription();
 
-  public legalEntityId: string = null;
+  public legalEntityId: string;
 
   public legalEntities: LegalEntity[] = [];
 
@@ -52,6 +52,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private router: Router,
   ) {
     this.languageSelected = languages[0];
+
+    this.legalEntityId = localStorage.getItem('legalEntityId');
 
     const legalEntitiesSub: Subscription = this.appService.legalEntities.subscribe((legalEntities: LegalEntity[]) => {
       this.legalEntities = legalEntities;

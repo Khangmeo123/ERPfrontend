@@ -6,8 +6,8 @@ import {
   GoodsReceiptPOEntity,
   ItemDetailEntity,
   PurchaseOrderEntity,
-  RequesterEntity,
-  SupplierAddressEntity,
+  EmployeeDetailEntity,
+  SupplierContactEntity,
   SupplierEntity,
   TaxEntity,
   UnitOfMeasureEntity,
@@ -17,8 +17,9 @@ import { map } from 'rxjs/operators';
 import {
   InventoryOrganizationSearchEntity,
   ItemDetailSearchEntity,
-  PurchaseOrderSearchEntity, RequesterSearchEntity,
-  SupplierAddressSearchEntity,
+  PurchaseOrderSearchEntity,
+  EmpoloyeeDetailSearchEntity,
+  SupplierContactSearchEntity,
   TaxSearchEntity,
   UnitOfMeasureSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
@@ -36,10 +37,10 @@ export class GoodsReceiptPODetailRepository extends Repository {
   }
 
   static getURL(url: string) {
-    return `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-detail/${url}`;
+    return `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-detail${url}`;
   }
 
-  getDetail(id: string): Observable<GoodsReceiptPOEntity> {
+  getDetail = (id: string): Observable<GoodsReceiptPOEntity> => {
     return this.http.post(
       GoodsReceiptPODetailRepository.getURL('/get'),
       {
@@ -55,9 +56,9 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<GoodsReceiptPOEntity>) => new GoodsReceiptPOEntity(response.body),
         ),
       );
-  }
+  };
 
-  save(goodsReceiptPOEntity: GoodsReceiptPOEntity): Observable<GoodsReceiptPOEntity> {
+  save = (goodsReceiptPOEntity: GoodsReceiptPOEntity): Observable<GoodsReceiptPOEntity> => {
     return this.http.post<GoodsReceiptPOEntity>(
       GoodsReceiptPODetailRepository.getURL('/save'),
       goodsReceiptPOEntity,
@@ -71,9 +72,9 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<GoodsReceiptPOEntity>) => new GoodsReceiptPOEntity(response.body),
         ),
       );
-  }
+  };
 
-  send(goodsReceiptPOEntity: GoodsReceiptPOEntity): Observable<GoodsReceiptPOEntity> {
+  send = (goodsReceiptPOEntity: GoodsReceiptPOEntity): Observable<GoodsReceiptPOEntity> => {
     return this.http.post<GoodsReceiptPOEntity>(
       GoodsReceiptPODetailRepository.getURL('/send'),
       goodsReceiptPOEntity,
@@ -87,9 +88,9 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<GoodsReceiptPOEntity>) => new GoodsReceiptPOEntity(response.body),
         ),
       );
-  }
+  };
 
-  getPurchaseOrderList(purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> {
+  getPurchaseOrderList = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> => {
     return this.http.post<PurchaseOrderEntity[]>(
       GoodsReceiptPODetailRepository.getURL('/single-list-purchase-order'),
       purchaseOrdersSearchEntity,
@@ -103,11 +104,11 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<PurchaseOrderEntity[]>) => response.body.map((item) => new PurchaseOrderEntity(item)),
         ),
       );
-  }
+  };
 
-  getSupplierList(supplierSearchEntity: SupplierSearchEntity): Observable<SupplierEntity[]> {
+  getSupplierList = (supplierSearchEntity: SupplierSearchEntity): Observable<SupplierEntity[]> => {
     return this.http.post<SupplierEntity[]>(
-      GoodsReceiptPODetailRepository.getURL('/single-list-supplier'),
+      GoodsReceiptPODetailRepository.getURL('/single-list-supplier-detail'),
       supplierSearchEntity,
       {
         observe: 'response',
@@ -119,12 +120,12 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<SupplierEntity[]>) => response.body.map((item) => new SupplierEntity(item)),
         ),
       );
-  }
+  };
 
-  getSupplierAddressList(supplierAddressSearchEntity: SupplierAddressSearchEntity): Observable<SupplierAddressEntity[]> {
-    return this.http.post<SupplierAddressEntity[]>(
-      GoodsReceiptPODetailRepository.getURL('/single-list-supplierAddress'),
-      supplierAddressSearchEntity,
+  getSupplierContactList = (supplierContactSearchEntity: SupplierContactSearchEntity): Observable<SupplierContactEntity[]> => {
+    return this.http.post<SupplierContactEntity[]>(
+      GoodsReceiptPODetailRepository.getURL('/single-list-supplier-contact'),
+      supplierContactSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -132,15 +133,15 @@ export class GoodsReceiptPODetailRepository extends Repository {
     )
       .pipe(
         map(
-          (response: HttpResponse<SupplierAddressEntity[]>) => response.body.map((item) => new SupplierAddressEntity(item)),
+          (response: HttpResponse<SupplierContactEntity[]>) => response.body.map((item) => new SupplierContactEntity(item)),
         ),
       );
-  }
+  };
 
-  getOwnerList(requesterSearchEntity): Observable<RequesterEntity[]> {
-    return this.http.post<RequesterEntity[]>(
-      GoodsReceiptPODetailRepository.getURL('/single-list-owner'),
-      requesterSearchEntity,
+  getEmployeeDetailList = (employeeDetailSearchEntity: EmpoloyeeDetailSearchEntity): Observable<EmployeeDetailEntity[]> => {
+    return this.http.post<EmployeeDetailEntity[]>(
+      GoodsReceiptPODetailRepository.getURL('/single-list-employee-detail'),
+      employeeDetailSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -148,26 +149,10 @@ export class GoodsReceiptPODetailRepository extends Repository {
     )
       .pipe(
         map(
-          (response: HttpResponse<RequesterEntity[]>) => response.body.map((item) => new RequesterEntity(item)),
+          (response: HttpResponse<EmployeeDetailEntity[]>) => response.body.map((item) => new EmployeeDetailEntity(item)),
         ),
       );
-  }
-
-  getBuyerList(requesterSearchEntity: RequesterSearchEntity): Observable<RequesterEntity[]> {
-    return this.http.post<RequesterEntity[]>(
-      GoodsReceiptPODetailRepository.getURL('/single-list-buyer'),
-      requesterSearchEntity,
-      {
-        observe: 'response',
-        headers: this.getHeader(),
-      },
-    )
-      .pipe(
-        map(
-          (response: HttpResponse<RequesterEntity[]>) => response.body.map((item) => new RequesterEntity(item)),
-        ),
-      );
-  }
+  };
 
   getInventoryOrganizationList(
     inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity,
@@ -191,7 +176,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
       );
   }
 
-  getItemDetailList(itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> {
+  getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
     return this.http.post<ItemDetailEntity[]>(
       GoodsReceiptPODetailRepository.getURL('/single-list-item-detail'),
       itemDetailSearchEntity,
@@ -205,9 +190,9 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<ItemDetailEntity[]>) => response.body.map((item) => new ItemDetailEntity(item)),
         ),
       );
-  }
+  };
 
-  getUnitOfMeasureList(unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Observable<UnitOfMeasureEntity[]> {
+  getUnitOfMeasureList = (unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Observable<UnitOfMeasureEntity[]> => {
     return this.http.post<UnitOfMeasureEntity[]>(
       GoodsReceiptPODetailRepository.getURL('/single-list-unit-of-measure'),
       unitOfMeasureSearchEntity,
@@ -221,11 +206,11 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<UnitOfMeasureEntity[]>) => response.body.map((item) => new UnitOfMeasureEntity(item)),
         ),
       );
-  }
+  };
 
-  getTaxList(taxSearchEntity: TaxSearchEntity): Observable<TaxEntity[]> {
+  getTaxList = (taxSearchEntity: TaxSearchEntity): Observable<TaxEntity[]> => {
     return this.http.post<TaxEntity[]>(
-      GoodsReceiptPODetailRepository.getURL('/single-list-unit-of-measure'),
+      GoodsReceiptPODetailRepository.getURL('/single-list-tax-list'),
       taxSearchEntity,
       {
         observe: 'response',
@@ -237,9 +222,9 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<TaxEntity[]>) => response.body.map((item) => new TaxEntity(item)),
         ),
       );
-  }
+  };
 
-  combineGoodsReceiptPO(data: any) {
+  combineGoodsReceiptPO = (data: any) => {
     return this.http.post<GoodsReceiptPOEntity>(
       GoodsReceiptPODetailRepository.getURL('/combine-goods-receipt-po-content'),
       data,
@@ -253,5 +238,5 @@ export class GoodsReceiptPODetailRepository extends Repository {
           (response: HttpResponse<GoodsReceiptPOEntity>) => new GoodsReceiptPOEntity(response.body),
         ),
       );
-  }
+  };
 }

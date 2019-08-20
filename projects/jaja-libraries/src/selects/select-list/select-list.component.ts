@@ -37,7 +37,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() list: any[];
 
-  @Input() key: string = 'id';
+  @Input() key: string = null;
 
   @Input() placeholder: string = 'Enum List Select';
 
@@ -80,7 +80,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   set value(value) {
-    this.selectedItem = this.list.find((item) => item[this.key] === value);
+    this.selectedItem = this.list.find((item) => this.getValue(item) === value);
     this.onChange(value);
   }
 
@@ -97,7 +97,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   ngOnInit() {
     if (this.value) {
-      this.selectedItem = this.list.find((item) => item[this.key] === this.value);
+      this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
     }
 
     if (this.searchable) {
@@ -122,11 +122,18 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
       this.loading = false;
     }
     if (changes.value || changes.list) {
-      this.selectedItem = this.list.find((item) => item[this.key] === this.value);
+      this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
     }
   }
 
   ngAfterViewInit(): void {
+  }
+
+  getValue(item) {
+    if (this.key && item.hasOwnProperty(this.key)) {
+      return item[this.key];
+    }
+    return item;
   }
 
   ngOnDestroy(): void {
@@ -134,9 +141,9 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   onSelect(item, event) {
-    if (item[this.key] !== this.value) {
+    if (this.getValue(item) !== this.value) {
       this.selectedItem = item;
-      this.onChange(item[this.key]);
+      this.onChange(this.getValue(item));
     }
     this.onTouch(event);
   }
@@ -162,7 +169,6 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   onToggle(isOpened) {
-    debugger
     if (isOpened) {
       this.searchEntity = new this.searchEntity.constructor();
       this.getList(this.searchEntity);

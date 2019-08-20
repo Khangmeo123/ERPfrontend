@@ -3,9 +3,12 @@
      [container]="appendTo"
      class="select enum-list-select"
      [ngClass]="{disabled: disabled}">
-  <div role="button" class="form-control jaja-select-list-toggle" dropdownToggle>
-    {{selectedItem ? null : placeholder}}
-    <ng-template *ngTemplateOutlet="label; context: selectedItem"></ng-template>
+  <div role="button"
+       class="form-control jaja-select-list-toggle"
+       dropdownToggle>
+    <ng-template *ngTemplateOutlet="label; context: selectedItem">
+      {{selectedItem ? null : placeholder}}
+    </ng-template>
   </div>
   <span class="icons">
     <i class="pi pi-times" (click)="onClear($event)" *ngIf="selectedItem"></i>

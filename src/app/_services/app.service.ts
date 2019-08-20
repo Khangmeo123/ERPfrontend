@@ -34,7 +34,7 @@ export class AppService {
     };
   }
 
-  getLegalEntityList(): Subscription {
+  getLegalEntityList = (): Subscription => {
     return this.appRepository.getLegalEntityList()
       .subscribe(
         (legalEntities: LegalEntity[]) => {
@@ -45,9 +45,5 @@ export class AppService {
           throw error;
         },
       );
-  }
-
-  getLegalEntity(id: string): Observable<LegalEntity> {
-    return this.appRepository.getLegalEntity(id);
-  }
+  };
 }
