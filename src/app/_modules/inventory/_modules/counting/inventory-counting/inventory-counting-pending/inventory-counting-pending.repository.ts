@@ -51,9 +51,9 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
-    getListInventoryCounter(id: string) {
-        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/serial-number/inventory-counting-pending',
-            JSON.stringify({ inventoryCounterId: id }),
+    getListInventoryCounter(icId: string, edId: string) {
+        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/compare-serial',
+            JSON.stringify({ inventoryCountingId: icId, employeeDetailId: edId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return r.body.map((item) => {
@@ -81,6 +81,16 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
+    updateQuantity(icId: string, idId: string, quantityNumber: number) {
+        return this.http.post<InventoryCounterContents>(this.apiUrl + '/update-quantity',
+            JSON.stringify({ inventoryCountingId: icId, itemDetailId: idId, quantity: quantityNumber }),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return new InventoryCounterContents(r.body);
+                }),
+            );
+    }
+
     // serialNumber:
     getListSerialNumber(id: string, icId: string) {
         return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/serial-number/list-counter-content-by-item-detail',
@@ -94,9 +104,9 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
-    analyzeSerialCode(id: string, code: string) {
+    analyzeSerialCode(idId: string, icId: string, code: string) {
         return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/scan-qr-code-serial-number',
-            JSON.stringify({ itemDetailId: id, qrCode: code }),
+            JSON.stringify({ itemDetailId: idId, inventonryCountingId: icId, qrCode: code }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return new CounterContentByItemDetailEntity(r.body);
@@ -112,19 +122,23 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
-    deleteMultipleSerialNumber(serialNumberList: any[]) {
+    deleteMultipleSerialNumber(icId: string, listIds: string[]) {
         return this.http.post<any>(this.apiUrl + '/serial-number/import',
-            JSON.stringify(serialNumberList),
+            JSON.stringify({ inventoryCountingId: icId, ids: listIds }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
     }
 
-    importSerialNumber(file: any) {
+    importSerialNumber(idId: string, icId: string, file: any) {
         const formData = new FormData();
         formData.append('file', file[0]);
-        return this.http.post(this.apiUrl + '/import', formData,
+        return this.http.post(this.apiUrl + '/serial-number/import', formData,
             {
+                params: {
+                    ItemDetailId: idId,
+                    InventoryCountingId: icId,
+                },
                 observe: 'response',
                 headers: this.getHeader(),
             },
@@ -146,9 +160,9 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
-    analyzeBatchCode(id: string, code: string) {
+    analyzeBatchCode(idId: string, icId: string, code: string) {
         return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/scan-qr-code-batch',
-            JSON.stringify({ itemDetailId: id, qrCode: code }),
+            JSON.stringify({ itemDetailId: idId, inventoryCountingId: icId, qrCode: code }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return new CounterContentByItemDetailEntity(r.body);
@@ -165,7 +179,7 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     updateBatch(batch: any) {
-        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/batch/update',
+        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/update-batch',
             JSON.stringify(batch),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => new CounterContentByItemDetailEntity(r.body)),

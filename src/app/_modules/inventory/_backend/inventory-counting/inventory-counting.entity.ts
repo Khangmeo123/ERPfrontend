@@ -89,6 +89,7 @@ export class InventoryCountingContents extends Entity {
     binLocationId: string;
     binLocationCode: string;
     quantityOnDocumentDate: 0;
+    variance: number;
 }
 
 export class ItemDetailOfCountingEntity extends Entity {

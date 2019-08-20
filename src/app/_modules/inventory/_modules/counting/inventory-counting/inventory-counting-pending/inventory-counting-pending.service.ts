@@ -25,7 +25,7 @@ import {
 import { InventoryCountingPendingRepository } from './inventory-counting-pending.repository';
 import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { translate } from 'src/app/_helpers/string';
-
+import * as _ from 'lodash';
 @Injectable()
 export class InventoryCountingPendingService {
     public inventoryCountingForm: BehaviorSubject<FormGroup>;
@@ -109,8 +109,8 @@ export class InventoryCountingPendingService {
         });
     }
 
-    getListInventoryCounter(inventoryCounterId: string) {
-        this.inventoryCountingRepository.getListInventoryCounter(inventoryCounterId).subscribe(res => {
+    getListInventoryCounter(inventoryCountingId: string, employeeDetailId: string) {
+        this.inventoryCountingRepository.getListInventoryCounter(inventoryCountingId, employeeDetailId).subscribe(res => {
             if (res) {
                 this.inventoryCounterList.next(res);
             }
@@ -133,7 +133,7 @@ export class InventoryCountingPendingService {
                         }
                     }
                 }
-                this.toastrService.error('Hệ thống cập nhật thành công!');
+                this.toastrService.success('Hệ thống cập nhật thành công!');
                 this.inventoryCountingForm.next(currentForm);
             }
         }, err => {
@@ -153,6 +153,28 @@ export class InventoryCountingPendingService {
         });
     }
 
+    updateQuantity(inventoryCountingId: string, itemDetailId: string, quantity: number) {
+        this.inventoryCountingRepository.updateQuantity(inventoryCountingId, itemDetailId, quantity).subscribe(res => {
+            if (res) {
+                const currentForm = this.inventoryCountingForm.getValue();
+                const currentArray = currentForm.get('inventoryCounterContents') as FormArray;
+                for (const control of currentArray.controls) {
+                    if (control instanceof FormGroup) {
+                        if (control.value.itemDetailId === res.itemDetailId) {
+                            control.patchValue(res);
+                        }
+                    }
+                }
+                this.toastrService.success('Hệ thống cập nhật thành công!');
+                this.inventoryCountingForm.next(currentForm);
+            }
+        }, err => {
+            if (err) {
+                this.toastrService.error('Quét QR xảy ra lỗi!');
+            }
+        });
+    }
+
     // SerialNumber:
     getListSerialNumber(itemDetailId: string, inventoryCountingId: string) {
         this.inventoryCountingRepository.getListSerialNumber(itemDetailId, inventoryCountingId).subscribe(res => {
@@ -162,8 +184,8 @@ export class InventoryCountingPendingService {
         });
     }
 
-    analyzeSerialCode(itemDetailId: string, event: any) {
-        this.inventoryCountingRepository.analyzeSerialCode(itemDetailId, event).subscribe(res => {
+    analyzeSerialCode(itemDetailId: string, inventoryCountingId: string, event: any) {
+        this.inventoryCountingRepository.analyzeSerialCode(itemDetailId, inventoryCountingId, event).subscribe(res => {
             if (res) {
                 const currentList = this.serialNumberList.getValue();
                 const filterItem = currentList.filter(item => {
@@ -200,7 +222,8 @@ export class InventoryCountingPendingService {
     }
 
     deleteMultipleSerialNumber(serialNumbeList: any[], itemDetailId: string, inventoryCountingId: string) {
-        this.inventoryCountingRepository.deleteMultipleSerialNumber(serialNumbeList).subscribe(res => {
+        const listIds = serialNumbeList.map(item => item.id)
+        this.inventoryCountingRepository.deleteMultipleSerialNumber(inventoryCountingId, listIds).subscribe(res => {
             if (res) {
                 this.getListSerialNumber(itemDetailId, inventoryCountingId);
             }
@@ -208,7 +231,7 @@ export class InventoryCountingPendingService {
     }
 
     importSerialNumber(file: File, itemDetailId: string, inventoryCountingId: string) {
-        this.inventoryCountingRepository.importSerialNumber(file).subscribe(res => {
+        this.inventoryCountingRepository.importSerialNumber(itemDetailId, inventoryCountingId, file).subscribe(res => {
             if (res) {
                 this.toastrService.success(translate('general.import.success'));
                 this.getListSerialNumber(itemDetailId, inventoryCountingId);
@@ -216,6 +239,16 @@ export class InventoryCountingPendingService {
         }, err => {
             if (err) {
                 this.toastrService.error(translate('general.import.error'));
+            }
+        });
+    }
+
+    saveSerialNumber(inventoryCountingForm: FormGroup, serialNumberList: CounterContentByItemDetailEntity[]) {
+        const currentArray = inventoryCountingForm.get('inventoryCounterContents') as FormArray;
+        currentArray.controls.forEach(control => {
+            if (control.get('itemDetailId').value === serialNumberList[0].itemDetailId) {
+                const sumQuantity = _.sumBy(serialNumberList, item => item.quantity);
+                control.get('quantity').setValue(sumQuantity);
             }
         });
     }
@@ -230,16 +263,26 @@ export class InventoryCountingPendingService {
         });
     }
 
-    analyzeBatchCode(itemDetailId: string, event: any) {
-        this.inventoryCountingRepository.analyzeBatchCode(itemDetailId, event).subscribe(res => {
+    saveBatch(inventoryCountingForm: FormGroup, batchList: CounterContentByItemDetailEntity[]) {
+        const currentArray = inventoryCountingForm.get('inventoryCounterContents') as FormArray;
+        currentArray.controls.forEach(control => {
+            if (control.get('itemDetailId').value === batchList[0].itemDetailId) {
+                const sumQuantity = _.sumBy(batchList, item => item.quantity);
+                control.get('quantity').setValue(sumQuantity);
+            }
+        });
+    }
+
+    analyzeBatchCode(itemDetailId: string, inventoryCountingId: string, event: any) {
+        this.inventoryCountingRepository.analyzeBatchCode(itemDetailId, inventoryCountingId, event).subscribe(res => {
             if (res) {
                 const currentList = this.batchList.getValue();
                 const filterItem = currentList.filter(item => {
-                    return item.id === res.id;
+                    return item.itemDetailId === res.itemDetailId;
                 });
                 const indexOf = currentList.indexOf(filterItem[0]);
-                this.toastrService.success('Hệ thống cập nhật thành công !');
                 currentList[indexOf] = res;
+                this.toastrService.success('Hệ thống cập nhật thành công !');
                 this.batchList.next(currentList);
             }
         }, err => {

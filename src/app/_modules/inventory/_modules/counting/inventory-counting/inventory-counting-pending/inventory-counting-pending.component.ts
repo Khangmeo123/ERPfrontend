@@ -248,11 +248,15 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   }
 
   clearUnitOfMeasure(table: any) {
-    table.filter('', 'unitOfMeasureId', 'contains');
+    table.filter('', 'itemDetailUnitOfMeasureId', 'contains');
   }
 
   clearItemDetailId(table: any) {
     table.filter('', 'itemDetailId', 'contains');
+  }
+
+  updateQuantity(itemDetailId: string, quantity: number) {
+    this.inventoryCountingService.updateQuantity(this.inventoryCountingId, itemDetailId, Number(quantity));
   }
 
   // serialNumber:
@@ -276,12 +280,17 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   }
 
   inputSerialNumber(event) {
-    this.inventoryCountingService.analyzeSerialCode(this.itemDetailId, event);
+    this.inventoryCountingService.analyzeSerialCode(this.itemDetailId, this.inventoryCountingId, event);
     this.serialNumber = null;
   }
 
   importSerialNumber(file: File) {
     this.inventoryCountingService.importSerialNumber(file, this.itemDetailId, this.inventoryCountingId);
+  }
+
+  saveSerialNumber() {
+    this.inventoryCountingService.saveSerialNumber(this.inventoryCountingForm, this.serialNumberList);
+    this.displaySerial = false;
   }
 
   clearSerialNumberTable(table) {
@@ -302,7 +311,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   }
 
   inputBatchCode(event: string) {
-    this.inventoryCountingService.analyzeBatchCode(this.itemDetailId, event);
+    this.inventoryCountingService.analyzeBatchCode(this.itemDetailId, this.inventoryCountingId, event);
     this.batchCode = null;
   }
 
@@ -310,10 +319,20 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     this.inventoryCountingService.updateBatch(batch);
   }
 
+  saveBatch() {
+    this.inventoryCountingService.saveBatch(this.inventoryCountingForm, this.batchList);
+    this.displayBatch = false;
+  }
+
+  clearBatchTable(table) {
+    this.serialNumberSearchEntity = new SerialNumberSearchEntity();
+    table.reset();
+  }
+
   // invetoryCounterDetail:
   showInventoryCounterDetail(item: any) {
     this.displayInventoryCounter = true;
-    this.inventoryCountingService.getListInventoryCounter(item.id);
+    this.inventoryCountingService.getListInventoryCounter(this.inventoryCountingId, item.id);
   }
 
   resetInventoryCounterContent() {
