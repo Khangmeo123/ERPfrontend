@@ -1,9 +1,9 @@
-import { environment } from 'src/environments/environment';
-import { Repository } from 'src/app/_repositories/repository';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import {environment} from 'src/environments/environment';
+import {Repository} from 'src/app/_repositories/repository';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
 import {
   GoodsReceiptPOEntity,
   ItemDetailEntity,
@@ -15,7 +15,7 @@ import {
   UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { Entities } from 'src/app/_helpers/entity';
+import {Entities} from 'src/app/_helpers/entity';
 
 @Injectable({
   providedIn: 'root',
@@ -26,33 +26,52 @@ export class GoodsReceiptPOApproveRepository extends Repository {
     this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-approve';
   }
 
-  getDetail(goodsReceiptPOId: string): Observable<GoodsReceiptPOEntity> {
-    return this.http.post<GoodsReceiptPOEntity>(this.apiUrl + '/get', JSON.stringify({id: goodsReceiptPOId}),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+  getDetail = (goodsReceiptPOId: string): Observable<GoodsReceiptPOEntity> => {
+    return this.http.post<GoodsReceiptPOEntity>(this.apiUrl + '/get',
+      {id: goodsReceiptPOId},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    ).pipe(
       map(r => {
         return new GoodsReceiptPOEntity(r.body);
       }),
     );
-  }
+  };
 
-  approve(goodsReceiptPOId: string): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/approve', JSON.stringify({id: goodsReceiptPOId}),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+  approve = (goodsReceiptPOId: string): Observable<boolean> => {
+    return this.http.post<boolean>(this.apiUrl + '/approve',
+      {id: goodsReceiptPOId},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    ).pipe(
       map(r => r.body),
     );
-  }
+  };
 
-  reject(goodsReceiptPOId: string): Observable<boolean> {
-    return this.http.post<boolean>(this.apiUrl + '/reject', JSON.stringify({id: goodsReceiptPOId}),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+  reject = (goodsReceiptPOId: string): Observable<boolean> => {
+    return this.http.post<boolean>(this.apiUrl + '/reject',
+      {id: goodsReceiptPOId},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    ).pipe(
       map(r => r.body),
     );
-  }
+  };
 
-  dropListItem(goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) {
+  dropListItem = (goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) => {
     return this.http.post<Entities>(this.apiUrl + '/drop-list-item',
-      JSON.stringify(goodsReceiptPOItemDetailSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+      goodsReceiptPOItemDetailSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    ).pipe(
       map(r => {
         r.body.ids = r.body.ids.map(item => {
           return new ItemDetailEntity(item);
@@ -63,12 +82,16 @@ export class GoodsReceiptPOApproveRepository extends Repository {
         return r.body;
       }),
     );
-  }
+  };
 
-  dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) {
+  dropListUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) => {
     return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure',
-      JSON.stringify(goodsReceiptPOUnitOfMeasureSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+      goodsReceiptPOUnitOfMeasureSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    ).pipe(
       map(r => {
         r.body.ids = r.body.ids.map(item => {
           return new UnitOfMeasureEntity(item);
@@ -79,12 +102,16 @@ export class GoodsReceiptPOApproveRepository extends Repository {
         return r.body;
       }),
     );
-  }
+  };
 
-  dropListDocumentNumber(purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) {
+  dropListDocumentNumber = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) => {
     return this.http.post<Entities>(this.apiUrl + '/drop-list-document-number',
-      JSON.stringify(purchaseOrdersSearchEntity),
-      {observe: 'response', headers: this.getHeader()}).pipe(
+      purchaseOrdersSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    ).pipe(
       map(r => {
         r.body.ids = r.body.ids.map(item => {
           return new PurchaseOrderEntity(item);
@@ -95,5 +122,5 @@ export class GoodsReceiptPOApproveRepository extends Repository {
         return r.body;
       }),
     );
-  }
+  };
 }

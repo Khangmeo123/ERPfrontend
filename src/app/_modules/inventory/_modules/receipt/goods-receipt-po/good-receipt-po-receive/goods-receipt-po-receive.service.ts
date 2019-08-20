@@ -1,24 +1,24 @@
-import { GoodsReceiptPOContent } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
-import { Entities } from 'src/app/_helpers/entity';
+import {GoodsReceiptPOContent} from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {GoodsReceiptPOForm} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
+import {Entities} from 'src/app/_helpers/entity';
 import {
   GoodsReceiptPOBinlocationSearchEntity,
   ItemDetailSearchEntity,
   UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
-import { GoodsReceiptPOReceiveRepository } from './goods-receipt-po-receive.repository';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import {GoodsReceiptPOReceiveRepository} from './goods-receipt-po-receive.repository';
 import {
   BatchBinLocationEntity,
   BinLocationEntity,
   QuantityEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import { GeneralService } from 'src/app/_services/general-service.service';
+import {GeneralService} from 'src/app/_services/general-service.service';
 
 @Injectable()
 export class GoodsReceiptPOReceiveService {
@@ -48,30 +48,31 @@ export class GoodsReceiptPOReceiveService {
   }
 
   // general:
-  getDetail(goodsReceiptPOId?): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+  getDetail = (goodsReceiptPOId?): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
       if (goodsReceiptPOId !== null && goodsReceiptPOId !== undefined) {
-        this.goodsReceiptPORepository.getDetail(goodsReceiptPOId).subscribe(res => {
-          if (res) {
-            const goodsReceiptPOForm = this.fb.group(
-              new GoodsReceiptPOForm(res),
-            );
-            this.recalculateContents(goodsReceiptPOForm);
-            resolve();
-          }
-        }, err => {
-          if (err) {
-            console.log(err);
-            reject();
-          }
-        });
+        this.goodsReceiptPORepository.getDetail(goodsReceiptPOId)
+          .subscribe(
+            res => {
+              if (res) {
+                const goodsReceiptPOForm = this.fb.group(
+                  new GoodsReceiptPOForm(res),
+                );
+                this.recalculateContents(goodsReceiptPOForm);
+                resolve();
+              }
+            }, err => {
+              if (err) {
+                console.log(err);
+                reject();
+              }
+            });
       }
     });
-    return defered;
-  }
+  };
 
-  receive(goodsReceiptPOId: string): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+  receive = (goodsReceiptPOId: string): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
       this.goodsReceiptPORepository.receive(goodsReceiptPOId).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
@@ -84,11 +85,10 @@ export class GoodsReceiptPOReceiveService {
         }
       });
     });
-    return defered;
-  }
+  };
 
-  rejectReceive(goodsReceiptPOId: string): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+  rejectReceive = (goodsReceiptPOId: string): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
       this.goodsReceiptPORepository.rejectReceive(goodsReceiptPOId).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
@@ -101,10 +101,9 @@ export class GoodsReceiptPOReceiveService {
         }
       });
     });
-    return defered;
-  }
+  };
 
-  recalculateContents(goodsReceiptPOForm: FormGroup) {
+  recalculateContents = (goodsReceiptPOForm: FormGroup) => {
     const currentArray = goodsReceiptPOForm.get('goodsReceiptPOContents') as FormArray;
     let totalGoodsReceiptPOContents = 0;
     for (const control of currentArray.controls) {
@@ -125,10 +124,10 @@ export class GoodsReceiptPOReceiveService {
     }
     goodsReceiptPOForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
     this.goodsReceiptPOForm.next(goodsReceiptPOForm);
-  }
+  };
 
   // quantityDetail:
-  getQuantityDetail(goodsReceiptPOContentId: string, enableBinLocation: boolean) {
+  getQuantityDetail = (goodsReceiptPOContentId: string, enableBinLocation: boolean) => {
     this.goodsReceiptPORepository.getQuantityDetail(goodsReceiptPOContentId).subscribe(res => {
       if (res) {
         if (res.goodsReceiptPOQuantityDetails[0].goodsReceiptPOQuantities.length === 0 && enableBinLocation) {
@@ -142,10 +141,10 @@ export class GoodsReceiptPOReceiveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  updateQuantityDetail(quantityDetail: any): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+  updateQuantityDetail = (quantityDetail: any): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
       this.goodsReceiptPORepository.updateQuantityDetail(quantityDetail).subscribe(res => {
         if (res) {
           this.toastrService.success('Hệ thống cập nhật thành công!');
@@ -168,10 +167,9 @@ export class GoodsReceiptPOReceiveService {
         this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
       });
     });
-    return defered;
-  }
+  };
 
-  addBinLocationQuantity(goodsReceiptContentId: string) {
+  addBinLocationQuantity = (goodsReceiptContentId: string) => {
     const binLocation = new QuantityEntity();
     const currentQuantityDetail = this.quantityDetail.getValue();
     const currentBinLocationArray = currentQuantityDetail.goodsReceiptPOQuantityDetails[0].goodsReceiptPOQuantities;
@@ -179,18 +177,18 @@ export class GoodsReceiptPOReceiveService {
     binLocation.binLocationCode = null;
     currentBinLocationArray.push(binLocation);
     this.quantityDetail.next(currentQuantityDetail);
-  }
+  };
 
-  deleteBinLocationQuantity(index: number) {
+  deleteBinLocationQuantity = (index: number) => {
     const currentQuantityDetail = this.quantityDetail.getValue();
     const currentBinLocationArray = currentQuantityDetail.goodsReceiptPOQuantityDetails[0].goodsReceiptPOQuantities;
     if (index > 0) {
       currentBinLocationArray.splice(index, 1);
     }
     this.recalculateQuantityDetail(currentQuantityDetail);
-  }
+  };
 
-  recalculateQuantityDetail(goodsReceiptPOContent: GoodsReceiptPOContent) {
+  recalculateQuantityDetail = (goodsReceiptPOContent: GoodsReceiptPOContent) => {
     goodsReceiptPOContent.goodsReceiptPOQuantityDetails.forEach(item => {
       item.actualReceive = 0;
       if (item.goodsReceiptPOQuantities.length > 0) {
@@ -200,10 +198,10 @@ export class GoodsReceiptPOReceiveService {
       }
     });
     this.quantityDetail.next(goodsReceiptPOContent);
-  }
+  };
 
   // serialNumber:
-  getSerialNumber(goodsReceiptPOContentId: string) {
+  getSerialNumber = (goodsReceiptPOContentId: string) => {
     this.goodsReceiptPORepository.getSerialNumber(goodsReceiptPOContentId).subscribe(res => {
       if (res) {
         this.serialNumber.next(res);
@@ -213,10 +211,10 @@ export class GoodsReceiptPOReceiveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  updateSerialNumber(goodsReceiptPOSerialNumberEntity: any) {
-    const defered = new Promise((resolve, reject) => {
+  updateSerialNumber = (goodsReceiptPOSerialNumberEntity: any) => {
+    return new Promise((resolve, reject) => {
       this.goodsReceiptPORepository.updateSerialNumber(goodsReceiptPOSerialNumberEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Hệ thống cập nhật thành công!');
@@ -230,10 +228,9 @@ export class GoodsReceiptPOReceiveService {
         }
       });
     });
-    return defered;
-  }
+  };
 
-  analyzeQRCode(itemDetailId: string, qrCode: string) {
+  analyzeQRCode = (itemDetailId: string, qrCode: string) => {
     this.goodsReceiptPORepository.analyzeQRCode(itemDetailId, qrCode).subscribe(res => {
       if (res) {
         const currentSerialNumber = this.serialNumber.getValue();
@@ -258,9 +255,9 @@ export class GoodsReceiptPOReceiveService {
         this.generalService.alertSound();
       }
     });
-  }
+  };
 
-  changeLocationSerialNumber(goodsReceiptPOBinlocationEntity: BinLocationEntity) {
+  changeLocationSerialNumber = (goodsReceiptPOBinlocationEntity: BinLocationEntity) => {
     const currentSerialNumber = this.serialNumber.getValue();
     const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
     if (currentSerialNumberList) {
@@ -273,25 +270,25 @@ export class GoodsReceiptPOReceiveService {
       });
     }
     this.serialNumber.next(currentSerialNumber);
-  }
+  };
 
-  deleteSerialNumber(index) {
+  deleteSerialNumber = (index) => {
     const currentSerialNumber = this.serialNumber.getValue();
     const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
     currentSerialNumberList.splice(index, 1);
     this.serialNumber.next(currentSerialNumber);
-  }
+  };
 
-  checkAllSerialNumber(checked: boolean) {
+  checkAllSerialNumber = (checked: boolean) => {
     const currentSerialNumber = this.serialNumber.getValue();
     const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
     currentSerialNumberList.forEach(item => {
       item.isSelected = checked;
     });
     this.serialNumber.next(currentSerialNumber);
-  }
+  };
 
-  deleteMultipleSerialNumber() {
+  deleteMultipleSerialNumber = () => {
     const indexArray = [];
     const currentSerialNumber = this.serialNumber.getValue();
     const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
@@ -305,10 +302,10 @@ export class GoodsReceiptPOReceiveService {
       currentSerialNumberList.splice(indexArray.reverse()[i], 1);
     }
     this.serialNumber.next(currentSerialNumber);
-  }
+  };
 
   // batch:
-  getBatch(goodsReceiptPOContentId: string) {
+  getBatch = (goodsReceiptPOContentId: string) => {
     this.goodsReceiptPORepository.getBatch(goodsReceiptPOContentId).subscribe(res => {
       if (res) {
         this.batch.next(res);
@@ -318,10 +315,10 @@ export class GoodsReceiptPOReceiveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  updateBatch(goodsReceiptPOBatchEntity: any) {
-    const defered = new Promise((resolve, reject) => {
+  updateBatch = (goodsReceiptPOBatchEntity: any) => {
+    return new Promise((resolve, reject) => {
       this.goodsReceiptPORepository.updateBatch(goodsReceiptPOBatchEntity).subscribe(res => {
         if (res) {
           this.toastrService.success('Hệ thống cập nhật thành công!');
@@ -339,10 +336,9 @@ export class GoodsReceiptPOReceiveService {
         this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
       });
     });
-    return defered;
-  }
+  };
 
-  analyzeBatchCode(itemDetailId: string, qrCode: string) {
+  analyzeBatchCode = (itemDetailId: string, qrCode: string) => {
     this.goodsReceiptPORepository.analyzeBatchCode(itemDetailId, qrCode).subscribe(res => {
       if (res) {
         const currentBatch = this.batch.getValue();
@@ -355,9 +351,9 @@ export class GoodsReceiptPOReceiveService {
         this.toastrService.error('Quét QR xảy ra lỗi!');
       }
     });
-  }
+  };
 
-  changeLocationBatch(goodsReceiptPOBinlocationEntity: BinLocationEntity) {
+  changeLocationBatch = (goodsReceiptPOBinlocationEntity: BinLocationEntity) => {
     const currentBatch = this.batch.getValue();
     const currentBatchList = currentBatch.goodsReceiptPOBatches;
     if (currentBatchList) {
@@ -371,9 +367,9 @@ export class GoodsReceiptPOReceiveService {
       });
     }
     this.batch.next(currentBatch);
-  }
+  };
 
-  addBinLocationBatch(indexRow: number, goodsReceiptPOBatchId: string) {
+  addBinLocationBatch = (indexRow: number, goodsReceiptPOBatchId: string) => {
     const currentBatch = this.batch.getValue();
     const currentBatchList = currentBatch.goodsReceiptPOBatches;
     const currentBinLocationArray = currentBatchList[indexRow].goodsReceiptPOBatchBinLocations;
@@ -381,9 +377,9 @@ export class GoodsReceiptPOReceiveService {
     binLocation.goodsReceiptPOBatchId = goodsReceiptPOBatchId;
     currentBinLocationArray.push(binLocation);
     this.batch.next(currentBatch);
-  }
+  };
 
-  deleteBinLocationBatch(indexRow: number, index: number) {
+  deleteBinLocationBatch = (indexRow: number, index: number) => {
     const currentBatch = this.batch.getValue();
     const currentBatchList = currentBatch.goodsReceiptPOBatches;
     const currentBinLocationArray = currentBatchList[indexRow].goodsReceiptPOBatchBinLocations;
@@ -391,18 +387,18 @@ export class GoodsReceiptPOReceiveService {
       currentBinLocationArray.splice(index, 1);
     }
     this.batch.next(currentBatch);
-  }
+  };
 
-  checkAllBatch(checked: boolean) {
+  checkAllBatch = (checked: boolean) => {
     const currentBatch = this.batch.getValue();
     const currentBatchList = currentBatch.goodsReceiptPOBatches;
     currentBatchList.forEach(item => {
       item.isSelected = checked;
     });
     this.batch.next(currentBatch);
-  }
+  };
 
-  deleteMultipleBatch() {
+  deleteMultipleBatch = () => {
     const indexArray = [];
     const currentBatch = this.batch.getValue();
     const currentBatchList = currentBatch.goodsReceiptPOBatches;
@@ -416,10 +412,10 @@ export class GoodsReceiptPOReceiveService {
       currentBatchList.splice(indexArray.reverse()[i], 1);
     }
     this.batch.next(currentBatch);
-  }
+  };
 
   // item:
-  dropListItem(goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) {
+  dropListItem = (goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) => {
     this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity).subscribe(res => {
       if (res) {
         this.itemList.next(res);
@@ -429,10 +425,9 @@ export class GoodsReceiptPOReceiveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  typingSearchItem(goodsReceiptPOItemDetailSearchEntity:
-                     Observable<ItemDetailSearchEntity>) {
+  typingSearchItem = (goodsReceiptPOItemDetailSearchEntity: Observable<ItemDetailSearchEntity>) => {
     goodsReceiptPOItemDetailSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
@@ -442,10 +437,10 @@ export class GoodsReceiptPOReceiveService {
         this.itemList.next(res);
       }
     });
-  }
+  };
 
   // unitOfMeasure:
-  dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) {
+  dropListUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) => {
     this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity).subscribe(res => {
       if (res) {
         this.unitOfMeasureList.next(res);
@@ -455,10 +450,9 @@ export class GoodsReceiptPOReceiveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  typingSearchUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity:
-                              Observable<UnitOfMeasureSearchEntity>) {
+  typingSearchUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: Observable<UnitOfMeasureSearchEntity>) => {
     goodsReceiptPOUnitOfMeasureSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
@@ -468,10 +462,10 @@ export class GoodsReceiptPOReceiveService {
         this.unitOfMeasureList.next(res);
       }
     });
-  }
+  };
 
   // documentNumber:
-  dropListDocumentNumber(purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) {
+  dropListDocumentNumber = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) => {
     this.goodsReceiptPORepository.dropListDocumentNumber(purchaseOrdersSearchEntity).subscribe(res => {
       if (res) {
         this.documentNumberList.next(res);
@@ -481,10 +475,9 @@ export class GoodsReceiptPOReceiveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  typingSearchDocumentNumber(purchaseOrdersSearchEntity:
-                               Observable<PurchaseOrderSearchEntity>) {
+  typingSearchDocumentNumber = (purchaseOrdersSearchEntity: Observable<PurchaseOrderSearchEntity>) => {
     purchaseOrdersSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
@@ -494,10 +487,10 @@ export class GoodsReceiptPOReceiveService {
         this.documentNumberList.next(res);
       }
     });
-  }
+  };
 
   // dropListBinLocation:
-  dropListBinLocation(goodsReceiptPOBinlocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity) {
+  dropListBinLocation = (goodsReceiptPOBinlocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity) => {
     this.goodsReceiptPORepository.dropListBinLocation(goodsReceiptPOBinlocationSearchEntity).subscribe(res => {
       if (res) {
         this.binLocationList.next(res);
@@ -507,10 +500,9 @@ export class GoodsReceiptPOReceiveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  typingSearchBinLocation(goodsReceiptPOBinlocationSearchEntity:
-                            Observable<GoodsReceiptPOBinlocationSearchEntity>) {
+  typingSearchBinLocation = (goodsReceiptPOBinlocationSearchEntity: Observable<GoodsReceiptPOBinlocationSearchEntity>) => {
     goodsReceiptPOBinlocationSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
@@ -520,5 +512,5 @@ export class GoodsReceiptPOReceiveService {
         this.binLocationList.next(res);
       }
     });
-  }
+  };
 }

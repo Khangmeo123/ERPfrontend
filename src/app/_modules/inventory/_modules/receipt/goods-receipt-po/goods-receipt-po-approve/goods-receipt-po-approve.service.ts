@@ -1,16 +1,16 @@
-import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
-import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
-import { Entities } from 'src/app/_helpers/entity';
+import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {Injectable} from '@angular/core';
+import {ToastrService} from 'ngx-toastr';
+import {GoodsReceiptPOForm} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
+import {GoodsReceiptPOApproveRepository} from './goods-receipt-po-approve.repository';
+import {Entities} from 'src/app/_helpers/entity';
 import {
   ItemDetailSearchEntity,
   UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 
 @Injectable()
 export class GoodsReceiptPOApproveService {
@@ -30,8 +30,8 @@ export class GoodsReceiptPOApproveService {
     this.documentNumberList = new BehaviorSubject(new Entities());
   }
 
-  getDetail(goodsReceiptPOId?): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+  getDetail = (goodsReceiptPOId?): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
       if (goodsReceiptPOId !== null && goodsReceiptPOId !== undefined) {
         this.goodsReceiptPORepository.getDetail(goodsReceiptPOId).subscribe(res => {
           if (res) {
@@ -49,11 +49,10 @@ export class GoodsReceiptPOApproveService {
         });
       }
     });
-    return defered;
-  }
+  };
 
-  approve(goodsReceiptPOId: string): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+  approve = (goodsReceiptPOId: string): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
       this.goodsReceiptPORepository.approve(goodsReceiptPOId).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
@@ -66,11 +65,10 @@ export class GoodsReceiptPOApproveService {
         }
       });
     });
-    return defered;
-  }
+  };
 
-  reject(goodsReceiptPOId: string): Promise<boolean> {
-    const defered = new Promise<boolean>((resolve, reject) => {
+  reject = (goodsReceiptPOId: string): Promise<boolean> => {
+    return new Promise<boolean>((resolve, reject) => {
       this.goodsReceiptPORepository.reject(goodsReceiptPOId).subscribe(res => {
         if (res) {
           this.toastrService.success('Cập nhật thành công !');
@@ -83,10 +81,9 @@ export class GoodsReceiptPOApproveService {
         }
       });
     });
-    return defered;
-  }
+  };
 
-  recalculateContents(goodsReceiptPOForm: FormGroup) {
+  recalculateContents = (goodsReceiptPOForm: FormGroup) => {
     const currentArray = goodsReceiptPOForm.get('goodsReceiptPOContents') as FormArray;
     let totalGoodsReceiptPOContents = 0;
     for (const control of currentArray.controls) {
@@ -107,23 +104,23 @@ export class GoodsReceiptPOApproveService {
     }
     goodsReceiptPOForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
     this.goodsReceiptPOForm.next(goodsReceiptPOForm);
-  }
+  };
 
   // item:
-  dropListItem(goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) {
-    this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity).subscribe(res => {
-      if (res) {
-        this.itemList.next(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
+  dropListItem = (goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) => {
+    this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity)
+      .subscribe(res => {
+        if (res) {
+          this.itemList.next(res);
+        }
+      }, err => {
+        if (err) {
+          console.log(err);
+        }
+      });
+  };
 
-  typingSearchItem(goodsReceiptPOItemDetailSearchEntity:
-                     Observable<ItemDetailSearchEntity>) {
+  typingSearchItem = (goodsReceiptPOItemDetailSearchEntity: Observable<ItemDetailSearchEntity>) => {
     goodsReceiptPOItemDetailSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
@@ -133,36 +130,37 @@ export class GoodsReceiptPOApproveService {
         this.itemList.next(res);
       }
     });
-  }
+  };
 
   // unitOfMeasure:
-  dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) {
-    this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity).subscribe(res => {
-      if (res) {
-        this.unitOfMeasureList.next(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  }
+  dropListUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) => {
+    this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity)
+      .subscribe(res => {
+        if (res) {
+          this.unitOfMeasureList.next(res);
+        }
+      }, err => {
+        if (err) {
+          console.log(err);
+        }
+      });
+  };
 
-  typingSearchUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity:
-                              Observable<UnitOfMeasureSearchEntity>) {
-    goodsReceiptPOUnitOfMeasureSearchEntity.pipe(debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(searchEntity => {
-        return this.goodsReceiptPORepository.dropListUnitOfMeasure(searchEntity);
-      })).subscribe(res => {
+  typingSearchUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: Observable<UnitOfMeasureSearchEntity>) => {
+    goodsReceiptPOUnitOfMeasureSearchEntity
+      .pipe(debounceTime(400),
+        distinctUntilChanged(),
+        switchMap(searchEntity => {
+          return this.goodsReceiptPORepository.dropListUnitOfMeasure(searchEntity);
+        })).subscribe(res => {
       if (res) {
         this.unitOfMeasureList.next(res);
       }
     });
-  }
+  };
 
   // documentNumber:
-  dropListDocumentNumber(purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) {
+  dropListDocumentNumber = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) => {
     this.goodsReceiptPORepository.dropListDocumentNumber(purchaseOrdersSearchEntity).subscribe(res => {
       if (res) {
         this.documentNumberList.next(res);
@@ -172,10 +170,9 @@ export class GoodsReceiptPOApproveService {
         console.log(err);
       }
     });
-  }
+  };
 
-  typingSearchDocumentNumber(purchaseOrdersSearchEntity:
-                               Observable<PurchaseOrderSearchEntity>) {
+  typingSearchDocumentNumber = (purchaseOrdersSearchEntity: Observable<PurchaseOrderSearchEntity>) => {
     purchaseOrdersSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
@@ -185,5 +182,5 @@ export class GoodsReceiptPOApproveService {
         this.documentNumberList.next(res);
       }
     });
-  }
+  };
 }
