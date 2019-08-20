@@ -23,9 +23,9 @@ import {
     CounterContentByItemDetailEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { InventoryCountingPendingRepository } from './inventory-counting-pending.repository';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
 import { translate } from 'src/app/_helpers/string';
 import * as _ from 'lodash';
+import { GeneralService } from 'src/app/_services/general-service.service';
 @Injectable()
 export class InventoryCountingPendingService {
     public inventoryCountingForm: BehaviorSubject<FormGroup>;

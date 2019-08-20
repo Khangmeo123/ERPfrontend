@@ -14,7 +14,6 @@ import { Subscription, Subject } from 'rxjs';
 import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
 import {
   InventoryOrganizationOfCountingEntity,
   EmployeeDetailOfCountingEntity,
@@ -28,6 +27,7 @@ import {
 import { InventoryCountingPendingService } from './inventory-counting-pending.service';
 import { ColumnEntity } from 'src/app/_helpers/entity';
 import { environment } from 'src/environments/environment';
+import { GeneralService } from 'src/app/_services/general-service.service';
 
 @Component({
   selector: 'app-inventory-counting-pending',

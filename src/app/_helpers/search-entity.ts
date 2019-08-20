@@ -6,6 +6,8 @@ export class SearchEntity implements ISearchEntity {
 
   ids: string[] = [];
 
+  existedIds: string[] = [];
+
   skip: number;
 
   take: number;

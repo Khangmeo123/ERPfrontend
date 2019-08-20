@@ -3,7 +3,7 @@ import {
     CounterContentByItemDetailEntity,
 } from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { Injectable } from '@angular/core';
-import { Repository } from 'src/app/_helpers/repository';
+import { Repository } from 'src/app/_repositories/repository';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
 import {

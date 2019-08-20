@@ -9,7 +9,6 @@ import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryCountingDetailService } from './inventory-counting-detail.service';
-import { GeneralService } from 'src/app/_helpers/general-service.service';
 import {
   InventoryOrganizationOfCountingEntity,
   EmployeeDetailOfCountingEntity,
@@ -20,6 +19,7 @@ import {
   EmployeeDetailOfCountingSearchEntity,
   ItemDetailOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
+import { GeneralService } from 'src/app/_services/general-service.service';
 
 @Component({
   selector: 'app-inventory-counting-detail',
@@ -45,18 +45,6 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   binLocationList: BinLocationOfInventoryCountingEntity[];
   itemDetailList: ItemDetailOfCountingEntity[];
   checkAllItem: boolean;
-  // colFrozen: string[] = [
-  //   'inventoryCounting.detail.tab1.no',
-
-  // ];
-  // cols: string[] = [
-  //   'inventoryCounting.detail.tab1.itemNo',
-  //   'inventoryCounting.detail.tab1.itemName',
-  //   'inventoryCounting.detail.tab1.unitOfMeasure',
-  //   'inventoryCounting.detail.tab1.inventoryCode',
-  //   'inventoryCounting.detail.tab1.quantityOfInventory',
-  //   'inventoryCounting.detail.tab1.highestDifference',
-  // ]
   // inventoryOrganization:
   inventoryOrganizationIds: InventoryOrganizationOfCountingEntity[];
   inventoryOrganizationExceptIds: InventoryOrganizationOfCountingEntity[];
