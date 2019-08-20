@@ -2,7 +2,9 @@ import { Injectable } from '@angular/core';
 import { GoodsReceiptPODetailRepository } from './goods-receipt-po-detail.repository';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import {
-  EmployeeDetailEntity, GoodsReceiptPOEntity,
+  EmployeeDetailEntity,
+  GoodsReceiptPOEntity,
+  ItemDetailEntity,
   PurchaseOrderEntity,
   SupplierContactEntity,
   SupplierEntity,
@@ -12,6 +14,7 @@ import {
 import {
   EmpoloyeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
+  ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
   SupplierContactSearchEntity,
   TaxSearchEntity,
@@ -49,7 +52,7 @@ export class GoodsReceiptPoDetailService {
 
   inventoryOrganizationList: BehaviorSubject<InventoryOrganizationEntity[]> = new BehaviorSubject<InventoryOrganizationEntity[]>([]);
 
-  inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
+  itemDetailList: BehaviorSubject<ItemDetailEntity[]> = new BehaviorSubject<ItemDetailEntity[]>([]);
 
   constructor(
     private goodsReceiptPODetailRepository: GoodsReceiptPODetailRepository,
@@ -224,4 +227,73 @@ export class GoodsReceiptPoDetailService {
           });
     });
   };
+
+  save = (goodsReceiptPOEntity: GoodsReceiptPOEntity): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      this.goodsReceiptPODetailRepository
+        .save(goodsReceiptPOEntity)
+        .subscribe(
+          (responseEntity: GoodsReceiptPOEntity) => {
+            if (responseEntity) {
+              this.toastrService.success(translate('general.update.success'));
+              resolve();
+            }
+          },
+          (error: Error) => {
+            if (error) {
+              this.toastrService.error(translate('general.update.error'));
+              this.goodsReceiptPOForm.next(
+                this.fb.group(
+                  new GoodsReceiptPOForm(error),
+                ),
+              );
+              reject();
+            }
+          });
+    });
+  };
+
+  public getDetail = (id: string): Promise<GoodsReceiptPOEntity> => {
+    return new Promise<GoodsReceiptPOEntity>((resolve, reject) => {
+      return this.goodsReceiptPODetailRepository.getDetail(id)
+        .subscribe(
+          (goodsReceiptPOEntity: GoodsReceiptPOEntity) => {
+            this.goodsReceiptPOForm.next(
+              this.fb.group(
+                new GoodsReceiptPOForm(goodsReceiptPOEntity),
+              ),
+            );
+            resolve(goodsReceiptPOEntity);
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('goodsReceiptPODetail.get.error'));
+            reject(error);
+          },
+        );
+    });
+  };
+
+  getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Promise<ItemDetailEntity[]> => {
+    return new Promise<ItemDetailEntity[]>((resolve, reject) => {
+      this.goodsReceiptPODetailRepository.getItemDetailList(itemDetailSearchEntity)
+        .subscribe(
+          (list: ItemDetailEntity[]) => {
+            this.itemDetailList.next(list);
+            resolve(list);
+          },
+          (error: Error) => {
+            reject(error);
+          },
+        );
+    });
+  };
+
+  deleteItemFromContents(deletedList: number[]) {
+    const currentFormGroup: FormGroup = this.goodsReceiptPOForm.getValue();
+    const newFormArray: FormArray = new FormArray(
+      currentFormGroup.get('goodsReceiptPOContents').value.filter((value, index) => deletedList.includes(index)),
+    );
+    currentFormGroup.setControl('goodsReceiptPOContents', newFormArray);
+    this.goodsReceiptPOForm.next(currentFormGroup);
+  }
 }

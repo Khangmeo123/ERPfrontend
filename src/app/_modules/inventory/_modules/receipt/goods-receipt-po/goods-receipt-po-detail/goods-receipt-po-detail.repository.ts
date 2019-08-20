@@ -3,10 +3,10 @@ import { Repository } from 'src/app/_repositories/repository';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
+  EmployeeDetailEntity,
   GoodsReceiptPOEntity,
   ItemDetailEntity,
   PurchaseOrderEntity,
-  EmployeeDetailEntity,
   SupplierContactEntity,
   SupplierEntity,
   TaxEntity,
@@ -15,10 +15,10 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
+  EmpoloyeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
   ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
-  EmpoloyeeDetailSearchEntity,
   SupplierContactSearchEntity,
   TaxSearchEntity,
   UnitOfMeasureSearchEntity,
