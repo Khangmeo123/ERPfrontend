@@ -42,11 +42,10 @@
   <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
        style="margin-right: 10px">
     <ul class="navbar-nav d-flex align-items-center">
-      <jaja-select-list [list]="legalEntities"
-                        key="id"
+      <jaja-select-list key="id"
                         display="code"
                         placeholder="{{'general.legalEntity.placeholder' | translate}}"
-                        [getList]="appService.getLegalEntityList"
+                        [getList]="appRepository.getLegalEntityList"
                         (change)="onChangeLegalEntity($event)"
                         [value]="legalEntityId">
         <ng-template #label #option let-code="code">

@@ -106,14 +106,14 @@ export class GoodsReceiptPoDetailService {
       );
   };
 
-  public getSupplierContactList = (supplierContactSearchEntity: SupplierContactSearchEntity): Promise<void> => {
-    return new Promise<void>((resolve, reject) => {
+  public getSupplierContactList = (supplierContactSearchEntity: SupplierContactSearchEntity): Promise<SupplierContactEntity[]> => {
+    return new Promise<SupplierContactEntity[]>((resolve, reject) => {
       this.goodsReceiptPODetailRepository
         .getSupplierContactList(supplierContactSearchEntity)
         .subscribe(
           (list: SupplierContactEntity[]) => {
             this.supplierContactList.next(list);
-            resolve();
+            resolve(list);
           },
           (error: Error) => {
             reject(error);
