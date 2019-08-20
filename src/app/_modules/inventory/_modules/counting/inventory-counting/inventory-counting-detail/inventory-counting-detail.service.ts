@@ -181,12 +181,23 @@ export class InventoryCountingDetailService {
     selectItemDetail(inventoryCountingForm: FormGroup, index: number, itemDetail: any) {
         const currentFormArray = inventoryCountingForm.get('inventoryCountingContents') as FormArray;
         const currentFormGroup = currentFormArray.controls[index] as FormGroup;
-        currentFormGroup.controls.itemDetailId.setValue(itemDetail.id);
-        currentFormGroup.controls.itemDetailCode.setValue(itemDetail.code);
-        currentFormGroup.controls.itemDetailName.setValue(itemDetail.name);
-        currentFormGroup.controls.itemDetailUnitOfMeasureId.setValue(itemDetail.unitOfMeasureId);
-        currentFormGroup.controls.itemDetailUnitOfMeasureCode.setValue(itemDetail.unitOfMeasureCode);
-        currentFormGroup.controls.itemDetailUnitOfMeasureName.setValue(itemDetail.unitOfMeasureName);
+        if (itemDetail !== null) {
+            currentFormGroup.controls.itemDetailId.setValue(itemDetail.id);
+            currentFormGroup.controls.itemDetailCode.setValue(itemDetail.code);
+            currentFormGroup.controls.itemDetailName.setValue(itemDetail.name);
+            currentFormGroup.controls.itemDetailUnitOfMeasureId.setValue(itemDetail.unitOfMeasureId);
+            currentFormGroup.controls.itemDetailUnitOfMeasureCode.setValue(itemDetail.unitOfMeasureCode);
+            currentFormGroup.controls.itemDetailUnitOfMeasureName.setValue(itemDetail.unitOfMeasureName);
+            currentFormGroup.controls.quantityOnDocumentDate.setValue(itemDetail.quantityOnDocumentDate);
+        } else {
+            currentFormGroup.controls.itemDetailId.setValue(null);
+            currentFormGroup.controls.itemDetailCode.setValue(null);
+            currentFormGroup.controls.itemDetailName.setValue(null);
+            currentFormGroup.controls.itemDetailUnitOfMeasureId.setValue(null);
+            currentFormGroup.controls.itemDetailUnitOfMeasureCode.setValue(null);
+            currentFormGroup.controls.itemDetailUnitOfMeasureName.setValue(null);
+            currentFormGroup.controls.quantityOnDocumentDate.setValue(null);
+        }
         this.inventoryCountingForm.next(inventoryCountingForm);
     }
 
@@ -248,108 +259,6 @@ export class InventoryCountingDetailService {
             })).subscribe(res => {
                 if (res) {
                     this.employeeDetailList.next(res);
-                }
-            });
-    }
-
-    // inventoryOrganization:
-    dropListInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListInventoryOrganization(inventoryOrganizationOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.inventoryOrganizationList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity:
-        Observable<InventoryOrganizationOfCountingSearchEntity>) {
-        inventoryOrganizationOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListInventoryOrganization(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.inventoryOrganizationList.next(res);
-                }
-            });
-    }
-
-    // itemDetail:
-    dropListItemDetail(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListItemDetail(itemDetailOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.itemDetailList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchItemDetail(itemDetailOfCountingSearchEntity: Observable<ItemDetailOfCountingSearchEntity>) {
-        itemDetailOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListItemDetail(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.itemDetailList.next(res);
-                }
-            });
-    }
-
-    // itemDetailCode:
-    dropListItemDetailCode(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListItemDetailCode(itemDetailOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.itemDetailCodeList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchItemDetailCode(itemDetailOfCountingSearchEntity: Observable<ItemDetailOfCountingSearchEntity>) {
-        itemDetailOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListItemDetailCode(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.itemDetailCodeList.next(res);
-                }
-            });
-    }
-
-    // unitOfMeasure:
-    dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.unitOfMeasureList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchUnitOfMeasure(unitOfMeasureOfCountingSearchEntity:
-        Observable<UnitOfMeasureOfCountingSearchEntity>) {
-        unitOfMeasureOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListUnitOfMeasure(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.unitOfMeasureList.next(res);
                 }
             });
     }

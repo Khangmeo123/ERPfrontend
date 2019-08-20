@@ -185,28 +185,32 @@
                                     <tr>
                                         <th class="th-filter" width="3%"></th>
                                         <th class="th-filter">
-                                            <app-single-select [list]="itemDetailCodeExceptIds"
-                                                [selectedList]="itemDetailCodeIds" [key]="'code'"
-                                                (search)="typingSearchItemDetailCode($event, itemDetailCodeSearchEntity.id)"
-                                                (selectionChange)="itemDetailCodeSearchEntity.id = $event[0]; tableInventoryCounterContents.filter($event[0], 'itemDetailId', 'equals')"
-                                                (listOpen)="dropListItemDetailCode(itemDetailCodeSearchEntity.id)"
-                                                (clear)="clearItemDetailId(tableInventoryCounterContents)"
-                                                data-qe-id="table-thead-filter-uom">
-                                            </app-single-select>
+                                            <jaja-select-list class="flex-grow-1"
+                                                [value]="itemDetailCodeSearchEntity.id" appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                                key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                                (change)="changeItemDetailCode($event, tableInventoryCounterContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-code="code">
+                                                    {{code}}
+                                                </ng-template>
+                                            </jaja-select-list>
                                         </th>
                                         <th class="th-filter">
                                             <input type="text" class="form-control w-100"
                                                 (input)="tableInventoryCounterContents.filter($event.target.value, 'itemDetailName', 'contains')" />
                                         </th>
                                         <th class="th-filter">
-                                            <app-single-select [list]="unitOfMeasureExceptIds"
-                                                [selectedList]="unitOfMeasureIds" [key]="'name'"
-                                                (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
-                                                (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableInventoryCounterContents.filter($event[0], 'itemDetailUnitOfMeasureId', 'equals')"
-                                                (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                                (clear)="clearUnitOfMeasure(tableInventoryCounterContents)"
-                                                data-qe-id="table-thead-filter-uom">
-                                            </app-single-select>
+                                            <jaja-select-list class="flex-grow-1" [value]="unitOfMeasureSearchEntity.id"
+                                                appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListUnitOfMeasure" key="id"
+                                                [searchEntity]="unitOfMeasureSearchEntity" searchField="name"
+                                                (change)="changeUnitOfMeasure($event, tableInventoryCounterContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-name="name">
+                                                    {{name}}
+                                                </ng-template>
+                                            </jaja-select-list>
                                         </th>
                                         <th class="th-filter"
                                             *ngIf="inventoryCountingForm.get('enableBinLocation').value"></th>
@@ -320,28 +324,32 @@
                                     <tr>
                                         <th class="th-filter" width="3%"></th>
                                         <th class="th-filter">
-                                            <app-single-select [list]="itemDetailCodeExceptIds"
-                                                [selectedList]="itemDetailCodeIds" [key]="'code'"
-                                                (search)="typingSearchItemDetailCode($event, itemDetailCodeSearchEntity.id)"
-                                                (selectionChange)="itemDetailCodeSearchEntity.id = $event[0]; tableInventoryCountingContents.filter($event[0], 'itemDetailId', 'equals')"
-                                                (listOpen)="dropListItemDetailCode(itemDetailCodeSearchEntity.id)"
-                                                (clear)="clearItemDetailId(tableInventoryCountingContents)"
-                                                data-qe-id="table-thead-filter-uom">
-                                            </app-single-select>
+                                            <jaja-select-list class="flex-grow-1"
+                                                [value]="itemDetailCodeSearchEntity.id" appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                                key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                                (change)="changeItemDetailCode($event, tableInventoryCountingContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-code="code">
+                                                    {{code}}
+                                                </ng-template>
+                                            </jaja-select-list>
                                         </th>
                                         <th class="th-filter">
                                             <input type="text" class="form-control w-100"
                                                 (input)="tableInventoryCountingContents.filter($event.target.value, 'itemDetailName', 'contains')" />
                                         </th>
                                         <th>
-                                            <app-single-select [list]="unitOfMeasureExceptIds"
-                                                [selectedList]="unitOfMeasureIds" [key]="'name'"
-                                                (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
-                                                (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableInventoryCountingContents.filter($event[0], 'itemDetailUnitOfMeasureId', 'equals')"
-                                                (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                                (clear)="clearUnitOfMeasure(tableInventoryCountingContents)"
-                                                data-qe-id="table-thead-filter-uom">
-                                            </app-single-select>
+                                            <jaja-select-list class="flex-grow-1" [value]="unitOfMeasureSearchEntity.id"
+                                                appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListUnitOfMeasure" key="id"
+                                                [searchEntity]="unitOfMeasureSearchEntity" searchField="name"
+                                                (change)="changeUnitOfMeasure($event, tableInventoryCountingContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-name="name">
+                                                    {{name}}
+                                                </ng-template>
+                                            </jaja-select-list>
                                         </th>
                                         <th class="th-filter"
                                             *ngIf="inventoryCountingForm.get('enableBinLocation').value"></th>
@@ -516,13 +524,15 @@
                                     (input)="tableBatch.filter($event.target.value, 'qrCode', 'contains')" />
                             </th>
                             <th class="th-filter">
-                                <app-single-select [list]="itemDetailCodeExceptIds" [selectedList]="itemDetailCodeIds"
-                                    [key]="'code'"
-                                    (search)="typingSearchItemDetailCode($event, itemDetailCodeSearchEntity.id)"
-                                    (selectionChange)="itemDetailCodeSearchEntity.id = $event[0]; tableBatch.filter($event[0], 'itemDetailId', 'equals')"
-                                    (listOpen)="dropListItemDetailCode(itemDetailCodeSearchEntity.id)"
-                                    (clear)="clearItemDetailId(tableBatch)" data-qe-id="table-thead-filter-uom">
-                                </app-single-select>
+                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeSearchEntity.id"
+                                    appendTo="body" [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                    key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                    (change)="changeItemDetailCode($event, tableBatch)" searchType="startsWith"
+                                    [searchable]="true">
+                                    <ng-template #label #option let-code="code">
+                                        {{code}}
+                                    </ng-template>
+                                </jaja-select-list>
                             </th>
                             <th class="th-filter">
                                 <input type="text" class="form-control w-100"
@@ -729,13 +739,15 @@
                                     (input)="tableSerialNumber.filter($event.target.value, 'qrCode', 'startsWith')" />
                             </th>
                             <th class="th-filter">
-                                <app-single-select [list]="itemDetailCodeExceptIds" [selectedList]="itemDetailCodeIds"
-                                    [key]="'code'"
-                                    (search)="typingSearchItemDetailCode($event, itemDetailCodeSearchEntity.id)"
-                                    (selectionChange)="itemDetailCodeSearchEntity.id = $event[0]; tableSerialNumber.filter($event[0], 'itemDetailId', 'equals')"
-                                    (listOpen)="dropListItemDetailCode(itemDetailCodeSearchEntity.id)"
-                                    (clear)="clearItemDetailId(tableSerialNumber)" data-qe-id="table-thead-filter-uom">
-                                </app-single-select>
+                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeSearchEntity.id"
+                                    appendTo="body" [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                    key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                    (change)="changeItemDetailCode($event, tableSerialNumber)" searchType="startsWith"
+                                    [searchable]="true">
+                                    <ng-template #label #option let-code="code">
+                                        {{code}}
+                                    </ng-template>
+                                </jaja-select-list>
                             </th>
                             <th class="th-filter">
                                 <input type="text" class="form-control w-100" pKeyFilter="int"

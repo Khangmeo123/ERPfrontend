@@ -41,9 +41,14 @@ export class EmployeeDetailOfCountingSearchEntity extends SearchEntity {
 export class ItemDetailOfCountingSearchEntity extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
-    inventoryOrganizationId: string;
-    constructor() {
+    inventoryOrganizationId: string = null;
+    constructor(itemDetailOfCountingSearchEntity?: any) {
         super();
+        if (itemDetailOfCountingSearchEntity) {
+            this.inventoryOrganizationId = itemDetailOfCountingSearchEntity.inventoryOrganizationId !== null &&
+                itemDetailOfCountingSearchEntity.inventoryOrganizationId !== undefined ?
+                itemDetailOfCountingSearchEntity.inventoryOrganizationId : null;
+        }
     }
 }
 

@@ -106,11 +106,11 @@
               </app-advanced-filters>
             </th>
             <th class="th-filter">
-              <jaja-select-list class="flex-grow-1"
-                [getList]="inventoryCountingListRepository.selectListInventoryOrganization" key="code" appendTo="body"
+              <jaja-select-list class="flex-grow-1" [value]="inventoryCountingSearchEntity.inventoryOrganizationId"
+                [getList]="inventoryCountingListRepository.selectListInventoryOrganization" appendTo="body" key="id"
                 [searchEntity]="inventoryOrganizationSearch" searchField="code" searchType="startsWith"
                 [searchable]="true"
-                (change)="inventoryCountingSearchEntity.inventoryOrganizationId = $event.id; getList()">
+                (change)="inventoryCountingSearchEntity.inventoryOrganizationId = $event; getList()">
                 <ng-template #label #option let-code="code">
                   {{code}}
                 </ng-template>
@@ -118,8 +118,8 @@
             </th>
             <th class="th-filter">
               <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
-                key="name" [searchEntity]="inventoryCountingOwnerSearch" searchField="name" searchType="startsWith"
-                [searchable]="true" (change)="inventoryCountingSearchEntity.ownerId = $event.id; getList()">
+                [searchEntity]="inventoryCountingOwnerSearch" searchField="name" searchType="startsWith"
+                [searchable]="true" (change)="inventoryCountingSearchEntity.inventoryCounterId = $event?.id; getList()">
                 <ng-template #label #option let-name="name">
                   {{name}}
                 </ng-template>
@@ -127,8 +127,8 @@
             </th>
             <th class="th-filter">
               <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
-                key="name" [searchEntity]="inventoryCounterSearch" searchField="name" searchType="startsWith"
-                [searchable]="true" (change)="inventoryCountingSearchEntity.inventoryCounterId = $event.id; getList()">
+                [searchEntity]="inventoryCounterSearch" searchField="name" searchType="startsWith" [searchable]="true"
+                (change)="inventoryCountingSearchEntity.ownerId = $event?.id; getList()">
                 <ng-template #label #option let-name="name">
                   {{name}}
                 </ng-template>

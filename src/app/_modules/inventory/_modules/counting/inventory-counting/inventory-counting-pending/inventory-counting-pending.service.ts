@@ -29,10 +29,6 @@ import { GeneralService } from 'src/app/_services/general-service.service';
 @Injectable()
 export class InventoryCountingPendingService {
     public inventoryCountingForm: BehaviorSubject<FormGroup>;
-    public itemDetailList: BehaviorSubject<Entities>;
-    public itemDetailCodeList: BehaviorSubject<Entities>;
-    public inventoryOrganizationList: BehaviorSubject<Entities>;
-    public unitOfMeasureList: BehaviorSubject<Entities>;
     public binLocationList: BehaviorSubject<BinLocationOfInventoryCountingEntity[]>;
     public serialNumberList: BehaviorSubject<CounterContentByItemDetailEntity[]>;
     public batchList: BehaviorSubject<CounterContentByItemDetailEntity[]>;
@@ -43,10 +39,6 @@ export class InventoryCountingPendingService {
         private generalService: GeneralService,
         private inventoryCountingRepository: InventoryCountingPendingRepository) {
         this.inventoryCountingForm = new BehaviorSubject(this.fb.group(new InventoryCountingForm()));
-        this.itemDetailList = new BehaviorSubject(new Entities());
-        this.itemDetailCodeList = new BehaviorSubject(new Entities());
-        this.unitOfMeasureList = new BehaviorSubject(new Entities());
-        this.inventoryOrganizationList = new BehaviorSubject(new Entities());
         this.binLocationList = new BehaviorSubject([]);
         this.serialNumberList = new BehaviorSubject([]);
         this.batchList = new BehaviorSubject([]);
@@ -312,108 +304,5 @@ export class InventoryCountingPendingService {
                 this.batchList.next(currentList);
             }
         });
-    }
-
-
-    // inventoryOrganization:
-    dropListInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListInventoryOrganization(inventoryOrganizationOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.inventoryOrganizationList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity:
-        Observable<InventoryOrganizationOfCountingSearchEntity>) {
-        inventoryOrganizationOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListInventoryOrganization(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.inventoryOrganizationList.next(res);
-                }
-            });
-    }
-
-    // itemDetail:
-    dropListItemDetail(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListItemDetail(itemDetailOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.itemDetailList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchItemDetail(itemDetailOfCountingSearchEntity: Observable<ItemDetailOfCountingSearchEntity>) {
-        itemDetailOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListItemDetail(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.itemDetailList.next(res);
-                }
-            });
-    }
-
-    // itemDetailCode:
-    dropListItemDetailCode(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListItemDetailCode(itemDetailOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.itemDetailCodeList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchItemDetailCode(itemDetailOfCountingSearchEntity: Observable<ItemDetailOfCountingSearchEntity>) {
-        itemDetailOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListItemDetailCode(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.itemDetailCodeList.next(res);
-                }
-            });
-    }
-
-    // unitOfMeasure:
-    dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity) {
-        this.inventoryCountingRepository.dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.unitOfMeasureList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchUnitOfMeasure(unitOfMeasureOfCountingSearchEntity:
-        Observable<UnitOfMeasureOfCountingSearchEntity>) {
-        unitOfMeasureOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingRepository.dropListUnitOfMeasure(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.unitOfMeasureList.next(res);
-                }
-            });
     }
 }

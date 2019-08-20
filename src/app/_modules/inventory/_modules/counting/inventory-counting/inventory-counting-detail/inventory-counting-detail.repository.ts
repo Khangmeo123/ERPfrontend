@@ -86,22 +86,6 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
-    dropListInventoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory-organizaion',
-            JSON.stringify(inventoryOrganizationOfCountingSearchEntity),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    r.body.ids = r.body.ids.map(item => {
-                        return new InventoryOrganizationOfCountingEntity(item);
-                    });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new InventoryOrganizationOfCountingEntity(item);
-                    });
-                    return r.body;
-                }),
-            );
-    }
-
     dropListEmployeeDetail(employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity) {
         return this.http.post<Entities>(this.apiUrl + '/drop-list-employee-detail',
             JSON.stringify(employeeDetailOfCountingSearchEntity),
@@ -118,51 +102,49 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
-    dropListItemDetailCode(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail-code',
+    selectListItemDetailCode = (itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity)
+        : Observable<ItemDetailOfCountingEntity[]> => this.http.post<ItemDetailOfCountingEntity[]>(
+            this.apiUrl + '/single-list-item-detail-code',
             JSON.stringify(itemDetailOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    r.body.ids = r.body.ids.map(item => {
+                    return r.body.map(item => {
                         return new ItemDetailOfCountingEntity(item);
                     });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new ItemDetailOfCountingEntity(item);
-                    });
-                    return r.body;
                 }),
             );
-    }
 
-    dropListItemDetail(itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-item-detail',
+    selectListItemDetail = (itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity)
+        : Observable<ItemDetailOfCountingEntity[]> => this.http.post<ItemDetailOfCountingEntity[]>(this.apiUrl + '/single-list-item-detail',
             JSON.stringify(itemDetailOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    r.body.ids = r.body.ids.map(item => {
+                    return r.body.map(item => {
                         return new ItemDetailOfCountingEntity(item);
                     });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new ItemDetailOfCountingEntity(item);
-                    });
-                    return r.body;
                 }),
             );
-    }
 
-    dropListUnitOfMeasure(unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure',
+    selectListUnitOfMeasure = (unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity)
+        : Observable<UnitOfMeasureOfCountingEntity[]> => this.http.post<UnitOfMeasureOfCountingEntity[]>(
+            this.apiUrl + '/single-list-unit-of-measure',
             JSON.stringify(unitOfMeasureOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    r.body.ids = r.body.ids.map(item => {
+                    return r.body.map(item => {
                         return new UnitOfMeasureOfCountingEntity(item);
                     });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new UnitOfMeasureOfCountingEntity(item);
-                    });
-                    return r.body;
                 }),
             );
-    }
+
+    selectListInventoryOrganization = (inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity)
+        : Observable<InventoryOrganizationOfCountingEntity[]> => this.http.post<InventoryOrganizationOfCountingEntity[]>(
+            this.apiUrl + '/single-list-inventory-organizaion', JSON.stringify(inventoryOrganizationOfCountingSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map(item => {
+                        return new InventoryOrganizationOfCountingEntity(item);
+                    });
+                }),
+            );
 }

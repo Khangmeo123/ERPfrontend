@@ -25,7 +25,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
   pagination: PaginationModel = new PaginationModel();
   // inventory counting
   inventoryCountingList: InventoryCountingEntity[];
-  inventoryCountingSearchEntity: InventoryCountingSearchEntity = new InventoryCountingSearchEntity();
+  inventoryCountingSearchEntity: InventoryCountingSearchEntity;
   inventoryCountingSubs: Subscription = new Subscription();
   // status:
   statusList: EnumEntity[];
@@ -73,6 +73,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.inventoryCountingSearchEntity = new InventoryCountingSearchEntity();
   }
 
   ngOnDestroy() {

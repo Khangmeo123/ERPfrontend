@@ -1,16 +1,13 @@
-import { UnitOfMeasureOfCountingSearchEntity } from './../../../../_backend/inventory-counting/inventory-counting.searchentity';
 import {
-  UnitOfMeasureOfCountingEntity,
   BinLocationOfInventoryCountingEntity,
 } from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { FormGroup, FormArray, FormControl } from '@angular/forms';
 import { Subscription, Subject } from 'rxjs';
-import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, ActivatedRoute } from '@angular/router';
 import { InventoryCountingDetailService } from './inventory-counting-detail.service';
 import {
-  InventoryOrganizationOfCountingEntity,
   EmployeeDetailOfCountingEntity,
   ItemDetailOfCountingEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
@@ -18,8 +15,10 @@ import {
   InventoryOrganizationOfCountingSearchEntity,
   EmployeeDetailOfCountingSearchEntity,
   ItemDetailOfCountingSearchEntity,
+  UnitOfMeasureOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { GeneralService } from 'src/app/_services/general-service.service';
+import { InventoryCountingDetailRepository } from './inventory-counting-detail.repository';
 
 @Component({
   selector: 'app-inventory-counting-detail',
@@ -46,39 +45,24 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   itemDetailList: ItemDetailOfCountingEntity[];
   checkAllItem: boolean;
   // inventoryOrganization:
-  inventoryOrganizationIds: InventoryOrganizationOfCountingEntity[];
-  inventoryOrganizationExceptIds: InventoryOrganizationOfCountingEntity[];
   inventoryOrganizationSearchEntity: InventoryOrganizationOfCountingSearchEntity =
     new InventoryOrganizationOfCountingSearchEntity();
-  inventoryOrganizationTyping: Subject<InventoryOrganizationOfCountingSearchEntity> = new Subject();
-
   // employeeDetail:
   employeeDetailIds: EmployeeDetailOfCountingEntity[];
   employeeDetailExceptIds: EmployeeDetailOfCountingEntity[];
   employeeDetailSearchEntity: EmployeeDetailOfCountingSearchEntity = new EmployeeDetailOfCountingSearchEntity();
   employeeDetailTyping: Subject<EmployeeDetailOfCountingSearchEntity> = new Subject();
-
   // unitOfMeasure:
-  unitOfMeasureIds: UnitOfMeasureOfCountingEntity[];
-  unitOfMeasureExceptIds: UnitOfMeasureOfCountingEntity[];
   unitOfMeasureSearchEntity: UnitOfMeasureOfCountingSearchEntity = new UnitOfMeasureOfCountingSearchEntity();
-  unitOfMeasureTyping: Subject<UnitOfMeasureOfCountingSearchEntity> = new Subject();
-
   // itemDetail:
-  itemDetailIds: ItemDetailOfCountingEntity[];
-  itemDetailExceptIds: ItemDetailOfCountingEntity[];
   itemDetailSearchEntity: ItemDetailOfCountingSearchEntity = new ItemDetailOfCountingSearchEntity();
-  itemDetailTyping: Subject<ItemDetailOfCountingSearchEntity> = new Subject();
-
   // itemDetailCode:
-  itemDetailCodeIds: ItemDetailOfCountingEntity[];
-  itemDetailCodeExceptIds: ItemDetailOfCountingEntity[];
   itemDetailCodeSearchEntity: ItemDetailOfCountingSearchEntity = new ItemDetailOfCountingSearchEntity();
-  itemDetailCodeTyping: Subject<ItemDetailOfCountingSearchEntity> = new Subject();
 
   constructor(
     private router: Router,
     private inventoryCountingService: InventoryCountingDetailService,
+    private inventoryCountingRepository: InventoryCountingDetailRepository,
     private generalService: GeneralService,
     private route: ActivatedRoute) {
 
@@ -91,6 +75,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
           if (res) {
             this.inventoryOrganizationId = res.inventoryOrganizationId;
             this.existedIds = res.inventoryCountingContents.map(item => item.itemDetailId);
+            this.itemDetailSearchEntity.inventoryOrganizationId = this.inventoryOrganizationId;
           }
         });
       });
@@ -99,12 +84,6 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
         this.inventoryCountingForm = res;
         const inventoryCounters = this.inventoryCountingForm.get('inventoryCounters').value;
         const inventoryCountingContents = this.inventoryCountingForm.get('inventoryCountingContents').value;
-        if (inventoryCounters.length > 0) {
-          this.inventoryOrganizationSearchEntity.ids = [...inventoryCounters];
-        }
-        if (inventoryCountingContents.length === 0) {
-          this.inventoryCountingService.addInventoryCountingContent(this.inventoryCountingForm);
-        }
       }
     });
     // employeeDetail:
@@ -121,38 +100,6 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
         this.itemDetailList = res;
       }
     });
-    // itemDetail:
-    const itemDetailListSub = this.inventoryCountingService.itemDetailList.subscribe(res => {
-      if (res) {
-        this.itemDetailExceptIds = res.exceptIds;
-        this.itemDetailIds = res.ids;
-      }
-    });
-    this.inventoryCountingService.typingSearchItemDetail(this.itemDetailTyping);
-    // itemDetailCode:
-    const itemDetailCodeListSub = this.inventoryCountingService.itemDetailCodeList.subscribe(res => {
-      if (res) {
-        this.itemDetailCodeExceptIds = res.exceptIds;
-        this.itemDetailCodeIds = res.ids;
-      }
-    });
-    this.inventoryCountingService.typingSearchItemDetailCode(this.itemDetailCodeTyping);
-    // unitOfMeasure:
-    const unitOfMeasureListSub = this.inventoryCountingService.unitOfMeasureList.subscribe(res => {
-      if (res) {
-        this.unitOfMeasureExceptIds = res.exceptIds;
-        this.unitOfMeasureIds = res.ids;
-      }
-    });
-    this.inventoryCountingService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
-    // inventoryOrganization:
-    const inventoryOrganizationListSub = this.inventoryCountingService.inventoryOrganizationList.subscribe(res => {
-      if (res) {
-        this.inventoryOrganizationIds = res.ids;
-        this.inventoryOrganizationExceptIds = res.exceptIds;
-      }
-    });
-    this.inventoryCountingService.typingSearchInvetoryOrganization(this.inventoryOrganizationTyping);
     // binlocation:
     const binLocationListSub = this.inventoryCountingService.binLocationList.subscribe(res => {
       if (res) {
@@ -161,16 +108,11 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     });
     this.inventoryCountingSubs.add(inventoryCountingFormSub)
       .add(employeeDetailListSub)
-      .add(itemDetailListSub)
-      .add(unitOfMeasureListSub)
-      .add(inventoryOrganizationListSub)
-      .add(itemDetailCodeListSub)
       .add(binLocationListSub)
       .add(itemDetailExtendListSub);
   }
 
   ngOnInit() {
-
   }
 
   ngOnDestroy() {
@@ -230,6 +172,22 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     }
   }
 
+  changeItemDetailCode(event, table) {
+    if (event === null) {
+      table.filter('', 'itemDetailId', 'contains');
+    } else {
+      table.filter(event, 'itemDetailId', 'equals');
+    }
+  }
+
+  changeUnitOfMeasure(event, table) {
+    if (event === null) {
+      table.filter('', 'itemDetailUnitOfMeasureId', 'contains');
+    } else {
+      table.filter(event, 'itemDetailUnitOfMeasureId', 'equals');
+    }
+  }
+
   // inventoryCoutingContents:
   clearUnitOfMeasure(tableInventoryCountingContents: any) {
     tableInventoryCountingContents.filter('', 'unitOfMeasureId', 'contains');
@@ -280,27 +238,11 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   // inventoryOrganization:
-  dropListInventoryOrganization(id: string) {
-    this.inventoryOrganizationSearchEntity = new InventoryOrganizationOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.inventoryOrganizationSearchEntity.ids.push(id);
-    }
-    this.inventoryCountingService.dropListInvetoryOrganization(this.inventoryOrganizationSearchEntity);
-  }
-
-  typingSearchInvetoryOrganization(event: string, id: string) {
-    this.inventoryOrganizationSearchEntity = new InventoryOrganizationOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.inventoryOrganizationSearchEntity.ids.push(id);
-    }
-    this.inventoryOrganizationSearchEntity.code.startsWith = event;
-    this.inventoryOrganizationTyping.next(this.inventoryOrganizationSearchEntity);
-  }
-
   selectInventoryOrganization(node: any) {
     this.inventoryCountingForm.get('inventoryOrganizationId').setValue(node.id);
     this.inventoryCountingForm.get('enableBinLocation').setValue(node.enableBinLocation);
     this.inventoryOrganizationId = node.id;
+    this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity({ inventoryOrganizationId: this.inventoryOrganizationId });
   }
 
   // employeeDetail
@@ -326,63 +268,4 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     this.employeeListIds = this.employeeList.map(item => item.id);
     this.inventoryCountingService.selectEmployee(this.inventoryCountingForm, this.employeeList);
   }
-
-  // unitOfMeasure:
-  dropListUnitOfMeasure(id: string) {
-    this.unitOfMeasureSearchEntity = new UnitOfMeasureOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.inventoryCountingService.dropListUnitOfMeasure(this.unitOfMeasureSearchEntity);
-  }
-
-  typingSearchUnitOfMeasure(event: string, id: string) {
-    this.unitOfMeasureSearchEntity = new UnitOfMeasureOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.unitOfMeasureSearchEntity.name.startsWith = event;
-    this.unitOfMeasureTyping.next(this.unitOfMeasureSearchEntity);
-  }
-
-  // itemDetail
-  dropListItemDetail(id: string) {
-    this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.itemDetailSearchEntity.existedIds = [...this.existedIds];
-    this.itemDetailSearchEntity.inventoryOrganizationId = this.inventoryOrganizationId;
-    this.inventoryCountingService.dropListItemDetail(this.itemDetailSearchEntity);
-  }
-
-  typingSearchItemDetail(event: string, id: string) {
-    this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.itemDetailSearchEntity.existedIds = [...this.existedIds];
-    this.itemDetailSearchEntity.inventoryOrganizationId = this.inventoryOrganizationId;
-    this.itemDetailSearchEntity.name.startsWith = event;
-    this.itemDetailTyping.next(this.itemDetailSearchEntity);
-  }
-
-  // itemDetailCode
-  dropListItemDetailCode(id: string) {
-    this.itemDetailCodeSearchEntity = new ItemDetailOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailCodeSearchEntity.ids.push(id);
-    }
-    this.inventoryCountingService.dropListItemDetailCode(this.itemDetailCodeSearchEntity);
-  }
-
-  typingSearchItemDetailCode(event: string, id: string) {
-    this.itemDetailCodeSearchEntity = new ItemDetailOfCountingSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailCodeSearchEntity.ids.push(id);
-    }
-    this.itemDetailCodeSearchEntity.name.startsWith = event;
-    this.itemDetailCodeTyping.next(this.itemDetailCodeSearchEntity);
-  }
-
 }

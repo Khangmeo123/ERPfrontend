@@ -4,13 +4,8 @@ import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { InventoryCountingListRepository } from './inventory-counting-list.repository';
 import { ToastrService } from 'ngx-toastr';
-import {
-    InventoryCountingSearchEntity,
-    InventoryOrganizationOfCountingSearchEntity,
-    EmployeeDetailOfCountingSearchEntity,
-} from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
+import { InventoryCountingSearchEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { Entities, EnumEntity } from 'src/app/_helpers/entity';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class InventoryCountingListService {
