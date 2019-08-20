@@ -4,6 +4,12 @@
             "title": ""
         }
     },
+    "goodsReceiptPODetail": {
+        "tab1": {
+            "batches": "",
+            "serial": ""
+        }
+    },
     "inventoryCounting": {
         "detail": {
             "batches": {
@@ -12,17 +18,28 @@
                 "expiryDate": "",
                 "itemCode": "",
                 "itemName": "",
-                "locationCode": "",
                 "manufacturingDate": "",
-                "quantitySaved": "",
                 "serial": "",
                 "startScanBatchesNo": "",
                 "title ": ""
             },
-            "binLocation": "",
             "counter": "",
             "countingDate": "",
             "description": "",
+            "detailBinLocation": {
+                "itemCode": "",
+                "locationCode": "",
+                "no": "",
+                "title ": ""
+            },
+            "detailDifference": {
+                "excess": "",
+                "itemCode": "",
+                "itemName": "",
+                "lack": "",
+                "no": "",
+                "title ": ""
+            },
             "documentNumber": "",
             "form": {
                 "post": {
@@ -34,37 +51,34 @@
                 "title": ""
             },
             "inventoryCode": "",
+            "itemDetail": {
+                "itemCode": "",
+                "locationCode": ""
+            },
             "personInCharge": "",
             "qrCode": {
                 "code": "",
                 "expiryDate": "",
                 "itemCode": "",
                 "itemName": "",
-                "locationCode": "",
                 "manufacturingDate": "",
-                "quantity": "",
-                "scanCode": "",
                 "scanQRCode": "",
                 "serial": "",
                 "title ": ""
             },
             "tab1": {
-                "batches": "",
-                "countAmount": "",
                 "highestDifference": "",
                 "inventoryCode": "",
                 "itemName": "",
                 "itemNo": "",
                 "no": "",
                 "quantityOfInventory": "",
-                "serial": "",
                 "title": "",
                 "unitOfMeasure": ""
             },
             "tab2": {
                 "title": ""
             },
-            "totalCount": "",
             "totalItem": ""
         },
         "list": {

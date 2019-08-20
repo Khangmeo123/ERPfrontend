@@ -24,6 +24,8 @@ import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { InventoryCountingPendingComponent } from './inventory-counting/inventory-counting-pending/inventory-counting-pending.component';
+import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
+
 
 @NgModule({
   declarations: [
@@ -59,6 +61,7 @@ import { InventoryCountingPendingComponent } from './inventory-counting/inventor
     }),
     FormsModule,
     ReactiveFormsModule,
+    SelectsModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

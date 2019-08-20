@@ -26,8 +26,6 @@ export class InventoryCountingListService {
     ) {
         this.inventoryCountingList = new BehaviorSubject([]);
         this.inventoryCountingCount = new BehaviorSubject(0);
-        this.inventoryOrganizationList = new BehaviorSubject(new Entities());
-        this.employeeDetailList = new BehaviorSubject(new Entities());
         this.statusList = new BehaviorSubject([]);
     }
 
@@ -40,55 +38,6 @@ export class InventoryCountingListService {
                 }
                 if (count) {
                     this.inventoryCountingCount.next(count);
-                }
-            });
-    }
-
-    dropListEmployeeDetail(employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity) {
-        this.inventoryCountingListRepository.dropListEmployeeDetail(employeeDetailOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.employeeDetailList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchEmployeeDetail(employeeDetailOfCountingSearchEntity: Observable<EmployeeDetailOfCountingSearchEntity>) {
-        employeeDetailOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingListRepository.dropListEmployeeDetail(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.employeeDetailList.next(res);
-                }
-            });
-    }
-
-    dropListInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {
-        this.inventoryCountingListRepository.dropListInventoryOrganization(inventoryOrganizationOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.inventoryOrganizationList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity:
-        Observable<InventoryOrganizationOfCountingSearchEntity>) {
-        inventoryOrganizationOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingListRepository.dropListInventoryOrganization(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.inventoryOrganizationList.next(res);
                 }
             });
     }

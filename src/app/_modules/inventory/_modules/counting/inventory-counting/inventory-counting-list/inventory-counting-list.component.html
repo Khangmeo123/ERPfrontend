@@ -106,29 +106,33 @@
               </app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-single-select [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
-                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.inventoryOrganizationId"
-                (clear)="clearSearch(table)"
-                (search)="typingSearchInvetoryOrganization($event, inventoryCountingSearchEntity.inventoryOrganizationId)"
-                (selectionChange)="inventoryCountingSearchEntity.inventoryOrganizationId = $event[0]; getList()"
-                (listOpen)="dropListInventoryOrganization(inventoryCountingSearchEntity.inventoryOrganizationId)">
-              </app-single-select>
+              <jaja-select-list class="flex-grow-1"
+                [getList]="inventoryCountingListRepository.selectListInventoryOrganization" key="code" appendTo="body"
+                [searchEntity]="inventoryOrganizationSearch" searchField="code" searchType="startsWith"
+                [searchable]="true"
+                (change)="inventoryCountingSearchEntity.inventoryOrganizationId = $event.id; getList()">
+                <ng-template #label #option let-code="code">
+                  {{code}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-              <app-single-select [list]="inventoryCountingOwnerExceptIds" [selectedList]="inventoryCountingOwnerIds"
-                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerId" (clear)="clearSearch(table)"
-                (search)="typingSearchInventoryOwner($event, inventoryCountingSearchEntity.ownerId)"
-                (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
-                (listOpen)="dropListInventoryCoutingOwner(inventoryCountingSearchEntity.ownerId)">
-              </app-single-select>
+              <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
+                key="name" [searchEntity]="inventoryCountingOwnerSearch" searchField="name" searchType="startsWith"
+                [searchable]="true" (change)="inventoryCountingSearchEntity.ownerId = $event.id; getList()">
+                <ng-template #label #option let-name="name">
+                  {{name}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-              <app-single-select [list]="inventoryCounterExceptIds" [selectedList]="inventoryCounterIds" [key]="'name'"
-                [initialValue]="inventoryCountingSearchEntity.inventoryCounterId" (clear)="clearSearch(table)"
-                (search)="typingSearchInventoryCounter($event, inventoryCountingSearchEntity.inventoryCounterId)"
-                (selectionChange)="inventoryCountingSearchEntity.inventoryCounterId = $event[0]; getList()"
-                (listOpen)="dropListInventoryCouter(inventoryCountingSearchEntity.inventoryCounterId)">
-              </app-single-select>
+              <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
+                key="name" [searchEntity]="inventoryCounterSearch" searchField="name" searchType="startsWith"
+                [searchable]="true" (change)="inventoryCountingSearchEntity.inventoryCounterId = $event.id; getList()">
+                <ng-template #label #option let-name="name">
+                  {{name}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
               <app-simple-select [key]="'display'" [list]="statusList" (clear)="clearSearch(table)"
