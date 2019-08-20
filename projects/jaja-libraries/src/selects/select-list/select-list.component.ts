@@ -13,12 +13,11 @@ import {
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
-import { ISelect } from '../ISelect';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SearchEntity } from '../../../../../src/app/_helpers/search-entity';
-import { ISearchEntity } from '../../entities/ISearchEntity';
+import {ISelect} from '../ISelect';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ISearchEntity} from '../../entities/ISearchEntity';
 
 @Component({
   selector: 'jaja-select-list',
@@ -33,7 +32,6 @@ import { ISearchEntity } from '../../entities/ISearchEntity';
   ],
 })
 export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ISelect {
-
 
   @Input() appendTo: string = null;
 
