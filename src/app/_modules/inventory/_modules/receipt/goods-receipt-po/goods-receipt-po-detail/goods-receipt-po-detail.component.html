@@ -91,15 +91,18 @@
                          [placement]="'top'"
                          [property]="'supplierDetailId'"
                          class="error-form"
-                         data-qe-id="form-error-supplierCode">
+                         data-qe-id="form-error-supplier-code">
               </app-error>
             </div>
           </div>
           <div class="col-sm-4 form-group">
-            <label>
+            <label for="detail-form-supplier-name">
               {{'goodsReceiptPODetail.supplierName' | translate}}
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-supplier-name" formControlName="supplierName"
+            <input class="form-control disabled"
+                   id="detail-form-supplier-name"
+                   data-qe-id="detail-form-supplier-name"
+                   formControlName="supplierName"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -122,8 +125,10 @@
                 </ng-template>
               </jaja-select-list>
               <app-error [formGroup]="goodsReceiptPOForm"
-                         [placement]="'top'" [property]="'supplierContactId'" class="error-form"
-                         data-qe-id="form-error-supplierContact"></app-error>
+                         [placement]="'top'"
+                         [property]="'supplierContactId'"
+                         class="error-form"
+                         data-qe-id="form-error-supplier-contact"></app-error>
             </div>
           </div>
         </div>
@@ -143,6 +148,11 @@
                    data-qe-id="detail-form-goods-receipt"
                    formControlName="purchaseOrderName"
                    type="text">
+            <app-error [formGroup]="goodsReceiptPOForm"
+                       [placement]="'top'"
+                       [property]="'purchaseOrderName'"
+                       class="error-form"
+                       data-qe-id="form-error-supplier-contact"></app-error>
           </div>
         </div>
       </div>
@@ -188,18 +198,26 @@
               {{'goodsReceiptPODetail.personInCharge' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <jaja-select-list [list]="ownerList"
-                              [getList]="goodsReceiptPoDetailService.getOwnerList"
-                              [searchable]="true"
-                              [searchEntity]="ownerSearchEntity"
-                              searchField="name"
-                              searchType="startsWith"
-                              (change)="onSelectOwner($event)"
-            >
-              <ng-template #label #option let-code="code" let-name="name">
-                {{code}} - {{name}}
-              </ng-template>
-            </jaja-select-list>
+            <div class="div-form d-flex">
+              <jaja-select-list [list]="ownerList"
+                                class="flex-grow-1"
+                                [getList]="goodsReceiptPoDetailService.getOwnerList"
+                                [searchable]="true"
+                                [searchEntity]="ownerSearchEntity"
+                                searchField="name"
+                                searchType="startsWith"
+                                (change)="onSelectOwner($event)"
+              >
+                <ng-template #label #option let-code="code" let-name="name">
+                  {{code}} - {{name}}
+                </ng-template>
+              </jaja-select-list>
+              <app-error [formGroup]="goodsReceiptPOForm"
+                         [placement]="'top'"
+                         [property]="'supplierContactId'"
+                         class="error-form"
+                         data-qe-id="form-error-supplier-contact"></app-error>
+            </div>
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -362,9 +380,9 @@
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
-                                        [list]="taxList"
-                                        [getList]="goodsReceiptPoDetailService.getTaxList"
-                                        [searchEntity]="taxSearchEntity"
+                                        [list]="purchaseOrdersList"
+                                        [getList]="goodsReceiptPoDetailService.getPurchaseOrderList"
+                                        [searchEntity]="purchaseOrderSearchEntity"
                                         searchField="code"
                                         searchType="startsWith"
                                         key="code"
@@ -377,12 +395,15 @@
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
-                                        [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getSupplierList"
+                                        [list]="itemDetailList"
+                                        [getList]="goodsReceiptPoDetailService.getItemDetailList"
+                                        [searchEntity]="itemDetailSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith"
                                         key="code"
                                         [searchable]="true">
-                        <ng-template #label #option let-code="code">
-                          {{code}}
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{code}} - {{name}}
                         </ng-template>
                       </jaja-select-list>
                     </th>
@@ -395,7 +416,10 @@
                       <jaja-select-list class="flex-grow-1"
                                         appendTo="body"
                                         [list]="supplierList"
-                                        [getList]="goodsReceiptPoDetailService.getSupplierList"
+                                        [getList]="goodsReceiptPoDetailService.getUnitOfMeasureList"
+                                        [searchEntity]="unitOfMeasureSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith"
                                         key="code"
                                         [searchable]="true">
                         <ng-template #label #option let-code="code">
@@ -473,21 +497,25 @@
             <div class="tab-upload">
               <div class="form-upload-file d-flex">
                 <div class="pt-3 upload-btn-wrapper">
-                  <button class="btn btn-labeled btn-import">
-                    <span class="btn-label"><i class="material-icons">attach_file</i></span>
+                  <button class="btn btn-labeled btn-import" (click)="files.click()">
+                    <span class="btn-label">
+                      <i class="material-icons">attach_file</i>
+                    </span>
                     <span class="button-label">
-                                            {{'general.button.attachFile' | translate}}
-                                        </span></button>
-                  <input (change)="readURL($event)" multiple type="file"/>
+                      {{'general.button.attachFile' | translate}}
+                    </span>
+                  </button>
+                  <input #files (change)="readURL($event)" multiple type="file"/>
                 </div>
                 <div class="results d-flex align-items-center">
-                  <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
+                  <div *ngFor="let name of filenameList" class="results-item d-flex align-items-center mr-3">
                     <div class="results-item-name">
-                      <span class="icon-upload"><i class="material-icons">attach_file</i></span>
+                      <span class="icon-upload d-flex align-items-center mr-1">
+                        <i class="material-icons">attach_file</i>
+                      </span>
                       <span>{{name}}</span>
                     </div>
-                    <span class="close-attach align-items-center"><i
-                      class="material-icons">close</i></span>
+                    <span class="close-attach align-items-center"><i class="material-icons">close</i></span>
                   </div>
                 </div>
               </div>
@@ -549,8 +577,6 @@
                 <app-date-picker (valueChange)="sortDatePurchaseOrders($event, tablePurchaseOrder)"
                                  data-qe-id="detail-form-receipted-date">
                 </app-date-picker>
-                <!-- <input type="text" class="form-control"
-                    (input)="tablePurchaseOrder.filter($event.target.value, 'documentDate', 'equals')" /> -->
               </th>
               <th class="th-filter">
                 <input (input)="tablePurchaseOrder.filter($event.target.value, 'documentNumber', 'equals')"

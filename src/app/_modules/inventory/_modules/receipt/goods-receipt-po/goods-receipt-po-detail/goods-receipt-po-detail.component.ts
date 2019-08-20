@@ -3,19 +3,23 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GoodsReceiptPoDetailService } from './goods-receipt-po-detail.service';
 import {
   EmployeeDetailEntity,
+  ItemDetailEntity,
   PurchaseOrderEntity,
   SupplierContactEntity,
   SupplierEntity,
   TaxEntity,
+  UnitOfMeasureEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
   EmpoloyeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
+  ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
   SupplierContactSearchEntity,
   TaxSearchEntity,
+  UnitOfMeasureSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
@@ -38,7 +42,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   displayPurchaseOrders: boolean = false;
 
-  fileNameList: any[] = [];
+  filenameList: string[] = [];
 
   deletedList: number[] = [];
 
@@ -74,6 +78,14 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
 
+  unitOfMeasureList: UnitOfMeasureEntity[] = [];
+
+  unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
+
+  itemDetailList: ItemDetailEntity[] = [];
+
+  itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
+
   public subscription: Subscription = new Subscription();
 
   constructor(
@@ -85,6 +97,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.goodsReceiptPOId) {
         this.goodsReceiptPOId = params.goodsReceiptPOId;
+        this.goodsReceiptPoDetailService.getDetail(params.goodsReceiptPOId);
       }
     });
 
@@ -189,6 +202,14 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   }
 
   save() {
+    if (this.goodsReceiptPOForm.invalid) {
+      this.generalService.validateAllFormFields(this.goodsReceiptPOForm);
+    } else {
+      this.goodsReceiptPoDetailService.save(this.goodsReceiptPOForm.value)
+        .then(() => {
+          return this.backToList();
+        });
+    }
   }
 
   public combineGoodsReceiptPO() {
@@ -213,7 +234,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   }
 
   deleteItem() {
-
+    this.goodsReceiptPoDetailService.deleteItemFromContents(this.deletedList);
   }
 
   showPurchaseOrders() {
@@ -241,7 +262,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   }
 
   readURL(event) {
-
+    this.filenameList = Object.values(event.target.files).map((file: File) => file.name);
   }
 
   trackByFn(index) {
