@@ -3,12 +3,8 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GoodsReceiptPoDetailService } from './goods-receipt-po-detail.service';
 import {
   EmployeeDetailEntity,
-  ItemDetailEntity,
   PurchaseOrderEntity,
   SupplierContactEntity,
-  SupplierEntity,
-  TaxEntity,
-  UnitOfMeasureEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
@@ -22,8 +18,9 @@ import {
   UnitOfMeasureSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
-import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
 import { GeneralService } from '../../../../../../_services/general-service.service';
+import { GoodsReceiptPOListRepository } from '../goods-receipt-po-list/goods-receipt-po-list.repository';
+import { GoodsReceiptPODetailRepository } from './goods-receipt-po-detail.repository';
 
 @Component({
   selector: 'app-goods-receipt-po-detail',
@@ -50,39 +47,23 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   purchaseOrderSearchEntity: PurchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
 
-  taxList: TaxEntity[] = [];
-
   taxSearchEntity: TaxSearchEntity = new TaxSearchEntity();
 
   requesterList: EmployeeDetailEntity[] = [];
 
   requesterSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
 
-  buyerList: EmployeeDetailEntity[] = [];
-
   buyerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
-
-  ownerList: EmployeeDetailEntity[] = [];
 
   ownerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
 
-  supplierList: SupplierEntity[] = [];
-
   supplierSearchEntity: SupplierSearchEntity = new SupplierSearchEntity();
-
-  supplierContactList: SupplierContactEntity[] = [];
 
   supplierContactSearchEntity: SupplierContactSearchEntity = new SupplierContactSearchEntity();
 
-  inventoryOrganizationList: InventoryOrganizationEntity[] = [];
-
   inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
 
-  unitOfMeasureList: UnitOfMeasureEntity[] = [];
-
   unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
-
-  itemDetailList: ItemDetailEntity[] = [];
 
   itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
 
@@ -93,6 +74,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     private goodsReceiptPoDetailService: GoodsReceiptPoDetailService,
     private activatedRoute: ActivatedRoute,
     private generalService: GeneralService,
+    private goodsReceiptPoDetailRepository: GoodsReceiptPODetailRepository,
   ) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.goodsReceiptPOId) {
@@ -105,58 +87,21 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       this.goodsReceiptPOForm = form;
     });
 
-    const taxSubscription: Subscription = this.goodsReceiptPoDetailService.taxList.subscribe((list: TaxEntity[]) => {
-      this.taxList = list;
-    });
-
-    const ownerListSubscription: Subscription = this.goodsReceiptPoDetailService.ownerList.subscribe((list: EmployeeDetailEntity[]) => {
-      this.ownerList = list;
-    });
-
-    const taxListSubscription: Subscription = this.goodsReceiptPoDetailService.ownerList.subscribe((list: TaxEntity[]) => {
-      this.taxList = list;
-    });
-
     const requesterListSubscription: Subscription = this.goodsReceiptPoDetailService.requesterList
       .subscribe((list: EmployeeDetailEntity[]) => {
         this.requesterList = list;
       });
-
-    const buyerSubscription: Subscription = this.goodsReceiptPoDetailService.buyerList.subscribe((list: EmployeeDetailEntity[]) => {
-      this.buyerList = list;
-    });
-
-    const supplierSubscription: Subscription = this.goodsReceiptPoDetailService.supplierList.subscribe((list: SupplierEntity[]) => {
-      this.supplierList = list;
-    });
 
     const purchaseOrdersSubscription: Subscription = this.goodsReceiptPoDetailService.purchaseOrderList
       .subscribe((list: PurchaseOrderEntity[]) => {
         this.purchaseOrdersList = list;
       });
 
-    const inventoryOrganizationSubscription: Subscription = this.goodsReceiptPoDetailService.inventoryOrganizationList
-      .subscribe((list: InventoryOrganizationEntity[]) => {
-        this.inventoryOrganizationList = list;
-      });
-
-    const supplierContactSubscription: Subscription = this.goodsReceiptPoDetailService.supplierContactList
-      .subscribe((list: SupplierContactEntity[]) => {
-        this.supplierContactList = list;
-      });
-
     this.subscription
       .add(activatedRouteSubscription)
-      .add(taxSubscription)
-      .add(supplierSubscription)
-      .add(supplierContactSubscription)
       .add(formSubscription)
-      .add(ownerListSubscription)
-      .add(buyerSubscription)
       .add(purchaseOrdersSubscription)
-      .add(inventoryOrganizationSubscription)
-      .add(requesterListSubscription)
-      .add(taxListSubscription);
+      .add(requesterListSubscription);
   }
 
   get errors(): FormGroup {
@@ -226,7 +171,6 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   }
 
   onClearSearch(event) {
-
   }
 
   deactivate() {
@@ -287,10 +231,10 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
     this.supplierContactSearchEntity.supplierDetailId = event.id;
     this.goodsReceiptPoDetailService.getSupplierContactList(this.supplierContactSearchEntity)
-      .then(() => {
-        if (this.supplierContactList.length > 0) {
+      .then((contactList: SupplierContactEntity[]) => {
+        if (contactList.length > 0) {
           this.goodsReceiptPOForm.patchValue({
-            supplierContactId: this.supplierContactList[0].id,
+            supplierContactId: contactList[0].id,
           });
         }
       });

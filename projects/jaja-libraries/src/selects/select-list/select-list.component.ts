@@ -14,7 +14,7 @@ import {
   TemplateRef,
 } from '@angular/core';
 import { ISelect } from '../ISelect';
-import { Subject, Subscription } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { NG_VALUE_ACCESSOR } from '@angular/forms';
 import { SearchEntity } from '../../../../../src/app/_helpers/search-entity';
@@ -33,9 +33,11 @@ import { ISearchEntity } from '../../entities/ISearchEntity';
   ],
 })
 export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ISelect {
+
+
   @Input() appendTo: string = null;
 
-  @Input() list: any[];
+  public list: any[] = [];
 
   @Input() key: string = null;
 
@@ -50,7 +52,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() searchField: string = 'name';
 
-  @Input() searchType: string = null;
+  @Input() searchType: string = 'startsWith';
 
   @Input() searchEntity: any = new SearchEntity();
 
@@ -85,7 +87,8 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   @Input()
-  getList(searchEntity?: ISearchEntity): any {
+  getList(searchEntity?: ISearchEntity): Observable<any[]> {
+    return new Observable<any[]>();
   }
 
   onChange(event) {
@@ -118,10 +121,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes.list) {
-      this.loading = false;
-    }
-    if (changes.value || changes.list) {
+    if (changes.value) {
       this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
     }
   }
@@ -171,8 +171,14 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   onToggle(isOpened) {
     if (isOpened) {
       this.searchEntity = new this.searchEntity.constructor();
-      this.getList(this.searchEntity);
       this.loading = true;
+      this.getList(this.searchEntity)
+        .subscribe(
+          (list: any[]) => {
+            this.list = list;
+            this.loading = false;
+          },
+        );
     }
   }
 }
