@@ -54,7 +54,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() searchType: string = 'startsWith';
 
-  @Input() searchEntity: any = new SearchEntity();
+  @Input() searchEntity: any;
 
   @Input() disabled: boolean = false;
 
@@ -83,7 +83,6 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   set value(value) {
     this.selectedItem = this.list.find((item) => this.getValue(item) === value);
-    this.onChange(value);
   }
 
   @Input()
@@ -111,7 +110,13 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
         .subscribe(
           (event) => {
             this.searchEntity[this.searchField][this.searchType] = event;
-            this.getList(this.searchEntity);
+            this.getList(this.searchEntity)
+              .subscribe(
+                (list: any[]) => {
+                  this.list = list;
+                  this.loading = false;
+                },
+              );
             this.loading = true;
           },
         );
@@ -122,7 +127,9 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value) {
-      this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
+      if (!changes.value.firstChange) {
+        this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
+      }
     }
   }
 
@@ -150,7 +157,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   onClear(event) {
     event.stopPropagation();
-    this.value = undefined;
+    this.onChange(null);
   }
 
   onSearch(event): void {
@@ -170,7 +177,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   onToggle(isOpened) {
     if (isOpened) {
-      this.searchEntity = new this.searchEntity.constructor();
+      this.searchEntity[this.searchField][this.searchType] = null;
       this.loading = true;
       this.getList(this.searchEntity)
         .subscribe(
