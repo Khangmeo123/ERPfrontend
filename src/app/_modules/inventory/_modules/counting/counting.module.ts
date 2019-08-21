@@ -26,6 +26,7 @@ import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover'
 import { InventoryCountingPendingComponent } from './inventory-counting/inventory-counting-pending/inventory-counting-pending.component';
 import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
 import { InventoryCountingDoneComponent } from './inventory-counting/inventory-counting-done/inventory-counting-done.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -64,6 +65,7 @@ import { InventoryCountingDoneComponent } from './inventory-counting/inventory-c
     FormsModule,
     ReactiveFormsModule,
     SelectsModule,
+    ConfirmDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

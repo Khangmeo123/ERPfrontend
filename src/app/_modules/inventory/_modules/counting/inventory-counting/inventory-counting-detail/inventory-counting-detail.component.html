@@ -105,9 +105,16 @@
                             {{'inventoryCounting.detail.countingDate' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-date-picker data-qe-id="detail-form-counting-date"
-                            [control]="inventoryCountingForm.get('documentDate')">
-                        </app-date-picker>
+                        <div class="div-form">
+                            <app-date-picker data-qe-id="detail-form-counting-date" class="w-100"
+                                [control]="inventoryCountingForm.get('documentDate')">
+                            </app-date-picker>
+                            <app-error data-qe-id="form-error-counter"
+                                *ngIf="(inventoryCountingForm.controls.documentDate?.errors && inventoryCountingForm.controls.documentDate?.dirty) || !!inventoryCountingForm.controls.errors.get('documentDate')?.value"
+                                [formGroup]="inventoryCountingForm" [property]="'documentDate'" [placement]="'top'"
+                                class="error-form">
+                            </app-error>
+                        </div>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
@@ -116,6 +123,7 @@
                         </label>
                         <div class="div-form">
                             <jaja-select-list class="flex-grow-1"
+                                [display]="inventoryCountingForm.get('inventoryOrganizationCode').value"
                                 [getList]="inventoryCountingRepository.selectListInventoryOrganization"
                                 [searchEntity]="inventoryOrganizationSearchEntity" searchField="code"
                                 searchType="startsWith" [searchable]="true"
@@ -166,9 +174,9 @@
                             </div>
 
                         </div>
-                        <div class="table" formArrayName="inventoryCountingContents">
+                        <div class="table">
                             <p-table #tableInventoryCountingContents [scrollable]="true" scrollHeight="500px"
-                                [resizableColumns]="true" [rowTrackBy]="trackByFn" [paginator]="true" [rows]="20"
+                                [resizableColumns]="true" [paginator]="true" [rows]="20"
                                 [value]="inventoryCountingForm.controls.inventoryCountingContents.value">
                                 <ng-template pTemplate="colgroup">
                                     <colgroup>
@@ -249,10 +257,12 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-inventoryCountingContent let-index="rowIndex">
-                                    <tr [formGroupName]='index'>
+                                    <tr>
                                         <td width="2.5%">
                                             <div class="pretty p-icon p-curve p-has-indeterminate">
-                                                <input type="checkbox" formControlName="isSelected" />
+                                                <input type="checkbox" [ngModel]="inventoryCountingContent.isSelected"
+                                                    [ngModelOptions]="{standalone: true}"
+                                                    (change)="checkInventoryCountingContent(index, $event.target)" />
                                                 <div class="state">
                                                     <i class="icon material-icons">done</i>
                                                     <label></label>
@@ -262,10 +272,11 @@
                                         <td width="3%">
                                             <span>{{index + 1}}</span>
                                         </td>
-                                        <td>
+                                        <td pEditableColumn>
                                             <jaja-select-list class="flex-grow-1" appendTo="body"
                                                 [value]="itemDetailSearchEntity.id"
                                                 [getList]="inventoryCountingRepository.selectListItemDetail"
+                                                [display]="inventoryCountingContent.itemDetailCode"
                                                 [searchEntity]="itemDetailSearchEntity" searchField="code"
                                                 (change)="selectItemDetail(index, $event)" searchType="startsWith"
                                                 [searchable]="true">
@@ -299,8 +310,9 @@
                                         <td width="2.5%"></td>
                                         <td width="3%"></td>
                                         <td>
-                                            <a href="javascript:;" (click)="addInventoryCountingContent()">+ Bấm vào để
-                                                thêm mới...</a>
+                                            <a href="javascript:;" (click)="addInventoryCountingContent()">
+                                                + {{'general.button.addRow' | translate}}
+                                            </a>
                                         </td>
                                         <td [attr.colspan]="inventoryOrganizationId !== undefined ? 4 : 3">
                                         </td>
@@ -516,3 +528,19 @@
         </div>
     </p-footer>
 </p-dialog>
+
+<p-confirmDialog #cd header="{{'general.confirmation.title' | translate}}"
+    message="{{'general.confirmation.message' | translate}}" icon="pi pi-exclamation-triangle">
+    <p-footer>
+        <div class="d-flex justify-content-end">
+            <button type="button" class="btn btn-labeled btn-cancel align-items-center" (click)="cd.reject()">
+                <span class="button-label">
+                    {{'general.button.confirm.no' | translate}}
+                </span></button>
+            <button type="button" class="btn btn-labeled btn-reverse align-items-center" (click)="cd.accept()">
+                <span class="button-label">
+                    {{'general.button.confirm.yes' | translate}}
+                </span></button>
+        </div>
+    </p-footer>
+</p-confirmDialog>

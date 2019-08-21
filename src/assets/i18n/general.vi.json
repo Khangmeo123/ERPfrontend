@@ -2,6 +2,7 @@
     "general": {
         "action": "Thao tác",
         "button": {
+            "addRow": "Bấm vào để thêm mới...",
             "add": "Thêm",
             "approve": "Phê duyệt",
             "attachFile": "Thêm đính kèm",

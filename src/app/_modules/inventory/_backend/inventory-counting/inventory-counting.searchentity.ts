@@ -49,6 +49,8 @@ export class ItemDetailOfCountingSearchEntity extends SearchEntity {
             this.inventoryOrganizationId = itemDetailOfCountingSearchEntity.inventoryOrganizationId !== null &&
                 itemDetailOfCountingSearchEntity.inventoryOrganizationId !== undefined ?
                 itemDetailOfCountingSearchEntity.inventoryOrganizationId : null;
+            this.existedIds = itemDetailOfCountingSearchEntity.existedIds !== null &&
+                itemDetailOfCountingSearchEntity.existedIds !== undefined ? itemDetailOfCountingSearchEntity.existedIds : [];
         }
     }
 }

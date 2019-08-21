@@ -81,6 +81,7 @@ export class InventoryCountingDetailService {
                     this.inventoryCountingForm.next(this.fb.group(
                         new InventoryCountingForm(err),
                     ));
+                    this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật');
                     reject();
                 }
             });
@@ -100,6 +101,7 @@ export class InventoryCountingDetailService {
                     this.inventoryCountingForm.next(this.fb.group(
                         new InventoryCountingForm(err),
                     ));
+                    this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật');
                     reject();
                 }
             });

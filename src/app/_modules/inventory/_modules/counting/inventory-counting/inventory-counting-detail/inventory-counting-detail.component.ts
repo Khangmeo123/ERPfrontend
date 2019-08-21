@@ -19,13 +19,15 @@ import {
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { GeneralService } from 'src/app/_services/general-service.service';
 import { InventoryCountingDetailRepository } from './inventory-counting-detail.repository';
+import { ConfirmationService } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-inventory-counting-detail',
   templateUrl: './inventory-counting-detail.component.html',
   styleUrls: ['./inventory-counting-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [InventoryCountingDetailService],
+  providers: [InventoryCountingDetailService, ConfirmationService],
 })
 export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptDetail.header.title');
@@ -60,9 +62,11 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   itemDetailCodeSearchEntity: ItemDetailOfCountingSearchEntity = new ItemDetailOfCountingSearchEntity();
 
   constructor(
+    private confirmationService: ConfirmationService,
     private router: Router,
     private inventoryCountingService: InventoryCountingDetailService,
     private inventoryCountingRepository: InventoryCountingDetailRepository,
+    private toastrService: ToastrService,
     private generalService: GeneralService,
     private route: ActivatedRoute) {
 
@@ -75,7 +79,10 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
           if (res) {
             this.inventoryOrganizationId = res.inventoryOrganizationId;
             this.existedIds = res.inventoryCountingContents.map(item => item.itemDetailId);
-            this.itemDetailSearchEntity.inventoryOrganizationId = this.inventoryOrganizationId;
+            this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity({
+              inventoryOrganizationId: this.inventoryOrganizationId,
+              existedIds: this.existedIds,
+            });
           }
         });
       });
@@ -147,8 +154,13 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   delete() {
-    this.inventoryCountingService.delete(this.inventoryCountingId).then(res => {
-      this.backToList();
+    this.confirmationService.confirm({
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.inventoryCountingService.delete(this.inventoryCountingId).then(res => {
+          this.backToList();
+        });
+      },
     });
   }
 
@@ -190,16 +202,29 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
 
   // inventoryCoutingContents:
   addInventoryCountingContent() {
-    this.inventoryCountingService.addInventoryCountingContent(this.inventoryCountingForm);
+    if (this.inventoryOrganizationId) {
+      this.inventoryCountingService.addInventoryCountingContent(this.inventoryCountingForm);
+    } else {
+      this.toastrService.warning('Bạn cần chọn mã kho trước!')
+    }
   }
 
   selectItemDetail(index: number, itemDetail: any) {
     this.existedIds.push(itemDetail.id);
+    this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity({
+      inventoryOrganizationId: this.inventoryOrganizationId,
+      existedIds: this.existedIds,
+    });
     this.inventoryCountingService.selectItemDetail(this.inventoryCountingForm, index, itemDetail);
   }
 
   checkAllContents(target: any) {
     this.inventoryCountingService.checkAllContents(this.inventoryCountingForm, target.checked);
+  }
+
+  checkInventoryCountingContent(index: number, event: any) {
+    const currentArray = this.inventoryCountingForm.get('inventoryCountingContents') as FormArray;
+    currentArray.controls[index].get('isSelected').setValue(event.checked);
   }
 
   deleteMultiple() {
@@ -229,10 +254,14 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
 
   // inventoryOrganization:
   selectInventoryOrganization(node: any) {
-    this.inventoryCountingForm.get('inventoryOrganizationId').setValue(node.id);
-    this.inventoryCountingForm.get('enableBinLocation').setValue(node.enableBinLocation);
-    this.inventoryOrganizationId = node.id;
-    this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity({ inventoryOrganizationId: this.inventoryOrganizationId });
+    if (node !== null && node !== undefined) {
+      this.inventoryCountingForm.get('inventoryOrganizationId').setValue(node.id);
+      this.inventoryCountingForm.get('enableBinLocation').setValue(node.enableBinLocation);
+      this.inventoryOrganizationId = node.id;
+      this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity({ inventoryOrganizationId: this.inventoryOrganizationId });
+    } else {
+      this.inventoryOrganizationId = null;
+    }
   }
 
   // employeeDetail

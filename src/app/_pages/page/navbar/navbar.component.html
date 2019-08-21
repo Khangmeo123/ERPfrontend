@@ -43,10 +43,10 @@
        style="margin-right: 10px">
     <ul class="navbar-nav d-flex align-items-center">
       <jaja-select-list key="id"
-                        display="code"
                         placeholder="{{'general.legalEntity.placeholder' | translate}}"
                         [getList]="appRepository.getLegalEntityList"
                         (change)="onChangeLegalEntity($event)"
+                        [display]="legalEntity?.code"
                         [value]="legalEntityId">
         <ng-template #label #option let-code="code">
           {{code}}
