@@ -32,8 +32,9 @@ import { SignUpComponent } from './_pages/sign-up/sign-up.component';
 import { ResetPasswordComponent } from './_pages/reset-password/reset-password.component';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { SelectModule } from './_shared/modules/select/select.module';
-import { SelectsModule } from '../../projects/jaja-libraries/src/selects/selects.module';
+import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
 import { BsDropdownModule } from 'ngx-bootstrap';
+import { IconModule } from '@ant-design/icons-angular';
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import { BsDropdownModule } from 'ngx-bootstrap';
     SelectModule,
     BsDropdownModule.forRoot(),
     SelectsModule,
+    IconModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},

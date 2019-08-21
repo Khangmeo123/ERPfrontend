@@ -15,7 +15,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  EmpoloyeeDetailSearchEntity,
+  EmployeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
   ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
@@ -140,7 +140,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
       );
   };
 
-  getEmployeeDetailList = (employeeDetailSearchEntity: EmpoloyeeDetailSearchEntity): Observable<EmployeeDetailEntity[]> => {
+  getEmployeeDetailList = (employeeDetailSearchEntity: EmployeeDetailSearchEntity): Observable<EmployeeDetailEntity[]> => {
     return this.http.post<EmployeeDetailEntity[]>(
       GoodsReceiptPODetailRepository.getURL('/single-list-employee-detail'),
       employeeDetailSearchEntity,
@@ -156,9 +156,9 @@ export class GoodsReceiptPODetailRepository extends Repository {
       );
   };
 
-  getInventoryOrganizationList(
+  getInventoryOrganizationList = (
     inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity,
-  ): Observable<InventoryOrganizationEntity[]> {
+  ): Observable<InventoryOrganizationEntity[]> => {
     return this.http.post<InventoryOrganizationEntity[]>(
       GoodsReceiptPODetailRepository.getURL('/single-list-inventory-organization'),
       inventoryOrganizationSearchEntity,

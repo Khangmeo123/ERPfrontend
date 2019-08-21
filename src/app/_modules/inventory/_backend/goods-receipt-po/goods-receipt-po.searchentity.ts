@@ -39,7 +39,7 @@ export class PurchaseOrderSearchEntity extends SearchEntity {
   }
 }
 
-export class EmpoloyeeDetailSearchEntity extends SearchEntity {
+export class EmployeeDetailSearchEntity extends SearchEntity {
   code: TextFilter = new TextFilter();
   name: TextFilter = new TextFilter();
 

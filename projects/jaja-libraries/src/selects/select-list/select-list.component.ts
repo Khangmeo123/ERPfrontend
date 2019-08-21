@@ -98,7 +98,6 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
   onTouch(event) {
   }
 
-
   ngOnInit() {
     if (this.value) {
       this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);

@@ -4,26 +4,19 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import {
   EmployeeDetailEntity,
   GoodsReceiptPOEntity,
-  ItemDetailEntity,
   PurchaseOrderEntity,
   SupplierContactEntity,
-  SupplierEntity,
   TaxEntity,
   UnitOfMeasureEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
-  EmpoloyeeDetailSearchEntity,
-  InventoryOrganizationSearchEntity,
-  ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
   SupplierContactSearchEntity,
   TaxSearchEntity,
   UnitOfMeasureSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { GoodsReceiptPOForm } from '../../../../_backend/goods-receipt-po/goods-receipt-po.form';
 import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
-import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';
 import { UploadFile } from 'ng-zorro-antd';
@@ -40,21 +33,11 @@ export class GoodsReceiptPoDetailService {
 
   taxList: BehaviorSubject<TaxEntity[]> = new BehaviorSubject<TaxEntity[]>([]);
 
-  supplierList: BehaviorSubject<SupplierEntity[]> = new BehaviorSubject<SupplierEntity[]>([]);
-
   supplierContactList: BehaviorSubject<SupplierContactEntity[]> = new BehaviorSubject<SupplierContactEntity[]>([]);
-
-  buyerList: BehaviorSubject<EmployeeDetailEntity[]> = new BehaviorSubject<EmployeeDetailEntity[]>([]);
-
-  ownerList: BehaviorSubject<EmployeeDetailEntity[]> = new BehaviorSubject<EmployeeDetailEntity[]>([]);
 
   requesterList: BehaviorSubject<EmployeeDetailEntity[]> = new BehaviorSubject<EmployeeDetailEntity[]>([]);
 
   unitOfMeasureList: BehaviorSubject<UnitOfMeasureEntity[]> = new BehaviorSubject<UnitOfMeasureEntity[]>([]);
-
-  inventoryOrganizationList: BehaviorSubject<InventoryOrganizationEntity[]> = new BehaviorSubject<InventoryOrganizationEntity[]>([]);
-
-  itemDetailList: BehaviorSubject<ItemDetailEntity[]> = new BehaviorSubject<ItemDetailEntity[]>([]);
 
   constructor(
     private goodsReceiptPODetailRepository: GoodsReceiptPODetailRepository,
@@ -67,46 +50,6 @@ export class GoodsReceiptPoDetailService {
       ),
     );
   }
-
-  public getBuyerList = (requesterSearchEntity: EmpoloyeeDetailSearchEntity): Subscription => {
-    return this.goodsReceiptPODetailRepository
-      .getEmployeeDetailList(requesterSearchEntity)
-      .subscribe(
-        (list: EmployeeDetailEntity[]) => {
-          this.buyerList.next(list);
-        },
-      );
-  };
-
-  public getRequesterList = (requesterSearchEntity: EmpoloyeeDetailSearchEntity): Subscription => {
-    return this.goodsReceiptPODetailRepository
-      .getEmployeeDetailList(requesterSearchEntity)
-      .subscribe(
-        (list: EmployeeDetailEntity[]) => {
-          this.requesterList.next(list);
-        },
-      );
-  };
-
-  public getOwnerList = (requesterSearchEntity: EmpoloyeeDetailSearchEntity): Subscription => {
-    return this.goodsReceiptPODetailRepository
-      .getEmployeeDetailList(requesterSearchEntity)
-      .subscribe(
-        (list: EmployeeDetailEntity[]) => {
-          this.ownerList.next(list);
-        },
-      );
-  };
-
-  public getSupplierList = (supplierSearchEntity: SupplierSearchEntity): Subscription => {
-    return this.goodsReceiptPODetailRepository
-      .getSupplierList(supplierSearchEntity)
-      .subscribe(
-        (list: SupplierEntity[]) => {
-          this.supplierList.next(list);
-        },
-      );
-  };
 
   public getSupplierContactList = (supplierContactSearchEntity: SupplierContactSearchEntity): Promise<SupplierContactEntity[]> => {
     return new Promise<SupplierContactEntity[]>((resolve, reject) => {
@@ -122,16 +65,6 @@ export class GoodsReceiptPoDetailService {
           },
         );
     });
-  };
-
-  public getInventoryOrganizationList = (inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity): Subscription => {
-    return this.goodsReceiptPODetailRepository
-      .getInventoryOrganizationList(inventoryOrganizationSearchEntity)
-      .subscribe(
-        (list: InventoryOrganizationEntity[]) => {
-          this.inventoryOrganizationList.next(list);
-        },
-      );
   };
 
   public getPurchaseOrderList = (purchaseOrderSearchEntity: PurchaseOrderSearchEntity): Promise<void> => {
@@ -275,21 +208,6 @@ export class GoodsReceiptPoDetailService {
     });
   };
 
-  getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Promise<ItemDetailEntity[]> => {
-    return new Promise<ItemDetailEntity[]>((resolve, reject) => {
-      this.goodsReceiptPODetailRepository.getItemDetailList(itemDetailSearchEntity)
-        .subscribe(
-          (list: ItemDetailEntity[]) => {
-            this.itemDetailList.next(list);
-            resolve(list);
-          },
-          (error: Error) => {
-            reject(error);
-          },
-        );
-    });
-  };
-
   deleteItemFromContents(deletedList: number[]) {
     const currentFormGroup: FormGroup = this.goodsReceiptPOForm.getValue();
     const newFormArray: FormArray = new FormArray(
@@ -304,7 +222,6 @@ export class GoodsReceiptPoDetailService {
       return this.goodsReceiptPODetailRepository.uploadFiles(files)
         .subscribe(
           (fileAttachments: FileAttachmentEntity[]) => {
-            debugger
             const currentForm: FormGroup = this.goodsReceiptPOForm.getValue();
             currentForm.setControl('fileAttachments', new FormArray(
               fileAttachments.map((fileAttachment: FileAttachmentEntity) => {

@@ -78,10 +78,10 @@
               <jaja-select-list class="flex-grow-1"
                                 [getList]="goodsReceiptPoDetailRepository.getSupplierList"
                                 (change)="onSelectSupplierDetail($event)"
+                                [display]="supplierCode?.value"
                                 [searchable]="true"
                                 [searchEntity]="supplierSearchEntity"
-                                searchField="code"
-              >
+                                searchField="code">
                 <ng-template #label #option let-code="code" let-name="name">
                   {{code}} - {{name}}
                 </ng-template>
@@ -110,13 +110,14 @@
             </label>
             <div class="div-form">
               <jaja-select-list class="flex-grow-1"
-                                [getList]="getSupplierContactList"
+                                [getList]="goodsReceiptPoDetailRepository.getSupplierContactList"
                                 formControlName="supplierContactId"
                                 key="id"
-                                [disabled]="!supplierDetailId.value"
+                                [ngClass]="{disabled: !supplierDetailId.value}"
                                 [searchable]="true"
                                 [searchEntity]="supplierContactSearchEntity"
                                 searchField="supplierAddress"
+                                [display]="supplierAddress?.value"
                                 searchType="contains">
                 <ng-template #label #option let-supplierAddress="supplierAddress">
                   {{supplierAddress}}
@@ -139,18 +140,20 @@
               {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input (focus)="showPurchaseOrders()"
-                   id="purchase-orders"
-                   [ngClass]="{disabled: !supplierDetailId?.value?.length}"
-                   class="form-control"
-                   data-qe-id="detail-form-goods-receipt"
-                   formControlName="purchaseOrderName"
-                   type="text">
-            <app-error [formGroup]="goodsReceiptPOForm"
-                       [placement]="'top'"
-                       [property]="'purchaseOrderName'"
-                       class="error-form"
-                       data-qe-id="form-error-supplier-contact"></app-error>
+            <div class="div-form">
+              <input (focus)="showPurchaseOrders()"
+                     id="purchase-orders"
+                     [ngClass]="{disabled: !supplierDetailId?.value?.length}"
+                     class="form-control"
+                     data-qe-id="detail-form-goods-receipt"
+                     formControlName="purchaseOrderName"
+                     type="text">
+              <app-error [formGroup]="goodsReceiptPOForm"
+                         [placement]="'top'"
+                         [property]="'purchaseOrderName'"
+                         class="error-form"
+                         data-qe-id="form-error-supplier-contact"></app-error>
+            </div>
           </div>
         </div>
       </div>
@@ -158,13 +161,19 @@
       <div class="page-section-form-body">
         <div class="row">
           <div class="col-sm-4 form-group">
-            <label>
+            <label for="document-number">
               {{'goodsReceiptPODetail.documentNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-document-number"
-                   formControlName="documentNumber"
-                   type="text">
+            <div class="div-form d-flex">
+              <input id="document-number" class="form-control flex-grow-1 disabled" data-qe-id="detail-form-document-number"
+                     formControlName="documentNumber" type="text">
+              <app-error [formGroup]="goodsReceiptPOForm"
+                         [placement]="'top'"
+                         [property]="'ownerId'"
+                         class="error-form"
+                         data-qe-id="form-error-supplier-contact"></app-error>
+            </div>
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -172,10 +181,11 @@
             </label>
             <jaja-select-list [getList]="goodsReceiptPoDetailRepository.getInventoryOrganizationList"
                               [searchable]="true"
+                              [display]="inventoryOrganizationCode.value"
                               [searchEntity]="inventoryOrganizationSearchEntity"
                               searchField="code"
-                              (change)="onSelectInventoryOrganization($event)"
-                              searchType="startsWith">
+                              searchType="startsWith"
+                              (change)="onSelectInventoryOrganization($event)">
               <ng-template #label #option let-code="code" let-name="name">
                 {{code}} - {{name}}
               </ng-template>
@@ -210,7 +220,7 @@
               </jaja-select-list>
               <app-error [formGroup]="goodsReceiptPOForm"
                          [placement]="'top'"
-                         [property]="'supplierContactId'"
+                         [property]="'ownerId'"
                          class="error-form"
                          data-qe-id="form-error-supplier-contact"></app-error>
             </div>
@@ -257,7 +267,9 @@
               </app-date-picker>
               <app-error
                 [formGroup]="goodsReceiptPOForm"
-                [placement]="'top'" [property]="'supplierContactId'" class="error-form"
+                [placement]="'top'"
+                property="dueDate"
+                class="error-form"
                 data-qe-id="form-error-supplierContact">
               </app-error>
             </div>
@@ -494,7 +506,7 @@
                 [(nzFileList)]="fileList"
                 [nzBeforeUpload]="beforeUpload">
                 <p class="ant-upload-drag-icon">
-                  <i nz-icon nzType="inbox"></i>
+                  <i nz-icon nzType="upload"></i>
                 </p>
                 <p class="ant-upload-text">
                   {{'goodsReceiptPODetail.attachments.title' | translate}}
@@ -504,8 +516,13 @@
                 </p>
               </nz-upload>
 
-              <button class="ant-btn ant-btn-primary mt-2" (click)="onUpload()">
-                {{'general.button.upload' | translate}}
+              <button class="btn btn-labeled btn-send mt-2" (click)="onUpload()">
+                <span class="btn-label">
+                  <i class="material-icons">cloud_upload</i>
+                </span>
+                <span class="button-label">
+                  {{'general.button.upload' | translate}}
+                </span>
               </button>
 
             </div>
@@ -531,7 +548,10 @@
   <div class="dialog-body">
     <div class="row mt-3">
       <div class="col-sm-12">
-        <p-table #tablePurchaseOrder [resizableColumns]="true" [scrollable]="true" [value]="purchaseOrdersList"
+        <p-table #tablePurchaseOrder
+                 [resizableColumns]="true"
+                 [scrollable]="true"
+                 [value]="purchaseOrdersList"
                  scrollHeight="500px">
           <ng-template pTemplate="colgroup">
             <colgroup>
@@ -544,7 +564,10 @@
             <tr>
               <th data-qe-id="table-thead-goodsReceipt-check-box" pResizableColumn width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input (change)="selectAllPurchaseOrders($event)" type="checkbox"/>
+                  <input id="dialog-select-all"
+                         [checked]="allSelected"
+                         (click)="selectAllPurchaseOrders($event)"
+                         type="checkbox"/>
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>

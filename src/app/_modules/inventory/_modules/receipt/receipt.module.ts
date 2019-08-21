@@ -31,7 +31,10 @@ import { ReturnRequestDetailComponent } from './return-request/return-request-de
 import { ReturnRequestListComponent } from './return-request/return-request-list/return-request-list.component';
 import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
 import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
-import { NzUploadModule, NzIconModule } from 'ng-zorro-antd';
+import { NzUploadModule } from 'ng-zorro-antd';
+import { NzIconModule } from 'ng-zorro-antd/icon';
+import { IconModule } from '@ant-design/icons-angular';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,7 @@ import { NzUploadModule, NzIconModule } from 'ng-zorro-antd';
     GoodsReceiptPoDetailComponent,
   ],
   imports: [
+    IconModule,
     CommonModule,
     ReactiveFormsModule,
     FormsModule,
@@ -78,6 +82,7 @@ import { NzUploadModule, NzIconModule } from 'ng-zorro-antd';
     SelectsModule,
     NzUploadModule,
     NzIconModule,
+    TooltipModule,
   ],
 })
 export class ReceiptModule {

@@ -163,7 +163,7 @@
               <jaja-select-list
                 (change)="onFilterStatus($event)"
                 [getList]="goodsReceiptPOListRepository.enumListStatus"
-                display="display"
+                [display]="null"
                 placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">
                   {{display}}
