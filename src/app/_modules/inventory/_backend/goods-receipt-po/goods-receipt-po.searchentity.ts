@@ -98,7 +98,7 @@ export class ItemDetailSearchEntity extends SearchEntity {
   name = new TextFilter();
 }
 
-export class GoodsReceiptPOBinlocationSearchEntity extends SearchEntity {
+export class BinLocationSearchEntity extends SearchEntity {
   goodsReceiptPOContentId: string;
   code = new TextFilter();
 }

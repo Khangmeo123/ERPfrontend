@@ -108,7 +108,7 @@ export class GoodsReceiptPOApproveService {
 
   // item:
   dropListItem = (goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) => {
-    this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity)
+    this.goodsReceiptPORepository.getItemList(goodsReceiptPOItemDetailSearchEntity)
       .subscribe(res => {
         if (res) {
           this.itemList.next(res);
@@ -124,7 +124,7 @@ export class GoodsReceiptPOApproveService {
     goodsReceiptPOItemDetailSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
-        return this.goodsReceiptPORepository.dropListItem(searchEntity);
+        return this.goodsReceiptPORepository.getItemList(searchEntity);
       })).subscribe(res => {
       if (res) {
         this.itemList.next(res);
@@ -134,7 +134,7 @@ export class GoodsReceiptPOApproveService {
 
   // unitOfMeasure:
   dropListUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) => {
-    this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity)
+    this.goodsReceiptPORepository.getUnitOfMeasureList(goodsReceiptPOUnitOfMeasureSearchEntity)
       .subscribe(res => {
         if (res) {
           this.unitOfMeasureList.next(res);
@@ -151,7 +151,7 @@ export class GoodsReceiptPOApproveService {
       .pipe(debounceTime(400),
         distinctUntilChanged(),
         switchMap(searchEntity => {
-          return this.goodsReceiptPORepository.dropListUnitOfMeasure(searchEntity);
+          return this.goodsReceiptPORepository.getUnitOfMeasureList(searchEntity);
         })).subscribe(res => {
       if (res) {
         this.unitOfMeasureList.next(res);
@@ -161,7 +161,7 @@ export class GoodsReceiptPOApproveService {
 
   // documentNumber:
   dropListDocumentNumber = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) => {
-    this.goodsReceiptPORepository.dropListDocumentNumber(purchaseOrdersSearchEntity).subscribe(res => {
+    this.goodsReceiptPORepository.getDocumentNumberList(purchaseOrdersSearchEntity).subscribe(res => {
       if (res) {
         this.documentNumberList.next(res);
       }
@@ -176,7 +176,7 @@ export class GoodsReceiptPOApproveService {
     purchaseOrdersSearchEntity.pipe(debounceTime(400),
       distinctUntilChanged(),
       switchMap(searchEntity => {
-        return this.goodsReceiptPORepository.dropListDocumentNumber(searchEntity);
+        return this.goodsReceiptPORepository.getDocumentNumberList(searchEntity);
       })).subscribe(res => {
       if (res) {
         this.documentNumberList.next(res);

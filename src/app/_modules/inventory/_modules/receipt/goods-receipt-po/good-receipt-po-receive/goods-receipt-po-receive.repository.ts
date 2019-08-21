@@ -6,7 +6,7 @@ import {
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import {environment} from 'src/environments/environment';
 import {Repository} from 'src/app/_repositories/repository';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
@@ -17,7 +17,7 @@ import {
   UnitOfMeasureEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
-  GoodsReceiptPOBinlocationSearchEntity,
+  BinLocationSearchEntity,
   ItemDetailSearchEntity,
   UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
@@ -41,9 +41,12 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => {
-        return new GoodsReceiptPOEntity(r.body);
-      }),
+      // map(r => {
+      //   return new GoodsReceiptPOEntity(r.body);
+      // }
+      map(
+        (response: HttpResponse<GoodsReceiptPOEntity>) => new GoodsReceiptPOEntity(response.body),
+      ),
     );
   };
 
@@ -55,7 +58,8 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => r.body),
+      map(r => r.body,
+      ),
     );
   };
 
@@ -71,68 +75,55 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
     );
   };
 
-  dropListItem = (goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) => {
-    return this.http.post<Entities>(this.apiUrl + '/drop-list-item',
-      goodsReceiptPOItemDetailSearchEntity,
+  getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
+    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/drop-list-item',
+      itemDetailSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
-    ).pipe(
-      map(r => {
-        r.body.ids = r.body.ids.map(item => {
-          return new ItemDetailEntity(item);
-        });
-        r.body.exceptIds = r.body.exceptIds.map(item => {
-          return new ItemDetailEntity(item);
-        });
-        return r.body;
-      }),
-    );
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<ItemDetailEntity[]>) => response.body,
+        ),
+      );
   };
 
-  dropListUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) => {
-    return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure',
-      goodsReceiptPOUnitOfMeasureSearchEntity,
+  getUnitOfMeasureList = (unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Observable<UnitOfMeasureEntity[]> => {
+    return this.http.post<UnitOfMeasureEntity[]>(
+      this.apiUrl + '/drop-list-unit-of-measure',
+      unitOfMeasureSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
-    ).pipe(
-      map(r => {
-        r.body.ids = r.body.ids.map(item => {
-          return new UnitOfMeasureEntity(item);
-        });
-        r.body.exceptIds = r.body.exceptIds.map(item => {
-          return new UnitOfMeasureEntity(item);
-        });
-        return r.body;
-      }),
-    );
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<UnitOfMeasureEntity[]>) => response.body,
+        ),
+      );
   };
 
-  dropListDocumentNumber = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) => {
-    return this.http.post<Entities>(this.apiUrl + '/drop-list-document-number',
+  getDocumentNumberList = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> => {
+    return this.http.post<PurchaseOrderEntity[]>(
+      this.apiUrl + '/drop-list-document-number',
       purchaseOrdersSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => {
-        r.body.ids = r.body.ids.map(item => {
-          return new PurchaseOrderEntity(item);
-        });
-        r.body.exceptIds = r.body.exceptIds.map(item => {
-          return new PurchaseOrderEntity(item);
-        });
-        return r.body;
-      }),
+      map(
+        (response: HttpResponse<PurchaseOrderEntity[]>) => response.body,
+      ),
     );
   };
 
   getQuantityDetail = (goodsReceiptPOContentId: string) => {
-    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/quantity/goods-receipt-po-content-detail',
+    return this.http.post<GoodsReceiptPOContent>(
+      this.apiUrl + '/quantity/goods-receipt-po-content-detail',
       {goodsReceiptPOContentId},
       {
         observe: 'response',
@@ -155,42 +146,40 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
     );
   };
 
-  dropListBinLocation = (goodsReceiptPOBinlocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity) => {
-    return this.http.post<Entities>(this.apiUrl + '/quantity/drop-list-bin-location',
-      goodsReceiptPOBinlocationSearchEntity,
+  getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
+    return this.http.post<BinLocationEntity[]>(
+      this.apiUrl + '/quantity/drop-list-bin-location',
+      binLocationSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => {
-        r.body.ids = r.body.ids.map(item => {
-          return new BinLocationEntity(item);
-        });
-        r.body.exceptIds = r.body.exceptIds.map(item => {
-          return new BinLocationEntity(item);
-        });
-        return r.body;
-      }),
+      map(
+        (response: HttpResponse<BinLocationEntity[]>) => response.body,
+      ),
     );
   };
 
   analyzeQRCode = (itemDetailId: string, qrCode: string) => {
-    return this.http.post<SerialNumberEntity>(this.apiUrl + '/serial-number/analyze-qr-code',
+    return this.http.post<SerialNumberEntity>(
+      this.apiUrl + '/serial-number/analyze-qr-code',
       {itemDetailId, qrCode},
       {
         observe: 'response',
         headers: this.getHeader(),
       },
-    ).pipe(
-      map(r => {
-        return new SerialNumberEntity(r.body);
-      }),
-    );
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<SerialNumberEntity>) => new SerialNumberEntity(response.body),
+        ),
+      );
   };
 
   updateSerialNumber = (goodsReceiptPOSerialNumberEntities: any[]) => {
-    return this.http.post<boolean>(this.apiUrl + '/serial-number/bulk-merge',
+    return this.http.post<boolean>(
+      this.apiUrl + '/serial-number/bulk-merge',
       goodsReceiptPOSerialNumberEntities,
       {
         observe: 'response',
@@ -202,7 +191,8 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
   };
 
   getSerialNumber = (goodsReceiptPOContentId: string) => {
-    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/serial-number/goods-receipt-po-content-detail',
+    return this.http.post<GoodsReceiptPOContent>(
+      this.apiUrl + '/serial-number/goods-receipt-po-content-detail',
       {
         goodsReceiptPOContentId,
       },
@@ -210,8 +200,11 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         observe: 'response',
         headers: this.getHeader(),
       },
-    ).pipe(
-      map(r => new GoodsReceiptPOContent(r.body)),
+    )
+      .pipe(
+      map(
+        (response: HttpResponse<GoodsReceiptPOContent>) => new GoodsReceiptPOContent(response.body),
+      ),
     );
   };
 
@@ -223,8 +216,8 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => {
-        return new BatchEntity(r.body);
+        map(r => {
+          return new BatchEntity(r.body);
       }),
     );
   };
