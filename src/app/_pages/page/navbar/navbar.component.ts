@@ -20,6 +20,7 @@ import { AppRepository } from '../../../_repositories/app.repository';
   ],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
+
   public languageSelected: LanguageEntity;
 
   public isToggleMenu = false;
@@ -43,6 +44,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
 
   public legalEntityId: string;
 
+  public legalEntity: LegalEntity = null;
+
   public legalEntities: LegalEntity[] = [];
 
   constructor(
@@ -56,6 +59,12 @@ export class NavbarComponent implements OnInit, OnDestroy {
     this.languageSelected = languages[0];
 
     this.legalEntityId = localStorage.getItem('legalEntityId');
+    if (this.legalEntityId) {
+      this.appService.getLegalEntity(this.legalEntityId)
+        .then((legalEntity: LegalEntity) => {
+          this.legalEntity = legalEntity;
+        });
+    }
 
     const legalEntitiesSub: Subscription = this.appService.legalEntities.subscribe((legalEntities: LegalEntity[]) => {
       this.legalEntities = legalEntities;

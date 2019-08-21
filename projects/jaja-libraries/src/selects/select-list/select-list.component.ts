@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
@@ -16,8 +15,7 @@ import {
 import { ISelect } from '../ISelect';
 import { Observable, Subject, Subscription } from 'rxjs';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { NG_VALUE_ACCESSOR } from '@angular/forms';
-import { SearchEntity } from '../../../../../src/app/_helpers/search-entity';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 import { ISearchEntity } from '../../entities/ISearchEntity';
 
 @Component({
@@ -32,20 +30,21 @@ import { ISearchEntity } from '../../entities/ISearchEntity';
     },
   ],
 })
-export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, OnDestroy, ISelect {
-
+export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor {
 
   @Input() appendTo: string = null;
 
-  public list: any[] = [];
+  @Input() renewOnOpen: boolean = true;
 
   @Input() key: string = null;
 
-  @Input() placeholder: string = 'Enum List Select';
+  @Input() display: string = null;
+
+  @Input() placeholder: string = '';
 
   @Input() searchable: boolean = false;
 
-  @Input() display: string = 'name';
+  // @Input() display: string = 'name';
 
   // tslint:disable-next-line:no-output-native
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
@@ -54,9 +53,11 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() searchType: string = 'startsWith';
 
-  @Input() searchEntity: any = new SearchEntity();
+  @Input() searchEntity: any;
 
   @Input() disabled: boolean = false;
+
+  @Input() list: any[] = [];
 
   @ContentChild('label', {static: false}) label: TemplateRef<ElementRef>;
 
@@ -83,7 +84,6 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   set value(value) {
     this.selectedItem = this.list.find((item) => this.getValue(item) === value);
-    this.onChange(value);
   }
 
   @Input()
@@ -98,6 +98,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   onTouch(event) {
   }
 
+
   ngOnInit() {
     if (this.value) {
       this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
@@ -111,8 +112,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
         .subscribe(
           (event) => {
             this.searchEntity[this.searchField][this.searchType] = event;
-            this.getList(this.searchEntity);
-            this.loading = true;
+            this.reloadList();
           },
         );
 
@@ -123,14 +123,9 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   ngOnChanges(changes: SimpleChanges) {
     if (changes.value) {
       if (!changes.value.firstChange) {
-        if (this.selectedItem && this.getValue(this.selectedItem) !== changes.value.currentValue) {
-          this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
-        }
+        this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
       }
     }
-  }
-
-  ngAfterViewInit(): void {
   }
 
   getValue(item) {
@@ -145,16 +140,20 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
   }
 
   onSelect(item, event) {
-    if (this.getValue(item) !== this.value) {
+    const value: any = this.getValue(item);
+    if (value !== this.value) {
       this.selectedItem = item;
-      this.onChange(this.getValue(item));
+      this.onChange(value);
     }
     this.onTouch(event);
   }
 
   onClear(event) {
+    event.preventDefault();
     event.stopPropagation();
-    this.value = undefined;
+    this.selectedItem = null;
+    this.display = null;
+    this.onChange(null);
   }
 
   onSearch(event): void {
@@ -172,17 +171,29 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
     this.onTouch = fn;
   }
 
+  reloadList() {
+    this.loading = true;
+    this.getList(this.searchEntity)
+      .subscribe(
+        (list: any[]) => {
+          this.list = list;
+          this.loading = false;
+        },
+      );
+  }
+
   onToggle(isOpened) {
     if (isOpened) {
-      this.searchEntity = new this.searchEntity.constructor();
-      this.loading = true;
-      this.getList(this.searchEntity)
-        .subscribe(
-          (list: any[]) => {
-            this.list = list;
-            this.loading = false;
-          },
-        );
+      if (this.renewOnOpen) {
+        if (this.searchEntity) {
+          this.searchEntity[this.searchField][this.searchType] = null;
+        }
+        this.reloadList();
+      }
     }
+  }
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
   }
 }

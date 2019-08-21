@@ -1,36 +1,43 @@
 <div dropdown
      (isOpenChange)="onToggle($event)"
      [container]="appendTo"
-     class="select enum-list-select"
+     class="select jaja-select-list d-flex"
      [ngClass]="{disabled: disabled}">
-  <div role="button"
-       class="form-control jaja-select-list-toggle"
-       dropdownToggle>
-    <ng-template *ngTemplateOutlet="label; context: selectedItem">
-      {{selectedItem ? null : placeholder}}
+
+  <span class="icons">
+    <i class="clear pi pi-times" (click)="onClear($event)" *ngIf="selectedItem"></i>
+    <i class="toggle pi pi-caret-down"></i>
+  </span>
+
+  <div dropdownToggle class="jaja-select-list-toggle form-control align-items-center">
+    <span *ngIf="!selectedItem; else labelTemplate">
+      {{display || placeholder}}
+    </span>
+    <ng-template #labelTemplate class="form-control">
+      <ng-container *ngTemplateOutlet="label; context: selectedItem"></ng-container>
     </ng-template>
   </div>
-  <span class="icons">
-    <i class="pi pi-times" (click)="onClear($event)" *ngIf="selectedItem"></i>
-    <i class="pi pi-caret-down"></i>
-  </span>
+
   <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu">
     <li *ngIf="searchable"
         class="dropdown-item search"
         (click)="$event.stopPropagation()">
       <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
     </li>
+
     <li role="menuitem"
         class="dropdown-item loading"
         *ngIf="loading; else notLoading">
       <nz-spin nzSimple></nz-spin>
     </li>
+
     <ng-template #notLoading>
       <li role="menuitem"
           class="empty"
           *ngIf="list.length === 0">
         <nz-empty nzNotFoundContent="{{'jaja.selects.empty' | translate}}"></nz-empty>
       </li>
+
       <li role="menuitem"
           class="dropdown-item"
           *ngFor="let item of list"
