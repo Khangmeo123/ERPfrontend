@@ -237,13 +237,16 @@ export class InventoryCountingPendingService {
     }
 
     saveSerialNumber(inventoryCountingForm: FormGroup, serialNumberList: CounterContentByItemDetailEntity[]) {
-        const currentArray = inventoryCountingForm.get('inventoryCounterContents') as FormArray;
-        currentArray.controls.forEach(control => {
-            if (control.get('itemDetailId').value === serialNumberList[0].itemDetailId) {
-                const sumQuantity = _.sumBy(serialNumberList, item => item.quantity);
-                control.get('quantity').setValue(sumQuantity);
-            }
-        });
+        if (serialNumberList.length > 0) {
+            const currentArray = inventoryCountingForm.get('inventoryCounterContents') as FormArray;
+            currentArray.controls.forEach(control => {
+                if (control.get('itemDetailId').value === serialNumberList[0].itemDetailId) {
+                    const sumQuantity = _.sumBy(serialNumberList, item => item.quantity);
+                    control.get('quantity').setValue(sumQuantity);
+                }
+            });
+        }
+        return;
     }
 
     // batch:
