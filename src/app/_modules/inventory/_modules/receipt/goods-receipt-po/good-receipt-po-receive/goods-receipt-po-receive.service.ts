@@ -1,17 +1,9 @@
 import {GoodsReceiptPOContent} from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {Injectable} from '@angular/core';
 import {ToastrService} from 'ngx-toastr';
 import {GoodsReceiptPOForm} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
-import {Entities} from 'src/app/_helpers/entity';
-import {
-  GoodsReceiptPOBinlocationSearchEntity,
-  ItemDetailSearchEntity,
-  UnitOfMeasureSearchEntity,
-  PurchaseOrderSearchEntity,
-} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
 import {GoodsReceiptPOReceiveRepository} from './goods-receipt-po-receive.repository';
 import {
   BatchBinLocationEntity,
@@ -23,10 +15,6 @@ import {GeneralService} from 'src/app/_services/general-service.service';
 @Injectable()
 export class GoodsReceiptPOReceiveService {
   public goodsReceiptPOForm: BehaviorSubject<FormGroup>;
-  public itemList: BehaviorSubject<Entities>;
-  public unitOfMeasureList: BehaviorSubject<Entities>;
-  public documentNumberList: BehaviorSubject<Entities>;
-  public binLocationList: BehaviorSubject<Entities>;
   public quantityDetail: BehaviorSubject<GoodsReceiptPOContent>;
   public serialNumber: BehaviorSubject<GoodsReceiptPOContent>;
   public batch: BehaviorSubject<GoodsReceiptPOContent>;
@@ -38,10 +26,6 @@ export class GoodsReceiptPOReceiveService {
     private generalService: GeneralService,
   ) {
     this.goodsReceiptPOForm = new BehaviorSubject(this.fb.group(new GoodsReceiptPOForm()));
-    this.itemList = new BehaviorSubject(new Entities());
-    this.unitOfMeasureList = new BehaviorSubject(new Entities());
-    this.documentNumberList = new BehaviorSubject(new Entities());
-    this.binLocationList = new BehaviorSubject(new Entities());
     this.quantityDetail = new BehaviorSubject(new GoodsReceiptPOContent());
     this.serialNumber = new BehaviorSubject(new GoodsReceiptPOContent());
     this.batch = new BehaviorSubject(new GoodsReceiptPOContent());
@@ -414,103 +398,4 @@ export class GoodsReceiptPOReceiveService {
     this.batch.next(currentBatch);
   };
 
-  // item:
-  dropListItem = (goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) => {
-    this.goodsReceiptPORepository.dropListItem(goodsReceiptPOItemDetailSearchEntity).subscribe(res => {
-      if (res) {
-        this.itemList.next(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  };
-
-  typingSearchItem = (goodsReceiptPOItemDetailSearchEntity: Observable<ItemDetailSearchEntity>) => {
-    goodsReceiptPOItemDetailSearchEntity.pipe(debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(searchEntity => {
-        return this.goodsReceiptPORepository.dropListItem(searchEntity);
-      })).subscribe(res => {
-      if (res) {
-        this.itemList.next(res);
-      }
-    });
-  };
-
-  // unitOfMeasure:
-  dropListUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) => {
-    this.goodsReceiptPORepository.dropListUnitOfMeasure(goodsReceiptPOUnitOfMeasureSearchEntity).subscribe(res => {
-      if (res) {
-        this.unitOfMeasureList.next(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  };
-
-  typingSearchUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: Observable<UnitOfMeasureSearchEntity>) => {
-    goodsReceiptPOUnitOfMeasureSearchEntity.pipe(debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(searchEntity => {
-        return this.goodsReceiptPORepository.dropListUnitOfMeasure(searchEntity);
-      })).subscribe(res => {
-      if (res) {
-        this.unitOfMeasureList.next(res);
-      }
-    });
-  };
-
-  // documentNumber:
-  dropListDocumentNumber = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) => {
-    this.goodsReceiptPORepository.dropListDocumentNumber(purchaseOrdersSearchEntity).subscribe(res => {
-      if (res) {
-        this.documentNumberList.next(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  };
-
-  typingSearchDocumentNumber = (purchaseOrdersSearchEntity: Observable<PurchaseOrderSearchEntity>) => {
-    purchaseOrdersSearchEntity.pipe(debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(searchEntity => {
-        return this.goodsReceiptPORepository.dropListDocumentNumber(searchEntity);
-      })).subscribe(res => {
-      if (res) {
-        this.documentNumberList.next(res);
-      }
-    });
-  };
-
-  // dropListBinLocation:
-  dropListBinLocation = (goodsReceiptPOBinlocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity) => {
-    this.goodsReceiptPORepository.dropListBinLocation(goodsReceiptPOBinlocationSearchEntity).subscribe(res => {
-      if (res) {
-        this.binLocationList.next(res);
-      }
-    }, err => {
-      if (err) {
-        console.log(err);
-      }
-    });
-  };
-
-  typingSearchBinLocation = (goodsReceiptPOBinlocationSearchEntity: Observable<GoodsReceiptPOBinlocationSearchEntity>) => {
-    goodsReceiptPOBinlocationSearchEntity.pipe(debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(searchEntity => {
-        return this.goodsReceiptPORepository.dropListBinLocation(searchEntity);
-      })).subscribe(res => {
-      if (res) {
-        this.binLocationList.next(res);
-      }
-    });
-  };
 }

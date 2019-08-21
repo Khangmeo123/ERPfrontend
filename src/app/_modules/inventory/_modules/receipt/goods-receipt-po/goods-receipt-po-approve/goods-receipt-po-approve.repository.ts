@@ -1,10 +1,11 @@
 import {environment} from 'src/environments/environment';
 import {Repository} from 'src/app/_repositories/repository';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpResponse} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {
+  BinLocationEntity,
   GoodsReceiptPOEntity,
   ItemDetailEntity,
   PurchaseOrderEntity,
@@ -27,7 +28,8 @@ export class GoodsReceiptPOApproveRepository extends Repository {
   }
 
   getDetail = (goodsReceiptPOId: string): Observable<GoodsReceiptPOEntity> => {
-    return this.http.post<GoodsReceiptPOEntity>(this.apiUrl + '/get',
+    return this.http.post<GoodsReceiptPOEntity>(
+      this.apiUrl + '/get',
       {id: goodsReceiptPOId},
       {
         observe: 'response',
@@ -41,7 +43,8 @@ export class GoodsReceiptPOApproveRepository extends Repository {
   };
 
   approve = (goodsReceiptPOId: string): Observable<boolean> => {
-    return this.http.post<boolean>(this.apiUrl + '/approve',
+    return this.http.post<boolean>(
+      this.apiUrl + '/approve',
       {id: goodsReceiptPOId},
       {
         observe: 'response',
@@ -53,7 +56,8 @@ export class GoodsReceiptPOApproveRepository extends Repository {
   };
 
   reject = (goodsReceiptPOId: string): Observable<boolean> => {
-    return this.http.post<boolean>(this.apiUrl + '/reject',
+    return this.http.post<boolean>(
+      this.apiUrl + '/reject',
       {id: goodsReceiptPOId},
       {
         observe: 'response',
@@ -64,63 +68,49 @@ export class GoodsReceiptPOApproveRepository extends Repository {
     );
   };
 
-  dropListItem = (goodsReceiptPOItemDetailSearchEntity: ItemDetailSearchEntity) => {
-    return this.http.post<Entities>(this.apiUrl + '/drop-list-item',
-      goodsReceiptPOItemDetailSearchEntity,
+  getItemList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
+    return this.http.post<ItemDetailEntity[]>(
+      this.apiUrl + '/drop-list-item',
+      itemDetailSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+      map(
+        (response: HttpResponse<ItemDetailEntity[]>) => response.body,
+      ),
+    );
+  };
+
+  getUnitOfMeasureList = (unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Observable<UnitOfMeasureEntity[]> => {
+    return this.http.post<UnitOfMeasureEntity[]>(
+      this.apiUrl + '/drop-list-unit-of-measure',
+      unitOfMeasureSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => {
-        r.body.ids = r.body.ids.map(item => {
-          return new ItemDetailEntity(item);
-        });
-        r.body.exceptIds = r.body.exceptIds.map(item => {
-          return new ItemDetailEntity(item);
-        });
-        return r.body;
-      }),
+      map(
+        (response: HttpResponse<UnitOfMeasureEntity[]>) => response.body,
+      ),
     );
   };
 
-  dropListUnitOfMeasure = (goodsReceiptPOUnitOfMeasureSearchEntity: UnitOfMeasureSearchEntity) => {
-    return this.http.post<Entities>(this.apiUrl + '/drop-list-unit-of-measure',
-      goodsReceiptPOUnitOfMeasureSearchEntity,
-      {
-        observe: 'response',
-        headers: this.getHeader(),
-      },
-    ).pipe(
-      map(r => {
-        r.body.ids = r.body.ids.map(item => {
-          return new UnitOfMeasureEntity(item);
-        });
-        r.body.exceptIds = r.body.exceptIds.map(item => {
-          return new UnitOfMeasureEntity(item);
-        });
-        return r.body;
-      }),
-    );
-  };
-
-  dropListDocumentNumber = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity) => {
-    return this.http.post<Entities>(this.apiUrl + '/drop-list-document-number',
+  getDocumentNumberList = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> => {
+    return this.http.post<PurchaseOrderEntity[]>(
+      this.apiUrl + '/drop-list-document-number',
       purchaseOrdersSearchEntity,
       {
         observe: 'response',
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => {
-        r.body.ids = r.body.ids.map(item => {
-          return new PurchaseOrderEntity(item);
-        });
-        r.body.exceptIds = r.body.exceptIds.map(item => {
-          return new PurchaseOrderEntity(item);
-        });
-        return r.body;
-      }),
+      map(
+        (response: HttpResponse<PurchaseOrderEntity[]>) => response.body,
+      ),
     );
   };
 }
