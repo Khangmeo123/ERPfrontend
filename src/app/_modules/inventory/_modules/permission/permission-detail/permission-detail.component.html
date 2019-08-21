@@ -34,18 +34,19 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form d-flex">
-            <app-single-select key="code"
-                               class="flex-grow-1"
-                               id="position-code"
-                               [disabled]="!(legalEntityId && inventoryOrganizationId && inventoryDocumentTypeId)"
-                               [valueSelector]="nodeSelector"
-                               (listOpen)="getPositionList()"
-                               (search)="onSearchPosition($event)"
-                               (selectionChange)="onSelectPosition($event)"
-                               [initialValue]="positionCode?.value"
-                               [list]="positionEntities.exceptIds"
-                               [selectedList]="positionEntities.ids"
-            ></app-single-select>
+            <jaja-select-list id="position-code"
+                              [getList]="permissionDetailRepository.getPositionList"
+                              [searchEntity]="positionSearchEntity"
+                              searchField="code"
+                              searchType="startsWith"
+                              [display]="positionCode?.value"
+                              placeholder="{{'permissionDetail.positionCode' | translate}}"
+                              (change)="onSelectPosition($event)"
+                              class="flex-grow-1">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
             <app-error data-qe-id="dialog-error-code"
                        *ngIf="(positionCode?.errors && positionCode?.touched) || !!errors?.get('positionCode')?.value"
                        [formGroup]="permissionForm" [property]="'positionCode'" [placement]="'top'" class="error-form">
@@ -59,17 +60,20 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form d-flex">
-            <app-simple-select id="current-status"
-                               class="flex-grow-1"
-                               [list]="documentStatus"
-                               [initialValue]="currentStatusDisplay?.value"
-                               (selectionChange)="onSelectCurrentStatus($event)"
-                               key="display"
-                               [valueSelector]="nodeSelector"
-            ></app-simple-select>
+            <jaja-select-list id="current-status"
+                              [list]="documentStatus"
+                              formControlName="currentStatusId"
+                              key="id"
+                              [display]="currentStatusDisplay?.value"
+                              class="flex-grow-1">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
             <app-error data-qe-id="dialog-error-current-status"
                        *ngIf="(currentStatusId?.errors && currentStatusId?.touched) || !!errors?.get('currentStatusId')?.value"
-                       [formGroup]="permissionForm" [property]="'currentStatusId'" [placement]="'top'" class="error-form">
+                       [formGroup]="permissionForm" [property]="'currentStatusId'" [placement]="'top'"
+                       class="error-form">
             </app-error>
           </div>
         </div>
@@ -80,14 +84,17 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form d-flex">
-            <app-simple-select id="next-status"
-                               class="flex-grow-1"
-                               [list]="documentStatus"
-                               [initialValue]="nextStatusDisplay?.value"
-                               (selectionChange)="onSelectNextStatus($event)"
-                               [valueSelector]="nodeSelector"
-                               key="display"
-            ></app-simple-select>
+            <jaja-select-list id="next-status"
+                              [list]="documentStatus"
+                              formControlName="nextStatusId"
+                              key="id"
+                              [display]="nextStatusDisplay?.value"
+                              placeholder="{{'permission.nextStatus' | translate}}"
+                              class="flex-grow-1">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
             <app-error data-qe-id="dialog-error-next-status"
                        *ngIf="(nextStatusId?.errors && nextStatusId?.touched) || !!errors?.get('nextStatusId')?.value"
                        [formGroup]="permissionForm" [property]="'nextStatusId'" [placement]="'top'" class="error-form">
@@ -96,21 +103,7 @@
         </div>
       </div>
       <div class="row">
-        <div class="col-4 form-group">
-          <label for="position-name">
-            {{'permission.positionName' | translate}}
-            <span class="text-danger ml-1">(*)</span>
-          </label>
-          <div class="div-form">
-            <input type="text" class="form-control" id="position-name" formControlName="positionName" readonly>
-            <app-error data-qe-id="dialog-error-name"
-                       *ngIf="(positionName?.errors && positionName?.touched) || !!errors?.get('positionName')?.value"
-                       [formGroup]="permissionForm" [property]="'positionName'" [placement]="'top'" class="error-form">
-            </app-error>
-          </div>
-        </div>
-
-        <div class="col-4 form-group">
+        <div class="col-4 offset-4 form-group">
           <label for="current-step">
             {{'permission.currentStep' | translate}}
             <span class="text-danger ml-1">(*)</span>

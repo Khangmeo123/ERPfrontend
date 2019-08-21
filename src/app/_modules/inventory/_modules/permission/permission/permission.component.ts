@@ -59,6 +59,9 @@ export class PermissionComponent implements OnInit, OnDestroy {
     const routeSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => {
       this.inventoryOrganizationId = params.inventoryOrganizationId;
       this.inventoryDocumentTypeId = params.inventoryDocumentTypeId;
+      if (this.inventoryDocumentTypeId) {
+        this.getDocumentStatus(this.inventoryDocumentTypeId);
+      }
     });
 
     const listSubscription: Subscription = this.permissionService.permissionList.subscribe((list: PermissionEntity[]) => {
@@ -80,7 +83,6 @@ export class PermissionComponent implements OnInit, OnDestroy {
   }
 
   async ngOnInit() {
-
   }
 
   ngOnDestroy(): void {
