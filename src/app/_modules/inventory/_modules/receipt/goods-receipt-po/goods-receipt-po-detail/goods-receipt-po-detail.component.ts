@@ -81,7 +81,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
         this.goodsReceiptPOId = params.id;
         this.goodsReceiptPoDetailService.getDetail(params.id)
           .then(() => {
-
+            this.supplierContactSearchEntity.supplierDetailId = this.supplierDetailId.value;
           });
       }
     });
