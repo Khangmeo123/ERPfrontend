@@ -9,16 +9,19 @@ export class GoodsReceiptPOSearchEntity extends SearchEntity {
   supplierContactId: string;
   currencyId: string;
   inventoryOrganizationId: string = null;
+  inventoryOrganizationCode: string = null;
   inventoryOrganizationStreet = new TextFilter();
   documentNumber: NumberFilter = new NumberFilter();
   documentReferenceId: string;
   statusId: string = null;
+  statusDisplay: string = null;
   postingDate: DateFilter = new DateFilter();
   dueDate: DateFilter = new DateFilter();
   documentDate: DateFilter = new DateFilter();
   buyerId: string;
   ownerId: string;
   requesterId: string = null;
+  requesterName: string = null;
   remarks = new TextFilter();
   generalDiscountRate: NumberFilter = new NumberFilter();
 

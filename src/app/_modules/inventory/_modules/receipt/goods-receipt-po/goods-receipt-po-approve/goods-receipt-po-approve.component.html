@@ -13,14 +13,16 @@
             class="ml-2 done-status">{{'general.done'| translate}}</span>
     </div>
     <div class="page-actions d-flex">
-      <button (click)="approve()" *ngIf="goodsReceiptPOForm.controls.statusName.value === 'PENDING_APPROVAL'" class="btn btn-labeled btn-approve"
+      <button (click)="approve()" *ngIf="goodsReceiptPOForm.controls.statusName.value === 'PENDING_APPROVAL'"
+              class="btn btn-labeled btn-approve"
               data-qe-id="button-approve">
         <span class="btn-label"><i class="material-icons">check</i></span>
         <span class="button-label">
                     {{'general.button.approve' | translate}}
                 </span>
       </button>
-      <button (click)="reject()" *ngIf="goodsReceiptPOForm.controls.statusName.value === 'PENDING_APPROVAL'" class="btn btn-labeled btn-rejected"
+      <button (click)="reject()" *ngIf="goodsReceiptPOForm.controls.statusName.value === 'PENDING_APPROVAL'"
+              class="btn btn-labeled btn-rejected"
               data-qe-id="button-rejected">
         <span class="btn-label"><i class="material-icons">block</i></span>
         <span class="button-label">
@@ -80,7 +82,8 @@
             <label>
               {{'goodsReceiptPODetail.supplierAddress' | translate}}
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-supplier-name" formControlName="supplierAddress"
+            <input class="form-control disabled" data-qe-id="detail-form-supplier-name"
+                   formControlName="supplierAddress"
                    type="text">
           </div>
         </div>
@@ -93,7 +96,8 @@
               {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-goods-receipt" formControlName="purchaseOrderName"
+            <input class="form-control disabled" data-qe-id="detail-form-goods-receipt"
+                   formControlName="purchaseOrderName"
                    type="text">
           </div>
         </div>
@@ -106,7 +110,8 @@
               {{'goodsReceiptPODetail.documentNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-documentNumber" formControlName="documentNumber"
+            <input class="form-control disabled" data-qe-id="detail-form-documentNumber"
+                   formControlName="documentNumber"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -121,7 +126,8 @@
             <label>
               {{'goodsReceiptPODetail.inventoryAddress' | translate}}
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-inventory-code" formControlName="inventoryOrganizationStreet"
+            <input class="form-control disabled" data-qe-id="detail-form-inventory-code"
+                   formControlName="inventoryOrganizationStreet"
                    type="text">
           </div>
         </div>
@@ -233,7 +239,8 @@
                   <tr>
                     <th class="th-filter">
                       <app-single-select (listOpen)="dropListDocumentNumber(documentNumberSearchEntity.id)"
-                                         (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)" (selectionChange)="documentNumberSearchEntity.id = $event[0];"
+                                         (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)"
+                                         (selectionChange)="documentNumberSearchEntity.id = $event[0];"
                                          [key]="'documentNumber'"
                                          [list]="documentNumberExceptIds"
                                          [selectedList]="documentNumberIds"
@@ -242,7 +249,8 @@
                     </th>
                     <th class="th-filter">
                       <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                         (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)" (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemId', 'equals')"
+                                         (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                         (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemId', 'equals')"
                                          [key]="'code'"
                                          [list]="itemDetailExceptIds"
                                          [selectedList]="itemDetailIds"
@@ -250,12 +258,14 @@
                       </app-single-select>
                     </th>
                     <th class="th-filter">
-                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" class="form-control w-100"
+                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
+                             class="form-control w-100"
                              type="text"/>
                     </th>
                     <th class="th-filter">
                       <app-single-select (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                         (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)" (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'unitOfMeasureId', 'equals')"
+                                         (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
+                                         (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'unitOfMeasureId', 'equals')"
                                          [key]="'name'"
                                          [list]="unitOfMeasureExceptIds"
                                          [selectedList]="unitOfMeasureIds"
@@ -263,28 +273,36 @@
                       </app-single-select>
                     </th>
                     <th class="th-filter">
-                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'quantity', 'equals')" class="form-control w-100" pKeyFilter="int"
+                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'quantity', 'equals')"
+                             class="form-control w-100" pKeyFilter="int"
                              type="text"/>
                     </th>
                     <th class="th-filter">
-                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'taxRate', 'equals')" class="form-control w-100" pKeyFilter="int"
+                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'taxRate', 'equals')"
+                             class="form-control w-100" pKeyFilter="int"
                              type="text"/>
                     </th>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListTax(taxSearchEntity.id)" (search)="typingSearchTax($event, taxSearchEntity.id)"
-                                         (selectionChange)="taxSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'taxId', 'equals')" [key]="'code'"
+                      <app-single-select (listOpen)="dropListTax(taxSearchEntity.id)"
+                                         (search)="typingSearchTax($event, taxSearchEntity.id)"
+                                         (selectionChange)="taxSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'taxId', 'equals')"
+                                         [key]="'code'"
                                          [list]="taxExceptIds"
                                          [selectedList]="taxIds"
                                          data-qe-id="table-thead-filter-uom">
                       </app-single-select>
                     </th>
                     <th class="th-filter">
-                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'generalDiscountRate', 'equals')" class="form-control w-100" pKeyFilter="int"
-                             type="text"/>
+                      <input
+                        (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'generalDiscountRate', 'equals')"
+                        class="form-control w-100" pKeyFilter="int"
+                        type="text"/>
                     </th>
                     <th class="th-filter">
-                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'generalDiscountCost', 'equals')" class="form-control w-100" pKeyFilter="int"
-                             type="text"/>
+                      <input
+                        (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'generalDiscountCost', 'equals')"
+                        class="form-control w-100" pKeyFilter="int"
+                        type="text"/>
                     </th>
                     <th class="th-filter" width="8%"></th>
                   </tr>

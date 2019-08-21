@@ -31,52 +31,36 @@
   <div class="page-body">
     <div class="page-section">
       <div class="row d-flex pb-3">
-        <div class="col-sm-4 form-group">
-          <label>
-            {{'permission.legalEntity' | translate}}
-            <span class="text-danger mr-2">*</span>
-          </label>
-          <app-single-select data-qe-id="form-select-legalEntity"
-                             [list]="legalEntities.exceptIds"
-                             [selectedList]="legalEntities.ids"
-                             [initialValue]="legalEntity?.name"
-                             (selectionChange)="onSelectLegalEntity($event)"
-                             (listOpen)="getLegalEntityList()"
-                             key="name"
-                             [valueSelector]="nodeSelector"
-                             (search)="onSearchLegalEntity($event)"
-          ></app-single-select>
-        </div>
-        <div class="col-sm-4 form-group">
+        <div class="col-sm-3 form-group">
           <label>
             {{'permission.inventoryCode' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-          <app-single-select data-qe-id="form-select-inventoryCode"
-                             [list]="inventoryOrganizationEntities.exceptIds"
-                             [selectedList]="inventoryOrganizationEntities.ids"
-                             [initialValue]="inventoryOrganization?.name"
-                             (selectionChange)="onSelectInventoryOrganization($event)"
-                             (listOpen)="getInventoryOrganizationList()"
-                             key="name"
-                             [valueSelector]="nodeSelector"
-                             [disabled]="!legalEntity"
-                             (search)="onSearchInventoryOrganization($event)"
-          ></app-single-select>
+          <jaja-select-list [display]="inventoryOrganization?.code"
+                            [getList]="permissionRepository.getInventoryOrganizationList"
+                            [searchEntity]="inventoryOrganizationSearchEntity"
+                            searchField="code"
+                            searchType="startsWith"
+                            (change)="onSelectInventoryOrganization($event)"
+                            placeholder="{{'permission.inventoryCode' | translate}}">
+            <ng-template #label #option let-code="code">
+              {{code}}
+            </ng-template>
+          </jaja-select-list>
         </div>
-        <div class="col-sm-4 form-group">
+        <div class="col-sm-3 form-group">
           <label>
             {{'permission.documentType' | translate}}
             <span class="text-danger mr-2">*</span>
           </label>
-          <app-simple-select data-qe-id="form-select-documentType"
-                             [list]="inventoryDocumentTypes"
-                             [initialValue]="inventoryDocumentType?.display"
-                             (selectionChange)="onSelectInventoryDocumentType($event)"
-                             (listOpen)="getDocumentList()"
-                             key="display"
-                             [valueSelector]="nodeSelector"
-          ></app-simple-select>
+          <jaja-select-list [display]="inventoryDocumentType?.display"
+                            [getList]="permissionRepository.getInventoryDocumentTypes"
+                            (change)="onSelectInventoryDocumentType($event)"
+                            placeholder="{{'permission.documentType' | translate}}">
+            <ng-template #label #option let-display="display">
+              {{display}}
+            </ng-template>
+          </jaja-select-list>
         </div>
       </div>
     </div>
@@ -130,16 +114,6 @@
           </tr>
           <tr>
             <th class="th-filter">
-<!--              <app-single-select key="code"-->
-<!--                                 [disabled]="!legalEntity"-->
-<!--                                 [valueSelector]="nodeSelector"-->
-<!--                                 (listOpen)="getPositionList()"-->
-<!--                                 (search)="onSearchPosition($event)"-->
-<!--                                 (selectionChange)="onSelectPosition($event)"-->
-<!--                                 [initialValue]="permissionSearchEntity.positionCode"-->
-<!--                                 [list]="positionEntities.exceptIds"-->
-<!--                                 [selectedList]="positionEntities.ids"-->
-<!--              ></app-single-select>-->
               <app-advanced-filters [filter]="permissionSearchEntity.positionCode"
                                     (changeFilter)="getList()"
                                     defaultType="startsWith"
@@ -156,30 +130,36 @@
               ></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-simple-select [list]="documentStatus"
-                                 (selectionChange)="onSelectCurrentDocumentStatus($event)"
-                                 (listOpen)="getDocumentStatus(inventoryDocumentTypeId)"
-                                 key="display"
-                                 [disabled]="!documentStatus?.length"
-                                 [valueSelector]="nodeSelector"
-                                 (clear)="onClearCurrentStatus()"
-                                 [initialValue]="currentDocumentStatus?.display"
-              ></app-simple-select>
+              <jaja-select-list [list]="documentStatus"
+                                [display]="permissionSearchEntity?.nextStatusDisplay"
+                                [renewOnOpen]="false"
+                                appendTo="body"
+                                [value]="permissionSearchEntity?.currentStatusId"
+                                [ngClass]="{disabled: !inventoryDocumentTypeId}"
+                                (change)="onSelectCurrentDocumentStatus($event)"
+                                placeholder="{{ 'permission.currentStatus' | translate}}">
+                <ng-template #label #option let-display="display">
+                  {{display}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
               <app-advanced-filters [filter]="permissionSearchEntity.nextStep" (changeFilter)="getList()"
               ></app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-simple-select [list]="documentStatus"
-                                 (selectionChange)="onSelectNextDocumentStatus($event)"
-                                 (listOpen)="getDocumentStatus(inventoryDocumentTypeId)"
-                                 key="display"
-                                 [disabled]="!documentStatus?.length"
-                                 (clear)="onClearNextStatus()"
-                                 [valueSelector]="nodeSelector"
-                                 [initialValue]="nextDocumentStatus?.display"
-              ></app-simple-select>
+              <jaja-select-list [list]="documentStatus"
+                                [display]="permissionSearchEntity?.nextStatusDisplay"
+                                [renewOnOpen]="false"
+                                appendTo="body"
+                                [value]="permissionSearchEntity?.nextStatusId"
+                                [ngClass]="{disabled: !inventoryDocumentTypeId}"
+                                (change)="onSelectNextDocumentStatus($event)"
+                                placeholder="{{ 'permission.nextStatus' | translate}}">
+                <ng-template #label #option let-display="display">
+                  {{display}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter actions"></th>
           </tr>

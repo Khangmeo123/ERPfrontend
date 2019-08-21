@@ -1,11 +1,10 @@
-import {environment} from 'src/environments/environment';
-import {Repository} from 'src/app/_repositories/repository';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Repository } from 'src/app/_repositories/repository';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
-  BinLocationEntity,
   GoodsReceiptPOEntity,
   ItemDetailEntity,
   PurchaseOrderEntity,
@@ -13,15 +12,15 @@ import {
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
   ItemDetailSearchEntity,
-  UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
+  UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import {Entities} from 'src/app/_helpers/entity';
 
 @Injectable({
   providedIn: 'root',
 })
 export class GoodsReceiptPOApproveRepository extends Repository {
+
   constructor(public http: HttpClient) {
     super(http);
     this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-approve';
@@ -68,9 +67,9 @@ export class GoodsReceiptPOApproveRepository extends Repository {
     );
   };
 
-  getItemList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
+  getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
     return this.http.post<ItemDetailEntity[]>(
-      this.apiUrl + '/drop-list-item',
+      this.apiUrl + '/single-list-item-detail',
       itemDetailSearchEntity,
       {
         observe: 'response',
@@ -78,15 +77,15 @@ export class GoodsReceiptPOApproveRepository extends Repository {
       },
     )
       .pipe(
-      map(
-        (response: HttpResponse<ItemDetailEntity[]>) => response.body,
-      ),
-    );
+        map(
+          (response: HttpResponse<ItemDetailEntity[]>) => response.body,
+        ),
+      );
   };
 
   getUnitOfMeasureList = (unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Observable<UnitOfMeasureEntity[]> => {
     return this.http.post<UnitOfMeasureEntity[]>(
-      this.apiUrl + '/drop-list-unit-of-measure',
+      this.apiUrl + '/single-list-unit-of-measure',
       unitOfMeasureSearchEntity,
       {
         observe: 'response',
@@ -101,7 +100,7 @@ export class GoodsReceiptPOApproveRepository extends Repository {
 
   getDocumentNumberList = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> => {
     return this.http.post<PurchaseOrderEntity[]>(
-      this.apiUrl + '/drop-list-document-number',
+      this.apiUrl + '/single-list-document-number',
       purchaseOrdersSearchEntity,
       {
         observe: 'response',

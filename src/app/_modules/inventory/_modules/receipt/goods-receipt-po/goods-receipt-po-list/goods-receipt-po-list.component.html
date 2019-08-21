@@ -124,6 +124,7 @@
                 [getList]="goodsReceiptPOListRepository.singleListInventoryOrganization"
                 [searchEntity]="inventoryOrganizationSearchEntity"
                 [searchable]="true"
+                [display]="goodsReceiptPOSearchEntity.inventoryOrganizationCode"
                 placeholder="{{'goodsReceiptPOList.filters.inventoryOrganizationCode' | translate}}"
                 searchField="name"
                 searchType="startsWith"
@@ -150,6 +151,7 @@
                 [getList]="goodsReceiptPOListRepository.singleListRequester"
                 [searchEntity]="requesterSearchEntity"
                 [searchable]="true"
+                [display]="goodsReceiptPOSearchEntity?.requesterName"
                 placeholder="{{'goodsReceiptPOList.filters.requester' | translate}}"
                 searchField="name"
                 searchType="startsWith"
@@ -163,7 +165,7 @@
               <jaja-select-list
                 (change)="onFilterStatus($event)"
                 [getList]="goodsReceiptPOListRepository.enumListStatus"
-                [display]="null"
+                [display]="goodsReceiptPOSearchEntity?.statusDisplay"
                 placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">
                   {{display}}
