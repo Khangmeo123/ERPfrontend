@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { AppRepository } from '../_repositories/app.repository';
 import { LegalEntity } from '../_modules/master-data/_backend/legal/legal.entity';
 import { ToastrService } from 'ngx-toastr';
@@ -45,5 +45,20 @@ export class AppService {
           throw error;
         },
       );
+  };
+
+  getLegalEntity = (id: string): Promise<LegalEntity> => {
+    return new Promise<LegalEntity>((resolve, reject) => {
+      return this.appRepository.getLegalEntity(id)
+        .subscribe(
+          (legalEntity: LegalEntity) => {
+            resolve(legalEntity);
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('general.legalEntityList.get.error'));
+            reject(error);
+          },
+        );
+    });
   };
 }

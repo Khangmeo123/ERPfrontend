@@ -2,52 +2,61 @@
 @import "../../../../../node_modules/bootstrap/scss/mixins";
 @import "../../../../../node_modules/bootstrap/scss/variables";
 
-.select {
+jaja-select-list {
+  flex-grow: 1;
   display: flex;
-  justify-content: space-between;
+}
+
+.select.jaja-select-list {
+  flex-grow: 1;
   align-items: center;
+  width: 100%;
   min-width: 80px;
-
-  cursor: pointer;
-
   position: relative;
 
   .jaja-select-list-toggle {
-    border: 1px solid $border-color;
-    border-radius: $border-radius;
+    overflow-x: hidden;
     text-overflow: ellipsis;
-    overflow: hidden;
-    white-space: nowrap;
-  }
-
-  button {
-    box-shadow: none;
-  }
-
-  .form-control:focus {
-    box-shadow: none;
-    text-align: left;
-    border-color: $border-color;
-  }
-
-  input[readonly] {
-    background: #ffffff;
-    cursor: pointer;
-    padding-right: 59px;
   }
 
   .icons {
     position: absolute;
     right: 0.5rem;
-    display: inline-flex;
-    align-items: center;
+    display: block;
+
+    .clear {
+      margin-right: 0.25rem;
+    }
+
+    .toggle {
+
+    }
+  }
+
+  input.form-control:focus {
+    box-shadow: none;
+    text-align: left;
+    border-color: $border-color;
+  }
+
+  input.form-control[readonly] {
+    background: #ffffff;
+    cursor: pointer;
+    padding-right: 59px;
+    position: relative;
+  }
+
+  input.form-control:after {
+    content: "\e906";
+    position: absolute;
+    right: 0.5rem;
   }
 }
 
-.select.disabled {
+.select.jaja-select-list.disabled {
   pointer-events: none;
 
-  input {
+  input.form-control {
     background: #e9ecef;
   }
 }
@@ -72,14 +81,18 @@ ul.dropdown-menu.select-dropdown {
     background: #ffffff;
     padding: 0 0.75rem 0.5rem;
     border-bottom: 1px solid $border-color;
-
-    :active, :focus, :hover {
-      background: inherit;
-    }
   }
 
   li.dropdown-item.empty {
     pointer-events: none;
+  }
+
+  li.dropdown-item.empty,
+  li.dropdown-item.loading {
+    background: inherit;
+    color: inherit;
+    pointer-events: none;
+    cursor: default;
   }
 
   li.dropdown-item.loading {
