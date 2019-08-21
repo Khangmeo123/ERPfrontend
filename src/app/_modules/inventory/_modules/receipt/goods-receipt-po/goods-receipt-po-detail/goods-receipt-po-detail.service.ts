@@ -122,10 +122,10 @@ export class GoodsReceiptPoDetailService {
       if (control instanceof FormGroup) {
         const unitPrice = control.get('unitPrice').value;
         const taxRate = control.get('taxRate').value;
-        const generalDiscountCost = control.get('generalDiscountCost').value;
+        const itemDiscountCost = control.get('itemDiscountCost').value;
         const quantity = Number(control.get('quantity').value);
         const taxNumber = unitPrice * (taxRate / 100);
-        const totalValue = Math.round((unitPrice + taxNumber - generalDiscountCost) * quantity);
+        const totalValue = Math.round((unitPrice + taxNumber - itemDiscountCost) * quantity);
         if (control.get('total')) {
           control.get('total').setValue(totalValue);
         } else {
