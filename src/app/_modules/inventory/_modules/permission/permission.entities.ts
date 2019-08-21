@@ -31,8 +31,6 @@ export class PermissionEntity extends Entity {
 }
 
 export class PermissionForm extends FormModel {
-  id: FormControl = new FormControl(null);
-
   legalEntityId: FormControl = new FormControl(null, [
     requiredField,
   ]);

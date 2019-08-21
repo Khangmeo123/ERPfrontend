@@ -77,9 +77,12 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     private goodsReceiptPoDetailRepository: GoodsReceiptPODetailRepository,
   ) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      if (params.goodsReceiptPOId) {
-        this.goodsReceiptPOId = params.goodsReceiptPOId;
-        this.goodsReceiptPoDetailService.getDetail(params.goodsReceiptPOId);
+      if (params.id) {
+        this.goodsReceiptPOId = params.id;
+        this.goodsReceiptPoDetailService.getDetail(params.id)
+          .then(() => {
+
+          });
       }
     });
 
@@ -140,6 +143,18 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     return this.goodsReceiptPOForm.get('inventoryOrganizationCode') as FormControl;
   }
 
+  get ownerName() {
+    return this.goodsReceiptPOForm.get('ownerName') as FormControl;
+  }
+
+  get buyerName() {
+    return this.goodsReceiptPOForm.get('buyerName') as FormControl;
+  }
+
+  get requesterName() {
+    return this.goodsReceiptPOForm.get('requesterName') as FormControl;
+  }
+
   ngOnInit() {
   }
 
@@ -186,7 +201,8 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     this.displayPurchaseOrders = false;
   }
 
-  onClearSearch(event) {
+  onClearSearch(table) {
+    table.reset();
   }
 
   deactivate() {

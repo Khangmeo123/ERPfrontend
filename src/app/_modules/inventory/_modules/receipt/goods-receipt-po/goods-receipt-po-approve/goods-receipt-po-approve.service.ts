@@ -1,16 +1,16 @@
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {BehaviorSubject, Observable} from 'rxjs';
-import {Injectable} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {GoodsReceiptPOForm} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
-import {GoodsReceiptPOApproveRepository} from './goods-receipt-po-approve.repository';
-import {Entities} from 'src/app/_helpers/entity';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
+import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
+import { Entities } from 'src/app/_helpers/entity';
 import {
   ItemDetailSearchEntity,
-  UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
+  UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class GoodsReceiptPOApproveService {

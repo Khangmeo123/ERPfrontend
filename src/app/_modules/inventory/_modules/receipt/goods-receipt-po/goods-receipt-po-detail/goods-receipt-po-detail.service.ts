@@ -222,6 +222,8 @@ export class GoodsReceiptPoDetailService {
       return this.goodsReceiptPODetailRepository.uploadFiles(files)
         .subscribe(
           (fileAttachments: FileAttachmentEntity[]) => {
+            resolve();
+            this.toastrService.success(translate('general.upload.success'));
             const currentForm: FormGroup = this.goodsReceiptPOForm.getValue();
             currentForm.setControl('fileAttachments', new FormArray(
               fileAttachments.map((fileAttachment: FileAttachmentEntity) => {
@@ -229,6 +231,10 @@ export class GoodsReceiptPoDetailService {
               }),
             ));
             this.goodsReceiptPOForm.next(currentForm);
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('general.upload.error'));
+            reject(error);
           },
         );
     });

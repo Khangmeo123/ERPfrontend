@@ -166,7 +166,8 @@
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form d-flex">
-              <input id="document-number" class="form-control flex-grow-1 disabled" data-qe-id="detail-form-document-number"
+              <input id="document-number" class="form-control flex-grow-1 disabled"
+                     data-qe-id="detail-form-document-number"
                      formControlName="documentNumber" type="text">
               <app-error [formGroup]="goodsReceiptPOForm"
                          [placement]="'top'"
@@ -181,7 +182,7 @@
             </label>
             <jaja-select-list [getList]="goodsReceiptPoDetailRepository.getInventoryOrganizationList"
                               [searchable]="true"
-                              [display]="inventoryOrganizationCode.value"
+                              [display]="inventoryOrganizationCode?.value"
                               [searchEntity]="inventoryOrganizationSearchEntity"
                               searchField="code"
                               searchType="startsWith"
@@ -211,6 +212,7 @@
                                 [searchable]="true"
                                 [searchEntity]="ownerSearchEntity"
                                 searchField="name"
+                                [display]="ownerName?.value"
                                 searchType="startsWith"
                                 (change)="onSelectOwner($event)"
               >
@@ -234,6 +236,7 @@
                               [searchEntity]="buyerSearchEntity"
                               searchField="name"
                               searchType="startsWith"
+                              [display]="buyerName?.value"
                               (change)="onSelectBuyer($event)">
               <ng-template #label #option let-code="code" let-name="name">
                 {{code}} - {{name}}
@@ -246,7 +249,9 @@
             </label>
             <jaja-select-list [getList]="goodsReceiptPoDetailRepository.getEmployeeDetailList"
                               [searchable]="true"
+                              [ngClass]="'disabled'"
                               [searchEntity]="requesterSearchEntity"
+                              [display]="requesterName?.value"
                               searchField="name"
                               searchType="startsWith"
                               (change)="onSelectRequester($event)">
@@ -461,7 +466,7 @@
                         </div>
                       </div>
                     </td>
-                    <td class="ui-resizable-column">{{goodsReceiptPOContent.documentNumber}}</td>
+                    <td class="ui-resizable-column">{{goodsReceiptPOContent.purchaseOrderNumber}}</td>
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.itemCode}}</td>
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.itemName}}</td>
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.unitOfMeasureName}}</td>
@@ -475,15 +480,14 @@
                     <td class="ui-resizable-column text-right">{{goodsReceiptPOContent.taxRate}}
                     </td>
                     <td class="ui-resizable-column text-right">
-                      {{goodsReceiptPOContent.generalDiscountRate}}
+                      {{goodsReceiptPOContent.discountRate}}
                     </td>
                     <td class="ui-resizable-column text-right">
-                      {{goodsReceiptPOContent.generalDiscountCost}}
+                      {{goodsReceiptPOContent.discountCost}}
                     </td>
                     <td class="text-right" width="8%">
                       {{goodsReceiptPOContent.total | number}}
                     </td>
-
                   </tr>
                 </ng-template>
                 <ng-template let-columns pTemplate="footer">
@@ -566,7 +570,7 @@
                 <div class="pretty p-icon p-curve p-has-indeterminate">
                   <input id="dialog-select-all"
                          [checked]="allSelected"
-                         (click)="selectAllPurchaseOrders($event)"
+                         (click)="selectAllPurchaseOrders()"
                          type="checkbox"/>
                   <div class="state">
                     <i class="icon material-icons">done</i>
