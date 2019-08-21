@@ -10,13 +10,15 @@
             <span class="ml-2 pending-counting-status">{{'general.pendingCounting'| translate}}</span>
         </div>
         <div class="page-actions d-flex">
-            <button class="btn btn-labeled btn-update" *ngIf="!inventoryCountingForm.get('isOwner').value">
+            <button class="btn btn-labeled btn-update" *ngIf="!inventoryCountingForm.get('isOwner').value"
+                (click)="save()">
                 <span class="btn-label"><i class="material-icons">update</i></span>
                 <span class="button-label">
                     {{'general.button.update' | translate}}
                 </span>
             </button>
-            <button class="btn btn-labeled btn-completed" *ngIf="inventoryCountingForm.get('isOwner').value">
+            <button class="btn btn-labeled btn-completed" *ngIf="inventoryCountingForm.get('isOwner').value"
+                (click)="send()">
                 <span class="btn-label"><i class="material-icons">check</i></span>
                 <span class="button-label">
                     {{'general.button.completed' | translate}}
@@ -178,7 +180,7 @@
                                         <th pResizableColumn data-qe-id="table-thead-quantity-of-inventory">
                                             {{'inventoryCounting.detail.tab1.quantityOfInventory' | translate}}
                                         </th>
-                                        <th width="5%" pResizableColumn data-qe-id="table-thead-batches-action">
+                                        <th width="8%" pResizableColumn data-qe-id="table-thead-batches-action">
                                             {{'general.action' | translate}}
                                         </th>
                                     </tr>
@@ -186,9 +188,10 @@
                                         <th class="th-filter" width="3%"></th>
                                         <th class="th-filter">
                                             <jaja-select-list class="flex-grow-1"
-                                                [value]="itemDetailCodeSearchEntity.id" appendTo="body"
+                                                [value]="itemDetailCodeOfCounterSearch.id" appendTo="body"
                                                 [getList]="inventoryCountingRepository.selectListItemDetailCode"
-                                                key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                                key="id" [searchEntity]="itemDetailCodeOfCounterSearch"
+                                                searchField="code"
                                                 (change)="changeItemDetailCode($event, tableInventoryCounterContents)"
                                                 searchType="startsWith" [searchable]="true">
                                                 <ng-template #label #option let-code="code">
@@ -215,7 +218,7 @@
                                         <th class="th-filter"
                                             *ngIf="inventoryCountingForm.get('enableBinLocation').value"></th>
                                         <th class="th-filter"></th>
-                                        <th class="th-filter" width="5%"></th>
+                                        <th class="th-filter" width="8%"></th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-inventoryCounterContent let-index="rowIndex">
@@ -254,15 +257,15 @@
                                                     formControlName="quantity" class="form-control text-right" />
                                             </ng-container>
                                         </td>
-                                        <td width="5%">
+                                        <td width="8%">
                                             <ng-container [ngSwitch]=" inventoryCounterContent.managementTypeName">
                                                 <a (click)="showBatch(inventoryCounterContent.itemDetailId)"
                                                     href="javascript:;" *ngSwitchCase="'BATCH'">
-                                                    {{'goodsReceiptPODetail.tab1.batches' | translate}}
+                                                    {{'inventoryCounting.detail.tab1.batches' | translate}}
                                                 </a>
                                                 <a (click)="showSerial(inventoryCounterContent.itemDetailId)"
                                                     href="javascript:;" *ngSwitchCase="'SERIAL_NUMBER'">
-                                                    {{'goodsReceiptPODetail.tab1.serial' | translate}}
+                                                    {{'inventoryCounting.detail.tab1.serial' | translate}}
                                                 </a>
                                             </ng-container>
                                         </td>
@@ -325,9 +328,10 @@
                                         <th class="th-filter" width="3%"></th>
                                         <th class="th-filter">
                                             <jaja-select-list class="flex-grow-1"
-                                                [value]="itemDetailCodeSearchEntity.id" appendTo="body"
+                                                [value]="itemDetailCodeOfCountingSearch.id" appendTo="body"
                                                 [getList]="inventoryCountingRepository.selectListItemDetailCode"
-                                                key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                                key="id" [searchEntity]="itemDetailCodeOfCountingSearch"
+                                                searchField="code"
                                                 (change)="changeItemDetailCode($event, tableInventoryCountingContents)"
                                                 searchType="startsWith" [searchable]="true">
                                                 <ng-template #label #option let-code="code">
@@ -514,7 +518,7 @@
                             <th pResizableColumn data-qe-id="table-thead-batches-actual-counting">
                                 {{'inventoryCounting.detail.batches.actualCounting' | translate}}
                             </th>
-                            <th pResizableColumn data-qe-id="table-thead- -action" width="5%">
+                            <th pResizableColumn data-qe-id="table-thead- -action" width="8%">
                                 {{'general.action' | translate}}
                             </th>
                         </tr>
@@ -524,9 +528,9 @@
                                     (input)="tableBatch.filter($event.target.value, 'qrCode', 'contains')" />
                             </th>
                             <th class="th-filter">
-                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeSearchEntity.id"
+                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeOfBatchSearch.id"
                                     appendTo="body" [getList]="inventoryCountingRepository.selectListItemDetailCode"
-                                    key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                    key="id" [searchEntity]="itemDetailCodeOfBatchSearch" searchField="code"
                                     (change)="changeItemDetailCode($event, tableBatch)" searchType="startsWith"
                                     [searchable]="true">
                                     <ng-template #label #option let-code="code">
@@ -553,7 +557,7 @@
                                 </app-date-picker>
                             </th>
                             <th class="th-filter"></th>
-                            <th class="th-filter" width="5%"></th>
+                            <th class="th-filter" width="8%"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-batch let-index="rowIndex">
@@ -581,7 +585,7 @@
                                     (ngModelChange)="batch.quantity = generalService.toNumber($event)"
                                     (change)="updateBatch(batch)" />
                             </td>
-                            <td width="5%" class="text-center">
+                            <td width="8%" class="text-center">
                                 <mat-icon class="text-danger" (click)="deleteBatch()">delete</mat-icon>
                             </td>
                         </tr>
@@ -636,7 +640,7 @@
                             aria-labelledby="button-basic">
                             <li role="menuitem">
                                 <button class="dropdown-item"
-                                    (click)="file.click()">{{'general.button.importFile' | translate}}</button>
+                                    (click)="file.click()">{{'general.button.import' | translate}}</button>
                             </li>
                             <li class="divider dropdown-divider"></li>
                             <li role="menuitem"><a class="dropdown-item" target="_blank"
@@ -678,7 +682,8 @@
             <div class="col-sm-6">
                 <div class="d-flex align-items-center justify-content-end">
                     <span class="mr-2">{{'inventoryCounting.detail.totalItem' | translate}}</span>
-                    <input type="text" class="form-control total-item disabled" data-qe-id="dialog-input-total-item">
+                    <input type="text" class="form-control total-item disabled" data-qe-id="dialog-input-total-item"
+                        [value]="serialNumberList.length">
                 </div>
             </div>
         </div>
@@ -702,7 +707,7 @@
                         <tr>
                             <th width="2.5%" pResizableColumn data-qe-id="table-thead-qrCode-check-box">
                                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                                    <input type="checkbox" />
+                                    <input type="checkbox" (change)="checkAllSerialNumber($event.target)" />
                                     <div class="state">
                                         <i class="icon material-icons">done</i>
                                         <label></label>
@@ -727,7 +732,7 @@
                             <th pResizableColumn data-qe-id="table-thead-qrCode-expiry-date">
                                 {{'inventoryCounting.detail.qrCode.expiryDate' | translate}}
                             </th>
-                            <th pResizableColumn data-qe-id="table-thead-qrCode-action" width="5%">
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-action" width="8%">
                                 {{'general.action' | translate}}
                             </th>
                         </tr>
@@ -739,9 +744,9 @@
                                     (input)="tableSerialNumber.filter($event.target.value, 'qrCode', 'startsWith')" />
                             </th>
                             <th class="th-filter">
-                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeSearchEntity.id"
+                                <jaja-select-list class="flex-grow-1" [value]="serialNumberSearchEntity.itemDetailId"
                                     appendTo="body" [getList]="inventoryCountingRepository.selectListItemDetailCode"
-                                    key="id" [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
+                                    key="id" [searchEntity]="itemDetailCodeOfSerialSearch" searchField="code"
                                     (change)="changeItemDetailCode($event, tableSerialNumber)" searchType="startsWith"
                                     [searchable]="true">
                                     <ng-template #label #option let-code="code">
@@ -761,15 +766,17 @@
                             </th>
                             <th class="th-filter">
                                 <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDate')"
+                                    [control]="serialNumberSearchEntity.mfrDate"
                                     data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>
                             <th class="th-filter">
                                 <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'expirationDate')"
+                                    [control]="serialNumberSearchEntity.expirationDate"
                                     data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>
-                            <th class="th-filter" width="5%"></th>
+                            <th class="th-filter" width="8%"></th>
                         </tr>
                     </ng-template>
                     <ng-template pTemplate="body" let-serialNumber let-index="rowIndex">
@@ -801,8 +808,10 @@
                             <td class="ui-resizable-column">
                                 {{serialNumber.expirationDate | date: 'dd/MM/yyyy'}}
                             </td>
-                            <td width="5%" class="text-center">
-                                <mat-icon class="text-danger" (click)="deleteSerialNumber()">delete</mat-icon>
+                            <td width="8%" class="text-center">
+                                <mat-icon class="text-danger" role="button"
+                                    (click)="deleteSerialNumber(serialNumber.id)">delete
+                                </mat-icon>
                             </td>
                         </tr>
                     </ng-template>

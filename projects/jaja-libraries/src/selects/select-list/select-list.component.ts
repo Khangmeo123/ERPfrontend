@@ -13,11 +13,11 @@ import {
   SimpleChanges,
   TemplateRef,
 } from '@angular/core';
-import {ISelect} from '../ISelect';
-import {Observable, Subject, Subscription} from 'rxjs';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {NG_VALUE_ACCESSOR} from '@angular/forms';
-import {ISearchEntity} from '../../entities/ISearchEntity';
+import { ISelect } from '../ISelect';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+import { ISearchEntity } from '../../entities/ISearchEntity';
 
 @Component({
   selector: 'jaja-select-list',
@@ -56,9 +56,9 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   @Input() disabled: boolean = false;
 
-  @ContentChild('label', {static: false}) label: TemplateRef<ElementRef>;
+  @ContentChild('label', { static: false }) label: TemplateRef<ElementRef>;
 
-  @ContentChild('option', {static: false}) option: TemplateRef<ElementRef>;
+  @ContentChild('option', { static: false }) option: TemplateRef<ElementRef>;
 
   public searchSubject: Subject<string> = new Subject<string>();
 
@@ -155,6 +155,7 @@ export class SelectListComponent implements OnInit, AfterViewInit, OnChanges, On
 
   onClear(event) {
     event.stopPropagation();
+    this.value = null;
     this.onChange(null);
   }
 

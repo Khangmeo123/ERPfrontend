@@ -44,10 +44,10 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
-    save(inventoryCountingEntity: any): Observable<InventoryCountingEntity> {
-        return this.http.post<InventoryCountingEntity>(this.apiUrl + '/save', JSON.stringify(inventoryCountingEntity),
+    send(icId: string): Observable<any> {
+        return this.http.post<any>(this.apiUrl + '/send', JSON.stringify({ id: icId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => new InventoryCountingEntity(r.body)),
+                map(r => r.body),
             );
     }
 
@@ -106,7 +106,7 @@ export class InventoryCountingPendingRepository extends Repository {
 
     analyzeSerialCode(idId: string, icId: string, code: string) {
         return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/scan-qr-code-serial-number',
-            JSON.stringify({ itemDetailId: idId, inventonryCountingId: icId, qrCode: code }),
+            JSON.stringify({ itemDetailId: idId, inventoryCountingId: icId, qrCode: code }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
                     return new CounterContentByItemDetailEntity(r.body);
@@ -114,17 +114,9 @@ export class InventoryCountingPendingRepository extends Repository {
             );
     }
 
-    deleteSerialNumber(id: string) {
-        return this.http.post<any>(this.apiUrl + '/serial-number/analyze-qr-code',
-            JSON.stringify({ serialNumberId: id }),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => r.body),
-            );
-    }
-
-    deleteMultipleSerialNumber(icId: string, listIds: string[]) {
-        return this.http.post<any>(this.apiUrl + '/serial-number/import',
-            JSON.stringify({ inventoryCountingId: icId, ids: listIds }),
+    deleteSerialNumber(icId: string, iccIds: string[]) {
+        return this.http.post<any>(this.apiUrl + '/serial-number/reset-result',
+            JSON.stringify({ inventoryCountingId: icId, inventoryCounterContentIds: iccIds }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
             );
@@ -171,7 +163,7 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     deleteBatch(id: string) {
-        return this.http.post<any>(this.apiUrl + '/batch/delete',
+        return this.http.post<any>(this.apiUrl + '/batch/reset-result',
             JSON.stringify({ batchId: id }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),

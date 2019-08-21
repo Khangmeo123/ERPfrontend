@@ -25,6 +25,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
 import { InventoryCountingPendingComponent } from './inventory-counting/inventory-counting-pending/inventory-counting-pending.component';
 import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
+import { InventoryCountingDoneComponent } from './inventory-counting/inventory-counting-done/inventory-counting-done.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
     InventoryCountingListComponent,
     InventoryCountingDetailComponent,
     InventoryCountingPendingComponent,
+    InventoryCountingDoneComponent,
     InventoryCountingComponent,
     InventoryPostingComponent,
     InventoryCountingCycleComponent],

@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { DateFilter } from 'src/app/_shared/models/filters/DateFilter';
@@ -71,8 +72,8 @@ export class SerialNumberSearchEntity extends SearchEntity {
     itemDetailId: string = null;
     itemDetailName: string = null;
     serialNumber: string = null;
-    mfrDate: string = null;
-    expirationDate: string = null;
+    mfrDate: FormControl = new FormControl(null);
+    expirationDate: FormControl = new FormControl(null);
 }
 
 export class BatchSearchEntity extends SearchEntity {

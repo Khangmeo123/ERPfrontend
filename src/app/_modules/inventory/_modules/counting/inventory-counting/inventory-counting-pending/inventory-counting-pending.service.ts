@@ -68,18 +68,16 @@ export class InventoryCountingPendingService {
         return defered;
     }
 
-    save(inventoryCountingEntity: any) {
+    send(inventoryCountingId: any) {
         const defered = new Promise<boolean>((resolve, reject) => {
-            this.inventoryCountingRepository.save(inventoryCountingEntity).subscribe(res => {
+            this.inventoryCountingRepository.send(inventoryCountingId).subscribe(res => {
                 if (res) {
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();
                 }
             }, err => {
                 if (err) {
-                    this.inventoryCountingForm.next(this.fb.group(
-                        new InventoryCountingForm(err),
-                    ));
+                    this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
                     reject();
                 }
             });
@@ -199,9 +197,11 @@ export class InventoryCountingPendingService {
     }
 
     deleteSerialNumber(serialNumberId: string, itemDetailId: string, inventoryCountingId: string) {
-        this.inventoryCountingRepository.deleteSerialNumber(serialNumberId).subscribe(res => {
+        const listids = [serialNumberId];
+        this.inventoryCountingRepository.deleteSerialNumber(inventoryCountingId, listids).subscribe(res => {
             if (res) {
                 this.getListSerialNumber(itemDetailId, inventoryCountingId);
+                this.toastrService.success('Hệ thống cập nhật thành công!');
             }
         });
     }
@@ -214,10 +214,11 @@ export class InventoryCountingPendingService {
     }
 
     deleteMultipleSerialNumber(serialNumbeList: any[], itemDetailId: string, inventoryCountingId: string) {
-        const listIds = serialNumbeList.map(item => item.id)
-        this.inventoryCountingRepository.deleteMultipleSerialNumber(inventoryCountingId, listIds).subscribe(res => {
+        const listIds = serialNumbeList.filter(item => item.isSelected).map(item => item.id);
+        this.inventoryCountingRepository.deleteSerialNumber(inventoryCountingId, listIds).subscribe(res => {
             if (res) {
                 this.getListSerialNumber(itemDetailId, inventoryCountingId);
+                this.toastrService.success('Hệ thống cập nhật thành công!');
             }
         });
     }
@@ -256,13 +257,17 @@ export class InventoryCountingPendingService {
     }
 
     saveBatch(inventoryCountingForm: FormGroup, batchList: CounterContentByItemDetailEntity[]) {
-        const currentArray = inventoryCountingForm.get('inventoryCounterContents') as FormArray;
-        currentArray.controls.forEach(control => {
-            if (control.get('itemDetailId').value === batchList[0].itemDetailId) {
-                const sumQuantity = _.sumBy(batchList, item => item.quantity);
-                control.get('quantity').setValue(sumQuantity);
-            }
-        });
+        if (batchList.length > 0) {
+            const currentArray = inventoryCountingForm.get('inventoryCounterContents') as FormArray;
+            currentArray.controls.forEach(control => {
+                if (control.get('itemDetailId').value === batchList[0].itemDetailId) {
+                    const sumQuantity = _.sumBy(batchList, item => item.quantity);
+                    control.get('quantity').setValue(sumQuantity);
+                }
+            });
+            this.inventoryCountingForm.next(inventoryCountingForm);
+        }
+        return;
     }
 
     analyzeBatchCode(itemDetailId: string, inventoryCountingId: string, event: any) {

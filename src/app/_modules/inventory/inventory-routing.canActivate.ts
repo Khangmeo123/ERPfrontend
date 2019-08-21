@@ -14,9 +14,10 @@ export class InventoryRoutingCanActivate implements CanActivate {
     state: RouterStateSnapshot,
   ): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
     const legalEntityId: string = localStorage.getItem('legalEntityId');
+    const currentUrl = state.url.split('?')[0];
     if (!route.queryParams.legalEntityId) {
       return this.router.navigate(
-        [state.url],
+        [currentUrl],
         {
           queryParams: {
             ...route.queryParams,

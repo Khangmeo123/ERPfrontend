@@ -18,25 +18,23 @@ import {
   EmployeeDetailOfCountingSearchEntity,
   ItemDetailOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
-import { InventoryCountingPendingService } from './inventory-counting-pending.service';
 import { environment } from 'src/environments/environment';
 import { GeneralService } from 'src/app/_services/general-service.service';
-import { InventoryCountingPendingRepository } from './inventory-counting-pending.repository';
 import { ToastrService } from 'ngx-toastr';
+import { InventoryCountingDoneService } from './inventory-counting-done.service';
+import { InventoryCountingDoneRepository } from './inventory-counting-done.repository';
 
 @Component({
-  selector: 'app-inventory-counting-pending',
-  templateUrl: './inventory-counting-pending.component.html',
-  styleUrls: ['./inventory-counting-pending.component.scss'],
+  selector: 'app-inventory-counting-done',
+  templateUrl: './inventory-counting-done.component.html',
+  styleUrls: ['./inventory-counting-done.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [InventoryCountingPendingService],
+  providers: [InventoryCountingDoneService],
 })
-export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
+export class InventoryCountingDoneComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceiptDetail.header.title');
   fileNameList: Array<any> = [];
   inventoryCountingSubs: Subscription = new Subscription();
-  displayBatch: boolean = false;
-  displaySerial: boolean = false;
   displayBinLocation: boolean = false;
   displayInventoryCounter: boolean = false;
   employeeListIds: string[] = [];
@@ -47,11 +45,8 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   inventoryCounterContentId: string;
   binLocationList: BinLocationOfInventoryCountingEntity[];
   inventoryCounterDetailSearchEntity: InventoryCounterDetailSearchEntity = new InventoryCounterDetailSearchEntity();
-  activeScanOutSide: boolean = false;
-  activeScan: boolean = false;
   inventoryCounters: any[] = [];
   inventoryCounterList: any[];
-  qrCodeOutSide: string;
   // serialNumber:
   serialNumber: string;
   serialNumberSearchEntity: SerialNumberSearchEntity = new SerialNumberSearchEntity();
@@ -83,10 +78,10 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
 
   constructor(
     private router: Router,
-    private inventoryCountingService: InventoryCountingPendingService,
+    private inventoryCountingService: InventoryCountingDoneService,
     private generalService: GeneralService,
     private toastrService: ToastrService,
-    private inventoryCountingRepository: InventoryCountingPendingRepository,
+    private inventoryCountingRepository: InventoryCountingDoneRepository,
     private route: ActivatedRoute) {
     this.route.queryParams
       .subscribe(params => {
@@ -112,18 +107,6 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
         this.binLocationList = res;
       }
     });
-    // serialNumber:
-    const serialNumberListSub = this.inventoryCountingService.serialNumberList.subscribe(res => {
-      if (res) {
-        this.serialNumberList = res;
-      }
-    });
-    // batch:
-    const batchListSub = this.inventoryCountingService.batchList.subscribe(res => {
-      if (res) {
-        this.batchList = res;
-      }
-    });
     // inventoryCounterList:
     const inventoryCounterListSub = this.inventoryCountingService.inventoryCounterList.subscribe(res => {
       if (res) {
@@ -133,8 +116,6 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
 
     this.inventoryCountingSubs.add(inventoryCountingFormSub)
       .add(binLocationListSub)
-      .add(serialNumberListSub)
-      .add(batchListSub)
       .add(inventoryCounterListSub);
   }
 
@@ -170,17 +151,6 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     this.router.navigate(['/inventory/counting/inventory-counting/inventory-counting-list']);
   }
 
-  save() {
-    this.toastrService.success('Hệ thống cập nhật thành công !');
-    this.backToList();
-  }
-
-  send() {
-    this.inventoryCountingService.send(this.inventoryCountingId).then(res => {
-      this.backToList();
-    });
-  }
-
   changeItemDetailCode(event, table) {
     if (event === null) {
       table.filter('', 'itemDetailId', 'contains');
@@ -203,98 +173,9 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     this.inventoryCountingService.getListBinLocation(this.inventoryOrganizationId, itemDetailId);
   }
 
-  inputCodeOutside(event) {
-    this.inventoryCountingService.analyzeCodeOutSide(this.inventoryCountingId, event.trim());
-    this.qrCodeOutSide = null;
-  }
-
-  updateQuantity(itemDetailId: string, quantity: number) {
-    this.inventoryCountingService.updateQuantity(this.inventoryCountingId, itemDetailId, Number(quantity));
-  }
-
-  // serialNumber:
-  showSerial(itemDetailId: string) {
-    this.displaySerial = true;
-    this.activeScan = false;
-    this.itemDetailId = itemDetailId;
-    this.inventoryCountingService.getListSerialNumber(this.itemDetailId, this.inventoryCountingId);
-  }
-
-  deleteSerialNumber(serialNumberId: string) {
-    this.inventoryCountingService.deleteSerialNumber(serialNumberId, this.itemDetailId, this.inventoryCountingId);
-  }
-
-  deleteMultipleSerialNumber() {
-    this.inventoryCountingService.deleteMultipleSerialNumber(this.serialNumberList, this.itemDetailId, this.inventoryCountingId);
-  }
-
-  checkAllSerialNumber(target: any) {
-    this.inventoryCountingService.checkAllSerialNumber(target.checked, this.serialNumberList);
-  }
-
-  inputSerialNumber(event) {
-    this.inventoryCountingService.analyzeSerialCode(this.itemDetailId, this.inventoryCountingId, event.trim());
-    this.serialNumber = null;
-  }
-
-  importSerialNumber(file: File) {
-    this.inventoryCountingService.importSerialNumber(file, this.itemDetailId, this.inventoryCountingId);
-  }
-
-  saveSerialNumber() {
-    this.inventoryCountingService.saveSerialNumber(this.inventoryCountingForm, this.serialNumberList);
-    this.displaySerial = false;
-  }
-
-  clearSerialNumberTable(table) {
-    this.serialNumberSearchEntity = new SerialNumberSearchEntity();
-    table.reset();
-  }
-
-  // batch:
-  showBatch(itemDetailId: string) {
-    this.displayBatch = true;
-    this.activeScan = false;
-    this.itemDetailId = itemDetailId;
-    this.inventoryCountingService.getListBatch(itemDetailId, this.inventoryCountingId);
-  }
-
-  deleteBatch(batchId: string) {
-    this.inventoryCountingService.deleteBatch(batchId, this.itemDetailId, this.inventoryCountingId);
-  }
-
-  inputBatchCode(event: string) {
-    this.inventoryCountingService.analyzeBatchCode(this.itemDetailId, this.inventoryCountingId, event);
-    this.batchCode = null;
-  }
-
-  updateBatch(batch: CounterContentByItemDetailEntity) {
-    this.inventoryCountingService.updateBatch(batch);
-  }
-
-  saveBatch() {
-    this.inventoryCountingService.saveBatch(this.inventoryCountingForm, this.batchList);
-    this.displayBatch = false;
-  }
-
-  clearBatchTable(table) {
-    this.serialNumberSearchEntity = new SerialNumberSearchEntity();
-    table.reset();
-  }
-
   // invetoryCounterDetail:
   showInventoryCounterDetail(item: any) {
     this.displayInventoryCounter = true;
     this.inventoryCountingService.getListInventoryCounter(this.inventoryCountingId, item.id);
-  }
-
-  resetInventoryCounterContent() {
-    this.inventoryCountingService.resetInventoryCounterContent(this.inventoryCountingId, this.inventoryCountingForm);
-  }
-
-  // inventoryOrganization:
-  selectInventoryOrganization(inventoryOrganizationId: string) {
-    this.inventoryCountingForm.get('inventoryOrganizationId').setValue(inventoryOrganizationId);
-    this.inventoryOrganizationId = inventoryOrganizationId;
   }
 }

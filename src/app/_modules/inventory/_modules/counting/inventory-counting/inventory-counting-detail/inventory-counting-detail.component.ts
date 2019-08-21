@@ -189,16 +189,6 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   // inventoryCoutingContents:
-  clearUnitOfMeasure(tableInventoryCountingContents: any) {
-    tableInventoryCountingContents.filter('', 'unitOfMeasureId', 'contains');
-  }
-
-  clearItemDetailId(table: any) {
-    table.filter('', 'itemDetailId', 'contains');
-  }
-  cleartItemDetail(table: any) {
-    table.filter('', 'id', 'contains');
-  }
   addInventoryCountingContent() {
     this.inventoryCountingService.addInventoryCountingContent(this.inventoryCountingForm);
   }

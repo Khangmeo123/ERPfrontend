@@ -1,15 +1,4 @@
 {
-    "goodsReceiptDetail": {
-        "header": {
-            "title": "Vị trí hàng hóa trong kho"
-        }
-    },
-    "goodsReceiptPODetail": {
-        "tab1": {
-            "batches": "",
-            "serial": ""
-        }
-    },
     "inventoryCounting": {
         "detail": {
             "batches": {
@@ -27,18 +16,18 @@
             "countingDate": "Ngày thực hiện",
             "description": "Mô tả",
             "detailBinLocation": {
-                "itemCode": "",
-                "locationCode": "",
-                "no": "",
-                "title ": ""
+                "itemCode": "Mã hàng",
+                "locationCode": "Mã vị trí",
+                "no": "Stt",
+                "title ": "Chi tiết vị trí mã hàng"
             },
             "detailDifference": {
-                "excess": "",
-                "itemCode": "",
-                "itemName": "",
-                "lack": "",
-                "no": "",
-                "title ": ""
+                "excess": "Mã serial thừa",
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng",
+                "lack": "Mã serial thiếu",
+                "no": "Stt",
+                "title ": "Chi tiết số lượng thực đếm"
             },
             "documentNumber": "Số chứng từ",
             "form": {
@@ -74,7 +63,9 @@
                 "no": "STT",
                 "quantityOfInventory": "Số lượng tồn kho",
                 "title": "Chi tiết hàng hóa",
-                "unitOfMeasure": "Đơn vị tính"
+                "unitOfMeasure": "Đơn vị tính",
+                "batches": "Lô",
+                "serial": "Serial"
             },
             "tab2": {
                 "title": "Đính kèm"
