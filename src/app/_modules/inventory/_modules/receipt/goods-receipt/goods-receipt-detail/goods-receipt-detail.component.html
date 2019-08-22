@@ -1,12 +1,12 @@
-<div class="page goods-receipt-po">
+<div class="page goods-receipt-po" [formGroup]="goodsReceiptForm">
   <div class="page-header justify-content-between">
     <div class="justify-content-start align-items-center">
-            <span (click)="backToList()" class="back-to-list">
-                <i class="material-icons">arrow_back_ios</i>
-            </span>
+      <span (click)="backToList()" class="back-to-list">
+        <i class="material-icons">arrow_back_ios</i>
+      </span>
       <span class="page-title">
-                {{pageTitle | translate}}
-            </span>
+        {{pageTitle | translate}}
+      </span>
       <span class="ml-2 open-status">{{'general.open'| translate}}</span>
       <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
       <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
@@ -14,51 +14,50 @@
     </div>
     <div class="page-actions d-flex">
       <button class="btn btn-labeled btn-clear">
-                <span class="btn-label">
-                    <img src="/assets/img/filter.svg" width="16">
-                </span>
+        <span class="btn-label">
+          <img src="/assets/img/filter.svg" width="16">
+        </span>
         <span class="button-label">
-                    {{'general.button.clear' | translate}}
-                </span></button>
+          {{'general.button.clear' | translate}}
+        </span></button>
       <button class="btn btn-labeled btn-reverse">
         <span class="btn-label"><i class="material-icons">replay</i></span>
         <span class="button-label">
-                    {{'general.button.reverse' | translate}}
-                </span></button>
+          {{'general.button.reverse' | translate}}
+        </span></button>
       <button class="btn btn-labeled btn-approve">
         <span class="btn-label"><i class="material-icons">check</i></span>
         <span class="button-label">
-                    {{'general.button.approve' | translate}}
-                </span></button>
+          {{'general.button.approve' | translate}}
+        </span></button>
       <button class="btn btn-labeled btn-rejected">
         <span class="btn-label"><i class="material-icons">block</i></span>
         <span class="button-label">
-                    {{'general.button.rejected' | translate}}
-                </span></button>
+          {{'general.button.rejected' | translate}}
+        </span></button>
       <button class="btn btn-labeled btn-receive">
         <span class="btn-label"><i class="material-icons">assignment_returned</i></span>
         <span class="button-label">
-                    {{'general.button.receive' | translate}}
-                </span></button>
+          {{'general.button.receive' | translate}}
+        </span></button>
       <button class="btn btn-labeled btn-send">
         <span class="btn-label"><i class="material-icons">send</i></span>
         <span class="button-label">
-                    {{'general.button.send' | translate}}
-                </span></button>
+          {{'general.button.send' | translate}}
+        </span></button>
       <button class="btn btn-labeled btn-save">
         <span class="btn-label"><i class="material-icons">save</i></span>
         <span class="button-label">
-                    {{'general.button.save' | translate}}
-                </span></button>
+          {{'general.button.save' | translate}}
+        </span></button>
       <div class="btn-group btn-labeled" data-qe-id="button-import" dropdown>
-        <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle
-                id="button-basic">
+        <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle id="button-basic">
           <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
           <span class="button-label">
-                        {{'general.action' | translate}}
-                    </span></button>
+            {{'general.action' | translate}}
+          </span></button>
         <ul *dropdownMenu aria-labelledby="button-basic" class="dropdown-menu dropdown-menu-right" id="dropdown-basic"
-            role="menu">
+          role="menu">
           <li role="menuitem">
             <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
           </li>
@@ -77,15 +76,16 @@
   <div class="page-body">
     <div class="page-section">
       <div class="page-section-form-header">
-                <span class="form-title">
-                    {{'goodsReceiptDetail.form.title' | translate}}
-                </span>
+        <span class="form-title">
+          {{'goodsReceiptDetail.form.title' | translate}}
+        </span>
         <div class="page-actions justify-content-end">
           <button class="btn btn-labeled btn-delete">
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span></button>
+              {{'general.button.delete' | translate}}
+            </span>
+          </button>
         </div>
       </div>
       <div class="line"></div>
@@ -96,20 +96,28 @@
               {{'goodsReceiptDetail.documentNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input class="form-control" data-qe-id="detail-form-document-number" type="text">
+            <input class="form-control disabled" data-qe-id="detail-form-document-number"
+              formControlName="documentNumber" type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.inventoryCode' | translate}}
             </label>
-            <app-single-select data-qe-id="detail-form-inventory-address"></app-single-select>
-
+            <jaja-select-list [getList]="goodsReceiptRepository.singleListInventoryOrganization" [searchable]="true"
+              [display]="goodsReceiptForm.get('inventoryOrganizationCode').value"
+              [searchEntity]="inventoryOrganizationOfGoodsReceiptSearch" searchField="code" searchType="startsWith"
+              (change)="selectInventoryOrganization($event)">
+              <ng-template #label #option let-code="code" let-name="name">
+                {{code}} - {{name}}
+              </ng-template>
+            </jaja-select-list>
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.inventoryAddress' | translate}}
             </label>
-            <input class="form-control" data-qe-id="detail-form-inventory-code" disabled type="text">
+            <input class="form-control disabled" data-qe-id="detail-form-inventory-code"
+              formControlName="inventoryOrganizationStreet" type="text">
           </div>
         </div>
         <div class="row">
@@ -118,20 +126,32 @@
               {{'goodsReceiptDetail.personInCharge' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
-
+            <div class="div-form d-flex">
+              <jaja-select-list class="flex-grow-1" [getList]="goodsReceiptRepository.singleListEmployeeDetail"
+                [searchable]="true" [searchEntity]="ownerSearch" searchField="name"
+                [display]="goodsReceiptForm.get('ownerName').value" searchType="startsWith"
+                (change)="selectOwner($event)">
+                <ng-template #label #option let-code="code" let-name="name">
+                  {{code}} - {{name}}
+                </ng-template>
+              </jaja-select-list>
+              <app-error [formGroup]="goodsReceiptForm" [placement]="'top'" [property]="'ownerId'" class="error-form"
+                data-qe-id="form-error-supplier-contact"></app-error>
+            </div>
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.receiver' | translate}}
             </label>
-            <input class="form-control" data-qe-id="detail-form-receiver" disabled type="text">
+            <input class="form-control disabled" data-qe-id="detail-form-receiver" type="text"
+              formControlName="buyerName">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.creator' | translate}}
             </label>
-            <input class="form-control" data-qe-id="detail-form-creator" disabled type="text">
+            <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="requesterName"
+              type="text">
           </div>
         </div>
         <div class="row">
@@ -140,21 +160,28 @@
               {{'goodsReceiptDetail.receiptedDate' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <app-date-picker data-qe-id="detail-form-receipted-date">
-            </app-date-picker>
+            <div class="div-form">
+              <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceipt.get('dueDate')"
+                class="w-100">
+              </app-date-picker>
+              <app-error [formGroup]="goodsReceiptForm" [placement]="'top'" property="dueDate" class="error-form">
+              </app-error>
+            </div>
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.createdDate' | translate}}
             </label>
-            <app-date-picker [disabled]="true" data-qe-id="detail-form-created-date"></app-date-picker>
+            <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceipt.get('documentDate')"
+              class="w-100">
+            </app-date-picker>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 form-group">
             <label>{{ 'goodsReceiptDetail.description' | translate}}</label>
-            <textarea class="form-control" data-qe-id="detail-form-description" rows="4">
-                         </textarea>
+            <textarea class="form-control" data-qe-id="detail-form-description" rows="4" formControlName="remarks">
+            </textarea>
           </div>
         </div>
       </div>
@@ -169,19 +196,35 @@
                   <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row">
                     <span class="btn-label"><i class="material-icons">delete</i></span>
                     <span class="button-label">
-                                            {{'general.button.delete' | translate}}
-                                        </span></button>
+                      {{'general.button.delete' | translate}}
+                    </span></button>
                 </div>
               </div>
 
             </div>
             <div class="table">
-              <p-table [value]="tableTemp" resizableColumns>
+              <p-table #tableGoodsReceiptContents [resizableColumns]="true" [rowTrackBy]="trackByFn" [scrollable]="true"
+                [value]="goodsReceiptContents.value" scrollHeight="500px">
+                <ng-template pTemplate="colgroup">
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
                     <th width="2.5%">
                       <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox"/>
+                        <input type="checkbox" (change)="checkAllGoodsReceipt($event.target)" />
                         <div class="state">
                           <i class="icon material-icons">done</i>
                           <label></label>
@@ -192,6 +235,8 @@
                       {{'goodsReceiptDetail.tab1.purchaseOrderNumber' | translate}} </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
                       {{'goodsReceiptDetail.tab1.itemNo' | translate}} </th>
+                    <th data-qe-id="table-thead-item-no" pResizableColumn>
+                      {{'goodsReceiptDetail.tab1.itemName' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
                       {{'goodsReceiptDetail.tab1.unitOfMeasure' | translate}}
                     </th>
@@ -213,40 +258,155 @@
                       {{'general.detail' | translate}}
                     </th>
                   </tr>
+                  <tr>
+                    <th class="th-filter" width="2.5%"></th>
+                    <th class="th-filter">
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        (change)="tableGoodsReceiptContents.filter($event, 'purchaseOrderId', 'equals')"
+                        [value]="goodsReceiptContentSearch.purchaseOrderId"
+                        [getList]="goodsReceiptRepository.singleListPurchaseOrder" [searchEntity]="purchaseOrderSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{code}} - {{name}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </th>
+                    <th class="th-filter">
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        [value]="goodsReceiptContentSearch.itemDetailId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'itemDetailId', 'equals')"
+                        [getList]="goodsReceiptRepository.singleListItemDetail" [searchEntity]="itemDetailSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{code}} - {{name}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </th>
+                    <th class="th-filter">
+                      <input
+                        (input)="tableGoodsReceiptContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                        class="form-control w-100" type="text" />
+                    </th>
+                    <th class="th-filter">
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        [value]="goodsReceiptContentSearch.unitOfMeasureId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'unitOfMeasureId', 'equals')"
+                        [getList]="goodsReceiptRepository.singleListUnitOfMeasure" [searchEntity]="unitOfMeasureSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </th>
+                    <th class="th-filter"></th>
+                    <th class="th-filter"></th>
+                    <th class="th-filter">
+                      <jaja-select-list class="flex-grow-1" appendTo="body" [value]="goodsReceiptContentSearch.taxId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'taxId', 'equals')"
+                        [getList]="goodsReceiptContentSearch.singleListTax" [searchEntity]="taxSearch"
+                        searchField="code" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </th>
+                    <th class="th-filter"></th>
+                    <th class="th-filter"></th>
+                    <th class="th-filter" width="8%"></th>
+                  </tr>
                 </ng-template>
-                <ng-template let-item pTemplate="body">
+                <ng-template let-goodsReceiptContent let-index="rowIndex" pTemplate="body">
                   <tr>
                     <td>
                       <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox"/>
+                        <input type="checkbox" [ngModel]="goodsReceiptContent.isSelected"
+                          (change)="selectGoodsReceipt($event.target)" />
                         <div class="state">
                           <i class="icon material-icons">done</i>
                           <label></label>
                         </div>
                       </div>
                     </td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td>{{item.total}}</td>
                     <td>
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        (change)="tableGoodsReceiptContents.filter($event, 'purchaseOrderId', 'equals')"
+                        [value]="goodsReceiptContentSearch.purchaseOrderId"
+                        [getList]="goodsReceiptRepository.singleListPurchaseOrder" [searchEntity]="purchaseOrderSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{code}} - {{name}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </td>
+                    <td>
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        [value]="goodsReceiptContentSearch.itemDetailId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'itemDetailId', 'equals')"
+                        [getList]="goodsReceiptRepository.singleListItemDetail" [searchEntity]="itemDetailSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{code}} - {{name}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </td>
+                    <td>
+                      <input
+                        (input)="tableGoodsReceiptContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                        class="form-control w-100" type="text" />
+                    </td>
+                    <td>
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        [value]="goodsReceiptContentSearch.unitOfMeasureId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'unitOfMeasureId', 'equals')"
+                        [getList]="goodsReceiptRepository.singleListUnitOfMeasure" [searchEntity]="unitOfMeasureSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </td>
+                    <td>
+                      <input
+                        (input)="tableGoodsReceiptContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                        class="form-control w-100" type="text" />
+                    </td>
+                    <td>
+                      <input
+                        (input)="tableGoodsReceiptContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                        class="form-control w-100" type="text" />
+                    </td>
+                    <td>
+                      <jaja-select-list class="flex-grow-1" appendTo="body" [value]="goodsReceiptContentSearch.taxId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'taxId', 'equals')"
+                        [getList]="goodsReceiptContentSearch.singleListTax" [searchEntity]="taxSearch"
+                        searchField="code" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </td>
+                    <td>
+                      <input
+                        (input)="tableGoodsReceiptContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                        class="form-control w-100" type="text" />
+                    </td>
+                    <td>
+                      <input
+                        (input)="tableGoodsReceiptContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                        class="form-control w-100" type="text" />
+                    </td>
+                    <td>{{goodsReceiptContent.total}}</td>
+                    <!-- <td>
                       <div *ngIf="item.type == 1">
-                        <a
-                          (click)="showBatches()">{{'goodsReceiptDetail.tab1.batches' | translate}}</a>
+                        <a (click)="showBatches()">{{'goodsReceiptDetail.tab1.batches' | translate}}</a>
                       </div>
                       <div *ngIf="item.type == 2">
-                        <a
-                          (click)="showSerial()">{{'goodsReceiptDetail.tab1.Serial' | translate}}</a>
+                        <a (click)="showSerial()">{{'goodsReceiptDetail.tab1.Serial' | translate}}</a>
                       </div>
                       <div *ngIf="item.type == 3">
-                        <a
-                          (click)="showAmount()">{{'goodsReceiptDetail.tab1.amount' | translate}}</a>
+                        <a (click)="showAmount()">{{'goodsReceiptDetail.tab1.amount' | translate}}</a>
                       </div>
-                    </td>
+                    </td> -->
                   </tr>
                 </ng-template>
               </p-table>
@@ -259,9 +419,9 @@
                   <button class="btn btn-labeled btn-import">
                     <span class="btn-label"><i class="material-icons">attach_file</i></span>
                     <span class="button-label">
-                                            {{'general.button.attachFile' | translate}}
-                                        </span></button>
-                  <input (change)="readURL($event)" multiple type="file"/>
+                      {{'general.button.attachFile' | translate}}
+                    </span></button>
+                  <input (change)="readURL($event)" multiple type="file" />
                 </div>
                 <div class="results d-flex align-items-center">
                   <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
@@ -269,8 +429,7 @@
                       <span class="icon-upload"><i class="material-icons">attach_file</i></span>
                       <span>{{name}}</span>
                     </div>
-                    <span class="close-attach align-items-center"><i
-                      class="material-icons">close</i></span>
+                    <span class="close-attach align-items-center"><i class="material-icons">close</i></span>
                   </div>
                 </div>
               </div>
@@ -281,9 +440,9 @@
     </div>
     <div class="page-section">
       <div class="page-section-form-header">
-                <span class="form-title">
-                    {{'goodsReceiptDetail.form.post.title' | translate}}
-                </span>
+        <span class="form-title">
+          {{'goodsReceiptDetail.form.post.title' | translate}}
+        </span>
       </div>
       <div class="line"></div>
       <div class="page-section-form-body">
@@ -295,7 +454,7 @@
 
 
 <p-dialog [(visible)]="displayBatches" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
-          [style]="{width: '90%'}" appendTo="body">
+  [style]="{width: '90%'}" appendTo="body">
   <p-header>
     <div class="row">
       <div class="col-sm-3">
@@ -304,22 +463,22 @@
       <div class="col-sm-9">
         <div class="page-actions d-flex justify-content-end">
           <button class="btn btn-labeled btn-import mr-2">
-                        <span class="btn-label">
-                            <img src="/assets/img/import.svg" width="24">
-                        </span>
+            <span class="btn-label">
+              <img src="/assets/img/import.svg" width="24">
+            </span>
             <span class="button-label">
-                            {{'general.button.import' | translate}}
-                        </span></button>
+              {{'general.button.import' | translate}}
+            </span></button>
           <button class="btn btn-labeled btn-export mr-2">
             <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
             <span class="button-label">
-                            {{'general.button.export' | translate}}
-                        </span></button>
+              {{'general.button.export' | translate}}
+            </span></button>
           <button class="btn btn-labeled btn-delete">
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span></button>
+              {{'general.button.delete' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -349,7 +508,7 @@
             <tr>
               <th data-qe-id="table-thead-batches-check-box" pResizableColumn width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox"/>
+                  <input type="checkbox" />
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>
@@ -388,13 +547,13 @@
           <button class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
-                            {{'general.button.save' | translate}}
-                        </span></button>
+              {{'general.button.save' | translate}}
+            </span></button>
           <button (click)="displayBatches = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
-                            {{'general.button.cancel' | translate}}
-                        </span></button>
+              {{'general.button.cancel' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -402,7 +561,7 @@
 </p-dialog>
 
 <p-dialog [(visible)]="displaySerial" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
-          [style]="{width: '90%'}" appendTo="body">
+  [style]="{width: '90%'}" appendTo="body">
   <p-header>
     <div class="row">
       <div class="col-sm-3">
@@ -411,22 +570,22 @@
       <div class="col-sm-9">
         <div class="page-actions d-flex justify-content-end">
           <button class="btn btn-labeled btn-import mr-2">
-                        <span class="btn-label">
-                            <img src="/assets/img/import.svg" width="24">
-                        </span>
+            <span class="btn-label">
+              <img src="/assets/img/import.svg" width="24">
+            </span>
             <span class="button-label">
-                            {{'general.button.import' | translate}}
-                        </span></button>
+              {{'general.button.import' | translate}}
+            </span></button>
           <button class="btn btn-labeled btn-export mr-2">
             <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
             <span class="button-label">
-                            {{'general.button.export' | translate}}
-                        </span></button>
+              {{'general.button.export' | translate}}
+            </span></button>
           <button class="btn btn-labeled btn-delete">
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span></button>
+              {{'general.button.delete' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -456,7 +615,7 @@
             <tr>
               <th data-qe-id="table-thead-qrCode-check-box" pResizableColumn width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox"/>
+                  <input type="checkbox" />
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>
@@ -497,13 +656,13 @@
           <button class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
-                            {{'general.button.save' | translate}}
-                        </span></button>
+              {{'general.button.save' | translate}}
+            </span></button>
           <button (click)="displaySerial = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
-                            {{'general.button.cancel' | translate}}
-                        </span></button>
+              {{'general.button.cancel' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -512,7 +671,7 @@
 
 
 <p-dialog [(visible)]="displayAmount" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
-          [style]="{width: '80%'}" appendTo="body">
+  [style]="{width: '80%'}" appendTo="body">
   <p-header>
     <div class="row">
       <div class="col-sm-3">
@@ -521,22 +680,22 @@
       <div class="col-sm-9">
         <div class="page-actions d-flex justify-content-end">
           <button class="btn btn-labeled btn-import mr-2">
-                        <span class="btn-label">
-                            <img src="/assets/img/import.svg" width="24">
-                        </span>
+            <span class="btn-label">
+              <img src="/assets/img/import.svg" width="24">
+            </span>
             <span class="button-label">
-                            {{'general.button.import' | translate}}
-                        </span></button>
+              {{'general.button.import' | translate}}
+            </span></button>
           <button class="btn btn-labeled btn-export mr-2">
             <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
             <span class="button-label">
-                            {{'general.button.export' | translate}}
-                        </span></button>
+              {{'general.button.export' | translate}}
+            </span></button>
           <button class="btn btn-labeled btn-delete">
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span></button>
+              {{'general.button.delete' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -557,7 +716,7 @@
             <tr>
               <th data-qe-id="table-thead-qrCode-check-box" pResizableColumn width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox"/>
+                  <input type="checkbox" />
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>
@@ -592,13 +751,13 @@
           <button class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
-                            {{'general.button.save' | translate}}
-                        </span></button>
+              {{'general.button.save' | translate}}
+            </span></button>
           <button (click)="displayAmount = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
-                            {{'general.button.cancel' | translate}}
-                        </span></button>
+              {{'general.button.cancel' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -606,7 +765,7 @@
 </p-dialog>
 
 <p-dialog [(visible)]="displayGoodsReceipt" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
-          [style]="{width: '80%'}" appendTo="body">
+  [style]="{width: '80%'}" appendTo="body">
   <p-header>
     <span class="dialog-header">{{'goodsReceiptDetail.goodsReceipt.supplierName' | translate}}</span>
   </p-header>
@@ -618,7 +777,7 @@
             <tr>
               <th data-qe-id="table-thead-goodsReceipt-check-box" pResizableColumn width="2.5%">
                 <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox"/>
+                  <input type="checkbox" />
                   <div class="state">
                     <i class="icon material-icons">done</i>
                     <label></label>
@@ -646,13 +805,13 @@
           <button class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
-                            {{'goodsReceiptDetail.button.add' | translate}}
-                        </span></button>
+              {{'goodsReceiptDetail.button.add' | translate}}
+            </span></button>
           <button (click)="displayGoodsReceipt = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
-                            {{'general.button.cancel' | translate}}
-                        </span></button>
+              {{'general.button.cancel' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
