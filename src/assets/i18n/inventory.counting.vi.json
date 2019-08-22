@@ -1,4 +1,9 @@
 {
+    "goodsReceiptDetail": {
+        "header": {
+            "title": "Phiếu nhập mua"
+        }
+    },
     "inventoryCounting": {
         "detail": {
             "batches": {
@@ -41,8 +46,8 @@
             },
             "inventoryCode": "Mã kho",
             "itemDetail": {
-                "itemCode": "",
-                "locationCode": ""
+                "itemCode": "Mã hàng",
+                "locationCode": "Địa chỉ kho"
             },
             "personInCharge": "Người chịu trách nhiệm",
             "qrCode": {
@@ -56,16 +61,16 @@
                 "title ": "Thông tin QR code sản phẩm"
             },
             "tab1": {
+                "batches": "Lô",
                 "highestDifference": "Số lượng chênh lệch cao nhất",
                 "inventoryCode": "Mã kho",
                 "itemName": "Tên hàng",
                 "itemNo": "Mã hàng",
                 "no": "STT",
                 "quantityOfInventory": "Số lượng tồn kho",
+                "serial": "Serial",
                 "title": "Chi tiết hàng hóa",
-                "unitOfMeasure": "Đơn vị tính",
-                "batches": "Lô",
-                "serial": "Serial"
+                "unitOfMeasure": "Đơn vị tính"
             },
             "tab2": {
                 "title": "Đính kèm"

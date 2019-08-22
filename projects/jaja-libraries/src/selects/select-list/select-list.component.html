@@ -25,7 +25,7 @@
     </li>
 
     <ng-template #notLoading>
-      <li role="menuitem" class="empty" *ngIf="list.length === 0">
+      <li role="menuitem" class="empty" *ngIf="!list?.length">
         <nz-empty nzNotFoundContent="{{'jaja.selects.empty' | translate}}"></nz-empty>
       </li>
 

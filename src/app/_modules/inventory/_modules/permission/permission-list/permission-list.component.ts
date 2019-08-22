@@ -52,7 +52,6 @@ export class PermissionListComponent implements OnInit, OnDestroy {
     private permissionRepository: PermissionListRepository,
   ) {
     const routeSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      debugger
       if (params.inventoryOrganizationId) {
         this.permissionRepository.getInventoryOrganization(params.inventoryOrganizationId)
           .subscribe((inventoryOrganization: InventoryOrganizationEntity) => {

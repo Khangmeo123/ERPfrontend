@@ -100,7 +100,6 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
     if (this.toggler) {
       const {nativeElement: toggler} = this.toggler;
       this.width = window.getComputedStyle(toggler).width;
-      console.log(this.width);
     }
   };
 
