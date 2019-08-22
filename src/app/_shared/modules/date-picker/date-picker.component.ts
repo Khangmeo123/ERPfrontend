@@ -84,6 +84,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
       if (changes.control.currentValue) {
         if (changes.control.currentValue.value) {
           this.date = new Date(changes.control.currentValue.value);
+        } else {
+          this.date = null;
         }
       }
     }
@@ -106,15 +108,15 @@ export class DatePickerComponent implements OnInit, OnChanges {
       this.checkCtrl = false;
       return;
     }
-    const {value} = event.target;
+    const { value } = event.target;
     if (value === '' || value === null) {
       this.date = null;
     }
   }
 
   onKeyDown(event) {
-    const {target, key} = event;
-    const {value} = target;
+    const { target, key } = event;
+    const { value } = target;
     if (key === 'Control') {
       this.checkCtrl = true;
     }

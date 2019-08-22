@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import {
   BinLocationOfInventoryCountingEntity,
 } from './../../../../_backend/inventory-counting/inventory-counting.entity';
@@ -65,7 +66,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     private confirmationService: ConfirmationService,
     private router: Router,
     private inventoryCountingService: InventoryCountingDetailService,
-    private inventoryCountingRepository: InventoryCountingDetailRepository,
+    public inventoryCountingRepository: InventoryCountingDetailRepository,
     private toastrService: ToastrService,
     private generalService: GeneralService,
     private route: ActivatedRoute) {
@@ -78,6 +79,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
         this.inventoryCountingService.getDetail(params.id).then(res => {
           if (res) {
             this.inventoryOrganizationId = res.inventoryOrganizationId;
+            this.employeeListIds = res.inventoryCounters.map(item => item.id);
             this.existedIds = res.inventoryCountingContents.map(item => item.itemDetailId);
             this.itemDetailSearchEntity = new ItemDetailOfCountingSearchEntity({
               inventoryOrganizationId: this.inventoryOrganizationId,
@@ -267,8 +269,8 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   // employeeDetail
   dropListEmployeeDetail() {
     this.employeeDetailSearchEntity = new EmployeeDetailOfCountingSearchEntity();
-    if (this.employeeList !== null && this.employeeList.length > 0) {
-      this.employeeDetailSearchEntity.ids = [...this.employeeList];
+    if (this.employeeListIds !== null && this.employeeListIds.length > 0) {
+      this.employeeDetailSearchEntity.ids = [...this.employeeListIds];
     }
     this.inventoryCountingService.dropListEmployeeDetail(this.employeeDetailSearchEntity);
   }

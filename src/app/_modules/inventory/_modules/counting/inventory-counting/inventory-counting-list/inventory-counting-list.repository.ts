@@ -68,10 +68,10 @@ export class InventoryCountingListRepository extends Repository {
             );
 
 
-    enumListStatus(): Observable<EnumEntity[]> {
-        return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-inventory-counting-status', JSON.stringify({}),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => r.body),
-            );
-    }
+    enumListStatus = (): Observable<EnumEntity[]> => this.http.post<EnumEntity[]>(
+        this.apiUrl + '/enum-inventory-counting-status', JSON.stringify({}),
+        { observe: 'response', headers: this.getHeader() }).pipe(
+            map(r => r.body),
+        );
+
 }
