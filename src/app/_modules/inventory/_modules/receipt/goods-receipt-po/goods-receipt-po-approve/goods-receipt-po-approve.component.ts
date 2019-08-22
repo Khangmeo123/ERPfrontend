@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { FormGroup } from '@angular/forms';
+import { FormControl, FormGroup } from '@angular/forms';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -10,7 +10,6 @@ import {
   PurchaseOrderSearchEntity,
   UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { UploadFile } from 'ng-zorro-antd';
 import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
 import { ValueAddedTaxSearchEntity } from '../../../../../master-data/_backend/value-added-tax/value-added-tax.search-entity';
 
@@ -24,8 +23,6 @@ import { ValueAddedTaxSearchEntity } from '../../../../../master-data/_backend/v
 export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
 
   pageTitle = translate('goodsReceiptPODetail.header.title');
-
-  fileList: UploadFile[] = [];
 
   displayBatches: boolean = false;
 
@@ -88,6 +85,10 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
       .add(goodsReceiptFormSub);
   }
 
+  get fileAttachments() {
+    return this.goodsReceiptPOForm.get('fileAttachments') as FormControl;
+  }
+
   ngOnInit() {
   }
 
@@ -97,12 +98,6 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
 
   // general:
   trackByFn = (index) => index;
-
-  readURL(event: any) {
-    for (const item of event.srcElement.files) {
-      this.fileList.push(item.name);
-    }
-  }
 
   backToList() {
     return this.router.navigate(

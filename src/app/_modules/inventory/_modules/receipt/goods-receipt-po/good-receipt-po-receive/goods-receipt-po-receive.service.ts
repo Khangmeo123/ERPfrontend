@@ -1,16 +1,16 @@
-import {GoodsReceiptPOContent} from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import {FormArray, FormBuilder, FormControl, FormGroup} from '@angular/forms';
-import {BehaviorSubject} from 'rxjs';
-import {Injectable} from '@angular/core';
-import {ToastrService} from 'ngx-toastr';
-import {GoodsReceiptPOForm} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
-import {GoodsReceiptPOReceiveRepository} from './goods-receipt-po-receive.repository';
+import { GoodsReceiptPOContent } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
+import { GoodsReceiptPOReceiveRepository } from './goods-receipt-po-receive.repository';
 import {
   BatchBinLocationEntity,
   BinLocationEntity,
   QuantityEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import {GeneralService} from 'src/app/_services/general-service.service';
+import { GeneralService } from 'src/app/_services/general-service.service';
 
 @Injectable()
 export class GoodsReceiptPOReceiveService {

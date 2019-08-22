@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GoodsReceiptPoDetailService } from './goods-receipt-po-detail.service';
 import {
@@ -30,8 +30,11 @@ import { UploadFile } from 'ng-zorro-antd';
     GoodsReceiptPoDetailService,
     GeneralService,
   ],
+  encapsulation: ViewEncapsulation.None,
 })
 export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
+
+  attachmentModal: boolean = false;
 
   goodsReceiptPOForm: FormGroup;
 
@@ -136,7 +139,8 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   }
 
   get allSelected() {
-    return this.purchaseOrdersList.length === this.purchaseOrdersList.filter((item) => item.isSelected).length;
+    return this.purchaseOrdersList.length > 0
+      && this.purchaseOrdersList.length === this.purchaseOrdersList.filter((item) => item.isSelected).length;
   }
 
   get inventoryOrganizationCode() {
@@ -241,7 +245,6 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     return index;
   }
 
-  // goodsReceiptPO content:
   addDeletedList(indexNumber: number) {
     if (this.deletedList.length > 0 && this.deletedList.includes(indexNumber)) {
       this.deletedList.splice(this.deletedList.indexOf(indexNumber), 1);
@@ -291,19 +294,26 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     });
   }
 
-  onSelectBuyer(event) {
+  onSelectBuyer = (event) => {
     this.goodsReceiptPOForm.patchValue({
       buyerId: event.id,
       buyerName: event.name,
     });
-  }
+  };
 
   onUpload = () => {
-    return this.goodsReceiptPoDetailService.uploadFiles(this.fileList);
+    return this.goodsReceiptPoDetailService.uploadFiles(this.fileList)
+      .then(() => {
+        this.fileList = [];
+      });
   };
 
   beforeUpload = (file: UploadFile) => {
     this.fileList = this.fileList.concat(file);
     return false;
+  };
+
+  toggleAttachmentModal = () => {
+    this.attachmentModal = !this.attachmentModal;
   };
 }

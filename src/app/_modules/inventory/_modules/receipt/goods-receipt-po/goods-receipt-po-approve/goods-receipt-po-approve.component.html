@@ -241,22 +241,22 @@
                     <th class="th-filter">
                       <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getDocumentNumberList"
                                         [searchEntity]="documentNumberSearchEntity"
+                                        [searchable]="true"
+                                        appendTo="body"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
                                         searchField="code"
                                         searchType="startsWith"
-                                        [searchable]="true"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
-                                        appendTo="body"
                       ></jaja-select-list>
                     </th>
                     <th class="th-filter">
                       <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getItemDetailList"
-                                        [searchEntity]="itemDetailSearchEntity"
-                                        searchField="code"
-                                        searchType="startsWith"
-                                        appendTo="body"
                                         [renewOnOpen]="true"
+                                        [searchEntity]="itemDetailSearchEntity"
+                                        [searchable]="true"
+                                        appendTo="body"
                                         placeholder="{{'goodsReceiptPODetail.tab1.itemCode' | translate}}"
-                                        [searchable]="true">
+                                        searchField="code"
+                                        searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
                           {{name}} ({{code}})
                         </ng-template>
@@ -268,15 +268,15 @@
                              type="text"/>
                     </th>
                     <th class="th-filter">
-                      <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getUnitOfMeasureList"
-                                        [searchEntity]="unitOfMeasureSearchEntity"
-                                        searchField="code"
-                                        searchType="startsWith"
-                                        appendTo="body"
-                                        (change)="tableGoodsReceiptPOContents.filter($event.target.value, 'unitPrice', 'startsWith')"
+                      <jaja-select-list (change)="tableGoodsReceiptPOContents.filter($event.target.value, 'unitPrice', 'startsWith')"
+                                        [getList]="goodsReceiptPOApproveRepository.getUnitOfMeasureList"
                                         [renewOnOpen]="true"
+                                        [searchEntity]="unitOfMeasureSearchEntity"
+                                        [searchable]="true"
+                                        appendTo="body"
                                         placeholder="{{'goodsReceiptPODetail.tab1.unitPrice' | translate}}"
-                                        [searchable]="true">
+                                        searchField="code"
+                                        searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
                           {{name}} ({{code}})
                         </ng-template>
@@ -294,13 +294,13 @@
                     </th>
                     <th class="th-filter">
                       <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getTaxList"
-                                        [searchEntity]="valueAddedTaxSearchEntity"
-                                        searchField="code"
-                                        searchType="startsWith"
-                                        appendTo="body"
                                         [renewOnOpen]="true"
+                                        [searchEntity]="valueAddedTaxSearchEntity"
+                                        [searchable]="true"
+                                        appendTo="body"
                                         placeholder="{{'goodsReceiptPODetail.tab1.valueAddedTax' | translate}}"
-                                        [searchable]="true">
+                                        searchField="code"
+                                        searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
                           {{name}} ({{code}})
                         </ng-template>
@@ -359,11 +359,11 @@
           <mat-tab label="{{'goodsReceiptPODetail.tab2.title' | translate}}">
             <div class="tab-upload">
               <nz-upload
-                nzType="drag"
-                [nzMultiple]="true"
-                [nzLimit]="0"
                 [nzDisabled]="true"
-                [(nzFileList)]="fileList">
+                [nzFileList]="fileAttachments.value"
+                [nzLimit]="0"
+                [nzMultiple]="true"
+                nzType="drag">
                 <p class="ant-upload-drag-icon">
                   <i nz-icon nzType="upload"></i>
                 </p>

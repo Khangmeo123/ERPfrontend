@@ -4,12 +4,12 @@ import {
   GoodsReceiptPOContent,
   SerialNumberEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import {environment} from 'src/environments/environment';
-import {Repository} from 'src/app/_repositories/repository';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import { environment } from 'src/environments/environment';
+import { Repository } from 'src/app/_repositories/repository';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import {
   GoodsReceiptPOEntity,
   ItemDetailEntity,
@@ -19,10 +19,9 @@ import {
 import {
   BinLocationSearchEntity,
   ItemDetailSearchEntity,
-  UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
+  UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import {Entities} from 'src/app/_helpers/entity';
 
 @Injectable({
   providedIn: 'root',
@@ -202,10 +201,10 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
       },
     )
       .pipe(
-      map(
-        (response: HttpResponse<GoodsReceiptPOContent>) => new GoodsReceiptPOContent(response.body),
-      ),
-    );
+        map(
+          (response: HttpResponse<GoodsReceiptPOContent>) => new GoodsReceiptPOContent(response.body),
+        ),
+      );
   };
 
   analyzeBatchCode = (itemDetailId: string, qrCode: string) => {
@@ -216,8 +215,8 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-        map(r => {
-          return new BatchEntity(r.body);
+      map(r => {
+        return new BatchEntity(r.body);
       }),
     );
   };

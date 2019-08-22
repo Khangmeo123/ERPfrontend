@@ -104,7 +104,7 @@
               {{ 'goodsReceiptPO.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn class="actions"> {{'general.action' | translate }} </th>
+            <th class="actions" pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
             <th class="th-filter"></th>
@@ -121,14 +121,14 @@
             <th class="th-filter">
               <jaja-select-list
                 (change)="onFilterInventoryOrganization($event)"
+                [display]="goodsReceiptPOSearchEntity.inventoryOrganizationCode"
                 [getList]="goodsReceiptPOListRepository.singleListInventoryOrganization"
                 [searchEntity]="inventoryOrganizationSearchEntity"
                 [searchable]="true"
-                [display]="goodsReceiptPOSearchEntity.inventoryOrganizationCode"
+                appendTo="body"
                 placeholder="{{'goodsReceiptPOList.filters.inventoryOrganizationCode' | translate}}"
                 searchField="code"
                 searchType="startsWith"
-                appendTo="body"
               >
                 <ng-template #label #option let-code="code" let-name="name">
                   {{code}} - {{name}}
@@ -149,14 +149,14 @@
             <th class="th-filter">
               <jaja-select-list
                 (change)="onFilterRequester($event)"
+                [display]="goodsReceiptPOSearchEntity?.requesterName"
                 [getList]="goodsReceiptPOListRepository.singleListRequester"
                 [searchEntity]="requesterSearchEntity"
                 [searchable]="true"
-                [display]="goodsReceiptPOSearchEntity?.requesterName"
+                appendTo="body"
                 placeholder="{{'goodsReceiptPOList.filters.requester' | translate}}"
                 searchField="name"
                 searchType="startsWith"
-                appendTo="body"
               >
                 <ng-template #label #option let-name="name">
                   {{name}}
@@ -166,8 +166,8 @@
             <th class="th-filter">
               <jaja-select-list
                 (change)="onFilterStatus($event)"
-                [getList]="goodsReceiptPOListRepository.enumListStatus"
                 [display]="goodsReceiptPOSearchEntity?.statusDisplay"
+                [getList]="goodsReceiptPOListRepository.enumListStatus"
                 appendTo="body"
                 placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">

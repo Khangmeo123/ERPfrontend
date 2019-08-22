@@ -6,6 +6,10 @@ jaja-select-list.disabled {
   pointer-events: none;
 
   * {
-    background: #cccccc!important;
+    background: #cccccc !important;
   }
+}
+
+.uploaded-file {
+  border-bottom: 1px solid $border-color;
 }
