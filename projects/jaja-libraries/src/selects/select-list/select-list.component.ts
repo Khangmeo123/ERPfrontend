@@ -1,9 +1,11 @@
 import {
+  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -11,6 +13,7 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { ISelect } from '../ISelect';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -30,7 +33,7 @@ import { ISearchEntity } from '../../entities/ISearchEntity';
     },
   ],
 })
-export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor {
+export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor, AfterViewInit {
 
   @Input() appendTo: string = null;
 
@@ -59,9 +62,15 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   @Input() list: any[] = [];
 
-  @ContentChild('label', { static: false }) label: TemplateRef<ElementRef>;
+  @ContentChild('label', {static: false}) label: TemplateRef<ElementRef>;
 
-  @ContentChild('option', { static: false }) option: TemplateRef<ElementRef>;
+  @ContentChild('option', {static: false}) option: TemplateRef<ElementRef>;
+
+  @ViewChild('toggler', {static: false}) toggler: ElementRef;
+
+  @ViewChild('dropdown', {static: false}) dropdown: ElementRef;
+
+  public width: any = '200px';
 
   public searchSubject: Subject<string> = new Subject<string>();
 
@@ -84,6 +93,19 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   set value(value) {
     this.selectedItem = this.list.find((item) => this.getValue(item) === value);
+  }
+
+  @HostListener('window:resize', [])
+  onWindowResize = () => {
+    if (this.toggler) {
+      const {nativeElement: toggler} = this.toggler;
+      this.width = window.getComputedStyle(toggler).width;
+      console.log(this.width);
+    }
+  };
+
+  ngAfterViewInit(): void {
+    this.onWindowResize();
   }
 
   @Input()

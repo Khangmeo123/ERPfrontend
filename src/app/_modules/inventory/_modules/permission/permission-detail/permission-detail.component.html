@@ -40,7 +40,7 @@
                               searchField="code"
                               searchType="startsWith"
                               [display]="positionCode?.value"
-                              placeholder="{{'permissionDetail.positionCode' | translate}}"
+                              placeholder="{{'permission.positionCode' | translate}}"
                               (change)="onSelectPosition($event)"
                               class="flex-grow-1">
               <ng-template #label #option let-code="code" let-name="name">
@@ -64,10 +64,12 @@
                               [list]="documentStatus"
                               formControlName="currentStatusId"
                               key="id"
+                              [renewOnOpen]="false"
                               [display]="currentStatusDisplay?.value"
+                              placeholder="{{'permission.currentStatus' | translate}}"
                               class="flex-grow-1">
-              <ng-template #label #option let-code="code" let-name="name">
-                {{code}} - {{name}}
+              <ng-template #label #option let-display="display">
+                {{display}}
               </ng-template>
             </jaja-select-list>
             <app-error data-qe-id="dialog-error-current-status"
@@ -88,11 +90,12 @@
                               [list]="documentStatus"
                               formControlName="nextStatusId"
                               key="id"
+                              [renewOnOpen]="false"
                               [display]="nextStatusDisplay?.value"
                               placeholder="{{'permission.nextStatus' | translate}}"
                               class="flex-grow-1">
-              <ng-template #label #option let-code="code" let-name="name">
-                {{code}} - {{name}}
+              <ng-template #label #option let-display="display">
+                {{display}}
               </ng-template>
             </jaja-select-list>
             <app-error data-qe-id="dialog-error-next-status"
@@ -109,7 +112,8 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form">
-            <input type="text" pKeyFilter="pnum" class="form-control" id="current-step" formControlName="currentStep">
+            <input type="text" pKeyFilter="pnum" class="form-control" id="current-step" formControlName="currentStep"
+                   placeholder="{{'permission.currentStep' | translate}}">
             <app-error data-qe-id="dialog-error-current-step"
                        *ngIf="(currentStep?.errors && currentStep?.touched) || !!errors?.get('currentStep')?.value"
                        [formGroup]="permissionForm" [property]="'currentStep'" [placement]="'top'" class="error-form">
@@ -123,7 +127,8 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form">
-            <input type="text" pKeyFilter="pnum" class="form-control" id="next-step" formControlName="nextStep">
+            <input type="text" pKeyFilter="pnum" class="form-control" id="next-step" formControlName="nextStep"
+                   placeholder="{{'permission.nextStep' | translate}}">
             <app-error data-qe-id="dialog-error-next-step"
                        *ngIf="(nextStep?.errors && nextStep?.touched) || !!errors?.get('nextStep')?.value"
                        [formGroup]="permissionForm" [property]="'nextStep'" [placement]="'top'" class="error-form">

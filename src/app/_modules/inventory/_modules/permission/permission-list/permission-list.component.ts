@@ -7,7 +7,6 @@ import { InventoryOrganizationSearchEntity } from '../../../_backend/inventory-o
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PermissionEntity, PermissionSearchEntity } from '../permission.entities';
 import { PaginationModel } from '../../../../../_shared/modules/pagination/pagination.model';
-import { PositionSearchEntity } from '../../../_backend/position/position.search-entity';
 import { InventoryOrganizationEntity } from '../../../_backend/inventory-organization/inventory-organization.entity';
 import { EnumEntity } from '../../../../../_helpers/entity';
 import { PermissionListRepository } from './permission-list.repository';
@@ -22,6 +21,7 @@ import { PermissionListRepository } from './permission-list.repository';
   ],
 })
 export class PermissionListComponent implements OnInit, OnDestroy {
+
   pageTitle = translate('permission.header.title');
 
   /**
@@ -29,13 +29,9 @@ export class PermissionListComponent implements OnInit, OnDestroy {
    */
   inventoryOrganization: InventoryOrganizationEntity = null;
 
-  inventoryOrganizationId: string = null;
-
   inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
 
   inventoryDocumentType: EnumEntity = null;
-
-  inventoryDocumentTypeId: string = null;
 
   isBookMark: boolean = false;
 
@@ -55,12 +51,20 @@ export class PermissionListComponent implements OnInit, OnDestroy {
     private activatedRoute: ActivatedRoute,
     private permissionRepository: PermissionListRepository,
   ) {
-
-    const routeSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => {
-      this.inventoryOrganizationId = params.inventoryOrganizationId;
-      this.inventoryDocumentTypeId = params.inventoryDocumentTypeId;
-      if (this.inventoryDocumentTypeId) {
-        this.getDocumentStatus(this.inventoryDocumentTypeId);
+    const routeSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
+      debugger
+      if (params.inventoryOrganizationId) {
+        this.permissionRepository.getInventoryOrganization(params.inventoryOrganizationId)
+          .subscribe((inventoryOrganization: InventoryOrganizationEntity) => {
+            this.inventoryOrganization = inventoryOrganization;
+          });
+      }
+      if (params.inventoryDocumentTypeId) {
+        this.getDocumentStatus(params.inventoryDocumentTypeId);
+        this.permissionRepository.getInventoryDocumentType(params.inventoryDocumentTypeId)
+          .subscribe((inventoryDocumentType: EnumEntity) => {
+            this.inventoryDocumentType = inventoryDocumentType;
+          });
       }
     });
 
@@ -82,7 +86,25 @@ export class PermissionListComponent implements OnInit, OnDestroy {
     return this.inventoryOrganizationId && this.inventoryDocumentTypeId;
   }
 
+  get inventoryOrganizationId() {
+    if (this.inventoryOrganization) {
+      return this.inventoryOrganization.id;
+    }
+    return null;
+  }
+
+  get inventoryDocumentTypeId() {
+    if (this.inventoryDocumentType) {
+      return this.inventoryDocumentType.id;
+    }
+    return null;
+  }
+
   async ngOnInit() {
+    const {queryParams} = this.activatedRoute.snapshot;
+    if (queryParams.inventoryOrganizationId) {
+
+    }
   }
 
   ngOnDestroy(): void {
@@ -186,12 +208,10 @@ export class PermissionListComponent implements OnInit, OnDestroy {
 
   onSelectInventoryOrganization(event) {
     if (event) {
-      this.inventoryOrganizationId = event.id;
       this.inventoryOrganization = event;
       this.permissionSearchEntity.inventoryOrganizationId = event.id;
       return this.getList();
     } else {
-      this.inventoryOrganizationId = null;
       this.inventoryOrganization = null;
       this.permissionSearchEntity.inventoryOrganizationId = null;
       return this.getList();
@@ -200,13 +220,11 @@ export class PermissionListComponent implements OnInit, OnDestroy {
 
   onSelectInventoryDocumentType(event) {
     if (event) {
-      this.inventoryDocumentTypeId = event.id;
       this.inventoryDocumentType = event;
       this.permissionSearchEntity.inventoryDocumentTypeId = event.id;
       this.getDocumentStatus(event.id);
       return this.getList();
     } else {
-      this.inventoryDocumentTypeId = null;
       this.inventoryDocumentType = null;
       this.permissionSearchEntity.inventoryDocumentTypeId = null;
       this.getDocumentStatus(null);

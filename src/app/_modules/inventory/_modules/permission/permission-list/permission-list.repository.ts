@@ -103,4 +103,36 @@ export class PermissionListRepository extends Repository {
         ),
       );
   };
+
+  getInventoryOrganization = (id: string): Observable<InventoryOrganizationEntity> => {
+    return this.http.post<InventoryOrganizationEntity>(
+      this.getUrl('get-inventory-organization'),
+      {id},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<InventoryOrganizationEntity>) => response.body,
+        ),
+      );
+  };
+
+  getInventoryDocumentType = (id: string): Observable<EnumEntity> => {
+    return this.http.post<EnumEntity>(
+      this.getUrl('get-inventory-document-type'),
+      {id},
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<EnumEntity>) => response.body,
+        ),
+      );
+  };
 }

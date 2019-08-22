@@ -147,10 +147,7 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
     return this.router.navigate(
       ['/inventory/permission/permission-list'],
       {
-        queryParams: {
-          inventoryOrganizationId: this.inventoryOrganizationId,
-          inventoryDocumentTypeId: this.inventoryDocumentTypeId,
-        },
+        queryParams: this.activatedRoute.snapshot.queryParams,
       },
     );
   }
@@ -165,6 +162,9 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
         .then(() => {
           return this.router.navigate(
             ['/inventory/permission/permission-list'],
+            {
+              queryParams: this.activatedRoute.snapshot.queryParams,
+            },
           );
         });
     }

@@ -41,6 +41,7 @@
                             [searchEntity]="inventoryOrganizationSearchEntity"
                             searchField="code"
                             searchType="startsWith"
+                            [searchable]="true"
                             (change)="onSelectInventoryOrganization($event)"
                             placeholder="{{'permission.inventoryCode' | translate}}">
             <ng-template #label #option let-code="code">
@@ -131,7 +132,7 @@
             </th>
             <th class="th-filter">
               <jaja-select-list [list]="documentStatus"
-                                [display]="permissionSearchEntity?.nextStatusDisplay"
+                                [display]="permissionSearchEntity?.currentStatusDisplay"
                                 [renewOnOpen]="false"
                                 appendTo="body"
                                 [value]="permissionSearchEntity?.currentStatusId"

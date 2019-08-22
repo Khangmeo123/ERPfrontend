@@ -1,10 +1,10 @@
-import {Entity} from '../../../../_helpers/entity';
-import {FormModel} from '../../../../_helpers/form-model';
-import {FormControl} from '@angular/forms';
-import {requiredField} from '../../../../_helpers';
-import {SearchEntity} from '../../../../_helpers/search-entity';
-import {TextFilter} from '../../../../_shared/models/filters/TextFilter';
-import {NumberFilter} from '../../../../_shared/models/filters/NumberFilter';
+import { Entity } from '../../../../_helpers/entity';
+import { FormModel } from '../../../../_helpers/form-model';
+import { FormControl } from '@angular/forms';
+import { requiredField } from '../../../../_helpers';
+import { SearchEntity } from '../../../../_helpers/search-entity';
+import { TextFilter } from '../../../../_shared/models/filters/TextFilter';
+import { NumberFilter } from '../../../../_shared/models/filters/NumberFilter';
 
 export class PermissionEntity extends Entity {
   id: string;
@@ -31,13 +31,11 @@ export class PermissionEntity extends Entity {
 }
 
 export class PermissionForm extends FormModel {
-  legalEntityId: FormControl = new FormControl(null, [
-    requiredField,
-  ]);
-
   inventoryOrganizationId: FormControl = new FormControl(null, [
     requiredField,
   ]);
+
+  inventoryOrganizationCode: FormControl = new FormControl(null);
 
   inventoryDocumentTypeId: FormControl = new FormControl(null, [
     requiredField,
