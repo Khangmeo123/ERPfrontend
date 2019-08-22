@@ -1,6 +1,6 @@
 import {RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {PermissionComponent} from './permission/permission.component';
+import {PermissionListComponent} from './permission-list/permission-list.component';
 import {PermissionDetailComponent} from './permission-detail/permission-detail.component';
 
 const routes: Routes = [
@@ -9,7 +9,7 @@ const routes: Routes = [
     children: [
       {
         path: 'permission-list',
-        component: PermissionComponent,
+        component: PermissionListComponent,
       },
       {
         path: 'permission-detail',

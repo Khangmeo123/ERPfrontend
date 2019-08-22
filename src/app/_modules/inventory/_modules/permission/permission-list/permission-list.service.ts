@@ -1,19 +1,23 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, forkJoin } from 'rxjs';
 import { PermissionEntity, PermissionSearchEntity } from '../permission.entities';
-import { PermissionRepository } from './permission.repository';
+import { PermissionListRepository } from './permission-list.repository';
 import { ToastrService } from 'ngx-toastr';
+import { translate } from '../../../../../_helpers/string';
 
 @Injectable({
   providedIn: 'root',
 })
-export class PermissionService {
+export class PermissionListService {
 
   permissionList: BehaviorSubject<PermissionEntity[]> = new BehaviorSubject<PermissionEntity[]>([]);
 
   permissionCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
 
-  constructor(private permissionRepository: PermissionRepository, private toastrService: ToastrService) {
+  constructor(
+    private permissionRepository: PermissionListRepository,
+    private toastrService: ToastrService,
+  ) {
   }
 
   getList(permissionSearchEntity: PermissionSearchEntity): Promise<void> {
@@ -28,6 +32,7 @@ export class PermissionService {
             this.permissionCount.next(count);
           },
           (error: Error) => {
+            this.toastrService.error(translate('permission.getList.error'));
             reject(error);
           },
         );

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { translate } from '../../../../../_helpers/string';
-import { PermissionService } from './permission.service';
+import { PermissionListService } from './permission-list.service';
 import { GeneralService } from '../../../../../_services/general-service.service';
 import { Subscription } from 'rxjs';
 import { InventoryOrganizationSearchEntity } from '../../../_backend/inventory-organization/inventory-organization.search-entity';
@@ -10,18 +10,18 @@ import { PaginationModel } from '../../../../../_shared/modules/pagination/pagin
 import { PositionSearchEntity } from '../../../_backend/position/position.search-entity';
 import { InventoryOrganizationEntity } from '../../../_backend/inventory-organization/inventory-organization.entity';
 import { EnumEntity } from '../../../../../_helpers/entity';
-import { PermissionRepository } from './permission.repository';
+import { PermissionListRepository } from './permission-list.repository';
 
 @Component({
   selector: 'app-permission',
-  templateUrl: './permission.component.html',
-  styleUrls: ['./permission.component.scss'],
+  templateUrl: './permission-list.component.html',
+  styleUrls: ['./permission-list.component.scss'],
   providers: [
-    PermissionService,
+    PermissionListService,
     GeneralService,
   ],
 })
-export class PermissionComponent implements OnInit, OnDestroy {
+export class PermissionListComponent implements OnInit, OnDestroy {
   pageTitle = translate('permission.header.title');
 
   /**
@@ -50,10 +50,10 @@ export class PermissionComponent implements OnInit, OnDestroy {
   documentStatus: EnumEntity[] = [];
 
   constructor(
-    private permissionService: PermissionService,
+    private permissionService: PermissionListService,
     private router: Router,
     private activatedRoute: ActivatedRoute,
-    private permissionRepository: PermissionRepository,
+    private permissionRepository: PermissionListRepository,
   ) {
 
     const routeSubscription: Subscription = this.activatedRoute.params.subscribe((params: Params) => {

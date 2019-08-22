@@ -12,16 +12,15 @@ import { PermissionEntity, PermissionSearchEntity } from '../permission.entities
 @Injectable({
   providedIn: 'root',
 })
-export class PermissionRepository extends Repository {
+export class PermissionListRepository extends Repository {
+
   apiUrl = `${environment.apiUrlInv}inventory/permission/permission-list`;
 
   constructor(http: HttpClient) {
     super(http);
   }
 
-  getUrl(url: string) {
-    return `${this.apiUrl}/${url}`;
-  }
+  getUrl = (url: string) => `${this.apiUrl}/${url}`;
 
   getList = (permissionSearchEntity: PermissionSearchEntity): Observable<PermissionEntity[]> => {
     return this.http.post<PermissionEntity[]>(
