@@ -52,3 +52,8 @@ export class UserEntity extends Entity {
     super(userEntity);
   }
 }
+
+export class ColumnEntity {
+    field: string;
+    header: string;
+}

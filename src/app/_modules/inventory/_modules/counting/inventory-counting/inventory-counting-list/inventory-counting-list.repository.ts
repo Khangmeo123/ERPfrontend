@@ -2,8 +2,16 @@ import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_repositories/repository';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { InventoryCountingSearchEntity, InventoryOrganizationOfCountingSearchEntity, EmployeeDetailOfCountingSearchEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
-import { InventoryCountingEntity, InventoryOrganizationOfCountingEntity, EmployeeDetailOfCountingEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
+import {
+    InventoryCountingSearchEntity,
+    InventoryOrganizationOfCountingSearchEntity,
+    EmployeeDetailOfCountingSearchEntity,
+} from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
+import {
+    InventoryCountingEntity,
+    InventoryOrganizationOfCountingEntity,
+    EmployeeDetailOfCountingEntity,
+} from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Entities, EnumEntity } from 'src/app/_helpers/entity';
@@ -37,37 +45,28 @@ export class InventoryCountingListRepository extends Repository {
             );
     }
 
-    dropListInventoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-inventory-organizaion',
-            JSON.stringify(inventoryOrganizationOfCountingSearchEntity),
+    selectListInventoryOrganization = (inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity)
+        : Observable<InventoryOrganizationOfCountingEntity[]> => this.http.post<InventoryOrganizationOfCountingEntity[]>(
+            this.apiUrl + '/single-list-inventory-organizaion', JSON.stringify(inventoryOrganizationOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    r.body.ids = r.body.ids.map(item => {
+                    return r.body.map(item => {
                         return new InventoryOrganizationOfCountingEntity(item);
                     });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new InventoryOrganizationOfCountingEntity(item);
-                    });
-                    return r.body;
                 }),
             );
-    }
 
-    dropListEmployeeDetail(employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-employee-detail',
-            JSON.stringify(employeeDetailOfCountingSearchEntity),
+    selectListEmployeeDetail = (employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity)
+        : Observable<EmployeeDetailOfCountingEntity[]> => this.http.post<EmployeeDetailOfCountingEntity[]>(
+            this.apiUrl + '/single-list-employee-detail', JSON.stringify(employeeDetailOfCountingSearchEntity),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
-                    r.body.ids = r.body.ids.map(item => {
+                    return r.body.map(item => {
                         return new EmployeeDetailOfCountingEntity(item);
                     });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new EmployeeDetailOfCountingEntity(item);
-                    });
-                    return r.body;
                 }),
             );
-    }
+
 
     enumListStatus(): Observable<EnumEntity[]> {
         return this.http.post<EnumEntity[]>(this.apiUrl + '/enum-inventory-counting-status', JSON.stringify({}),

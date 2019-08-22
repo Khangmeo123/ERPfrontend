@@ -9,19 +9,19 @@
       </span>
     </span>
     <div class="page-actions d-flex">
-      <button type="button" class="btn btn-labeled btn-add" (click) = "addInventoryCounting()" data-qe-id="button-add">
+      <button type="button" class="btn btn-labeled btn-add" (click)="addInventoryCounting()" data-qe-id="button-add">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
         </span></button>
-        <button class="btn btn-labeled btn-clear" data-qe-id="button-clear" (click)="clearSearch(table)">
-            <span class="btn-label">
-              <img src="/assets/img/filter.svg" width="16">
-            </span>
-            <span class="button-label">
-              {{'general.button.clear' | translate}}
-            </span>
-          </button>
+      <button class="btn btn-labeled btn-clear" data-qe-id="button-clear" (click)="clearSearch(table)">
+        <span class="btn-label">
+          <img src="/assets/img/filter.svg" width="16">
+        </span>
+        <span class="button-label">
+          {{'general.button.clear' | translate}}
+        </span>
+      </button>
     </div>
 
   </div>
@@ -31,7 +31,8 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1 " matInput [matDatepicker]="picker"
-            placeholder="dd/mm/yyyy" data-qe-id="input-date-from" [(ngModel)] = "inventoryCountingSearchEntity.postingDate.greaterEqual">
+            placeholder="dd/mm/yyyy" data-qe-id="input-date-from"
+            [(ngModel)]="inventoryCountingSearchEntity.postingDate.greaterEqual">
           <mat-datepicker #picker></mat-datepicker>
           <div role="button" (click)="openDatePicker(picker)">
             <mat-icon>calendar_today</mat-icon>
@@ -40,7 +41,8 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
-            placeholder="dd/mm/yyyy" data-qe-id="button-date-to" [(ngModel)] = "inventoryCountingSearchEntity.postingDate.lessEqual">
+            placeholder="dd/mm/yyyy" data-qe-id="button-date-to"
+            [(ngModel)]="inventoryCountingSearchEntity.postingDate.lessEqual">
           <mat-datepicker #datepicker></mat-datepicker>
           <div role="button" (click)="openToDatePicker(datepicker)">
             <mat-icon>calendar_today</mat-icon>
@@ -73,7 +75,8 @@
               {{ 'inventoryCounting.list.countDate' | translate}}
               <p-sortIcon [field]="'documentDate'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn data-qe-id="table-thead-inventory-code" [pSortableColumn]="'inventoryOrganizationName'">
+            <th pResizableColumn data-qe-id="table-thead-inventory-code"
+              [pSortableColumn]="'inventoryOrganizationName'">
               {{ 'inventoryCounting.list.inventoryCode' | translate}}
               <p-sortIcon [field]="'inventoryOrganizationName'" class="float-right"></p-sortIcon>
             </th>
@@ -89,91 +92,98 @@
               {{ 'inventoryCounting.list.status' | translate}}
               <p-sortIcon [field]="'statusName'" class="float-right"></p-sortIcon>
             </th>
-            <th pResizableColumn> {{'general.action' | translate }} </th>
+            <th width="8%"> {{'general.action' | translate }} </th>
           </tr>
           <tr>
             <th class="th-filter">
-                <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentNumber" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-documentNumber">
-                </app-advanced-filters>
+              <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentNumber" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-documentNumber">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentDate" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-documentDate">
-                </app-advanced-filters>
+              <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentDate" (changeFilter)="getList()"
+                data-qe-id="table-thead-filter-documentDate">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-single-select  [list]="inventoryOrganizationExceptIds" [selectedList]="inventoryOrganizationIds"
-                [key]="'code'" [initialValue]="inventoryCountingSearchEntity.inventoryOrganizationId"
-                (search)="typingSearchInvetoryOrganization($event, inventoryCountingSearchEntity.inventoryOrganizationId)"
-                (selectionChange)="inventoryCountingSearchEntity.inventoryOrganizationId = $event[0]; getList()"
-                (listOpen)="dropListInventoryOrganization(inventoryCountingSearchEntity.inventoryOrganizationId)">
-                </app-single-select>
+              <jaja-select-list class="flex-grow-1" [value]="inventoryCountingSearchEntity.inventoryOrganizationId"
+                [getList]="inventoryCountingListRepository.selectListInventoryOrganization" appendTo="body" key="id"
+                [searchEntity]="inventoryOrganizationSearch" searchField="code" searchType="startsWith"
+                [searchable]="true"
+                (change)="inventoryCountingSearchEntity.inventoryOrganizationId = $event; getList()">
+                <ng-template #label #option let-code="code">
+                  {{code}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-                <app-single-select [list]="inventoryCountingOwnerExceptIds" [selectedList]="inventoryCountingOwnerIds"
-                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerId"
-                (search)="typingSearchInventoryOwner($event, inventoryCountingSearchEntity.ownerId)"
-                (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
-                (listOpen)="dropListInventoryCoutingOwner(inventoryCountingSearchEntity.ownerId)">
-                </app-single-select>
+              <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
+                [searchEntity]="inventoryCountingOwnerSearch" searchField="name" searchType="startsWith"
+                [searchable]="true" (change)="inventoryCountingSearchEntity.inventoryCounterId = $event?.id; getList()">
+                <ng-template #label #option let-name="name">
+                  {{name}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-                <app-single-select [list]="inventoryCounterExceptIds" [selectedList]="inventoryCounterIds"
-                [key]="'name'" [initialValue]="inventoryCountingSearchEntity.ownerId"
-                (search)="typingSearchInventoryCounter($event, inventoryCountingSearchEntity.ownerId)"
-                (selectionChange)="inventoryCountingSearchEntity.ownerId = $event[0]; getList()"
-                (listOpen)="dropListInventoryCouter(inventoryCountingSearchEntity.ownerId)">
-                </app-single-select>
+              <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
+                [searchEntity]="inventoryCounterSearch" searchField="name" searchType="startsWith" [searchable]="true"
+                (change)="inventoryCountingSearchEntity.ownerId = $event?.id; getList()">
+                <ng-template #label #option let-name="name">
+                  {{name}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'display'" [list]="statusList"
+              <app-simple-select [key]="'display'" [list]="statusList" (clear)="clearSearch(table)"
                 (selectionChange)="inventoryCountingSearchEntity.statusId = $event; getList()"
-                (listOpen)="enumListStatus()"
-                [initialValue]="inventoryCountingSearchEntity.statusId">
-                </app-simple-select>
+                (listOpen)="enumListStatus()" [initialValue]="inventoryCountingSearchEntity.statusId">
+              </app-simple-select>
             </th>
-            <th></th>
+            <th class="th-filter" width="8%"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-inventoryCounting let-index="rowIndex">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
             <td> {{inventoryCounting.documentNumber}} </td>
-            <td> {{inventoryCounting.documentDate}} </td>
+            <td> {{inventoryCounting.documentDate | date: 'dd/MM/yyyy'}} </td>
             <td> {{inventoryCounting.inventoryOrganizationCode}} </td>
             <td>
-              <div  *ngIf="inventoryCounting.inventoryCounters && inventoryCounting.inventoryCounters.length >0">
-                  <div *ngFor="let item of inventoryCounting.inventoryCounters">
-                      {{item.name }}
-                  </div>
+              <div *ngIf="inventoryCounting.inventoryCounters && inventoryCounting.inventoryCounters.length >0">
+                <div *ngFor="let item of inventoryCounting.inventoryCounters">
+                  {{item.name }}
+                </div>
               </div>
-              
+
             </td>
             <td> {{inventoryCounting.ownerName }} </td>
-            <td>
+            <td class="text-center">
               <div [ngSwitch]="inventoryCounting.statusName">
-                <span class="ml-2 open-status" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</span>
-                <span class="ml-2 pending-counting-status" *ngSwitchCase="'COUNTING'">{{'general.pendingCounting'| translate}}</span>
-                <span class="ml-2 completed-status" *ngSwitchCase="'DONE'">{{'general.completed'| translate}}</span>
+                <a class="ml-2 open-status"
+                  routerLink="/inventory/counting/inventory-counting/inventory-counting-detail"
+                  [queryParams]="{id: inventoryCounting.id}" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</a>
+                <a class="ml-2 pending-counting-status"
+                  routerLink="/inventory/counting/inventory-counting/inventory-counting-pending"
+                  [queryParams]="{id: inventoryCounting.id}"
+                  *ngSwitchCase="'COUNTING'">{{'general.pending'| translate}}</a>
+                <a class="ml-2 completed-status"
+                  routerLink="/inventory/counting/inventory-counting/inventory-counting-done"
+                  [queryParams]="{id: inventoryCounting.id}" *ngSwitchCase="'DONE'">{{'general.done'| translate}}</a>
               </div>
-            <td>
-              <div class="d-flex">
+            <td width="8%">
+              <div class="d-flex justify-content-center">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click) = "editInventoryCounting(inventoryCounting.id)">
-                  <mat-icon>edit</mat-icon>
-                </div>
-
               </div>
             </td>
           </tr>
         </ng-template>
       </p-table>
       <div class="pagination">
-        <app-pagination data-qe-id="pagination" [pagination]="pagination" (paginationOut)="paginationOut($event)"></app-pagination>
+        <app-pagination data-qe-id="pagination" [pagination]="pagination" (paginationOut)="paginationOut($event)">
+        </app-pagination>
       </div>
-
     </div>
   </div>
 </div>

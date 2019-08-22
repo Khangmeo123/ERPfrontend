@@ -1,3 +1,7 @@
+import {
+    InventoryCounterContents,
+    CounterContentByItemDetailEntity,
+} from './../../../../_backend/inventory-counting/inventory-counting.entity';
 import { Injectable } from '@angular/core';
 import { Repository } from 'src/app/_repositories/repository';
 import { environment } from 'src/environments/environment';
@@ -25,10 +29,10 @@ import { Observable } from 'rxjs';
 })
 
 
-export class InventoryCountingDetailRepository extends Repository {
+export class InventoryCountingDoneRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/counting/inventory-counting/inventory-counting-detail';
+        this.apiUrl = environment.apiUrlInv + 'inventory/counting/inventory-counting/inventory-counting-done';
     }
 
     getDetail(inventoryCountingId: string): Observable<InventoryCountingEntity> {
@@ -40,27 +44,19 @@ export class InventoryCountingDetailRepository extends Repository {
             );
     }
 
-    send(inventoryCountingEntity: any) {
-        return this.http.post<InventoryCountingEntity>(this.apiUrl + '/send', JSON.stringify(inventoryCountingEntity),
+    getListInventoryCounter(icId: string, edId: string) {
+        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/compare-serial',
+            JSON.stringify({ inventoryCountingId: icId, employeeDetailId: edId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => new InventoryCountingEntity(r.body)),
+                map(r => {
+                    return r.body.map((item) => {
+                        return new CounterContentByItemDetailEntity(item);
+                    });
+                }),
             );
     }
 
-    save(inventoryCountingEntity: any): Observable<InventoryCountingEntity> {
-        return this.http.post<InventoryCountingEntity>(this.apiUrl + '/save', JSON.stringify(inventoryCountingEntity),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => new InventoryCountingEntity(r.body)),
-            );
-    }
-
-    delete(inventoryCountingId: string) {
-        return this.http.post<InventoryCountingEntity>(this.apiUrl + '/delete', JSON.stringify({ id: inventoryCountingId }),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => r.body),
-            );
-    }
-
+    // binlocation:
     getListBinLocation(ioId: string, idId: string) {
         return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list-bin-location', JSON.stringify({
             inventoryOrganizationId: ioId,
@@ -71,33 +67,6 @@ export class InventoryCountingDetailRepository extends Repository {
                     return r.body.map((item) => {
                         return new BinLocationOfInventoryCountingEntity(item);
                     });
-                }),
-            );
-    }
-
-    getListItemDetail(data: any) {
-        return this.http.post<BinLocationOfInventoryCountingEntity[]>(this.apiUrl + '/list-item-detail', JSON.stringify({ selected: data }),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    return r.body.map((item) => {
-                        return new ItemDetailOfCountingEntity(item);
-                    });
-                }),
-            );
-    }
-
-    dropListEmployeeDetail(employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity) {
-        return this.http.post<Entities>(this.apiUrl + '/drop-list-employee-detail',
-            JSON.stringify(employeeDetailOfCountingSearchEntity),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    r.body.ids = r.body.ids.map(item => {
-                        return new EmployeeDetailOfCountingEntity(item);
-                    });
-                    r.body.exceptIds = r.body.exceptIds.map(item => {
-                        return new EmployeeDetailOfCountingEntity(item);
-                    });
-                    return r.body;
                 }),
             );
     }
@@ -114,16 +83,6 @@ export class InventoryCountingDetailRepository extends Repository {
                 }),
             );
 
-    selectListItemDetail = (itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity)
-        : Observable<ItemDetailOfCountingEntity[]> => this.http.post<ItemDetailOfCountingEntity[]>(this.apiUrl + '/single-list-item-detail',
-            JSON.stringify(itemDetailOfCountingSearchEntity),
-            { observe: 'response', headers: this.getHeader() }).pipe(
-                map(r => {
-                    return r.body.map(item => {
-                        return new ItemDetailOfCountingEntity(item);
-                    });
-                }),
-            );
 
     selectListUnitOfMeasure = (unitOfMeasureOfCountingSearchEntity: UnitOfMeasureOfCountingSearchEntity)
         : Observable<UnitOfMeasureOfCountingEntity[]> => this.http.post<UnitOfMeasureOfCountingEntity[]>(
@@ -147,4 +106,16 @@ export class InventoryCountingDetailRepository extends Repository {
                     });
                 }),
             );
+
+    selectListItemDetail = (itemDetailOfCountingSearchEntity: ItemDetailOfCountingSearchEntity)
+        : Observable<ItemDetailOfCountingEntity[]> => this.http.post<ItemDetailOfCountingEntity[]>(this.apiUrl + '/single-list-item-detail',
+            JSON.stringify(itemDetailOfCountingSearchEntity),
+            { observe: 'response', headers: this.getHeader() }).pipe(
+                map(r => {
+                    return r.body.map(item => {
+                        return new ItemDetailOfCountingEntity(item);
+                    });
+                }),
+            );
+
 }

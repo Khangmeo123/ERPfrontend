@@ -21,14 +21,21 @@ import { DiscussionModule } from 'src/app/_shared/modules/discussion/discussion.
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { JwtInterceptor, ErrorInterceptor } from 'src/app/_helpers';
-import { FormsModule } from '@angular/forms';
-import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ConfirmationPopoverModule } from 'jaja.vn-angular-confirmation-popover';
+import { InventoryCountingPendingComponent } from './inventory-counting/inventory-counting-pending/inventory-counting-pending.component';
+import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
+import { InventoryCountingDoneComponent } from './inventory-counting/inventory-counting-done/inventory-counting-done.component';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+
 
 @NgModule({
   declarations: [
     InventoryCountingCycleComponent,
     InventoryCountingListComponent,
     InventoryCountingDetailComponent,
+    InventoryCountingPendingComponent,
+    InventoryCountingDoneComponent,
     InventoryCountingComponent,
     InventoryPostingComponent,
     InventoryCountingCycleComponent],
@@ -56,6 +63,9 @@ import {ConfirmationPopoverModule} from 'jaja.vn-angular-confirmation-popover';
       confirmButtonType: 'danger',
     }),
     FormsModule,
+    ReactiveFormsModule,
+    SelectsModule,
+    ConfirmDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,13 +1,5 @@
-<div dropdown
-     (isOpenChange)="onToggle($event)"
-     [container]="appendTo"
-     class="select jaja-select-list d-flex"
-     [ngClass]="{disabled: disabled}">
-
-  <span class="icons">
-    <i class="clear pi pi-times" (click)="onClear($event)" *ngIf="selectedItem"></i>
-    <i class="toggle pi pi-caret-down"></i>
-  </span>
+<div dropdown (isOpenChange)="onToggle($event)" [container]="appendTo" class="select jaja-select-list d-flex"
+  [ngClass]="{disabled: disabled}">
 
   <div dropdownToggle class="jaja-select-list-toggle form-control align-items-center">
     <span *ngIf="!selectedItem; else labelTemplate">
@@ -16,33 +8,28 @@
     <ng-template #labelTemplate class="form-control">
       <ng-container *ngTemplateOutlet="label; context: selectedItem"></ng-container>
     </ng-template>
+    <span class="icons">
+      <i class="clear pi pi-times" (click)="onClear($event)" *ngIf="selectedItem || display"></i>
+      <i class="toggle pi pi-caret-down"></i>
+    </span>
   </div>
 
   <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu">
-    <li *ngIf="searchable"
-        class="dropdown-item search"
-        (click)="$event.stopPropagation()">
+    <li *ngIf="searchable" class="dropdown-item search" (click)="$event.stopPropagation()">
       <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
     </li>
 
-    <li role="menuitem"
-        class="dropdown-item loading"
-        *ngIf="loading; else notLoading">
+    <li role="menuitem" class="dropdown-item loading" *ngIf="loading; else notLoading">
       <nz-spin nzSimple></nz-spin>
     </li>
 
     <ng-template #notLoading>
-      <li role="menuitem"
-          class="empty"
-          *ngIf="list.length === 0">
+      <li role="menuitem" class="empty" *ngIf="list.length === 0">
         <nz-empty nzNotFoundContent="{{'jaja.selects.empty' | translate}}"></nz-empty>
       </li>
 
-      <li role="menuitem"
-          class="dropdown-item"
-          *ngFor="let item of list"
-          (click)="onSelect(item, $event)"
-          [ngClass]="{active: selectedItem === item}">
+      <li role="menuitem" class="dropdown-item" *ngFor="let item of list" (click)="onSelect(item, $event)"
+        [ngClass]="{active: selectedItem === item}">
         <ng-container *ngTemplateOutlet="option; context: item"></ng-container>
       </li>
     </ng-template>

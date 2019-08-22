@@ -4,13 +4,8 @@ import { BehaviorSubject, forkJoin, Observable } from 'rxjs';
 import { FormBuilder } from '@angular/forms';
 import { InventoryCountingListRepository } from './inventory-counting-list.repository';
 import { ToastrService } from 'ngx-toastr';
-import {
-    InventoryCountingSearchEntity,
-    InventoryOrganizationOfCountingSearchEntity,
-    EmployeeDetailOfCountingSearchEntity,
-} from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
+import { InventoryCountingSearchEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { Entities, EnumEntity } from 'src/app/_helpers/entity';
-import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 
 @Injectable()
 export class InventoryCountingListService {
@@ -26,8 +21,6 @@ export class InventoryCountingListService {
     ) {
         this.inventoryCountingList = new BehaviorSubject([]);
         this.inventoryCountingCount = new BehaviorSubject(0);
-        this.inventoryOrganizationList = new BehaviorSubject(new Entities());
-        this.employeeDetailList = new BehaviorSubject(new Entities());
         this.statusList = new BehaviorSubject([]);
     }
 
@@ -40,55 +33,6 @@ export class InventoryCountingListService {
                 }
                 if (count) {
                     this.inventoryCountingCount.next(count);
-                }
-            });
-    }
-
-    dropListEmployeeDetail(employeeDetailOfCountingSearchEntity: EmployeeDetailOfCountingSearchEntity) {
-        this.inventoryCountingListRepository.dropListEmployeeDetail(employeeDetailOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.employeeDetailList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchEmployeeDetail(employeeDetailOfCountingSearchEntity: Observable<EmployeeDetailOfCountingSearchEntity>) {
-        employeeDetailOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingListRepository.dropListEmployeeDetail(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.employeeDetailList.next(res);
-                }
-            });
-    }
-
-    dropListInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity: InventoryOrganizationOfCountingSearchEntity) {
-        this.inventoryCountingListRepository.dropListInventoryOrganization(inventoryOrganizationOfCountingSearchEntity).subscribe(res => {
-            if (res) {
-                this.inventoryOrganizationList.next(res);
-            }
-        }, err => {
-            if (err) {
-                console.log(err);
-            }
-        });
-    }
-
-    typingSearchInvetoryOrganization(inventoryOrganizationOfCountingSearchEntity:
-        Observable<InventoryOrganizationOfCountingSearchEntity>) {
-        inventoryOrganizationOfCountingSearchEntity.pipe(debounceTime(400),
-            distinctUntilChanged(),
-            switchMap(searchEntity => {
-                return this.inventoryCountingListRepository.dropListInventoryOrganization(searchEntity);
-            })).subscribe(res => {
-                if (res) {
-                    this.inventoryOrganizationList.next(res);
                 }
             });
     }

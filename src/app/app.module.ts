@@ -25,7 +25,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { SidebarListComponent } from './_pages/page/sidebar/sidebar-list/sidebar-list.component';
 import { CookieService } from 'ngx-cookie-service';
-
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { SignUpComponent } from './_pages/sign-up/sign-up.component';
@@ -83,8 +82,8 @@ import { IconModule } from '@ant-design/icons-angular';
     IconModule,
   ],
   providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true},
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
     CookieService,
   ],
   bootstrap: [AppComponent],

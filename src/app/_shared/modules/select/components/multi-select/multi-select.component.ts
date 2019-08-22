@@ -1,7 +1,7 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {getListDirection} from '../../helpers';
-import {toggleMenu} from '../../../../animations/toggleMenu';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { getListDirection } from '../../helpers';
+import { toggleMenu } from '../../../../animations/toggleMenu';
 import { Guid } from 'guid-typescript';
 
 @Component({
@@ -59,12 +59,11 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
 
   get selectedText() {
     if (this.selectedList) {
-      if (this.selectedList.length === 1) {
-        return this.selectedList[0][this.key];
+      if (this.selectedList.length === 0) {
+        return `${this.initialValue} dữ liệu đã được chọn`;
       }
-      return `${this.selectedList.length} selected`;
+      return `${this.selectedList.length} dữ liệu đã được chọn`;
     }
-    return `${this.initialValue} selected`;
   }
 
   get hasSelected() {
@@ -154,7 +153,7 @@ export class MultiSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   unselect(event) {
-    const {index, data} = event;
+    const { index, data } = event;
     this.selectedList = [
       ...this.selectedList.slice(0, index),
       ...this.selectedList.slice(index + 1),

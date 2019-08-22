@@ -1,7 +1,8 @@
 {
     "general": {
-        "action": "thao tác",
+        "action": "Thao tác",
         "button": {
+            "addRow": "Bấm vào để thêm mới...",
             "add": "Thêm",
             "approve": "Phê duyệt",
             "attachFile": "Thêm đính kèm",
@@ -16,7 +17,7 @@
             "getData": "Lấy dữ liệu",
             "history": "Lịch sử",
             "import": "Nhập hàng loạt",
-            "importFile": "",
+            "importFile": "Nhập hàng loạt",
             "import_file": "Nhập hàng loạt",
             "issue": "",
             "ok": "",

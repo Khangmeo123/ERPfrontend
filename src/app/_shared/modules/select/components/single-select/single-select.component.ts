@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
-import {ISelect} from '../../select.interface';
-import {toggleMenu} from '../../../../animations/toggleMenu';
-import {getListDirection} from '../../helpers';
-import {Guid} from 'guid-typescript';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { ISelect } from '../../select.interface';
+import { toggleMenu } from '../../../../animations/toggleMenu';
+import { getListDirection } from '../../helpers';
+import { Guid } from 'guid-typescript';
 
 @Component({
   selector: 'app-single-select',
@@ -35,7 +35,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
 
   listDirection = 'down';
 
-  @Input() direction: string = 'auto';
+  @Input() direction: string = 'down';
 
   isOpened = false;
 
@@ -81,7 +81,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   unselect(event) {
-    const {data} = event;
+    const { data } = event;
     this.initialValue = null;
     this.currentValue = null;
     this.selectedList = [];
@@ -105,8 +105,9 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
         this.initialValue = null;
         this.currentValue = null;
       } else {
-        if (/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(currentValue)) {
-          this.initialValue = this.currentValue;
+        const pattern = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+        if (pattern.test(changes.initialValue.currentValue)) {
+          this.initialValue = this.currentValue ? this.currentValue : null;
         }
       }
     }
@@ -120,7 +121,7 @@ export class SingleSelectComponent implements OnInit, ISelect, OnChanges {
   }
 
   select(event) {
-    const {data, index} = event;
+    const { data, index } = event;
     if (this.hasSelected) {
       if (this.selectedList[0].id === data.id) {
         return this.unselect(event);

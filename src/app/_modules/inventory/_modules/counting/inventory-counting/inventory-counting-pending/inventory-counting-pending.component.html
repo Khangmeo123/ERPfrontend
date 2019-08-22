@@ -1,0 +1,966 @@
+<div class="page inventory-counting-detail" [formGroup]="inventoryCountingForm">
+    <div class="page-header justify-content-between">
+        <div class="justify-content-start align-items-center">
+            <span class="back-to-list" (click)="backToList()">
+                <i class="material-icons">arrow_back_ios</i>
+            </span>
+            <span class="page-title">
+                {{'inventoryCounting.detail.header.title' | translate}}
+            </span>
+            <span class="ml-2 pending-counting-status">{{'general.pendingCounting'| translate}}</span>
+        </div>
+        <div class="page-actions d-flex">
+            <button class="btn btn-labeled btn-update" *ngIf="!inventoryCountingForm.get('isOwner').value"
+                (click)="save()">
+                <span class="btn-label"><i class="material-icons">update</i></span>
+                <span class="button-label">
+                    {{'general.button.update' | translate}}
+                </span>
+            </button>
+            <button class="btn btn-labeled btn-completed" *ngIf="inventoryCountingForm.get('isOwner').value"
+                (click)="send()">
+                <span class="btn-label"><i class="material-icons">check</i></span>
+                <span class="button-label">
+                    {{'general.button.completed' | translate}}
+                </span>
+            </button>
+            <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
+                <button id="button-basic" class="btn btn-labeled btn-import" dropdownToggle
+                    aria-controls="dropdown-basic">
+                    <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
+                    <span class="button-label">
+                        {{'general.action' | translate}}
+                    </span></button>
+                <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu dropdown-menu-right" role="menu"
+                    aria-labelledby="button-basic">
+                    <li role="menuitem">
+                        <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
+                    </li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem">
+                        <a class="dropdown-item" href="#">{{'general.button.print' | translate}}</a>
+                    </li>
+                    <li class="divider dropdown-divider"></li>
+                    <li role="menuitem">
+                        <a class="dropdown-item" href="#">{{'general.button.referenceDocument' | translate}}</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="page-body">
+        <div class="page-section">
+            <div class="page-section-form-header">
+                <span class="form-title">
+                    {{'inventoryCounting.detail.form.title' | translate}}
+                </span>
+                <div class="page-actions justify-content-end"></div>
+            </div>
+            <div class="line"></div>
+            <div class="page-section-form-body">
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'inventoryCounting.detail.documentNumber' | translate}}
+                        </label>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-document-number"
+                            formControlName="documentNumber">
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'inventoryCounting.detail.counter' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-document-number"
+                            formControlName="inventoryCountersName">
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'inventoryCounting.detail.personInCharge' | translate}}
+                        </label>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-person-in-charge"
+                            formControlName="ownerName">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'inventoryCounting.detail.countingDate' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <app-date-picker data-qe-id="detail-form-counting-date" [disabled]="true"
+                            [control]="inventoryCountingForm.get('documentDate')">
+                        </app-date-picker>
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'inventoryCounting.detail.inventoryCode' | translate}}
+                            <span class="text-danger mr-2">*</span>
+                        </label>
+                        <input type="text" class="form-control disabled" data-qe-id="detail-form-person-in-charge"
+                            formControlName="inventoryOrganizationCode">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 form-group">
+                        <label>{{ 'inventoryCounting.detail.description' | translate}}</label>
+                        <textarea class="form-control" rows="4" data-qe-id="detail-form-description"
+                            formControlName="remarks">
+                         </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page-section">
+            <div class="tab-header pt-3 pb-3 pl-3 pr-3">
+                <mat-tab-group>
+                    <mat-tab label="{{'inventoryCounting.detail.tab1.title' | translate}}"
+                        *ngIf="!inventoryCountingForm.get('isOwner').value">
+                        <div class="row pt-3 pb-3 pl-3">
+                            <div class="col-sm-6">
+                                <div class="d-flex align-items-center">
+                                    <p-inputSwitch [(ngModel)]="activeScanOutSide" (onChange)="inputCodeOutSide.focus()"
+                                        [ngModelOptions]="{standalone: true}"></p-inputSwitch>
+                                    <span
+                                        class="ml-2">{{'inventoryCounting.detail.batches.startScanBatchesNo' | translate}}</span>
+                                    <div class="ml-2 col-sm-8">
+                                        <input type="text" class="form-control" [(ngModel)]="qrCodeOutSide"
+                                            [ngModelOptions]="{standalone: true}"
+                                            (change)="inputCodeOutside($event.target.value)"
+                                            [disabled]="!activeScanOutSide"
+                                            data-qe-id="dialog-input-start-scan-batches-no" #inputCodeOutSide>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="page-actions d-flex justify-content-end">
+                                    <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row"
+                                        (click)="resetInventoryCounterContent()">
+                                        <span class="btn-label"><i class="material-icons">delete</i></span>
+                                        <span class="button-label">
+                                            {{'general.button.delete' | translate}}
+                                        </span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="table" formArrayName="inventoryCounterContents">
+                            <p-table #tableInventoryCounterContents [scrollable]="true" scrollHeight="500px"
+                                [resizableColumns]="true" [rowTrackBy]="trackByFn" [paginator]="true" [rows]="10"
+                                [value]="inventoryCountingForm.controls.inventoryCounterContents.value">
+                                <ng-template pTemplate="colgroup">
+                                    <colgroup>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col *ngIf="inventoryCountingForm.get('enableBinLocation').value">
+                                        <col>
+                                        <col>
+                                    </colgroup>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th width="3%" pResizableColumn data-qe-id="table-thead-no">
+                                            {{'inventoryCounting.detail.tab1.no' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-item-no">
+                                            {{'inventoryCounting.detail.tab1.itemNo' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-item-name">
+                                            {{'inventoryCounting.detail.tab1.itemName' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
+                                            {{'inventoryCounting.detail.tab1.unitOfMeasure' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-inventory-code"
+                                            *ngIf="inventoryCountingForm.get('enableBinLocation').value">
+                                            {{'inventoryCounting.detail.tab1.inventoryCode' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-quantity-of-inventory">
+                                            {{'inventoryCounting.detail.tab1.quantityOfInventory' | translate}}
+                                        </th>
+                                        <th width="8%" pResizableColumn data-qe-id="table-thead-batches-action">
+                                            {{'general.action' | translate}}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="th-filter" width="3%"></th>
+                                        <th class="th-filter">
+                                            <jaja-select-list class="flex-grow-1"
+                                                [value]="itemDetailCodeOfCounterSearch.id" appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                                key="id" [searchEntity]="itemDetailCodeOfCounterSearch"
+                                                searchField="code"
+                                                (change)="changeItemDetailCode($event, tableInventoryCounterContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-code="code">
+                                                    {{code}}
+                                                </ng-template>
+                                            </jaja-select-list>
+                                        </th>
+                                        <th class="th-filter">
+                                            <input type="text" class="form-control w-100"
+                                                (input)="tableInventoryCounterContents.filter($event.target.value, 'itemDetailName', 'contains')" />
+                                        </th>
+                                        <th class="th-filter">
+                                            <jaja-select-list class="flex-grow-1" [value]="unitOfMeasureSearchEntity.id"
+                                                appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListUnitOfMeasure" key="id"
+                                                [searchEntity]="unitOfMeasureSearchEntity" searchField="name"
+                                                (change)="changeUnitOfMeasure($event, tableInventoryCounterContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-name="name">
+                                                    {{name}}
+                                                </ng-template>
+                                            </jaja-select-list>
+                                        </th>
+                                        <th class="th-filter"
+                                            *ngIf="inventoryCountingForm.get('enableBinLocation').value"></th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter" width="8%"></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-inventoryCounterContent let-index="rowIndex">
+                                    <tr [formGroupName]='index'>
+                                        <td width="3%">
+                                            <span>{{index + 1}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{inventoryCounterContent.itemDetailCode}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{inventoryCounterContent.itemDetailName}}</span>
+                                        </td>
+                                        <td>
+                                            <span>{{inventoryCounterContent.itemDetailUnitOfMeasureName}}</span>
+                                        </td>
+                                        <td *ngIf="inventoryCountingForm.get('enableBinLocation').value">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="view-detail mr-2">
+                                                    <mat-icon
+                                                        (click)="openBinLocation(inventoryCounterContent.itemDetailId)">
+                                                        remove_red_eye</mat-icon>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <ng-container [ngSwitch]="inventoryCounterContent.managementTypeName">
+                                                <span *ngSwitchCase="'SERIAL_NUMBER'">
+                                                    {{inventoryCounterContent.quantity | number}}
+                                                </span>
+                                                <span *ngSwitchCase="'BATCH'">
+                                                    {{inventoryCounterContent.quantity | number}}
+                                                </span>
+                                                <input *ngSwitchCase="'QUANTITY'" type="number"
+                                                    (change)="updateQuantity(inventoryCounterContent.itemDetailId, $event.target.value)"
+                                                    formControlName="quantity" class="form-control text-right" />
+                                            </ng-container>
+                                        </td>
+                                        <td width="8%">
+                                            <ng-container [ngSwitch]=" inventoryCounterContent.managementTypeName">
+                                                <a (click)="showBatch(inventoryCounterContent.itemDetailId)"
+                                                    href="javascript:;" *ngSwitchCase="'BATCH'">
+                                                    {{'inventoryCounting.detail.tab1.batches' | translate}}
+                                                </a>
+                                                <a (click)="showSerial(inventoryCounterContent.itemDetailId)"
+                                                    href="javascript:;" *ngSwitchCase="'SERIAL_NUMBER'">
+                                                    {{'inventoryCounting.detail.tab1.serial' | translate}}
+                                                </a>
+                                            </ng-container>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="{{'inventoryCounting.detail.tab1.title' | translate}}"
+                        *ngIf="inventoryCountingForm.get('isOwner').value">
+                        <div class="row pt-3 pb-3 pl-3">
+                            <div class="col-sm-6"></div>
+                            <div class="col-sm-6"></div>
+                        </div>
+                        <div class="table" formArrayName="inventoryCountingContents">
+                            <p-table #tableInventoryCountingContents [scrollable]="true" scrollHeight="500px"
+                                [rowTrackBy]="trackByFn"
+                                [value]="inventoryCountingForm.controls.inventoryCountingContents.value">
+                                <ng-template pTemplate="colgroup">
+                                    <colgroup>
+                                        <col width="3%">
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col *ngIf="inventoryCountingForm.get('enableBinLocation').value">
+                                        <col *ngFor="let item of inventoryCounters;">
+                                    </colgroup>
+                                </ng-template>
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th width="3%" pResizableColumn data-qe-id="table-thead-no">
+                                            {{'inventoryCounting.detail.tab1.no' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-item-no">
+                                            {{'inventoryCounting.detail.tab1.itemNo' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-item-name">
+                                            {{'inventoryCounting.detail.tab1.itemName' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
+                                            {{'inventoryCounting.detail.tab1.unitOfMeasure' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-inventory-code"
+                                            *ngIf="inventoryCountingForm.get('enableBinLocation').value">
+                                            {{'inventoryCounting.detail.tab1.inventoryCode' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-quantity-of-inventory">
+                                            {{'inventoryCounting.detail.tab1.quantityOfInventory' | translate}}
+                                        </th>
+                                        <th pResizableColumn data-qe-id="table-thead-quantity-of-inventory">
+                                            {{'inventoryCounting.detail.tab1.highestDifference' | translate}}
+                                        </th>
+                                        <th pResizableColumn *ngFor="let item of inventoryCounters;"
+                                            (click)="showInventoryCounterDetail(item)">
+                                            {{item.name}}
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <th class="th-filter" width="3%"></th>
+                                        <th class="th-filter">
+                                            <jaja-select-list class="flex-grow-1"
+                                                [value]="itemDetailCodeOfCountingSearch.id" appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                                key="id" [searchEntity]="itemDetailCodeOfCountingSearch"
+                                                searchField="code"
+                                                (change)="changeItemDetailCode($event, tableInventoryCountingContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-code="code">
+                                                    {{code}}
+                                                </ng-template>
+                                            </jaja-select-list>
+                                        </th>
+                                        <th class="th-filter">
+                                            <input type="text" class="form-control w-100"
+                                                (input)="tableInventoryCountingContents.filter($event.target.value, 'itemDetailName', 'contains')" />
+                                        </th>
+                                        <th>
+                                            <jaja-select-list class="flex-grow-1" [value]="unitOfMeasureSearchEntity.id"
+                                                appendTo="body"
+                                                [getList]="inventoryCountingRepository.selectListUnitOfMeasure" key="id"
+                                                [searchEntity]="unitOfMeasureSearchEntity" searchField="name"
+                                                (change)="changeUnitOfMeasure($event, tableInventoryCountingContents)"
+                                                searchType="startsWith" [searchable]="true">
+                                                <ng-template #label #option let-name="name">
+                                                    {{name}}
+                                                </ng-template>
+                                            </jaja-select-list>
+                                        </th>
+                                        <th class="th-filter"
+                                            *ngIf="inventoryCountingForm.get('enableBinLocation').value"></th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter" *ngFor="let item of inventoryCounters;"></th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-inventoryCountingContent let-index="rowIndex">
+                                    <tr [formGroupName]='index'>
+                                        <td width="3%">
+                                            {{index + 1}}
+                                        </td>
+                                        <td>
+                                            {{inventoryCountingContent.itemDetailCode}}
+                                        </td>
+                                        <td>
+                                            {{inventoryCountingContent.itemDetailName}}
+                                        </td>
+                                        <td>
+                                            {{inventoryCountingContent.itemDetailUnitOfMeasureName}}
+                                        </td>
+                                        <td *ngIf="inventoryCountingForm.get('enableBinLocation').value">
+                                            <div class="d-flex justify-content-center">
+                                                <div class="view-detail mr-2">
+                                                    <mat-icon
+                                                        (click)="openBinLocation(inventoryCountingContent.itemDetailId)">
+                                                        remove_red_eye</mat-icon>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            {{inventoryCountingContent.quantityOnDocumentDate | number}}
+                                        </td>
+                                        <td class="text-right">
+                                            {{inventoryCountingContent.variance | number}}
+                                        </td>
+                                        <td *ngFor="let item of inventoryCountingContent.inventoryCounterContents;"
+                                            class="text-right">
+                                            <span>{{item.totalQuantity | number}}</span>
+                                        </td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="{{'inventoryCounting.detail.tab2.title' | translate}}">
+                        <div class="tab-upload">
+                            <div class="form-upload-file d-flex">
+                                <div class="pt-3 upload-btn-wrapper">
+                                    <button class="btn btn-labeled btn-import">
+                                        <span class="btn-label"><i class="material-icons">attach_file</i></span>
+                                        <span class="button-label">
+                                            {{'general.button.attachFile' | translate}}
+                                        </span></button>
+                                    <input type="file" (change)="readURL($event)" multiple />
+                                </div>
+                                <div class="results d-flex align-items-center">
+                                    <div class="results-item d-flex mr-3" *ngFor="let name of fileNameList">
+                                        <div class="results-item-name">
+                                            <span class="icon-upload"><i class="material-icons">attach_file</i></span>
+                                            <span>{{name}}</span>
+                                        </div>
+                                        <span class="close-attach align-items-center"><i
+                                                class="material-icons">close</i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                </mat-tab-group>
+            </div>
+        </div>
+        <div class="page-section" *ngIf="inventoryCountingId">
+            <div class="page-section-form-header">
+                <span class="form-title">
+                    {{'inventoryCounting.detail.form.post.title' | translate}}
+                </span>
+            </div>
+            <div class="line"></div>
+            <div class="page-section-form-body">
+                <app-discussion [discussionId]="inventoryCountingId"></app-discussion>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayBatch" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '90%'}" [responsive]="true">
+    <p-header>
+        <div class="row">
+            <div class="col-sm-3">
+                <span class="dialog-header">{{'inventoryCounting.detail.batches.title ' | translate}}</span>
+            </div>
+            <div class="col-sm-9">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-clear" data-qe-id="button-clear"
+                        (click)="clearBatchTable(tableBatch)">
+                        <span class="btn-label">
+                            <img src="/assets/img/filter.svg" width="16">
+                        </span>
+                        <span class="button-label">
+                            {{'general.button.clear' | translate}}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="d-flex align-items-center">
+                    <p-inputSwitch [(ngModel)]="activeScan" (onChange)="inputBatch.focus()"></p-inputSwitch>
+                    <span class="ml-2">{{'inventoryCounting.detail.batches.startScanBatchesNo' | translate}}</span>
+                    <div class="ml-2 col-sm-9">
+                        <input type="text" class="form-control" [(ngModel)]="batchCode" [disabled]="!activeScan"
+                            (change)="inputBatchCode($event.target.value)"
+                            data-qe-id="dialog-input-start-scan-batches-no" #inputBatch>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6"></div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table resizableColumns [value]="batchList" [scrollable]="true" scrollHeight="300px"
+                    [resizableColumns]="true" [paginator]="true" [rows]="10" #tableBatch>
+                    <ng-template pTemplate="colgroup">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pResizableColumn data-qe-id="table-thead-batches-code">
+                                {{'inventoryCounting.detail.batches.batchCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-item-code">
+                                {{'inventoryCounting.detail.batches.itemCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-serial">
+                                {{'inventoryCounting.detail.batches.serial' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-item-name">
+                                {{'inventoryCounting.detail.batches.itemName' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-manufacturing-date">
+                                {{'inventoryCounting.detail.batches.manufacturingDate' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-expiry-date">
+                                {{'inventoryCounting.detail.batches.expiryDate' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-batches-actual-counting">
+                                {{'inventoryCounting.detail.batches.actualCounting' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead- -action" width="8%">
+                                {{'general.action' | translate}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100"
+                                    (input)="tableBatch.filter($event.target.value, 'qrCode', 'contains')" />
+                            </th>
+                            <th class="th-filter">
+                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeOfBatchSearch.id"
+                                    appendTo="body" [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                    key="id" [searchEntity]="itemDetailCodeOfBatchSearch" searchField="code"
+                                    (change)="changeItemDetailCode($event, tableBatch)" searchType="startsWith"
+                                    [searchable]="true">
+                                    <ng-template #label #option let-code="code">
+                                        {{code}}
+                                    </ng-template>
+                                </jaja-select-list>
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100"
+                                    (input)="tableBatch.filter($event.target.value, 'serialNumber', 'contains')" />
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100"
+                                    (input)="tableBatch.filter($event.target.value, 'itemDetailName', 'contains')" />
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'expirationDate')"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter"></th>
+                            <th class="th-filter" width="8%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-batch let-index="rowIndex">
+                        <tr>
+                            <td class="ui-resizable-column">
+                                {{batch.qrCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{batch.itemDetailCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{batch.serialNumber}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{batch.itemDetailName}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{batch.mfrDate | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{batch.expirationDate | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                <input type="text" class="form-control w-100" [ngModel]="batch.quantity"
+                                    (ngModelChange)="batch.quantity = generalService.toNumber($event)"
+                                    (change)="updateBatch(batch)" />
+                            </td>
+                            <td width="8%" class="text-center">
+                                <mat-icon class="text-danger" (click)="deleteBatch()">delete</mat-icon>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-save-dialog" (click)="saveBatch()">
+                        <span class="btn-label"><i class="material-icons">save</i></span>
+                        <span class="button-label">
+                            {{'general.button.save' | translate}}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displaySerial" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '90%'}" [responsive]="true">
+    <p-header>
+        <div class="row">
+            <div class="col-sm-3">
+                <span class="dialog-header">{{'inventoryCounting.detail.qrCode.title ' | translate}}</span>
+            </div>
+            <div class="col-sm-9">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-clear mr-2" data-qe-id="button-clear"
+                        (click)="clearSerialNumberTable(tableSerialNumber)">
+                        <span class="btn-label">
+                            <img src="/assets/img/filter.svg" width="16">
+                        </span>
+                        <span class="button-label">
+                            {{'general.button.clear' | translate}}
+                        </span>
+                    </button>
+                    <div class="btn-group btn-labeled" dropdown data-qe-id="button-import">
+                        <button class="btn btn-labeled btn-import mr-2" dropdownToggle aria-controls="dropdown-basic">
+                            <span class="btn-label">
+                                <img src="/assets/img/import.svg" width="24">
+                            </span>
+                            <span class="button-label">
+                                {{'general.button.import' | translate}}
+                            </span></button>
+                        <ul id="dropdown-basic" *dropdownMenu class="dropdown-menu" role="menu"
+                            aria-labelledby="button-basic">
+                            <li role="menuitem">
+                                <button class="dropdown-item"
+                                    (click)="file.click()">{{'general.button.import' | translate}}</button>
+                            </li>
+                            <li class="divider dropdown-divider"></li>
+                            <li role="menuitem"><a class="dropdown-item" target="_blank"
+                                    [href]="linkSerialNumberTemplate">{{'general.button.downloadTemplate' | translate}}</a>
+                            </li>
+                        </ul>
+                        <input type="file" accept=".xlsx" (click)="file.value = null"
+                            (change)="importSerialNumber(file.files)" #file hidden>
+                    </div>
+                    <a class="btn btn-labeled btn-export mr-2" [href]="linkSerialNumberExport">
+                        <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
+                        <span class="button-label">
+                            {{'general.button.export' | translate}}
+                        </span>
+                    </a>
+                    <button class="btn btn-labeled btn-delete" (click)="deleteMultipleSerialNumber()">
+                        <span class="btn-label"><i class="material-icons">delete</i></span>
+                        <span class="button-label">
+                            {{'general.button.delete' | translate}}
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="d-flex align-items-center">
+                    <p-inputSwitch [(ngModel)]="activeScan" (onChange)="inputSerial.focus()"></p-inputSwitch>
+                    <span class="ml-2">{{'inventoryCounting.detail.qrCode.scanQRCode' | translate}}</span>
+                    <div class="ml-2 col-sm-9">
+                        <input type="text" class="form-control" data-qe-id="dialog-input-start-scan-batches-no"
+                            [(ngModel)]="serialNumber" (change)="inputSerialNumber($event.target.value)"
+                            [disabled]="!activeScan" #inputSerial>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="d-flex align-items-center justify-content-end">
+                    <span class="mr-2">{{'inventoryCounting.detail.totalItem' | translate}}</span>
+                    <input type="text" class="form-control total-item disabled" data-qe-id="dialog-input-total-item"
+                        [value]="serialNumberList.length">
+                </div>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table [value]="serialNumberList" [scrollable]="true" scrollHeight="300px" [resizableColumns]="true"
+                    [paginator]="true" [rows]="10" #tableSerialNumber>
+                    <ng-template pTemplate="colgroup">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th width="2.5%" pResizableColumn data-qe-id="table-thead-qrCode-check-box">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" (change)="checkAllSerialNumber($event.target)" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-code">
+                                {{'inventoryCounting.detail.qrCode.code' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-item-code">
+                                {{'inventoryCounting.detail.qrCode.itemCode' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-item-name">
+                                {{'inventoryCounting.detail.qrCode.itemName' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-serial">
+                                {{'inventoryCounting.detail.qrCode.serial' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-manufacturing-date">
+                                {{'inventoryCounting.detail.qrCode.manufacturingDate' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-expiry-date">
+                                {{'inventoryCounting.detail.qrCode.expiryDate' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-qrCode-action" width="8%">
+                                {{'general.action' | translate}}
+                            </th>
+                        </tr>
+                        <tr>
+                            <th width="2.5%"></th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    [(ngModel)]="serialNumberSearchEntity.qrCode"
+                                    (input)="tableSerialNumber.filter($event.target.value, 'qrCode', 'startsWith')" />
+                            </th>
+                            <th class="th-filter">
+                                <jaja-select-list class="flex-grow-1" [value]="serialNumberSearchEntity.itemDetailId"
+                                    appendTo="body" [getList]="inventoryCountingRepository.selectListItemDetailCode"
+                                    key="id" [searchEntity]="itemDetailCodeOfSerialSearch" searchField="code"
+                                    (change)="changeItemDetailCode($event, tableSerialNumber)" searchType="startsWith"
+                                    [searchable]="true">
+                                    <ng-template #label #option let-code="code">
+                                        {{code}}
+                                    </ng-template>
+                                </jaja-select-list>
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    [(ngModel)]="serialNumberSearchEntity.itemName"
+                                    (input)="tableSerialNumber.filter($event.target.value, 'itemName', 'contains')" />
+                            </th>
+                            <th class="th-filter">
+                                <input type="text" class="form-control w-100" pKeyFilter="int"
+                                    [(ngModel)]="serialNumberSearchEntity.serialNumber"
+                                    (input)="tableSerialNumber.filter($event.target.value, 'serialNumber', 'startsWith')" />
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDate')"
+                                    [control]="serialNumberSearchEntity.mfrDate"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter">
+                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'expirationDate')"
+                                    [control]="serialNumberSearchEntity.expirationDate"
+                                    data-qe-id="detail-form-receipted-date">
+                                </app-date-picker>
+                            </th>
+                            <th class="th-filter" width="8%"></th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-serialNumber let-index="rowIndex">
+                        <tr>
+                            <td width="2.5%">
+                                <div class="pretty p-icon p-curve p-has-indeterminate">
+                                    <input type="checkbox" [(ngModel)]="serialNumber.isSelected" />
+                                    <div class="state">
+                                        <i class="icon material-icons">done</i>
+                                        <label></label>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.qrCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.itemDetailCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.itemDetailName}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.serialNumber}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.mfrDate | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{serialNumber.expirationDate | date: 'dd/MM/yyyy'}}
+                            </td>
+                            <td width="8%" class="text-center">
+                                <mat-icon class="text-danger" role="button"
+                                    (click)="deleteSerialNumber(serialNumber.id)">delete
+                                </mat-icon>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-save-dialog" (click)="saveSerialNumber()">
+                        <span class="btn-label"><i class="material-icons">save</i></span>
+                        <span class="button-label">
+                            {{'general.button.save' | translate}}
+                        </span></button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayBinLocation" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '90%'}" [responsive]="true">
+    <p-header>
+        <div class="row">
+            <div class="col-sm-3">
+                <span class="dialog-header">{{'inventoryCounting.detail.detailBinLocation.title ' | translate}}</span>
+            </div>
+        </div>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table [value]="binLocationList" #tableBinLocation [scrollable]="true" scrollHeight="500px"
+                    [resizableColumns]="true" [rowTrackBy]="trackByFn">
+                    <ng-template pTemplate="colgroup">
+                        <colgroup>
+                            <col>
+                            <col>
+                            <col>
+                        </colgroup>
+                    </ng-template>
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pResizableColumn>
+                                {{'inventoryCounting.detail.detailBinLocation.no' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-detail-bin-location-item-code">
+                                {{'inventoryCounting.detail.detailBinLocation.itemCode' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detail-bin-location-location-code">
+                                {{'inventoryCounting.detail.detailBinLocation.locationCode' | translate}} </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-binLocation let-index="rowIndex">
+                        <tr>
+                            <td class="ui-resizable-column">
+                                {{index + 1}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{binLocation.itemDetailCode}}
+                            </td>
+                            <td class="ui-resizable-column">
+                                {{binLocation.code}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-cancel" (click)="displayBinLocation = false">
+                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+                        <span class="button-label">
+                            {{'general.button.cancel' | translate}}
+                        </span></button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
+
+<p-dialog [modal]="true" appendTo="body" [(visible)]="displayInventoryCounter" [contentStyle]="{'overflow':'visible'}"
+    [style]="{width: '90%'}" [responsive]="true">
+    <p-header>
+        <div class="row">
+            <div class="col-sm-3">
+                <span class="dialog-header">{{'inventoryCounting.detail.detailDifference.title ' | translate}}</span>
+            </div>
+        </div>
+    </p-header>
+    <div class="dialog-body">
+        <div class="row mt-3">
+            <div class="col-sm-12">
+                <p-table resizableColumns [value]="inventoryCounterList" #tableInventoryCounter [scrollable]="true"
+                    scrollHeight="500px" [resizableColumns]="true">
+                    <ng-template pTemplate="header">
+                        <tr>
+                            <th pResizableColumn>
+                                {{'inventoryCounting.detail.detailDifference.no' | translate}}
+                            </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-item-code">
+                                {{'inventoryCounting.detail.detailDifference.itemCode' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-item-name">
+                                {{'inventoryCounting.detail.detailDifference.itemName' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-excess">
+                                {{'inventoryCounting.detail.detailDifference.excess' | translate}} </th>
+                            <th pResizableColumn data-qe-id="table-thead-detailDifference-lack">
+                                {{'inventoryCounting.detail.detailDifference.lack' | translate}} </th>
+                        </tr>
+                    </ng-template>
+                    <ng-template pTemplate="body" let-inventoryCounterDetail let-index="rowIndex">
+                        <tr>
+                            <td>
+                                {{index + 1}}
+                            </td>
+                            <td>
+                                {{inventoryCounterDetail.itemDetailCode}}
+                            </td>
+                            <td>
+                                {{inventoryCounterDetail.itemDetailName}}
+                            </td>
+                            <td>
+                                {{inventoryCounterDetail.redundantSerialNumber.join(', ')}}
+                            </td>
+                            <td>
+                                {{inventoryCounterDetail.lackSerialNumber.join(', ')}}
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+    </div>
+    <p-footer>
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                    <button class="btn btn-labeled btn-cancel" (click)="displayInventoryCounter = false">
+                        <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+                        <span class="button-label">
+                            {{'general.button.cancel' | translate}}
+                        </span></button>
+                </div>
+            </div>
+        </div>
+    </p-footer>
+</p-dialog>
