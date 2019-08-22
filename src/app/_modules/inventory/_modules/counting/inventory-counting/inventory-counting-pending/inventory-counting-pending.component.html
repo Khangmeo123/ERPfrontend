@@ -524,11 +524,11 @@
                         </tr>
                         <tr>
                             <th class="th-filter">
-                                <input type="text" class="form-control w-100"
+                                <input type="text" class="form-control w-100" [(ngModel)]="batchSearchEntity.qrCode"
                                     (input)="tableBatch.filter($event.target.value, 'qrCode', 'contains')" />
                             </th>
                             <th class="th-filter">
-                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeOfBatchSearch.id"
+                                <jaja-select-list class="flex-grow-1" [value]="batchSearchEntity.itemDetailId"
                                     appendTo="body" [getList]="inventoryCountingRepository.selectListItemDetailCode"
                                     key="id" [searchEntity]="itemDetailCodeOfBatchSearch" searchField="code"
                                     (change)="changeItemDetailCode($event, tableBatch)" searchType="startsWith"
@@ -540,19 +540,22 @@
                             </th>
                             <th class="th-filter">
                                 <input type="text" class="form-control w-100"
+                                    [(ngModel)]="batchSearchEntity.serialNumber"
                                     (input)="tableBatch.filter($event.target.value, 'serialNumber', 'contains')" />
                             </th>
                             <th class="th-filter">
                                 <input type="text" class="form-control w-100"
+                                    [(ngModel)]="batchSearchEntity.itemDetailName"
                                     (input)="tableBatch.filter($event.target.value, 'itemDetailName', 'contains')" />
                             </th>
                             <th class="th-filter">
                                 <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
-                                    data-qe-id="detail-form-receipted-date">
+                                    [control]="batchSearchEntity.mfrDate" data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>
                             <th class="th-filter">
                                 <app-date-picker (valueChange)="sortDate($event, tableBatch, 'expirationDate')"
+                                    [control]="batchSearchEntity.expirationDate"
                                     data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>

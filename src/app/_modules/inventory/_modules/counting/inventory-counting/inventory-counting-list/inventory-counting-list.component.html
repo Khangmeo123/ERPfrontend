@@ -118,7 +118,8 @@
             </th>
             <th class="th-filter">
               <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
-                [searchEntity]="inventoryCountingOwnerSearch" searchField="name" searchType="startsWith"
+                [value]="inventoryCountingSearchEntity.inventoryCounterId" key="id"
+                [searchEntity]="inventoryCountingOwnerSearch" searchField="name" searchType="startsWith" appendTo="body"
                 [searchable]="true" (change)="inventoryCountingSearchEntity.inventoryCounterId = $event?.id; getList()">
                 <ng-template #label #option let-name="name">
                   {{name}}
@@ -127,7 +128,8 @@
             </th>
             <th class="th-filter">
               <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
-                [searchEntity]="inventoryCounterSearch" searchField="name" searchType="startsWith" [searchable]="true"
+                [value]="inventoryCountingSearchEntity.ownerId" key="id" [searchEntity]="inventoryCounterSearch"
+                searchField="name" searchType="startsWith" [searchable]="true" appendTo="body"
                 (change)="inventoryCountingSearchEntity.ownerId = $event?.id; getList()">
                 <ng-template #label #option let-name="name">
                   {{name}}
@@ -135,17 +137,24 @@
               </jaja-select-list>
             </th>
             <th class="th-filter">
-              <app-simple-select [key]="'display'" [list]="statusList" (clear)="clearSearch(table)"
+              <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.enumListStatus"
+                [value]="inventoryCountingSearchEntity.statusId" key="id" appendTo="body"
+                (change)="inventoryCountingSearchEntity.statusId = $event; getList()">
+                <ng-template #label #option let-display="display">
+                  {{display}}
+                </ng-template>
+              </jaja-select-list>
+              <!-- <app-simple-select [key]="'display'" [list]="statusList" (clear)="clearSearch(table)"
                 (selectionChange)="inventoryCountingSearchEntity.statusId = $event; getList()"
                 (listOpen)="enumListStatus()" [initialValue]="inventoryCountingSearchEntity.statusId">
-              </app-simple-select>
+              </app-simple-select> -->
             </th>
             <th class="th-filter" width="8%"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-inventoryCounting let-index="rowIndex">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> {{inventoryCounting.documentNumber}} </td>
+            <td class="text-right"> {{inventoryCounting.documentNumber}} </td>
             <td> {{inventoryCounting.documentDate | date: 'dd/MM/yyyy'}} </td>
             <td> {{inventoryCounting.inventoryOrganizationCode}} </td>
             <td>
