@@ -176,7 +176,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
           },
         ),
       );
-  }
+  };
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
     return this.http.post<ItemDetailEntity[]>(

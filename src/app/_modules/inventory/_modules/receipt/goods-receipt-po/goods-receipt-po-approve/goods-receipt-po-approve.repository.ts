@@ -8,11 +8,13 @@ import {
   GoodsReceiptPOEntity,
   ItemDetailEntity,
   PurchaseOrderEntity,
+  TaxEntity,
   UnitOfMeasureEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
   ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
+  TaxSearchEntity,
   UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 
@@ -23,13 +25,14 @@ export class GoodsReceiptPOApproveRepository extends Repository {
 
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt-po/goods-receipt-po-approve';
   }
 
-  getDetail = (goodsReceiptPOId: string): Observable<GoodsReceiptPOEntity> => {
+  static getURL = (url: string) => `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-approve${url}`;
+
+  getDetail = (id: string): Observable<GoodsReceiptPOEntity> => {
     return this.http.post<GoodsReceiptPOEntity>(
-      this.apiUrl + '/get',
-      {id: goodsReceiptPOId},
+      GoodsReceiptPOApproveRepository.getURL('/get'),
+      {id},
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -41,10 +44,10 @@ export class GoodsReceiptPOApproveRepository extends Repository {
     );
   };
 
-  approve = (goodsReceiptPOId: string): Observable<boolean> => {
+  approve = (id: string): Observable<boolean> => {
     return this.http.post<boolean>(
-      this.apiUrl + '/approve',
-      {id: goodsReceiptPOId},
+      GoodsReceiptPOApproveRepository.getURL('/approve'),
+      {id},
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -54,10 +57,10 @@ export class GoodsReceiptPOApproveRepository extends Repository {
     );
   };
 
-  reject = (goodsReceiptPOId: string): Observable<boolean> => {
+  reject = (id: string): Observable<boolean> => {
     return this.http.post<boolean>(
-      this.apiUrl + '/reject',
-      {id: goodsReceiptPOId},
+      GoodsReceiptPOApproveRepository.getURL('/reject'),
+      {id},
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -69,7 +72,7 @@ export class GoodsReceiptPOApproveRepository extends Repository {
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
     return this.http.post<ItemDetailEntity[]>(
-      this.apiUrl + '/single-list-item-detail',
+      GoodsReceiptPOApproveRepository.getURL('/single-list-item-detail'),
       itemDetailSearchEntity,
       {
         observe: 'response',
@@ -85,7 +88,7 @@ export class GoodsReceiptPOApproveRepository extends Repository {
 
   getUnitOfMeasureList = (unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Observable<UnitOfMeasureEntity[]> => {
     return this.http.post<UnitOfMeasureEntity[]>(
-      this.apiUrl + '/single-list-unit-of-measure',
+      GoodsReceiptPOApproveRepository.getURL('/single-list-unit-of-measure'),
       unitOfMeasureSearchEntity,
       {
         observe: 'response',
@@ -100,7 +103,7 @@ export class GoodsReceiptPOApproveRepository extends Repository {
 
   getDocumentNumberList = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> => {
     return this.http.post<PurchaseOrderEntity[]>(
-      this.apiUrl + '/single-list-document-number',
+      GoodsReceiptPOApproveRepository.getURL('/single-list-document-number'),
       purchaseOrdersSearchEntity,
       {
         observe: 'response',
@@ -111,5 +114,21 @@ export class GoodsReceiptPOApproveRepository extends Repository {
         (response: HttpResponse<PurchaseOrderEntity[]>) => response.body,
       ),
     );
+  };
+
+  getTaxList = (taxSearchEntity: TaxSearchEntity): Observable<TaxEntity[]> => {
+    return this.http.post<TaxEntity[]>(
+      GoodsReceiptPOApproveRepository.getURL('/single-list-tax-list'),
+      taxSearchEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<TaxEntity[]>) => response.body.map((item) => new TaxEntity(item)),
+        ),
+      );
   };
 }

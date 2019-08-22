@@ -39,6 +39,7 @@
                               [searchEntity]="positionSearchEntity"
                               searchField="code"
                               searchType="startsWith"
+                              [searchable]="true"
                               [display]="positionCode?.value"
                               placeholder="{{'permission.positionCode' | translate}}"
                               (change)="onSelectPosition($event)"

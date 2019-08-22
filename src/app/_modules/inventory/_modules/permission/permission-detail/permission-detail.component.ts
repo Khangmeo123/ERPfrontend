@@ -40,12 +40,12 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
   positionSearchEntity: PositionSearchEntity = new PositionSearchEntity();
 
   constructor(
-    private permissionDetailService: PermissionDetailService,
-    private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService,
-    private generalService: GeneralService,
-    private router: Router,
-    private permissionDetailRepository: PermissionDetailRepository,
+    public permissionDetailService: PermissionDetailService,
+    public activatedRoute: ActivatedRoute,
+    public toastrService: ToastrService,
+    public generalService: GeneralService,
+    public router: Router,
+    public permissionDetailRepository: PermissionDetailRepository,
   ) {
     const permissionFormSub: Subscription = this.permissionDetailService.permissionForm.subscribe((form: FormGroup) => {
       this.permissionForm = form;
@@ -143,16 +143,16 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
   bookMark() {
   }
 
-  cancel() {
+  public cancel = () => {
     return this.router.navigate(
       ['/inventory/permission/permission-list'],
       {
         queryParams: this.activatedRoute.snapshot.queryParams,
       },
     );
-  }
+  };
 
-  save() {
+  public save = () => {
     if (this.permissionForm.invalid) {
       this.generalService.validateAllFormFields(this.permissionForm);
     }
@@ -168,9 +168,9 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
           );
         });
     }
-  }
+  };
 
-  onSelectPosition(event) {
+  public onSelectPosition = (event) => {
     if (event) {
       this.permissionForm.patchValue({
         positionCode: event.code,
@@ -178,5 +178,5 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
         positionName: event.name,
       });
     }
-  }
+  };
 }

@@ -10,6 +10,9 @@ import {
   PurchaseOrderSearchEntity,
   UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import { UploadFile } from 'ng-zorro-antd';
+import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
+import { ValueAddedTaxSearchEntity } from '../../../../../master-data/_backend/value-added-tax/value-added-tax.search-entity';
 
 @Component({
   selector: 'app-goods-receipt-po-approve',
@@ -19,41 +22,61 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
+
   pageTitle = translate('goodsReceiptPODetail.header.title');
-  fileNameList: Array<any> = [];
+
+  fileList: UploadFile[] = [];
+
   displayBatches: boolean = false;
+
   displaySerial: boolean = false;
+
   displayAmount: boolean = false;
-  displayPurchseOrders: boolean = false;
+
+  displayPurchaseOrders: boolean = false;
+
   goodsReceiptPOSubs: Subscription = new Subscription();
+
   goodsReceiptPOForm: FormGroup;
+
   deletedList: number[] = [];
+
   popoverTitle: string = '';
+
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+
   supplierDetailId: string;
+
   goodsReceiptPOId: string;
+
   // documentNumber:
   documentNumberSearchEntity: PurchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
+
   // itemDetail:
   itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
+
   // unitOfMeasure:
   unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
+
+  valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity = new ValueAddedTaxSearchEntity();
 
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOApproveService,
     private generalService: GeneralService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private goodsReceiptPOApproveRepository: GoodsReceiptPOApproveRepository,
+  ) {
 
-    this.route.queryParams
-      .subscribe(params => {
-        if (params.id) {
-          this.goodsReceiptPOId = params.id;
-        }
-        this.goodsReceiptPOService.getDetail(params.id).then(res => {
+    this.route.queryParams.subscribe(params => {
+      if (params.id) {
+        this.goodsReceiptPOId = params.id;
+      }
+      this.goodsReceiptPOService.getDetail(params.id)
+        .then(() => {
           this.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
         });
-      });
+    });
 
     const goodsReceiptFormSub = this.goodsReceiptPOService.goodsReceiptPOForm.subscribe(res => {
       if (res) {
@@ -66,7 +89,6 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
   }
 
   ngOnDestroy() {
@@ -74,29 +96,31 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
   }
 
   // general:
-  trackByFn(index, row) {
-    return index;
-  }
+  trackByFn = (index) => index;
 
   readURL(event: any) {
     for (const item of event.srcElement.files) {
-      this.fileNameList.push(item.name);
+      this.fileList.push(item.name);
     }
   }
 
   backToList() {
-    this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
+    return this.router.navigate(
+      ['/inventory/receipt/goods-receipt-po/goods-receipt-po-list'],
+    );
   }
 
   approve() {
-    this.goodsReceiptPOService.approve(this.goodsReceiptPOForm.controls.id.value).then(res => {
-      this.backToList();
-    });
+    this.goodsReceiptPOService.approve(this.goodsReceiptPOForm.value.id)
+      .then(() => {
+        return this.backToList();
+      });
   }
 
-  reject() {
-    this.goodsReceiptPOService.reject(this.goodsReceiptPOForm.controls.id.value).then(res => {
-      this.backToList();
-    });
-  }
+  reject = () => {
+    this.goodsReceiptPOService.reject(this.goodsReceiptPOForm.value.id)
+      .then(() => {
+        return this.backToList();
+      });
+  };
 }

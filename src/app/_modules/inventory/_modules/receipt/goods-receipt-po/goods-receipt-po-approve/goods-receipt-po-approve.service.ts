@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
 import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
+import { translate } from '../../../../../../_helpers/string';
 
 @Injectable()
 export class GoodsReceiptPOApproveService {
@@ -15,7 +16,11 @@ export class GoodsReceiptPOApproveService {
     private goodsReceiptPORepository: GoodsReceiptPOApproveRepository,
     private toastrService: ToastrService,
   ) {
-    this.goodsReceiptPOForm = new BehaviorSubject(this.fb.group(new GoodsReceiptPOForm()));
+    this.goodsReceiptPOForm = new BehaviorSubject(
+      this.fb.group(
+        new GoodsReceiptPOForm(),
+      ),
+    );
   }
 
   getDetail = (goodsReceiptPOId?): Promise<boolean> => {
@@ -46,12 +51,12 @@ export class GoodsReceiptPOApproveService {
     return new Promise<boolean>((resolve, reject) => {
       this.goodsReceiptPORepository.approve(goodsReceiptPOId).subscribe(res => {
         if (res) {
-          this.toastrService.success('Cập nhật thành công !');
+          this.toastrService.success(translate('general.approve.success'));
           resolve();
         }
       }, (error: Error) => {
         if (error) {
-          this.toastrService.error('Có lỗi xảy ra trong quá trình phê duyệt !');
+          this.toastrService.error(translate('general.approve.error'));
           reject();
         }
       });
@@ -64,13 +69,13 @@ export class GoodsReceiptPOApproveService {
         .subscribe(
           res => {
             if (res) {
-              this.toastrService.success('Cập nhật thành công !');
+              this.toastrService.success(translate('general.update.success'));
               resolve();
             }
           },
           (error: Error) => {
             if (error) {
-              this.toastrService.error('Có lỗi xảy ra trong quá trình từ chối phê duyệt !');
+              this.toastrService.error(translate('general.update.error'));
               reject();
             }
           },

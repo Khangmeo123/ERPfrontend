@@ -35,6 +35,7 @@ import { NzUploadModule } from 'ng-zorro-antd';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconModule } from '@ant-design/icons-angular';
 import { TooltipModule } from 'primeng/tooltip';
+import { KeyFilterModule } from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -83,6 +84,7 @@ import { TooltipModule } from 'primeng/tooltip';
     NzUploadModule,
     NzIconModule,
     TooltipModule,
+    KeyFilterModule,
   ],
 })
 export class ReceiptModule {

@@ -126,8 +126,9 @@
                 [searchable]="true"
                 [display]="goodsReceiptPOSearchEntity.inventoryOrganizationCode"
                 placeholder="{{'goodsReceiptPOList.filters.inventoryOrganizationCode' | translate}}"
-                searchField="name"
+                searchField="code"
                 searchType="startsWith"
+                appendTo="body"
               >
                 <ng-template #label #option let-code="code" let-name="name">
                   {{code}} - {{name}}
@@ -155,6 +156,7 @@
                 placeholder="{{'goodsReceiptPOList.filters.requester' | translate}}"
                 searchField="name"
                 searchType="startsWith"
+                appendTo="body"
               >
                 <ng-template #label #option let-name="name">
                   {{name}}
@@ -166,6 +168,7 @@
                 (change)="onFilterStatus($event)"
                 [getList]="goodsReceiptPOListRepository.enumListStatus"
                 [display]="goodsReceiptPOSearchEntity?.statusDisplay"
+                appendTo="body"
                 placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">
                   {{display}}

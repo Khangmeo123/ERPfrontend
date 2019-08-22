@@ -209,7 +209,8 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}} </th>
+                      {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}
+                    </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.itemNo' | translate}} </th>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
@@ -232,30 +233,34 @@
                     <th data-qe-id="table-thead-discount-amount" pResizableColumn>
                       {{'goodsReceiptPODetail.tab1.discountAmount' | translate}}
                     </th>
-                    <th width="8%">
+                    <th class="value">
                       {{'goodsReceiptPODetail.tab1.total' | translate}}
                     </th>
                   </tr>
                   <tr>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListDocumentNumber(documentNumberSearchEntity.id)"
-                                         (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)"
-                                         (selectionChange)="documentNumberSearchEntity.id = $event[0];"
-                                         [key]="'documentNumber'"
-                                         [list]="documentNumberExceptIds"
-                                         [selectedList]="documentNumberIds"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getDocumentNumberList"
+                                        [searchEntity]="documentNumberSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith"
+                                        [searchable]="true"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
+                                        appendTo="body"
+                      ></jaja-select-list>
                     </th>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                         (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                         (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemId', 'equals')"
-                                         [key]="'code'"
-                                         [list]="itemDetailExceptIds"
-                                         [selectedList]="itemDetailIds"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getItemDetailList"
+                                        [searchEntity]="itemDetailSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith"
+                                        appendTo="body"
+                                        [renewOnOpen]="true"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.itemCode' | translate}}"
+                                        [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{name}} ({{code}})
+                        </ng-template>
+                      </jaja-select-list>
                     </th>
                     <th class="th-filter">
                       <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
@@ -263,14 +268,19 @@
                              type="text"/>
                     </th>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                         (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
-                                         (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'unitOfMeasureId', 'equals')"
-                                         [key]="'name'"
-                                         [list]="unitOfMeasureExceptIds"
-                                         [selectedList]="unitOfMeasureIds"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getUnitOfMeasureList"
+                                        [searchEntity]="unitOfMeasureSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith"
+                                        appendTo="body"
+                                        (change)="tableGoodsReceiptPOContents.filter($event.target.value, 'unitPrice', 'startsWith')"
+                                        [renewOnOpen]="true"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.unitPrice' | translate}}"
+                                        [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{name}} ({{code}})
+                        </ng-template>
+                      </jaja-select-list>
                     </th>
                     <th class="th-filter">
                       <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'quantity', 'equals')"
@@ -283,14 +293,18 @@
                              type="text"/>
                     </th>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListTax(taxSearchEntity.id)"
-                                         (search)="typingSearchTax($event, taxSearchEntity.id)"
-                                         (selectionChange)="taxSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'taxId', 'equals')"
-                                         [key]="'code'"
-                                         [list]="taxExceptIds"
-                                         [selectedList]="taxIds"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getTaxList"
+                                        [searchEntity]="valueAddedTaxSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith"
+                                        appendTo="body"
+                                        [renewOnOpen]="true"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.valueAddedTax' | translate}}"
+                                        [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{name}} ({{code}})
+                        </ng-template>
+                      </jaja-select-list>
                     </th>
                     <th class="th-filter">
                       <input
@@ -304,7 +318,7 @@
                         class="form-control w-100" pKeyFilter="int"
                         type="text"/>
                     </th>
-                    <th class="th-filter" width="8%"></th>
+                    <th class="th-filter value"></th>
                   </tr>
                 </ng-template>
                 <ng-template let-goodsReceiptPOContent let-index="rowIndex" pTemplate="body">
@@ -321,12 +335,12 @@
                     <td class="ui-resizable-column text-right">{{goodsReceiptPOContent.taxRate}}
                     </td>
                     <td class="ui-resizable-column text-right">
-                      {{goodsReceiptPOContent.generalDiscountRate}}
+                      {{goodsReceiptPOContent.itemDiscountRate}}
                     </td>
                     <td class="ui-resizable-column text-right">
-                      {{goodsReceiptPOContent.generalDiscountCost}}
+                      {{goodsReceiptPOContent.itemDiscountCost}}
                     </td>
-                    <td class="text-right" width="8%">
+                    <td class="text-right value">
                       {{goodsReceiptPOContent.total}}
                     </td>
                   </tr>
@@ -334,7 +348,7 @@
                 <ng-template let-columns pTemplate="footer">
                   <tr>
                     <td class="text-right" colspan="9">{{'general.text.total' | translate}}:</td>
-                    <td class="text-right" width="8%">
+                    <td class="text-right value">
                       {{ goodsReceiptPOForm.controls.totalGoodsReceiptPOContents.value | number}}
                     </td>
                   </tr>
@@ -344,26 +358,31 @@
           </mat-tab>
           <mat-tab label="{{'goodsReceiptPODetail.tab2.title' | translate}}">
             <div class="tab-upload">
-              <div class="form-upload-file d-flex">
-                <div class="pt-3 upload-btn-wrapper">
-                  <button class="btn btn-labeled btn-import">
-                    <span class="btn-label"><i class="material-icons">attach_file</i></span>
-                    <span class="button-label">
-                                            {{'general.button.attachFile' | translate}}
-                                        </span></button>
-                  <input (change)="readURL($event)" multiple type="file"/>
-                </div>
-                <div class="results d-flex align-items-center">
-                  <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
-                    <div class="results-item-name">
-                      <span class="icon-upload"><i class="material-icons">attach_file</i></span>
-                      <span>{{name}}</span>
-                    </div>
-                    <span class="close-attach align-items-center"><i
-                      class="material-icons">close</i></span>
-                  </div>
-                </div>
-              </div>
+              <nz-upload
+                nzType="drag"
+                [nzMultiple]="true"
+                [nzLimit]="0"
+                [nzDisabled]="true"
+                [(nzFileList)]="fileList">
+                <p class="ant-upload-drag-icon">
+                  <i nz-icon nzType="upload"></i>
+                </p>
+                <p class="ant-upload-text">
+                  {{'goodsReceiptPODetail.attachments.title' | translate}}
+                </p>
+                <p class="ant-upload-hint">
+                  {{'goodsReceiptPODetail.attachments.description' | translate}}
+                </p>
+              </nz-upload>
+
+              <button class="btn btn-labeled btn-send mt-2" disabled>
+                <span class="btn-label">
+                  <i class="material-icons">cloud_upload</i>
+                </span>
+                <span class="button-label">
+                  {{'general.button.upload' | translate}}
+                </span>
+              </button>
             </div>
           </mat-tab>
         </mat-tab-group>

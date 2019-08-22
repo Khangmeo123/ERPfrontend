@@ -70,7 +70,7 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   @ViewChild('dropdown', {static: false}) dropdown: ElementRef;
 
-  public width: any = '200px';
+  public width: any = '100%';
 
   public searchSubject: Subject<string> = new Subject<string>();
 
@@ -104,7 +104,9 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
   };
 
   ngAfterViewInit(): void {
-    this.onWindowResize();
+    if (this.appendTo === 'body') {
+      this.onWindowResize();
+    }
   }
 
   @Input()
