@@ -55,7 +55,7 @@ export class AuthenticationService {
 
   logout() {
     this.currentUserSubject.next(null);
-    localStorage.removeItem('currentUser');
+    localStorage.clear();
     this.cookieService.deleteAll('/');
     window.location.reload();
   }
