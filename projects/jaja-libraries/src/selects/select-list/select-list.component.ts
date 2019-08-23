@@ -59,6 +59,8 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   @Input() list: any[] = [];
 
+  @Input() small: boolean = false;
+
   @ContentChild('label', { static: false }) label: TemplateRef<ElementRef>;
 
   @ContentChild('option', { static: false }) option: TemplateRef<ElementRef>;
