@@ -7,10 +7,10 @@
       </span>
     </div>
   </div>
-  <div class="page-body" [formGroup]="permissionForm">
+  <div [formGroup]="permissionForm" class="page-body">
     <div class="page-section">
       <div class="d-flex justify-content-end">
-        <button class="btn btn-labeled btn-cancel mr-2" (click)="cancel()">
+        <button (click)="cancel()" class="btn btn-labeled btn-cancel mr-2">
           <span class="btn-label">
             <i class="material-icons">cancel</i>
           </span>
@@ -18,7 +18,7 @@
             {{'general.button.cancel' | translate}}
           </span>
         </button>
-        <button class="btn btn-labeled btn-save" (click)="save()">
+        <button (click)="save()" class="btn btn-labeled btn-save">
           <span class="btn-label">
             <i class="material-icons">save</i>
           </span>
@@ -34,23 +34,24 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form d-flex">
-            <jaja-select-list id="position-code"
+            <jaja-select-list (change)="onSelectPosition($event)"
+                              [display]="positionCode?.value"
                               [getList]="permissionDetailRepository.getPositionList"
                               [searchEntity]="positionSearchEntity"
-                              searchField="code"
-                              searchType="startsWith"
                               [searchable]="true"
-                              [display]="positionCode?.value"
+                              class="flex-grow-1"
+                              id="position-code"
                               placeholder="{{'permission.positionCode' | translate}}"
-                              (change)="onSelectPosition($event)"
-                              class="flex-grow-1">
+                              searchField="code"
+                              searchType="startsWith">
               <ng-template #label #option let-code="code" let-name="name">
                 {{code}} - {{name}}
               </ng-template>
             </jaja-select-list>
-            <app-error data-qe-id="dialog-error-code"
-                       *ngIf="(positionCode?.errors && positionCode?.touched) || !!errors?.get('positionCode')?.value"
-                       [formGroup]="permissionForm" [property]="'positionCode'" [placement]="'top'" class="error-form">
+            <app-error *ngIf="(positionCode?.errors && positionCode?.touched) || !!errors?.get('positionCode')?.value"
+                       [formGroup]="permissionForm"
+                       [placement]="'top'" [property]="'positionCode'" class="error-form"
+                       data-qe-id="dialog-error-code">
             </app-error>
           </div>
         </div>
@@ -61,22 +62,23 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form d-flex">
-            <jaja-select-list id="current-status"
+            <jaja-select-list [display]="currentStatusDisplay?.value"
                               [list]="documentStatus"
-                              formControlName="currentStatusId"
-                              key="id"
                               [renewOnOpen]="false"
-                              [display]="currentStatusDisplay?.value"
-                              placeholder="{{'permission.currentStatus' | translate}}"
-                              class="flex-grow-1">
+                              class="flex-grow-1"
+                              formControlName="currentStatusId"
+                              id="current-status"
+                              key="id"
+                              placeholder="{{'permission.currentStatus' | translate}}">
               <ng-template #label #option let-display="display">
                 {{display}}
               </ng-template>
             </jaja-select-list>
-            <app-error data-qe-id="dialog-error-current-status"
-                       *ngIf="(currentStatusId?.errors && currentStatusId?.touched) || !!errors?.get('currentStatusId')?.value"
-                       [formGroup]="permissionForm" [property]="'currentStatusId'" [placement]="'top'"
-                       class="error-form">
+            <app-error
+              *ngIf="(currentStatusId?.errors && currentStatusId?.touched) || !!errors?.get('currentStatusId')?.value"
+              [formGroup]="permissionForm"
+              [placement]="'top'" [property]="'currentStatusId'" class="error-form"
+              data-qe-id="dialog-error-current-status">
             </app-error>
           </div>
         </div>
@@ -87,21 +89,22 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form d-flex">
-            <jaja-select-list id="next-status"
+            <jaja-select-list [display]="nextStatusDisplay?.value"
                               [list]="documentStatus"
-                              formControlName="nextStatusId"
-                              key="id"
                               [renewOnOpen]="false"
-                              [display]="nextStatusDisplay?.value"
-                              placeholder="{{'permission.nextStatus' | translate}}"
-                              class="flex-grow-1">
+                              class="flex-grow-1"
+                              formControlName="nextStatusId"
+                              id="next-status"
+                              key="id"
+                              placeholder="{{'permission.nextStatus' | translate}}">
               <ng-template #label #option let-display="display">
                 {{display}}
               </ng-template>
             </jaja-select-list>
-            <app-error data-qe-id="dialog-error-next-status"
-                       *ngIf="(nextStatusId?.errors && nextStatusId?.touched) || !!errors?.get('nextStatusId')?.value"
-                       [formGroup]="permissionForm" [property]="'nextStatusId'" [placement]="'top'" class="error-form">
+            <app-error *ngIf="(nextStatusId?.errors && nextStatusId?.touched) || !!errors?.get('nextStatusId')?.value"
+                       [formGroup]="permissionForm"
+                       [placement]="'top'" [property]="'nextStatusId'" class="error-form"
+                       data-qe-id="dialog-error-next-status">
             </app-error>
           </div>
         </div>
@@ -113,11 +116,13 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form">
-            <input type="text" pKeyFilter="pnum" class="form-control" id="current-step" formControlName="currentStep"
-                   placeholder="{{'permission.currentStep' | translate}}">
-            <app-error data-qe-id="dialog-error-current-step"
-                       *ngIf="(currentStep?.errors && currentStep?.touched) || !!errors?.get('currentStep')?.value"
-                       [formGroup]="permissionForm" [property]="'currentStep'" [placement]="'top'" class="error-form">
+            <input class="form-control" formControlName="currentStep" id="current-step" pKeyFilter="pnum"
+                   placeholder="{{'permission.currentStep' | translate}}"
+                   type="text">
+            <app-error *ngIf="(currentStep?.errors && currentStep?.touched) || !!errors?.get('currentStep')?.value"
+                       [formGroup]="permissionForm"
+                       [placement]="'top'" [property]="'currentStep'" class="error-form"
+                       data-qe-id="dialog-error-current-step">
             </app-error>
           </div>
         </div>
@@ -128,11 +133,13 @@
             <span class="text-danger ml-1">(*)</span>
           </label>
           <div class="div-form">
-            <input type="text" pKeyFilter="pnum" class="form-control" id="next-step" formControlName="nextStep"
-                   placeholder="{{'permission.nextStep' | translate}}">
-            <app-error data-qe-id="dialog-error-next-step"
-                       *ngIf="(nextStep?.errors && nextStep?.touched) || !!errors?.get('nextStep')?.value"
-                       [formGroup]="permissionForm" [property]="'nextStep'" [placement]="'top'" class="error-form">
+            <input class="form-control" formControlName="nextStep" id="next-step" pKeyFilter="pnum"
+                   placeholder="{{'permission.nextStep' | translate}}"
+                   type="text">
+            <app-error *ngIf="(nextStep?.errors && nextStep?.touched) || !!errors?.get('nextStep')?.value"
+                       [formGroup]="permissionForm"
+                       [placement]="'top'" [property]="'nextStep'" class="error-form"
+                       data-qe-id="dialog-error-next-step">
             </app-error>
           </div>
         </div>
@@ -145,7 +152,7 @@
           <label for="mail-to-sender">
             {{'permission.mailToSender' | translate}}
           </label>
-          <p-editor id="mail-to-sender" [style]="{'height':'320px'}" formControlName="mailToSender"></p-editor>
+          <p-editor [style]="{'height':'320px'}" formControlName="mailToSender" id="mail-to-sender"></p-editor>
         </div>
       </div>
     </div>
@@ -156,9 +163,57 @@
           <label for="mail-to-approver">
             {{'permission.mailToApprover' | translate}}
           </label>
-          <p-editor id="mail-to-approver" [style]="{'height':'320px'}" formControlName="mailToApprover"></p-editor>
+          <p-editor [style]="{'height':'320px'}" formControlName="mailToApprover" id="mail-to-approver"></p-editor>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="page-section d-flex">
+    <button (click)="confirmDeleting()" class="btn btn-labeled btn-delete mr-2">
+      <span class="btn-label">
+        <i class="material-icons">delete</i>
+      </span>
+      <span class="button-label">
+        {{'general.button.delete' | translate}}
+      </span>
+    </button>
+    <div class="flex-grow-1 d-flex justify-content-end">
+      <button (click)="cancel()" class="btn btn-labeled btn-cancel mr-2">
+          <span class="btn-label">
+            <i class="material-icons">cancel</i>
+          </span>
+        <span class="button-label">
+            {{'general.button.cancel' | translate}}
+          </span>
+      </button>
+      <button (click)="save()" class="btn btn-labeled btn-save">
+          <span class="btn-label">
+            <i class="material-icons">save</i>
+          </span>
+        <span class="button-label">
+            {{'general.button.save' | translate}}
+          </span>
+      </button>
+    </div>
+  </div>
 </div>
+
+
+<p-confirmDialog #cd
+                 header="{{'general.confirmation.title' | translate}}"
+                 message="{{'general.confirmation.message' | translate}}"
+                 icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-labeled btn-cancel align-items-center" (click)="cd.reject()">
+        <span class="button-label">
+          {{'general.button.confirm.no' | translate}}
+        </span></button>
+      <button type="button" class="btn btn-labeled btn-reverse align-items-center" (click)="cd.accept()">
+        <span class="button-label">
+          {{'general.button.confirm.yes' | translate}}
+        </span></button>
+    </div>
+  </p-footer>
+</p-confirmDialog>

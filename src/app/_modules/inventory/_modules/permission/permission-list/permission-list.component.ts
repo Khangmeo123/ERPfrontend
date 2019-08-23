@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { translate } from '../../../../../_helpers/string';
 import { PermissionListService } from './permission-list.service';
 import { GeneralService } from '../../../../../_services/general-service.service';
-import { Subscription } from 'rxjs';
+import { forkJoin, Subscription } from 'rxjs';
 import { InventoryOrganizationSearchEntity } from '../../../_backend/inventory-organization/inventory-organization.search-entity';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { PermissionEntity, PermissionSearchEntity } from '../permission.entities';
@@ -52,17 +52,18 @@ export class PermissionListComponent implements OnInit, OnDestroy {
     private permissionRepository: PermissionListRepository,
   ) {
     const routeSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      if (params.inventoryOrganizationId) {
-        this.permissionRepository.getInventoryOrganization(params.inventoryOrganizationId)
-          .subscribe((inventoryOrganization: InventoryOrganizationEntity) => {
-            this.inventoryOrganization = inventoryOrganization;
-          });
-      }
-      if (params.inventoryDocumentTypeId) {
+      if (params.inventoryOrganizationId && params.inventoryDocumentTypeId) {
         this.getDocumentStatus(params.inventoryDocumentTypeId);
-        this.permissionRepository.getInventoryDocumentType(params.inventoryDocumentTypeId)
-          .subscribe((inventoryDocumentType: EnumEntity) => {
+        forkJoin(
+          this.permissionRepository.getInventoryOrganization(params.inventoryOrganizationId),
+          this.permissionRepository.getInventoryDocumentType(params.inventoryDocumentTypeId),
+        )
+          .subscribe(([inventoryOrganization, inventoryDocumentType]) => {
+            this.inventoryOrganization = inventoryOrganization;
             this.inventoryDocumentType = inventoryDocumentType;
+            if (this.allSelected) {
+              return this.getList();
+            }
           });
       }
     });
