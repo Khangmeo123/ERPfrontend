@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation,
+  ViewEncapsulation
 } from '@angular/core';
 import { FilterType } from '../../../models/filters/FilterType';
 import { DateFilter } from '../../../models/filters/DateFilter';

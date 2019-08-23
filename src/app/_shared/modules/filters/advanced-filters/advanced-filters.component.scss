@@ -2,30 +2,37 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
-.advanced-filter {
-  position: relative;
+app-advanced-filters {
   width: 100%;
   flex-grow: 1;
   flex-basis: 100%;
   display: flex;
 
   * {
-    font-size: small;
+    font-size: small !important;
   }
 
-  .input-group-prepend {
+  .input-group {
+    flex-wrap: unset;
+
+    .form-control {
+      border-top-left-radius: unset;
+      border-bottom-left-radius: unset;
+    }
+
+    .input-group-prepend {
+      cursor: pointer;
+    }
+  }
+}
+
+.dropdown-menu.advanced-filter-dropdown {
+  font-size: small;
+
+  li.menuitem {
     cursor: pointer;
-  }
 
-  button:focus {
-    outline: none;
-    outline: 0;
-    border-color: #cecece;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-
-  li.dropdown-item {
-    cursor: pointer;
+    .dropdown-item {
+    }
   }
 }
