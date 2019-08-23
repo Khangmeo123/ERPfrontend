@@ -241,11 +241,11 @@
                     <th class="th-filter">
                       <jaja-select-list [getList]="goodsReceiptPOApproveRepository.getDocumentNumberList"
                                         [searchEntity]="documentNumberSearchEntity"
+                                        searchField="documentNumber"
+                                        searchType="startsWith"
                                         [searchable]="true"
                                         appendTo="body"
                                         placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
-                                        searchField="code"
-                                        searchType="startsWith"
                       ></jaja-select-list>
                     </th>
                     <th class="th-filter">
