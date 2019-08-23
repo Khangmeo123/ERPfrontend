@@ -241,14 +241,14 @@ export class GoodsReceiptPOReceiveService {
     });
   };
 
-  changeLocationSerialNumber = (goodsReceiptPOBinlocationEntity: BinLocationEntity) => {
+  changeLocationSerialNumber = (binLocationEntity: BinLocationEntity) => {
     const currentSerialNumber = this.serialNumber.getValue();
     const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
     if (currentSerialNumberList) {
       currentSerialNumberList.forEach(item => {
         if (item.isSelected) {
-          item.binLocationId = goodsReceiptPOBinlocationEntity.id;
-          item.binLocationCode = goodsReceiptPOBinlocationEntity.code;
+          item.binLocationId = binLocationEntity.id;
+          item.binLocationCode = binLocationEntity.code;
           item.isSelected = false;
         }
       });

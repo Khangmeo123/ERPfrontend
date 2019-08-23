@@ -1,12 +1,12 @@
 <div class="page goods-receipt-po">
   <div class="page-header justify-content-between">
     <div class="justify-content-start align-items-center">
-            <span (click)="backToList()" class="back-to-list">
-                <i class="material-icons">arrow_back_ios</i>
-            </span>
+        <span (click)="backToList()" class="back-to-list">
+            <i class="material-icons">arrow_back_ios</i>
+        </span>
       <span class="page-title">
-                {{pageTitle | translate}}
-            </span>
+          {{pageTitle | translate}}
+      </span>
       <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
     </div>
     <div class="page-actions d-flex">
@@ -32,16 +32,16 @@
         <ul *dropdownMenu aria-labelledby="button-basic" class="dropdown-menu dropdown-menu-right" id="dropdown-basic"
             role="menu">
           <li role="menuitem">
-            <a class="dropdown-item" href="javascript:">{{'general.button.history' | translate}}</a>
+            <a class="dropdown-item btn btn-link" role="button">{{'general.button.history' | translate}}</a>
           </li>
           <li class="divider dropdown-divider"></li>
           <li role="menuitem">
-            <a class="dropdown-item" href="javascript:">{{'general.button.print' | translate}}</a>
+            <a class="dropdown-item btn btn-link" role="button">{{'general.button.print' | translate}}</a>
           </li>
           <li class="divider dropdown-divider"></li>
           <li role="menuitem">
             <a class="dropdown-item"
-               href="javascript:">{{'general.button.referenceDocument' | translate}}</a>
+               role="button" class="btn btn-link">{{'general.button.referenceDocument' | translate}}</a>
           </li>
         </ul>
       </div>
@@ -152,6 +152,7 @@
           </div>
         </div>
         <div class="row">
+
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptPODetail.receiptedDate' | translate}}
@@ -222,26 +223,24 @@
                   </tr>
                   <tr>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListDocumentNumber(documentNumberSearchEntity.id)"
-                                         (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)"
-                                         (selectionChange)="documentNumberSearchEntity.id = $event[0].id;
-                                                    tableGoodsReceiptPOContents.filter($event[0].documentNumber, 'documentNumber', 'equals')"
-                                         [key]="'documentNumber'"
-                                         [list]="documentNumberExceptIds"
-                                         [selectedList]="documentNumberIds"
-                                         [valueSelector]="returnNode"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getDocumentNumberList"
+                                        [searchEntity]="documentNumberSearchEntity"
+                                        searchField="documentNumber"
+                                        [searchable]="true"
+                                        appendTo="body"
+                                        [small]="true"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
+                      ></jaja-select-list>
                     </th>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                         (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                         (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
-                                         [key]="'code'"
-                                         [list]="itemDetailExceptIds"
-                                         [selectedList]="itemDetailIds"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
+                                        [searchEntity]="itemDetailSearchEntity"
+                                        [searchable]="true"
+                                        searchField="code"
+                                        [small]="true"
+                                        appendTo="body"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.itemNo' | translate}}"
+                      ></jaja-select-list>
                     </th>
                     <th class="th-filter">
                       <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
@@ -249,14 +248,13 @@
                              type="text"/>
                     </th>
                     <th class="th-filter">
-                      <app-single-select (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                         (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
-                                         (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'unitOfMeasureId', 'equals')"
-                                         [key]="'name'"
-                                         [list]="unitOfMeasureExceptIds"
-                                         [selectedList]="unitOfMeasureIds"
-                                         data-qe-id="table-thead-filter-uom">
-                      </app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getUnitOfMeasureList"
+                                        [searchEntity]="unitOfMeasureSearchEntity"
+                                        searchField="code"
+                                        [searchable]="true"
+                                        [small]="true"
+                                        appendTo="body"
+                      ></jaja-select-list>
                     </th>
                     <th class="th-filter"></th>
                     <th class="th-filter"></th>
@@ -272,28 +270,13 @@
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.quantity}}</td>
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.actualReceive}}</td>
                     <td>
-                      <!-- <div *ngIf="goodsReceiptPOContent.type == 1">
-                          <a (click)="showBatches()">
-                              {{'goodsReceiptPODetail.tab1.batches' | translate}}
-                          </a>
-                      </div>
-                      <div *ngIf="goodsReceiptPOContent.type == 2">
-                          <a (click)="showSerial()">
-                              {{'goodsReceiptPODetail.tab1.Serial' | translate}}
-                          </a>
-                      </div>
-                      <div *ngIf="goodsReceiptPOContent.type == 3">
-                          <a (click)="showAmount()">
-                              {{'goodsReceiptPODetail.tab1.amount' | translate}}
-                          </a>
-                      </div> -->
-                      <a (click)="showBatch(goodsReceiptPOContent)" href="javascript:">
+                      <a (click)="showBatch(goodsReceiptPOContent)" role="button" class="btn btn-link">
                         {{'goodsReceiptPODetail.tab1.batches' | translate}}
                       </a>
-                      <a (click)="showSerial(goodsReceiptPOContent)" href="javascript:">
+                      <a (click)="showSerial(goodsReceiptPOContent)" role="button" class="btn btn-link">
                         {{'goodsReceiptPODetail.tab1.Serial' | translate}}
                       </a>
-                      <a (click)="showQuantity(goodsReceiptPOContent)" href="javascript:">
+                      <a (click)="showQuantity(goodsReceiptPOContent)" role="button" class="btn btn-link">
                         {{'goodsReceiptPODetail.tab1.amount' | translate}}
                       </a>
                     </td>
@@ -303,24 +286,41 @@
             </div>
           </mat-tab>
           <mat-tab label="{{'goodsReceiptPODetail.tab2.title' | translate}}">
-            <div class="tab-upload">
-              <div class="form-upload-file d-flex">
-                <div class="pt-3 upload-btn-wrapper">
-                  <button class="btn btn-labeled btn-import">
-                    <span class="btn-label"><i class="material-icons">attach_file</i></span>
-                    <span class="button-label">
-                                            {{'general.button.attachFile' | translate}}
-                                        </span></button>
-                  <input (change)="readURL($event)" multiple type="file"/>
-                </div>
-                <div class="results d-flex align-items-center">
-                  <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
-                    <div class="results-item-name">
-                      <span class="icon-upload"><i class="material-icons">attach_file</i></span>
-                      <span>{{name}}</span>
-                    </div>
-                    <span class="close-attach align-items-center"><i
-                      class="material-icons">close</i></span>
+            <div class="tab-upload mt-4">
+              <div class="row">
+                <div class="col">
+                  <nz-upload [nzDisabled]="true"
+                             [nzLimit]="0"
+                             [nzMultiple]="true"
+                             nzType="drag">
+                    <p class="ant-upload-drag-icon">
+                      <i nz-icon nzType="upload"></i>
+                    </p>
+                    <p class="ant-upload-text">
+                      {{'goodsReceiptPODetail.attachments.title' | translate}}
+                    </p>
+                    <p class="ant-upload-hint">
+                      {{'goodsReceiptPODetail.attachments.description' | translate}}
+                    </p>
+                  </nz-upload>
+                  <div class="d-flex justify-content-start mt-2">
+                    <button disabled class="btn btn-labeled btn-send mr-2">
+                    <span class="btn-label">
+                      <i class="material-icons">cloud_upload</i>
+                    </span>
+                      <span class="button-label">
+                      {{'general.button.upload' | translate}}
+                    </span>
+                    </button>
+
+                    <button (click)="toggleAttachmentModal()" class="btn btn-labeled btn-send">
+                    <span class="btn-label">
+                      <i class="material-icons">cloud_upload</i>
+                    </span>
+                      <span class="button-label">
+                      {{'general.button.uploaded' | translate}} ({{fileAttachments.value.length}})
+                    </span>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -333,8 +333,12 @@
 </div>
 
 
-<p-dialog [(visible)]="displayBatch" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
-          [style]="{width: '90%'}" appendTo="body">
+<p-dialog [(visible)]="displayBatch"
+          [contentStyle]="{'overflow':'visible'}"
+          [modal]="true"
+          [responsive]="true"
+          [style]="{width: '90%'}"
+          appendTo="body">
   <p-header>
     <div class="row">
       <div class="col-sm-3">
@@ -342,32 +346,33 @@
       </div>
       <div class="col-sm-9">
         <div class="page-actions d-flex justify-content-end">
-          <button (click)="clearSerialNumberTable(tableBatch)" class="btn btn-labeled btn-clear mr-2"
+          <button (click)="clearSerialNumberTable(tableBatch)"
+                  class="btn btn-labeled btn-clear mr-2"
                   data-qe-id="button-clear">
-                        <span class="btn-label">
-                            <img src="/assets/img/filter.svg" width="16">
-                        </span>
+            <span class="btn-label">
+              <img src="/assets/img/filter.svg" width="16">
+            </span>
             <span class="button-label">
-                            {{'general.button.clear' | translate}}
-                        </span>
+                {{'general.button.clear' | translate}}
+            </span>
           </button>
           <button class="btn btn-labeled btn-import mr-2">
-                        <span class="btn-label">
-                            <img src="/assets/img/import.svg" width="24">
-                        </span>
+            <span class="btn-label">
+              <img src="/assets/img/import.svg" width="24">
+            </span>
             <span class="button-label">
-                            {{'general.button.import' | translate}}
-                        </span></button>
+              {{'general.button.import' | translate}}
+            </span></button>
           <button class="btn btn-labeled btn-export mr-2">
             <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
             <span class="button-label">
-                            {{'general.button.export' | translate}}
-                        </span></button>
+              {{'general.button.export' | translate}}
+            </span></button>
           <button (click)="deleteMultipleBatch()" class="btn btn-labeled btn-delete">
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span></button>
+                {{'general.button.delete' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -379,7 +384,7 @@
           <p-inputSwitch [(ngModel)]="activeScan"></p-inputSwitch>
           <span class="ml-2">{{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}</span>
           <div class="ml-2">
-            <input (input)="inputSerialNumber()" [(ngModel)]="serialNumber" [disabled]="activeScan"
+            <input (input)="inputSerialNumber($event)" [(ngModel)]="serialNumber" [disabled]="activeScan"
                    class="form-control" data-qe-id="dialog-input-start-scan-batches-no" type="text">
           </div>
         </div>
@@ -387,14 +392,8 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
-          <app-single-select (listOpen)="dropListBinLocation(binLocationId)"
-                             (search)="typingSearchBinLocation($event, binLocationId)"
-                             (selectionChange)="changeLocationInBatch($event[0])"
-                             *ngIf="displaySerial" [disabled]="activeScan"
-                             [key]="'code'"
-                             [list]="binLocationExceptIds" [selectedList]="binLocationIds"
-                             [valueSelector]="returnNode" data-qe-id="ialog-input-bin-location">
-          </app-single-select>
+          <jaja-select-list
+          ></jaja-select-list>
         </div>
       </div>
       <div class="col-sm-6 mt-2"></div>
@@ -440,23 +439,32 @@
                 </div>
               </th>
               <th data-qe-id="table-thead-qrCode" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.qrCode' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.qrCode' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-item-code" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.itemCode' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.itemCode' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-item-name" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.itemName' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.itemName' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-code" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.batchCode' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.batchCode' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-manufacturing-date" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.manufacturingDate' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.manufacturingDate' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-expiry-date" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.expiryDate' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.expiryDate' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-quantity-in-each-batch" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.quantityInEachBatch' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.quantityInEachBatch' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-location-code" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.locationCode' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.locationCode' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-quantity" pResizableColumn>
-                {{'goodsReceiptPODetail.batches.quantity' | translate}} </th>
+                {{'goodsReceiptPODetail.batches.quantity' | translate}}
+              </th>
               <th data-qe-id="table-thead-batches-action" pResizableColumn>
                 {{'general.action' | translate}}
               </th>
@@ -470,14 +478,17 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
-                                   [key]="'code'"
-                                   [list]="itemDetailExceptIds"
-                                   [selectedList]="itemDetailIds"
-                                   data-qe-id="table-thead-filter-uom">
-                </app-single-select>
+                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
+                                  [searchEntity]="itemDetailSearchEntity"
+                                  searchField="code"
+                                  searchType="startsWith"
+                                  [searchable]="true"
+                                  appendTo="body"
+                                  [small]="true">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
               </th>
               <th class="th-filter">
                 <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
@@ -538,16 +549,7 @@
                 <input [(ngModel)]="batch.actualReceive" class="form-control" type="text"/>
               </td>
               <td class="ui-resizable-column">
-                <app-single-select
-                  (listOpen)="dropListBinLocation(batch.goodsReceiptPOBatchBinLocation[0].binLocationId)"
-                  (search)="typingSearchBinLocation($event, batch.goodsReceiptPOBatchBinLocation[0].binLocationId)"
-                  (selectionChange)="batch.goodsReceiptPOBatchBinLocation[0].binLocationId = $event[0]"
-                  [disabled]="activeScan"
-                  [initialValue]="batch.goodsReceiptPOBatchBinLocation[0].binLocationCode"
-                  [key]="'code'"
-                  [list]="binLocationExceptIds"
-                  [selectedList]="binLocationIds" data-qe-id="ialog-input-bin-location">
-                </app-single-select>
+                <jaja-select-list></jaja-select-list>
               </td>
               <td class="ui-resizable-column">
                 <input [(ngModel)]="batch.goodsReceiptPOBatchBinLocation[0].quantity" [attr.placeholder]="placeholder"
@@ -559,36 +561,33 @@
                 </mat-icon>
               </td>
             </tr>
-            <tr *ngFor="let binLocation of batch.goodsReceiptPOBatchBinLocations | slice:1; let i = index;">
+            <tr *ngFor="let binLocation of batch.goodsReceiptPOBatchBinLocations | slice:1; index as i">
               <td class="ui-resizable-column">
-                <app-single-select (listOpen)="dropListBinLocation(binLocation.binLocationId)"
-                                   (search)="typingSearchBinLocation($event, binLocation.binLocationId)"
-                                   (selectionChange)="binLocation.binLocationId = $event[0]" [disabled]="activeScan"
-                                   [initialValue]="binLocation.binLocationCode"
-                                   [key]="'code'"
-                                   [list]="binLocationExceptIds" [selectedList]="binLocationIds"
-                                   data-qe-id="ialog-input-bin-location">
-                </app-single-select>
+                <jaja-select-list></jaja-select-list>
               </td>
               <td class="ui-resizable-column">
                 <input [(ngModel)]="binLocation.quantity" [attr.placeholder]="placeholder" class="form-control"
                        type="text"/>
               </td>
               <td class="text-center" width="5%">
-                <mat-icon (click)="deleteBinLocationBatch(i)" class="text-danger">delete</mat-icon>
+                <mat-icon (click)="deleteBinLocationBatch(i, i)" class="text-danger">delete</mat-icon>
               </td>
             </tr>
             <tr>
               <td class="ui-resizable-column">
-                <a (click)="addBinLocationBatch()" href="javascript:">+ Bấm vào để thêm mới...</a>
+                <a (click)="addBinLocationBatch()" role="button" class="btn btn-link">+ Bấm vào để thêm mới...</a>
               </td>
               <td class="ui-resizable-column"></td>
               <td class="text-center" width="5%"></td>
             </tr>
           </ng-template>
         </p-table>
-        <p-table #tableBatch *ngIf="!enableBinLocation" [resizableColumns]="true" [scrollable]="true"
-                 [value]="batch.goodsReceiptPOBatches" resizableColumns resizableColumns scrollHeight="300px">
+        <p-table #tableBatch
+                 *ngIf="!enableBinLocation"
+                 [resizableColumns]="true"
+                 [scrollable]="true"
+                 [value]="batch.goodsReceiptPOBatches"
+                 scrollHeight="300px">
           <ng-template pTemplate="colgroup">
             <colgroup>
               <col>
@@ -643,14 +642,18 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
-                                   [key]="'code'"
-                                   [list]="itemDetailExceptIds"
-                                   [selectedList]="itemDetailIds"
-                                   data-qe-id="table-thead-filter-uom">
-                </app-single-select>
+                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
+                                  [searchEntity]="itemDetailSearchEntity"
+                                  searchField="code"
+                                  searchType="startsWith"
+                                  [searchable]="true"
+                                  [small]="true"
+                                  appendTo="body"
+                                  placeholder="{{'goodsReceiptPODetail.batches.itemCode' | translate}}">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
               </th>
               <th class="th-filter">
                 <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
@@ -761,13 +764,13 @@
           <button class="btn btn-labeled btn-export mr-2">
             <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
             <span class="button-label">
-                            {{'general.button.export' | translate}}
-                        </span></button>
+                {{'general.button.export' | translate}}
+            </span></button>
           <button (click)="deleteMultipleSerialNumber()" class="btn btn-labeled btn-delete">
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
-                            {{'general.button.delete' | translate}}
-                        </span></button>
+                {{'general.button.delete' | translate}}
+            </span></button>
         </div>
       </div>
     </div>
@@ -788,14 +791,17 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
-          <app-single-select (listOpen)="dropListBinLocation(binLocationId)"
-                             (search)="typingSearchBinLocation($event, binLocationId)"
-                             (selectionChange)="changeLocationSerialNumber($event[0])"
-                             *ngIf="displaySerial " [disabled]="!activeScan"
-                             [key]="'code'"
-                             [list]="binLocationExceptIds" [selectedList]="binLocationIds"
-                             [valueSelector]="returnNode" data-qe-id="ialog-input-bin-location">
-          </app-single-select>
+          <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                            appendTo="body"
+                            [small]="true"
+                            [searchable]="true"
+                            searchField="code"
+                            [searchEntity]="binLocationSearchEntity"
+                            placeholder="">
+            <ng-template #label #option let-code="code">
+              {{code}}
+            </ng-template>
+          </jaja-select-list>
         </div>
       </div>
       <div class="col-sm-6 mt-2"></div>
@@ -878,14 +884,16 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
-                                   [key]="'code'"
-                                   [list]="itemDetailExceptIds"
-                                   [selectedList]="itemDetailIds"
-                                   data-qe-id="table-thead-filter-uom">
-                </app-single-select>
+                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
+                                  [searchEntity]="itemDetailSearchEntity"
+                                  [searchable]="true"
+                                  searchField="code"
+                                  appendTo="body"
+                                  [small]="true">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
               </th>
               <th class="th-filter">
                 <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
@@ -943,14 +951,17 @@
                 {{serialNumber.expirationDate}}
               </td>
               <td class="ui-resizable-column">
-                <app-single-select (listOpen)="dropListBinLocation(serialNumber.binLocationId)"
-                                   (search)="typingSearchBinLocation($event, serialNumber.binLocationId)"
-                                   (selectionChange)="serialNumber.binLocationId = $event[0]" [disabled]="!activeScan"
-                                   [initialValue]="serialNumber.binLocationCode"
-                                   [key]="'code'"
-                                   [list]="binLocationExceptIds"
-                                   [selectedList]="binLocationIds" data-qe-id="dialog-input-bin-location">
-                </app-single-select>
+                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                                  [searchEntity]="binLocationSearchEntity"
+                                  searchField="code"
+                                  searchType="startsWith"
+                                  [searchable]="true"
+                                  [small]="true"
+                                  appendTo="body">
+                  <ng-template #option #label let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
               </td>
               <td class="text-center" width="5%">
                 <mat-icon (click)="deleteSerialNumber()" class="text-danger">delete</mat-icon>
@@ -1009,14 +1020,13 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
-                                   [key]="'code'"
-                                   [list]="itemDetailExceptIds"
-                                   [selectedList]="itemDetailIds"
-                                   data-qe-id="table-thead-filter-uom">
-                </app-single-select>
+                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
+                                  [searchEntity]="itemDetailSearchEntity"
+                                  searchField="code"
+                                  searchType="startsWith"
+                                  [searchable]="true"
+                >
+                </jaja-select-list>
               </th>
               <th class="th-filter">
                 <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
@@ -1181,21 +1191,20 @@
                        type="text"/>
               </td>
               <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
-                <app-single-select
-                  (listOpen)="dropListBinLocation(quantityDetail.goodsReceiptPOQuantities[0].binLocationId)"
-                  (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
-                  (selectionChange)="quantityDetail.goodsReceiptPOQuantities[0].binLocationId = $event[0];"
-                  [initialValue]="quantityDetail.goodsReceiptPOQuantities[0]?.binLocationCode"
-                  [key]="'code'"
-                  [list]="binLocationExceptIds"
-                  [selectedList]="binLocationIds"
-                  data-qe-id="dialog-input-bin-location"></app-single-select>
+                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                                  [searchEntity]="binLocationSearchEntity"
+                                  searchField="code"
+                                  searchType="startsWith">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
               </td>
               <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
                 <div class="validation-div">
                   <input
                     (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = generalService.toNumber($event); recalculateQuantityDetail()"
-                    [attr.placeholder]="placeholder"
+                    [attr.placeholder]="null"
                     [ngClass]="{'error-border-color': quantityDetail.errors}"
                     [ngModel]="quantityDetail.goodsReceiptPOQuantities[0]?.quantity"
                     class="form-control"
@@ -1218,14 +1227,14 @@
                   <div class="validation-div">
                     <div [ngClass]="{'error-border-color': quantityModel.errors}"
                          class="w-100 error-border-color">
-                      <app-single-select (listOpen)="dropListBinLocation(quantityModel.binLocationId)"
-                                         (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
-                                         (selectionChange)="quantityModel.binLocationId = $event[0];"
-                                         [initialValue]="quantityModel.binLocationCode"
-                                         [key]="'code'"
-                                         [list]="binLocationExceptIds"
-                                         [selectedList]="binLocationIds"
-                                         data-qe-id="dialog-input-bin-location"></app-single-select>
+                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                                        [searchEntity]="binLocationSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
                     </div>
                     <div *ngIf="quantityModel.errors" class="invalid-validation">
                       <span>{{quantityModel.errors.quantity}}</span>
@@ -1253,7 +1262,7 @@
             </ng-container>
             <tr>
               <td>
-                <a (click)="addBinLocationQuantity()" href="javascript:">+ Bấm vào để thêm mới...</a>
+                <a (click)="addBinLocationQuantity()" role="button" class="btn btn-link">+ Bấm vào để thêm mới...</a>
               </td>
               <td></td>
               <td></td>

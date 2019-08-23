@@ -40,9 +40,6 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      // map(r => {
-      //   return new GoodsReceiptPOEntity(r.body);
-      // }
       map(
         (response: HttpResponse<GoodsReceiptPOEntity>) => new GoodsReceiptPOEntity(response.body),
       ),
@@ -57,7 +54,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => r.body,
+      map(response => response.body,
       ),
     );
   };
@@ -70,7 +67,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => r.body),
+      map(response => response.body),
     );
   };
 
@@ -129,7 +126,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => new GoodsReceiptPOContent(r.body)),
+      map(response => new GoodsReceiptPOContent(response.body)),
     );
   };
 
@@ -141,7 +138,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => r.body),
+      map(response => response.body),
     );
   };
 
@@ -185,7 +182,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => r.body),
+      map(response => response.body),
     );
   };
 
@@ -215,8 +212,8 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => {
-        return new BatchEntity(r.body);
+      map(response => {
+        return new BatchEntity(response.body);
       }),
     );
   };
@@ -229,7 +226,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => r.body),
+      map(response => response.body),
     );
   };
 
@@ -242,7 +239,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
         headers: this.getHeader(),
       },
     ).pipe(
-      map(r => new GoodsReceiptPOContent(r.body)),
+      map(response => new GoodsReceiptPOContent(response.body)),
     );
   };
 }
