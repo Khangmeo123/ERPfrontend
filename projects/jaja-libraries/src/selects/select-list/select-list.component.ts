@@ -4,6 +4,7 @@ import {
   ElementRef,
   EventEmitter,
   forwardRef,
+  HostListener,
   Input,
   OnChanges,
   OnDestroy,
@@ -11,6 +12,7 @@ import {
   Output,
   SimpleChanges,
   TemplateRef,
+  ViewChild,
 } from '@angular/core';
 import { ISelect } from '../ISelect';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -44,8 +46,6 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   @Input() searchable: boolean = false;
 
-  // @Input() display: string = 'name';
-
   // tslint:disable-next-line:no-output-native
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
 
@@ -61,9 +61,11 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   @Input() small: boolean = false;
 
-  @ContentChild('label', { static: false }) label: TemplateRef<ElementRef>;
+  @ContentChild('label', {static: false}) label: TemplateRef<ElementRef>;
 
-  @ContentChild('option', { static: false }) option: TemplateRef<ElementRef>;
+  @ContentChild('option', {static: false}) option: TemplateRef<ElementRef>;
+
+  @ViewChild('toggler', {static: false}) toggler: ElementRef;
 
   public searchSubject: Subject<string> = new Subject<string>();
 
@@ -73,7 +75,10 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   public loading: boolean = false;
 
-  constructor() { }
+  public width: string | number = '100%';
+
+  constructor() {
+  }
 
   @Input()
   get value() {
@@ -88,17 +93,18 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
   }
 
   @Input()
-  getList(searchEntity?: ISearchEntity): Observable<any[]> {
+  getList = (searchEntity?: ISearchEntity): Observable<any[]> => {
     return new Observable<any[]>();
-  }
+  };
 
-  onChange(event) {
+  onChange = (event) => {
     this.change.emit(event);
-  }
+  };
 
-  onTouch(event) {
-  }
-
+  onTouch = (event) => {
+    /* tslint:disable-next-line */
+    console.log(event);
+  };
 
   ngOnInit() {
     if (this.value) {
@@ -129,12 +135,12 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
     }
   }
 
-  getValue(item) {
+  getValue = (item) => {
     if (this.key && item.hasOwnProperty(this.key)) {
       return item[this.key];
     }
     return item;
-  }
+  };
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -156,6 +162,13 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
     this.display = null;
     this.onChange(null);
   }
+
+  @HostListener('window:resize', [])
+  onWindowResize = () => {
+    if (this.toggler) {
+      this.width = window.getComputedStyle(this.toggler.nativeElement).width;
+    }
+  };
 
   onSearch(event): void {
     this.searchSubject.next(event.target.value);
@@ -183,7 +196,7 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
       );
   }
 
-  onToggle(isOpened) {
+  onToggle = (isOpened) => {
     if (isOpened) {
       if (this.renewOnOpen) {
         if (this.searchEntity) {
@@ -192,9 +205,9 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
         this.reloadList();
       }
     }
-  }
+  };
 
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState = (isDisabled: boolean): void => {
     this.disabled = isDisabled;
-  }
+  };
 }

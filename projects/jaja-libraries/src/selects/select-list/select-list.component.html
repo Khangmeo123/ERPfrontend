@@ -18,7 +18,7 @@
     </span>
   </div>
 
-  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu">
+  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu" [ngStyle]="{width: width}">
     <li *ngIf="searchable" class="dropdown-item search" (click)="$event.stopPropagation()">
       <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
     </li>
