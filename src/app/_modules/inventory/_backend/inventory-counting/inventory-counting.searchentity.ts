@@ -83,6 +83,6 @@ export class BatchSearchEntity extends SearchEntity {
     itemDetailId: string = null;
     itemDetailName: string = null;
     serialNumber: string = null;
-    mfrDate: string = null;
-    expirationDate: string = null;
+    mfrDate: FormControl = new FormControl(null);
+    expirationDate: FormControl = new FormControl(null);
 }

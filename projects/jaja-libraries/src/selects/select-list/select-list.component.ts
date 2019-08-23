@@ -1,5 +1,4 @@
 import {
-  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
@@ -33,7 +32,7 @@ import { ISearchEntity } from '../../entities/ISearchEntity';
     },
   ],
 })
-export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor, AfterViewInit {
+export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor {
 
   @Input() appendTo: string = null;
 
@@ -46,8 +45,6 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
   @Input() placeholder: string = '';
 
   @Input() searchable: boolean = false;
-
-  // @Input() display: string = 'name';
 
   // tslint:disable-next-line:no-output-native
   @Output() change: EventEmitter<any> = new EventEmitter<any>();
@@ -62,15 +59,13 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   @Input() list: any[] = [];
 
+  @Input() small: boolean = false;
+
   @ContentChild('label', {static: false}) label: TemplateRef<ElementRef>;
 
   @ContentChild('option', {static: false}) option: TemplateRef<ElementRef>;
 
   @ViewChild('toggler', {static: false}) toggler: ElementRef;
-
-  @ViewChild('dropdown', {static: false}) dropdown: ElementRef;
-
-  public width: any = '100%';
 
   public searchSubject: Subject<string> = new Subject<string>();
 
@@ -79,6 +74,8 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
   public selectedItem: any = null;
 
   public loading: boolean = false;
+
+  public width: string | number = '100%';
 
   constructor() {
   }
@@ -95,31 +92,19 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
     this.selectedItem = this.list.find((item) => this.getValue(item) === value);
   }
 
-  @HostListener('window:resize', [])
-  onWindowResize = () => {
-    if (this.toggler) {
-      const {nativeElement: toggler} = this.toggler;
-      this.width = window.getComputedStyle(toggler).width;
-    }
+  @Input()
+  getList = (searchEntity?: ISearchEntity): Observable<any[]> => {
+    return new Observable<any[]>();
   };
 
-  ngAfterViewInit(): void {
-    if (this.appendTo === 'body') {
-      this.onWindowResize();
-    }
-  }
-
-  @Input()
-  getList(searchEntity?: ISearchEntity): Observable<any[]> {
-    return new Observable<any[]>();
-  }
-
-  onChange(event) {
+  onChange = (event) => {
     this.change.emit(event);
-  }
+  };
 
-  onTouch(event) {
-  }
+  onTouch = (event) => {
+    /* tslint:disable-next-line */
+    console.log(event);
+  };
 
   ngOnInit() {
     if (this.value) {
@@ -150,12 +135,12 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
     }
   }
 
-  getValue(item) {
+  getValue = (item) => {
     if (this.key && item.hasOwnProperty(this.key)) {
       return item[this.key];
     }
     return item;
-  }
+  };
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
@@ -177,6 +162,13 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
     this.display = null;
     this.onChange(null);
   }
+
+  @HostListener('window:resize', [])
+  onWindowResize = () => {
+    if (this.toggler) {
+      this.width = window.getComputedStyle(this.toggler.nativeElement).width;
+    }
+  };
 
   onSearch(event): void {
     this.searchSubject.next(event.target.value);
@@ -204,7 +196,7 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
       );
   }
 
-  onToggle(isOpened) {
+  onToggle = (isOpened) => {
     if (isOpened) {
       if (this.renewOnOpen) {
         if (this.searchEntity) {
@@ -213,9 +205,9 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
         this.reloadList();
       }
     }
-  }
+  };
 
-  setDisabledState(isDisabled: boolean): void {
+  setDisabledState = (isDisabled: boolean): void => {
     this.disabled = isDisabled;
-  }
+  };
 }

@@ -1,35 +1,35 @@
-<div class="advanced-filter" (clickOutside)="closeDropdown()" (click)="$event.stopPropagation()">
-  <div #pane class="filter-pane {{ dropdownDirection }}">
-    <div class="ui-inputgroup d-flex p-1">
-      <span class="ui-inputgroup-addon">
-        {{filterTypeSign}}
-      </span>
-      <input *ngIf="!isDateFilter; else dateFilter"
-             type="{{inputType}}"
-             class="form-control"
-             (keyup)="onKeyUp($event)"
-             (change)="onChange($event)"
-             [(ngModel)]="filterValue"
-             placeholder="{{'advancedFilter.placeholder' | translate}}">
-      <ng-template #dateFilter>
-        <div class="flex-grow-1">
-          <app-date-picker (valueChange)="onApplyFilter($event)" [value]="filterValue"></app-date-picker>
-        </div>
-      </ng-template>
-      <div class="input-group-append">
-        <button #toggler class="btn" type="button" (click)="toggleList()">
-          <i class="fas fa-filter"></i>
-        </button>
-      </div>
-    </div>
-    <div [@toggleMenu]="listState">
-      <div class="select-list">
-        <ul class="dropdown-menu">
-          <li *ngFor="let type of types" class="dropdown-item d-flex align-items-center" (click)="onSelectType(type)">
-            <span>{{'advancedFilter.' + type.code | translate}}</span>
-          </li>
-        </ul>
-      </div>
-    </div>
+<div class="input-group input-group-sm" #toggler dropdown [container]="appendTo">
+  <div class="input-group-prepend flex-shrink-1" dropdownToggle>
+    <label class="input-group-text">
+      {{filterTypeSign}}
+    </label>
   </div>
+  <input type="text"
+         *ngIf="isTextFilter"
+         class="form-control"
+         [(ngModel)]="filterValue"
+         (keyup)="onKeyUp($event)"
+         (change)="onChange($event)"
+         placeholder="{{'advancedFilter.placeholder' | translate}}">
+  <input type="number"
+         *ngIf="isNumberFilter"
+         class="form-control"
+         [(ngModel)]="filterValue"
+         (keyup)="onKeyUp($event)"
+         (change)="onChange($event)"
+         pKeyFilter="num"
+         placeholder="{{'advancedFilter.placeholder' | translate}}">
+  <app-date-picker *ngIf="isDateFilter"
+                   [small]="true"
+                   [displayToggler]="false"
+                   (valueChange)="onApplyFilter($event)"
+                   [value]="filterValue">
+  </app-date-picker>
+  <ul *dropdownMenu class="dropdown-menu advanced-filter-dropdown" role="menu" [ngStyle]="{width: width}">
+    <li class="menuitem" *ngFor="let type of types" (click)="onSelectType(type)">
+      <span class="dropdown-item">
+        {{'advancedFilter.' + type.code | translate}}
+      </span>
+    </li>
+  </ul>
 </div>

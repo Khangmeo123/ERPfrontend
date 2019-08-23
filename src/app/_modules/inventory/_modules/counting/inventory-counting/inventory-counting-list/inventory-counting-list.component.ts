@@ -39,7 +39,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
     private inventoryCountingListService: InventoryCountingListService,
     private genaralService: GeneralService,
     private bookmarkService: BookmarkService,
-    private inventoryCountingListRepository: InventoryCountingListRepository,
+    public inventoryCountingListRepository: InventoryCountingListRepository,
     private router: Router) {
     // inventory counting
     const inventoryCountingListSub = this.inventoryCountingListService.inventoryCountingList.subscribe(res => {
