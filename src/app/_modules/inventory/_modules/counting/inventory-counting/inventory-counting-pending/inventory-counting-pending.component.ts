@@ -99,7 +99,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
       .subscribe(params => {
         if (params.id) {
           this.inventoryCountingId = params.id;
-          const queryParams = `?InventoryCountingId=${this.inventoryCountingId}&LegalEntityId=${this.legalEntityId}`;
+          const queryParams = `?InventoryCountingId=${this.inventoryCountingId}&LegalEntityId=af81fee4-b4df-46f8-aaee-be97425be15c`;
           this.linkCounterExport = this.baseLinkCounterExport + queryParams;
           this.linkCountingExport = this.baseLinkCountingExport + queryParams;
         }

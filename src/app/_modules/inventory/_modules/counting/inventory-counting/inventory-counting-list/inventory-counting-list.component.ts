@@ -97,7 +97,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
   }
 
   onDateChange(data: any, type: string) {
-    this.inventoryCountingSearchEntity.documentNumber[type] = this.datePipe.transform(data.value, OUTPUT_DATE_FORMAT);
+    this.inventoryCountingSearchEntity.documentDate[type] = this.datePipe.transform(data.value, OUTPUT_DATE_FORMAT);
   }
 
   sort(event: any) {
