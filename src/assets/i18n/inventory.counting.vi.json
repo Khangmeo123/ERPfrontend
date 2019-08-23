@@ -41,8 +41,8 @@
             },
             "inventoryCode": "Mã kho",
             "itemDetail": {
-                "itemCode": "",
-                "locationCode": ""
+                "itemCode": "Mã hàng",
+                "itemName": "Tên hàng"
             },
             "personInCharge": "Người chịu trách nhiệm",
             "qrCode": {
@@ -65,7 +65,8 @@
                 "title": "Chi tiết hàng hóa",
                 "unitOfMeasure": "Đơn vị tính",
                 "batches": "Lô",
-                "serial": "Serial"
+                "serial": "Serial",
+                "countedQuantity": "Số lượng thực đếm"
             },
             "tab2": {
                 "title": "Đính kèm"
@@ -82,6 +83,11 @@
             "inventoryCountingOwner": "Người chịu trách nhiệm",
             "issueID": "Số phiếu",
             "status": "Trạng thái"
+        },
+        "button": {
+            "open": "Khởi tạo",
+            "pending": "Chờ kiểm kê",
+            "done": "Hoàn thành"
         }
     }
 }

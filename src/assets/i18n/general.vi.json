@@ -30,7 +30,11 @@
             "reverse": "Hoàn duyệt",
             "save": "Lưu",
             "send": "Gửi",
-            "update": "Cập nhật"
+            "update": "Cập nhật",
+            "confirm": {
+                "no": "Hủy",
+                "yes": "Xác nhận"
+            }
         },
         "completed": "Hoàn thành",
         "customer_group": {

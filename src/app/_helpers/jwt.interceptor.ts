@@ -28,7 +28,7 @@ export class JwtInterceptor implements HttpInterceptor {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'X-Language': currentLang ? currentLang : 'vi',
-        'X-LegalEntity': JwtInterceptor.legalEntityId,
+        'X-LegalEntity': 'af81fee4-b4df-46f8-aaee-be97425be15c',
       }),
     });
     return next.handle(request);

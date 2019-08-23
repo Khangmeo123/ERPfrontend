@@ -52,15 +52,22 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   inventoryCounters: any[] = [];
   inventoryCounterList: any[];
   qrCodeOutSide: string;
+  legalEntityId = localStorage.getItem('legalEntityId') || null;
   // serialNumber:
   serialNumber: string;
   serialNumberSearchEntity: SerialNumberSearchEntity = new SerialNumberSearchEntity();
   serialNumberList: CounterContentByItemDetailEntity[];
   linkSerialNumberTemplate: string = environment.apiUrlInv +
     'inventory/counting/inventory-counting/inventory-counting-pending/serial-number/download-template';
-  linkSerialNumberExport: string = environment.apiUrlInv +
+  baseLinkSerialNumberExport: string = environment.apiUrlInv +
     'inventory/counting/inventory-counting/inventory-counting-pending/serial-number/export';
-
+  linkSerialNumberExport: string;
+  baseLinkCounterExport: string = environment.apiUrlInv +
+    'inventory/counting/inventory-counting/inventory-counting-pending/export-by-counter';
+  linkCounterExport: string;
+  baseLinkCountingExport: string = environment.apiUrlInv +
+    'inventory/counting/inventory-counting/inventory-counting-pending/export-counting-content';
+  linkCountingExport: string;
   // batch:
   batchCode: string;
   batchSearchEntity: BatchSearchEntity = new BatchSearchEntity();
@@ -86,12 +93,15 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     private inventoryCountingService: InventoryCountingPendingService,
     private generalService: GeneralService,
     private toastrService: ToastrService,
-    private inventoryCountingRepository: InventoryCountingPendingRepository,
+    public inventoryCountingRepository: InventoryCountingPendingRepository,
     private route: ActivatedRoute) {
     this.route.queryParams
       .subscribe(params => {
         if (params.id) {
           this.inventoryCountingId = params.id;
+          const queryParams = `?InventoryCountingId=${this.inventoryCountingId}&LegalEntityId=${this.legalEntityId}`;
+          this.linkCounterExport = this.baseLinkCounterExport + queryParams;
+          this.linkCountingExport = this.baseLinkCountingExport + queryParams;
         }
         this.inventoryCountingService.getDetail(params.id).then(res => {
           if (res) {
@@ -103,7 +113,6 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
       if (res) {
         this.inventoryCountingForm = res;
         this.inventoryOrganizationId = this.inventoryCountingForm.get('inventoryOrganizationId').value;
-
       }
     });
     // binlocation:
@@ -214,6 +223,8 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
 
   // serialNumber:
   showSerial(itemDetailId: string) {
+    const queryParams = `?InventoryCountingId=${this.inventoryCountingId}&ItemDetailId=${itemDetailId}&X-LegalEntity=${this.legalEntityId}`;
+    this.linkSerialNumberExport = this.baseLinkSerialNumberExport + queryParams;
     this.displaySerial = true;
     this.activeScan = false;
     this.itemDetailId = itemDetailId;

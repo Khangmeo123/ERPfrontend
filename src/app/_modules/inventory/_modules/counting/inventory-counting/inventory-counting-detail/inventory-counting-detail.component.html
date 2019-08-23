@@ -375,7 +375,7 @@
         <div class="row mt-3">
             <div class="col-sm-12">
                 <p-table [value]="itemDetailList" #tableItemDetail [scrollable]="true" scrollHeight="500px"
-                    [resizableColumns]="true" [paginator]="true" [rows]="10">
+                    [resizableColumns]="true" [paginator]="true" [rows]="50">
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -405,10 +405,10 @@
                         <tr>
                             <th pResizableColumn width="5%"></th>
                             <th class="th-filter" data-qe-id="table-thead-detail-itemDetail-code">
-                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeSearchEntity.id"
+                                <jaja-select-list class="flex-grow-1" [value]="itemDetailCodeExtendSearch.id"
                                     [getList]="inventoryCountingRepository.selectListItemDetailCode" key="id"
-                                    [searchEntity]="itemDetailCodeSearchEntity" searchField="code"
-                                    (change)="tableItemDetail.filter($event[0], 'id', 'equals')" searchType="startsWith"
+                                    [searchEntity]="itemDetailCodeExtendSearch" searchField="code"
+                                    (change)="tableItemDetail.filter($event, 'id', 'equals')" searchType="startsWith"
                                     [searchable]="true">
                                     <ng-template #label #option let-code="code">
                                         {{code}}
@@ -417,7 +417,7 @@
                             </th>
                             <th class="th-filter" data-qe-id="table-thead-detail-itemDetail-name">
                                 <input type="text" class="form-control w-100"
-                                    (input)="tableItemDetail.filter($event[0], 'name', 'contains')" />
+                                    (input)="tableItemDetail.filter($event.target.value, 'name', 'contains')" />
                             </th>
                         </tr>
                     </ng-template>
