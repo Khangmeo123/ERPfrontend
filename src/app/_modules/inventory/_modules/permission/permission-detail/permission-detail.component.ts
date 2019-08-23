@@ -1,14 +1,14 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {Subject, Subscription} from 'rxjs';
-import {PermissionDetailService} from './permission-detail.service';
-import {PositionEntity} from '../../../_backend/position/position.entity';
-import {Entities, EnumEntity} from '../../../../../_helpers/entity';
-import {PositionSearchEntity} from '../../../_backend/position/position.search-entity';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {ToastrService} from 'ngx-toastr';
-import {translate} from '../../../../../_helpers/string';
-import {GeneralService} from '../../../../../_services/general-service.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Subscription } from 'rxjs';
+import { PermissionDetailService } from './permission-detail.service';
+import { EnumEntity } from '../../../../../_helpers/entity';
+import { PositionSearchEntity } from '../../../_backend/position/position.search-entity';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { translate } from '../../../../../_helpers/string';
+import { GeneralService } from '../../../../../_services/general-service.service';
+import { PermissionDetailRepository } from './permission-detail.repository';
 
 @Component({
   selector: 'app-permission-detail',
@@ -28,8 +28,6 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
 
   subscription: Subscription = new Subscription();
 
-  legalEntityId: string = null;
-
   inventoryDocumentTypeId: string = null;
 
   inventoryOrganizationId: string = null;
@@ -39,17 +37,15 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
   /**
    * Select position
    */
-  position: PositionEntity = null;
-  positionEntities: Entities = new Entities();
   positionSearchEntity: PositionSearchEntity = new PositionSearchEntity();
-  positionSearchEntityTyping: Subject<PositionSearchEntity> = new Subject<PositionSearchEntity>();
 
   constructor(
-    private permissionDetailService: PermissionDetailService,
-    private activatedRoute: ActivatedRoute,
-    private toastrService: ToastrService,
-    private generalService: GeneralService,
-    private router: Router,
+    public permissionDetailService: PermissionDetailService,
+    public activatedRoute: ActivatedRoute,
+    public toastrService: ToastrService,
+    public generalService: GeneralService,
+    public router: Router,
+    public permissionDetailRepository: PermissionDetailRepository,
   ) {
     const permissionFormSub: Subscription = this.permissionDetailService.permissionForm.subscribe((form: FormGroup) => {
       this.permissionForm = form;
@@ -61,16 +57,11 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
       this.patchIds();
     });
 
-    const positionTypingSub: Subscription = this.permissionDetailService.searchPositionByTyping(this.positionSearchEntityTyping);
-    const positionSub: Subscription = this.permissionDetailService.positionList.subscribe((entities: Entities) => {
-      this.positionEntities = entities;
-    });
-
     const routeSub: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.legalEntityId && params.inventoryDocumentTypeId && params.inventoryOrganizationId) {
-        this.legalEntityId = params.legalEntityId;
         this.inventoryDocumentTypeId = params.inventoryDocumentTypeId;
         this.inventoryOrganizationId = params.inventoryOrganizationId;
+        this.getDocumentStatus();
         this.patchIds();
         if (params.id) {
           this.permissionDetailService.get(params.id)
@@ -82,18 +73,9 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
       }
     });
 
-    const documentStatusSub: Subscription = this.permissionDetailService.documentStatus.subscribe((status: EnumEntity[]) => {
-      if (status) {
-        this.documentStatus = status;
-      }
-    });
-
     this.subscription
       .add(permissionFormSub)
-      .add(positionTypingSub)
-      .add(positionSub)
-      .add(routeSub)
-      .add(documentStatusSub);
+      .add(routeSub);
   }
 
   get errors() {
@@ -102,10 +84,6 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
 
   get positionCode() {
     return this.permissionForm.get('positionCode') as FormControl;
-  }
-
-  get positionName() {
-    return this.permissionForm.get('positionName') as FormControl;
   }
 
   get currentStep() {
@@ -140,32 +118,22 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
     this.permissionForm.patchValue({
       inventoryDocumentTypeId: this.inventoryDocumentTypeId,
       inventoryOrganizationId: this.inventoryOrganizationId,
-      legalEntityId: this.legalEntityId,
     });
   }
-
-  onSelectCurrentStatus(event) {
-    if (event) {
-      this.currentStatusId.setValue(event.id);
-      this.currentStatusDisplay.setValue(event.display);
-    }
-  }
-
-  onSelectNextStatus(event) {
-    if (event) {
-      this.nextStatusId.setValue(event.id);
-      this.nextStatusDisplay.setValue(event.display);
-    }
-  }
-
-  nodeSelector = node => node;
 
   ngOnInit() {
     return this.getDocumentStatus();
   }
 
   getDocumentStatus() {
-    return this.permissionDetailService.getDocumentStatus(this.inventoryDocumentTypeId);
+    if (this.inventoryDocumentTypeId) {
+      this.permissionDetailRepository.getDocumentStatus(this.inventoryDocumentTypeId)
+        .subscribe(
+          (documentStatus: EnumEntity[]) => {
+            this.documentStatus = documentStatus;
+          },
+        );
+    }
   }
 
   ngOnDestroy(): void {
@@ -175,50 +143,16 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
   bookMark() {
   }
 
-  getPositionList() {
-    if (this.legalEntityId) {
-      const {ids} = this.positionSearchEntity;
-      this.positionSearchEntity = new PositionSearchEntity();
-      this.positionSearchEntity.ids = ids;
-      this.positionSearchEntity.legalEntityId = this.legalEntityId;
-      return this.permissionDetailService.getPositionList(this.positionSearchEntity);
-    }
-  }
-
-  onSearchPosition(event) {
-    const {ids} = this.positionSearchEntity;
-    this.positionSearchEntity = new PositionSearchEntity();
-    this.positionSearchEntity.ids = ids;
-    this.positionSearchEntity.name.startsWith = event;
-    this.positionSearchEntityTyping.next(this.positionSearchEntity);
-  }
-
-  onSelectPosition(event) {
-    if (event && event.length) {
-      const positionEntity: PositionEntity = event[0];
-      this.positionId.setValue(positionEntity.id);
-      this.positionCode.setValue(positionEntity.code);
-      this.positionName.setValue(positionEntity.name);
-      this.positionSearchEntity.ids = [
-        positionEntity.id,
-      ];
-    }
-  }
-
-  cancel() {
+  public cancel = () => {
     return this.router.navigate(
       ['/inventory/permission/permission-list'],
       {
-        queryParams: {
-          legalEntityId: this.legalEntityId,
-          inventoryOrganizationId: this.inventoryOrganizationId,
-          inventoryDocumentTypeId: this.inventoryDocumentTypeId,
-        },
+        queryParams: this.activatedRoute.snapshot.queryParams,
       },
     );
-  }
+  };
 
-  save() {
+  public save = () => {
     if (this.permissionForm.invalid) {
       this.generalService.validateAllFormFields(this.permissionForm);
     }
@@ -228,8 +162,21 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
         .then(() => {
           return this.router.navigate(
             ['/inventory/permission/permission-list'],
+            {
+              queryParams: this.activatedRoute.snapshot.queryParams,
+            },
           );
         });
     }
-  }
+  };
+
+  public onSelectPosition = (event) => {
+    if (event) {
+      this.permissionForm.patchValue({
+        positionCode: event.code,
+        positionId: event.id,
+        positionName: event.name,
+      });
+    }
+  };
 }

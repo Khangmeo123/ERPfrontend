@@ -4,12 +4,6 @@
             "title": ""
         }
     },
-    "goodsReceiptPODetail": {
-        "tab1": {
-            "batches": "",
-            "serial": ""
-        }
-    },
     "inventoryCounting": {
         "detail": {
             "batches": {
@@ -67,12 +61,14 @@
                 "title ": ""
             },
             "tab1": {
+                "batches": "",
                 "highestDifference": "",
                 "inventoryCode": "",
                 "itemName": "",
                 "itemNo": "",
                 "no": "",
                 "quantityOfInventory": "",
+                "serial": "",
                 "title": "",
                 "unitOfMeasure": ""
             },

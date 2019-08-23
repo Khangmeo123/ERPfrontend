@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { GoodsReceiptPoDetailService } from './goods-receipt-po-detail.service';
+import { GoodsReceiptPOApproveService } from './goods-receipt-po-approve.service';
 
 describe('GoodsReceiptPoDetailService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: GoodsReceiptPoDetailService = TestBed.get(GoodsReceiptPoDetailService);
+    const service: GoodsReceiptPOApproveService = TestBed.get(GoodsReceiptPOApproveService);
     expect(service).toBeTruthy();
   });
 });

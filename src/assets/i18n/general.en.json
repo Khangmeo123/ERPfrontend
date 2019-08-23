@@ -3,11 +3,16 @@
         "action": "",
         "button": {
             "add": "",
+            "addRow": "",
             "approve": "",
             "attachFile": "",
             "cancel": "",
             "clear": "",
             "completed": "",
+            "confirm": {
+                "no": "",
+                "yes": ""
+            },
             "delete": "",
             "downloadTemplate": "",
             "download_example": "",
@@ -29,9 +34,14 @@
             "reverse": "",
             "save": "",
             "send": "",
-            "update": ""
+            "update": "",
+            "upload": ""
         },
         "completed": "",
+        "confirmation": {
+            "message": "",
+            "title": ""
+        },
         "customer_group": {
             "name": ""
         },
@@ -58,7 +68,13 @@
             "success": ""
         },
         "legalEntity": {
-            "name": ""
+            "name": "",
+            "placeholder": ""
+        },
+        "legalEntityList": {
+            "get": {
+                "error": ""
+            }
         },
         "legal_entity": {
             "name": ""
@@ -89,7 +105,12 @@
         },
         "toDate": "",
         "update": {
+            "error": "",
             "failure": "",
+            "success": ""
+        },
+        "upload": {
+            "error": "",
             "success": ""
         }
     }

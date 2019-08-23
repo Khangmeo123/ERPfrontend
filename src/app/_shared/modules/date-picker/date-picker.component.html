@@ -1,23 +1,23 @@
-<div class="date-picker">
-  <div class="input-group">
-    <input type="text"
-           class="form-control"
-           [readOnly]="inputReadOnly"
-           [disabled]="disabled"
-           (keydown)="onKeyDown($event)"
-           (keyup)="onKeyUp($event)"
-           (mousedown)="onMouseDown(matDatepicker)"
-           (dateChange)="onDateChange(matDatepicker)"
-           maxlength="10"
-           autocomplete="off"
-           [(ngModel)]="date"
-           [matDatepicker]="matDatepicker"
-           placeholder="{{'datePicker.placeHolder' | translate}}">
-    <mat-datepicker #matDatepicker></mat-datepicker>
-    <div class="input-group-append">
-      <div class="input-group-text" role="button" (click)="openDatePicker(matDatepicker)">
+<div class="input-group" [ngClass]="{'input-group-sm': small}">
+  <input type="text"
+         class="form-control"
+         [ngClass]="{'form-control-sm': small}"
+         [readOnly]="inputReadOnly"
+         [disabled]="disabled"
+         (keydown)="onKeyDown($event)"
+         (keyup)="onKeyUp($event)"
+         (mousedown)="onMouseDown(matDatePicker)"
+         (dateChange)="onDateChange(matDatePicker)"
+         [maxLength]="10"
+         [minLength]="10"
+         autocomplete="off"
+         [(ngModel)]="date"
+         [matDatepicker]="matDatePicker"
+         placeholder="{{'datePicker.placeHolder' | translate}}">
+  <div class="input-group-append" *ngIf="displayToggler">
+      <span class="input-group-text" role="button" (click)="openDatePicker(matDatePicker)">
         <mat-icon>calendar_today</mat-icon>
-      </div>
-    </div>
+      </span>
   </div>
 </div>
+<mat-datepicker #matDatePicker></mat-datepicker>

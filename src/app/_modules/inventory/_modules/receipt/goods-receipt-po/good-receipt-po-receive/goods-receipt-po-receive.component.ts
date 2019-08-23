@@ -1,23 +1,17 @@
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralService } from 'src/app/_services/general-service.service';
 import { GoodsReceiptPOReceiveService } from './goods-receipt-po-receive.service';
+import { BinLocationEntity, GoodsReceiptPOContent, } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
-  BinLocationEntity,
-  GoodsReceiptPOContent,
-  ItemDetailEntity,
-  PurchaseOrderEntity,
-  UnitOfMeasureEntity,
-} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import {
-  GoodsReceiptPOBinlocationSearchEntity,
+  BinLocationSearchEntity,
   GoodsReceiptPOContentDetailSearchEntity,
   ItemDetailSearchEntity,
-  UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
+  UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
 
 @Component({
@@ -54,25 +48,13 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   itemDetailId: string;
   goodsReceiptPOContentDetailSearchEntity: GoodsReceiptPOContentDetailSearchEntity = new GoodsReceiptPOContentDetailSearchEntity();
   // documentNumber:
-  documentNumberIds: PurchaseOrderEntity[];
-  documentNumberExceptIds: PurchaseOrderEntity[];
   documentNumberSearchEntity: PurchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
-  documentNumberTyping: Subject<PurchaseOrderSearchEntity> = new Subject();
   // itemDetail:
-  itemDetailIds: ItemDetailEntity[];
-  itemDetailExceptIds: ItemDetailEntity[];
   itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
-  itemDetailTyping: Subject<ItemDetailSearchEntity> = new Subject();
   // unitOfMeasure:
-  unitOfMeasureIds: UnitOfMeasureEntity[];
-  unitOfMeasureExceptIds: UnitOfMeasureEntity[];
   unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
-  unitOfMeasureTyping: Subject<UnitOfMeasureSearchEntity> = new Subject();
   // binLocation:
-  binLocationIds: BinLocationEntity[];
-  binLocationExceptIds: BinLocationEntity[];
-  binLocationSearchEntity: GoodsReceiptPOBinlocationSearchEntity = new GoodsReceiptPOBinlocationSearchEntity();
-  binLocationTyping: Subject<GoodsReceiptPOBinlocationSearchEntity> = new Subject();
+  binLocationSearchEntity: BinLocationSearchEntity = new BinLocationSearchEntity();
 
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOReceiveService,
@@ -116,44 +98,9 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     });
 
     // documentNumber:
-    const documentNumberListSub = this.goodsReceiptPOService.documentNumberList.subscribe(res => {
-      if (res) {
-        this.documentNumberIds = res.ids;
-        this.documentNumberExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchDocumentNumber(this.documentNumberTyping);
-    // itemDetail:
-    const itemListSub = this.goodsReceiptPOService.itemList.subscribe(res => {
-      if (res) {
-        this.itemDetailIds = res.ids;
-        this.itemDetailExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchItem(this.itemDetailTyping);
-    // unitOfMeasure:
-    const unitOfMeasureListSub = this.goodsReceiptPOService.unitOfMeasureList.subscribe(res => {
-      if (res) {
-        this.unitOfMeasureIds = res.ids;
-        this.unitOfMeasureExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
-    // binLocation:
-    const binLocationListSub = this.goodsReceiptPOService.binLocationList.subscribe(res => {
-      if (res) {
-        this.binLocationIds = res.ids;
-        this.binLocationExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchBinLocation(this.binLocationTyping);
     // add subcription:
     this.goodsReceiptPOSubs
       .add(goodsReceiptFormSub)
-      .add(documentNumberListSub)
-      .add(itemListSub)
-      .add(unitOfMeasureListSub)
-      .add(binLocationListSub)
       .add(quantityDetailSub)
       .add(serialNumberDetailSub)
       .add(batchSub);
@@ -203,59 +150,6 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     table.filter(date, field, 'equals');
   }
 
-  // documentNumber:
-  dropListDocumentNumber(id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrderSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.documentNumberSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListDocumentNumber(this.documentNumberSearchEntity);
-  }
-
-  typingSearchDocumentNumber(event: number, id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrderSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.documentNumberSearchEntity.ids.push(id);
-    }
-    this.documentNumberSearchEntity.documentNumber.equal = event;
-    this.documentNumberTyping.next(this.documentNumberSearchEntity);
-  }
-
-  // itemDetail:
-  dropListItemDetail(id: string) {
-    this.itemDetailSearchEntity = new ItemDetailSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListItem(this.itemDetailSearchEntity);
-  }
-
-  typingSearchItemDetail(event: string, id: string) {
-    this.itemDetailSearchEntity = new ItemDetailSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.itemDetailSearchEntity.name.startsWith = event;
-    this.itemDetailTyping.next(this.itemDetailSearchEntity);
-  }
-
-  // unitOfMeasure:
-  dropListUnitOfMeasure(id: string) {
-    this.unitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListUnitOfMeasure(this.unitOfMeasureSearchEntity);
-  }
-
-  typingSearchUnitOfMeasure(event: string, id: string) {
-    this.unitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.unitOfMeasureSearchEntity.name.startsWith = event;
-    this.unitOfMeasureTyping.next(this.unitOfMeasureSearchEntity);
-  }
 
   // quantity dialog:
   showQuantity(goodsReceiptPOContent: GoodsReceiptPOContent) {
@@ -264,24 +158,6 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOContentId = goodsReceiptPOContent.id;
     this.goodsReceiptPOContentDetailSearchEntity = new GoodsReceiptPOContentDetailSearchEntity();
     this.goodsReceiptPOService.getQuantityDetail(this.goodsReceiptPOContentId, this.enableBinLocation);
-  }
-
-  dropListBinLocation(id: string) {
-    this.binLocationSearchEntity = new GoodsReceiptPOBinlocationSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.binLocationSearchEntity.ids.push(id);
-    }
-    this.binLocationSearchEntity.goodsReceiptPOContentId = this.goodsReceiptPOContentId;
-    this.goodsReceiptPOService.dropListBinLocation(this.binLocationSearchEntity);
-  }
-
-  typingSearchBinLocation(event: string, id: string) {
-    this.binLocationSearchEntity = new GoodsReceiptPOBinlocationSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.binLocationSearchEntity.ids.push(id);
-    }
-    this.binLocationSearchEntity.code.startsWith = event;
-    this.binLocationTyping.next(this.binLocationSearchEntity);
   }
 
   updateQuantityDetail() {

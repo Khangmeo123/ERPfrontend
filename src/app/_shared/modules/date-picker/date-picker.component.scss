@@ -2,18 +2,19 @@
 @import "~bootstrap/scss/functions";
 @import "~bootstrap/scss/variables";
 
-.date-picker {
-  .form-control {
-  }
+app-date-picker {
+  .input-group {
+    flex-grow: 1;
 
-  .input-group-text {
-    cursor: pointer;
-    height: calc(1.5em + 0.75rem + 0px);
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-  }
+    .input-group-text {
+      cursor: pointer;
+      height: calc(1.5em + 0.75rem + 0px);
+      padding-left: 0.25rem;
+      padding-right: 0.25rem;
+    }
 
-  button.mat-icon-button {
-    outline: none;
+    button.mat-icon-button {
+      outline: none;
+    }
   }
 }

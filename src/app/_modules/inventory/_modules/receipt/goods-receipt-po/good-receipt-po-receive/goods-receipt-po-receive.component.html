@@ -78,7 +78,8 @@
             <label>
               {{'goodsReceiptPODetail.supplierAddress' | translate}}
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-supplierAddress" formControlName="supplierAddress"
+            <input class="form-control disabled" data-qe-id="detail-form-supplierAddress"
+                   formControlName="supplierAddress"
                    type="text"/>
           </div>
         </div>
@@ -91,7 +92,8 @@
               {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-purchaseOrderName" formControlName="purchaseOrderName"
+            <input class="form-control disabled" data-qe-id="detail-form-purchaseOrderName"
+                   formControlName="purchaseOrderName"
                    type="text">
           </div>
         </div>
@@ -104,7 +106,8 @@
               {{'goodsReceiptPODetail.documentNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input class="form-control disabled" data-qe-id="detail-form-documentNumber" formControlName="documentNumber"
+            <input class="form-control disabled" data-qe-id="detail-form-documentNumber"
+                   formControlName="documentNumber"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -220,7 +223,8 @@
                   <tr>
                     <th class="th-filter">
                       <app-single-select (listOpen)="dropListDocumentNumber(documentNumberSearchEntity.id)"
-                                         (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)" (selectionChange)="documentNumberSearchEntity.id = $event[0].id;
+                                         (search)="typingSearchDocumentNumber($event, documentNumberSearchEntity.id)"
+                                         (selectionChange)="documentNumberSearchEntity.id = $event[0].id;
                                                     tableGoodsReceiptPOContents.filter($event[0].documentNumber, 'documentNumber', 'equals')"
                                          [key]="'documentNumber'"
                                          [list]="documentNumberExceptIds"
@@ -231,7 +235,8 @@
                     </th>
                     <th class="th-filter">
                       <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
-                                         (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)" (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
+                                         (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                         (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
                                          [key]="'code'"
                                          [list]="itemDetailExceptIds"
                                          [selectedList]="itemDetailIds"
@@ -239,12 +244,14 @@
                       </app-single-select>
                     </th>
                     <th class="th-filter">
-                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" class="form-control w-100"
+                      <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
+                             class="form-control w-100"
                              type="text"/>
                     </th>
                     <th class="th-filter">
                       <app-single-select (listOpen)="dropListUnitOfMeasure(unitOfMeasureSearchEntity.id)"
-                                         (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)" (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'unitOfMeasureId', 'equals')"
+                                         (search)="typingSearchUnitOfMeasure($event, unitOfMeasureSearchEntity.id)"
+                                         (selectionChange)="unitOfMeasureSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'unitOfMeasureId', 'equals')"
                                          [key]="'name'"
                                          [list]="unitOfMeasureExceptIds"
                                          [selectedList]="unitOfMeasureIds"
@@ -380,7 +387,9 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
-          <app-single-select (listOpen)="dropListBinLocation(binLocationId)" (search)="typingSearchBinLocation($event, binLocationId)" (selectionChange)="changeLocationInBatch($event[0])"
+          <app-single-select (listOpen)="dropListBinLocation(binLocationId)"
+                             (search)="typingSearchBinLocation($event, binLocationId)"
+                             (selectionChange)="changeLocationInBatch($event[0])"
                              *ngIf="displaySerial" [disabled]="activeScan"
                              [key]="'code'"
                              [list]="binLocationExceptIds" [selectedList]="binLocationIds"
@@ -393,7 +402,8 @@
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}: </span>
           <div class="ml-2">
-            <input [value]="batch.goodsReceiptPOBatches?.length" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
+            <input [value]="batch.goodsReceiptPOBatches?.length" class="form-control disabled"
+                   data-qe-id="dialog-input-start-scan-batches-no"
                    pKeyFilter="int" type="text">
           </div>
         </div>
@@ -455,23 +465,28 @@
               <th width="2.5%">
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)" (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')" [key]="'code'"
+                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
+                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
+                                   [key]="'code'"
                                    [list]="itemDetailExceptIds"
                                    [selectedList]="itemDetailIds"
                                    data-qe-id="table-thead-filter-uom">
                 </app-single-select>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
@@ -523,17 +538,20 @@
                 <input [(ngModel)]="batch.actualReceive" class="form-control" type="text"/>
               </td>
               <td class="ui-resizable-column">
-                <app-single-select (listOpen)="dropListBinLocation(batch.goodsReceiptPOBatchBinLocation[0].binLocationId)" (search)="typingSearchBinLocation($event, batch.goodsReceiptPOBatchBinLocation[0].binLocationId)"
-                                   (selectionChange)="batch.goodsReceiptPOBatchBinLocation[0].binLocationId = $event[0]"
-                                   [disabled]="activeScan"
-                                   [initialValue]="batch.goodsReceiptPOBatchBinLocation[0].binLocationCode"
-                                   [key]="'code'"
-                                   [list]="binLocationExceptIds"
-                                   [selectedList]="binLocationIds" data-qe-id="ialog-input-bin-location">
+                <app-single-select
+                  (listOpen)="dropListBinLocation(batch.goodsReceiptPOBatchBinLocation[0].binLocationId)"
+                  (search)="typingSearchBinLocation($event, batch.goodsReceiptPOBatchBinLocation[0].binLocationId)"
+                  (selectionChange)="batch.goodsReceiptPOBatchBinLocation[0].binLocationId = $event[0]"
+                  [disabled]="activeScan"
+                  [initialValue]="batch.goodsReceiptPOBatchBinLocation[0].binLocationCode"
+                  [key]="'code'"
+                  [list]="binLocationExceptIds"
+                  [selectedList]="binLocationIds" data-qe-id="ialog-input-bin-location">
                 </app-single-select>
               </td>
               <td class="ui-resizable-column">
-                <input [(ngModel)]="batch.goodsReceiptPOBatchBinLocation[0].quantity" [attr.placeholder]="placeholder" class="form-control"
+                <input [(ngModel)]="batch.goodsReceiptPOBatchBinLocation[0].quantity" [attr.placeholder]="placeholder"
+                       class="form-control"
                        type="text"/>
               </td>
               <td class="text-center" width="5%">
@@ -543,7 +561,8 @@
             </tr>
             <tr *ngFor="let binLocation of batch.goodsReceiptPOBatchBinLocations | slice:1; let i = index;">
               <td class="ui-resizable-column">
-                <app-single-select (listOpen)="dropListBinLocation(binLocation.binLocationId)" (search)="typingSearchBinLocation($event, binLocation.binLocationId)"
+                <app-single-select (listOpen)="dropListBinLocation(binLocation.binLocationId)"
+                                   (search)="typingSearchBinLocation($event, binLocation.binLocationId)"
                                    (selectionChange)="binLocation.binLocationId = $event[0]" [disabled]="activeScan"
                                    [initialValue]="binLocation.binLocationCode"
                                    [key]="'code'"
@@ -619,23 +638,28 @@
               <th width="2.5%">
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)" (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')" [key]="'code'"
+                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
+                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
+                                   [key]="'code'"
                                    [list]="itemDetailExceptIds"
                                    [selectedList]="itemDetailIds"
                                    data-qe-id="table-thead-filter-uom">
                 </app-single-select>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
@@ -764,7 +788,9 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
-          <app-single-select (listOpen)="dropListBinLocation(binLocationId)" (search)="typingSearchBinLocation($event, binLocationId)" (selectionChange)="changeLocationSerialNumber($event[0])"
+          <app-single-select (listOpen)="dropListBinLocation(binLocationId)"
+                             (search)="typingSearchBinLocation($event, binLocationId)"
+                             (selectionChange)="changeLocationSerialNumber($event[0])"
                              *ngIf="displaySerial " [disabled]="!activeScan"
                              [key]="'code'"
                              [list]="binLocationExceptIds" [selectedList]="binLocationIds"
@@ -777,7 +803,8 @@
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptPODetail.qrCode.quantity' | translate}}: </span>
           <div class="ml-2">
-            <input [value]="itemQuantities" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
+            <input [value]="itemQuantities" class="form-control disabled"
+                   data-qe-id="dialog-input-start-scan-batches-no"
                    type="text">
           </div>
         </div>
@@ -787,7 +814,8 @@
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptPODetail.qrCode.rows' | translate}}: </span>
           <div class="ml-2">
-            <input [value]="serialNumberDetail.goodsReceiptPOSerialNumbers?.length" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
+            <input [value]="serialNumberDetail.goodsReceiptPOSerialNumbers?.length" class="form-control disabled"
+                   data-qe-id="dialog-input-start-scan-batches-no"
                    pKeyFilter="int" type="text">
           </div>
         </div>
@@ -796,7 +824,8 @@
     <div class="row mt-3">
       <div class="col-sm-12">
         <p-table #tableSerialNumber *ngIf="enableBinLocation" [resizableColumns]="true"
-                 [scrollable]="true" [value]="serialNumberDetail.goodsReceiptPOSerialNumbers" resizableColumns scrollHeight="300px">
+                 [scrollable]="true" [value]="serialNumberDetail.goodsReceiptPOSerialNumbers" resizableColumns
+                 scrollHeight="300px">
           <ng-template pTemplate="colgroup">
             <colgroup>
               <col>
@@ -843,25 +872,30 @@
               <th width="2.5%">
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')" [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.qrCode" class="form-control w-100"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')"
+                       [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.qrCode" class="form-control w-100"
                        pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)" (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')" [key]="'code'"
+                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
+                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
+                                   [key]="'code'"
                                    [list]="itemDetailExceptIds"
                                    [selectedList]="itemDetailIds"
                                    data-qe-id="table-thead-filter-uom">
                 </app-single-select>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.itemName" class="form-control w-100"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
+                       [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.itemName" class="form-control w-100"
                        pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.serialNumber" class="form-control w-100"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')"
+                       [(ngModel)]="goodsReceiptPOContentDetailSearchEntity.serialNumber" class="form-control w-100"
                        pKeyFilter="int"
                        type="text"/>
               </th>
@@ -909,7 +943,8 @@
                 {{serialNumber.expirationDate}}
               </td>
               <td class="ui-resizable-column">
-                <app-single-select (listOpen)="dropListBinLocation(serialNumber.binLocationId)" (search)="typingSearchBinLocation($event, serialNumber.binLocationId)"
+                <app-single-select (listOpen)="dropListBinLocation(serialNumber.binLocationId)"
+                                   (search)="typingSearchBinLocation($event, serialNumber.binLocationId)"
                                    (selectionChange)="serialNumber.binLocationId = $event[0]" [disabled]="!activeScan"
                                    [initialValue]="serialNumber.binLocationCode"
                                    [key]="'code'"
@@ -924,7 +959,8 @@
           </ng-template>
         </p-table>
         <p-table #tableSerialNumber *ngIf="!enableBinLocation" [resizableColumns]="true"
-                 [scrollable]="true" [value]="serialNumberDetail.goodsReceiptPOSerialNumbers" resizableColumns scrollHeight="300px">
+                 [scrollable]="true" [value]="serialNumberDetail.goodsReceiptPOSerialNumbers" resizableColumns
+                 scrollHeight="300px">
           <ng-template pTemplate="colgroup">
             <colgroup>
               <col>
@@ -968,23 +1004,28 @@
               <th width="2.5%">
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'qrCode', 'startsWith')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)" (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
-                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')" [key]="'code'"
+                <app-single-select (listOpen)="dropListItemDetail(itemDetailSearchEntity.id)"
+                                   (search)="typingSearchItemDetail($event, itemDetailSearchEntity.id)"
+                                   (selectionChange)="itemDetailSearchEntity.id = $event[0]; tableGoodsReceiptPOContents.filter($event[0], 'itemDetailId', 'equals')"
+                                   [key]="'code'"
                                    [list]="itemDetailExceptIds"
                                    [selectedList]="itemDetailIds"
                                    data-qe-id="table-thead-filter-uom">
                 </app-single-select>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'itemName', 'contains')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
-                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')" class="form-control w-100" pKeyFilter="int"
+                <input (input)="tableGoodsReceiptPOContents.filter($event.target.value, 'serialNumber', 'startsWith')"
+                       class="form-control w-100" pKeyFilter="int"
                        type="text"/>
               </th>
               <th class="th-filter">
@@ -1074,7 +1115,8 @@
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptPODetail.amount.quantity' | translate}}: </span>
           <div class="ml-2">
-            <input [value]="itemQuantities" class="form-control disabled" data-qe-id="dialog-input-start-scan-batches-no"
+            <input [value]="itemQuantities" class="form-control disabled"
+                   data-qe-id="dialog-input-start-scan-batches-no"
                    type="text">
           </div>
         </div>
@@ -1134,25 +1176,30 @@
               </td>
               <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
                   class="ui-resizable-column">
-                <input (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event)" [ngModel]="quantityDetail.actualReceive" class="form-control"
+                <input (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event)"
+                       [ngModel]="quantityDetail.actualReceive" class="form-control"
                        type="text"/>
               </td>
               <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
-                <app-single-select (listOpen)="dropListBinLocation(quantityDetail.goodsReceiptPOQuantities[0].binLocationId)" (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
-                                   (selectionChange)="quantityDetail.goodsReceiptPOQuantities[0].binLocationId = $event[0];"
-                                   [initialValue]="quantityDetail.goodsReceiptPOQuantities[0]?.binLocationCode"
-                                   [key]="'code'"
-                                   [list]="binLocationExceptIds"
-                                   [selectedList]="binLocationIds"
-                                   data-qe-id="dialog-input-bin-location"></app-single-select>
+                <app-single-select
+                  (listOpen)="dropListBinLocation(quantityDetail.goodsReceiptPOQuantities[0].binLocationId)"
+                  (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
+                  (selectionChange)="quantityDetail.goodsReceiptPOQuantities[0].binLocationId = $event[0];"
+                  [initialValue]="quantityDetail.goodsReceiptPOQuantities[0]?.binLocationCode"
+                  [key]="'code'"
+                  [list]="binLocationExceptIds"
+                  [selectedList]="binLocationIds"
+                  data-qe-id="dialog-input-bin-location"></app-single-select>
               </td>
               <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
                 <div class="validation-div">
-                  <input (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = generalService.toNumber($event); recalculateQuantityDetail()" [attr.placeholder]="placeholder"
-                         [ngClass]="{'error-border-color': quantityDetail.errors}"
-                         [ngModel]="quantityDetail.goodsReceiptPOQuantities[0]?.quantity"
-                         class="form-control"
-                         type="text"/>
+                  <input
+                    (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = generalService.toNumber($event); recalculateQuantityDetail()"
+                    [attr.placeholder]="placeholder"
+                    [ngClass]="{'error-border-color': quantityDetail.errors}"
+                    [ngModel]="quantityDetail.goodsReceiptPOQuantities[0]?.quantity"
+                    class="form-control"
+                    type="text"/>
                   <div *ngIf="quantityDetail.goodsReceiptPOQuantities[0].errors"
                        class="invalid-validation">
                     <span>{{quantityDetail.goodsReceiptPOQuantities[0].errors.message}}</span>
@@ -1172,7 +1219,8 @@
                     <div [ngClass]="{'error-border-color': quantityModel.errors}"
                          class="w-100 error-border-color">
                       <app-single-select (listOpen)="dropListBinLocation(quantityModel.binLocationId)"
-                                         (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)" (selectionChange)="quantityModel.binLocationId = $event[0];"
+                                         (search)="typingSearchBinLocation($event, binLocationSearchEntity.id)"
+                                         (selectionChange)="quantityModel.binLocationId = $event[0];"
                                          [initialValue]="quantityModel.binLocationCode"
                                          [key]="'code'"
                                          [list]="binLocationExceptIds"
@@ -1186,10 +1234,12 @@
                 </td>
                 <td>
                   <div class="validation-div">
-                    <input (ngModelChange)="quantityModel.quantity = generalService.toNumber($event); recalculateQuantityDetail()" [attr.placeholder]="placeholder"
-                           [ngClass]="{'error-border-color': quantityModel.errors}"
-                           [ngModel]="quantityModel.quantity" class="form-control"
-                           type="text"/>
+                    <input
+                      (ngModelChange)="quantityModel.quantity = generalService.toNumber($event); recalculateQuantityDetail()"
+                      [attr.placeholder]="placeholder"
+                      [ngClass]="{'error-border-color': quantityModel.errors}"
+                      [ngModel]="quantityModel.quantity" class="form-control"
+                      type="text"/>
                     <div *ngIf="quantityModel.errors" class="invalid-validation">
                       <span>{{quantityModel.errors.quantity}}</span>
                     </div>
@@ -1248,7 +1298,8 @@
                 {{quantityDetail.unitOfMeasureName}}
               </td>
               <td class="ui-resizable-column">
-                <input (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event);" [ngModel]="quantityDetail.actualReceive" class="form-control"
+                <input (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event);"
+                       [ngModel]="quantityDetail.actualReceive" class="form-control"
                        type="text"/>
               </td>
             </tr>

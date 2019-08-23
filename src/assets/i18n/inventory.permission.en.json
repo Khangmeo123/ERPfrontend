@@ -1,24 +1,4 @@
 {
-    "documentStatus": {
-        "get": {
-            "error": ""
-        }
-    },
-    "inventoryDocumentTypes": {
-        "get": {
-            "error": ""
-        }
-    },
-    "inventoryOrganizationEntity": {
-        "get": {
-            "error": ""
-        }
-    },
-    "legalEntity": {
-        "get": {
-            "error": ""
-        }
-    },
     "permission": {
         "currentStatus": "",
         "currentStep": "",
@@ -31,22 +11,18 @@
             "title": ""
         },
         "documentType": "",
+        "getList": {
+            "error": ""
+        },
         "header": {
             "title": ""
         },
         "inventoryCode": "",
-        "legalEntity": "",
         "mailToApprover": "",
         "mailToSender": "",
         "nextStatus": "",
         "nextStep": "",
-        "nextStep ": "",
         "positionCode": "",
         "positionName": ""
-    },
-    "positionEntity": {
-        "get": {
-            "error": ""
-        }
     }
 }

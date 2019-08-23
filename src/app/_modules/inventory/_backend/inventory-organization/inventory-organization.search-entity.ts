@@ -2,7 +2,6 @@ import {SearchEntity} from '../../../../_helpers/search-entity';
 import {TextFilter} from '../../../../_shared/models/filters/TextFilter';
 
 export class InventoryOrganizationSearchEntity extends SearchEntity {
-  legalEntityId: string;
 
   code: TextFilter = new TextFilter();
 

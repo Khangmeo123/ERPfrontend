@@ -1,23 +1,13 @@
 import { Injectable } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpHeaders, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { AuthenticationService } from '../_services';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { Observable } from 'rxjs';
 import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class JwtInterceptor implements HttpInterceptor {
-  public legalEntityId: BehaviorSubject<string> = new BehaviorSubject<string>(null);
-
-  constructor(
-    private authenticationService: AuthenticationService,
-    private translateService: TranslateService,
-  ) {
-  }
-
-  static get legalEntityId() {
-    return localStorage.getItem('legalEntityId');
+  constructor(private translateService: TranslateService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -25,11 +15,9 @@ export class JwtInterceptor implements HttpInterceptor {
     // add authorization header with jwt token if available
     request = request.clone({
       withCredentials: true,
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'X-Language': currentLang ? currentLang : 'vi',
-        'X-LegalEntity': 'af81fee4-b4df-46f8-aaee-be97425be15c',
-      }),
+      headers: request.headers
+        .set('X-LegalEntity', localStorage.getItem('legalEntityId') || '')
+        .set('X-Language', currentLang || 'vi'),
     });
     return next.handle(request);
   }

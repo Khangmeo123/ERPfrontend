@@ -8,9 +8,9 @@ describe('GoodsReceiptPoDetailComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GoodsReceiptPoDetailComponent ]
+      declarations: [GoodsReceiptPoDetailComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

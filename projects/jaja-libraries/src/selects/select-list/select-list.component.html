@@ -1,7 +1,12 @@
-<div dropdown (isOpenChange)="onToggle($event)" [container]="appendTo" class="select jaja-select-list d-flex"
-  [ngClass]="{disabled: disabled}">
+<div dropdown (isOpenChange)="onToggle($event)"
+     [container]="appendTo"
+     class="select jaja-select-list d-flex"
+     [ngClass]="{disabled: disabled}">
 
-  <div dropdownToggle class="jaja-select-list-toggle form-control align-items-center">
+  <div dropdownToggle
+       #toggler
+       [ngClass]="{'form-control-sm': small}"
+       class="jaja-select-list-toggle form-control align-items-center">
     <span *ngIf="!selectedItem; else labelTemplate">
       {{display || placeholder}}
     </span>
@@ -14,7 +19,7 @@
     </span>
   </div>
 
-  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu">
+  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu" [ngStyle]="{width: width}">
     <li *ngIf="searchable" class="dropdown-item search" (click)="$event.stopPropagation()">
       <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
     </li>
@@ -29,7 +34,7 @@
       </li>
 
       <li role="menuitem" class="dropdown-item" *ngFor="let item of list" (click)="onSelect(item, $event)"
-        [ngClass]="{active: selectedItem === item}">
+          [ngClass]="{active: selectedItem === item}">
         <ng-container *ngTemplateOutlet="option; context: item"></ng-container>
       </li>
     </ng-template>

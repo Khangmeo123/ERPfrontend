@@ -1,0 +1,7 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/variables";
+
+.uploaded-file {
+  border-bottom: 1px solid $border-color;
+}

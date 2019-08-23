@@ -1,9 +1,20 @@
-import {Component, EventEmitter, Input, OnChanges, OnInit, Output, ViewChild, ViewEncapsulation} from '@angular/core';
-import {FilterType} from '../../../models/filters/FilterType';
-import {DateFilter} from '../../../models/filters/DateFilter';
-import {TextFilter} from '../../../models/filters/TextFilter';
-import {NumberFilter} from '../../../models/filters/NumberFilter';
-import {toggleMenu} from '../../../animations/toggleMenu';
+import {
+  AfterViewInit,
+  Component,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewEncapsulation
+} from '@angular/core';
+import { FilterType } from '../../../models/filters/FilterType';
+import { DateFilter } from '../../../models/filters/DateFilter';
+import { TextFilter } from '../../../models/filters/TextFilter';
+import { NumberFilter } from '../../../models/filters/NumberFilter';
+import { toggleMenu } from '../../../animations/toggleMenu';
 
 @Component({
   selector: 'app-advanced-filters',
@@ -14,7 +25,9 @@ import {toggleMenu} from '../../../animations/toggleMenu';
     toggleMenu,
   ],
 })
-export class AdvancedFiltersComponent implements OnInit, OnChanges {
+export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewInit {
+
+  @Input() appendTo: string = 'body';
 
   @Input() filter;
 
@@ -28,13 +41,16 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
 
   public inputType: string = '';
 
-  public inputValue: any;
+  width: any = '100%';
 
   type = null;
 
   dropdownDirection = 'left';
+
   filterValue;
+
   types: FilterType[] = [];
+
   isOpened = false;
 
   constructor() {
@@ -63,9 +79,23 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     return null;
   }
 
+  ngAfterViewInit(): void {
+    if (this.appendTo === 'body') {
+      this.onWindowResize();
+    }
+  }
+
   ngOnChanges(changes): void {
     if (changes.filter) {
       this.filterValue = null;
+    }
+  }
+
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    if (this.toggler) {
+      const {nativeElement} = this.toggler;
+      this.width = window.getComputedStyle(nativeElement).width;
     }
   }
 
@@ -126,12 +156,6 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges {
     this.filter[this.type.code] = this.filterValue;
     this.changeFilter.emit();
     this.toggleList();
-  }
-
-  closeDropdown() {
-    if (this.isOpened) {
-      this.isOpened = !this.isOpened;
-    }
   }
 
   onChange(event) {
