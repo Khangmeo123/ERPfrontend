@@ -4,7 +4,19 @@
 
 .advanced-filter {
   position: relative;
-  // display: inline-table;
+  width: 100%;
+  flex-grow: 1;
+  flex-basis: 100%;
+  display: flex;
+
+  * {
+    font-size: small;
+  }
+
+  .input-group-prepend {
+    cursor: pointer;
+  }
+
   button:focus {
     outline: none;
     outline: 0;
@@ -13,154 +25,7 @@
     box-shadow: none;
   }
 
-  .ui-inputgroup-addon {
-    border-color: #ced4da !important;
-    border-right: none;
-    color: #3D464D !important;
-  }
-
-  .form-control {
-    border-radius: 0;
-  }
-
-  .date-picker {
-    .input-group-append {
-      display: none;
-      visibility: hidden;
-    }
-  }
-
-  .btn {
-    border: 1px solid #cecece;
-    border-left: none;
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-
-  input {
-    border-right: none;
-  }
-
-  * {
-    font-size: small;
-  }
-
-  p-calendar {
-    span {
-      input {
-        width: 100%;
-      }
-    }
-  }
-
-  .ui-listbox {
-    min-width: unset;
-    max-width: unset;
-    width: 100%;
-    border-width: 0;
-    border-top: 1px solid $border-color;
-  }
-
-  .ui-calendar {
-    .ui-inputtext {
-      border-left: 0;
-      border-top-left-radius: 0;
-      border-bottom-left-radius: 0;
-    }
-  }
-
-  .ui-inputgroup {
-    width: 100% !important;
-
-    input {
-      min-width: unset !important;
-      width: 100%;
-    }
-  }
-
-  .filter-pane {
-    left: 0;
-    right: auto;
-    position: relative;
-  }
-
-  .filter-pane.right {
-    right: 0;
-    left: auto;
-  }
-
-
-  .select-list {
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 100%;
-    padding-left: 0.25rem;
-    padding-right: 0.25rem;
-    display: flex;
-
-    .dropdown-menu {
-      margin-top: 0;
-      left: 0.25rem;
-      right: 0.25rem;
-      display: block !important;
-      flex-grow: 1;
-      -webkit-border-radius: 0;
-      -moz-border-radius: 0;
-      border-radius: 0;
-      border: 1px solid #ced4da;
-
-      li.dropdown-item {
-        cursor: pointer;
-
-        input[type="checkbox"] {
-          margin-right: 0.5rem;
-        }
-      }
-
-      ul {
-        margin-bottom: 0;
-        margin-left: -40px;
-      }
-
-      li.dropdown-item:hover {
-        background-color: #eaeaea;
-        color: inherit;
-      }
-    }
-
-    .tooltip {
-      .tooltip-inner {
-        color: white;
-      }
-    }
-
-  }
-
-  .ui-calendar {
-    .ui-inputtext {
-      border: 1px solid #cecece;
-      border-right: 0;
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
-    }
-
-    input.ui-inputtext:hover {
-      border: 1px solid #cecece;
-      border-right: 0;
-    }
-
-    input.ui-inputtext:focus {
-      border-color: #cecece;
-      border-right: 0;
-    }
-
-    .ui-datepicker {
-      min-width: 20em !important;
-
-      table td > span, a {
-        padding: 0.1em !important;
-      }
-    }
+  li.dropdown-item {
+    cursor: pointer;
   }
 }

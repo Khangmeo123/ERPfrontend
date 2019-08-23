@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ClickOutsideModule } from 'ng-click-outside';
 import { DatePickerModule } from '../date-picker/date-picker.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { KeyFilterModule } from 'primeng/keyfilter';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     ReactiveFormsModule,
     TranslateModule,
+    KeyFilterModule,
   ],
   exports: [
     AdvancedFiltersComponent,
