@@ -1,5 +1,5 @@
 import {
-  EmpoloyeeDetailSearchEntity,
+  EmployeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Subscription } from 'rxjs';
@@ -35,18 +35,17 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
   goodsReceiptPOSearchEntity: GoodsReceiptPOSearchEntity = new GoodsReceiptPOSearchEntity();
 
   // requester:
-  requesterSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+  requesterSearchEntity: EmployeeDetailSearchEntity = new EmployeeDetailSearchEntity();
 
   // inventoryOrganization:
-  inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity =
-    new InventoryOrganizationSearchEntity();
+  inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
 
   // status:
   statusList: EnumEntity[];
 
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOListService,
-    private genaralService: GeneralService,
+    private generalService: GeneralService,
     private bookmarkService: BookmarkService,
     private router: Router,
     private goodsReceiptPOListRepository: GoodsReceiptPOListRepository,
@@ -126,29 +125,25 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     }
   }
 
-  editGoodsReceiptPO(goodsReceiptId: string) {
-    return this.router.navigate(
-      ['inventory/receipt/goods-receipt-po/goods-receipt-po-detail'],
-      {queryParams: {id: goodsReceiptId}},
-    );
-  }
-
   addGoodsReceipt() {
     return this.router.navigate(['inventory/receipt/goods-receipt-po/goods-receipt-po-detail']);
   }
 
-  onFilterInventoryOrganization(event) {
-    this.goodsReceiptPOSearchEntity.inventoryOrganizationId = event;
+  onFilterInventoryOrganization(inventoryOrganization) {
+    this.goodsReceiptPOSearchEntity.inventoryOrganizationId = inventoryOrganization.id;
+    this.goodsReceiptPOSearchEntity.inventoryOrganizationCode = inventoryOrganization.code;
     this.getList();
   }
 
-  onFilterStatus(statusId) {
-    this.goodsReceiptPOSearchEntity.statusId = statusId;
+  onFilterStatus(status) {
+    this.goodsReceiptPOSearchEntity.statusId = status.id;
+    this.goodsReceiptPOSearchEntity.statusDisplay = status.display;
     this.getList();
   }
 
-  onFilterRequester(requesterId) {
-    this.goodsReceiptPOSearchEntity.requesterId = requesterId;
+  onFilterRequester(requester) {
+    this.goodsReceiptPOSearchEntity.requesterId = requester.id;
+    this.goodsReceiptPOSearchEntity.requesterName = requester.name;
     this.getList();
   }
 }

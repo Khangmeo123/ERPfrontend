@@ -113,6 +113,7 @@ export class SupplierEntity extends Entity {
 export class SupplierContactEntity extends Entity {
   name: string;
   address: string;
+  supplierAddress: string;
 }
 
 export class TaxEntity extends Entity {

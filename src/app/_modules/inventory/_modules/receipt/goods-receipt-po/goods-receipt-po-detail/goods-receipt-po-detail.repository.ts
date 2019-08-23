@@ -15,7 +15,7 @@ import {
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import {
-  EmpoloyeeDetailSearchEntity,
+  EmployeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
   ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
@@ -25,6 +25,8 @@ import {
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
+import { UploadFile } from 'ng-zorro-antd';
+import { FileAttachmentEntity } from '../../../../_backend/file-attachment/file-attachment.entity';
 
 @Injectable({
   providedIn: 'root',
@@ -138,7 +140,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
       );
   };
 
-  getEmployeeDetailList = (employeeDetailSearchEntity: EmpoloyeeDetailSearchEntity): Observable<EmployeeDetailEntity[]> => {
+  getEmployeeDetailList = (employeeDetailSearchEntity: EmployeeDetailSearchEntity): Observable<EmployeeDetailEntity[]> => {
     return this.http.post<EmployeeDetailEntity[]>(
       GoodsReceiptPODetailRepository.getURL('/single-list-employee-detail'),
       employeeDetailSearchEntity,
@@ -154,9 +156,9 @@ export class GoodsReceiptPODetailRepository extends Repository {
       );
   };
 
-  getInventoryOrganizationList(
+  getInventoryOrganizationList = (
     inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity,
-  ): Observable<InventoryOrganizationEntity[]> {
+  ): Observable<InventoryOrganizationEntity[]> => {
     return this.http.post<InventoryOrganizationEntity[]>(
       GoodsReceiptPODetailRepository.getURL('/single-list-inventory-organization'),
       inventoryOrganizationSearchEntity,
@@ -174,7 +176,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
           },
         ),
       );
-  }
+  };
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
     return this.http.post<ItemDetailEntity[]>(
@@ -239,4 +241,25 @@ export class GoodsReceiptPODetailRepository extends Repository {
         ),
       );
   };
+
+  uploadFiles(files: UploadFile[]): Observable<FileAttachmentEntity[]> {
+    const formData: FormData = new FormData();
+    files.forEach((file: any) => {
+      formData.append('files', file);
+    });
+    return this.http.post(
+      GoodsReceiptPODetailRepository.getURL('/upload-file'),
+      formData,
+      {
+        observe: 'response',
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<FileAttachmentEntity[]>) => {
+            return response.body;
+          },
+        ),
+      );
+  }
 }

@@ -163,8 +163,7 @@
                 "title": "Danh sách sản phẩm"
             },
             "tab": {
-                "title1": "Tab 1",
-                "title_2": "Thông tin thuế suất"
+                "title1": "Tab 1"
             }
         },
         "list": {
@@ -260,10 +259,10 @@
         }
     },
     "tax-template": {
-        "code": "",
-        "name": "",
-        "title": "",
-        "type": ""
+        "code": "Mã biểu thuế",
+        "name": "Tên biểu thuế",
+        "title": "Mẫu biểu thuế",
+        "type": "Loại biểu thuế"
     },
     "tax": {
         "code": "Mã",

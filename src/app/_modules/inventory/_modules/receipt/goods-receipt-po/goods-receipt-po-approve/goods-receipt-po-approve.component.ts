@@ -1,4 +1,4 @@
-import { Subject, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { FormGroup } from '@angular/forms';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
@@ -6,15 +6,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { GeneralService } from 'src/app/_services/general-service.service';
 import { GoodsReceiptPOApproveService } from './goods-receipt-po-approve.service';
 import {
-  ItemDetailEntity,
-  PurchaseOrderEntity,
-  UnitOfMeasureEntity,
-} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import {
   ItemDetailSearchEntity,
-  UnitOfMeasureSearchEntity,
   PurchaseOrderSearchEntity,
+  UnitOfMeasureSearchEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import { UploadFile } from 'ng-zorro-antd';
+import { GoodsReceiptPOApproveRepository } from './goods-receipt-po-approve.repository';
+import { ValueAddedTaxSearchEntity } from '../../../../../master-data/_backend/value-added-tax/value-added-tax.search-entity';
 
 @Component({
   selector: 'app-goods-receipt-po-approve',
@@ -24,50 +22,61 @@ import {
   encapsulation: ViewEncapsulation.None,
 })
 export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
+
   pageTitle = translate('goodsReceiptPODetail.header.title');
-  fileNameList: Array<any> = [];
+
+  fileList: UploadFile[] = [];
+
   displayBatches: boolean = false;
+
   displaySerial: boolean = false;
+
   displayAmount: boolean = false;
-  displayPurchseOrders: boolean = false;
+
+  displayPurchaseOrders: boolean = false;
+
   goodsReceiptPOSubs: Subscription = new Subscription();
+
   goodsReceiptPOForm: FormGroup;
+
   deletedList: number[] = [];
+
   popoverTitle: string = '';
+
   popoverMessage: string = 'Bạn có chắc chắn muốn xóa ?';
+
   supplierDetailId: string;
+
   goodsReceiptPOId: string;
+
   // documentNumber:
-  documentNumberIds: PurchaseOrderEntity[];
-  documentNumberExceptIds: PurchaseOrderEntity[];
   documentNumberSearchEntity: PurchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
-  documentNumberTyping: Subject<PurchaseOrderSearchEntity> = new Subject();
+
   // itemDetail:
-  itemDetailIds: ItemDetailEntity[];
-  itemDetailExceptIds: ItemDetailEntity[];
   itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
-  itemDetailTyping: Subject<ItemDetailSearchEntity> = new Subject();
+
   // unitOfMeasure:
-  unitOfMeasureIds: UnitOfMeasureEntity[];
-  unitOfMeasureExceptIds: UnitOfMeasureEntity[];
   unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
-  unitOfMeasureTyping: Subject<UnitOfMeasureSearchEntity> = new Subject();
+
+  valueAddedTaxSearchEntity: ValueAddedTaxSearchEntity = new ValueAddedTaxSearchEntity();
 
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOApproveService,
     private generalService: GeneralService,
     private route: ActivatedRoute,
-    private router: Router) {
+    private router: Router,
+    private goodsReceiptPOApproveRepository: GoodsReceiptPOApproveRepository,
+  ) {
 
-    this.route.queryParams
-      .subscribe(params => {
-        if (params.id) {
-          this.goodsReceiptPOId = params.id;
-        }
-        this.goodsReceiptPOService.getDetail(params.id).then(res => {
+    this.route.queryParams.subscribe(params => {
+      if (params.id) {
+        this.goodsReceiptPOId = params.id;
+      }
+      this.goodsReceiptPOService.getDetail(params.id)
+        .then(() => {
           this.supplierDetailId = this.goodsReceiptPOForm.controls.supplierDetailId.value;
         });
-      });
+    });
 
     const goodsReceiptFormSub = this.goodsReceiptPOService.goodsReceiptPOForm.subscribe(res => {
       if (res) {
@@ -75,40 +84,11 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
       }
     });
 
-    // documentNumber:
-    const documentNumberListSub = this.goodsReceiptPOService.documentNumberList.subscribe(res => {
-      if (res) {
-        this.documentNumberIds = res.ids;
-        this.documentNumberExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchDocumentNumber(this.documentNumberTyping);
-    // itemDetail:
-    const itemListSub = this.goodsReceiptPOService.itemList.subscribe(res => {
-      if (res) {
-        this.itemDetailIds = res.ids;
-        this.itemDetailExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchItem(this.itemDetailTyping);
-    // unitOfMeasure:
-    const unitOfMeasureListSub = this.goodsReceiptPOService.unitOfMeasureList.subscribe(res => {
-      if (res) {
-        this.unitOfMeasureIds = res.ids;
-        this.unitOfMeasureExceptIds = res.exceptIds;
-      }
-    });
-    this.goodsReceiptPOService.typingSearchUnitOfMeasure(this.unitOfMeasureTyping);
-    // add subcription:
     this.goodsReceiptPOSubs
-      .add(goodsReceiptFormSub)
-      .add(documentNumberListSub)
-      .add(itemListSub)
-      .add(unitOfMeasureListSub);
+      .add(goodsReceiptFormSub);
   }
 
   ngOnInit() {
-
   }
 
   ngOnDestroy() {
@@ -116,83 +96,31 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
   }
 
   // general:
-  trackByFn(index, row) {
-    return index;
-  }
+  trackByFn = (index) => index;
 
   readURL(event: any) {
     for (const item of event.srcElement.files) {
-      this.fileNameList.push(item.name);
+      this.fileList.push(item.name);
     }
   }
 
   backToList() {
-    this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
+    return this.router.navigate(
+      ['/inventory/receipt/goods-receipt-po/goods-receipt-po-list'],
+    );
   }
 
   approve() {
-    this.goodsReceiptPOService.approve(this.goodsReceiptPOForm.controls.id.value).then(res => {
-      this.backToList();
-    });
+    this.goodsReceiptPOService.approve(this.goodsReceiptPOForm.value.id)
+      .then(() => {
+        return this.backToList();
+      });
   }
 
-  reject() {
-    this.goodsReceiptPOService.reject(this.goodsReceiptPOForm.controls.id.value).then(res => {
-      this.backToList();
-    });
-  }
-
-  // documentNumber:
-  dropListDocumentNumber(id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrderSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.documentNumberSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListDocumentNumber(this.documentNumberSearchEntity);
-  }
-
-  typingSearchDocumentNumber(event: number, id: string) {
-    this.documentNumberSearchEntity = new PurchaseOrderSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.documentNumberSearchEntity.ids.push(id);
-    }
-    this.documentNumberSearchEntity.documentNumber.equal = event;
-    this.documentNumberTyping.next(this.documentNumberSearchEntity);
-  }
-
-  // itemDetail:
-  dropListItemDetail(id: string) {
-    this.itemDetailSearchEntity = new ItemDetailSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListItem(this.itemDetailSearchEntity);
-  }
-
-  typingSearchItemDetail(event: string, id: string) {
-    this.itemDetailSearchEntity = new ItemDetailSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.itemDetailSearchEntity.ids.push(id);
-    }
-    this.itemDetailSearchEntity.name.startsWith = event;
-    this.itemDetailTyping.next(this.itemDetailSearchEntity);
-  }
-
-  // unitOfMeasure:
-  dropListUnitOfMeasure(id: string) {
-    this.unitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.goodsReceiptPOService.dropListUnitOfMeasure(this.unitOfMeasureSearchEntity);
-  }
-
-  typingSearchUnitOfMeasure(event: string, id: string) {
-    this.unitOfMeasureSearchEntity = new UnitOfMeasureSearchEntity();
-    if (id !== null && id.length > 0) {
-      this.unitOfMeasureSearchEntity.ids.push(id);
-    }
-    this.unitOfMeasureSearchEntity.name.startsWith = event;
-    this.unitOfMeasureTyping.next(this.unitOfMeasureSearchEntity);
-  }
+  reject = () => {
+    this.goodsReceiptPOService.reject(this.goodsReceiptPOForm.value.id)
+      .then(() => {
+        return this.backToList();
+      });
+  };
 }

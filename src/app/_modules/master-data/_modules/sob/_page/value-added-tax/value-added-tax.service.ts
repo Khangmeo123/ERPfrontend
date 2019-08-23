@@ -175,7 +175,7 @@ export class ValueAddedTaxService {
         this.toastrService.success(translate('general.update.success'));
       })
       .catch((error) => {
-        this.toastrService.error(translate('general.update.failure'));
+        this.toastrService.error(translate('general.update.error'));
         throw error;
       });
   }
@@ -186,7 +186,7 @@ export class ValueAddedTaxService {
         this.toastrService.success(translate('general.update.success'));
       })
       .catch((error) => {
-        this.toastrService.error(translate('general.update.failure'));
+        this.toastrService.error(translate('general.update.error'));
         throw error;
       });
   }

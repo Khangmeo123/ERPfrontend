@@ -6,10 +6,10 @@ import {
   PurchaseOrderEntity,
   SupplierContactEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import {
-  EmpoloyeeDetailSearchEntity,
+  EmployeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
   ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
@@ -19,8 +19,8 @@ import {
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { SupplierSearchEntity } from '../../../../../master-data/_backend/supplier/supplier.searchentity';
 import { GeneralService } from '../../../../../../_services/general-service.service';
-import { GoodsReceiptPOListRepository } from '../goods-receipt-po-list/goods-receipt-po-list.repository';
 import { GoodsReceiptPODetailRepository } from './goods-receipt-po-detail.repository';
+import { UploadFile } from 'ng-zorro-antd';
 
 @Component({
   selector: 'app-goods-receipt-po-detail',
@@ -39,7 +39,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   displayPurchaseOrders: boolean = false;
 
-  filenameList: string[] = [];
+  fileList: UploadFile[] = [];
 
   deletedList: number[] = [];
 
@@ -51,11 +51,11 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   requesterList: EmployeeDetailEntity[] = [];
 
-  requesterSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+  requesterSearchEntity: EmployeeDetailSearchEntity = new EmployeeDetailSearchEntity();
 
-  buyerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+  buyerSearchEntity: EmployeeDetailSearchEntity = new EmployeeDetailSearchEntity();
 
-  ownerSearchEntity: EmpoloyeeDetailSearchEntity = new EmpoloyeeDetailSearchEntity();
+  ownerSearchEntity: EmployeeDetailSearchEntity = new EmployeeDetailSearchEntity();
 
   supplierSearchEntity: SupplierSearchEntity = new SupplierSearchEntity();
 
@@ -77,9 +77,12 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     private goodsReceiptPoDetailRepository: GoodsReceiptPODetailRepository,
   ) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      if (params.goodsReceiptPOId) {
-        this.goodsReceiptPOId = params.goodsReceiptPOId;
-        this.goodsReceiptPoDetailService.getDetail(params.goodsReceiptPOId);
+      if (params.id) {
+        this.goodsReceiptPOId = params.id;
+        this.goodsReceiptPoDetailService.getDetail(params.id)
+          .then(() => {
+            this.supplierContactSearchEntity.supplierDetailId = this.supplierDetailId.value;
+          });
       }
     });
 
@@ -120,8 +123,36 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     return this.goodsReceiptPOForm.get('supplierName') as FormControl;
   }
 
+  get supplierAddress() {
+    return this.goodsReceiptPOForm.get('supplierAddress') as FormControl;
+  }
+
   get dueDate() {
     return this.goodsReceiptPOForm.get('dueDate') as FormControl;
+  }
+
+  get fileAttachments() {
+    return this.goodsReceiptPOForm.get('fileAttachments') as FormArray;
+  }
+
+  get allSelected() {
+    return this.purchaseOrdersList.length === this.purchaseOrdersList.filter((item) => item.isSelected).length;
+  }
+
+  get inventoryOrganizationCode() {
+    return this.goodsReceiptPOForm.get('inventoryOrganizationCode') as FormControl;
+  }
+
+  get ownerName() {
+    return this.goodsReceiptPOForm.get('ownerName') as FormControl;
+  }
+
+  get buyerName() {
+    return this.goodsReceiptPOForm.get('buyerName') as FormControl;
+  }
+
+  get requesterName() {
+    return this.goodsReceiptPOForm.get('requesterName') as FormControl;
   }
 
   ngOnInit() {
@@ -170,11 +201,11 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     this.displayPurchaseOrders = false;
   }
 
-  onClearSearch(event) {
+  onClearSearch(table) {
+    table.reset();
   }
 
   deactivate() {
-
   }
 
   deleteItem() {
@@ -199,14 +230,11 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     tablePurchaseOrders.filter(date, 'documentDate', 'equals');
   }
 
-  selectAllPurchaseOrders(event) {
+  selectAllPurchaseOrders() {
+    const allSelected: boolean = this.allSelected;
     this.purchaseOrdersList.forEach(item => {
-      item.isSelected = event.target.checked;
+      item.isSelected = !allSelected;
     });
-  }
-
-  readURL(event) {
-    this.filenameList = Object.values(event.target.files).map((file: File) => file.name);
   }
 
   trackByFn(index) {
@@ -224,31 +252,27 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   onSelectSupplierDetail(event) {
     this.goodsReceiptPOForm.patchValue({
+      supplierName: event.name,
       supplierDetailId: event.id,
       supplierCode: event.code,
-      supplierName: event.name,
     });
 
     this.supplierContactSearchEntity.supplierDetailId = event.id;
     this.goodsReceiptPoDetailService.getSupplierContactList(this.supplierContactSearchEntity)
       .then((contactList: SupplierContactEntity[]) => {
-        if (contactList.length > 0) {
+        if (contactList.length) {
           this.goodsReceiptPOForm.patchValue({
             supplierContactId: contactList[0].id,
+            supplierAddress: contactList[0].supplierAddress,
           });
         }
       });
   }
 
-  getSupplierContactList = () => {
-    this.supplierContactSearchEntity = new SupplierContactSearchEntity();
-    this.supplierContactSearchEntity.supplierDetailId = this.supplierDetailId.value;
-    this.goodsReceiptPoDetailService.getSupplierContactList(this.supplierContactSearchEntity);
-  };
-
   onSelectInventoryOrganization(event) {
     this.goodsReceiptPOForm.patchValue({
       inventoryOrganizationId: event.id,
+      inventoryOrganizationCode: event.code,
       inventoryOrganizationStreet: event.address,
     });
   }
@@ -273,4 +297,13 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
       buyerName: event.name,
     });
   }
+
+  onUpload = () => {
+    return this.goodsReceiptPoDetailService.uploadFiles(this.fileList);
+  };
+
+  beforeUpload = (file: UploadFile) => {
+    this.fileList = this.fileList.concat(file);
+    return false;
+  };
 }

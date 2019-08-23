@@ -2,25 +2,29 @@
     "general": {
         "action": "Thao tác",
         "button": {
-            "addRow": "Bấm vào để thêm mới...",
             "add": "Thêm",
+            "addRow": "Bấm vào để thêm mới...",
             "approve": "Phê duyệt",
             "attachFile": "Thêm đính kèm",
             "cancel": "Hủy",
             "clear": "Bỏ lọc",
             "completed": "Hoàn thành",
+            "confirm": {
+                "no": "Không",
+                "yes": "Có"
+            },
             "delete": "Xóa",
             "downloadTemplate": "Tải file mẫu",
             "download_example": "Tải file mẫu",
-            "edit": "",
+            "edit": "Chỉnh sửa",
             "export": "Xuất Excel",
             "getData": "Lấy dữ liệu",
             "history": "Lịch sử",
             "import": "Nhập hàng loạt",
             "importFile": "Nhập hàng loạt",
             "import_file": "Nhập hàng loạt",
-            "issue": "",
-            "ok": "",
+            "issue": "Xuất",
+            "ok": "OK",
             "post": "Bình luận",
             "print": "In",
             "receive": "Nhận",
@@ -30,9 +34,14 @@
             "reverse": "Hoàn duyệt",
             "save": "Lưu",
             "send": "Gửi",
-            "update": "Cập nhật"
+            "update": "Cập nhật",
+            "upload": ""
         },
         "completed": "Hoàn thành",
+        "confirmation": {
+            "message": "Bạn chắc chắn muốn xóa?",
+            "title": "Xác nhận xóa"
+        },
         "customer_group": {
             "name": "Tên nhóm khách hàng"
         },
@@ -59,7 +68,13 @@
             "success": "Nhập thành công"
         },
         "legalEntity": {
-            "name": "Tên pháp nhân"
+            "name": "Tên pháp nhân",
+            "placeholder": "Chọn pháp nhân"
+        },
+        "legalEntityList": {
+            "get": {
+                "error": "Không thể lấy danh sách pháp nhân"
+            }
         },
         "legal_entity": {
             "name": "Tên pháp nhân"
@@ -90,8 +105,12 @@
         },
         "toDate": "Đến ngày",
         "update": {
-            "failure": "Cập nhật thất bại",
+            "error": "Cập nhật thất bại",
             "success": "Cập nhật thành công"
+        },
+        "upload": {
+            "error": "Tải lên thất bại",
+            "success": "Tải lên thành công"
         }
     }
 }

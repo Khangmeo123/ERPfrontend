@@ -9,16 +9,19 @@ export class GoodsReceiptPOSearchEntity extends SearchEntity {
   supplierContactId: string;
   currencyId: string;
   inventoryOrganizationId: string = null;
+  inventoryOrganizationCode: string = null;
   inventoryOrganizationStreet = new TextFilter();
   documentNumber: NumberFilter = new NumberFilter();
   documentReferenceId: string;
   statusId: string = null;
+  statusDisplay: string = null;
   postingDate: DateFilter = new DateFilter();
   dueDate: DateFilter = new DateFilter();
   documentDate: DateFilter = new DateFilter();
   buyerId: string;
   ownerId: string;
   requesterId: string = null;
+  requesterName: string = null;
   remarks = new TextFilter();
   generalDiscountRate: NumberFilter = new NumberFilter();
 
@@ -39,7 +42,7 @@ export class PurchaseOrderSearchEntity extends SearchEntity {
   }
 }
 
-export class EmpoloyeeDetailSearchEntity extends SearchEntity {
+export class EmployeeDetailSearchEntity extends SearchEntity {
   code: TextFilter = new TextFilter();
   name: TextFilter = new TextFilter();
 
@@ -98,7 +101,7 @@ export class ItemDetailSearchEntity extends SearchEntity {
   name = new TextFilter();
 }
 
-export class GoodsReceiptPOBinlocationSearchEntity extends SearchEntity {
+export class BinLocationSearchEntity extends SearchEntity {
   goodsReceiptPOContentId: string;
   code = new TextFilter();
 }

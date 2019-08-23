@@ -104,7 +104,7 @@
               {{ 'goodsReceiptPO.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th width="5%"> {{'general.action' | translate }} </th>
+            <th pResizableColumn class="actions"> {{'general.action' | translate }} </th>
           </tr>
           <tr>
             <th class="th-filter"></th>
@@ -124,9 +124,11 @@
                 [getList]="goodsReceiptPOListRepository.singleListInventoryOrganization"
                 [searchEntity]="inventoryOrganizationSearchEntity"
                 [searchable]="true"
+                [display]="goodsReceiptPOSearchEntity.inventoryOrganizationCode"
                 placeholder="{{'goodsReceiptPOList.filters.inventoryOrganizationCode' | translate}}"
-                searchField="name"
+                searchField="code"
                 searchType="startsWith"
+                appendTo="body"
               >
                 <ng-template #label #option let-code="code" let-name="name">
                   {{code}} - {{name}}
@@ -150,9 +152,11 @@
                 [getList]="goodsReceiptPOListRepository.singleListRequester"
                 [searchEntity]="requesterSearchEntity"
                 [searchable]="true"
+                [display]="goodsReceiptPOSearchEntity?.requesterName"
                 placeholder="{{'goodsReceiptPOList.filters.requester' | translate}}"
                 searchField="name"
                 searchType="startsWith"
+                appendTo="body"
               >
                 <ng-template #label #option let-name="name">
                   {{name}}
@@ -163,14 +167,15 @@
               <jaja-select-list
                 (change)="onFilterStatus($event)"
                 [getList]="goodsReceiptPOListRepository.enumListStatus"
-                display="display"
+                [display]="goodsReceiptPOSearchEntity?.statusDisplay"
+                appendTo="body"
                 placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">
                   {{display}}
                 </ng-template>
               </jaja-select-list>
             </th>
-            <th width="5%"></th>
+            <th class="th-filter actions"></th>
           </tr>
         </ng-template>
         <ng-template let-goodsReceiptPO let-index="rowIndex" pTemplate="body">
@@ -199,14 +204,9 @@
                    routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-approve">{{'general.done'| translate}}</a>
               </div>
             </td>
-            <td width="5%">
-              <div class="d-flex justify-content-center">
-                <div class="view-detail mr-2">
-                  <mat-icon>remove_red_eye</mat-icon>
-                </div>
-                <div (click)="editGoodsReceiptPO(goodsReceiptPO.id)" class="edit">
-                  <mat-icon>edit</mat-icon>
-                </div>
+            <td class="actions">
+              <div class="view-detail d-flex justify-content-center">
+                <mat-icon>remove_red_eye</mat-icon>
               </div>
             </td>
           </tr>

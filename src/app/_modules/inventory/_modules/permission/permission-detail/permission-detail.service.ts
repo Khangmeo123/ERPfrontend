@@ -1,23 +1,17 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable, Subscription} from 'rxjs';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {PermissionEntity, PermissionForm} from '../permission.entities';
-import {PermissionDetailRepository} from './permission-detail.repository';
-import {Entities, EnumEntity} from '../../../../../_helpers/entity';
-import {PositionSearchEntity} from '../../../_backend/position/position.search-entity';
-import {translate} from '../../../../../_helpers/string';
-import {ToastrService} from 'ngx-toastr';
-import {debounceTime, distinctUntilChanged, switchMap} from 'rxjs/operators';
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { PermissionEntity, PermissionForm } from '../permission.entities';
+import { PermissionDetailRepository } from './permission-detail.repository';
+import { Entities, EnumEntity } from '../../../../../_helpers/entity';
+import { ToastrService } from 'ngx-toastr';
+import { translate } from '../../../../../_helpers/string';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PermissionDetailService {
   permissionForm: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(null);
-
-  positionList: BehaviorSubject<Entities> = new BehaviorSubject<Entities>(new Entities());
-
-  documentStatus: BehaviorSubject<EnumEntity[]> = new BehaviorSubject<EnumEntity[]>([]);
 
   constructor(
     private permissionDetailRepository: PermissionDetailRepository,
@@ -29,53 +23,6 @@ export class PermissionDetailService {
         new PermissionForm(),
       ),
     );
-  }
-
-  getPositionList(positionSearchEntity: PositionSearchEntity): Promise<Entities> {
-    return new Promise<Entities>((resolve, reject) => {
-      this.permissionDetailRepository.getPositionList(positionSearchEntity)
-        .subscribe(
-          (entities: Entities) => {
-            this.positionList.next(entities);
-            resolve(entities);
-          },
-          (error: Error) => {
-            this.toastrService.error(translate('positionEntity.get.error'));
-            reject(error);
-          },
-        );
-    });
-  }
-
-  searchPositionByTyping(positionSearchEntityTyping: Observable<PositionSearchEntity>): Subscription {
-    return positionSearchEntityTyping.pipe(
-      debounceTime(400),
-      distinctUntilChanged(),
-      switchMap(
-        (positionSearchEntity: PositionSearchEntity) => {
-          return this.permissionDetailRepository.getPositionList(positionSearchEntity);
-        },
-      ),
-    )
-      .subscribe((entities: Entities) => {
-        this.positionList.next(entities);
-      });
-  }
-
-  getDocumentStatus(inventoryDocumentTypeId: string): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      this.permissionDetailRepository.getDocumentStatus(inventoryDocumentTypeId)
-        .subscribe(
-          (documentTypes: EnumEntity[]) => {
-            this.documentStatus.next(documentTypes);
-            resolve();
-          },
-          (error: Error) => {
-            this.toastrService.error(translate('documentStatus.get.error'));
-            reject(error);
-          },
-        );
-    });
   }
 
   get(id: string): Promise<void> {
@@ -116,5 +63,4 @@ export class PermissionDetailService {
         );
     });
   }
-
 }

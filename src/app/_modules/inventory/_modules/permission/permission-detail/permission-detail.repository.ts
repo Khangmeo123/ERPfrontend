@@ -1,13 +1,13 @@
-import {Repository} from '../../../../../_repositories/repository';
-import {HttpClient, HttpResponse} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {PositionSearchEntity} from '../../../_backend/position/position.search-entity';
-import {Observable} from 'rxjs';
-import {Entities, EnumEntity} from '../../../../../_helpers/entity';
-import {map} from 'rxjs/operators';
-import {PositionEntity} from '../../../_backend/position/position.entity';
-import {environment} from '../../../../../../environments/environment';
-import {PermissionEntity} from '../permission.entities';
+import { Repository } from '../../../../../_repositories/repository';
+import { HttpClient, HttpResponse } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { PositionSearchEntity } from '../../../_backend/position/position.search-entity';
+import { Observable } from 'rxjs';
+import { EnumEntity } from '../../../../../_helpers/entity';
+import { map } from 'rxjs/operators';
+import { PositionEntity } from '../../../_backend/position/position.entity';
+import { environment } from '../../../../../../environments/environment';
+import { PermissionEntity } from '../permission.entities';
 
 @Injectable({
   providedIn: 'root',
@@ -19,13 +19,11 @@ export class PermissionDetailRepository extends Repository {
     super(http);
   }
 
-  getUrl(url: string) {
-    return `${this.apiUrl}/${url}`;
-  }
+  getUrl = (url: string) => `${this.apiUrl}/${url}`;
 
-  getPositionList(positionSearchEntity: PositionSearchEntity): Observable<Entities> {
-    return this.http.post<Entities>(
-      this.getUrl('drop-list-position'),
+  getPositionList = (positionSearchEntity: PositionSearchEntity): Observable<PositionEntity[]> => {
+    return this.http.post<PositionEntity[]>(
+      this.getUrl('single-list-position'),
       positionSearchEntity,
       {
         observe: 'response',
@@ -34,19 +32,14 @@ export class PermissionDetailRepository extends Repository {
     )
       .pipe(
         map(
-          (response: HttpResponse<Entities>) => {
-            const entities: Entities = new Entities();
-            entities.ids = response.body.ids.map((item) => new PositionEntity(item));
-            entities.exceptIds = response.body.exceptIds.map((item) => new PositionEntity(item));
-            return entities;
-          },
+          (response: HttpResponse<PositionEntity[]>) => response.body,
         ),
       );
-  }
+  };
 
-  getDocumentStatus(inventoryDocumentTypeId: string): Observable<EnumEntity[]> {
+  getDocumentStatus = (inventoryDocumentTypeId: string): Observable<EnumEntity[]> => {
     return this.http.post<EnumEntity[]>(
-      this.getUrl('enum-list-document-status'),
+      this.getUrl('single-list-document-status'),
       {
         id: inventoryDocumentTypeId,
       },
@@ -60,9 +53,9 @@ export class PermissionDetailRepository extends Repository {
           (response: HttpResponse<EnumEntity[]>) => response.body,
         ),
       );
-  }
+  };
 
-  get(id: string): Observable<PermissionEntity> {
+  get = (id: string): Observable<PermissionEntity> => {
     return this.http.post<PermissionEntity>(
       this.getUrl('get'),
       {
@@ -78,9 +71,9 @@ export class PermissionDetailRepository extends Repository {
           (response: HttpResponse<PermissionEntity>) => response.body,
         ),
       );
-  }
+  };
 
-  update(permissionEntity: PermissionEntity): Observable<PermissionEntity> {
+  update = (permissionEntity: PermissionEntity): Observable<PermissionEntity> => {
     return this.http.post<PermissionEntity>(
       this.getUrl('update'),
       permissionEntity,
@@ -94,9 +87,9 @@ export class PermissionDetailRepository extends Repository {
           (response: HttpResponse<PermissionEntity>) => response.body,
         ),
       );
-  }
+  };
 
-  create(permissionEntity: PermissionEntity): Observable<PermissionEntity> {
+  create = (permissionEntity: PermissionEntity): Observable<PermissionEntity> => {
     return this.http.post<PermissionEntity>(
       this.getUrl('create'),
       permissionEntity,
@@ -110,5 +103,5 @@ export class PermissionDetailRepository extends Repository {
           (response: HttpResponse<PermissionEntity>) => response.body,
         ),
       );
-  }
+  };
 }

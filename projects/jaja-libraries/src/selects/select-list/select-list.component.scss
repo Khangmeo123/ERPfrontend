@@ -63,7 +63,7 @@ jaja-select-list {
 }
 
 ul.dropdown-menu.select-dropdown {
-  min-width: 320px;
+  min-width: 120px;
   max-height: 242px;
   overflow-y: auto;
   padding-top: 0;
@@ -80,7 +80,8 @@ ul.dropdown-menu.select-dropdown {
     position: sticky;
     top: 0;
     background: #ffffff;
-    padding: 0 0.75rem 0.5rem;
+    margin-top: 0;
+    padding: 0.5rem 0.75rem 0.5rem;
     border-bottom: 1px solid $border-color;
   }
 
