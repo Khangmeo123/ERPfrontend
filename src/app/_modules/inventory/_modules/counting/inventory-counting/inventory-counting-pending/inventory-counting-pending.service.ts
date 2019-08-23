@@ -26,6 +26,7 @@ import { InventoryCountingPendingRepository } from './inventory-counting-pending
 import { translate } from 'src/app/_helpers/string';
 import * as _ from 'lodash';
 import { GeneralService } from 'src/app/_services/general-service.service';
+import { SpinnerService } from 'src/app/_services';
 @Injectable()
 export class InventoryCountingPendingService {
     public inventoryCountingForm: BehaviorSubject<FormGroup>;
@@ -37,6 +38,7 @@ export class InventoryCountingPendingService {
         private fb: FormBuilder,
         private toastrService: ToastrService,
         private generalService: GeneralService,
+        private spinnerService: SpinnerService,
         private inventoryCountingRepository: InventoryCountingPendingRepository) {
         this.inventoryCountingForm = new BehaviorSubject(this.fb.group(new InventoryCountingForm()));
         this.binLocationList = new BehaviorSubject([]);
@@ -49,8 +51,10 @@ export class InventoryCountingPendingService {
     getDetail(inventoryCountingId?): Promise<InventoryCountingEntity> {
         const defered = new Promise<InventoryCountingEntity>((resolve, reject) => {
             if (inventoryCountingId !== null && inventoryCountingId !== undefined) {
+                this.spinnerService.show();
                 this.inventoryCountingRepository.getDetail(inventoryCountingId).subscribe(res => {
                     if (res) {
+                        this.spinnerService.hide();
                         const inventoryCountingForm = this.fb.group(
                             new InventoryCountingForm(res),
                         );
@@ -59,7 +63,7 @@ export class InventoryCountingPendingService {
                     }
                 }, err => {
                     if (err) {
-                        console.log(err);
+                        this.spinnerService.hide();
                         reject();
                     }
                 });
@@ -70,13 +74,16 @@ export class InventoryCountingPendingService {
 
     send(inventoryCountingId: any) {
         const defered = new Promise<boolean>((resolve, reject) => {
+            this.spinnerService.show();
             this.inventoryCountingRepository.send(inventoryCountingId).subscribe(res => {
                 if (res) {
+                    this.spinnerService.hide();
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();
                 }
             }, err => {
                 if (err) {
+                    this.spinnerService.hide();
                     this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
                     reject();
                 }
@@ -88,13 +95,15 @@ export class InventoryCountingPendingService {
 
     // inventoryCounterContents:
     getListBinLocation(inventoryOrganizationId: string, itemDetailId: string) {
+        this.spinnerService.show();
         this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, itemDetailId).subscribe(res => {
             if (res) {
+                this.spinnerService.hide();
                 this.binLocationList.next(res);
             }
         }, err => {
             if (err) {
-                console.log(err);
+                this.spinnerService.hide();
             }
         });
     }
@@ -135,17 +144,21 @@ export class InventoryCountingPendingService {
     }
 
     resetInventoryCounterContent(inventoryCountingId: string, inventoryCountingForm: FormGroup) {
+        this.spinnerService.show();
         const listInventoryCounterIds = inventoryCountingForm.value.inventoryCounterContents.map(item => item.id);
         this.inventoryCountingRepository.resetInventoryCounterContent(inventoryCountingId, listInventoryCounterIds).subscribe(res => {
             if (res) {
+                this.spinnerService.hide();
                 this.getDetail(inventoryCountingId);
             }
         });
     }
 
     updateQuantity(inventoryCountingId: string, itemDetailId: string, quantity: number) {
+        this.spinnerService.show();
         this.inventoryCountingRepository.updateQuantity(inventoryCountingId, itemDetailId, quantity).subscribe(res => {
             if (res) {
+                this.spinnerService.hide();
                 const currentForm = this.inventoryCountingForm.getValue();
                 const currentArray = currentForm.get('inventoryCounterContents') as FormArray;
                 for (const control of currentArray.controls) {
@@ -160,6 +173,7 @@ export class InventoryCountingPendingService {
             }
         }, err => {
             if (err) {
+                this.spinnerService.hide();
                 this.toastrService.error('Quét QR xảy ra lỗi!');
             }
         });
@@ -167,8 +181,10 @@ export class InventoryCountingPendingService {
 
     // SerialNumber:
     getListSerialNumber(itemDetailId: string, inventoryCountingId: string) {
+        this.spinnerService.show();
         this.inventoryCountingRepository.getListSerialNumber(itemDetailId, inventoryCountingId).subscribe(res => {
             if (res) {
+                this.spinnerService.hide();
                 this.serialNumberList.next(res);
             }
         });
@@ -224,14 +240,17 @@ export class InventoryCountingPendingService {
     }
 
     importSerialNumber(file: File, itemDetailId: string, inventoryCountingId: string) {
+        this.spinnerService.show();
         this.inventoryCountingRepository.importSerialNumber(itemDetailId, inventoryCountingId, file).subscribe(res => {
             if (res) {
+                this.spinnerService.hide();
                 this.toastrService.success(translate('general.import.success'));
                 this.getListSerialNumber(itemDetailId, inventoryCountingId);
             }
         }, err => {
             if (err) {
                 this.toastrService.error(translate('general.import.error'));
+                this.spinnerService.hide();
             }
         });
     }
@@ -252,8 +271,10 @@ export class InventoryCountingPendingService {
     // batch:
 
     getListBatch(itemDetailId: string, inventoryCountingId: string) {
+        this.spinnerService.show();
         this.inventoryCountingRepository.getBatchList(itemDetailId, inventoryCountingId).subscribe(res => {
             if (res) {
+                this.spinnerService.hide();
                 this.batchList.next(res);
             }
         });
@@ -300,8 +321,10 @@ export class InventoryCountingPendingService {
     }
 
     updateBatch(batch: CounterContentByItemDetailEntity) {
+        this.spinnerService.show();
         this.inventoryCountingRepository.updateBatch(batch).subscribe(res => {
             if (res) {
+                this.spinnerService.show();
                 const currentList = this.batchList.getValue();
                 const filterItem = currentList.filter(item => {
                     return item.id === res.id;

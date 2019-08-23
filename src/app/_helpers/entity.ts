@@ -3,6 +3,7 @@ export class Entity {
   isDeleted: boolean = true;
   isEdited: boolean = true;
   isSelected: boolean = false;
+  isDifference: boolean = false;
   errors: any;
 
   constructor(entity?: any) {
@@ -54,6 +55,6 @@ export class UserEntity extends Entity {
 }
 
 export class ColumnEntity {
-    field: string;
-    header: string;
+  field: string;
+  header: string;
 }

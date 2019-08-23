@@ -61,6 +61,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   itemDetailSearchEntity: ItemDetailOfCountingSearchEntity = new ItemDetailOfCountingSearchEntity();
   // itemDetailCode:
   itemDetailCodeSearchEntity: ItemDetailOfCountingSearchEntity = new ItemDetailOfCountingSearchEntity();
+  itemDetailCodeExtendSearch: ItemDetailOfCountingSearchEntity = new ItemDetailOfCountingSearchEntity();
 
   constructor(
     private confirmationService: ConfirmationService,
@@ -207,7 +208,7 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
     if (this.inventoryOrganizationId) {
       this.inventoryCountingService.addInventoryCountingContent(this.inventoryCountingForm);
     } else {
-      this.toastrService.warning('Bạn cần chọn mã kho trước!')
+      this.toastrService.warning('Bạn cần chọn mã kho trước!');
     }
   }
 
@@ -239,10 +240,14 @@ export class InventoryCountingDetailComponent implements OnInit, OnDestroy {
   }
 
   openItemDetail() {
-    this.displayItemDetail = true;
-    this.checkAllItem = false;
-    const data = this.inventoryCountingForm.get('inventoryCountingContents').value;
-    this.inventoryCountingService.getItemDetailList(data);
+    if (this.inventoryOrganizationId) {
+      this.displayItemDetail = true;
+      this.checkAllItem = false;
+      const data = this.inventoryCountingForm.get('inventoryCountingContents').value;
+      this.inventoryCountingService.getItemDetailList(data);
+    } else {
+      this.toastrService.warning('Bạn cần chọn mã kho trước!');
+    }
   }
 
   checkAllItemDetail(target: any) {

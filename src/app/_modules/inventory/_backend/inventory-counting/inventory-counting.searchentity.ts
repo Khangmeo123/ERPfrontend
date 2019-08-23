@@ -7,6 +7,7 @@ export class InventoryCountingSearchEntity extends SearchEntity {
     id: string;
     documentNumber: TextFilter = new TextFilter();
     documentDate: DateFilter = new DateFilter();
+    dueDate: DateFilter = new DateFilter();
     inventoryOrganizationId: string = null;
     inventoryOrganizationCode: string;
     inventoryOrganizationName: string;
