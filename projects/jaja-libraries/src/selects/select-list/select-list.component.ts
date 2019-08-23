@@ -1,4 +1,5 @@
 import {
+  AfterViewInit,
   Component,
   ContentChild,
   ElementRef,
@@ -32,7 +33,7 @@ import { ISearchEntity } from '../../entities/ISearchEntity';
     },
   ],
 })
-export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor {
+export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor, AfterViewInit {
 
   @Input() appendTo: string = null;
 
@@ -92,8 +93,13 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
     this.selectedItem = this.list.find((item) => this.getValue(item) === value);
   }
 
+  ngAfterViewInit(): void {
+    this.resetDropdownWidth();
+  }
+
   @Input()
   getList = (searchEntity?: ISearchEntity): Observable<any[]> => {
+    this.searchEntity = searchEntity;
     return new Observable<any[]>();
   };
 
@@ -164,7 +170,7 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
   }
 
   @HostListener('window:resize', [])
-  onWindowResize = () => {
+  resetDropdownWidth = () => {
     if (this.toggler) {
       this.width = window.getComputedStyle(this.toggler.nativeElement).width;
     }
