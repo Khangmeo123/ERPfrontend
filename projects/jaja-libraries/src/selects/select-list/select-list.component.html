@@ -4,6 +4,7 @@
      [ngClass]="{disabled: disabled}">
 
   <div dropdownToggle
+       #toggler
        [ngClass]="{'form-control-sm': small}"
        class="jaja-select-list-toggle form-control align-items-center">
     <span *ngIf="!selectedItem; else labelTemplate">
