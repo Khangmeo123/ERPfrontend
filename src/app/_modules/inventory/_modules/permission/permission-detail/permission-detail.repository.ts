@@ -104,4 +104,20 @@ export class PermissionDetailRepository extends Repository {
         ),
       );
   };
+
+  delete = (permissionEntity: PermissionEntity): Observable<PermissionEntity> => {
+    return this.http.post<PermissionEntity>(
+      this.getUrl('delete'),
+      permissionEntity,
+      {
+        observe: 'response',
+        headers: this.getHeader(),
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<PermissionEntity>) => response.body,
+        ),
+      );
+  };
 }

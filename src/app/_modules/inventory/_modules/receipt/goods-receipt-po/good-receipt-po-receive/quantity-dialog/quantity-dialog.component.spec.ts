@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PermissionDetailComponent } from './permission-detail.component';
+import { QuantityDialogComponent } from './quantity-dialog.component';
 
-describe('PermissionDetailComponent', () => {
-  let component: PermissionDetailComponent;
-  let fixture: ComponentFixture<PermissionDetailComponent>;
+describe('QuantityDialogComponent', () => {
+  let component: QuantityDialogComponent;
+  let fixture: ComponentFixture<QuantityDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PermissionDetailComponent],
+      declarations: [QuantityDialogComponent],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PermissionDetailComponent);
+    fixture = TestBed.createComponent(QuantityDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

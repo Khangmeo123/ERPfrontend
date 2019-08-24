@@ -37,6 +37,9 @@ import { IconModule } from '@ant-design/icons-angular';
 import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { NzListModule } from 'ng-zorro-antd';
+import { BatchDialogComponent } from './goods-receipt-po/good-receipt-po-receive/batch-dialog/batch-dialog.component';
+import { SerialDialogComponent } from './goods-receipt-po/good-receipt-po-receive/serial-dialog/serial-dialog.component';
+import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-receive/quantity-dialog/quantity-dialog.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +57,9 @@ import { NzListModule } from 'ng-zorro-antd';
     ReturnRequestDetailComponent,
     ReturnRequestListComponent,
     GoodsReceiptPoDetailComponent,
+    BatchDialogComponent,
+    SerialDialogComponent,
+    QuantityDialogComponent,
   ],
   imports: [
     IconModule,

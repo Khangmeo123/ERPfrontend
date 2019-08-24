@@ -21,7 +21,7 @@
       <ng-template #notGroup>
         <li class="menu-item menu-item-{{level}} d-flex" routerLinkActive="active"
             [routerLinkActiveOptions]="{exact: item.exact}">
-          <a class="flex-grow-1" [routerLink]="item.route">
+          <a class="flex-grow-1" [routerLink]="item.route" [queryParams]="{legalEntityId: legalEntityId}">
             <i class="material-icons" *ngIf="!!item.icon; else notHaveIcon">{{item.icon}}</i>
             <ng-template #notHaveIcon>
               <div class="icon-placeholder"></div>

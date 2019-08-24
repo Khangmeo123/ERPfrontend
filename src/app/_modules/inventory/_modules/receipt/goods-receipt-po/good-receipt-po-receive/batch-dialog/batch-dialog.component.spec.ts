@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PermissionDetailComponent } from './permission-detail.component';
+import { BatchDialogComponent } from './batch-dialog.component';
 
-describe('PermissionDetailComponent', () => {
-  let component: PermissionDetailComponent;
-  let fixture: ComponentFixture<PermissionDetailComponent>;
+describe('BatchDialogComponent', () => {
+  let component: BatchDialogComponent;
+  let fixture: ComponentFixture<BatchDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PermissionDetailComponent],
+      declarations: [BatchDialogComponent],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PermissionDetailComponent);
+    fixture = TestBed.createComponent(BatchDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
