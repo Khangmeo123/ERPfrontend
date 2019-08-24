@@ -3,9 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PermissionEntity, PermissionForm } from '../permission.entities';
 import { PermissionDetailRepository } from './permission-detail.repository';
-import { Entities, EnumEntity } from '../../../../../_helpers/entity';
 import { ToastrService } from 'ngx-toastr';
-import { translate } from '../../../../../_helpers/string';
 
 @Injectable({
   providedIn: 'root',
@@ -58,6 +56,22 @@ export class PermissionDetailService {
           },
           (error: Error) => {
             this.toastrService.error('permission.update.error');
+            reject(error);
+          },
+        );
+    });
+  }
+
+  delete(permissionEntity: PermissionEntity): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+      this.permissionDetailRepository.delete(permissionEntity)
+        .subscribe(
+          () => {
+            this.toastrService.success('permission.delete.success');
+            resolve();
+          },
+          (error: Error) => {
+            this.toastrService.error('permission.delete.error');
             reject(error);
           },
         );

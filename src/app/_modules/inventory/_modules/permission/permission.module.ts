@@ -14,6 +14,7 @@ import { KeyFilterModule } from 'primeng/keyfilter';
 import { EditorModule } from 'primeng/editor';
 import { ErrorModule } from '../../../../_shared/components/error/error.module';
 import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
     FormsModule,
     ErrorModule,
     SelectsModule,
+    ConfirmDialogModule,
   ],
 })
 export class PermissionModule {

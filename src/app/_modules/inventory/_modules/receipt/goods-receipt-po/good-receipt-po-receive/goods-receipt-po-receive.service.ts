@@ -94,10 +94,10 @@ export class GoodsReceiptPOReceiveService {
       if (control instanceof FormGroup) {
         const unitPrice = control.get('unitPrice').value;
         const taxRate = control.get('taxRate').value;
-        const generalDiscountCost = control.get('generalDiscountCost').value;
+        const itemDiscountCost = control.get('itemDiscountCost').value;
         const quantity = control.get('quantity').value;
         const taxNumber = unitPrice * (taxRate / 100);
-        const totalValue = Math.round((unitPrice + taxNumber - generalDiscountCost) * quantity);
+        const totalValue = Math.round((unitPrice + taxNumber - itemDiscountCost) * quantity);
         if (control.get('total')) {
           control.get('total').setValue(totalValue);
         } else {
@@ -241,14 +241,14 @@ export class GoodsReceiptPOReceiveService {
     });
   };
 
-  changeLocationSerialNumber = (goodsReceiptPOBinlocationEntity: BinLocationEntity) => {
+  changeLocationSerialNumber = (binLocationEntity: BinLocationEntity) => {
     const currentSerialNumber = this.serialNumber.getValue();
     const currentSerialNumberList = currentSerialNumber.goodsReceiptPOSerialNumbers;
     if (currentSerialNumberList) {
       currentSerialNumberList.forEach(item => {
         if (item.isSelected) {
-          item.binLocationId = goodsReceiptPOBinlocationEntity.id;
-          item.binLocationCode = goodsReceiptPOBinlocationEntity.code;
+          item.binLocationId = binLocationEntity.id;
+          item.binLocationCode = binLocationEntity.code;
           item.isSelected = false;
         }
       });
@@ -337,15 +337,15 @@ export class GoodsReceiptPOReceiveService {
     });
   };
 
-  changeLocationBatch = (goodsReceiptPOBinlocationEntity: BinLocationEntity) => {
+  changeLocationBatch = (binLocationEntity: BinLocationEntity) => {
     const currentBatch = this.batch.getValue();
     const currentBatchList = currentBatch.goodsReceiptPOBatches;
     if (currentBatchList) {
       currentBatchList.forEach(item => {
         if (item.isSelected && item.goodsReceiptPOBatchBinLocations) {
           item.goodsReceiptPOBatchBinLocations.forEach(i => {
-            i.binLocationId = goodsReceiptPOBinlocationEntity.id;
-            i.binLocationCode = goodsReceiptPOBinlocationEntity.code;
+            i.binLocationId = binLocationEntity.id;
+            i.binLocationCode = binLocationEntity.code;
           });
         }
       });

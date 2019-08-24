@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PermissionDetailComponent } from './permission-detail.component';
+import { SerialDialogComponent } from './serial-dialog.component';
 
-describe('PermissionDetailComponent', () => {
-  let component: PermissionDetailComponent;
-  let fixture: ComponentFixture<PermissionDetailComponent>;
+describe('SerialDialogComponent', () => {
+  let component: SerialDialogComponent;
+  let fixture: ComponentFixture<SerialDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [PermissionDetailComponent],
+      declarations: [SerialDialogComponent]
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PermissionDetailComponent);
+    fixture = TestBed.createComponent(SerialDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -16,7 +16,7 @@ export class JwtInterceptor implements HttpInterceptor {
     request = request.clone({
       withCredentials: true,
       headers: request.headers
-        .set('X-LegalEntity', 'af81fee4-b4df-46f8-aaee-be97425be15c')
+        .set('X-LegalEntity', localStorage.getItem('legalEntityId') || '')
         .set('X-Language', currentLang || 'vi'),
     });
     return next.handle(request);

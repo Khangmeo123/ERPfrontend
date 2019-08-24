@@ -1,50 +1,55 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 import { AppRepository } from '../_repositories/app.repository';
 import { LegalEntity } from '../_modules/master-data/_backend/legal/legal.entity';
 import { ToastrService } from 'ngx-toastr';
 import { translate } from '../_helpers/string';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
 
-  isSidebarPinned = false; // default true
+  public isPinned: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  isToggled = false;
+  public isToggled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
+  public legalEntity: BehaviorSubject<LegalEntity> = new BehaviorSubject<LegalEntity>(null);
 
   public legalEntities: BehaviorSubject<LegalEntity[]> = new BehaviorSubject<LegalEntity[]>([]);
 
-  constructor(private appRepository: AppRepository, private toastrService: ToastrService) {
+  constructor(
+    private appRepository: AppRepository,
+    private toastrService: ToastrService,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+  ) {
+    this.isToggled.next(true);
   }
 
   toggleSidebar() {
-    this.isToggled = !this.isToggled;
+    this.isToggled.next(!this.isToggled.getValue());
   }
 
   toggleSidebarPin() {
-    this.isSidebarPinned = !this.isSidebarPinned;
+    this.isPinned.next(!this.isPinned.getValue());
   }
 
-  getSidebarStat() {
-    return {
-      isSidebarPinned: this.isSidebarPinned,
-      isToggled: this.isToggled,
-    };
-  }
-
-  getLegalEntityList = (): Subscription => {
-    return this.appRepository.getLegalEntityList()
-      .subscribe(
-        (legalEntities: LegalEntity[]) => {
-          this.legalEntities.next(legalEntities);
-        },
-        (error: Error) => {
-          this.toastrService.error(translate('general.legalEntityList.get.error'));
-          throw error;
-        },
-      );
+  getLegalEntityList = (): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      return this.appRepository.getLegalEntityList()
+        .subscribe(
+          (legalEntities: LegalEntity[]) => {
+            this.legalEntities.next(legalEntities);
+            resolve();
+          },
+          (error: Error) => {
+            this.toastrService.error(translate('general.legalEntityList.get.error'));
+            reject(error);
+          },
+        );
+    });
   };
 
   getLegalEntity = (id: string): Promise<LegalEntity> => {
@@ -60,5 +65,19 @@ export class AppService {
           },
         );
     });
+  };
+
+  selectLegalEntity = (legalEntity: LegalEntity) => {
+    this.legalEntity.next(legalEntity);
+    localStorage.setItem('legalEntityId', legalEntity.id);
+    return this.router.navigate(
+      [window.location.pathname],
+      {
+        queryParams: {
+          ...this.activatedRoute.snapshot.queryParams,
+          legalEntityId: legalEntity.id,
+        },
+      },
+    );
   };
 }
