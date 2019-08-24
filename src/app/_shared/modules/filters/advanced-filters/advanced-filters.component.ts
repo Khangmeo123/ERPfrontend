@@ -8,7 +8,7 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewEncapsulation
+  ViewEncapsulation,
 } from '@angular/core';
 import { FilterType } from '../../../models/filters/FilterType';
 import { DateFilter } from '../../../models/filters/DateFilter';
@@ -29,7 +29,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
 
   @Input() appendTo: string = 'body';
 
-  @Input() filter;
+  @Input() filter: TextFilter | NumberFilter | DateFilter = null;
 
   @Input() defaultType: string = 'equal';
 
@@ -45,13 +45,9 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
 
   type = null;
 
-  dropdownDirection = 'left';
-
   filterValue;
 
   types: FilterType[] = [];
-
-  isOpened = false;
 
   constructor() {
   }
@@ -68,10 +64,6 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
     return this.filter instanceof TextFilter;
   }
 
-  get listState() {
-    return this.isOpened ? 'opened' : 'closed';
-  }
-
   get filterTypeSign() {
     if (this.type) {
       return this.type.sign;
@@ -81,7 +73,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
 
   ngAfterViewInit(): void {
     if (this.appendTo === 'body') {
-      this.onWindowResize();
+      this.resetDropdownWidth();
     }
   }
 
@@ -92,7 +84,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
   }
 
   @HostListener('window:resize', [])
-  onWindowResize() {
+  resetDropdownWidth() {
     if (this.toggler) {
       const {nativeElement} = this.toggler;
       this.width = window.getComputedStyle(nativeElement).width;
@@ -117,29 +109,6 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
     }
   }
 
-  beforeOpenList() {
-    const style = window.getComputedStyle(this.pane.nativeElement, null);
-    const width = parseInt(style.width, 10);
-    const {left} = this.toggler.nativeElement.getBoundingClientRect();
-    if (left + width > window.innerWidth) {
-      this.dropdownDirection = 'right';
-    } else {
-      this.dropdownDirection = 'left';
-    }
-  }
-
-  beforeCloseList() {
-  }
-
-  toggleList() {
-    if (!this.isOpened) {
-      this.beforeOpenList();
-    } else {
-      this.beforeCloseList();
-    }
-    this.isOpened = !this.isOpened;
-  }
-
   onApplyFilter(value) {
     this.filter[this.type.code] = value;
     this.filterValue = value;
@@ -155,7 +124,6 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
     }
     this.filter[this.type.code] = this.filterValue;
     this.changeFilter.emit();
-    this.toggleList();
   }
 
   onChange(event) {
