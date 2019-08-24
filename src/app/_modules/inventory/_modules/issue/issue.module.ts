@@ -24,6 +24,10 @@ import {GoodsReturnDetailComponent} from './goods-return/goods-return-detail/goo
 import {GoodsReturnListComponent} from './goods-return/goods-return-list/goods-return-list.component';
 import {GoodsReturnRequestListComponent} from './goods-return-request/goods-return-request-list/goods-return-request-list.component';
 import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-return-request-detail/goods-return-request-detail.component';
+import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
+import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -57,6 +61,10 @@ import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-re
     DialogModule,
     InputSwitchModule,
     DiscussionModule,
+    SelectsModule,
+    FiltersModule,
+    ReactiveFormsModule,
+    FormsModule,
   ]
 })
 export class IssueModule { }

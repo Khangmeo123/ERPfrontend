@@ -1,4 +1,4 @@
- <div class="page delivery-order-list">
+<div class="page delivery-order-list">
   <div class="page-header">
     <span class="page-title">
       {{pageTitle | translate}}
@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add" (click) = "addgoodsIssue()">
+      <button type="button" class="btn btn-labeled btn-add" (click)="addgoodsIssue()">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
@@ -22,23 +22,25 @@
       <div class="row d-flex pb-3">
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
-          <input class="form-control input-datepicker ml-1 mr-1 " matInput [matDatepicker]="picker"
+          <input class="form-control input-datepicker ml-1 mr-1 "
+            [(ngModel)]="goodsIssueSearchEntity.documentDate.greaterEqual" matInput [matDatepicker]="picker"
             placeholder="dd/mm/yyyy">
           <mat-datepicker #picker></mat-datepicker>
-          <div role="button" (click)="openDatePicker(picker)">
+          <div role="button" (click)="picker.open()">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
-          <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
+          <input class="form-control input-datepicker ml-1 mr-1"
+            [(ngModel)]="goodsIssueSearchEntity.documentDate.lessEqual" matInput [matDatepicker]="datepicker"
             placeholder="dd/mm/yyyy">
           <mat-datepicker #datepicker></mat-datepicker>
-          <div role="button" (click)="openToDatePicker(datepicker)">
+          <div role="button" (click)="datepicker.open()">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
-        <button type="button" class="btn btn-labeled btn-add get-data">
+        <button type="button" (click)="getList()" class="btn btn-labeled btn-add get-data">
           {{'general.button.getData' | translate}}</button>
       </div>
 
@@ -70,7 +72,7 @@
               {{ 'goodsIssue.list.receiptedDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-           
+
             <th pResizableColumn data-qe-id="table-thead-inventory-code">
               {{ 'goodsIssue.list.inventoryCode' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
@@ -94,30 +96,65 @@
             <th pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
-            <!-- <th class="th-filter">
-                <app-advanced-filters [filter]="goodsIssue.listSearchEntity.code" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-code">
-                </app-advanced-filters>
+            <th class="th-filter"></th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="goodsIssueSearchEntity.documentNumber"
+                data-qe-id="table-thead-filter-documentNumber">
+              </app-advanced-filters>
+            </th>
+
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="goodsIssueSearchEntity.dueDate"
+                data-qe-id="table-thead-filter-dueDate">
+              </app-advanced-filters>
+            </th>
+
+            <th class="th-filter">
+              <jaja-select-list (change)="onFilterInventoryOrganization($event)"
+                [display]="goodsIssueSearchEntity.inventoryOrganizationCode"
+                [getList]="goodsIssueRepository.singleListInventoryOrganization"
+                [searchEntity]="inventoryOrganizationSearchEntity" [searchable]="true" appendTo="body"
+                placeholder="{{'goodsIssue.filters.inventoryOrganizationCode' | translate}}" searchField="code"
+                searchType="startsWith">
+                <ng-template #label #option let-code="code" let-name="name">
+                  {{code}} - {{name}}
+                </ng-template>
+              </jaja-select-list>
+            </th>
+
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()"
+                [filter]="goodsIssueSearchEntity.inventoryOrganizationStreet"
+                data-qe-id="table-thead-filter-inventoryOrganizationStreet">
+              </app-advanced-filters>
+            </th>
+
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="goodsIssueSearchEntity.remarks"
+                data-qe-id="table-thead-filter-remarks">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-advanced-filters [filter]="goodsIssue.listSearchEntity.name" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-name">
-                </app-advanced-filters>
+              <jaja-select-list (change)="onFilterRequester($event)"
+                [display]="goodsIssueSearchEntity?.requesterName"
+                [getList]="goodsIssueRepository.singleListRequester" [searchEntity]="requesterSearchEntity"
+                [searchable]="true" appendTo="body" placeholder="{{'goodsIssue.filters.requester' | translate}}"
+                searchField="name" searchType="startsWith">
+                <ng-template #label #option let-name="name">
+                  {{name}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="goodsIssue.listTypes"
-                    [initialValue]="goodsIssue.listSearchEntity.typeId"
-                    (selectionChange)="goodsIssue.listSearchEntity.typeId = $event; getList()"
-                    (listOpen)="opengoodsIssue.listTypes($event)">
-                </app-simple-select>
+              <jaja-select-list (change)="onFilterStatus($event)" [display]="goodsIssueSearchEntity?.statusDisplay"
+                [getList]="goodsIssueRepository.enumListStatus" appendTo="body"
+                placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
+                <ng-template #label #option let-display="display">
+                  {{display}}
+                </ng-template>
+              </jaja-select-list>
             </th>
-            <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="goodsIssue.listStatuses"
-                    [initialValue]="goodsIssue.listSearchEntity.typeId"
-                    (selectionChange)="goodsIssue.listSearchEntity.statusId = $event; getList()"
-                    (listOpen)="opengoodsIssue.listStatuses($event)">
-                </app-simple-select>
-            </th> -->
+            <th class="th-filter actions"></th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-goodsIssue let-index="rowIndex">
@@ -135,7 +172,7 @@
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click) = "editgoodsIssue()">
+                <div class="edit" (click)="editgoodsIssue()">
                   <mat-icon>edit</mat-icon>
                 </div>
 
