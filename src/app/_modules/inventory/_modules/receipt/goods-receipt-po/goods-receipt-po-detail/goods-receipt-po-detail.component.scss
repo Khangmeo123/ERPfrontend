@@ -5,3 +5,7 @@
 .uploaded-file {
   border-bottom: 1px solid $border-color;
 }
+
+.disabled {
+  pointer-events: none;
+}

@@ -38,7 +38,7 @@ export class BatchDialogRepository extends Repository {
   };
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
-    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item',
+    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item-detail',
       itemDetailSearchEntity,
       {
         observe: 'response',
