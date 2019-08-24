@@ -7,7 +7,6 @@ import { map } from 'rxjs/operators';
 import { UploadFile } from 'ng-zorro-antd';
 import { FileAttachmentEntity } from '../../../../_backend/file-attachment/file-attachment.entity';
 import {
-  PurchaseOrderOfGoodsReceipt,
   GoodsReceipt,
   SupplierDetailOfGoodsReceipt,
   SupplierContactOfGoodsReceipt,
@@ -18,7 +17,7 @@ import {
   TaxOfGoodsReceipt,
 } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.entity';
 import {
-  PurchaseOrderOfGoodsReceiptSearch,
+
   SupplierDetailOfGoodsReceiptSearch,
   SupplierContactOfGoodsReceiptSearch,
   EmployeeDetailOfGoodsReceiptSearch,
@@ -31,7 +30,7 @@ import {
 @Injectable({
   providedIn: 'root',
 })
-export class GoodsReceiptDetailRepository extends Repository {
+export class GoodsReceiptReceiveRepository extends Repository {
 
   constructor(public http: HttpClient) {
     super(http);
@@ -188,7 +187,7 @@ export class GoodsReceiptDetailRepository extends Repository {
 
   singleListTax = (taxOfGoodsReceiptSearch: TaxOfGoodsReceiptSearch): Observable<TaxOfGoodsReceipt[]> =>
     this.http.post<TaxOfGoodsReceipt[]>(
-      this.apiUrl + '/single-list-tax',
+      this.apiUrl + '/single-list-tax-list',
       taxOfGoodsReceiptSearch,
       {
         observe: 'response',

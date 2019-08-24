@@ -1,3 +1,4 @@
+import { GoodsReceiptReceiveRepository } from './goods-receipt-receive.repository';
 import {
   GoodsReceiptContentSearch,
   PurchaseOrderOfGoodsReceiptSearch,
@@ -9,25 +10,24 @@ import { Component, OnInit, ViewEncapsulation, OnDestroy } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { Router, Params, ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { GoodsReceiptDetailService } from './goods-receipt-detail.service';
 import { GeneralService } from 'src/app/_services/general-service.service';
-import { GoodsReceiptDetailRepository } from './goods-receipt-detail.repository';
 import { InventoryOrganizationOfGoodsReceipt } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.entity';
 import {
   InventoryOrganizationOfGoodsReceiptSearch,
   EmployeeDetailOfGoodsReceiptSearch,
 } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.searchentity';
 import { ConfirmationService } from 'primeng/api';
+import { GoodsReceiptReceiveService } from './goods-receipt-receive.service';
 
 @Component({
-  selector: 'app-goods-receipt-detail',
-  templateUrl: './goods-receipt-detail.component.html',
-  styleUrls: ['./goods-receipt-detail.component.scss'],
+  selector: 'app-goods-receipt-receive',
+  templateUrl: './goods-receipt-receive.component.html',
+  styleUrls: ['./goods-receipt-receive.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [GoodsReceiptDetailService, ConfirmationService],
+  providers: [GoodsReceiptReceiveService, ConfirmationService],
 })
-export class GoodsReceiptDetailComponent implements OnInit, OnDestroy {
-  pageTitle = translate('goodsReceiptDetail.header.title');
+export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
+  pageTitle = translate('goodsReceiptReceive.header.title');
   fileNameList: Array<any> = [];
   goodsReceiptId: string;
   goodsReceiptForm: FormGroup;
@@ -45,10 +45,10 @@ export class GoodsReceiptDetailComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private confirmationService: ConfirmationService,
-    private goodsReceiptService: GoodsReceiptDetailService,
+    private goodsReceiptService: GoodsReceiptReceiveService,
     private activatedRoute: ActivatedRoute,
     private generalService: GeneralService,
-    private goodsReceiptRepository: GoodsReceiptDetailRepository) {
+    private goodsReceiptRepository: GoodsReceiptReceiveRepository) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.id) {
         this.goodsReceiptId = params.id;
@@ -84,33 +84,11 @@ export class GoodsReceiptDetailComponent implements OnInit, OnDestroy {
 
   selectInventoryOrganization(inventoryOrganizationOfGoodsReceipt: InventoryOrganizationOfGoodsReceipt) {
     this.goodsReceiptForm.get('inventoryOrganizationId').setValue(inventoryOrganizationOfGoodsReceipt.id);
-    this.goodsReceiptForm.get('inventoryOrganizationStreet').setValue(inventoryOrganizationOfGoodsReceipt.address);
+    this.goodsReceiptForm.get('inventoryOrganizationStreet').setValue(inventoryOrganizationOfGoodsReceipt.street);
   }
 
   selectOwner(employeeDetailOfGoodsReceipt: EmployeeDetailOfGoodsReceiptSearch) {
     this.goodsReceiptForm.get('ownerId').setValue(employeeDetailOfGoodsReceipt.id);
-  }
-
-  send() {
-    if (this.goodsReceiptForm.invalid) {
-      this.generalService.validateAllFormFields(this.goodsReceiptForm);
-    } else {
-      this.goodsReceiptService.send(this.goodsReceiptForm.value)
-        .then(() => {
-          return this.backToList();
-        });
-    }
-  }
-
-  save() {
-    if (this.goodsReceiptForm.invalid) {
-      this.generalService.validateAllFormFields(this.goodsReceiptForm);
-    } else {
-      this.goodsReceiptService.save(this.goodsReceiptForm.value)
-        .then(() => {
-          return this.backToList();
-        });
-    }
   }
 
   // modify goodsReceiptContent:
@@ -124,46 +102,39 @@ export class GoodsReceiptDetailComponent implements OnInit, OnDestroy {
 
   selectItemDetail(value: any, index: number) {
     this.goodsReceiptContents.controls[index].get('itemDetailId').setValue(value.id);
-    this.goodsReceiptContents.controls[index].get('itemName').setValue(value.name);
-    this.goodsReceiptContents.controls[index].get('itemCode').setValue(value.code);
-    this.goodsReceiptService.goodsReceiptForm.next(this.goodsReceiptForm);
+    this.goodsReceiptContents.controls[index].get('itemDetailName').setValue(value.name);
+    this.goodsReceiptContents.controls[index].get('itemDetailName').setValue(value.code);
   }
 
   selectUnitOfMeasure(value: any, index: number) {
     this.goodsReceiptContents.controls[index].get('unitOfMeasureId').setValue(value.id);
     this.goodsReceiptContents.controls[index].get('unitOfMeasureName').setValue(value.name);
-    this.goodsReceiptContents.controls[index].get('unitOfMeasureCode').setValue(value.code);
-    this.goodsReceiptService.goodsReceiptForm.next(this.goodsReceiptForm);
   }
 
   inputQuantity(value: any, index: number) {
-    this.goodsReceiptContents.controls[index].get('quantity').setValue(Number(value));
+    this.goodsReceiptContents.controls[index].get('quantity').setValue(value);
     this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
   }
 
   inputUnitPrice(value: any, index: number) {
-    this.goodsReceiptContents.controls[index].get('unitPrice').setValue(Number(value));
+    this.goodsReceiptContents.controls[index].get('unitPrice').setValue(value);
     this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
   }
 
   selectTax(value: any, index: number) {
     this.goodsReceiptContents.controls[index].get('taxId').setValue(value.id);
-    this.goodsReceiptContents.controls[index].get('taxCode').setValue(value.code);
-    this.goodsReceiptContents.controls[index].get('taxRate').setValue(Number(value.rate));
+    this.goodsReceiptContents.controls[index].get('taxName').setValue(value.name);
+    this.goodsReceiptContents.controls[index].get('taxCost').setValue(value.cost);
     this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
   }
 
   inputItemDiscountRate(value: any, index: number) {
-    this.goodsReceiptContents.controls[index].get('itemDiscountRate').setValue(Number(value));
-    const itemDiscountRate = this.goodsReceiptContents.controls[index].get('itemDiscountRate').value;
-    const unitPrice = this.goodsReceiptContents.controls[index].get('unitPrice').value;
-    const itemDiscountCost = unitPrice * (itemDiscountRate / 100);
-    this.goodsReceiptContents.controls[index].get('itemDiscountCost').setValue(Number(itemDiscountCost));
+    this.goodsReceiptContents.controls[index].get('itemDiscountRate').setValue(value);
     this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
   }
 
   inputItemDiscountCost(value: any, index: number) {
-    this.goodsReceiptContents.controls[index].get('itemDiscountCost').setValue(Number(value));
+    this.goodsReceiptContents.controls[index].get('itemDiscountCost').setValue(value);
     this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
   }
 

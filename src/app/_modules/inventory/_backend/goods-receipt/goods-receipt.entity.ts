@@ -101,7 +101,7 @@ export class InventoryOrganizationOfGoodsReceipt extends Entity {
   code: string;
   name: string;
   shortName: string;
-  street: string;
+  address: string;
 }
 
 export class SupplierDetailOfGoodsReceipt extends Entity {

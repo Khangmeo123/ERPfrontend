@@ -35,7 +35,8 @@ import { NzUploadModule } from 'ng-zorro-antd';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconModule } from '@ant-design/icons-angular';
 import { TooltipModule } from 'primeng/tooltip';
-import { KeyFilterModule } from 'primeng/primeng';
+import { KeyFilterModule, ConfirmDialogModule } from 'primeng/primeng';
+import { GoodsReceiptReceiveComponent } from './goods-receipt/goods-receipt-receive/goods-receipt-receive.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,7 @@ import { KeyFilterModule } from 'primeng/primeng';
     ReturnDetailComponent,
     GoodsReceiptDetailComponent,
     GoodsReceiptListComponent,
+    GoodsReceiptReceiveComponent,
     ReturnRequestDetailComponent,
     ReturnRequestListComponent,
     GoodsReceiptPoDetailComponent,
@@ -85,6 +87,7 @@ import { KeyFilterModule } from 'primeng/primeng';
     NzIconModule,
     TooltipModule,
     KeyFilterModule,
+    ConfirmDialogModule,
   ],
 })
 export class ReceiptModule {

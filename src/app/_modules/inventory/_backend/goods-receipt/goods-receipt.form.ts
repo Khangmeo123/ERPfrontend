@@ -3,7 +3,7 @@ import { FormModel } from 'src/app/_helpers/form-model';
 import { requiredField } from 'src/app/_helpers';
 
 export class GoodsReceiptForm extends FormModel {
-    supplierDetailId = new FormControl(null, [requiredField]);
+    supplierDetailId = new FormControl(null);
     supplierContactId = new FormControl(null);
     supplierName = new FormControl(null);
     supplierCode = new FormControl(null);
@@ -31,9 +31,8 @@ export class GoodsReceiptForm extends FormModel {
     inventoryOrganizationStreet = new FormControl(null);
     generalDiscountRate = new FormControl(null);
     generalDiscountCost = new FormControl(null);
-    purchaseOrderName = new FormControl(null, [requiredField]);
-    goodsReceiptPOContents = new FormArray([]);
-    totalGoodsReceiptPOContents = new FormControl(null);
+    goodsReceiptContents = new FormArray([]);
+    totalGoodsReceiptContents = new FormControl(null);
     purchaseOrderIds = new FormArray([]);
     fileAttachments = new FormArray([]);
     errors = new FormGroup({
@@ -43,15 +42,15 @@ export class GoodsReceiptForm extends FormModel {
         inventoryOrganizationId: new FormControl(),
     });
 
-    constructor(goodsReceiptPOEntity?: any) {
+    constructor(goodsReceiptEntity?: any) {
         super();
-        this.mapData(goodsReceiptPOEntity);
+        this.mapData(goodsReceiptEntity);
     }
 }
 
 export class GoodsReceiptContentForm extends FormModel {
-    goodsReceiptPOId = new FormControl(null);
-    goodsReceiptPOName = new FormControl(null);
+    goodsReceiptId = new FormControl(null);
+    goodsReceiptName = new FormControl(null);
     itemDetailId = new FormControl(null);
     itemCode = new FormControl(null);
     itemName = new FormControl(null);
@@ -61,9 +60,10 @@ export class GoodsReceiptContentForm extends FormModel {
     itemDiscountCost = new FormControl(null);
     generalDiscountRate = new FormControl(null);
     generalDiscountCost = new FormControl(null);
+    total = new FormControl(null);
     taxId = new FormControl(null);
-    taxName = new FormControl(null);
-    taxCost = new FormControl(null);
+    taxCode = new FormControl(null);
+    taxRate = new FormControl(null);
     unitOfMeasureId = new FormControl(null);
     unitOfMeasureName = new FormControl(null);
     unitOfMeasureCode = new FormControl(null);

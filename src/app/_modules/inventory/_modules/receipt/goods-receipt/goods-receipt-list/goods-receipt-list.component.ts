@@ -19,6 +19,7 @@ import { GoodsReceiptListRepository } from './goods-receipt-list.repository';
   selector: 'app-goods-receipt-list',
   templateUrl: './goods-receipt-list.component.html',
   styleUrls: ['./goods-receipt-list.component.scss'],
+  providers: [GoodsReceiptListService],
 })
 export class GoodsReceiptListComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsReceipt.header.title');

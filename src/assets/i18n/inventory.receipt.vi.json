@@ -83,11 +83,13 @@
             "discount": "Chiết khấu",
             "discountAmount": "Số tiền chiết khấu",
             "itemNo": "Mã hàng",
+            "itemName": "Tên hàng",
             "purchaseOrderNumber": "Mã đơn hàng",
             "quantity": "Số lượng",
             "title": "Chi tiết hàng hóa theo hạch toán",
             "total": "Thành tiền",
             "unitOfMeasure": "Đơn vị",
+            "unitPrice": "Đơn giá",
             "valueAddedTax": "Thuế VAT"
         },
         "tab2": {

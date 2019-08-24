@@ -5,19 +5,19 @@ import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';
 import { UploadFile } from 'ng-zorro-antd';
 import { FileAttachmentEntity } from '../../../../_backend/file-attachment/file-attachment.entity';
-import { GoodsReceiptDetailRepository } from './goods-receipt-detail.repository';
 import { GoodsReceiptForm, GoodsReceiptContentForm } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.form';
 import { GoodsReceipt } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.entity';
+import { GoodsReceiptReceiveRepository } from './goods-receipt-receive.repository';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GoodsReceiptDetailService {
+export class GoodsReceiptReceiveService {
 
   goodsReceiptForm: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(this.fb.group(new GoodsReceiptForm()));
 
   constructor(
-    private goodsReceiptRepository: GoodsReceiptDetailRepository,
+    private goodsReceiptRepository: GoodsReceiptReceiveRepository,
     private fb: FormBuilder,
     private toastrService: ToastrService,
   ) { }
@@ -35,7 +35,7 @@ export class GoodsReceiptDetailService {
             resolve(goodsReceipt);
           },
           (error: Error) => {
-            this.toastrService.error(translate('goodsReceiptDetail.get.error'));
+            this.toastrService.error(translate('goodsReceiptPODetail.get.error'));
             reject(error);
           },
         );
@@ -43,13 +43,13 @@ export class GoodsReceiptDetailService {
   };
 
   public recalculateContents = (goodsReceiptForm: FormGroup) => {
-    const currentArray: FormArray = goodsReceiptForm.get('goodsReceiptContents') as FormArray;
-    let totalGoodsReceiptContents: number = 0;
+    const currentArray: FormArray = goodsReceiptForm.get('goodsReceiptPOContents') as FormArray;
+    let totalGoodsReceiptPOContents: number = 0;
     for (const control of currentArray.controls) {
       if (control instanceof FormGroup) {
-        const unitPrice = control.get('unitPrice').value || 0;
-        const taxRate = control.get('taxRate').value || 0;
-        const itemDiscountCost = control.get('itemDiscountCost').value || 0;
+        const unitPrice = control.get('unitPrice').value;
+        const taxRate = control.get('taxRate').value;
+        const itemDiscountCost = control.get('itemDiscountCost').value;
         const quantity = Number(control.get('quantity').value);
         const taxNumber = unitPrice * (taxRate / 100);
         const totalValue = Math.round((unitPrice + taxNumber - itemDiscountCost) * quantity);
@@ -58,10 +58,10 @@ export class GoodsReceiptDetailService {
         } else {
           control.addControl('total', new FormControl(totalValue));
         }
-        totalGoodsReceiptContents += totalValue;
+        totalGoodsReceiptPOContents += totalValue;
       }
     }
-    goodsReceiptForm.get('totalGoodsReceiptContents').setValue(totalGoodsReceiptContents);
+    goodsReceiptForm.get('totalGoodsReceiptPOContents').setValue(totalGoodsReceiptPOContents);
     this.goodsReceiptForm.next(goodsReceiptForm);
   };
 

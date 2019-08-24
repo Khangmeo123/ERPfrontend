@@ -130,7 +130,7 @@
             </th>
             <th class="th-filter">
               <jaja-select-list (change)="goodsReceiptSearch.statusId = $event; getList()"
-                [value]="goodsReceiptSearch.requesterId" [getList]="goodsReceiptPOListRepository.enumListStatus"
+                [value]="goodsReceiptSearch.requesterId" [getList]="goodsReceiptRepository.enumListStatus"
                 appendTo="body" key="id" placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">
                   {{display}}

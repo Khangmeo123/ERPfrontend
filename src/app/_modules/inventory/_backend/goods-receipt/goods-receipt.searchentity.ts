@@ -4,13 +4,10 @@ import { NumberFilter } from 'src/app/_shared/models/filters/NumberFilter';
 import { DateFilter } from 'src/app/_shared/models/filters/DateFilter';
 
 export class GoodsReceiptSearch extends SearchEntity {
-  name: TextFilter = new TextFilter();
   supplierDetailId: string;
   supplierContactId: string;
   currencyId: string;
   inventoryOrganizationId: string = null;
-  inventoryOrganizationCode: string = null;
-  inventoryOrganizationStreet = new TextFilter();
   documentNumber: NumberFilter = new NumberFilter();
   documentReferenceId: string;
   statusId: string = null;
@@ -21,7 +18,6 @@ export class GoodsReceiptSearch extends SearchEntity {
   buyerId: string;
   ownerId: string;
   requesterId: string = null;
-  requesterName: string = null;
   remarks = new TextFilter();
   generalDiscountRate: NumberFilter = new NumberFilter();
 
