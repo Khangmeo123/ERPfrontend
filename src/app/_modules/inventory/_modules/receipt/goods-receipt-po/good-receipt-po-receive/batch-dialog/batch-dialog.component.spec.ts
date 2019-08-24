@@ -8,9 +8,9 @@ describe('BatchDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BatchDialogComponent ]
+      declarations: [BatchDialogComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

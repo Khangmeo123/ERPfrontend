@@ -33,6 +33,14 @@ export class SidebarListComponent implements OnInit {
     return this.router.url;
   }
 
+  get legalEntityId() {
+    const legalEntityId: string = localStorage.getItem('legalEntityId');
+    if (legalEntityId) {
+      return legalEntityId;
+    }
+    return '';
+  }
+
   ngOnInit() {
     const {
       routeUrl,

@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="displaySerial" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+<p-dialog [(visible)]="display" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
           [style]="{width: '90%'}" appendTo="body">
   <p-header>
     <div class="row">
@@ -53,13 +53,13 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
-          <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
-                            appendTo="body"
-                            [small]="true"
-                            [searchable]="true"
-                            searchField="code"
+          <jaja-select-list [getList]="serialDialogRepository.getBinLocationList"
                             [searchEntity]="binLocationSearchEntity"
-                            placeholder="">
+                            [searchable]="true"
+                            [small]="true"
+                            appendTo="body"
+                            placeholder=""
+                            searchField="code">
             <ng-template #label #option let-code="code">
               {{code}}
             </ng-template>
@@ -71,7 +71,7 @@
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptPODetail.qrCode.quantity' | translate}}: </span>
           <div class="ml-2">
-            <input [value]="itemQuantities" class="form-control disabled"
+            <input [value]="quantityItems" class="form-control disabled"
                    data-qe-id="dialog-input-start-scan-batches-no"
                    type="text">
           </div>
@@ -146,12 +146,12 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
+                <jaja-select-list [getList]="serialDialogRepository.getItemDetailList"
                                   [searchEntity]="itemDetailSearchEntity"
                                   [searchable]="true"
-                                  searchField="code"
+                                  [small]="true"
                                   appendTo="body"
-                                  [small]="true">
+                                  searchField="code">
                   <ng-template #label #option let-code="code">
                     {{code}}
                   </ng-template>
@@ -213,14 +213,14 @@
                 {{serialNumber.expirationDate}}
               </td>
               <td class="ui-resizable-column">
-                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                <jaja-select-list [getList]="serialDialogRepository.getBinLocationList"
                                   [searchEntity]="binLocationSearchEntity"
-                                  searchField="code"
-                                  searchType="startsWith"
                                   [searchable]="true"
                                   [small]="true"
-                                  appendTo="body">
-                  <ng-template #option #label let-code="code">
+                                  appendTo="body"
+                                  searchField="code"
+                                  searchType="startsWith">
+                  <ng-template #label #option let-code="code">
                     {{code}}
                   </ng-template>
                 </jaja-select-list>
@@ -282,11 +282,11 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
+                <jaja-select-list [getList]="serialDialogRepository.getItemDetailList"
                                   [searchEntity]="itemDetailSearchEntity"
+                                  [searchable]="true"
                                   searchField="code"
                                   searchType="startsWith"
-                                  [searchable]="true"
                 >
                 </jaja-select-list>
               </th>
@@ -302,8 +302,7 @@
               </th>
               <th class="th-filter">
                 <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDate')"
-                                 data-qe-id="detail-form-receipted-date">
-                </app-date-picker>
+                                 data-qe-id="detail-form-receipted-date"></app-date-picker>
               </th>
               <th class="th-filter">
                 <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'expirationDate')"
@@ -358,13 +357,13 @@
           <button (click)="updateSerialNumber()" class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
-                            {{'general.button.save' | translate}}
-                        </span></button>
-          <button (click)="displaySerial = false" class="btn btn-labeled btn-cancel">
+              {{'general.button.save' | translate}}
+            </span></button>
+          <button (click)="display = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
-                            {{'general.button.cancel' | translate}}
-                        </span></button>
+            {{'general.button.cancel' | translate}}
+          </span></button>
         </div>
       </div>
     </div>

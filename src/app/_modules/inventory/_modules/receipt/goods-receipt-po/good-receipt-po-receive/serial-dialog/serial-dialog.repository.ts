@@ -1,22 +1,18 @@
 import { Repository } from '../../../../../../../_repositories/repository';
-import { environment } from '../../../../../../../../environments/environment';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
+import { environment } from '../../../../../../../../environments/environment';
 import { BinLocationSearchEntity, ItemDetailSearchEntity } from '../../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Observable } from 'rxjs';
-import {
-  BinLocationEntity,
-  GoodsReceiptPOContent,
-  ItemDetailEntity,
-} from '../../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
+import { BinLocationEntity, ItemDetailEntity } from '../../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
 import { map } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
-export class BatchDialogRepository extends Repository {
+export class SerialDialogRepository extends Repository {
 
-  apiUrl: string = `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-receive/batch`;
+  apiUrl: string = `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-receive/serial-number`;
 
   constructor(http: HttpClient) {
     super(http);
@@ -24,11 +20,10 @@ export class BatchDialogRepository extends Repository {
 
   getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
     return this.http.post<BinLocationEntity[]>(
-      this.apiUrl + '/batch/single-list-bin-location',
+      this.apiUrl + '/serial-number/single-list-bin-location',
       binLocationSearchEntity,
       {
         observe: 'response',
-        headers: this.getHeader(),
       },
     ).pipe(
       map(
@@ -38,7 +33,7 @@ export class BatchDialogRepository extends Repository {
   };
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
-    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item',
+    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item-detail',
       itemDetailSearchEntity,
       {
         observe: 'response',
@@ -50,18 +45,5 @@ export class BatchDialogRepository extends Repository {
           (response: HttpResponse<ItemDetailEntity[]>) => response.body,
         ),
       );
-  };
-
-  getGoodsReceiptPOContent = (goodsReceiptPOContentId: string) => {
-    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/batch/goods-receipt-po-content-detail',
-      {goodsReceiptPOContentId},
-
-      {
-        observe: 'response',
-        headers: this.getHeader(),
-      },
-    ).pipe(
-      map(response => new GoodsReceiptPOContent(response.body)),
-    );
   };
 }

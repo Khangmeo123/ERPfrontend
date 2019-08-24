@@ -8,9 +8,9 @@ describe('QuantityDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ QuantityDialogComponent ]
+      declarations: [QuantityDialogComponent],
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

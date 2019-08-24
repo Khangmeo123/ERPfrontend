@@ -67,8 +67,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-supplierCode"
-                   id="detail-form-supplierCode"
                    formControlName="supplierCode"
+                   id="detail-form-supplierCode"
                    type="text"/>
           </div>
           <div class="col-sm-4 form-group">
@@ -77,8 +77,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-supplierName"
-                   id="detail-form-supplierName"
                    formControlName="supplierName"
+                   id="detail-form-supplierName"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -87,8 +87,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-supplierAddress"
-                   id="detail-form-supplierAddress"
                    formControlName="supplierAddress"
+                   id="detail-form-supplierAddress"
                    type="text"/>
           </div>
         </div>
@@ -103,8 +103,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-purchaseOrderName"
-                   id="detail-form-purchaseOrderName"
                    formControlName="purchaseOrderName"
+                   id="detail-form-purchaseOrderName"
                    type="text">
           </div>
         </div>
@@ -119,8 +119,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-documentNumber"
-                   id="detail-form-documentNumber"
                    formControlName="documentNumber"
+                   id="detail-form-documentNumber"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -129,8 +129,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-inventoryOrganizationCode"
-                   id="detail-form-inventoryOrganizationCode"
                    formControlName="inventoryOrganizationCode"
+                   id="detail-form-inventoryOrganizationCode"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -139,8 +139,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-inventoryOrganizationStreet"
-                   id="detail-form-inventoryOrganizationStreet"
                    formControlName="inventoryOrganizationStreet"
+                   id="detail-form-inventoryOrganizationStreet"
                    type="text">
           </div>
         </div>
@@ -152,8 +152,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-ownerName"
-                   id="detail-form-ownerName"
                    formControlName="ownerName"
+                   id="detail-form-ownerName"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -162,8 +162,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-buyerName"
-                   id="detail-form-buyerName"
                    formControlName="buyerName"
+                   id="detail-form-buyerName"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
@@ -172,8 +172,8 @@
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-creator"
-                   id="detail-form-creator"
                    formControlName="requesterName"
+                   id="detail-form-creator"
                    type="text">
           </div>
         </div>
@@ -185,8 +185,8 @@
               <span class="text-danger mr-2">*</span>
             </label>
             <app-date-picker [control]="dueDate"
-                             id="due-date"
-                             [disabled]="true" data-qe-id="detail-form-receipted-date">
+                             [disabled]="true"
+                             data-qe-id="detail-form-receipted-date" id="due-date">
             </app-date-picker>
           </div>
           <div class="col-sm-4 form-group">
@@ -194,8 +194,8 @@
               {{'goodsReceiptPODetail.createdDate' | translate}}
             </label>
             <app-date-picker [control]="documentDate"
-                             id="document-date"
-                             [disabled]="true" data-qe-id="detail-form-created-date">
+                             [disabled]="true"
+                             data-qe-id="detail-form-created-date" id="document-date">
             </app-date-picker>
           </div>
         </div>
@@ -204,8 +204,8 @@
             <label for="detail-form-remarks">{{ 'goodsReceiptPODetail.description' | translate}}</label>
             <textarea class="form-control disabled"
                       data-qe-id="detail-form-remarks"
-                      id="detail-form-remarks"
                       formControlName="remarks"
+                      id="detail-form-remarks"
                       rows="4">
                         </textarea>
           </div>
@@ -259,11 +259,11 @@
                     <th class="th-filter">
                       <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getDocumentNumberList"
                                         [searchEntity]="documentNumberSearchEntity"
-                                        searchField="documentNumber"
                                         [searchable]="true"
-                                        appendTo="body"
                                         [small]="true"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}">
+                                        appendTo="body"
+                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
+                                        searchField="documentNumber">
                         <ng-template #label #option let-documentNumber="documentNumber">
                           {{documentNumber}}
                         </ng-template>
@@ -274,10 +274,10 @@
                       <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
                                         [searchEntity]="itemDetailSearchEntity"
                                         [searchable]="true"
-                                        searchField="code"
                                         [small]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.itemNo' | translate}}">
+                                        placeholder="{{'goodsReceiptPODetail.tab1.itemNo' | translate}}"
+                                        searchField="code">
                         <ng-template #label #option let-code="code">
                           {{code}}
                         </ng-template>
@@ -291,10 +291,10 @@
                     <th class="th-filter">
                       <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getUnitOfMeasureList"
                                         [searchEntity]="unitOfMeasureSearchEntity"
-                                        searchField="code"
                                         [searchable]="true"
                                         [small]="true"
-                                        appendTo="body">
+                                        appendTo="body"
+                                        searchField="code">
                         <ng-template #label #option let-code="code">
                           {{code}}
                         </ng-template>
@@ -314,13 +314,13 @@
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.quantity}}</td>
                     <td class="ui-resizable-column">{{goodsReceiptPOContent.actualReceive}}</td>
                     <td>
-                      <a (click)="showBatch(goodsReceiptPOContent)" role="button" class="btn btn-link">
+                      <a (click)="showBatch(goodsReceiptPOContent)" class="btn btn-link" role="button">
                         {{'goodsReceiptPODetail.tab1.batches' | translate}}
                       </a>
-                      <a (click)="showSerial(goodsReceiptPOContent)" role="button" class="btn btn-link">
+                      <a (click)="showSerial(goodsReceiptPOContent)" class="btn btn-link" role="button">
                         {{'goodsReceiptPODetail.tab1.Serial' | translate}}
                       </a>
-                      <a (click)="showQuantity(goodsReceiptPOContent)" role="button" class="btn btn-link">
+                      <a (click)="showQuantity(goodsReceiptPOContent)" class="btn btn-link" role="button">
                         {{'goodsReceiptPODetail.tab1.amount' | translate}}
                       </a>
                     </td>
@@ -348,7 +348,7 @@
                     </p>
                   </nz-upload>
                   <div class="d-flex justify-content-start mt-2">
-                    <button disabled class="btn btn-labeled btn-send mr-2">
+                    <button class="btn btn-labeled btn-send mr-2" disabled>
                     <span class="btn-label">
                       <i class="material-icons">cloud_upload</i>
                     </span>
@@ -376,8 +376,36 @@
   </div>
 </div>
 
-<app-batch-dialog [batch]="batch"></app-batch-dialog>
+<app-batch-dialog [addBinLocationBatch]="addBinLocationBatch"
+                  [batch]="batch"
+                  [changeLocationInBatch]="changeLocationInBatch"
+                  [checkAllBatch]="checkAllBatch"
+                  [clearBatchTable]="clearBatchTable"
+                  [deleteBinLocationBatch]="deleteBinLocationBatch"
+                  [deleteMultipleBatch]="deleteMultipleBatch"
+                  [display]="displayBatch"
+                  [updateBatch]="updateBatch">
+</app-batch-dialog>
 
-<app-quantity-dialog></app-quantity-dialog>
+<app-quantity-dialog [display]="displayQuantity"
+                     [addBinLocationQuantity]="addBinLocationQuantity"
+                     [changeLocationInQuantity]="changeLocationInQuantity"
+                     [deleteBinLocationQuantity]="deleteBinLocationQuantity"
+                     [quantity]="quantityDetail"
+                     [quantityDetail]="quantityDetail"
+                     [quantityItems]="quantityItems"
+                     [sortDate]="sortDate"
+                     [updateQuantityDetail]="updateQuantityDetail"
+                     [recalculateQuantityDetail]="recalculateQuantityDetail"
+></app-quantity-dialog>
 
-<app-serial-dialog [serialNumberDetail]="serialNumberDetail"></app-serial-dialog>
+<app-serial-dialog [serialNumberDetail]="serialNumberDetail"
+                   [quantityItems]="quantityItems"
+                   [display]="displaySerial"
+                   [batch]="batch"
+                   [deleteSerialNumber]="deleteSerialNumber"
+                   [enableBinLocation]="enableBinLocation"
+                   [goodsReceiptPOContentDetailSearchEntity]="goodsReceiptPOContentDetailSearchEntity"
+                   [tableGoodsReceiptPOContents]="goodsReceiptPOContentsTable"
+                   [serialNumber]="serialNumber"
+></app-serial-dialog>

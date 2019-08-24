@@ -14,9 +14,9 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root',
 })
-export class BatchDialogRepository extends Repository {
+export class QuantityDialogRepository extends Repository {
 
-  apiUrl: string = `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-receive/batch`;
+  apiUrl: string = `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-receive/quantity`;
 
   constructor(http: HttpClient) {
     super(http);
@@ -24,7 +24,7 @@ export class BatchDialogRepository extends Repository {
 
   getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
     return this.http.post<BinLocationEntity[]>(
-      this.apiUrl + '/batch/single-list-bin-location',
+      this.apiUrl + '/quantity/single-list-bin-location',
       binLocationSearchEntity,
       {
         observe: 'response',
@@ -53,7 +53,7 @@ export class BatchDialogRepository extends Repository {
   };
 
   getGoodsReceiptPOContent = (goodsReceiptPOContentId: string) => {
-    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/batch/goods-receipt-po-content-detail',
+    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/quantity/get-goods-receipt-po-content',
       {goodsReceiptPOContentId},
 
       {

@@ -1,4 +1,4 @@
-<p-dialog [(visible)]="displayBatch"
+<p-dialog [(visible)]="display"
           [contentStyle]="{'overflow':'visible'}"
           [modal]="true"
           [responsive]="true"
@@ -47,10 +47,16 @@
       <div class="col-sm-6">
         <div class="d-flex align-items-center">
           <p-inputSwitch [(ngModel)]="activeScan"></p-inputSwitch>
-          <span class="ml-2">{{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}</span>
+          <label class="ml-2" for="dialog-input-start-scan-batches-no">
+            {{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}
+          </label>
           <div class="ml-2">
-            <input (input)="inputBatch($event)" [(ngModel)]="batch" [disabled]="activeScan"
-                   class="form-control" data-qe-id="dialog-input-start-scan-batches-no" type="text">
+            <input (input)="inputBatch($event)"
+                   [disabled]="!activeScan"
+                   class="form-control"
+                   data-qe-id="dialog-input-start-scan-batches-no"
+                   id="dialog-input-start-scan-batches-no"
+                   type="text">
           </div>
         </div>
       </div>
@@ -149,11 +155,11 @@
               <th class="th-filter">
                 <jaja-select-list [getList]="batchDialogRepository.getItemDetailList"
                                   [searchEntity]="itemDetailSearchEntity"
-                                  searchField="code"
-                                  searchType="startsWith"
                                   [searchable]="true"
+                                  [small]="true"
                                   appendTo="body"
-                                  [small]="true">
+                                  searchField="code"
+                                  searchType="startsWith">
                   <ng-template #label #option let-code="code">
                     {{code}}
                   </ng-template>
@@ -232,7 +238,15 @@
             </tr>
             <tr *ngFor="let binLocation of batch.goodsReceiptPOBatchBinLocations | slice:1; index as i">
               <td class="ui-resizable-column">
-                <jaja-select-list></jaja-select-list>
+                <jaja-select-list [getList]="batchDialogRepository.getBinLocationList"
+                                  [searchEntity]="binLocationSearchEntity"
+                                  [searchable]="true"
+                                  placeholder="{{'goodsReceiptPODetail.batches.locationCode' | translate}}"
+                                  searchField="code">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
               </td>
               <td class="ui-resizable-column">
                 <input [(ngModel)]="binLocation.quantity" [attr.placeholder]="placeholder" class="form-control"
@@ -244,7 +258,7 @@
             </tr>
             <tr>
               <td class="ui-resizable-column">
-                <a (click)="addBinLocationBatch()" role="button" class="btn btn-link">+ Bấm vào để thêm mới...</a>
+                <a (click)="addBinLocationBatch()" class="btn btn-link" role="button">+ Bấm vào để thêm mới...</a>
               </td>
               <td class="ui-resizable-column"></td>
               <td class="text-center" width="5%"></td>
@@ -313,11 +327,11 @@
               <th class="th-filter">
                 <jaja-select-list [getList]="batchDialogRepository.getItemDetailList"
                                   [searchEntity]="itemDetailSearchEntity"
-                                  searchField="code"
                                   [searchable]="true"
                                   [small]="true"
                                   appendTo="body"
-                                  placeholder="{{'goodsReceiptPODetail.batches.itemCode' | translate}}">
+                                  placeholder="{{'goodsReceiptPODetail.batches.itemCode' | translate}}"
+                                  searchField="code">
                   <ng-template #label #option let-code="code">
                     {{code}}
                   </ng-template>
@@ -391,13 +405,13 @@
           <button (click)="updateBatch()" class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
-                            {{'general.button.save' | translate}}
-                        </span></button>
-          <button (click)="displayBatch = false" class="btn btn-labeled btn-cancel">
+                {{'general.button.save' | translate}}
+            </span></button>
+          <button (click)="display = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
-                            {{'general.button.cancel' | translate}}
-                        </span></button>
+                {{'general.button.cancel' | translate}}
+            </span></button>
         </div>
       </div>
     </div>

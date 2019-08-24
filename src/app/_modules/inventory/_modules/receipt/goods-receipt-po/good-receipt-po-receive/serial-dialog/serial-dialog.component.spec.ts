@@ -8,9 +8,9 @@ describe('SerialDialogComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SerialDialogComponent ]
+      declarations: [SerialDialogComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,4 +1,7 @@
-<p-dialog [(visible)]="displayQuantity" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+<p-dialog [(visible)]="display"
+          [contentStyle]="{'overflow':'visible'}"
+          [modal]="true"
+          [responsive]="true"
           [style]="{width: '80%'}" appendTo="body">
   <p-header>
     <div class="row">
@@ -14,7 +17,7 @@
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptPODetail.amount.quantity' | translate}}: </span>
           <div class="ml-2">
-            <input [value]="itemQuantities" class="form-control disabled"
+            <input [value]="quantityItems" class="form-control disabled"
                    data-qe-id="dialog-input-start-scan-batches-no"
                    type="text">
           </div>
@@ -80,7 +83,7 @@
                        type="text"/>
               </td>
               <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
-                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                <jaja-select-list [getList]="quantityDialogRepository.getBinLocationList"
                                   [searchEntity]="binLocationSearchEntity"
                                   searchField="code"
                                   searchType="startsWith">
@@ -116,7 +119,7 @@
                   <div class="validation-div">
                     <div [ngClass]="{'error-border-color': quantityModel.errors}"
                          class="w-100 error-border-color">
-                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                      <jaja-select-list [getList]="quantityDialogRepository.getBinLocationList"
                                         [searchEntity]="binLocationSearchEntity"
                                         searchField="code"
                                         searchType="startsWith">
@@ -151,7 +154,7 @@
             </ng-container>
             <tr>
               <td>
-                <a (click)="addBinLocationQuantity()" role="button" class="btn btn-link">+ Bấm vào để thêm mới...</a>
+                <a (click)="addBinLocationQuantity()" class="btn btn-link" role="button">+ Bấm vào để thêm mới...</a>
               </td>
               <td></td>
               <td></td>
@@ -215,7 +218,7 @@
             <span class="button-label">
                             {{'general.button.save' | translate}}
                         </span></button>
-          <button (click)="displayQuantity = false" class="btn btn-labeled btn-cancel">
+          <button (click)="display = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
                 {{'general.button.cancel' | translate}}

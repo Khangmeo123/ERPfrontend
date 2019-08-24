@@ -119,7 +119,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
 
   getQuantityDetail = (goodsReceiptPOContentId: string) => {
     return this.http.post<GoodsReceiptPOContent>(
-      this.apiUrl + '/quantity/goods-receipt-po-content-detail',
+      this.apiUrl + '/quantity/get-goods-receipt-po-content',
       {goodsReceiptPOContentId},
       {
         observe: 'response',

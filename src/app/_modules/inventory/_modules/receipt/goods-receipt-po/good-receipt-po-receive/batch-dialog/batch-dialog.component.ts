@@ -6,12 +6,11 @@ import { BinLocationSearchEntity, ItemDetailSearchEntity } from '../../../../../
   selector: 'app-batch-dialog',
   templateUrl: './batch-dialog.component.html',
   styleUrls: ['./batch-dialog.component.scss'],
+  providers: [
+    BatchDialogRepository,
+  ],
 })
 export class BatchDialogComponent implements OnInit {
-
-  @Input() tableGoodsReceiptPOContents;
-
-  displayBatch: boolean = false;
 
   itemDetailSearchEntity: ItemDetailSearchEntity = new ItemDetailSearchEntity();
 
@@ -19,48 +18,39 @@ export class BatchDialogComponent implements OnInit {
 
   enableBinLocation: boolean = false;
 
-  @Input() batch: any;
-
   placeholder: string = '';
 
   activeScan: boolean = false;
 
+  @Input() tableGoodsReceiptPOContents;
+
+  @Input() display: boolean = false;
+
+  @Input() batch: any;
+
+  @Input() deleteMultipleBatch;
+
+  @Input() addBinLocationBatch;
+
+  @Input() checkAllBatch;
+
+  @Input() updateBatch;
+
+  @Input() deleteBinLocationBatch;
+
+  @Input() inputBatch;
+
+  @Input() changeLocationInBatch;
+
   @ViewChild('tableBatch', {static: false}) tableBatch: ElementRef;
+
+  @Input() sortDate;
+
+  @Input() clearBatchTable;
 
   constructor(private batchDialogRepository: BatchDialogRepository) {
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
   }
-
-  clearBatchTable(table) {
-    table.reset();
-  }
-
-  updateBatch() {
-
-  }
-
-  deleteMultipleBatch = () => {
-
-  };
-
-  sortDate(event, table, field) {
-
-  }
-
-  addBinLocationBatch() {
-  }
-
-  deleteBinLocationBatch(i, j) {
-
-  }
-
-  checkAllBatch(event) {
-
-  }
-
-  inputBatch = (event) => {
-
-  };
 }
