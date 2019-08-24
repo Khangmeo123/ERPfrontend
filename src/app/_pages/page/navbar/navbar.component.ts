@@ -8,6 +8,7 @@ import { LegalEntity } from '../../../_modules/master-data/_backend/legal/legal.
 import { LanguageEntity, languages } from '../../../_constants/languages';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { AppRepository } from '../../../_repositories/app.repository';
+import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-navbar',
@@ -62,14 +63,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.user = user;
     });
 
-    const routeSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      if (params.legalEntityId && !this.legalEntityId) {
-        this.getCurrentLegalEntity();
-      }
-    });
-
     this.subscription
-      .add(routeSubscription)
       .add(userSubscription)
       .add(legalEntitiesSubscription)
       .add(legalEntitySubscription);
@@ -112,6 +106,10 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    const {queryParams} = this.activatedRoute.snapshot;
+    if (queryParams.legalEntityId && queryParams.legalEntityId !== this.legalEntityId) {
+      localStorage.setItem('legalEntityId', queryParams.legalEntityId);
+    }
     if (this.legalEntityId) {
       this.getCurrentLegalEntity();
     } else {
