@@ -1,6 +1,6 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppService } from '../../_services';
-
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-page',
@@ -8,24 +8,30 @@ import { AppService } from '../../_services';
   styleUrls: ['./page.component.scss'],
   encapsulation: ViewEncapsulation.None,
 })
-export class PageComponent implements OnInit {
+export class PageComponent implements OnInit, OnDestroy {
 
-  public isPinned = false;
+  public isPinned: boolean = false;
 
-  constructor(private appService: AppService) {
-  }
+  public isToggled: boolean = false;
 
-  get class() {
-    return {
-      'pinned-sidebar': this.appService.getSidebarStat().isSidebarPinned,
-      'toggled-sidebar': this.appService.getSidebarStat().isToggled,
-    };
+  public subscription: Subscription = new Subscription();
+
+  constructor(public appService: AppService) {
+    const pinnedSubscription: Subscription = this.appService.isPinned.subscribe((isPinned: boolean) => {
+      this.isPinned = isPinned;
+    });
+    const toggledSubscription: Subscription = this.appService.isToggled.subscribe((isToggled: boolean) => {
+      this.isToggled = isToggled;
+    });
+    this.subscription
+      .add(toggledSubscription)
+      .add(pinnedSubscription);
   }
 
   ngOnInit() {
   }
 
-  onChangeToggle(event) {
-    this.isPinned = event;
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

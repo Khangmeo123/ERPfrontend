@@ -1,8 +1,8 @@
-<div class="wrapper default-theme" [ngClass]="class">
-  <app-navbar (changeToggle)="onChangeToggle($event)"></app-navbar>
+<div class="wrapper default-theme" [ngClass]="{'pinned-sidebar': isPinned, 'toggled-sidebar': isToggled}">
+  <app-navbar></app-navbar>
   <main>
     <app-sidebar class="page-sidebar" [isOpened]="isPinned"></app-sidebar>
-    <div class="pages container-fluid pt-3 pb-3 pl-3 pr-3 ">
+    <div class="pages container-fluid p-3 ">
       <router-outlet></router-outlet>
       <hr>
       <app-footer></app-footer>

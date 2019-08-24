@@ -14,10 +14,6 @@ import { AppRepository } from '../../../_repositories/app.repository';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
   animations: [toggleMenu],
-  providers: [
-    AppService,
-    AuthenticationService,
-  ],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
 
@@ -25,8 +21,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   public changeToggle = new EventEmitter();
 
   public languageSelected: LanguageEntity;
-
-  public isToggleMenu = false;
 
   public languages: LanguageEntity[] = languages;
 
@@ -69,8 +63,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     });
 
     const routeSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      if (params.legalEntityId && params.legalEntityId !== this.legalEntityId) {
-
+      if (params.legalEntityId && !this.legalEntityId) {
+        this.getCurrentLegalEntity();
       }
     });
 
@@ -149,11 +143,5 @@ export class NavbarComponent implements OnInit, OnDestroy {
     if (this.isPinned) {
       this.isPinned = false;
     }
-  }
-
-  toggleSidebarPin() {
-    this.isToggleMenu = !this.isToggleMenu;
-    this.appService.toggleSidebarPin();
-    this.changeToggle.emit(this.isToggleMenu);
   }
 }

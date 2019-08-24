@@ -1,4 +1,5 @@
 $sidebar-color: #3d464d;
+
 .wrapper {
   main {
     position: relative;
@@ -111,7 +112,6 @@ $sidebar-color: #3d464d;
   &.pinned-sidebar {
     @media (min-width: 768px) {
       .navbar-header {
-        width: $sidebar-pinned-wdth !important;
         span {
           display: none !important;
         }

@@ -11,9 +11,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppService {
 
-  public isSidebarPinned = false;
+  public isPinned: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  public isToggled = false;
+  public isToggled: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   public legalEntity: BehaviorSubject<LegalEntity> = new BehaviorSubject<LegalEntity>(null);
 
@@ -25,21 +25,15 @@ export class AppService {
     private router: Router,
     private activatedRoute: ActivatedRoute,
   ) {
+    this.isToggled.next(true);
   }
 
   toggleSidebar() {
-    this.isToggled = !this.isToggled;
+    this.isToggled.next(!this.isToggled.getValue());
   }
 
   toggleSidebarPin() {
-    this.isSidebarPinned = !this.isSidebarPinned;
-  }
-
-  getSidebarStat() {
-    return {
-      isSidebarPinned: this.isSidebarPinned,
-      isToggled: this.isToggled,
-    };
+    this.isPinned.next(!this.isPinned.getValue());
   }
 
   getLegalEntityList = (): Promise<void> => {

@@ -263,7 +263,7 @@ export const sampleSidebarMenu = [
         route: '/master-data/department/project-organization',
         isShowed: true,
         exact: false,
-      }
+      },
     ],
   },
   {
@@ -390,6 +390,6 @@ export const sampleSidebarMenu = [
         exact: false,
         isShowed: true,
       },
-    ]
-  }
+    ],
+  },
 ];
