@@ -1,0 +1,227 @@
+<p-dialog [(visible)]="displayQuantity" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+          [style]="{width: '80%'}" appendTo="body">
+  <p-header>
+    <div class="row">
+      <div class="col-sm-3">
+        <span class="dialog-header">{{'goodsReceiptPODetail.amount.title ' | translate}}</span>
+      </div>
+    </div>
+  </p-header>
+  <div class="dialog-body">
+    <div class="row">
+      <div class="col-sm-6 mt-2"></div>
+      <div class="col-sm-6 mt-2">
+        <div class="d-flex align-items-center justify-content-end">
+          <span class="ml-2">{{'goodsReceiptPODetail.amount.quantity' | translate}}: </span>
+          <div class="ml-2">
+            <input [value]="itemQuantities" class="form-control disabled"
+                   data-qe-id="dialog-input-start-scan-batches-no"
+                   type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <p-table *ngIf="enableBinLocation" [resizableColumns]="true" [scrollable]="true"
+                 [value]="quantityDetail.goodsReceiptPOQuantityDetails" resizableColumns scrollHeight="300px">
+          <ng-template pTemplate="colgroup">
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-amount-item-code" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.itemCode' | translate}} </th>
+              <th data-qe-id="table-thead-amount-item-name" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.itemName' | translate}} </th>
+              <th data-qe-id="table-thead-amount-unit" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.unitOfMeasure' | translate}} </th>
+              <th data-qe-id="table-thead-amount-quantity" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.quantity' | translate}} </th>
+              <th *ngIf="enableBinLocation" data-qe-id="table-thead-amount-location-code"
+                  pResizableColumn>
+                {{'goodsReceiptPODetail.amount.locationCode' | translate}}
+              </th>
+              <th *ngIf="enableBinLocation" data-qe-id="table-thead-amount-quantity-saved"
+                  pResizableColumn>
+                {{'goodsReceiptPODetail.amount.quantitySaved' | translate}}
+              </th>
+              <th *ngIf="enableBinLocation" width="5%">
+                {{'general.action' | translate}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template let-index="rowIndex" let-quantityDetail pTemplate="body">
+            <tr>
+              <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                  class="ui-resizable-column">
+                {{quantityDetail.itemCode}}
+              </td>
+              <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                  class="ui-resizable-column">
+                {{quantityDetail.itemName}}
+              </td>
+              <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                  class="ui-resizable-column">
+                {{quantityDetail.unitOfMeasureName}}
+              </td>
+              <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                  class="ui-resizable-column">
+                <input (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event)"
+                       [ngModel]="quantityDetail.actualReceive" class="form-control"
+                       type="text"/>
+              </td>
+              <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+                <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                                  [searchEntity]="binLocationSearchEntity"
+                                  searchField="code"
+                                  searchType="startsWith">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
+              </td>
+              <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+                <div class="validation-div">
+                  <input
+                    (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = generalService.toNumber($event); recalculateQuantityDetail()"
+                    [attr.placeholder]="null"
+                    [ngClass]="{'error-border-color': quantityDetail.errors}"
+                    [ngModel]="quantityDetail.goodsReceiptPOQuantities[0]?.quantity"
+                    class="form-control"
+                    type="text"/>
+                  <div *ngIf="quantityDetail.goodsReceiptPOQuantities[0].errors"
+                       class="invalid-validation">
+                    <span>{{quantityDetail.goodsReceiptPOQuantities[0].errors.message}}</span>
+                  </div>
+                </div>
+              </td>
+              <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0" class="text-center"
+                  width="5%">
+                <mat-icon (click)="deleteBinLocationQuantity(0)" class="text-danger">delete</mat-icon>
+              </td>
+            </tr>
+            <ng-container *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+              <tr
+                *ngFor="let quantityModel of quantityDetail.goodsReceiptPOQuantities | slice:1; let i = index">
+                <td>
+                  <div class="validation-div">
+                    <div [ngClass]="{'error-border-color': quantityModel.errors}"
+                         class="w-100 error-border-color">
+                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getBinLocationList"
+                                        [searchEntity]="binLocationSearchEntity"
+                                        searchField="code"
+                                        searchType="startsWith">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </div>
+                    <div *ngIf="quantityModel.errors" class="invalid-validation">
+                      <span>{{quantityModel.errors.quantity}}</span>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="validation-div">
+                    <input
+                      (ngModelChange)="quantityModel.quantity = generalService.toNumber($event); recalculateQuantityDetail()"
+                      [attr.placeholder]="placeholder"
+                      [ngClass]="{'error-border-color': quantityModel.errors}"
+                      [ngModel]="quantityModel.quantity" class="form-control"
+                      type="text"/>
+                    <div *ngIf="quantityModel.errors" class="invalid-validation">
+                      <span>{{quantityModel.errors.quantity}}</span>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-center" width="5%">
+                  <mat-icon (click)="deleteBinLocationQuantity(i + 1)" class="text-danger">delete
+                  </mat-icon>
+                </td>
+              </tr>
+            </ng-container>
+            <tr>
+              <td>
+                <a (click)="addBinLocationQuantity()" role="button" class="btn btn-link">+ Bấm vào để thêm mới...</a>
+              </td>
+              <td></td>
+              <td></td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-table *ngIf="!enableBinLocation" [resizableColumns]="true" [scrollable]="true" [value]="quantityDetailList"
+                 resizableColumns scrollHeight="300px">
+          <ng-template pTemplate="colgroup">
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-amount-item-code" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.itemCode' | translate}}
+              </th>
+              <th data-qe-id="table-thead-amount-item-name" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.itemName' | translate}}
+              </th>
+              <th data-qe-id="table-thead-amount-unit" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.unitOfMeasure' | translate}}
+              </th>
+              <th data-qe-id="table-thead-amount-quantity" pResizableColumn>
+                {{'goodsReceiptPODetail.amount.quantity' | translate}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template let-index="rowIndex" let-quantityDetail pTemplate="body">
+            <tr>
+              <td class="ui-resizable-column">
+                {{quantityDetail.itemCode}}
+              </td>
+              <td class="ui-resizable-column">
+                {{quantityDetail.itemName}}
+              </td>
+              <td class="ui-resizable-column">
+                {{quantityDetail.unitOfMeasureName}}
+              </td>
+              <td class="ui-resizable-column">
+                <input (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event);"
+                       [ngModel]="quantityDetail.actualReceive" class="form-control"
+                       type="text"/>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions d-flex justify-content-end">
+          <button (click)="updateQuantityDetail()" class="btn btn-labeled btn-save-dialog">
+            <span class="btn-label"><i class="material-icons">save</i></span>
+            <span class="button-label">
+                            {{'general.button.save' | translate}}
+                        </span></button>
+          <button (click)="displayQuantity = false" class="btn btn-labeled btn-cancel">
+            <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+            <span class="button-label">
+                {{'general.button.cancel' | translate}}
+            </span></button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>

@@ -1,5 +1,5 @@
 import { Subscription } from 'rxjs';
-import { FormArray, FormGroup } from '@angular/forms';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { translate } from 'src/app/_helpers/string';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -135,6 +135,14 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
 
   get fileAttachments() {
     return this.goodsReceiptPOForm.get('fileAttachments') as FormArray;
+  }
+
+  get dueDate() {
+    return this.goodsReceiptPOForm.get('dueDate') as FormControl;
+  }
+
+  get documentDate() {
+    return this.goodsReceiptPOForm.get('documentDate') as FormControl;
   }
 
   ngOnInit() {

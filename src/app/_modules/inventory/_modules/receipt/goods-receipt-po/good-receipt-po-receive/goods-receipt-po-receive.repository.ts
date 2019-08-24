@@ -72,7 +72,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
   };
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
-    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/drop-list-item',
+    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item-detail',
       itemDetailSearchEntity,
       {
         observe: 'response',
@@ -88,7 +88,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
 
   getUnitOfMeasureList = (unitOfMeasureSearchEntity: UnitOfMeasureSearchEntity): Observable<UnitOfMeasureEntity[]> => {
     return this.http.post<UnitOfMeasureEntity[]>(
-      this.apiUrl + '/drop-list-unit-of-measure',
+      this.apiUrl + '/single-list-unit-of-measure',
       unitOfMeasureSearchEntity,
       {
         observe: 'response',
@@ -104,7 +104,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
 
   getDocumentNumberList = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> => {
     return this.http.post<PurchaseOrderEntity[]>(
-      this.apiUrl + '/drop-list-document-number',
+      this.apiUrl + '/single-list-document-number',
       purchaseOrdersSearchEntity,
       {
         observe: 'response',
@@ -144,7 +144,7 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
 
   getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
     return this.http.post<BinLocationEntity[]>(
-      this.apiUrl + '/quantity/drop-list-bin-location',
+      this.apiUrl + '/quantity/single-list-bin-location',
       binLocationSearchEntity,
       {
         observe: 'response',
