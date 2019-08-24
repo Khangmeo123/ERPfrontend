@@ -163,10 +163,6 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
     }
   }
 
-  returnNode(node) {
-    return node;
-  }
-
   backToList() {
     return this.router.navigate(['/inventory/receipt/goods-receipt-po/goods-receipt-po-list']);
   }
