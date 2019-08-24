@@ -5,7 +5,9 @@ import { InventoryComponent } from './inventory.component';
 import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-  declarations: [InventoryComponent],
+  declarations: [
+    InventoryComponent,
+  ],
   imports: [
     CommonModule,
     InventoryRoutingModule,

@@ -8,7 +8,7 @@
   </div>
   <!-- sidebar toggler -->
   <div class="sidebar-toggler ml-auto mr-3">
-    <a class="btn nav-link" (click)="toggleSidebar()"><i class="fa fa-bars"></i></a>
+    <a class="btn nav-link" (click)="appService.toggleSidebar()"><i class="fa fa-bars"></i></a>
   </div>
   <!-- right menu toggler -->
   <div class="nav-toggler-right mr-4 d-md-none">
@@ -38,10 +38,10 @@
   <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
        style="margin-right: 10px">
     <ul class="navbar-nav d-flex align-items-center">
-      <jaja-select-list key="id"
-                        placeholder="{{'general.legalEntity.placeholder' | translate}}"
+      <jaja-select-list placeholder="{{'general.legalEntity.placeholder' | translate}}"
                         [getList]="appRepository.getLegalEntityList"
-                        (change)="onChangeLegalEntity($event)"
+                        (change)="appService.selectLegalEntity($event)"
+                        [list]="legalEntities"
                         [display]="legalEntity?.code"
                         [value]="legalEntityId">
         <ng-template #label #option let-code="code">
@@ -104,7 +104,7 @@
               <span>{{'app.changePassword' | translate}}</span>
             </li>
             <li class="content-drop" style="margin-bottom: 10px">
-              <button class="btn" (click)="onClickLogOut()">
+              <button class="btn" (click)="authenticationService.logout()">
                 <span><i class="fas fa-sign-out-alt"></i></span>
                 <span style="padding-left: 10px"> {{'app.logout' | translate}} </span>
               </button>

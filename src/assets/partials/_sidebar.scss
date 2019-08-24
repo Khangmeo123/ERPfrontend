@@ -69,7 +69,7 @@ $sidebar-color: #3d464d;
           li {
             display: block;
             span {
-              cursor: pointer; 
+              cursor: pointer;
             }
             a {
               text-decoration: none;
@@ -87,8 +87,8 @@ $sidebar-color: #3d464d;
                 @extend .icon-style;
                 font-size: 1rem;
               }
-              
-              
+
+
 
               span {
                 color: $sidebar-color;
@@ -150,21 +150,21 @@ $sidebar-color: #3d464d;
           }
 
           // ul li {
-          //   display: 
+          //   display:
           // }
 
           ul span {
             i, mat-icon {
               display: none;
             }
-            
+
           }
         }
       }
     }
   }
 
-  &.toggeled-sidebar {
+  &.toggled-sidebar {
     .sidebar {
       left: 0;
     }

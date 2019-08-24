@@ -1,18 +1,9 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-invetory',
-  templateUrl: './invetory.component.html',
-  styleUrls: ['./invetory.component.scss'],
+  selector: 'app-inventory',
+  templateUrl: './inventory.component.html',
+  styleUrls: ['./inventory.component.scss'],
 })
-export class InventoryComponent implements OnInit, OnDestroy {
-
-  constructor() {
-  }
-
-  ngOnInit() {
-  }
-
-  ngOnDestroy(): void {
-  }
+export class InventoryComponent {
 }

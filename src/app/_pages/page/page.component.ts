@@ -9,24 +9,20 @@ import { AppService } from '../../_services';
   encapsulation: ViewEncapsulation.None,
 })
 export class PageComponent implements OnInit {
+
   public isPinned = false;
 
   constructor(private appService: AppService) {
   }
 
-  ngOnInit() {
-  }
-
-  getClasses() {
-    const classes = {
+  get class() {
+    return {
       'pinned-sidebar': this.appService.getSidebarStat().isSidebarPinned,
-      'toggeled-sidebar': this.appService.getSidebarStat().isToggled,
+      'toggled-sidebar': this.appService.getSidebarStat().isToggled,
     };
-    return classes;
   }
 
-  toggleSidebar() {
-    this.appService.toggleSidebar();
+  ngOnInit() {
   }
 
   onChangeToggle(event) {

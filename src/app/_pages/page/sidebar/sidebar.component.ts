@@ -19,6 +19,7 @@ import { AppService, BookMark, BookmarkService } from '../../../_services';
   encapsulation: ViewEncapsulation.None,
 })
 export class SidebarComponent implements OnInit, OnChanges {
+
   @Input() menu: SidebarItem[] = sampleSidebarMenu;
 
   @Input() showBookmarks = false;

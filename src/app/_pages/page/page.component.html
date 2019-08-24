@@ -1,4 +1,4 @@
-<div class="wrapper default-theme" [ngClass]="getClasses()">
+<div class="wrapper default-theme" [ngClass]="class">
   <app-navbar (changeToggle)="onChangeToggle($event)"></app-navbar>
   <main>
     <app-sidebar class="page-sidebar" [isOpened]="isPinned"></app-sidebar>
@@ -7,6 +7,5 @@
       <hr>
       <app-footer></app-footer>
     </div>
-    <div class="overlay" (click)="toggleSidebar()"></div>
   </main>
 </div>
