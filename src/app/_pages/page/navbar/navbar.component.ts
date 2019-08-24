@@ -6,9 +6,8 @@ import { Subscription } from 'rxjs';
 import { UserEntity } from '../../../_helpers/entity';
 import { LegalEntity } from '../../../_modules/master-data/_backend/legal/legal.entity';
 import { LanguageEntity, languages } from '../../../_constants/languages';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AppRepository } from '../../../_repositories/app.repository';
-import { query } from '@angular/animations';
 
 @Component({
   selector: 'app-navbar',
