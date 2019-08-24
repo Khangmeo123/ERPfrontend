@@ -148,7 +148,7 @@
             <th class="th-filter">
               <jaja-select-list (change)="onFilterStatus($event)" [display]="goodsIssueSearchEntity?.statusDisplay"
                 [getList]="goodsIssueRepository.enumListStatus" appendTo="body"
-                placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
+                placeholder="{{'goodsIssueList.filters.status' | translate}}">
                 <ng-template #label #option let-display="display">
                   {{display}}
                 </ng-template>
@@ -159,11 +159,13 @@
         </ng-template>
         <ng-template pTemplate="body" let-goodsIssue let-index="rowIndex">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> </td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
-            <td> </td>
+            <td class="ui-resizable-column"> {{goodsIssue.documentDate | date: 'dd/MM/yyyy'}}</td>
+            <td class="ui-resizable-column"> {{goodsIssue.documentNumber}} </td>
+            <td class="ui-resizable-column"> {{goodsIssue.dueDate | date: 'dd/MM/yyyy'}}</td>
+            <td class="ui-resizable-column"> {{goodsIssue.inventoryOrganizationCode}}</td>
+            <td class="ui-resizable-column"> {{goodsIssue.inventoryOrganizationStreet}}</td>
+            <td class="ui-resizable-column"> {{goodsIssue.remarks }} </td>
+            <td class="ui-resizable-column"> {{goodsIssue.requesterName }} </td>
             <td> {{goodsIssue.description }} </td>
             <td> {{goodsIssue.creator }} </td>
             <td> {{goodsIssue.status }} </td>
