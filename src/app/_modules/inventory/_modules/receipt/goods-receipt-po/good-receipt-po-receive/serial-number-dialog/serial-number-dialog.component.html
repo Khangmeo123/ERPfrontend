@@ -53,7 +53,7 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
-          <jaja-select-list [getList]="serialDialogRepository.getBinLocationList"
+          <jaja-select-list [getList]="serialNumberDialogRepository.getBinLocationList"
                             [searchEntity]="binLocationSearchEntity"
                             [searchable]="true"
                             [small]="true"
@@ -124,8 +124,8 @@
                 {{'goodsReceiptPODetail.qrCode.itemCode' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-item-name" pResizableColumn>
                 {{'goodsReceiptPODetail.qrCode.itemName' | translate}} </th>
-              <th data-qe-id="table-thead-qrCode-serial" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.serial' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-serialNumber" pResizableColumn>
+                {{'goodsReceiptPODetail.qrCode.serialNumber' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-manufacturing-date" pResizableColumn>
                 {{'goodsReceiptPODetail.qrCode.manufacturingDate' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-expiry-date" pResizableColumn>
@@ -146,7 +146,7 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <jaja-select-list [getList]="serialDialogRepository.getItemDetailList"
+                <jaja-select-list [getList]="serialNumberDialogRepository.getItemDetailList"
                                   [searchEntity]="itemDetailSearchEntity"
                                   [searchable]="true"
                                   [small]="true"
@@ -213,7 +213,7 @@
                 {{serialNumber.expirationDate}}
               </td>
               <td class="ui-resizable-column">
-                <jaja-select-list [getList]="serialDialogRepository.getBinLocationList"
+                <jaja-select-list [getList]="serialNumberDialogRepository.getBinLocationList"
                                   [searchEntity]="binLocationSearchEntity"
                                   [searchable]="true"
                                   [small]="true"
@@ -263,8 +263,8 @@
                 {{'goodsReceiptPODetail.qrCode.itemCode' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-item-name" pResizableColumn>
                 {{'goodsReceiptPODetail.qrCode.itemName' | translate}} </th>
-              <th data-qe-id="table-thead-qrCode-serial" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.serial' | translate}} </th>
+              <th data-qe-id="table-thead-qrCode-serialNumber" pResizableColumn>
+                {{'goodsReceiptPODetail.qrCode.serialNumber' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-manufacturing-date" pResizableColumn>
                 {{'goodsReceiptPODetail.qrCode.manufacturingDate' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-expiry-date" pResizableColumn>
@@ -282,7 +282,7 @@
                        type="text"/>
               </th>
               <th class="th-filter">
-                <jaja-select-list [getList]="serialDialogRepository.getItemDetailList"
+                <jaja-select-list [getList]="serialNumberDialogRepository.getItemDetailList"
                                   [searchEntity]="itemDetailSearchEntity"
                                   [searchable]="true"
                                   searchField="code"

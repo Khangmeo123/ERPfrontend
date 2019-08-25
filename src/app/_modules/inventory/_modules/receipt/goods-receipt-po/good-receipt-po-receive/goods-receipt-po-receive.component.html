@@ -18,7 +18,7 @@
             {{'general.button.receive' | translate}}
         </span>
       </button>
-      <button (click)="rejectReceive()" class="btn btn-labeled btn-rejected" data-qe-id="button-rejected">
+      <button (click)="reject()" class="btn btn-labeled btn-rejected" data-qe-id="button-rejected">
         <span class="btn-label"><i class="material-icons">block</i></span>
         <span class="button-label">
             {{'general.button.rejected' | translate}}
@@ -257,48 +257,24 @@
                   </tr>
                   <tr>
                     <th class="th-filter">
-                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getDocumentNumberList"
-                                        [searchEntity]="documentNumberSearchEntity"
-                                        [searchable]="true"
-                                        [small]="true"
-                                        appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
-                                        searchField="documentNumber">
-                        <ng-template #label #option let-documentNumber="documentNumber">
-                          {{documentNumber}}
-                        </ng-template>
-                      </jaja-select-list>
-
+                      <app-advanced-filters [filter]="purchaseOrderSearchEntity.documentNumber"
+                                            (changeFilter)="onFilterPurchaseOrder(goodsReceiptPOContentsTable)"
+                      ></app-advanced-filters>
                     </th>
                     <th class="th-filter">
-                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getItemDetailList"
-                                        [searchEntity]="itemDetailSearchEntity"
-                                        [searchable]="true"
-                                        [small]="true"
-                                        appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.itemNo' | translate}}"
-                                        searchField="code">
-                        <ng-template #label #option let-code="code">
-                          {{code}}
-                        </ng-template>
-                      </jaja-select-list>
+                      <app-advanced-filters [filter]="itemDetailSearchEntity.code"
+                                            (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
+                      ></app-advanced-filters>
                     </th>
                     <th class="th-filter">
-                      <input (input)="goodsReceiptPOContentsTable.filter($event.target.value, 'itemName', 'contains')"
-                             class="form-control w-100"
-                             type="text"/>
+                      <app-advanced-filters [filter]="itemDetailSearchEntity.name"
+                                            (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
+                      ></app-advanced-filters>
                     </th>
                     <th class="th-filter">
-                      <jaja-select-list [getList]="goodsReceiptPOReceiveRepository.getUnitOfMeasureList"
-                                        [searchEntity]="unitOfMeasureSearchEntity"
-                                        [searchable]="true"
-                                        [small]="true"
-                                        appendTo="body"
-                                        searchField="code">
-                        <ng-template #label #option let-code="code">
-                          {{code}}
-                        </ng-template>
-                      </jaja-select-list>
+                      <app-advanced-filters [filter]="unitOfMeasureSearchEntity.code"
+                                            (changeFilter)="onFilterUnitOfMeasure(goodsReceiptPOContentsTable)"
+                      ></app-advanced-filters>
                     </th>
                     <th class="th-filter"></th>
                     <th class="th-filter"></th>
@@ -317,8 +293,8 @@
                       <a (click)="showBatch(goodsReceiptPOContent)" class="btn btn-link" role="button">
                         {{'goodsReceiptPODetail.tab1.batches' | translate}}
                       </a>
-                      <a (click)="showSerial(goodsReceiptPOContent)" class="btn btn-link" role="button">
-                        {{'goodsReceiptPODetail.tab1.Serial' | translate}}
+                      <a (click)="showSerialNumber(goodsReceiptPOContent)" class="btn btn-link" role="button">
+                        {{'goodsReceiptPODetail.tab1.SerialNumber' | translate}}
                       </a>
                       <a (click)="showQuantity(goodsReceiptPOContent)" class="btn btn-link" role="button">
                         {{'goodsReceiptPODetail.tab1.amount' | translate}}
@@ -357,7 +333,7 @@
                     </span>
                     </button>
 
-                    <button (click)="toggleAttachmentModal()" class="btn btn-labeled btn-send">
+                    <button (click)="showAttachments()" class="btn btn-labeled btn-send">
                     <span class="btn-label">
                       <i class="material-icons">cloud_upload</i>
                     </span>
@@ -375,37 +351,3 @@
     </div>
   </div>
 </div>
-
-<app-batch-dialog [addBinLocationBatch]="addBinLocationBatch"
-                  [batch]="batch"
-                  [changeLocationInBatch]="changeLocationInBatch"
-                  [checkAllBatch]="checkAllBatch"
-                  [clearBatchTable]="clearBatchTable"
-                  [deleteBinLocationBatch]="deleteBinLocationBatch"
-                  [deleteMultipleBatch]="deleteMultipleBatch"
-                  [display]="displayBatch"
-                  [updateBatch]="updateBatch">
-</app-batch-dialog>
-
-<app-quantity-dialog [display]="displayQuantity"
-                     [addBinLocationQuantity]="addBinLocationQuantity"
-                     [changeLocationInQuantity]="changeLocationInQuantity"
-                     [deleteBinLocationQuantity]="deleteBinLocationQuantity"
-                     [quantity]="quantityDetail"
-                     [quantityDetail]="quantityDetail"
-                     [quantityItems]="quantityItems"
-                     [sortDate]="sortDate"
-                     [updateQuantityDetail]="updateQuantityDetail"
-                     [recalculateQuantityDetail]="recalculateQuantityDetail"
-></app-quantity-dialog>
-
-<app-serial-dialog [serialNumberDetail]="serialNumberDetail"
-                   [quantityItems]="quantityItems"
-                   [display]="displaySerial"
-                   [batch]="batch"
-                   [deleteSerialNumber]="deleteSerialNumber"
-                   [enableBinLocation]="enableBinLocation"
-                   [goodsReceiptPOContentDetailSearchEntity]="goodsReceiptPOContentDetailSearchEntity"
-                   [tableGoodsReceiptPOContents]="goodsReceiptPOContentsTable"
-                   [serialNumber]="serialNumber"
-></app-serial-dialog>

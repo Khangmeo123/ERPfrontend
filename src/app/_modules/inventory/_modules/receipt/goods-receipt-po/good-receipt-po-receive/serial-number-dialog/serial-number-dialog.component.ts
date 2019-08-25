@@ -2,16 +2,16 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import {
   BinLocationSearchEntity,
   GoodsReceiptPOContentDetailSearchEntity,
-  ItemDetailSearchEntity
+  ItemDetailSearchEntity,
 } from '../../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { SerialDialogRepository } from './serial-dialog.repository';
+import { SerialNumberDialogRepository } from './serial-number-dialog.repository';
 
 @Component({
-  selector: 'app-serial-dialog',
-  templateUrl: './serial-dialog.component.html',
-  styleUrls: ['./serial-dialog.component.scss'],
+  selector: 'app-serial-number-dialog',
+  templateUrl: './serial-number-dialog.component.html',
+  styleUrls: ['./serial-number-dialog.component.scss'],
 })
-export class SerialDialogComponent implements OnInit {
+export class SerialNumberDialogComponent implements OnInit {
 
   @Input() tableGoodsReceiptPOContents;
 
@@ -41,7 +41,7 @@ export class SerialDialogComponent implements OnInit {
 
   activeScan: boolean = false;
 
-  constructor(private serialDialogRepository: SerialDialogRepository) {
+  constructor(private serialNumberDialogRepository: SerialNumberDialogRepository) {
   }
 
   ngOnInit() {

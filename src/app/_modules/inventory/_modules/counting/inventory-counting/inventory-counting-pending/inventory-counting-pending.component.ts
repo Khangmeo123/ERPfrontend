@@ -68,7 +68,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   baseLinkCountingExport: string = environment.apiUrlInv +
     'inventory/counting/inventory-counting/inventory-counting-pending/export-counting-content';
   linkCountingExport: string;
-  // batch:
+  // batchDetail:
   batchCode: string;
   batchSearchEntity: BatchSearchEntity = new BatchSearchEntity();
   batchList: CounterContentByItemDetailEntity[];
@@ -127,7 +127,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
         this.serialNumberList = res;
       }
     });
-    // batch:
+    // batchDetail:
     const batchListSub = this.inventoryCountingService.batchList.subscribe(res => {
       if (res) {
         this.batchList = res;
@@ -262,7 +262,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     table.reset();
   }
 
-  // batch:
+  // batchDetail:
   showBatch(itemDetailId: string) {
     this.displayBatch = true;
     this.activeScan = false;

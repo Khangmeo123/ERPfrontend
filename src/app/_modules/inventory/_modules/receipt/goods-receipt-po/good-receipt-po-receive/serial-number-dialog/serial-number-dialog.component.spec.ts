@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SerialDialogComponent } from './serial-dialog.component';
+import { SerialNumberDialogComponent } from './serial-number-dialog.component';
 
-describe('SerialDialogComponent', () => {
-  let component: SerialDialogComponent;
-  let fixture: ComponentFixture<SerialDialogComponent>;
+describe('SerialNumberDialogComponent', () => {
+  let component: SerialNumberDialogComponent;
+  let fixture: ComponentFixture<SerialNumberDialogComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [SerialDialogComponent]
+      declarations: [SerialNumberDialogComponent],
     })
       .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SerialDialogComponent);
+    fixture = TestBed.createComponent(SerialNumberDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
