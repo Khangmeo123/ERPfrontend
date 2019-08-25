@@ -3,12 +3,12 @@
         "createdDate": "",
         "creator": "",
         "description": "",
-        "documentNumber": "",
         "header": {
             "title": ""
         },
         "inventoryAddress": "",
         "inventoryCode": "",
+        "purchaseOrderNumber": "",
         "receiptedDate": "",
         "status": ""
     },
@@ -41,7 +41,6 @@
         "createdDate": "",
         "creator": "",
         "description": "",
-        "documentNumber": "",
         "form": {
             "post": {
                 "title": ""
@@ -61,6 +60,7 @@
         "inventoryAddress": "",
         "inventoryCode": "",
         "personInCharge": "",
+        "purchaseOrderNumber": "",
         "qrCode": {
             "code": "",
             "expiryDate": "",
@@ -95,17 +95,23 @@
         }
     },
     "goodsReceiptPO": {
+        "attachments": {
+            "filename": ""
+        },
         "createdDate": "",
         "creator": "",
         "description": "",
-        "documentNumber": "",
         "header": {
             "title": ""
         },
         "inventoryAddress": "",
         "inventoryCode": "",
+        "purchaseOrderNumber": "",
         "receiptedDate": "",
         "status": ""
+    },
+    "goodsReceiptPOContent": {
+        "title": ""
     },
     "goodsReceiptPODetail": {
         "amount": {
@@ -146,7 +152,6 @@
             }
         },
         "description": "",
-        "documentNumber": "",
         "form": {
             "post": {
                 "title": ""
@@ -164,38 +169,17 @@
             "supplierName": "",
             "title": ""
         },
-        "header": {
+        "goodsReceiptPOAttachments": {
             "title": ""
         },
-        "inventoryAddress": "",
-        "inventoryCode": "",
-        "personInCharge": "",
-        "qrCode": {
-            "code": "",
-            "expiryDate": "",
-            "itemCode": "",
-            "itemName": "",
-            "locationCode": "",
-            "manufacturingDate": "",
-            "quantity": "",
-            "rows": "",
-            "scanQRCode": "",
-            "serial": "",
-            "title ": ""
-        },
-        "receiptedDate": "",
-        "receiver": "",
-        "supplierAddress": "",
-        "supplierCode": "",
-        "supplierContact": "",
-        "supplierName": "",
-        "tab1": {
-            "Serial": "",
+        "goodsReceiptPOContents": {
+            "SerialNumber": "",
             "actualReceive": "",
             "amount": "",
             "batches": "",
             "discount": "",
             "discountAmount": "",
+            "itemCode": "",
             "itemName": "",
             "itemNo": "",
             "purchaseOrderNumber": "",
@@ -206,9 +190,32 @@
             "unitPrice": "",
             "valueAddedTax": ""
         },
-        "tab2": {
+        "header": {
             "title": ""
-        }
+        },
+        "inventoryAddress": "",
+        "inventoryCode": "",
+        "personInCharge": "",
+        "purchaseOrderNumber": "",
+        "qrCode": {
+            "code": "",
+            "expiryDate": "",
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "manufacturingDate": "",
+            "quantity": "",
+            "rows": "",
+            "scanQRCode": "",
+            "serialNumber": "",
+            "title ": ""
+        },
+        "receiptedDate": "",
+        "receiver": "",
+        "supplierAddress": "",
+        "supplierCode": "",
+        "supplierContact": "",
+        "supplierName": ""
     },
     "goodsReceiptPOList": {
         "filters": {
@@ -259,7 +266,6 @@
             "customerInfo": "",
             "customerName": "",
             "description": "",
-            "documentNumber": "",
             "form": {
                 "title": ""
             },
@@ -269,6 +275,7 @@
             "inventoryAddress": "",
             "inventoryCode": "",
             "personInCharge": "",
+            "purchaseOrderNumber": "",
             "qrCode": {
                 "code": "",
                 "expiryDate": "",
@@ -336,13 +343,13 @@
             "customerInfo": "",
             "customerName": "",
             "description": "",
-            "documentNumber": "",
             "form": {
                 "title": ""
             },
             "inventoryAddress": "",
             "inventoryCode": "",
             "personInCharge": "",
+            "purchaseOrderNumber": "",
             "receiptedDate": "",
             "receiver": "",
             "returnRequest": {

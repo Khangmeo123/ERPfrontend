@@ -32,7 +32,7 @@ export class GoodsReceiptPOSearchEntity extends SearchEntity {
 
 export class PurchaseOrderSearchEntity extends SearchEntity {
   supplierDetailId: string;
-  documentNumber = new NumberFilter();
+  purchaseOrderNumber: NumberFilter = new NumberFilter();
   documentDate = new DateFilter();
   ownerId: string = null;
   buyerId: string = null;

@@ -46,7 +46,7 @@ export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
 
   goodsReceiptPOId: string;
 
-  // documentNumber:
+  // purchaseOrderNumber:
   documentNumberSearchEntity: PurchaseOrderSearchEntity = new PurchaseOrderSearchEntity();
 
   // itemDetail:

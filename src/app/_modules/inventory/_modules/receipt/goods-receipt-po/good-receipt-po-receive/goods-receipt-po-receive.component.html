@@ -113,7 +113,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label for="detail-form-documentNumber">
-              {{'goodsReceiptPODetail.documentNumber' | translate}}
+              {{'goodsReceiptPODetail.purchaseOrderNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled"
@@ -212,141 +212,160 @@
       </div>
     </div>
     <div class="page-section">
-      <div class="tab-header pt-3 pb-3 pl-3 pr-3">
-        <mat-tab-group>
-          <mat-tab label="{{'goodsReceiptPODetail.tab1.title' | translate}}">
-            <div class="table mt-3" formArrayName="goodsReceiptPOContents">
-              <p-table #goodsReceiptPOContentsTable [resizableColumns]="true" [rowTrackBy]="trackByFn"
-                       [scrollable]="true" [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value"
-                       scrollHeight="500px">
-                <ng-template pTemplate="colgroup">
-                  <colgroup>
-                    <col>
-                    <col>
-                    <col>
-                    <col>
-                    <col>
-                    <col>
-                    <col>
-                  </colgroup>
-                </ng-template>
-                <ng-template pTemplate="header">
-                  <tr>
-                    <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}
-                    </th>
-                    <th data-qe-id="table-thead-item-no" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.itemNo' | translate}}
-                    </th>
-                    <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.itemName' | translate}}
-                    </th>
-                    <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.unitOfMeasure' | translate}}
-                    </th>
-                    <th data-qe-id="table-thead-quantity" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.quantity' | translate}}
-                    </th>
-                    <th data-qe-id="table-thead-actualReceive" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.actualReceive' | translate}}
-                    </th>
-                    <th data-qe-id="table-thead-view-detail" pResizableColumn>
-                      {{'general.detail' | translate}}
-                    </th>
-                  </tr>
-                  <tr>
-                    <th class="th-filter">
-                      <app-advanced-filters [filter]="purchaseOrderSearchEntity.documentNumber"
-                                            (changeFilter)="onFilterPurchaseOrder(goodsReceiptPOContentsTable)"
-                      ></app-advanced-filters>
-                    </th>
-                    <th class="th-filter">
-                      <app-advanced-filters [filter]="itemDetailSearchEntity.code"
-                                            (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
-                      ></app-advanced-filters>
-                    </th>
-                    <th class="th-filter">
-                      <app-advanced-filters [filter]="itemDetailSearchEntity.name"
-                                            (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
-                      ></app-advanced-filters>
-                    </th>
-                    <th class="th-filter">
-                      <app-advanced-filters [filter]="unitOfMeasureSearchEntity.code"
-                                            (changeFilter)="onFilterUnitOfMeasure(goodsReceiptPOContentsTable)"
-                      ></app-advanced-filters>
-                    </th>
-                    <th class="th-filter"></th>
-                    <th class="th-filter"></th>
-                    <th class="th-filter"></th>
-                  </tr>
-                </ng-template>
-                <ng-template let-goodsReceiptPOContent let-index="rowIndex" pTemplate="body">
-                  <tr [formGroupName]='index'>
-                    <td class="ui-resizable-column">{{goodsReceiptPOContent.documentNumber}}</td>
-                    <td class="ui-resizable-column">{{goodsReceiptPOContent.itemCode}}</td>
-                    <td class="ui-resizable-column">{{goodsReceiptPOContent.itemName}}</td>
-                    <td class="ui-resizable-column">{{goodsReceiptPOContent.unitOfMeasureName}}</td>
-                    <td class="ui-resizable-column">{{goodsReceiptPOContent.quantity}}</td>
-                    <td class="ui-resizable-column">{{goodsReceiptPOContent.actualReceive}}</td>
-                    <td>
-                      <a (click)="showBatch(goodsReceiptPOContent)" class="btn btn-link" role="button">
-                        {{'goodsReceiptPODetail.tab1.batches' | translate}}
-                      </a>
-                      <a (click)="showSerialNumber(goodsReceiptPOContent)" class="btn btn-link" role="button">
-                        {{'goodsReceiptPODetail.tab1.SerialNumber' | translate}}
-                      </a>
-                      <a (click)="showQuantity(goodsReceiptPOContent)" class="btn btn-link" role="button">
-                        {{'goodsReceiptPODetail.tab1.amount' | translate}}
-                      </a>
-                    </td>
-                  </tr>
-                </ng-template>
-              </p-table>
+      <nz-tabset>
+        <nz-tab nzTitle="{{'goodsReceiptPODetail.goodsReceiptPOContents.title' | translate}}">
+          <p-table #goodsReceiptPOContentsTable
+                   [resizableColumns]="true"
+                   [rowTrackBy]="trackByFn"
+                   [scrollable]="true"
+                   [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value"
+                   formArrayName="goodsReceiptPOContents"
+                   scrollHeight="500px">
+            <ng-template pTemplate="colgroup">
+              <colgroup>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+                <col>
+              </colgroup>
+            </ng-template>
+            <ng-template pTemplate="header">
+              <tr>
+                <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
+                  {{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}}
+                </th>
+                <th data-qe-id="table-thead-item-no" pResizableColumn>
+                  {{'goodsReceiptPODetail.goodsReceiptPOContents.itemNo' | translate}}
+                </th>
+                <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
+                  {{'goodsReceiptPODetail.goodsReceiptPOContents.itemName' | translate}}
+                </th>
+                <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
+                  {{'goodsReceiptPODetail.goodsReceiptPOContents.unitOfMeasure' | translate}}
+                </th>
+                <th data-qe-id="table-thead-quantity" pResizableColumn>
+                  {{'goodsReceiptPODetail.goodsReceiptPOContents.quantity' | translate}}
+                </th>
+                <th data-qe-id="table-thead-actualReceive" pResizableColumn>
+                  {{'goodsReceiptPODetail.goodsReceiptPOContents.actualReceive' | translate}}
+                </th>
+                <th data-qe-id="table-thead-view-detail" pResizableColumn>
+                  {{'general.detail' | translate}}
+                </th>
+              </tr>
+              <tr>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="purchaseOrderSearchEntity.purchaseOrderNumber"
+                                        (changeFilter)="onFilterPurchaseOrder(goodsReceiptPOContentsTable)"
+                  ></app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="itemDetailSearchEntity.code"
+                                        defaultType="startsWith"
+                                        (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
+                  ></app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="itemDetailSearchEntity.name"
+                                        defaultType="contains"
+                                        (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
+                  ></app-advanced-filters>
+                </th>
+                <th class="th-filter">
+                  <app-advanced-filters [filter]="unitOfMeasureSearchEntity.code"
+                                        (changeFilter)="onFilterUnitOfMeasure(goodsReceiptPOContentsTable)"
+                  ></app-advanced-filters>
+                </th>
+                <th class="th-filter"></th>
+                <th class="th-filter"></th>
+                <th class="th-filter"></th>
+              </tr>
+            </ng-template>
+            <ng-template let-goodsReceiptPOContent let-index="rowIndex" pTemplate="body">
+              <tr [formGroupName]='index'>
+                <td class="ui-resizable-column">{{goodsReceiptPOContent.purchaseOrderNumber}}</td>
+                <td class="ui-resizable-column">{{goodsReceiptPOContent.itemCode}}</td>
+                <td class="ui-resizable-column">{{goodsReceiptPOContent.itemName}}</td>
+                <td class="ui-resizable-column">{{goodsReceiptPOContent.unitOfMeasureName}}</td>
+                <td class="ui-resizable-column">{{goodsReceiptPOContent.quantity}}</td>
+                <td class="ui-resizable-column">{{goodsReceiptPOContent.actualReceive}}</td>
+                <td>
+                  <a *ngIf="goodsReceiptPOContent.itemManagementTypeName === 'BATCH'"
+                     (click)="showBatch(goodsReceiptPOContent)" class="btn btn-link" role="button">
+                    {{'goodsReceiptPODetail.goodsReceiptPOContents.batches' | translate}}
+                  </a>
+                  <a *ngIf="goodsReceiptPOContent.itemManagementTypeName === 'SERIAL_NUMBER'"
+                     (click)="showSerialNumber(goodsReceiptPOContent)" class="btn btn-link" role="button">
+                    {{'goodsReceiptPODetail.goodsReceiptPOContents.SerialNumber' | translate}}
+                  </a>
+                  <a *ngIf="goodsReceiptPOContent.itemManagementTypeName === 'QUANTITY'"
+                     (click)="showQuantity(goodsReceiptPOContent)" class="btn btn-link" role="button">
+                    {{'goodsReceiptPODetail.goodsReceiptPOContents.amount' | translate}}
+                  </a>
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+        </nz-tab>
+        <nz-tab nzTitle="{{'goodsReceiptPODetail.goodsReceiptPOAttachments.title' | translate}}">
+          <div class="row">
+            <div class="col">
+              <ul class="list-group">
+                <li class="list-group-item" *ngFor="let file of fileAttachments.value">
+                  {{file.filename}}
+                </li>
+              </ul>
             </div>
-          </mat-tab>
-          <mat-tab label="{{'goodsReceiptPODetail.tab2.title' | translate}}">
-            <div class="tab-upload mt-4">
-              <div class="row">
-                <div class="col">
-                  <nz-upload [nzDisabled]="true"
-                             [nzLimit]="0"
-                             [nzMultiple]="true"
-                             nzType="drag">
-                    <p class="ant-upload-drag-icon">
-                      <i nz-icon nzType="upload"></i>
-                    </p>
-                    <p class="ant-upload-text">
-                      {{'goodsReceiptPODetail.attachments.title' | translate}}
-                    </p>
-                    <p class="ant-upload-hint">
-                      {{'goodsReceiptPODetail.attachments.description' | translate}}
-                    </p>
-                  </nz-upload>
-                  <div class="d-flex justify-content-start mt-2">
-                    <button class="btn btn-labeled btn-send mr-2" disabled>
+          </div>
+          <div class="row">
+            <div class="col">
+              <nz-upload [nzDisabled]="true"
+                         [nzLimit]="0"
+                         [nzMultiple]="true"
+                         nzType="drag">
+                <p class="ant-upload-drag-icon">
+                  <i nz-icon nzType="upload"></i>
+                </p>
+                <p class="ant-upload-text">
+                  {{'goodsReceiptPODetail.attachments.title' | translate}}
+                </p>
+                <p class="ant-upload-hint">
+                  {{'goodsReceiptPODetail.attachments.description' | translate}}
+                </p>
+              </nz-upload>
+              <div class="d-flex justify-content-start mt-2">
+                <button class="btn btn-labeled btn-send mr-2" disabled>
                     <span class="btn-label">
                       <i class="material-icons">cloud_upload</i>
                     </span>
-                      <span class="button-label">
+                  <span class="button-label">
                       {{'general.button.upload' | translate}}
                     </span>
-                    </button>
+                </button>
 
-                    <button (click)="showAttachments()" class="btn btn-labeled btn-send">
+                <button (click)="showAttachments()" class="btn btn-labeled btn-send">
                     <span class="btn-label">
                       <i class="material-icons">cloud_upload</i>
                     </span>
-                      <span class="button-label">
+                  <span class="button-label">
                       {{'general.button.uploaded' | translate}} ({{fileAttachments.value.length}})
                     </span>
-                    </button>
-                  </div>
-                </div>
+                </button>
               </div>
             </div>
-          </mat-tab>
-        </mat-tab-group>
-      </div>
+          </div>
+        </nz-tab>
+      </nz-tabset>
     </div>
   </div>
 </div>
+
+<app-batch-dialog [(display)]="displayBatch"
+                  [itemDetailId]="goodsReceiptPOContentId"
+                  [batch]="batch"
+                  [inputBatch]="inputBatch"
+                  [updateBatch]="updateBatch"
+></app-batch-dialog>

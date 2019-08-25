@@ -159,6 +159,22 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
     return this.goodsReceiptPOForm.get('requesterName') as FormControl;
   }
 
+  get requesterId() {
+    return this.goodsReceiptPOForm.get('requesterId') as FormControl;
+  }
+
+  get buyerId() {
+    return this.goodsReceiptPOForm.get('buyerId') as FormControl;
+  }
+
+  get ownerId() {
+    return this.goodsReceiptPOForm.get('ownerId') as FormControl;
+  }
+
+  get inventoryOrganizationId() {
+    return this.goodsReceiptPOForm.get('inventoryOrganizationId') as FormControl;
+  }
+
   ngOnInit() {
   }
 
@@ -195,7 +211,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
   public combineGoodsReceiptPO() {
     const goodsReceiptPOValue = this.goodsReceiptPOForm.value;
     const arrayIds = [];
-    this.purchaseOrdersList.forEach(item => {
+    this.purchaseOrdersList.forEach((item) => {
       if (item.isSelected) {
         arrayIds.push(item.id);
       }
@@ -236,7 +252,7 @@ export class GoodsReceiptPoDetailComponent implements OnInit, OnDestroy {
 
   selectAllPurchaseOrders() {
     const allSelected: boolean = this.allSelected;
-    this.purchaseOrdersList.forEach(item => {
+    this.purchaseOrdersList.forEach((item) => {
       item.isSelected = !allSelected;
     });
   }

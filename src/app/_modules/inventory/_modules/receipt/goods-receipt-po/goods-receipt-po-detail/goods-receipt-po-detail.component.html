@@ -162,7 +162,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label for="document-number">
-              {{'goodsReceiptPODetail.documentNumber' | translate}}
+              {{'goodsReceiptPODetail.purchaseOrderNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form d-flex">
@@ -185,6 +185,7 @@
                               [getList]="goodsReceiptPoDetailRepository.getInventoryOrganizationList"
                               [searchEntity]="inventoryOrganizationSearchEntity"
                               [searchable]="true"
+                              [value]="inventoryOrganizationId?.value"
                               searchField="code"
                               searchType="startsWith">
               <ng-template #label #option let-code="code" let-name="name">
@@ -212,6 +213,7 @@
                                 [display]="ownerName?.value"
                                 [getList]="goodsReceiptPoDetailRepository.getEmployeeDetailList"
                                 [searchEntity]="ownerSearchEntity"
+                                [value]="ownerId?.value"
                                 [searchable]="true"
                                 class="flex-grow-1"
                                 searchField="name"
@@ -237,6 +239,7 @@
                               [getList]="goodsReceiptPoDetailRepository.getEmployeeDetailList"
                               [searchEntity]="buyerSearchEntity"
                               [searchable]="true"
+                              [value]="buyerId?.value"
                               searchField="name"
                               searchType="startsWith">
               <ng-template #label #option let-code="code" let-name="name">
@@ -252,6 +255,7 @@
                               [display]="requesterName?.value"
                               [getList]="goodsReceiptPoDetailRepository.getEmployeeDetailList"
                               [ngClass]="'disabled'"
+                              [value]="requesterId?.value"
                               [searchEntity]="requesterSearchEntity"
                               [searchable]="true"
                               searchField="name"
@@ -303,7 +307,7 @@
     <div class="page-section">
       <div class="tab-header pt-3 pb-3 pl-3 pr-3">
         <mat-tab-group>
-          <mat-tab label="{{'goodsReceiptPODetail.tab1.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOContents.title' | translate}}">
             <div class="row pt-3 pb-3 pl-3">
               <div class="col-sm-12">
                 <div class="page-actions d-flex justify-content-end">
@@ -359,31 +363,31 @@
                     <th width="2.5%">
                     </th>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}} </th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}} </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.itemNo' | translate}} </th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemNo' | translate}} </th>
                     <th data-qe-id="table-thead-purchase-item-name" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.itemName' | translate}} </th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemName' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.unitOfMeasure' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitOfMeasure' | translate}}
                     </th>
                     <th data-qe-id="table-thead-quantity" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.quantity' | translate}} </th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.quantity' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.unitPrice' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitPrice' | translate}}
                     </th>
                     <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.valueAddedTax' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.valueAddedTax' | translate}}
                       (%)
                     </th>
                     <th data-qe-id="table-thead-discount" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.discount' | translate}} (%)
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discount' | translate}} (%)
                     </th>
                     <th data-qe-id="table-thead-discount-amount" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.discountAmount' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discountAmount' | translate}}
                     </th>
                     <th width="8%">
-                      {{'goodsReceiptPODetail.tab1.total' | translate}}</th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.total' | translate}}</th>
                     <!-- <th pResizableColumn data-qe-id="table-thead-view-detail">
                         {{'general.detail' | translate}}
                     </th> -->
@@ -503,7 +507,7 @@
               </p-table>
             </div>
           </mat-tab>
-          <mat-tab label="{{'goodsReceiptPODetail.tab2.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOAttachments.title' | translate}}">
             <div class="tab-upload mt-4">
               <div class="row">
                 <div class="col">
@@ -609,7 +613,7 @@
                 </app-date-picker>
               </th>
               <th class="th-filter">
-                <input (input)="tablePurchaseOrder.filter($event.target.value, 'documentNumber', 'equals')"
+                <input (input)="tablePurchaseOrder.filter($event.target.value, 'purchaseOrderNumber', 'equals')"
                        class="form-control"
                        type="text"/>
               </th>

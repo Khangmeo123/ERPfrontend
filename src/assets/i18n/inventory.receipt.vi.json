@@ -3,12 +3,12 @@
         "createdDate": "Ngày tạo",
         "creator": "Người tạo",
         "description": "Mô tả",
-        "documentNumber": "Số chứng từ",
         "header": {
             "title": "Phiếu nhập kho khác"
         },
         "inventoryAddress": "Địa chỉ kho",
         "inventoryCode": "Mã kho",
+        "purchaseOrderNumber": "Mã đơn hàng",
         "receiptedDate": "Ngày thực hiện",
         "status": "Trạng thái"
     },
@@ -41,7 +41,6 @@
         "createdDate": "Ngày tạo",
         "creator": "Người tạo",
         "description": "Mô tả",
-        "documentNumber": "Số chứng từ",
         "form": {
             "post": {
                 "title": "Bình luận"
@@ -61,6 +60,7 @@
         "inventoryAddress": "Địa chỉ kho",
         "inventoryCode": "Mã kho",
         "personInCharge": "Nhân viên phụ trách",
+        "purchaseOrderNumber": "Mã đơn hàng",
         "qrCode": {
             "code": "QR code",
             "expiryDate": "Ngày hết hạn",
@@ -95,17 +95,23 @@
         }
     },
     "goodsReceiptPO": {
+        "attachments": {
+            "filename": "Tên tệp"
+        },
         "createdDate": "Ngày tạo",
         "creator": "Người tạo",
         "description": "Mô tả",
-        "documentNumber": "Số chứng từ",
         "header": {
             "title": "Phiếu nhập kho hàng mua"
         },
         "inventoryAddress": "Địa chỉ kho",
         "inventoryCode": "Mã kho",
+        "purchaseOrderNumber": "Mã đơn hàng",
         "receiptedDate": "Ngày thực hiện",
         "status": "Trạng thái"
+    },
+    "goodsReceiptPOContent": {
+        "title": "Chi tiết hàng hóa theo hạch toán"
     },
     "goodsReceiptPODetail": {
         "amount": {
@@ -146,7 +152,6 @@
             }
         },
         "description": "Mô tả",
-        "documentNumber": "Số chứng từ",
         "form": {
             "post": {
                 "title": "Thông tin chi tiết đơn hàng nhận"
@@ -164,12 +169,34 @@
             "supplierName": "Tên nhà cung cấp",
             "title": "Nhập phiếu từ đơn mua hàng"
         },
+        "goodsReceiptPOAttachments": {
+            "title": "Đính kèm"
+        },
+        "goodsReceiptPOContents": {
+            "SerialNumber": "Số serial",
+            "actualReceive": "Thực nhận",
+            "amount": "Tổng",
+            "batches": "Lô",
+            "discount": "Chiết khấu",
+            "discountAmount": "Tổng chiết khấu",
+            "itemCode": "Mã hàng",
+            "itemName": "Tên hàng",
+            "itemNo": "Mã hàng",
+            "purchaseOrderNumber": "Mã đơn hàng",
+            "quantity": "Số lượng",
+            "title": "Chi tiết hàng hóa theo hạch toán",
+            "total": "Tổng",
+            "unitOfMeasure": "Đơn vị tính",
+            "unitPrice": "Đơn giá",
+            "valueAddedTax": "Thuế VAT"
+        },
         "header": {
             "title": "Phiếu nhập kho hàng mua"
         },
         "inventoryAddress": "Địa chỉ kho",
         "inventoryCode": "Mã kho",
         "personInCharge": "Người phụ trách",
+        "purchaseOrderNumber": "Mã đơn hàng",
         "qrCode": {
             "code": "QR code",
             "expiryDate": "Ngày hết hạn",
@@ -180,7 +207,7 @@
             "quantity": "Số lượng",
             "rows": "bản ghi",
             "scanQRCode": "Bắt đầu quét QR code",
-            "serial": "Serial#",
+            "serialNumber": "Số serial",
             "title ": "Chi tiết QR code"
         },
         "receiptedDate": "Ngày thực hiện",
@@ -188,27 +215,7 @@
         "supplierAddress": "Địa chỉ nhà cung cấp",
         "supplierCode": "Mã nhà cung cấp",
         "supplierContact": "Địa chỉ nhà cung cấp",
-        "supplierName": "Tên nhà cung cấp",
-        "tab1": {
-            "Serial": "Số seri",
-            "actualReceive": "Thực nhận",
-            "amount": "Số lương",
-            "batches": "Lô",
-            "discount": "Chiết khấu",
-            "discountAmount": "Số tiền chiết khấu",
-            "itemName": "Tên hàng",
-            "itemNo": "Mã hàng",
-            "purchaseOrderNumber": "Mã đơn hàng",
-            "quantity": "Số lượng",
-            "title": "Chi tiết hàng hóa theo hạch toán",
-            "total": "Thành tiền",
-            "unitOfMeasure": "Đơn vị",
-            "unitPrice": "Đơn giá",
-            "valueAddedTax": "Thuế VAT"
-        },
-        "tab2": {
-            "title": "Đính kèm"
-        }
+        "supplierName": "Tên nhà cung cấp"
     },
     "goodsReceiptPOList": {
         "filters": {
@@ -259,7 +266,6 @@
             "customerInfo": "Thông tin liên hệ khách hàng",
             "customerName": "Tên khách hàng",
             "description": "Mô tả",
-            "documentNumber": "Số chứng từ",
             "form": {
                 "title": "Thông tin chung"
             },
@@ -269,6 +275,7 @@
             "inventoryAddress": "Địa chỉ kho",
             "inventoryCode": "Mã kho",
             "personInCharge": "Người phụ trách",
+            "purchaseOrderNumber": "Mã đơn hàng",
             "qrCode": {
                 "code": "QR code",
                 "expiryDate": "Ngày hết hạn",
@@ -336,13 +343,13 @@
             "customerInfo": "Thông tin liên hệ khách hàng",
             "customerName": "Tên khách hàng",
             "description": "Mô tả",
-            "documentNumber": "Số chứng từ ",
             "form": {
                 "title": "Thông tin chung"
             },
             "inventoryAddress": "Địa chỉ kho",
             "inventoryCode": "Mã kho",
             "personInCharge": "Người phụ trách",
+            "purchaseOrderNumber": "Mã đơn hàng",
             "receiptedDate": "Ngày thực hiện",
             "receiver": "Người nhận hàng",
             "returnRequest": {

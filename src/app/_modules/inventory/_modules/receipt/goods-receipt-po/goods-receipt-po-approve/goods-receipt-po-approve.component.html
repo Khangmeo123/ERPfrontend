@@ -107,7 +107,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.documentNumber' | translate}}
+              {{'goodsReceiptPODetail.purchaseOrderNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-documentNumber"
@@ -187,7 +187,7 @@
     <div class="page-section">
       <div class="tab-header pt-3 pb-3 pl-3 pr-3">
         <mat-tab-group>
-          <mat-tab label="{{'goodsReceiptPODetail.tab1.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOContents.title' | translate}}">
             <div class="table pt-3">
               <p-table #tableGoodsReceiptPOContents [resizableColumns]="true" [scrollable]="true"
                        [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value"
@@ -209,32 +209,32 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}}
                     </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.itemNo' | translate}} </th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemNo' | translate}} </th>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.itemName' | translate}} </th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemName' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.unitOfMeasure' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitOfMeasure' | translate}}
                     </th>
                     <th data-qe-id="table-thead-quantity" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.quantity' | translate}} </th>
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.quantity' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.unitPrice' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitPrice' | translate}}
                     </th>
                     <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.valueAddedTax' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.valueAddedTax' | translate}}
                       (%)
                     </th>
                     <th data-qe-id="table-thead-discount" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.discount' | translate}} (%)
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discount' | translate}} (%)
                     </th>
                     <th data-qe-id="table-thead-discount-amount" pResizableColumn>
-                      {{'goodsReceiptPODetail.tab1.discountAmount' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discountAmount' | translate}}
                     </th>
                     <th class="value">
-                      {{'goodsReceiptPODetail.tab1.total' | translate}}
+                      {{'goodsReceiptPODetail.goodsReceiptPOContents.total' | translate}}
                     </th>
                   </tr>
                   <tr>
@@ -245,7 +245,7 @@
                                         searchType="startsWith"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.purchaseOrderNumber' | translate}}"
+                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}}"
                       ></jaja-select-list>
                     </th>
                     <th class="th-filter">
@@ -254,7 +254,7 @@
                                         [searchEntity]="itemDetailSearchEntity"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.itemCode' | translate}}"
+                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.itemCode' | translate}}"
                                         searchField="code"
                                         searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
@@ -274,7 +274,7 @@
                                         [searchEntity]="unitOfMeasureSearchEntity"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.unitPrice' | translate}}"
+                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.unitPrice' | translate}}"
                                         searchField="code"
                                         searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
@@ -298,7 +298,7 @@
                                         [searchEntity]="valueAddedTaxSearchEntity"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.tab1.valueAddedTax' | translate}}"
+                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.valueAddedTax' | translate}}"
                                         searchField="code"
                                         searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
@@ -356,7 +356,7 @@
               </p-table>
             </div>
           </mat-tab>
-          <mat-tab label="{{'goodsReceiptPODetail.tab2.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOAttachments.title' | translate}}">
             <div class="tab-upload">
               <nz-upload
                 [nzDisabled]="true"

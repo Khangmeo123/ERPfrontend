@@ -4,9 +4,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { GeneralService } from 'src/app/_services/general-service.service';
 import { GoodsReceiptPOReceiveService } from './goods-receipt-po-receive.service';
 import { GoodsReceiptPOContent } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import { GoodsReceiptPOReceiveRepository } from './goods-receipt-po-receive.repository';
 import { Subscription } from 'rxjs';
-import { UploadFile } from 'ng-zorro-antd';
 import {
   ItemDetailSearchEntity,
   PurchaseOrderSearchEntity,
@@ -33,13 +31,11 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
 
   public goodsReceiptPOForm: FormGroup;
 
-  public quantityDetail: GoodsReceiptPOContent;
+  public quantity: GoodsReceiptPOContent;
 
-  public serialNumberDetail: GoodsReceiptPOContent;
+  public serialNumber: GoodsReceiptPOContent;
 
-  public batchDetail: GoodsReceiptPOContent;
-
-  public fileList: UploadFile[] = [];
+  public batch: GoodsReceiptPOContent;
 
   public displayQuantity: boolean = false;
 
@@ -57,15 +53,15 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
 
   public quantityFilter: NumberFilter = new NumberFilter();
 
+  goodsReceiptPOContentId: string;
+
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOReceiveService,
     private generalService: GeneralService,
     private route: ActivatedRoute,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
-    private goodsReceiptPOReceiveRepository: GoodsReceiptPOReceiveRepository,
   ) {
-    this.route.queryParams.subscribe((params: Params) => {
+    const routeSubscription: Subscription = this.route.queryParams.subscribe((params: Params) => {
       if (params.id) {
         this.goodsReceiptPOId = params.id;
       }
@@ -80,21 +76,21 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       }
     });
 
-    const quantityDetailSubscription = this.goodsReceiptPOService.quantityDetail.subscribe((content: GoodsReceiptPOContent) => {
+    const quantityDetailSubscription = this.goodsReceiptPOService.quantity.subscribe((content: GoodsReceiptPOContent) => {
       if (content) {
-        this.quantityDetail = content;
+        this.quantity = content;
       }
     });
 
     const serialNumberDetailSubscription = this.goodsReceiptPOService.serialNumber.subscribe((content: GoodsReceiptPOContent) => {
       if (content) {
-        this.serialNumberDetail = content;
+        this.serialNumber = content;
       }
     });
 
-    const batchSubscription = this.goodsReceiptPOService.batchDetail.subscribe((content: GoodsReceiptPOContent) => {
+    const batchSubscription = this.goodsReceiptPOService.batch.subscribe((content: GoodsReceiptPOContent) => {
       if (content) {
-        this.batchDetail = content;
+        this.batch = content;
       }
     });
 
@@ -102,7 +98,8 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       .add(goodsReceiptFormSubscription)
       .add(quantityDetailSubscription)
       .add(serialNumberDetailSubscription)
-      .add(batchSubscription);
+      .add(batchSubscription)
+      .add(routeSubscription);
   }
 
   get fileAttachments() {
@@ -153,7 +150,9 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
   };
 
   showBatch = (goodsReceiptPOContent: GoodsReceiptPOContent) => {
+    this.goodsReceiptPOContentId = goodsReceiptPOContent.id;
     this.displayBatch = true;
+    return this.goodsReceiptPOService.getBatch(this.goodsReceiptPOContentId);
   };
 
   showQuantity = (goodsReceiptPOContent: GoodsReceiptPOContent) => {
@@ -180,7 +179,11 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
 
   };
 
-  onFilterQuantity = (table: Table) => {
+  inputBatch = (id: string, event) => {
+    this.goodsReceiptPOService.analyzeBatchCode(id, event.target.value);
+  };
+
+  updateBatch = () => {
 
   };
 }
