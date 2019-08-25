@@ -113,10 +113,10 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
   };
 
   ngOnInit() {
+    this.resetDropdownWidth();
     if (this.value) {
       this.selectedItem = this.list.find((item) => this.getValue(item) === this.value);
     }
-
     if (this.searchable) {
       const searchSubscription: Subscription = this.searchSubject.pipe(
         debounceTime(400),
@@ -128,7 +128,6 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
             this.reloadList();
           },
         );
-
       this.subscription.add(searchSubscription);
     }
   }
@@ -204,12 +203,14 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   onToggle = (isOpened) => {
     if (isOpened) {
+      this.resetDropdownWidth();
       if (this.renewOnOpen) {
         if (this.searchEntity) {
           this.searchEntity[this.searchField][this.searchType] = null;
         }
         this.reloadList();
       }
+    } else {
     }
   };
 
