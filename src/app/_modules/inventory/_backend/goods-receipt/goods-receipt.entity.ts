@@ -35,6 +35,9 @@ export class GoodsReceipt extends Entity {
   fileAttachments: FileAttachments[];
   enableBinLocation: boolean;
   totalGoodsReceiptPOContents: number;
+  freight: number;
+  packageDimension: string;
+  packageWeight: string;
 
   constructor(goodsReceiptEntity?: any) {
     super(goodsReceiptEntity);

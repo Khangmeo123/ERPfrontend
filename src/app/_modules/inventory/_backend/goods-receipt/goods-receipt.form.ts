@@ -35,6 +35,9 @@ export class GoodsReceiptForm extends FormModel {
     totalGoodsReceiptContents = new FormControl(null);
     purchaseOrderIds = new FormArray([]);
     fileAttachments = new FormArray([]);
+    freight = new FormControl(null);
+    packageDimension = new FormControl(null);
+    packageWeight = new FormControl(null);
     errors = new FormGroup({
         supplierDetailId: new FormControl(),
         dueDate: new FormControl(),
@@ -62,7 +65,7 @@ export class GoodsReceiptContentForm extends FormModel {
     generalDiscountCost = new FormControl(null);
     total = new FormControl(null);
     taxId = new FormControl(null);
-    taxCode = new FormControl(null);
+    taxName = new FormControl(null);
     taxRate = new FormControl(null);
     unitOfMeasureId = new FormControl(null);
     unitOfMeasureName = new FormControl(null);

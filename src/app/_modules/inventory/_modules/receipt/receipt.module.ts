@@ -1,3 +1,4 @@
+import { GoodsReceiptApproveComponent } from './goods-receipt/goods-receipt-approve/goods-receipt-approve.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoodsReceiptPOComponent } from './goods-receipt-po/goods-receipt-po.component';
@@ -56,6 +57,7 @@ import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-rece
     GoodsReceiptDetailComponent,
     GoodsReceiptListComponent,
     GoodsReceiptReceiveComponent,
+    GoodsReceiptApproveComponent,
     ReturnRequestDetailComponent,
     ReturnRequestListComponent,
     GoodsReceiptPoDetailComponent,

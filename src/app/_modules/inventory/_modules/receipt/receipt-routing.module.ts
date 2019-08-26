@@ -15,6 +15,7 @@ import { ReturnRequestListComponent } from './return-request/return-request-list
 import { ReturnRequestDetailComponent } from './return-request/return-request-detail/return-request-detail.component';
 import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
 import { GoodsReceiptReceiveComponent } from './goods-receipt/goods-receipt-receive/goods-receipt-receive.component';
+import { GoodsReceiptApproveComponent } from './goods-receipt/goods-receipt-approve/goods-receipt-approve.component';
 
 const routes: Routes = [
   {
@@ -61,6 +62,10 @@ const routes: Routes = [
           {
             path: 'goods-receipt-receive',
             component: GoodsReceiptReceiveComponent,
+          },
+          {
+            path: 'goods-receipt-approve',
+            component: GoodsReceiptApproveComponent,
           },
           {
             path: '',

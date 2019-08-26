@@ -45,10 +45,10 @@ export class GoodsReceiptDetailComponent implements OnInit, OnDestroy {
   constructor(
     private router: Router,
     private confirmationService: ConfirmationService,
-    private goodsReceiptService: GoodsReceiptDetailService,
+    public goodsReceiptService: GoodsReceiptDetailService,
     private activatedRoute: ActivatedRoute,
     private generalService: GeneralService,
-    private goodsReceiptRepository: GoodsReceiptDetailRepository) {
+    public goodsReceiptRepository: GoodsReceiptDetailRepository) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.id) {
         this.goodsReceiptId = params.id;
@@ -148,7 +148,7 @@ export class GoodsReceiptDetailComponent implements OnInit, OnDestroy {
 
   selectTax(value: any, index: number) {
     this.goodsReceiptContents.controls[index].get('taxId').setValue(value.id);
-    this.goodsReceiptContents.controls[index].get('taxCode').setValue(value.code);
+    this.goodsReceiptContents.controls[index].get('taxName').setValue(value.name);
     this.goodsReceiptContents.controls[index].get('taxRate').setValue(Number(value.rate));
     this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
   }
@@ -164,6 +164,10 @@ export class GoodsReceiptDetailComponent implements OnInit, OnDestroy {
 
   inputItemDiscountCost(value: any, index: number) {
     this.goodsReceiptContents.controls[index].get('itemDiscountCost').setValue(Number(value));
+    this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
+  }
+
+  inputGeneralDiscount() {
     this.goodsReceiptService.recalculateContents(this.goodsReceiptForm);
   }
 

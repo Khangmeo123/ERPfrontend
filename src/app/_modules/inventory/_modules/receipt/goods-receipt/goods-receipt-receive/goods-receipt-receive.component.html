@@ -7,49 +7,21 @@
       <span class="page-title">
         {{pageTitle | translate}}
       </span>
-      <span class="ml-2 open-status">{{'general.open'| translate}}</span>
-      <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
       <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
-      <span class="ml-2 done-status">{{'general.done'| translate}}</span>
     </div>
     <div class="page-actions d-flex">
-      <button class="btn btn-labeled btn-clear">
-        <span class="btn-label">
-          <img src="/assets/img/filter.svg" width="16">
-        </span>
-        <span class="button-label">
-          {{'general.button.clear' | translate}}
-        </span></button>
-      <button class="btn btn-labeled btn-reverse">
-        <span class="btn-label"><i class="material-icons">replay</i></span>
-        <span class="button-label">
-          {{'general.button.reverse' | translate}}
-        </span></button>
-      <button class="btn btn-labeled btn-approve">
-        <span class="btn-label"><i class="material-icons">check</i></span>
-        <span class="button-label">
-          {{'general.button.approve' | translate}}
-        </span></button>
-      <button class="btn btn-labeled btn-rejected">
-        <span class="btn-label"><i class="material-icons">block</i></span>
-        <span class="button-label">
-          {{'general.button.rejected' | translate}}
-        </span></button>
       <button class="btn btn-labeled btn-receive">
         <span class="btn-label"><i class="material-icons">assignment_returned</i></span>
         <span class="button-label">
           {{'general.button.receive' | translate}}
-        </span></button>
-      <button class="btn btn-labeled btn-send">
-        <span class="btn-label"><i class="material-icons">send</i></span>
+        </span>
+      </button>
+      <button class="btn btn-labeled btn-rejected">
+        <span class="btn-label"><i class="material-icons">block</i></span>
         <span class="button-label">
-          {{'general.button.send' | translate}}
-        </span></button>
-      <button class="btn btn-labeled btn-save">
-        <span class="btn-label"><i class="material-icons">save</i></span>
-        <span class="button-label">
-          {{'general.button.save' | translate}}
-        </span></button>
+          {{'general.button.notReceive' | translate}}
+        </span>
+      </button>
       <div class="btn-group btn-labeled" data-qe-id="button-import" dropdown>
         <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle id="button-basic">
           <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
@@ -79,14 +51,7 @@
         <span class="form-title">
           {{'goodsReceiptDetail.form.title' | translate}}
         </span>
-        <div class="page-actions justify-content-end">
-          <button class="btn btn-labeled btn-delete">
-            <span class="btn-label"><i class="material-icons">delete</i></span>
-            <span class="button-label">
-              {{'general.button.delete' | translate}}
-            </span>
-          </button>
-        </div>
+        <div class="page-actions justify-content-end"></div>
       </div>
       <div class="line"></div>
       <div class="page-section-form-body">
@@ -94,7 +59,6 @@
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.documentNumber' | translate}}
-              <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-document-number"
               formControlName="documentNumber" type="text">
@@ -103,14 +67,8 @@
             <label>
               {{'goodsReceiptDetail.inventoryCode' | translate}}
             </label>
-            <jaja-select-list [getList]="goodsReceiptRepository.singleListInventoryOrganization" [searchable]="true"
-              [display]="goodsReceiptForm.get('inventoryOrganizationCode').value"
-              [searchEntity]="inventoryOrganizationOfGoodsReceiptSearch" searchField="code" searchType="startsWith"
-              (change)="selectInventoryOrganization($event)">
-              <ng-template #label #option let-code="code" let-name="name">
-                {{code}} - {{name}}
-              </ng-template>
-            </jaja-select-list>
+            <input class="form-control disabled" data-qe-id="detail-form-document-number"
+              formControlName="inventoryOrganizationCode" type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -123,28 +81,35 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptDetail.personInCharge' | translate}}
+              {{'goodsReceiptDetail.freight' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <div class="div-form d-flex">
-              <jaja-select-list class="flex-grow-1" [getList]="goodsReceiptRepository.singleListEmployeeDetail"
-                [searchable]="true" [searchEntity]="ownerSearch" searchField="name"
-                [display]="goodsReceiptForm.get('ownerName').value" searchType="startsWith"
-                (change)="selectOwner($event)">
-                <ng-template #label #option let-code="code" let-name="name">
-                  {{code}} - {{name}}
-                </ng-template>
-              </jaja-select-list>
-              <app-error [formGroup]="goodsReceiptForm" [placement]="'top'" [property]="'ownerId'" class="error-form"
-                data-qe-id="form-error-supplier-contact"></app-error>
-            </div>
+            <input class="form-control disabled" data-qe-id="detail-form-receiver" pKeyFilter="int" type="text"
+              formControlName="freight">
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptDetail.receiver' | translate}}
+              {{'goodsReceiptDetail.packageDimension' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-receiver" type="text"
-              formControlName="buyerName">
+              formControlName="packageDimension">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.packageWeight' | translate}}
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="packageWeight"
+              type="text">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.personInCharge' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-document-number" formControlName="ownerName"
+              type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -153,35 +118,32 @@
             <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="requesterName"
               type="text">
           </div>
-        </div>
-        <div class="row">
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.receiptedDate' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <div class="div-form">
-              <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceiptForm.get('dueDate')"
-                class="w-100">
-              </app-date-picker>
-              <app-error [formGroup]="goodsReceiptForm" [placement]="'top'" property="dueDate" class="error-form">
-              </app-error>
-            </div>
+            <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceiptForm.get('dueDate')"
+              class="w-100" [disabled]="true">
+            </app-date-picker>
           </div>
+        </div>
+        <div class="row">
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.createdDate' | translate}}
             </label>
             <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceiptForm.get('documentDate')"
-              class="w-100">
+              class="w-100" [disabled]="true">
             </app-date-picker>
           </div>
         </div>
         <div class="row">
           <div class="col-sm-12 form-group">
             <label>{{ 'goodsReceiptDetail.description' | translate}}</label>
-            <textarea class="form-control" data-qe-id="detail-form-description" rows="4" formControlName="remarks">
-            </textarea>
+            <textarea class="form-control disabled" data-qe-id="detail-form-description" rows="4"
+              formControlName="remarks">
+              </textarea>
           </div>
         </div>
       </div>
@@ -212,24 +174,10 @@
                     <col>
                     <col>
                     <col>
-                    <col>
-                    <col>
-                    <col>
-                    <col>
-                    <col>
                   </colgroup>
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th width="2.5%">
-                      <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox" (change)="checkAllGoodsReceipt($event.target)" />
-                        <div class="state">
-                          <i class="icon material-icons">done</i>
-                          <label></label>
-                        </div>
-                      </div>
-                    </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
                       {{'goodsReceiptDetail.tab1.itemNo' | translate}} </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
@@ -239,26 +187,11 @@
                     </th>
                     <th data-qe-id="table-thead-quantity" pResizableColumn>
                       {{'goodsReceiptDetail.tab1.quantity' | translate}} </th>
-                    <th data-qe-id="table-thead-unitPrice" pResizableColumn>
-                      {{'goodsReceiptDetail.tab1.unitPrice' | translate}} </th>
-                    <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
-                      {{'goodsReceiptDetail.tab1.valueAddedTax' | translate}}
-                      (%)
-                    </th>
-                    <th data-qe-id="table-thead-discount" pResizableColumn>
-                      {{'goodsReceiptDetail.tab1.discount' | translate}} (%)
-                    </th>
-                    <th data-qe-id="table-thead-discount-amount" pResizableColumn>
-                      {{'goodsReceiptDetail.tab1.discountAmount' | translate}}
-                    </th>
-                    <th data-qe-id="table-thead-total" pResizableColumn>
-                      {{'goodsReceiptDetail.tab1.total' | translate}}</th>
-                    <!-- <th data-qe-id="table-thead-view-detail" pResizableColumn>
+                    <th data-qe-id="table-thead-view-detail" pResizableColumn>
                       {{'general.detail' | translate}}
-                    </th> -->
+                    </th>
                   </tr>
                   <tr>
-                    <th class="th-filter" width="2.5%"></th>
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1" appendTo="body"
                         [value]="goodsReceiptContentSearch.itemDetailId"
@@ -288,34 +221,10 @@
                     </th>
                     <th class="th-filter"></th>
                     <th class="th-filter"></th>
-                    <th class="th-filter">
-                      <jaja-select-list class="flex-grow-1" appendTo="body" [value]="goodsReceiptContentSearch.taxId"
-                        (change)="tableGoodsReceiptContents.filter($event, 'taxId', 'equals')"
-                        [getList]="goodsReceiptContentSearch.singleListTax" [searchEntity]="taxSearch"
-                        searchField="code" key="id" [searchable]="true">
-                        <ng-template #label #option let-code="code">
-                          {{code}}
-                        </ng-template>
-                      </jaja-select-list>
-                    </th>
-                    <th class="th-filter"></th>
-                    <th class="th-filter"></th>
-                    <th class="th-filter"></th>
-                    <!-- <th class="th-filter"></th> -->
                   </tr>
                 </ng-template>
                 <ng-template let-goodsReceiptContent let-index="rowIndex" pTemplate="body">
                   <tr>
-                    <td width="2.5%">
-                      <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox" [ngModel]="goodsReceiptContent.isSelected"
-                          (change)="selectGoodsReceipt($event.target, index)" [ngModelOptions]="{standalone: true}" />
-                        <div class="state">
-                          <i class="icon material-icons">done</i>
-                          <label></label>
-                        </div>
-                      </div>
-                    </td>
                     <td>
                       <jaja-select-list class="flex-grow-1" appendTo="body"
                         [display]="goodsReceiptContent.itemDetailCode" [value]="goodsReceiptContentSearch.itemDetailId"
@@ -348,54 +257,16 @@
                         (input)="inputQuantity($event.target.value, index)" class="form-control w-100" />
                     </td>
                     <td>
-                      <input [ngModel]="goodsReceiptContent.unitPrice" type="text" [ngModelOptions]="{standalone: true}"
-                        (input)="inputUnitPrice($event.target.value, index)" class="form-control w-100" />
+                      <a (click)="showBatch(goodsReceiptContent)" class="btn btn-link" role="button">
+                        {{'goodsReceiptPODetail.tab1.batches' | translate}}
+                      </a>
+                      <a (click)="showSerialNumber(goodsReceiptContent)" class="btn btn-link" role="button">
+                        {{'goodsReceiptPODetail.tab1.SerialNumber' | translate}}
+                      </a>
+                      <a (click)="showQuantity(goodsReceiptContent)" class="btn btn-link" role="button">
+                        {{'goodsReceiptPODetail.tab1.amount' | translate}}
+                      </a>
                     </td>
-                    <td>
-                      <jaja-select-list class="flex-grow-1" appendTo="body" [value]="goodsReceiptContentSearch.taxId"
-                        [display]="goodsReceiptContent.taxName" (change)="selectTax($event, index)"
-                        [getList]="goodsReceiptContentSearch.singleListTax" [searchEntity]="taxSearch"
-                        searchField="code" key="id" [searchable]="true">
-                        <ng-template #label #option let-code="code">
-                          {{code}}
-                        </ng-template>
-                      </jaja-select-list>
-                    </td>
-                    <td>
-                      <input [ngModel]="goodsReceiptContent.itemDiscountRate" type="text"
-                        [ngModelOptions]="{standalone: true}"
-                        (input)="inputItemDiscountRate($event.target.value, index)" class="form-control w-100" />
-                    </td>
-                    <td>
-                      <input [ngModel]="goodsReceiptContent.itemDiscountCost" type="text"
-                        [ngModelOptions]="{standalone: true}"
-                        (input)="inputItemDiscountCost($event.target.value, index)" class="form-control w-100" />
-                    </td>
-                    <td>
-                      <input [ngModel]="goodsReceiptContent.total" type="text" [ngModelOptions]="{standalone: true}"
-                        class="form-control w-100 disabled" />
-                    </td>
-                    <!-- <td>
-                      <div *ngIf="item.type == 1">
-                        <a (click)="showBatches()">{{'goodsReceiptDetail.tab1.batches' | translate}}</a>
-                      </div>
-                      <div *ngIf="item.type == 2">
-                        <a (click)="showSerial()">{{'goodsReceiptDetail.tab1.Serial' | translate}}</a>
-                      </div>
-                      <div *ngIf="item.type == 3">
-                        <a (click)="showAmount()">{{'goodsReceiptDetail.tab1.amount' | translate}}</a>
-                      </div>
-                    </td> -->
-                  </tr>
-                </ng-template>
-                <ng-template pTemplate="footer" let-columns>
-                  <tr>
-                    <td width="2.5%"></td>
-                    <td>
-                      <a href="javascript:;" (click)="addNewGoodsReceiptContent()">+
-                        {{'general.button.addRow' | translate}}</a>
-                    </td>
-                    <td colspan="8"></td>
                   </tr>
                 </ng-template>
               </p-table>
@@ -442,7 +313,7 @@
 </div>
 
 
-<p-dialog [(visible)]="displayBatches" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+<p-dialog [(visible)]="displayBatch" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
   [style]="{width: '90%'}" appendTo="body">
   <p-header>
     <div class="row">
@@ -538,7 +409,7 @@
             <span class="button-label">
               {{'general.button.save' | translate}}
             </span></button>
-          <button (click)="displayBatches = false" class="btn btn-labeled btn-cancel">
+          <button (click)="displayBatch = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
               {{'general.button.cancel' | translate}}
@@ -658,8 +529,7 @@
   </p-footer>
 </p-dialog>
 
-
-<p-dialog [(visible)]="displayAmount" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+<p-dialog [(visible)]="displayQuantity" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
   [style]="{width: '80%'}" appendTo="body">
   <p-header>
     <div class="row">
@@ -667,25 +537,7 @@
         <span class="dialog-header">{{'goodsReceiptDetail.amount.title ' | translate}}</span>
       </div>
       <div class="col-sm-9">
-        <div class="page-actions d-flex justify-content-end">
-          <button class="btn btn-labeled btn-import mr-2">
-            <span class="btn-label">
-              <img src="/assets/img/import.svg" width="24">
-            </span>
-            <span class="button-label">
-              {{'general.button.import' | translate}}
-            </span></button>
-          <button class="btn btn-labeled btn-export mr-2">
-            <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
-            <span class="button-label">
-              {{'general.button.export' | translate}}
-            </span></button>
-          <button class="btn btn-labeled btn-delete">
-            <span class="btn-label"><i class="material-icons">delete</i></span>
-            <span class="button-label">
-              {{'general.button.delete' | translate}}
-            </span></button>
-        </div>
+        <div class="page-actions d-flex justify-content-end"></div>
       </div>
     </div>
   </p-header>
@@ -693,25 +545,31 @@
     <div class="row">
       <div class="col-sm-12">
         <div class="d-flex align-items-center justify-content-end">
-          <span class="mr-2">{{'goodsReceiptDetail.binLocation' | translate}}</span>
-          <app-single-select data-qe-id="ialog-input-bin-location"></app-single-select>
+          <span class="ml-2">{{'goodsReceiptDetail.amount.quantity' | translate}}: </span>
+          <div class="ml-2">
+            <input [value]="quantityItems.length" class="form-control disabled"
+              data-qe-id="dialog-input-start-scan-batches-no" type="text">
+          </div>
         </div>
       </div>
     </div>
     <div class="row mt-3">
       <div class="col-sm-12">
-        <p-table [value]="" resizableColumns>
+        <p-table [resizableColumns]="true" [scrollable]="true" [value]="quantityItems" resizableColumns
+          scrollHeight="300px">
+          <ng-template pTemplate="colgroup">
+            <colgroup>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+          </ng-template>
           <ng-template pTemplate="header">
             <tr>
-              <th data-qe-id="table-thead-qrCode-check-box" pResizableColumn width="2.5%">
-                <div class="pretty p-icon p-curve p-has-indeterminate">
-                  <input type="checkbox" />
-                  <div class="state">
-                    <i class="icon material-icons">done</i>
-                    <label></label>
-                  </div>
-                </div>
-              </th>
               <th data-qe-id="table-thead-amount-item-code" pResizableColumn>
                 {{'goodsReceiptDetail.amount.itemCode' | translate}} </th>
               <th data-qe-id="table-thead-amount-item-name" pResizableColumn>
@@ -729,6 +587,104 @@
               </th>
             </tr>
           </ng-template>
+          <ng-template let-index="rowIndex" let-quantityDetail pTemplate="body">
+              <tr>
+                <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                    class="ui-resizable-column">
+                  {{quantityDetail.itemCode}}
+                </td>
+                <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                    class="ui-resizable-column">
+                  {{quantityDetail.itemName}}
+                </td>
+                <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                    class="ui-resizable-column">
+                  {{quantityDetail.unitOfMeasureName}}
+                </td>
+                <td *ngIf="index === 0" [attr.rowspan]="quantityDetail.goodsReceiptPOQuantities.length + 1"
+                    class="ui-resizable-column">
+                  <input (ngModelChange)="quantityDetail.actualReceive = generalService.toNumber($event)"
+                         [ngModel]="quantityDetail.actualReceive" class="form-control"
+                         type="text"/>
+                </td>
+                <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+                  <jaja-select-list [getList]="quantityDialogRepository.getBinLocationList"
+                                    [searchEntity]="binLocationSearchEntity"
+                                    searchField="code"
+                                    searchType="startsWith">
+                    <ng-template #label #option let-code="code">
+                      {{code}}
+                    </ng-template>
+                  </jaja-select-list>
+                </td>
+                <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+                  <div class="validation-div">
+                    <input
+                      (ngModelChange)="quantityDetail.goodsReceiptPOQuantities[0].quantity = generalService.toNumber($event); recalculateQuantityDetail()"
+                      [attr.placeholder]="null"
+                      [ngClass]="{'error-border-color': quantityDetail.errors}"
+                      [ngModel]="quantityDetail.goodsReceiptPOQuantities[0]?.quantity"
+                      class="form-control"
+                      type="text"/>
+                    <div *ngIf="quantityDetail.goodsReceiptPOQuantities[0].errors"
+                         class="invalid-validation">
+                      <span>{{quantityDetail.goodsReceiptPOQuantities[0].errors.message}}</span>
+                    </div>
+                  </div>
+                </td>
+                <td *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0" class="text-center"
+                    width="5%">
+                  <mat-icon (click)="deleteBinLocationQuantity(0)" class="text-danger">delete</mat-icon>
+                </td>
+              </tr>
+              <ng-container *ngIf="quantityDetail.goodsReceiptPOQuantities.length > 0">
+                <tr
+                  *ngFor="let quantityModel of quantityDetail.goodsReceiptPOQuantities | slice:1; let i = index">
+                  <td>
+                    <div class="validation-div">
+                      <div [ngClass]="{'error-border-color': quantityModel.errors}"
+                           class="w-100 error-border-color">
+                        <jaja-select-list [getList]="quantityDialogRepository.getBinLocationList"
+                                          [searchEntity]="binLocationSearchEntity"
+                                          searchField="code"
+                                          searchType="startsWith">
+                          <ng-template #label #option let-code="code">
+                            {{code}}
+                          </ng-template>
+                        </jaja-select-list>
+                      </div>
+                      <div *ngIf="quantityModel.errors" class="invalid-validation">
+                        <span>{{quantityModel.errors.quantity}}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div class="validation-div">
+                      <input
+                        (ngModelChange)="quantityModel.quantity = generalService.toNumber($event); recalculateQuantityDetail()"
+                        [attr.placeholder]="placeholder"
+                        [ngClass]="{'error-border-color': quantityModel.errors}"
+                        [ngModel]="quantityModel.quantity" class="form-control"
+                        type="text"/>
+                      <div *ngIf="quantityModel.errors" class="invalid-validation">
+                        <span>{{quantityModel.errors.quantity}}</span>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="text-center" width="5%">
+                    <mat-icon (click)="deleteBinLocationQuantity(i + 1)" class="text-danger">delete
+                    </mat-icon>
+                  </td>
+                </tr>
+              </ng-container>
+              <tr>
+                <td>
+                  <a (click)="addBinLocationQuantity()" class="btn btn-link" role="button">+ Bấm vào để thêm mới...</a>
+                </td>
+                <td></td>
+                <td></td>
+              </tr>
+            </ng-template>
         </p-table>
       </div>
     </div>
@@ -742,7 +698,7 @@
             <span class="button-label">
               {{'general.button.save' | translate}}
             </span></button>
-          <button (click)="displayAmount = false" class="btn btn-labeled btn-cancel">
+          <button (click)="displayQuantity = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
             <span class="button-label">
               {{'general.button.cancel' | translate}}

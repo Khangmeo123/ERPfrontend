@@ -1,4 +1,3 @@
-import { GoodsReceiptReceiveRepository } from './goods-receipt-receive.repository';
 import {
   GoodsReceiptContentSearch,
   PurchaseOrderOfGoodsReceiptSearch,
@@ -15,18 +14,18 @@ import {
   InventoryOrganizationOfGoodsReceiptSearch,
   EmployeeDetailOfGoodsReceiptSearch,
 } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.searchentity';
-import { ConfirmationService } from 'primeng/api';
-import { GoodsReceiptReceiveService } from './goods-receipt-receive.service';
+import { GoodsReceiptApproveService } from './goods-receipt-approve.service';
+import { GoodsReceiptApproveRepository } from './goods-receipt-approve.repository';
 
 @Component({
-  selector: 'app-goods-receipt-receive',
-  templateUrl: './goods-receipt-receive.component.html',
-  styleUrls: ['./goods-receipt-receive.component.scss'],
+  selector: 'app-goods-receipt-approve',
+  templateUrl: './goods-receipt-approve.component.html',
+  styleUrls: ['./goods-receipt-approve.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [GoodsReceiptReceiveService, ConfirmationService],
+  providers: [GoodsReceiptApproveService],
 })
-export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
-  pageTitle = translate('goodsReceiptReceive.header.title');
+export class GoodsReceiptApproveComponent implements OnInit, OnDestroy {
+  pageTitle = translate('goodsReceiptDetail.header.title');
   fileNameList: Array<any> = [];
   goodsReceiptId: string;
   goodsReceiptForm: FormGroup;
@@ -37,21 +36,16 @@ export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
   purchaseOrderSearch: PurchaseOrderOfGoodsReceiptSearch = new PurchaseOrderOfGoodsReceiptSearch();
   unitOfMeasureSearch: UnitOfMeasureOfGoodsReceiptSearch = new UnitOfMeasureOfGoodsReceiptSearch();
   taxSearch: TaxOfGoodsReceiptSearch = new TaxOfGoodsReceiptSearch();
-  displayBatch: boolean = false;
-  displaySerial: boolean = false;
-  displayQuantity: boolean = false;
-  quantityItems: any[] = [];
 
   get goodsReceiptContents() {
     return this.goodsReceiptForm.get('goodsReceiptContents') as FormArray;
   }
   constructor(
     private router: Router,
-    private confirmationService: ConfirmationService,
-    private goodsReceiptService: GoodsReceiptReceiveService,
+    public goodsReceiptService: GoodsReceiptApproveService,
     private activatedRoute: ActivatedRoute,
     private generalService: GeneralService,
-    private goodsReceiptRepository: GoodsReceiptReceiveRepository) {
+    public goodsReceiptRepository: GoodsReceiptApproveRepository) {
     const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
       if (params.id) {
         this.goodsReceiptId = params.id;
@@ -83,6 +77,20 @@ export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
 
   backToList() {
     this.router.navigate(['/inventory/receipt/goods-receipt/goods-receipt-list']);
+  }
+
+  approve() {
+    this.goodsReceiptService.approve(this.goodsReceiptForm.value)
+      .then(() => {
+        return this.backToList();
+      });
+  }
+
+  reject() {
+    this.goodsReceiptService.reject(this.goodsReceiptForm.value)
+      .then(() => {
+        return this.backToList();
+      });
   }
 
 }

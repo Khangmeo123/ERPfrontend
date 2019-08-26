@@ -13,6 +13,9 @@
         "status": "Trạng thái"
     },
     "goodsReceiptDetail": {
+        "freight": "Chi phí vận chuyển",
+        "packageDimension": " Kích thước đóng",
+        "packageWeight": "Trọng lượng đóng gói",
         "amount": {
             "itemCode": "Mã hàng",
             "itemName": "Tên hàng hóa",
@@ -90,7 +93,8 @@
             "total": "Thành tiền",
             "unitOfMeasure": "Đơn vị",
             "unitPrice": "Đơn giá",
-            "valueAddedTax": "Thuế VAT"
+            "valueAddedTax": "Thuế VAT",
+            "totalGeneralDiscountRate": "Chiết khấu tổng đơn(%)"
         },
         "tab2": {
             "title": "Đính kèm"

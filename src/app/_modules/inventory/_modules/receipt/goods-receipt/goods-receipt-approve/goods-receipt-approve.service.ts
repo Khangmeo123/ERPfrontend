@@ -5,19 +5,19 @@ import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../../_helpers/string';
 import { UploadFile } from 'ng-zorro-antd';
 import { FileAttachmentEntity } from '../../../../_backend/file-attachment/file-attachment.entity';
-import { GoodsReceiptDetailRepository } from './goods-receipt-detail.repository';
-import { GoodsReceiptForm, GoodsReceiptContentForm } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.form';
+import { GoodsReceiptForm } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.form';
 import { GoodsReceipt } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.entity';
+import { GoodsReceiptApproveRepository } from './goods-receipt-approve.repository';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GoodsReceiptDetailService {
+export class GoodsReceiptApproveService {
 
   goodsReceiptForm: BehaviorSubject<FormGroup> = new BehaviorSubject<FormGroup>(this.fb.group(new GoodsReceiptForm()));
 
   constructor(
-    private goodsReceiptRepository: GoodsReceiptDetailRepository,
+    private goodsReceiptRepository: GoodsReceiptApproveRepository,
     private fb: FormBuilder,
     private toastrService: ToastrService,
   ) { }
@@ -73,10 +73,10 @@ export class GoodsReceiptDetailService {
     this.goodsReceiptForm.next(goodsReceiptForm);
   };
 
-  send = (goodsReceipt: GoodsReceipt): Promise<void> => {
+  approve = (goodsReceipt: GoodsReceipt): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
       this.goodsReceiptRepository
-        .send(goodsReceipt)
+        .approve(goodsReceipt)
         .subscribe(
           (responseEntity: GoodsReceipt) => {
             if (responseEntity) {
@@ -98,10 +98,10 @@ export class GoodsReceiptDetailService {
     });
   };
 
-  save = (goodsReceipt: GoodsReceipt): Promise<void> => {
+  reject = (goodsReceipt: GoodsReceipt): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
       this.goodsReceiptRepository
-        .save(goodsReceipt)
+        .reject(goodsReceipt)
         .subscribe(
           (responseEntity: GoodsReceipt) => {
             if (responseEntity) {
@@ -145,35 +145,4 @@ export class GoodsReceiptDetailService {
         );
     });
   };
-
-  addNewGoodsReceiptContent(goodsReceiptForm: FormGroup) {
-    const goodsReceiptContents = goodsReceiptForm.get('goodsReceiptContents') as FormArray;
-    goodsReceiptContents.push(this.fb.group(new GoodsReceiptContentForm()));
-    this.goodsReceiptForm.next(goodsReceiptForm);
-  }
-
-  checkAllGoodsReceiptContents(goodsReceiptForm: FormGroup, checked: boolean) {
-    const goodsReceiptContents = goodsReceiptForm.get('goodsReceiptContents') as FormArray;
-    goodsReceiptContents.controls.forEach(element => {
-      if (element instanceof FormGroup) {
-        element.get('isSelected').setValue(checked);
-      }
-    });
-    this.goodsReceiptForm.next(goodsReceiptForm);
-  }
-
-  deleteGoodsReceiptContent(goodsReceiptForm: FormGroup) {
-    const goodsReceiptContents = goodsReceiptForm.get('goodsReceiptContents') as FormArray;
-    const deletedList = [];
-    for (const control of goodsReceiptContents.controls) {
-      if (control.get('isSelected').value) {
-        deletedList.push(goodsReceiptContents.controls.indexOf(control));
-        control.get('isSelected').setValue(false);
-      }
-    }
-    for (let i = deletedList.length - 1; i >= 0; i--) {
-      goodsReceiptContents.removeAt(deletedList[i]);
-    }
-    this.goodsReceiptForm.next(goodsReceiptForm);
-  }
 }
