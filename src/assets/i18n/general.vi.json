@@ -1,6 +1,10 @@
 {
     "general": {
         "action": "Thao tác",
+        "approve": {
+            "error": "Duyệt thất bại",
+            "success": "Duyệt thành công"
+        },
         "button": {
             "add": "Thêm",
             "addRow": "Bấm vào để thêm mới...",
@@ -35,7 +39,8 @@
             "save": "Lưu",
             "send": "Gửi",
             "update": "Cập nhật",
-            "upload": "Tải lên"
+            "upload": "Tải lên",
+            "uploaded": "Tệp đã tải lên"
         },
         "completed": "Hoàn thành",
         "confirmation": {

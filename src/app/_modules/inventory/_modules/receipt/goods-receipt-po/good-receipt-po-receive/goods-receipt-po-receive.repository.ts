@@ -209,20 +209,6 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
       );
   };
 
-  analyzeBatchCode = (itemDetailId: string, qrCode: string) => {
-    return this.http.post<BatchEntity>(this.apiUrl + '/batch/analyze-qr-code',
-      {itemDetailId, qrCode},
-      {
-        observe: 'response',
-      },
-    )
-      .pipe(
-        map((response) => {
-          return new BatchEntity(response.body);
-        }),
-      );
-  };
-
   updateBatch = (goodsReceiptPOBatchEntities: any[]) => {
     return this.http.post<boolean>(
       this.apiUrl + '/batch/bulk-merge',

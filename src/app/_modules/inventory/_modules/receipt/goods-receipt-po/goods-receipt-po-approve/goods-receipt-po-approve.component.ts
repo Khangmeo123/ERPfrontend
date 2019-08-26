@@ -22,7 +22,7 @@ import { ValueAddedTaxSearchEntity } from '../../../../../master-data/_backend/v
 })
 export class GoodsReceiptPOApproveComponent implements OnInit, OnDestroy {
 
-  pageTitle = translate('goodsReceiptPODetail.header.title');
+  pageTitle = translate('goodsReceiptPO.header.title');
 
   displayBatches: boolean = false;
 

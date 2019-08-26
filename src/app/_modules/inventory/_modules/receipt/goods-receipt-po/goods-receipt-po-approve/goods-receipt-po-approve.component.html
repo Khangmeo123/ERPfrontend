@@ -57,7 +57,7 @@
     <div class="page-section">
       <div class="page-section-form-header">
                 <span class="form-title">
-                    {{'goodsReceiptPODetail.form.title' | translate}}
+                    {{'goodsReceiptPO.form.title' | translate}}
                 </span>
       </div>
       <div class="line"></div>
@@ -65,7 +65,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.supplierCode' | translate}}
+              {{'goodsReceiptPO.supplierCode' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-supplierCode" formControlName="supplierCode"
@@ -73,14 +73,14 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.supplierName' | translate}}
+              {{'goodsReceiptPO.supplierName' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-supplier-name" formControlName="supplierName"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.supplierAddress' | translate}}
+              {{'goodsReceiptPO.supplierAddress' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-supplier-name"
                    formControlName="supplierAddress"
@@ -93,7 +93,7 @@
         <div class="row">
           <div class="col-sm-8 form-group">
             <label>
-              {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
+              {{'goodsReceiptPO.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-goods-receipt"
@@ -107,7 +107,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.purchaseOrderNumber' | translate}}
+              {{'goodsReceiptPO.purchaseOrderNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-documentNumber"
@@ -116,7 +116,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.inventoryCode' | translate}}
+              {{'goodsReceiptPO.inventoryCode' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-inventoryOrganizationCode"
                    formControlName="inventoryOrganizationCode"
@@ -124,7 +124,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.inventoryAddress' | translate}}
+              {{'goodsReceiptPO.inventoryAddress' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-inventory-code"
                    formControlName="inventoryOrganizationStreet"
@@ -134,7 +134,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.personInCharge' | translate}}
+              {{'goodsReceiptPO.personInCharge' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-ownerName" formControlName="ownerName"
@@ -142,14 +142,14 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.receiver' | translate}}
+              {{'goodsReceiptPO.receiver' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-buyerName" formControlName="buyerName"
                    type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.creator' | translate}}
+              {{'goodsReceiptPO.creator' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="requesterName"
                    type="text">
@@ -158,7 +158,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.receiptedDate' | translate}}
+              {{'goodsReceiptPO.receiptedDate' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <app-date-picker [control]="goodsReceiptPOForm.get('dueDate')" [disabled]="true"
@@ -167,7 +167,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.createdDate' | translate}}
+              {{'goodsReceiptPO.createdDate' | translate}}
             </label>
             <app-date-picker [control]="goodsReceiptPOForm.get('documentDate')"
                              [disabled]="true" data-qe-id="detail-form-documentDate">
@@ -176,7 +176,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 form-group">
-            <label>{{ 'goodsReceiptPODetail.description' | translate}}</label>
+            <label>{{ 'goodsReceiptPO.description' | translate}}</label>
             <textarea class="form-control disabled" data-qe-id="detail-form-remarks" formControlName="remarks"
                       rows="4">
                          </textarea>
@@ -187,7 +187,7 @@
     <div class="page-section">
       <div class="tab-header pt-3 pb-3 pl-3 pr-3">
         <mat-tab-group>
-          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOContents.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPO.goodsReceiptPOContents.title' | translate}}">
             <div class="table pt-3">
               <p-table #tableGoodsReceiptPOContents [resizableColumns]="true" [scrollable]="true"
                        [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value"
@@ -209,32 +209,32 @@
                 <ng-template pTemplate="header">
                   <tr>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.purchaseOrderNumber' | translate}}
                     </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemNo' | translate}} </th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.itemNo' | translate}} </th>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemName' | translate}} </th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.itemName' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitOfMeasure' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.unitOfMeasure' | translate}}
                     </th>
                     <th data-qe-id="table-thead-quantity" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.quantity' | translate}} </th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.quantity' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitPrice' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.unitPrice' | translate}}
                     </th>
                     <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.valueAddedTax' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.valueAddedTax' | translate}}
                       (%)
                     </th>
                     <th data-qe-id="table-thead-discount" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discount' | translate}} (%)
+                      {{'goodsReceiptPO.goodsReceiptPOContents.discount' | translate}} (%)
                     </th>
                     <th data-qe-id="table-thead-discount-amount" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discountAmount' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.discountAmount' | translate}}
                     </th>
                     <th class="value">
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.total' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.total' | translate}}
                     </th>
                   </tr>
                   <tr>
@@ -245,7 +245,7 @@
                                         searchType="startsWith"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}}"
+                                        placeholder="{{'goodsReceiptPO.goodsReceiptPOContents.purchaseOrderNumber' | translate}}"
                       ></jaja-select-list>
                     </th>
                     <th class="th-filter">
@@ -254,7 +254,7 @@
                                         [searchEntity]="itemDetailSearchEntity"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.itemCode' | translate}}"
+                                        placeholder="{{'goodsReceiptPO.goodsReceiptPOContents.itemCode' | translate}}"
                                         searchField="code"
                                         searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
@@ -274,7 +274,7 @@
                                         [searchEntity]="unitOfMeasureSearchEntity"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.unitPrice' | translate}}"
+                                        placeholder="{{'goodsReceiptPO.goodsReceiptPOContents.unitPrice' | translate}}"
                                         searchField="code"
                                         searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
@@ -298,7 +298,7 @@
                                         [searchEntity]="valueAddedTaxSearchEntity"
                                         [searchable]="true"
                                         appendTo="body"
-                                        placeholder="{{'goodsReceiptPODetail.goodsReceiptPOContents.valueAddedTax' | translate}}"
+                                        placeholder="{{'goodsReceiptPO.goodsReceiptPOContents.valueAddedTax' | translate}}"
                                         searchField="code"
                                         searchType="startsWith">
                         <ng-template #label #option let-code="code" let-name="name">
@@ -356,7 +356,7 @@
               </p-table>
             </div>
           </mat-tab>
-          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOAttachments.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPO.goodsReceiptPOAttachments.title' | translate}}">
             <div class="tab-upload">
               <nz-upload
                 [nzDisabled]="true"
@@ -368,10 +368,10 @@
                   <i nz-icon nzType="upload"></i>
                 </p>
                 <p class="ant-upload-text">
-                  {{'goodsReceiptPODetail.attachments.title' | translate}}
+                  {{'goodsReceiptPO.attachments.title' | translate}}
                 </p>
                 <p class="ant-upload-hint">
-                  {{'goodsReceiptPODetail.attachments.description' | translate}}
+                  {{'goodsReceiptPO.attachments.description' | translate}}
                 </p>
               </nz-upload>
 
@@ -392,7 +392,7 @@
     <div *ngIf="goodsReceiptPOId !== null && goodsReceiptPOId !== undefined" class="page-section">
       <div class="page-section-form-header">
                 <span class="form-title">
-                    {{'goodsReceiptPODetail.form.post.title' | translate}}
+                    {{'goodsReceiptPO.form.post.title' | translate}}
                 </span>
       </div>
       <div class="line"></div>

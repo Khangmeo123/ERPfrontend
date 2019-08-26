@@ -95,47 +95,22 @@
         }
     },
     "goodsReceiptPO": {
-        "attachments": {
-            "filename": ""
-        },
-        "createdDate": "",
-        "creator": "",
-        "description": "",
-        "header": {
-            "title": ""
-        },
-        "inventoryAddress": "",
-        "inventoryCode": "",
-        "purchaseOrderNumber": "",
-        "receiptedDate": "",
-        "status": ""
-    },
-    "goodsReceiptPOContent": {
-        "title": ""
-    },
-    "goodsReceiptPODetail": {
-        "amount": {
-            "itemCode": "",
-            "itemName": "",
-            "locationCode": "",
-            "quantity": "",
-            "quantitySaved": "",
-            "title ": "",
-            "unitOfMeasure": ""
-        },
+        "actualReceive": "",
         "attachments": {
             "description": "",
+            "filename": "",
             "title": ""
         },
         "batches": {
+            "actions": "",
             "batchCode": "",
+            "binLocationCode": "",
+            "binLocationQuantity": "",
             "expiryDate": "",
             "itemCode": "",
             "itemName": "",
-            "locationCode": "",
             "manufacturingDate": "",
             "qrCode": "",
-            "quantity": "",
             "quantityInEachBatch": "",
             "title ": ""
         },
@@ -175,7 +150,6 @@
         "goodsReceiptPOContents": {
             "SerialNumber": "",
             "actualReceive": "",
-            "amount": "",
             "batches": "",
             "discount": "",
             "discountAmount": "",
@@ -195,6 +169,8 @@
         },
         "inventoryAddress": "",
         "inventoryCode": "",
+        "itemCode": "",
+        "itemName": "",
         "personInCharge": "",
         "purchaseOrderNumber": "",
         "qrCode": {
@@ -210,12 +186,24 @@
             "serialNumber": "",
             "title ": ""
         },
+        "quantities": {
+            "actions": "",
+            "binLocationCode": "",
+            "binLocationQuantity": "",
+            "title ": ""
+        },
         "receiptedDate": "",
         "receiver": "",
+        "status": "",
         "supplierAddress": "",
         "supplierCode": "",
         "supplierContact": "",
-        "supplierName": ""
+        "supplierName": "",
+        "totalItems": "",
+        "unitPrice": ""
+    },
+    "goodsReceiptPOContent": {
+        "title": ""
     },
     "goodsReceiptPOList": {
         "filters": {

@@ -1,16 +1,16 @@
-import { GoodsReceiptPOContent, GoodsReceiptPOEntity } from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
-import { BehaviorSubject } from 'rxjs';
-import { ToastrService } from 'ngx-toastr';
-import { GoodsReceiptPOForm } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
-import { GoodsReceiptPOReceiveRepository } from './goods-receipt-po-receive.repository';
+import {GoodsReceiptPOContent, GoodsReceiptPOEntity} from '../../../../_backend/goods-receipt-po/goods-receipt-po.entity';
+import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
+import {BehaviorSubject} from 'rxjs';
+import {ToastrService} from 'ngx-toastr';
+import {GoodsReceiptPOForm} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.form';
+import {GoodsReceiptPOReceiveRepository} from './goods-receipt-po-receive.repository';
 import {
   BatchBinLocationEntity,
   BinLocationEntity,
   QuantityEntity,
 } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import { GeneralService } from 'src/app/_services/general-service.service';
-import { Injectable } from '@angular/core';
+import {GeneralService} from 'src/app/_services/general-service.service';
+import {Injectable} from '@angular/core';
 
 @Injectable()
 export class GoodsReceiptPOReceiveService {
@@ -327,21 +327,6 @@ export class GoodsReceiptPOReceiveService {
         reject();
         this.toastrService.error('Có lỗi xảy ra trong quá trình cập nhật!');
       });
-    });
-  };
-
-  analyzeBatchCode = (itemDetailId: string, qrCode: string) => {
-    this.goodsReceiptPORepository.analyzeBatchCode(itemDetailId, qrCode).subscribe((result) => {
-      if (result) {
-        const currentBatch = this.batch.getValue();
-        const currentBatchList = currentBatch.goodsReceiptPOBatches;
-        currentBatchList.push(result);
-        this.batch.next(currentBatch);
-      }
-    }, (error) => {
-      if (error) {
-        this.toastrService.error('Quét QR xảy ra lỗi!');
-      }
     });
   };
 

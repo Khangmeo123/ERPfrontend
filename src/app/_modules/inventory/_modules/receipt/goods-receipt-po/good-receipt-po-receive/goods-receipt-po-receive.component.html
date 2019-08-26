@@ -51,7 +51,7 @@
     <div class="page-section">
       <div class="page-section-form-header">
         <span class="form-title">
-            {{'goodsReceiptPODetail.form.title' | translate}}
+            {{'goodsReceiptPO.form.title' | translate}}
         </span>
         <div class="page-actions justify-content-end">
         </div>
@@ -61,7 +61,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label for="detail-form-supplierCode">
-              {{'goodsReceiptPODetail.supplierCode' | translate}}
+              {{'goodsReceiptPO.supplierCode' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled"
@@ -72,7 +72,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="detail-form-supplierName">
-              {{'goodsReceiptPODetail.supplierName' | translate}}
+              {{'goodsReceiptPO.supplierName' | translate}}
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-supplierName"
@@ -82,7 +82,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="detail-form-supplierAddress">
-              {{'goodsReceiptPODetail.supplierAddress' | translate}}
+              {{'goodsReceiptPO.supplierAddress' | translate}}
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-supplierAddress"
@@ -97,7 +97,7 @@
         <div class="row">
           <div class="col-sm-8 form-group">
             <label for="detail-form-purchaseOrderName">
-              {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
+              {{'goodsReceiptPO.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled"
@@ -113,7 +113,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label for="detail-form-documentNumber">
-              {{'goodsReceiptPODetail.purchaseOrderNumber' | translate}}
+              {{'goodsReceiptPO.purchaseOrderNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled"
@@ -124,7 +124,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="detail-form-inventoryOrganizationCode">
-              {{'goodsReceiptPODetail.inventoryCode' | translate}}
+              {{'goodsReceiptPO.inventoryCode' | translate}}
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-inventoryOrganizationCode"
@@ -134,7 +134,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="detail-form-inventoryOrganizationStreet">
-              {{'goodsReceiptPODetail.inventoryAddress' | translate}}
+              {{'goodsReceiptPO.inventoryAddress' | translate}}
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-inventoryOrganizationStreet"
@@ -146,7 +146,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label for="detail-form-ownerName">
-              {{'goodsReceiptPODetail.personInCharge' | translate}}
+              {{'goodsReceiptPO.personInCharge' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <input class="form-control disabled"
@@ -157,7 +157,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="detail-form-buyerName">
-              {{'goodsReceiptPODetail.receiver' | translate}}
+              {{'goodsReceiptPO.receiver' | translate}}
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-buyerName"
@@ -167,7 +167,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="detail-form-creator">
-              {{'goodsReceiptPODetail.creator' | translate}}
+              {{'goodsReceiptPO.creator' | translate}}
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-creator"
@@ -180,7 +180,7 @@
 
           <div class="col-sm-4 form-group">
             <label for="due-date">
-              {{'goodsReceiptPODetail.receiptedDate' | translate}}
+              {{'goodsReceiptPO.receiptedDate' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <app-date-picker [control]="dueDate"
@@ -190,7 +190,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="document-date">
-              {{'goodsReceiptPODetail.createdDate' | translate}}
+              {{'goodsReceiptPO.createdDate' | translate}}
             </label>
             <app-date-picker [control]="documentDate"
                              [disabled]="true"
@@ -200,7 +200,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 form-group">
-            <label for="detail-form-remarks">{{ 'goodsReceiptPODetail.description' | translate}}</label>
+            <label for="detail-form-remarks">{{ 'goodsReceiptPO.description' | translate}}</label>
             <textarea class="form-control disabled"
                       data-qe-id="detail-form-remarks"
                       formControlName="remarks"
@@ -213,12 +213,25 @@
     </div>
     <div class="page-section">
       <nz-tabset>
-        <nz-tab nzTitle="{{'goodsReceiptPODetail.goodsReceiptPOContents.title' | translate}}">
+        <nz-tab nzTitle="{{'goodsReceiptPO.goodsReceiptPOContents.title' | translate}}">
+          <div class="page-actions d-flex justify-content-end mb-2">
+            <button (click)="clearTable(goodsReceiptPOContentsTable)"
+                    class="btn btn-labeled btn-clear mr-2"
+                    data-qe-id="button-clear">
+          <span class="btn-label">
+            <img src="/assets/img/filter.svg" width="16">
+          </span>
+              <span class="button-label">
+            {{'general.button.clear' | translate}}
+          </span>
+            </button>
+          </div>
+
           <p-table #goodsReceiptPOContentsTable
                    [resizableColumns]="true"
                    [rowTrackBy]="trackByFn"
                    [scrollable]="true"
-                   [value]="goodsReceiptPOForm.controls.goodsReceiptPOContents.value"
+                   [value]="goodsReceiptPOForm.value.goodsReceiptPOContents"
                    formArrayName="goodsReceiptPOContents"
                    scrollHeight="500px">
             <ng-template pTemplate="colgroup">
@@ -235,22 +248,22 @@
             <ng-template pTemplate="header">
               <tr>
                 <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                  {{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}}
+                  {{'goodsReceiptPO.goodsReceiptPOContents.purchaseOrderNumber' | translate}}
                 </th>
                 <th data-qe-id="table-thead-item-no" pResizableColumn>
-                  {{'goodsReceiptPODetail.goodsReceiptPOContents.itemNo' | translate}}
+                  {{'goodsReceiptPO.goodsReceiptPOContents.itemNo' | translate}}
                 </th>
                 <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                  {{'goodsReceiptPODetail.goodsReceiptPOContents.itemName' | translate}}
+                  {{'goodsReceiptPO.goodsReceiptPOContents.itemName' | translate}}
                 </th>
                 <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                  {{'goodsReceiptPODetail.goodsReceiptPOContents.unitOfMeasure' | translate}}
+                  {{'goodsReceiptPO.goodsReceiptPOContents.unitOfMeasure' | translate}}
                 </th>
                 <th data-qe-id="table-thead-quantity" pResizableColumn>
-                  {{'goodsReceiptPODetail.goodsReceiptPOContents.quantity' | translate}}
+                  {{'goodsReceiptPO.goodsReceiptPOContents.quantity' | translate}}
                 </th>
                 <th data-qe-id="table-thead-actualReceive" pResizableColumn>
-                  {{'goodsReceiptPODetail.goodsReceiptPOContents.actualReceive' | translate}}
+                  {{'goodsReceiptPO.goodsReceiptPOContents.actualReceive' | translate}}
                 </th>
                 <th data-qe-id="table-thead-view-detail" pResizableColumn>
                   {{'general.detail' | translate}}
@@ -258,25 +271,26 @@
               </tr>
               <tr>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="purchaseOrderSearchEntity.purchaseOrderNumber"
+                  <app-advanced-filters [filter]="goodsReceiptPOContentSearchEntity.purchaseOrderNumber"
+                                        defaultType="startsWith"
                                         (changeFilter)="onFilterPurchaseOrder(goodsReceiptPOContentsTable)"
                   ></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemDetailSearchEntity.code"
+                  <app-advanced-filters [filter]="goodsReceiptPOContentSearchEntity.itemCode"
                                         defaultType="startsWith"
-                                        (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
+                                        (changeFilter)="onFilterItemCode(goodsReceiptPOContentsTable)"
                   ></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="itemDetailSearchEntity.name"
+                  <app-advanced-filters [filter]="goodsReceiptPOContentSearchEntity.itemName"
                                         defaultType="contains"
-                                        (changeFilter)="onFilterItemDetail(goodsReceiptPOContentsTable)"
+                                        (changeFilter)="onFilterItemName(goodsReceiptPOContentsTable)"
                   ></app-advanced-filters>
                 </th>
                 <th class="th-filter">
-                  <app-advanced-filters [filter]="unitOfMeasureSearchEntity.code"
-                                        (changeFilter)="onFilterUnitOfMeasure(goodsReceiptPOContentsTable)"
+                  <app-advanced-filters [filter]="goodsReceiptPOContentSearchEntity.unitOfMeasureCode"
+                                        (changeFilter)="onFilterUnitOfMeasureCode(goodsReceiptPOContentsTable)"
                   ></app-advanced-filters>
                 </th>
                 <th class="th-filter"></th>
@@ -295,22 +309,22 @@
                 <td>
                   <a *ngIf="goodsReceiptPOContent.itemManagementTypeName === 'BATCH'"
                      (click)="showBatch(goodsReceiptPOContent)" class="btn btn-link" role="button">
-                    {{'goodsReceiptPODetail.goodsReceiptPOContents.batches' | translate}}
+                    {{'goodsReceiptPO.goodsReceiptPOContents.batches' | translate}}
                   </a>
                   <a *ngIf="goodsReceiptPOContent.itemManagementTypeName === 'SERIAL_NUMBER'"
                      (click)="showSerialNumber(goodsReceiptPOContent)" class="btn btn-link" role="button">
-                    {{'goodsReceiptPODetail.goodsReceiptPOContents.SerialNumber' | translate}}
+                    {{'goodsReceiptPO.goodsReceiptPOContents.SerialNumber' | translate}}
                   </a>
                   <a *ngIf="goodsReceiptPOContent.itemManagementTypeName === 'QUANTITY'"
                      (click)="showQuantity(goodsReceiptPOContent)" class="btn btn-link" role="button">
-                    {{'goodsReceiptPODetail.goodsReceiptPOContents.amount' | translate}}
+                    {{'goodsReceiptPO.goodsReceiptPOContents.quantity' | translate}}
                   </a>
                 </td>
               </tr>
             </ng-template>
           </p-table>
         </nz-tab>
-        <nz-tab nzTitle="{{'goodsReceiptPODetail.goodsReceiptPOAttachments.title' | translate}}">
+        <nz-tab nzTitle="{{'goodsReceiptPO.goodsReceiptPOAttachments.title' | translate}}">
           <div class="row">
             <div class="col">
               <ul class="list-group">
@@ -330,10 +344,10 @@
                   <i nz-icon nzType="upload"></i>
                 </p>
                 <p class="ant-upload-text">
-                  {{'goodsReceiptPODetail.attachments.title' | translate}}
+                  {{'goodsReceiptPO.attachments.title' | translate}}
                 </p>
                 <p class="ant-upload-hint">
-                  {{'goodsReceiptPODetail.attachments.description' | translate}}
+                  {{'goodsReceiptPO.attachments.description' | translate}}
                 </p>
               </nz-upload>
               <div class="d-flex justify-content-start mt-2">
@@ -365,7 +379,14 @@
 
 <app-batch-dialog [(display)]="displayBatch"
                   [itemDetailId]="goodsReceiptPOContentId"
-                  [batch]="batch"
-                  [inputBatch]="inputBatch"
                   [updateBatch]="updateBatch"
+                  [goodsReceiptPOContentId]="goodsReceiptPOContentId"
+                  [enableBinLocation]="enableBinLocation?.value"
 ></app-batch-dialog>
+
+<app-quantity-dialog [(display)]="displayQuantity"
+                     [itemDetailId]="goodsReceiptPOContentId"
+                     [updateQuantity]="updateBatch"
+                     [goodsReceiptPOContentId]="goodsReceiptPOContentId"
+                     [enableBinLocation]="enableBinLocation?.value"
+></app-quantity-dialog>

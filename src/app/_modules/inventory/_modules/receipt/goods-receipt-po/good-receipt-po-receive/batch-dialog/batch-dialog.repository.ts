@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BinLocationSearchEntity, ItemDetailSearchEntity } from '../../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Observable } from 'rxjs';
 import {
+  BatchEntity,
   BinLocationEntity,
   GoodsReceiptPOContent,
   ItemDetailEntity,
@@ -66,5 +67,18 @@ export class BatchDialogRepository extends Repository {
         ),
       );
   };
+
+  analyzeBatchCode = (itemDetailId: string, qrCode: string) => {
+    return this.http.post<BatchEntity>(this.apiUrl + '/analyze-qr-code',
+      {itemDetailId, qrCode},
+      {
+        observe: 'response',
+      },
+    )
+      .pipe(
+        map((response) => {
+          return new BatchEntity(response.body);
+        }),
+      );
+  };
 }
-;

@@ -3,18 +3,18 @@
   <p-header>
     <div class="row">
       <div class="col-sm-3">
-        <span class="dialog-header">{{'goodsReceiptPODetail.qrCode.title ' | translate}}</span>
+        <span class="dialog-header">{{'goodsReceiptPO.qrCode.title ' | translate}}</span>
       </div>
       <div class="col-sm-9">
         <div class="page-actions d-flex justify-content-end">
           <button (click)="clearSerialNumberTable(tableSerialNumber)" class="btn btn-labeled btn-clear mr-2"
                   data-qe-id="button-clear">
-                        <span class="btn-label">
-                            <img src="/assets/img/filter.svg" width="16">
-                        </span>
+            <span class="btn-label">
+                <img src="/assets/img/filter.svg" width="16">
+            </span>
             <span class="button-label">
-                            {{'general.button.clear' | translate}}
-                        </span>
+                {{'general.button.clear' | translate}}
+            </span>
           </button>
           <button class="btn btn-labeled btn-import mr-2">
                         <span class="btn-label">
@@ -42,7 +42,7 @@
       <div class="col-sm-6">
         <div class="d-flex align-items-center">
           <p-inputSwitch [(ngModel)]="activeScan"></p-inputSwitch>
-          <span class="ml-2">{{'goodsReceiptPODetail.qrCode.scanQRCode' | translate}}</span>
+          <span class="ml-2">{{'goodsReceiptPO.qrCode.scanQRCode' | translate}}</span>
           <div class="ml-2 col-sm-9">
             <input (change)="inputSerialNumber($event.target.value)" [(ngModel)]="serialNumber" [disabled]="!activeScan"
                    class="form-control" data-qe-id="dialog-input-start-scan-batches-no"
@@ -52,7 +52,7 @@
       </div>
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
-          <span class="mr-2">{{'goodsReceiptPODetail.binLocation' | translate}}: </span>
+          <span class="mr-2">{{'goodsReceiptPO.binLocation' | translate}}: </span>
           <jaja-select-list [getList]="serialNumberDialogRepository.getBinLocationList"
                             [searchEntity]="binLocationSearchEntity"
                             [searchable]="true"
@@ -69,7 +69,7 @@
       <div class="col-sm-6 mt-2"></div>
       <div class="col-sm-6 mt-2">
         <div class="d-flex align-items-center justify-content-end">
-          <span class="ml-2">{{'goodsReceiptPODetail.qrCode.quantity' | translate}}: </span>
+          <span class="ml-2">{{'goodsReceiptPO.qrCode.quantity' | translate}}: </span>
           <div class="ml-2">
             <input [value]="quantityItems" class="form-control disabled"
                    data-qe-id="dialog-input-start-scan-batches-no"
@@ -80,7 +80,7 @@
       <div class="col-sm-6 mt-2"></div>
       <div class="col-sm-6 mt-2">
         <div class="d-flex align-items-center justify-content-end">
-          <span class="ml-2">{{'goodsReceiptPODetail.qrCode.rows' | translate}}: </span>
+          <span class="ml-2">{{'goodsReceiptPO.qrCode.rows' | translate}}: </span>
           <div class="ml-2">
             <input [value]="serialNumberDetail.goodsReceiptPOSerialNumbers?.length" class="form-control disabled"
                    data-qe-id="dialog-input-start-scan-batches-no"
@@ -119,19 +119,19 @@
                 </div>
               </th>
               <th data-qe-id="table-thead-qrCode-code" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.code' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.code' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-item-code" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.itemCode' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.itemCode' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-item-name" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.itemName' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.itemName' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-serialNumber" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.serialNumber' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.serialNumber' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-manufacturing-date" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.manufacturingDate' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.manufacturingDate' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-expiry-date" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.expiryDate' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.expiryDate' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-location-code" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.locationCode' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.locationCode' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-action" width="5%">
                 {{'general.action' | translate}}
               </th>
@@ -258,17 +258,17 @@
                 </div>
               </th>
               <th data-qe-id="table-thead-qrCode-code" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.code' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.code' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-item-code" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.itemCode' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.itemCode' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-item-name" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.itemName' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.itemName' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-serialNumber" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.serialNumber' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.serialNumber' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-manufacturing-date" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.manufacturingDate' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.manufacturingDate' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-expiry-date" pResizableColumn>
-                {{'goodsReceiptPODetail.qrCode.expiryDate' | translate}} </th>
+                {{'goodsReceiptPO.qrCode.expiryDate' | translate}} </th>
               <th data-qe-id="table-thead-qrCode-action" width="5%">
                 {{'general.action' | translate}}
               </th>

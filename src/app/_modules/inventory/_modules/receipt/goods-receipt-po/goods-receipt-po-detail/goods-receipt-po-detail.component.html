@@ -6,7 +6,7 @@
                 <i class="material-icons">arrow_back_ios</i>
             </span>
       <span class="page-title">
-                {{'goodsReceiptPODetail.header.title' | translate}}
+                {{'goodsReceiptPO.header.title' | translate}}
             </span>
       <span class="ml-2 open-status">{{'general.open'| translate}}</span>
     </div>
@@ -55,7 +55,7 @@
     <div class="page-section">
       <div class="page-section-form-header">
                 <span class="form-title">
-                    {{'goodsReceiptPODetail.form.title' | translate}}
+                    {{'goodsReceiptPO.form.title' | translate}}
                 </span>
         <div class="page-actions justify-content-end">
           <button (click)="deactivate()" *ngIf="goodsReceiptPOId!==null && goodsReceiptPOId!==undefined"
@@ -71,7 +71,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.supplierCode' | translate}}
+              {{'goodsReceiptPO.supplierCode' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form">
@@ -96,7 +96,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="detail-form-supplier-name">
-              {{'goodsReceiptPODetail.supplierName' | translate}}
+              {{'goodsReceiptPO.supplierName' | translate}}
             </label>
             <input class="form-control disabled"
                    data-qe-id="detail-form-supplier-name"
@@ -106,7 +106,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.supplierContact' | translate}}
+              {{'goodsReceiptPO.supplierContact' | translate}}
             </label>
             <div class="div-form">
               <jaja-select-list [display]="supplierAddress?.value"
@@ -137,7 +137,7 @@
         <div class="row">
           <div class="col-sm-8 form-group">
             <label for="purchase-orders">
-              {{'goodsReceiptPODetail.goodsReceipt.title' | translate}}
+              {{'goodsReceiptPO.goodsReceipt.title' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form">
@@ -162,7 +162,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label for="document-number">
-              {{'goodsReceiptPODetail.purchaseOrderNumber' | translate}}
+              {{'goodsReceiptPO.purchaseOrderNumber' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form d-flex">
@@ -178,7 +178,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.inventoryCode' | translate}}
+              {{'goodsReceiptPO.inventoryCode' | translate}}
             </label>
             <jaja-select-list (change)="onSelectInventoryOrganization($event)"
                               [display]="inventoryOrganizationCode?.value"
@@ -195,7 +195,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label for="inventory-organization-street">
-              {{'goodsReceiptPODetail.inventoryAddress' | translate}}
+              {{'goodsReceiptPO.inventoryAddress' | translate}}
             </label>
             <input class="form-control disabled" formControlName="inventoryOrganizationStreet"
                    id="inventory-organization-street"
@@ -205,7 +205,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.personInCharge' | translate}}
+              {{'goodsReceiptPO.personInCharge' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form d-flex">
@@ -232,7 +232,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.receiver' | translate}}
+              {{'goodsReceiptPO.receiver' | translate}}
             </label>
             <jaja-select-list (change)="onSelectBuyer($event)"
                               [display]="buyerName?.value"
@@ -249,7 +249,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.creator' | translate}}
+              {{'goodsReceiptPO.creator' | translate}}
             </label>
             <jaja-select-list (change)="onSelectRequester($event)"
                               [display]="requesterName?.value"
@@ -269,7 +269,7 @@
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.receiptedDate' | translate}}
+              {{'goodsReceiptPO.receiptedDate' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
             <div class="div-form">
@@ -287,7 +287,7 @@
           </div>
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptPODetail.createdDate' | translate}}
+              {{'goodsReceiptPO.createdDate' | translate}}
             </label>
             <app-date-picker [control]="goodsReceiptPOForm.get('documentDate')"
                              [disabled]="true" data-qe-id="detail-form-created-date">
@@ -296,7 +296,7 @@
         </div>
         <div class="row">
           <div class="col-sm-12 form-group">
-            <label>{{ 'goodsReceiptPODetail.description' | translate}}</label>
+            <label>{{ 'goodsReceiptPO.description' | translate}}</label>
             <textarea class="form-control" data-qe-id="detail-form-remarks" formControlName="remarks"
                       rows="4">
                          </textarea>
@@ -307,7 +307,7 @@
     <div class="page-section">
       <div class="tab-header pt-3 pb-3 pl-3 pr-3">
         <mat-tab-group>
-          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOContents.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPO.goodsReceiptPOContents.title' | translate}}">
             <div class="row pt-3 pb-3 pl-3">
               <div class="col-sm-12">
                 <div class="page-actions d-flex justify-content-end">
@@ -325,8 +325,8 @@
                           data-qe-id="button-delete-row"
                           mwlConfirmationPopover
                           placement="bottom"
-                          popoverMessage="{{'goodsReceiptPODetail.delete.confirm.message' | translate}}"
-                          popoverTitle="{{'goodsReceiptPODetail.delete.confirm.title' | translate}}">
+                          popoverMessage="{{'goodsReceiptPO.delete.confirm.message' | translate}}"
+                          popoverTitle="{{'goodsReceiptPO.delete.confirm.title' | translate}}">
                     <span class="btn-label"><i class="material-icons">delete</i></span>
                     <span class="button-label">
                                             {{'general.button.delete' | translate}}
@@ -363,31 +363,31 @@
                     <th width="2.5%">
                     </th>
                     <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.purchaseOrderNumber' | translate}} </th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.purchaseOrderNumber' | translate}} </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemNo' | translate}} </th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.itemNo' | translate}} </th>
                     <th data-qe-id="table-thead-purchase-item-name" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.itemName' | translate}} </th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.itemName' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitOfMeasure' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.unitOfMeasure' | translate}}
                     </th>
                     <th data-qe-id="table-thead-quantity" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.quantity' | translate}} </th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.quantity' | translate}} </th>
                     <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.unitPrice' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.unitPrice' | translate}}
                     </th>
                     <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.valueAddedTax' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.valueAddedTax' | translate}}
                       (%)
                     </th>
                     <th data-qe-id="table-thead-discount" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discount' | translate}} (%)
+                      {{'goodsReceiptPO.goodsReceiptPOContents.discount' | translate}} (%)
                     </th>
                     <th data-qe-id="table-thead-discount-amount" pResizableColumn>
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.discountAmount' | translate}}
+                      {{'goodsReceiptPO.goodsReceiptPOContents.discountAmount' | translate}}
                     </th>
                     <th width="8%">
-                      {{'goodsReceiptPODetail.goodsReceiptPOContents.total' | translate}}</th>
+                      {{'goodsReceiptPO.goodsReceiptPOContents.total' | translate}}</th>
                     <!-- <th pResizableColumn data-qe-id="table-thead-view-detail">
                         {{'general.detail' | translate}}
                     </th> -->
@@ -507,7 +507,7 @@
               </p-table>
             </div>
           </mat-tab>
-          <mat-tab label="{{'goodsReceiptPODetail.goodsReceiptPOAttachments.title' | translate}}">
+          <mat-tab label="{{'goodsReceiptPO.goodsReceiptPOAttachments.title' | translate}}">
             <div class="tab-upload mt-4">
               <div class="row">
                 <div class="col">
@@ -520,10 +520,10 @@
                       <i nz-icon nzType="upload"></i>
                     </p>
                     <p class="ant-upload-text">
-                      {{'goodsReceiptPODetail.attachments.title' | translate}}
+                      {{'goodsReceiptPO.attachments.title' | translate}}
                     </p>
                     <p class="ant-upload-hint">
-                      {{'goodsReceiptPODetail.attachments.description' | translate}}
+                      {{'goodsReceiptPO.attachments.description' | translate}}
                     </p>
                   </nz-upload>
                   <div class="d-flex justify-content-start mt-2">
@@ -563,7 +563,7 @@
           [style]="{width: '80%'}"
           appendTo="body">
   <p-header>
-        <span class="dialog-header">{{'goodsReceiptPODetail.goodsReceipt.supplierName' | translate}}
+        <span class="dialog-header">{{'goodsReceiptPO.goodsReceipt.supplierName' | translate}}
           {{goodsReceiptPOForm.controls.supplierName.value}}
         </span>
   </p-header>
@@ -597,13 +597,13 @@
                 </div>
               </th>
               <th data-qe-id="table-thead-goodsReceipt-createdDate" pResizableColumn>
-                {{'goodsReceiptPODetail.goodsReceipt.createdDate' | translate}} </th>
+                {{'goodsReceiptPO.goodsReceipt.createdDate' | translate}} </th>
               <th data-qe-id="table-thead-goodsReceipt-documentNo" pResizableColumn>
-                {{'goodsReceiptPODetail.goodsReceipt.documentNo' | translate}} </th>
+                {{'goodsReceiptPO.goodsReceipt.documentNo' | translate}} </th>
               <th data-qe-id="table-thead-goodsReceipt-buyer" pResizableColumn>
-                {{'goodsReceiptPODetail.goodsReceipt.buyer' | translate}} </th>
+                {{'goodsReceiptPO.goodsReceipt.buyer' | translate}} </th>
               <th data-qe-id="table-thead-goodsReceipt-creator" pResizableColumn>
-                {{'goodsReceiptPODetail.goodsReceipt.creator' | translate}} </th>
+                {{'goodsReceiptPO.goodsReceipt.creator' | translate}} </th>
             </tr>
             <tr>
               <th class="th-filter" width="2.5%"></th>
@@ -659,7 +659,7 @@
           <button (click)="combineGoodsReceiptPO()" class="btn btn-labeled btn-save-dialog">
             <span class="btn-label"><i class="material-icons">save</i></span>
             <span class="button-label">
-                            {{'goodsReceiptPODetail.button.add' | translate}}
+                            {{'goodsReceiptPO.button.add' | translate}}
                         </span></button>
           <button (click)="displayPurchaseOrders = false" class="btn btn-labeled btn-cancel">
             <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
