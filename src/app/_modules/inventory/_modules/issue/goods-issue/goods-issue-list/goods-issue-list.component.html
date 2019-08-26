@@ -9,7 +9,7 @@
       </span>
     </span>
     <div class="page-actions">
-      <button type="button" class="btn btn-labeled btn-add" (click)="addgoodsIssue()">
+      <button type="button" class="btn btn-labeled btn-add" (click)="addGoodsIssue()">
         <span class="btn-label"><i class="material-icons">add</i></span>
         <span class="button-label">
           {{'general.button.add' | translate}}
@@ -166,15 +166,13 @@
             <td class="ui-resizable-column"> {{goodsIssue.inventoryOrganizationStreet}}</td>
             <td class="ui-resizable-column"> {{goodsIssue.remarks }} </td>
             <td class="ui-resizable-column"> {{goodsIssue.requesterName }} </td>
-            <td> {{goodsIssue.description }} </td>
-            <td> {{goodsIssue.creator }} </td>
-            <td> {{goodsIssue.status }} </td>
+            <td class="ui-resizable-column"> {{goodsIssue.statusName }} </td>
             <td>
               <div class="d-flex">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div class="edit" (click)="editgoodsIssue()">
+                <div class="edit" (click)="editGoodsIssue()">
                   <mat-icon>edit</mat-icon>
                 </div>
 

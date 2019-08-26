@@ -27,6 +27,8 @@ import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-re
 import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
 import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ErrorModule } from 'src/app/_shared/components/error/error.module';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 
 @NgModule({
@@ -65,6 +67,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     FiltersModule,
     ReactiveFormsModule,
     FormsModule,
+    ErrorModule,
+    ConfirmDialogModule,
   ]
 })
 export class IssueModule { }

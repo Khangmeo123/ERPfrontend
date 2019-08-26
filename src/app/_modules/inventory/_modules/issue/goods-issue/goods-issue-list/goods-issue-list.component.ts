@@ -146,12 +146,12 @@ export class GoodsIssueListComponent implements OnInit, OnDestroy {
     }
   }
 
-  editdeliveryOrder() {
-    this.router.navigate(['inventory/issue/delivery-order/delivery-order-detail']);
+  editGoodsIssue() {
+    this.router.navigate(['inventory/issue/goods-issue/goods-issue-detail']);
   }
 
-  adddeliveryOrder() {
-    this.router.navigate(['inventory/issue/deliveryOrder/delivery-order-detail']);
+  addGoodsIssue() {
+    this.router.navigate(['inventory/issue/goods-issue/goods-issue-detail']);
   }
 
 }

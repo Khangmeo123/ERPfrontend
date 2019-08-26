@@ -19,7 +19,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 export class GoodsIssueRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-issue/goods-issue-list';
+        this.apiUrl = environment.apiUrlInv + 'inventory/issue/goods-issue/goods-issue-list';
     }
 
 
