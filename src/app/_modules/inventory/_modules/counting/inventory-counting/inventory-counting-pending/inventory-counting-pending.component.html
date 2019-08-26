@@ -104,7 +104,7 @@
                 <div class="row">
                     <div class="col-sm-12 form-group">
                         <label>{{ 'inventoryCounting.detail.description' | translate}}</label>
-                        <textarea class="form-control" rows="4" data-qe-id="detail-form-description"
+                        <textarea class="form-control disabled" rows="4" data-qe-id="detail-form-description"
                             formControlName="remarks">
                          </textarea>
                     </div>
@@ -134,6 +134,12 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="page-actions d-flex justify-content-end">
+                                    <a class="btn btn-labeled btn-export mr-2" [href]="linkCounterExport">
+                                        <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
+                                        <span class="button-label">
+                                            {{'general.button.export' | translate}}
+                                        </span>
+                                    </a>
                                     <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row"
                                         (click)="resetInventoryCounterContent()">
                                         <span class="btn-label"><i class="material-icons">delete</i></span>
@@ -178,7 +184,7 @@
                                             {{'inventoryCounting.detail.tab1.inventoryCode' | translate}}
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-quantity-of-inventory">
-                                            {{'inventoryCounting.detail.tab1.quantityOfInventory' | translate}}
+                                            {{'inventoryCounting.detail.tab1.countedQuantity' | translate}}
                                         </th>
                                         <th width="8%" pResizableColumn data-qe-id="table-thead-batches-action">
                                             {{'general.action' | translate}}
@@ -222,7 +228,7 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-inventoryCounterContent let-index="rowIndex">
-                                    <tr [formGroupName]='index'>
+                                    <tr>
                                         <td width="3%">
                                             <span>{{index + 1}}</span>
                                         </td>
@@ -277,12 +283,20 @@
                     <mat-tab label="{{'inventoryCounting.detail.tab1.title' | translate}}"
                         *ngIf="inventoryCountingForm.get('isOwner').value">
                         <div class="row pt-3 pb-3 pl-3">
-                            <div class="col-sm-6"></div>
-                            <div class="col-sm-6"></div>
+                            <div class="col-sm-12">
+                                <div class="page-actions d-flex justify-content-end">
+                                    <a class="btn btn-labeled btn-export mr-2" [href]="linkCountingExport">
+                                        <span class="btn-label"><img src="/assets/img/export.svg" width="24"></span>
+                                        <span class="button-label">
+                                            {{'general.button.export' | translate}}
+                                        </span>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="table" formArrayName="inventoryCountingContents">
+                        <div class="table">
                             <p-table #tableInventoryCountingContents [scrollable]="true" scrollHeight="500px"
-                                [rowTrackBy]="trackByFn"
+                                [rowTrackBy]="trackByFn" [paginator]="true" [rows]="50"
                                 [value]="inventoryCountingForm.controls.inventoryCountingContents.value">
                                 <ng-template pTemplate="colgroup">
                                     <colgroup>
@@ -321,7 +335,8 @@
                                         </th>
                                         <th pResizableColumn *ngFor="let item of inventoryCounters;"
                                             (click)="showInventoryCounterDetail(item)">
-                                            {{item.name}}
+                                            <a href="javascript:;"
+                                                [ngClass]="{'text-danger': item.isDifferent}">{{item.name}}</a>
                                         </th>
                                     </tr>
                                     <tr>
@@ -363,7 +378,7 @@
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-inventoryCountingContent let-index="rowIndex">
-                                    <tr [formGroupName]='index'>
+                                    <tr>
                                         <td width="3%">
                                             {{index + 1}}
                                         </td>
@@ -389,7 +404,8 @@
                                             {{inventoryCountingContent.quantityOnDocumentDate | number}}
                                         </td>
                                         <td class="text-right">
-                                            {{inventoryCountingContent.variance | number}}
+                                            <span
+                                                [ngClass]="{'text-danger': inventoryCountingContent.variance !== 0}">{{inventoryCountingContent.variance | number}}</span>
                                         </td>
                                         <td *ngFor="let item of inventoryCountingContent.inventoryCounterContents;"
                                             class="text-right">

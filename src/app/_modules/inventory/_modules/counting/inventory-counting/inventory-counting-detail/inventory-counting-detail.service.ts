@@ -11,9 +11,6 @@ import {
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.form';
 import {
     EmployeeDetailOfCountingSearchEntity,
-    InventoryOrganizationOfCountingSearchEntity,
-    ItemDetailOfCountingSearchEntity,
-    UnitOfMeasureOfCountingSearchEntity,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
 import {
@@ -21,6 +18,7 @@ import {
     ItemDetailOfCountingEntity,
     InventoryCounterContents,
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
+import { SpinnerService } from 'src/app/_services';
 
 @Injectable()
 export class InventoryCountingDetailService {
@@ -35,7 +33,9 @@ export class InventoryCountingDetailService {
     constructor(
         private fb: FormBuilder,
         private toastrService: ToastrService,
-        private inventoryCountingRepository: InventoryCountingDetailRepository) {
+        private inventoryCountingRepository: InventoryCountingDetailRepository,
+        private spinnerService: SpinnerService,
+    ) {
         this.inventoryCountingForm = new BehaviorSubject(this.fb.group(new InventoryCountingForm()));
         this.employeeDetailList = new BehaviorSubject(new Entities());
         this.itemDetailExtendList = new BehaviorSubject([]);
@@ -50,8 +50,10 @@ export class InventoryCountingDetailService {
     getDetail(inventoryCountingId?): Promise<any> {
         const defered = new Promise<any>((resolve, reject) => {
             if (inventoryCountingId !== null && inventoryCountingId !== undefined) {
+                this.spinnerService.show();
                 this.inventoryCountingRepository.getDetail(inventoryCountingId).subscribe(res => {
                     if (res) {
+                        this.spinnerService.hide();
                         const inventoryCountingForm = this.fb.group(
                             new InventoryCountingForm(res),
                         );
@@ -60,7 +62,7 @@ export class InventoryCountingDetailService {
                     }
                 }, err => {
                     if (err) {
-                        console.log(err);
+                        this.spinnerService.hide();
                         reject();
                     }
                 });
@@ -70,14 +72,17 @@ export class InventoryCountingDetailService {
     }
 
     send(inventoryCountingEntity: any) {
+        this.spinnerService.show();
         const defered = new Promise<boolean>((resolve, reject) => {
             this.inventoryCountingRepository.send(inventoryCountingEntity).subscribe(res => {
                 if (res) {
+                    this.spinnerService.hide();
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();
                 }
             }, err => {
                 if (err) {
+                    this.spinnerService.hide();
                     this.inventoryCountingForm.next(this.fb.group(
                         new InventoryCountingForm(err),
                     ));
@@ -90,14 +95,17 @@ export class InventoryCountingDetailService {
     }
 
     save(inventoryCountingEntity: any) {
+        this.spinnerService.show();
         const defered = new Promise<boolean>((resolve, reject) => {
             this.inventoryCountingRepository.save(inventoryCountingEntity).subscribe(res => {
                 if (res) {
+                    this.spinnerService.hide();
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();
                 }
             }, err => {
                 if (err) {
+                    this.spinnerService.hide();
                     this.inventoryCountingForm.next(this.fb.group(
                         new InventoryCountingForm(err),
                     ));
@@ -110,14 +118,17 @@ export class InventoryCountingDetailService {
     }
 
     delete(inventoryCountingId: string) {
+        this.spinnerService.show();
         const defered = new Promise<boolean>((resolve, reject) => {
             this.inventoryCountingRepository.delete(inventoryCountingId).subscribe(res => {
                 if (res) {
+                    this.spinnerService.hide();
                     this.toastrService.success('Cập nhật thành công !');
                     resolve();
                 }
             }, err => {
                 if (err) {
+                    this.spinnerService.hide();
                     this.inventoryCountingForm.next(this.fb.group(
                         new InventoryCountingForm(err),
                     ));
@@ -169,8 +180,10 @@ export class InventoryCountingDetailService {
     }
 
     getListBinLocation(inventoryOrganizationId: string, itemDetailId: string) {
+        this.spinnerService.show();
         this.inventoryCountingRepository.getListBinLocation(inventoryOrganizationId, itemDetailId).subscribe(res => {
             if (res) {
+                this.spinnerService.hide();
                 this.binLocationList.next(res);
             }
         }, err => {

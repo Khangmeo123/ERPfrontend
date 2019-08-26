@@ -103,7 +103,7 @@ export class GoodsReceiptPOApproveRepository extends Repository {
 
   getDocumentNumberList = (purchaseOrdersSearchEntity: PurchaseOrderSearchEntity): Observable<PurchaseOrderEntity[]> => {
     return this.http.post<PurchaseOrderEntity[]>(
-      GoodsReceiptPOApproveRepository.getURL('/single-list-document-number'),
+      GoodsReceiptPOApproveRepository.getURL('/single-list-purchase-order'),
       purchaseOrdersSearchEntity,
       {
         observe: 'response',

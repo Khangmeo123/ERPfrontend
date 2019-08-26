@@ -242,7 +242,7 @@ export class GoodsReceiptPODetailRepository extends Repository {
       );
   };
 
-  uploadFiles(files: UploadFile[]): Observable<FileAttachmentEntity[]> {
+  uploadFiles = (files: UploadFile[]): Observable<FileAttachmentEntity[]> => {
     const formData: FormData = new FormData();
     files.forEach((file: any) => {
       formData.append('files', file);
@@ -261,5 +261,5 @@ export class GoodsReceiptPODetailRepository extends Repository {
           },
         ),
       );
-  }
+  };
 }

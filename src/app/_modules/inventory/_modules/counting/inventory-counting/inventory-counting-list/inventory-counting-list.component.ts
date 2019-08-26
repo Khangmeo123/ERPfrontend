@@ -12,12 +12,19 @@ import { InventoryCountingListService } from './inventory-counting-list.service'
 import { GeneralService } from 'src/app/_services/general-service.service';
 import { BookmarkService } from 'src/app/_services';
 import { InventoryCountingListRepository } from './inventory-counting-list.repository';
+import { MAT_DATE_FORMATS } from '@angular/material';
+import { DEFAULT_DATE_FORMAT, OUTPUT_DATE_FORMAT } from 'src/app/_shared/modules/date-picker/date-picker.formats';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-goods-receipt-po-list',
   templateUrl: './inventory-counting-list.component.html',
   styleUrls: ['./inventory-counting-list.component.scss'],
-  providers: [InventoryCountingListService],
+  providers: [InventoryCountingListService, DatePipe,
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: DEFAULT_DATE_FORMAT,
+    }],
 })
 export class InventoryCountingListComponent implements OnInit, OnDestroy {
   pageTitle = translate('inventoryCounting.list.header.title');
@@ -40,6 +47,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
     private genaralService: GeneralService,
     private bookmarkService: BookmarkService,
     public inventoryCountingListRepository: InventoryCountingListRepository,
+    public datePipe: DatePipe,
     private router: Router) {
     // inventory counting
     const inventoryCountingListSub = this.inventoryCountingListService.inventoryCountingList.subscribe(res => {
@@ -88,6 +96,10 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
     matDatePicker.open();
   }
 
+  onDateChange(data: any, type: string) {
+    this.inventoryCountingSearchEntity.documentDate[type] = this.datePipe.transform(data.value, OUTPUT_DATE_FORMAT);
+  }
+
   sort(event: any) {
     if (event.sortField && event.sortOrder) {
       this.inventoryCountingSearchEntity.orderBy = event.sortField;
@@ -102,6 +114,7 @@ export class InventoryCountingListComponent implements OnInit, OnDestroy {
     this.inventoryCountingSearchEntity.take = this.pagination.take;
     this.inventoryCountingListService.getList(this.inventoryCountingSearchEntity);
   }
+
 
   paginationOut(pagination: PaginationModel) {
     this.inventoryCountingSearchEntity.skip = pagination.skip;

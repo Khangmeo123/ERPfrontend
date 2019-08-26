@@ -6,6 +6,7 @@ import { InventoryCountingListRepository } from './inventory-counting-list.repos
 import { ToastrService } from 'ngx-toastr';
 import { InventoryCountingSearchEntity } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.searchentity';
 import { Entities, EnumEntity } from 'src/app/_helpers/entity';
+import { SpinnerService } from 'src/app/_services';
 
 @Injectable()
 export class InventoryCountingListService {
@@ -18,6 +19,7 @@ export class InventoryCountingListService {
         private fb: FormBuilder,
         private inventoryCountingListRepository: InventoryCountingListRepository,
         private toastrService: ToastrService,
+        private spinnerService: SpinnerService,
     ) {
         this.inventoryCountingList = new BehaviorSubject([]);
         this.inventoryCountingCount = new BehaviorSubject(0);
@@ -26,8 +28,10 @@ export class InventoryCountingListService {
 
 
     getList(inventoryCountingSearchEntity: InventoryCountingSearchEntity) {
+        this.spinnerService.show();
         forkJoin(this.inventoryCountingListRepository.getList(inventoryCountingSearchEntity),
             this.inventoryCountingListRepository.count(inventoryCountingSearchEntity)).subscribe(([list, count]) => {
+                this.spinnerService.hide();
                 if (list) {
                     this.inventoryCountingList.next(list);
                 }

@@ -31,8 +31,8 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1 " matInput [matDatepicker]="picker"
-            placeholder="dd/mm/yyyy" data-qe-id="input-date-from"
-            [(ngModel)]="inventoryCountingSearchEntity.postingDate.greaterEqual">
+            [(ngModel)]="inventoryCountingSearchEntity.documentDate.greaterEqual" placeholder="dd/mm/yyyy"
+            data-qe-id="input-date-from" (dateChange)="onDateChange($event, 'greaterEqual')">
           <mat-datepicker #picker></mat-datepicker>
           <div role="button" (click)="openDatePicker(picker)">
             <mat-icon>calendar_today</mat-icon>
@@ -41,8 +41,8 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
           <input class="form-control input-datepicker ml-1 mr-1" matInput [matDatepicker]="datepicker"
-            placeholder="dd/mm/yyyy" data-qe-id="button-date-to"
-            [(ngModel)]="inventoryCountingSearchEntity.postingDate.lessEqual">
+            [(ngModel)]="inventoryCountingSearchEntity.documentDate.lessEqual" placeholder="dd/mm/yyyy"
+            data-qe-id="button-date-to" (dateChange)="onDateChange($event, 'lessEqual')">
           <mat-datepicker #datepicker></mat-datepicker>
           <div role="button" (click)="openToDatePicker(datepicker)">
             <mat-icon>calendar_today</mat-icon>
@@ -101,9 +101,6 @@
               </app-advanced-filters>
             </th>
             <th class="th-filter">
-              <app-advanced-filters [filter]="inventoryCountingSearchEntity.documentDate" (changeFilter)="getList()"
-                data-qe-id="table-thead-filter-documentDate">
-              </app-advanced-filters>
             </th>
             <th class="th-filter">
               <jaja-select-list class="flex-grow-1" [value]="inventoryCountingSearchEntity.inventoryOrganizationId"
@@ -120,7 +117,7 @@
               <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
                 [value]="inventoryCountingSearchEntity.inventoryCounterId" key="id"
                 [searchEntity]="inventoryCountingOwnerSearch" searchField="name" searchType="startsWith" appendTo="body"
-                [searchable]="true" (change)="inventoryCountingSearchEntity.inventoryCounterId = $event?.id; getList()">
+                [searchable]="true" (change)="inventoryCountingSearchEntity.inventoryCounterId = $event; getList()">
                 <ng-template #label #option let-name="name">
                   {{name}}
                 </ng-template>
@@ -130,7 +127,7 @@
               <jaja-select-list class="flex-grow-1" [getList]="inventoryCountingListRepository.selectListEmployeeDetail"
                 [value]="inventoryCountingSearchEntity.ownerId" key="id" [searchEntity]="inventoryCounterSearch"
                 searchField="name" searchType="startsWith" [searchable]="true" appendTo="body"
-                (change)="inventoryCountingSearchEntity.ownerId = $event?.id; getList()">
+                (change)="inventoryCountingSearchEntity.ownerId = $event; getList()">
                 <ng-template #label #option let-name="name">
                   {{name}}
                 </ng-template>
@@ -170,14 +167,16 @@
               <div [ngSwitch]="inventoryCounting.statusName">
                 <a class="ml-2 open-status"
                   routerLink="/inventory/counting/inventory-counting/inventory-counting-detail"
-                  [queryParams]="{id: inventoryCounting.id}" *ngSwitchCase="'OPEN'">{{'general.open'| translate}}</a>
+                  [queryParams]="{id: inventoryCounting.id}"
+                  *ngSwitchCase="'OPEN'">{{'inventoryCounting.button.open'| translate}}</a>
                 <a class="ml-2 pending-counting-status"
                   routerLink="/inventory/counting/inventory-counting/inventory-counting-pending"
                   [queryParams]="{id: inventoryCounting.id}"
-                  *ngSwitchCase="'COUNTING'">{{'general.pending'| translate}}</a>
+                  *ngSwitchCase="'COUNTING'">{{'inventoryCounting.button.pending'| translate}}</a>
                 <a class="ml-2 completed-status"
                   routerLink="/inventory/counting/inventory-counting/inventory-counting-done"
-                  [queryParams]="{id: inventoryCounting.id}" *ngSwitchCase="'DONE'">{{'general.done'| translate}}</a>
+                  [queryParams]="{id: inventoryCounting.id}"
+                  *ngSwitchCase="'DONE'">{{'inventoryCounting.button.done'| translate}}</a>
               </div>
             <td width="8%">
               <div class="d-flex justify-content-center">

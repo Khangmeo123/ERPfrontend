@@ -1,28 +1,23 @@
 <nav class="navbar navbar-expand-md fixed-top navbar-dark flex-fill">
   <div class="navbar-header pl-2 pr-2 ml-3 text-center">
     <a class="navbar-brand m-0 w-100 logo" href="#">
-      <!-- <i class="fa fa-flash mr-1"></i> -->
-      <img src="./assets/img/logo.png" alt="lightning logo">
-      <!-- <span class="ml-1">Lightning</span> -->
+      <img src="./assets/img/logo.png" alt="JAJA logo">
     </a>
   </div>
-  <!-- sidebar toggler -->
-  <div class="sidebar-toggler ml-auto mr-3">
-    <a class="btn nav-link" (click)="toggleSidebar()"><i class="fa fa-bars"></i></a>
-  </div>
-  <!-- right menu toggler -->
+
   <div class="nav-toggler-right mr-4 d-md-none">
-    <button class="" type="button" (click)="isCollapsed = !isCollapsed" [attr.aria-expanded]="!isCollapsed"
+    <button class=""
+            type="button"
+            (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed"
             aria-controls="collapseBasic">
-      <!-- <span class="navbar-toggler-icon"></span> -->
       <img src="./assets/img/user.jpg" class="img-fluid" alt="">
     </button>
     <span class="user-profile nav-alert bg-danger"></span>
   </div>
-  <!-- left box -->
   <ul class="navbar-nav flex-fill mt-1 align-items-center left-nav">
     <li class="nav-item navicon">
-      <a class="btn nav-link" (click)="toggleSidebarPin()"><i class="fa fa-bars"></i></a>
+      <a class="btn nav-link" (click)="appService.toggleSidebarPin()"><i class="fa fa-bars"></i></a>
     </li>
 
     <li class="nav-item flex-fill">
@@ -34,14 +29,13 @@
       </div>
     </li>
   </ul>
-  <!-- right menu -->
   <div class="collapse navbar-collapse right-nav" id="collapseBasic" [collapse]="isCollapsed"
        style="margin-right: 10px">
     <ul class="navbar-nav d-flex align-items-center">
-      <jaja-select-list key="id"
-                        placeholder="{{'general.legalEntity.placeholder' | translate}}"
+      <jaja-select-list placeholder="{{'general.legalEntity.placeholder' | translate}}"
                         [getList]="appRepository.getLegalEntityList"
-                        (change)="onChangeLegalEntity($event)"
+                        (change)="appService.selectLegalEntity($event)"
+                        [list]="legalEntities"
                         [display]="legalEntity?.code"
                         [value]="legalEntityId">
         <ng-template #label #option let-code="code">
@@ -104,7 +98,7 @@
               <span>{{'app.changePassword' | translate}}</span>
             </li>
             <li class="content-drop" style="margin-bottom: 10px">
-              <button class="btn" (click)="onClickLogOut()">
+              <button class="btn" (click)="authenticationService.logout()">
                 <span><i class="fas fa-sign-out-alt"></i></span>
                 <span style="padding-left: 10px"> {{'app.logout' | translate}} </span>
               </button>

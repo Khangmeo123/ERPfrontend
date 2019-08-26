@@ -52,16 +52,23 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   inventoryCounters: any[] = [];
   inventoryCounterList: any[];
   qrCodeOutSide: string;
+  legalEntityId = localStorage.getItem('legalEntityId') || null;
   // serialNumber:
   serialNumber: string;
   serialNumberSearchEntity: SerialNumberSearchEntity = new SerialNumberSearchEntity();
   serialNumberList: CounterContentByItemDetailEntity[];
   linkSerialNumberTemplate: string = environment.apiUrlInv +
     'inventory/counting/inventory-counting/inventory-counting-pending/serial-number/download-template';
-  linkSerialNumberExport: string = environment.apiUrlInv +
+  baseLinkSerialNumberExport: string = environment.apiUrlInv +
     'inventory/counting/inventory-counting/inventory-counting-pending/serial-number/export';
-
-  // batch:
+  linkSerialNumberExport: string;
+  baseLinkCounterExport: string = environment.apiUrlInv +
+    'inventory/counting/inventory-counting/inventory-counting-pending/export-by-counter';
+  linkCounterExport: string;
+  baseLinkCountingExport: string = environment.apiUrlInv +
+    'inventory/counting/inventory-counting/inventory-counting-pending/export-counting-content';
+  linkCountingExport: string;
+  // batchDetail:
   batchCode: string;
   batchSearchEntity: BatchSearchEntity = new BatchSearchEntity();
   batchList: CounterContentByItemDetailEntity[];
@@ -86,12 +93,15 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     private inventoryCountingService: InventoryCountingPendingService,
     private generalService: GeneralService,
     private toastrService: ToastrService,
-    private inventoryCountingRepository: InventoryCountingPendingRepository,
+    public inventoryCountingRepository: InventoryCountingPendingRepository,
     private route: ActivatedRoute) {
     this.route.queryParams
       .subscribe(params => {
         if (params.id) {
           this.inventoryCountingId = params.id;
+          const queryParams = `?InventoryCountingId=${this.inventoryCountingId}&LegalEntityId=af81fee4-b4df-46f8-aaee-be97425be15c`;
+          this.linkCounterExport = this.baseLinkCounterExport + queryParams;
+          this.linkCountingExport = this.baseLinkCountingExport + queryParams;
         }
         this.inventoryCountingService.getDetail(params.id).then(res => {
           if (res) {
@@ -103,7 +113,6 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
       if (res) {
         this.inventoryCountingForm = res;
         this.inventoryOrganizationId = this.inventoryCountingForm.get('inventoryOrganizationId').value;
-
       }
     });
     // binlocation:
@@ -118,7 +127,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
         this.serialNumberList = res;
       }
     });
-    // batch:
+    // batchDetail:
     const batchListSub = this.inventoryCountingService.batchList.subscribe(res => {
       if (res) {
         this.batchList = res;
@@ -214,6 +223,8 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
 
   // serialNumber:
   showSerial(itemDetailId: string) {
+    const queryParams = `?InventoryCountingId=${this.inventoryCountingId}&ItemDetailId=${itemDetailId}&X-LegalEntity=${this.legalEntityId}`;
+    this.linkSerialNumberExport = this.baseLinkSerialNumberExport + queryParams;
     this.displaySerial = true;
     this.activeScan = false;
     this.itemDetailId = itemDetailId;
@@ -251,7 +262,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
     table.reset();
   }
 
-  // batch:
+  // batchDetail:
   showBatch(itemDetailId: string) {
     this.displayBatch = true;
     this.activeScan = false;

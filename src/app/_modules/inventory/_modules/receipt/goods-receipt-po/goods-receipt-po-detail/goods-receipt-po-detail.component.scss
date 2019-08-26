@@ -2,10 +2,10 @@
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/variables";
 
-jaja-select-list.disabled {
-  pointer-events: none;
+.uploaded-file {
+  border-bottom: 1px solid $border-color;
+}
 
-  * {
-    background: #cccccc!important;
-  }
+.disabled {
+  pointer-events: none;
 }

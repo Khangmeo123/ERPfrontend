@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { translate } from '../../../../../_helpers/string';
 import { GeneralService } from '../../../../../_services/general-service.service';
 import { PermissionDetailRepository } from './permission-detail.repository';
+import { ConfirmationService } from 'primeng/api';
+import { TaxTemplateDetailService } from '../../../../master-data/_modules/business-group/_page/tax-template/tax-template-detail/tax-template-detail.service';
 
 @Component({
   selector: 'app-permission-detail',
@@ -18,6 +20,8 @@ import { PermissionDetailRepository } from './permission-detail.repository';
     PermissionDetailService,
     ToastrService,
     GeneralService,
+    ConfirmationService,
+    TaxTemplateDetailService,
   ],
 })
 export class PermissionDetailComponent implements OnInit, OnDestroy {
@@ -46,6 +50,7 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
     public generalService: GeneralService,
     public router: Router,
     public permissionDetailRepository: PermissionDetailRepository,
+    public confirmationService: ConfirmationService,
   ) {
     const permissionFormSub: Subscription = this.permissionDetailService.permissionForm.subscribe((form: FormGroup) => {
       this.permissionForm = form;
@@ -58,7 +63,7 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
     });
 
     const routeSub: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
-      if (params.legalEntityId && params.inventoryDocumentTypeId && params.inventoryOrganizationId) {
+      if (params.inventoryDocumentTypeId && params.inventoryOrganizationId) {
         this.inventoryDocumentTypeId = params.inventoryDocumentTypeId;
         this.inventoryOrganizationId = params.inventoryOrganizationId;
         this.getDocumentStatus();
@@ -179,4 +184,21 @@ export class PermissionDetailComponent implements OnInit, OnDestroy {
       });
     }
   };
+
+  public confirmDeleting() {
+    this.confirmationService.confirm({
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        this.permissionDetailService.delete(this.permissionForm.value)
+          .then(() => {
+            return this.router.navigate(
+              ['/inventory/permission/permission-list'],
+              {
+                queryParams: this.activatedRoute.snapshot.queryParams,
+              },
+            );
+          });
+      },
+    });
+  }
 }

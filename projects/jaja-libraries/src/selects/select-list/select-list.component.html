@@ -1,8 +1,13 @@
-<div dropdown (isOpenChange)="onToggle($event)" [container]="appendTo" class="select jaja-select-list d-flex"
+<div dropdown (isOpenChange)="onToggle($event)"
+     [container]="appendTo"
+     class="select jaja-select-list d-flex"
      [ngClass]="{disabled: disabled}">
 
-  <div dropdownToggle class="jaja-select-list-toggle form-control align-items-center" #toggler
-       (window:resize)="onWindowResize()">
+  <div dropdownToggle
+       (window:resize)="resetDropdownWidth()"
+       #toggler
+       [ngClass]="{'form-control-sm': small}"
+       class="jaja-select-list-toggle form-control align-items-center">
     <span *ngIf="!selectedItem; else labelTemplate">
       {{display || placeholder}}
     </span>
@@ -15,7 +20,7 @@
     </span>
   </div>
 
-  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu" #dropdown [ngStyle]="{width: width}">
+  <ul *dropdownMenu class="dropdown-menu select-dropdown" role="menu" [ngStyle]="{width: width}">
     <li *ngIf="searchable" class="dropdown-item search" (click)="$event.stopPropagation()">
       <input type="text" class="form-control form-control-sm" (input)="onSearch($event)">
     </li>
@@ -25,7 +30,7 @@
     </li>
 
     <ng-template #notLoading>
-      <li role="menuitem" class="empty" *ngIf="!list?.length">
+      <li role="menuitem" class="empty" *ngIf="list.length === 0">
         <nz-empty nzNotFoundContent="{{'jaja.selects.empty' | translate}}"></nz-empty>
       </li>
 

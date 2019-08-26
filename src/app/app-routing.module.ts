@@ -10,16 +10,18 @@ const routes: Routes = [
     component: LoginComponent,
   },
   {
-    path: '', component: PageComponent, children: [
+    path: '',
+    component: PageComponent,
+    children: [
       {
         path: 'master-data',
         loadChildren: () => import('./_modules/master-data/master-data.module')
-          .then(m => m.MasterDataModule),
+          .then((m) => m.MasterDataModule),
       },
       {
         path: 'inventory',
         loadChildren: () => import('./_modules/inventory/inventory.module')
-          .then(m => m.InventoryModule),
+          .then((m) => m.InventoryModule),
       },
     ],
     canActivate: [
@@ -30,8 +32,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  imports: [
+    RouterModule.forRoot(routes),
+  ],
+  exports: [
+    RouterModule,
+  ],
 })
 export class AppRoutingModule {
 }

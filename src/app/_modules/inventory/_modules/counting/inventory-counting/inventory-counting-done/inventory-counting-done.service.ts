@@ -10,6 +10,7 @@ import {
 } from 'src/app/_modules/inventory/_backend/inventory-counting/inventory-counting.entity';
 import * as _ from 'lodash';
 import { InventoryCountingDoneRepository } from './inventory-counting-done.repository';
+import { SpinnerService } from 'src/app/_services';
 @Injectable()
 export class InventoryCountingDoneService {
     public inventoryCountingForm: BehaviorSubject<FormGroup>;
@@ -17,6 +18,7 @@ export class InventoryCountingDoneService {
     public inventoryCounterList: BehaviorSubject<any[]>;
     constructor(
         private fb: FormBuilder,
+        private spinnerService: SpinnerService,
         private inventoryCountingRepository: InventoryCountingDoneRepository) {
         this.inventoryCountingForm = new BehaviorSubject(this.fb.group(new InventoryCountingForm()));
         this.binLocationList = new BehaviorSubject([]);
@@ -25,10 +27,12 @@ export class InventoryCountingDoneService {
 
     // general:
     getDetail(inventoryCountingId?): Promise<InventoryCountingEntity> {
+        this.spinnerService.show();
         const defered = new Promise<InventoryCountingEntity>((resolve, reject) => {
             if (inventoryCountingId !== null && inventoryCountingId !== undefined) {
                 this.inventoryCountingRepository.getDetail(inventoryCountingId).subscribe(res => {
                     if (res) {
+                        this.spinnerService.hide();
                         const inventoryCountingForm = this.fb.group(
                             new InventoryCountingForm(res),
                         );
@@ -37,7 +41,7 @@ export class InventoryCountingDoneService {
                     }
                 }, err => {
                     if (err) {
-                        console.log(err);
+                        this.spinnerService.hide();
                         reject();
                     }
                 });

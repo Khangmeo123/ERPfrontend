@@ -35,7 +35,7 @@
             "save": "Lưu",
             "send": "Gửi",
             "update": "Cập nhật",
-            "upload": ""
+            "upload": "Tải lên"
         },
         "completed": "Hoàn thành",
         "confirmation": {
@@ -83,7 +83,7 @@
         "pending": "Chờ duyệt",
         "pendingCounting": "Chờ kiểm kê",
         "pendingReceive": "Chờ nhận",
-        "pendingTransfer": "",
+        "pendingTransfer": "Chờ gửi",
         "project": {
             "delete": {
                 "message": "Bạn chắc chắn muốn xóa?",

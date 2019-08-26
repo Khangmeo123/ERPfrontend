@@ -31,12 +31,16 @@ import { ReturnRequestDetailComponent } from './return-request/return-request-de
 import { ReturnRequestListComponent } from './return-request/return-request-list/return-request-list.component';
 import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
 import { GoodsReceiptPoDetailComponent } from './goods-receipt-po/goods-receipt-po-detail/goods-receipt-po-detail.component';
-import { NzUploadModule } from 'ng-zorro-antd';
+import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconModule } from '@ant-design/icons-angular';
 import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule, ConfirmDialogModule } from 'primeng/primeng';
 import { GoodsReceiptReceiveComponent } from './goods-receipt/goods-receipt-receive/goods-receipt-receive.component';
+import { NzListModule } from 'ng-zorro-antd';
+import { BatchDialogComponent } from './goods-receipt-po/good-receipt-po-receive/batch-dialog/batch-dialog.component';
+import { SerialNumberDialogComponent } from './goods-receipt-po/good-receipt-po-receive/serial-number-dialog/serial-number-dialog.component';
+import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-receive/quantity-dialog/quantity-dialog.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +59,9 @@ import { GoodsReceiptReceiveComponent } from './goods-receipt/goods-receipt-rece
     ReturnRequestDetailComponent,
     ReturnRequestListComponent,
     GoodsReceiptPoDetailComponent,
+    BatchDialogComponent,
+    SerialNumberDialogComponent,
+    QuantityDialogComponent,
   ],
   imports: [
     IconModule,
@@ -88,6 +95,7 @@ import { GoodsReceiptReceiveComponent } from './goods-receipt/goods-receipt-rece
     TooltipModule,
     KeyFilterModule,
     ConfirmDialogModule,
+    NzListModule,
   ],
 })
 export class ReceiptModule {

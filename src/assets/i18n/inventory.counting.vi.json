@@ -47,6 +47,7 @@
             "inventoryCode": "Mã kho",
             "itemDetail": {
                 "itemCode": "Mã hàng",
+                "itemName": "Tên hàng",
                 "locationCode": "Địa chỉ kho"
             },
             "personInCharge": "Người chịu trách nhiệm",
@@ -70,7 +71,8 @@
                 "quantityOfInventory": "Số lượng tồn kho",
                 "serial": "Serial",
                 "title": "Chi tiết hàng hóa",
-                "unitOfMeasure": "Đơn vị tính"
+                "unitOfMeasure": "Đơn vị tính",
+                "countedQuantity": "Số lượng thực đếm"
             },
             "tab2": {
                 "title": "Đính kèm"
@@ -87,6 +89,11 @@
             "inventoryCountingOwner": "Người chịu trách nhiệm",
             "issueID": "Số phiếu",
             "status": "Trạng thái"
+        },
+        "button": {
+            "open": "Khởi tạo",
+            "pending": "Chờ kiểm kê",
+            "done": "Hoàn thành"
         }
     }
 }

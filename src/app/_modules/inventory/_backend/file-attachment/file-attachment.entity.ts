@@ -5,7 +5,13 @@ export class FileAttachmentEntity extends Entity {
 
   filename: string = null;
 
+  uid: string;
+
   constructor(fileAttachmentEntity?: FileAttachmentEntity) {
     super(fileAttachmentEntity);
   }
+}
+
+export interface IFileAttachmentMap {
+  [key: string]: FileAttachmentEntity;
 }

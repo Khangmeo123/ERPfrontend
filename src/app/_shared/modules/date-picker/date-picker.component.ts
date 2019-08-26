@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter } from '@angular/material-moment-adapter';
 import { DEFAULT_DATE_FORMAT, OUTPUT_DATE_FORMAT } from './date-picker.formats';
@@ -9,10 +9,7 @@ import { DatePipe } from '@angular/common';
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
-  styleUrls: [
-    './date-picker.component.scss',
-  ],
-  encapsulation: ViewEncapsulation.None,
+  styleUrls: ['./date-picker.component.scss'],
   providers: [
     TranslateService,
     {
@@ -35,13 +32,15 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   @Input() disabled: boolean = false;
 
-  @Input() displayToggler = false;
+  @Input() displayToggler = true;
 
   @Input() inputReadOnly = false;
 
   @Output() valueChange = new EventEmitter();
 
   @Input() value: string = '';
+
+  @Input() small: boolean = false;
 
   dateValue = null;
 
@@ -108,15 +107,15 @@ export class DatePickerComponent implements OnInit, OnChanges {
       this.checkCtrl = false;
       return;
     }
-    const { value } = event.target;
+    const {value} = event.target;
     if (value === '' || value === null) {
       this.date = null;
     }
   }
 
   onKeyDown(event) {
-    const { target, key } = event;
-    const { value } = target;
+    const {target, key} = event;
+    const {value} = target;
     if (key === 'Control') {
       this.checkCtrl = true;
     }

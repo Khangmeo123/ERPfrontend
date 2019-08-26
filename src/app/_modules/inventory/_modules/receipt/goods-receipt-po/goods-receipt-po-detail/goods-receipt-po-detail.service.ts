@@ -218,11 +218,10 @@ export class GoodsReceiptPoDetailService {
   }
 
   uploadFiles = (files: UploadFile[]) => {
-    return new Promise<FileAttachmentEntity[]>((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       return this.goodsReceiptPODetailRepository.uploadFiles(files)
         .subscribe(
           (fileAttachments: FileAttachmentEntity[]) => {
-            resolve();
             this.toastrService.success(translate('general.upload.success'));
             const currentForm: FormGroup = this.goodsReceiptPOForm.getValue();
             currentForm.setControl('fileAttachments', new FormArray(
@@ -231,6 +230,7 @@ export class GoodsReceiptPoDetailService {
               }),
             ));
             this.goodsReceiptPOForm.next(currentForm);
+            resolve();
           },
           (error: Error) => {
             this.toastrService.error(translate('general.upload.error'));
