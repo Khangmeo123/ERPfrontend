@@ -213,7 +213,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   }
 
   inputCodeOutside(event) {
-    this.inventoryCountingService.analyzeCodeOutSide(this.inventoryCountingId, event.trim());
+    this.inventoryCountingService.analyzeCodeOutSide(this.inventoryCountingId, event);
     this.qrCodeOutSide = null;
   }
 
@@ -244,7 +244,7 @@ export class InventoryCountingPendingComponent implements OnInit, OnDestroy {
   }
 
   inputSerialNumber(event) {
-    this.inventoryCountingService.analyzeSerialCode(this.itemDetailId, this.inventoryCountingId, event.trim());
+    this.inventoryCountingService.analyzeSerialCode(this.itemDetailId, this.inventoryCountingId, event);
     this.serialNumber = null;
   }
 
