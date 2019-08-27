@@ -63,7 +63,7 @@ export class GoodsReceiptContent extends Entity {
   unitOfMeasureName: string;
   unitOfMeasureCode: string;
   actualReceive: number;
-  goodsReceiptQuantityDetails: QuantityDetailOfGoodsReceipt[];
+  goodsReceiptQuantities: QuantityOfGoodsReceipt[];
   goodsReceiptSerialNumbers: SerialNumberOfGoodsReceipt[];
   goodsReceiptBatches: BatchOfGoodsReceipt[];
 
@@ -138,19 +138,6 @@ export class ItemDetailOfGoodsReceipt extends Entity {
   name: string;
 }
 
-export class QuantityDetailOfGoodsReceipt extends Entity {
-  itemCode: string;
-  itemName: string;
-  unitOfMeasureName: string;
-  quantity: number;
-  actualReceive: number;
-  goodsReceiptQuantities: QuantityOfGoodsReceipt[];
-
-  constructor(quantityDetailOfGoodsReceipt?: any) {
-    super(quantityDetailOfGoodsReceipt);
-  }
-}
-
 export class QuantityOfGoodsReceipt extends Entity {
   goodsReceiptContentId: string = null;
   binLocationId: string = null;
@@ -195,14 +182,14 @@ export class BatchOfGoodsReceipt extends Entity {
   itemName: string;
   itemCode: string;
   batchNumber: number;
-  quantity: number;
+  quantity: number = null;
   binLocationId: string;
   expirationDate: string;
   mfrDate: string;
   location: string;
   details: string;
   unitCost: number;
-  goodsReceiptBatchBinLocations: BatchBinLocationOfGoodsReceipt[];
+  goodsReceiptBatchBinLocations: BatchBinLocationOfGoodsReceipt[] = [];
   actualReceive: number;
 
   constructor(batchOfGoodsReceipt?: any) {

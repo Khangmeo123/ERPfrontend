@@ -1,0 +1,342 @@
+<p-dialog [(visible)]="display" [contentStyle]="{'overflow':'visible'}" [modal]="true" [responsive]="true"
+  [style]="{width: '90%'}" appendTo="body">
+  <p-header>
+    <div class="row">
+      <div class="col-sm-3">
+        <span class="dialog-header">{{'goodsReceiptDetail.batches.title ' | translate}}: {{extendTitle}}</span>
+      </div>
+      <div class="col-sm-9">
+        <div class="page-actions d-flex justify-content-end">
+          <button (click)="clearBatchTable(tableBatch)" class="btn btn-labeled btn-clear mr-2"
+            data-qe-id="button-clear">
+            <span class="btn-label">
+              <img src="/assets/img/filter.svg" width="16">
+            </span>
+            <span class="button-label">
+              {{'general.button.clear' | translate}}
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </p-header>
+  <div class="dialog-body">
+    <div class="row">
+      <div class="col-sm-6">
+        <div class="d-flex align-items-center">
+          <p-inputSwitch [(ngModel)]="activeScan"></p-inputSwitch>
+          <label class="ml-2" for="dialog-input-start-scan-batches-no">
+            {{'goodsReceiptDetail.qrCode.scanQRCode' | translate}}
+          </label>
+          <div class="ml-2">
+            <input (change)="inputBatch($event)" [disabled]="!activeScan" class="form-control"
+              data-qe-id="dialog-input-start-scan-batches-no" id="dialog-input-start-scan-batches-no" type="text">
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6">
+        <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
+          <span class="mr-2">{{'goodsReceiptDetail.binLocation' | translate}}: </span>
+          <jaja-select-list></jaja-select-list>
+        </div>
+      </div>
+      <div class="col-sm-12 mt-2">
+        <div class="d-flex align-items-center justify-content-end">
+          <span class="ml-2">{{'goodsReceiptDetail.qrCode.scanQRCode' | translate}}: </span>
+          <div class="ml-2">
+            <input [value]="goodsReceiptContent.goodsReceiptBatches?.length" class="form-control disabled"
+              data-qe-id="dialog-input-start-scan-batches-no" type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col-sm-12">
+        <p-table #tableBatch *ngIf="enableBinLocation" [resizableColumns]="true" [scrollable]="true"
+          [value]="goodsReceiptContent.goodsReceiptBatches" scrollHeight="300px">
+          <ng-template pTemplate="colgroup">
+            <colgroup>
+              <col width="80px">
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-batches-check-box" pResizableColumn>
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input (change)="checkAllBatch($event.target)" type="checkbox" />
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </th>
+              <th data-qe-id="table-thead-qrCode" pResizableColumn>
+                {{'goodsReceiptDetail.batches.qrCode' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-code" pResizableColumn>
+                {{'goodsReceiptDetail.batches.batchCode' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-manufacturing-date" pResizableColumn>
+                {{'goodsReceiptDetail.batches.manufacturingDate' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-expiry-date" pResizableColumn>
+                {{'goodsReceiptDetail.batches.expiryDate' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-quantity-in-each-batch" pResizableColumn>
+                {{'goodsReceiptDetail.batches.quantityInEachBatch' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-location-code" pResizableColumn>
+                {{'goodsReceiptDetail.batches.locationCode' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-quantity" pResizableColumn>
+                {{'goodsReceiptDetail.batches.quantity' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-action" pResizableColumn>
+                {{'general.action' | translate}}
+              </th>
+            </tr>
+            <tr>
+              <th></th>
+              <th class="th-filter">
+                <input (input)="tableBatch.filter($event.target.value, 'qrCode', 'startsWith')"
+                  class="form-control w-100" pKeyFilter="int" type="text" />
+              </th>
+              <th class="th-filter">
+                <input (input)="tableBatch.filter($event.target.value, 'batchCode', 'startsWith')"
+                  class="form-control w-100" pKeyFilter="int" type="text" />
+              </th>
+              <th class="th-filter">
+                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
+                  data-qe-id="detail-form-receipted-date">
+                </app-date-picker>
+              </th>
+              <th class="th-filter">
+                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'expirationDate')"
+                  data-qe-id="detail-form-receipted-date">
+                </app-date-picker>
+              </th>
+              <th class="th-filter"></th>
+              <th class="th-filter"></th>
+              <th class="th-filter"></th>
+              <th class="th-filter"></th>
+            </tr>
+          </ng-template>
+          <ng-template let-batch let-indexRow="rowIndex" pTemplate="body">
+            <tr>
+              <td
+                [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input [(ngModel)]="batch.isSelected" type="checkbox" />
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </td>
+              <td class="ui-resizable-column"
+                [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
+                <input [(ngModel)]="batch.qrCode" class="form-control w-100" pKeyFilter="int" type="text" />
+              </td>
+              <td class="ui-resizable-column"
+                [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
+                <input [(ngModel)]="batch.batchNumber" class="form-control w-100" pKeyFilter="int" type="text" />
+              </td>
+              <td class="ui-resizable-column"
+                [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
+                <app-date-picker (valueChange)="batch.mfrDate = $event" data-qe-id="detail-form-receipted-date"
+                  [model]="batch.mfrDate">
+                </app-date-picker>
+              </td>
+              <td class="ui-resizable-column"
+                [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
+                <app-date-picker (valueChange)="batch.expirationDate = $event" [model]="batch.expirationDate"
+                  data-qe-id="detail-form-receipted-date">
+                </app-date-picker>
+              </td>
+              <td class="ui-resizable-column"
+                [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
+                <div class="validation-div">
+                  <input (ngModelChange)="batch.actualReceive = generalService.toNumber($event);"
+                    [attr.placeholder]="null" [ngClass]="{'error-border-color': batch.errors}"
+                    [ngModel]="batch.actualReceive" class="form-control" type="text" />
+                  <div *ngIf="batch.errors" class="invalid-validation">
+                    <span>{{quantityDetail.errors.message}}</span>
+                  </div>
+                </div>
+              </td>
+              <td class="ui-resizable-column" *ngIf="batch.goodsReceiptBatchBinLocations.length">
+                <jaja-select-list [getList]="batchDialogRepository.getBinLocationList"
+                  (change)="batch.goodsReceiptBatchBinLocations[0].binLocationId=$event"
+                  [display]="batch.goodsReceiptBatchBinLocations[0].binLocationCode" key="id" appendTo="body"
+                  [searchEntity]="binLocationSearchEntity" [searchable]="true" searchField="code">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
+              </td>
+              <td class="ui-resizable-column" *ngIf="batch.goodsReceiptBatchBinLocations.length">
+                <input [(ngModel)]="batch.goodsReceiptBatchBinLocations[0].quantity" [attr.placeholder]="placeholder"
+                  class="form-control" type="text" />
+              </td>
+              <td class="text-center" *ngIf="batch.goodsReceiptBatchBinLocations.length">
+                <mat-icon (click)="deleteBatch(indexRow, 0)" class="text-danger">delete
+                </mat-icon>
+              </td>
+            </tr>
+            <tr *ngFor="let binLocation of batch.goodsReceiptBatchBinLocations | slice:1; index as i">
+              <td class="ui-resizable-column">
+                <jaja-select-list [getList]="batchDialogRepository.getBinLocationList"
+                  (change)="binLocation.binLocationId=$event" [display]="binLocation.binLocationCode" key="id"
+                  appendTo="body" [searchEntity]="binLocationSearchEntity" [searchable]="true" searchField="code">
+                  <ng-template #label #option let-code="code">
+                    {{code}}
+                  </ng-template>
+                </jaja-select-list>
+              </td>
+              <td class="ui-resizable-column">
+                <input [(ngModel)]="binLocation.quantity" [attr.placeholder]="placeholder" class="form-control"
+                  type="text" />
+              </td>
+              <td class="text-center" width="5%">
+                <mat-icon (click)="deleteBatch(indexRow, i)" class="text-danger">delete</mat-icon>
+              </td>
+            </tr>
+            <tr>
+              <td class="ui-resizable-column" colspan="3">
+                <a (click)="addNewBatch(indexRow)" class="btn btn-link" href="javascript:;">+ Bấm vào để thêm mới...</a>
+              </td>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="footer" *ngIf="!activeScan">
+            <tr>
+              <td colspan="2" class="text-right">
+                <a href="javascript:;" (click)="addNewBatchRow()">+
+                  {{'general.button.addRow' | translate}}</a>
+              </td>
+              <td colspan="7"></td>
+            </tr>
+          </ng-template>
+        </p-table>
+        <p-table #tableBatch *ngIf="!enableBinLocation" [resizableColumns]="true" [scrollable]="true"
+          [value]="goodsReceiptContent.goodsReceiptBatches" scrollHeight="300px">
+          <ng-template pTemplate="colgroup">
+            <colgroup>
+              <col width="80px">
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+              <col>
+            </colgroup>
+          </ng-template>
+          <ng-template pTemplate="header">
+            <tr>
+              <th data-qe-id="table-thead-batches-check-box" pResizableColumn width="2.5%">
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input (change)="checkAllBatch($event)" type="checkbox" />
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </th>
+              <th data-qe-id="table-thead-qrCode" pResizableColumn>
+                {{'goodsReceiptDetail.batches.qrCode' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-code" pResizableColumn>
+                {{'goodsReceiptDetail.batches.batchCode' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-manufacturing-date" pResizableColumn>
+                {{'goodsReceiptDetail.batches.manufacturingDate' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-expiry-date" pResizableColumn>
+                {{'goodsReceiptDetail.batches.expiryDate' | translate}}
+              </th>
+              <th data-qe-id="table-thead-batches-quantity-in-each-batch" pResizableColumn>
+                {{'goodsReceiptDetail.batches.quantityInEachBatch' | translate}}
+              </th>
+            </tr>
+            <tr>
+              <th></th>
+              <th class="th-filter">
+                <input (input)="tableBatch.filter($event.target.value, 'qrCode', 'startsWith')"
+                  class="form-control w-100" pKeyFilter="int" type="text" />
+              </th>
+              <th class="th-filter">
+                <input (input)="tableBatch.filter($event.target.value, 'batchDetail', 'startsWith')"
+                  class="form-control w-100" pKeyFilter="int" type="text" />
+              </th>
+              <th class="th-filter">
+                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
+                  data-qe-id="detail-form-receipted-date">
+                </app-date-picker>
+              </th>
+              <th class="th-filter">
+                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'expirationDate')"
+                  data-qe-id="detail-form-receipted-date">
+                </app-date-picker>
+              </th>
+              <th class="th-filter"></th>
+            </tr>
+          </ng-template>
+          <ng-template let-batch let-indexRow="rowIndex" pTemplate="body">
+            <tr>
+              <td>
+                <div class="pretty p-icon p-curve p-has-indeterminate">
+                  <input [(ngModel)]="batch.isSelected" type="checkbox" />
+                  <div class="state">
+                    <i class="icon material-icons">done</i>
+                    <label></label>
+                  </div>
+                </div>
+              </td>
+              <td class="ui-resizable-column">
+                {{batch.qrCode}}
+              </td>
+              <td class="ui-resizable-column">
+                {{batch.batchNumber}}
+              </td>
+              <td class="ui-resizable-column">
+                {{batch.mfrDate}}
+              </td>
+              <td class="ui-resizable-column">
+                {{batch.expirationDate}}
+              </td>
+              <td class="ui-resizable-column">
+                <input [(ngModel)]="batch.actualReceive" class="form-control" type="text" />
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+  <p-footer>
+    <div class="row">
+      <div class="col-sm-12">
+        <div class="page-actions d-flex justify-content-end">
+          <button (click)="update()" class="btn btn-labeled btn-save-dialog">
+            <span class="btn-label"><i class="material-icons">save</i></span>
+            <span class="button-label">
+              {{'general.button.save' | translate}}
+            </span></button>
+          <button (click)="cancel()" class="btn btn-labeled btn-cancel">
+            <span class="btn-label"><i class="material-icons"> highlight_off</i></span>
+            <span class="button-label">
+              {{'general.button.cancel' | translate}}
+            </span></button>
+        </div>
+      </div>
+    </div>
+  </p-footer>
+</p-dialog>

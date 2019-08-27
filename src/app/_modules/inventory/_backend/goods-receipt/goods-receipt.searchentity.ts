@@ -107,7 +107,18 @@ export class ItemDetailOfGoodsReceiptSearch extends SearchEntity {
 }
 
 export class BinLocationOfGoodsReceiptSearch extends SearchEntity {
-  goodsReceiptPOContentId: string;
+  goodsReceiptContentId: string;
+  inventoryOrganizationId: string;
   code = new TextFilter();
+
+  constructor(binLocationOfGoodsReceiptSearch?) {
+    super();
+    if (binLocationOfGoodsReceiptSearch) {
+      this.goodsReceiptContentId = binLocationOfGoodsReceiptSearch.goodsReceiptContentId !== undefined
+        && binLocationOfGoodsReceiptSearch.goodsReceiptContentId !== null ? binLocationOfGoodsReceiptSearch.goodsReceiptContentId : null;
+      this.inventoryOrganizationId = binLocationOfGoodsReceiptSearch.inventoryOrganizationId !== undefined
+        && binLocationOfGoodsReceiptSearch.inventoryOrganizationId !== null ? binLocationOfGoodsReceiptSearch.inventoryOrganizationId : null;
+    }
+  }
 }
 

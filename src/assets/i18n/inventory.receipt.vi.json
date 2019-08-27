@@ -23,18 +23,21 @@
             "quantity": "Số lượng",
             "quantitySaved": "Số lượng lưu",
             "title ": "Vị trí hàng hóa trong kho",
-            "unitOfMeasure": "Đơn vị tính"
+            "unitOfMeasure": "Đơn vị tính",
+            "actualReceive": "Số lượng thực"
         },
         "batches": {
             "batchCode": "Mã lô",
+            "qrCode": "Mã QR",
             "expiryDate": "Hạn sử dụng",
             "itemCode": "Mã hàng",
             "itemName": "Tên hàng hóa",
             "locationCode": "Mã vị trí",
             "manufacturingDate": "Ngày sản xuất",
             "quantityInEachBatch": "Sô lượng hàng trong lô",
-            "quantitySaved": "số lượng lưu",
+            "quantitySaved": "Số lượng lưu",
             "startScanBatchesNo": "Bắt đầu quét mã lô",
+            "quantity": "Số lượng lưu",
             "title ": "Thông tin lô"
         },
         "binLocation": "Vị trí lưu kho",
@@ -80,7 +83,8 @@
         "receiptedDate": "Ngày thực hiện",
         "receiver": "Người nhận hàng",
         "tab1": {
-            "Serial": "Serial",
+            "actualReceive": "Số lượng thực",
+            "serial": "Serial",
             "amount": "Số lương",
             "batches": "Lô",
             "discount": "Chiết khấu",

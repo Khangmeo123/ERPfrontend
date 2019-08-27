@@ -1,3 +1,4 @@
+import { GoodsReceiptQuantityDialogComponent } from './goods-receipt/goods-receipt-receive/quantity-dialog/goods-receipt-quantity-dialog.component';
 import { GoodsReceiptApproveComponent } from './goods-receipt/goods-receipt-approve/goods-receipt-approve.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -42,6 +43,8 @@ import { NzListModule } from 'ng-zorro-antd';
 import { BatchDialogComponent } from './goods-receipt-po/good-receipt-po-receive/batch-dialog/batch-dialog.component';
 import { SerialNumberDialogComponent } from './goods-receipt-po/good-receipt-po-receive/serial-number-dialog/serial-number-dialog.component';
 import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-receive/quantity-dialog/quantity-dialog.component';
+import { GoodsReceiptSerialNumberDialogComponent } from './goods-receipt/goods-receipt-receive/serial-number-dialog/goods-receipt-serial-number-dialog.component';
+import { GoodsReceiptBatchDialogComponent } from './goods-receipt/goods-receipt-receive/batch-dialog/goods-receipt-batch-dialog.component';
 
 @NgModule({
   declarations: [
@@ -64,6 +67,9 @@ import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-rece
     BatchDialogComponent,
     SerialNumberDialogComponent,
     QuantityDialogComponent,
+    GoodsReceiptQuantityDialogComponent,
+    GoodsReceiptSerialNumberDialogComponent,
+    GoodsReceiptBatchDialogComponent,
   ],
   imports: [
     IconModule,

@@ -90,10 +90,35 @@ export class GoodsReceiptReceiveService {
     });
   };
 
-  save = (goodsReceipt: GoodsReceipt): Promise<void> => {
+  approve = (goodsReceipt: GoodsReceipt): Promise<void> => {
     return new Promise<void>((resolve, reject) => {
       this.goodsReceiptRepository
-        .save(goodsReceipt)
+        .approve(goodsReceipt)
+        .subscribe(
+          (responseEntity: GoodsReceipt) => {
+            if (responseEntity) {
+              this.toastrService.success(translate('general.update.success'));
+              resolve();
+            }
+          },
+          (error: Error) => {
+            if (error) {
+              this.toastrService.error(translate('general.update.error'));
+              this.goodsReceiptForm.next(
+                this.fb.group(
+                  new GoodsReceiptForm(error),
+                ),
+              );
+              reject();
+            }
+          });
+    });
+  };
+
+  reject = (goodsReceipt: GoodsReceipt): Promise<void> => {
+    return new Promise<void>((resolve, reject) => {
+      this.goodsReceiptRepository
+        .reject(goodsReceipt)
         .subscribe(
           (responseEntity: GoodsReceipt) => {
             if (responseEntity) {

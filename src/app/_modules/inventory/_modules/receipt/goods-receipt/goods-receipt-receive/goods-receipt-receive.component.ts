@@ -38,9 +38,12 @@ export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
   unitOfMeasureSearch: UnitOfMeasureOfGoodsReceiptSearch = new UnitOfMeasureOfGoodsReceiptSearch();
   taxSearch: TaxOfGoodsReceiptSearch = new TaxOfGoodsReceiptSearch();
   displayBatch: boolean = false;
-  displaySerial: boolean = false;
+  displaySerialNumber: boolean = false;
   displayQuantity: boolean = false;
+  enableBinLocation: boolean = false;
+  goodsReceiptContentId: string;
   quantityItems: any[] = [];
+  inventoryOrganizationId: string;
 
   get goodsReceiptContents() {
     return this.goodsReceiptForm.get('goodsReceiptContents') as FormArray;
@@ -56,7 +59,10 @@ export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
       if (params.id) {
         this.goodsReceiptId = params.id;
         this.goodsReceiptService.getDetail(params.id)
-          .then(() => { });
+          .then((res) => {
+            this.enableBinLocation = res.enableBinLocation;
+            this.inventoryOrganizationId = res.inventoryOrganizationId;
+          });
       }
     });
     const goodsReceiptFormSub = this.goodsReceiptService.goodsReceiptForm.subscribe(res => {
@@ -74,7 +80,22 @@ export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
 
   }
+
   // general:
+  approve() {
+    this.goodsReceiptService.approve(this.goodsReceiptForm.value)
+      .then(() => {
+        return this.backToList();
+      });
+  }
+
+  reject() {
+    this.goodsReceiptService.reject(this.goodsReceiptForm.value)
+      .then(() => {
+        return this.backToList();
+      });
+  }
+
   readURL(event: any) {
     for (const item of event.srcElement.files) {
       this.fileNameList.push(item.name);
@@ -85,4 +106,33 @@ export class GoodsReceiptReceiveComponent implements OnInit, OnDestroy {
     this.router.navigate(['/inventory/receipt/goods-receipt/goods-receipt-list']);
   }
 
+  openQuantityDialog(goodsReceiptContentId: string) {
+    this.displayQuantity = true;
+    this.goodsReceiptContentId = goodsReceiptContentId;
+  }
+
+  cancelQuantity(event) {
+    this.displayQuantity = event;
+    this.goodsReceiptService.getDetail(this.goodsReceiptId);
+  }
+
+  openBatchDialog(goodsReceiptContentId: string) {
+    this.displayBatch = true;
+    this.goodsReceiptContentId = goodsReceiptContentId;
+  }
+
+  cancelBatch(event) {
+    this.displayBatch = event;
+    this.goodsReceiptService.getDetail(this.goodsReceiptId);
+  }
+
+  openSerialNumberDialog(goodsReceiptContentId: string) {
+    this.displaySerialNumber = true;
+    this.goodsReceiptContentId = goodsReceiptContentId;
+  }
+
+  cancelSerialNumber(event) {
+    this.displaySerialNumber = event;
+    this.goodsReceiptService.getDetail(this.goodsReceiptId);
+  }
 }

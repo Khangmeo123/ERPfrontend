@@ -30,6 +30,8 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   @Input() control = new FormControl();
 
+  @Input() model: any;
+
   @Input() disabled: boolean = false;
 
   @Input() displayToggler = true;
@@ -96,6 +98,9 @@ export class DatePickerComponent implements OnInit, OnChanges {
         this.date = new Date(this.control.value);
       }
     }
+    if (this.model) {
+      this.date = new Date(this.model);
+    }
   }
 
   onMouseDown(datePicker) {
@@ -107,15 +112,15 @@ export class DatePickerComponent implements OnInit, OnChanges {
       this.checkCtrl = false;
       return;
     }
-    const {value} = event.target;
+    const { value } = event.target;
     if (value === '' || value === null) {
       this.date = null;
     }
   }
 
   onKeyDown(event) {
-    const {target, key} = event;
-    const {value} = target;
+    const { target, key } = event;
+    const { value } = target;
     if (key === 'Control') {
       this.checkCtrl = true;
     }

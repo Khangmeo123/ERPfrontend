@@ -34,7 +34,7 @@ export class GoodsReceiptReceiveRepository extends Repository {
 
   constructor(public http: HttpClient) {
     super(http);
-    this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt/goods-receipt-detail';
+    this.apiUrl = environment.apiUrlInv + 'inventory/receipt/goods-receipt/goods-receipt-receive';
   }
 
   getDetail = (id: string): Observable<GoodsReceipt> => {
@@ -50,22 +50,6 @@ export class GoodsReceiptReceiveRepository extends Repository {
     )
       .pipe(
         map(r => new GoodsReceipt(r.body)),
-      );
-  };
-
-  save = (goodsReceipt: GoodsReceipt): Observable<GoodsReceipt> => {
-    return this.http.post<GoodsReceipt>(
-      this.apiUrl + '/save',
-      goodsReceipt,
-      {
-        observe: 'response',
-        headers: this.getHeader(),
-      },
-    )
-      .pipe(
-        map(
-          r => new GoodsReceipt(r.body),
-        ),
       );
   };
 
@@ -85,11 +69,10 @@ export class GoodsReceiptReceiveRepository extends Repository {
       );
   };
 
-  singleListSupplier = (supplierDetailOfGoodsReceiptSearch: SupplierDetailOfGoodsReceiptSearch):
-    Observable<SupplierDetailOfGoodsReceipt[]> =>
-    this.http.post<SupplierDetailOfGoodsReceipt[]>(
-      this.apiUrl + '/single-list-supplier-detail',
-      supplierDetailOfGoodsReceiptSearch,
+  approve = (goodsReceipt: GoodsReceipt): Observable<GoodsReceipt> => {
+    return this.http.post<GoodsReceipt>(
+      this.apiUrl + '/approve',
+      goodsReceipt,
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -97,15 +80,15 @@ export class GoodsReceiptReceiveRepository extends Repository {
     )
       .pipe(
         map(
-          (response: HttpResponse<SupplierDetailOfGoodsReceipt[]>) => response.body.map((item) => new SupplierDetailOfGoodsReceipt(item)),
+          r => new GoodsReceipt(r.body),
         ),
       );
+  };
 
-  singleListSupplierContact = (supplierContactOfGoodsReceiptSearch: SupplierContactOfGoodsReceiptSearch):
-    Observable<SupplierContactOfGoodsReceipt[]> =>
-    this.http.post<SupplierContactOfGoodsReceipt[]>(
-      this.apiUrl + '/single-list-supplier-contact',
-      supplierContactOfGoodsReceiptSearch,
+  reject = (goodsReceipt: GoodsReceipt): Observable<GoodsReceipt> => {
+    return this.http.post<GoodsReceipt>(
+      this.apiUrl + '/reject',
+      goodsReceipt,
       {
         observe: 'response',
         headers: this.getHeader(),
@@ -113,25 +96,10 @@ export class GoodsReceiptReceiveRepository extends Repository {
     )
       .pipe(
         map(
-          (response: HttpResponse<SupplierContactOfGoodsReceipt[]>) => response.body.map((item) => new SupplierContactOfGoodsReceipt(item)),
+          r => new GoodsReceipt(r.body),
         ),
       );
-
-  singleListEmployeeDetail = (employeeDetailOfGoodsReceiptSearch: EmployeeDetailOfGoodsReceiptSearch):
-    Observable<EmployeeDetailOfGoodsReceipt[]> =>
-    this.http.post<EmployeeDetailOfGoodsReceipt[]>(
-      this.apiUrl + '/single-list-employee-detail',
-      employeeDetailOfGoodsReceiptSearch,
-      {
-        observe: 'response',
-        headers: this.getHeader(),
-      },
-    )
-      .pipe(
-        map(
-          (response: HttpResponse<EmployeeDetailOfGoodsReceipt[]>) => response.body.map((item) => new EmployeeDetailOfGoodsReceipt(item)),
-        ),
-      );
+  };
 
   singleListInventoryOrganization = (inventoryOrganizationOfGoodsReceiptSearch: InventoryOrganizationOfGoodsReceiptSearch):
     Observable<InventoryOrganizationOfGoodsReceipt[]> =>
