@@ -37,7 +37,12 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptDetail.binLocation' | translate}}: </span>
-          <jaja-select-list></jaja-select-list>
+          <jaja-select-list [getList]="batchDialogRepository.getBinLocationList" (change)="selectBinLocation($event)"
+            [searchEntity]="binLocationSearchEntity" [searchable]="true" appendTo="body" searchField="code">
+            <ng-template #label #option let-code="code">
+              {{code}}
+            </ng-template>
+          </jaja-select-list>
         </div>
       </div>
       <div class="col-sm-12 mt-2">
