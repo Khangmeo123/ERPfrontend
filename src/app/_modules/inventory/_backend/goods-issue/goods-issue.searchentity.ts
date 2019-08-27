@@ -3,7 +3,7 @@ import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { NumberFilter } from 'src/app/_shared/models/filters/NumberFilter';
 import { DateFilter } from 'src/app/_shared/models/filters/DateFilter';
 
-export class GoodsIssueSearchEntity extends SearchEntity {
+export class GoodsIssueSearch extends SearchEntity {
     documentDate: DateFilter = new DateFilter();
     dueDate: DateFilter = new DateFilter();
     employeeId: string = null;
@@ -32,12 +32,12 @@ export class GoodsIssueSearchEntity extends SearchEntity {
     packageWeight: string;
 
 
-    constructor(goodsIssueSearchEntity?: any) {
-        super(goodsIssueSearchEntity);
+    constructor(goodsIssueSearch?: any) {
+        super(goodsIssueSearch);
     }
 }
 
-export class RequesterSearchEntity extends SearchEntity {
+export class RequesterOfGoodsIssueSearch extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
 
@@ -46,7 +46,7 @@ export class RequesterSearchEntity extends SearchEntity {
     }
 }
 
-export class InventoryOrganizationSearchEntity extends SearchEntity {
+export class InventoryOrganizationOfGoodsIssueSearch extends SearchEntity {
 
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
@@ -57,37 +57,29 @@ export class InventoryOrganizationSearchEntity extends SearchEntity {
     }
 }
 
-export class UnitOfMeasureOfIssueSearchEntity extends SearchEntity {
+export class UnitOfMeasureOfGoodsIssueSearch extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
     type: string;
     description: string;
-    constructor(unitOfMeasureOfIssueSearchEntity?: any) {
-        super(unitOfMeasureOfIssueSearchEntity);
+    constructor(unitOfMeasureOfIssueOfGoodsIssueSearch?: any) {
+        super(unitOfMeasureOfIssueOfGoodsIssueSearch);
     }
 }
 
-export class ItemDetailOfIssueSearchEntity extends SearchEntity {
+export class ItemDetailOfGoodsIssueSearch extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
-    // inventoryOrganizationId: string = null;
-    constructor(itemDetailOfIssueSearchEntity?: any) {
+    constructor(itemDetaiOfGoodsIssueSearch?: any) {
         super();
-        // if (itemDetailOfIssueSearchEntity) {
-        //     this.inventoryOrganizationId = itemDetailOfIssueSearchEntity.inventoryOrganizationId !== null &&
-        //         itemDetailOfIssueSearchEntity.inventoryOrganizationId !== undefined ?
-        //         itemDetailOfIssueSearchEntity.inventoryOrganizationId : null;
-        //     this.existedIds = itemDetailOfIssueSearchEntity.existedIds !== null &&
-        //         itemDetailOfIssueSearchEntity.existedIds !== undefined ? itemDetailOfIssueSearchEntity.existedIds : [];
-        // }
     }
 }
 
-export class TaxOfIssueSearchEntity extends SearchEntity {
+export class TaxOfGoodsIssueSearch extends SearchEntity {
     code: TextFilter = new TextFilter();
     name: TextFilter = new TextFilter();
-    constructor(taxOfIssueSearchEntity?: any) {
-        super(taxOfIssueSearchEntity);
+    constructor(taxOfGoodsIssueSearch?: any) {
+        super(taxOfGoodsIssueSearch);
     }
 }
 

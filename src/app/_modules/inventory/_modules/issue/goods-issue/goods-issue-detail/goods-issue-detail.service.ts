@@ -5,9 +5,9 @@ import { Entities } from 'src/app/_helpers/entity';
 import { ToastrService } from 'ngx-toastr';
 import { GoodsIssueDetailRepository } from './goods-issue-detail.repository';
 import { SpinnerService } from 'src/app/_services';
-import { GoodsIssueEntity } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.entity';
 import { GoodsIssueForm } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.form';
 import { translate } from 'src/app/_helpers/string';
+import { GoodsIssue } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.entity';
 
 @Injectable()
 
@@ -28,61 +28,12 @@ export class GoodsIssueDetailService {
         this.inventoryOrganizationList = new BehaviorSubject(new Entities());
     }
 
-    send = (goodsIssueEntity: GoodsIssueEntity): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
-            this.goodsIssueDetailRepository
-                .send(goodsIssueEntity)
-                .subscribe(
-                    (responseEntity: GoodsIssueEntity) => {
-                        if (responseEntity) {
-                            this.toastrService.success(translate('general.update.success'));
-                            resolve();
-                        }
-                    },
-                    (error: Error) => {
-                        if (error) {
-                            this.toastrService.error(translate('general.update.error'));
-                            this.goodsIssueForm.next(
-                                this.fb.group(
-                                    new GoodsIssueForm(error),
-                                ),
-                            );
-                            reject();
-                        }
-                    });
-        });
-    };
 
-    save = (goodsIssueEntity: GoodsIssueEntity): Promise<void> => {
-        return new Promise<void>((resolve, reject) => {
-            this.goodsIssueDetailRepository
-                .save(goodsIssueEntity)
-                .subscribe(
-                    (responseEntity: GoodsIssueEntity) => {
-                        if (responseEntity) {
-                            this.toastrService.success(translate('general.update.success'));
-                            resolve();
-                        }
-                    },
-                    (error: Error) => {
-                        if (error) {
-                            this.toastrService.error(translate('general.update.error'));
-                            this.goodsIssueForm.next(
-                                this.fb.group(
-                                    new GoodsIssueForm(error),
-                                ),
-                            );
-                            reject();
-                        }
-                    });
-        });
-    };
-
-    public getDetail = (id: string): Promise<GoodsIssueEntity> => {
-        return new Promise<GoodsIssueEntity>((resolve, reject) => {
+    public getDetail = (id: string): Promise<GoodsIssue> => {
+        return new Promise<GoodsIssue>((resolve, reject) => {
             return this.goodsIssueDetailRepository.getDetail(id)
                 .subscribe(
-                    (goodsIssueEntity: GoodsIssueEntity) => {
+                    (goodsIssueEntity: GoodsIssue) => {
                         this.goodsIssueForm.next(
                             this.fb.group(
                                 new GoodsIssueForm(goodsIssueEntity),

@@ -1,6 +1,6 @@
 import { Entity } from 'src/app/_helpers/entity';
 
-export class GoodsIssueEntity extends Entity {
+export class GoodsIssue extends Entity {
     documentDate: string;
     dueDate: string;
     employeeId: string;
@@ -31,27 +31,27 @@ export class GoodsIssueEntity extends Entity {
     packageDimension: string;
     packageWeight: string;
     
-    constructor(goodsIssueEntity?: any) {
-        super(goodsIssueEntity);
+    constructor(goodsIssue?: any) {
+        super(goodsIssue);
       }
 }
 
-export class RequesterEntity extends Entity {
+export class RequesterOfGoodsIssue extends Entity {
     code: string;
     name: string;
 
-    constructor(requesterEntity?: any) {
-        super(requesterEntity);
+    constructor(requesterOfGoodsIssue?: any) {
+        super(requesterOfGoodsIssue);
     }
 }
 
-export class InventoryOrganizationEntity extends Entity {
+export class InventoryOrganizationOfGoodsIssue extends Entity {
     code: string;
     name: string;
     shortName: string;
 
-    constructor(inventoryOrganizationEntity?: any) {
-        super(inventoryOrganizationEntity);
+    constructor(inventoryOrganizationOfGoodsIssue?: any) {
+        super(inventoryOrganizationOfGoodsIssue);
     }
 }
 
@@ -77,34 +77,59 @@ export class GoodsIssueContents extends Entity {
     actualReceive: number = 0;
     isSelected: boolean = true;
 
-    constructor() {
-        super();
+    constructor(goodsIssueContents?: any) {
+        super(goodsIssueContents);
     }
 }
 
-export class UnitOfMeasureOfIssueEntity extends Entity {
+export class UnitOfMeasureOfGoodsIssue extends Entity {
     code: string;
     name: string;
     type: string;
     description: string;
-    constructor(unitOfMeasureOfIssueEntity?: any) {
-        super(unitOfMeasureOfIssueEntity);
+    constructor(unitOfMeasureOfGoodsIssue?: any) {
+        super(unitOfMeasureOfGoodsIssue);
     }
 }
 
-export class ItemDetailOfIssueEntity extends Entity {
+export class ItemDetailOfGoodsIssue extends Entity {
     code: string;
     name: string;
     // inventoryOrganizationId: string = null;
-    constructor(itemDetailOfIssueEntity?: any) {
-        super(itemDetailOfIssueEntity);
+    constructor(itemDetailOfGoodsIssue?: any) {
+        super(itemDetailOfGoodsIssue);
     }
 }
 
-export class TaxOfIssueEntity extends Entity {
+export class TaxOfGoodsIssue extends Entity {
     code: string;
     name: string;
-    constructor(taxOfIssueEntity?: any) {
-        super(taxOfIssueEntity);
+    constructor(taxOfGoodsIssue?: any) {
+        super(taxOfGoodsIssue);
     }
 }
+
+
+export class SerialNumberOfGoodsIssue extends Entity {
+    goodsIssueContentId: string;
+    itemName: string;
+    itemCode: string;
+    mfrSerialNumber: string;
+    serialNumber: string;
+    lotNumber: string;
+    quantity: number;
+    binLocationId: string;
+    binLocationCode: string;
+    expirationDate: string;
+    mfrDate: string;
+    admissionDate: string;
+    mfrWarrantyStart: string;
+    mfrWarrantyEnd: string;
+    location: string;
+    details: string;
+    qrCode: string;
+  
+    constructor(serialNumberOfGoodsIssue?) {
+      super(serialNumberOfGoodsIssue);
+    }
+  }

@@ -12,25 +12,37 @@ import {GoodsReturnListComponent} from './goods-return/goods-return-list/goods-r
 import {GoodsReturnDetailComponent} from './goods-return/goods-return-detail/goods-return-detail.component';
 import {GoodsReturnRequestListComponent} from './goods-return-request/goods-return-request-list/goods-return-request-list.component';
 import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-return-request-detail/goods-return-request-detail.component';
+import {GoodsIssueApproveComponent} from './goods-issue/goods-issue-approve/goods-issue-approve.component';
+import {GoodsIssueSendComponent} from './goods-issue/goods-issue-send/goods-issue-send.component';
+import { DeliveryOrderApproveComponent } from './delivery-order/delivery-order-approve/delivery-order-approve.component';
+import { DeliveryOrderSendComponent } from './delivery-order/delivery-order-send/delivery-order-send.component';
 
 const routes: Routes = [
   {
     path: '', children: [
       {
-        path: 'delivery-order',
+        path: 'delivery',
         component: DeliveryOrderComponent,
         children: [
           {
-            path: 'delivery-order-list',
+            path: 'delivery-list',
             component: DeliveryOrderListComponent,
           },
           {
-            path: 'delivery-order-detail',
+            path: 'delivery-detail',
             component: DeliveryOrderDetailComponent,
           },
           {
+            path: 'delivery-approve',
+            component: DeliveryOrderApproveComponent,
+          },
+          {
+            path: 'delivery-send',
+            component: DeliveryOrderSendComponent,
+          },
+          {
             path: '',
-            redirectTo: 'delivery-order-list',
+            redirectTo: 'delivery-list',
             pathMatch: 'full',
           },
         ],
@@ -84,6 +96,14 @@ const routes: Routes = [
           {
             path: 'goods-issue-detail',
             component: GoodsIssueDetailComponent,
+          },
+          {
+            path: 'goods-issue-approve',
+            component: GoodsIssueApproveComponent,
+          },
+          {
+            path: 'goods-issue-receive',
+            component: GoodsIssueSendComponent,
           },
           {
             path: '',

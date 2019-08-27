@@ -29,6 +29,10 @@ import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { ErrorModule } from 'src/app/_shared/components/error/error.module';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {GoodsIssueApproveComponent} from './goods-issue/goods-issue-approve/goods-issue-approve.component';
+import {GoodsIssueSendComponent} from './goods-issue/goods-issue-send/goods-issue-send.component';
+import { DeliveryOrderSendComponent } from './delivery-order/delivery-order-send/delivery-order-send.component';
+import { DeliveryOrderApproveComponent } from './delivery-order/delivery-order-approve/delivery-order-approve.component';
 
 
 @NgModule({
@@ -39,12 +43,17 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog';
     GoodsIssueComponent,
     DeliveryOrderListComponent,
     DeliveryOrderDetailComponent,
+    DeliveryOrderApproveComponent,
+    DeliveryOrderSendComponent,
     GoodsIssueDetailComponent,
     GoodsIssueListComponent,
+    GoodsIssueApproveComponent,
+    GoodsIssueSendComponent,
     GoodsReturnDetailComponent,
     GoodsReturnListComponent,
     GoodsReturnRequestListComponent,
-    GoodsReturnRequestDetailComponent],
+    GoodsReturnRequestDetailComponent,
+     ],
   imports: [
     CommonModule,
     IssueRoutingModule,

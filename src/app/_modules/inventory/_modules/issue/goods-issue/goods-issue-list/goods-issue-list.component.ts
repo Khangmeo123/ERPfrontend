@@ -3,16 +3,16 @@ import {translate} from '../../../../../../_helpers/string';
 import { Router } from '@angular/router';
 import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
 import { Subscription } from 'rxjs';
-import { GoodsIssueEntity } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.entity';
-import {
-  GoodsIssueSearchEntity,
-  RequesterSearchEntity,
-  InventoryOrganizationSearchEntity,
-} from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.searchentity';
 import { EnumEntity } from 'src/app/_helpers/entity';
 import { GoodsIssueListService } from './goods-issue-list.service';
 import { BookmarkService } from 'src/app/_services';
 import { GoodsIssueRepository } from './goods-issue-list.repository';
+import {GoodsIssue} from '../../../../_backend/goods-issue/goods-issue.entity';
+import {
+  GoodsIssueSearch,
+  InventoryOrganizationOfGoodsIssueSearch,
+  RequesterOfGoodsIssueSearch
+} from '../../../../_backend/goods-issue/goods-issue.searchentity';
 
 @Component({
   selector: 'app-delivery-order-list',
@@ -28,14 +28,14 @@ export class GoodsIssueListComponent implements OnInit, OnDestroy {
   goodsIssueSubs: Subscription = new Subscription();
 
   // goodsIssue
-  goodsIssueList: GoodsIssueEntity[];
-  goodsIssueSearchEntity: GoodsIssueSearchEntity = new GoodsIssueSearchEntity();
+  goodsIssueList: GoodsIssue[];
+  goodsIssueSearchEntity: GoodsIssueSearch = new GoodsIssueSearch();
 
   // requester:
-  requesterSearchEntity: RequesterSearchEntity = new RequesterSearchEntity();
+  requesterSearchEntity: RequesterOfGoodsIssueSearch = new RequesterOfGoodsIssueSearch();
 
   // inventoryOrganization:
-  inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
+  inventoryOrganizationSearchEntity: InventoryOrganizationOfGoodsIssueSearch = new InventoryOrganizationOfGoodsIssueSearch();
 
   // status:
   statusList: EnumEntity[];
@@ -85,14 +85,6 @@ export class GoodsIssueListComponent implements OnInit, OnDestroy {
   }
 
 
-  openDatePicker(matDatePicker) {
-    matDatePicker.open();
-  }
-
-  openToDatePicker(matDatePicker) {
-    matDatePicker.open();
-  }
-
   getList() {
     this.pagination.pageNumber = 1;
     this.goodsIssueSearchEntity.skip = 0;
@@ -107,7 +99,7 @@ export class GoodsIssueListComponent implements OnInit, OnDestroy {
   }
 
   clearSearch(table: any) {
-    this.goodsIssueSearchEntity = new GoodsIssueSearchEntity();
+    this.goodsIssueSearchEntity = new GoodsIssueSearch();
     table.reset();
   }
 

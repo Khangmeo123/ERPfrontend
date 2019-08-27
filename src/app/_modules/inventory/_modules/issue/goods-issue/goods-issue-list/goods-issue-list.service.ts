@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { GoodsIssueRepository } from './goods-issue-list.repository';
-import { GoodsIssueEntity } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.entity';
 import { BehaviorSubject, Subscription, forkJoin } from 'rxjs';
-import { GoodsIssueSearchEntity } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.searchentity';
 import { EnumEntity } from 'src/app/_helpers/entity';
+import {GoodsIssueSearch} from '../../../../_backend/goods-issue/goods-issue.searchentity';
+import {GoodsIssue} from '../../../../_backend/goods-issue/goods-issue.entity';
 
 @Injectable()
 export class GoodsIssueListService {
 
-    public goodsIssueList: BehaviorSubject<GoodsIssueEntity[]> = new BehaviorSubject<GoodsIssueEntity[]>([]);
+    public goodsIssueList: BehaviorSubject<GoodsIssue[]> = new BehaviorSubject<GoodsIssue[]>([]);
     public goodsIssueCount: BehaviorSubject<number> = new BehaviorSubject<number>(0);
     public statusList: BehaviorSubject<EnumEntity[]> = new BehaviorSubject<EnumEntity[]>([]);
     
@@ -19,7 +19,7 @@ export class GoodsIssueListService {
       ) {
       }
 
-      getList = (goodsIssueSearchEntity: GoodsIssueSearchEntity): Subscription => {
+      getList = (goodsIssueSearchEntity: GoodsIssueSearch): Subscription => {
         return forkJoin(
           this.goodsIssueRepository.getList(goodsIssueSearchEntity),
           this.goodsIssueRepository.count(goodsIssueSearchEntity),

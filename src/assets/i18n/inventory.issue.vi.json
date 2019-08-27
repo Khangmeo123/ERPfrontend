@@ -139,10 +139,10 @@
             "creator": "Người tạo",
             "description": "Mô tả",
             "documentNumber": "Số chứng từ ",
-            "exporter": "Người xuất hàng",
             "form": {
                 "title": "Thông tin chung"
             },
+            "freight": "",
             "goodsIssueRequest": {
                 "buyer": "Người mua",
                 "createdDate": "Ngày tạo",
@@ -155,6 +155,8 @@
             },
             "inventoryAddress": "Địa chỉ kho",
             "inventoryCode": "Mã kho",
+            "packageDimension": "",
+            "packageWeight": "",
             "personInCharge": "Nhân viên phụ trách",
             "qrCode": {
                 "code": "QR code",
@@ -170,7 +172,6 @@
                 "title ": "Chi tiết QR code"
             },
             "receiptedDate": "Ngày thực hiện",
-            "shipper": "Người giao hàng",
             "tab1": {
                 "Serial": "Serial",
                 "amount": "Số lương",
@@ -191,6 +192,10 @@
                 "title": "Đính kèm"
             }
         },
+        "filters": {
+            "inventoryOrganizationCode": "",
+            "requester": ""
+        },
         "form": {
             "post": {
                 "title": "Bình luận"
@@ -208,6 +213,16 @@
             "inventoryCode": "Mã kho",
             "receiptedDate": "Ngày thực hiện",
             "status": "Trang thái"
+        }
+    },
+    "goodsIssueList": {
+        "filters": {
+            "status": ""
+        }
+    },
+    "goodsReceiptPODetail": {
+        "get": {
+            "error": ""
         }
     },
     "goodsReturn": {

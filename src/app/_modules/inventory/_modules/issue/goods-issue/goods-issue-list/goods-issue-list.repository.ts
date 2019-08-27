@@ -2,15 +2,15 @@ import { Repository } from 'src/app/_repositories/repository';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { GoodsIssueEntity, InventoryOrganizationEntity, RequesterEntity } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.entity';
-import { Observable } from 'rxjs';
-import {
-    GoodsIssueSearchEntity,
-    InventoryOrganizationSearchEntity,
-    RequesterSearchEntity,
-} from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.searchentity';
 import { map } from 'rxjs/operators';
 import { EnumEntity } from 'src/app/_helpers/entity';
+import {
+  GoodsIssueSearch,
+  InventoryOrganizationOfGoodsIssueSearch,
+  RequesterOfGoodsIssueSearch
+} from '../../../../_backend/goods-issue/goods-issue.searchentity';
+import {GoodsIssue, InventoryOrganizationOfGoodsIssue, RequesterOfGoodsIssue} from '../../../../_backend/goods-issue/goods-issue.entity';
+import {Observable} from 'rxjs';
 
 @Injectable({
     providedIn: 'root',
@@ -23,10 +23,10 @@ export class GoodsIssueRepository extends Repository {
     }
 
 
-    getList = (goodsReceiptPOSearchEntity: GoodsIssueSearchEntity): Observable<GoodsIssueEntity[]> => {
-        return this.http.post<GoodsIssueEntity[]>(
+    getList = (goodsIssueSearchEntity: GoodsIssueSearch): Observable<GoodsIssue[]> => {
+        return this.http.post<GoodsIssue[]>(
             this.apiUrl + '/list',
-            goodsReceiptPOSearchEntity,
+          goodsIssueSearchEntity,
             {
                 observe: 'response',
                 headers: this.getHeader(),
@@ -34,15 +34,15 @@ export class GoodsIssueRepository extends Repository {
         )
             .pipe(
                 map(
-                    (response: HttpResponse<GoodsIssueEntity[]>) => response.body,
+                    (response: HttpResponse<GoodsIssue[]>) => response.body,
                 ),
             );
     };
 
-    count = (goodsReceiptPOSearchEntity: GoodsIssueSearchEntity): Observable<number> => {
+    count = (goodsIssueSearch: GoodsIssueSearch): Observable<number> => {
         return this.http.post<number>(
             this.apiUrl + '/count',
-            goodsReceiptPOSearchEntity,
+          goodsIssueSearch,
             {
                 observe: 'response',
                 headers: this.getHeader(),
@@ -55,8 +55,8 @@ export class GoodsIssueRepository extends Repository {
             );
     };
 
-    singleListInventoryOrganization = (inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity) => {
-        return this.http.post<InventoryOrganizationEntity[]>(
+    singleListInventoryOrganization = (inventoryOrganizationSearchEntity: InventoryOrganizationOfGoodsIssueSearch) => {
+        return this.http.post<InventoryOrganizationOfGoodsIssue[]>(
             this.apiUrl + '/single-list-inventory-organization',
             inventoryOrganizationSearchEntity,
             {
@@ -66,7 +66,7 @@ export class GoodsIssueRepository extends Repository {
         )
             .pipe(
                 map(
-                    (response: HttpResponse<InventoryOrganizationEntity[]>) => response.body,
+                    (response: HttpResponse<InventoryOrganizationOfGoodsIssue[]>) => response.body,
                 ),
             );
     };
@@ -87,8 +87,8 @@ export class GoodsIssueRepository extends Repository {
             );
     };
 
-    singleListRequester = (requesterSearchEntity: RequesterSearchEntity) => {
-        return this.http.post<RequesterEntity[]>(
+    singleListRequester = (requesterSearchEntity: RequesterOfGoodsIssueSearch) => {
+        return this.http.post<RequesterOfGoodsIssue[]>(
           this.apiUrl + '/single-list-requester',
           requesterSearchEntity,
           {
@@ -98,7 +98,7 @@ export class GoodsIssueRepository extends Repository {
         )
           .pipe(
             map(
-              (response: HttpResponse<RequesterEntity[]>) => response.body,
+              (response: HttpResponse<RequesterOfGoodsIssue[]>) => response.body,
             ),
           );
       };

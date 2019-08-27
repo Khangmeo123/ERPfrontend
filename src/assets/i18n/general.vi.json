@@ -1,6 +1,10 @@
 {
     "general": {
         "action": "Thao tác",
+        "approve": {
+            "error": "",
+            "success": ""
+        },
         "button": {
             "add": "Thêm",
             "addRow": "Bấm vào để thêm mới...",
@@ -35,7 +39,8 @@
             "save": "Lưu",
             "send": "Gửi",
             "update": "Cập nhật",
-            "upload": "Tải lên"
+            "upload": "Tải lên",
+            "uploaded": ""
         },
         "completed": "Hoàn thành",
         "confirmation": {
@@ -82,6 +87,7 @@
         "open": "Khởi tạo",
         "pending": "Chờ duyệt",
         "pendingCounting": "Chờ kiểm kê",
+        "pendingIssue": "Chờ xuất",
         "pendingReceive": "Chờ nhận",
         "pendingTransfer": "Chờ gửi",
         "project": {

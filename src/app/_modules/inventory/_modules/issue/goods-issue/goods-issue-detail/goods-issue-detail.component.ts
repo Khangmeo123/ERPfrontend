@@ -6,14 +6,19 @@ import { Subscription } from 'rxjs';
 import { GoodsIssueDetailService } from './goods-issue-detail.service';
 import { GeneralService } from 'src/app/_services/general-service.service';
 import { GoodsIssueDetailRepository } from './goods-issue-detail.repository';
-import { InventoryOrganizationSearchEntity, RequesterSearchEntity, GoodsIssueContentsSearch, ItemDetailOfIssueSearchEntity, UnitOfMeasureOfIssueSearchEntity } from 'src/app/_modules/inventory/_backend/goods-issue/goods-issue.searchentity';
+import {ItemDetailOfGoodsIssue} from '../../../../_backend/goods-issue/goods-issue.entity';
+import {
+  GoodsIssueContentsSearch, InventoryOrganizationOfGoodsIssueSearch,
+  ItemDetailOfGoodsIssueSearch, RequesterOfGoodsIssueSearch,
+  UnitOfMeasureOfGoodsIssueSearch,
+} from '../../../../_backend/goods-issue/goods-issue.searchentity';
 
 @Component({
   selector: 'app-delivery-order-detail',
   templateUrl: './goods-issue-detail.component.html',
   styleUrls: ['./goods-issue-detail.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [GoodsIssueDetailService]
+  providers: [GoodsIssueDetailService],
 })
 export class GoodsIssueDetailComponent implements OnInit, OnDestroy {
   pageTitle = translate('goodsIssue.detail.header.title');
@@ -24,13 +29,13 @@ export class GoodsIssueDetailComponent implements OnInit, OnDestroy {
   goodsIssueSubs: Subscription = new Subscription();
 
   goodsIssueContentSearch: GoodsIssueContentsSearch = new GoodsIssueContentsSearch();
-  itemDetailSearch: ItemDetailOfIssueSearchEntity = new ItemDetailOfIssueSearchEntity();
-  unitOfMeasureSearch: UnitOfMeasureOfIssueSearchEntity = new UnitOfMeasureOfIssueSearchEntity();
+  itemDetailSearch: ItemDetailOfGoodsIssueSearch = new ItemDetailOfGoodsIssueSearch();
+  unitOfMeasureSearch: UnitOfMeasureOfGoodsIssueSearch = new UnitOfMeasureOfGoodsIssueSearch();
 
   // inventoryOrganization:
-  inventoryOrganizationSearchEntity: InventoryOrganizationSearchEntity = new InventoryOrganizationSearchEntity();
-  requesterSearchEntity: RequesterSearchEntity = new RequesterSearchEntity();
-  ownerSearchEntity: RequesterSearchEntity = new RequesterSearchEntity();
+  inventoryOrganizationSearchEntity: InventoryOrganizationOfGoodsIssueSearch = new InventoryOrganizationOfGoodsIssueSearch();
+  requesterSearchEntity: RequesterOfGoodsIssueSearch = new RequesterOfGoodsIssueSearch();
+  ownerSearchEntity: RequesterOfGoodsIssueSearch = new RequesterOfGoodsIssueSearch();
 
   displayBatches: boolean = false;
   displaySerial: boolean = false;
@@ -97,23 +102,23 @@ export class GoodsIssueDetailComponent implements OnInit, OnDestroy {
   }
 
   save() {
-    if (!this.goodsIssueForm.valid) {
-      this.generalService.validateAllFormFields(this.goodsIssueForm);
-    } else {
-      this.goodsIssueDetailService.save(this.goodsIssueForm.value).then(res => {
-        this.backToList();
-      });
-    }
+    // if (!this.goodsIssueForm.valid) {
+    //   this.generalService.validateAllFormFields(this.goodsIssueForm);
+    // } else {
+    //   this.goodsIssueDetailService.save(this.goodsIssueForm.value).then(res => {
+    //     this.backToList();
+    //   });
+    // }
   }
 
   send() {
-    if (!this.goodsIssueForm.valid) {
-      this.generalService.validateAllFormFields(this.goodsIssueForm);
-    } else {
-      this.goodsIssueDetailService.send(this.goodsIssueForm.value).then(res => {
-        this.backToList();
-      });
-    }
+    // if (!this.goodsIssueForm.valid) {
+    //   this.generalService.validateAllFormFields(this.goodsIssueForm);
+    // } else {
+    //   this.goodsIssueDetailService.send(this.goodsIssueForm.value).then(res => {
+    //     this.backToList();
+    //   });
+    // }
   }
 
   onSelectInventoryOrganization(event) {
