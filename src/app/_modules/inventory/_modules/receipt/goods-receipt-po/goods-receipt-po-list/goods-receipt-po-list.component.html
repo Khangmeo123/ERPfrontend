@@ -54,71 +54,66 @@
                 type="button">
           {{'general.button.getData' | translate}}</button>
       </div>
-
-      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true"
-               [resizableColumns]="true" [scrollable]="true" [value]="goodsReceiptPOList" scrollHeight="500px">
-        <ng-template pTemplate="colgroup">
-          <colgroup>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-            <col>
-          </colgroup>
-        </ng-template>
+      <p-table #table
+               (onLazyLoad)="sort($event)"
+               [customSort]="true"
+               [lazy]="true"
+               [columns]="selectedColumns"
+               [resizableColumns]="true"
+               dataKey="id"
+               [scrollable]="true"
+               [value]="goodsReceiptPOList"
+               scrollHeight="512px">
         <ng-template pTemplate="header">
           <tr>
-            <th data-qe-id="table-thead-documentDate" pResizableColumn>
-              {{ 'goodsReceiptPO.createdDate' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
-            </th>
-            <th data-qe-id="table-thead-documentNumber" pResizableColumn>
+            <th [ngStyle]="{width: '4em'}" pResizableColumn></th>
+            <th data-qe-id="table-thead-documentNumber" pResizableColumn *ngIf="selectedKeys?.documentNumber">
               {{ 'goodsReceiptPO.purchaseOrderNumber' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th data-qe-id="table-thead-dueDate" pResizableColumn>
+            <th data-qe-id="table-thead-documentDate" pResizableColumn *ngIf="selectedKeys?.postingDate">
+              {{ 'goodsReceiptPO.createdDate' | translate}}
+              <p-sortIcon class="float-right"></p-sortIcon>
+            </th>
+            <th data-qe-id="table-thead-dueDate" pResizableColumn *ngIf="selectedKeys?.dueDate">
               {{ 'goodsReceiptPO.receiptedDate' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th data-qe-id="table-thead-inventoryOrganizationCode" pResizableColumn>
-              {{ 'goodsReceiptPO.inventoryCode' | translate}}
+            <th data-qe-id="table-thead-inventoryOrganizationCode" pResizableColumn
+                *ngIf="selectedKeys?.inventoryOrganization">
+              {{ 'goodsReceiptPO.inventory' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th data-qe-id="table-thead-inventoryOrganizationAddress" pResizableColumn>
-              {{ 'goodsReceiptPO.inventoryAddress' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
-            </th>
-            <th data-qe-id="table-thead-remarks" pResizableColumn>
+            <th data-qe-id="table-thead-remarks" pResizableColumn *ngIf="selectedKeys?.remarks">
               {{ 'goodsReceiptPO.description' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th data-qe-id="table-thead-requester" pResizableColumn>
+            <th data-qe-id="table-thead-requester" pResizableColumn *ngIf="selectedKeys?.requester">
               {{ 'goodsReceiptPO.creator' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th data-qe-id="table-thead-status" pResizableColumn>
+            <th data-qe-id="table-thead-status" pResizableColumn *ngIf="selectedKeys?.status">
               {{ 'goodsReceiptPO.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
             <th class="actions" pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
-            <th class="th-filter"></th>
+            <th class="th-filter" [ngStyle]="{width: '4em'}" pResizableColumn>
+            </th>
             <th class="th-filter">
               <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptPOSearchEntity.documentNumber"
                                     data-qe-id="table-thead-filter-documentNumber">
               </app-advanced-filters>
             </th>
             <th class="th-filter">
+            </th>
+            <th class="th-filter" *ngIf="selectedKeys?.dueDate">
               <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptPOSearchEntity.dueDate"
                                     data-qe-id="table-thead-filter-dueDate">
               </app-advanced-filters>
             </th>
-            <th class="th-filter">
+            <th class="th-filter" *ngIf="selectedKeys?.inventoryOrganization">
               <jaja-select-list
                 (change)="onFilterInventoryOrganization($event)"
                 [display]="goodsReceiptPOSearchEntity.inventoryOrganizationCode"
@@ -128,25 +123,18 @@
                 appendTo="body"
                 placeholder="{{'goodsReceiptPOList.filters.inventoryOrganizationCode' | translate}}"
                 searchField="code"
-                searchType="startsWith"
-              >
+                searchType="startsWith">
                 <ng-template #label #option let-code="code" let-name="name">
                   {{code}} - {{name}}
                 </ng-template>
               </jaja-select-list>
             </th>
-            <th class="th-filter">
-              <app-advanced-filters (changeFilter)="getList()"
-                                    [filter]="goodsReceiptPOSearchEntity.inventoryOrganizationStreet"
-                                    data-qe-id="table-thead-filter-inventoryOrganizationStreet">
-              </app-advanced-filters>
-            </th>
-            <th class="th-filter">
+            <th class="th-filter" *ngIf="selectedKeys?.remarks">
               <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptPOSearchEntity.remarks"
                                     data-qe-id="table-thead-filter-remarks">
               </app-advanced-filters>
             </th>
-            <th class="th-filter">
+            <th class="th-filter" *ngIf="selectedKeys?.requester">
               <jaja-select-list
                 (change)="onFilterRequester($event)"
                 [display]="goodsReceiptPOSearchEntity?.requesterName"
@@ -163,7 +151,7 @@
                 </ng-template>
               </jaja-select-list>
             </th>
-            <th class="th-filter">
+            <th class="th-filter" *ngIf="selectedKeys?.status">
               <jaja-select-list
                 (change)="onFilterStatus($event)"
                 [display]="goodsReceiptPOSearchEntity?.statusDisplay"
@@ -175,20 +163,41 @@
                 </ng-template>
               </jaja-select-list>
             </th>
-            <th class="th-filter actions"></th>
+            <th class="th-filter actions">
+              <p-multiSelect [options]="columns"
+                             [(ngModel)]="selectedColumns"
+                             optionLabel="header"
+                             selectedItemsLabel=""
+                             [style]="{minWidth: '200px'}"
+                             (onChange)="onChangeColumns($event)"
+                             defaultLabel=""></p-multiSelect>
+            </th>
           </tr>
         </ng-template>
-        <ng-template let-goodsReceiptPO let-index="rowIndex" pTemplate="body">
+        <ng-template let-goodsReceiptPO let-index="rowIndex" pTemplate="body" let-expanded="expanded">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td class="ui-resizable-column"> {{goodsReceiptPO.documentDate | date: 'dd/MM/yyyy'}} </td>
-            <td class="ui-resizable-column"> {{goodsReceiptPO.documentNumber}} </td>
-            <td class="ui-resizable-column"> {{goodsReceiptPO.dueDate | date: 'dd/MM/yyyy'}} </td>
-            <td class="ui-resizable-column"> {{goodsReceiptPO.inventoryOrganizationCode}} </td>
-            <td class="ui-resizable-column"> {{goodsReceiptPO.inventoryOrganizationStreet}} </td>
-            <td class="ui-resizable-column"> {{goodsReceiptPO.remarks }} </td>
-            <td class="ui-resizable-column"> {{goodsReceiptPO.requesterName }} </td>
-            <td class="text-center ui-resizable-column">
-              <div [ngSwitch]="goodsReceiptPO.statusName">
+            <td class="ui-resizable-column" [ngStyle]="{width: '4em'}" pResizableColumn>
+              <a role="button" class="btn btn-link text-primary" [pRowToggler]="goodsReceiptPO"
+                 (click)="onGetContent(goodsReceiptPO)">
+                <i class="material-icons">{{expanded ? 'remove' : 'add'}}</i>
+              </a>
+            </td>
+            <td class="ui-resizable-column"
+                *ngIf="selectedKeys?.documentNumber"> {{goodsReceiptPO.documentNumber}} </td>
+            <td class="ui-resizable-column"
+                *ngIf="selectedKeys?.postingDate"> {{goodsReceiptPO.documentDate | date: 'dd/MM/yyyy'}} </td>
+            <td class="ui-resizable-column"
+                *ngIf="selectedKeys?.dueDate"> {{goodsReceiptPO.dueDate | date: 'dd/MM/yyyy'}} </td>
+            <td class="ui-resizable-column"
+                *ngIf="selectedKeys?.inventoryOrganization"> {{goodsReceiptPO.inventoryOrganizationCode}}
+              - {{goodsReceiptPO.inventoryOrganizationStreet}} </td>
+            <td class="ui-resizable-column"
+                *ngIf="selectedKeys?.remarks"> {{goodsReceiptPO.remarks }} </td>
+            <td class="ui-resizable-column"
+                *ngIf="selectedKeys?.requester"> {{goodsReceiptPO.requesterName }} </td>
+            <td class="text-center ui-resizable-column"
+                *ngIf="selectedKeys?.status">
+              <div [ngSwitch]="goodsReceiptPO.statusName">/
                 <a *ngSwitchCase="'OPEN'" [queryParams]="{id: goodsReceiptPO.id}"
                    class="ml-2 open-status"
                    routerLink="/inventory/receipt/goods-receipt-po/goods-receipt-po-detail">{{'general.open'| translate}}</a>
@@ -211,11 +220,81 @@
             </td>
           </tr>
         </ng-template>
+        <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
+          <tr>
+            <td [attr.colspan]="2"></td>
+            <td [attr.colspan]="8">
+              <table class="ui-table" *ngIf="rowData.goodsReceiptPOContents; else tableLoading">
+                <thead>
+                <tr>
+                  <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.purchaseOrderNumber' | translate}}
+                  </th>
+                  <th data-qe-id="table-thead-item-no" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.itemNo' | translate}} </th>
+                  <th data-qe-id="table-thead-purchase-order-number" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.itemName' | translate}} </th>
+                  <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.unitOfMeasure' | translate}}
+                  </th>
+                  <th data-qe-id="table-thead-quantity" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.quantity' | translate}} </th>
+                  <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.unitPrice' | translate}}
+                  </th>
+                  <th data-qe-id="table-thead-value-added-tax" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.valueAddedTax' | translate}}
+                    (%)
+                  </th>
+                  <th data-qe-id="table-thead-discount" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.discount' | translate}} (%)
+                  </th>
+                  <th data-qe-id="table-thead-discount-amount" pResizableColumn>
+                    {{'goodsReceiptPO.goodsReceiptPOContents.discountAmount' | translate}}
+                  </th>
+                  <th class="value">
+                    {{'goodsReceiptPO.goodsReceiptPOContents.total' | translate}}
+                  </th>
+                </tr>
+                </thead>
+                <tbody class="ui-table-tbody">
+                <tr *ngFor="let goodsReceiptPOContent of rowData.goodsReceiptPOContents">
+                  <td class="ui-resizable-column">{{goodsReceiptPOContent.documentNumber}}</td>
+                  <td class="ui-resizable-column">{{goodsReceiptPOContent.itemCode}}</td>
+                  <td class="ui-resizable-column">{{goodsReceiptPOContent.itemName}}</td>
+                  <td class="ui-resizable-column">{{goodsReceiptPOContent.unitOfMeasureName}}</td>
+                  <td class="ui-resizable-column">
+                    {{goodsReceiptPOContent.quantity}}
+                  </td>
+                  <td class="ui-resizable-column text-right">{{goodsReceiptPOContent.unitPrice}}
+                  </td>
+                  <td class="ui-resizable-column text-right">{{goodsReceiptPOContent.taxRate}}
+                  </td>
+                  <td class="ui-resizable-column text-right">
+                    {{goodsReceiptPOContent.itemDiscountRate}}
+                  </td>
+                  <td class="ui-resizable-column text-right">
+                    {{goodsReceiptPOContent.itemDiscountCost}}
+                  </td>
+                  <td class="text-right value">
+                    {{goodsReceiptPOContent.total}}
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <ng-template #tableLoading>
+                <div class="table-loading">
+                  <nz-spin nzSimple></nz-spin>
+                </div>
+              </ng-template>
+            </td>
+          </tr>
+        </ng-template>
+        <div class="pagination flex-grow-1">
+          <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination" data-qe-id="pagination">
+          </app-pagination>
+        </div>
       </p-table>
-      <div class="pagination">
-        <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination" data-qe-id="pagination">
-        </app-pagination>
-      </div>
     </div>
   </div>
 </div>

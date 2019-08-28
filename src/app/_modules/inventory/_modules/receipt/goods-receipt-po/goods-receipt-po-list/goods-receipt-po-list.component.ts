@@ -2,26 +2,40 @@ import {
   EmployeeDetailSearchEntity,
   InventoryOrganizationSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { Subscription } from 'rxjs';
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { translate } from '../../../../../../_helpers/string';
-import { Router } from '@angular/router';
-import { GoodsReceiptPOListService } from './goods-receipt-po-list.service';
-import { GeneralService } from 'src/app/_services/general-service.service';
-import { BookmarkService } from 'src/app/_services';
-import { GoodsReceiptPOEntity } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import { GoodsReceiptPOSearchEntity } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { PaginationModel } from 'src/app/_shared/modules/pagination/pagination.model';
-import { EnumEntity } from 'src/app/_helpers/entity';
-import { GoodsReceiptPOListRepository } from './goods-receipt-po-list.repository';
+import {Subscription} from 'rxjs';
+import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
+import {translate} from '../../../../../../_helpers/string';
+import {Router} from '@angular/router';
+import {GoodsReceiptPOListService} from './goods-receipt-po-list.service';
+import {GeneralService} from 'src/app/_services/general-service.service';
+import {BookmarkService} from 'src/app/_services';
+import {GoodsReceiptPOEntity} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
+import {GoodsReceiptPOSearchEntity} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.searchentity';
+import {PaginationModel} from 'src/app/_shared/modules/pagination/pagination.model';
+import {EnumEntity} from 'src/app/_helpers/entity';
+import {GoodsReceiptPOListRepository} from './goods-receipt-po-list.repository';
 
 @Component({
   selector: 'app-goods-receipt-po-list',
   templateUrl: './goods-receipt-po-list.component.html',
   styleUrls: ['./goods-receipt-po-list.component.scss'],
   providers: [GoodsReceiptPOListService],
+  encapsulation: ViewEncapsulation.None,
 })
 export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
+
+  columns: string[] = [
+    'documentNumber',
+    'documentDate',
+    'postingDate',
+    'inventoryOrganization',
+    'remarks',
+    'requester',
+    'status',
+  ];
+
+  selectedColumns = [];
+
   pageTitle = translate('goodsReceiptPO.header.title');
 
   isBookMark: boolean = false;
@@ -43,6 +57,8 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
   // status:
   statusList: EnumEntity[];
 
+  selectedKeys = {};
+
   constructor(
     private goodsReceiptPOService: GoodsReceiptPOListService,
     private generalService: GeneralService,
@@ -51,31 +67,31 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     private goodsReceiptPOListRepository: GoodsReceiptPOListRepository,
   ) {
     // goodReceiptPO
-    const goodReceiptPOListSub = this.goodsReceiptPOService.goodsReceiptPOList.subscribe(res => {
+    const goodReceiptPOListSub = this.goodsReceiptPOService.goodsReceiptPOList.subscribe((res) => {
       if (res) {
         this.goodsReceiptPOList = res;
       }
     });
-    const goodReceiptPOCountSub = this.goodsReceiptPOService.goodsReceiptPOCount.subscribe(res => {
+    const goodReceiptPOCountSub = this.goodsReceiptPOService.goodsReceiptPOCount.subscribe((res) => {
       if (res) {
         this.pagination.totalItems = res;
       }
     });
-
     // status:
-    const statusListSub = this.goodsReceiptPOService.statusList.subscribe(res => {
+    const statusListSub = this.goodsReceiptPOService.statusList.subscribe((res) => {
       if (res) {
         this.statusList = res;
       }
     });
     // bookmark:
-    const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe(res => {
+    const bookMarkNotify = this.bookmarkService.pushItemObs.subscribe((res) => {
       this.isBookMark = res;
     });
     this.bookmarkService.checkBookMarks({name: this.pageTitle, route: this.router.url});
 
     // add subscription:
-    this.goodsReceiptPOSubs.add(goodReceiptPOListSub)
+    this.goodsReceiptPOSubs
+      .add(goodReceiptPOListSub)
       .add(goodReceiptPOCountSub)
       .add(statusListSub)
       .add(bookMarkNotify);
@@ -145,5 +161,23 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
     this.goodsReceiptPOSearchEntity.requesterId = requester.id;
     this.goodsReceiptPOSearchEntity.requesterName = requester.name;
     this.getList();
+  }
+
+  onGetContent = (rowData) => {
+    if (!rowData.goodsReceiptPOContent) {
+      this.goodsReceiptPOListRepository.getDetail(rowData.id)
+        .subscribe(
+          (goodsReceiptPOEntity: GoodsReceiptPOEntity) => {
+            rowData.goodsReceiptPOContents = goodsReceiptPOEntity.goodsReceiptPOContents;
+          },
+        );
+    }
+  };
+
+  onChangeColumns(event) {
+    this.selectedKeys = {};
+    this.selectedColumns.forEach((column) => {
+      this.selectedKeys[column] = column;
+    });
   }
 }

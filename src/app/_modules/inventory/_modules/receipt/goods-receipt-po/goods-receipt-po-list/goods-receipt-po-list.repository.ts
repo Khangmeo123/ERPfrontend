@@ -1,17 +1,21 @@
-import { Repository } from 'src/app/_repositories/repository';
-import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import { EmployeeDetailEntity, GoodsReceiptPOEntity } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
+import {Repository} from 'src/app/_repositories/repository';
+import {environment} from 'src/environments/environment';
+import {Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {
+  EmployeeDetailEntity,
+  GoodsReceiptPOContent,
+  GoodsReceiptPOEntity,
+} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
 import {
   EmployeeDetailSearchEntity,
   GoodsReceiptPOSearchEntity,
   InventoryOrganizationSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import { EnumEntity } from 'src/app/_helpers/entity';
-import { Injectable } from '@angular/core';
-import { InventoryOrganizationEntity } from '../../../../_backend/inventory-organization/inventory-organization.entity';
-import { HttpResponse } from '@angular/common/http';
+import {EnumEntity} from 'src/app/_helpers/entity';
+import {Injectable} from '@angular/core';
+import {InventoryOrganizationEntity} from '../../../../_backend/inventory-organization/inventory-organization.entity';
+import {HttpResponse} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -96,6 +100,23 @@ export class GoodsReceiptPOListRepository extends Repository {
       .pipe(
         map(
           (response: HttpResponse<EnumEntity[]>) => response.body,
+        ),
+      );
+  };
+
+  getDetail = (id: string) => {
+    return this.http.post<GoodsReceiptPOEntity>(
+      this.apiUrl + '/get',
+      {
+        id,
+      },
+      {
+        observe: 'response',
+      },
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<GoodsReceiptPOEntity>) => new GoodsReceiptPOEntity(response.body),
         ),
       );
   };
