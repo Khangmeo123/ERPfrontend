@@ -152,7 +152,7 @@
                         </div>
                         <div class="table" formArrayName="inventoryCounterContents">
                             <p-table #tableInventoryCounterContents [scrollable]="true" scrollHeight="500px"
-                                [resizableColumns]="true" [rowTrackBy]="trackByFn" [paginator]="true" [rows]="10"
+                                [resizableColumns]="true" [rowTrackBy]="trackByFn" [paginator]="true" [rows]="50"
                                 [value]="inventoryCountingForm.controls.inventoryCounterContents.value">
                                 <ng-template pTemplate="colgroup">
                                     <colgroup>
@@ -498,7 +498,7 @@
         <div class="row mt-3">
             <div class="col-sm-12">
                 <p-table resizableColumns [value]="batchList" [scrollable]="true" scrollHeight="300px"
-                    [resizableColumns]="true" [paginator]="true" [rows]="10" #tableBatch>
+                    [resizableColumns]="true" [paginator]="true" [rows]="50" #tableBatch>
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -709,7 +709,7 @@
         <div class="row mt-3">
             <div class="col-sm-12">
                 <p-table [value]="serialNumberList" [scrollable]="true" scrollHeight="300px" [resizableColumns]="true"
-                    [paginator]="true" [rows]="10" #tableSerialNumber>
+                    [paginator]="true" [rows]="50" #tableSerialNumber>
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -825,7 +825,7 @@
                                 {{serialNumber.mfrDate | date: 'dd/MM/yyyy'}}
                             </td>
                             <td class="ui-resizable-column">
-                                {{serialNumber.expirationDate | date: 'dd/MM/yyyy'}}
+                                {{serialNumber.mfrExpiryDate | date: 'dd/MM/yyyy'}}
                             </td>
                             <td width="8%" class="text-center">
                                 <mat-icon class="text-danger" role="button"

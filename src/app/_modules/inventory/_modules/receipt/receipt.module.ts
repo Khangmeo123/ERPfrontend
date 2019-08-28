@@ -38,7 +38,7 @@ import { TooltipModule } from 'primeng/tooltip';
 import { KeyFilterModule } from 'primeng/keyfilter';
 import { NzListModule } from 'ng-zorro-antd';
 import { BatchDialogComponent } from './goods-receipt-po/good-receipt-po-receive/batch-dialog/batch-dialog.component';
-import { SerialDialogComponent } from './goods-receipt-po/good-receipt-po-receive/serial-dialog/serial-dialog.component';
+import { SerialNumberDialogComponent } from './goods-receipt-po/good-receipt-po-receive/serial-number-dialog/serial-number-dialog.component';
 import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-receive/quantity-dialog/quantity-dialog.component';
 
 @NgModule({
@@ -58,7 +58,7 @@ import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-rece
     ReturnRequestListComponent,
     GoodsReceiptPoDetailComponent,
     BatchDialogComponent,
-    SerialDialogComponent,
+    SerialNumberDialogComponent,
     QuantityDialogComponent,
   ],
   imports: [

@@ -24,7 +24,7 @@ export class BatchDialogRepository extends Repository {
 
   getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
     return this.http.post<BinLocationEntity[]>(
-      this.apiUrl + '/batch/single-list-bin-location',
+      this.apiUrl + '/batchDetail/single-list-bin-location',
       binLocationSearchEntity,
       {
         observe: 'response',
@@ -38,7 +38,7 @@ export class BatchDialogRepository extends Repository {
   };
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
-    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item',
+    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item-detail',
       itemDetailSearchEntity,
       {
         observe: 'response',
@@ -53,7 +53,7 @@ export class BatchDialogRepository extends Repository {
   };
 
   getGoodsReceiptPOContent = (goodsReceiptPOContentId: string) => {
-    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/batch/goods-receipt-po-content-detail',
+    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/batchDetail/goods-receipt-po-content-detail',
       {goodsReceiptPOContentId},
 
       {

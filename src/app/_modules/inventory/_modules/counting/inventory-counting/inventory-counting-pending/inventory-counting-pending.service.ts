@@ -268,7 +268,7 @@ export class InventoryCountingPendingService {
         return;
     }
 
-    // batch:
+    // batchDetail:
 
     getListBatch(itemDetailId: string, inventoryCountingId: string) {
         this.spinnerService.show();

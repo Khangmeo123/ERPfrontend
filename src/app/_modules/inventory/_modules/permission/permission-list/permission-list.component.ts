@@ -61,9 +61,7 @@ export class PermissionListComponent implements OnInit, OnDestroy {
           .subscribe(([inventoryOrganization, inventoryDocumentType]) => {
             this.inventoryOrganization = inventoryOrganization;
             this.inventoryDocumentType = inventoryDocumentType;
-            if (this.allSelected) {
-              return this.getList();
-            }
+            return this.getList();
           });
       }
     });
@@ -121,6 +119,12 @@ export class PermissionListComponent implements OnInit, OnDestroy {
 
   getList() {
     if (this.allSelected) {
+      if (this.inventoryDocumentType) {
+        this.permissionSearchEntity.inventoryDocumentTypeId = this.inventoryDocumentType.id;
+      }
+      if (this.inventoryOrganization) {
+        this.permissionSearchEntity.inventoryOrganizationId = this.inventoryOrganization.id;
+      }
       return this.permissionService.getList(this.permissionSearchEntity);
     }
   }

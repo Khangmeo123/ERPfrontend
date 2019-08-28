@@ -10,9 +10,9 @@ import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root',
 })
-export class SerialDialogRepository extends Repository {
+export class SerialNumberDialogRepository extends Repository {
 
-  apiUrl: string = `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-receive/serial-number`;
+  apiUrl: string = `${environment.apiUrlInv}inventory/receipt/goods-receipt-po/goods-receipt-po-receive/serial-number-number`;
 
   constructor(http: HttpClient) {
     super(http);
@@ -20,7 +20,7 @@ export class SerialDialogRepository extends Repository {
 
   getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
     return this.http.post<BinLocationEntity[]>(
-      this.apiUrl + '/serial-number/single-list-bin-location',
+      this.apiUrl + '/serial-number-number/single-list-bin-location',
       binLocationSearchEntity,
       {
         observe: 'response',
