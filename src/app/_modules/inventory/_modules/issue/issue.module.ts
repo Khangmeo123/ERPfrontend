@@ -24,6 +24,18 @@ import {GoodsReturnDetailComponent} from './goods-return/goods-return-detail/goo
 import {GoodsReturnListComponent} from './goods-return/goods-return-list/goods-return-list.component';
 import {GoodsReturnRequestListComponent} from './goods-return-request/goods-return-request-list/goods-return-request-list.component';
 import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-return-request-detail/goods-return-request-detail.component';
+import { SelectsModule } from 'jaja-libraries/src/selects/selects.module';
+import { FiltersModule } from 'src/app/_shared/modules/filters/filters.module';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { ErrorModule } from 'src/app/_shared/components/error/error.module';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import {GoodsIssueApproveComponent} from './goods-issue/goods-issue-approve/goods-issue-approve.component';
+import {GoodsIssueSendComponent} from './goods-issue/goods-issue-send/goods-issue-send.component';
+import { DeliveryOrderSendComponent } from './delivery-order/delivery-order-send/delivery-order-send.component';
+import { DeliveryOrderApproveComponent } from './delivery-order/delivery-order-approve/delivery-order-approve.component';
+import {GoodsReturnSendComponent} from './goods-return/goods-return-send/goods-return-send.component';
+import {GoodsReturnApproveComponent} from './goods-return/goods-return-approve/goods-return-approve.component';
+
 
 @NgModule({
   declarations: [
@@ -33,12 +45,19 @@ import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-re
     GoodsIssueComponent,
     DeliveryOrderListComponent,
     DeliveryOrderDetailComponent,
+    DeliveryOrderApproveComponent,
+    DeliveryOrderSendComponent,
     GoodsIssueDetailComponent,
     GoodsIssueListComponent,
+    GoodsIssueApproveComponent,
+    GoodsIssueSendComponent,
     GoodsReturnDetailComponent,
     GoodsReturnListComponent,
+    GoodsReturnSendComponent,
+    GoodsReturnApproveComponent,
     GoodsReturnRequestListComponent,
-    GoodsReturnRequestDetailComponent],
+    GoodsReturnRequestDetailComponent,
+     ],
   imports: [
     CommonModule,
     IssueRoutingModule,
@@ -57,6 +76,12 @@ import {GoodsReturnRequestDetailComponent} from './goods-return-request/goods-re
     DialogModule,
     InputSwitchModule,
     DiscussionModule,
+    SelectsModule,
+    FiltersModule,
+    ReactiveFormsModule,
+    FormsModule,
+    ErrorModule,
+    ConfirmDialogModule,
   ]
 })
 export class IssueModule { }

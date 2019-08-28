@@ -302,12 +302,12 @@ export const sampleSidebarMenu = [
         exact: false,
         isShowed: true,
       },
-      {
-        label: 'Yêu cầu nhập kho hàng trả lại từ KH',
-        route: '/inventory/receipt/return-request',
-        exact: false,
-        isShowed: true,
-      },
+      // {
+      //   label: 'Yêu cầu nhập kho hàng trả lại từ KH',
+      //   route: '/inventory/receipt/return-request',
+      //   exact: false,
+      //   isShowed: true,
+      // },
       {
         label: 'Phiếu nhập kho hàng trả lại từ KH',
         route: '/inventory/receipt/return',
@@ -320,7 +320,7 @@ export const sampleSidebarMenu = [
       },
       {
         label: 'Phiếu xuất kho hàng bán',
-        route: '/inventory/issue/delivery-order',
+        route: '/inventory/issue/delivery',
         exact: false,
         isShowed: true,
       },
@@ -330,12 +330,12 @@ export const sampleSidebarMenu = [
         exact: false,
         isShowed: true,
       },
-      {
-        label: 'Yêu cầu xuất kho hàng trả lại NCC',
-        route: '/inventory/issue/goods-return-request',
-        exact: false,
-        isShowed: true,
-      },
+      // {
+      //   label: 'Yêu cầu xuất kho hàng trả lại NCC',
+      //   route: '/inventory/issue/goods-return-request',
+      //   exact: false,
+      //   isShowed: true,
+      // },
       {
         label: 'Phiếu xuất kho trả NCC',
         route: '/inventory/issue/goods-return',

@@ -139,10 +139,10 @@
             "creator": "",
             "description": "",
             "documentNumber": "",
-            "exporter": "",
             "form": {
                 "title": ""
             },
+            "freight": "",
             "goodsIssueRequest": {
                 "buyer": "",
                 "createdDate": "",
@@ -155,6 +155,8 @@
             },
             "inventoryAddress": "",
             "inventoryCode": "",
+            "packageDimension": "",
+            "packageWeight": "",
             "personInCharge": "",
             "qrCode": {
                 "code": "",
@@ -170,7 +172,6 @@
                 "title ": ""
             },
             "receiptedDate": "",
-            "shipper": "",
             "tab1": {
                 "Serial": "",
                 "amount": "",
@@ -191,6 +192,10 @@
                 "title": ""
             }
         },
+        "filters": {
+            "inventoryOrganizationCode": "",
+            "requester": ""
+        },
         "form": {
             "post": {
                 "title": ""
@@ -208,6 +213,16 @@
             "inventoryCode": "",
             "receiptedDate": "",
             "status": ""
+        }
+    },
+    "goodsIssueList": {
+        "filters": {
+            "status": ""
+        }
+    },
+    "goodsReceiptPODetail": {
+        "get": {
+            "error": ""
         }
     },
     "goodsReturn": {

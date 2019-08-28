@@ -87,6 +87,7 @@
         "open": "",
         "pending": "",
         "pendingCounting": "",
+        "pendingIssue": "",
         "pendingReceive": "",
         "pendingTransfer": "",
         "project": {

@@ -1,4 +1,4 @@
-<div class="page goods-receipt-po">
+<div class="page return">
   <div class="page-header">
     <span class="page-title">
       {{pageTitle | translate}}
@@ -23,22 +23,22 @@
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
           <input [matDatepicker]="picker" class="form-control input-datepicker ml-1 mr-1 " matInput
-                 placeholder="dd/mm/yyyy">
+                 placeholder="dd/mm/yyyy" [(ngModel)]="returnSearch.documentDate.greaterEqual">
           <mat-datepicker #picker></mat-datepicker>
-          <div (click)="openDatePicker(picker)" role="button">
+          <div (click)="picker.open()" role="button">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
           <input [matDatepicker]="datepicker" class="form-control input-datepicker ml-1 mr-1" matInput
-                 placeholder="dd/mm/yyyy">
+                 placeholder="dd/mm/yyyy" [(ngModel)]="returnSearch.documentDate.lessEqual">
           <mat-datepicker #datepicker></mat-datepicker>
-          <div (click)="openToDatePicker(datepicker)" role="button">
+          <div (click)="datepicker.open()" role="button">
             <mat-icon>calendar_today</mat-icon>
           </div>
         </div>
-        <button class="btn btn-labeled btn-add get-data" type="button">
+        <button class="btn btn-labeled btn-add get-data" type="button" (click)="getList()">
           {{'general.button.getData' | translate}}</button>
       </div>
 
@@ -89,50 +89,86 @@
             <th pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
-            <!-- <th class="th-filter">
-                <app-advanced-filters [filter]="return.listSearchEntity.code" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-code">
-                </app-advanced-filters>
+            <th class="th-filter"></th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="returnSearch.documentNumber"
+                data-qe-id="table-thead-filter-documentNumber">
+              </app-advanced-filters>
+            </th>
+
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="returnSearch.dueDate"
+                data-qe-id="table-thead-filter-dueDate">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-advanced-filters [filter]="return.listSearchEntity.name" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-name">
-                </app-advanced-filters>
+              <jaja-select-list (change)="returnSearch.inventoryOrganizationId = $event; getList()"
+                [value]="returnSearch.inventoryOrganizationId"
+                [getList]="returnRepository.singleListInventoryOrganization" key="id"
+                [searchEntity]="inventoryOrganizationSearch" [searchable]="true"
+                placeholder="{{'return.list.filters.inventoryOrganizationCode' | translate}}" searchField="code"
+                searchType="startsWith" appendTo="body">
+                <ng-template #label #option let-code="code" let-name="name">
+                  {{code}} - {{name}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="return.listTypes"
-                    [initialValue]="return.listSearchEntity.typeId"
-                    (selectionChange)="return.listSearchEntity.typeId = $event; getList()"
-                    (listOpen)="openreturn.listTypes($event)">
-                </app-simple-select>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="returnSearch.remarks"
+                data-qe-id="table-thead-filter-remarks">
+              </app-advanced-filters>
             </th>
+
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="return.listStatuses"
-                    [initialValue]="return.listSearchEntity.typeId"
-                    (selectionChange)="return.listSearchEntity.statusId = $event; getList()"
-                    (listOpen)="openreturn.listStatuses($event)">
-                </app-simple-select>
-            </th> -->
+              <jaja-select-list (change)="returnSearch.requesterId = $event; getList()"
+                [value]="returnSearch.requesterId" key="id" [getList]="returnRepository.singleListEmployeeDetail"
+                [searchEntity]="requesterSearch" [searchable]="true"
+                placeholder="{{'return.list.filters.requester' | translate}}" searchField="name"
+                searchType="startsWith" appendTo="body">
+                <ng-template #label #option let-name="name">
+                  {{name}}
+                </ng-template>
+              </jaja-select-list>
+            </th>
+
+            <th class="th-filter">
+              <jaja-select-list (change)="returnSearch.statusId = $event; getList()"
+                [value]="returnSearch.requesterId" [getList]="returnRepository.enumListStatus"
+                appendTo="body" key="id" placeholder="{{'return.list.filters.status' | translate}}">
+                <ng-template #label #option let-display="display">
+                  {{display}}
+                </ng-template>
+              </jaja-select-list>
+            </th>
+            <th class="th-filter actions"></th>
           </tr>
         </ng-template>
         <ng-template let-index="rowIndex" let-return pTemplate="body">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
-            <td> {{return.description }} </td>
-            <td> {{return.creator }} </td>
-            <td> {{return.status }} </td>
+            <td> {{return.documentDate | date: 'dd/MM/yyyy'}} </td>
+            <td> {{return.documentNumber}} </td>
+            <td> {{return.dueDate | date: 'dd/MM/yyyy'}} </td>
+            <td> {{return.inventoryOrganizationCode}} - {{return.inventoryOrganizationStreet}} </td>
+            <td> {{return.remarks }} </td>
+            <td> {{return.requesterName }} </td>
+            <td class="text-center ui-resizable-column">
+              <div [ngSwitch]="return.statusName">
+                <a *ngSwitchCase="'OPEN'" [queryParams]="{id: return.id}" class="ml-2 open-status"
+                  routerLink="/inventory/receipt/return/return-detail">{{'general.open'| translate}}</a>
+                <a *ngSwitchCase="'PENDING_APPROVAL'" [queryParams]="{id: return.id}" class="ml-2 pending-status"
+                  routerLink="/inventory/receipt/return/return-approve">{{'general.pending'| translate}}</a>
+                <a *ngSwitchCase="'PENDING_RECEIVE'" [queryParams]="{id: return.id}"
+                  class="ml-2 pending-receive-status"
+                  routerLink="/inventory/receipt/return/return-receive">{{'general.pendingReceive'| translate}}</a>
+                <a *ngSwitchCase="'DONE'" [queryParams]="{id: return.id}" class="ml-2 done-status"
+                  routerLink="/inventory/receipt/return/return-approve">{{'general.done'| translate}}</a>
+              </div>
+            </td>
             <td>
               <div class="d-flex">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div (click)="editReturn()" class="edit">
-                  <mat-icon>edit</mat-icon>
-                </div>
-
               </div>
             </td>
           </tr>
