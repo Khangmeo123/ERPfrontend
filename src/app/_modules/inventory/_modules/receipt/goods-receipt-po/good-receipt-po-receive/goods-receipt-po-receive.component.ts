@@ -1,17 +1,17 @@
-import {FormArray, FormControl, FormGroup} from '@angular/forms';
-import {Component, OnDestroy, OnInit, ViewEncapsulation} from '@angular/core';
-import {ActivatedRoute, Params, Router} from '@angular/router';
-import {GeneralService} from 'src/app/_services/general-service.service';
-import {GoodsReceiptPOReceiveService} from './goods-receipt-po-receive.service';
-import {GoodsReceiptPOContent} from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
-import {Subscription} from 'rxjs';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { GeneralService } from 'src/app/_services/general-service.service';
+import { GoodsReceiptPOReceiveService } from './goods-receipt-po-receive.service';
+import { GoodsReceiptPOContent } from 'src/app/_modules/inventory/_backend/goods-receipt-po/goods-receipt-po.entity';
+import { Subscription } from 'rxjs';
 import {
   GoodsReceiptPOContentSearchEntity,
   ItemDetailSearchEntity,
   UnitOfMeasureSearchEntity,
 } from '../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
-import {translate} from '../../../../../../_helpers/string';
-import {Table} from 'primeng/table';
+import { translate } from '../../../../../../_helpers/string';
+import { Table } from 'primeng/table';
 
 @Component({
   selector: 'app-goods-receipt-po-receive',
@@ -194,7 +194,6 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode.equal,
       'unitOfMeasureCode',
       'equal',
-      this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode[this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode.type.code],
     );
   };
 
