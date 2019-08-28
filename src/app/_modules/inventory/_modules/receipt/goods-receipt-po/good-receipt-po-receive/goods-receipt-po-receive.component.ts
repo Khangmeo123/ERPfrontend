@@ -194,7 +194,7 @@ export class GoodsReceiptPOReceiveComponent implements OnInit, OnDestroy {
       this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode.equal,
       'unitOfMeasureCode',
       'equal',
-      this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode[this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode.type.code],
+      // this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode[this.goodsReceiptPOContentSearchEntity.unitOfMeasureCode.type.code],
     );
   };
 

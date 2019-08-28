@@ -98,7 +98,7 @@
             "createdDate": "Ngày tạo",
             "creator": "Người tạo",
             "description": "Mô tả",
-            "documentNumber": "Số chứng từ",
+            "documentNumber": "Số phiếu",
             "header": {
                 "title": "Phiếu xuất kho hàng bán"
             },
@@ -205,7 +205,7 @@
             "createdDate": "Ngày tạo",
             "creator": "Người tạo",
             "description": "Mô tả",
-            "documentNumber": "Số chứng từ ",
+            "documentNumber": "Số phiếu",
             "header": {
                 "title": "Phiếu xuất kho khác"
             },
@@ -324,7 +324,7 @@
             "createdDate": "Ngày tạo",
             "creator": "Người tạo",
             "description": "Mô tả",
-            "documentNumber": "Số chứng từ ",
+            "documentNumber": "Số phiếu",
             "header": {
                 "title": "Phiếu xuất kho hàng trả lại nhà cung cấp"
             },
