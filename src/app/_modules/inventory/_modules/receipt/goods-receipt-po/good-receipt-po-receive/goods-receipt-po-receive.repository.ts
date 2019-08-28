@@ -209,23 +209,9 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
       );
   };
 
-  analyzeBatchCode = (itemDetailId: string, qrCode: string) => {
-    return this.http.post<BatchEntity>(this.apiUrl + '/batchDetail/analyze-qr-code',
-      {itemDetailId, qrCode},
-      {
-        observe: 'response',
-      },
-    )
-      .pipe(
-        map((response) => {
-          return new BatchEntity(response.body);
-        }),
-      );
-  };
-
   updateBatch = (goodsReceiptPOBatchEntities: any[]) => {
     return this.http.post<boolean>(
-      this.apiUrl + '/batchDetail/bulk-merge',
+      this.apiUrl + '/batch/bulk-merge',
       goodsReceiptPOBatchEntities,
       {
         observe: 'response',
@@ -236,9 +222,9 @@ export class GoodsReceiptPOReceiveRepository extends Repository {
       );
   };
 
-  getBatch = (id: string) => {
+  getBatch = (id: string): Observable<GoodsReceiptPOContent> => {
     return this.http.post<GoodsReceiptPOContent>(
-      this.apiUrl + '/batchDetail/goods-receipt-po-content-detail',
+      this.apiUrl + '/batch/get-goods-receipt-po-content',
       {id},
       {
         observe: 'response',

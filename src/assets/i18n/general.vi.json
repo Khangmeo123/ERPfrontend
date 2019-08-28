@@ -2,8 +2,8 @@
     "general": {
         "action": "Thao tác",
         "approve": {
-            "error": "",
-            "success": ""
+            "error": "Duyệt thất bại",
+            "success": "Duyệt thành công"
         },
         "button": {
             "add": "Thêm",
@@ -40,7 +40,7 @@
             "send": "Gửi",
             "update": "Cập nhật",
             "upload": "Tải lên",
-            "uploaded": ""
+            "uploaded": "Tệp đã tải lên"
         },
         "completed": "Hoàn thành",
         "confirmation": {

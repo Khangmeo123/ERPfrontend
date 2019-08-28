@@ -201,7 +201,7 @@ export class GoodsReceiptPoDetailService {
             resolve(goodsReceiptPOEntity);
           },
           (error: Error) => {
-            this.toastrService.error(translate('goodsReceiptPODetail.get.error'));
+            this.toastrService.error(translate('goodsReceiptPO.get.error'));
             reject(error);
           },
         );

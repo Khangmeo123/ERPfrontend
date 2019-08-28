@@ -107,6 +107,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
         return type.code === this.defaultType;
       });
     }
+    this.filter.type = this.type;
   }
 
   onApplyFilter(value) {
@@ -123,6 +124,7 @@ export class AdvancedFiltersComponent implements OnInit, OnChanges, AfterViewIni
       }
     }
     this.filter[this.type.code] = this.filterValue;
+    this.filter.type = this.type;
     this.changeFilter.emit();
   }
 

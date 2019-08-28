@@ -1,7 +1,7 @@
-import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
-import { SearchEntity } from 'src/app/_helpers/search-entity';
-import { NumberFilter } from 'src/app/_shared/models/filters/NumberFilter';
-import { DateFilter } from 'src/app/_shared/models/filters/DateFilter';
+import {TextFilter} from 'src/app/_shared/models/filters/TextFilter';
+import {SearchEntity} from 'src/app/_helpers/search-entity';
+import {NumberFilter} from 'src/app/_shared/models/filters/NumberFilter';
+import {DateFilter} from 'src/app/_shared/models/filters/DateFilter';
 
 export class GoodsReceiptPOSearchEntity extends SearchEntity {
   name: TextFilter = new TextFilter();
@@ -32,7 +32,7 @@ export class GoodsReceiptPOSearchEntity extends SearchEntity {
 
 export class PurchaseOrderSearchEntity extends SearchEntity {
   supplierDetailId: string;
-  documentNumber = new NumberFilter();
+  purchaseOrderNumber: NumberFilter = new NumberFilter();
   documentDate = new DateFilter();
   ownerId: string = null;
   buyerId: string = null;
@@ -113,4 +113,14 @@ export class GoodsReceiptPOContentDetailSearchEntity extends SearchEntity {
   serialNumber: string = null;
   mfrDate: string = null;
   expirationDate: string = null;
+}
+
+export class GoodsReceiptPOContentSearchEntity extends SearchEntity {
+  purchaseOrderNumber: TextFilter = new TextFilter();
+
+  itemCode: TextFilter = new TextFilter();
+
+  itemName: TextFilter = new TextFilter();
+
+  unitOfMeasureCode: TextFilter = new TextFilter();
 }

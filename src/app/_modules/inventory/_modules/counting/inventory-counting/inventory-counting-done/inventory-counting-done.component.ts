@@ -56,7 +56,7 @@ export class InventoryCountingDoneComponent implements OnInit, OnDestroy {
   linkSerialNumberExport: string = environment.apiUrlInv +
     'inventory/counting/inventory-counting/inventory-counting-pending/serial-number/export';
 
-  // batchDetail:
+  // batch:
   batchCode: string;
   batchSearchEntity: BatchSearchEntity = new BatchSearchEntity();
   batchList: CounterContentByItemDetailEntity[];
