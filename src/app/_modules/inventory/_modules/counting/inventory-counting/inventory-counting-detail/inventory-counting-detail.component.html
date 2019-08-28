@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'inventoryCounting.detail.documentNumber' | translate}}
+                            {{'inventoryCounting.detail.purchaseOrderNumber' | translate}}
                         </label>
                         <input type="text" class="form-control disabled" data-qe-id="detail-form-document-number"
                             formControlName="documentNumber">
@@ -176,7 +176,7 @@
                         </div>
                         <div class="table">
                             <p-table #tableInventoryCountingContents [scrollable]="true" scrollHeight="500px"
-                                [resizableColumns]="true" [paginator]="true" [rows]="20"
+                                [resizableColumns]="true" [paginator]="true" [rows]="50"
                                 [value]="inventoryCountingForm.controls.inventoryCountingContents.value">
                                 <ng-template pTemplate="colgroup">
                                     <colgroup>

@@ -24,7 +24,7 @@ export class QuantityDialogRepository extends Repository {
 
   getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
     return this.http.post<BinLocationEntity[]>(
-      this.apiUrl + '/quantity/single-list-bin-location',
+      this.apiUrl + '/single-list-bin-location',
       binLocationSearchEntity,
       {
         observe: 'response',
@@ -38,7 +38,7 @@ export class QuantityDialogRepository extends Repository {
   };
 
   getItemDetailList = (itemDetailSearchEntity: ItemDetailSearchEntity): Observable<ItemDetailEntity[]> => {
-    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item',
+    return this.http.post<ItemDetailEntity[]>(this.apiUrl + '/single-list-item-detail',
       itemDetailSearchEntity,
       {
         observe: 'response',
@@ -52,16 +52,18 @@ export class QuantityDialogRepository extends Repository {
       );
   };
 
-  getGoodsReceiptPOContent = (goodsReceiptPOContentId: string) => {
-    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/quantity/get-goods-receipt-po-content',
-      {goodsReceiptPOContentId},
-
+  getGoodsReceiptPOContent = (id: string): Observable<GoodsReceiptPOContent> => {
+    return this.http.post<GoodsReceiptPOContent>(
+      this.apiUrl + '/get-goods-receipt-po-content',
+      {id},
       {
         observe: 'response',
-        headers: this.getHeader(),
       },
-    ).pipe(
-      map(response => new GoodsReceiptPOContent(response.body)),
-    );
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<any>) => new GoodsReceiptPOContent(response.body),
+        ),
+      );
   };
 }

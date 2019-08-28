@@ -1,6 +1,10 @@
 {
     "general": {
         "action": "",
+        "approve": {
+            "error": "",
+            "success": ""
+        },
         "button": {
             "add": "",
             "addRow": "",
@@ -35,7 +39,8 @@
             "save": "",
             "send": "",
             "update": "",
-            "upload": ""
+            "upload": "",
+            "uploaded": ""
         },
         "completed": "",
         "confirmation": {
@@ -106,7 +111,6 @@
         "toDate": "",
         "update": {
             "error": "",
-            "failure": "",
             "success": ""
         },
         "upload": {

@@ -61,7 +61,7 @@
                 <div class="row">
                     <div class="col-sm-4 form-group">
                         <label>
-                            {{'inventoryCounting.detail.documentNumber' | translate}}
+                            {{'inventoryCounting.detail.purchaseOrderNumber' | translate}}
                         </label>
                         <input type="text" class="form-control disabled" data-qe-id="detail-form-document-number"
                             formControlName="documentNumber">
@@ -152,7 +152,7 @@
                         </div>
                         <div class="table" formArrayName="inventoryCounterContents">
                             <p-table #tableInventoryCounterContents [scrollable]="true" scrollHeight="500px"
-                                [resizableColumns]="true" [rowTrackBy]="trackByFn" [paginator]="true" [rows]="10"
+                                [resizableColumns]="true" [rowTrackBy]="trackByFn" [paginator]="true" [rows]="50"
                                 [value]="inventoryCountingForm.controls.inventoryCounterContents.value">
                                 <ng-template pTemplate="colgroup">
                                     <colgroup>
@@ -498,7 +498,7 @@
         <div class="row mt-3">
             <div class="col-sm-12">
                 <p-table resizableColumns [value]="batchList" [scrollable]="true" scrollHeight="300px"
-                    [resizableColumns]="true" [paginator]="true" [rows]="10" #tableBatch>
+                    [resizableColumns]="true" [paginator]="true" [rows]="50" #tableBatch>
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -565,7 +565,7 @@
                                     (input)="tableBatch.filter($event.target.value, 'itemDetailName', 'contains')" />
                             </th>
                             <th class="th-filter">
-                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
+                                <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDateFilter')"
                                     [control]="batchSearchEntity.mfrDate" data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>
                             </th>
@@ -709,7 +709,7 @@
         <div class="row mt-3">
             <div class="col-sm-12">
                 <p-table [value]="serialNumberList" [scrollable]="true" scrollHeight="300px" [resizableColumns]="true"
-                    [paginator]="true" [rows]="10" #tableSerialNumber>
+                    [paginator]="true" [rows]="50" #tableSerialNumber>
                     <ng-template pTemplate="colgroup">
                         <colgroup>
                             <col>
@@ -784,7 +784,7 @@
                                     (input)="tableSerialNumber.filter($event.target.value, 'serialNumber', 'startsWith')" />
                             </th>
                             <th class="th-filter">
-                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDate')"
+                                <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDateFilter')"
                                     [control]="serialNumberSearchEntity.mfrDate"
                                     data-qe-id="detail-form-receipted-date">
                                 </app-date-picker>

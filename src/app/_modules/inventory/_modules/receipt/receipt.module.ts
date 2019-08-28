@@ -1,5 +1,3 @@
-import { GoodsReceiptQuantityDialogComponent } from './goods-receipt/goods-receipt-receive/quantity-dialog/goods-receipt-quantity-dialog.component';
-import { GoodsReceiptApproveComponent } from './goods-receipt/goods-receipt-approve/goods-receipt-approve.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { GoodsReceiptPOComponent } from './goods-receipt-po/goods-receipt-po.component';
@@ -37,14 +35,11 @@ import { NzUploadModule } from 'ng-zorro-antd/upload';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { IconModule } from '@ant-design/icons-angular';
 import { TooltipModule } from 'primeng/tooltip';
-import { KeyFilterModule, ConfirmDialogModule } from 'primeng/primeng';
-import { GoodsReceiptReceiveComponent } from './goods-receipt/goods-receipt-receive/goods-receipt-receive.component';
-import { NzListModule } from 'ng-zorro-antd';
+import { KeyFilterModule } from 'primeng/keyfilter';
+import { NzListModule, NzTabsModule } from 'ng-zorro-antd';
 import { BatchDialogComponent } from './goods-receipt-po/good-receipt-po-receive/batch-dialog/batch-dialog.component';
 import { SerialNumberDialogComponent } from './goods-receipt-po/good-receipt-po-receive/serial-number-dialog/serial-number-dialog.component';
 import { QuantityDialogComponent } from './goods-receipt-po/good-receipt-po-receive/quantity-dialog/quantity-dialog.component';
-import { GoodsReceiptSerialNumberDialogComponent } from './goods-receipt/goods-receipt-receive/serial-number-dialog/goods-receipt-serial-number-dialog.component';
-import { GoodsReceiptBatchDialogComponent } from './goods-receipt/goods-receipt-receive/batch-dialog/goods-receipt-batch-dialog.component';
 
 @NgModule({
   declarations: [
@@ -59,17 +54,12 @@ import { GoodsReceiptBatchDialogComponent } from './goods-receipt/goods-receipt-
     ReturnDetailComponent,
     GoodsReceiptDetailComponent,
     GoodsReceiptListComponent,
-    GoodsReceiptReceiveComponent,
-    GoodsReceiptApproveComponent,
     ReturnRequestDetailComponent,
     ReturnRequestListComponent,
     GoodsReceiptPoDetailComponent,
     BatchDialogComponent,
     SerialNumberDialogComponent,
     QuantityDialogComponent,
-    GoodsReceiptQuantityDialogComponent,
-    GoodsReceiptSerialNumberDialogComponent,
-    GoodsReceiptBatchDialogComponent,
   ],
   imports: [
     IconModule,
@@ -102,8 +92,8 @@ import { GoodsReceiptBatchDialogComponent } from './goods-receipt/goods-receipt-
     NzIconModule,
     TooltipModule,
     KeyFilterModule,
-    ConfirmDialogModule,
     NzListModule,
+    NzTabsModule,
   ],
 })
 export class ReceiptModule {

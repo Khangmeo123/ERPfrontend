@@ -139,9 +139,9 @@ export class InventoryCountingPendingRepository extends Repository {
         );
     }
 
-    // batchDetail:
+    // batch:
     getBatchList(id: string, icId: string) {
-        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/batchDetail/list-counter-content-by-item-detail',
+        return this.http.post<CounterContentByItemDetailEntity[]>(this.apiUrl + '/batch/list-counter-content-by-item-detail',
             JSON.stringify({ itemDetailId: id, inventoryCountingId: icId }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
@@ -153,7 +153,7 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     analyzeBatchCode(idId: string, icId: string, code: string) {
-        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/scan-qr-code-batchDetail',
+        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/scan-qr-code-batch',
             JSON.stringify({ itemDetailId: idId, inventoryCountingId: icId, qrCode: code }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => {
@@ -163,7 +163,7 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     deleteBatch(id: string) {
-        return this.http.post<any>(this.apiUrl + '/batchDetail/reset-result',
+        return this.http.post<any>(this.apiUrl + '/batch/reset-result',
             JSON.stringify({ batchId: id }),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => r.body),
@@ -171,7 +171,7 @@ export class InventoryCountingPendingRepository extends Repository {
     }
 
     updateBatch(batch: any) {
-        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/update-batchDetail',
+        return this.http.post<CounterContentByItemDetailEntity>(this.apiUrl + '/update-batch',
             JSON.stringify(batch),
             { observe: 'response', headers: this.getHeader() }).pipe(
                 map(r => new CounterContentByItemDetailEntity(r.body)),

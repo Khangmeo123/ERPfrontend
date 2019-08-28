@@ -67,9 +67,9 @@
         </ng-template>
         <ng-template pTemplate="header">
           <tr>
-            <th pResizableColumn data-qe-id="table-thead-issue-ID" [pSortableColumn]="'documentNumber'">
+            <th pResizableColumn data-qe-id="table-thead-issue-ID" [pSortableColumn]="'purchaseOrderNumber'">
               {{ 'inventoryCounting.list.issueID' | translate}}
-              <p-sortIcon [field]="'documentNumber'" class="float-right"></p-sortIcon>
+              <p-sortIcon [field]="'purchaseOrderNumber'" class="float-right"></p-sortIcon>
             </th>
             <th pResizableColumn data-qe-id="table-thead-count-date" [pSortableColumn]="'documentDate'">
               {{ 'inventoryCounting.list.countDate' | translate}}
