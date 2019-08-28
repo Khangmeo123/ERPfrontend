@@ -2,14 +2,13 @@ import { Entity } from 'src/app/_helpers/entity';
 
 export class Return extends Entity {
 
+  name: string;
   customerDetailId: string;
   customerContactId: string;
   customerContactFullName: string;
   customerCode: string;
   customerName: string;
   customerAddress: string;
-  currencyId: string;
-  currencyName: string;
   documentNumber: string;
   deliveryName: string;
   statusId: string;
@@ -17,11 +16,12 @@ export class Return extends Entity {
   postingDate: string;
   dueDate: string;
   documentDate: string;
-  buyerId: string;
-  buyerName: string;
+  salerId: string;
+  salerName: string;
   ownerId: string;
   ownerName: string;
   requesterId: string;
+  requesterName: string;
   remarks: string;
   inventoryOrganizationId: string;
   inventoryOrganizationCode: string;
@@ -31,11 +31,12 @@ export class Return extends Entity {
   generalDiscountRate: number;
   generalDiscountCost: number;
   returnContents: ReturnContent[];
-  purchaseOrderIds: PurchaseOrderOfReturn[];
-  purchaseOrderName: string;
+  deliveries: Deliveries[];
+  returnWorkflows: ReturnWorkflows[];
   fileAttachments: FileAttachmentsOfReturn[];
   enableBinLocation: boolean;
   totalReturnContents: number;
+
 
   constructor(returnEntity?: any) {
     super(returnEntity);
@@ -70,21 +71,6 @@ export class ReturnContent extends Entity {
   }
 }
 
-export class PurchaseOrderOfReturn extends Entity {
-  id: string;
-
-  name: string;
-  documentNumber: string;
-  documentDate: string;
-  ownerName: string;
-  buyerName: string;
-  isSelected: boolean;
-
-  constructor(purchaseOrders?: any) {
-    super(purchaseOrders);
-  }
-}
-
 export class FileAttachmentsOfReturn extends Entity {
   fileName: string;
 
@@ -98,7 +84,7 @@ export class EmployeeDetailOfReturn extends Entity {
   name: string;
 }
 
-export class ReturnInventoryOrganizationOfReturn extends Entity {
+export class InventoryOrganizationOfReturn extends Entity {
   code: string;
   name: string;
   shortName: string;

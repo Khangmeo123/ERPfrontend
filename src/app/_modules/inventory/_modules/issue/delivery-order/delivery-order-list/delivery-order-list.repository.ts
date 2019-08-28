@@ -15,7 +15,7 @@ import { EnumEntity } from 'src/app/_helpers/entity';
 export class DeliveryOrderRepository extends Repository {
     constructor(public http: HttpClient) {
         super(http);
-        this.apiUrl = environment.apiUrlInv + 'inventory/issue/delivery-order/delivery-order-list';
+        this.apiUrl = environment.apiUrlInv + 'inventory/issue/delivery/delivery-list';
     }
 
     getList = (deliveryOrderSearchEntity: DeliveryOrderSearch): Observable<DeliveryOrder[]> => {

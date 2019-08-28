@@ -111,7 +111,7 @@
               <jaja-select-list (change)="onFilterInventoryOrganization($event)"
                 [display]="deliveryOrderSearch.inventoryOrganizationCode"
                 [getList]="deliveryOrderRepository.singleListInventoryOrganization"
-                [searchEntity]="inventoryOrganizationSearchEntity" [searchable]="true" appendTo="body"
+                [searchEntity]="inventoryOrganizationSearch" [searchable]="true" appendTo="body"
                 placeholder="{{'deliveryOrder.filters.inventoryOrganizationCode' | translate}}" searchField="code"
                 searchType="startsWith">
                 <ng-template #label #option let-code="code" let-name="name">
@@ -135,7 +135,7 @@
             <th class="th-filter">
               <jaja-select-list (change)="onFilterRequester($event)"
                 [display]="deliveryOrderSearch?.requesterName"
-                [getList]="deliveryOrderRepository.singleListRequester" [searchEntity]="requesterSearchEntity"
+                [getList]="deliveryOrderRepository.singleListRequester" [searchEntity]="requesterSearch"
                 [searchable]="true" appendTo="body" placeholder="{{'deliveryOrder.filters.requester' | translate}}"
                 searchField="name" searchType="startsWith">
                 <ng-template #label #option let-name="name">

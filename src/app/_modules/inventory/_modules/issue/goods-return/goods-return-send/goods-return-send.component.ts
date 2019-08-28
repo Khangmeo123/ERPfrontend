@@ -6,35 +6,32 @@ import { Subscription } from 'rxjs';
 import { GoodsReturnSendService } from './goods-return-send.service';
 import { GeneralService } from 'src/app/_services/general-service.service';
 import { GoodsReturnSendRepository } from './goods-return-send.repository';
-import {
-  GoodsIssueContentsSearch, InventoryOrganizationOfGoodsIssueSearch,
-  ItemDetailOfGoodsIssueSearch, RequesterOfGoodsIssueSearch,
-  UnitOfMeasureOfGoodsIssueSearch
-} from '../../../../_backend/goods-issue/goods-issue.searchentity';
+import { ItemDetailOfGoodsReturnSearch, UnitOfMeasureOfGoodsReturnSearch, InventoryOrganizationOfGoodsReturnSearch, RequesterOfGoodsReturnSearch } from 'src/app/_modules/inventory/_backend/goods-return/goods-return.searchentity';
+
 
 @Component({
-  selector: 'app-delivery-order-detail',
+  selector: 'app-goods-return-detail',
   templateUrl: './goods-return-send.component.html',
   styleUrls: ['./goods-return-send.component.scss'],
   encapsulation: ViewEncapsulation.None,
   providers: [GoodsReturnSendService]
 })
 export class GoodsReturnSendComponent implements OnInit, OnDestroy {
-  pageTitle = translate('goodsIssue.detail.header.title');
+  pageTitle = translate('GoodsReturn.detail.header.title');
   fileNameList: Array<any> = [];
 
-  goodsIssueForm: FormGroup;
-  goodsIssueId: string = null;
-  goodsIssueSubs: Subscription = new Subscription();
+  goodsReturnForm: FormGroup;
+  goodsReturnId: string = null;
+  goodsReturnSubs: Subscription = new Subscription();
 
-  goodsIssueContentSearch: GoodsIssueContentsSearch = new GoodsIssueContentsSearch();
-  itemDetailSearch: ItemDetailOfGoodsIssueSearch = new ItemDetailOfGoodsIssueSearch();
-  unitOfMeasureSearch: UnitOfMeasureOfGoodsIssueSearch = new UnitOfMeasureOfGoodsIssueSearch();
+  // goodsReturnContentSearch: GoodsReturnContentsSearch = new GoodsReturnContentsSearch();
+  itemDetailSearch: ItemDetailOfGoodsReturnSearch = new ItemDetailOfGoodsReturnSearch();
+  unitOfMeasureSearch: UnitOfMeasureOfGoodsReturnSearch = new UnitOfMeasureOfGoodsReturnSearch();
 
   // inventoryOrganization:
-  inventoryOrganizationSearchEntity: InventoryOrganizationOfGoodsIssueSearch = new InventoryOrganizationOfGoodsIssueSearch();
-  requesterSearchEntity: RequesterOfGoodsIssueSearch = new RequesterOfGoodsIssueSearch();
-  ownerSearchEntity: RequesterOfGoodsIssueSearch = new RequesterOfGoodsIssueSearch();
+  inventoryOrganizationSearchEntity: InventoryOrganizationOfGoodsReturnSearch = new InventoryOrganizationOfGoodsReturnSearch();
+  requesterSearchEntity: RequesterOfGoodsReturnSearch = new RequesterOfGoodsReturnSearch();
+  ownerSearchEntity: RequesterOfGoodsReturnSearch = new RequesterOfGoodsReturnSearch();
 
   displayBatches: boolean = false;
   displaySerial: boolean = false;
@@ -43,27 +40,27 @@ export class GoodsReturnSendComponent implements OnInit, OnDestroy {
 
   constructor(
     private generalService: GeneralService,
-    private goodsIssueDetailService: GoodsReturnSendService,
+    private GoodsReturnDetailService: GoodsReturnSendService,
     private activatedRoute: ActivatedRoute,
-    private goodsIssueDetailRepository: GoodsReturnSendRepository,
+    private GoodsReturnDetailRepository: GoodsReturnSendRepository,
     private router: Router) {
       const activatedRouteSubscription: Subscription = this.activatedRoute.queryParams.subscribe((params: Params) => {
         if (params.id) {
-          this.goodsIssueId = params.id;
-          // this.goodsIssueDetailService.getDetail(params.id)
+          this.goodsReturnId = params.id;
+          // this.GoodsReturnDetailService.getDetail(params.id)
           //   .then(() => {
           //     this.supplierContactSearchEntity.supplierDetailId = this.supplierDetailId.value;
           //   });
         }
       });
 
-      const goodsIssueFormSub = this.goodsIssueDetailService.goodsIssueForm.subscribe(res => {
+      const goodsReturnFormSub = this.GoodsReturnDetailService.goodsReturnForm.subscribe(res => {
         if (res) {
-          this.goodsIssueForm = res;
+          this.goodsReturnForm = res;
         }
       });
 
-      this.goodsIssueSubs.add(activatedRouteSubscription).add(goodsIssueFormSub);
+      this.goodsReturnSubs.add(activatedRouteSubscription).add(goodsReturnFormSub);
     }
 
   ngOnInit() {
@@ -97,31 +94,31 @@ export class GoodsReturnSendComponent implements OnInit, OnDestroy {
   }
 
   backToList() {
-    this.router.navigate(['/inventory/issue/goods-issue/goods-issue-list']);
+    this.router.navigate(['/inventory/issue/goods-return/goods-return-list']);
   }
 
   save() {
-    // if (!this.goodsIssueForm.valid) {
-    //   this.generalService.validateAllFormFields(this.goodsIssueForm);
+    // if (!this.GoodsReturnForm.valid) {
+    //   this.generalService.validateAllFormFields(this.GoodsReturnForm);
     // } else {
-    //   this.goodsIssueDetailService.save(this.goodsIssueForm.value).then(res => {
+    //   this.GoodsReturnDetailService.save(this.GoodsReturnForm.value).then(res => {
     //     this.backToList();
     //   });
     // }
   }
 
   send() {
-    // if (!this.goodsIssueForm.valid) {
-    //   this.generalService.validateAllFormFields(this.goodsIssueForm);
+    // if (!this.GoodsReturnForm.valid) {
+    //   this.generalService.validateAllFormFields(this.GoodsReturnForm);
     // } else {
-    //   this.goodsIssueDetailService.send(this.goodsIssueForm.value).then(res => {
+    //   this.GoodsReturnDetailService.send(this.GoodsReturnForm.value).then(res => {
     //     this.backToList();
     //   });
     // }
   }
 
   onSelectInventoryOrganization(event) {
-    this.goodsIssueForm.patchValue({
+    this.goodsReturnForm.patchValue({
       inventoryOrganizationId: event.id,
       inventoryOrganizationCode: event.code,
       inventoryOrganizationStreet: event.address,
@@ -129,7 +126,7 @@ export class GoodsReturnSendComponent implements OnInit, OnDestroy {
   }
 
   onSelectOwner(event) {
-    this.goodsIssueForm.patchValue({
+    this.goodsReturnForm.patchValue({
       ownerId: event.id,
       ownerName: event.name,
     });
