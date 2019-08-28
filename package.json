@@ -30,6 +30,7 @@
     "@angular/router": "~8.0.1",
     "@ant-design/icons-angular": "^8.0.3",
     "@aspnet/signalr": "^1.1.4",
+    "@biesbjerg/ngx-translate-extract-marker": "^1.0.0",
     "@fortawesome/fontawesome-free": "^5.8.2",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",

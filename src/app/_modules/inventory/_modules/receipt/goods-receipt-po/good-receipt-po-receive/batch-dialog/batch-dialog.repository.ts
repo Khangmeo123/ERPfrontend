@@ -4,6 +4,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { BinLocationSearchEntity, ItemDetailSearchEntity } from '../../../../../_backend/goods-receipt-po/goods-receipt-po.searchentity';
 import { Observable } from 'rxjs';
 import {
+  BatchEntity,
   BinLocationEntity,
   GoodsReceiptPOContent,
   ItemDetailEntity,
@@ -24,7 +25,7 @@ export class BatchDialogRepository extends Repository {
 
   getBinLocationList = (binLocationSearchEntity: BinLocationSearchEntity): Observable<BinLocationEntity[]> => {
     return this.http.post<BinLocationEntity[]>(
-      this.apiUrl + '/batchDetail/single-list-bin-location',
+      this.apiUrl + '/single-list-bin-location',
       binLocationSearchEntity,
       {
         observe: 'response',
@@ -52,16 +53,32 @@ export class BatchDialogRepository extends Repository {
       );
   };
 
-  getGoodsReceiptPOContent = (goodsReceiptPOContentId: string) => {
-    return this.http.post<GoodsReceiptPOContent>(this.apiUrl + '/batchDetail/goods-receipt-po-content-detail',
-      {goodsReceiptPOContentId},
-
+  getGoodsReceiptPOContent = (id: string): Observable<GoodsReceiptPOContent> => {
+    return this.http.post<GoodsReceiptPOContent>(
+      this.apiUrl + '/get-goods-receipt-po-content',
+      {id},
       {
         observe: 'response',
-        headers: this.getHeader(),
       },
-    ).pipe(
-      map(response => new GoodsReceiptPOContent(response.body)),
-    );
+    )
+      .pipe(
+        map(
+          (response: HttpResponse<any>) => new GoodsReceiptPOContent(response.body),
+        ),
+      );
+  };
+
+  analyzeBatchCode = (itemDetailId: string, qrCode: string) => {
+    return this.http.post<BatchEntity>(this.apiUrl + '/analyze-qr-code',
+      {itemDetailId, qrCode},
+      {
+        observe: 'response',
+      },
+    )
+      .pipe(
+        map((response) => {
+          return new BatchEntity(response.body);
+        }),
+      );
   };
 }

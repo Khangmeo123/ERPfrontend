@@ -3,12 +3,12 @@
         "createdDate": "",
         "creator": "",
         "description": "",
-        "documentNumber": "",
         "header": {
             "title": ""
         },
         "inventoryAddress": "",
         "inventoryCode": "",
+        "purchaseOrderNumber": "",
         "receiptedDate": "",
         "status": ""
     },
@@ -41,7 +41,6 @@
         "createdDate": "",
         "creator": "",
         "description": "",
-        "documentNumber": "",
         "form": {
             "post": {
                 "title": ""
@@ -61,6 +60,7 @@
         "inventoryAddress": "",
         "inventoryCode": "",
         "personInCharge": "",
+        "purchaseOrderNumber": "",
         "qrCode": {
             "code": "",
             "expiryDate": "",
@@ -95,41 +95,22 @@
         }
     },
     "goodsReceiptPO": {
-        "createdDate": "",
-        "creator": "",
-        "description": "",
-        "documentNumber": "",
-        "header": {
-            "title": ""
-        },
-        "inventoryAddress": "",
-        "inventoryCode": "",
-        "receiptedDate": "",
-        "status": ""
-    },
-    "goodsReceiptPODetail": {
-        "amount": {
-            "itemCode": "",
-            "itemName": "",
-            "locationCode": "",
-            "quantity": "",
-            "quantitySaved": "",
-            "title ": "",
-            "unitOfMeasure": ""
-        },
+        "actualReceive": "",
         "attachments": {
             "description": "",
+            "filename": "",
             "title": ""
         },
         "batches": {
+            "actions": "",
             "batchCode": "",
+            "binLocationCode": "",
+            "binLocationQuantity": "",
             "expiryDate": "",
             "itemCode": "",
             "itemName": "",
-            "locationCode": "",
             "manufacturingDate": "",
             "qrCode": "",
-            "quantity": "",
             "quantityInEachBatch": "",
             "title ": ""
         },
@@ -146,7 +127,6 @@
             }
         },
         "description": "",
-        "documentNumber": "",
         "form": {
             "post": {
                 "title": ""
@@ -164,38 +144,16 @@
             "supplierName": "",
             "title": ""
         },
-        "header": {
+        "goodsReceiptPOAttachments": {
             "title": ""
         },
-        "inventoryAddress": "",
-        "inventoryCode": "",
-        "personInCharge": "",
-        "qrCode": {
-            "code": "",
-            "expiryDate": "",
-            "itemCode": "",
-            "itemName": "",
-            "locationCode": "",
-            "manufacturingDate": "",
-            "quantity": "",
-            "rows": "",
-            "scanQRCode": "",
-            "serial": "",
-            "title ": ""
-        },
-        "receiptedDate": "",
-        "receiver": "",
-        "supplierAddress": "",
-        "supplierCode": "",
-        "supplierContact": "",
-        "supplierName": "",
-        "tab1": {
-            "Serial": "",
+        "goodsReceiptPOContents": {
+            "SerialNumber": "",
             "actualReceive": "",
-            "amount": "",
             "batches": "",
             "discount": "",
             "discountAmount": "",
+            "itemCode": "",
             "itemName": "",
             "itemNo": "",
             "purchaseOrderNumber": "",
@@ -206,9 +164,46 @@
             "unitPrice": "",
             "valueAddedTax": ""
         },
-        "tab2": {
+        "header": {
             "title": ""
-        }
+        },
+        "inventoryAddress": "",
+        "inventoryCode": "",
+        "itemCode": "",
+        "itemName": "",
+        "personInCharge": "",
+        "purchaseOrderNumber": "",
+        "qrCode": {
+            "code": "",
+            "expiryDate": "",
+            "itemCode": "",
+            "itemName": "",
+            "locationCode": "",
+            "manufacturingDate": "",
+            "quantity": "",
+            "rows": "",
+            "scanQRCode": "",
+            "serialNumber": "",
+            "title ": ""
+        },
+        "quantities": {
+            "actions": "",
+            "binLocationCode": "",
+            "binLocationQuantity": "",
+            "title ": ""
+        },
+        "receiptedDate": "",
+        "receiver": "",
+        "status": "",
+        "supplierAddress": "",
+        "supplierCode": "",
+        "supplierContact": "",
+        "supplierName": "",
+        "totalItems": "",
+        "unitPrice": ""
+    },
+    "goodsReceiptPOContent": {
+        "title": ""
     },
     "goodsReceiptPOList": {
         "filters": {
@@ -259,7 +254,6 @@
             "customerInfo": "",
             "customerName": "",
             "description": "",
-            "documentNumber": "",
             "form": {
                 "title": ""
             },
@@ -269,6 +263,7 @@
             "inventoryAddress": "",
             "inventoryCode": "",
             "personInCharge": "",
+            "purchaseOrderNumber": "",
             "qrCode": {
                 "code": "",
                 "expiryDate": "",
@@ -336,13 +331,13 @@
             "customerInfo": "",
             "customerName": "",
             "description": "",
-            "documentNumber": "",
             "form": {
                 "title": ""
             },
             "inventoryAddress": "",
             "inventoryCode": "",
             "personInCharge": "",
+            "purchaseOrderNumber": "",
             "receiptedDate": "",
             "receiver": "",
             "returnRequest": {
