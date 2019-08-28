@@ -33,6 +33,8 @@ import {GoodsIssueApproveComponent} from './goods-issue/goods-issue-approve/good
 import {GoodsIssueSendComponent} from './goods-issue/goods-issue-send/goods-issue-send.component';
 import { DeliveryOrderSendComponent } from './delivery-order/delivery-order-send/delivery-order-send.component';
 import { DeliveryOrderApproveComponent } from './delivery-order/delivery-order-approve/delivery-order-approve.component';
+import {GoodsReturnSendComponent} from './goods-return/goods-return-send/goods-return-send.component';
+import {GoodsReturnApproveComponent} from './goods-return/goods-return-approve/goods-return-approve.component';
 
 
 @NgModule({
@@ -51,6 +53,8 @@ import { DeliveryOrderApproveComponent } from './delivery-order/delivery-order-a
     GoodsIssueSendComponent,
     GoodsReturnDetailComponent,
     GoodsReturnListComponent,
+    GoodsReturnSendComponent,
+    GoodsReturnApproveComponent,
     GoodsReturnRequestListComponent,
     GoodsReturnRequestDetailComponent,
      ],
