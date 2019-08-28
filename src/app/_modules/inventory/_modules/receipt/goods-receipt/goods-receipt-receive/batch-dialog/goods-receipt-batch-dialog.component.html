@@ -7,13 +7,18 @@
       </div>
       <div class="col-sm-9">
         <div class="page-actions d-flex justify-content-end">
-          <button (click)="clearBatchTable(tableBatch)" class="btn btn-labeled btn-clear mr-2"
-            data-qe-id="button-clear">
+          <button (click)="resetTable()" class="btn btn-labeled btn-clear mr-2" data-qe-id="button-clear">
             <span class="btn-label">
               <img src="/assets/img/filter.svg" width="16">
             </span>
             <span class="button-label">
               {{'general.button.clear' | translate}}
+            </span>
+          </button>
+          <button (click)="deleteMultipleBatch()" class="btn btn-labeled btn-delete">
+            <span class="btn-label"><i class="material-icons">delete</i></span>
+            <span class="button-label">
+              {{'general.button.delete' | translate}}
             </span>
           </button>
         </div>
@@ -28,7 +33,7 @@
           <label class="ml-2" for="dialog-input-start-scan-batches-no">
             {{'goodsReceiptDetail.qrCode.scanQRCode' | translate}}
           </label>
-          <div class="ml-2">
+          <div class="ml-2 col-sm-8">
             <input (change)="inputBatch($event)" [disabled]="!activeScan" class="form-control"
               data-qe-id="dialog-input-start-scan-batches-no" id="dialog-input-start-scan-batches-no" type="text">
           </div>
@@ -37,19 +42,21 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptDetail.binLocation' | translate}}: </span>
-          <jaja-select-list [getList]="batchDialogRepository.getBinLocationList" (change)="selectBinLocation($event)"
-            [searchEntity]="binLocationSearchEntity" [searchable]="true" appendTo="body" searchField="code">
-            <ng-template #label #option let-code="code">
-              {{code}}
-            </ng-template>
-          </jaja-select-list>
+          <div class="ml-2 col-sm-4">
+            <jaja-select-list [getList]="batchDialogRepository.getBinLocationList" (change)="selectBinLocation($event)"
+              [searchEntity]="binLocationSearchEntity" [searchable]="true" appendTo="body" searchField="code">
+              <ng-template #label #option let-code="code">
+                {{code}}
+              </ng-template>
+            </jaja-select-list>
+          </div>
         </div>
       </div>
       <div class="col-sm-12 mt-2">
         <div class="d-flex align-items-center justify-content-end">
-          <span class="ml-2">{{'goodsReceiptDetail.qrCode.scanQRCode' | translate}}: </span>
-          <div class="ml-2">
-            <input [value]="goodsReceiptContent.goodsReceiptBatches?.length" class="form-control disabled"
+          <span class="ml-2">{{'goodsReceiptDetail.qrCode.actualReceive' | translate}}: </span>
+          <div class="ml-2 col-sm-2">
+            <input [value]="goodsReceiptContent.actualReceive" class="form-control disabled"
               data-qe-id="dialog-input-start-scan-batches-no" type="text">
           </div>
         </div>
@@ -61,7 +68,7 @@
           [value]="goodsReceiptContent.goodsReceiptBatches" scrollHeight="300px">
           <ng-template pTemplate="colgroup">
             <colgroup>
-              <col width="80px">
+              <col width="50px">
               <col>
               <col>
               <col>
@@ -112,20 +119,20 @@
               <th></th>
               <th class="th-filter">
                 <input (input)="tableBatch.filter($event.target.value, 'qrCode', 'startsWith')"
-                  class="form-control w-100" pKeyFilter="int" type="text" />
+                  class="form-control w-100" type="text" [(ngModel)]="batchOfGoodsReceiptSearch.qrCode" />
               </th>
               <th class="th-filter">
                 <input (input)="tableBatch.filter($event.target.value, 'batchCode', 'startsWith')"
-                  class="form-control w-100" pKeyFilter="int" type="text" />
+                  class="form-control w-100" type="text" [(ngModel)]="batchOfGoodsReceiptSearch.batchNumber" />
               </th>
               <th class="th-filter">
                 <app-date-picker (valueChange)="sortDate($event, tableBatch, 'mfrDate')"
-                  data-qe-id="detail-form-receipted-date">
+                  data-qe-id="detail-form-receipted-date" [control]="batchOfGoodsReceiptSearch.mfrDate">
                 </app-date-picker>
               </th>
               <th class="th-filter">
                 <app-date-picker (valueChange)="sortDate($event, tableBatch, 'expirationDate')"
-                  data-qe-id="detail-form-receipted-date">
+                  data-qe-id="detail-form-receipted-date" [control]="batchOfGoodsReceiptSearch.expirationDate">
                 </app-date-picker>
               </th>
               <th class="th-filter"></th>
@@ -148,11 +155,11 @@
               </td>
               <td class="ui-resizable-column"
                 [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
-                <input [(ngModel)]="batch.qrCode" class="form-control w-100" pKeyFilter="int" type="text" />
+                <input [(ngModel)]="batch.qrCode" class="form-control w-100" type="text" />
               </td>
               <td class="ui-resizable-column"
                 [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
-                <input [(ngModel)]="batch.batchNumber" class="form-control w-100" pKeyFilter="int" type="text" />
+                <input [(ngModel)]="batch.batchNumber" class="form-control w-100" type="text" />
               </td>
               <td class="ui-resizable-column"
                 [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
@@ -169,11 +176,11 @@
               <td class="ui-resizable-column"
                 [attr.rowspan]="batch.goodsReceiptBatchBinLocations.length==0?batch.goodsReceiptBatchBinLocations.length + 2:batch.goodsReceiptBatchBinLocations.length + 1">
                 <div class="validation-div">
-                  <input (ngModelChange)="batch.actualReceive = generalService.toNumber($event);"
-                    [attr.placeholder]="null" [ngClass]="{'error-border-color': batch.errors}"
-                    [ngModel]="batch.actualReceive" class="form-control" type="text" />
+                  <input (ngModelChange)="batch.quantity = generalService.toNumber($event);" [attr.placeholder]="null"
+                    [ngClass]="{'error-border-color': batch.errors}" [ngModel]="batch.quantity" class="form-control"
+                    type="text" />
                   <div *ngIf="batch.errors" class="invalid-validation">
-                    <span>{{quantityDetail.errors.message}}</span>
+                    <span>{{batch.errors.message}}</span>
                   </div>
                 </div>
               </td>
@@ -220,8 +227,8 @@
               </td>
             </tr>
           </ng-template>
-          <ng-template pTemplate="footer" *ngIf="!activeScan">
-            <tr>
+          <ng-template pTemplate="footer">
+            <tr *ngIf="!activeScan">
               <td colspan="2" class="text-right">
                 <a href="javascript:;" (click)="addNewBatchRow()">+
                   {{'general.button.addRow' | translate}}</a>
@@ -234,7 +241,7 @@
           [value]="goodsReceiptContent.goodsReceiptBatches" scrollHeight="300px">
           <ng-template pTemplate="colgroup">
             <colgroup>
-              <col width="80px">
+              <col width="50px">
               <col>
               <col>
               <col>

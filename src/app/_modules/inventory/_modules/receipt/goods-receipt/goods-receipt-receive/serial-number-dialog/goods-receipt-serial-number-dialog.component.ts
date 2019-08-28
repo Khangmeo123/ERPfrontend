@@ -1,9 +1,9 @@
-import { Component, Input, OnInit, OnDestroy, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, Output, EventEmitter, ViewChild } from '@angular/core';
 import { GoodsReceiptSerialNumberDialogRepository } from './goods-receipt-serial-number-dialog.repository';
 import {
-  ItemDetailOfGoodsReceiptSearch,
   BinLocationOfGoodsReceiptSearch,
   GoodsReceiptContentSearch,
+  SerialNumberOfGoodsReceiptSearch,
 } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.searchentity';
 import { GoodsReceiptContent, SerialNumberOfGoodsReceipt } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.entity';
 import { Subscription } from 'rxjs';
@@ -17,18 +17,18 @@ import { GeneralService } from 'src/app/_services/general-service.service';
 export class GoodsReceiptSerialNumberDialogComponent implements OnInit, OnDestroy {
 
   extendTitle: string;
-  goodsReceiptContentSearch: GoodsReceiptContentSearch = new GoodsReceiptContentSearch();
   binLocationSearchEntity: BinLocationOfGoodsReceiptSearch = new BinLocationOfGoodsReceiptSearch();
   goodsReceiptContent: GoodsReceiptContent = JSON.parse(localStorage.getItem('goodsReceiptSerialNumber')) || new GoodsReceiptContent();
   goodsReceiptSerialNumberDialogSubs: Subscription = new Subscription();
   activeScan: boolean = false;
   qrCode: string;
-
+  serialNumberOfGoodsReceiptSearch: SerialNumberOfGoodsReceiptSearch = new SerialNumberOfGoodsReceiptSearch();
   @Input() display: boolean = false;
   @Input() goodsReceiptContentId: string = null;
   @Input() enableBinLocation: boolean = false;
   @Input() inventoryOrganizationId: string;
   @Output() cancelDialog: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('tableSerialNumber', { static: false }) tableSerialNumber: any;
 
   constructor(
     private serialNumberDialogRepository: GoodsReceiptSerialNumberDialogRepository,
@@ -49,6 +49,10 @@ export class GoodsReceiptSerialNumberDialogComponent implements OnInit, OnDestro
 
   ngOnDestroy() {
     this.goodsReceiptSerialNumberDialogSubs.unsubscribe();
+  }
+
+  resetTable() {
+    this.tableSerialNumber.reset();
   }
 
   sortDate(event: string, table: any, field: string) {

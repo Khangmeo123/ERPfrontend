@@ -1,9 +1,10 @@
 import { BatchOfGoodsReceipt } from './../../../../../_backend/goods-receipt/goods-receipt.entity';
-import { Component, OnInit, Input, Output, EventEmitter, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { GoodsReceiptBatchDialogRepository } from './goods-receipt-batch-dialog.repository';
 import {
   GoodsReceiptContentSearch,
   BinLocationOfGoodsReceiptSearch,
+  BatchOfGoodsReceiptSearch,
 } from 'src/app/_modules/inventory/_backend/goods-receipt/goods-receipt.searchentity';
 import {
   GoodsReceiptContent,
@@ -23,6 +24,7 @@ export class GoodsReceiptBatchDialogComponent implements OnInit, OnDestroy {
 
   extendTitle: string;
   goodsReceiptContentSearch: GoodsReceiptContentSearch = new GoodsReceiptContentSearch();
+  batchOfGoodsReceiptSearch: BatchOfGoodsReceiptSearch = new BatchOfGoodsReceiptSearch();
   binLocationSearchEntity: BinLocationOfGoodsReceiptSearch;
   goodsReceiptContent: GoodsReceiptContent = JSON.parse(localStorage.getItem('goodsReceiptSerialNumber')) || new GoodsReceiptContent();
   goodsReceiptBatchDialogSubs: Subscription = new Subscription();
@@ -34,6 +36,7 @@ export class GoodsReceiptBatchDialogComponent implements OnInit, OnDestroy {
   @Input() enableBinLocation: boolean = false;
   @Input() inventoryOrganizationId: string;
   @Output() cancelDialog: EventEmitter<boolean> = new EventEmitter<boolean>();
+  @ViewChild('tableBatch', { static: false }) tableBatch: any;
 
   constructor(
     private batchDialogRepository: GoodsReceiptBatchDialogRepository,
@@ -56,6 +59,10 @@ export class GoodsReceiptBatchDialogComponent implements OnInit, OnDestroy {
     this.goodsReceiptBatchDialogSubs.unsubscribe();
   }
 
+  resetTable() {
+    this.tableBatch.reset();
+  }
+
   sortDate(event: string, table: any, field: string) {
     const date = event.replace(/\//g, '-') + 'T00:00:00';
     table.filter(date, field, 'equals');
@@ -64,8 +71,8 @@ export class GoodsReceiptBatchDialogComponent implements OnInit, OnDestroy {
   validate() {
     let returnvalue = true;
     this.goodsReceiptContent.goodsReceiptBatches.forEach((item) => {
-      const sumValue = _.sumBy(item.goodsReceiptBatchBinLocations, (elm) => elm.quantity);
-      if (item.actualReceive !== sumValue) {
+      const sumValue = _.sumBy(item.goodsReceiptBatchBinLocations, (elm) => Number(elm.quantity));
+      if (item.quantity !== sumValue) {
         item.errors = { message: 'Tổng số lượng không bằng nhau!' };
         returnvalue = false;
       }

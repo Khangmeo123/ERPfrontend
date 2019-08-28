@@ -78,7 +78,8 @@
             "scanCode": "Quét code",
             "scanQRCode": "Bắt đầu quét QR code",
             "serial": "Serial#",
-            "title ": "Chi tiết QR code"
+            "title ": "Chi tiết QR code",
+            "actualReceive": "Số lượng thực"
         },
         "receiptedDate": "Ngày thực hiện",
         "receiver": "Người nhận hàng",

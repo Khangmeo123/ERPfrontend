@@ -7,8 +7,7 @@
       </div>
       <div class="col-sm-9">
         <div class="page-actions d-flex justify-content-end">
-          <button (click)="clearSerialNumberTable(tableSerialNumber)" class="btn btn-labeled btn-clear mr-2"
-            data-qe-id="button-clear">
+          <button (click)="tableSerialNumber.reset()" class="btn btn-labeled btn-clear mr-2" data-qe-id="button-clear">
             <span class="btn-label">
               <img src="/assets/img/filter.svg" width="16">
             </span>
@@ -20,7 +19,8 @@
             <span class="btn-label"><i class="material-icons">delete</i></span>
             <span class="button-label">
               {{'general.button.delete' | translate}}
-            </span></button>
+            </span>
+          </button>
         </div>
       </div>
     </div>
@@ -31,7 +31,7 @@
         <div class="d-flex align-items-center">
           <p-inputSwitch [(ngModel)]="activeScan"></p-inputSwitch>
           <span class="ml-2">{{'goodsReceiptDetail.qrCode.scanQRCode' | translate}}</span>
-          <div class="ml-2 col-sm-9">
+          <div class="ml-2 col-sm-8">
             <input (change)="inputSerialNumber($event.target.value)" [(ngModel)]="qrCode" [disabled]="!activeScan"
               class="form-control" data-qe-id="dialog-input-start-scan-batches-no" type="text">
           </div>
@@ -40,7 +40,7 @@
       <div class="col-sm-6">
         <div *ngIf="enableBinLocation" class="d-flex align-items-center justify-content-end">
           <span class="mr-2">{{'goodsReceiptDetail.binLocation' | translate}}: </span>
-          <div class="ml-2">
+          <div class="ml-2 col-sm-4">
             <jaja-select-list [getList]="serialNumberDialogRepository.getBinLocationList"
               (change)="selectBinLocation($event)" [searchEntity]="binLocationSearchEntity" [searchable]="true"
               appendTo="body" searchField="code">
@@ -54,7 +54,7 @@
       <div class="col-sm-12 mt-2">
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptDetail.qrCode.quantity' | translate}}: </span>
-          <div class="ml-2">
+          <div class="ml-2 col-sm-2">
             <input [ngModel]="goodsReceiptContent.quantity" class="form-control disabled"
               data-qe-id="dialog-input-start-scan-batches-no" type="text">
           </div>
@@ -63,7 +63,7 @@
       <div class="col-sm-12 mt-2">
         <div class="d-flex align-items-center justify-content-end">
           <span class="ml-2">{{'goodsReceiptDetail.qrCode.actualReceive' | translate}}: </span>
-          <div class="ml-2">
+          <div class="ml-2 col-sm-2">
             <input [value]="goodsReceiptContent.goodsReceiptSerialNumbers?.length" class="form-control disabled"
               data-qe-id="dialog-input-start-scan-batches-no" type="text">
           </div>
@@ -119,22 +119,22 @@
               <th class="th-filter"></th>
               <th class="th-filter">
                 <input (change)="tableSerialNumber.filter($event.target.value, 'qrCode', 'startsWith')"
-                  [(ngModel)]="goodsReceiptContentSearch.qrCode" class="form-control w-100" pKeyFilter="int"
+                  [(ngModel)]="serialNumberOfGoodsReceiptSearch.qrCode" class="form-control w-100" pKeyFilter="int"
                   type="text" />
               </th>
               <th class="th-filter">
                 <input (input)="tableSerialNumber.filter($event.target.value, 'serialNumber', 'startsWith')"
-                  [(ngModel)]="goodsReceiptContentSearch.serialNumber" class="form-control w-100" pKeyFilter="int"
-                  type="text" />
+                  [(ngModel)]="serialNumberOfGoodsReceiptSearch.serialNumber" class="form-control w-100"
+                  pKeyFilter="int" type="text" />
               </th>
               <th class="th-filter">
                 <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'mfrDate')"
-                  data-qe-id="detail-form-receipted-date">
+                  data-qe-id="detail-form-receipted-date" [control]="serialNumberOfGoodsReceiptSearch.mfrDate">
                 </app-date-picker>
               </th>
               <th class="th-filter">
                 <app-date-picker (valueChange)="sortDate($event, tableSerialNumber, 'expirationDate')"
-                  data-qe-id="detail-form-receipted-date">
+                  data-qe-id="detail-form-receipted-date" [control]="serialNumberOfGoodsReceiptSearch.expirationDate">
                 </app-date-picker>
               </th>
               <th class="th-filter"></th>

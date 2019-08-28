@@ -1,3 +1,4 @@
+import { FormControl } from '@angular/forms';
 import { TextFilter } from 'src/app/_shared/models/filters/TextFilter';
 import { SearchEntity } from 'src/app/_helpers/search-entity';
 import { NumberFilter } from 'src/app/_shared/models/filters/NumberFilter';
@@ -104,6 +105,20 @@ export class UnitOfMeasureOfGoodsReceiptSearch extends SearchEntity {
 export class ItemDetailOfGoodsReceiptSearch extends SearchEntity {
   code = new TextFilter();
   name = new TextFilter();
+}
+
+export class SerialNumberOfGoodsReceiptSearch extends SearchEntity {
+  qrCode: string = null;
+  serialNumber: string = null;
+  mfrDate: FormControl = new FormControl();
+  expirationDate: FormControl = new FormControl();
+}
+
+export class BatchOfGoodsReceiptSearch extends SearchEntity {
+  qrCode: string = null;
+  batchNumber: string = null;
+  mfrDate: FormControl = new FormControl();
+  expirationDate: FormControl = new FormControl();
 }
 
 export class BinLocationOfGoodsReceiptSearch extends SearchEntity {
