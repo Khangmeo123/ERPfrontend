@@ -19,21 +19,11 @@
   </div>
   <div class="page-body">
     <div class="page-section">
-      <div class="validation-div">
-        <input [attr.placeholder]="placeholder" class="form-control text-left error-border-color" type="text"/>
-        <!-- <textarea rows="{{Rows}}" class="form-control autosizeme text-left" [attr.placeholder]="placeholder" [(ngModel)]="value" (blur)="onBlur(value)" (keypress.enter)="KeypressEnter(value)" (change)="onChange(value)"
-                  [ngClass]="{'error_border-color': ErrorEntity !== null}" [disabled]="Disabled" *ngIf="Type == 'TEXTAREA'" [style.height]="Height"></textarea> -->
-        <div class="invalid-validation">
-          loi me roi
-        </div>
-      </div>
-    </div>
-    <div class="page-section">
       <div class="row d-flex pb-3">
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-r">
           <label class="">{{'general.fromDate' | translate}}</label>
-          <input [matDatepicker]="picker" class="form-control input-datepicker ml-1 mr-1 " matInput
-                 placeholder="dd/mm/yyyy">
+          <input [(ngModel)]="goodsReceiptSearch.documentDate.greaterEqual" [matDatepicker]="picker"
+            class="form-control input-datepicker ml-1 mr-1 " matInput placeholder="dd/mm/yyyy">
           <mat-datepicker #picker></mat-datepicker>
           <div (click)="openDatePicker(picker)" role="button">
             <mat-icon>calendar_today</mat-icon>
@@ -41,8 +31,8 @@
         </div>
         <div class="col-sm-2 d-flex date-picker align-items-center n-p-l  n-p-r">
           <label>{{'general.toDate' | translate}}</label>
-          <input [matDatepicker]="datepicker" class="form-control input-datepicker ml-1 mr-1" matInput
-                 placeholder="dd/mm/yyyy">
+          <input [(ngModel)]="goodsReceiptSearch.documentDate.lessEqual" [matDatepicker]="datepicker"
+            class="form-control input-datepicker ml-1 mr-1" matInput placeholder="dd/mm/yyyy">
           <mat-datepicker #datepicker></mat-datepicker>
           <div (click)="openToDatePicker(datepicker)" role="button">
             <mat-icon>calendar_today</mat-icon>
@@ -52,10 +42,15 @@
           {{'general.button.getData' | translate}}</button>
       </div>
 
-      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true"
-               [resizableColumns]="true" [scrollable]="true" [value]="goodsReceiptList" scrollHeight="500px">
+      <p-table #table (onLazyLoad)="sort($event)" [customSort]="true" [lazy]="true" [resizableColumns]="true"
+        [scrollable]="true" [value]="goodsReceiptList" scrollHeight="500px">
         <ng-template pTemplate="colgroup">
           <colgroup>
+            <col>
+            <col>
+            <col>
+            <col>
+            <col>
             <col>
             <col>
             <col>
@@ -79,10 +74,6 @@
               {{ 'goodsReceipt.inventoryCode' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
-            <th data-qe-id="table-thead-inventory-address" pResizableColumn>
-              {{ 'goodsReceipt.inventoryAddress' | translate}}
-              <p-sortIcon class="float-right"></p-sortIcon>
-            </th>
             <th data-qe-id="table-thead-description" pResizableColumn>
               {{ 'goodsReceipt.description' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
@@ -98,60 +89,92 @@
             <th pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
-            <!-- <th class="th-filter">
-                <app-advanced-filters [filter]="goodsReceiptSearchEntity.code" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-code">
-                </app-advanced-filters>
+            <th class="th-filter"></th>
+            <th class="th-filter">
+              <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptSearch.documentNumber"
+                data-qe-id="table-thead-filter-documentNumber">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-advanced-filters [filter]="goodsReceiptSearchEntity.name" (changeFilter)="getList()"
-                    data-qe-id="table-thead-filter-name">
-                </app-advanced-filters>
+              <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptSearch.dueDate"
+                data-qe-id="table-thead-filter-dueDate">
+              </app-advanced-filters>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="goodsReceiptTypes"
-                    [initialValue]="goodsReceiptSearchEntity.typeId"
-                    (selectionChange)="goodsReceiptSearchEntity.typeId = $event; getList()"
-                    (listOpen)="opengoodsReceiptTypes($event)">
-                </app-simple-select>
+              <jaja-select-list (change)="goodsReceiptSearch.inventoryOrganizationId = $event; getList()"
+                [value]="goodsReceiptSearch.inventoryOrganizationId"
+                [getList]="goodsReceiptRepository.singleListInventoryOrganization" key="id"
+                [searchEntity]="inventoryOrganizationSearch" [searchable]="true"
+                placeholder="{{'goodsReceiptPOList.filters.inventoryOrganizationCode' | translate}}" searchField="code"
+                searchType="startsWith" appendTo="body">
+                <ng-template #label #option let-code="code" let-name="name">
+                  {{code}} - {{name}}
+                </ng-template>
+              </jaja-select-list>
             </th>
             <th class="th-filter">
-                <app-simple-select [key]="'name'" [list]="goodsReceiptStatuses"
-                    [initialValue]="goodsReceiptSearchEntity.typeId"
-                    (selectionChange)="goodsReceiptSearchEntity.statusId = $event; getList()"
-                    (listOpen)="opengoodsReceiptStatuses($event)">
-                </app-simple-select>
-            </th> -->
+              <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptSearch.remarks"
+                data-qe-id="table-thead-filter-remarks">
+              </app-advanced-filters>
+            </th>
+            <th class="th-filter">
+              <jaja-select-list (change)="goodsReceiptSearch.requesterId = $event; getList()"
+                [value]="goodsReceiptSearch.requesterId" key="id" [getList]="goodsReceiptRepository.singleListRequester"
+                [searchEntity]="requesterSearchEntity" [searchable]="true"
+                placeholder="{{'goodsReceiptPOList.filters.requester' | translate}}" searchField="name"
+                searchType="startsWith" appendTo="body">
+                <ng-template #label #option let-name="name">
+                  {{name}}
+                </ng-template>
+              </jaja-select-list>
+            </th>
+            <th class="th-filter">
+              <jaja-select-list (change)="goodsReceiptSearch.statusId = $event; getList()"
+                [value]="goodsReceiptSearch.requesterId" [getList]="goodsReceiptRepository.enumListStatus"
+                appendTo="body" key="id" placeholder="{{'goodsReceiptPOList.filters.status' | translate}}">
+                <ng-template #label #option let-display="display">
+                  {{display}}
+                </ng-template>
+              </jaja-select-list>
+            </th>
+            <th class="th-filter actions"></th>
           </tr>
         </ng-template>
         <ng-template let-goodsReceipt let-index="rowIndex" pTemplate="body">
           <tr [attr.data-qe-id]="'table-tbody-row-' + index">
-            <td> {{goodsReceipt.createdDate}} </td>
+            <td> {{goodsReceipt.documentDate | date: 'dd/MM/yyyy'}} </td>
             <td> {{goodsReceipt.documentNumber}} </td>
-            <td> {{goodsReceipt.receiptedDate}} </td>
-            <td> {{goodsReceipt.inventoryCode}} </td>
-            <td> {{goodsReceipt.inventoryAddress}} </td>
-            <td> {{goodsReceipt.description }} </td>
-            <td> {{goodsReceipt.creator }} </td>
-            <td> {{goodsReceipt.status }} </td>
+            <td> {{goodsReceipt.dueDate | date: 'dd/MM/yyyy'}} </td>
+            <td> {{goodsReceipt.inventoryOrganizationCode}} - {{goodsReceipt.inventoryOrganizationStreet}} </td>
+            <td> {{goodsReceipt.remarks }} </td>
+            <td> {{goodsReceipt.requesterName }} </td>
+            <td class="text-center ui-resizable-column">
+              <div [ngSwitch]="goodsReceipt.statusName">
+                <a *ngSwitchCase="'OPEN'" [queryParams]="{id: goodsReceipt.id}" class="ml-2 open-status"
+                  routerLink="/inventory/receipt/goods-receipt/goods-receipt-detail">{{'general.open'| translate}}</a>
+                <a *ngSwitchCase="'PENDING_APPROVAL'" [queryParams]="{id: goodsReceipt.id}" class="ml-2 pending-status"
+                  routerLink="/inventory/receipt/goods-receipt/goods-receipt-approve">{{'general.pending'| translate}}</a>
+                <a *ngSwitchCase="'PENDING_RECEIVE'" [queryParams]="{id: goodsReceipt.id}"
+                  class="ml-2 pending-receive-status"
+                  routerLink="/inventory/receipt/goods-receipt/goods-receipt-receive">{{'general.pendingReceive'| translate}}</a>
+                <a *ngSwitchCase="'DONE'" [queryParams]="{id: goodsReceipt.id}" class="ml-2 done-status"
+                  routerLink="/inventory/receipt/goods-receipt/goods-receipt-approve">{{'general.done'| translate}}</a>
+              </div>
+            </td>
             <td>
-              <div class="d-flex">
+              <div class="d-flex justify-content-center">
                 <div class="view-detail mr-2">
                   <mat-icon>remove_red_eye</mat-icon>
                 </div>
-                <div (click)="editGoodsReceipt()" class="edit">
-                  <mat-icon>edit</mat-icon>
-                </div>
-
               </div>
             </td>
           </tr>
         </ng-template>
       </p-table>
       <div class="pagination">
-        <app-pagination data-qe-id="pagination"></app-pagination>
+        <app-pagination (paginationOut)="paginationOut($event)" [pagination]="pagination" data-qe-id="pagination">
+        </app-pagination>
       </div>
-
     </div>
   </div>
 </div>

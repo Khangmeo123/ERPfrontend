@@ -32,6 +32,7 @@
             "post": "Bình luận",
             "print": "In",
             "receive": "Nhận",
+            "notReceive": "Từ chối nhận",
             "referenceDocument": "Chứng từ tham chiếu",
             "rejected": "Từ chối duyệt",
             "reset": "Làm lại",

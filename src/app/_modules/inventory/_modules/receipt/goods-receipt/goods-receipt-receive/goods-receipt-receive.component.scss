@@ -3,6 +3,11 @@
 }
 
 .goods-receipt-po {
+  a {
+    text-decoration: underline !important;
+    color: #007ee5 !important;
+  }
+
   p-table {
     th {
       white-space: nowrap !important;
@@ -15,7 +20,8 @@
     }
 
   }
-}
-.sm-input{
-  width: 50px !important;
+
+  .tab-upload {
+    height: 200px;
+  }
 }

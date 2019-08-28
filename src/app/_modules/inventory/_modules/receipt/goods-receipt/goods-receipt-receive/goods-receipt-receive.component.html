@@ -1,0 +1,344 @@
+<div class="page goods-receipt-po" [formGroup]="goodsReceiptForm">
+  <div class="page-header justify-content-between">
+    <div class="justify-content-start align-items-center">
+      <span (click)="backToList()" class="back-to-list">
+        <i class="material-icons">arrow_back_ios</i>
+      </span>
+      <span class="page-title">
+        {{pageTitle | translate}}
+      </span>
+      <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
+    </div>
+    <div class="page-actions d-flex">
+      <button class="btn btn-labeled btn-receive" (click)="approve()">
+        <span class="btn-label"><i class="material-icons">assignment_returned</i></span>
+        <span class="button-label">
+          {{'general.button.receive' | translate}}
+        </span>
+      </button>
+      <button class="btn btn-labeled btn-rejected" (click)="reject()">
+        <span class="btn-label"><i class="material-icons">block</i></span>
+        <span class="button-label">
+          {{'general.button.notReceive' | translate}}
+        </span>
+      </button>
+      <div class="btn-group btn-labeled" data-qe-id="button-import" dropdown>
+        <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle id="button-basic">
+          <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
+          <span class="button-label">
+            {{'general.action' | translate}}
+          </span></button>
+        <ul *dropdownMenu aria-labelledby="button-basic" class="dropdown-menu dropdown-menu-right" id="dropdown-basic"
+          role="menu">
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">{{'general.button.history' | translate}}</a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">{{'general.button.print' | translate}}</a>
+          </li>
+          <li class="divider dropdown-divider"></li>
+          <li role="menuitem">
+            <a class="dropdown-item" href="#">{{'general.button.referenceDocument' | translate}}</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="page-section">
+      <div class="page-section-form-header">
+        <span class="form-title">
+          {{'goodsReceiptDetail.form.title' | translate}}
+        </span>
+        <div class="page-actions justify-content-end"></div>
+      </div>
+      <div class="line"></div>
+      <div class="page-section-form-body">
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.documentNumber' | translate}}
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-document-number"
+              formControlName="documentNumber" type="text">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.inventoryCode' | translate}}
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-document-number"
+              formControlName="inventoryOrganizationCode" type="text">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.inventoryAddress' | translate}}
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-inventory-code"
+              formControlName="inventoryOrganizationStreet" type="text">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.freight' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-receiver" pKeyFilter="int" type="text"
+              formControlName="freight">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.packageDimension' | translate}}
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-receiver" type="text"
+              formControlName="packageDimension">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.packageWeight' | translate}}
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="packageWeight"
+              type="text">
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.personInCharge' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-document-number" formControlName="ownerName"
+              type="text">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.creator' | translate}}
+            </label>
+            <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="requesterName"
+              type="text">
+          </div>
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.receiptedDate' | translate}}
+              <span class="text-danger mr-2">*</span>
+            </label>
+            <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceiptForm.get('dueDate')"
+              class="w-100" [disabled]="true">
+            </app-date-picker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-4 form-group">
+            <label>
+              {{'goodsReceiptDetail.createdDate' | translate}}
+            </label>
+            <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceiptForm.get('documentDate')"
+              class="w-100" [disabled]="true">
+            </app-date-picker>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 form-group">
+            <label>{{ 'goodsReceiptDetail.description' | translate}}</label>
+            <textarea class="form-control disabled" data-qe-id="detail-form-description" rows="4"
+              formControlName="remarks">
+              </textarea>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="page-section">
+      <div class="tab-header pt-3 pb-3 pl-3 pr-3">
+        <mat-tab-group>
+          <mat-tab label="{{'goodsReceiptDetail.tab1.title' | translate}}">
+            <div class="row pt-3 pb-3 pl-3">
+              <div class="col-sm-12">
+                <div class="page-actions d-flex justify-content-end">
+                  <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row" (click)="deleteMultiple()">
+                    <span class="btn-label"><i class="material-icons">delete</i></span>
+                    <span class="button-label">
+                      {{'general.button.delete' | translate}}
+                    </span></button>
+                </div>
+              </div>
+
+            </div>
+            <div class="table">
+              <p-table #tableGoodsReceiptContents [resizableColumns]="true" [rowTrackBy]="trackByFn" [scrollable]="true"
+                [value]="goodsReceiptForm.get('goodsReceiptContents').value" scrollHeight="500px">
+                <ng-template pTemplate="colgroup">
+                  <colgroup>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                    <col>
+                  </colgroup>
+                </ng-template>
+                <ng-template pTemplate="header">
+                  <tr>
+                    <th data-qe-id="table-thead-item-no" pResizableColumn>
+                      {{'goodsReceiptDetail.tab1.itemNo' | translate}}
+                    </th>
+                    <th data-qe-id="table-thead-item-no" pResizableColumn>
+                      {{'goodsReceiptDetail.tab1.itemName' | translate}}
+                    </th>
+                    <th data-qe-id="table-thead-unit-of-measure" pResizableColumn>
+                      {{'goodsReceiptDetail.tab1.unitOfMeasure' | translate}}
+                    </th>
+                    <th data-qe-id="table-thead-quantity" pResizableColumn>
+                      {{'goodsReceiptDetail.tab1.quantity' | translate}}
+                    </th>
+                    <th data-qe-id="table-thead-quantity" pResizableColumn>
+                      {{'goodsReceiptDetail.tab1.actualReceive' | translate}}
+                    </th>
+                    <th data-qe-id="table-thead-view-detail" pResizableColumn>
+                      {{'general.detail' | translate}}
+                    </th>
+                  </tr>
+                  <tr>
+                    <th class="th-filter">
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        [value]="goodsReceiptContentSearch.itemDetailId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'itemDetailId', 'equals')"
+                        [getList]="goodsReceiptRepository.singleListItemDetail" [searchEntity]="itemDetailSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code" let-name="name">
+                          {{code}} - {{name}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </th>
+                    <th class="th-filter">
+                      <input
+                        (input)="tableGoodsReceiptContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                        class="form-control w-100" type="text" />
+                    </th>
+                    <th class="th-filter">
+                      <jaja-select-list class="flex-grow-1" appendTo="body"
+                        [value]="goodsReceiptContentSearch.unitOfMeasureId"
+                        (change)="tableGoodsReceiptContents.filter($event, 'unitOfMeasureId', 'equals')"
+                        [getList]="goodsReceiptRepository.singleListUnitOfMeasure" [searchEntity]="unitOfMeasureSearch"
+                        searchField="code" searchType="startsWith" key="id" [searchable]="true">
+                        <ng-template #label #option let-code="code">
+                          {{code}}
+                        </ng-template>
+                      </jaja-select-list>
+                    </th>
+                    <th class="th-filter"></th>
+                    <th class="th-filter"></th>
+                    <th class="th-filter"></th>
+                  </tr>
+                </ng-template>
+                <ng-template let-goodsReceiptContent let-index="rowIndex" pTemplate="body">
+                  <tr>
+                    <td>
+                      <span>{{goodsReceiptContent.itemCode}}</span>
+                    </td>
+                    <td>
+                      <span>{{goodsReceiptContent.itemName}}</span>
+                    </td>
+                    <td>
+                      <span>{{goodsReceiptContent.unitOfMeasureName}}</span>
+                    </td>
+                    <td>
+                      <span>{{goodsReceiptContent.quantity}}</span>
+                    </td>
+                    <td>
+                      <span>{{goodsReceiptContent.actualReceive}}</span>
+                    </td>
+                    <td [ngSwitch]="goodsReceiptContent.itemManagementTypeName">
+                      <a (click)="openBatchDialog(goodsReceiptContent.id)" class="btn btn-link" role="button"
+                        *ngSwitchCase="'BATCH'">
+                        {{'goodsReceiptDetail.tab1.batches' | translate}}
+                      </a>
+                      <a (click)="openSerialNumberDialog(goodsReceiptContent.id)" class="btn btn-link" role="button"
+                        *ngSwitchCase="'SERIAL_NUMBER'">
+                        {{'goodsReceiptDetail.tab1.serial' | translate}}
+                      </a>
+                      <a (click)="openQuantityDialog(goodsReceiptContent.id)" class="btn btn-link" role="button"
+                        *ngSwitchCase="'QUANTITY'">
+                        {{'goodsReceiptDetail.tab1.amount' | translate}}
+                      </a>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </mat-tab>
+          <mat-tab label="{{'goodsReceiptDetail.tab2.title' | translate}}">
+            <div class="tab-upload">
+              <div class="form-upload-file d-flex">
+                <div class="pt-3 upload-btn-wrapper">
+                  <button class="btn btn-labeled btn-import">
+                    <span class="btn-label"><i class="material-icons">attach_file</i></span>
+                    <span class="button-label">
+                      {{'general.button.attachFile' | translate}}
+                    </span></button>
+                  <input (change)="readURL($event)" multiple type="file" />
+                </div>
+                <div class="results d-flex align-items-center">
+                  <div *ngFor="let name of fileNameList" class="results-item d-flex mr-3">
+                    <div class="results-item-name">
+                      <span class="icon-upload"><i class="material-icons">attach_file</i></span>
+                      <span>{{name}}</span>
+                    </div>
+                    <span class="close-attach align-items-center"><i class="material-icons">close</i></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </mat-tab>
+        </mat-tab-group>
+      </div>
+    </div>
+    <div class="page-section">
+      <div class="page-section-form-header">
+        <span class="form-title">
+          {{'goodsReceiptDetail.form.post.title' | translate}}
+        </span>
+      </div>
+      <div class="line"></div>
+      <div class="page-section-form-body">
+        <app-discussion [discussionId]="'2b155311-ab49-4cff-af4e-7156bfaa97c2'"></app-discussion>
+      </div>
+    </div>
+  </div>
+</div>
+
+<p-confirmDialog #cd header="{{'general.confirmation.title' | translate}}"
+  message="{{'general.confirmation.message' | translate}}" icon="pi pi-exclamation-triangle">
+  <p-footer>
+    <div class="d-flex justify-content-end">
+      <button type="button" class="btn btn-labeled btn-cancel align-items-center" (click)="cd.reject()">
+        <span class="button-label">
+          {{'general.button.confirm.no' | translate}}
+        </span></button>
+      <button type="button" class="btn btn-labeled btn-reverse align-items-center" (click)="cd.accept()">
+        <span class="button-label">
+          {{'general.button.confirm.yes' | translate}}
+        </span></button>
+    </div>
+  </p-footer>
+</p-confirmDialog>
+
+<ng-container *ngIf="displayBatch && goodsReceiptContentId">
+  <app-goods-receipt-batch-dialog [display]="displayBatch" [goodsReceiptContentId]="goodsReceiptContentId"
+    [enableBinLocation]="enableBinLocation" (cancelDialog)="cancelBatch($event)"
+    [inventoryOrganizationId]="inventoryOrganizationId">
+  </app-goods-receipt-batch-dialog>
+</ng-container>
+
+<ng-container *ngIf="displayQuantity && goodsReceiptContentId">
+  <app-goods-receipt-quantity-dialog [display]="displayQuantity" [goodsReceiptContentId]="goodsReceiptContentId"
+    [enableBinLocation]="enableBinLocation" (cancelDialog)="cancelQuantity($event)"
+    [inventoryOrganizationId]="inventoryOrganizationId">
+  </app-goods-receipt-quantity-dialog>
+</ng-container>
+
+<ng-container *ngIf="displaySerialNumber && goodsReceiptContentId">
+  <app-goods-receipt-serial-number-dialog [display]="displaySerialNumber"
+    [goodsReceiptContentId]="goodsReceiptContentId" [enableBinLocation]="enableBinLocation"
+    (cancelDialog)="cancelSerialNumber($event)" [inventoryOrganizationId]="inventoryOrganizationId">
+  </app-goods-receipt-serial-number-dialog>
+</ng-container>

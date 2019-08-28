@@ -7,19 +7,21 @@
       <span class="page-title">
         {{pageTitle | translate}}
       </span>
-      <span class="ml-2 open-status">{{'general.open'| translate}}</span>
+      <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
     </div>
     <div class="page-actions d-flex">
-      <button class="btn btn-labeled btn-send" (click)="send()">
-        <span class="btn-label"><i class="material-icons">send</i></span>
+      <button class="btn btn-labeled btn-approve" (click)="approve()">
+        <span class="btn-label"><i class="material-icons">check</i></span>
         <span class="button-label">
-          {{'general.button.send' | translate}}
-        </span></button>
-      <button class="btn btn-labeled btn-save" (click)="save()">
-        <span class="btn-label"><i class="material-icons">save</i></span>
+          {{'general.button.approve' | translate}}
+        </span>
+      </button>
+      <button class="btn btn-labeled btn-rejected" (click)="reject()">
+        <span class="btn-label"><i class="material-icons">block</i></span>
         <span class="button-label">
-          {{'general.button.save' | translate}}
-        </span></button>
+          {{'general.button.rejected' | translate}}
+        </span>
+      </button>
       <div class="btn-group btn-labeled" data-qe-id="button-import" dropdown>
         <button aria-controls="dropdown-basic" class="btn btn-labeled btn-import" dropdownToggle id="button-basic">
           <span class="btn-label"><i class="material-icons">arrow_drop_down</i></span>
@@ -49,22 +51,14 @@
         <span class="form-title">
           {{'goodsReceiptDetail.form.title' | translate}}
         </span>
-        <div class="page-actions justify-content-end">
-          <button class="btn btn-labeled btn-delete">
-            <span class="btn-label"><i class="material-icons">delete</i></span>
-            <span class="button-label">
-              {{'general.button.delete' | translate}}
-            </span>
-          </button>
-        </div>
+        <div class="page-actions justify-content-end"></div>
       </div>
       <div class="line"></div>
       <div class="page-section-form-body">
         <div class="row">
           <div class="col-sm-4 form-group">
             <label>
-              {{'goodsReceiptDetail.purchaseOrderNumber' | translate}}
-              <span class="text-danger mr-2">*</span>
+              {{'goodsReceiptDetail.documentNumber' | translate}}
             </label>
             <input class="form-control disabled" data-qe-id="detail-form-document-number"
               formControlName="documentNumber" type="text">
@@ -72,20 +66,9 @@
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.inventoryCode' | translate}}
-              <span class="text-danger mr-2">*</span>
             </label>
-            <div class="div-form d-flex">
-              <jaja-select-list [getList]="goodsReceiptRepository.singleListInventoryOrganization" [searchable]="true"
-                [display]="goodsReceiptForm.get('inventoryOrganizationCode').value"
-                [searchEntity]="inventoryOrganizationOfGoodsReceiptSearch" searchField="code" searchType="startsWith"
-                (change)="selectInventoryOrganization($event)" class="w-100">
-                <ng-template #label #option let-code="code" let-name="name">
-                  {{code}} - {{name}}
-                </ng-template>
-              </jaja-select-list>
-              <app-error [formGroup]="goodsReceiptForm" [placement]="'top'" [property]="'inventoryOrganizationId'"
-                class="error-form" data-qe-id="form-error-supplier-contact"></app-error>
-            </div>
+            <input class="form-control disabled" data-qe-id="detail-form-document-number"
+              formControlName="inventoryOrganizationCode" type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -101,20 +84,22 @@
               {{'goodsReceiptDetail.freight' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <input class="form-control" data-qe-id="detail-form-receiver" pKeyFilter="int" formControlName="freight">
+            <input class="form-control disabled" data-qe-id="detail-form-receiver" pKeyFilter="int" type="text"
+              formControlName="freight">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.packageDimension' | translate}}
             </label>
-            <input class="form-control" data-qe-id="detail-form-receiver" type="text"
+            <input class="form-control disabled" data-qe-id="detail-form-receiver" type="text"
               formControlName="packageDimension">
           </div>
           <div class="col-sm-4 form-group">
             <label>
               {{'goodsReceiptDetail.packageWeight' | translate}}
             </label>
-            <input class="form-control" data-qe-id="detail-form-creator" formControlName="packageWeight" type="text">
+            <input class="form-control disabled" data-qe-id="detail-form-creator" formControlName="packageWeight"
+              type="text">
           </div>
         </div>
         <div class="row">
@@ -123,18 +108,8 @@
               {{'goodsReceiptDetail.personInCharge' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <div class="div-form d-flex">
-              <jaja-select-list class="flex-grow-1" [getList]="goodsReceiptRepository.singleListEmployeeDetail"
-                [searchable]="true" [searchEntity]="ownerSearch" searchField="name"
-                [display]="goodsReceiptForm.get('ownerName').value" searchType="startsWith"
-                (change)="selectOwner($event)" class="w-100">
-                <ng-template #label #option let-code="code" let-name="name">
-                  {{code}} - {{name}}
-                </ng-template>
-              </jaja-select-list>
-              <app-error [formGroup]="goodsReceiptForm" [placement]="'top'" [property]="'ownerId'" class="error-form"
-                data-qe-id="form-error-supplier-contact"></app-error>
-            </div>
+            <input class="form-control disabled" data-qe-id="detail-form-document-number" formControlName="ownerName"
+              type="text">
           </div>
           <div class="col-sm-4 form-group">
             <label>
@@ -148,13 +123,9 @@
               {{'goodsReceiptDetail.receiptedDate' | translate}}
               <span class="text-danger mr-2">*</span>
             </label>
-            <div class="div-form">
-              <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceiptForm.get('dueDate')"
-                class="w-100">
-              </app-date-picker>
-              <app-error [formGroup]="goodsReceiptForm" [placement]="'top'" property="dueDate" class="error-form">
-              </app-error>
-            </div>
+            <app-date-picker data-qe-id="detail-form-receipted-date" [control]="goodsReceiptForm.get('dueDate')"
+              class="w-100" [disabled]="true">
+            </app-date-picker>
           </div>
         </div>
         <div class="row">
@@ -170,7 +141,8 @@
         <div class="row">
           <div class="col-sm-12 form-group">
             <label>{{ 'goodsReceiptDetail.description' | translate}}</label>
-            <textarea class="form-control" data-qe-id="detail-form-description" rows="4" formControlName="remarks">
+            <textarea class="form-control disabled" data-qe-id="detail-form-description" rows="4"
+              formControlName="remarks">
             </textarea>
           </div>
         </div>
@@ -183,11 +155,6 @@
             <div class="row pt-3 pb-3 pl-3">
               <div class="col-sm-12">
                 <div class="page-actions d-flex justify-content-end">
-                  <button class="btn btn-labeled btn-delete" data-qe-id="button-delete-row" (click)="deleteMultiple()">
-                    <span class="btn-label"><i class="material-icons">delete</i></span>
-                    <span class="button-label">
-                      {{'general.button.delete' | translate}}
-                    </span></button>
                 </div>
               </div>
 
@@ -197,8 +164,7 @@
                 [value]="goodsReceiptForm.get('goodsReceiptContents').value" scrollHeight="500px">
                 <ng-template pTemplate="colgroup">
                   <colgroup>
-                    <col width="50px">
-                    <col width="250px;">
+                    <col>
                     <col>
                     <col>
                     <col>
@@ -211,15 +177,6 @@
                 </ng-template>
                 <ng-template pTemplate="header">
                   <tr>
-                    <th>
-                      <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox" (change)="checkAllGoodsReceipt($event.target)" />
-                        <div class="state">
-                          <i class="icon material-icons">done</i>
-                          <label></label>
-                        </div>
-                      </div>
-                    </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
                       {{'goodsReceiptDetail.tab1.itemNo' | translate}} </th>
                     <th data-qe-id="table-thead-item-no" pResizableColumn>
@@ -245,7 +202,6 @@
                       {{'goodsReceiptDetail.tab1.total' | translate}}</th>
                   </tr>
                   <tr>
-                    <th class="th-filter"></th>
                     <th class="th-filter">
                       <jaja-select-list class="flex-grow-1" appendTo="body"
                         [value]="goodsReceiptContentSearch.itemDetailId"
@@ -293,70 +249,28 @@
                 <ng-template let-goodsReceiptContent let-index="rowIndex" pTemplate="body">
                   <tr>
                     <td>
-                      <div class="pretty p-icon p-curve p-has-indeterminate">
-                        <input type="checkbox" [ngModel]="goodsReceiptContent.isSelected"
-                          (change)="selectGoodsReceipt($event.target, index)" [ngModelOptions]="{standalone: true}" />
-                        <div class="state">
-                          <i class="icon material-icons">done</i>
-                          <label></label>
-                        </div>
-                      </div>
+                      <span>{{goodsReceiptContent.itemCode}}</span>
                     </td>
                     <td>
-                      <jaja-select-list class="flex-grow-1" appendTo="body" [display]="goodsReceiptContent.itemCode"
-                        [value]="goodsReceiptContentSearch.itemDetailId" (change)="selectItemDetail($event, index)"
-                        [getList]="goodsReceiptRepository.singleListItemDetail" [searchEntity]="itemDetailSearch"
-                        searchField="code" searchType="startsWith" [searchable]="true">
-                        <ng-template #label #option let-code="code" let-name="name">
-                          {{code}} - {{name}}
-                        </ng-template>
-                      </jaja-select-list>
+                      <span>{{goodsReceiptContent.itemName}}</span>
                     </td>
                     <td>
-                      <input class="form-control disabled" type="text" [ngModel]="goodsReceiptContent.itemName"
-                        [ngModelOptions]="{standalone: true}" />
+                      <span>{{goodsReceiptContent.unitOfMeasureName}}</span>
+                    </td>
+                    <td class="text-right">
+                      <span>{{goodsReceiptContent.quantity | number}}</span>
+                    </td>
+                    <td class="text-right">
+                      <span>{{goodsReceiptContent.unitPrice | number}}</span>
                     </td>
                     <td>
-                      <jaja-select-list class="flex-grow-1" appendTo="body"
-                        [display]="goodsReceiptContent.unitOfMeasureName"
-                        [value]="goodsReceiptContentSearch.unitOfMeasureId"
-                        (change)="selectUnitOfMeasure($event, index)"
-                        [getList]="goodsReceiptRepository.singleListUnitOfMeasure" [searchEntity]="unitOfMeasureSearch"
-                        searchField="code" searchType="startsWith" [searchable]="true">
-                        <ng-template #label #option let-code="code">
-                          {{code}}
-                        </ng-template>
-                      </jaja-select-list>
+                      <span>{{goodsReceiptContent.taxName}}</span>
                     </td>
-                    <td>
-                      <input [ngModel]="goodsReceiptContent.quantity" type="text" [ngModelOptions]="{standalone: true}"
-                        (change)="inputQuantity($event.target.value, index)" class="form-control text-right"
-                        pKeyFilter="int" />
+                    <td class="text-right">
+                      <span>{{goodsReceiptContent.itemDiscountRate | number}}</span>
                     </td>
-                    <td>
-                      <input [ngModel]="goodsReceiptContent.unitPrice" type="text" [ngModelOptions]="{standalone: true}"
-                        (change)="inputUnitPrice($event.target.value, index)" class="form-control text-right"
-                        pKeyFilter="int" />
-                    </td>
-                    <td>
-                      <jaja-select-list class="flex-grow-1" appendTo="body" [value]="goodsReceiptContentSearch.taxId"
-                        [display]="goodsReceiptContent.taxName" (change)="selectTax($event, index)"
-                        [getList]="goodsReceiptRepository.singleListTax" [searchEntity]="taxSearch" searchField="name"
-                        [searchable]="true">
-                        <ng-template #label #option let-name="name">
-                          {{name}}
-                        </ng-template>
-                      </jaja-select-list>
-                    </td>
-                    <td>
-                      <input [ngModel]="goodsReceiptContent.itemDiscountRate" type="text"
-                        [ngModelOptions]="{standalone: true}" pKeyFilter="int"
-                        (change)="inputItemDiscountRate($event.target.value, index)" class="form-control text-right" />
-                    </td>
-                    <td>
-                      <input [ngModel]="goodsReceiptContent.itemDiscountCost" type="text"
-                        [ngModelOptions]="{standalone: true}" pKeyFilter="int"
-                        (change)="inputItemDiscountCost($event.target.value, index)" class="form-control text-right" />
+                    <td class="text-right">
+                      <span>{{goodsReceiptContent.itemDiscountCost | number}}</span>
                     </td>
                     <td class="text-right">
                       <span>{{ goodsReceiptContent.total | number}}</span>
@@ -369,8 +283,7 @@
                       <div class="d-flex align-items-center justify-content-end">
                         <span class="ml-2">{{'goodsReceiptDetail.tab1.totalGeneralDiscountRate' | translate}}:</span>
                         <div class="ml-2">
-                          <input formControlName="generalDiscountRate" pKeyFilter="int"
-                            (change)="inputGeneralDiscount()" class="form-control text-right sm-input">
+                          <span>{{goodsReceiptForm.get('generalDiscountRate').value | number}}</span>
                         </div>
                       </div>
                     </td>
@@ -385,13 +298,6 @@
                     <td class="text-right">
                       <span>{{ goodsReceiptForm.controls.totalGoodsReceiptContents.value | number}}</span>
                     </td>
-                  </tr>
-                  <tr>
-                    <td colspan="2">
-                      <a href="javascript:;" (click)="addNewGoodsReceiptContent()">+
-                        {{'general.button.addRow' | translate}}</a>
-                    </td>
-                    <td colspan="8"></td>
                   </tr>
                 </ng-template>
               </p-table>
@@ -436,19 +342,3 @@
     </div>
   </div>
 </div>
-
-<p-confirmDialog #cd header="{{'general.confirmation.title' | translate}}"
-  message="{{'general.confirmation.message' | translate}}" icon="pi pi-exclamation-triangle">
-  <p-footer>
-    <div class="d-flex justify-content-end">
-      <button type="button" class="btn btn-labeled btn-cancel align-items-center" (click)="cd.reject()">
-        <span class="button-label">
-          {{'general.button.confirm.no' | translate}}
-        </span></button>
-      <button type="button" class="btn btn-labeled btn-reverse align-items-center" (click)="cd.accept()">
-        <span class="button-label">
-          {{'general.button.confirm.yes' | translate}}
-        </span></button>
-    </div>
-  </p-footer>
-</p-confirmDialog>
