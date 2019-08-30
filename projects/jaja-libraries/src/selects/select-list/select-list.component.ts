@@ -15,11 +15,11 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { ISelect } from '../ISelect';
-import { Observable, Subject, Subscription } from 'rxjs';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
-import { ISearchEntity } from '../../entities/ISearchEntity';
+import {ISelect} from '../ISelect';
+import {Observable, Subject, Subscription} from 'rxjs';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
+import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
+import {ISearchEntity} from '../../entities/ISearchEntity';
 
 @Component({
   selector: 'jaja-select-list',
@@ -78,6 +78,8 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   public width: string | number = '100%';
 
+  public touched: boolean = false;
+
   constructor() {
   }
 
@@ -109,7 +111,7 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   onTouch = (event) => {
     /* tslint:disable-next-line */
-    console.log(event);
+    this.touched = true;
   };
 
   ngOnInit() {

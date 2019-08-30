@@ -148,7 +148,7 @@
               "projects/jaja-libraries/src/assets"
             ],
             "styles": [
-              "projects/jaja-libraries/src/styles.css"
+              "projects/jaja-libraries/src/styles.scss"
             ],
             "scripts": []
           },

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectListComponent } from './select-list.component';
+import { SiderMenuComponent } from './sider-menu.component';
 
-describe('EnumListSelectComponent', () => {
-  let component: SelectListComponent;
-  let fixture: ComponentFixture<SelectListComponent>;
+describe('SiderMenuComponent', () => {
+  let component: SiderMenuComponent;
+  let fixture: ComponentFixture<SiderMenuComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectListComponent ],
+      declarations: [ SiderMenuComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectListComponent);
+    fixture = TestBed.createComponent(SiderMenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

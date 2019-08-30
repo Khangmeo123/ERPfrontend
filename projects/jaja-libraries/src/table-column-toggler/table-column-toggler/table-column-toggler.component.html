@@ -1,0 +1,24 @@
+<div class="btn-group"
+     dropdown
+     [container]="appendTo"
+     #dropdown="bs-dropdown"
+     (isOpenChange)="onToggle(dropdown)">
+  <button dropdownToggle
+          type="button"
+          class="btn btn-link"
+          aria-controls="dropdown-basic">
+    <i class="material-icons">{{arrow}}</i>
+  </button>
+  <ul *dropdownMenu
+      class="dropdown-menu dropdown-menu-right"
+      role="menu"
+      aria-labelledby="button-basic">
+    <li role="menuitem" *ngFor="let column of columns">
+      <a class="dropdown-item" role="button" (click)="$event.stopPropagation()">
+        <label nz-checkbox [(ngModel)]="column.isSelected" (ngModelChange)="onSelectColumn($event)">
+          {{column.header}}
+        </label>
+      </a>
+    </li>
+  </ul>
+</div>

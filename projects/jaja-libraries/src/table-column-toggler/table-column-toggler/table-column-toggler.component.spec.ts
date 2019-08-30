@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SelectListComponent } from './select-list.component';
+import { TableColumnTogglerComponent } from './table-column-toggler.component';
 
-describe('EnumListSelectComponent', () => {
-  let component: SelectListComponent;
-  let fixture: ComponentFixture<SelectListComponent>;
+describe('TableColumnTogglerComponent', () => {
+  let component: TableColumnTogglerComponent;
+  let fixture: ComponentFixture<TableColumnTogglerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectListComponent ],
+      declarations: [ TableColumnTogglerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SelectListComponent);
+    fixture = TestBed.createComponent(TableColumnTogglerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
