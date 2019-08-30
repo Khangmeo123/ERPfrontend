@@ -5,11 +5,13 @@ import { BsDropdownModule } from 'ngx-bootstrap';
 import { NzEmptyModule, NzSpinModule } from 'ng-zorro-antd';
 import { TranslateModule } from '@ngx-translate/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ColumnTogglerComponent } from './column-toggler/column-toggler.component';
 
 
 @NgModule({
   declarations: [
     SelectListComponent,
+    ColumnTogglerComponent,
   ],
   exports: [
     SelectListComponent,

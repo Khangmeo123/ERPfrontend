@@ -4,7 +4,6 @@ import {
   ContentChild,
   ElementRef,
   EventEmitter,
-  forwardRef,
   HostListener,
   Input,
   OnChanges,
@@ -15,25 +14,16 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import {ISelect} from '../ISelect';
 import {Observable, Subject, Subscription} from 'rxjs';
-import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
-import {ControlValueAccessor, NG_VALUE_ACCESSOR} from '@angular/forms';
 import {ISearchEntity} from '../../entities/ISearchEntity';
+import {debounceTime, distinctUntilChanged} from 'rxjs/operators';
 
 @Component({
-  selector: 'jaja-select-list',
-  templateUrl: './select-list.component.html',
-  styleUrls: ['./select-list.component.scss'],
-  providers: [
-    {
-      provide: NG_VALUE_ACCESSOR,
-      useExisting: forwardRef(() => SelectListComponent),
-      multi: true,
-    },
-  ],
+  selector: 'jaja-column-toggler',
+  templateUrl: './column-toggler.component.html',
+  styleUrls: ['./column-toggler.component.scss'],
 })
-export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelect, ControlValueAccessor, AfterViewInit {
+export class ColumnTogglerComponent implements OnInit, AfterViewInit, OnDestroy, OnChanges {
 
   @Input() appendTo: string = null;
 
