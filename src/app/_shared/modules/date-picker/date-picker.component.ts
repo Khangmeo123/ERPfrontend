@@ -1,15 +1,16 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
-import { DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
-import { MomentDateAdapter } from '@angular/material-moment-adapter';
-import { DEFAULT_DATE_FORMAT, OUTPUT_DATE_FORMAT } from './date-picker.formats';
-import { FormControl } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-import { DatePipe } from '@angular/common';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation} from '@angular/core';
+import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MomentDateAdapter} from '@angular/material-moment-adapter';
+import {DEFAULT_DATE_FORMAT, OUTPUT_DATE_FORMAT} from './date-picker.formats';
+import {FormControl} from '@angular/forms';
+import {TranslateService} from '@ngx-translate/core';
+import {DatePipe} from '@angular/common';
 
 @Component({
   selector: 'app-date-picker',
   templateUrl: './date-picker.component.html',
   styleUrls: ['./date-picker.component.scss'],
+  encapsulation: ViewEncapsulation.None,
   providers: [
     TranslateService,
     {
@@ -26,7 +27,6 @@ import { DatePipe } from '@angular/common';
   ],
 })
 export class DatePickerComponent implements OnInit, OnChanges {
-  checkCtrl = false;
 
   @Input() control = new FormControl();
 
@@ -44,10 +44,9 @@ export class DatePickerComponent implements OnInit, OnChanges {
 
   @Input() small: boolean = false;
 
-  dateValue = null;
+  checkCtrl = false;
 
-  constructor() {
-  }
+  dateValue = null;
 
   get date() {
     return this.dateValue;
@@ -112,15 +111,15 @@ export class DatePickerComponent implements OnInit, OnChanges {
       this.checkCtrl = false;
       return;
     }
-    const { value } = event.target;
+    const {value} = event.target;
     if (value === '' || value === null) {
       this.date = null;
     }
   }
 
   onKeyDown(event) {
-    const { target, key } = event;
-    const { value } = target;
+    const {target, key} = event;
+    const {value} = target;
     if (key === 'Control') {
       this.checkCtrl = true;
     }

@@ -8,44 +8,17 @@
                 {{pageTitle | translate}}
             </span>
             <span class="ml-2 open-status">{{'general.open'| translate}}</span>
-            <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
+            <!-- <span class="ml-2 pending-status">{{'general.pending'| translate}}</span>
             <span class="ml-2 pending-receive-status">{{'general.pendingReceive'| translate}}</span>
-            <span class="ml-2 done-status">{{'general.done'| translate}}</span>
+            <span class="ml-2 done-status">{{'general.done'| translate}}</span> -->
         </div>
         <div class="page-actions d-flex">
-            <button class="btn btn-labeled btn-clear">
-                <span class="btn-label">
-                    <img src="/assets/img/filter.svg" width="16">
-                </span>
-                <span class="button-label">
-                    {{'general.button.clear' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-reverse">
-                <span class="btn-label"><i class="material-icons">replay</i></span>
-                <span class="button-label">
-                    {{'general.button.reverse' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-approve">
-                <span class="btn-label"><i class="material-icons">check</i></span>
-                <span class="button-label">
-                    {{'general.button.approve' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-rejected">
-                <span class="btn-label"><i class="material-icons">block</i></span>
-                <span class="button-label">
-                    {{'general.button.rejected' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-receive">
-                <span class="btn-label"><i class="material-icons">assignment_goodsIssueed</i></span>
-                <span class="button-label">
-                    {{'general.button.receive' | translate}}
-                </span></button>
-            <button class="btn btn-labeled btn-send">
+            <button class="btn btn-labeled btn-send" (click)="send()">
                 <span class="btn-label"><i class="material-icons">send</i></span>
                 <span class="button-label">
                     {{'general.button.send' | translate}}
                 </span></button>
-            <button class="btn btn-labeled btn-save">
+            <button class="btn btn-labeled btn-save" (click)="save()">
                 <span class="btn-label"><i class="material-icons">save</i></span>
                 <span class="button-label">
                     {{'general.button.save' | translate}}
@@ -74,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="page-body">
+    <div class="page-body" [formGroup]="goodsIssueForm">
         <div class="page-section">
             <div class="page-section-form-header">
                 <span class="form-title">
@@ -96,20 +69,55 @@
                             {{'goodsIssue.detail.purchaseOrderNumber' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-document-number" disabled>
+                        <input type="text" class="form-control" formControlName="documentNumber"
+                            data-qe-id="detail-form-document-number" disabled>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsIssue.detail.inventoryCode' | translate}}
                         </label>
-                        <app-single-select data-qe-id="detail-form-inventory-address"></app-single-select>
+                        <jaja-select-list (change)="onSelectInventoryOrganization($event)"
+                            [display]="inventoryOrganizationCode?.value"
+                            [getList]="goodsIssueDetailRepository.selectListInventoryOrganization"
+                            [searchEntity]="inventoryOrganizationSearchEntity" [searchable]="true" searchField="code"
+                            searchType="startsWith">
+                            <ng-template #label #option let-code="code" let-name="name">
+                                {{code}} - {{name}}
+                            </ng-template>
+                        </jaja-select-list>
 
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsIssue.detail.inventoryAddress' | translate}}
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-inventory-code" disabled>
+                        <input type="text" class="form-control" formControlName="inventoryOrganizationStreet"
+                            data-qe-id="detail-form-inventory-code" disabled>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsIssue.detail.freight' | translate}}
+                        </label>
+                        <input type="text" class="form-control" formControlName="freight"
+                            data-qe-id="detail-form-freight">
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsIssue.detail.packageDimension' | translate}}
+                        </label>
+                        <input type="text" class="form-control" formControlName="packageDimension"
+                            data-qe-id="detail-form-packageDimension">
+
+                    </div>
+                    <div class="col-sm-4 form-group">
+                        <label>
+                            {{'goodsIssue.detail.packageWeight' | translate}}
+                        </label>
+                        <input type="text" class="form-control" formControlName="packageWeight"
+                            data-qe-id="detail-form-weight">
                     </div>
                 </div>
                 <div class="row">
@@ -118,50 +126,57 @@
                             {{'goodsIssue.detail.personInCharge' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-single-select data-qe-id="detail-form-person-in-charge"></app-single-select>
-
-                    </div>
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'goodsIssue.detail.exporter' | translate}}
-                        </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-receiver" disabled>
+                        <div class="div-form d-flex">
+                            <jaja-select-list (change)="onSelectOwner($event)" [display]="ownerName?.value"
+                                [getList]="goodsIssueDetailRepository.selectListEmployeeDetail"
+                                [searchEntity]="ownerSearchEntity" [searchable]="true" class="flex-grow-1"
+                                searchField="name" searchType="startsWith">
+                                <ng-template #label #option let-code="code" let-name="name">
+                                    {{code}} - {{name}}
+                                </ng-template>
+                            </jaja-select-list>
+                            <app-error [formGroup]="goodsIssueForm" [placement]="'top'" [property]="'ownerId'"
+                                class="error-form" data-qe-id="form-error-ownerId"></app-error>
+                        </div>
                     </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsIssue.detail.creator' | translate}}
                         </label>
-                        <input type="text" class="form-control" data-qe-id="detail-form-creator" disabled>
+                        <input type="text" class="form-control" formControlName="requesterName"
+                            data-qe-id="detail-form-creator" disabled>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-4 form-group">
-                        <label>
-                            {{'goodsIssue.detail.shipper' | translate}}
-                            <span class="text-danger mr-2">*</span>
-                        </label>
-                        <app-single-select data-qe-id="detail-form-shipper"></app-single-select>
 
-                    </div>
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsIssue.detail.receiptedDate' | translate}}
                             <span class="text-danger mr-2">*</span>
                         </label>
-                        <app-date-picker data-qe-id="detail-form-receipted-date">
-                        </app-date-picker>
+                        <div class="div-form">
+                            <app-date-picker [control]="dueDate" class="w-100" data-qe-id="detail-form-receipted-date">
+                            </app-date-picker>
+                            <app-error [formGroup]="goodsIssueForm" [placement]="'top'" class="error-form"
+                                data-qe-id="form-error-receipted-date" property="dueDate">
+                            </app-error>
+                        </div>
                     </div>
+                </div>
+                <div class="row">
+
                     <div class="col-sm-4 form-group">
                         <label>
                             {{'goodsIssue.detail.createdDate' | translate}}
                         </label>
-                        <app-date-picker data-qe-id="detail-form-created-date" [disabled]="true"></app-date-picker>
+                        <app-date-picker [control]="goodsIssueForm.get('documentDate')" [disabled]="true"
+                            data-qe-id="detail-form-created-date">
+                        </app-date-picker>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-12 form-group">
                         <label>{{ 'goodsIssue.detail.description' | translate}}</label>
-                        <textarea class="form-control" rows="4" data-qe-id="detail-form-description">
+                        <textarea class="form-control" rows="4" data-qe-id="detail-form-description"
+                            formControlName="remarks">
                          </textarea>
                     </div>
                 </div>
@@ -173,7 +188,7 @@
                     <mat-tab label="{{'goodsIssue.detail.tab1.title' | translate}}">
                         <div class="row pt-3 pb-3 pl-3">
                             <div class="col-sm-6">
-                                <div class="d-flex align-items-center">
+                                <!-- <div class="d-flex align-items-center">
                                     <p-inputSwitch></p-inputSwitch>
                                     <span
                                         class="ml-2">{{'goodsIssue.detail.batches.startScanBatchesNo' | translate}}</span>
@@ -181,21 +196,30 @@
                                         <input type="text" class="form-control"
                                             data-qe-id="dialog-input-start-scan-batches-no">
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="col-sm-6">
                                 <div class="page-actions d-flex justify-content-end">
-                                    <button class="btn btn-labeled btn-reverse">
+                                    <button (click)="deleteItem()" class="btn btn-labeled btn-delete"
+                                        data-qe-id="button-delete-row">
+                                        <span class="btn-label"><i class="material-icons">delete</i></span>
+                                        <span class="button-label">
+                                            {{'general.button.delete' | translate}}
+                                        </span>
+                                    </button>
+                                    <!-- <button class="btn btn-labeled btn-reverse">
                                         <span class="btn-label"><i class="material-icons">replay</i></span>
                                         <span class="button-label">
                                             {{'general.button.reset' | translate}}
-                                        </span></button>
+                                        </span></button> -->
                                 </div>
                             </div>
 
                         </div>
                         <div class="table">
-                            <p-table resizableColumns [value]="tableTemp">
+                            <p-table #tableGoodsIssueContents [resizableColumns]="true" [rowTrackBy]="trackByFn"
+                                [scrollable]="true" [value]="goodsIssueForm.get('goodsIssueContents').value"
+                                scrollHeight="500px">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th width="2.5%">
@@ -214,9 +238,9 @@
                                         <th pResizableColumn data-qe-id="table-thead-unit-of-measure">
                                             {{'goodsIssue.detail.tab1.unitOfMeasure' | translate}}
                                         </th>
-                                        <th pResizableColumn data-qe-id="table-thead-weight">
+                                        <!-- <th pResizableColumn data-qe-id="table-thead-weight">
                                             {{'goodsIssue.detail.tab1.weight' | translate}}
-                                        </th>
+                                        </th> -->
                                         <th pResizableColumn data-qe-id="table-thead-quantity">
                                             {{'goodsIssue.detail.tab1.quantity' | translate}} </th>
                                         <th pResizableColumn data-qe-id="table-thead-unit-price">
@@ -233,21 +257,72 @@
                                         </th>
                                         <th pResizableColumn data-qe-id="table-thead-total">
                                             {{'goodsIssue.detail.tab1.total' | translate}}</th>
-                                        <th pResizableColumn data-qe-id="table-thead-view-detail">
+                                        <!-- <th pResizableColumn data-qe-id="table-thead-view-detail">
                                             {{'general.detail' | translate}}
+                                        </th> -->
+                                    </tr>
+
+                                    <tr>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter">
+                                            <jaja-select-list class="flex-grow-1" appendTo="body"
+                                                [value]="goodsIssueContentSearch.itemDetailId"
+                                                (change)="tableGoodsIssueContents.filter($event, 'itemDetailId', 'equals')"
+                                                [getList]="goodsIssueDetailRepository.selectListItemDetail"
+                                                [searchEntity]="itemDetailSearch" searchField="code"
+                                                searchType="startsWith" key="id" [searchable]="true">
+                                                <ng-template #label #option let-code="code" let-name="name">
+                                                    {{code}} - {{name}}
+                                                </ng-template>
+                                            </jaja-select-list>
                                         </th>
+                                        <th class="th-filter">
+                                            <input
+                                                (input)="tableGoodsIssueContents.filter($event.target.value, 'itemDetailName', 'contains')"
+                                                class="form-control w-100" type="text" />
+                                        </th>
+                                        <th class="th-filter">
+                                            <jaja-select-list class="flex-grow-1" appendTo="body"
+                                                [value]="goodsIssueContentSearch.unitOfMeasureId"
+                                                (change)="tableGoodsIssueContents.filter($event, 'unitOfMeasureId', 'equals')"
+                                                [getList]="goodsIssueDetailRepository.selectListUnitOfMeasure"
+                                                [searchEntity]="unitOfMeasureSearch" searchField="code"
+                                                searchType="startsWith" key="id" [searchable]="true">
+                                                <ng-template #label #option let-code="code">
+                                                    {{code}}
+                                                </ng-template>
+                                            </jaja-select-list>
+                                        </th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter">
+                                            <jaja-select-list class="flex-grow-1" appendTo="body"
+                                                [value]="goodsIssueContentSearch.taxId"
+                                                (change)="tableGoodsIssueContents.filter($event, 'taxId', 'equals')"
+                                                [getList]="goodsIssueDetailRepository.selectListTax"
+                                                [searchEntity]="taxSearch" searchField="name" key="id"
+                                                [searchable]="true">
+                                                <ng-template #label #option let-name="name">
+                                                    {{name}}
+                                                </ng-template>
+                                            </jaja-select-list>
+                                        </th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter"></th>
+                                        <th class="th-filter"></th>
                                     </tr>
                                 </ng-template>
                                 <ng-template pTemplate="body" let-item>
                                     <tr>
                                         <td>
-                                            <div class="pretty p-icon p-curve p-has-indeterminate">
-                                                <input type="checkbox" />
+                                            <!-- <div class="pretty p-icon p-curve p-has-indeterminate">
+                                                <input type="checkbox" [ngModel]="goodsReceiptContent.isSelected"
+                                                    (change)="selectGoodsReceipt($event.target, index)" [ngModelOptions]="{standalone: true}" />
                                                 <div class="state">
                                                     <i class="icon material-icons">done</i>
                                                     <label></label>
                                                 </div>
-                                            </div>
+                                            </div> -->
                                         </td>
                                         <td></td>
                                         <td></td>

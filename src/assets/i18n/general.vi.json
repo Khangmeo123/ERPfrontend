@@ -88,6 +88,7 @@
         "open": "Khởi tạo",
         "pending": "Chờ duyệt",
         "pendingCounting": "Chờ kiểm kê",
+        "pendingIssue": "Chờ xuất",
         "pendingReceive": "Chờ nhận",
         "pendingTransfer": "Chờ gửi",
         "project": {

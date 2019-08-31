@@ -8,13 +8,18 @@ app-date-picker {
 
     .input-group-text {
       cursor: pointer;
-      height: calc(1.5em + 0.75rem + 0px);
       padding-left: 0.25rem;
       padding-right: 0.25rem;
     }
 
     button.mat-icon-button {
       outline: none;
+    }
+
+    mat-icon,
+    .material-icons {
+      font-size: small;
+      height: auto;
     }
   }
 }

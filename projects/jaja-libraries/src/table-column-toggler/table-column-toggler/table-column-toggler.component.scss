@@ -1,0 +1,13 @@
+ul.dropdown-menu {
+  li {
+    .dropdown-item {
+      padding: 0.25rem 0.75rem;
+    }
+  }
+
+  li:active,
+  li:focus {
+    background: inherit;
+    color: inherit;
+  }
+}

@@ -8,7 +8,7 @@ describe('EnumListSelectComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SelectListComponent ]
+      declarations: [ SelectListComponent ],
     })
     .compileComponents();
   }));

@@ -78,6 +78,8 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   public width: string | number = '100%';
 
+  public touched: boolean = false;
+
   constructor() {
   }
 
@@ -109,7 +111,7 @@ export class SelectListComponent implements OnInit, OnChanges, OnDestroy, ISelec
 
   onTouch = (event) => {
     /* tslint:disable-next-line */
-    console.log(event);
+    this.touched = true;
   };
 
   ngOnInit() {
