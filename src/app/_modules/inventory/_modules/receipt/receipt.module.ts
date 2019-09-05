@@ -50,6 +50,7 @@ import { GoodsReceiptQuantityDialogComponent } from './goods-receipt/goods-recei
 import { GoodsReceiptSerialNumberDialogComponent } from './goods-receipt/goods-receipt-receive/serial-number-dialog/goods-receipt-serial-number-dialog.component';
 import { GoodsReceiptBatchDialogComponent } from './goods-receipt/goods-receipt-receive/batch-dialog/goods-receipt-batch-dialog.component';
 import { MultiSelectModule } from 'primeng/primeng';
+import { TableColumnTogglerModule } from 'jaja-libraries/src/table-column-toggler/table-column-toggler.module';
 
 @NgModule({
   declarations: [
@@ -113,6 +114,7 @@ import { MultiSelectModule } from 'primeng/primeng';
     NzSpinModule,
     MultiSelectModule,
     NzCheckboxModule,
+    TableColumnTogglerModule,
   ],
 })
 export class ReceiptModule {

@@ -99,17 +99,16 @@
             <th class="actions" pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
-            <th class="th-filter" [ngStyle]="{width: '4em'}" pResizableColumn>
-            </th>
-            <th class="th-filter">
+            <th class="th-filter" [ngStyle]="{width: '4em'}" pResizableColumn></th>
+            <th class="th-filter" *ngIf="selectedKeys?.documentNumber">
               <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptPOSearchEntity.documentNumber"
                                     data-qe-id="table-thead-filter-documentNumber">
               </app-advanced-filters>
             </th>
-            <th class="th-filter">
-            </th>
+            <th class="th-filter" *ngIf="selectedKeys?.postingDate"></th>
             <th class="th-filter" *ngIf="selectedKeys?.dueDate">
-              <app-advanced-filters (changeFilter)="getList()" [filter]="goodsReceiptPOSearchEntity.dueDate"
+              <app-advanced-filters (changeFilter)="getList()"
+                                    [filter]="goodsReceiptPOSearchEntity.dueDate"
                                     data-qe-id="table-thead-filter-dueDate">
               </app-advanced-filters>
             </th>
@@ -164,13 +163,10 @@
               </jaja-select-list>
             </th>
             <th class="th-filter actions">
-              <p-multiSelect [options]="columns"
-                             [(ngModel)]="selectedColumns"
-                             optionLabel="header"
-                             selectedItemsLabel=""
-                             [style]="{minWidth: '200px'}"
-                             (onChange)="onChangeColumns($event)"
-                             defaultLabel=""></p-multiSelect>
+              <jaja-table-column-toggler [columns]="columns"
+                                         appendTo="body"
+                                         (selectColumn)="onChangeColumns($event)">
+              </jaja-table-column-toggler>
             </th>
           </tr>
         </ng-template>

@@ -1,4 +1,4 @@
-import {marker} from '@biesbjerg/ngx-translate-extract-marker';
+export {marker as translate} from '@biesbjerg/ngx-translate-extract-marker';
 
 export const generateRandomString = (length: number) => {
   const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
@@ -7,8 +7,4 @@ export const generateRandomString = (length: number) => {
     result += alphabet[Math.random() * alphabet.length];
   }
   return result;
-};
-
-export const translate = (str: string) => {
-  return marker(str);
 };

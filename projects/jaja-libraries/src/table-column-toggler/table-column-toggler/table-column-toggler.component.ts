@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 export interface IColumn {
   header: string;
@@ -9,15 +9,19 @@ export interface IColumn {
 }
 
 @Component({
-  selector: 'app-table-column-toggler',
+  selector: 'jaja-table-column-toggler',
   templateUrl: './table-column-toggler.component.html',
-  styleUrls: ['./table-column-toggler.component.scss'],
+  styleUrls: [
+    './table-column-toggler.component.scss',
+  ],
 })
 export class TableColumnTogglerComponent implements OnInit {
 
-  @Input() appendTo: string = 'body';
+  @Input()
+  public appendTo: string = 'body';
 
-  @Input() columns: IColumn[] = [
+  @Input()
+  public columns: IColumn[] = [
     {
       header: 'Header 1',
       field: 'field-1',
@@ -36,9 +40,10 @@ export class TableColumnTogglerComponent implements OnInit {
     },
   ];
 
-  @Output() selectColumn: EventEmitter<IColumn> = new EventEmitter<IColumn>();
+  @Output()
+  public selectColumn: EventEmitter<IColumn> = new EventEmitter<IColumn>();
 
-  arrow: string = 'keyboard_arrow_down';
+  public arrow: string = 'keyboard_arrow_down';
 
   constructor() {
   }
