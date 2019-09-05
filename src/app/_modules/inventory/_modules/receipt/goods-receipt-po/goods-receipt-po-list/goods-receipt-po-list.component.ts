@@ -205,10 +205,12 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
       .add(bookMarkNotify);
   }
 
-  get selectedKeys() {
+  get selectedKeys(): {[key: string]: boolean} {
     const selectedKeys = {};
     this.columns.forEach((column: IColumn) => {
-      selectedKeys[column.field] = column;
+      if (column.isSelected) {
+        selectedKeys[column.field] = true;
+      }
     });
     return selectedKeys;
   }
@@ -288,9 +290,5 @@ export class GoodsReceiptPOListComponent implements OnInit, OnDestroy {
           },
         );
     }
-  };
-
-  onChangeColumns = (event) => {
-
   };
 }
