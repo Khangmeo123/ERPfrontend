@@ -96,6 +96,38 @@
               {{ 'goodsReceiptPO.status' | translate}}
               <p-sortIcon class="float-right"></p-sortIcon>
             </th>
+            <th data-qe-id="table-thead-supplierContact" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.supplierContact">
+              {{'goodsReceiptPO.columns.supplierContact' | translate }} 
+            </th>
+            <th data-qe-id="table-thead-documentReference" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.documentReference">
+              {{'goodsReceiptPO.columns.documentReference' | translate }} 
+            </th>
+            <th data-qe-id="table-thead-dueDate" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.dueDate">
+              {{'goodsReceiptPO.columns.dueDate' | translate }} 
+            </th>
+            <th data-qe-id="table-thead-quantity" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.quantity">
+              {{'goodsReceiptPO.columns.quantity' | translate }} 
+            </th>
+            <th data-qe-id="table-thead-total" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.total">
+              {{'goodsReceiptPO.columns.total' | translate }} 
+            </th>
+            <th data-qe-id="table-thead-freight" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.freight">
+              {{'goodsReceiptPO.columns.freight' | translate }} 
+            </th>
+            <th data-qe-id="table-thead-packageDimension" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.packageDimension">
+              {{'goodsReceiptPO.columns.packageDimension' | translate }} 
+            </th>
+            <th data-qe-id="table-thead-packageWeight" class="actions" pResizableColumn
+            *ngIf="selectedKeys?.packageWeight">
+              {{'goodsReceiptPO.columns.packageWeight' | translate }} 
+            </th>
             <th class="actions" pResizableColumn> {{'general.action' | translate }} </th>
           </tr>
           <tr>
@@ -162,6 +194,14 @@
                 </ng-template>
               </jaja-select-list>
             </th>
+            <th class="th-filter supplierContact" *ngIf="selectedKeys?.supplierContact"></th>
+            <th class="th-filter documentReference" *ngIf="selectedKeys?.documentReference"></th>
+            <th class="th-filter dueDate" *ngIf="selectedKeys?.dueDate"></th>
+            <th class="th-filter quantity" *ngIf="selectedKeys?.quantity"></th>
+            <th class="th-filter total" *ngIf="selectedKeys?.total"></th>
+            <th class="th-filter freight" *ngIf="selectedKeys?.freight"></th>
+            <th class="th-filter packageDimension" *ngIf="selectedKeys?.packageDimension"></th>
+            <th class="th-filter packageWeight" *ngIf="selectedKeys?.packageWeight"></th>
             <th class="th-filter actions">
               <jaja-table-column-toggler [columns]="columns"
                                          appendTo="body"
