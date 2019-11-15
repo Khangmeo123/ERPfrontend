@@ -24,9 +24,9 @@ const routes: Routes = [
           .then((m) => m.InventoryModule),
       },
     ],
-    canActivate: [
-      AuthGuard,
-    ],
+    // canActivate: [
+    //   AuthGuard,
+    // ],
   },
   {path: '**', redirectTo: 'home', pathMatch: 'full'},
 ];
